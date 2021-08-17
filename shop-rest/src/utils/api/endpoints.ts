@@ -1,4 +1,6 @@
+
 export const API_ENDPOINTS: Record<string, string> = {
+  
   PRODUCTS: "products",
   SETTINGS: "settings",
   CUSTOMER: "me",
@@ -27,4 +29,5 @@ export const API_ENDPOINTS: Record<string, string> = {
   HOME_OFFERS:"fetch-offers",
   HOME_CATEGORIES:"fetch-home-categories",
   SEARCH:"search"
+  
 };

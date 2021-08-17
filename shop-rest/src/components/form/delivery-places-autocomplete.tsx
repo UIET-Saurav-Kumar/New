@@ -99,7 +99,6 @@ export default function DeliveryPlacesAutocomplete({address,
     
       <Autocomplete
        
-
         // placeholder='where from?'
                                             nearbuyPlacesAPI = 'GooglePlacesSearch'
                                             enablePoweredbyContainer={false}
@@ -116,6 +115,7 @@ export default function DeliveryPlacesAutocomplete({address,
                                             }}
                                             debounce={400}
       >
+        
         <input
           type="text"
           placeholder={t("common:placeholder-search-location")}

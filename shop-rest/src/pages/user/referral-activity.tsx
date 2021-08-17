@@ -4,9 +4,6 @@ import React,{useState, useEffect} from 'react';
 
 import MobileNavigation from "@components/layout/mobile-navigation";
 
-
-
-
 import Footer from '@components/footer/Footer';
 import Navbar from '@components/layout/navbar/navbar';
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";

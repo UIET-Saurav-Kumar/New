@@ -111,7 +111,10 @@ export default function GooglePlacesAutocomplete({address,
           placeholder={t("common:placeholder-search-location")}
           defaultValue={loc}
           
-          className="mt-16 p-1 pl-8 border-gray-300  sm:w-1/2 sm:mx-auto xmd:mx-4 md:w-1/2 md:mx-auto 2xl:p-3 lg:p-3 lg:mx-auto  lg:w-1/2 2xl:w-1/2 2xl:mx-auto font-light focus:border-accent focus:bg-light rounded-full mx-4 bg-gray-80 outline-none border-gray-400 border "
+          className="mt-16 p-1 pl-8  mx-auto sm:w-3/4 sm:mx-auto  xmd:mx-4 md:w-1/2 md:mx-auto 
+          2xl:p-3 lg:p-3 lg:mx-auto  lg:w-1/2 2xl:w-1/2 2xl:mx-auto font-light
+          focus:border-accent focus:bg-light rounded-full  bg-gray-80
+           outline-none text-xs sm:text-sm md:text-base lg:text-lg border-gray-300 shadow-2xl border "
         />
       </Autocomplete>
   ) : (

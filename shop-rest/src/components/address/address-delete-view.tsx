@@ -5,7 +5,6 @@ import {
 } from "@components/ui/modal/modal.context";
 import { useDeleteAddressMutation } from "@data/customer/use-address.mutation";
 
-
 const AddressDeleteView = () => {
   const { data } = useModalState();
   const { closeModal } = useModalAction();

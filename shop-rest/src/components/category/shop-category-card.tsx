@@ -61,13 +61,14 @@ const ShopCategoryCard: React.FC<ShopCategoryCardProps> = ({
 
       <aside
         className={cn(
-          "bg-light rounded h-full w-full md:w-72 2xl:w-72 hidden md:block flex-shrink-0",
+          "bg-light rounded h-full w-full md:w-72 2xl:w-72 hidden lg:block flex-shrink-0",
           className
         )}
       >
 
         <div className="max-h-full overflow-hidden">
           <Scrollbar className={cn("w-full", styles.scrollbar_height)}>
+
             <div className="w-full border-b border-gray-200 p-7 flex flex-col items-center">
           
               <h4 className='-ml-44 text-gray-800 font-bold border-b '>Categories</h4>
@@ -75,13 +76,10 @@ const ShopCategoryCard: React.FC<ShopCategoryCardProps> = ({
                 <CategoryDropdownSidebar/>
               </ul>
 
-             
-
             </div>
 
             <div className=' p-3'>
             <form className='' noValidate>
-           
             
           </form>
 

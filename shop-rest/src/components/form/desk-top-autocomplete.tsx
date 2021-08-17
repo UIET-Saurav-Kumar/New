@@ -1,3 +1,4 @@
+
 import { Autocomplete, useJsApiLoader } from "@react-google-maps/api";
 import { Libraries } from "@react-google-maps/api/dist/utils/make-load-script-url";
 import { LocationInput } from "@ts-types/generated";
@@ -90,6 +91,7 @@ export default function DeskTopAutoComplete({
       onChange(location);
     }
   };
+
   if (loadError) {
     return <div>{t("common:text-map-cant-load")}</div>;
   }
@@ -98,7 +100,6 @@ export default function DeskTopAutoComplete({
 
   const handleCurrentLocation = () => {
     setActive(!active)
-    
   }
 
   useOnClickOutside
@@ -119,14 +120,14 @@ export default function DeskTopAutoComplete({
         placeholder={t("common:placeholder-search-location")}
         defaultValue={location}
         onClick={handleCurrentLocation}
-        
+
         className="hidden relative lg:inline-flex  rounded-lg 
         rounded-r-none h-12 outline-none  border border-e-0 border-transparent 
         focus:border-accent  border-gray-300 pl-2 
-        placeholder-gray-400 placeholder:text-xs"
-        style={{width:"330px"}}
+        placeholder-gray-400 placeholder:text-xs lg:w-48 2xl:w-60"
       />
-      <button className = {` ${ active ? 'block' : 'hidden'} absolute top-21 ml-1 bg-gray-600 text-white px-4 py-1`}> Get Current Location </button>
+      <button className = {` ${ active ? 'block' : 'hidden'} absolute 
+      top-21 ml-1 bg-gray-600 text-white px-4 py-1`}> Get Current Location </button>
       </>
     </Autocomplete>
   ) : (

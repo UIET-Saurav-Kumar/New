@@ -35,10 +35,11 @@ export default function GetCurrentLocation({
 
     return (
         <>
-            <div onClick = {getLoc} className=' flex items-center justify-center relative bg-gray-400 mt-10 px-2 p-1 2xl:px-8 2xl:p-2 mx-auto rounded-lg text-white' > 
-                <h5 className='font-light text-sm 2xl:text-lg'> Get current location </h5>
-                <MapPin className=' h-4 w-4 2xl:h-5 2xl:w-5  bg-gray-400'/> 
-            </div>
+            
+            <button onClick = {getLoc} className=' flex items-start justify-center text-xs sm:text-sm relative bg-white border mt-10 px-1 p-1 sm:px-1 2xl:px-8 2xl:p-2 mx-auto rounded-lg text-accent shadow-lg font-semibold' > 
+            <img src='/gps.png' className=' mr-2 ml-2  text-green-400   w-3 h-3 sm:w-6 sm:h-6'/>     Get current location
+               
+            </button>
         </>
     )
     // <button onClick={handleCurrentLocation} className = {` ${ active ? 'block' : 'hidden'}  absolute flex items-center shadow-2xl font-semibold placeholder:text-gray-50 rounded w-60 top-22 ml-1 bg-gray-50 text-accent  py-4`}>

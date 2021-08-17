@@ -18,8 +18,17 @@ import Logo from "@components/ui/logo";
 import GetCurrentLocation from "@components/geoCode/get-current-location"
 import { useLocation } from "@contexts/location/location.context";
 import  DeskTopAutoComplete from "@components/form/desk-top-autocomplete";
+import MobileJoinButton from '@components/layout/navbar/mobile-join-button';
+import Truncate from '@components/ui/truncate-scroll';
+
+
 
 export default function HeaderMiddle() {
+
+    const truncate = (txt, n) => {
+        txt.length > 10 ? txt.substring(0, n) : ''
+
+    }
 
     const {getLocation} =useLocation()
     
@@ -55,14 +64,18 @@ export default function HeaderMiddle() {
             setHasLoction(true);
         }
     },[])
+
     function changeLocation(data:any){
+
         var location=JSON.stringify(data);
         console.log(data?.formattedAddress);
         document.getElementById("location_id").value=data?.formattedAddress;
         setLocation(data?.formattedAddress);
+
         if(location){
             setHasLoction(true);
         }
+
         var { query ,pathname} = router;
         var pathname="/"+router.locale+pathname
         
@@ -82,88 +95,134 @@ export default function HeaderMiddle() {
 
     return (
 
-    <div id='amazon-shops' className='flex flex-col shadow-md md:bg-white lg:bg-white'> 
-        <div className='relative z-30 px-4 flex  justify-evenly max-w-full pt-8 pb-6'>
-                {/* SideNav */}
-                <div className={` absolute w-1/2 md:w-1/3 inset-0 shadow-lg transform duration-200 ease-in 
-                                    ${click ? 'translate-x-0' : '-translate-x-full' } transform  z-400 min-h-screen lg:w-1/4 bg-white  `} style={{zIndex:"10000"}}>
+        <div id='amazon-shops' 
+        className='flex flex-col  shadow-md md:bg-white lg:bg-white'> 
 
-                    <XIcon onClick={closeNav} className=' absolute z-30 h-8 w-8 right-0 '/>
 
-                    <div  className='border border-gray absolute top-0 w-full h-22'>
-                        <Link href='/home'>
-                            <Logo className="mx-auto lg:mx-0" />
-                        </Link>
+       <div className=' relative z-30 px-4 flex  justify-evenly max-w-full pt-8 pb-6 '>
+              
+
+               {/* searchbar  */}
+               <div className=' hidden lg:flex justify-around lg:justify-between p-0 lg:py-4 w-full px-4'>
+
+                    <div className = ' hidden lg:block px-0 mx-0 p-0 m-0  ' >
+
+                        <Logo className=" mx-0 px-0 " />       
+                                          
+                    </div>
+                  
+                   <div className=' flex  focus-ring-2 justify-center
+                                     lg:w-3/4 2xl:mx-auto lg:mx-auto 
+                                    2xl:flex-1' >
+
+
+                {/* for location icon */}
+                       {/* <span className='hidden lg:inline-flex relative rounded-l group-focus:border-accent-300 rounded-r-none rounded-md items-center '>  */}
+                             {/* <MapPin className='absolute ml-2 text-gray-200 w-5 h-5' src='/gps.png'/> */}
+                             {/* <input className=' border  h-12  border-gray-300 w-8 
+                              border-r-0 rounded-lg rounded-r-none' defaultValue=''  /> */}
+                       {/* </span> */}
+
+                       <input onClick = {handleLocation} 
+                              defaultValue = {getLocation?.formattedAddress}  
+                              className ='hidden lg:inline-flex  text-gray-500 lg:w-32 lg+:w-38 2xl:w-52 md:w-32 placeholder:text-gray-500  
+                                          lg:w-42 rounded-lg  border-l rounded-l-lg rounded-r-none h-12 outline-none 
+                                          border border-e-0  focus:border-accent pr-4 border-gray-300 pl-2 ' 
+                              placeholder = 'Enter location' id='location_id' />
+                       
+                           <div className='hidden  lg:flex lg:w-3/5   xl:h-0  
+                                           focus:bg-accent-hover' >
+                                <DropDown  getLoc={handleLocation} />
+                           </div>
+
                     </div>
 
-                    <ul className='flex flex-col justify-evenly  text-left mt-16 '>
-                        { siteSettings.homePageSidenav.map(( navitem ,id)=> (
-                            <li key={id}>
-                                <Link href={navitem.href}>
-                                    <a className=' flex items-center  px-4 mt-4 py-2 hover:bg-gray-200 rounded-md'> {navitem.label} </a>
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
+                           { isAuthorize ? 
+                               <div className='hidden lg:inline-flex lg:ml-8 lg+:ml-0  xl:inline-flex  '>
+                                 <AuthorizedMenu/>
+                               </div>
+                            : 
+                               <div className=' hidden lg:inline-flex xl:inline-flex lg:ml-4 lg+:ml-0    '>
+                                 <JoinButton/>
+                               </div> 
+                           }  
 
-                </div>
+               </div>
 
-                <div className='px-0  flex  ' >
-                    <MenuIcon onClick={openNav}  className=' md:h-8 h-8 -mt-2 lg:mt-2 md:mr-4 sm:h-8  ml-0 items-center 
-                                                        md:items-center  lg:h-10 lg-w-9 lg:items-center  text-gray-800' /> 
-                    <Logo className="mx-auto lg:mx-0" />                                
-                </div>
+               {/* Location screen */}
+              <div className={` absolute flex flex-col  w-full z-1000 inset-0 shadow-lg transform ml-0 duration-200 ease-in 
+                               ${location ? 'translate-y-0 ' : '-translate-y-full ' } transform border-5 h-screen lg:h-96 bg-gray-50  overflow-y-hidden overflow-hidden  `}>
+                   <div className='flex items-center justify-between mx-auto mt-20 '>
 
-                {/* searchbar  */}
-                <div className='flex   px-4'>
-                    {/* bars icon */}
-                    <div className=' flex md:flex-1 sm:flex-1 focus-ring-2 focus:ring-green-600 lg:flex-1 w-full mx-0   2xl:flex-1'>
+                       {/* <Logo className="mx-auto" /> */}
+                       <img src="/icons/x.svg"  onClick = {closeLocation} 
+                            className={`${(hasLocation)?"":"hidden"} absolute font-bold z-40 h-6 w-6 top-2 right-2 2xl:top-20 text-gray-400 2xl:h-8 2xl:w-8 2xl:right-20 `}/>
+                       <h2 className=' font-md text-md sm:text-lg md:text-lg lg:text-lg 2xl:text-2xl '> Get best deals in your city </h2>
 
-                        <input onClick={handleLocation} defaultValue={getLocation?.formattedAddress} style={{width:"330px",height: "48px"}} className ='hidden lg:inline-flex  2xl:w-48 md:w-32  lg:w-60 rounded-lg rounded-r-none outline-none  border border-e-0 border-transparent focus:border-accent  border-gray-300 pl-2 ' placeholder = 'Enter location' style={{borderColor: "hsl(0, 0%, 80%)",height:"48px"}} id="location_id"/>
-                        {/* <DeskTopAutoComplete onChange={changeLocation}  /> */}
-                        <div className='hidden xmd:inline-flex lg:flex xl:flex h-12 2xl:flex-1 focus:bg-accent-hover' style={{width:"450px"}}>
-                            <DropDown getLoc={handleLocation} />
-                        </div>
+                   </div>
+                   
+                   <GooglePlacesAutocomplete  onChange = {changeLocation} address={getLocation?.formattedAddress}/>
+    
+                   <GetCurrentLocation onChange = {changeLocation} />
 
-                    </div>
-                </div>
+              </div> 
 
-                {/* Location screen */}
-                <div className={` fixed flex flex-col  w-full z-1000 inset-0 shadow-lg transform ml-0 duration-200 ease-in 
-                                    ${location ? 'translate-y-0' : '-translate-y-full' } transform border-5  overflow-y-hidden overflow-hidden bg-white `} style={{zIndex:"100000",height:"500px",position:"fixed"}}>
-                    <div className='flex items-center justify-between mx-auto mt-20 '>
 
-                        <Logo className="mx-auto lg:mx-0" />
-                        <XIcon onClick = {closeLocation} className={`${(hasLocation)?"":"hidden"} absolute z-40 h-6 w-6 top-2 right-2 2xl:top-20 text-gray-400 2xl:h-8 2xl:w-8 2xl:right-20 `}/>
-                        <h2 className=' font-md text-md sm:text-lg md:text-lg lg:text-lg 2xl:text-2xl '> Get best deals in your city </h2>
+               {isAuthorize ? (
 
-                    </div>
-                    <GooglePlacesAutocomplete onChange={changeLocation} address={getLocation?.formattedAddress}/>
-     
-                    <GetCurrentLocation onChange={changeLocation} />
-                </div>
+                   <div className='flex justify-between  w-full  items-center  lg:hidden xl:hidden 2xl:hidden'>
+                    <div className='block px-0  '>  <Logo className='mx-0  px-0'/> </div>
+                       <div className='flex items-center space-x-4 md:space-x-10 lg:space-x-8'>
+                               <span>  
+                                   
+                                   <h3 onClick={handleLocation}  
+                                       className='flex text-black items-center text-xs lg:hidden  md:text-black mr-0 md:mr-0 md:text-md'>
+           
+                                           <CaretDown/> Chandigarh
+           
+                                   </h3> 
+                                   </span>
 
-                {isAuthorize ? (
-                    <AuthorizedMenu className='' />
-                    
-                    ) : (
-                    <>
-                        <div className='hidden sm:hidden md:hidden xms:hidden pl-2 lg:pr-8 lg:flex lg:h-10 lg:w-10 '>
-                            <JoinButton />
-                        </div>
+                               <AuthorizedMenu  />
+                       </div>
 
-                        <span>    
-                            <h3 onClick={handleLocation}  className='flex text-black items-center text-xs lg:hidden  md:text-black mr-0 md:mr-0 md:text-md'>
-                                <CaretDown/> Location
-                            </h3> 
-                        </span>
-                    </>
-                )}
-            </div>
-        <div className='flex md:flex  lg:hidden px-4 mb-2 mt-0' >
-            <DropDown getLoc={handleLocation}/>
-        </div>
-    </div>
+                   </div>
+                       
+                       ) : (
+                           <div className='flex justify-between  w-full  items-center  lg:hidden xl:hidden 2xl:hidden'>
+                    <div className='block px-0 -ml-10 sm:-ml-6  '>  <Logo className='mx-0  px-0'/> </div>
+                       <div className='flex items-center space-x-4 sm:space-x-16 md:space-x-16 '>
+                               <span>  
+                                   
+                                   <h3 onClick={handleLocation}  
+                                       className='flex text-gray-600 items-center text-xs sm:text-sm md:text-md lg:hidden  
+                                                md:text-gray-600 mr-0 md:mr-0 md:text-md'>
+           
+                                           <CaretDown className='text-gray-500 mr-2 w-5 h-5'/> 
+
+                                            <button className='border text-gray-500  rounded-xl border-gray-400 p-1 px-2'>
+
+                                                 {/* { truncate(` ${getLocation?.formattedAddress} `, 10) } */}
+
+                                                { getLocation?.formattedAddress }
+                                                 {/* Chandigarh */}
+
+                                           </button>
+           
+                                   </h3> 
+                                   </span>
+
+                               <MobileJoinButton  />
+                       </div>
+
+                   </div>
+             
+               )}
+       </div>
+       <div className='flex md:flex w-full lg:hidden px-4 mb-2 mt-0' >
+           <DropDown getLoc={handleLocation}/>
+       </div>
+   </div>
 
     )
 }

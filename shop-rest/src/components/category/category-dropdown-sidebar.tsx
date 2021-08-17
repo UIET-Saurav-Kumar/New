@@ -1,3 +1,4 @@
+
 import { useRouter } from "next/router";
 import ErrorMessage from "@components/ui/error-message";
 import SidebarMenu from "@components/ui/sidebar-menu";
@@ -5,6 +6,7 @@ import Scrollbar from "@components/ui/scrollbar";
 import CategoryListLoader from "@components/ui/loaders/category-loader";
 import NotFound from "@components/common/not-found";
 import { useCategoriesQuery } from "@data/category/use-categories.query";
+
 
 const CategoryDropdownSidebar = () => {
   const { query } = useRouter();
@@ -17,6 +19,7 @@ const CategoryDropdownSidebar = () => {
     type: type as string,
   });
 
+
   if (loading) {
     return (
       <div className="hidden xl:block">
@@ -28,12 +31,13 @@ const CategoryDropdownSidebar = () => {
   }
   if (error) return <ErrorMessage message={error.message} />;
 
+
   return (
-    <aside className="sticky top-22 h-full lg:w-72 hidden xl:block bg-light">
+    <aside className="sticky top-22 h-full lg:w-72 hidden md:block bg-light">
       <div className="max-h-full overflow-hidden">
         <Scrollbar className="w-full h-full max-h-screen">
           {data?.categories?.data?.length ? (
-            <div className="px-5">
+            <div className="px-5 h-80">
               <SidebarMenu items={data?.categories?.data} className="py-8" />
             </div>
           ) : (
@@ -44,6 +48,7 @@ const CategoryDropdownSidebar = () => {
         </Scrollbar>
       </div>
     </aside>
+    
   );
 };
 

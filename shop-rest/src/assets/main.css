@@ -234,22 +234,35 @@
   border-style: solid!important;
   border-width: 1px!important;
   box-shadow: 0 0 0 1px #449E7D!important;
-  height: 48px!important;
+  height: 54px!important;
   border-radius: 0px!important;
+  border-left: none;
+
 }
 .css-yk16xz-control{
-  height: 48px!important;
+  height: 61px!important;
   border-radius: 0px!important;
   
 }
-@media (max-width: 1023px) {
+
+@media (min-width: 244px) {
 
   .css-yk16xz-control{
-    height: 40px!important;
-    border-radius: 0px!important;
+
+    height: 50px!important;
+
   }
-  .css-1pahdxg-control{
-    height: 40px!important;
-    border-radius: 0px!important;
+
+
+ }
+
+ @media (min-width: 1024px) {
+
+  .css-yk16xz-control{
+
+    height: 60px!important;
+
   }
+
+
  }

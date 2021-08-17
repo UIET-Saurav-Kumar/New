@@ -52,11 +52,13 @@ export default function BakeryPage() {
         </div>
 
         <main className="w-full overflow-hidden block lg:mt-6">
+
           <BannerShort banner={getPageData.banner} className="max-h-140" />
           <FilterBarLayoutTwo />
           <Element name="grid">
-            <FeedLayoutTwo />
+          <FeedLayoutTwo />
           </Element>
+
         </main>
       </div>
       {width > 1023 && <CartCounterButton />}

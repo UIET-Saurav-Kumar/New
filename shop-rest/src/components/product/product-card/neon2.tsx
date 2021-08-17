@@ -32,7 +32,7 @@ const Neon2: React.FC<NeonProps> = ({ product, className }) => {
       )}
     >
       <div
-        className="relative flex items-center justify-center cursor-pointer w-auto h-48 p-2 sm:h-64"
+        className="relative flex items-center justify-center cursor-pointer w-auto h-48 p-3 sm:h-64"
         onClick={handleProductQuickView}
       >
         <span className="sr-only">{t("text-product-image")}</span>
@@ -42,7 +42,7 @@ const Neon2: React.FC<NeonProps> = ({ product, className }) => {
           // layout="fill"
           height={420}
           width={420}
-          // objectFit="contain"
+          objectFit="fill"
           className="product-image"
         />
         {discount && (
@@ -54,12 +54,14 @@ const Neon2: React.FC<NeonProps> = ({ product, className }) => {
       {/* End of product image */}
 
       <header className="p-3 md:p-6">
+
         <div className="flex items-center mb-2">
           <span className="text-sm md:text-base text-heading font-semibold">
             {basePrice ? basePrice : price}
           </span>
           {discount && (
             <del className="text-xs md:text-sm text-muted ms-2">{price}</del>
+            
           )}
         </div>
         {/* End of product price */}

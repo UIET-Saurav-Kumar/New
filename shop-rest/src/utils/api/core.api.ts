@@ -1,6 +1,10 @@
+
 import pickBy from "lodash/pickBy";
 import Axios from "./http";
+
+
 type NumberOrString = number | string;
+
 export type ParamsType = {
   type?: string;
   text?: string;
@@ -10,18 +14,25 @@ export type ParamsType = {
   shop_id?: string;
   limit?: number;
 };
-export type SearchParams ={
+
+export type SearchParams = {
+
   location?:any;
   category?:string;
   is_active?:string;
   search?:string;
   limit?: number;
+
 }
+
+
 export class CoreApi {
+
   http = Axios;
   constructor(public _base_path: string) {}
   private stringifySearchQuery(values: any) {
     const parsedValues = pickBy(values);
+
     return Object.keys(parsedValues)
       .map((k) => {
         if (k === "type") {
@@ -35,7 +46,9 @@ export class CoreApi {
       .join("")
       .slice(0, -1);
   }
+
   find(params: ParamsType) {
+
     const {
       type,
       text: name,
@@ -45,6 +58,7 @@ export class CoreApi {
       shop_id,
       limit = 30,
     } = params;
+
     const searchString = this.stringifySearchQuery({
       type,
       name,
@@ -53,11 +67,15 @@ export class CoreApi {
       shop_id,
       is_active,
     });
+    
     const queryString = `?search=${searchString}&searchJoin=and&limit=${limit}`;
     
     return this.http.get(this._base_path + queryString);
+    
   }
+
   search(params: SearchParams) {
+
     var {
       category,
       is_active,
@@ -68,29 +86,38 @@ export class CoreApi {
     
     const queryString = `?search=${search?search:""}&category=${category?category:""}&location=${location?location:""}&is_active=${is_active?is_active:""}&limit=${limit?limit:""}`;
     return this.http.get(this._base_path + queryString);
-  }
+    
+   }
+
+
   findAll() {
     return this.http.get(this._base_path);
   }
+  
   fetchUrl(url: string) {
     return this.http.get(url);
   }
+
   postUrl(url: string, data: any) {
     return this.http.post(url, data);
   }
+
   findOne(id: NumberOrString) {
     return this.http.get(`${this._base_path}/${id}`);
   }
+
   create(data: any, options?: any) {
     return this.http
       .post(this._base_path, data, options)
       .then((res) => res.data);
   }
+
   update(id: NumberOrString, data: any) {
     return this.http
       .put(`${this._base_path}/${id}`, data)
       .then((res) => res.data);
   }
+
   delete(id: NumberOrString) {
     return this.http.delete(`${this._base_path}/${id}`);
   }

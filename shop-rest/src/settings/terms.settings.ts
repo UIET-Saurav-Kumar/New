@@ -1,5 +1,5 @@
 export const termsAndServices = {
-  title: "terms-main-title",
+  title: "Our Terms & Services",
   date: "01/01/2020",
   content: [
     {

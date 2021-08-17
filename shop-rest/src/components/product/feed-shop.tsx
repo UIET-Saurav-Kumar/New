@@ -1,3 +1,4 @@
+
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import Button from "@components/ui/button";
@@ -9,9 +10,11 @@ import { useProductsQuery } from "@data/product/use-products.query";
 import { Fragment ,useRef} from "react";
 import useIntersectionObserver from "./useIntersectionObserver";
 
+
 const ProductFeedLoader = dynamic(
   () => import("@components/ui/loaders/product-feed-loader")
 );
+
 
 const ShopProductFeed = ({ shopId }: { shopId: string }) => {
   const { t } = useTranslation("common");
@@ -41,7 +44,9 @@ const ShopProductFeed = ({ shopId }: { shopId: string }) => {
   })
 
   if (isError && error) return <ErrorMessage message={error.message} />;
+
   function handleLoadMore() {
+    
     fetchNextPage();
   }
 
@@ -54,7 +59,7 @@ const ShopProductFeed = ({ shopId }: { shopId: string }) => {
   }
   return (
     <div className="bg-gray-100 pt-6 pb-8 lg:py-8">
-      <div className="grid grid-cols-2 lg:grid-cols-3 xl:lg:grid-cols-4 2xl:grid-cols-3 3xl:grid-cols-6 gap-3">
+      <div className="grid grid-cols-2 lg:grid-cols-3 xl:lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 gap-3">
         {loading && !data?.pages?.length ? (
           <ProductFeedLoader limit={20} />
         ) : (

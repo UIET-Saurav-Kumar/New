@@ -23,6 +23,7 @@ const Neon: React.FC<NeonProps> = ({ product, className }) => {
   function handleProductQuickView() {
     return openModal("PRODUCT_DETAILS", product.slug);
   }
+
   return (
     <article
       className={cn(
@@ -30,10 +31,12 @@ const Neon: React.FC<NeonProps> = ({ product, className }) => {
         className
       )}
     >
+
       <div
         className="relative flex items-center justify-center cursor-pointer w-auto h-48 sm:h-64"
         onClick={handleProductQuickView}
       >
+
         <span className="sr-only">{t("text-product-image")}</span>
         <Image
           src={image?.original ?? siteSettings?.product?.placeholderImage}
@@ -51,6 +54,7 @@ const Neon: React.FC<NeonProps> = ({ product, className }) => {
       {/* End of product image */}
 
       <header className="p-3 md:p-6">
+
         <div className="flex items-center mb-2">
           <span className="text-sm md:text-base text-heading font-semibold">
             {basePrice ? basePrice : price}
@@ -77,6 +81,7 @@ const Neon: React.FC<NeonProps> = ({ product, className }) => {
           </div>
         )}
         {/* End of add to cart */}
+
       </header>
     </article>
   );

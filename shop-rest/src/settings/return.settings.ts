@@ -1,5 +1,5 @@
 export const returnPolicy = {
-    title: "policy-main-title",
+    title: "Our Return Policy",
     date: "01/01/2020",
     content: [
       {
