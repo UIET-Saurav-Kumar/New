@@ -5,7 +5,7 @@ export type VerifyCheckoutInputType = {
   amount: number;
   products: any[];
   billing_address: any;
-  shipping_address: any;
+  // shipping_address: any;
 };
 
 class Order extends CoreApi {
@@ -14,9 +14,13 @@ class Order extends CoreApi {
   }
 
   verifyCheckout(input: VerifyCheckoutInputType) {
+    
     return this.http
       .post(API_ENDPOINTS.VERIFY_CHECKOUT, input)
       .then((res) => res.data);
+      
+      
   }
+  
 }
 export const OrderService = new Order(API_ENDPOINTS.ORDER);

@@ -4,11 +4,11 @@ type UserAddress = {
 };
 export interface State {
   billing_address: UserAddress | null;
-  shipping_address: UserAddress | null;
+  // shipping_address: UserAddress | null;
   delivery_time: any;
   checkoutData: {
     total_tax: number;
-    shipping_charge: number;
+    // shipping_charge: number;
     unavailable_products: string[];
   } | null;
   discount: number;
@@ -17,7 +17,7 @@ export interface State {
 
 const defaultState = {
   billing_address: null,
-  shipping_address: null,
+  // shipping_address: null,
   checkoutData: null,
   delivery_time: "",
   discount: 0,
@@ -32,10 +32,10 @@ type Action =
       type: "UPDATE_BILLING_ADDRESS";
       payload: UserAddress;
     }
-  | {
-      type: "UPDATE_SHIPPING_ADDRESS";
-      payload: UserAddress;
-    }
+  // | {
+  //     type: "UPDATE_SHIPPING_ADDRESS";
+  //     payload: UserAddress;
+  //   }
   | {
       type: "UPDATE_DELIVERY_TIME";
       payload: any;
@@ -61,18 +61,19 @@ CheckoutContext.displayName = "CheckoutContext";
 
 function checkoutReducer(state: State, action: Action) {
   switch (action.type) {
+
     case "UPDATE_BILLING_ADDRESS": {
       return {
         ...state,
         billing_address: action.payload,
       };
     }
-    case "UPDATE_SHIPPING_ADDRESS": {
-      return {
-        ...state,
-        shipping_address: action.payload,
-      };
-    }
+    // case "UPDATE_SHIPPING_ADDRESS": {
+    //   return {
+    //     ...state,
+    //     shipping_address: action.payload,
+    //   };
+    // }
     case "SET_CHECKOUT_DATA": {
       return {
         ...state,
@@ -117,21 +118,30 @@ function calculateDiscount(state: any, coupon: any, amount: number = 1) {
 }
 
 export const CheckoutProvider: FC = (props) => {
+
   const [state, dispatch] = React.useReducer(checkoutReducer, initialState);
+
   React.useEffect(() => {
     localStorage.setItem("checkout", JSON.stringify(state));
   }, [state]);
+
   const updateBillingAddress = (payload: UserAddress) =>
     dispatch({ type: "UPDATE_BILLING_ADDRESS", payload });
-  const updateShippingAddress = (payload: UserAddress) =>
-    dispatch({ type: "UPDATE_SHIPPING_ADDRESS", payload });
+
+  // const updateShippingAddress = (payload: UserAddress) =>
+  //   dispatch({ type: "UPDATE_SHIPPING_ADDRESS", payload });
+
   const updateDeliveryTime = (payload: any) =>
     dispatch({ type: "UPDATE_DELIVERY_TIME", payload });
+
   const setCheckoutData = (payload: any) =>
     dispatch({ type: "SET_CHECKOUT_DATA", payload });
+
   const applyCoupon = (payload: any) =>
     dispatch({ type: "APPLY_COUPON", payload });
+
   const removeCoupon = () => dispatch({ type: "REMOVE_COUPON" });
+
   const clearCheckoutData = () => {
     localStorage.removeItem("checkout");
     dispatch({ type: "CLEAR_CHECKOUT" });
@@ -141,7 +151,7 @@ export const CheckoutProvider: FC = (props) => {
     () => ({
       ...state,
       updateBillingAddress,
-      updateShippingAddress,
+      // updateShippingAddress,
       updateDeliveryTime,
       setCheckoutData,
       applyCoupon,

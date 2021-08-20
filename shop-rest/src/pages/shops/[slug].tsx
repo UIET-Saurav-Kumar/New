@@ -51,14 +51,19 @@ const ShopPage = ({ data,  cardClassName }: any) => {
 
                       <div className="relative space-x-2 rounded w-full lg:hidden overflow-hidden  ">
 
-                          <Image
+                          {/* <Image
                             alt={t("heading")}
                             src={data?.cover_image?.original! ?? "/product-placeholder.svg"}
                             height={400}
                             width={1200}
                             // layout="fill"
-                            // objectFit="contain"
-                          />
+                            objectFit="fill"
+                          /> */}
+
+                          <img alt={t("heading")} 
+                               className='object-contain h-400 w-full'
+                              src={data?.cover_image?.original! ?? "/product-placeholder.svg"}
+                           />
 
                        </div>
                          
@@ -97,7 +102,7 @@ const ShopPage = ({ data,  cardClassName }: any) => {
                     </div>
 
                 <div className='sticky '> 
-                <ShopCategoryCard data={data} className="" />
+                    <ShopCategoryCard data={data} className="" />
                 </div> 
                 
               </div>

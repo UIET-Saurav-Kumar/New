@@ -92,8 +92,10 @@ export default function DropDown({getLoc}:{getLoc:any}){
   }
 
     return (
-        <div  className='flex w-full h-12  '>
-          <div className='w-full h-12  '>
+        <div  className='flex w-full '>
+
+          <div className='w-full  '>
+            
               <AsyncSelect
                   cacheOptions
                   // defaultValue={inputValue.value}
@@ -103,11 +105,11 @@ export default function DropDown({getLoc}:{getLoc:any}){
                   onInputChange={handleInputChange}
                   placeholder="Search | Category | Shops"
                   onChange={optionSelected}
+             
                   
                 />
-                
-                 
           </div>
+          
           <div>
               <button onClick={clear} className="h-10 px-4 lg:h-12 xl:h-12 xl:px-8 flex items-center rounded-lg rounded-ts-none rounded-bs-none bg-accent 
                                                 text-light font-semibold transition-colors duration-200 focus:outline-none hover:bg-accent-hover focus:bg-accent-hover">

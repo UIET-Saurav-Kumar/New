@@ -169,7 +169,7 @@ export declare type Order = {
   created_at: Date;
   updated_at: Date;
   billing_address?: UserAddress;
-  shipping_address?: UserAddress;
+  // shipping_address?: UserAddress;
 };
 
 export type SettingsType = {
@@ -183,7 +183,7 @@ export type SettingsOptions = {
   currency?: string;
   logo?: Attachment;
   taxClass?: string;
-  shippingClass?: string;
+  // shippingClass?: string;
 };
 
 export type Shop = {

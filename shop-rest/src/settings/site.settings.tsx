@@ -1,3 +1,4 @@
+
 import { FacebookIcon } from "@components/icons/facebook";
 import { InstagramIcon } from "@components/icons/instagram";
 import { TwitterIcon } from "@components/icons/twitter";
@@ -30,6 +31,7 @@ export const siteSettings = {
       default: "Neon",
     },
   },
+
   author: {
     name: "RedQ, Inc.",
     websiteUrl: "https://redq.io",
@@ -58,10 +60,12 @@ export const siteSettings = {
       },
     ],
   },
+
+
   headerLinks: [
     { href: ROUTES.SHOPS, icon: null, label: "Shops" },
     { href: ROUTES.OFFERS, icon: null, label: "Offer" },
-    { href: ROUTES.HELP, label: "FAQ" },
+    // { href: ROUTES.HELP, label: "FAQ" },
     { href: ROUTES.CONTACT, label: "Contact" },
   ],
 
@@ -73,11 +77,11 @@ export const siteSettings = {
     { href: ROUTES.REFERRAL_ACTIVITY, label: "Referral Status" },
     { href: ROUTES.REFERRAL_NETWORK, label: "Referral Network" },
     { href: ROUTES.LOGOUT, label: "Logout" },
-   
   ],
 
   
   dashboardSidebarMenu: [
+
     {
       href: ROUTES.PROFILE,
       menulabel: "profile-sidebar-profile",
@@ -106,7 +110,6 @@ export const siteSettings = {
       href: ROUTES.HELP,
       menulabel: "profile-sidebar-help",
     },
-
     {
       href: ROUTES.LOGOUT,
       menulabel: "profile-sidebar-logout",
@@ -460,6 +463,7 @@ export const siteSettings = {
      
    },
    ],
+
    amazonShops: [
     {
       image: '/images/amazon-delivery.jpeg',

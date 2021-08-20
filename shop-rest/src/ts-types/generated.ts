@@ -238,7 +238,7 @@ export declare type Order = {
   created_at: Scalars["DateTime"];
   updated_at: Scalars["DateTime"];
   billing_address?: Maybe<UserAddress>;
-  shipping_address?: Maybe<UserAddress>;
+  // shipping_address?: Maybe<UserAddress>;
 };
 export declare type OrderStatus = {
   __typename?: "OrderStatus";
@@ -511,6 +511,7 @@ export declare type ProductsHasCategoriesWhereConditions = {
 export enum ProductsHasCategoriesColumn {
   Slug = "SLUG",
 }
+
 export declare type Settings = {
   __typename?: "Settings";
   id: Scalars["ID"];
@@ -671,9 +672,11 @@ export declare type MutationUpdateProfileArgs = {
 export declare type MutationDeleteProfileArgs = {
   id: Scalars["ID"];
 };
+
 export declare type MutationUpdateSettingsArgs = {
   input: SettingsInput;
 };
+
 export declare type MutationDeleteTypeArgs = {
   id: Scalars["ID"];
 };
@@ -694,12 +697,14 @@ export declare type AddressInput = {
   type: Scalars["String"];
   customer?: Maybe<ConnectBelongsTo>;
 };
+
 export declare type UserAddressInput = {
   country?: Maybe<Scalars["String"]>;
   city?: Maybe<Scalars["String"]>;
   state?: Maybe<Scalars["String"]>;
   zip?: Maybe<Scalars["String"]>;
 };
+
 export declare type ConnectBelongsTo = {
   connect?: Maybe<Scalars["ID"]>;
 };
@@ -746,7 +751,7 @@ export declare type CheckoutVerificationInput = {
   amount: Scalars["Float"];
   products: Array<ConnectProductOrderPivot>;
   billing_address?: Maybe<UserAddressInput>;
-  shipping_address?: Maybe<UserAddressInput>;
+  // shipping_address?: Maybe<UserAddressInput>;
 };
 export declare type ConnectProductOrderPivot = {
   product_id: Scalars["ID"];
@@ -774,8 +779,9 @@ export enum CouponType {
   /** Percentage coupon */
   PercentageCoupon = "PERCENTAGE_COUPON",
   /** Free shipping coupon */
-  FreeShippingCoupon = "FREE_SHIPPING_COUPON",
+  // FreeShippingCoupon = "FREE_SHIPPING_COUPON",
 }
+
 export declare type CouponUpdateInput = {
   code?: Maybe<Scalars["String"]>;
   type?: Maybe<CouponType>;
@@ -785,6 +791,7 @@ export declare type CouponUpdateInput = {
   active_from?: Maybe<Scalars["DateTime"]>;
   expire_at?: Maybe<Scalars["DateTime"]>;
 };
+
 export declare type UpdateOrder = {
   tracking_number?: Maybe<Scalars["String"]>;
   customer_id?: Maybe<Scalars["ID"]>;
@@ -801,7 +808,7 @@ export declare type UpdateOrder = {
   delivery_fee?: Maybe<Scalars["Float"]>;
   delivery_time?: Maybe<Scalars["String"]>;
   billing_address?: Maybe<UserAddressInput>;
-  shipping_address?: Maybe<UserAddressInput>;
+  // shipping_address?: Maybe<UserAddressInput>;
 };
 export declare type ConnectCustomerBelongsTo = {
   connect: Scalars["ID"];
@@ -809,12 +816,15 @@ export declare type ConnectCustomerBelongsTo = {
 export declare type ConnectOrderStatusBelongsTo = {
   connect: Scalars["ID"];
 };
+
 export declare type SyncProductOrderBelongsToMany = {
   sync?: Maybe<Array<ConnectProductOrderPivot>>;
 };
+
 export declare type ConnectCouponBelongsTo = {
   connect: Scalars["ID"];
 };
+
 export declare type CreateOrder = {
   tracking_number: Scalars["String"];
   customer_id: Scalars["Int"];
@@ -832,7 +842,7 @@ export declare type CreateOrder = {
   delivery_time: Scalars["String"];
   card?: Maybe<CardInput>;
   billing_address?: Maybe<UserAddressInput>;
-  shipping_address?: Maybe<UserAddressInput>;
+  // shipping_address?: Maybe<UserAddressInput>;
 };
 export declare type CardInput = {
   number: Scalars["String"];
@@ -1022,6 +1032,7 @@ export type UpdateUser = {
   profile?: Maybe<UserProfileInput>;
   address?: Maybe<Array<Maybe<UserAddressUpsertInput>>>;
 };
+
 export type CreateUser = {
   name?: Maybe<Scalars["String"]>;
   email: Scalars["String"];
@@ -1066,10 +1077,12 @@ export declare type Analytics = {
   newCustomers?: Maybe<Scalars["Int"]>;
   totalYearSaleByMonth?: Maybe<Array<Maybe<TotalYearSaleByMonth>>>;
 };
+
 export declare type TotalYearSaleByMonth = {
   total?: Maybe<Scalars["Float"]>;
   month?: Maybe<Scalars["String"]>;
 };
+
 // export declare type ProductsQuery = {
 //   __typename?: "Query";
 // } & {

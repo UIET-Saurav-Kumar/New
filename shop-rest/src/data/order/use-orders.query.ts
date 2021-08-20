@@ -3,19 +3,23 @@ import {
   Order,
   OrdersQueryOptionsType,
 } from "@ts-types/custom.types";
+
 import { ParamsType } from "@utils/api/core.api";
 import { API_ENDPOINTS } from "@utils/api/endpoints";
 import { mapPaginatorData } from "@utils/data-mappers";
+
 import {
   QueryKey,
   useInfiniteQuery,
   UseInfiniteQueryOptions,
 } from "react-query";
+
 import { OrderService } from "./order.service";
 type PaginatedOrder = {
   data: Order[];
   paginatorInfo: any;
 };
+
 const fetchOrders = async ({
   queryKey,
   pageParam,

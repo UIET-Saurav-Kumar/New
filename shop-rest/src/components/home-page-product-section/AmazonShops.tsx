@@ -58,8 +58,10 @@ export default function AmazonShops() {
 
                                             
 
-                                                <div className='flex justify-evenly items-center h-48  sm:h-52 lg:flex max-w-30 md:max-w-96 md:h-34 lg:max-w-600 lg:h-48 2xl:h-48  lg+:max-w-600 lg+:h-44 xl+:max-w-600 xl++:h-48 xl++:max-w-500 2xl:max-w-500 3xl:max-w-800 xl:justify-center 2xl:items-center border p-4 md:p-2 
-								                                bg-white rounded-md md:px-3 lg:px-1 px-0 cursor-pointer hover:border-gray-400 ' 
+                                                {/* <div className='flex justify-evenly items-center h-48  sm:h-52 lg:flex max-w-30 md:max-w-96 md:h-34 lg:max-w-600 lg:h-48 2xl:h-48  lg+:max-w-600 lg+:h-44 xl+:max-w-600 xl++:h-48 xl++:max-w-500 2xl:max-w-500 3xl:max-w-800 xl:justify-center 2xl:items-center border p-4 md:p-2 
+								                                bg-white rounded-md md:px-3 lg:px-1 px-0 cursor-pointer hover:border-gray-400 '  */}
+                                                                <div className='w-full max-h-96 sm:max bg-white flex justify-between py-4 px-2  sm:px-16 md:px-8 
+                                                                               lg:px-0 lg:justify-between xl:px-8 items-center  '
 						                                        key={products.label} >
 
                                                

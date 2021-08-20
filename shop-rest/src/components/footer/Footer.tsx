@@ -75,11 +75,11 @@ const Footer = () => {
 
 			  		<h5 className='footer-links-title font-semibold'>More</h5>
 
-					  <a className='light-text cursor-pointer hover:underline font-light mt-4' href='#all-categories'><h5 className='light-text mt-4 font-light'>Categories</h5></a>
-					  <a className='light-text cursor-pointer hover:underline font-light mt-4' href='#featured-shops'><h5 className='light-text mt-4 font-light'> Local Shops</h5></a>
-			  	      <a className='light-text cursor-pointer hover:underline font-light mt-4' href='#ecommerce-store'><h5 className='light-text mt-4 font-light'> E-Stores</h5></a>	
-					  <a className='light-text cursor-pointer hover:underline font-light mt-4' href='#offer-of-the-day'><h5  className='light-text mt-4 font-light'> Offer of the Day</h5></a>
-					  <a className='light-text cursor-pointer hover:underline font-light mt-4' href='#featured-products'><h5  className='light-text mt-4 font-light'> Featured Products</h5></a>
+					  <a className='light-text cursor-pointer hover:underline font-light mt-4' href='./home#all-categories'><h5 className='light-text mt-4 font-light'>Categories</h5></a>
+					  <a className='light-text cursor-pointer hover:underline font-light mt-4' href='./home#featured-shops'><h5 className='light-text mt-4 font-light'> Local Shops</h5></a>
+			  	      <a className='light-text cursor-pointer hover:underline font-light mt-4' href='./home#ecommerce-store'><h5 className='light-text mt-4 font-light'> E-Stores</h5></a>	
+					  <a className='light-text cursor-pointer hover:underline font-light mt-4' href='./home#offer-of-the-day'><h5  className='light-text mt-4 font-light'> Offer of the Day</h5></a>
+					  <a className='light-text cursor-pointer hover:underline font-light mt-4' href='./home#featured-products'><h5  className='light-text mt-4 font-light'> Featured Products</h5></a>
 			  		
 			  	</div>
 

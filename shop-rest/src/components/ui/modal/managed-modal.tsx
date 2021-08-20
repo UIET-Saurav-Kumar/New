@@ -2,17 +2,21 @@ import dynamic from "next/dynamic";
 import Modal from "@components/ui/modal/modal";
 import { useModalAction, useModalState } from "./modal.context";
 import ShopProfileCard from "@components/profile/profile-card";
+
 const Login = dynamic(() => import("@components/auth/login"));
 const Register = dynamic(() => import("@components/auth/register"));
 const ForgotPassword = dynamic(
   () => import("@components/auth/forget-password/forget-password")
 );
+
 const ProductDetailsModalView = dynamic(
   () => import("@components/product/product-details-modal-view")
 );
+
 const CreateOrUpdateAddressForm = dynamic(
   () => import("@components/address/address-form")
 );
+
 const AddressDeleteView = dynamic(
   () => import("@components/address/address-delete-view")
 );

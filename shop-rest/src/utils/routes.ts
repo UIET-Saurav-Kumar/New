@@ -1,4 +1,5 @@
 export const ROUTES = {
+
   HOME: "/home",
   CHECKOUT: "/checkout",
   
@@ -30,7 +31,6 @@ export const ROUTES = {
   
   WISHLIST: './my-wishlist',
   NOTIFICATONS: './notifications',
-
 
   PROFILE: "/user/profile",
   CHANGE_PASSWORD: "/user/change-password",

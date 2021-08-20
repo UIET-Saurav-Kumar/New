@@ -25,6 +25,7 @@ export default function CheckoutPage() {
       <div className="flex flex-col lg:flex-row items-center lg:items-start m-auto lg:space-s-8 w-full max-w-5xl">
         <div className="lg:max-w-2xl w-full space-y-6">
           <div className="shadow-700 bg-light p-5 md:p-8">
+            
             <Address
               id={data?.me?.id!}
               heading="text-billing-address"

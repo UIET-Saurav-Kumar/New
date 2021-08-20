@@ -9,21 +9,26 @@ interface Props {
   heading: string;
   addresses: any[] | undefined;
   count?: number;
-  type?: "billing" | "shipping";
+  type?: "billing";
 }
 
 const Address = ({ id, addresses, heading, count, type }: Props) => {
+
   const { openModal } = useModalAction();
-  const { updateBillingAddress, updateShippingAddress } = useCheckout();
+
+  const { updateBillingAddress } = useCheckout();
+
   useEffect(() => {
     if (addresses && type === "billing") {
       updateBillingAddress(addresses[0]);
     }
-    if (addresses && type === "shipping") {
-      updateShippingAddress(addresses[0]);
-    }
+    // if (addresses && type === "shipping") {
+    //   updateShippingAddress(addresses[0]);
+    // }
   }, [addresses]);
+
   function handleAdd() {
+
     if (loggedIn()) {
       return openModal("ADD_OR_UPDATE_ADDRESS", { customerId: id, type });
     } else {
@@ -40,11 +45,13 @@ const Address = ({ id, addresses, heading, count, type }: Props) => {
     });
   }
   function handleSelect(item: any) {
-    if (type === "billing") {
-      updateBillingAddress(item);
-    } else {
-      updateShippingAddress(item);
-    }
+    // if (type === "billing") {
+    //   updateBillingAddress(item);
+    // } 
+    type === 'billing' ?  updateBillingAddress(item) : ''
+    // else {
+    //   updateShippingAddress(item);
+    // }
   }
   return (
     <SectionWithCardGroup

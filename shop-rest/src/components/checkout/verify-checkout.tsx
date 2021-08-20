@@ -14,35 +14,45 @@ import { useCart } from "@contexts/quick-cart/cart.context";
 import { useModalAction } from "@components/ui/modal/modal.context";
 
 const VerifyCheckout = () => {
+
   const { t } = useTranslation("common");
   const router = useRouter();
   const [errorMessage, setError] = useState("");
-  const { billing_address, shipping_address, setCheckoutData } = useCheckout();
+  const { billing_address, setCheckoutData } = useCheckout();
   const { items, total, isEmpty } = useCart();
   const { openModal } = useModalAction();
+
   const { price: subtotal } = usePrice(
     items && {
       amount: total,
     }
   );
+
   const { mutate: verifyCheckout, isLoading: loading } =
-    useVerifyCheckoutMutation();
+        useVerifyCheckoutMutation();
 
   async function handleVerifyCheckout() {
+
     if (loggedIn()) {
-      if (billing_address && shipping_address) {
+
+      if ( billing_address ) {
+        
         verifyCheckout(
           {
             amount: total,
             products: items?.map((item) => formatOrderedProduct(item)),
+
             billing_address: {
               ...(billing_address?.address && billing_address.address),
             },
-            shipping_address: {
-              ...(shipping_address?.address && shipping_address.address),
-            },
+            
+            // shipping_address: {
+            //   ...(shipping_address?.address && shipping_address.address),
+            // },
           },
+
           {
+
             onSuccess: (data) => {
               setCheckoutData(data);
               router.push("/order");
@@ -50,11 +60,13 @@ const VerifyCheckout = () => {
             onError: (error) => {
               console.log(error, "error");
             },
+
           }
         );
       } else {
         setError("error-add-both-address");
       }
+
     } else {
       openModal("LOGIN_VIEW");
     }
@@ -75,9 +87,11 @@ const VerifyCheckout = () => {
               {t("text-no-products")}
             </h4>
           </div>
+          
         ) : (
           items?.map((item) => <CheckoutCartItem item={item} key={item.id} />)
         )}
+
       </div>
       <div className="space-y-2 mt-4">
         <div className="flex justify-between">
@@ -97,6 +111,7 @@ const VerifyCheckout = () => {
           </span>
         </div>
       </div>
+
       <Button
         loading={loading}
         className="w-full mt-5"

@@ -122,6 +122,7 @@ export default function HeaderMiddle() {
                              {/* <input className=' border  h-12  border-gray-300 w-8 
                               border-r-0 rounded-lg rounded-r-none' defaultValue=''  /> */}
                        {/* </span> */}
+                       
 
                        <input onClick = {handleLocation} 
                               defaultValue = {getLocation?.formattedAddress}  
@@ -130,8 +131,8 @@ export default function HeaderMiddle() {
                                           border border-e-0  focus:border-accent pr-4 border-gray-300 pl-2 ' 
                               placeholder = 'Enter location' id='location_id' />
                        
-                           <div className='hidden  lg:flex lg:w-3/5   xl:h-0  
-                                           focus:bg-accent-hover' >
+                           <div className='hidden  lg:flex lg:w-3/5   
+                                           ' >
                                 <DropDown  getLoc={handleLocation} />
                            </div>
 
