@@ -1,5 +1,5 @@
 
-const colourOptions=[
+const colourOptions = [
     {
         label:"yellow"
     },

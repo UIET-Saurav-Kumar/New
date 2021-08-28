@@ -23,7 +23,7 @@ const CategoryDropdownSidebar = () => {
   if (loading) {
     return (
       <div className="hidden xl:block">
-        <div className="w-72 mt-8 px-2">
+        <div className="w-60 mt-8 px-2">
           <CategoryListLoader />
         </div>
       </div>
@@ -31,9 +31,9 @@ const CategoryDropdownSidebar = () => {
   }
   if (error) return <ErrorMessage message={error.message} />;
 
-
+  
   return (
-    <aside className="sticky top-22 h-full lg:w-72 hidden md:block bg-light">
+    <aside className="sticky top-22 h-full lg:w-80  hidden md:block bg-light">
       <div className="max-h-full overflow-hidden">
         <Scrollbar className="w-full h-full max-h-screen">
           {data?.categories?.data?.length ? (

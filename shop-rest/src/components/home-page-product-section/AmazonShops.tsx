@@ -60,16 +60,20 @@ export default function AmazonShops() {
 
                                                 {/* <div className='flex justify-evenly items-center h-48  sm:h-52 lg:flex max-w-30 md:max-w-96 md:h-34 lg:max-w-600 lg:h-48 2xl:h-48  lg+:max-w-600 lg+:h-44 xl+:max-w-600 xl++:h-48 xl++:max-w-500 2xl:max-w-500 3xl:max-w-800 xl:justify-center 2xl:items-center border p-4 md:p-2 
 								                                bg-white rounded-md md:px-3 lg:px-1 px-0 cursor-pointer hover:border-gray-400 '  */}
-                                                                <div className='w-full max-h-96 sm:max bg-white flex justify-between py-4 px-2  sm:px-16 md:px-8 
-                                                                               lg:px-0 lg:justify-between xl:px-8 items-center  '
-						                                        key={products.label} >
-
-                                               
-                                                         <img className='rounded-0 w-16 h-20 xs+:w-20 xs+:h-20 xs++:w-24 xs++:h-24 sm:w-24 
-                                                                sm:h-24 md:w-20 lg:w-34 lg:h-32 xl+:w-36 2xl:w-38 2xl:h-38' src ={products.image} />
+                                                                <div className=' rounded  w-auto h-48 md++:h-60 lg:w-56 lg:h-48 lg+:w-auto lg+:h-52 border border-gray-200 hover:border-gray-400 sm:max bg-white flex justify-evenly py-4 px-2  sm:px-16 md:px-8 
+                                                                               lg:px-0 lg:justify-evenly xl:px-8 items-center '
+						                                             key={products.label} 
+                                                                >
+               
+                                                         {/* <img className='rounded-0 w-16 h-20 xs+:w-20 xs+:h-20 xs++:w-24 xs++:h-24 sm:w-24 
+                                                                sm:h-24 md:w-20 lg:w-34 lg:h-32 xl+:w-36 2xl:w-38 2xl:h-38'  */}
+                                                                <img className=' w-16 h-16 xs++:w-16 xs++:h-16 xs+++:w-20 xs+++:h-20 sm:w-20 sm:h-20 
+                                                                                    md:w-28 md:h-28 ml-2  lg:w-36 lg:h-36 lg+:w-32 lg+:h-28 xl+:w-32 xl+:h-32 xl++:w-32 
+                                                                                    xl++:h-32 2xl:w-32 2xl:h-32 object-fill '  
+                                                                src ={products.image} />
 
                                                     <div className='flex flex-col justify-center w-20 md-w-24 lg:w-32 2xl:w-64 2xl:h-40 space-y-1 pl-2 md:pl-3 lg:pl-4 2xl:pl-4 '>
-                                                        <h3 className='font-semibold text-10px  md:text-sm lg:text-sm 2xl:text-lg  '> {products.label} </h3>
+                                                        <h3 className='w-10 font-semibold text-10px  md:text-sm lg:text-sm 2xl:text-lg  '> {products.label} </h3>
                                                         <h3 className=' font-light text-gray-600 text-10px md:text-10px lg:text-10px 2xl:text-sm  ' > {truncate(`${products.offers}`,23)} additional cashback </h3>
                                                         <a href={products.href} target="_blank" className=' font-light text-blue-600 text-xs  md:text-md lg:text-md 2xl:text-10px ' > Shop Now</a>
                                                     </div>

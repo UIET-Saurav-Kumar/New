@@ -25,8 +25,8 @@ import Truncate from '@components/ui/truncate-scroll';
 
 export default function HeaderMiddle() {
 
-    const truncate = (txt, n) => {
-        txt.length > 10 ? txt.substring(0, n) : ''
+    const truncate = (txt:any, n:number) => {
+      return  txt.length > 10 ? txt.substring(0, n) : txt
 
     }
 
@@ -96,7 +96,7 @@ export default function HeaderMiddle() {
     return (
 
         <div id='amazon-shops' 
-        className='flex flex-col  shadow-md md:bg-white lg:bg-white'> 
+             className='flex flex-col  shadow-md md:bg-white lg:bg-white'> 
 
 
        <div className=' relative z-30 px-4 flex  justify-evenly max-w-full pt-8 pb-6 '>
@@ -172,49 +172,63 @@ export default function HeaderMiddle() {
                {isAuthorize ? (
 
                    <div className='flex justify-between  w-full  items-center  lg:hidden xl:hidden 2xl:hidden'>
-                    <div className='block px-0  '>  <Logo className='mx-0  px-0'/> </div>
-                       <div className='flex items-center space-x-4 md:space-x-10 lg:space-x-8'>
-                               <span>  
-                                   
-                                   <h3 onClick={handleLocation}  
-                                       className='flex text-black items-center text-xs lg:hidden  md:text-black mr-0 md:mr-0 md:text-md'>
-           
-                                           <CaretDown/> Chandigarh
-           
-                                   </h3> 
-                                   </span>
 
-                               <AuthorizedMenu  />
+                        <div className='block px-0  '>  
+                           <Logo className='mx-0  px-0'/> 
+                        </div>
+
+                       <div className='flex items-center  '>
+                               <span>  
+                               <h3 onClick={handleLocation}  
+                                                className='flex  text-gray-600 items-center text-xs sm:text-sm md:text-md lg:hidden  
+                                                            md:text-gray-600 mr-0 md:mr-0 md:text-md'>
+           
+                                               <CaretDown className='text-gray-500 mr-2 w-3 h-3 md:w-5 md:h-5'/> 
+
+                                                        <button className='border text-gray-500 w-auto sm:w-96  rounded-xl border-gray-400 p-1 px-2'>
+
+                                                            { truncate(` ${getLocation?.formattedAddress} `, 21) }
+
+                                                            {/* { getLocation?.formattedAddress } */}
+                                                            {/* Chandigarh */}
+
+                                                        </button>
+                                   </h3> 
+                                </span>
+                               
                        </div>
+
+                       <AuthorizedMenu  />
 
                    </div>
                        
                        ) : (
                            <div className='flex justify-between  w-full  items-center  lg:hidden xl:hidden 2xl:hidden'>
-                    <div className='block px-0 -ml-10 sm:-ml-6  '>  <Logo className='mx-0  px-0'/> </div>
-                       <div className='flex items-center space-x-4 sm:space-x-16 md:space-x-16 '>
-                               <span>  
-                                   
-                                   <h3 onClick={handleLocation}  
-                                       className='flex text-gray-600 items-center text-xs sm:text-sm md:text-md lg:hidden  
-                                                md:text-gray-600 mr-0 md:mr-0 md:text-md'>
-           
-                                           <CaretDown className='text-gray-500 mr-2 w-5 h-5'/> 
 
-                                            <button className='border text-gray-500  rounded-xl border-gray-400 p-1 px-2'>
+                                <div className='block px-0 -ml-10 sm:-ml-6  '> 
+                                    <Logo className='mx-0  px-0'/>
+                                 </div>
 
-                                                 {/* { truncate(` ${getLocation?.formattedAddress} `, 10) } */}
+                                <div className='flex items-center '>
 
-                                                { getLocation?.formattedAddress }
-                                                 {/* Chandigarh */}
+                                        <span className='flex f'>  
+                                            <h3 onClick={handleLocation}  
+                                                className='flex  text-gray-600 items-center text-xs sm:text-sm md:text-md lg:hidden  
+                                                            md:text-gray-600 mr-0 md:mr-0 md:text-md'>
+                    
+                                                    <CaretDown className='text-gray-500 mr-2 w-5 h-5'/> 
 
-                                           </button>
-           
-                                   </h3> 
-                                   </span>
+                                                        <button className='border text-gray-500  rounded-xl border-gray-400 p-1 px-2'>
 
-                               <MobileJoinButton  />
-                       </div>
+                                                            { truncate(` ${getLocation?.formattedAddress} `, 21) }
+
+                                                        </button>
+                                            </h3> 
+                                        </span>
+
+                                </div>
+
+                       <MobileJoinButton  />
 
                    </div>
              

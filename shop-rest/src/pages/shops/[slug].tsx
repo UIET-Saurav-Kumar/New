@@ -25,6 +25,7 @@ import { isEmpty } from "lodash";
 import cn from "classnames";
 import ShopCategoryCard from "@components/category/shop-category-card";
 import Navbar from "@components/layout/navbar/navbar";
+import MobileNavigation from "@components/layout/mobile-navigation";
 
 
 
@@ -40,7 +41,7 @@ const ShopPage = ({ data,  cardClassName }: any) => {
 
   return (
     <>
-    <Navbar />
+    <Navbar label='' />
 
     <div className="bg-gray-100 flex flex-col md:flex-row md:justify-between  
                       md:items-start md:p-8" >
@@ -178,6 +179,7 @@ const ShopPage = ({ data,  cardClassName }: any) => {
                       </span>
 
                       <div className='flex 2xl:hidden '> 
+
                           <a
                               href={data?.settings?.website}
                               target="_blank"
@@ -185,7 +187,7 @@ const ShopPage = ({ data,  cardClassName }: any) => {
                               font-bold hover:text-accent-hover focus:outline-none focus:text-accent-hover"
                             >
                               {t("text-visit-site")}
-                            </a>
+                          </a>
                       </div>
 
                   </div>
@@ -230,6 +232,7 @@ const ShopPage = ({ data,  cardClassName }: any) => {
       </div>
 
       {width > 1023 && <CartCounterButton />}
+      {width < 1022 && <MobileNavigation />}
 
     </div>
     </>

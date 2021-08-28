@@ -25,6 +25,7 @@ import { fetchCategories } from "@data/home/use-categories-query";
 import { fetchFeatureShop } from "@data/home/use-feature-shop-query";
 import { fetchFeatureStore } from "@data/home/use-feature-e-store";
 import { fetchOfferQuery } from "@data/home/use-offer-query";
+import MobileNavigation from "@components/layout/mobile-navigation";
 
 
 export const getStaticProps: GetStaticProps = async ({ locale, params }) => {
@@ -123,6 +124,9 @@ if (query.text || query.category) {
     {/*  } */}
         {width > 1023 && 
             <CartCounterButton />
+        }
+        {width < 1023 && 
+            <MobileNavigation />
         }
         </>
     )

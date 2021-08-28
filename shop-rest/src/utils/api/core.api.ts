@@ -29,8 +29,11 @@ export type SearchParams = {
 export class CoreApi {
 
   http = Axios;
-  constructor(public _base_path: string) {}
-  private stringifySearchQuery(values: any) {
+  
+   constructor(public _base_path: string) {}
+
+   private stringifySearchQuery(values: any) {
+
     const parsedValues = pickBy(values);
 
     return Object.keys(parsedValues)

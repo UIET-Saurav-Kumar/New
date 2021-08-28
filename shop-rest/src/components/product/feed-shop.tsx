@@ -61,7 +61,7 @@ const ShopProductFeed = ({ shopId }: { shopId: string }) => {
     <div className="bg-gray-100 pt-6 pb-8 lg:py-8">
       <div className="grid grid-cols-2 lg:grid-cols-3 xl:lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 gap-3">
         {loading && !data?.pages?.length ? (
-          <ProductFeedLoader limit={20} />
+          <ProductFeedLoader limit={1} />
         ) : (
           <>
             {data?.pages.map((products, _idx) => (

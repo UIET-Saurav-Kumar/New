@@ -14,8 +14,10 @@ const ProductFeedLoader = dynamic(
 );
 
 const Feed = () => {
+
   const { t } = useTranslation("common");
   const { query } = useRouter();
+
   const {
     isFetching: loading,
     isFetchingNextPage: loadingMore,
@@ -34,6 +36,7 @@ const Feed = () => {
   function handleLoadMore() {
     fetchNextPage();
   }
+
   if (!loading && !data?.pages?.[0]?.data?.length) {
     return (
       <div className="bg-gray-100 min-h-full pt-6 pb-8 px-4 lg:p-8">
@@ -41,11 +44,12 @@ const Feed = () => {
       </div>
     );
   }
+  
   return (
     <div className="bg-gray-100 min-h-full pt-6 pb-8 px-4 lg:p-8">
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 gap-3">
         {loading && !data?.pages?.length ? (
-          <ProductFeedLoader limit={20} />
+          <ProductFeedLoader limit={3} />
         ) : (
           <>
             {data?.pages.map((products, _idx) => (

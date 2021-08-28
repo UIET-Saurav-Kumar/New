@@ -57,17 +57,20 @@ export default function FeaturesShops({ }) {
     
                         {data?.featureShops.data?.map((shop, _idx) => (
                             <Link href={`${ROUTES.SHOPS}/${shop.slug}`}>
-                                <div  className='flex justify-evenly items-center h-32 w-full  md:h-34  lg:h-40 2xl:h-48  xl:justify-center 
-                                     2xl:items-center border p-4 md:p-2  bg-white rounded-md md:px-3 lg:px-1 px-0 cursor-pointer hover:border-gray-400'>
+                                <div  className='flex justify-evenly lg:justify-evenly items-center h-32 w-full  md:h-34  lg:h-40 2xl:h-48  xl:justify-evenly 
+                                     2xl:items-center border p-4 md:p-2  bg-white rounded-md px-0 cursor-pointer hover:border-gray-400'>
                                    
-                                          <img className='rounded-0 w-10 h-10 xs+:w-16 xs+:h-16 xs++:w-20 xs++:h-20 sm:w-28 
-                                                          sm:h-24 md:w-20 lg:w-28 lg:h-32 2xl:w-38 2xl:h-38' src={shop.logo?.thumbnail}
-                                                          style={{ objectFit: "contain" }} />
+                                          {/* <img className='rounded-0 w-10 h-10 xs+:w-16 xs+:h-16 xs++:w-20 xs++:h-20 sm:w-28 
+                                                          sm:h-24 md:w-20 lg:w-28 lg:h-32 2xl:w-38 2xl:h-38'  */}
+                                                          <img className='  w-16 h-16 xs++:w-16 xs++:h-16 xs+++:w-20 xs+++:h-20 sm:w-20 sm:h-20 
+                                                                md:w-16 md:h-16 ml-2  lg:w-28 lg:h-28 lg+:w-28 lg+:h-28 xl+:w-32 xl+:h-32 xl++:w-32 
+                                                                xl++:h-32 2xl:w-32 2xl:h-32 object-contain'  
+                                                               src={shop.logo?.thumbnail}
+                                                               style={{ objectFit: "contain" }} />
         
                                     <div className='flex flex-col justify-center w-20 sm+:ml-0 md-w-24 lg:w-38 2xl:w-64 2xl:h-40 space-y-1 px-2 md:px-3 lg:px-4 2xl:px-4'>
                                         <h3 className='font-semibold text-10px  md:text-md lg:text-sm 2xl:text-lg  '> {shop.name}</h3>
                                         <h3 className='font-light text-10px sm:text-xs md:text-md lg:text-md 2xl:text-md ' >   {shop?.address?.city} </h3>
-                                        
                                     </div>
     
                                 </div>

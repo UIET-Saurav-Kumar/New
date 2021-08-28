@@ -42,26 +42,25 @@ const ShopCategoryCard: React.FC<ShopCategoryCardProps> = ({
 
       <div
         className={cn(
-          "flex sticky items-center md:hidden w-60 bg-light border-b border-gray-300 py-4 px-6  top-[55px] z-10",
+          "flex md:sticky items-center  w-80 bg-light border-b border-gray-900 py-4 px-6  top-[55px] z-10",
           cardClassName
         )}
       >
         
        
-        <div className="w-16 h-16 rounded-lg relative mx-auto border border-gray-100 bg-gray-200 overflow-hidden me-4 flex-shrink-0">
+        {/* <div className="w-16 h-16 rounded-lg relative mx-auto border border-gray-100 bg-gray-200 overflow-hidden me-4 flex-shrink-0">
 
           
-        </div>
+        </div> */}
 
-        <div className="w-full">
+        {/* <div className="w-full">
         
-        </div>
+        </div> */}
 
-      </div>
 
       <aside
         className={cn(
-          "bg-light rounded h-full w-full md:w-72 2xl:w-72 hidden lg:block flex-shrink-0",
+          "bg-transparent rounded h-full w-full md:w-60 2xl:w-60 hidden lg:block flex-shrink-0",
           className
         )}
       >
@@ -69,9 +68,9 @@ const ShopCategoryCard: React.FC<ShopCategoryCardProps> = ({
         <div className="max-h-full overflow-hidden">
           <Scrollbar className={cn("w-full", styles.scrollbar_height)}>
 
-            <div className="w-full border-b border-gray-200 p-7 flex flex-col items-center">
+            <div className="w-full  p-0 flex flex-col items-center">
           
-              <h4 className='-ml-44 text-gray-800 font-bold border-b '>Categories</h4>
+              <h4 className='-ml-36 text-gray-800 font-bold  '>Categories</h4>
               <ul className='text-gray-500'>
                 <CategoryDropdownSidebar/>
               </ul>
@@ -86,8 +85,10 @@ const ShopCategoryCard: React.FC<ShopCategoryCardProps> = ({
         </div>
 
           </Scrollbar>
+
         </div>
       </aside>
+      </div>
     </>
   );
 };

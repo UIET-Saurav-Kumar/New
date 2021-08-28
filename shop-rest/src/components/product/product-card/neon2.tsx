@@ -32,16 +32,16 @@ const Neon2: React.FC<NeonProps> = ({ product, className }) => {
       )}
     >
       <div
-        className="relative flex items-center justify-center cursor-pointer w-auto h-48 p-3 sm:h-64"
+        className="relative flex items-center justify-center cursor-pointer w-auto h-48 p-4 xl:p-12 sm:h-64"
         onClick={handleProductQuickView}
       >
         <span className="sr-only">{t("text-product-image")}</span>
         <Image
           src={product.image?.original?? siteSettings?.product?.placeholderImage}
           alt={product.name}
-          // layout="fill"
-          height={420}
-          width={420}
+          layout="fill"
+          // height={420}
+          // width={420}
           objectFit="fill"
           className="product-image"
         />

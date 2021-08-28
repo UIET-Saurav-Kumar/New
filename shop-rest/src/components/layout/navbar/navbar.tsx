@@ -1,4 +1,5 @@
-import { useRef } from "react";
+
+import { useRef, useState } from "react";
 import { siteSettings } from "@settings/site.settings";
 import Logo from "@components/ui/logo";
 import NavLink from "@components/ui/link/nav-link";
@@ -22,24 +23,37 @@ const Navbar = ({label}) => {
   const { t } = useTranslation("common");
   addActiveScroll(navbarRef);
 
+  const [category, setCategory] = useState(false);
+
+
   return (
+
     <header ref={navbarRef} className="site-header h-14 md:h-16 lg:h-22">
       <nav className="h-14 md:h-16 lg:h-22 fixed w-full z-20 bg-light shadow-sm py-5 px-4 lg:px-5 xl:px-8 flex justify-between items-center">
        
-      <div className='flex items-center space-x-8'> 
-      <Logo className="mx-auto lg:mx-0" /> 
-      <h2 className='font-semibold text-lg '>{label}</h2>
-     </div> 
+      <div className='flex items-center justify-between  space-x-8'> 
+       
+          <div className='flex items-center '> 
+              <Logo className="mx-auto lg:mx-0" /> 
+              <h2 className='font-semibold text-lg '>{label}</h2>
+          </div>
+          <div className='flex '>
+              <button className=''>  </button>
+          </div>
+
+      </div> 
 
         <ul className="hidden lg:flex items-center space-s-8">
           {isAuthorize ? (
             <li key="track-orders">
+
               <Link
                 href={ROUTES.ORDERS}
                 className="font-semibold text-heading flex items-center transition duration-200 no-underline hover:text-accent focus:text-accent"
               >
                 {t("nav-menu-track-order")}
               </Link>
+
             </li>
           ) : null}
           {siteSettings.headerLinks.map(({ href, label, icon }) => (
@@ -62,6 +76,7 @@ const Navbar = ({label}) => {
             </li>
           )}
         </ul>
+
       </nav>
     </header>
   );
