@@ -33,11 +33,11 @@ const CategoryDropdownSidebar = () => {
 
   
   return (
-    <aside className="sticky top-22 h-full lg:w-80  hidden md:block bg-light">
+    <aside className="sticky top-22 h-full lg:w-64  hidden md:block bg-light">
       <div className="max-h-full overflow-hidden">
         <Scrollbar className="w-full h-full max-h-screen">
           {data?.categories?.data?.length ? (
-            <div className="px-5 h-80">
+            <div className="px-5 h-96">
               <SidebarMenu items={data?.categories?.data} className="py-8" />
             </div>
           ) : (
