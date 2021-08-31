@@ -139,7 +139,7 @@ Route::group(['middleware' => ['can:' . Permission::CUSTOMER, 'auth:sanctum']], 
     Route::apiResource('attachments', AttachmentController::class, [
         'only' => ['store', 'update', 'destroy']
     ]);
-    // Route::post('checkout/verify', 'PickBazar\Http\Controllers\CheckoutController@verify');
+    Route::post('checkout/verify', 'PickBazar\Http\Controllers\CheckoutController@verify');
     Route::get('me', 'PickBazar\Http\Controllers\UserController@me');
     Route::put('users/{id}', 'PickBazar\Http\Controllers\UserController@update');
     Route::post('/change-password', 'PickBazar\Http\Controllers\UserController@changePassword');
