@@ -52,7 +52,7 @@ const Address = ({ id, addresses, heading, count, type }: Props) => {
     // if (type === "billing") {
     //   updateBillingAddress(item);
     // } 
-    type === 'billing' ?  updateBillingAddress(item) : ''
+    updateBillingAddress(item)
     // else {
     //   updateShippingAddress(item);
     // }
