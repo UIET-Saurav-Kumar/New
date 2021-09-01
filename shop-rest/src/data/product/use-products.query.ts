@@ -26,6 +26,9 @@ const fetchProducts = async ({
     if(process.browser&&window.document.domain!="localhost"){
       pageParam=pageParam.replace("http","https");
     }
+
+    pageParam = pageParam+'&search=shop_id:'+params.shop_id;
+    
     const response = await ProductService.fetchUrl(pageParam);
     fetchedData = response.data;
   } else {
