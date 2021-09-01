@@ -259,7 +259,7 @@ export default function OrderPage() {
                 </strong>
                 :
                 <span className="w-7/12 sm:w-8/12 ps-4 text-sm">
-                  {formatAddress(data?.order?.shipping_address!)}
+                  {formatAddress(data?.order?.billing_address!)}
                 </span>
               </p>
             </div>

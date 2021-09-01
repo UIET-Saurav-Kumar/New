@@ -122,7 +122,7 @@ export const siteSettings = {
     {
       id: "0",
       title: "Self Pickup",
-      description: "",
+      description: "Self Pickup",
     },
     {
       id: "1",

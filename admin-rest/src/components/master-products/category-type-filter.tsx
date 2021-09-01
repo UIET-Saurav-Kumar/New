@@ -28,6 +28,7 @@ export default function CategoryTypeFilter({
   );
 
   return (
+
     <div
       className={cn(
         "flex flex-col md:flex-row md:space-x-5 md:items-end space-y-5 md:space-y-0 w-full",
@@ -36,14 +37,14 @@ export default function CategoryTypeFilter({
     >
       <div className="w-full">
         <Label>{t("common:filter-by-group")}</Label>
-        <Select
-          options={data?.types}
-          isLoading={loading}
-          getOptionLabel={(option: any) => option.name}
-          getOptionValue={(option: any) => option.slug}
-          placeholder={t("common:filter-by-group-placeholder")}
-          onChange={onTypeFilter}
-        />
+          <Select
+            options={data?.types}
+            isLoading={loading}
+            getOptionLabel={(option: any) => option.name}
+            getOptionValue={(option: any) => option.slug}
+            placeholder={t("common:filter-by-group-placeholder")}
+            onChange={onTypeFilter}
+          />
       </div>
       <div className="w-full">
         <Label>{t("common:filter-by-category")}</Label>
