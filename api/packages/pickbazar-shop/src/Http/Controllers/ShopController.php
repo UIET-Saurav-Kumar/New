@@ -79,7 +79,7 @@ class ShopController extends CoreController
                 }
             }
 
-            $shops->where("id",$category_shop_array);
+            $shops->whereIn("id",$category_shop_array);
         }
 
         

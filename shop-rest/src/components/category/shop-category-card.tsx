@@ -42,7 +42,7 @@ const ShopCategoryCard: React.FC<ShopCategoryCardProps> = ({
 
       <div
         className={cn(
-          "flex md:sticky items-center  w-80 bg-light border-b border-gray-900 py-4 px-6  top-[55px] z-10",
+          "flex md:sticky items-center  w-80 bg-light  py-4 px-6  top-[55px] z-10",
           cardClassName
         )}
       >

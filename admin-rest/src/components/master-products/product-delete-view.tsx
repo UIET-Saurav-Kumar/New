@@ -14,6 +14,7 @@ const MasterProductDeleteView = () => {
     deleteProduct(data);
     closeModal();
   }
+  
   return (
     <ConfirmationCard
       onCancel={closeModal}

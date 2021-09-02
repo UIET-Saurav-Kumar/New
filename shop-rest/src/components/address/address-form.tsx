@@ -86,16 +86,16 @@ const CreateOrUpdateAddressForm = () => {
         className="grid grid-cols-2 gap-5 h-full"
       >
         <div>
-          <Label>{t("text-type")}</Label>
+          {/* <Label>{t("text-type")}</Label> */}
 
-          <div className="space-s-4 flex items-center">
-            <Radio
+          {/* <div className="space-s-4 flex items-center">
+            <h1
               id="billing"
               {...register("type")}
               type="radio"
               value="billing"
-              label={t("text-billing")}
-            />
+              label={t("Delivery Address")}
+              > </h1>
 
             <Radio
               id="shipping"
@@ -104,11 +104,11 @@ const CreateOrUpdateAddressForm = () => {
               value="shipping"
               label={t("text-shipping")}
             />
-          </div>
+          </div> */}
         </div>
 
         <Input
-          label={t("text-title")}
+          label={t("Name")}
           {...register("title")}
           error={t(errors.title?.message!)}
           variant="outline"

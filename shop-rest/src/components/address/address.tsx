@@ -18,6 +18,7 @@ const Address = ({ id, addresses, heading, count, type }: Props) => {
 
   const { updateBillingAddress } = useCheckout();
 
+  
   useEffect(() => {
     if (addresses && type === "billing") {
       updateBillingAddress(addresses[0]);
@@ -27,6 +28,7 @@ const Address = ({ id, addresses, heading, count, type }: Props) => {
     // }
   }, [addresses]);
 
+
   function handleAdd() {
 
     if (loggedIn()) {
@@ -35,6 +37,7 @@ const Address = ({ id, addresses, heading, count, type }: Props) => {
       openModal("LOGIN_VIEW");
     }
   }
+
   function handleEdit(address: any) {
     return openModal("ADD_OR_UPDATE_ADDRESS", { customerId: id, address });
   }
@@ -44,15 +47,17 @@ const Address = ({ id, addresses, heading, count, type }: Props) => {
       addressId: address.id,
     });
   }
+
   function handleSelect(item: any) {
     // if (type === "billing") {
     //   updateBillingAddress(item);
     // } 
-    type === 'billing' ?  updateBillingAddress(item) : ''
+    updateBillingAddress(item)
     // else {
     //   updateShippingAddress(item);
     // }
   }
+
   return (
     <SectionWithCardGroup
       count={count}
@@ -64,6 +69,7 @@ const Address = ({ id, addresses, heading, count, type }: Props) => {
       onEdit={handleEdit}
       onDelete={handleDelete}
     />
+    
   );
 };
 

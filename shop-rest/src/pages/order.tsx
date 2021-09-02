@@ -22,10 +22,11 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
   };
 };
 
-const OrderPage = () => {
+  const OrderPage = () => {
   const { t } = useTranslation("common");
   const { isEmpty } = useCart();
   if (isEmpty) {
+
     return (
       <div
         className="flex flex-col items-center justify-center mb-4"
@@ -34,6 +35,7 @@ const OrderPage = () => {
         <EmptyCartIcon width={180} height={236} />
         <h4 className="my-4 text-lg text-heading">
           {t("error-cart-empty")}{" "}
+
           <Link
             href={ROUTES.HOME}
             className="text-accent font-semibold hover:text-accent-hover"

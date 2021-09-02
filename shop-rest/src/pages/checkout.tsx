@@ -50,7 +50,9 @@ export default function CheckoutPage() {
           <div className="shadow-700 bg-light p-5 md:p-8">
             <Schedule count={3} />
           </div>
+
         </div>
+        
         <div className="w-full lg:w-96 mb-10 sm:mb-12 lg:mb-0 mt-10">
           <VerifyCheckout />
         </div>

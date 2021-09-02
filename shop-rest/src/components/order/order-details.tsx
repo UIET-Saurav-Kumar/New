@@ -67,7 +67,7 @@ const OrderDetails = ({ order }: Props) => {
                 </span>
 
                 <span className="text-sm text-body">
-                  {formatAddress(shipping_address)}
+                  {formatAddress(billing_address)}
                 </span>
               </div>
 

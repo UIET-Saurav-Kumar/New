@@ -18,11 +18,11 @@ class CheckoutRepository
     {
         $unavailable_products = $this->checkStock($request['products']);
         $amount = $this->getOrderAmount($request, $unavailable_products);
-        // $shipping_charge = $this->calculateShippingCharge($request, $amount);
+        $shipping_charge = $this->calculateShippingCharge($request, $amount);
         $tax = $this->calculateTax($request, $shipping_charge, $amount);
         return [
             'total_tax'            => $tax,
-            // 'shipping_charge'      => $shipping_charge,
+            'shipping_charge'      => $shipping_charge,
             'unavailable_products' => $unavailable_products
         ];
     }
