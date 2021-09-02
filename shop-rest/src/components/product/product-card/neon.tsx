@@ -50,6 +50,13 @@ const Neon: React.FC<NeonProps> = ({ product, className }) => {
             {discount}
           </div>
         )}
+        {product.is_offer && (
+          <div className="absolute mr-4 start-3 top-3">
+            <div className="inline-flex items-center bg-accent text-light rounded-full text-xs leading-6 px-1.5 py-0">
+              <span>Offered</span>
+            </div>
+          </div>
+        )}
       </div>
       {/* End of product image */}
 
