@@ -13,6 +13,8 @@ use PickBazar\Exceptions\PickbazarException;
 use PickBazar\Http\Requests\CategoryCreateRequest;
 use PickBazar\Http\Requests\CategoryUpdateRequest;
 use Prettus\Validator\Exceptions\ValidatorException;
+use PickBazar\Database\Models\Shop;
+use PickBazar\Database\Models\Product;
 
 
 class CategoryController extends CoreController
