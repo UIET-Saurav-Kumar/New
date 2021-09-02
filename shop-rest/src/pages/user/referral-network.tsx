@@ -5,121 +5,83 @@ import Footer from "@components/footer/Footer";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useState } from "react";
 import ProfileSidebar from "@components/profile/profile-sidebar";
-import { useEffect } from "react";
-
-
+import { useEffect ,useLayoutEffect} from "react";
+import { InvitedUsers } from '@settings/site.settings';
+import Tree from 'react-tree-graph';
+import 'react-tree-graph/dist/style.css'
+import {useReferralNetworkQuery} from '@data/user/use-referral-network-query'
 export default function ReferralNetwork() {
+    const data_1 = {
+        name: 'Colour',
+        children: [
+            {
+                name: 'Black',
+                children: []
+            }, 
+            {
+                name: 'Blue',
+                children: [{
+                    name: 'Aquamarine',
+                    children: []
+                }, {
+                    name: 'Cyan',
+                    children: []
+                }, {
+                    name: 'Navy',
+                    children: []
+                }, {
+                    name: 'Turquoise',
+                    children: []
+                }]
+            }, 
+            {
+                name: 'Green',
+                children: []
+            }, 
+            {
+                name: 'Purple',
+                children: [{
+                    name: 'Indigo',
+                    children: []
+                }, {
+                    name: 'Violet',
+                    children: []
+                }]
+            }, 
+            {
+                name: 'Red',
+                children: [{
+                    name: 'Crimson',
+                    children: []
+                }, {
+                    name: 'Maroon',
+                    children: []
+                }, {
+                    name: 'Scarlet',
+                    children: []
+                }]
+            }, 
+            {
+                name: 'White',
+                children: []
+            }, 
+            {
+                name: 'Yellow',
+                children: []
+            }
+        ]
+    };
+    
 
-    const InvitedUsers = [
+    
+    const { data } = useReferralNetworkQuery({
+        limit: 10 as number,
+        search:"",
+    });
 
-        { 
-           id:'9056',
-           name: 'Vinender Singh',
-           mobileNumber: '90182-47362',
-           status: 'accepted',
-           purchases: '₹ 1500 in last 1 month',
-           level: '1',
-       },
-    
-       {
-        id:'9496',
-           name: 'Koshim',
-           mobileNumber: '90182-47362',
-           status: 'accepted',
-           purchases: '₹ 2000 in last 1 month',
-           level: '2',
-       },
-    
-       {
-        id:'1102',
-           name: 'Sahil',
-           mobileNumber: '80183-65263',
-           status: 'accepted',
-           purchases: '₹ 2000 in last 1 month',
-           level: '3',
-       },
-    
-       {
-        id:'2026',
-           name: 'Dev Ed',
-           mobileNumber: '70182-65262',
-           status: 'pending',
-           purchases: '₹ 1030 in last 1 month',
-           level: '4',
-           date : '20/June/2021',
-    
-       },
-    
-       {
-        id:'1016',
-           name: 'Web Dev',
-           mobileNumber: '70340-69872',
-           status: 'pending',
-           purchases: '₹ 200 in last 1 month',
-           level: '2',
-           date : '20/June/2021',
-       },
-
-       {
-        id:'70856',
-           name: 'Aman',
-           mobileNumber: '90182-47362',
-           status: 'accepted',
-           purchases: '₹ 1160 in last 1 month',
-           level: '3',
-           date : '20/June/2021',
-       },
-    
-       {
-        id:'1095',
-           name: 'Sharma',
-           mobileNumber: '80183-65263',
-           status: 'accepted',
-           purchases: '₹ 350 in last 1 month',
-           level: '4',
-           date : '20/June/2021',
-       },
-    
-       {
-        id:'9306',
-           name: 'Dev Ed',
-           mobileNumber: '70182-65262',
-           status: 'pending',
-           purchases: '₹ 600 in last 1 month',
-           level: '2',
-           date : '20/June/2021',
-    
-       },
-    
-       {
-        id:'9394',
-           name: 'Web Dev',
-           mobileNumber: '70340-69872',
-           status: 'pending',
-           purchases: 'null',
-           level: '3',
-           date : '20/June/2021',
-    
-       },
-
-       {
-        id:'4006',
-           name: 'Guest',
-           mobileNumber: '70340-69872',
-           status: 'pending',
-           purchases: 'null',
-           level: '4',
-           date : '20/June/2021',
-    
-       },
-    ]
-
-
-    const handleClick = () => {
-
-    }
-
-   
+    useEffect(()=>{
+        console.log(data,"data");
+    },[])
     const showLevel1 = () => {
         setLevel1(true);
         setLevel3(false);
@@ -172,7 +134,24 @@ export default function ReferralNetwork() {
       setLevel1(true);
     }, [])
 
+    function useWindowSize() {
+        const [size, setSize] = useState([0, 0]);
+        useLayoutEffect(() => {
+          function updateSize() {
+            var new_width=(window.innerWidth>=1000)?800:window.innerWidth-10;
+            var new_height=window.innerHeight;
+            // console.log(new_width,"new_width");
+            // console.log(new_height,"new_height");
 
+            setSize([new_width, new_height]);
+          }
+          window.addEventListener('resize', updateSize);
+          updateSize();
+          return () => window.removeEventListener('resize', updateSize);
+        }, []);
+        return size;
+    }
+    const [width, height] = useWindowSize();
     return (  
 
         <div className='bg-gray-100'>
@@ -184,8 +163,23 @@ export default function ReferralNetwork() {
 
                     <ProfileSidebar className="sticky overflow-hidden flex-shrink-0 mt-14 ml-14 hidden xl:block xl:w-80 " />  
 
+                    <div className="flex flex-col  justify-evenly bg-white  p-4 w-full mx-auto border  mt-14">
+                    {
+                        data&&(
+                            <Tree
+                                data={data}
+                                height={height}
+                                width={width}
+                                svgProps={{
+                                    className: 'custom'
+                                }}
+                            />
+                        )
+                    }
+                    
+                    </div>
 
-                    <div className=" flex flex-col  justify-evenly bg-white  p-4 w-full mx-auto border  mt-14 " >
+                    {/* <div className=" flex flex-col  justify-evenly bg-white  p-4 w-full mx-auto border  mt-14 " >
 
                             <div className='flex justify-evenly bg'>   
 
@@ -212,8 +206,7 @@ export default function ReferralNetwork() {
                                 )) }
 
                             </div> 
-
-                    </div>
+                    </div> */}
                 
                 </div>
 

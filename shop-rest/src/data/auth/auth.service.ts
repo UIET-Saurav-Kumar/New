@@ -9,6 +9,7 @@ export type RegisterUserInputType = {
 	name: string;
 	email: string;
 	password: string;
+	invited_by:number;
 };
 
 export type ChangePasswordInputType = {

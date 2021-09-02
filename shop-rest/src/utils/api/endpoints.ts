@@ -28,6 +28,7 @@ export const API_ENDPOINTS: Record<string, string> = {
   HOME_FEATURE_PRODUCTS:"fetch-feature-products",
   HOME_OFFERS:"fetch-offers",
   HOME_CATEGORIES:"fetch-home-categories",
-  SEARCH:"search"
+  SEARCH:"search",
+  REFERRAL_NETWORK:"referral-network"
   
 };

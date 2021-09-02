@@ -263,6 +263,77 @@
     height: 48px!important;
 
   }
-
-
  }
+
+ .tip {
+  position: relative;
+  display: inline-block;
+}
+
+.tip .tiptext {
+  visibility: hidden;
+  width: 70px;
+  background-color: #43A093;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  /* Position the tip */
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 150%;
+  margin-left: -60px;
+}
+
+.tip:hover .tiptext {
+  visibility: visible;
+}
+
+.icon-clipboard{
+  width:25px;
+  height: auto;
+  color:#43A093;
+  cursor: pointer;
+
+}
+.invite-link{
+  color:#43A093;
+  text-decoration: none;
+  margin-left: 12px;
+}
+
+div.custom-container {
+	background-color: #242424;
+}
+
+
+svg.custom{
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* TREE */
+svg.custom .node circle {
+	fill: #F3F3FF;
+	stroke: #46A48B;
+	stroke-width: 1.5px;
+}
+
+svg.custom .node text {
+	font-size: 16px;
+	background-color: #444;
+	fill: #202020;
+	font-weight: 600;
+}
+
+svg.custom .node {
+	cursor: pointer;
+}
+
+svg.custom path.link {
+	fill: none;
+	stroke: #46A48B;
+	stroke-width: 1.5px;
+}
+/* END TREE */

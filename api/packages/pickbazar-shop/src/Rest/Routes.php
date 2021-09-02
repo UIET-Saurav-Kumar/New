@@ -97,7 +97,7 @@ Route::put('shop-commission/{shop_id}','PickBazar\Http\Controllers\ShopControlle
 
 Route::put('shop-commission-type/{shop_id}','PickBazar\Http\Controllers\ShopController@shop_commission_type');
 
-
+Route::get('referral-network','PickBazar\Http\Controllers\InviteController@refferral_network');
 
 
 // busineesId, mobile, ParentBusinees Id

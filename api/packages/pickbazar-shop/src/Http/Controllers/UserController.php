@@ -18,6 +18,7 @@ use Exception;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
+use PickBazar\Database\Models\Invite;
 use PickBazar\Http\Requests\ChangePasswordRequest;
 use PickBazar\Mail\ContactAdmin;
 use PickBazar\Database\Models\Permission as ModelsPermission;
@@ -106,7 +107,7 @@ class UserController extends CoreController
     public function me(Request $request)
     {
         $user = $request->user();
-
+        
         if (isset($user)) {
             return $this->repository->with(['profile', 'address', 'shops.balance', 'managed_shop.balance'])->find($user->id);
         }
@@ -147,6 +148,13 @@ class UserController extends CoreController
             'name'     => $request->name,
             'email'    => $request->email,
             'password' => Hash::make($request->password),
+            'invited_by'=>$request->invited_by
+        ]);
+
+        Invite::create([
+            "user_id"=>$request->invited_by,
+            "invitee_id"=>$user->id,
+            "invitee_name"=>$user->name
         ]);
 
         $user->givePermissionTo($permissions);

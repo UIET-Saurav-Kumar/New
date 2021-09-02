@@ -56,7 +56,7 @@ export default function FeaturesShops({ }) {
     
     
                         {data?.featureShops.data?.map((shop, _idx) => (
-                            <Link href={`${ROUTES.SHOPS}/${shop.slug}`}>
+                            <Link href={`${ROUTES.SHOPS}/${shop.slug}`} key={_idx}>
                                 <div  className='flex justify-evenly lg:justify-evenly items-center h-32 w-full  md:h-34  lg:h-40 2xl:h-48  xl:justify-evenly 
                                      2xl:items-center border p-4 md:p-2  bg-white rounded-md px-0 cursor-pointer hover:border-gray-400'>
                                    

@@ -54,7 +54,7 @@ export default function AmazonShops() {
                                {siteSettings.amazonShops.map((products, _idx) => (
 
                                       <a href={products.href} target="_blank" 
-                                            className=' font-light  text-xs  md:text-md lg:text-md 2xl:text-md ' >
+                                            className=' font-light  text-xs  md:text-md lg:text-md 2xl:text-md '  key={_idx}>
 
                                             
 
