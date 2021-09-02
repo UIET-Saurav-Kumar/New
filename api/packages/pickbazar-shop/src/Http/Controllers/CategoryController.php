@@ -34,6 +34,17 @@ class CategoryController extends CoreController
     {
         $limit = $request->limit ?   $request->limit : 15;
         return $this->repository->with(['type', 'parent', 'children.type'])->where('parent', null)->paginate($limit);
+//         $checkslug = (explode(":",$request->search));
+
+//         $limit = $request->limit ?   $request->limit : 15;
+
+//         $shopid = Shop::where('slug', $checkslug[1])->get()->first();
+
+//         $findid = Product::where('shop_id', $shopid->id)->get()->first();
+        
+//         $res = Category::with(['type','parent','children.type'])->where('type_id', $findid->type_id)->where('parent',null)->paginate($limit);
+
+        return $res;
     }
     /**
      * Display a listing of the resource.
