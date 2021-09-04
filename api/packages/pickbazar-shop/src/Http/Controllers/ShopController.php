@@ -293,9 +293,9 @@ class ShopController extends CoreController
 
         if($location){
             $shops=ShopRepository::getSortedShops($location);
-            return Shop::whereIn("id",$shops)->where("is_active",1)->limit($limit)->get();
+            return Shop::whereIn("id",$shops)->where("is_featured",1)->where("is_active",1)->limit($limit)->get();
         }
-        return Shop::limit($limit)->where("is_active",1)->get();
+        return Shop::limit($limit)->where("is_featured",1)->where("is_active",1)->get();
     }
 
     public function fetchFeatureStores(Request $request)

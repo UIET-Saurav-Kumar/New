@@ -13,11 +13,13 @@ import { useTranslation } from "next-i18next";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useModalAction } from "@components/ui/modal/modal.context";
+import { route } from "next/dist/next-server/server/router";
 
 type FormValues = {
   name: string;
   email: string;
   password: string;
+  phone_number:number
 };
 
 const registerFormSchema = yup.object().shape({
@@ -27,12 +29,14 @@ const registerFormSchema = yup.object().shape({
     .email("error-email-format")
     .required("error-email-required"),
   password: yup.string().required("error-password-required"),
+  phone_number:yup.string().required("You must need to provide your Phone number")
 });
 
 const defaultValues = {
   name: "",
   email: "",
   password: "",
+  phone_number:""
 };
 
 const RegisterForm = () => {
@@ -56,15 +60,20 @@ const RegisterForm = () => {
     router.push(`/${path}`);
     closeModal();
   }
-  function onSubmit({ name, email, password }: FormValues) {
+  function onSubmit({ name, email, password,phone_number }: FormValues) {
     mutate(
       {
         name,
         email,
         password,
+        phone_number,
+        invited_by:'',
       },
       {
         onSuccess: (data) => {
+          router.push('/auth/'+data.user.id);
+          closeModal();
+          return ;
           if (data?.token && data?.permissions?.length) {
             Cookies.set("auth_token", data.token);
             Cookies.set("auth_permissions", data.permissions);
@@ -137,6 +146,15 @@ const RegisterForm = () => {
           className="mb-5"
           error={t(errors.email?.message!)}
         />
+        <Input
+          label={"Phone Number"}
+          {...register("phone_number")}
+          type="text"
+          variant="outline"
+          className="mb-5"
+          error={t(errors.phone_number?.message!)}
+        />
+
         <PasswordInput
           label={t("text-password")}
           {...register("password")}

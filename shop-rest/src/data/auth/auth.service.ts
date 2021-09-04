@@ -10,14 +10,21 @@ export type RegisterUserInputType = {
 	email: string;
 	password: string;
 	invited_by:number;
+	phone_number:number;
 };
-
+export type VerifyUserInputType = {
+	id: string;
+	code: string;
+};
 export type ChangePasswordInputType = {
 	oldPassword: string;
 	newPassword: string;
 };
 export type ForgetPasswordInputType = {
 	email: string;
+};
+export type CodeInputType = {
+	id: string;
 };
 export type ResetPasswordInputType = {
 	email: string;
@@ -45,6 +52,11 @@ class Auth extends CoreApi {
 	register(input: RegisterUserInputType) {
 		return this.http
 			.post(API_ENDPOINTS.REGISTER, input)
+			.then((res) => res.data);
+	}
+	verfiy(input: VerifyUserInputType) {
+		return this.http
+			.post(API_ENDPOINTS.USER_VERIFY, input)
 			.then((res) => res.data);
 	}
 	logout() {

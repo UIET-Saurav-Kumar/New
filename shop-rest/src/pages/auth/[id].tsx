@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import { useForm } from "react-hook-form";
-import { useRegisterMutation } from "@data/auth/use-register.mutation";
+import { useVerifyMutation } from "@data/auth/use-verify.mutation";
+import { useCodeMutation } from "@data/auth/use-code.mutation";
 import Logo from "@components/ui/logo";
 import Alert from "@components/ui/alert";
 import Input from "@components/ui/input";
-import PasswordInput from "@components/ui/password-input";
 import Button from "@components/ui/button";
 import { useUI } from "@contexts/ui.context";
 import { useTranslation } from "next-i18next";
@@ -18,9 +18,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 
 type FormValues = {
-  name: string;
-  email: string;
-  password: string;
+  code: string;
   id:number
 };
 
@@ -34,24 +32,18 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
 
   
 const registerFormSchema = yup.object().shape({
-  name: yup.string().required("error-name-required"),
-  email: yup
-    .string()
-    .email("error-email-format")
-    .required("error-email-required"),
-  password: yup.string().required("error-password-required"),
+  code: yup.string().required("Code is required")
 });
 
 const defaultValues = {
-  name: "",
-  email: "",
-  password: "",
+  code: "",
 };
 
 
 const RegisterForm = () => {
   const { t } = useTranslation("common");
-  const { mutate, isLoading: loading } = useRegisterMutation();
+  const { mutate, isLoading: loading } = useVerifyMutation();
+  
   const [errorMsg, setErrorMsg] = useState("");
   const { query } = useRouter();
   const {
@@ -71,20 +63,29 @@ const RegisterForm = () => {
     router.push(`/${path}`);
     closeModal();
   }
-  function onSubmit({ name, email, password }: FormValues) {
+  async function resendCode(){
+    if(query.id){
+      var data=await useCodeMutation(query.id as string);
+      console.log(data);
+    }
+  }
+
+
+
+  function onSubmit({code}: FormValues) {
     mutate(
       {
-        name,
-        email,
-        password,
-        invited_by:query.id
+        code,
+        id:query.id
       },
       {
         onSuccess: (data) => {
-          if(data.user){
-            router.push('/auth/'+data.user.id);
+          if(data.message=="incorrect"){
+            setErrorMsg("Code is incorrect");
+            return ;
+          }else{
+            setErrorMsg("");
           }
-          return ;
           if (data?.token && data?.permissions?.length) {
             Cookies.set("auth_token", data.token);
             Cookies.set("auth_permissions", data.permissions);
@@ -143,32 +144,18 @@ const RegisterForm = () => {
                 />
             )}
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
+
                 <Input
-                label={t("text-name")}
-                {...register("name")}
-                type="text"
+                label={t("text-code")}
+                {...register("code")}
+                type="code"
                 variant="outline"
                 className="mb-5"
-                error={t(errors.name?.message!)}
-                />
-                <Input
-                label={t("text-email")}
-                {...register("email")}
-                type="email"
-                variant="outline"
-                className="mb-5"
-                error={t(errors.email?.message!)}
-                />
-                <PasswordInput
-                label={t("text-password")}
-                {...register("password")}
-                error={t(errors.password?.message!)}
-                variant="outline"
-                className="mb-5"
+                error={t(errors.code?.message!)}
                 />
                 <div className="mt-8">
                 <Button className="w-full h-12" loading={loading} disabled={loading}>
-                    {t("text-register")}
+                    Verify
                 </Button>
                 </div>
             </form>
@@ -176,16 +163,14 @@ const RegisterForm = () => {
 
             <div className="flex flex-col items-center justify-center relative text-sm text-heading mt-8 sm:mt-11 mb-6 sm:mb-8">
                 <hr className="w-full" />
-                <span className="absolute start-2/4 -top-2.5 px-2 -ms-4 bg-light">
-                {t("text-or")}
-                </span>
             </div>
             <div className="text-sm sm:text-base text-body text-center">
-                {t("text-already-account")}{" "}
+                {"didn't recieve the message"}{" "}
                 <button
                 className="ms-1 underline text-accent font-semibold transition-colors duration-200 focus:outline-none hover:text-accent-hover focus:text-accent-hover hover:no-underline focus:no-underline"
+                onClick={resendCode}
                 >
-                {t("text-login")}
+                resend 
                 </button>
             </div>
         </div>

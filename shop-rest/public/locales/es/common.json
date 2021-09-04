@@ -126,6 +126,7 @@
   "text-name": "Nombre",
   "text-email": "Correo electrónico",
   "text-password": "Contraseña",
+  "text-code":"Code",
   "text-subject": "Asunto",
   "text-description": "Descripción",
   "text-contact-number": "Número de contacto",

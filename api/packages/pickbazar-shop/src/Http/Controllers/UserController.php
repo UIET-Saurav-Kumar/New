@@ -2,27 +2,29 @@
 
 namespace PickBazar\Http\Controllers;
 
+use Exception;
+use Carbon\Carbon;
+use GuzzleHttp\Client;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use PickBazar\Http\Util\SMS;
 use Illuminate\Http\Response;
-use PickBazar\Database\Repositories\UserRepository;
-use Illuminate\Validation\ValidationException;
+use PickBazar\Enums\Permission;
+use PickBazar\Mail\ContactAdmin;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use PickBazar\Database\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use PickBazar\Database\Models\Invite;
+use Laravel\Socialite\Facades\Socialite;
+use PickBazar\Exceptions\PickbazarException;
+use Illuminate\Validation\ValidationException;
 use PickBazar\Http\Requests\UserCreateRequest;
 use PickBazar\Http\Requests\UserUpdateRequest;
-use PickBazar\Enums\Permission;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
-use Exception;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
-use Laravel\Socialite\Facades\Socialite;
-use PickBazar\Database\Models\Invite;
 use PickBazar\Http\Requests\ChangePasswordRequest;
-use PickBazar\Mail\ContactAdmin;
+use PickBazar\Database\Repositories\UserRepository;
 use PickBazar\Database\Models\Permission as ModelsPermission;
-use PickBazar\Exceptions\PickbazarException;
 
 class UserController extends CoreController
 {
@@ -140,26 +142,66 @@ class UserController extends CoreController
 
     public function register(UserCreateRequest $request)
     {
+        // dd($request->phone_number);
+
         $permissions = [Permission::CUSTOMER];
         if (isset($request->permission)) {
             $permissions[] = isset($request->permission->value) ? $request->permission->value : $request->permission;
         }
+
+        $code=SMS::sendOTP($request->phone_number);
+
         $user = $this->repository->create([
             'name'     => $request->name,
             'email'    => $request->email,
             'password' => Hash::make($request->password),
-            'invited_by'=>$request->invited_by
+            'invited_by'=>$request->invited_by,
+            'phone_number'=>$request->phone_number,
+            'is_active'=>0,
+            'code'=>$code
         ]);
-
-        Invite::create([
-            "user_id"=>$request->invited_by,
-            "invitee_id"=>$user->id,
-            "invitee_name"=>$user->name
-        ]);
+        
+        if($request->invited_by){
+            Invite::create([
+                "user_id"=>$request->invited_by,
+                "invitee_id"=>$user->id,
+                "invitee_name"=>$user->name
+            ]);
+        }
 
         $user->givePermissionTo($permissions);
 
-        return ["token" => $user->createToken('auth_token')->plainTextToken, "permissions" => $user->getPermissionNames()];
+        return ["user"=>$user];
+
+        return ["token" => $user->createToken('auth_token')->plainTextToken,"permissions" => $user->getPermissionNames()];
+    }
+
+    
+
+    public function userVerify(Request $request)
+    {
+        $user=User::findOrFail($request->id);
+        if($request->code==$user->code){
+
+            $user->update([
+                "is_active"=>1
+            ]);
+            
+            return ["token" => $user->createToken('auth_token')->plainTextToken,"permissions" => $user->getPermissionNames()];
+        }
+
+        return ["message"=>"incorrect"];
+    }
+
+    public function resendCode($id)
+    {
+        $user=User::findOrFail($id);
+        $code=SMS::sendOTP($user->phone_number);
+        $user->update([
+            "code"=>$code
+        ]);
+        return["message"=>"code resent"];
+        
     }
 
     public function banUser(Request $request)
@@ -174,6 +216,7 @@ class UserController extends CoreController
             throw new PickbazarException('PICKBAZAR_ERROR.NOT_AUTHORIZED');
         }
     }
+
     public function activeUser(Request $request)
     {
         $user = $request->user();
