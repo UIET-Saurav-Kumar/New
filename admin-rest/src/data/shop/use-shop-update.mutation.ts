@@ -22,7 +22,7 @@ export const useUpdateShopMutation = () => {
       },
       // Always refetch after error or success:
       onSettled: () => {
-        queryClient.invalidateQueries(API_ENDPOINTS.SHOPS);
+        queryClient.invalidateQueries(API_ENDPOINTS.ADMIN_SHOP);
       },
     }
   );
