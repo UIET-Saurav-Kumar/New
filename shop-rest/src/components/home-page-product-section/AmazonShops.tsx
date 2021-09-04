@@ -30,7 +30,7 @@ export default function AmazonShops() {
 
                 <div className='flex justify-between  p-2 px-4'>
                     
-                        <h3 className='font-semibold text-xs sm:text-md md:text-md xl:text-lg '> 
+                        <h3 className='font-bold text-xs sm:text-md md:text-md xl:text-xl '> 
                            Get Additional Discounts on Major E-Stores
                         </h3>
 

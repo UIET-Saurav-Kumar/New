@@ -31,7 +31,7 @@ export default function ProductGrid() {
       <>
        <div id='offer-of-the-day' className=' flex flex-col mt-8 border-b rounded-t shadow-lg bg-gray-50 p-4  '>
         <div className='flex justify-between '>
-            <h3 className='font-semibold text-xs sm:text-md md:text-md  xl:text-lg  '> 
+            <h3 className='font-bold text-xs sm:text-md md:text-md  xl:text-xl  '> 
                 Offers of the Day
             </h3>
             <h3 className='font-blue hover:underline cursor-pointer' > view all </h3>
