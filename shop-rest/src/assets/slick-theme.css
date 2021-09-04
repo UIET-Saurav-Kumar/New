@@ -121,7 +121,7 @@
 .slick-dots
 {
     position: absolute;
-    bottom: 15px;
+    bottom: -0px;
 
     display: block;
 
@@ -221,10 +221,20 @@
   
    }
 
-   @media (min-width: 1497px) {
+   @media (min-width: 1298px) {
 
     .slick-dots{
         bottom: -20px
+
+    }
+  
+  
+   }
+
+   @media (min-width: 1497px) {
+
+    .slick-dots{
+        bottom: 0px
 
     }
   

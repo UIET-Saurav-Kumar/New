@@ -20,7 +20,7 @@ const fetchProducts = async ({
   let fetchData:any={}
   if(pageParam){
     if(process.browser&&window.document.domain!="localhost"){
-      pageParam=pageParam.replace("http","https");
+      pageParam=pageParam.replace("http","http");
     }
     fetchData= await Product.all(pageParam)
   }else{

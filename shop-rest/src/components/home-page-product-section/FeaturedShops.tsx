@@ -18,10 +18,11 @@ export default function FeaturesShops({ }) {
         isLoading: loading,
         error,
     } = useFeatureShopQuery({
-        limit: 10 as number,
+        limit: 16 as number,
         search:"",
         location : ((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any
     });
+
     function getLink(){
 		var pathname="/"+router.locale+"/shops/"
 		const { type, ...rest } = query;
@@ -38,7 +39,7 @@ export default function FeaturesShops({ }) {
     
                     <div className='flex justify-between  p-2 px-4'>
     
-                        <h3 className='font-semibold text-xs sm:text-md md:text-md xl:text-lg  '>
+                        <h3 className='font-bold text-xs sm:text-md md:text-md xl:text-xl  '>
                             Featured Local Shops Nearby
                         </h3>
 
@@ -50,8 +51,8 @@ export default function FeaturesShops({ }) {
 
                 </div>
     
-                <div className=' grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-2  gap-2
-                                            lg:place-items-center 2xl:gap-2 2xl:grid-cols-5
+                <div className=' grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 lg:gap-2  gap-2
+                                            lg:place-items-center 2xl:gap-2 2xl:grid-cols-4
                                             mt-0 px-2 lg:px-4 bg-gray-100 p-4' >
     
     

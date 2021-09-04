@@ -13,6 +13,8 @@ use PickBazar\Exceptions\PickbazarException;
 use PickBazar\Http\Requests\CategoryCreateRequest;
 use PickBazar\Http\Requests\CategoryUpdateRequest;
 use Prettus\Validator\Exceptions\ValidatorException;
+use PickBazar\Database\Models\Shop;
+use PickBazar\Database\Models\Product;
 
 
 class CategoryController extends CoreController
@@ -32,8 +34,26 @@ class CategoryController extends CoreController
      */
     public function fetchOnlyParent(Request $request)
     {
-        $limit = $request->limit ?   $request->limit : 15;
-        return $this->repository->with(['type', 'parent', 'children.type'])->where('parent', null)->paginate($limit);
+        if($request->search != null)
+        {
+            $checkslug = (explode(":",$request->search));
+
+            $limit = $request->limit ?   $request->limit : 15;
+    
+            $shopid = Shop::where('slug', $checkslug[1])->get()->first();
+    
+            $findid = Product::where('shop_id', $shopid->id)->get()->first()->type_id ?? 0;
+           
+            $res = Category::with(['type','parent','children.type'])->where('type_id', $findid)->where('parent',null)->paginate($limit);
+    
+            return $res;
+        }
+        else
+        {
+            
+            $limit = $request->limit ?   $request->limit : 15;
+            return $this->repository->with(['type', 'parent', 'children.type'])->paginate($limit);
+        }
     }
     /**
      * Display a listing of the resource.

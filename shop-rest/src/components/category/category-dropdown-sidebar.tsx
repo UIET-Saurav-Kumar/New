@@ -16,7 +16,7 @@ const CategoryDropdownSidebar = () => {
     isLoading: loading,
     error,
   } = useCategoriesQuery({
-    type: type as string,
+    type: query.slug as string,
   });
 
 
