@@ -44,7 +44,7 @@ export default function ImageSlider() {
 
           <div className="card">
 
-          <img  className='rounded-md w-full  h-40 lg:w-full 2xl:h-full 2xl:w-full space-x-9'  
+          <img  className='rounded-md w-full h-40 lg:w-full xl+:h-60  2xl:h-64 2xl:w-full space-x-9'  
                 src={'/banner/new-7.png'} 
                 objectFit='contain'   />
 
@@ -54,9 +54,9 @@ export default function ImageSlider() {
 
         <div>
           <div className="card">
-            <img className='rounded-md  w-full h-40 lg:w-full 2xl:h-full 2xl:w-full  space-x-9 '   
-                src={'/banner/new-2.png'} 
-                objectFit='contain'  />
+            <img className='rounded-md  w-full h-40 lg:w-full xl+:h-60  2xl:h-64 2xl:w-full  space-x-9 '   
+                  src={'/banner/new-2.png'} 
+                  objectFit='contain'  />
             </div> 
         </div>
 
@@ -64,7 +64,7 @@ export default function ImageSlider() {
 
           <div className="card">
 
-          <img className='rounded-md  h-40 lg:w-full 2xl:h-full 2xl:w-full w-full  space-x-9 '   
+          <img className='rounded-md  h-40 lg:w-full 2xl:h-64 xl+:h-60 2xl:w-full  space-x-9 '   
                src={'/banner/new-3.png'} 
                objectFit='contain'  />
 
@@ -75,7 +75,7 @@ export default function ImageSlider() {
         <div>
           <div className="card">
 
-          <img className='rounded-md  w-full  h-40 lg:w-full 2xl:h-full 2xl:w-full  space-x-9 '   
+          <img className='rounded-md  w-full  h-40 lg:w-full xl+:h-60 2xl:h-full 2xl:w-full  space-x-9 '   
                src={'/banner/new-4.png'} 
                objectFit='contain'  />
 
@@ -85,7 +85,7 @@ export default function ImageSlider() {
         <div>
           <div className="card">
 
-          <img className='rounded-md  w-full  h-40 lg:w-full 2xl:h-full 2xl:w-full  space-x-9 '   
+          <img className='rounded-md  w-full  h-40 lg:w-full xl+:h-60  2xl:h-full 2xl:w-full  space-x-9 '   
                src={'/banner/new-5.png'} 
                objectFit='contain'  />
 
@@ -95,7 +95,7 @@ export default function ImageSlider() {
         <div>
           <div className="card">
 
-          <img className='rounded-md  w-full  h-40 lg:w-full 2xl:h-full 2xl:w-full  space-x-9 '   
+          <img className='rounded-md  w-full  h-40 lg:w-full xl+:h-60 2xl:h-full 2xl:w-full  space-x-9 '   
                src={'/banner/new-6.png'} 
                objectFit='contain'  />
 
@@ -105,7 +105,7 @@ export default function ImageSlider() {
         <div>
           <div className="card">
 
-          <img className='rounded-md  w-full  h-40 lg:w-full 2xl:h-full 2xl:w-full  space-x-9 '   
+          <img className='rounded-md  w-full  h-40 lg:w-full xl+:h-60  2xl:h-full 2xl:w-full  space-x-9 '   
                src={'/banner/new-8.png'} 
                objectFit='contain'  />
 
