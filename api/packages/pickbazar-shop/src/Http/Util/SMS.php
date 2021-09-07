@@ -16,8 +16,10 @@ class SMS
 
     public static function sendOTP($phone_number)
     {
-        $client = new Client();
+        $phone_number=SMS::formate_number($phone_number);
 
+        $client = new Client();
+        
         $otp=SMS::random(5);
         $key=SMS::$key;
 
@@ -32,8 +34,19 @@ class SMS
         }
     }
 
+    private static function formate_number($phone_number)
+    {
+        $phone_number=str_replace("(","",$phone_number);
+        $phone_number=str_replace(")","",$phone_number);
+        $phone_number=str_replace(" ","",$phone_number);
+
+        return $phone_number;
+    }
+
     public static function welcome($phone_number)
     {
+        $phone_number=SMS::formate_number($phone_number);
+
         $client = new Client();
         $url = "https://2factor.in/API/V1/$key/ADDON_SERVICES/SEND/PSMS";
 
@@ -52,5 +65,5 @@ class SMS
         }
     }
 }
-http://2factor.in/API/V1/293832-67745-11e5-88de-5600000c6b13/ADDON_SERVICES/SEND/PSMS
+// http://2factor.in/API/V1/293832-67745-11e5-88de-5600000c6b13/ADDON_SERVICES/SEND/PSMS
 

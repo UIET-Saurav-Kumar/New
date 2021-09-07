@@ -50,5 +50,7 @@ export const API_ENDPOINTS = {
   CREATED_MASTER_PRODUCT:"created-master-products",
   PRODUCT_COMMISSSION:"products-commission",
   SHOP_COMMISSION:"shop-commission",
-  SHOP_COMMISSION_TYPE:"shop-commission-type"
+  SHOP_COMMISSION_TYPE:"shop-commission-type",
+  UPDATE_REFERRAL_COMMISSION:"update-referral-commission",
+  GET_REFERRAL_COMMISSION:"get-referral-commission"
 };

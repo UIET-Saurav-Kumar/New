@@ -4,13 +4,15 @@ import ErrorMessage from "@components/ui/error-message";
 import Loader from "@components/ui/loader/loader";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import ShopList from "@components/commission/shop-list";
 import { useState } from "react";
+import ShopList from "@components/commission/shop-list";
 import Search from "@components/common/search";
 import { adminOnly } from "@utils/auth-utils";
 import { useShopsQuery } from "@data/shop/use-shops.query";
+import { useRefferalCommissionQuery } from "@data/shop/use-referral-commission.query";
 import SortForm from "@components/common/sort-form";
 import { SortOrder } from "@ts-types/generated";
+import ReferalCommissionForm from "@components/commission/referal-commission-form"
 
 export default function AllShopPage() {
   const { t } = useTranslation();
@@ -29,8 +31,8 @@ export default function AllShopPage() {
     orderBy,
     sortedBy,
   });
-
-  if (loading) return <Loader text={t("common:text-loading")} />;
+  const { data:refferal_commission, isLoading:commissionLoading} = useRefferalCommissionQuery()
+  if (loading||commissionLoading) return <Loader text={t("common:text-loading")} />;
   if (error) return <ErrorMessage message={error.message} />;
   function handleSearch({ searchText }: { searchText: string }) {
     setSearchTerm(searchText);
@@ -40,6 +42,14 @@ export default function AllShopPage() {
   }
   return (
     <>
+      <div className="flex flex-col md:flex-column justify-between mb-8 mt-5">
+        <h1 className="text-lg font-semibold text-heading">
+          REFERRAL COMMISSION
+        </h1>
+        <div className="card-body w-full">
+          <ReferalCommissionForm initialValues={refferal_commission?.refferal_commission}/>
+        </div>
+      </div>
       <Card className="flex flex-col md:flex-row items-center justify-between mb-8">
         <div className="md:w-1/4 mb-4 md:mb-0">
           <h1 className="text-lg font-semibold text-heading">

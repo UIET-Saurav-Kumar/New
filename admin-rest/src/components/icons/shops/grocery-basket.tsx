@@ -11,7 +11,7 @@ export const GroceryBasketIcon: React.FC<React.SVGAttributes<{}>> = (props) => {
         fill="currentColor"
         stroke="currentColor"
         strokeWidth=".4"
-        fill-rule="evenodd"
+        fillRule="evenodd"
       />
     </svg>
   );

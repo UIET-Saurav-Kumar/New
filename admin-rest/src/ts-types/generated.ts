@@ -812,6 +812,13 @@ export declare type ShopInput = {
   shop_categories?:any;
   is_featured?: number;
 };
+
+export declare type ReferalCommissionInput={
+  customer_commission: string;
+  level1_commission: string;
+  level2_commission: string;
+  level3_commission: string;
+}
 /** A paginated list of Shop items. */
 
 export declare type ShopPaginator = {

@@ -1,0 +1,217 @@
+
+import React,{useState, useEffect} from 'react';
+import MobileNavigation from "@components/layout/mobile-navigation";
+import ProductFeedLoaderTwo from "@components/ui/loaders/product-feed-loader-two";
+import Footer from '@components/footer/Footer';
+import Navbar from '@components/layout/navbar/navbar';
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import ProfileSidebar from "@components/profile/profile-sidebar";
+import {InvitedUsers} from "@data/invite/referal-data"
+import {useWalletCommissionQuery} from '@data/user/use-wallet-commission-query'
+
+
+const ReferralActivity = () => {
+    const { data,isLoading:loading } = useWalletCommissionQuery({
+        limit: 10 as number,
+        search:"",
+    });
+
+    function formateDate(date:string):string{
+        var temp=date.substring(0,10).split('-');
+        
+        return temp[2]+"/"+temp[1]+"/"+temp[0];
+    }
+
+    useEffect(()=>{
+        console.log(data)
+    },[data])
+
+	const [accepted, setAccepted ] = useState([])
+    if (loading) {
+        return (
+          <div className="hidden xl:block">
+            <div className="w-full h-52 flex justify-center mt-8 px-2">
+              <ProductFeedLoaderTwo />
+            </div>
+          </div>
+        );
+      }
+	return (
+        <> 
+		<div className='invitation-status-page bg-gray-100 flex flex-col'>  
+
+            <Navbar label='Referral Activity '/>
+
+            <div className='flex mx-10 space-x-20 '>
+                
+                <ProfileSidebar className="flex-shrink-0 hidden mt-14 xl:block xl:w-80 ml-14" />  
+
+                <div className="flex flex-col  justify-evenly p-4 w-full mx-auto  mt-14">
+                    <div className='invite-tabs flex flex-col bg-white p-4 w-full mx-4 text-left mt-5 px-8'>
+                        <div className="users-list mt-10">
+                            <h1 className="text-lg mb-5 font-semibold text-heading">Customer Wallet</h1>
+                            <table className='border-collapse border w-full'>
+                                <thead className=' font-normal text-10px md:text-md lg:text-lg p-10'>
+                                    <tr className='p-10  font-normal text-10px md:text-md lg:text-sm '>
+                                        <th className=" p-1  border-b-2  lg:px-4 lg:py-4">Date</th>
+                                        <th className=" p-1  border-b-2  lg:px-4 lg:py-4">Shop name</th>
+                                        <th className=" p-1  border-b-2  lg:px-4 lg:py-4">Order Id</th>
+                                        <th className=" p-1  border-b-2  lg:px-4 lg:py-4">Order Value</th>
+                                        <th className=" p-1  border-b-2  lg:px-4 lg:py-4">Earning</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {
+                                    (data?.customer_level?.length==0)&&(
+                                        <>
+                                        <tr>
+                                            <td colSpan="5" className='text-center p-1 border-b-2  lg:px-4 lg:py-4 text:10px sm:text-xs  lg:text-md font-md text-gray-600'>
+                                                No record found
+                                            </td>
+                                        </tr>
+                                        </>
+                                    )
+                                }
+                                {(data?.customer_level).map((commission):any => (
+                                    <tr className='bg-white' key={commission.id}>
+                                        <td className=' p-1  border-b-2  lg:px-4 lg:py-4 text:10px sm:text-xs lg:text-md font-md text-gray-600'>{formateDate(commission.created_at)}</td>
+                                        <td className='p-1 border-b-2  lg:px-4 lg:py-4 text:10px sm:text-xs  lg:text-md font-md text-gray-600' >{commission.shop_name}</td>
+                                        <td className='p-1 border-b-2  lg:px-4 lg:py-4 text:10px sm:text-xs  lg:text-md font-md text-gray-600' >{commission.order_track_number}</td>
+                                        <td className='p-1 border-b-2  lg:px-4 lg:py-4 sm:text-10px  text:xs lg:text-md font-md text-gray-600' >₹{commission.commission_value}</td>
+                                        <td className='p-1 border-b-2  lg:px-4 lg:py-4 sm:text-10px  text:xs lg:text-md font-md text-gray-600' >₹{commission.earning}</td>
+                                    </tr>
+                                ))}
+                                </tbody>
+                            </table>
+                        </div>                      
+                    </div>
+                    <div className='invite-tabs flex flex-col bg-white p-4 w-full mx-4 text-left mt-5 px-8'>
+                        <div className="users-list mt-10">
+                            <h1 className="text-lg mb-5 font-semibold text-heading">Level 1 earnings</h1>
+                            <table className='border-collapse border w-full'>
+                                <thead className=' font-normal text-10px md:text-md lg:text-lg p-10'>
+                                    <tr className='p-10  font-normal text-10px md:text-md lg:text-sm '>
+                                        <th className=" p-1  border-b-2  lg:px-4 lg:py-4">Date</th>
+                                        <th className=" p-1  border-b-2  lg:px-4 lg:py-4">Order Id</th>
+                                        <th className=" p-1  border-b-2  lg:px-4 lg:py-4">Order Value</th>
+                                        <th className=" p-1  border-b-2  lg:px-4 lg:py-4">Earning</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        (data?.level1?.length==0)&&(
+                                            <>
+                                            <tr>
+                                                <td colSpan="5" className='text-center p-1 border-b-2  lg:px-4 lg:py-4 text:10px sm:text-xs  lg:text-md font-md text-gray-600'>
+                                                    No record found
+                                                </td>
+                                            </tr>
+                                            </>
+                                        )
+                                    }
+                                    {(data?.level1).map((commission) => (
+                                        <tr className='bg-white' key={commission.id}>
+                                            <td className=' p-1  border-b-2  lg:px-4 lg:py-4 text:10px sm:text-xs lg:text-md font-md text-gray-600'>{formateDate(commission.created_at)}</td>
+                                            <td className='p-1 border-b-2  lg:px-4 lg:py-4 text:10px sm:text-xs  lg:text-md font-md text-gray-600' >{commission.order_track_number}</td>
+                                            <td className='p-1 border-b-2  lg:px-4 lg:py-4 text:10px sm:text-xs  lg:text-md font-md text-gray-600' >₹{commission.commission_value}</td>
+                                            <td className='p-1 border-b-2  lg:px-4 lg:py-4 sm:text-10px  text:xs lg:text-md font-md text-gray-600' >₹{commission.earning}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>                      
+                    </div>
+                    <div className='invite-tabs flex flex-col bg-white p-4 w-full mx-4 text-left mt-5 px-8'>
+                        <div className="users-list mt-10">
+                            <h1 className="text-lg mb-5 font-semibold text-heading">Level 2 earnings</h1>
+                            <table className='border-collapse border w-full'>
+                                <thead className=' font-normal text-10px md:text-md lg:text-lg p-10'>
+                                    <tr className='p-10  font-normal text-10px md:text-md lg:text-sm '>
+                                        <th className=" p-1  border-b-2  lg:px-4 lg:py-4">Date</th>
+                                        <th className=" p-1  border-b-2  lg:px-4 lg:py-4">Order Name</th>
+                                        <th className=" p-1  border-b-2  lg:px-4 lg:py-4">Order Value</th>
+                                        <th className=" p-1  border-b-2  lg:px-4 lg:py-4">Earning</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {
+                                        (data?.level2?.length==0)&&(
+                                            <>
+                                            <tr>
+                                                <td colSpan="5" className='text-center p-1 border-b-2  lg:px-4 lg:py-4 text:10px sm:text-xs  lg:text-md font-md text-gray-600'>
+                                                    No record found
+                                                </td>
+                                            </tr>
+                                            </>
+                                        )
+                                    }
+                                    {( data?.level2).map((commission) => (
+                                        <tr className='bg-white' key={commission.id}>
+                                            <td className=' p-1  border-b-2  lg:px-4 lg:py-4 text:10px sm:text-xs lg:text-md font-md text-gray-600'>{formateDate(commission.created_at)}</td>
+                                            <td className='p-1 border-b-2  lg:px-4 lg:py-4 text:10px sm:text-xs  lg:text-md font-md text-gray-600' >{commission.order_track_number}</td>
+                                            <td className='p-1 border-b-2  lg:px-4 lg:py-4 text:10px sm:text-xs  lg:text-md font-md text-gray-600' >₹{commission.commission_value}</td>
+                                            <td className='p-1 border-b-2  lg:px-4 lg:py-4 sm:text-10px  text:xs lg:text-md font-md text-gray-600' >₹{commission.earning}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>                      
+                    </div>
+                    <div className='invite-tabs flex flex-col bg-white p-4 w-full mx-4 text-left mt-5 px-8'>
+                        <div className="users-list mt-10">
+                            <h1 className="text-lg mb-5 font-semibold text-heading">Level 3 earnings</h1>
+                            <table className='border-collapse border w-full'>
+                                <thead className=' font-normal text-10px md:text-md lg:text-lg p-10'>
+                                    <tr className='p-10  font-normal text-10px md:text-md lg:text-sm '>
+                                        <th className=" p-1  border-b-2  lg:px-4 lg:py-4">Date</th>
+                                        <th className=" p-1  border-b-2  lg:px-4 lg:py-4">Order Name</th>
+                                        <th className=" p-1  border-b-2  lg:px-4 lg:py-4">Order Value</th>
+                                        <th className=" p-1  border-b-2  lg:px-4 lg:py-4">Earning</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        (data?.level3?.length==0)&&(
+                                            <>
+                                            <tr>
+                                                <td colSpan="5" className='text-center p-1 border-b-2  lg:px-4 lg:py-4 text:10px sm:text-xs  lg:text-md font-md text-gray-600'>
+                                                    No record found
+                                                </td>
+                                            </tr>
+                                            </>
+                                        )
+                                    }
+                                    {( data?.level3).map((commission) => (
+                                        <tr className='bg-white' key={commission.id}>
+                                            <td className=' p-1  border-b-2  lg:px-4 lg:py-4 text:10px sm:text-xs lg:text-md font-md text-gray-600'>{formateDate(commission.created_at)}</td>
+                                            <td className='p-1 border-b-2  lg:px-4 lg:py-4 text:10px sm:text-xs  lg:text-md font-md text-gray-600' >{commission.order_track_number}</td>
+                                            <td className='p-1 border-b-2  lg:px-4 lg:py-4 text:10px sm:text-xs  lg:text-md font-md text-gray-600' >₹{commission.commission_value}</td>
+                                            <td className='p-1 border-b-2  lg:px-4 lg:py-4 sm:text-10px  text:xs lg:text-md font-md text-gray-600' >₹{commission.earning}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>                      
+                    </div>
+                </div>
+            </div>
+			
+		 </div>
+
+
+        <div><Footer/></div> 
+        <MobileNavigation search={false} />
+
+        </>
+	)
+}
+
+export default ReferralActivity;
+
+export const getStaticProps = async ({ locale }: any) => {
+    return {
+      props: {
+        ...(await serverSideTranslations(locale, ["common"])),
+      },
+    };
+  };

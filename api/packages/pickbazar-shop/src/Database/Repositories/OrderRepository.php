@@ -3,21 +3,23 @@
 
 namespace PickBazar\Database\Repositories;
 
-use Ignited\LaravelOmnipay\Facades\OmnipayFacade as Omnipay;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Str;
+use App\Models\ReferralEarning;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
-use PickBazar\Database\Models\Balance;
-use PickBazar\Database\Models\Coupon;
-use PickBazar\Database\Models\Order;
-use PickBazar\Database\Models\Product;
-use PickBazar\Database\Models\User;
 use PickBazar\Events\OrderCreated;
+use PickBazar\Database\Models\User;
+use PickBazar\Database\Models\Order;
+use PickBazar\Database\Models\Coupon;
+use PickBazar\Database\Models\Balance;
+use PickBazar\Database\Models\Product;
 use PickBazar\Exceptions\PickbazarException;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Prettus\Repository\Exceptions\RepositoryException;
+use PickBazar\Database\Models\ReferralCommission;
 use Prettus\Validator\Exceptions\ValidatorException;
+use Prettus\Repository\Exceptions\RepositoryException;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Ignited\LaravelOmnipay\Facades\OmnipayFacade as Omnipay;
 
 class OrderRepository extends BaseRepository
 {
@@ -68,24 +70,30 @@ class OrderRepository extends BaseRepository
         return Order::class;
     }
 
+
     /**
      * @param $request
      * @return LengthAwarePaginator|JsonResponse|Collection|mixed
      */
+
     public function storeOrder($request)
     {
         $request['tracking_number'] = Str::random(12);
         $request['customer_id'] = $request->user()->id;
         $discount = $this->calculateDiscount($request);
         if ($discount) {
+
             $request['paid_total'] = $request['amount'] + $request['sales_tax'] + $request['delivery_fee'] - $discount;
             $request['total'] = $request['amount'] + $request['sales_tax'] + $request['delivery_fee'] - $discount;
+
+
             $request['discount'] =  $discount;
         } else {
             $request['paid_total'] = $request['amount'] + $request['sales_tax'] + $request['delivery_fee'];
             $request['total'] = $request['amount'] + $request['sales_tax'] + $request['delivery_fee'];
         }
         $payment_gateway = $request['payment_gateway'];
+
         switch ($payment_gateway) {
             case 'cod':
                 // Cash on Delivery no need to capture payment
@@ -140,7 +148,7 @@ class OrderRepository extends BaseRepository
             $order = $this->create($orderInput);
             $order->products()->attach($products);
             $this->createChildOrder($order->id, $request);
-            $this->calculateShopIncome($order);
+            $this->calculateShopIncome($order, $request);
             $order->children = $order->children;
 
             // event(new OrderCreated($order));
@@ -150,16 +158,92 @@ class OrderRepository extends BaseRepository
         }
     }
 
-    protected function calculateShopIncome($parent_order)
+    protected function calculateShopIncome($parent_order,$request)
     {
         foreach ($parent_order->children as  $order) {
             $balance = Balance::where('shop_id', '=', $order->shop_id)->first();
             $adminCommissionRate = $balance->admin_commission_rate;
             $shop_earnings = ($order->total * (100 - $adminCommissionRate)) / 100;
+            $commission_value = ($order->total * $adminCommissionRate) / 100 ;
+            $this->distribute_commission($order,$commission_value,$request);
             $balance->total_earnings = $balance->total_earnings + $shop_earnings;
             $balance->current_balance = $balance->current_balance + $shop_earnings;
             $balance->save();
         }
+    }
+
+    private function distribute_commission($order,$commission_value,$request)
+    {
+        $customer=User::find($request->customer_id);
+        $level1=($customer)?$this->get_uplink($customer):"";
+        $level2=($level1)?$this->get_uplink($level1):"";
+        $level3=($level2)?$this->get_uplink($level2):"";
+
+        $referral_commission=ReferralCommission::find(1);
+        if($customer){
+            $commission=($commission_value*(float)$referral_commission->customer_commission)/100;
+            $this->createReferralEarning(
+                $order,
+                $commission,
+                $request,
+                $customer,
+                $customer,
+                $commission_value,
+                "0");
+        }
+        if($level1){
+            $commission=($commission_value*(float)$referral_commission->level1_commission)/100;
+            $this->createReferralEarning(
+                $order,
+                $commission,
+                $request,
+                $level1,
+                $customer,
+                $commission_value,
+                "1");
+        }
+        if($level2){
+            $commission=($commission_value*(float)$referral_commission->level2_commission)/100;
+            $this->createReferralEarning(
+                $order,
+                $commission,
+                $request,
+                $level2,
+                $customer,
+                $commission_value,
+                "2");
+        }
+        if($level3){
+            $commission=($commission_value*(float)$referral_commission->level3_commission)/100;
+            $this->createReferralEarning(
+                $order,
+                $commission,
+                $request,
+                $level3,
+                $customer,
+                $commission_value,
+                "3");
+        }
+    }
+
+    private function createReferralEarning($order,$commission_value,$request,$level,$customer,$commission,$commission_level)
+    {
+        ReferralEarning::create([
+            "user_id"=>$level->id,
+            "customer_id"=>$customer->id,
+            "customer_name"=>$customer->name,
+            "order_id"=>$order->id,
+            "order_track_number"=>$order->tracking_number,
+            "commission_value"=>$commission,
+            "shop_name"=>$order->shop->name,
+            "earning"=>$commission_value,
+            "level"=>$commission_level
+        ]);
+    }
+
+    private function get_uplink($user)
+    {
+        return ($user->invited_by)?User::find($user->invited_by):"";
     }
 
     protected function processProducts($products)

@@ -13,6 +13,7 @@ use PickBazar\Database\Models\Balance;
 use PickBazar\Database\Models\Product;
 use PickBazar\Database\Models\ShopCategory;
 use Illuminate\Database\Eloquent\Collection;
+use PickBazar\Database\Models\ReferralCommission;
 use PickBazar\Database\Repositories\ProductRepository;
 use PickBazar\Exceptions\PickbazarException;
 use PickBazar\Http\Requests\ShopCreateRequest;
@@ -307,12 +308,10 @@ class ShopController extends CoreController
     public function shop_commission(Request $request,$shop_id)
     {
         if ($request->user() && ($request->user()->hasPermissionTo(Permission::SUPER_ADMIN))){
-            
-            $shop=Shop::find($shop_id);
-            if($shop){
-                $shop->commission=$request->commission;
-                $shop->save();
-            }
+
+            $balance = Balance::firstOrNew($shop_id);
+            $balance->admin_commission_rate = $request->commission;
+            $balance->save();
 
             return "success";
         }
@@ -331,4 +330,36 @@ class ShopController extends CoreController
             return "success";
         }
     }
+
+    public function updateReferralCommission(Request $request)
+    {
+        $request->validate([
+            "customer_commission"=>"required",
+            "level1_commission"=>"required",
+            "level2_commission"=>"required",
+            "level3_commission"=>"required",
+        ]);
+        $referral=ReferralCommission::find(1);
+        if($referral){
+            $referral->update($request->all());
+        }else{
+            ReferralCommission::create($request->all());
+        }
+
+
+        return "success";
+    }
+    public function getReferralCommission(){
+        return [
+            "data"=>ReferralCommission::select("customer_commission","level1_commission","level2_commission","level3_commission")
+            ->first()
+        ];
+    }
+
+    public function getWalletCommission(Request $request)
+    {
+        
+    }
+
+    
 }

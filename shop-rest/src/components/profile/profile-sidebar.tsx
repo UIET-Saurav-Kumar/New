@@ -12,7 +12,7 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({ className }) => {
   return (
     <aside
       className={cn(
-        "bg-light rounded border border-border-200 overflow-hidden",
+        "bg-light rounded border border-border-200 overflow-hidden mb-5",
         className
       )}
     >

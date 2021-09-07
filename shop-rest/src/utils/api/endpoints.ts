@@ -30,6 +30,7 @@ export const API_ENDPOINTS: Record<string, string> = {
   HOME_CATEGORIES:"fetch-home-categories",
   SEARCH:"search",
   REFERRAL_NETWORK:"referral-network",
+  GET_WALLET_COMMISSION:"get-wallet-commission",
   USER_VERIFY:"user-verify",
   RESEND_CODE:"resend-code"
 };

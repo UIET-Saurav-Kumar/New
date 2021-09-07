@@ -13,6 +13,7 @@ import { useTranslation } from "next-i18next";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useModalAction } from "@components/ui/modal/modal.context";
+import { maskPhoneNumber } from "@utils/mask-phone-number";
 import { route } from "next/dist/next-server/server/router";
 
 type FormValues = {
@@ -29,7 +30,7 @@ const registerFormSchema = yup.object().shape({
     .email("error-email-format")
     .required("error-email-required"),
   password: yup.string().required("error-password-required"),
-  phone_number:yup.string().required("You must need to provide your Phone number")
+  phone_number:yup.string().min(8, "error-min-contact").required("error-contact-required"),
 });
 
 const defaultValues = {
@@ -47,7 +48,7 @@ const RegisterForm = () => {
     register,
     handleSubmit,
     setError,
-
+    setValue,
     formState: { errors },
   } = useForm<FormValues>({
     defaultValues,
@@ -59,6 +60,9 @@ const RegisterForm = () => {
   function handleNavigate(path: string) {
     router.push(`/${path}`);
     closeModal();
+  }
+  function getPhoneNumber(value:any){
+    return value;
   }
   function onSubmit({ name, email, password,phone_number }: FormValues) {
     mutate(
@@ -146,21 +150,21 @@ const RegisterForm = () => {
           className="mb-5"
           error={t(errors.email?.message!)}
         />
-        <Input
-          label={"Phone Number"}
-          {...register("phone_number")}
-          type="text"
-          variant="outline"
-          className="mb-5"
-          error={t(errors.phone_number?.message!)}
-        />
-
         <PasswordInput
           label={t("text-password")}
           {...register("password")}
           error={t(errors.password?.message!)}
           variant="outline"
           className="mb-5"
+        />
+        <Input
+          label={"Phone Number"}
+          {...register("phone_number")}
+          type="text"
+          variant="outline"
+          className="mb-5"
+          onChange={(e) => setValue("phone_number", getPhoneNumber(e.target.value))}
+          error={t(errors.phone_number?.message!)}
         />
         <div className="mt-8">
           <Button className="w-full h-12" loading={loading} disabled={loading}>

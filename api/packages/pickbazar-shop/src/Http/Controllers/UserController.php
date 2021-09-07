@@ -142,12 +142,11 @@ class UserController extends CoreController
 
     public function register(UserCreateRequest $request)
     {
-        // dd($request->phone_number);
-
         $permissions = [Permission::CUSTOMER];
         if (isset($request->permission)) {
             $permissions[] = isset($request->permission->value) ? $request->permission->value : $request->permission;
         }
+        
 
         $code=SMS::sendOTP($request->phone_number);
 

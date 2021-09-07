@@ -15,22 +15,23 @@ import * as yup from "yup";
 import { useModalAction } from "@components/ui/modal/modal.context";
 import { GetServerSideProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-
+import { maskPhoneNumber } from "@utils/mask-phone-number";
 
 type FormValues = {
   name: string;
   email: string;
   password: string;
-  id:number
+  id:number;
+  phone_number:number
 };
 
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
-    return {
-      props: {
-        ...(await serverSideTranslations(context.locale, ["common"])),
-      },
-    };
+  return {
+    props: {
+      ...(await serverSideTranslations(context.locale, ["common"])),
+    },
   };
+};
 
   
 const registerFormSchema = yup.object().shape({
@@ -40,12 +41,14 @@ const registerFormSchema = yup.object().shape({
     .email("error-email-format")
     .required("error-email-required"),
   password: yup.string().required("error-password-required"),
+  phone_number:yup.string().min(8, "error-min-contact").required("error-contact-required")
 });
 
 const defaultValues = {
   name: "",
   email: "",
   password: "",
+  phone_number:""
 };
 
 
@@ -58,7 +61,7 @@ const RegisterForm = () => {
     register,
     handleSubmit,
     setError,
-
+    setValue,
     formState: { errors },
   } = useForm<FormValues>({
     defaultValues,
@@ -71,13 +74,17 @@ const RegisterForm = () => {
     router.push(`/${path}`);
     closeModal();
   }
-  function onSubmit({ name, email, password }: FormValues) {
+  function getPhoneNumber(value:any){
+    return value;
+  }
+  function onSubmit({ name, email, password ,phone_number}: FormValues) {
     mutate(
       {
         name,
         email,
         password,
-        invited_by:query.id
+        invited_by:query.id,
+        phone_number
       },
       {
         onSuccess: (data) => {
@@ -111,9 +118,9 @@ const RegisterForm = () => {
     );
   }
   return (
-    <div className="flex items-center justify-center h-screen bg-white sm:bg-gray-100">
+    <div className="flex items-center justify-center bg-white sm:bg-gray-100 " >
         
-        <div className="py-6 px-5 sm:p-8 bg-light w-screen md:max-w-md h-screen md:h-auto flex flex-col justify-center m-auto max-w-md w-full bg-white sm:shadow p-5 sm:p-8 rounded">
+        <div className="py-6 px-5 sm:p-8 bg-light w-screen md:max-w-md h-screen md:h-auto flex flex-col justify-center m-auto max-w-md w-full bg-white sm:shadow p-5 sm:p-8 rounded mt-5 mb-5">
             <div className="flex justify-center">
                 <Logo />
             </div>
@@ -165,6 +172,15 @@ const RegisterForm = () => {
                 error={t(errors.password?.message!)}
                 variant="outline"
                 className="mb-5"
+                />
+                <Input
+                  label={"Phone Number"}
+                  {...register("phone_number")}
+                  type="text"
+                  variant="outline"
+                  className="mb-5"
+                  onChange={(e) => setValue("phone_number", getPhoneNumber(e.target.value))}
+                  error={t(errors.phone_number?.message!)}
                 />
                 <div className="mt-8">
                 <Button className="w-full h-12" loading={loading} disabled={loading}>

@@ -157,6 +157,8 @@ class OrderController extends CoreController
                 $child_order->save();
             }
         }
+
+        
         return $order;
     }
 

@@ -37,4 +37,5 @@ export const ROUTES = {
   INVITE_FRIENDS: '/user/invite',
   REFERRAL_ACTIVITY: '/user/referral-activity',
   REFERRAL_NETWORK: '/user/referral-network',
+  WALLET:"/user/wallet"
 };

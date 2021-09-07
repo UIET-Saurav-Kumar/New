@@ -88,7 +88,6 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
         selectOption(JSON.parse(initialValues.shop_categories))
       }
     }
-    // console.log(initialValues);
   },[])
   const {
     register,

@@ -83,6 +83,7 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
   const { t } = useTranslation();
   const { data, isLoading } = useShopCategoryQuery();
   useEffect(()=>{
+    console.log(initialValues,"initialValues");
     if(initialValues){
       if(initialValues.shop_categories){
         selectOption(JSON.parse(initialValues.shop_categories))

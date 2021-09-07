@@ -1,5 +1,5 @@
 import * as yup from "yup";
-export const shopValidationSchema = yup.object().shape({
+export const ValidationSchema = yup.object().shape({
   name: yup.string().required("form:error-name-required"),
   balance: yup.object().shape({
     payment_info: yup.object().shape({

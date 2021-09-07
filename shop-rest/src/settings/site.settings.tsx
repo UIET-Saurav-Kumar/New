@@ -107,6 +107,10 @@ export const siteSettings = {
       menulabel: "Referral Activity",
     },
     {
+      href: ROUTES.WALLET,
+      menulabel: "Wallet",
+    },
+    {
       href: ROUTES.HELP,
       menulabel: "profile-sidebar-help",
     },

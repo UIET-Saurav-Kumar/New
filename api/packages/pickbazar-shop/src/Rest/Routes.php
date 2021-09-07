@@ -100,7 +100,15 @@ Route::put('shop-commission/{shop_id}','PickBazar\Http\Controllers\ShopControlle
 
 Route::put('shop-commission-type/{shop_id}','PickBazar\Http\Controllers\ShopController@shop_commission_type');
 
+Route::put('update-referral-commission','PickBazar\Http\Controllers\ShopController@updateReferralCommission');
+
+Route::get('get-referral-commission','PickBazar\Http\Controllers\ShopController@getReferralCommission');
+
+Route::get('get-wallet-commission','PickBazar\Http\Controllers\InviteController@getWalletCommission');
+
 Route::get('referral-network','PickBazar\Http\Controllers\InviteController@refferral_network');
+
+
 
 
 // busineesId, mobile, ParentBusinees Id

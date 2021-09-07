@@ -2,6 +2,7 @@
 
 namespace PickBazar\Http\Controllers;
 
+use App\Models\ReferralEarning;
 use App\Models\User;
 use Illuminate\Http\Request;
 use PickBazar\Database\Models\Invite;
@@ -58,6 +59,22 @@ class InviteController extends CoreController
             "id"=>$invitee->id,
             "name"=>($is_root)?$invitee->name:$invitee->invitee_name,
             "children"=>[]
+        ];
+    }
+
+    public function getWalletCommission(Request $request)
+    {
+        $user = $request->user();
+        $customer_level=ReferralEarning::where('user_id',$user->id)->where('level',"0")->get();
+        $level1=ReferralEarning::where('user_id',$user->id)->where('level',"1")->get();
+        $level2=ReferralEarning::where('user_id',$user->id)->where('level',"2")->get();
+        $level3=ReferralEarning::where('user_id',$user->id)->where('level',"3")->get();
+
+        return [
+            "customer_level"=>$customer_level,
+            "level1"=>$level1,
+            "level2"=>$level2,
+            "level3"=>$level3,
         ];
     }
 }
