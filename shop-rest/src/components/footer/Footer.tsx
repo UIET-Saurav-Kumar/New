@@ -59,7 +59,7 @@ const Footer = () => {
 
 			  		<h5 className='footer-links-title font-semibold text-xl'>Registrations</h5>
 
-			  		<Link href='https://admin.buylowcal.com'><h5 className='light-text cursor-pointer text-lg hover:underline font-light'>Register as Vendor </h5></Link>
+			  		<Link href='https://admin.buylowcal.com/register'><h5 className='light-text cursor-pointer text-lg hover:underline font-light'>Register as Vendor </h5></Link>
 					{/* <h5 className='light-text cursor-pointer text-lg hover:underline font-light'>Register as Rider </h5> */}
 					<h5 onClick={handleJoin} className='light-text cursor-pointer text-lg hover:underline font-light'>
 						Register as Customer 
