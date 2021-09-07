@@ -113,7 +113,7 @@ const ShopPage = ({ data,  cardClassName }: any) => {
       
       <div className="flex flex-col w-full p-4 md:p-0 md:ps-8">
 
-        <div className="relative space-x-2 rounded w-full  overflow-hidden hidden lg:flex">
+        <div className="relative  rounded w-full  overflow-hidden hidden lg:flex">
 
           <ShopProfileCard data={data} className="sticky top-24 lg:top-28" />  
           

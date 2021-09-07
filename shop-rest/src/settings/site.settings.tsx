@@ -1,6 +1,7 @@
 
 import { FacebookIcon } from "@components/icons/facebook";
 import { InstagramIcon } from "@components/icons/instagram";
+import { LinkedInIcon } from "@components/icons/social/linkedin";
 import { TwitterIcon } from "@components/icons/twitter";
 import { YouTubeIcon } from "@components/icons/youtube";
 import { ROUTES } from "@utils/routes";
@@ -33,30 +34,30 @@ export const siteSettings = {
   },
 
   author: {
-    name: "RedQ, Inc.",
-    websiteUrl: "https://redq.io",
-    address: "115 E 9th St, New York, CA 90079,USA",
-    phone: "+971-321-4841-78",
+    name: "Buylowcal",
+    websiteUrl: "https://buylowcal.com",
+    address: "Plot no 130 Industrial Area Phase 1,Chandigarh ",
+    phone: "+91 62803-64140",
     social: [
       {
-        link: "https://www.facebook.com",
+        link: "https://www.facebook.com/buylowcal/",
         icon: <FacebookIcon width="16px" height="16px" />,
         hoverClass: "text-social-facebook",
       },
       {
-        link: "https://www.instagram.com",
+        link: "https://www.instagram.com/buylowcal/?hl=en",
         icon: <InstagramIcon width="16px" height="16px" />,
         hoverClass: "text-social-instagram",
       },
+      // {
+      //   link: "https://www.twitter.com",
+      //   icon: <TwitterIcon width="16px" height="16px" />,
+      //   hoverClass: "text-social-twitter",
+      // },
       {
-        link: "https://www.twitter.com",
-        icon: <TwitterIcon width="16px" height="16px" />,
-        hoverClass: "text-social-twitter",
-      },
-      {
-        link: "https://www.youtube.com",
-        icon: <YouTubeIcon width="16px" height="16px" />,
-        hoverClass: "text-social-youtube",
+        link: "https://in.linkedin.com/company/buylowcal",
+        icon: <LinkedInIcon width="16px" height="16px" />,
+        hoverClass: "text-social-linkedin",
       },
     ],
   },
@@ -64,7 +65,7 @@ export const siteSettings = {
 
   headerLinks: [
     { href: ROUTES.SHOPS, icon: null, label: "Shops" },
-    { href: ROUTES.OFFERS, icon: null, label: "Offer" },
+    // { href: ROUTES.OFFERS, icon: null, label: "Offer" },
     // { href: ROUTES.HELP, label: "FAQ" },
     { href: ROUTES.CONTACT, label: "Contact" },
   ],
