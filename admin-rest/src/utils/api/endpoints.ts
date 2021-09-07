@@ -52,5 +52,7 @@ export const API_ENDPOINTS = {
   SHOP_COMMISSION:"shop-commission",
   SHOP_COMMISSION_TYPE:"shop-commission-type",
   UPDATE_REFERRAL_COMMISSION:"update-referral-commission",
-  GET_REFERRAL_COMMISSION:"get-referral-commission"
+  GET_REFERRAL_COMMISSION:"get-referral-commission",
+  USER_VERIFY:"user-verify",
+  RESEND_CODE:"resend-code"
 };

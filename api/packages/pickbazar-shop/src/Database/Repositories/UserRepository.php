@@ -34,7 +34,8 @@ class UserRepository extends BaseRepository
     protected $dataArray = [
         'name',
         'email',
-        'shop_id'
+        'shop_id',
+        "phone_number"
     ];
 
     /**

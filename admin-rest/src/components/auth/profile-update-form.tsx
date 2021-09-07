@@ -11,6 +11,7 @@ import pick from "lodash/pick";
 
 type FormValues = {
   name: string;
+  phone_number:number;
   profile: {
     id: string;
     bio: string;
@@ -34,21 +35,21 @@ export default function ProfileUpdate({ me }: any) {
   } = useForm<FormValues>({
     defaultValues: {
       ...(me &&
-        pick(me, ["name", "profile.bio", "profile.contact", "profile.avatar"])),
+        pick(me, ["name","phone_number", "profile.bio", "profile.contact", "profile.avatar"])),
     },
   });
 
   async function onSubmit(values: FormValues) {
-    const { name, profile } = values;
+    const { name,phone_number, profile } = values;
     updateUser({
       variables: {
         id: me?.id,
         input: {
           name: name,
+          phone_number:phone_number,
           profile: {
             id: me?.profile?.id,
             bio: profile?.bio,
-            contact: profile?.contact,
             avatar: {
               thumbnail: profile?.avatar?.thumbnail,
               original: profile?.avatar?.original,
@@ -97,9 +98,9 @@ export default function ProfileUpdate({ me }: any) {
             className="mb-6"
           />
           <Input
-            label={t("form:input-label-contact")}
-            {...register("profile.contact")}
-            error={t(errors.profile?.contact?.message!)}
+            label={t("phone Number")}
+            {...register("phone_number")}
+            error={t(errors.phone_number?.message!)}
             variant="outline"
             className="mb-5"
           />

@@ -632,6 +632,7 @@ export declare type RegisterInput = {
   name: Scalars["String"];
   shop_id?: Scalars["Int"];
   permission: Permission;
+  phone_number:number;
 };
 
 export type ChangePasswordInput = {
@@ -670,6 +671,7 @@ export enum Permission {
 
 export type UpdateUser = {
   name?: Maybe<Scalars["String"]>;
+  phone_number:number;
   profile?: Maybe<UserProfileInput>;
   address?: Maybe<Array<Maybe<UserAddressUpsertInput>>>;
 };
