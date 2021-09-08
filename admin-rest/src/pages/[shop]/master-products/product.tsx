@@ -14,14 +14,16 @@ export default function Product({product,shopId,masterIds}:any) {
     })
     function addProduct():any{
         console.log(product.id);
-        const price = document.getElementById("price_"+product.id)?.value;
-        const sale_price = document.getElementById("sale_price_"+product.id)?.value;
+        const price = document.getElementById("price_"+product.id)?.value as any;
+        const sale_price = document.getElementById("sale_price_"+product.id)?.value as any;
+        const quantity = document.getElementById("quantity_"+product.id)?.value as any;
         if(price&&sale_price){
             createProduct(
                 {
                     shop_id:shopId,
                     price:price,
                     master_id:product.id,
+                    quantity:quantity,
                     sale_price:sale_price,
                 },
                 {
@@ -68,6 +70,17 @@ export default function Product({product,shopId,masterIds}:any) {
                         className="mb-5"
                         id={"sale_price_"+product.id}
                     />
+                </td>
+                <td className="rc-table-cell text-center" >
+                    <span className="whitespace-nowrap" title={"$"+product.quantity}>
+                    <Input
+                        name="quantity"
+                        variant="outline"
+                        className="mb-5"
+                        placeholder="quantity"
+                        id={"quantity_"+product.id}
+                    />
+                    </span>
                 </td>
                 <td className="rc-table-cell text-center" >
                     <div className="space-s-5 inline-flex items-center w-auto">

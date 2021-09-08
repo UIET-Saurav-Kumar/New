@@ -2,21 +2,23 @@
 
 namespace PickBazar\Http\Controllers;
 
-use Barryvdh\DomPDF\Facade as PDF;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use PickBazar\Http\Util\SMS;
+use PickBazar\Enums\Permission;
+use Illuminate\Http\JsonResponse;
+use Barryvdh\DomPDF\Facade as PDF;
+use PickBazar\Events\OrderCreated;
 use Illuminate\Support\Facades\Log;
+use PickBazar\Database\Models\User;
 use PickBazar\Database\Models\Order;
 use PickBazar\Database\Models\Settings;
-use PickBazar\Database\Models\User;
-use PickBazar\Database\Repositories\OrderRepository;
-use PickBazar\Enums\Permission;
-use PickBazar\Events\OrderCreated;
+use PickBazar\Database\Models\OrderStatus;
+use Illuminate\Database\Eloquent\Collection;
 use PickBazar\Exceptions\PickbazarException;
 use PickBazar\Http\Requests\OrderCreateRequest;
 use PickBazar\Http\Requests\OrderUpdateRequest;
+use PickBazar\Database\Repositories\OrderRepository;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 
 class OrderController extends CoreController
@@ -146,6 +148,16 @@ class OrderController extends CoreController
     {
         $order->status = $status;
         $order->save();
+        
+        $status=OrderStatus::find($status)->name;
+
+        SMS::orderStatusChanged(
+                $order->customer->phone_number,
+                $order->customer->name,
+                $order->tracking_number,
+                $status
+            );
+
         try {
             $children = json_decode($order->children);
         } catch (\Throwable $th) {

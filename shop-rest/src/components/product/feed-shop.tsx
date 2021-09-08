@@ -88,11 +88,16 @@ const ShopProductFeed = ({ shopId }: { shopId: string }) => {
         </div>
       )} */}
       <div ref={loadMoreRef} className={`${!hasNextPage ? "hidden" : ""}`}>
-              {isFetchingNextPage&& (
-                <div className="w-full flex justify-center align-center">
-                  <p>loading...</p>
-                </div>
-              )}
+              {
+                (isFetchingNextPage)
+                &&
+                (
+                  <>
+                    <span>Loading </span>
+                    <img src="/preloader/cir.gif" style={{width:"30px",height:"30px"}}/>
+                  </>
+                ) 
+              }
       </div>
     </div>
   );

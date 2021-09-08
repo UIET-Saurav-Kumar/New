@@ -163,7 +163,7 @@ export default function ReferralNetwork() {
 
                     <ProfileSidebar className="sticky overflow-hidden flex-shrink-0 mt-14 ml-14 hidden xl:block xl:w-80 " />  
 
-                    <div className="flex flex-col  justify-evenly bg-white  p-4 w-full mx-auto border  mt-14">
+                    <div className="flex flex-col  justify-evenly bg-white  p-4 w-full mx-auto border  mt-14" style={{backgroundColor:"#242424"}}>
                     {
                         data&&(
                             <Tree

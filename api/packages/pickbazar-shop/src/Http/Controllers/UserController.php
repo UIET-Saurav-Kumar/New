@@ -166,6 +166,10 @@ class UserController extends CoreController
                 "invitee_id"=>$user->id,
                 "invitee_name"=>$user->name
             ]);
+
+            $invited_by=User::find($request->invited_by);
+            SMS::userInvite($invited_by->phone_number,$invited_by->name,$user->name);
+
         }
 
         $user->givePermissionTo($permissions);
@@ -180,8 +184,9 @@ class UserController extends CoreController
     public function userVerify(Request $request)
     {
         $user=User::findOrFail($request->id);
-        if($request->code==$user->code){
 
+        if($request->code==$user->code){
+            SMS::welcome($user->phone_number,$user->name);
             $user->update([
                 "is_active"=>1
             ]);

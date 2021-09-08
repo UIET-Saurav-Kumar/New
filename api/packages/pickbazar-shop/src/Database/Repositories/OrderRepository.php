@@ -4,6 +4,7 @@
 namespace PickBazar\Database\Repositories;
 
 use Illuminate\Support\Str;
+use PickBazar\Http\Util\SMS;
 use App\Models\ReferralEarning;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
@@ -106,6 +107,7 @@ class OrderRepository extends BaseRepository
         }
 
         $response = $this->capturePayment($request);
+        SMS::customerPurchase($request->user()->phone_number,$request->user()->name);
         if ($response->isSuccessful()) {
             $payment_id = $response->getTransactionReference();
             $request['payment_id'] = $payment_id;

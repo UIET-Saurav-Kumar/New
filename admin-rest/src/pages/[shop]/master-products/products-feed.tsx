@@ -93,6 +93,7 @@ export default function ProductsFeed({shopId,searchTerm,type,category,orderBy,so
               <th title="Name" className="rc-table-cell rc-table-cell-ellipsis w-48 min-w-full" >Name</th>
               <th className="rc-table-cell w-48 min-w-full" >Price</th>
               <th className="rc-table-cell w-48 min-w-full" >Sale Price</th>
+              <th className="rc-table-cell w-48 min-w-full" >Quantity</th>
               <th className="rc-table-cell w-48 min-w-full" >Actions</th>
           </tr>
       </thead>
@@ -109,7 +110,19 @@ export default function ProductsFeed({shopId,searchTerm,type,category,orderBy,so
     </table>
       
       <div ref={loadMoreRef} className={`${!hasNextPage ? "hidden" : ""}`}>
-              {isFetchingNextPage ? "Loading more..." : ""}
+            <div className="flex justify-center items-center">
+                {
+                  (isFetchingNextPage)
+                  &&
+                  (
+                    <>
+                      <span>Loading </span>
+                      <img src="/preloader/cir.gif" style={{width:"40px",height:"40px"}}/>
+                    </>
+                  ) 
+                }
+              
+            </div>
       </div>
     </>
   );

@@ -91,8 +91,18 @@ class ShopController extends CoreController
 
     public function getAdminShop(Request $request)
     {
-        $shops=$this->fetchShops($request);
-        return $shops->paginate()->withQueryString();
+        $limit = $request->limit ?   $request->limit : 10;
+        return $this->fetchRepoShops($request)->paginate($limit)->withQueryString();
+    }
+
+    public function fetchRepoShops(Request $request)
+    {
+        return $this->repository->withCount(['orders', 'products'])->with(['owner.profile'])->where('id', '!=', null);
+    }
+
+    public function fetchShops(Request $request)
+    {
+        return Shop::withCount(['orders', 'products'])->with(['owner.profile'])->where('id', '!=', null);
     }
     
     private function getCategoryId($shop_categories)
@@ -110,10 +120,7 @@ class ShopController extends CoreController
         }
         return $ids;
     }
-    public function fetchShops(Request $request)
-    {
-        return Shop::withCount(['orders', 'products'])->with(['owner.profile'])->where('id', '!=', null);
-    }
+    
 
 
     /**
@@ -308,8 +315,7 @@ class ShopController extends CoreController
     public function shop_commission(Request $request,$shop_id)
     {
         if ($request->user() && ($request->user()->hasPermissionTo(Permission::SUPER_ADMIN))){
-
-            $balance = Balance::firstOrNew($shop_id);
+            $balance = Balance::firstOrNew(['shop_id' => $shop_id]);
             $balance->admin_commission_rate = $request->commission;
             $balance->save();
 
