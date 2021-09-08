@@ -40,7 +40,7 @@ export const ContactPage = () => {
         <div className="w-full md:w-72 lg:w-96 bg-light p-5 flex-shrink-0 order-2 md:order-1">
           <div className="w-full flex items-center justify-center overflow-hidden mb-8">
             <img
-              src="/contact-illustration.svg"
+              src="/buylowcal-logo.webp"
               alt={t("nav-menu-contact")}
               className="w-full h-auto"
             />
@@ -72,6 +72,7 @@ export const ContactPage = () => {
               <span className="text-sm text-body">
                 {siteSettings.author.websiteUrl}
               </span>
+              
               <a
                 href={siteSettings.author.websiteUrl}
                 target="_blank"
