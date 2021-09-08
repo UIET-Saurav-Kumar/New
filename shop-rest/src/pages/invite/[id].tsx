@@ -120,7 +120,7 @@ const RegisterForm = () => {
   return (
     <div className="flex items-center justify-center bg-white sm:bg-gray-100 " >
         
-        <div className="py-6 px-5 sm:p-8 bg-light w-screen md:max-w-md h-screen md:h-auto flex flex-col justify-center m-auto max-w-md w-full bg-white sm:shadow p-5 sm:p-8 rounded mt-5 mb-5">
+        <div className="py-6 px-5 sm:p-8 bg-light md:max-w-md h-screen md:h-auto flex flex-col justify-center m-auto max-w-md w-full bg-white sm:shadow p-5 sm:p-8 rounded mt-5 mb-5">
             <div className="flex justify-center">
                 <Logo />
             </div>
