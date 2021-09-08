@@ -36,9 +36,10 @@ const Footer = () => {
 
 
 
-					  <Link href='./return-policy'><h5 className=' cursor-pointer text-lg hover:underline phone-number text-primary font-normal -mt-4'> Our Return Policy</h5></Link> 
-					<Link href='./privacy'><h5 className=' cursor-pointer text-lg hover:underline phone-number text-primary font-normal -mt-4'>Our Privacy Policy</h5></Link> 
-			
+					  <Link href='./return-policy'><h5 className=' cursor-pointer text-lg hover:underline phone-number text-primary font-normal -mt-4'> Refunds/Cancellations/Shipping</h5></Link> 
+					<Link href='./privacy'><h5 className=' cursor-pointer text-lg hover:underline phone-number text-primary font-normal -mt-4'>Privacy Policy</h5></Link> 
+					<Link href='./contact'><h5 className=' cursor-pointer text-lg hover:underline phone-number text-primary font-normal -mt-4'>Contact Us</h5></Link> 
+
 			  		
 			  	</div>
 
@@ -55,31 +56,9 @@ const Footer = () => {
 			  		<h5  className='light-text font-light'> FAQs</h5>
 			  	</div> */}
 
-			  	<div className='footer-section-links w-42 space-y-10 text-left'>
-
-			  		<h5 className='footer-links-title font-semibold text-xl'>Registrations</h5>
-
-			  		<Link href='https://admin.buylowcal.com/register'><h5 className='light-text cursor-pointer text-lg hover:underline font-light'>Register as Vendor </h5></Link>
-					{/* <h5 className='light-text cursor-pointer text-lg hover:underline font-light'>Register as Rider </h5> */}
-					<h5 onClick={handleJoin} className='light-text cursor-pointer text-lg hover:underline font-light'>
-						Register as Customer 
-					</h5>
 			  	
-			  		{/* <h5 className='light-text font-light'> Careers</h5> */}
-			  		
-			  	</div>
 
-			  	{/* <div className='footer-section-links w-42 space-y-10 text-left'>
-
-			  		<h5 className='footer-links-title font-semibold text-lg'>Know more</h5>
-
-			  		<h5 className='light-text cursor-pointer text-lg hover:underline font-light'>Cashbacks Offers</h5>
-			  		<h5 className='light-text cursor-pointer text-lg hover:underline font-light'> Flash Sale</h5>
-			  		<h5  className='light-text cursor-pointer text-lg hover:underline font-light'> Top Offers</h5>
-			  		<h5  className='light-text cursor-pointer text-lg hover:underline font-light'> New Arrivals</h5>
-			  		
-			  	</div> */}
-
+			  
 
 				  <div className='footer-section-links w-42  text-left'>
 
@@ -93,6 +72,19 @@ const Footer = () => {
 					  <a className='light-text cursor-pointer text-lg hover:underline font-light mt-4' href='./home#featured-products'><h5  className='light-text mt-4 font-light'> Featured Products</h5></a>
 			  		</div> 
 			  	</div>
+
+				  <div className='footer-section-links w-42 space-y-10 text-left'>
+
+			  		<h5 className='footer-links-title font-semibold text-xl'>Registrations</h5>
+
+			  		<Link href='https://admin.buylowcal.com/register'><h5 className='light-text cursor-pointer text-lg hover:underline font-light'>Register as Vendor </h5></Link>
+					<h5 onClick={handleJoin} className='light-text cursor-pointer text-lg hover:underline font-light'>
+						Register as Customer 
+					</h5>
+			  				  		
+			  	</div>
+
+
 
 				  <div className='flex flex-col w-42 space-y-4'>
 					  <h5 className='font-semibold text-xl'> Follow Us</h5>
@@ -125,7 +117,10 @@ const Footer = () => {
 			  </div>
 			  
 			  <div className='footer-bottom-section flex justify-between items-start p-2 px-4 -mt-0'>
-			  	  <h5 className='font-semibold text-lg text-gray-400'> © 4221 BuyLowcal.com All Rights Reserved</h5>
+			  	 
+				    <h5 className='font-semibold text-lg text-gray-400'> 
+					   © 4221 BuyLowcal.com All Rights Reserved
+				    </h5>
 			  	  <div className='social-media-icons-wrapper flex justify-between w-40'>
 			  	  	{/* <FacebookIcon className='facebook'/>
 			  	  	<TwittterIcon className='twitter'/>

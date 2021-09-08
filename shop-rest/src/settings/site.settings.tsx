@@ -36,8 +36,9 @@ export const siteSettings = {
   author: {
     name: "Buylowcal",
     websiteUrl: "https://buylowcal.com",
-    address: "Plot no 130 Industrial Area Phase 1,Chandigarh ",
-    phone: "+91 62803-64140",
+    address: `Lowcal Ventures Pvt Ltd
+    Plot No: 130 | Phase-1 | Industrial Area | Chandigarh`,
+    phone: "+91 77430 42380",
     social: [
       {
         link: "https://www.facebook.com/buylowcal/",
