@@ -27,7 +27,7 @@ const fetchProducts = async ({
       pageParam=pageParam.replace("http","http");
     }
 
-    pageParam = pageParam+'&search=shop_id:'+params.shop_id;
+    pageParam = pageParam+'&search=shop_id:'+params.shop_id+'&category='+params.category;
     
     const response = await ProductService.fetchUrl(pageParam);
     fetchedData = response.data;
