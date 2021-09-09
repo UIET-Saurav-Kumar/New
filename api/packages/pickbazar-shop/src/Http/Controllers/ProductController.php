@@ -34,12 +34,27 @@ class ProductController extends CoreController
      */
     public function index(Request $request)
     {
-        $limit = $request->limit ?   $request->limit : 15;
-        $repdata = $this->repository
-            ->with(['type', 'shop', 'categories', 'tags', 'variations.attribute'])
-            ->orderBy('is_offer', 'desc')->paginate($limit);
-        
-        return $repdata;
+        $category = $request->category != null ? true : false;
+        if($category)
+        {
+            $slug = $request->category;
+            $limit = $request->limit ?   $request->limit : 15;
+            
+            $repdata = $this->repository->with(['type', 'shop', 'categories', 'tags', 'variations.attribute'])->
+                        whereHas('categories', function ($query) use ($slug ) {
+                            return $query->where('slug', $slug);
+                        })->orderBy('is_offer', 'desc')->paginate($limit);
+          
+            return $repdata;
+        }
+        else
+        {
+            $limit = $request->limit ?   $request->limit : 15;
+
+            $repdata = $this->repository->with(['type', 'shop', 'categories', 'tags', 'variations.attribute'])->orderBy('is_offer', 'desc')->paginate($limit);
+
+            return $repdata;
+        }
     }
 
     public function product_offers(Request $request)
