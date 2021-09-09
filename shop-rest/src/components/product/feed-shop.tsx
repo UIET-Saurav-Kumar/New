@@ -18,7 +18,13 @@ const ProductFeedLoader = dynamic(
 
 const ShopProductFeed = ({ shopId }: { shopId: string }) => {
   const { t } = useTranslation("common");
-
+  var cat = 'all';   
+  const router = useRouter();
+  if(router.query.category)
+  {
+    cat = router.query.category;
+    console.log(router.query.category)
+  }
   const {
     data,
     isFetching: loading,
@@ -30,6 +36,7 @@ const ShopProductFeed = ({ shopId }: { shopId: string }) => {
   } = useProductsQuery(
     {
       shop_id: Number(shopId),
+      category: cat
     },
     {
       enabled: Boolean(shopId),
