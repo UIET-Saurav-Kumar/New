@@ -9,7 +9,7 @@ import { useTranslation } from "next-i18next";
 import { useProductsQuery } from "@data/product/use-products.query";
 import { Fragment ,useRef} from "react";
 import useIntersectionObserver from "./useIntersectionObserver";
-
+import { useRouter } from "next/router";
 
 const ProductFeedLoader = dynamic(
   () => import("@components/ui/loaders/product-feed-loader")
