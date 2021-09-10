@@ -67,7 +67,7 @@ export const InvitePage = () => {
       <div className="flex flex-col md:flex-row max-w-7xl w-full mx-auto py-10 px-5 xl:py-14 xl:px-8 2xl:px-0">
         {/* Left sidebar */}
         <div className='flex flex-col '>
-          <ProfileSidebar className="flex-shrink-0 hidden xl:block xl:w-80 me-10" />  
+          <ProfileSidebar className="flex-shrink-0 hidden xl:block xl:w-80 me-4" />  
         </div> 
         {/* Right side content */}
         <div className="w-full order-1 md:order-2 mb-8 md:mb-0 md:ms-7 lg:ms-9 p-5 md:p-8 bg-light">

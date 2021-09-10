@@ -30,17 +30,17 @@ export default function AmazonShops() {
 
                 <div className='flex justify-between  p-2 px-4'>
                     
-                        <h3 className='font-bold text-xs sm:text-md md:text-md xl:text-xl '> 
+                        <h3 className='text-lg sm:text-lg md:text-lg xl:text-2xl  font-semibold  p-2 '> 
                            Get Additional Discounts on Major E-Stores
                         </h3>
 
-                        <Link href='/restraunt-shop-page'>
+                        {/* <Link href='/restraunt-shop-page'> */}
 
                            <h3 className='font-blue text-sm sm:text-sm md:text-md 2xl:text-md  hover:underline cursor-pointer font-light text-blue-600 ' >
                                 view all 
                            </h3>
 
-                        </Link>
+                        {/* </Link> */}
 
                 </div>
                 </div>
@@ -54,7 +54,7 @@ export default function AmazonShops() {
                                {siteSettings.amazonShops.map((products, _idx) => (
 
                                       <a href={products.href} target="_blank" 
-                                            className=' font-light  text-xs  md:text-md lg:text-md 2xl:text-md '  key={_idx}>
+                                         className=' font-light  text-xs  md:text-md lg:text-md 2xl:text-md '  key={_idx}>
 
                                             
 
@@ -85,9 +85,5 @@ export default function AmazonShops() {
 
                </>
                    
-
-
-
-
     )
 }

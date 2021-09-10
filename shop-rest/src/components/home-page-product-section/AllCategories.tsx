@@ -33,12 +33,14 @@ const AllCategories = () => {
 
 
 	return (
-        <>
-          <div id='all-categories' className='categories-page -mt-10 xs+:mt-2 sm:mt-2 xl:mt-60 2xl:mt-96 border-b bg-gray-50 rounded-t'>
-	    	<h3 className=' text-xs sm:text-md md:text-md xl:text-xl  font-bold  p-2' > Shop by Category  </h3>
+        <div className='mt-0 md:mt-28 lg:mt-36'>
+
+
+          <div id='all-categories' className='categories-page -mt-28 xs+:-mt-28 sm:-mt-44 xl:mt-60 2xl:mt-96 border-b bg-gray-50 rounded-t'>
+	    	<h3 className=' text-lg sm:text-lg md:text-lg xl:text-2xl  font-semibold  p-2' > Shop by Category  </h3>
 		  </div>
 
-	    <div className='all-categories grid grid-cols-2 sm+:grid-cols-2  
+	    <div className='all-categories grid grid-cols-2 sm+:grid-cols-2 
 	                	md:grid-cols-4 lg:grid-cols-4 lg+:grid-cols-4  lg:gap-2  gap-2
                         lg:place-items-center 2xl:gap-2 2xl:grid-cols-4 
                         my-4 px-2 md:p-4 lg:px-4 xl:p-4 p-2 mt-0  bg-gray-100 '>
@@ -80,7 +82,7 @@ const AllCategories = () => {
 		
 	
     
-</>
+</div>
 	)
 }
 

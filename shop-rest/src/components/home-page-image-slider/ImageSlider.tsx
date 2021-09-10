@@ -40,77 +40,73 @@ export default function ImageSlider() {
     return (
       <Slider {...settings}>
 
-       <div className=' w-full h-52 '>
+      
 
-          <div className="card">
+          <div className="card h-72">
 
-          <img  className='rounded-md w-full h-40 lg:w-full xl+:h-60  2xl:h-64 2xl:w-full space-x-9'  
-                src={'/banner/new-7.png'} 
-                objectFit='contain'   />
+            <img  className='rounded-md w-full opacity-90  h-40 lg:w-full lg:h-72 xl+:h-80 md:h-64  2xl:h-72 2xl:w-full space-x-9 object-cover'  
+                  src={'/banner/fruitsvegies.jpg'} 
+                  />
 
           </div>
 
-        </div>
+        
 
-        <div>
+        
           <div className="card">
-            <img className='rounded-md  w-full h-40 lg:w-full xl+:h-60  2xl:h-64 2xl:w-full  space-x-9 '   
-                  src={'/banner/new-2.png'} 
-                  objectFit='contain'  />
+            <img  className='rounded-md  w-full h-40 lg:w-full lg:h-72 xl+:h-80 md:h-64  2xl:h-72 2xl:w-full object-cover  space-x-9 '   
+                  src={'/banner/home.jpg'} 
+                  />
             </div> 
-        </div>
+      
 
-        <div>
-
+      
           <div className="card">
-
-          <img className='rounded-md  h-40 lg:w-full 2xl:h-64 xl+:h-60 2xl:w-full  space-x-9 '   
-               src={'/banner/new-3.png'} 
-               objectFit='contain'  />
-
-              
+            <img className='rounded-md w-full h-40 lg:w-full lg:h-72 2xl:h-72 xl+:h-80 md:h-64 2xl:w-full object-cover  space-x-9 '   
+                src={'/banner/mall.jpeg'} 
+                />
           </div>
-        </div>
+        
 
-        <div>
+        
           <div className="card">
 
-          <img className='rounded-md  w-full  h-40 lg:w-full xl+:h-60 2xl:h-full 2xl:w-full  space-x-9 '   
-               src={'/banner/new-4.png'} 
-               objectFit='contain'  />
+          <img className='rounded-md  w-full  h-40 lg:w-full lg:h-72 xl+:h-80 md:h-64 2xl:h-72 2xl:w-full object-cover space-x-9 '   
+               src={'/banner/restraunt.jpg'} 
+               />
 
           </div>
-        </div>
+      
 
-        <div>
+        
           <div className="card">
 
-          <img className='rounded-md  w-full  h-40 lg:w-full xl+:h-60  2xl:h-full 2xl:w-full  space-x-9 '   
-               src={'/banner/new-5.png'} 
-               objectFit='contain'  />
+          <img className='rounded-md  w-full  h-40 lg:w-full lg:h-72 xl+:h-80 md:h-64 2xl:h-72 2xl:w-full object-cover space-x-9 '   
+               src={'/banner/salon.jpg'} 
+               />
 
           </div>
-        </div>
+        
 
-        <div>
+        
           <div className="card">
 
-          <img className='rounded-md  w-full  h-40 lg:w-full xl+:h-60 2xl:h-full 2xl:w-full  space-x-9 '   
+          <img className='rounded-md  w-full  h-40 lg:w-full xl+:h-80 md:h-64 lg:h-72 2xl:h-72 2xl:w-full object-fill  space-x-9 '   
                src={'/banner/new-6.png'} 
-               objectFit='contain'  />
+               />
 
           </div>
-        </div>
+      
 
-        <div>
+        {/* <div>
           <div className="card">
 
-          <img className='rounded-md  w-full  h-40 lg:w-full xl+:h-60  2xl:h-full 2xl:w-full  space-x-9 '   
+          <img className='rounded-md  w-full  h-40 lg:w-full xl+:h-80 md:h-64 lg:h-72  2xl:h-full 2xl:w-full object-cover space-x-9 '   
                src={'/banner/new-8.png'} 
-               objectFit='contain'  />
+               />
 
           </div>
-        </div>
+        </div> */}
 
        
       </Slider>

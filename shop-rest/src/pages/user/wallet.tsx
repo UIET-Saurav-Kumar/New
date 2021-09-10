@@ -44,7 +44,7 @@ const ReferralActivity = () => {
 
             <div className='flex mx-10 space-x-20 '>
                 
-                <ProfileSidebar className="flex-shrink-0 hidden mt-14 xl:block xl:w-80 ml-14" />  
+                <ProfileSidebar className="flex-shrink-0 hidden mt-14 xl:block xl:w-80 ml-8" />  
 
                 <div className="flex flex-col  justify-evenly p-4 w-full mx-auto  mt-14">
                     <div className='invite-tabs flex flex-col bg-white p-4 w-full mx-4 text-left mt-5 px-8'>

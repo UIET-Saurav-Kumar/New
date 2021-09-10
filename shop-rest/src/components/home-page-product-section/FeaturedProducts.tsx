@@ -33,7 +33,7 @@ export default function featuredProducts({}) {
 
         <div id='featured-products' className=' flex flex-col mt-8 border-b rounded-t p-4 bg-gray-50 '>
             <div className='flex justify-between '>
-                <h3 className='font-bold text-xs sm:text-md md:text-md xl:text-xl  '> 
+                <h3 className='text-lg sm:text-lg md:text-lg xl:text-2xl  font-semibold  p-2  '> 
                     Featured Products 
                 </h3>
                 <h3 className=' text-xs font-blue hover:underline cursor-pointer' > view all </h3>
