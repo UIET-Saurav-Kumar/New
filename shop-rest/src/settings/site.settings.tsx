@@ -112,10 +112,10 @@ export const siteSettings = {
       href: ROUTES.WALLET,
       menulabel: "Wallet",
     },
-    {
-      href: ROUTES.HELP,
-      menulabel: "profile-sidebar-help",
-    },
+    // {
+    //   href: ROUTES.HELP,
+    //   menulabel: "profile-sidebar-help",
+    // },
     {
       href: ROUTES.LOGOUT,
       menulabel: "profile-sidebar-logout",
