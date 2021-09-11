@@ -2,10 +2,12 @@
 
 namespace PickBazar\Http\Controllers;
 
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use PickBazar\Database\Models\Type;
 use Illuminate\Support\Facades\Schema;
 use PickBazar\Database\Models\Product;
 use PickBazar\Database\Models\Category;
@@ -13,6 +15,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Eloquent\Collection;
 use PickBazar\Database\Models\MasterProduct;
 use PickBazar\Exceptions\PickbazarException;
+use PickBazar\Database\Models\VariationOption;
 use PickBazar\Database\Repositories\ShopRepository;
 use PickBazar\Http\Requests\MasterProductCreateRequest;
 use PickBazar\Http\Requests\MasterProductUpdateRequest;
@@ -296,6 +299,202 @@ class MasterProductController extends CoreController
             ]);
         }
         return 1;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function importMasterVariationOptions(Request $request)
+    {
+        $requestFile = $request->file();
+        $user = $request->user();
+
+        if (count($requestFile)) {
+            if (isset($requestFile['csv'])) {
+                $uploadedCsv = $requestFile['csv'];
+            } else {
+                $uploadedCsv = current($requestFile);
+            }
+        } else {
+            throw new PickbazarException(config('shop.app_notice_domain') . 'ERROR.CSV_NOT_FOUND');
+        }
+
+        if (!$this->repository->adminPermission($user)) {
+            throw new PickbazarException(config('shop.app_notice_domain') . 'ERROR.NOT_AUTHORIZED');
+        }
+        if (isset($user->id)) {
+            $file = $uploadedCsv->storePubliclyAs('csv-files', 'master-variation-options-' . Str::random(5) . '.' . $uploadedCsv->getClientOriginalExtension(), 'public');
+
+            $attributes = $this->repository->csvToArray(storage_path() . '/app/public/' . $file);
+
+            foreach ($attributes as $key => $attribute) {
+                if (!isset($attribute['title']) || !isset($attribute['price'])) {
+                    throw new PickbazarException("MARVEL_ERROR.WRONG_CSV");
+                }
+                unset($attribute['id']);
+                $attribute['options'] = json_decode($attribute['options'], true);
+                // try {
+                    $product = Type::find($attribute['product_id']);
+                    if (isset($product->id)) {
+                        VariationOption::firstOrCreate($attribute);
+                    }
+                // } catch (Exception $e) {
+                // }
+            }
+            return true;
+        }
+    }
+
+    public function exportMasterVariableOptions(Request $request)
+    {
+
+        $filename = 'master-variable-options-' . Str::random(5) . '.csv';
+        $headers = [
+            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
+            'Content-type'        => 'text/csv',
+            'Content-Disposition' => 'attachment; filename=' . $filename,
+            'Expires'             => '0',
+            'Pragma'              => 'public'
+        ];
+
+        $products = $this->repository->get();
+
+        $list = VariationOption::WhereIn('product_id', $products->pluck('id'))->get()->toArray();
+
+        if (!count($list)) {
+            return response()->stream(function () {
+            }, 200, $headers);
+        }
+        # add headers for each column in the CSV download
+        array_unshift($list, array_keys($list[0]));
+
+        $callback = function () use ($list) {
+            $FH = fopen('php://output', 'w');
+            foreach ($list as $key => $row) {
+                if ($key === 0) {
+                    $exclude = ['id', 'created_at', 'updated_at'];
+                    $row = array_diff($row, $exclude);
+                }
+                unset($row['id']);
+                unset($row['updated_at']);
+                unset($row['created_at']);
+                if (isset($row['options'])) {
+                    $row['options'] = json_encode($row['options']);
+                }
+                fputcsv($FH, $row);
+            }
+            fclose($FH);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
+
+    public function exportMasterProducts(Request $request)
+    {
+        $filename = 'master-products'.'.csv';
+        $headers = [
+            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
+            'Content-type'        => 'text/csv',
+            'Content-Disposition' => 'attachment; filename=' . $filename,
+            'Expires'             => '0',
+            'Pragma'              => 'public'
+        ];
+
+        $list = $this->repository->get()->toArray();
+        if (!count($list)) {
+            return response()->stream(function () {
+            }, 200, $headers);
+        }
+        # add headers for each column in the CSV download
+        array_unshift($list, array_keys($list[0]));
+
+        $callback = function () use ($list) {
+            $FH = fopen('php://output', 'w');
+            foreach ($list as $key => $row) {
+                if ($key === 0) {
+                    $exclude = ['id', 'slug', 'deleted_at', 'created_at', 'updated_at', 'shipping_class_id'];
+                    $row = array_diff($row, $exclude);
+                }
+                unset($row['id']);
+                unset($row['deleted_at']);
+                unset($row['shipping_class_id']);
+                unset($row['updated_at']);
+                unset($row['created_at']);
+                unset($row['slug']);
+                if (isset($row['image'])) {
+                    $row['image'] = json_encode($row['image']);
+                }
+                if (isset($row['gallery'])) {
+                    $row['gallery'] = json_encode($row['gallery']);
+                }
+                fputcsv($FH, $row);
+            }
+            fclose($FH);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
+
+    public function importMasterProducts(Request $request)
+    {
+        $requestFile = $request->file();
+
+        $user = $request->user();
+
+        if (count($requestFile)) {
+            if (isset($requestFile['csv'])) {
+                $uploadedCsv = $requestFile['csv'];
+            } else {
+                $uploadedCsv = current($requestFile);
+            }
+        }
+
+        if (!$this->repository->adminPermission($user)) {
+            throw new PickbazarException(config('shop.app_notice_domain') . 'ERROR.NOT_AUTHORIZED');
+        }
+        
+        $file = $uploadedCsv->storePubliclyAs('csv-files', 'master-products'.'.' . $uploadedCsv->getClientOriginalExtension(), 'public');
+
+        $products = $this->repository->csvToArray(storage_path() . '/app/public/' . $file);
+
+        foreach ($products as $key => $product) {
+            if (!isset($product['type_id'])) {
+                throw new PickbazarException("MARVEL_ERROR.WRONG_CSV");
+            }
+            unset($product['id']);
+            unset($product['max_price']);
+            unset($product['min_price']);
+            unset($product['sale_price']);
+            unset($product['commission']);
+            unset($product['is_featured']);
+
+            $product['image'] = json_decode($product['image'], true);
+            $product['gallery'] = json_decode($product['gallery'], true);
+            try {
+                $type = Type::find($product['type_id']);
+                if (isset($type->id)) {
+                    MasterProduct::firstOrCreate($product);
+                }
+            } catch (Exception $e) {
+            }
+        }
+        return true;
+        
     }
 
 }

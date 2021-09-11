@@ -16,6 +16,9 @@ import CategoryTypeFilter from "@components/master-products/category-type-filter
 import cn from "classnames";
 import { ArrowDown } from "@components/icons/arrow-down";
 import { ArrowUp } from "@components/icons/arrow-up";
+import { useModalAction } from "@components/ui/modal/modal.context";
+import { MoreIcon } from "@components/icons/more-icon";
+import Button from "@components/ui/button";
 
 export default function ProductsPage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -26,7 +29,7 @@ export default function ProductsPage() {
   const [orderBy, setOrder] = useState("created_at");
   const [sortedBy, setColumn] = useState<SortOrder>(SortOrder.Desc);
   const [visible, setVisible] = useState(false);
-
+  const { openModal } = useModalAction();
   const toggleVisible = () => {
     setVisible((v) => !v);
   };
@@ -47,7 +50,9 @@ export default function ProductsPage() {
 
   if (loading) return <Loader text={t("common:text-loading")} />;
   if (error) return <ErrorMessage message={error.message} />;
-
+  function handleImportModal() {
+    openModal("EXPORT_IMPORT_MASTER_PRODUCT");
+  }
   function handleSearch({ searchText }: { searchText: string }) {
     setSearchTerm(searchText);
     setPage(1);
@@ -68,7 +73,12 @@ export default function ProductsPage() {
           <div className="w-full md:w-3/4 flex flex-col items-center ms-auto">
             <div className="w-full flex items-center">
               <Search onSearch={handleSearch} />
-
+              <Button
+                  onClick={handleImportModal}
+                  className="mt-5 w-full md:hidden"
+                >
+                  {t("common:text-export-import")}
+              </Button>
               <LinkButton
                 href={`/master-products/create`}
                 className="h-12 ms-4 md:ms-6"
@@ -80,6 +90,12 @@ export default function ProductsPage() {
                   + {t("form:button-label-add")}
                 </span>
               </LinkButton>
+              <button
+                onClick={handleImportModal}
+                className="hidden md:flex w-8 h-8 rounded-full bg-gray-50 hover:bg-gray-100 items-center justify-center flex-shrink-0 ms-5 transition duration-300"
+              >
+              <MoreIcon className="w-3.5 text-body" />
+            </button>
             </div>
           </div>
 

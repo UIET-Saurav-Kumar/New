@@ -236,39 +236,63 @@ class UserController extends CoreController
 
     public function forgetPassword(Request $request)
     {
-        $user = $this->repository->findByField('email', $request->email);
-        if (count($user) < 1) {
+        $user = User::where('email', $request->email)->first();
+        
+        if (!$user) {
             return ['message' => 'PICKBAZAR_MESSAGE.NOT_FOUND', 'success' => false];
         }
-        $tokenData = DB::table('password_resets')
-            ->where('email', $request->email)->first();
-        if (!$tokenData) {
-            DB::table('password_resets')->insert([
-                'email' => $request->email,
-                'token' => Str::random(16),
-                'created_at' => Carbon::now()
-            ]);
-            $tokenData = DB::table('password_resets')
-                ->where('email', $request->email)->first();
+        // $tokenData = DB::table('password_resets')
+        //     ->where('email', $request->email)->first();
+        // if (!$tokenData) {
+        //     // DB::table('password_resets')->insert([
+        //     //     'email' => $request->email,
+        //     //     'token' => Str::random(16),
+        //     //     'created_at' => Carbon::now()
+        //     // ]);
+            
+        //     $tokenData = DB::table('password_resets')
+        //         ->where('email', $request->email)->first();
+        // }
+        
+        $code=SMS::sendOTP($user->phone_number);
+        $user->update([
+            "code"=>$code
+        ]);
+        $p=$user->phone_number;
+        $stars=$this->getStars(strlen($p)-3-2);
+        $phone_number=substr($p,0,3,).$stars.substr($p,strlen($p)-2,2);
+        return [
+            'message' => 'PICKBAZAR_MESSAGE.CHECK_INBOX_FOR_PASSWORD_RESET_EMAIL', 
+            'success' => true,
+            'phone_number'=>$phone_number
+        ];
+
+        // if ($this->repository->sendResetEmail($request->email, $tokenData->token)) {
+        //     return ['message' => 'PICKBAZAR_MESSAGE.CHECK_INBOX_FOR_PASSWORD_RESET_EMAIL', 'success' => true];
+        // } else {
+        //     return ['message' => 'PICKBAZAR_MESSAGE.SOMETHING_WENT_WRONG', 'success' => false];
+        // }
+    }
+    private function getStars($size){
+        $stars="";
+        for($i=0;$i<$size;$i++){
+            $stars=$stars."*";
         }
 
-        if ($this->repository->sendResetEmail($request->email, $tokenData->token)) {
-            return ['message' => 'PICKBAZAR_MESSAGE.CHECK_INBOX_FOR_PASSWORD_RESET_EMAIL', 'success' => true];
-        } else {
-            return ['message' => 'PICKBAZAR_MESSAGE.SOMETHING_WENT_WRONG', 'success' => false];
-        }
+        return $stars;
     }
     public function verifyForgetPasswordToken(Request $request)
     {
-        $tokenData = DB::table('password_resets')->where('token', $request->token)->first();
-        $user = $this->repository->findByField('email', $request->email);
-        if (!$tokenData) {
+
+        // $tokenData = DB::table('password_resets')->where('token', $request->token)->first();
+        $user = User::where('email', $request->email)->where('code',$request->token)->first();
+        // $user = $this->repository->findByField('email', $request->email);
+        if (!$user) {
             return ['message' => 'PICKBAZAR_MESSAGE.INVALID_TOKEN', 'success' => false];
         }
-        $user = $this->repository->findByField('email', $request->email);
-        if (count($user) < 1) {
-            return ['message' => 'PICKBAZAR_MESSAGE.NOT_FOUND', 'success' => false];
-        }
+        // if (!$user) {
+        //     return ['message' => 'PICKBAZAR_MESSAGE.NOT_FOUND', 'success' => false];
+        // }
         return ['message' => 'PICKBAZAR_MESSAGE.TOKEN_IS_VALID', 'success' => true];
     }
     public function resetPassword(Request $request)

@@ -2,24 +2,27 @@
 
 namespace PickBazar\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
 use PickBazar\Enums\Permission;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use PickBazar\Database\Models\Shop;
+use PickBazar\Database\Models\Type;
 use PickBazar\Database\Models\User;
 use Illuminate\Support\Facades\Hash;
 use PickBazar\Database\Models\Balance;
 use PickBazar\Database\Models\Product;
 use PickBazar\Database\Models\ShopCategory;
 use Illuminate\Database\Eloquent\Collection;
-use PickBazar\Database\Models\ReferralCommission;
-use PickBazar\Database\Repositories\ProductRepository;
+use PickBazar\Database\Models\MasterProduct;
 use PickBazar\Exceptions\PickbazarException;
 use PickBazar\Http\Requests\ShopCreateRequest;
 use PickBazar\Http\Requests\ShopUpdateRequest;
 use PickBazar\Http\Requests\UserCreateRequest;
+use PickBazar\Database\Models\ReferralCommission;
 use PickBazar\Database\Repositories\ShopRepository;
+use PickBazar\Database\Repositories\ProductRepository;
 
 class ShopController extends CoreController
 {
@@ -362,10 +365,113 @@ class ShopController extends CoreController
         ];
     }
 
-    public function getWalletCommission(Request $request)
+    public function exportShop(Request $request)
     {
+        $filename = 'shops'.'.csv';
+        $headers = [
+            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
+            'Content-type'        => 'text/csv',
+            'Content-Disposition' => 'attachment; filename=' . $filename,
+            'Expires'             => '0',
+            'Pragma'              => 'public'
+        ];
+
+        $list = $this->repository->get()->toArray();
+
+        if (!count($list)) {
+            return response()->stream(function () {
+            }, 200, $headers);
+        }
+        # add headers for each column in the CSV download
+        array_unshift($list, array_keys($list[0]));
+
+        $callback = function () use ($list) {
+            $FH = fopen('php://output', 'w');
+            foreach ($list as $key => $row) {
+                if ($key === 0) {
+                    $exclude = ['id','slug','is_active',"commission_type",'created_at', 'updated_at','commission','is_featured'];
+                    $row = array_diff($row, $exclude);
+                }
+                unset($row['id']);
+                unset($row['updated_at']);
+                unset($row['created_at']);
+                unset($row['slug']);
+                unset($row['commission_type']);
+                unset($row['is_active']);
+                unset($row['is_featured']);
+                unset($row['commission']);
+                if (isset($row['logo'])) {
+                    $row['logo'] = json_encode($row['logo']);
+                }
+                if (isset($row['cover_image'])) {
+                    $row['cover_image'] = json_encode($row['cover_image']);
+                }
+                if (isset($row['settings'])) {
+                    $row['settings'] = json_encode($row['settings']);
+                }
+                if (isset($row['shop_categories'])) {
+                    $row['shop_categories'] = json_encode($row['shop_categories']);
+                }
+                if (isset($row['address'])) {
+                    $row['address'] = json_encode($row['address']);
+                }
+                fputcsv($FH, $row);
+            }
+            fclose($FH);
+        };
+        
+        return response()->stream($callback, 200, $headers);
+    }
+
+    public function importShop(Request $request)
+    {
+        $requestFile = $request->file();
+
+        $user = $request->user();
+
+        if (count($requestFile)) {
+            if (isset($requestFile['csv'])) {
+                $uploadedCsv = $requestFile['csv'];
+            } else {
+                $uploadedCsv = current($requestFile);
+            }
+        }
+
+        if (!$this->repository->adminPermission($user)) {
+            throw new PickbazarException(config('shop.app_notice_domain') . 'ERROR.NOT_AUTHORIZED');
+        }
+        
+        $file = $uploadedCsv->storePubliclyAs('csv-files', 'shops'.'.' . $uploadedCsv->getClientOriginalExtension(), 'public');
+
+        $shops = $this->repository->csvToArrayShop(storage_path() . '/app/public/' . $file);
+
+        foreach ($shops as $key => $shop) {
+            // if (!isset($shop['type_id'])) {
+            //     throw new PickbazarException("MARVEL_ERROR.WRONG_CSV");
+            // }
+            unset($shop['id']);
+            unset($shop['updated_at']);
+            unset($shop['created_at']);
+            unset($shop['slug']);
+            unset($shop['commission_type']);
+            unset($shop['is_active']);
+            unset($shop['is_featured']);
+            unset($shop['commisssion']);
+
+            $shop['logo'] = json_decode($shop['logo'], true);
+            $shop['cover_image'] = json_decode($shop['cover_image'], true);
+            $shop['settings'] = json_decode($shop['settings'], true);
+            $shop['shop_categories'] = json_decode($shop['shop_categories'], true);
+            $shop['address'] = json_decode($shop['address'], true);
+            
+            
+            Shop::create($shop);
+            
+        }
+        return true;
         
     }
+
 
     
 }

@@ -110,6 +110,28 @@ Route::get('referral-network','PickBazar\Http\Controllers\InviteController@reffe
 
 
 
+Route::post('import-products', 'PickBazar\Http\Controllers\ProductController@importProducts');
+Route::post('import-variation-options', 'PickBazar\Http\Controllers\ProductController@importVariationOptions');
+Route::get('export-products/{shop_id}', 'PickBazar\Http\Controllers\ProductController@exportProducts');
+Route::get('export-variation-options/{shop_id}', 'PickBazar\Http\Controllers\ProductController@exportVariableOptions');
+Route::post('import-attributes', 'PickBazar\Http\Controllers\AttributeController@importAttributes');
+Route::get('export-attributes/{shop_id}', 'PickBazar\Http\Controllers\AttributeController@exportAttributes');
+
+Route::get('export-all-products', 'PickBazar\Http\Controllers\ProductController@exportAllProducts');
+Route::post('import-all-products', 'PickBazar\Http\Controllers\ProductController@importAllProducts');
+
+Route::get('export-all-variation-options', 'PickBazar\Http\Controllers\ProductController@exportAllVariableOptions');
+Route::post('import-all-variation-options', 'PickBazar\Http\Controllers\ProductController@importAllVariationOptions');
+
+
+Route::get('export-master-products', 'PickBazar\Http\Controllers\MasterProductController@exportMasterProducts');
+Route::post('import-master-products', 'PickBazar\Http\Controllers\MasterProductController@importMasterProducts');
+
+Route::get('export-master-variation-options', 'PickBazar\Http\Controllers\MasterProductController@exportMasterVariableOptions');
+Route::post('import-master-variation-options', 'PickBazar\Http\Controllers\MasterProductController@importMasterVariationOptions');
+
+Route::get('export-shops', 'PickBazar\Http\Controllers\ShopController@exportShop');
+Route::post('import-shops', 'PickBazar\Http\Controllers\ShopController@importShop');
 
 // busineesId, mobile, ParentBusinees Id
 Route::apiResource('coupons', CouponController::class, [

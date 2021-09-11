@@ -42,6 +42,24 @@ const DisApproveShopView = dynamic(
 const RemoveStaffView = dynamic(
   () => import("@components/shop/staff-delete-view")
 );
+
+const ExportImportView = dynamic(
+  () => import("@components/product/import-export-modal")
+);
+
+const AttributeExportImport = dynamic(
+  () => import("@components/attribute/attribute-import-export")
+);
+const AllProductsExportImport = dynamic(
+  () => import("@components/product/import-export-modal-all-products")
+);
+const MasterProductsExportImport = dynamic(
+  () => import("@components/product/import-export-modal-master-products")
+);
+const ShopsExportImport = dynamic(
+  () => import("@components/product/import-export-modal-shop")
+);
+
 const ManagedModal = () => {
   const { isOpen, view } = useModalState();
   const { closeModal } = useModalAction();
@@ -64,6 +82,10 @@ const ManagedModal = () => {
       {view === "SHOP_APPROVE_VIEW" && <ApproveShopView />}
       {view === "SHOP_DISAPPROVE_VIEW" && <DisApproveShopView />}
       {view === "DELETE_STAFF" && <RemoveStaffView />}
+      {view === "EXPORT_IMPORT_PRODUCT" && <ExportImportView />}
+      {view === "EXPORT_IMPORT_ATTRIBUTE" && <AttributeExportImport />}
+      {view === "EXPORT_IMPORT_ADMIN_PRODUCT" && <AllProductsExportImport />}
+      {view === "EXPORT_IMPORT_SHOPS" && <ShopsExportImport />}
     </Modal>
   );
 };

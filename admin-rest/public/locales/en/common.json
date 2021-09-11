@@ -187,5 +187,24 @@
   "filter-by-order-placeholder": "Order By",
   "text-filter": "Filter",
   "text-download": "Download",
-  "text-map-cant-load": "Map cannot be loaded right now, sorry."
+  "text-map-cant-load": "Map cannot be loaded right now, sorry.",
+
+
+
+
+
+
+
+
+  "text-export-import": "Export/Import",
+  "text-export-products": "Export Products",
+  "text-export-product-variations": "Export Product Variations",
+  "text-import-products": "Import Products",
+  "text-import-product-variations": "Import Product Variations",
+  "text-import-attributes": "Import Attributes",
+  "text-export-attributes": "Export Attributes",
+  "attribute-imported-successfully": "Attributes Imported Successfully",
+  "product-imported-successfully": "Products Imported Successfully",
+  "variation-options-imported-successfully": "Variation Options Imported Successfully",
+  "PICKBAZAR_ERROR.WRONG_CSV": "You have uploaded wrong csv file!"
 }

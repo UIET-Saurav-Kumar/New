@@ -54,5 +54,14 @@ export const API_ENDPOINTS = {
   UPDATE_REFERRAL_COMMISSION:"update-referral-commission",
   GET_REFERRAL_COMMISSION:"get-referral-commission",
   USER_VERIFY:"user-verify",
-  RESEND_CODE:"resend-code"
+  RESEND_CODE:"resend-code",
+  IMPORT_PRODUCTS: "import-products/",
+  IMPORT_ALL_PRODUCTS: "import-all-products/",
+  IMPORT_ATTRIBUTES: "import-attributes/",
+  IMPORT_VARIATION_OPTIONS: "import-variation-options/",
+  IMPORT_ALL_VARIATION_OPTIONS: "import-all-variation-options/",
+  IMPORT_MASTER_VARIATION_OPTIONS: "import-master-variation-options/",
+  IMPORT_MASTER_PRODUCTS: "import-master-products/",
+  IMPORT_SHOPS: "import-shops/",
+
 };

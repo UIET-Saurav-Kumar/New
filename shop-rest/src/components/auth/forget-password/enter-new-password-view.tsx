@@ -24,7 +24,7 @@ const EnterNewPasswordView = ({ onSubmit, loading }: Props) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <PasswordInput
-        label="text-password"
+        label="Enter New password to reset"
         {...register("password")}
         error={errors.password?.message}
         variant="outline"

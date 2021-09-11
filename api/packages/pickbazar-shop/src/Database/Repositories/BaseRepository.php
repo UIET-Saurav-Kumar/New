@@ -189,4 +189,50 @@ abstract class BaseRepository extends Repository implements CacheableInterface
         }
         return false;
     }
+
+    function csvToArray($filename = '', $delimiter = ',')
+    {
+        if (!file_exists($filename) || !is_readable($filename))
+            return false;
+
+        $header = null;
+        $data = array();
+        if (($handle = fopen($filename, 'r')) !== false) {
+            while (($row = fgetcsv($handle, 0, $delimiter)) !== false) {
+                if (!$header) {
+                    $exclude = ['id', 'slug', 'deleted_at', 'created_at', 'updated_at', 'shipping_class_id'];
+                    $row = array_diff($row, $exclude);
+                    $header = $row;
+                } else {
+                    $data[] = array_combine($header, $row);
+                }
+            }
+            fclose($handle);
+        }
+
+        return $data;
+    }
+
+    function csvToArrayShop($filename = '', $delimiter = ',')
+    {
+        if (!file_exists($filename) || !is_readable($filename))
+            return false;
+
+        $header = null;
+        $data = array();
+        if (($handle = fopen($filename, 'r')) !== false) {
+            while (($row = fgetcsv($handle, 0, $delimiter)) !== false) {
+                if (!$header) {
+                    $exclude = ['id', 'slug', 'created_at', 'updated_at','is_featured','commission'];
+                    $row = array_diff($row, $exclude);
+                    $header = $row;
+                } else {
+                    $data[] = array_combine($header, $row);
+                }
+            }
+            fclose($handle);
+        }
+
+        return $data;
+    }
 }

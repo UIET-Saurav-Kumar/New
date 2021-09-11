@@ -11,13 +11,16 @@ import { adminOnly } from "@utils/auth-utils";
 import { useShopsQuery } from "@data/shop/use-shops.query";
 import SortForm from "@components/common/sort-form";
 import { SortOrder } from "@ts-types/generated";
-
+import { useModalAction } from "@components/ui/modal/modal.context";
+import { MoreIcon } from "@components/icons/more-icon";
+import Button from "@components/ui/button";
 export default function AllShopPage() {
   const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(1);
   const [orderBy, setOrder] = useState("created_at");
   const [sortedBy, setColumn] = useState<SortOrder>(SortOrder.Desc);
+  const { openModal } = useModalAction();
   const {
     data,
     isLoading: loading,
@@ -38,6 +41,9 @@ export default function AllShopPage() {
   function handlePagination(current: any) {
     setPage(current);
   }
+  function handleImportModal() {
+    openModal("EXPORT_IMPORT_SHOPS");
+  }
   return (
     <>
       <Card className="flex flex-col md:flex-row items-center justify-between mb-8">
@@ -49,6 +55,12 @@ export default function AllShopPage() {
 
         <div className="w-full md:w-3/4 flex flex-col md:flex-row items-center ms-auto">
           <Search onSearch={handleSearch} />
+          <Button
+              onClick={handleImportModal}
+              className="mt-5 w-full md:hidden"
+            >
+              {t("common:text-export-import")}
+          </Button>
           <SortForm
             showLabel={false}
             className="w-full md:w-1/2 md:ms-5 mt-5 md:mt-0 flex-shrink-0"
@@ -66,6 +78,12 @@ export default function AllShopPage() {
               { id: 2, value: "updated_at", label: "Updated At" },
             ]}
           />
+          <button
+              onClick={handleImportModal}
+              className="hidden md:flex w-8 h-8 rounded-full bg-gray-50 hover:bg-gray-100 items-center justify-center flex-shrink-0 ms-5 transition duration-300"
+            >
+            <MoreIcon className="w-3.5 text-body" />
+          </button>
         </div>
       </Card>
       <ShopList shops={data?.shops} onPagination={handlePagination} />

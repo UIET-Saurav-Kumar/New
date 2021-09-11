@@ -236,7 +236,7 @@ class OrderRepository extends BaseRepository
             "customer_name"=>$customer->name,
             "order_id"=>$order->id,
             "order_track_number"=>$order->tracking_number,
-            "commission_value"=>$commission,
+            "commission_value"=>$order->total,
             "shop_name"=>$order->shop->name,
             "earning"=>$commission_value,
             "level"=>$commission_level
