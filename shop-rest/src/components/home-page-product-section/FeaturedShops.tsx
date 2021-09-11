@@ -39,7 +39,7 @@ export default function FeaturesShops({ }) {
     
                     <div className='flex justify-between  p-2 px-4'>
     
-                        <h3 className='font-bold text-xs sm:text-md md:text-md xl:text-xl  '>
+                        <h3 className='text-lg sm:text-lg md:text-lg xl:text-2xl  font-semibold  p-2  '>
                             Featured Local Shops Nearby
                         </h3>
 

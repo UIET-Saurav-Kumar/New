@@ -205,6 +205,11 @@
 
 @media (min-width: 244px) {
 
+    .slick-dots{
+        top: 160px
+
+    }
+
     .slick-dots li{
        display: none;
     }
@@ -215,6 +220,26 @@
 
     .slick-dots li{
        display: inline-block;
+
+    }
+  
+  
+   }
+
+   @media (min-width: 768px) {
+
+    .slick-dots{
+        top: 260px
+
+    }
+  
+  
+   }
+
+   @media (min-width: 1024px) {
+
+    .slick-dots{
+        top: 290px
 
     }
   
@@ -234,7 +259,17 @@
    @media (min-width: 1497px) {
 
     .slick-dots{
-        bottom: 0px
+        bottom: -20px
+
+    }
+  
+  
+   }
+
+   @media (min-width: 1298px) {
+
+    .slick-dots{
+        top: 320px
 
     }
   
@@ -244,7 +279,7 @@
    @media (min-width: 1497px) {
 
     .slick-dots{
-        bottom: -40px
+        top: 320px
 
     }
   

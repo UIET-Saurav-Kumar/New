@@ -159,7 +159,7 @@ export default function ReferralNetwork() {
 
             <Navbar label="Referral Network "/>
 
-                <div className='  flex mx-10 space-x-20'>
+                <div className='  flex mx-10 space-x-10'>
 
                     <ProfileSidebar className="sticky overflow-hidden flex-shrink-0 mt-14 ml-14 hidden xl:block xl:w-80 " />  
 

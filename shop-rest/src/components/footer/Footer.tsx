@@ -15,13 +15,13 @@ const Footer = () => {
   }
 
 	return (
-		<div className='footer-wrapper hidden
-                        sm:flex sm:flex-col text-10px py-16
-                        bg-black shadow-lg mb-8 rounded-md text-white  justify-evenly mt-16'>
+		<div className='footer-wrapper 
+		text-10px py-16
+	   bg-black shadow-lg mb-8 rounded-md text-white lg:px-20 justify-evenly mt-16'>
 			  
 
 			  <div className='footer-top-section 
-                              flex space-x-6 text-left mb-8 p-4  shadow-md border-gray-700 justify-evenly'>
+                               grid-cols-1 xs++:grid space-y-10 sm:grid-cols-2 md:grid-cols-4  space-x-6 text-left mb-8 p-4  shadow-md border-gray-700 justify-evenly'>
 
 
 			  	<div className='footer-section-links w-42 space-y-10 text-left'>
@@ -88,7 +88,7 @@ const Footer = () => {
 
 				  <div className='flex flex-col w-42 space-y-4'>
 					  <h5 className='font-semibold text-xl'> Follow Us</h5>
-				  <div className='flex flex-col space-y-10 cursor-pointer text-lg '>
+				  <div className='grid grid-cols-3 lg:grid-cols-3 place-items-center items-center  cursor-pointer text-3xl lg:text-lg '>
 					  
 					<a target="_blank" href='https://www.facebook.com/buylowcal/'> <FacebookIcon className='h-8 w-8  bg-blue-800 cursor-pointer text-lg hover:underline'/></a> 
 					  
