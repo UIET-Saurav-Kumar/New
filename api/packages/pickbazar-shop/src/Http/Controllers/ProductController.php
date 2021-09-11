@@ -38,18 +38,24 @@ class ProductController extends CoreController
      */
     public function index(Request $request)
     {
-        $pluckcat = explode(';',$request->search);
-        $pluckall = explode(':', $pluckcat[0]);
-        if($pluckall[1] == 'all')
+        if($request->search != null)
         {
-            $request->replace([
-                'search' => $pluckcat[1],
-                'searchJoin' => $request->searchJoin,
-                'limit' => $request->limit
-                ]);
+            $pluckcat = explode(';',$request->search);
+            $pluckall = explode(':', $pluckcat[0]);
+
+            if($pluckall[1] == 'all')
+            {
+                $request->replace([
+                    'search' => $pluckcat[1],
+                    'searchJoin' => $request->searchJoin,
+                    'limit' => $request->limit
+                    ]);
+            }
         }
-        
-        // dd($request->all());
+        $limit = $request->limit ?   $request->limit : 15;           
+        $repdata = $this->repository->with(['type', 'shop', 'categories', 'tags', 'variations.attribute'])->orderBy('is_offer', 'desc')->paginate($limit);
+
+        return $repdata;
 
         // $category = $request->category != null ? true : false;
         // dd($category);
@@ -67,9 +73,9 @@ class ProductController extends CoreController
         // }
         // else
         // {
-            $limit = $request->limit ?   $request->limit : 15;
-            $repdata = $this->repository->with(['type', 'shop', 'categories', 'tags', 'variations.attribute'])->orderBy('is_offer', 'desc')->paginate($limit);
-            return $repdata;
+//             $limit = $request->limit ?   $request->limit : 15;
+//             $repdata = $this->repository->with(['type', 'shop', 'categories', 'tags', 'variations.attribute'])->orderBy('is_offer', 'desc')->paginate($limit);
+//             return $repdata;
         // }
         
     }
