@@ -17,7 +17,7 @@ export default function CountUpAnimation() {
     return (
 
        <>
-       <div className=' bg-black z-100 relative space-y-10 lg:space-y-20 flex flex-col h-screen md:h-2/3 lg:h-96 mt-1 lg:mt-10 lg:rounded-lg  lg:py-0 shadow-xl lg:mx-10 text-white '>
+       <div className=' bg-black z-100 relative space-y-8 lg:space-y-20 flex flex-col h-screen  sm:h-96 md:h-96 lg:h-96 mt-1 lg:mt-10 lg:rounded-lg  lg:py-0 shadow-xl lg:mx-10 text-white '>
 
            <img src='/banner8.jpeg' className='absolute z-10 opacity-20 h-full pt-0 w-full object-cover lg:object-fill'/>
 
@@ -26,7 +26,7 @@ export default function CountUpAnimation() {
                 <h1 className=' text-2xl sm:text-2xl font-semibold lg:text-3xl '> Discover best of everything around you </h1>
             </div>
 
-    <div className = ' grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 space-y-16 lg:space-y-0 place-items-center items-center  justify-around ' >
+    <div className = ' grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 space-y-10 sm:space-y-10 lg:space-y-0 place-items-center items-center  justify-around ' >
 
        <div className='flex flex-col  items-center'>
 
@@ -42,7 +42,7 @@ export default function CountUpAnimation() {
                                 </CountUp> + 
                             </span>
                     </ReactVisibilitySensor>
-                    
+
             </h1>
             <p className='text-2xl lg:tracking-widest'> Vendors </p>
 
