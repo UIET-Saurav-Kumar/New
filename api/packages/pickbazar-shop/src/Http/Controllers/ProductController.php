@@ -35,38 +35,39 @@ class ProductController extends CoreController
     public function index(Request $request)
     {
         $pluckcat = explode(';',$request->search);
-        $pluckall = explode(';', $pluckcat[0]);
-        
-        if($pluckall[0] == 'all')
+        $pluckall = explode(':', $pluckcat[0]);
+        if($pluckall[1] == 'all')
         {
             $request->replace([
-                'search'=>$pluckcat[1],
-                'searchJoin'=>$request->searchJoin,
-                'limit'=>$request->limit
-            ]);
+                'search' => $pluckcat[1],
+                'searchJoin' => $request->searchJoin,
+                'limit' => $request->limit
+                ]);
         }
         
-//         $category = $request->category != null ? true : false;
-//         if($category)
-//         {
-//             $slug = $request->category;
-//             $limit = $request->limit ?   $request->limit : 15;
+        // dd($request->all());
+
+        // $category = $request->category != null ? true : false;
+        // dd($category);
+        // if($category)
+        // {
+        //     $slug = $request->category;
+        //     $limit = $request->limit ?   $request->limit : 15;
             
-//             $repdata = $this->repository->with(['type', 'shop', 'categories', 'tags', 'variations.attribute'])->
-//                         whereHas('categories', function ($query) use ($slug ) {
-//                             return $query->where('slug', $slug);
-//                         })->orderBy('is_offer', 'desc')->paginate($limit);
+        //     $repdata = $this->repository->with(['type', 'shop', 'categories', 'tags', 'variations.attribute'])->
+        //                 whereHas('categories', function ($query) use ($slug ) {
+        //                     return $query->where('slug', $slug);
+        //                 })->orderBy('is_offer', 'desc')->paginate($limit);
           
-//             return $repdata;
-//         }
-//         else
-//         {
+        //     return $repdata;
+        // }
+        // else
+        // {
             $limit = $request->limit ?   $request->limit : 15;
-
             $repdata = $this->repository->with(['type', 'shop', 'categories', 'tags', 'variations.attribute'])->orderBy('is_offer', 'desc')->paginate($limit);
-
             return $repdata;
-//         }
+        // }
+        
     }
 
     public function product_offers(Request $request)
