@@ -44,7 +44,10 @@ class CategoryController extends CoreController
     
             $findid = Product::where('shop_id', $shopid->id)->get()->first()->type_id ?? 0;
            
-            $res = Category::with(['type','parent','children.type'])->where('type_id', $findid)->where('parent',null)->paginate($limit);
+            $res = Category::with(['type','parent','children.type','products'])
+                    ->whereHas('products', function ($query){
+                        return empty($query) ? false : true ;
+                    })->where('type_id', $findid)->where('parent',null)->paginate($limit);
     
             return $res;
         }
