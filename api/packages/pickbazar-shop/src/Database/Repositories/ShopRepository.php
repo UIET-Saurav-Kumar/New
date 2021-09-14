@@ -124,6 +124,10 @@ class ShopRepository extends BaseRepository
         $sorted_shops=[];
 
         foreach($shops as $shop){
+            if(!isset($shop->settings["location"])){
+                continue;
+            }
+
             $location=json_decode(json_encode($shop->settings["location"]));
             if($location){
                 $lat2=$location->lat;
@@ -135,14 +139,12 @@ class ShopRepository extends BaseRepository
                 }
             }
         }
-
         $sorted_shops=ShopRepository::quick_sort($sorted_shops);
         $shops_array=[];
         foreach($sorted_shops as $shop)
         {
             $shops_array[]=$shop->id;
         }
-
         return $shops_array;
     }
 

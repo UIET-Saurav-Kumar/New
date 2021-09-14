@@ -72,6 +72,8 @@ Route::get('fetch-offers', 'PickBazar\Http\Controllers\ProductController@fetchOf
 
 // Route::get('fetch-offers', 'PickBazar\Http\Controllers\OfferController@fetchHomeOffers');
 
+Route::get('shop-availability', 'PickBazar\Http\Controllers\ShopController@shopAvailability');
+
 Route::get('fetch-feature-shops', 'PickBazar\Http\Controllers\ShopController@fetchFeatureShops');
 
 Route::get('fetch-feature-stores', 'PickBazar\Http\Controllers\ShopController@fetchFeatureStores');

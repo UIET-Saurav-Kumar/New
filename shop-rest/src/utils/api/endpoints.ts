@@ -32,5 +32,6 @@ export const API_ENDPOINTS: Record<string, string> = {
   REFERRAL_NETWORK:"referral-network",
   GET_WALLET_COMMISSION:"get-wallet-commission",
   USER_VERIFY:"user-verify",
-  RESEND_CODE:"resend-code"
+  RESEND_CODE:"resend-code",
+  SHOP_AVAILABILITY:'shop-availability'
 };

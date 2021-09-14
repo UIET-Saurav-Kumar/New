@@ -297,6 +297,22 @@ class ShopController extends CoreController
         return $this->repository->where('owner_id', '=', $user->id)->get();
     }
 
+    public function shopAvailability(Request $request)
+    {
+        $location=($request->location)?json_decode($request->location):"";
+        if($location){
+            $shops=ShopRepository::getSortedShops($location);
+            if(count($shops)==0){
+                return [
+                    "check"=>0
+                ];        
+            }
+        }
+        return [
+            "check"=>1
+        ];
+    }
+
     public function fetchFeatureShops(Request $request)
     {
         $limit = isset($request->limit) ? $request->limit : 10;
