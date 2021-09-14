@@ -200,7 +200,7 @@ abstract class BaseRepository extends Repository implements CacheableInterface
         if (($handle = fopen($filename, 'r')) !== false) {
             while (($row = fgetcsv($handle, 0, $delimiter)) !== false) {
                 if (!$header) {
-                    $exclude = ['id', 'slug', 'deleted_at', 'created_at', 'updated_at', 'shipping_class_id'];
+                    $exclude = ['id', 'slug', 'deleted_at', 'created_at', 'updated_at', 'shipping_class_id','image','gallery'];
                     $row = array_diff($row, $exclude);
                     $header = $row;
                 } else {
@@ -223,7 +223,7 @@ abstract class BaseRepository extends Repository implements CacheableInterface
         if (($handle = fopen($filename, 'r')) !== false) {
             while (($row = fgetcsv($handle, 0, $delimiter)) !== false) {
                 if (!$header) {
-                    $exclude = ['id', 'slug', 'created_at', 'updated_at','is_featured','commission'];
+                    $exclude = ['id','slug','created_at', 'updated_at','cover_image','logo','shop_categories','address','settings'];
                     $row = array_diff($row, $exclude);
                     $header = $row;
                 } else {
