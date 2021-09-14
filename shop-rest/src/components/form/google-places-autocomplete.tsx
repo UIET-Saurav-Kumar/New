@@ -86,15 +86,18 @@ export default function GooglePlacesAutocomplete({address,
           break;
       }
     }
+
     if (onChange) {
       addLocation(location);
       
       onChange(location);
     }
   };
+
   if (loadError) {
     return <div>{t("common:text-map-cant-load")}</div>;
   }
+
   return isLoaded ? (
     
       <Autocomplete
@@ -104,20 +107,25 @@ export default function GooglePlacesAutocomplete({address,
         fields={["address_components", "geometry.location", "formatted_address"]}
         types={["address"]}
         className="flex"
-
       >
+
         <input
-          type="text"
-          placeholder={t("common:placeholder-search-location")}
+          type = "text"
+          // placeholder={t("common:placeholder-search-location")}
+          placeholder='Enter your location'
           defaultValue={loc}
           
-          className="mt-16 p-1 pl-8  mx-auto sm:w-3/4 sm:mx-auto  xmd:mx-4 md:w-1/2 md:mx-auto 
-          2xl:p-3 lg:p-3 lg:mx-auto  lg:w-1/2 2xl:w-1/2 2xl:mx-auto font-light
-          focus:border-accent focus:bg-light rounded-full  bg-gray-80
-           outline-none text-xs sm:text-sm md:text-base lg:text-lg border-gray-300 shadow-2xl border "
+          className=" mt-16 p-3 pl-8  mx-8 w-full  sm:px-8 sm:w-full sm:mx-auto  xmd:mx-4 md:w-full md:mx-auto 
+                      2xl:p-3 lg:p-3 lg:mx-auto  lg:w-full 2xl:w-full 2xl:mx-auto font-light
+                      focus:border-accent focus:bg-light rounded-full  bg-gray-80
+                      outline-none text-xs sm:text-sm md:text-base lg:text-lg 
+                    border-gray-300 shadow-2xl border "
         />
-      </Autocomplete>
+
+      </Autocomplete >
+
   ) : (
+
     <div className="flex">
       <Loader simple={true} className="w-6 h-6" />
     </div>

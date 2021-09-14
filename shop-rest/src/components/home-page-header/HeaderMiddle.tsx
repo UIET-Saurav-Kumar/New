@@ -162,9 +162,16 @@ export default function HeaderMiddle() {
 
                    </div>
                    
-                   <GooglePlacesAutocomplete  onChange = {changeLocation} address={getLocation?.formattedAddress}/>
-    
-                   <GetCurrentLocation onChange = {changeLocation} />
+                  <div className='w-auto sm:w-400 lg:w-800 mx-auto items-center '> 
+                  
+                        <GooglePlacesAutocomplete  onChange = {changeLocation} 
+                                                address={getLocation?.formattedAddress} /> 
+                  </div>
+        
+                  <div className='flex mx-auto items-center'> 
+                      <GetCurrentLocation onChange = {changeLocation} />  
+
+                  </div>
 
               </div> 
 
