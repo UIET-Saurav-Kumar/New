@@ -5,17 +5,12 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
 import { scroller, Element } from "react-scroll";
 import ImageSlider from '@components/home-page-image-slider/ImageSlider';
-import FilterBar from '@components/common/filter-bar';
-import ProductFeed from "@components/product/feed";
-import CategoryDropdownSidebar from "@components/category/category-dropdown-sidebar";
 import AllCategories from '@components/home-page-product-section/AllCategories';
 import FeaturedShops from '@components/home-page-product-section/FeaturedShops';
-import FeaturedStores from '@components/home-page-product-section/FeaturedStores';
 import FeaturedProducts from '@components/home-page-product-section/FeaturedProducts';
 import ProductGrid from '@components/home-page-product-section/ProductGrid';
 import AmazonShops  from '@components/home-page-product-section/AmazonShops'
 import dynamic from "next/dynamic";
-import Footer from '@components/footer/Footer';
 import { GetStaticProps } from "next";
 import { QueryClient } from "react-query";
 import { dehydrate } from "react-query/hydration";
@@ -26,7 +21,14 @@ import { fetchFeatureShop } from "@data/home/use-feature-shop-query";
 import { fetchFeatureStore } from "@data/home/use-feature-e-store";
 import { fetchOfferQuery } from "@data/home/use-offer-query";
 import MobileNavigation from "@components/layout/mobile-navigation";
+import StayTuned from '@components/no-shop-msg/stay-tuned'
+import { useShopAvailabilityQuery } from "@data/home/use-shop-availability-query";
+import { useLocation } from "@contexts/location/location.context";
 
+
+const ProductFeedLoader = dynamic(
+  () => import("@components/ui/loaders/product-feed-loader")
+);
 
 export const getStaticProps: GetStaticProps = async ({ locale, params }) => {
 
@@ -89,6 +91,18 @@ export default function home() {
 
 const { width } = useWindowSize();
 const { query } = useRouter();
+const {getLocation} =useLocation()
+
+
+const {
+  data,
+  isLoading: loading,
+  error,
+} = useShopAvailabilityQuery({
+  limit: 16 as number,
+  search:"",
+  location : ((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any
+});
 
 useEffect(() => {
 if (query.text || query.category) {
@@ -100,34 +114,38 @@ if (query.text || query.category) {
 }, [query.text, query.category]);
     return (
         <>
-    {/* { query.text ?
-        <Element name="grid" className="flex flex-1 border-t border-solid border-gray-200 border-opacity-70">
-            <CategoryDropdownSidebar />
-            <main className="flex-1">
-                <ProductFeed />
-            </main>
-        </Element> : */}
-    
 
+    {loading ? (
+          <ProductFeedLoader limit={3} />
+        ) : (
         <div className='lg:px-10 md:px-7'>
-            <ImageSlider/>
-            
-            <AllCategories/>
-            <FeaturedShops />
-            
-            <AmazonShops />
-            <ProductGrid/>
-            <FeaturedProducts/>
+          {
+            (data?.ShopAvailability?.data?.check==0)?
+            (<StayTuned/>):
+            (
+              <>
+                <ImageSlider/>
+                <AllCategories/>
+                <FeaturedShops />
+                <AmazonShops />
+                <ProductGrid/>
+                <FeaturedProducts/>
+              </>
+            )
+          } 
             
             
         </div>
-    {/*  } */}
-        {width > 1023 && 
-            <CartCounterButton />
-        }
-        {width < 1023 && 
-            <MobileNavigation />
-        }
+    )
+       }
+       {
+          width > 1023 && 
+          <CartCounterButton />
+      }
+      {
+        width < 1023 && 
+          <MobileNavigation />
+      }
         </>
     )
 }

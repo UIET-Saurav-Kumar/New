@@ -23,7 +23,12 @@ import Truncate from '@components/ui/truncate-scroll';
 
 
 
-export default function HeaderMiddle() {
+export default function HeaderMiddle({children,
+    open = false,
+    variant = "right",
+    useBlurBackdrop,
+    onClose,}) {
+    
 
     const truncate = (txt:any, n:number) => {
       return  txt.length > 10 ? txt.substring(0, n) : txt
@@ -73,6 +78,7 @@ export default function HeaderMiddle() {
         setLocation(data?.formattedAddress);
 
         if(location){
+            
             setHasLoction(true);
         }
 
@@ -152,7 +158,7 @@ export default function HeaderMiddle() {
 
                {/* Location screen */}
               <div className={` absolute flex flex-col  w-full z-1000 inset-0 shadow-lg transform ml-0 duration-200 ease-in 
-                               ${location ? 'translate-y-0 ' : '-translate-y-full ' } transform border-5 h-screen lg:h-96 bg-gray-50  overflow-y-hidden overflow-hidden  `}>
+                               ${location ? 'translate-y-0  ' : '-translate-y-full ' } ${useBlurBackdrop && "use-blur-backdrop"} transform border-5 h-screen lg:h-96 bg-gray-50  overflow-y-hidden overflow-hidden  `}>
                    <div className='flex items-center justify-between mx-auto mt-20 '>
 
                        {/* <Logo className="mx-auto" /> */}

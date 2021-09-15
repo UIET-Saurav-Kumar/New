@@ -297,6 +297,22 @@ class ShopController extends CoreController
         return $this->repository->where('owner_id', '=', $user->id)->get();
     }
 
+    public function shopAvailability(Request $request)
+    {
+        $location=($request->location)?json_decode($request->location):"";
+        if($location){
+            $shops=ShopRepository::getSortedShops($location);
+            if(count($shops)==0){
+                return [
+                    "check"=>0
+                ];        
+            }
+        }
+        return [
+            "check"=>1
+        ];
+    }
+
     public function fetchFeatureShops(Request $request)
     {
         $limit = isset($request->limit) ? $request->limit : 10;
@@ -389,32 +405,22 @@ class ShopController extends CoreController
             $FH = fopen('php://output', 'w');
             foreach ($list as $key => $row) {
                 if ($key === 0) {
-                    $exclude = ['id','slug','is_active',"commission_type",'created_at', 'updated_at','commission','is_featured'];
+                    $exclude = ['id','slug','created_at', 'updated_at','cover_image','logo','shop_categories','address','settings'];
+
                     $row = array_diff($row, $exclude);
+   
                 }
                 unset($row['id']);
                 unset($row['updated_at']);
                 unset($row['created_at']);
                 unset($row['slug']);
-                unset($row['commission_type']);
-                unset($row['is_active']);
-                unset($row['is_featured']);
-                unset($row['commission']);
-                if (isset($row['logo'])) {
-                    $row['logo'] = json_encode($row['logo']);
-                }
-                if (isset($row['cover_image'])) {
-                    $row['cover_image'] = json_encode($row['cover_image']);
-                }
-                if (isset($row['settings'])) {
-                    $row['settings'] = json_encode($row['settings']);
-                }
-                if (isset($row['shop_categories'])) {
-                    $row['shop_categories'] = json_encode($row['shop_categories']);
-                }
-                if (isset($row['address'])) {
-                    $row['address'] = json_encode($row['address']);
-                }
+                unset($row['cover_image']);
+                unset($row['logo']);
+                unset($row['shop_categories']);
+                unset($row['address']);
+                unset($row['settings']);
+
+                
                 fputcsv($FH, $row);
             }
             fclose($FH);
@@ -453,16 +459,15 @@ class ShopController extends CoreController
             unset($shop['updated_at']);
             unset($shop['created_at']);
             unset($shop['slug']);
-            unset($shop['commission_type']);
-            unset($shop['is_active']);
-            unset($shop['is_featured']);
-            unset($shop['commisssion']);
+            unset($shop['logo']);
+            unset($shop['cover_image']);
+            unset($shop['settings']);
+            unset($shop['shop_categories']);
+            unset($shop['address']);
 
-            $shop['logo'] = json_decode($shop['logo'], true);
-            $shop['cover_image'] = json_decode($shop['cover_image'], true);
-            $shop['settings'] = json_decode($shop['settings'], true);
-            $shop['shop_categories'] = json_decode($shop['shop_categories'], true);
-            $shop['address'] = json_decode($shop['address'], true);
+            if(!$shop['commission']){
+                unset($shop['commission']);
+            }
             
             
             Shop::create($shop);
@@ -470,8 +475,5 @@ class ShopController extends CoreController
         }
         return true;
         
-    }
-
-
-    
+    }   
 }

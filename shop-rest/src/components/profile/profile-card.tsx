@@ -1,3 +1,4 @@
+
 import cn from "classnames";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
@@ -33,11 +34,11 @@ type ShopProfileCardProps = {
     <>
       <div
         className={cn(
-          "flex items-center md:hidden  w-48 bg-light border-b  py-4 px-6 sticky top-[15px] z-10",
+          " items-center hidden   w-full bg-light   py-4 px-6 sticky top-[15px] z-10",
           cardClassName
         )}
       >
-        <div className="w-10 h-10 rounded-lg relative mx-auto border  overflow-hidden me-4 flex-shrink-0">
+        <div className="w-10 h-10 rounded-lg relative mx-auto overflow-hidden me-4 flex-shrink-0">
 
           <Image
             alt={t("logo")}
@@ -49,7 +50,7 @@ type ShopProfileCardProps = {
 
         </div>
 
-        <div className="w-full">
+        <div className="w-full ">
 
           <h3 className="text-base font-semibold text-heading">{data?.name}</h3>
 
@@ -65,7 +66,7 @@ type ShopProfileCardProps = {
 
       <aside
         className={cn(
-          "bg-light rounded h-full w-full md:w-48 2xl:w-56 hidden md:block flex-shrink-0",
+          "bg-light rounded h-full w-1/3 md:w-48 2xl:w-56   flex-shrink-0",
           className
         )}
       >
@@ -73,7 +74,7 @@ type ShopProfileCardProps = {
 
           <Scrollbar className={cn("w-full", styles.scrollbar_height)}>
 
-            <div className="w-full border-b border-gray-200 p-7 flex flex-col items-center">
+            <div className="w-full  ray-200 p-7 flex flex-col items-center">
 
               <div className="w-full h-34 rounded-lg flex relative mx-auto items-center  overflow-hidden mb-8">
 
