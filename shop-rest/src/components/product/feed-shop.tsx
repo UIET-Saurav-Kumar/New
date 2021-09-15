@@ -60,7 +60,7 @@ const ShopProductFeed = ({ shopId }: { shopId: string }) => {
   if (!loading && !data?.pages?.[0]?.data?.length) {
     return (
       <div className="bg-gray-100 pt-6 pb-8 px-4 lg:p-8">
-<!--         <NotFound text="text-not-found" className="w-7/12 mx-auto" /> -->
+
       </div>
     );
   }
