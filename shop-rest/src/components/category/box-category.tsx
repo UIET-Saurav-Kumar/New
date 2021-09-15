@@ -101,7 +101,7 @@ const BoxCategory = () => {
           </div>
         ) : (
           <div className="min-h-full pt-6 pb-8 px-4 lg:p-8">
-<!--             <NotFound text="text-no-category" className="h-96" /> -->
+
           </div>
         )}
       </div>
