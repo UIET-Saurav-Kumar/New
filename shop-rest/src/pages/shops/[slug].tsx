@@ -9,24 +9,12 @@ import dynamic from "next/dynamic";
 import url from "@utils/api/server_url";
 import { GetStaticPathsContext, GetStaticProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import Layout from "@components/layout/layout";
 import { QueryClient } from "react-query";
 import { fetchProducts } from "@data/product/use-products.query";
 import { fetchSettings } from "@data/settings/use-settings.query";
 import { dehydrate } from "react-query/hydration";
-
-import Input from "@components/ui/input";
-import Button from "@components/ui/button";
-import TextArea from "@components/ui/text-area";
-import ReadMore from "@components/ui/truncate";
-import { formatAddress } from "@utils/format-address";
-import { isEmpty } from "lodash";
-
-import cn from "classnames";
 import ShopCategoryCard from "@components/category/shop-category-card";
 import Navbar from "@components/layout/navbar/navbar";
-import MobileNavigation from "@components/layout/mobile-navigation";
-import FilterBar from "@components/common/filter-bar";
 import ShopPaymentForm from "./shop-payment-form";
 import ShopDescription from "./shop-description";
 import ShopMobileView from "./shop-mobile-view";
@@ -38,7 +26,7 @@ const CartCounterButton = dynamic(
   { ssr: false }
 );
 
-const ShopPage = ({ data,  cardClassName }: any) => {
+const ShopPage = ({ data }: any) => {
   
   const { t } = useTranslation("common") ;
   const { width } = useWindowSize() ;
@@ -99,19 +87,18 @@ const ShopPage = ({ data,  cardClassName }: any) => {
 
                     </div>
 
-        
+          </div>
 
-        {/* <ShopProfileCard data={data} className="sticky ml-10 top-24 lg:top-28" />   */}
-      
-
-    </div>
-
-    <div className='block lg:hidden'>
+      <div className='block lg:hidden w-full'>
 
         <ShopMobileView data={data}/>
 
-        {width > 1023 && <CartCounterButton />}
+        
+
       </div>
+      
+      {width > 1023 && <CartCounterButton />}
+
     </>
   );
 };

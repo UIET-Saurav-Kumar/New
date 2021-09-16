@@ -11,23 +11,24 @@ export default function ShopDescription({data}) {
     const { t } = useTranslation("common") ;
 
     return (
+      
         <div className=' hidden lg:inline-flex  bg-white justify-between xl:space-x-8 px-2 xl:px-16 mt-1  ;
-        text-10px lg:text-sm pt-4 '>
+                         text-10px lg:text-sm pt-4 '>
 
-   <div className=' flex flex-col '>
+            <div className=' flex flex-col '>
 
-       <span className="text-sm text-heading font-semibold mb-2">
-             Description
-       </span>
+                <span className="text-sm text-heading font-semibold mb-2">
+                      Description
+                </span>
 
-       { data?.description && (
-         
-               <p className="text-sm font-md text-gray-600 w-24 lg:w-32 lg+:32 xl:w-60 xl+:64 mb-2  leading-relaxed">
-                 {data?.description}
-               </p>
-       )}
+                { data?.description && (
+                  
+                        <p className="text-sm font-md text-gray-600 w-24 lg:w-32 lg+:32 xl:w-60 xl+:64 mb-2  leading-relaxed">
+                          {data?.description}
+                        </p>
+                )}
 
-   </div>  
+            </div>  
 
 {/* <div className="p-4 flex justify-evenly  space-x-5"> */}
 
