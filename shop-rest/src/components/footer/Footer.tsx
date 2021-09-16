@@ -16,19 +16,22 @@ const Footer = () => {
 
 	return (
 		<div className='footer-wrapper 
-		text-10px py-16
+		text-10px py-2
 	   bg-black shadow-lg mb-8 rounded-md text-white lg:px-20 justify-evenly mt-16'>
 			  
 
 			  <div className='footer-top-section 
-                               grid-cols-1 xs++:grid space-y-10 sm:grid-cols-2 md:grid-cols-4  space-x-6 text-left mb-8 p-4  shadow-md border-gray-700 justify-evenly'>
+                               grid-cols-1 xs++:grid space-y-10 sm:grid-cols-2 md:grid-cols-4  
+							   space-x-6 text-left mb-8 p-4  shadow-md border-gray-700 justify-evenly'>
 
 
-			  	<div className='footer-section-links w-42 space-y-10 text-left'>
+			  	<div className='footer-section-links w-42 space-y-4 mt-10 text-left'>
 
 			  		{/* <h5 className='footer-links-title font-semibold text-lg '> About Buylowcal </h5> */}
 
-			  		<h5 className='footer-links-title font-semibold text-xl'> About  </h5>
+			  		<h5 className='footer-links-title mb-16 font-semibold text-xl tracking-widest'> About  </h5>
+
+					  <div className='flex flex-col tracking-widest   space-y-4'>
 
 					  <Link href='./about-us'><h5 className='phone-number cursor-pointer text-lg hover:underline text-primary font-normal -mt-4'> About Buylowcal</h5></Link>
 					  <Link href='./careers'><h5 className='phone-number cursor-pointer text-lg hover:underline text-primary font-normal -mt-4'> Careers</h5></Link>
@@ -39,7 +42,7 @@ const Footer = () => {
 					  <Link href='./return-policy'><h5 className=' cursor-pointer text-lg hover:underline phone-number text-primary font-normal -mt-4'> Refunds/Cancellations/Shipping</h5></Link> 
 					<Link href='./privacy'><h5 className=' cursor-pointer text-lg hover:underline phone-number text-primary font-normal -mt-4'>Privacy Policy</h5></Link> 
 					<Link href='./contact'><h5 className=' cursor-pointer text-lg hover:underline phone-number text-primary font-normal -mt-4'>Contact Us</h5></Link> 
-
+					</div>
 			  		
 			  	</div>
 
@@ -60,11 +63,11 @@ const Footer = () => {
 
 			  
 
-				  <div className='footer-section-links w-42  text-left'>
+				  <div className='footer-section-links w-42 space-y-4 text-left'>
 
-			  		<h5 className='footer-links-title font-semibold text-xl'>More</h5>
+			  		<h5 className = 'footer-links-title font-semibold tracking-widest  text-xl' > More </h5>
 
-					<div className='flex flex-col space-y-8'> 
+					<div className='flex flex-col space-y-0 tracking-widest'> 
 					  <a className='light-text cursor-pointer text-lg hover:underline font-light mt-4' href='./home#all-categories'><h5 className='light-text mt-4 font-light'>Categories</h5></a>
 					  <a className='light-text cursor-pointer text-lg hover:underline font-light mt-4' href='./home#featured-shops'><h5 className='light-text mt-4 font-light'> Local Shops</h5></a>
 			  	      <a className='light-text cursor-pointer text-lg hover:underline font-light mt-4' href='./home#ecommerce-store'><h5 className='light-text mt-4 font-light'> E-Stores</h5></a>	
@@ -74,20 +77,22 @@ const Footer = () => {
 			  	</div>
 
 				  <div className='footer-section-links w-42 space-y-10 text-left'>
+						<h5 className='footer-links-title font-semibold text-xl tracking-widest '>Registrations</h5>
 
-			  		<h5 className='footer-links-title font-semibold text-xl'>Registrations</h5>
-
-			  		<Link href='https://admin.buylowcal.com/register'><h5 className='light-text cursor-pointer text-lg hover:underline font-light'>Register as Vendor </h5></Link>
-					<h5 onClick={handleJoin} className='light-text cursor-pointer text-lg hover:underline font-light'>
-						Register as Customer 
-					</h5>
-			  				  		
-			  	</div>
+						<div className='flex flex-col space-y-4 tracking-widest '>
+							<Link href='https://admin.buylowcal.com/register'>
+								<h5 className='light-text cursor-pointer text-lg hover:underline  font-light'>Register as Vendor </h5>
+							</Link>
+							<h5 onClick={handleJoin} className='light-text cursor-pointer text-lg hover:underline font-light'>
+								Register as Customer 
+							</h5>
+						</div>		  		
+			  	  </div>
 
 
 
 				  <div className='flex flex-col w-42 space-y-4'>
-					  <h5 className='font-semibold text-xl'> Follow Us</h5>
+					  <h5 className='font-semibold text-xl tracking-widest'> Follow Us</h5>
 				  <div className='grid grid-cols-3 lg:grid-cols-3 place-items-center items-center  cursor-pointer text-3xl lg:text-lg '>
 					  
 					<a target="_blank" href='https://www.facebook.com/buylowcal/'> <FacebookIcon className='h-8 w-8  bg-blue-800 cursor-pointer text-lg hover:underline'/></a> 
