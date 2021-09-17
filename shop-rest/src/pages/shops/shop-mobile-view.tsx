@@ -25,10 +25,13 @@ export default function ShopMobileView({data}) {
 
             <div className='w-full flex'>
                <ShopProfileCard data={data} /> 
-               <img alt={t("heading")} 
-                    className='object-fill h-60 md:h-72 w-full'
+                
+                <div className='w-full '>
+                   <img alt={t("heading")} 
+                    className='object-fill h-60 md:h-72 w-full '
                     src={data?.cover_image?.original! ?? "/product-placeholder.svg"}
                 />
+                  </div>
             </div>
 
                 <PaymentForm />
