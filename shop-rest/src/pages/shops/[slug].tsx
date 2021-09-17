@@ -62,7 +62,7 @@ const ShopPage = ({ data }: any) => {
 
                             <div className='flex w-full '> 
 
-                              <div className='w-60 h-full'>  
+                              <div className=' h-full'>  
                                 <ShopProfileCard data={data} />
                               </div>
                               
