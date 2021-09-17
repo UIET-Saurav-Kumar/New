@@ -52,13 +52,13 @@ export default function ShopDescription({data}) {
  <div className="mb-7 last:mb-0 flex flex-col">
 
      <span className="text-sm text-heading font-semibold mb-2">
-       {t("text-phone")}
+       {t("Whatsapp/Call to order")}
      </span>
 
      <span className="text-sm text-body">
        {data?.settings?.contact
          ? data?.settings?.contact
-         : t("text-no-contact")}
+         : t("77430-42380")}
      </span>
 
      {/* <div className='flex 2xl:hidden '> 
