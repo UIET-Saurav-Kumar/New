@@ -152,15 +152,7 @@ const PaymentForm = () => {
       <div className="my-6">
         <Label>{t("text-payment-gateway")}</Label>
 
-        <div className="space-s-4 flex items-center">
-          <Radio
-            id="stripe"
-            type="radio"
-            {...register("payment_gateway")}
-            value="stripe"
-            label={t("text-stripe")}
-            className=""
-          />
+      
 
           <Radio
             id="cod"
