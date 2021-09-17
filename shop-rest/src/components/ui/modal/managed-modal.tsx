@@ -2,6 +2,8 @@ import dynamic from "next/dynamic";
 import Modal from "@components/ui/modal/modal";
 import { useModalAction, useModalState } from "./modal.context";
 import ShopProfileCard from "@components/profile/profile-card";
+import CategoryDropdownSidebar from "@components/category/category-dropdown-sidebar";
+
 
 const Login = dynamic(() => import("@components/auth/login"));
 const Register = dynamic(() => import("@components/auth/register"));
@@ -32,6 +34,7 @@ const ManagedModal = () => {
       {view === "FORGOT_VIEW" && <ForgotPassword />}
       {view === "ADD_OR_UPDATE_ADDRESS" && <CreateOrUpdateAddressForm />}
       {view === "DELETE_ADDRESS" && <AddressDeleteView />}
+      {view === "SHOP_MOBILE_CATEGORIES" && <CategoryDropdownSidebar />}
       {view === "PRODUCT_DETAILS" && (
         <ProductDetailsModalView productSlug={data} />
       )}
