@@ -22,7 +22,7 @@ const CategoryDropdownSidebar = () => {
 
   if (loading) {
     return (
-      <div className="hidden xl:block">
+      <div className="block">
         <div className="w-60 mt-8 px-2">
           <CategoryListLoader />
         </div>
@@ -33,7 +33,7 @@ const CategoryDropdownSidebar = () => {
 
   
   return (
-    <aside className="sticky top-22 h-full lg:w-64  hidden md:block bg-light">
+    <aside className="sticky w-72 top-22 h-full lg:w-64   bg-light">
       <div className="max-h-full overflow-hidden">
         <Scrollbar className="w-full h-full max-h-screen">
           {data?.categories?.data?.length ? (
