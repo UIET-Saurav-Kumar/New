@@ -62,7 +62,7 @@ const PaymentForm = () => {
   } = useForm<FormValues>({
     resolver: yupResolver(paymentSchema),
     defaultValues: {
-      payment_gateway: "stripe",
+      payment_gateway: "cod",
     },
   });
 
