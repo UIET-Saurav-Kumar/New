@@ -24,12 +24,6 @@ import MobileNavigation from "@components/layout/mobile-navigation";
 import StayTuned from '@components/no-shop-msg/stay-tuned'
 import { useShopAvailabilityQuery } from "@data/home/use-shop-availability-query";
 import { useLocation } from "@contexts/location/location.context";
-<<<<<<< HEAD
-const ProductFeedLoader = dynamic(
-  () => import("@components/ui/loaders/product-feed-loader")
-);
-=======
->>>>>>> cdc5232ff82bd8c8aac5f8d781042a9877105a09
 
 
 const ProductFeedLoader = dynamic(
@@ -95,28 +89,6 @@ const CartCounterButton = dynamic(
 
 export default function home() {
 
-<<<<<<< HEAD
-  const { width } = useWindowSize();
-  const { query } = useRouter();
-  const {getLocation} =useLocation()
-  const {
-    data,
-    isLoading: loading,
-    error,
-  } = useShopAvailabilityQuery({
-    limit: 16 as number,
-    search:"",
-    location : ((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any
-  });
-  useEffect(() => {
-  if (query.text || query.category) {
-      scroller.scrollTo("grid", {
-      smooth: true,
-      offset: -110,
-      });
-  }
-  }, [query.text, query.category]);
-=======
 const { width } = useWindowSize();
 const { query } = useRouter();
 const {getLocation} =useLocation()
@@ -131,16 +103,11 @@ const {
   search:"",
   location : ((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any
 });
->>>>>>> cdc5232ff82bd8c8aac5f8d781042a9877105a09
 
     return (
         <>
-<<<<<<< HEAD
-        {loading ? (
-=======
 
     {loading ? (
->>>>>>> cdc5232ff82bd8c8aac5f8d781042a9877105a09
           <ProductFeedLoader limit={3} />
         ) : (
         <div className='lg:px-10 md:px-7'>
@@ -158,15 +125,10 @@ const {
               </>
             )
           } 
-<<<<<<< HEAD
-        </div>
-        )
-=======
             
             
         </div>
     )
->>>>>>> cdc5232ff82bd8c8aac5f8d781042a9877105a09
        }
        {
           width > 1023 && 
