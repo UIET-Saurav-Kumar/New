@@ -34,5 +34,9 @@ export const API_ENDPOINTS: Record<string, string> = {
   USER_VERIFY:"user-verify",
   RESEND_CODE:"resend-code",
   SHOP_AVAILABILITY:'shop-availability',
+<<<<<<< HEAD
   USER_WITHDRAWS:'user-withdraws'
+=======
+
+>>>>>>> cdc5232ff82bd8c8aac5f8d781042a9877105a09
 };

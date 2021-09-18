@@ -54,14 +54,15 @@ const TextArea = React.forwardRef<HTMLTextAreaElement, Props>((props, ref) => {
         </label>
       )}
       <textarea
-        id={name}
-        name={name}
+        id = {name}
+        name = {name}
         className={rootClassName}
         autoComplete="off"
         autoCorrect="off"
         autoCapitalize="off"
         spellCheck="false"
-        rows={4}
+        rows={10}
+        cols={10}
         ref={ref}
         {...rest}
       />

@@ -29,6 +29,7 @@ const Sidebar: FC<SidebarProps> = ({
   onClose,
 }) => {
   const ref = useRef() as DivElementRef;
+  
   useEffect(() => {
     if (ref.current) {
       if (open) {

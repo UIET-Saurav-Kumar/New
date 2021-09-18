@@ -7,7 +7,8 @@ type MODAL_VIEWS =
   | "ADD_OR_UPDATE_ADDRESS"
   | "DELETE_ADDRESS"
   | "PRODUCT_DETAILS"
-  | "SHOP_INFO";
+  | "SHOP_INFO"
+  | 'SHOP_MOBILE_CATEGORIES';
 
 interface State {
   view?: MODAL_VIEWS;

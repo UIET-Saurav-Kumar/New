@@ -38,11 +38,11 @@ const ShopCategoryCard: React.FC<ShopCategoryCardProps> = ({
   
 
   return (
-    <>
+    <div className='mt-1'>
 
       <div
         className={cn(
-          "flex md:sticky items-center  w-80 bg-light  py-4 px-6  top-[55px] z-10",
+          "flex md:sticky items-center  w-full bg-light  py-4 px-6  z-10 ",
           cardClassName
         )}
       >
@@ -89,7 +89,7 @@ const ShopCategoryCard: React.FC<ShopCategoryCardProps> = ({
         </div>
       </aside>
       </div>
-    </>
+    </div>
   );
 };
 
