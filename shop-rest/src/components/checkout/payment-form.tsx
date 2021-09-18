@@ -165,49 +165,7 @@ const PaymentForm = () => {
         </div>
       </div>
 
-      {isCashOnDelivery === "stripe" && (
-        <div>
-          <Label>{t("text-card-info")}</Label>
-
-          <Input
-            {...register("card.email")}
-            className=""
-            variant="outline"
-            placeholder={t("text-email")}
-            error={t(errors.card?.email?.message!)}
-          />
-
-          <FormattedInput
-            variant="outline"
-            className=""
-            placeholder={t("placeholder-card-number")}
-            {...register("card.number")}
-            options={{
-              creditCard: true,
-            }}
-            error={t(errors.card?.number?.message!)}
-          />
-
-          <div className="flex space-s-4 w-full">
-            <FormattedInput
-              variant="outline"
-              className="w-1/2"
-              placeholder={t("placeholder-m-y")}
-              options={{ date: true, datePattern: ["m", "y"] }}
-              {...register("card.expiry")}
-              error={t(errors.card?.expiry?.message!)}
-            />
-            <FormattedInput
-              variant="outline"
-              className="w-1/2"
-              placeholder={t("placeholder-cvc")}
-              options={{ blocks: [4] }}
-              {...register("card.cvc")}
-              error={t(errors.card?.cvc?.message!)}
-            />
-          </div>
-        </div>
-      )}
+      
       {!subtotal && <ValidationError message={t("error-order-unavailable")} />}
       {total < 0 && (
         <div className="mt-3">
