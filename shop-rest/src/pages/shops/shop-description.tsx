@@ -57,7 +57,7 @@ export default function ShopDescription({data}) {
 
      <span className="text-sm text-body">
        {data?.settings?.contact
-         ? t("77430-42380")}
+         ? t("77430-42380")
          : t("77430-42380")}
      </span>
 
