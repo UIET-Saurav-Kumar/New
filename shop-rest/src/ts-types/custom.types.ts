@@ -198,3 +198,13 @@ export type Offer = {
 export type Search = {
   [key: string]: any;
 };
+
+export type WithdrawsQueryOptionsType = {
+  text?: string;
+  shop_id?: number;
+  page?: number;
+  parent?: number | null;
+  limit?: number;
+  orderBy?: string;
+  sortedBy?: SortOrder;
+};

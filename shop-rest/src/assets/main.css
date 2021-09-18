@@ -340,3 +340,21 @@ svg.custom path.link {
 	stroke-width: 1.5px;
 }
 /* END TREE */
+
+
+
+
+.rc-pagination .rc-pagination-item.rc-pagination-item-active {
+  --tw-border-opacity: 1;
+  border-color: rgba(var(--color-accent), var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgba(var(--color-accent), var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: white;
+  border-radius: 5px;
+}
+
+
+.rc-pagination .rc-pagination-item.rc-pagination-item-active a{
+  color: white;
+}

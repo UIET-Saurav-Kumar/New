@@ -1083,6 +1083,63 @@ export declare type TotalYearSaleByMonth = {
   month?: Maybe<Scalars["String"]>;
 };
 
+
+/** A paginated list of Withdraw items. */
+
+export declare type WithdrawPaginator = {
+  __typename?: "WithdrawPaginator";
+  /** Pagination information about the list of items. */
+
+  paginatorInfo: PaginatorInfo;
+  /** A list of Withdraw items. */
+
+  data: Array<Withdraw>;
+};
+
+
+export declare type CreateWithdrawInput = {
+  amount: Scalars["Float"];
+  payment_method?: Maybe<Scalars["String"]>;
+  details?: Maybe<Scalars["String"]>;
+  note?: Maybe<Scalars["String"]>;
+};
+
+export declare type ApproveWithdrawInput = {
+  id: Scalars["ID"];
+  status: WithdrawStatus;
+};
+
+export declare enum WithdrawStatus {
+  /** Approved */
+  Approved = "APPROVED",
+
+  /** Pending */
+  Pending = "PENDING",
+
+  /** On hold */
+  OnHold = "ON_HOLD",
+
+  /** Rejected */
+  Rejected = "REJECTED",
+
+  /** Processing */
+  Processing = "PROCESSING",
+}
+
+export declare type Withdraw = {
+  __typename?: "Withdraw";
+  id?: Maybe<Scalars["ID"]>;
+  amount?: Maybe<Scalars["Float"]>;
+  status?: Maybe<WithdrawStatus>;
+  shop_id?: Maybe<Scalars["Int"]>;
+  shop?: any;
+  payment_method?: Maybe<Scalars["String"]>;
+  details?: Maybe<Scalars["String"]>;
+  note?: Maybe<Scalars["String"]>;
+  created_at?: Maybe<Scalars["DateTime"]>;
+  updated_at?: Maybe<Scalars["DateTime"]>;
+};
+
 // export declare type ProductsQuery = {
 //   __typename?: "Query";
 // } & {

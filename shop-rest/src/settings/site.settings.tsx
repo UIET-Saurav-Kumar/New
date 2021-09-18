@@ -92,6 +92,7 @@ export const siteSettings = {
       href: ROUTES.CHANGE_PASSWORD,
       menulabel: "profile-sidebar-password",
     },
+    
     {
       href: ROUTES.ORDERS,
       menulabel: "profile-sidebar-orders",
@@ -111,6 +112,10 @@ export const siteSettings = {
     {
       href: ROUTES.WALLET,
       menulabel: "Wallet",
+    },
+    {
+      href: ROUTES.WITHDRAWS,
+      menulabel: "Widthdraws",
     },
     // {
     //   href: ROUTES.HELP,

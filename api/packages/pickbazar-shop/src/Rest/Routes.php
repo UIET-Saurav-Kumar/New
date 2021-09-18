@@ -216,12 +216,15 @@ Route::group(
         Route::apiResource('withdraws', WithdrawController::class, [
             'only' => ['store', 'index', 'show']
         ]);
+
+
         Route::post('users/add-staff', 'PickBazar\Http\Controllers\ShopController@addStaff');
         Route::post('users/remove-staff', 'PickBazar\Http\Controllers\ShopController@removeStaff');
         Route::get('staffs', 'PickBazar\Http\Controllers\UserController@staffs');
         Route::get('my-shops', 'PickBazar\Http\Controllers\ShopController@myShops');
     }
 );
+
 
 
 Route::group(['middleware' => ['permission:' . Permission::SUPER_ADMIN, 'auth:sanctum']], function () {
@@ -262,3 +265,6 @@ Route::group(['middleware' => ['permission:' . Permission::SUPER_ADMIN, 'auth:sa
     Route::post('disapprove-shop', 'PickBazar\Http\Controllers\ShopController@disApproveShop');
     Route::post('approve-withdraw', 'PickBazar\Http\Controllers\WithdrawController@approveWithdraw');
 });
+
+Route::get('user-withdraws', 'PickBazar\Http\Controllers\WithdrawController@fetchUserWithdraws');
+Route::post('user-withdraws', 'PickBazar\Http\Controllers\WithdrawController@storeUserWithdraws');

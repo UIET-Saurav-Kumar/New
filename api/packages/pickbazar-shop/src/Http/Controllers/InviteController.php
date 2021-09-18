@@ -65,12 +65,15 @@ class InviteController extends CoreController
     public function getWalletCommission(Request $request)
     {
         $user = $request->user();
+
+        $balance=$user->balance;
         $customer_level=ReferralEarning::where('user_id',$user->id)->where('level',"0")->get();
         $level1=ReferralEarning::where('user_id',$user->id)->where('level',"1")->get();
         $level2=ReferralEarning::where('user_id',$user->id)->where('level',"2")->get();
         $level3=ReferralEarning::where('user_id',$user->id)->where('level',"3")->get();
 
         return [
+            "balance"=>$balance,
             "customer_level"=>$customer_level,
             "level1"=>$level1,
             "level2"=>$level2,

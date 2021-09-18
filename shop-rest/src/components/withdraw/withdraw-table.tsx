@@ -28,26 +28,25 @@ const WithdrawTable = ({ withdraws, title }: IProps) => {
   const renderStatusBadge = (status: string) => {
     switch (status.toUpperCase()) {
       case "APPROVED":
-        return <Badge text={t("text-approved")} color="bg-accent" />;
+        return <Badge text={("Approved")} color="bg-accent" />;
       case "PENDING":
-        return <Badge text={t("text-pending")} color="bg-purple-500" />;
+        return <Badge text={("Pending")} color="bg-purple-500" />;
       case "ON_HOLD":
-        return <Badge text={t("text-on-hold")} color="bg-pink-500" />;
+        return <Badge text={("On hold")} color="bg-pink-500" />;
       case "REJECTED":
-        return <Badge text={t("text-rejected")} color="bg-red-500" />;
+        return <Badge text={("Rejected")} color="bg-red-500" />;
       case "PROCESSING":
-        return <Badge text={t("text-processing")} color="bg-yellow-500" />;
+        return <Badge text={("Processing")} color="bg-yellow-500" />;
     }
   };
-
+  function formateDate(date){
+    var d=date.split('T')[0].split('-');
+    return d[2]+"/"+d[1]+"/"+d[0]
+  }
   let columns = [
+
     {
-      title: ("Name"),
-      align: alignLeft,
-      render: (data:any) => (data.user)?data.user.name:(data.shop.name),
-    },
-    {
-      title: t("table:table-item-amount"),
+      title: ("Amount"),
       dataIndex: "amount",
       key: "amount",
       align: "right",
@@ -59,14 +58,14 @@ const WithdrawTable = ({ withdraws, title }: IProps) => {
       },
     },
     {
-      title: t("table:table-item-status"),
+      title: ("Status"),
       dataIndex: "status",
       key: "status",
       align: "center",
       render: (status: string) => renderStatusBadge(status),
     },
     {
-      title: t("table:table-item-created-at"),
+      title: ("Created"),
       dataIndex: "created_at",
       key: "created_at",
       align: "center",
@@ -82,25 +81,20 @@ const WithdrawTable = ({ withdraws, title }: IProps) => {
       },
     },
     {
-      title: t("table:table-item-actions"),
-      dataIndex: "id",
-      key: "actions",
+      title: ("Date"),
+      dataIndex: "created_at",
+      key: "created_at",
       align: "center",
-      render: (id: string) => {
-        const { permissions } = getAuthCredentials();
-        if (hasAccess(adminOnly, permissions)) {
-          return (
-            <ActionButtons detailsUrl={`${ROUTES.WITHDRAWS}/${id}`} id={id} />
-          );
-        }
-        return null;
+      render: (date: string) => {
+        return (
+          <span className="whitespace-nowrap">
+            {formateDate(date)}
+          </span>
+        );
       },
     },
   ];
 
-  if (router?.query?.shop) {
-    columns = columns?.filter((column) => column?.key !== "actions");
-  }
   return (
     <div className="rounded overflow-hidden shadow mb-6">
       <h3 className="text-heading text-center font-semibold px-4 py-3 bg-light border-b border-border-200">
@@ -109,7 +103,7 @@ const WithdrawTable = ({ withdraws, title }: IProps) => {
       <Table
         //@ts-ignore
         columns={columns}
-        emptyText={t("table:empty-table-data")}
+        emptyText={("No Records Found")}
         data={data}
         rowKey="id"
         scroll={{ x: 700 }}

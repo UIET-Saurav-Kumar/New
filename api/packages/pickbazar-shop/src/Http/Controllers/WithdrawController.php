@@ -45,9 +45,9 @@ class WithdrawController extends CoreController
         $shop_id = isset($request['shop_id']) ? $request['shop_id'] : false;
         if ($shop_id) {
             if ($user->shops->contains('id', $shop_id)) {
-                return $this->repository->with(['shop'])->where('shop_id', '=', $shop_id);
+                return $this->repository->with(['shop'])->where('shop_id', '=', $shop_id)->where('shop_id','!=',NULL);
             } elseif ($user && $user->hasPermissionTo(Permission::SUPER_ADMIN)) {
-                return $this->repository->with(['shop'])->where('amount', '!=', null);
+                return $this->repository->with(['shop'])->with(['user'])->where('amount', '!=', null);
             } else {
                 throw new PickbazarException('PICKBAZAR_ERROR.NOT_AUTHORIZED');
             }
@@ -60,6 +60,17 @@ class WithdrawController extends CoreController
         }
     }
 
+
+    public function fetchUserWithdraws(Request $request)
+    {
+        $limit = $request->limit ?   $request->limit : 15;
+        $user = $request->user();
+
+        if ($user->id){
+            return $this->repository->where('user_id', '=', $user->id)->paginate($limit);
+        }
+        
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -72,6 +83,35 @@ class WithdrawController extends CoreController
         $validatedData = $request->validated();
         if (isset($validatedData['shop_id'])) {
             $balance = Balance::where('shop_id', '=', $validatedData['shop_id'])->first();
+            if (isset($balance->current_balance) && $balance->current_balance >= $validatedData['amount']) {
+                $withdraw = $this->repository->create($validatedData);
+                $balance->withdrawn_amount = $balance->withdrawn_amount + $validatedData['amount'];
+                $balance->current_balance = $balance->current_balance - $validatedData['amount'];
+                $balance->save();
+                $withdraw->shop = $withdraw->shop;
+                return $withdraw;
+            } else {
+                throw new PickbazarException('PICKBAZAR_ERROR.INSUFFICIENT_BALANCE');
+            }
+        } else {
+            throw new PickbazarException('PICKBAZAR_ERROR.WITHDRAW_MUST_BE_ATTACHED_TO_SHOP');
+        }
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param WithdrawRequest $request
+     * @return mixed
+     * @throws ValidatorException
+     */
+    public function storeUserWithdraws(Request $request)
+    {
+        $validatedData = $request->all();
+        $user = $request->user();
+        $validatedData["user_id"]=$user->id;
+        if (isset($user)) {
+            $balance = Balance::where('user_id', '=', $user->id)->first();
             if (isset($balance->current_balance) && $balance->current_balance >= $validatedData['amount']) {
                 $withdraw = $this->repository->create($validatedData);
                 $balance->withdrawn_amount = $balance->withdrawn_amount + $validatedData['amount'];

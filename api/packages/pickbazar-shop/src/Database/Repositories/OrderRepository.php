@@ -176,7 +176,9 @@ class OrderRepository extends BaseRepository
 
     private function distribute_commission($order,$commission_value,$request)
     {
+
         $customer=User::find($request->customer_id);
+
         $level1=($customer)?$this->get_uplink($customer):"";
         $level2=($level1)?$this->get_uplink($level1):"";
         $level3=($level2)?$this->get_uplink($level2):"";
@@ -230,6 +232,8 @@ class OrderRepository extends BaseRepository
 
     private function createReferralEarning($order,$commission_value,$request,$level,$customer,$commission,$commission_level)
     {
+        $this->customerBalance($commission_value,$level);
+
         ReferralEarning::create([
             "user_id"=>$level->id,
             "customer_id"=>$customer->id,
@@ -241,6 +245,22 @@ class OrderRepository extends BaseRepository
             "earning"=>$commission_value,
             "level"=>$commission_level
         ]);
+    }
+
+    private function customerBalance($price,$user)
+    {
+        $balance = Balance::where('user_id', '=', $user->id)->first();
+        if($balance){
+            $balance->total_earnings = $balance->total_earnings + $price;
+            $balance->current_balance = $balance->current_balance + $price;
+            $balance->save();
+        }else{
+            Balance::create([
+                "user_id"=>$user->id,
+                "total_earnings"=>$price,
+                "current_balance"=>$price,
+            ]);
+        }
     }
 
     private function get_uplink($user)

@@ -20,4 +20,9 @@ class Withdraw extends Model
     {
         return $this->belongsTo(Shop::class, 'shop_id');
     }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

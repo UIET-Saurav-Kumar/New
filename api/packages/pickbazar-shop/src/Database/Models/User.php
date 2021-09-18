@@ -107,4 +107,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Provider::class, 'user_id', 'id');
     }
+
+    public function balance(): HasOne
+    {
+        return $this->hasOne(Balance::class, 'user_id');
+    }
 }

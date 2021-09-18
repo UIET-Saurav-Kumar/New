@@ -292,7 +292,7 @@ export default function OrderPage() {
                     <Table
                       //@ts-ignore
                       columns={orderTableColumns}
-                      emptyText={t("table:empty-table-data")}
+                      emptyText={t("table:No Records Found")}
                       //@ts-ignore
                       data={data?.order?.children}
                       rowKey="id"

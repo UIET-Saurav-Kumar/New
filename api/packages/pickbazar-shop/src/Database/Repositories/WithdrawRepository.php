@@ -14,6 +14,7 @@ class WithdrawRepository extends BaseRepository
      */
     protected $fieldSearchable = [
         'shop_id',
+        'user_id'
     ];
 
     public function boot()

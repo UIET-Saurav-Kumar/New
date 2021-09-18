@@ -33,5 +33,6 @@ export const API_ENDPOINTS: Record<string, string> = {
   GET_WALLET_COMMISSION:"get-wallet-commission",
   USER_VERIFY:"user-verify",
   RESEND_CODE:"resend-code",
-  SHOP_AVAILABILITY:'shop-availability'
+  SHOP_AVAILABILITY:'shop-availability',
+  USER_WITHDRAWS:'user-withdraws'
 };

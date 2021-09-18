@@ -3,12 +3,13 @@ import "@fontsource/open-sans";
 import "@fontsource/open-sans/600.css";
 import "@fontsource/open-sans/700.css";
 import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 import "@assets/main.css";
 import { UIProvider } from "@contexts/ui.context";
 import { SettingsProvider } from "@contexts/settings.context";
 import ErrorMessage from "@components/ui/error-message";
 import PageLoader from "@components/ui/page-loader/page-loader";
-import { ToastContainer } from "react-toastify";
+
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Hydrate } from "react-query/hydration";
 import { useRef } from "react";

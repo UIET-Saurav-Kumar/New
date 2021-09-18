@@ -233,5 +233,10 @@
   "text-price": "Price",
   "text-no-order-found": "Sorry, No Order Found :(",
   "common:text-search": "Search Item",
-  "placeholder-search-location":"Enter Location"
+  "placeholder-search-location":"Enter Location",
+  "text-revenue": "Revenue",
+  "text-total-orders": "Total Orders",
+  "text-gross-sales": "Gross Sales",
+  "text-others": "Others",
+  "sidebar-nav-item-withdraws": "Withdraws"
 }

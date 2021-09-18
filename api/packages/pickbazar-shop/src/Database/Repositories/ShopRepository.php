@@ -81,6 +81,7 @@ class ShopRepository extends BaseRepository
 
     public function updateShop($request, $id)
     {
+
         try {
             $shop = $this->findOrFail($id);
             if (isset($request['categories'])) {

@@ -8,18 +8,42 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import ProfileSidebar from "@components/profile/profile-sidebar";
 import {InvitedUsers} from "@data/invite/referal-data"
 import {useWalletCommissionQuery} from '@data/user/use-wallet-commission-query'
-
+import usePrice from "@utils/use-price";
+import { PriceWalletIcon } from "@components/icons/price-wallet";
+import { DollarIcon } from "@components/icons/dollar";
+import { OrdersIcon } from "@components/icons/orders";
 
 const ReferralActivity = () => {
     const { data,isLoading:loading } = useWalletCommissionQuery({
         limit: 10 as number,
         search:"",
     });
-
+    const { price: totalEarnings } = usePrice(
+        data && {
+            amount: data?.balance?.total_earnings!,
+        }
+    );
+    const { price: currentBalance } = usePrice(
+        data && {
+            amount: data?.balance?.current_balance!,
+        }
+    );
+    const { price: withdrawnAmount } = usePrice(
+        data && {
+            amount: data?.balance?.withdrawn_amount!,
+        }
+    );
+    
     function formateDate(date:string):string{
         var temp=date.substring(0,10).split('-');
         
         return temp[2]+"/"+temp[1]+"/"+temp[0];
+    }
+
+    function orders_count(){
+        if(data){
+            return data.customer_level?.length+data.level1?.length+data.level2?.length+data.level3?.length;
+        }
     }
 
     useEffect(()=>{
@@ -47,6 +71,72 @@ const ReferralActivity = () => {
                 <ProfileSidebar className="flex-shrink-0 hidden mt-14 xl:block xl:w-80 ml-8" />  
 
                 <div className="flex flex-col  justify-evenly p-4 w-full mx-auto  mt-14">
+                    <div className='invite-tabs flex flex-col bg-white p-4 w-full mx-4 text-left mt-5 px-8'>
+                        <div className="users-list mt-10">
+                            <h1 className="text-lg mb-5 font-semibold text-heading">Revenue</h1>
+                            {/* Mini Dashboard */}
+                            <div className="order-4 xl:order-3 col-span-12 xl:col-span-9">
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-5 bg-light p-4 rounded h-full">
+                                
+
+                                <div className="space-y-3">
+                                    <div className="border border-gray-100">
+                                        <div className="flex items-center py-3 px-4 border-b border-gray-100">
+                                            <div className="p-3 rounded-full w-11 h-11 flex items-center justify-center bg-[#C7AF99] text-light">
+                                            <PriceWalletIcon width={16} />
+                                            </div>
+
+                                            <div className="ml-3">
+                                            <p className="text-lg font-semibold text-sub-heading mb-0.5">
+                                                {totalEarnings}
+                                            </p>
+                                            <p className="text-sm text-muted mt-0">
+                                                {("Gross Sales")}
+                                            </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="space-y-3">
+                                    <div className="border border-gray-100">
+                                        <div className="flex items-center py-3 px-4">
+                                            <div className="p-3 rounded-full w-11 h-11 flex items-center justify-center bg-[#FFA7AE] text-light">
+                                                <DollarIcon width={12} />
+                                            </div>
+
+                                            <div className="ml-3">
+                                                <p className="text-lg font-semibold text-sub-heading mb-0.5">
+                                                    {currentBalance}
+                                                </p>
+                                                <p className="text-sm text-muted mt-0">
+                                                    {("Current Balance")}
+                                                </p>
+                                            </div>
+                                        </div>  
+                                    </div>
+                                </div>
+                                <div className="space-y-3">
+                                    <div className="border border-gray-100">
+                                        <div className="flex items-center py-3 px-4">
+                                            <div className="p-3 rounded-full w-11 h-11 flex items-center justify-center bg-[#6EBBFD] text-light">
+                                            <PriceWalletIcon width={16} />
+                                            </div>
+
+                                            <div className="ml-3">
+                                            <p className="text-lg font-semibold text-sub-heading mb-0.5">
+                                                {withdrawnAmount}
+                                            </p>
+                                            <p className="text-sm text-muted mt-0">
+                                                {("Withdrawal Amount")}
+                                            </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
                     <div className='invite-tabs flex flex-col bg-white p-4 w-full mx-4 text-left mt-5 px-8'>
                         <div className="users-list mt-10">
                             <h1 className="text-lg mb-5 font-semibold text-heading">Customer Wallet</h1>
@@ -194,9 +284,8 @@ const ReferralActivity = () => {
                         </div>                      
                     </div>
                 </div>
-            </div>
-			
-		 </div>
+		    </div>
+        </div>
 
 
         <div><Footer/></div> 
