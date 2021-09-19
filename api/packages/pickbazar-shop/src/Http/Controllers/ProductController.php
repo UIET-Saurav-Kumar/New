@@ -38,28 +38,24 @@ class ProductController extends CoreController
      */
     public function index(Request $request)
     {
-        $pluckcat = explode(';',$request->search);
-        $pluckall = explode(':', $pluckcat[0]);
-        if(isset($pluckall[1])){
-            if($pluckall[1] == 'all'){
+        if($request->search != null)
+        {
+            $pluckcat = explode(';',$request->search);
+            $pluckall = explode(':', $pluckcat[0]);
+
+            if($pluckall[1] == 'all')
+            {
                 $request->replace([
                     'search' => $pluckcat[1],
                     'searchJoin' => $request->searchJoin,
                     'limit' => $request->limit
                     ]);
             }
-        }else{
-            $request->replace([
-                'search' => "",
-                'searchJoin' => $request->searchJoin,
-                'limit' => $request->limit
-            ]);
-            
         }
-        
-        
-        
-        // dd($request->all());
+        $limit = $request->limit ?   $request->limit : 15;           
+        $repdata = $this->repository->with(['type', 'shop', 'categories', 'tags', 'variations.attribute'])->orderBy('is_offer', 'desc')->paginate($limit);
+
+        return $repdata;
 
         // $category = $request->category != null ? true : false;
         // dd($category);
@@ -289,7 +285,7 @@ class ProductController extends CoreController
             $FH = fopen('php://output', 'w');
             foreach ($list as $key => $row) {
                 if ($key === 0) {
-                    $exclude = ['id', 'slug', 'deleted_at', 'created_at', 'updated_at', 'shipping_class_id','image','gallery'];
+                    $exclude = ['id', 'slug', 'deleted_at', 'created_at', 'updated_at', 'shipping_class_id'];
                     $row = array_diff($row, $exclude);
                 }
                 unset($row['id']);
@@ -298,9 +294,12 @@ class ProductController extends CoreController
                 unset($row['updated_at']);
                 unset($row['created_at']);
                 unset($row['slug']);
-                unset($row['image']);
-                unset($row['gallery']);
-                
+                if (isset($row['image'])) {
+                    $row['image'] = json_encode($row['image']);
+                }
+                if (isset($row['gallery'])) {
+                    $row['gallery'] = json_encode($row['gallery']);
+                }
                 fputcsv($FH, $row);
             }
             fclose($FH);
@@ -332,7 +331,7 @@ class ProductController extends CoreController
             $FH = fopen('php://output', 'w');
             foreach ($list as $key => $row) {
                 if ($key === 0) {
-                    $exclude = ['id', 'slug', 'deleted_at', 'created_at', 'updated_at', 'shipping_class_id','image','gallery'];
+                    $exclude = ['id', 'slug', 'deleted_at', 'created_at', 'updated_at', 'shipping_class_id'];
                     $row = array_diff($row, $exclude);
                 }
                 unset($row['id']);
@@ -341,9 +340,12 @@ class ProductController extends CoreController
                 unset($row['updated_at']);
                 unset($row['created_at']);
                 unset($row['slug']);
-                unset($row['image']);
-                unset($row['gallery']);
-                
+                if (isset($row['image'])) {
+                    $row['image'] = json_encode($row['image']);
+                }
+                if (isset($row['gallery'])) {
+                    $row['gallery'] = json_encode($row['gallery']);
+                }
                 fputcsv($FH, $row);
             }
             fclose($FH);
@@ -379,14 +381,15 @@ class ProductController extends CoreController
             $FH = fopen('php://output', 'w');
             foreach ($list as $key => $row) {
                 if ($key === 0) {
-                    $exclude = ['id', 'created_at', 'updated_at','options'];
+                    $exclude = ['id', 'created_at', 'updated_at'];
                     $row = array_diff($row, $exclude);
                 }
                 unset($row['id']);
                 unset($row['updated_at']);
                 unset($row['created_at']);
-                unset($row['options']);
-
+                if (isset($row['options'])) {
+                    $row['options'] = json_encode($row['options']);
+                }
                 fputcsv($FH, $row);
             }
             fclose($FH);
@@ -427,8 +430,6 @@ class ProductController extends CoreController
             unset($product['sale_price']);
             unset($product['commission']);
             unset($product['is_featured']);
-            unset($row['image']);
-            unset($row['gallery']);
 
             $product['image'] = json_decode($product['image'], true);
             $product['gallery'] = json_decode($product['gallery'], true);
@@ -474,13 +475,12 @@ class ProductController extends CoreController
                 unset($product['max_price']);
                 unset($product['min_price']);
                 unset($product['sale_price']);
-                unset($product['is_featured']);
                 unset($product['commission']);
-                unset($row['image']);
-                unset($row['gallery']);
+                unset($product['is_featured']);
 
                 $product['shop_id'] = $shop_id;
-
+                $product['image'] = json_decode($product['image'], true);
+                $product['gallery'] = json_decode($product['gallery'], true);
                 // try {
                     $type = Type::find($product['type_id']);
                     if (isset($type->id)) {
@@ -603,14 +603,15 @@ class ProductController extends CoreController
             $FH = fopen('php://output', 'w');
             foreach ($list as $key => $row) {
                 if ($key === 0) {
-                    $exclude = ['id', 'created_at', 'updated_at','options'];
+                    $exclude = ['id', 'created_at', 'updated_at'];
                     $row = array_diff($row, $exclude);
                 }
                 unset($row['id']);
                 unset($row['updated_at']);
                 unset($row['created_at']);
-                unset($row['options']);
-                
+                if (isset($row['options'])) {
+                    $row['options'] = json_encode($row['options']);
+                }
                 fputcsv($FH, $row);
             }
             fclose($FH);
