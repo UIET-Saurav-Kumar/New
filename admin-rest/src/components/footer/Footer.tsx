@@ -4,6 +4,8 @@ import { FacebookIcon } from "@components/icons/social/facebook"
 import { InstagramIcon } from "@components/icons/social/instagram"
 import { LinkedInIcon } from '@components/icons/social/linkedin'
 import { useModalAction } from "@components/ui/modal/modal.context";
+import { YouTubeIcon } from '@components/icons/social/youtube';
+
 
 
 const Footer = () => {
@@ -99,7 +101,10 @@ const Footer = () => {
 					  
 					<a target="_blank" href='https://www.instagram.com/buylowcal/?hl=en'> <InstagramIcon className='h-8 w-8 text-red-500 cursor-pointer text-lg hover:underline'  /></a>
 
-					<a target="_blank" href='https://in.linkedin.com/company/buylowcal'> <LinkedInIcon className='h-8 w-8 cursor-pointer hover:underline '  />	 </a>			
+					<a target="_blank" href='https://in.linkedin.com/company/buylowcal'> <LinkedInIcon className='h-8 w-8 cursor-pointer hover:underline '  />	 </a>	
+					  
+					<a target="_blank" href='https://www.youtube.com/channel/UCs0jYR_99h5GKs0cvRZSg-A'> <YouTubeIcon className='h-8 w-8 cursor-pointer hover:underline '  />	 </a>		
+
 				 </div>
 				  </div>
 
