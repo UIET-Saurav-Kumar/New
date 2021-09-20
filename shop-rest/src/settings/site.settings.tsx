@@ -76,10 +76,11 @@ export const siteSettings = {
     { href: ROUTES.CHECKOUT, label: "Checkout" },
     { href: ROUTES.ORDERS, label: "Orders" },
     { href: ROUTES.INVITE_FRIENDS, label: "Invite Friends" },
-    // { href: ROUTES.REFERRAL_ACTIVITY, label: "Referral Status" },
     { href: ROUTES.REFERRAL_NETWORK, label: "Referral Network" },
+    { href: ROUTES.WALLET, label: "Wallet" },
+    { href: ROUTES.WITHDRAWS, label: "Withdraws" },
     { href: ROUTES.LOGOUT, label: "Logout" },
-  ],
+  ],  
 
   
   dashboardSidebarMenu: [

@@ -38,6 +38,7 @@ export default function ShopPage() {
     query: { shop },
     locale,
   } = useRouter();
+  
   const { data, isLoading: loading, error } = useShopQuery(shop!.toString());
   const { price: totalEarnings } = usePrice(
     data && {
@@ -167,7 +168,7 @@ export default function ShopPage() {
         )}
       </div>
 
-      `{/* Mini Dashboard */}
+      {/* Mini Dashboard */}
       <div className="order-4 xl:order-3 col-span-12 xl:col-span-9">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 bg-light p-4 rounded h-full">
           <div className="space-y-3">
@@ -269,7 +270,7 @@ export default function ShopPage() {
             </div>
           </div>
         </div>
-      </div>`
+      </div>
 
       {/* Misc. Information */}
       <div className="order-3 xl:order-4 bg-light rounded col-span-12 sm:col-span-6 xl:col-span-3">

@@ -1,3 +1,4 @@
+
 import RCPagination, { PaginationProps } from "rc-pagination";
 import { ArrowNextIcon } from "@components/icons/arrow-next";
 import { ArrowPrevIcon } from "@components/icons/arrow-prev";
