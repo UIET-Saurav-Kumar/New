@@ -78,16 +78,16 @@ const Footer = () => {
 			  		</div> 
 			  	</div>
 
-				  <div className='footer-section-links w-42 space-y-10 text-left'>
+				   <div className='footer-section-links w-42 space-y-10 text-left'>
 						<h5 className='footer-links-title font-semibold text-xl tracking-widest '>Registrations</h5>
 
 						<div className='flex flex-col space-y-4 tracking-widest '>
-							<Link href='https://admin.buylowcal.com/register'>
-								<h5 className='light-text cursor-pointer text-lg hover:underline  font-light'>Register as Vendor </h5>
-							</Link>
-							<h5 onClick={handleJoin} className='light-text cursor-pointer text-lg hover:underline font-light'>
+							
+						<a className='light-text cursor-pointer text-lg hover:underline font-light mt-4' href='./register#vendor'><h5 className='light-text cursor-pointer text-lg hover:underline  font-light'>Register as Vendor </h5></a>
+							
+							<Link href='https://buylowcal.com/buylowcal'><h5 className='light-text cursor-pointer text-lg hover:underline font-light'>
 								Register as Customer 
-							</h5>
+							</h5></Link>
 						</div>		  		
 			  	  </div>
 
