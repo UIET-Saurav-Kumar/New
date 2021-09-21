@@ -9,6 +9,7 @@ import { getAuthCredentials, isAuthenticated } from "@utils/auth-utils";
 import { ROUTES } from "@utils/routes";
 import Link from 'next/link';
 import Footer from "@components/footer/Footer";
+import CountUpAnimation from "@components/countup-animation/countup-animation";
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => ({
   props: {
@@ -52,7 +53,7 @@ export default function RegisterPage() {
 
                 </h1>
 
-                <Link href='http://admin.buylowcal.com/register'><button className='w-60 px-4 p-3 rounded-md text-lg font-semibold items-center bg-green-700 text-white '>Register Now</button></Link>
+                {/* <a className=' cursor-pointer text-lg hover:underline font-light mt-4' href='./register#vendor'><button className='w-60 px-4 p-3 rounded-md text-lg font-semibold items-center bg-green-700 text-white '>Register Now</button></a> */}
 
             </div>
 
@@ -71,6 +72,9 @@ export default function RegisterPage() {
       </div> 
 
     </div>
+
+    {/* Countup Animation*/}
+    <CountUpAnimation/>
     
     {/* feature blocks */}
     <div className=' flex flex-col items-center mx-auto space-y-6 mt-10 bg-green-50 py-6'>
@@ -127,7 +131,7 @@ export default function RegisterPage() {
 
     </div>
 
-       <Footer/>
+       <div className=''> <Footer /> </div>
     </>
   );
 }

@@ -53,7 +53,8 @@
     "swiper": "^6.7.5",
     "yup": "^0.32.9"
   },
-  "devDependencies": {
+
+    "devDependencies": {
     "@types/body-scroll-lock": "^2.6.1",
     "@types/cleave.js": "^1.4.4",
     "@types/js-cookie": "^2.2.6",

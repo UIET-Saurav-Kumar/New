@@ -94,7 +94,7 @@ const RegistrationForm = () => {
 
   return (
     <>
-    <h1 className='text-center text-xl  font-md text-gray-600 '>Register your shop</h1>
+    <h1 className='text-center text-xl  font-md text-gray-600 '>Register Now</h1>
       <form className='mt-10' onSubmit={handleSubmit(onSubmit)} noValidate>
         <Input
           label={t("form:input-label-name")}
