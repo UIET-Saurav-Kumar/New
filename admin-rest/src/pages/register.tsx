@@ -9,6 +9,9 @@ import { getAuthCredentials, isAuthenticated } from "@utils/auth-utils";
 import { ROUTES } from "@utils/routes";
 import Link from 'next/link';
 import Footer from "@components/footer/Footer";
+import CountUpAnimation from "@components/countup-animation/countup-animation";
+import { CheckMarkCircle } from "@components/icons/checkmark-circle";
+import { CheckMark } from "@components/icons/checkmark";
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => ({
   props: {
@@ -43,22 +46,23 @@ export default function RegisterPage() {
             <div className=' flex flex-col  items-center space-y-8 tracking-widest'>
                 <h1 className='text-3xl lg:text-5xl font-serif font-bold w-3/4 space-y-6 text-center text-gray-800 '>
 
-                Grow your business with  <span></span>
+                Get Access to Your Area’s Local Customers with <span></span>
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-green-300 to-yellow-600 ">
-                   Buylowcal
+                BuyLowcal.com 
                 </span>
 
-                <p className='text-lg font-light '> Register your shop and help your business grow to new heights with large user base </p>
+                <p className='text-lg font-light '> Customer loyalty with promotional and interactive campaigns. 
+                                                    Hard cash earnings and cash back rewards for customers to shop from you.  </p>
 
                 </h1>
 
-                <Link href='http://admin.buylowcal.com/register'><button className='w-60 px-4 p-3 rounded-md text-lg font-semibold items-center bg-green-700 text-white '>Register Now</button></Link>
+                {/* <a className=' cursor-pointer text-lg hover:underline font-light mt-4' href='./register#vendor'><button className='w-60 px-4 p-3 rounded-md text-lg font-semibold items-center bg-green-700 text-white '>Register Now</button></a> */}
 
             </div>
 
             {/* banner image */}
             <div className='-mt-20 lg:mt-0 w-600'> 
-                  <img src='https://startup-agency.vercel.app/_next/static/images/banner-illustration-bdd71ba1bdab49b214f8174a81063078.png'
+                  <img src='/banner-animated.png'
                   className='w-full h-96 object-contain'/>
             </div>
 
@@ -71,14 +75,69 @@ export default function RegisterPage() {
       </div> 
 
     </div>
+
+    {/* Countup Animation*/}
+    <CountUpAnimation/>
     
     {/* feature blocks */}
     <div className=' flex flex-col items-center mx-auto space-y-6 mt-10 bg-green-50 py-6'>
-    <h1 className='text-3xl lg:text-4xl font-serif font-bold w-3/4 space-y-6 text-center text-gray-800 '>
-      Your Ecommerce store </h1>
-      <p className='text-md font-md tracking-wider text-gray-800 w-11/12 lg:w-1/2 text-center'> Build an incredible workplace and grow your Brand 
-          with buylowcal all-in-one platform with amazing contents and features for your shop.
-      </p>
+        <h1 className='text-3xl lg:text-4xl font-serif font-bold w-3/4 space-y-6 text-center text-gray-800 '>
+        Your Digital Shop Absolutely Free for Lifetime with Complete Control of
+        </h1>
+      <div className='grid grid-cols-2 sm:grid-cols-4 gap-8 md:gap-10 lg:gap-20  place-items-stretch  lg:grid-cols-4 xl:grid-cols-4 '>
+        <div className='grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 text-center gap-2 place-items-center space-x-4 '>
+          <img className='h-20 w-20' src='/customer.png'/>
+          <h1 className='font-lg text-xl tracking-widest'>Customers</h1>
+
+        </div>
+
+        <div className='grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 text-center gap-2 place-items-center space-x-4 '>
+          <img className='h-20 w-20' src='/product.png'/>
+          <h1 className='font-lg text-xl tracking-widest'>Products</h1>
+
+        </div>
+
+        <div className='grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 text-center gap-2 place-items-center space-x-4 '>
+          <img className='h-20 w-20' src='/inventory.png'/>
+          <h1 className='font-lg text-xl tracking-widest'>Inventories</h1>
+
+        </div>
+
+        <div className='grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 text-center gap-2 place-items-center space-x-4 '>
+          <img className='h-20 w-20' src='/offers.png'/>
+          <h1 className='font-lg text-xl tracking-widest'>Offers</h1>
+
+        </div>
+
+        <div className='grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 text-center gap-2 place-items-center space-x-4 '>
+          <img className='h-20 w-20' src='/billing.png'/>
+          <h1 className='font-lg text-xl tracking-widest'>Billing</h1>
+
+        </div>
+
+        <div className='grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 text-center gap-2 place-items-center space-x-4 '>
+          <img className='h-20 w-20' src='/staff.png'/>
+          <h1 className='font-lg text-xl tracking-widest'>Staff</h1>
+
+        </div>
+
+        <div className='grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 text-center gap-2 place-items-center space-x-4 '>
+          <img className='h-20 w-20' src='/money-bag.png'/>
+          <h1 className='font-lg text-xl tracking-widest'>Money</h1>
+
+        </div>
+
+        <div className='grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 text-center gap-2 place-items-center space-x-4 '>
+          <img className='h-20 w-20' src='/insight.png'/>
+          <h1 className='font-lg text-xl tracking-widest'>Consumer Insights</h1>
+
+        </div>
+      </div>
+
+      <div className='font-md text-gray-600 text-lg tracking-widest mx-6 text-center '>
+           Free Access to Local Customer Looking for Your Products in Your Locality
+      </div>
+
     </div>
 
     <div className ='w-full grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3  my-2 lg:my-8 gap-6
@@ -93,8 +152,8 @@ export default function RegisterPage() {
             Track your sales and revenue and more in your shop dashboard  
           </p>
           
-          <img src='/shop-dashboard.png' 
-                className='w-full border-1 h-60 object-fill lg:object-contain  lg:hover:transition-transform duration-700 ease-in-out hover:scale-125'/>
+          <img src='/shop-image.png' 
+                className='w-full border-1 h-72 object-fill lg:object-contain  lg:hover:transition-transform duration-700 ease-in-out hover:scale-125'/>
 
       </div>
 
@@ -104,8 +163,8 @@ export default function RegisterPage() {
           <h1>Add Products on go</h1>
           <p className='text-sm font-light text-center text-gray-900'> 
            Master prodcuts contains all product that you need for your shop </p>
-          <img src='/master-products.png' 
-                className='w-full border-1 h-60 object-fill lg:object-contain  lg:hover:transition-transform duration-700 ease-in-out hover:scale-125'/>
+          <img src='/master-product.png' 
+                className='w-full border-1 h-72 object-fill lg:object-contain  lg:hover:transition-transform duration-700 ease-in-out hover:scale-125'/>
         
       </div>
 
@@ -121,13 +180,42 @@ export default function RegisterPage() {
           <img 
           src='https://redq.io/landing/_next/static/images/1-73db406dcd877c4776e7a485a4767d5d.png'
           // src='/shop-dashboard.png' 
-          className='w-full border-1 h-60 object-fill lg:object-contain  lg:hover:transition-transform duration-700 ease-in-out hover:scale-125'/>
+          className='w-full border-1 h-72 object-fill lg:object-contain  lg:hover:transition-transform duration-700 ease-in-out hover:scale-125'/>
         
       </div>
 
     </div>
+     
+     {/* how to get customer */}
+    <div className='grid grid-cols-1 sm:grid-cols-2 place-items-center lg:place-items-start w-full mx-4 md:mx-0 lg:mx-6 xl:mx-40 mt-20 space-x-0 lg:space-x-0 lg:mt-40'>
 
-       <Footer/>
+        <div className=' flex flex-col items-center sm:hidden '>
+          <h1 className='block sm:hidden font-bold tracking-widest text-2xl sm:text-3xl lg:text-4xl xl:text-5xl text-center '>How we get customers? </h1>
+          <img src='/animated-customer.png' className='h-72 w-72 sm:h-80 sm:w-80 mt-10 sm:mt-0 lg:w-full  lg:h-full'/>
+        </div>
+
+        <div className='hidden sm:flex'>
+          <img src='/animated-customer.png' 
+              className='hidden sm:block h-72 w-72 sm:h-80 sm:w-80 mt-10 sm:mt-0 lg:w-full  lg:h-full'/>
+        </div>
+
+        <div className=' flex flex-col space-y-8 lg:space-y-16 items-center '>
+          <h1 className='hidden sm:block font-bold tracking-widest text-3xl lg:text-4xl xl:text-5xl  '>How we get customers?</h1>
+
+          <div className='flex flex-col space-y-5 lg:space-y-10 w-80 xs+:w-80 sm:w-full'>
+            <h4 className='flex items-center text-md font-md text-gray-700 text-left tracking-wider space-x-4'><span className=''><CheckMark className='h-4 lg:h-6 text-white mr-4 w-4 lg:w-6 bg-green-600 rounded-full '/></span>Hard Cash Earning on Shopping</h4>
+            <h4 className='flex items-center text-md font-md text-gray-700 text-left tracking-wider space-x-4'><span className=''><CheckMark className='h-4 lg:h-6 text-white mr-4 w-4 lg:w-6 bg-green-600 rounded-full '/></span>Customer Engagement & loyaalty</h4>
+            <h4 className='flex items-center text-md font-md text-gray-700 text-left tracking-wider space-x-4'><span className=''><CheckMark className='h-4 lg:h-6 text-white mr-4 w-4 lg:w-6 bg-green-600 rounded-full '/></span>Rewards</h4>
+            <h4 className='flex items-center text-md font-md text-gray-700 text-left tracking-wider space-x-4'><span className=''><CheckMark className='h-4 lg:h-6 text-white mr-4 w-4 lg:w-6 bg-green-600 rounded-full '/></span>Free and Discounted promotional products</h4>
+            <h4 className='flex items-center text-md font-md text-gray-700 text-left tracking-wider space-x-4'><span className=''><CheckMark className='h-4 lg:h-6 text-white mr-4 w-4 lg:w-6 bg-green-600 rounded-full '/></span>consumer Behaviour Intelligence</h4>
+          </div>
+        
+        </div>
+     
+
+    </div>
+
+       <div className=''> <Footer /> </div>
     </>
   );
 }

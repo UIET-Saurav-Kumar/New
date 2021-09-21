@@ -151,6 +151,7 @@ export default function ShopPage() {
 
       {/* Cover Photo */}
       <div className="order-1 xl:order-2 col-span-12 xl:col-span-8 3xl:col-span-9 rounded h-full overflow-hidden relative bg-light min-h-[400px]">
+        
         <Image
           src={cover_image?.original ?? "/product-placeholder-borderless.svg"}
           layout="fill"
@@ -163,7 +164,9 @@ export default function ShopPage() {
             className="absolute top-3 end-3 bg-blue-500 hover:bg-blue-600 shadow-sm"
             href={`/${shop}/edit`}
           >
+
             <EditIcon className="w-4 me-2" /> {t("common:text-edit-shop")}
+            
           </LinkButton>
         )}
       </div>
