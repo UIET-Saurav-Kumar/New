@@ -22,7 +22,7 @@ const Footer = () => {
 			  
 
 			  <div className='footer-top-section 
-                               grid-cols-1 xs++:grid space-y-10 sm:grid-cols-2 md:grid-cols-2  
+                             grid  grid-cols-1  space-y-10 sm:grid-cols-2 md:grid-cols-3  lg:grid-cols-4
 							   space-x-6 text-left mb-8 p-4  shadow-md border-gray-700 justify-evenly'>
 
 
