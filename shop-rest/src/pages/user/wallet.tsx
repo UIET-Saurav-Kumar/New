@@ -91,7 +91,7 @@ const ReferralActivity = () => {
                                                 {totalEarnings}
                                             </p>
                                             <p className="text-sm text-muted mt-0">
-                                                {("Gross Sales")}
+                                                {("Total Earning")}
                                             </p>
                                             </div>
                                         </div>

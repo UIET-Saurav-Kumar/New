@@ -41,18 +41,25 @@ class WithdrawController extends CoreController
 
     public function fetchWithdraws(Request $request)
     {
+        
+
         $user = $request->user();
-        $shop_id = isset($request['shop_id']) ? $request['shop_id'] : false;
+        $shop_id = $request['shop_id'] ? $request['shop_id'] : false;
         if ($shop_id) {
             if ($user->shops->contains('id', $shop_id)) {
                 return $this->repository->with(['shop'])->where('shop_id', '=', $shop_id)->where('shop_id','!=',NULL);
             } elseif ($user && $user->hasPermissionTo(Permission::SUPER_ADMIN)) {
-                return $this->repository->with(['shop'])->with(['user'])->where('amount', '!=', null);
+                if($shop_id&&$shop_id!="undefined"){
+                    return $this->repository->with(['shop'])->where('shop_id', '=', $shop_id)->where('shop_id','!=',NULL);
+                }else{
+                    return $this->repository->with(['shop'])->with(['user'])->where('amount', '!=', null);
+                }
             } else {
                 throw new PickbazarException('PICKBAZAR_ERROR.NOT_AUTHORIZED');
             }
         } else {
             if ($user && $user->hasPermissionTo(Permission::SUPER_ADMIN)) {
+                
                 return $this->repository->with(['shop'])->where('id', '!=', null);
             } else {
                 throw new PickbazarException('PICKBAZAR_ERROR.NOT_AUTHORIZED');

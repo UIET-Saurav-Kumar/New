@@ -427,7 +427,7 @@ class MasterProductController extends CoreController
             $FH = fopen('php://output', 'w');
             foreach ($list as $key => $row) {
                 if ($key === 0) {
-                    $exclude = ['id', 'slug', 'deleted_at', 'created_at', 'updated_at', 'shipping_class_id'];
+                    $exclude = ['id', 'slug', 'deleted_at', 'created_at', 'updated_at', 'shipping_class_id','image','gallery'];
                     $row = array_diff($row, $exclude);
                 }
                 unset($row['id']);
@@ -436,12 +436,9 @@ class MasterProductController extends CoreController
                 unset($row['updated_at']);
                 unset($row['created_at']);
                 unset($row['slug']);
-                if (isset($row['image'])) {
-                    $row['image'] = json_encode($row['image']);
-                }
-                if (isset($row['gallery'])) {
-                    $row['gallery'] = json_encode($row['gallery']);
-                }
+                unset($product['image']);
+                unset($product['gallery']);
+                
                 fputcsv($FH, $row);
             }
             fclose($FH);
@@ -482,9 +479,9 @@ class MasterProductController extends CoreController
             unset($product['sale_price']);
             unset($product['commission']);
             unset($product['is_featured']);
+            unset($product['image']);
+            unset($product['gallery']); 
 
-            $product['image'] = json_decode($product['image'], true);
-            $product['gallery'] = json_decode($product['gallery'], true);
             try {
                 $type = Type::find($product['type_id']);
                 if (isset($type->id)) {
