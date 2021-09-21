@@ -34,15 +34,15 @@ const Footer = () => {
 
 					  <div className='flex flex-col tracking-widest   space-y-4'>
 
-						<Link href='./about-us'><h5 className='phone-number cursor-pointer text-lg hover:underline text-primary font-normal '> About Buylowcal</h5></Link>
-						<Link href='./careers'><h5 className='phone-number cursor-pointer text-lg hover:underline text-primary font-normal '> Careers</h5></Link>
-						<Link href='./terms'><h5 className='phone-number cursor-pointer text-lg hover:underline text-primary font-normal '> Terms of Service</h5></Link>
+						<Link href='https://buylowcal.com/about-us'><h5 className='phone-number cursor-pointer text-lg hover:underline text-primary font-normal '> About Buylowcal</h5></Link>
+						<Link href='https://buylowcal.com/careers'><h5 className='phone-number cursor-pointer text-lg hover:underline text-primary font-normal '> Careers</h5></Link>
+						<Link href='https://buylowcal.com/terms'><h5 className='phone-number cursor-pointer text-lg hover:underline text-primary font-normal '> Terms of Service</h5></Link>
 
 
 
-						<Link href='./return-policy'><h5 className=' cursor-pointer text-lg hover:underline phone-number text-primary font-normal '> Refunds/Cancellations/Shipping</h5></Link> 
-						<Link href='./privacy'><h5 className=' cursor-pointer text-lg hover:underline phone-number text-primary font-normal '>Privacy Policy</h5></Link> 
-						<Link href='./contact'><h5 className=' cursor-pointer text-lg hover:underline phone-number text-primary font-normal '>Contact Us</h5></Link> 
+						<Link href='https://buylowcal.com/return-policy'><h5 className=' cursor-pointer text-lg hover:underline phone-number text-primary font-normal '> Refunds/Cancellations/Shipping</h5></Link> 
+						<Link href='https://buylowcal.com/privacy'><h5 className=' cursor-pointer text-lg hover:underline phone-number text-primary font-normal '>Privacy Policy</h5></Link> 
+						<Link href='https://buylowcal.com/contact'><h5 className=' cursor-pointer text-lg hover:underline phone-number text-primary font-normal '>Contact Us</h5></Link> 
 					
 					  </div>
 			  		
@@ -94,8 +94,6 @@ const Footer = () => {
 							<a target="_blank" href='https://www.youtube.com/channel/UCs0jYR_99h5GKs0cvRZSg-A'> <YouTubeIcon className='h-8 w-8 cursor-pointer hover:underline '  />	 </a>		
 						</div>
 				   </div>
-
-				  
 
 
 			  </div>

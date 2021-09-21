@@ -202,7 +202,7 @@ export default function RegisterPage() {
         <div className=' flex flex-col space-y-8 lg:space-y-16 items-center '>
           <h1 className='hidden sm:block font-bold tracking-widest text-3xl lg:text-4xl xl:text-5xl  '>How we get customers?</h1>
 
-          <div className='flex flex-col space-y-5 lg:space-y-10 '>
+          <div className='flex flex-col space-y-5 lg:space-y-10 w-80 xs+:w-80 sm:w-full'>
             <h4 className='flex items-center text-md font-md text-gray-700 text-left tracking-wider space-x-4'><span className=''><CheckMark className='h-4 lg:h-6 text-white mr-4 w-4 lg:w-6 bg-green-600 rounded-full '/></span>Hard Cash Earning on Shopping</h4>
             <h4 className='flex items-center text-md font-md text-gray-700 text-left tracking-wider space-x-4'><span className=''><CheckMark className='h-4 lg:h-6 text-white mr-4 w-4 lg:w-6 bg-green-600 rounded-full '/></span>Customer Engagement & loyaalty</h4>
             <h4 className='flex items-center text-md font-md text-gray-700 text-left tracking-wider space-x-4'><span className=''><CheckMark className='h-4 lg:h-6 text-white mr-4 w-4 lg:w-6 bg-green-600 rounded-full '/></span>Rewards</h4>
