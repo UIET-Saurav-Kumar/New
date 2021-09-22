@@ -28,6 +28,15 @@ import { useSocialLoginMutation } from "@data/auth/use-social-login-mutation";
 import { CUSTOMER } from "@utils/constants";
 import Cookies from "js-cookie";
 import ManagedModal from "@components/ui/modal/managed-modal";
+
+import { useRouter } from "next/router";
+
+declare global {
+  interface Window {
+      gtag:any;
+  }
+}
+
 import {
   ModalProvider,
   useModalAction,
@@ -88,6 +97,23 @@ const SocialLoginProvider: React.FC = () => {
 };
 
 function CustomApp({ Component, pageProps }: AppProps) {
+
+  const router = useRouter();
+
+  const handleRouteChange = (url: any) => {
+    window.gtag('config', `${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`, {
+      page_path: url,
+    });
+  };
+
+  useEffect(() => {
+    router.events.on('routeChangeComplete', handleRouteChange);
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [router.events]);
+
+
   const queryClientRef = useRef<any>(null);
   if (!queryClientRef.current) {
     queryClientRef.current = new QueryClient();

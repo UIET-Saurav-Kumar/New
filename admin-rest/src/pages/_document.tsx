@@ -1,3 +1,4 @@
+
 import Document, {
   Html,
   Head,
@@ -11,6 +12,7 @@ export default class CustomDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
     return Document.getInitialProps(ctx);
   }
+
   render() {
     const { locale } = this.props.__NEXT_DATA__;
     const dir = locale === "ar" || locale === "he" ? "rtl" : "ltr";
@@ -19,9 +21,11 @@ export default class CustomDocument extends Document {
     }
 
     return (
+
       <Html>
        <Head>
           {/* Global Site Tag (gtag.js) - Google Analytics */}
+
           <script
             async
             src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}

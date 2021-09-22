@@ -52,13 +52,14 @@ export default function delivery() {
 
 
             <div className=' flex  lg:flex w-full mt-4 '>
-
+                     
+                     {/* location inputs */}
                     <div className='flex flex-col h-11/12 w-500 border-t-0 border shadow-2xl'>
 
                             <div className=' flex justify-between mx-4 items-center  h-24'>
 
                                 <img  src='/transparent-delivery-man.png' 
-                                      className='rounded-full border h-14 mt-3  w-14 object-contain '/>
+                                      className ='rounded-full border h-14 mt-3  w-14 object-contain'/>
 
                                     <div className='flex justify-between  text-xs '>
 
@@ -67,7 +68,6 @@ export default function delivery() {
 
                                     </div>
                                     
-
                             </div>
 
                         <div className=' flex flex-col  space-y-4 justify-around mx-auto mt-8  w-full rounded-md '>
@@ -75,8 +75,8 @@ export default function delivery() {
                             <form className='flex items-center mx-auto  flex-col ' >
 
                                     
-                                            <GooglePlacesAutocomplete
-                                            />
+                                        <GooglePlacesAutocomplete
+                                        />
                                   
                                         <input onChange={(e)=>setDrop(e.target.value)} type='text' className=' mx-2  p-2 rounded-lg text-xs outline-none border' 
                                             placeholder='Enter Drop Location' />
@@ -96,9 +96,10 @@ export default function delivery() {
                         <div className="google-map-code w-full">
 
                             <iframe  src="https://www.google.com/maps/embed/v1/view?key=AIzaSyDd58SS-eX8RDXYdhOu-HO1AhqVtjowXqQ&center=30.701871399999998,76.801418&zoom=18&maptype=roadmap"  
-                                 className='w-full'   width="1300" height="450" frameborder="0" style={{border:0}} allowfullscreen aria-hidden="false" tabindex="0"></iframe>
+                                 className='w-full h-screen'   width="full" height="full" frameborder="0" style={{border:0}} allowfullscreen aria-hidden="false" tabindex="0"></iframe>
                         </div>
                     {/* Map end */}
+
 
             </div>
 
