@@ -86,6 +86,8 @@ const ManagedModal = () => {
       {view === "EXPORT_IMPORT_ATTRIBUTE" && <AttributeExportImport />}
       {view === "EXPORT_IMPORT_ADMIN_PRODUCT" && <AllProductsExportImport />}
       {view === "EXPORT_IMPORT_SHOPS" && <ShopsExportImport />}
+      {view === "EXPORT_IMPORT_MASTER_PRODUCT" && <MasterProductsExportImport />}
+
     </Modal>
   );
 };

@@ -21,7 +21,7 @@ export const useUpdateProductMutation = () => {
       },
       // Always refetch after error or success:
       onSettled: () => {
-        queryClient.invalidateQueries(API_ENDPOINTS.PRODUCT_OFFERS);
+        queryClient.invalidateQueries(API_ENDPOINTS.PRODUCTS);
       },
     }
   );

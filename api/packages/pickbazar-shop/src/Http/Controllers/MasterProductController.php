@@ -2,6 +2,7 @@
 
 namespace PickBazar\Http\Controllers;
 
+use Exception;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -436,8 +437,8 @@ class MasterProductController extends CoreController
                 unset($row['updated_at']);
                 unset($row['created_at']);
                 unset($row['slug']);
-                unset($product['image']);
-                unset($product['gallery']);
+                unset($row['image']);
+                unset($row['gallery']);
                 
                 fputcsv($FH, $row);
             }
