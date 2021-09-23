@@ -57,8 +57,7 @@ class MasterProductController extends CoreController
     {
         $products_name=Product::where("shop_id",$request->shop_id)->pluck("name");
         $master_ids=MasterProduct::whereIn("name",$products_name)->pluck("id");
-        return $master_ids;
-        
+        return $master_ids;   
     }
 
 
@@ -263,7 +262,6 @@ class MasterProductController extends CoreController
         $master=MasterProduct::find($request->master_id);
 
         $data=$master->toArray();
-
         unset($data["id"]);
         unset($data["created_at"]);
         unset($data["updated_at"]);
@@ -279,24 +277,24 @@ class MasterProductController extends CoreController
         $product=Product::create($data);
 
         foreach($master->categories as $category){
-            DB::table("category_master_product")->insert(
+            DB::table("category_product")->insert(
                 [
                     "category_id"=>$category->id,
-                    "master_product_id"=>$product->id
+                    "product_id"=>$product->id
                 ]);
         }
         foreach($master->variations as $attribute){
-            DB::table("attribute_value_master_product")->insert(
+            DB::table("attribute_product")->insert(
                 [
                     "attribute_value_id"=>$attribute->id,
-                    "master_product_id"=>$product->id
+                    "product_id"=>$product->id
                 ]
             );
         }
         foreach($master->tags as $tag){
-            DB::table("master_product_tag")->insert([
+            DB::table("product_tag")->insert([
                 "tag_id"=>$tag->id,
-                "master_product_id"=>$product->id
+                "product_id"=>$product->id
             ]);
         }
         return 1;
