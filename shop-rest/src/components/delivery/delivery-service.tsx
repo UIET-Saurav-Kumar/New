@@ -6,10 +6,12 @@ import Spinner from "@components/ui/loaders/spinner/spinner";
 import Image from "next/image";
 import Logo from "@components/ui/logo";
 import Navbar from "@components/layout/navbar/navbar";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+// import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Footer from "@components/footer/Footer";
 import GooglePlacesAutocomplete from "@components/form/google-current-location";
 import DeliveryPlacesAutocomplete from "@components/form/delivery-places-autocomplete";
+import ShopPaymentForm from "src/pages/shops/shop-payment-form";
+import DeliveryAddressInputs from "./address-input";
 
 
 // import { XIcon } from "@heroicons/react/outline";
@@ -17,7 +19,7 @@ import DeliveryPlacesAutocomplete from "@components/form/delivery-places-autocom
 // import { Map, GoogleApiWrapper } from 'google-maps-react';
 
 
-export default function delivery() {
+export default function Delivery() {
 
     const [delivery, setDelivery ] = useState(false);
 
@@ -44,21 +46,23 @@ export default function delivery() {
 
     return (
         <>
-          <Navbar label='Book Delivery'/>
+          <Navbar label=''/>
 
         <div className='hidden  lg:flex lg:flex-col  w-full '>
 
-          
-
 
             <div className=' flex  lg:flex w-full mt-4 '>
-
+                
+                     
+                     {/* location inputs */}
                     <div className='flex flex-col h-11/12 w-500 border-t-0 border shadow-2xl'>
+
+                        <DeliveryAddressInputs/>
 
                             <div className=' flex justify-between mx-4 items-center  h-24'>
 
                                 <img  src='/transparent-delivery-man.png' 
-                                      className='rounded-full border h-14 mt-3  w-14 object-contain '/>
+                                      className ='rounded-full border h-14 mt-3  w-14 object-contain'/>
 
                                     <div className='flex justify-between  text-xs '>
 
@@ -67,38 +71,19 @@ export default function delivery() {
 
                                     </div>
                                     
-
                             </div>
 
-                        <div className=' flex flex-col  space-y-4 justify-around mx-auto mt-8  w-full rounded-md '>
-
-                            <form className='flex items-center mx-auto  flex-col ' >
-
-                                    
-                                            <GooglePlacesAutocomplete
-                                            />
-                                  
-                                        <input onChange={(e)=>setDrop(e.target.value)} type='text' className=' mx-2  p-2 rounded-lg text-xs outline-none border' 
-                                            placeholder='Enter Drop Location' />
-                                    {/* </div> */}
-
-                                    <button onClick={handleDelivery} className='px-4 bg-green-500 hover:bg-green-400 mx-auto rounded-lg text-sm py-1 text-white font-semibold'>
-                                        Pickup Delivery
-                                    </button>
-
-                            </form>
-
-                        </div>
-                 </div>
+                   </div>
 
                 
                      {/* Map */}
                         <div className="google-map-code w-full">
 
                             <iframe  src="https://www.google.com/maps/embed/v1/view?key=AIzaSyDd58SS-eX8RDXYdhOu-HO1AhqVtjowXqQ&center=30.701871399999998,76.801418&zoom=18&maptype=roadmap"  
-                                 className='w-full'   width="1300" height="450" frameborder="0" style={{border:0}} allowfullscreen aria-hidden="false" tabindex="0"></iframe>
+                                 className='w-full h-screen'   width="full" height="full" frameborder="0" style={{border:0}} allowfullscreen aria-hidden="false" tabindex="0"></iframe>
                         </div>
                     {/* Map end */}
+
 
             </div>
 
@@ -149,7 +134,7 @@ export default function delivery() {
             <div className="google-map-code w-full">
                    <iframe  src="https://www.google.com/maps/embed/v1/view?key=AIzaSyDd58SS-eX8RDXYdhOu-HO1AhqVtjowXqQ&center=30.701871399999998,76.801418&zoom=18&maptype=roadmap"  
                   className='w-full'   width="1300" height="300" frameborder="0" style={{border:0}} allowfullscreen aria-hidden="false" tabindex="0"></iframe>
-             </div>
+            </div>
 
               <div className='flex flex-col h-11/12 w-500 border-t-0 border w-auto shadow-2xl'>
 
@@ -165,20 +150,19 @@ export default function delivery() {
 
                                     </div>
                                     
-
                             </div>
 
                         <div className=' flex flex-col  space-y-4 justify-around mx-auto mt-8  w-full rounded-md '>
 
-                            <form className='flex items-center mx-auto  flex-col ' >
+                          
 
+                            <form className='flex items-center mx-auto  flex-col ' >
                                     
-                                            <DeliveryPlacesAutocomplete
-                                            />
+                                        <DeliveryPlacesAutocomplete />
                                   
                                         <input onChange={(e)=>setDrop(e.target.value)} type='text' className=' mx-2  p-2 rounded-lg text-xs outline-none border' 
                                             placeholder='Enter Drop Location' />
-                                    {/* </div> */}
+                                    
 
                                     <button onClick={handleDelivery} className='px-4 bg-green-500 hover:bg-green-400 mx-auto rounded-lg text-sm py-1 text-white font-semibold'>
                                         Pickup Delivery

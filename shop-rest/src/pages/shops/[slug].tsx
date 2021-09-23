@@ -40,12 +40,12 @@ const ShopPage = ({ data }: any) => {
           <div className="bg-gray-100 flex flex-col md:flex-row md:justify-between  
                             md:items-start md:p-8" >
 
-                    <div className='hidden  p-3 lg:flex w-full flex-col  '>
+                    <div className='hidden  p-3 lg:flex w-full flex-col '>
 
                       <div className="hidden lg:space-x-5 xl:space-x-10  lg:flex justify-between ">
 
-                          <div className='  overflow-hidden lg:w-1/2 xl:w-1/4 flex h-full flex-col'>
-                            <ShopPaymentForm/>
+                          <div className=' sticky top-24 overflow-hidden lg:w-1/2 xl:w-1/4 flex h-full flex-col'>
+                            <ShopPaymentForm />
                             <ShopCategoryCard data={data} className="" />
                           </div>
 
@@ -58,22 +58,22 @@ const ShopPage = ({ data }: any) => {
                               objectFit="fill"
                             /> */}
 
-                          <div className='flex flex-col overflow-y-scroll w-full'>  
+                          <div className='flex flex-col overflow-y-scroll  w-full'>  
 
-                            <div className='flex w-full '> 
+                            <div className='flex w-full h-full border'> 
 
-                              <div className=' h-full'>  
-                                <ShopProfileCard data={data} />
-                              </div>
-                              
-                              <Image
-                                alt={t("heading")}
-                                src={data?.cover_image?.original! ?? "/product-placeholder.svg"}
-                                height={100}
-                                width={1200}
-                                // layout="fill"
-                                // objectFit="contain"
-                              />
+                                <div className='h-full'>  
+                                  <ShopProfileCard data={data} />
+                                </div>
+                                
+                                <Image
+                                  alt={t("heading")}
+                                  src={data?.cover_image?.original! ?? "/product-placeholder.svg"}
+                                  height={100}
+                                  width={1200}
+                                  // layout="fill"
+                                  // objectFit="contain"
+                                />
                           
                             </div>
 
@@ -92,8 +92,6 @@ const ShopPage = ({ data }: any) => {
       <div className='block lg:hidden w-full'>
 
         <ShopMobileView data={data}/>
-
-        
 
       </div>
       

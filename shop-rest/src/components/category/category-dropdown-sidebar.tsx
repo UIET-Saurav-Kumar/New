@@ -29,12 +29,15 @@ const CategoryDropdownSidebar = () => {
       </div>
     );
   }
+
   if (error) return <ErrorMessage message={error.message} />;
 
   
   return (
+
     <aside className="sticky w-72 top-22 h-full lg:w-64   bg-light">
       <div className="max-h-full overflow-hidden">
+
         <Scrollbar className="w-full h-full max-h-screen">
           {data?.categories?.data?.length ? (
             <div className="px-5 h-96">

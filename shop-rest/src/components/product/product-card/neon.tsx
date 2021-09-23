@@ -13,7 +13,7 @@ type NeonProps = {
 
 const Neon: React.FC<NeonProps> = ({ product, className }) => {
   const { t } = useTranslation("common");
-  const { name, image, quantity } = product ?? {};
+  const { name, image, quantity, unit } = product ?? {};
   const { price, basePrice, discount } = usePrice({
     amount: product.price,
     baseAmount: product.sale_price,
@@ -73,10 +73,10 @@ const Neon: React.FC<NeonProps> = ({ product, className }) => {
         {/* End of product price */}
 
         <h3
-          className="text-xs md:text-sm text-body truncate mb-4 cursor-pointer"
+          className="text-xs md:text-sm text-body  mb-4 cursor-pointer"
           onClick={handleProductQuickView}
         >
-          {name}
+          <div className='flex flex-col'>{name}<h3>{unit}</h3></div>
         </h3>
         {/* End of product title */}
 

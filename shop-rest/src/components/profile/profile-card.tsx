@@ -34,7 +34,7 @@ type ShopProfileCardProps = {
     <>
       <div
         className={cn(
-          " items-center hidden   w-full bg-light   py-4 px-6 sticky top-[15px] z-10",
+          " items-center hidden  w-full bg-light   py-4 px-6 sticky top-[15px] z-10",
           cardClassName
         )}
       >
@@ -45,7 +45,6 @@ type ShopProfileCardProps = {
             src={data?.logo?.original! ?? "/product-placeholder.svg"}
             layout="fill"
             objectFit="contain"
-            
           />
 
         </div>
@@ -66,27 +65,26 @@ type ShopProfileCardProps = {
 
       <aside
         className={cn(
-          "bg-light rounded h-full w-1/3 md:w-48 2xl:w-56   flex-shrink-0",
+          "bg-light rounded h-72 w-full sm:1/3 md:w-2/3 lg:w-56 xl:w-56 2xl:w-56 flex-shrink-0",
           className
         )}
       >
-        <div className="max-h-full overflow-hidden">
+        <div className="max-h-full w-full overflow-hidden">
 
           <Scrollbar className={cn("w-full", styles.scrollbar_height)}>
 
-            <div className="w-full  ray-200 p-7 flex flex-col items-center">
+            <div className="w-full  p-4 grid grid-cols-2 xs+:grid-cols-1 gap-x-8 gap-y-0  
+                            sm:grid-cols-1 lg:grid-cols-1 items-center">
 
-              <div className="w-full h-34 rounded-lg flex relative mx-auto items-center  overflow-hidden mb-8">
+              <div className="w-full h-34 rounded-lg flex relative mx-auto
+                              items-center overflow-hidden mb-8">
 
-                <Image
-
+                <img
                   alt = {t("logo")}
                   src = {data?.logo?.original! ?? "/product-placeholder.svg"}
                   // layout="fill"
-                  objectFit = "contain"
-                  width = {150}
-                  height = {150}
-                  
+                  className='object-fill lg:object-fill w-36 h-36'
+                  // objectFit = "fill"
                 />
                 
               </div>
@@ -95,75 +93,11 @@ type ShopProfileCardProps = {
                 {data?.name}
               </h3>
 
-              {/* {data?.description && (
-                <p className="text-xs text-body mb-2 text-center leading-relaxed">
-                  <ReadMore character={70}>{data?.description}</ReadMore>
-                </p>
-              )} */}
-
-              {/* <div className="flex items-center justify-start mt-3">
-                {data?.settings?.socials.map((item: any, index: number) => (
-                  <a
-                    key={index}
-                    href={item?.url}
-                    target="_blank"
-                    className={`text-muted focus:outline-none me-6 last:me-0 transition-colors duration-300 hover:${item.hoverClass}`}
-                  >
-                    {getIcon({
-                      iconList: socialIcons,
-                      iconName: item?.icon,
-                      className: "w-4 h-4",
-                    })}
-                  </a>
-                ))}
-              </div> */}
             </div>
 
-            {/* <div className="p-7">
-              <div className="mb-7 last:mb-0 flex flex-col">
-                <span className="text-sm text-heading font-semibold mb-2">
-                  {t("text-address")}
-                </span>
-                <span className="text-sm text-body">
-                  {!isEmpty(formatAddress(data?.address))
-                    ? formatAddress(data?.address)
-                    : t("common:text-no-address")}
-                </span>
-              </div>
-
-              <div className="mb-7 last:mb-0 flex flex-col">
-                <span className="text-sm text-heading font-semibold mb-2">
-                  {t("text-phone")}
-                </span>
-                <span className="text-sm text-body">
-                  {data?.settings?.contact
-                    ? data?.settings?.contact
-                    : t("text-no-contact")}
-                </span>
-              </div>
-              {data?.settings?.website && (
-                <div className="flex flex-col">
-                  <span className="text-sm text-heading font-semibold mb-2">
-                    {t("text-website")}
-                  </span>
-
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-body">
-                      {data?.settings?.website}
-                    </span>
-                    <a
-                      href={data?.settings?.website}
-                      target="_blank"
-                      className="text-sm text-accent font-semibold hover:text-accent-hover focus:outline-none focus:text-accent-hover"
-                    >
-                      {t("text-visit-site")}
-                    </a>
-                  </div>
-                </div>
-              )}
-            </div> */}
           </Scrollbar>
         </div>
+
       </aside>
     </>
   );

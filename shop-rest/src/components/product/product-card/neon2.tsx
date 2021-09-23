@@ -5,20 +5,41 @@ import usePrice from "@utils/use-price";
 import { AddToCart } from "@components/product/add-to-cart/add-to-cart";
 import { useTranslation } from "next-i18next";
 import { useModalAction } from "@components/ui/modal/modal.context";
+import { useProductQuery } from "@data/product/use-product.query";
 
 type NeonProps = {
   product: any;
   className?: string;
+  productSlug: string
 };
 
-const Neon2: React.FC<NeonProps> = ({ product, className }) => {
+
+
+
+
+
+const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
+
+  const { data, isLoading: loading } = useProductQuery(productSlug);
+
+
+
   const { t } = useTranslation("common");
-  const { name, quantity } = product ?? {};
+
+  const { name, quantity, unit } = product ?? {};
+
   const { price, basePrice, discount } = usePrice({
     amount: product.price,
     baseAmount: product.sale_price,
   });
   const { openModal } = useModalAction();
+
+  // const isSelected = !isEmpty(variations)
+  //   ? !isEmpty(attributes) &&
+  //     Object.keys(variations).every((variation) =>
+  //       attributes.hasOwnProperty(variation)
+  //     )
+  //   : true;
 
   function handleProductQuickView() {
     return openModal("PRODUCT_DETAILS", product.slug);
@@ -55,7 +76,7 @@ const Neon2: React.FC<NeonProps> = ({ product, className }) => {
 
       <header className="p-3 md:p-6">
 
-        <div className="flex items-center mb-2">
+        <div className="flex items-center  mb-2">
           <span className="text-sm md:text-base text-heading font-semibold">
             {basePrice ? basePrice : price}
           </span>
@@ -70,7 +91,7 @@ const Neon2: React.FC<NeonProps> = ({ product, className }) => {
           className="text-xs md:text-sm text-body truncate mb-4 cursor-pointer"
           onClick={handleProductQuickView}
         >
-          {name}
+           <div className='flex flex-col'>{name}<h3>{unit}</h3></div>
         </h3>
         {/* End of product title */}
 
