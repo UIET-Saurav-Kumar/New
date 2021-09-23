@@ -20,15 +20,6 @@ import { ModalProvider } from "@components/ui/modal/modal.context";
 import DefaultSeo from "@components/ui/default-seo";
 import PrivateRoute from "@utils/private-route";
 import ManagedModal from "@components/ui/modal/managed-modal";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-
-
-declare global {
-  interface Window {
-      gtag:any;
-  }
-}
 
 const Noop: React.FC = ({ children }) => <>{children}</>;
 
@@ -40,27 +31,10 @@ const AppSettings: React.FC = (props) => {
 };
 
 const CustomApp = ({ Component, pageProps }: AppProps) => {
-
-  const router = useRouter();
-
-  const handleRouteChange = (url: any) => {
-    window.gtag('config', `${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`, {
-      page_path: url,
-    });
-  };
-
-  useEffect(() => {
-    router.events.on('routeChangeComplete', handleRouteChange);
-    return () => {
-      router.events.off('routeChangeComplete', handleRouteChange);
-    };
-  }, [router.events]);
-
   const queryClientRef = useRef<any>(null);
   if (!queryClientRef.current) {
     queryClientRef.current = new QueryClient();
   }
-
   const Layout = (Component as any).Layout || Noop;
   const authProps = (Component as any).authenticate;
 

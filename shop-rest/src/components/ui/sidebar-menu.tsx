@@ -7,14 +7,22 @@ import { getIcon } from "@utils/get-icon";
 import * as CategoryIcons from "@components/icons/category";
 import { useUI } from "@contexts/ui.context";
 import { useEffect, useState } from "react";
+import { useModalAction, useModalState } from "./modal/modal.context";
+
+
 
 function SidebarMenuItem({ className, item, depth = 0 }: any) {
+
   const router = useRouter();
+
   const active = router?.query?.category;
+
   const isActive =
     active === item.slug ||
     item?.children?.some((_item: any) => _item.slug === active);
+
   const [isOpen, setOpen] = useState<boolean>(isActive);
+
   useEffect(() => {
     setOpen(isActive);
   }, [isActive]);
@@ -25,8 +33,12 @@ function SidebarMenuItem({ className, item, depth = 0 }: any) {
     setOpen((prevValue) => !prevValue);
   }
 
+  const { closeModal } = useModalAction();
+
   function onClick() {
+   
     const { pathname, query } = router;
+    closeModal()
     const navigate = () =>
       router.push(
         {
@@ -62,6 +74,7 @@ function SidebarMenuItem({ className, item, depth = 0 }: any) {
         initial={false}
         animate={{ backgroundColor: "#ffffff" }}
         onClick={onClick}
+        
         className="py-1 rounded-md"
       >
         <button
