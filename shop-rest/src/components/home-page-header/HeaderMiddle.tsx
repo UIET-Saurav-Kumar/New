@@ -1,25 +1,15 @@
-
-// import './styles/globals.css'
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import {HeartIcon, ShoppingCartIcon, UserIcon, PhoneIcon, MenuIcon, XIcon, MapIcon} from '@heroicons/react/outline';
-import SearchBox from "@components/ui/search-box";
 import JoinButton from "@components/layout/navbar/join-button";
-import { useCustomerQuery } from "@data/customer/use-customer.query";
 import { useUI } from "@contexts/ui.context";
 import AuthorizedMenu from '@components/layout/navbar/authorized-menu';
-import { siteSettings } from '@settings/site.settings';
 import { CaretDown } from '@components/icons/caret-down';
-import { MapPin } from '@components/icons/map-pin';
 import DropDown from "@components/ui/dropDown"
 import GooglePlacesAutocomplete from "@components/form/google-places-autocomplete";
 import { useRouter } from "next/router";
 import Logo from "@components/ui/logo";
 import GetCurrentLocation from "@components/geoCode/get-current-location"
 import { useLocation } from "@contexts/location/location.context";
-import  DeskTopAutoComplete from "@components/form/desk-top-autocomplete";
 import MobileJoinButton from '@components/layout/navbar/mobile-join-button';
-import Truncate from '@components/ui/truncate-scroll';
 
 
 
@@ -121,13 +111,6 @@ export default function HeaderMiddle({children,
                                      lg:w-3/4 2xl:mx-auto lg:mx-auto 
                                     2xl:flex-1' >
 
-
-                {/* for location icon */}
-                       {/* <span className='hidden lg:inline-flex relative rounded-l group-focus:border-accent-300 rounded-r-none rounded-md items-center '>  */}
-                             {/* <MapPin className='absolute ml-2 text-gray-200 w-5 h-5' src='/gps.png'/> */}
-                             {/* <input className=' border  h-12  border-gray-300 w-8 
-                              border-r-0 rounded-lg rounded-r-none' defaultValue=''  /> */}
-                       {/* </span> */}
                        
 
                        <input onClick = {handleLocation} 
@@ -255,3 +238,29 @@ export default function HeaderMiddle({children,
     )
 }
 
+
+
+/*
+Logs
+
+--- LOGGED IN
+
+1) SAVE LOCATION
+2) SAVE ITEMS
+3) SAVE CART PRODUCT, SHOP,
+4) SAVE ORDER
+
+- 
+- ip address, user, location, timeStamp,                                ---type:location
+- ip address, user, location, search_item, timeStamp,                   ---type:search_item
+- ip address, user, location, product, shop, timeStamp,                 ---type:product
+- ip address, user, location, product, shop, order, timeStamp,          ---type:order
+
+--- NOT LOGED OUT
+
+1) SAVE LOCATION
+
+- ip address, location, timeStamp,
+- ip address, location, search_item, timeStamp,
+
+*/

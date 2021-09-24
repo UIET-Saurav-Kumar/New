@@ -6,7 +6,7 @@ use Exception;
 use Illuminate\Http\Request;
 use PickBazar\Enums\Permission;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Log;
+use PickBazar\Database\Models\Log;
 use PickBazar\Database\Models\Shop;
 use PickBazar\Database\Models\Type;
 use PickBazar\Database\Models\User;
@@ -65,6 +65,19 @@ class ShopController extends CoreController
             $shops_ids=ShopRepository::getSortedShops($location,$shops_ids);
             $shops->whereIn('id',$shops_ids);
         }
+
+        // if($search||$location)
+        // {
+        //     $user=$request->user();
+
+        //     Log::create([
+        //         "user_id"=>($user)?$user->id:"",
+        //         "ip_address"=>$request->ip(),
+        //         "location"=>$location,
+        //         "search_item"=>$search,
+        //         "type"=>"location"
+        //     ]);
+        // }
 
         if($category_slug)
         {

@@ -1,5 +1,4 @@
 import Button from "@components/ui/button";
-import FormattedInput from "@components/ui/formatted-input";
 import Input from "@components/ui/input";
 import Label from "@components/ui/label";
 import Radio from "@components/ui/radio/radio";
@@ -16,6 +15,7 @@ import { useTranslation } from "next-i18next";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { useCart } from "@contexts/quick-cart/cart.context";
+import { useLocation } from "@contexts/location/location.context";
 import {
   calculatePaidTotal,
   calculateTotal,
@@ -52,6 +52,7 @@ const PaymentForm = () => {
   const router = useRouter();
   const { mutate: createOrder, isLoading: loading } = useCreateOrderMutation();
   const { data: orderStatusData } = useOrderStatusesQuery();
+  const {getLocation} =useLocation()
   const {
     register,
     handleSubmit,
@@ -92,6 +93,7 @@ const PaymentForm = () => {
   function onSubmit(values: FormValues) {
     let input = {
       //@ts-ignore
+      location:getLocation?.formattedAddress,
       products: available_items?.map((item) => formatOrderedProduct(item)),
       customer_contact: values.contact,
       status: orderStatusData?.order_statuses?.data[0]?.id ?? 1,

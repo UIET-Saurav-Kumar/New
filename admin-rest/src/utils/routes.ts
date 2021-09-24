@@ -26,5 +26,6 @@ export const ROUTES = {
   LOGOUT: "/logout",
   STAFFS: "/staffs",
   MASTER_PRODUCT:"/master-products",
-  COMMISSION:"/commission"
+  COMMISSION:"/commission",
+  LOGS:'/logs'
 };

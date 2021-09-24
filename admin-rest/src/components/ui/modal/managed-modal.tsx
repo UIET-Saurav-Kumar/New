@@ -59,6 +59,9 @@ const MasterProductsExportImport = dynamic(
 const ShopsExportImport = dynamic(
   () => import("@components/product/import-export-modal-shop")
 );
+const LogDeleteView = dynamic(
+  () => import("@components/logs/log-delete-view")
+);
 
 const ManagedModal = () => {
   const { isOpen, view } = useModalState();
@@ -69,6 +72,7 @@ const ManagedModal = () => {
       
       {view === "DELETE_OFFER" && <OfferDeleteView />}
       {view === "DELETE_SHOP_CATEGORY" && <ShopCategoryDeleteView />}
+      {view === "DELETE_LOG" && <LogDeleteView />}
       {view === "DELETE_PRODUCT" && <ProductDeleteView />}
       {view === "MASTER_DELETE_PRODUCT" && <MasterProductDeleteView />}
       {view === "DELETE_TYPE" && <TypeDeleteView />}

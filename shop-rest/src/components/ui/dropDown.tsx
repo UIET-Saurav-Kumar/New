@@ -5,11 +5,13 @@ import colourOptions from '@data/colourOptions';
 import {fetchSearch} from '@data/search/use-search.query';
 import { useRouter } from "next/router";
 import { useLocation } from "@contexts/location/location.context";
+import { useCreateLogMutation } from "@data/log/use-create-log.mutation";
 
 export default function DropDown({getLoc}:{getLoc:any}){
   const [inputValue,setInputValue] = useState("");
   const router = useRouter();
   const {getLocation} =useLocation()
+  const { mutate: createLog, isLoading: loading } = useCreateLogMutation();
   
   useEffect(()=>{
     setInputValue(getSearch())
@@ -53,6 +55,16 @@ export default function DropDown({getLoc}:{getLoc:any}){
     const { type, ...rest } = router.query;
     
     var text =e?.value
+
+    createLog({
+      location:getLocation?.formattedAddress,
+      search:text
+    }, {
+      onSuccess: (data: any) => {
+        console.log(data)
+      },
+    });
+
     router.push(
       {
           pathname,

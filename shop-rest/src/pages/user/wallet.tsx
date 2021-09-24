@@ -6,12 +6,11 @@ import Footer from '@components/footer/Footer';
 import Navbar from '@components/layout/navbar/navbar';
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import ProfileSidebar from "@components/profile/profile-sidebar";
-import {InvitedUsers} from "@data/invite/referal-data"
 import {useWalletCommissionQuery} from '@data/user/use-wallet-commission-query'
 import usePrice from "@utils/use-price";
 import { PriceWalletIcon } from "@components/icons/price-wallet";
 import { DollarIcon } from "@components/icons/dollar";
-import { OrdersIcon } from "@components/icons/orders";
+
 
 const ReferralActivity = () => {
     const { data,isLoading:loading } = useWalletCommissionQuery({

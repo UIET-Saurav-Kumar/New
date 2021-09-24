@@ -7,7 +7,8 @@ import { fadeInOut } from "@utils/motion/fade-in-out";
 import usePrice from "@utils/use-price";
 import { useTranslation } from "next-i18next";
 import { useCart } from "@contexts/quick-cart/cart.context";
-
+import { useCreateLogMutation } from "@data/log/use-create-log.mutation";
+import { useLocation } from "@contexts/location/location.context";
 interface CartItemProps {
   item: any;
 }
@@ -23,13 +24,38 @@ const CartItem = ({ item }: CartItemProps) => {
   const { price: itemPrice } = usePrice({
     amount: item.itemTotal,
   });
+  const { mutate: createLog} = useCreateLogMutation();
+  const {getLocation} =useLocation()
+
   function handleIncrement(e: any) {
     e.stopPropagation();
     addItemToCart(item, 1);
+
+    createLog({
+      location:getLocation?.formattedAddress,
+      product:item,
+      type:'item-added'
+    }, {
+      onSuccess: (data: any) => {
+        console.log(data)
+      },
+    });
+
   }
   const handleRemoveClick = (e: any) => {
     e.stopPropagation();
     removeItemFromCart(item.id);
+
+    createLog({
+      location:getLocation?.formattedAddress,
+      product:item,
+      type:'item-removed'
+    }, {
+      onSuccess: (data: any) => {
+        console.log(data)
+      },
+    });
+
   };
   const outOfStock = !isInStock(item.id);
 

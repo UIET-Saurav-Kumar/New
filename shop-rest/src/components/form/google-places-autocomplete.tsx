@@ -5,7 +5,7 @@ import React, { useState ,useEffect } from "react";
 import { useTranslation } from "next-i18next";
 import Loader from "@components/ui/loader/loader";
 import { useLocation } from "@contexts/location/location.context";
-
+import { useCreateLogMutation } from "@data/log/use-create-log.mutation";
 import useOnClickOutside from "@utils/use-click-outside";
 
 
@@ -21,6 +21,7 @@ export default function GooglePlacesAutocomplete({address,
   const { t } = useTranslation();
   const [loc,setLocation]=useState(address);
   const {addLocation,getLocation} =useLocation()
+  const { mutate: createLog, isLoading: loading } = useCreateLogMutation();
 
   useEffect(()=>{
     setLocation(getLocation?.formattedAddress)
@@ -91,6 +92,15 @@ export default function GooglePlacesAutocomplete({address,
       addLocation(location);
       
       onChange(location);
+
+      createLog({location:location.formattedAddress}, {
+        onSuccess: (data: any) => {
+          console.log(data)
+        },
+        onError: (error: any) => {
+          
+        },
+      });
     }
   };
 

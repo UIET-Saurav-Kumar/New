@@ -63,5 +63,5 @@ export const API_ENDPOINTS = {
   IMPORT_MASTER_VARIATION_OPTIONS: "import-master-variation-options/",
   IMPORT_MASTER_PRODUCTS: "import-master-products/",
   IMPORT_SHOPS: "import-shops/",
-
+  LOGS:"logs",
 };

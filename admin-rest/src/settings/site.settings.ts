@@ -131,6 +131,11 @@ export const siteSettings = {
         label: "sidebar-nav-item-settings",
         icon: "SettingsIcon",
       },
+      {
+        href: ROUTES.LOGS,
+        label: "Logs",
+        icon: "Logs",
+      },
     ],
     shop: [
       {

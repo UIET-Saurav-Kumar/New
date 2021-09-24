@@ -8,6 +8,7 @@ use PickBazar\Http\Util\SMS;
 use App\Models\ReferralEarning;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
+use PickBazar\Database\Models\Log;
 use PickBazar\Events\OrderCreated;
 use PickBazar\Database\Models\User;
 use PickBazar\Database\Models\Order;
@@ -138,6 +139,15 @@ class OrderRepository extends BaseRepository
         return $transaction->send();
     }
 
+
+    private function formattedAddress($order)
+    {
+        $location=json_decode(json_encode($order->shop->settings["location"]));
+        if($location){
+            $location->formattedAddress;
+        }
+        return NULL;
+    }
     /**
      * @param $request
      * @return array|LengthAwarePaginator|Collection|mixed
@@ -153,7 +163,21 @@ class OrderRepository extends BaseRepository
             $this->calculateShopIncome($order, $request);
             $order->children = $order->children;
 
-            // event(new OrderCreated($order));
+            if($order)
+            {
+                $product_id=$request->products[0]["product_id"];
+                $product=Product::find($product_id);
+                $user=$request->user();                
+                Log::create([
+                    "user_id"=>($user)?$user->id:"",
+                    "ip_address"=>$request->ip(),
+                    "order_id"=>$order->id,
+                    "location"=>$request->location,
+                    'shop_id'=>$product->shop_id,
+                    "type"=>"order"
+                ]);
+            }
+            
             return $order;
         } catch (ValidatorException $e) {
             throw new PickbazarException('PICKBAZAR_ERROR.SOMETHING_WENT_WRONG');

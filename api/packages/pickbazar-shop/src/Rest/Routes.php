@@ -135,6 +135,10 @@ Route::post('import-master-variation-options', 'PickBazar\Http\Controllers\Maste
 Route::get('export-shops', 'PickBazar\Http\Controllers\ShopController@exportShop');
 Route::post('import-shops', 'PickBazar\Http\Controllers\ShopController@importShop');
 
+Route::post('logs', 'PickBazar\Http\Controllers\LogController@store');
+Route::get('logs', 'PickBazar\Http\Controllers\LogController@fetchLogs');
+Route::delete('logs/{id}', 'PickBazar\Http\Controllers\LogController@destory');
+
 // busineesId, mobile, ParentBusinees Id
 Route::apiResource('coupons', CouponController::class, [
     'only' => ['index', 'show']

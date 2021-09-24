@@ -19,3 +19,4 @@ export { TaxesIcon } from "@components/icons/sidebar/taxes";
 export { Offers } from "@components/icons/sidebar/offers";
 export { MasterProductsIcon } from "@components/icons/sidebar/master-products"
 export { Commission } from "@components/icons/sidebar/commission"
+export { Logs } from "@components/icons/sidebar/logs"
