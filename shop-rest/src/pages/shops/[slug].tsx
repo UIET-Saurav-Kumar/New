@@ -44,7 +44,7 @@ const ShopPage = ({ data }: any) => {
 
                       <div className="hidden lg:space-x-5 xl:space-x-10  lg:flex justify-between ">
 
-                          <div className=' sticky top-24 overflow-hidden lg:w-1/2 xl:w-1/4 flex  flex-col'>
+                          <div className=' sticky top-24 overflow-hidden lg:w-1/2 xl:w-1/4 flex h-full flex-col'>
                             <ShopPaymentForm />
                             <ShopCategoryCard data={data} className="" />
                           </div>
@@ -60,26 +60,26 @@ const ShopPage = ({ data }: any) => {
 
                           <div className='flex flex-col overflow-y-scroll  w-full'>  
 
-                              <div className='flex w-full h-full border'> 
+                            <div className='flex w-full h-full border'> 
 
-                                  <div className='h-full'>  
-                                    <ShopProfileCard data={data} />
-                                  </div>
-                                  
-                                  <Image
-                                    alt={t("heading")}
-                                    src={data?.cover_image?.original! ?? "/product-placeholder.svg"}
-                                    height={100}
-                                    width={1200}
-                                    // layout="fill"
-                                    // objectFit="contain"
-                                  />
-                            
-                              </div>
+                                <div className='h-full'>  
+                                  <ShopProfileCard data={data} />
+                                </div>
+                                
+                                <Image
+                                  alt={t("heading")}
+                                  src={data?.cover_image?.original! ?? "/product-placeholder.svg"}
+                                  height={100}
+                                  width={1200}
+                                  // layout="fill"
+                                  // objectFit="contain"
+                                />
+                          
+                            </div>
 
-                              <ShopDescription data = {data} />
+                             <ShopDescription data = {data} />
 
-                              { data && <ShopProductFeed shopId={data.id} /> }
+                            { data && <ShopProductFeed shopId={data.id} /> }
 
                           </div>
 
