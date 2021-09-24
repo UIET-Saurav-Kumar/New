@@ -11,68 +11,6 @@ import Tree from 'react-tree-graph';
 import 'react-tree-graph/dist/style.css'
 import {useReferralNetworkQuery} from '@data/user/use-referral-network-query'
 export default function ReferralNetwork() {
-    const data_1 = {
-        name: 'Colour',
-        children: [
-            {
-                name: 'Black',
-                children: []
-            }, 
-            {
-                name: 'Blue',
-                children: [{
-                    name: 'Aquamarine',
-                    children: []
-                }, {
-                    name: 'Cyan',
-                    children: []
-                }, {
-                    name: 'Navy',
-                    children: []
-                }, {
-                    name: 'Turquoise',
-                    children: []
-                }]
-            }, 
-            {
-                name: 'Green',
-                children: []
-            }, 
-            {
-                name: 'Purple',
-                children: [{
-                    name: 'Indigo',
-                    children: []
-                }, {
-                    name: 'Violet',
-                    children: []
-                }]
-            }, 
-            {
-                name: 'Red',
-                children: [{
-                    name: 'Crimson',
-                    children: []
-                }, {
-                    name: 'Maroon',
-                    children: []
-                }, {
-                    name: 'Scarlet',
-                    children: []
-                }]
-            }, 
-            {
-                name: 'White',
-                children: []
-            }, 
-            {
-                name: 'Yellow',
-                children: []
-            }
-        ]
-    };
-    
-
     
     const { data } = useReferralNetworkQuery({
         limit: 10 as number,

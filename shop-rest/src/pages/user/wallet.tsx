@@ -333,5 +333,3 @@ export const getStaticProps = async ({ locale }: any) => {
       },
     };
   };
-
-  ReferralActivity.layout = Layout;
