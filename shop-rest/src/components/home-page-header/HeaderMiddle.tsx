@@ -154,7 +154,7 @@ export default function HeaderMiddle({children,
                   <div className='w-auto sm:w-400 lg:w-800 mx-auto items-center '> 
                   
                         <GooglePlacesAutocomplete  onChange = {changeLocation} 
-                                                address={getLocation?.formattedAddress} /> 
+                                                   address  = {getLocation?.formattedAddress} /> 
                   </div>
         
                   <div className='flex mx-auto items-center'> 
@@ -175,21 +175,21 @@ export default function HeaderMiddle({children,
 
                        <div className='flex items-center  '>
                                <span>  
-                               <h3 onClick={handleLocation}  
-                                                className='flex  text-gray-600 items-center text-xs sm:text-sm md:text-md lg:hidden  
-                                                            md:text-gray-600 mr-0 md:mr-0 md:text-md'>
-           
-                                               <CaretDown className='text-gray-500 mr-2 w-3 h-3 md:w-5 md:h-5'/> 
+                                    <h3 onClick={handleLocation}  
+                                        className='flex  text-gray-600 items-center text-xs sm:text-sm md:text-md lg:hidden  
+                                                                    md:text-gray-600 mr-0 md:mr-0 md:text-md'>
 
-                                                        <button className='border text-gray-500 w-auto sm:w-96  rounded-xl border-gray-400 p-1 px-2'>
+                                            <CaretDown className='text-gray-500 mr-2 w-3 h-3 md:w-5 md:h-5'/> 
 
-                                                            { truncate(` ${getLocation?.formattedAddress} `, 21) }
+                                                    <button className='border text-gray-500 w-auto sm:w-96  rounded-xl border-gray-400 p-1 px-2'>
 
-                                                            {/* { getLocation?.formattedAddress } */}
-                                                            {/* Chandigarh */}
+                                                        { truncate(` ${getLocation?.formattedAddress} `, 21) }
 
-                                                        </button>
-                                   </h3> 
+                                                        {/* { getLocation?.formattedAddress } */}
+                                                        {/* Chandigarh */}
+
+                                                    </button>
+                                        </h3> 
                                 </span>
                                
                        </div>

@@ -89,7 +89,7 @@ export default function CreateOrUpdateWithdrawForm({ initialValues }: IProps) {
             className="w-full px-0 sm:pe-4 md:pe-5 pb-5 sm:w-4/12 md:w-1/3 sm:py-8 "
           />
 
-          <Card className="w-full sm:w-8/12 md:w-2/3">
+          <Card className="w-full sm:w-full md:w-2/3">
             <Input
               label={("Amount")}
               {...register("amount")}
