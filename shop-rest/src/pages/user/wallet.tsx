@@ -83,14 +83,15 @@ const ReferralActivity = () => {
                             <h1 className="text-lg mb-5 font-semibold text-heading">Revenue</h1>
 
                             {/* Mini Dashboard */}
-                            <div className="order-4 xl:order-3 col-span-12 xl:col-span-9">
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-5 bg-light p-4 rounded h-full">
+                            <div className="order-4 mx-auto xl:order-3 col-span-12 xl:col-span-9">
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-5 bg-light p-4 mx-auto rounded h-full">
                                 
 
-                                <div className="space-y-3">
+                                <div className="space-y-3  w-full">
                                     <div className="border border-gray-100">
 
                                         <div className="flex items-center py-3 px-4 border-b border-gray-100">
+
                                             <div className="p-3 rounded-full w-11 h-11 flex items-center justify-center bg-[#C7AF99] text-light">
                                                     <PriceWalletIcon width={16} />
                                             </div>
@@ -103,6 +104,7 @@ const ReferralActivity = () => {
                                                     {("Total Earning")}
                                                 </p>
                                             </div>
+
                                         </div>
 
                                     </div>
@@ -185,6 +187,7 @@ const ReferralActivity = () => {
                                 }
 
                                 {(data?.customer_level).map((commission):any => (
+                                    
                                     <tr className='bg-white' key={commission.id}>
                                         <td className=' p-1  border-b-2  lg:px-4 lg:py-4 text:10px sm:text-xs lg:text-md font-md text-gray-600'>{formateDate(commission.created_at)}</td>
                                         <td className='p-1 border-b-2  lg:px-4 lg:py-4 text:10px sm:text-xs  lg:text-md font-md text-gray-600' >{commission.shop_name}</td>

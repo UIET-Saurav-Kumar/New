@@ -41,11 +41,12 @@ export default function WithdrawsPage() {
 
   return (
     <>
-    <div className='invitation-status-page bg-gray-100 flex flex-col'>  
-      <Navbar label='Referral Activity '/>
+    <div className='invitation-status-page bg-gray-50 lg:bg-gray-100 flex flex-col'>  
+    
+      <Navbar label=''/>
 
-      <div className='flex mx-10 space-x-20 '>
-      <ProfileSidebar className="flex-shrink-0 hidden mt-14 xl:block xl:w-80 ml-8" />  
+      <div className='flex mx-0 lg:mx-10 space-x-8 lg:space-x-20 '>
+       <ProfileSidebar className="flex-shrink-0 hidden mt-14 xl:block xl:w-80  ml-8" />  
         <div className="w-full overflow-hidden">
           <div className="flex flex-col  justify-evenly p-4 w-full mx-auto  mt-14">
             <Card className="flex flex-col md:flex-row items-center justify-between mb-8">
@@ -55,12 +56,13 @@ export default function WithdrawsPage() {
                 </h1>
               </div>
 
-              <div className="flex items-center w-full ms-auto">
+              <div className="grid grid-cols-1 space-y-4 sm:flex sm:items-center md:flex 
+                              md:items-center place-items-center w-full ms-auto">
                 <SortForm
                   showLabel={false}
                   className="w-full"
                   onSortChange={({ value }: { value: SortOrder }) => {
-                    setColumn(value);
+                  setColumn(value);
                   }}
                   onOrderChange={({ value }: { value: string }) => {
                     setOrder(value);
@@ -82,12 +84,14 @@ export default function WithdrawsPage() {
                   <span className="md:hidden">+ {("Add")}</span>
                 </LinkButton>
               </div>
+
             </Card>
 
             <WithdrawList
               withdraws={data?.withdraws}
               onPagination={handlePagination}
             />
+
           </div>
         </div>
       </div>
