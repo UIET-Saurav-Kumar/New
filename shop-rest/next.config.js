@@ -13,24 +13,24 @@ module.exports = withPWA({
     return [
       {
         source: "/",
-        destination: "/buylowcal",
+        destination: "/home",
         permanent: false,
       },
     ];
   },
   images: {
     domains: [
-      '110.36.209.210',
       "googleusercontent.com",
       "graph.facebook.com",
       "res.cloudinary.com",
       "s3.amazonaws.com",
       "18.141.64.26",
       "127.0.0.1",
-      'api.buylowcal.com',
+      "110.36.209.210",
       "test.buylowcal.com",
       "testadmin.buylowcal.com",
       "testapi.buylowcal.com",
+      "api.buylowcal.com",
       "via.placeholder.com",
       "pickbazarlaravel.s3.ap-southeast-1.amazonaws.com",
       "picsum.photos",
