@@ -159,11 +159,11 @@ export default function ReferralNetwork() {
 
             <Navbar label="Referral Network "/>
 
-                <div className='  flex mx-10 space-x-10'>
+                <div className='  flex mx-4 sm:mx-10  space-x-0 lg:space-x-10'>
 
                     <ProfileSidebar className="sticky overflow-hidden flex-shrink-0 mt-14 ml-14 hidden xl:block xl:w-80 " />  
 
-                    <div className="flex flex-col  justify-evenly bg-white  p-4 w-full mx-auto border  mt-14" style={{backgroundColor:"#242424"}}>
+                    <div className="flex flex-col  justify-evenly bg-white h-screen p-4 w-screen  border  mt-14" style={{backgroundColor:"#2c2d25"}}>
                     {
                         data&&(
                             <Tree

@@ -10,6 +10,8 @@ import dynamic from "next/dynamic";
 import { ROUTES } from "@utils/routes";
 import Link from "@components/ui/link";
 import { useTranslation } from "next-i18next";
+import MobileJoinButton from "./mobile-join-button";
+import { isAbsolute } from "path/posix";
 
 const AuthorizedMenu = dynamic(
   () => import("@components/layout/navbar/authorized-menu"),
@@ -31,15 +33,19 @@ const Navbar = ({label}) => {
     <header ref={navbarRef} className="site-header h-14 md:h-16 lg:h-22">
       <nav className="h-14 md:h-16 lg:h-22 fixed w-full z-20 bg-light shadow-sm py-5 px-4 lg:px-5 xl:px-8 flex justify-between items-center">
        
-      <div className='flex items-center justify-between  space-x-8'> 
+      <div className='flex items-center justify-between w-full space-x-8'> 
        
-          <div className='flex items-center '> 
-              <Logo className="mx-auto lg:mx-0" /> 
-              <h2 className='font-semibold text-lg '>{label}</h2>
-          </div>
-          <div className='flex '>
+        <div className='flex items-center '> 
+            <Logo className="mx-auto lg:mx-0" /> 
+            <h2 className='font-semibold text-lg '>{label}</h2>
+        </div>
+
+        <div className='block lg:hidden mr-8'> 
+            {isAuthorize ? <AuthorizedMenu/> : <MobileJoinButton/>} 
+        </div>
+          {/* <div className='flex '>
               <button className=''>  </button>
-          </div>
+          </div> */}
 
       </div> 
 

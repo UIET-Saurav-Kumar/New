@@ -9,9 +9,9 @@ import Navbar from "@components/layout/navbar/navbar";
 // import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Footer from "@components/footer/Footer";
 import GooglePlacesAutocomplete from "@components/form/google-current-location";
-import DeliveryPlacesAutocomplete from "@components/form/delivery-places-autocomplete";
 import ShopPaymentForm from "src/pages/shops/shop-payment-form";
 import DeliveryAddressInputs from "./address-input";
+import DeliveryGooglePlaces from "./google-places-autocomplete";
 
 
 // import { XIcon } from "@heroicons/react/outline";
@@ -57,7 +57,8 @@ export default function Delivery() {
                      {/* location inputs */}
                     <div className='flex flex-col h-11/12 w-500 border-t-0 border shadow-2xl'>
 
-                        <DeliveryAddressInputs/>
+                        {/* <DeliveryAddressInputs/> */}
+                        <DeliveryGooglePlaces/>
 
                             <div className=' flex justify-between mx-4 items-center  h-24'>
 
@@ -73,7 +74,7 @@ export default function Delivery() {
                                     
                             </div>
 
-                   </div>
+                    </div>
 
                 
                      {/* Map */}
@@ -143,7 +144,7 @@ export default function Delivery() {
                                 <img  src='/transparent-delivery-man.png' 
                                       className='rounded-full border h-14 mt-3  w-14 object-contain '/>
 
-                                    <div className='flex justify-between  text-xs '>
+                                    <div className='flex justify-between text-xs '>
 
                                         <h3 className='font-semibold'>Rider</h3>
                                         <h3 className='font-light flex ml-8 text-gray-600'>CH 01 3499</h3>
@@ -158,13 +159,16 @@ export default function Delivery() {
 
                             <form className='flex items-center mx-auto  flex-col ' >
                                     
-                                        <DeliveryPlacesAutocomplete />
+                                    <DeliveryGooglePlaces/>
                                   
-                                        <input onChange={(e)=>setDrop(e.target.value)} type='text' className=' mx-2  p-2 rounded-lg text-xs outline-none border' 
-                                            placeholder='Enter Drop Location' />
+                                    <input onChange={(e)=>setDrop(e.target.value)} type='text' 
+                                        className=' mx-2  p-2 rounded-lg text-xs outline-none border' 
+                                        placeholder='Enter Drop Location' />
                                     
 
-                                    <button onClick={handleDelivery} className='px-4 bg-green-500 hover:bg-green-400 mx-auto rounded-lg text-sm py-1 text-white font-semibold'>
+                                    <button onClick={handleDelivery} 
+                                            className='px-4 bg-green-500 hover:bg-green-400 mx-auto 
+                                                       rounded-lg text-sm py-1 text-white font-semibold'>
                                         Pickup Delivery
                                     </button>
 
@@ -185,7 +189,7 @@ export default function Delivery() {
 
 
 
-export const getStaticProps = async ({ locale }, any) => {
+export const getStaticProps = async ({ locale } :any) => {
     return {
       props: {
         ...(await serverSideTranslations(locale, ["common"])),

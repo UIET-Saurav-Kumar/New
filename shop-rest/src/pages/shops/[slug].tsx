@@ -44,7 +44,7 @@ const ShopPage = ({ data }: any) => {
 
                       <div className="hidden lg:space-x-5 xl:space-x-10  lg:flex justify-between ">
 
-                          <div className=' sticky top-24 overflow-hidden lg:w-1/2 xl:w-1/4 flex h-full flex-col'>
+                          <div className=' sticky top-24 overflow-hidden lg:w-1/2 xl:w-1/4 flex  flex-col'>
                             <ShopPaymentForm />
                             <ShopCategoryCard data={data} className="" />
                           </div>
