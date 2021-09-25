@@ -21,7 +21,7 @@ import {
   calculateTotal,
 } from "@contexts/quick-cart/cart.utils";
 interface FormValues {
-  payment_gateway: "cod" | "stripe";
+  payment_gateway: "cod" | "cashfree" | "upi" | "wallet";
   contact: string;
   card: {
     number: string;
@@ -35,16 +35,16 @@ const paymentSchema = Yup.object().shape({
   contact: Yup.string()
     .min(8, "error-min-contact")
     .required("error-contact-required"),
-  payment_gateway: Yup.string().default("stripe").oneOf(["cod", "stripe"]),
-  card: Yup.mixed().when("payment_gateway", {
-    is: (value: string) => value === "stripe",
-    then: Yup.object().shape({
-      number: Yup.string().required("error-card-required"),
-      expiry: Yup.string().required("error-expiry-date"),
-      cvc: Yup.string().required("error-cvc"),
-      email: Yup.string().email().required("error-email-required"),
-    }),
-  }),
+  payment_gateway: Yup.string().default("cashfree").oneOf(["cod", "cashfree", "upi", "wallet"]),
+  // card: Yup.mixed().when("payment_gateway", {
+  //   is: (value: string) => value === "cashfree",
+  //   then: Yup.object().shape({
+  //     number: Yup.string().required("error-card-required"),
+  //     expiry: Yup.string().required("error-expiry-date"),
+  //     cvc: Yup.string().required("error-cvc"),
+  //     email: Yup.string().email().required("error-email-required"),
+  //   }),
+  // }),
 });
 
 const PaymentForm = () => {
@@ -63,7 +63,7 @@ const PaymentForm = () => {
   } = useForm<FormValues>({
     resolver: yupResolver(paymentSchema),
     defaultValues: {
-      payment_gateway: "cod",
+      payment_gateway: "cashfree",
     },
   });
 
@@ -113,21 +113,25 @@ const PaymentForm = () => {
         ...(shipping_address?.address && shipping_address.address),
       },
     };
-    if (values.payment_gateway !== "cod") {
-      // @ts-ignore
-      input.card = {
-        number: values?.card?.number,
-        expiryMonth: values?.card?.expiry?.split("/")[0],
-        expiryYear: values?.card?.expiry?.split("/")[1],
-        cvv: values?.card?.cvc,
-        email: values?.card?.email,
-      };
-    }
+    // if (values.payment_gateway !== "cod") {
+    //   // @ts-ignore
+    //   input.card = {
+    //     number: values?.card?.number,
+    //     expiryMonth: values?.card?.expiry?.split("/")[0],
+    //     expiryYear: values?.card?.expiry?.split("/")[1],
+    //     cvv: values?.card?.cvc,
+    //     email: values?.card?.email,
+    //   };
+    // }
 
     createOrder(input, {
       onSuccess: (order: any) => {
         if (order?.tracking_number) {
           router.push(`${ROUTES.ORDERS}/${order?.tracking_number}`);
+        }
+        if (order?.paymentLink)
+        {
+          window.location.replace(order?.paymentLink)
         }
       },
       onError: (error: any) => {
@@ -153,8 +157,8 @@ const PaymentForm = () => {
 
       <div className="my-6">
         <Label>{t("text-payment-gateway")}</Label>
-        
-         <div className="space-s-4 flex items-center">
+
+        <div className="flex items-center space-s-4">
 
           <Radio
             id="cod"
@@ -164,10 +168,37 @@ const PaymentForm = () => {
             label={t("text-cash-on-delivery")}
             className=""
           />
+
+          <Radio
+            id="cashfree"
+            type="radio"
+            {...register("payment_gateway")}
+            value="cashfree"
+            label={t("text-creditcard")}
+            className=""
+          />
+
+          <Radio
+            id="upi"
+            type="radio"
+            {...register("payment_gateway")}
+            value="upi"
+            label={t("text-upi")}
+            className=""
+          />
+
+          <Radio
+            id="wallet"
+            type="radio"
+            {...register("payment_gateway")}
+            value="wallet"
+            label={t("text-wallet")}
+            className=""
+          />
         </div>
       </div>
 
-      
+     
       {!subtotal && <ValidationError message={t("error-order-unavailable")} />}
       {total < 0 && (
         <div className="mt-3">
@@ -177,7 +208,7 @@ const PaymentForm = () => {
       <Button
         loading={loading}
         disabled={!subtotal || total < 0}
-        className="w-full lg:w-auto lg:ms-auto mt-5"
+        className="w-full mt-5 lg:w-auto lg:ms-auto"
       >
         {t("text-place-order")}
       </Button>
