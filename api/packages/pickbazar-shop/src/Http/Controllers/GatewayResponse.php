@@ -9,7 +9,6 @@ use Illuminate\Support\Collection;
 use PickBazar\Exceptions\PickbazarException;
 use Prettus\Validator\Exceptions\ValidatorException;
 use PickBazar\Database\Models\Order;
-use PickBazar\Database\Models\GatewayTransactions;
 
 class GatewayResponse extends CoreController
 {
