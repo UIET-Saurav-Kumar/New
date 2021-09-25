@@ -23,7 +23,6 @@ use PickBazar\Http\Controllers\OrderStatusController;
 use PickBazar\Http\Controllers\ShopCategoryController;
 use PickBazar\Http\Controllers\MasterProductController;
 use PickBazar\Http\Controllers\AttributeValueController;
-use PickBazar\Database\Models\Order;
 
 Route::post('/register', 'PickBazar\Http\Controllers\UserController@register');
 Route::post('/token', 'PickBazar\Http\Controllers\UserController@token');
@@ -111,28 +110,7 @@ Route::get('get-wallet-commission','PickBazar\Http\Controllers\InviteController@
 
 Route::get('referral-network','PickBazar\Http\Controllers\InviteController@refferral_network');
 
-Route::any('order/success', function () {
-    $response = request()->all();
-
-    $order_id = $response['orderId'] ?? null;
-    $orderAmount = $response['orderAmount'] ?? null;
-    $referenceId = $response['referenceId'] ?? null;
-    $txStatus = $response['txStatus'] ?? null;
-    $paymentMode = $response['paymentMode'] ?? null;
-    $txMsg = $response['txMsg'] ?? null;
-    $txTime = $response['txTime'] ?? null;
-    $signature = $response['signature'] ?? null;
-
-    if ($txStatus != "SUCCESS") {
-
-        $parent_orderid = Order::where('tracking_number', $order_id)->first()->id;
-        Order::where('tracking_number', $order_id)->update(['status' => 8]);
-        Order::where('parent_id', $parent_orderid)->update(['status' => 8]);
-    }
-
-    $url = \Config::get('app.shop_url')."/orders/".$order_id;
-    return redirect()->away($url);
-});
+Route::any('order/success','PickBazar\Http\Controllers\GatewayResponse@process_response');
 
 Route::post('import-products', 'PickBazar\Http\Controllers\ProductController@importProducts');
 Route::post('import-variation-options', 'PickBazar\Http\Controllers\ProductController@importVariationOptions');
