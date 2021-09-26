@@ -108,7 +108,7 @@ const {
         <>
 
     {loading ? (
-          <ProductFeedLoader limit={3} />
+         <img src='/preloader/cir.gif' className='mx-auto my-auto'/>
         ) : (
         <div className='lg:px-10 md:px-7'>
           {
