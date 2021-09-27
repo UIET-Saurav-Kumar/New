@@ -133,7 +133,7 @@ export const siteSettings = {
       },
       {
         href: ROUTES.LOGS,
-        label: "Logs",
+        label: "Business Intelligence",
         icon: "Logs",
       },
     ],

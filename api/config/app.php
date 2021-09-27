@@ -120,6 +120,8 @@ return [
     */
 
     'key' => env('APP_KEY'),
+    
+    'shop_url' => env('APP_SHOP'),
 
     'cipher' => 'AES-256-CBC',
 
@@ -161,6 +163,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        LoveyCom\CashFree\CashFreeServiceProvider::class,
 
         /*
          * Package Service Providers...

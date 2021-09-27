@@ -19,9 +19,8 @@
         "laravel/framework": "^8.12",
         "laravel/socialite": "^5.2",
         "laravel/tinker": "^2.5",
-        "omnipay/common": "dev-master",
-        "omnipay/stripe": "dev-master",
-        "pickbazar/shop": "dev-master"
+        "loveycom/cashfree": "^2.1",
+        "pickbazar/shop": "dev-main"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -73,18 +72,6 @@
         "pickbazar/shop": {
             "type": "path",
             "url": "packages/pickbazar-shop"
-        },
-        "ignited/laravel-omnipay": {
-            "type": "path",
-            "url": "packages/laravel-omnipay"
-        },
-        "omnipay/common": {
-            "type": "path",
-            "url": "packages/omnipay-common"
-        },
-        "omnipay/stripe": {
-            "type": "path",
-            "url": "packages/omnipay-stripe"
         }
     }
 }

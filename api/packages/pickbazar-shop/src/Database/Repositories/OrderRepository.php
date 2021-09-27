@@ -22,6 +22,7 @@ use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Repository\Exceptions\RepositoryException;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Ignited\LaravelOmnipay\Facades\OmnipayFacade as Omnipay;
+use LoveyCom\CashFree\PaymentGateway\Order as CashFreeOrder;
 
 class OrderRepository extends BaseRepository
 {
@@ -80,6 +81,7 @@ class OrderRepository extends BaseRepository
 
     public function storeOrder($request)
     {
+        $user = $request->user();
         $request['tracking_number'] = Str::random(12);
         $request['customer_id'] = $request->user()->id;
         $discount = $this->calculateDiscount($request);
@@ -101,24 +103,56 @@ class OrderRepository extends BaseRepository
                 // Cash on Delivery no need to capture payment
                 return $this->createOrder($request);
                 break;
-            case 'paypal':
+            case 'cashfree':
                 // For default gateway no need to set gateway
-                Omnipay::setGateway('paypal');
+                // Omnipay::setGateway('cashfree');
+                // return $this->createOrder($request);
                 break;
         }
 
-        $response = $this->capturePayment($request);
-        SMS::customerPurchase($request->user()->phone_number,$request->user()->name);
-        if ($response->isSuccessful()) {
-            $payment_id = $response->getTransactionReference();
-            $request['payment_id'] = $payment_id;
-            $order = $this->createOrder($request);
-            return $order;
-        } elseif ($response->isRedirect()) {
-            return $response->getRedirectResponse();
-        } else {
-            throw new PickbazarException('PICKBAZAR_ERROR.PAYMENT_FAILED');
+        // $response = $this->capturePayment($request);
+        // SMS::customerPurchase($request->user()->phone_number, $request->user()->name);
+        $payment_method = 'cc';
+        if($payment_method == 'cashfree')
+        {
+            $payment_method = 'cc';
         }
+        if($payment_method == 'upi')
+        {
+            $payment_method = 'upi';
+        }
+        if($payment_method == 'wallet')
+        {
+            $payment_method = 'dc';
+        }
+        $orderFree = new CashFreeOrder();
+        $od["orderId"] = $request['tracking_number'];
+        $od["orderAmount"] = $request['total'];
+        $od["orderNote"] = "Subscription";
+        $od["customerPhone"] = $request->customer_contact;
+        $od["customerName"] = $user->name;
+        $od["customerEmail"] = $user->email ?? "test@cashfree.com";
+        $od["payment_methods"] = $payment_method;
+        $od["returnUrl"] = url("order/success");
+        $od["notifyUrl"] = url("order/success");
+        $orderFree->create($od);
+        $this->createOrder($request);
+        $link = $orderFree->getLink($od['orderId']);
+        return json_encode($link);
+        // if () {
+        // $payment_id = $response->getTransactionReference();
+        // $request['payment_id'] = $payment_id;
+
+        // $link = $orderFree->getLink($od['orderId']);
+        // return $link;
+        // return $order;
+        // }
+        // elseif ($response->isRedirect()) {
+        // return $response->getRedirectResponse();
+        // } 
+        // else {
+        // throw new PickbazarException('PICKBAZAR_ERROR.PAYMENT_FAILED');
+        // }
     }
 
     /**
@@ -149,73 +183,10 @@ class OrderRepository extends BaseRepository
         return NULL;
     }
 
-
-    //   #attributes: array:17 [
-    //     "tracking_number" => "8TGF5Fc9zmGX"
-    //     "customer_id" => 21
-    //     "status" => 1
-    //     "amount" => 21
-    //     "sales_tax" => 0.42
-    //     "paid_total" => 71.42
-    //     "total" => 71.42
-    //     "delivery_time" => "Self Pickup"
-    //     "payment_gateway" => "cod"
-    //     "discount" => 0
-    //     "billing_address" => "{"zip":"1234","city":"test","state":"test","country":"test","street_address":"test"}"
-    //     "shipping_address" => "[]"
-    //     "delivery_fee" => 50
-    //     "customer_contact" => "9(999) 999 99 99"
-    //     "updated_at" => "2021-09-27 12:47:01"
-    //     "created_at" => "2021-09-27 12:47:01"
-    //     "id" => 38
-    //   ]
-    //   #original: array:17 [
-    //     "tracking_number" => "8TGF5Fc9zmGX"
-    //     "customer_id" => 21
-    //     "status" => 1
-    //     "amount" => 21
-    //     "sales_tax" => 0.42
-    //     "paid_total" => 71.42
-    //     "total" => 71.42
-    //     "delivery_time" => "Self Pickup"
-    //     "payment_gateway" => "cod"
-    //     "discount" => 0
-    //     "billing_address" => "{"zip":"1234","city":"test","state":"test","country":"test","street_address":"test"}"
-    //     "shipping_address" => "[]"
-    //     "delivery_fee" => 50
-    //     "customer_contact" => "9(999) 999 99 99"
-    //     "updated_at" => "2021-09-27 12:47:01"
-    //     "created_at" => "2021-09-27 12:47:01"
-    //     "id" => 38
-    //   ]
     /**
      * @param $request
      * @return array|LengthAwarePaginator|Collection|mixed
-     */
-
-
-    // array:14 [
-    //     "tracking_number" => "B8hh2aEzBSwY"
-    //     "customer_id" => 21
-    //     "status" => 1
-    //     "amount" => 21
-    //     "sales_tax" => 0.42
-    //     "paid_total" => 71.42
-    //     "total" => 71.42
-    //     "delivery_time" => "Self Pickup"
-    //     "payment_gateway" => "cod"
-    //     "discount" => 0
-    //     "billing_address" => array:5 [
-    //       "zip" => "1234"
-    //       "city" => "test"
-    //       "state" => "test"
-    //       "country" => "test"
-    //       "street_address" => "test"
-    //     ]
-    //     "shipping_address" => []
-    //     "delivery_fee" => 50
-    //     "customer_contact" => "9(999) 999 99 99"
-    //   ]
+     */    
     protected function createOrder($request)
     {
         try {
@@ -251,32 +222,30 @@ class OrderRepository extends BaseRepository
         }
     }
 
-    protected function calculateShopIncome($parent_order,$request)
+    protected function calculateShopIncome($parent_order, $request)
     {
         foreach ($parent_order->children as  $order) {
             $balance = Balance::where('shop_id', '=', $order->shop_id)->first();
             $adminCommissionRate = $balance->admin_commission_rate;
             $shop_earnings = ($order->total * (100 - $adminCommissionRate)) / 100;
-            $commission_value = ($order->total * $adminCommissionRate) / 100 ;
-            $this->distribute_commission($order,$commission_value,$request);
+            $commission_value = ($order->total * $adminCommissionRate) / 100;
+            $this->distribute_commission($order, $commission_value, $request);
             $balance->total_earnings = $balance->total_earnings + $shop_earnings;
             $balance->current_balance = $balance->current_balance + $shop_earnings;
             $balance->save();
         }
     }
 
-    private function distribute_commission($order,$commission_value,$request)
+    private function distribute_commission($order, $commission_value, $request)
     {
+        $customer = User::find($request->customer_id);
+        $level1 = ($customer) ? $this->get_uplink($customer) : "";
+        $level2 = ($level1) ? $this->get_uplink($level1) : "";
+        $level3 = ($level2) ? $this->get_uplink($level2) : "";
 
-        $customer=User::find($request->customer_id);
-
-        $level1=($customer)?$this->get_uplink($customer):"";
-        $level2=($level1)?$this->get_uplink($level1):"";
-        $level3=($level2)?$this->get_uplink($level2):"";
-
-        $referral_commission=ReferralCommission::find(1);
-        if($customer){
-            $commission=($commission_value*(float)$referral_commission->customer_commission)/100;
+        $referral_commission = ReferralCommission::find(1);
+        if ($customer) {
+            $commission = ($commission_value * (float)$referral_commission->customer_commission) / 100;
             $this->createReferralEarning(
                 $order,
                 $commission,
@@ -284,10 +253,11 @@ class OrderRepository extends BaseRepository
                 $customer,
                 $customer,
                 $commission_value,
-                "0");
+                "0"
+            );
         }
-        if($level1){
-            $commission=($commission_value*(float)$referral_commission->level1_commission)/100;
+        if ($level1) {
+            $commission = ($commission_value * (float)$referral_commission->level1_commission) / 100;
             $this->createReferralEarning(
                 $order,
                 $commission,
@@ -295,10 +265,11 @@ class OrderRepository extends BaseRepository
                 $level1,
                 $customer,
                 $commission_value,
-                "1");
+                "1"
+            );
         }
-        if($level2){
-            $commission=($commission_value*(float)$referral_commission->level2_commission)/100;
+        if ($level2) {
+            $commission = ($commission_value * (float)$referral_commission->level2_commission) / 100;
             $this->createReferralEarning(
                 $order,
                 $commission,
@@ -306,10 +277,11 @@ class OrderRepository extends BaseRepository
                 $level2,
                 $customer,
                 $commission_value,
-                "2");
+                "2"
+            );
         }
-        if($level3){
-            $commission=($commission_value*(float)$referral_commission->level3_commission)/100;
+        if ($level3) {
+            $commission = ($commission_value * (float)$referral_commission->level3_commission) / 100;
             $this->createReferralEarning(
                 $order,
                 $commission,
@@ -317,46 +289,29 @@ class OrderRepository extends BaseRepository
                 $level3,
                 $customer,
                 $commission_value,
-                "3");
+                "3"
+            );
         }
     }
 
-    private function createReferralEarning($order,$commission_value,$request,$level,$customer,$commission,$commission_level)
+    private function createReferralEarning($order, $commission_value, $request, $level, $customer, $commission, $commission_level)
     {
-        $this->customerBalance($commission_value,$level);
-
         ReferralEarning::create([
-            "user_id"=>$level->id,
-            "customer_id"=>$customer->id,
-            "customer_name"=>$customer->name,
-            "order_id"=>$order->id,
-            "order_track_number"=>$order->tracking_number,
-            "commission_value"=>$order->total,
-            "shop_name"=>$order->shop->name,
-            "earning"=>$commission_value,
-            "level"=>$commission_level
+            "user_id" => $level->id,
+            "customer_id" => $customer->id,
+            "customer_name" => $customer->name,
+            "order_id" => $order->id,
+            "order_track_number" => $order->tracking_number,
+            "commission_value" => $order->total,
+            "shop_name" => $order->shop->name,
+            "earning" => $commission_value,
+            "level" => $commission_level
         ]);
-    }
-
-    private function customerBalance($price,$user)
-    {
-        $balance = Balance::where('user_id', '=', $user->id)->first();
-        if($balance){
-            $balance->total_earnings = $balance->total_earnings + $price;
-            $balance->current_balance = $balance->current_balance + $price;
-            $balance->save();
-        }else{
-            Balance::create([
-                "user_id"=>$user->id,
-                "total_earnings"=>$price,
-                "current_balance"=>$price,
-            ]);
-        }
     }
 
     private function get_uplink($user)
     {
-        return ($user->invited_by)?User::find($user->invited_by):"";
+        return ($user->invited_by) ? User::find($user->invited_by) : "";
     }
 
     protected function processProducts($products)
@@ -430,94 +385,3 @@ class OrderRepository extends BaseRepository
         }
     }
 }
-// array:14 [
-//     "tracking_number" => "8ewKFepsbzab"
-//     "customer_id" => 21
-//     "status" => 1
-//     "amount" => 40
-//     "sales_tax" => 0.8
-//     "paid_total" => 90.8
-//     "total" => 90.8
-//     "delivery_time" => "Self Pickup"
-//     "payment_gateway" => "cod"
-//     "discount" => 0
-//     "billing_address" => array:5 [
-//       "zip" => "1234"
-//       "city" => "test"
-//       "state" => "test"
-//       "country" => "test"
-//       "street_address" => "test"
-//     ]
-//     "shipping_address" => []
-//     "delivery_fee" => 50
-//     "customer_contact" => "9(999) 999 99 99"
-//   ]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// #attributes: array:17 [
-//     "tracking_number" => "E2bmJW7Iuv22"
-//     "customer_id" => 21
-//     "status" => 1
-//     "amount" => 40
-//     "sales_tax" => 0.8
-//     "paid_total" => 90.8
-//     "total" => 90.8
-//     "delivery_time" => "Self Pickup"
-//     "payment_gateway" => "cod"
-//     "discount" => 0
-//     "billing_address" => "{"zip":"1234","city":"test","state":"test","country":"test","street_address":"test"}"
-//     "shipping_address" => "[]"
-//     "delivery_fee" => 50
-//     "customer_contact" => "9(999) 999 99 99"
-//     "updated_at" => "2021-09-27 12:51:38"
-//     "created_at" => "2021-09-27 12:51:38"
-//     "id" => 39
-//   ]
-//   #original: array:17 [
-//     "tracking_number" => "E2bmJW7Iuv22"
-//     "customer_id" => 21
-//     "status" => 1
-//     "amount" => 40
-//     "sales_tax" => 0.8
-//     "paid_total" => 90.8
-//     "total" => 90.8
-//     "delivery_time" => "Self Pickup"
-//     "payment_gateway" => "cod"
-//     "discount" => 0
-//     "billing_address" => "{"zip":"1234","city":"test","state":"test","country":"test","street_address":"test"}"
-//     "shipping_address" => "[]"
-//     "delivery_fee" => 50
-//     "customer_contact" => "9(999) 999 99 99"
-//     "updated_at" => "2021-09-27 12:51:38"
-//     "created_at" => "2021-09-27 12:51:38"
-//     "id" => 39
-//   ]

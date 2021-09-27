@@ -154,6 +154,11 @@
   "text-place-order": "Place Order",
   "text-your-order": "Your Order",
   "text-cash-on-delivery": "Cash On Delivery",
+  
+  "text-creditcard": "Credit Card",
+  "text-wallet": "Wallet",
+  "text-upi": "UPI",
+
   "text-card-info": "Card Information",
   "text-no-products": "No products found",
   "text-search-label": "grocery search at header",
