@@ -48,6 +48,12 @@ const CustomerList = ({ customers, onPagination }: IProps) => {
       align: alignLeft,
     },
     {
+      title: ("Role"),
+      dataIndex: "role",
+      key: "role",
+      align: alignLeft,
+    },
+    {
       title: t("table:table-item-status"),
       dataIndex: "is_active",
       key: "is_active",

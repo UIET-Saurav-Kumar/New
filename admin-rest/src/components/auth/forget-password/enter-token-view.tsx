@@ -23,7 +23,7 @@ const EnterTokenView = ({ onSubmit, loading }: Props) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <Input
-        label={t("form:token-label")}
+        label={("Enter your token")}
         {...register("token")}
         variant="outline"
         className="mb-5"

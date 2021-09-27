@@ -17,6 +17,8 @@ use PickBazar\Database\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use PickBazar\Database\Models\Invite;
+use App\Http\Resources\UserCollection;
+use App\Http\Resources\UserResource;
 use Laravel\Socialite\Facades\Socialite;
 use PickBazar\Exceptions\PickbazarException;
 use Illuminate\Validation\ValidationException;
@@ -43,7 +45,10 @@ class UserController extends CoreController
     public function index(Request $request)
     {
         $limit = $request->limit ?   $request->limit : 15;
-        return $this->repository->with(['profile', 'address'])->paginate($limit);
+        $data= UserResource::collection(User::paginate($limit));
+        
+        return $data->resource;
+        
     }
 
     /**

@@ -20,6 +20,7 @@ const ForgotPassword = () => {
   const [errorMsg, setErrorMsg] = useState<string | null | undefined>("");
   const [verifiedEmail, setVerifiedEmail] = useState("");
   const [verifiedToken, setVerifiedToken] = useState("");
+  const [phone_number,setPhoneNumber]=useState("")
 
   function handleEmailSubmit({ email }: { email: string }) {
     forgetPassword(
@@ -32,8 +33,9 @@ const ForgotPassword = () => {
       },
       {
         onSuccess: ({ data }) => {
-          if (data?.success) {
+          if (data.success) {
             setVerifiedEmail(email);
+            setPhoneNumber(data.phone_number);
           } else {
             setErrorMsg(data?.message);
           }
@@ -87,6 +89,12 @@ const ForgotPassword = () => {
 
   return (
     <>
+      {
+        verifiedEmail && !verifiedToken &&
+        (<p className="text-center text-sm md:text-base leading-relaxed text-body mb-7 sm:mb-10">
+          Verfication code has been set to you on {phone_number}
+        </p>)
+      }
       {errorMsg && (
         <Alert
           variant="error"

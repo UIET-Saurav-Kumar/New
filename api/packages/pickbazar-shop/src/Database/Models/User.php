@@ -6,6 +6,7 @@ use App\Enums\RoleType;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Builder;
+use PickBazar\Enums\Permission;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -111,5 +112,22 @@ class User extends Authenticatable
     public function balance(): HasOne
     {
         return $this->hasOne(Balance::class, 'user_id');
+    }
+
+    public function role(){
+        if($this->hasPermissionTo(Permission::SUPER_ADMIN)){
+            $role="Super Admin";
+        }else if($this->hasPermissionTo(Permission::STORE_OWNER)){
+            $role="Store Owner";
+        }else if($this->hasPermissionTo(Permission::STAFF))
+        {
+            $role="Staff";
+        }else {
+            $role="Customer";
+        }
+        
+        return [
+            "role"=>$role
+        ];
     }
 }

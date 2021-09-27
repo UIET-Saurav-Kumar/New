@@ -148,16 +148,83 @@ class OrderRepository extends BaseRepository
         }
         return NULL;
     }
+
+
+    //   #attributes: array:17 [
+    //     "tracking_number" => "8TGF5Fc9zmGX"
+    //     "customer_id" => 21
+    //     "status" => 1
+    //     "amount" => 21
+    //     "sales_tax" => 0.42
+    //     "paid_total" => 71.42
+    //     "total" => 71.42
+    //     "delivery_time" => "Self Pickup"
+    //     "payment_gateway" => "cod"
+    //     "discount" => 0
+    //     "billing_address" => "{"zip":"1234","city":"test","state":"test","country":"test","street_address":"test"}"
+    //     "shipping_address" => "[]"
+    //     "delivery_fee" => 50
+    //     "customer_contact" => "9(999) 999 99 99"
+    //     "updated_at" => "2021-09-27 12:47:01"
+    //     "created_at" => "2021-09-27 12:47:01"
+    //     "id" => 38
+    //   ]
+    //   #original: array:17 [
+    //     "tracking_number" => "8TGF5Fc9zmGX"
+    //     "customer_id" => 21
+    //     "status" => 1
+    //     "amount" => 21
+    //     "sales_tax" => 0.42
+    //     "paid_total" => 71.42
+    //     "total" => 71.42
+    //     "delivery_time" => "Self Pickup"
+    //     "payment_gateway" => "cod"
+    //     "discount" => 0
+    //     "billing_address" => "{"zip":"1234","city":"test","state":"test","country":"test","street_address":"test"}"
+    //     "shipping_address" => "[]"
+    //     "delivery_fee" => 50
+    //     "customer_contact" => "9(999) 999 99 99"
+    //     "updated_at" => "2021-09-27 12:47:01"
+    //     "created_at" => "2021-09-27 12:47:01"
+    //     "id" => 38
+    //   ]
     /**
      * @param $request
      * @return array|LengthAwarePaginator|Collection|mixed
      */
+
+
+    // array:14 [
+    //     "tracking_number" => "B8hh2aEzBSwY"
+    //     "customer_id" => 21
+    //     "status" => 1
+    //     "amount" => 21
+    //     "sales_tax" => 0.42
+    //     "paid_total" => 71.42
+    //     "total" => 71.42
+    //     "delivery_time" => "Self Pickup"
+    //     "payment_gateway" => "cod"
+    //     "discount" => 0
+    //     "billing_address" => array:5 [
+    //       "zip" => "1234"
+    //       "city" => "test"
+    //       "state" => "test"
+    //       "country" => "test"
+    //       "street_address" => "test"
+    //     ]
+    //     "shipping_address" => []
+    //     "delivery_fee" => 50
+    //     "customer_contact" => "9(999) 999 99 99"
+    //   ]
     protected function createOrder($request)
     {
         try {
             $orderInput = $request->only($this->dataArray);
             $products = $this->processProducts($request['products']);
             $order = $this->create($orderInput);
+            $id=isset($order["id"])?$order["id"]:$order->id;
+            $order=Order::findOrFail($id);
+
             $order->products()->attach($products);
             $this->createChildOrder($order->id, $request);
             $this->calculateShopIncome($order, $request);
@@ -363,3 +430,94 @@ class OrderRepository extends BaseRepository
         }
     }
 }
+// array:14 [
+//     "tracking_number" => "8ewKFepsbzab"
+//     "customer_id" => 21
+//     "status" => 1
+//     "amount" => 40
+//     "sales_tax" => 0.8
+//     "paid_total" => 90.8
+//     "total" => 90.8
+//     "delivery_time" => "Self Pickup"
+//     "payment_gateway" => "cod"
+//     "discount" => 0
+//     "billing_address" => array:5 [
+//       "zip" => "1234"
+//       "city" => "test"
+//       "state" => "test"
+//       "country" => "test"
+//       "street_address" => "test"
+//     ]
+//     "shipping_address" => []
+//     "delivery_fee" => 50
+//     "customer_contact" => "9(999) 999 99 99"
+//   ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// #attributes: array:17 [
+//     "tracking_number" => "E2bmJW7Iuv22"
+//     "customer_id" => 21
+//     "status" => 1
+//     "amount" => 40
+//     "sales_tax" => 0.8
+//     "paid_total" => 90.8
+//     "total" => 90.8
+//     "delivery_time" => "Self Pickup"
+//     "payment_gateway" => "cod"
+//     "discount" => 0
+//     "billing_address" => "{"zip":"1234","city":"test","state":"test","country":"test","street_address":"test"}"
+//     "shipping_address" => "[]"
+//     "delivery_fee" => 50
+//     "customer_contact" => "9(999) 999 99 99"
+//     "updated_at" => "2021-09-27 12:51:38"
+//     "created_at" => "2021-09-27 12:51:38"
+//     "id" => 39
+//   ]
+//   #original: array:17 [
+//     "tracking_number" => "E2bmJW7Iuv22"
+//     "customer_id" => 21
+//     "status" => 1
+//     "amount" => 40
+//     "sales_tax" => 0.8
+//     "paid_total" => 90.8
+//     "total" => 90.8
+//     "delivery_time" => "Self Pickup"
+//     "payment_gateway" => "cod"
+//     "discount" => 0
+//     "billing_address" => "{"zip":"1234","city":"test","state":"test","country":"test","street_address":"test"}"
+//     "shipping_address" => "[]"
+//     "delivery_fee" => 50
+//     "customer_contact" => "9(999) 999 99 99"
+//     "updated_at" => "2021-09-27 12:51:38"
+//     "created_at" => "2021-09-27 12:51:38"
+//     "id" => 39
+//   ]

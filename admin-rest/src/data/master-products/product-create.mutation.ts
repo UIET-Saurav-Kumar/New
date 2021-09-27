@@ -13,7 +13,7 @@ export const useCreateProductMutation = () => {
     (input: CreateProduct) => Product.create(API_ENDPOINTS.MASTER_PRODUCT, input),
     {
       onSuccess: () => {
-        router.push(`/${router?.query?.shop}${ROUTES.MASTER_PRODUCT}`);
+        router.push(`${ROUTES.MASTER_PRODUCT}`);
       },
       // Always refetch after error or success:
       onSettled: () => {

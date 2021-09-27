@@ -72,7 +72,12 @@ const LogList = ({ logs, onPagination }: IProps) => {
     {
       title: ("User"),
       align: alignLeft,
-      render: (data:any) => (data.user)?data.user.name:"",
+      render: (data:any) => (data.user)?data.user.name:"---",
+    },
+    {
+      title: ("Phone no."),
+      align: alignLeft,
+      render: (data:any) => (data.user)?data.user.phone_number:"---",
     },
     {
       title: ("Data"),

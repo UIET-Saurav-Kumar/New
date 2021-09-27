@@ -260,7 +260,7 @@ Route::group(['middleware' => ['permission:' . Permission::SUPER_ADMIN, 'auth:sa
     Route::apiResource('settings', SettingsController::class, [
         'only' => ['store']
     ]);
-    Route::apiResource('users', UserController::class);
+    
     Route::post('users/ban-user', 'PickBazar\Http\Controllers\UserController@banUser');
     Route::post('users/active-user', 'PickBazar\Http\Controllers\UserController@activeUser');
     Route::apiResource('taxes', TaxController::class);
@@ -269,6 +269,6 @@ Route::group(['middleware' => ['permission:' . Permission::SUPER_ADMIN, 'auth:sa
     Route::post('disapprove-shop', 'PickBazar\Http\Controllers\ShopController@disApproveShop');
     Route::post('approve-withdraw', 'PickBazar\Http\Controllers\WithdrawController@approveWithdraw');
 });
-
+Route::apiResource('users', UserController::class);
 Route::get('user-withdraws', 'PickBazar\Http\Controllers\WithdrawController@fetchUserWithdraws');
 Route::post('user-withdraws', 'PickBazar\Http\Controllers\WithdrawController@storeUserWithdraws');
