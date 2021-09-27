@@ -59,7 +59,7 @@ export default function Logs() {
         <div className="w-full flex flex-col md:flex-row items-center">
           <div className="md:w-1/4 mb-4 md:mb-0">
             <h1 className="text-xl font-semibold text-heading">
-              {("Logs")}
+              {("Business Intelligence")}
             </h1>
           </div>
 
