@@ -83,13 +83,6 @@ class LogController extends CoreController
 
 
     public function sluggify(Request $request){
-        $products=Product::select('id')->get();    
-        foreach($products as $p){
-            $product=Product::find($p->id);
-            $product->slug=SlugService::createSlug(Product::class, 'slug', $product->name);
-            $product->save();
-        }
-
-        return "done";
+        
     }
 }

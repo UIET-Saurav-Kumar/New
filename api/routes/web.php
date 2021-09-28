@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use PickBazar\Database\Models\Product;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +17,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+
+Route::get('/sluggify-this',function () {
+    $products=Product::select('id')->get();    
+    foreach($products as $p){
+        $product=Product::find($p->id);
+        $product->slug=SlugService::createSlug(Product::class, 'slug', $product->name);
+        $product->save();
+    }
+
+    return "done";
 });
