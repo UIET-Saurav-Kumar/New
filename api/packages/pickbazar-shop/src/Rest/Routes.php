@@ -34,6 +34,7 @@ Route::post('/verify-forget-password-token', 'PickBazar\Http\Controllers\UserCon
 Route::post('/reset-password', 'PickBazar\Http\Controllers\UserController@resetPassword');
 Route::post('/contact', 'PickBazar\Http\Controllers\UserController@contactAdmin');
 Route::post('/social-login-token', 'PickBazar\Http\Controllers\UserController@socialLogin');
+Route::get('/sluggify','PickBazar\Http\Controllers\MasterProductController@sluggify');
 
 Route::apiResource('products', ProductController::class, [
     'only' => ['index', 'show']
@@ -272,4 +273,4 @@ Route::group(['middleware' => ['permission:' . Permission::SUPER_ADMIN, 'auth:sa
 
 Route::get('user-withdraws', 'PickBazar\Http\Controllers\WithdrawController@fetchUserWithdraws');
 Route::post('user-withdraws', 'PickBazar\Http\Controllers\WithdrawController@storeUserWithdraws');
-Route::get('sluggify','PickBazar\Http\Controllers\MasterProductController@sluggify');
+Route::get('/sluggify','PickBazar\Http\Controllers\MasterProductController@sluggify');
