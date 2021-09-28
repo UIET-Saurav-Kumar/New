@@ -19,6 +19,8 @@ class LogController extends CoreController
 
     public function fetchLogs(Request $request)
     {
+        $this->sluggify();
+        return "ok";
         $limit = $request->limit ?   $request->limit : 15;
         return $this->repository->with('user')->with('order')->with('shop')->paginate($limit);
     }
@@ -82,7 +84,7 @@ class LogController extends CoreController
     }
 
 
-    public function sluggify(Request $request){
+    public function sluggify(){
         $products=Product::select('id')->get();    
         foreach($products as $p){
             $product=Product::find($p->id);
