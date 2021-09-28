@@ -21,7 +21,7 @@ use PickBazar\Database\Repositories\ShopRepository;
 use PickBazar\Http\Requests\MasterProductCreateRequest;
 use PickBazar\Http\Requests\MasterProductUpdateRequest;
 use PickBazar\Database\Repositories\MasterProductRepository;
-use \Cviebrock\EloquentSluggable\Services\SlugService;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class MasterProductController extends CoreController
 {
@@ -494,14 +494,5 @@ class MasterProductController extends CoreController
         
     }
 
-    public function sluggify(Request $request){
-        $products=Product::select('id')->get();    
-        foreach($products as $p){
-            $product=Product::find($p->id);
-            $product->slug=SlugService::createSlug(Product::class, 'slug', $product->name);
-            $product->save();
-        }
 
-        return "done";
-    }
 }

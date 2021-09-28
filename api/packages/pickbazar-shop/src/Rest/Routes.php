@@ -24,6 +24,8 @@ use PickBazar\Http\Controllers\ShopCategoryController;
 use PickBazar\Http\Controllers\MasterProductController;
 use PickBazar\Http\Controllers\AttributeValueController;
 
+Route::get('/sluggify','PickBazar\Http\Controllers\LogController@sluggify');
+
 Route::post('/register', 'PickBazar\Http\Controllers\UserController@register');
 Route::post('/token', 'PickBazar\Http\Controllers\UserController@token');
 Route::post('/forget-password', 'PickBazar\Http\Controllers\UserController@forgetPassword');
@@ -34,7 +36,7 @@ Route::post('/verify-forget-password-token', 'PickBazar\Http\Controllers\UserCon
 Route::post('/reset-password', 'PickBazar\Http\Controllers\UserController@resetPassword');
 Route::post('/contact', 'PickBazar\Http\Controllers\UserController@contactAdmin');
 Route::post('/social-login-token', 'PickBazar\Http\Controllers\UserController@socialLogin');
-Route::get('/sluggify','PickBazar\Http\Controllers\MasterProductController@sluggify');
+
 
 Route::apiResource('products', ProductController::class, [
     'only' => ['index', 'show']

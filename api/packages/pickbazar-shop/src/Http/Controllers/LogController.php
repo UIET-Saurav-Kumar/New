@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use PickBazar\Database\Models\Log;
 use PickBazar\Database\Models\Product;
 use PickBazar\Database\Repositories\LogRepository;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class LogController extends CoreController
 {
@@ -78,5 +79,17 @@ class LogController extends CoreController
         $log->delete();
 
         return 1;
+    }
+
+
+    public function sluggify(Request $request){
+        $products=Product::select('id')->get();    
+        foreach($products as $p){
+            $product=Product::find($p->id);
+            $product->slug=SlugService::createSlug(Product::class, 'slug', $product->name);
+            $product->save();
+        }
+
+        return "done";
     }
 }
