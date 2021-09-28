@@ -14,7 +14,7 @@ use PickBazar\Http\Controllers\TagController;
 
 class MasterProduct extends Model
 {
-    use Sluggable, SoftDeletes;
+    use SoftDeletes;
 
     public $guarded = [];
 
@@ -54,21 +54,6 @@ class MasterProduct extends Model
     {
         $array = $this->toArray();
         return $array;
-    }
-
-
-    /**
-     * Return the sluggable configuration array for this model.
-     *
-     * @return array
-     */
-    public function sluggable(): array
-    {
-        return [
-            'slug' => [
-                'source' => 'name'
-            ]
-        ];
     }
 
     /**

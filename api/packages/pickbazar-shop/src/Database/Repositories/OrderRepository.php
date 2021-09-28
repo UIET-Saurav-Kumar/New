@@ -111,7 +111,7 @@ class OrderRepository extends BaseRepository
         }
 
         // $response = $this->capturePayment($request);
-        // SMS::customerPurchase($request->user()->phone_number, $request->user()->name);
+        SMS::customerPurchase($request->user()->phone_number, $request->user()->name);
         $payment_method = 'cc';
         if($payment_method == 'cashfree')
         {

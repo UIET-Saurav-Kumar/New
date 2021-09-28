@@ -38,11 +38,16 @@ class ProductController extends CoreController
      */
     public function index(Request $request)
     {
+        
+        $shop_id="";
         if($request->search != null)
         {
+
             $pluckcat = explode(';',$request->search);
             $pluckall = explode(':', $pluckcat[0]);
-
+            if(isset($pluckcat[1])){
+                $shop_id=explode(':',$pluckcat[1])[1];
+            }
             if($pluckall[1] == 'all')
             {
                 $request->replace([
@@ -52,7 +57,9 @@ class ProductController extends CoreController
                     ]);
             }
         }
+        // dd($request->all());
         $limit = $request->limit ?   $request->limit : 15;           
+        // ->where('shop_id',$shop_id)
         $repdata = $this->repository->with(['type', 'shop', 'categories', 'tags', 'variations.attribute'])->orderBy('is_offer', 'desc')->paginate($limit);
 
         return $repdata;
