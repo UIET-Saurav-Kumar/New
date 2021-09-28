@@ -24,7 +24,7 @@ use PickBazar\Http\Controllers\ShopCategoryController;
 use PickBazar\Http\Controllers\MasterProductController;
 use PickBazar\Http\Controllers\AttributeValueController;
 
-Route::get('/sluggify','PickBazar\Http\Controllers\LogController@sluggify');
+Route::get('sluggify','PickBazar\Http\Controllers\LogController@sluggify');
 
 Route::post('/register', 'PickBazar\Http\Controllers\UserController@register');
 Route::post('/token', 'PickBazar\Http\Controllers\UserController@token');
@@ -275,4 +275,4 @@ Route::group(['middleware' => ['permission:' . Permission::SUPER_ADMIN, 'auth:sa
 
 Route::get('user-withdraws', 'PickBazar\Http\Controllers\WithdrawController@fetchUserWithdraws');
 Route::post('user-withdraws', 'PickBazar\Http\Controllers\WithdrawController@storeUserWithdraws');
-Route::get('/sluggify','PickBazar\Http\Controllers\MasterProductController@sluggify');
+Route::get('sluggify','PickBazar\Http\Controllers\LogController@sluggify');
