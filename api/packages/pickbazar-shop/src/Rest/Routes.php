@@ -24,7 +24,6 @@ use PickBazar\Http\Controllers\ShopCategoryController;
 use PickBazar\Http\Controllers\MasterProductController;
 use PickBazar\Http\Controllers\AttributeValueController;
 
-Route::get('sluggify','PickBazar\Http\Controllers\LogController@sluggify');
 
 Route::post('/register', 'PickBazar\Http\Controllers\UserController@register');
 Route::post('/token', 'PickBazar\Http\Controllers\UserController@token');
