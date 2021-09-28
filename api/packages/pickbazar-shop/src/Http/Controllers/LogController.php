@@ -89,7 +89,7 @@ class LogController extends CoreController
         foreach($products as $p){
             $product=Product::find($p->id);
             if($product){
-                $product->slug=SlugService::createSlug(Product::class, 'slug', $product->name);
+                $product->slug=$product->slug.$product->id;
                 $product->save();
             }
         }
