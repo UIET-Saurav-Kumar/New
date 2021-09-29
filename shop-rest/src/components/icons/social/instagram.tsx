@@ -13,7 +13,7 @@ export const InstagramIcon: React.FC<React.SVGAttributes<{}>> = (props) => (
     <path
       data-name="Path 2"
       d="M9.25 3.5a.75.75 0 11.75-.75.748.748 0 01-.75.75zM6 4a2 2 0 11-2 2 2 2 0 012-2m0-1a3 3 0 103 3 3 3 0 00-3-3z"
-      fill="currentColor"
+      fill="#c32aa3"
     />
   </svg>
 );
