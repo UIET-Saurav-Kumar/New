@@ -47,7 +47,7 @@ export default function ShopMobileView({data}) {
 
             </div>
 
-              <div className='-mt-20 xs+:mt-0'> <PaymentForm /></div>  
+              <div className='-mt-20 sm:mt-6'> <PaymentForm /></div>  
               
                <div className='mx-4'> 
                   { data && <ShopProductFeed shopId={data.id} /> }
