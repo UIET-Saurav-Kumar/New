@@ -89,7 +89,7 @@ class MasterProductController extends CoreController
             $limit = isset($request->limit) ? $request->limit : 10;
             $product = $this->repository
                 ->with(['type', 'shop', 'categories', 'tags', 'variations.attribute.values', 'variation_options'])
-                ->findOneByFieldOrFail('slug', $slug);
+                ->findOneByFieldOrFail('id', $slug);
             $product->related_products = $this->repository->fetchRelated($slug, $limit);
             return $product;
         } catch (\Exception $e) {

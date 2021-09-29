@@ -144,14 +144,14 @@ const ProductList = ({ products, onPagination }: IProps) => {
     
     {
       title: t("table:table-item-actions"),
-      dataIndex: "slug",
+      dataIndex: "id",
       key: "actions",
       align: "center",
       width: 80,
-      render: (slug: string, record: Product) => (
+      render: (id: string, record: Product) => (
         <ActionButtons
           id={record?.id}
-          editUrl={`${router.asPath}/${slug}/edit`}
+          editUrl={`${router.asPath}/${id}/edit`}
           deleteModalView="MASTER_DELETE_PRODUCT"
         />
       ),
