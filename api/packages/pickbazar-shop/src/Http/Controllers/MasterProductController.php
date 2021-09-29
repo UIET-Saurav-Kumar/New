@@ -260,15 +260,15 @@ class MasterProductController extends CoreController
     public function storeShopProduct(Request $request)
     {
 
-        $master=MasterProduct::find($request->master_id);
         dd('hwew');
+        $master=MasterProduct::find($request->master_id);
         $data=$master->toArray();
         unset($data["id"]);
         unset($data["created_at"]);
         unset($data["updated_at"]);
-        if($data["slug"]){
-            unset($data["slug"]);
-        }
+        // if($data["slug"]){
+        //     unset($data["slug"]);
+        // }
 
         $data["price"]=(double)$request->price;
         $data["sale_price"]=(double)$request->sale_price;
