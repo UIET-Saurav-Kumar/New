@@ -261,7 +261,7 @@ class MasterProductController extends CoreController
     {
 
         $master=MasterProduct::find($request->master_id);
-
+        dd('hwew');
         $data=$master->toArray();
         unset($data["id"]);
         unset($data["created_at"]);
