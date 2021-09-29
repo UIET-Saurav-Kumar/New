@@ -28,9 +28,9 @@ export default function ShopMobileView({data}) {
 
         <div className=' px-6 mt-0  flex flex-col'>
 
-            <div className='w-full grid grid-cols-1 xs+:grid-cols-2  xs+:flex sm:flex'>
+            <div className='w-full grid grid-cols-1  sm:flex'>
 
-                <div className='hidden xs+:block w-48'> 
+                <div className='hidden sm:block w-48'> 
                     <ShopProfileCard data={data} /> 
                 </div>
                 
@@ -41,7 +41,7 @@ export default function ShopMobileView({data}) {
                    />
                 </div>
 
-                <div className='block xs+:hidden'> 
+                <div className='block sm:hidden'> 
                     <ShopProfileCard data={data} /> 
                 </div>
 
