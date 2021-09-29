@@ -266,6 +266,9 @@ class MasterProductController extends CoreController
         unset($data["id"]);
         unset($data["created_at"]);
         unset($data["updated_at"]);
+        if($data["slug"]){
+            unset($data["slug"]);
+        }
 
         $data["price"]=(double)$request->price;
         $data["sale_price"]=(double)$request->sale_price;
