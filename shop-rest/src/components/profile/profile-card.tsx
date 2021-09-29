@@ -34,7 +34,7 @@ type ShopProfileCardProps = {
     <>
       <div
         className={cn(
-          " items-center hidden  w-full bg-light   py-4 px-6 sticky top-[15px] z-10",
+          " items-center hidden  lg:grid-cols-1 lg:w-full bg-light   py-4 px-6 sticky top-[15px] z-10",
           cardClassName
         )}
       >
@@ -65,7 +65,7 @@ type ShopProfileCardProps = {
 
       <aside
         className={cn(
-          "bg-light rounded h-72 w-full sm:1/3 md:w-2/3 lg:w-56 xl:w-56 2xl:w-56 flex-shrink-0",
+          "bg-light rounded h-72 w-full sm:1/3 md:w-3/4 lg:w-56 xl:w-56 2xl:w-56 flex-shrink-0",
           className
         )}
       >
@@ -73,7 +73,7 @@ type ShopProfileCardProps = {
 
           <Scrollbar className={cn("w-full", styles.scrollbar_height)}>
 
-            <div className="w-full  p-4 grid grid-cols-2 xs+:grid-cols-1 gap-x-8 gap-y-0  
+            <div className="w-full  p-4 grid grid-cols-2  gap-x-8 gap-y-0  
                             sm:grid-cols-1 lg:grid-cols-1 items-center">
 
               <div className="w-full h-34 rounded-lg flex relative mx-auto
@@ -83,13 +83,13 @@ type ShopProfileCardProps = {
                   alt = {t("logo")}
                   src = {data?.logo?.original! ?? "/product-placeholder.svg"}
                   // layout="fill"
-                  className='object-fill lg:object-fill w-36 h-36'
+                  className='object-fill lg:object-fill mx-auto w-36 h-36'
                   // objectFit = "fill"
                 />
                 
               </div>
 
-              <h3 className="text-md font-semibold text-heading mb-2">
+              <h3 className="text-md font-semibold text-center text-heading mb-2">
                 {data?.name}
               </h3>
 
