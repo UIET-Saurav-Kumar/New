@@ -83,7 +83,8 @@ type ShopProfileCardProps = {
                   alt = {t("logo")}
                   src = {data?.logo?.original! ?? "/product-placeholder.svg"}
                   // layout="fill"
-                  className='object-fill lg:object-fill mx-auto w-36 h-36'
+                  className='object-contain sm:object-fill md:object-contain 
+                               lg:object-fill mx-auto w-36 h-36'
                   // objectFit = "fill"
                 />
                 
