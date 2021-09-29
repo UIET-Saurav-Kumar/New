@@ -1,7 +1,8 @@
 import { useTranslation } from "next-i18next";
 import { isEmpty } from "lodash";
 import { formatAddress } from "@utils/format-address";
-
+import { getIcon } from "@utils/get-icon";
+import * as socialIcons from "@components/icons/social";
 
 
 
@@ -60,6 +61,27 @@ export default function ShopDescription({data}) {
          ? t("77430-42380")
          : t("77430-42380")}
      </span>
+     
+      <div className='hidden lg:flex mt-8'>
+       
+
+              <div className="flex items-center justify-start mt-3">
+                {data?.settings?.socials.map((item: any, index: number) => (
+                  <a
+                    key={index}
+                    href={item?.url}
+                    target="_blank"
+                    className={`text-muted focus:outline-none me-6 last:me-0 transition-colors duration-300 hover:${item.hoverClass}`}
+                  >
+                    {getIcon({
+                      iconList: socialIcons,
+                      iconName: item?.icon,
+                      className: "w-4 h-4",
+                    })}
+                  </a>
+                ))}
+              </div>
+     </div>
 
      {/* <div className='flex 2xl:hidden '> 
 
