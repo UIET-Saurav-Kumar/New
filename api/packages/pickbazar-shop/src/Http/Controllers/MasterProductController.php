@@ -269,6 +269,9 @@ class MasterProductController extends CoreController
             unset($data["slug"]);
         }
 
+        $slug=$this->getSlug($data['name']);
+
+        $data["slug"]=$slug;
         $data["price"]=(double)$request->price;
         $data["sale_price"]=(double)$request->sale_price;
         $data["quantity"]=(double)$request->quantity;
@@ -301,6 +304,24 @@ class MasterProductController extends CoreController
             ]);
         }
         return 1;
+    }
+
+    private function getSlug($name)
+    {
+        $is_unique=FALSE;
+        while(!$is_unique){
+            $permitted_chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+            $postfix=substr(str_shuffle($permitted_chars), 0, 2);
+
+            $slug=str_replace(" ","-",$name)."-".$postfix;
+
+            $product=Product::where('slug',$slug)->first();
+            if(!$product){
+                $is_unique=TRUE;
+            }
+        }
+
+        return $slug;
     }
 
 
