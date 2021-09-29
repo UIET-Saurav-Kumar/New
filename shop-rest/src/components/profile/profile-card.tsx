@@ -73,7 +73,7 @@ type ShopProfileCardProps = {
 
           <Scrollbar className={cn("w-full", styles.scrollbar_height)}>
 
-            <div className="w-full  p-4 grid grid-cols-2 xs+:grid-cols-1 gap-x-8 gap-y-0  
+            <div className="w-full  p-4 grid grid-cols-2 xs+:grid-cols-2 gap-x-8 gap-y-0  
                             sm:grid-cols-1 lg:grid-cols-1 items-center">
 
               <div className="w-full h-34 rounded-lg flex relative mx-auto
