@@ -3,6 +3,7 @@ import Modal from "@components/ui/modal/modal";
 import { useModalAction, useModalState } from "./modal.context";
 import ShopProfileCard from "@components/profile/profile-card";
 import CategoryDropdownSidebar from "@components/category/category-dropdown-sidebar";
+import ShopPaymentForm from "src/pages/shops/shop-payment-form";
 
 
 const Login = dynamic(() => import("@components/auth/login"));
@@ -35,6 +36,7 @@ const ManagedModal = () => {
       {view === "ADD_OR_UPDATE_ADDRESS" && <CreateOrUpdateAddressForm />}
       {view === "DELETE_ADDRESS" && <AddressDeleteView />}
       {view === "SHOP_MOBILE_CATEGORIES" && <CategoryDropdownSidebar />}
+      {view === "SHOP_PAYMENT_FORM" && <ShopPaymentForm />}
       {view === "PRODUCT_DETAILS" && (
         <ProductDetailsModalView productSlug={data} />
       )}

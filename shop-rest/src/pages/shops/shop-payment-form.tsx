@@ -12,7 +12,7 @@ export default function ShopPaymentForm() {
     return (
 
 
-        <form className='flex flex-1' noValidate>
+        <form className='flex flex-1 bg-white' noValidate>
 
                             <div className="mt-0 w-full h-full p-4 flex-col flex space-y-6">
 
