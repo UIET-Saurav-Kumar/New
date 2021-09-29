@@ -34,7 +34,7 @@ type ShopProfileCardProps = {
     <>
       <div
         className={cn(
-          " items-center hidden  w-full bg-light   py-4 px-6 sticky top-[15px] z-10",
+          " items-center hidden  lg:grid-cols-1 lg:w-full bg-light   py-4 px-6 sticky top-[15px] z-10",
           cardClassName
         )}
       >
