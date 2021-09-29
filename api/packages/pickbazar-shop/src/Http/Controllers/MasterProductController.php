@@ -265,7 +265,7 @@ class MasterProductController extends CoreController
         unset($data["id"]);
         unset($data["created_at"]);
         unset($data["updated_at"]);
-        if($data["slug"]){
+        if(isset($data["slug"])){
             unset($data["slug"]);
         }
 
