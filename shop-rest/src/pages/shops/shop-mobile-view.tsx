@@ -44,7 +44,7 @@ export default function ShopMobileView({data}) {
                 
                 <div className='w-full flex-grow'>
                    <img alt={t("heading")} 
-                        className='object-fill h-60 md:h-72 w-full'
+                        className='object-fill h-42 sm:h-60 md:h-72 w-full'
                         src={data?.cover_image?.original! ?? "/product-placeholder.svg"}
                    />
                 </div>
