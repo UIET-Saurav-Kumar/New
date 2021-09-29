@@ -89,7 +89,7 @@ type ShopProfileCardProps = {
                 
               </div>
 
-              <h3 className="text-md font-semibold text-heading mb-2">
+              <h3 className="text-md font-semibold text-center text-heading mb-2">
                 {data?.name}
               </h3>
 
