@@ -65,7 +65,7 @@ type ShopProfileCardProps = {
 
       <aside
         className={cn(
-          "bg-light rounded h-72 w-full sm:1/3 md:w-2/3 lg:w-56 xl:w-56 2xl:w-56 flex-shrink-0",
+          "bg-light rounded h-72 w-full sm:1/3 md:w-3/4 lg:w-56 xl:w-56 2xl:w-56 flex-shrink-0",
           className
         )}
       >
@@ -83,7 +83,7 @@ type ShopProfileCardProps = {
                   alt = {t("logo")}
                   src = {data?.logo?.original! ?? "/product-placeholder.svg"}
                   // layout="fill"
-                  className='object-fill lg:object-fill w-36 h-36'
+                  className='object-fill lg:object-fill mx-auto w-36 h-36'
                   // objectFit = "fill"
                 />
                 
