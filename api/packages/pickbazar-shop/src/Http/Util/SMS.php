@@ -43,28 +43,41 @@ class SMS
         return $phone_number;
     }
 
+    
     public static function welcome($phone_number,$username)
     {
         $phone_number=SMS::formate_number($phone_number);
         $key=SMS::$key;
         $client = new Client();
-        $url = "https://2factor.in/API/V1/$key/ADDON_SERVICES/SEND/TSMS";
+        // $url = "https://2factor.in/API/V1/$key/ADDON_SERVICES/SEND/TSMS";
 
-        $response = $client->request('POST', $url, [
-            'form_params' => [
-                'From' => "LOWCAL",
-                "TemplateName"=>"BuyLowcalregister",
-                'To' => $phone_number,
-                "VAR1"=>$username
-            ]
-        ]);
+        // $response = $client->request('POST', $url, [
+        //     'form_params' => [
+        //         'From' => "LOWCAL",
+        //         "TemplateName"=>"BuyLowcalregister",
+        //         'To' => $phone_number,
+        //         "VAR1"=>$username
+        //     ]
+        // ]);
+
+        // if ($response->getStatusCode() == 200) {
+        //     $content = $response->getBody()->getContents();
+        //     $content = json_decode($content);
+        //     if($content){
+        //         return "success";
+        //     }
+        // }
+
+
+        $template="LowcalRegister";
+        $url = "https://2factor.in/API/R1/?module=TRANS_SMS&apikey=$key&to=$phone_number&from=LOWCAL&templatename=$template&var1=$username&var2=$username";
+
+        $response = $client->request('GET', "$url");
 
         if ($response->getStatusCode() == 200) {
-            $content = $response->getBody()->getContents();
-            $content = json_decode($content);
-            if($content){
-                return "success";
-            }
+            return "Success";
+        }else{
+            dd('not sent');
         }
     }
 
@@ -77,23 +90,35 @@ class SMS
         $phone_number=SMS::formate_number($phone_number);
         $key=SMS::$key;
         $client = new Client();
-        $url = "https://2factor.in/API/V1/$key/ADDON_SERVICES/SEND/TSMS";
+        // $url = "https://2factor.in/API/V1/$key/ADDON_SERVICES/SEND/TSMS";
 
-        $response = $client->request('POST', $url, [
-            'form_params' => [
-                'From' => "LOWCAL",
-                "TemplateName"=>"CustomerPurchase",
-                'To' => $phone_number,
-                "VAR1"=>$username
-            ]
-        ]);
+        // $response = $client->request('POST', $url, [
+        //     'form_params' => [
+        //         'From' => "LOWCAL",
+        //         "TemplateName"=>"CustomerPurchase",
+        //         'To' => $phone_number,
+        //         "VAR1"=>$username
+        //     ]
+        // ]);
+
+        // if ($response->getStatusCode() == 200) {
+        //     $content = $response->getBody()->getContents();
+        //     $content = json_decode($content);
+        //     if($content){
+        //         return "success";
+        //     }
+        // }
+
+        
+        $template="PurchasesToVendor";
+        $url = "https://2factor.in/API/R1/?module=TRANS_SMS&apikey=$key&to=$phone_number&from=LOWCAL&templatename=$template&var1=$username&var2=$username";
+
+        $response = $client->request('GET', "$url");
 
         if ($response->getStatusCode() == 200) {
-            $content = $response->getBody()->getContents();
-            $content = json_decode($content);
-            if($content){
-                return "success";
-            }
+            return "Success";
+        }else{
+            dd('not sent');
         }
     }
 
@@ -106,25 +131,36 @@ class SMS
         $phone_number=SMS::formate_number($phone_number);
         $key=SMS::$key;
         $client = new Client();
-        $url = "https://2factor.in/API/V1/$key/ADDON_SERVICES/SEND/TSMS";
+        // $url = "https://2factor.in/API/V1/$key/ADDON_SERVICES/SEND/TSMS";
 
-        $response = $client->request('POST', $url, [
-            'form_params' => [
-                'From' => "LOWCAL",
-                "TemplateName"=>"OrderStatus",
-                'To' => $phone_number,
-                "VAR1"=>$username,
-                "VAR2"=>$order_tracking_number,
-                "VAR3"=>$status
-            ]
-        ]);
+        // $response = $client->request('POST', $url, [
+        //     'form_params' => [
+        //         'From' => "LOWCAL",
+        //         "TemplateName"=>"OrderStatus",
+        //         'To' => $phone_number,
+        //         "VAR1"=>$username,
+        //         "VAR2"=>$order_tracking_number,
+        //         "VAR3"=>$status
+        //     ]
+        // ]);
+
+        // if ($response->getStatusCode() == 200) {
+        //     $content = $response->getBody()->getContents();
+        //     $content = json_decode($content);
+        //     if($content){
+        //         return "success";
+        //     }
+        // }
+
+        $template="OrderstatusLowcal";
+        $url = "https://2factor.in/API/R1/?module=TRANS_SMS&apikey=$key&to=$phone_number&from=LOWCAL&templatename=$template&var1=$username&var2=$order_tracking_number&var3=$status";
+
+        $response = $client->request('GET', "$url");
 
         if ($response->getStatusCode() == 200) {
-            $content = $response->getBody()->getContents();
-            $content = json_decode($content);
-            if($content){
-                return "success";
-            }
+            return "Success";
+        }else{
+            dd('not sent');
         }
     }
 
@@ -137,26 +173,35 @@ class SMS
         $phone_number=SMS::formate_number($phone_number);
         $key=SMS::$key;
         $client = new Client();
-        $url = "https://2factor.in/API/V1/$key/ADDON_SERVICES/SEND/TSMS";
+        // $url = "https://2factor.in/API/V1/$key/ADDON_SERVICES/SEND/TSMS";
 
-        $response = $client->request('POST', $url, [
-            'form_params' => [
-                'From' => "LOWCAL",
-                "TemplateName"=>"UserInvite",
-                'To' => $phone_number,
-                "VAR1"=>$username,
-                "VAR2"=>$invitee,
-            ]
-        ]);
+        // $response = $client->request('POST', $url, [
+        //     'form_params' => [
+        //         'From' => "LOWCAL",
+        //         "TemplateName"=>"UserInvite",
+        //         'To' => $phone_number,
+        //         "VAR1"=>$username,
+        //         "VAR2"=>$invitee,
+        //     ]
+        // ]);
+
+        // if ($response->getStatusCode() == 200) {
+        //     $content = $response->getBody()->getContents();
+        //     $content = json_decode($content);
+        //     if($content){
+        //         return "success";
+        //     }
+        // }
+
+        $template="UserInvite";
+        $url = "https://2factor.in/API/R1/?module=TRANS_SMS&apikey=$key&to=$phone_number&from=LOWCAL&templatename=$template&var1=$username&var2=$invitee";
+
+        $response = $client->request('GET', "$url");
 
         if ($response->getStatusCode() == 200) {
-            $content = $response->getBody()->getContents();
-            $content = json_decode($content);
-            if($content){
-                return "success";
-            }
+            return "Success";
+        }else{
+            dd('not sent');
         }
     }
 }
-// http://2factor.in/API/V1/293832-67745-11e5-88de-5600000c6b13/ADDON_SERVICES/SEND/PSMS
-
