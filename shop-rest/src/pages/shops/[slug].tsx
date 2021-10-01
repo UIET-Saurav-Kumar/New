@@ -18,6 +18,8 @@ import Navbar from "@components/layout/navbar/navbar";
 import ShopPaymentForm from "./shop-payment-form";
 import ShopDescription from "./shop-description";
 import ShopMobileView from "./shop-mobile-view";
+import ShopBanner from "./shop-banner";
+import WebShopBanner from "./web-shop-banner";
 
 
 
@@ -37,7 +39,7 @@ const ShopPage = ({ data }: any) => {
 
        <Navbar label='' />
 
-          <div className="bg-gray-100 flex flex-col md:flex-row md:justify-between  
+          <div className="bg-white lg:bg-gray-100 hidden lg:flex flex-col md:flex-row md:justify-between  
                             md:items-start md:p-8" >
 
                     <div className='hidden  p-3 lg:flex w-full flex-col '>
@@ -60,22 +62,24 @@ const ShopPage = ({ data }: any) => {
 
                           <div className='flex flex-col overflow-y-scroll  w-full'>  
 
-                            <div className='flex w-full h-full border'> 
+                            <div className='flex  w-full h-72 border'> 
 
                                 <div className='h-full'>  
                                   <ShopProfileCard data={data} />
                                 </div>
                                 
-                                <Image
+                                <img
                                   alt={t("heading")}
                                   src={data?.cover_image?.original! ?? "/product-placeholder.svg"}
-                                  height={100}
-                                  width={1200}
+                                className='h-full w-full object-cover lg:object-cover'
                                   // layout="fill"
                                   // objectFit="contain"
                                 />
-                          
+          
                             </div>
+
+                           
+                           <WebShopBanner/>
 
                              <ShopDescription data = {data} />
 
