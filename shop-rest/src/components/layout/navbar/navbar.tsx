@@ -55,7 +55,7 @@ const Navbar = ({label}) => {
 
               <Link
                 href={ROUTES.ORDERS}
-                className="font-semibold text-heading flex items-center transition duration-200 no-underline hover:text-accent focus:text-accent"
+                className="font-semibold text-heading flex items-center transition duration-200 w-28 no-underline hover:text-accent focus:text-accent"
               >
                 {t("nav-menu-track-order")}
               </Link>
