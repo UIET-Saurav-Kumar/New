@@ -14,7 +14,7 @@ export const useUpdateProductMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(
     ({ variables: { id, input } }: IProductUpdateVariables) =>
-      Product.update(`${API_ENDPOINTS.PRODUCT_STATUS_UPDATE}/${id}`, input),
+      Product.update(`${API_ENDPOINTS.MASTER_PRODUCT_STATUS_UPDATE}/${id}`, input),
     {
       onSuccess: () => {
         toast.success(t("common:successfully-updated"));

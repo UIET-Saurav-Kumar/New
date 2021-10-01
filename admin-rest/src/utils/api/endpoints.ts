@@ -48,6 +48,7 @@ export const API_ENDPOINTS = {
   PAGINATION_MASTER_PRODUCT: "pagination-master-products",
   STORE_MASTER_PRODUCT: "store-master-product",
   CREATED_MASTER_PRODUCT:"created-master-products",
+  MASTER_PRODUCT_STATUS_UPDATE:"status-master-product",
   PRODUCT_COMMISSSION:"products-commission",
   SHOP_COMMISSION:"shop-commission",
   SHOP_COMMISSION_TYPE:"shop-commission-type",
