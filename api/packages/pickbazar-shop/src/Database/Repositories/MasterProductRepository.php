@@ -84,6 +84,8 @@ class MasterProductRepository extends BaseRepository
                 $product->variation_options()->createMany($request['variation_options']['upsert']);
             }
             $product->categories = $product->categories;
+
+            dd($product->categories);
             $product->variation_options = $product->variation_options;
             $product->variations = $product->variations;
             $product->type = $product->type;
