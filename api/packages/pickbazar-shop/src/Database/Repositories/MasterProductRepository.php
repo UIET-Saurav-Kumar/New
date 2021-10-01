@@ -80,6 +80,7 @@ class MasterProductRepository extends BaseRepository
                             "master_product_id"=>$product->id
                         ]);
                 }
+                $product->categories()->sync($request['categories']);
             }
             if (isset($request['tags'])) {
                 $product->tags()->attach($request['tags']);
