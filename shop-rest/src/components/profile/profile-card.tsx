@@ -32,9 +32,9 @@ type ShopProfileCardProps = {
 
   return (
     <>
-      <div
+      {/* <div
         className={cn(
-          " items-center hidden  lg:grid-cols-1 lg:w-full bg-light   py-4 px-6 sticky top-[15px] z-10",
+          "items-center hidden lg:grid-cols-1 lg:w-full bg-light   py-0 px-6 sticky top-[15px] z-10",
           cardClassName
         )}
       >
@@ -61,38 +61,58 @@ type ShopProfileCardProps = {
             </button>
 
         </div>
-      </div>
+      </div> */}
 
       <aside
         className={cn(
-          "bg-light rounded h-40 sm:h-64 lg:h-72 w-full sm:1/3 md:w-3/4 lg:w-56 xl:w-56 2xl:w-56 flex-shrink-0",
+          "bg-gray-50 sm:bg-white shadow-md  sm:shadow-none px-2 rounded mt-0  lg:mt-0  h-36 items-center border sm:border-none sm:h-64 lg:h-72 w-full sm:1/3 md:w-auto lg:w-56 xl:w-56 2xl:w-56 flex-shrink-0",
           className
         )}
       >
-        <div className="max-h-full w-full overflow-hidden">
+        <div className="h-full w-full  flex items-center  overflow-hidden">
 
           <Scrollbar className={cn("w-full", styles.scrollbar_height)}>
 
-            <div className="w-full  p-4 grid grid-cols-2  gap-x-8 gap-y-0  
-                            sm:grid-cols-1 lg:grid-cols-1 items-center">
+            <div className="w-full -space-y-8 p-0 grid grid-cols-2  gap-x-8 gap-y-0  
+                            xs+++:grid-cols-1 lg:grid-cols-1 items-center">
 
-              <div className="w-full h-34 rounded-lg flex relative mx-auto
+              <div className="w-full h-34 rounded-lg flex relative mx-auto 
                               items-center overflow-hidden mb-8">
 
-                <img
-                  alt = {t("logo")}
-                  src = {data?.logo?.original! ?? "/product-placeholder.svg"}
-                  // layout="fill"
-                  className='object-contain sm:object-fill md:object-contain 
-                               lg:object-fill mx-auto w-36 h-36'
-                  // objectFit = "fill"
-                />
+                  <img
+                    alt = {t("logo")}
+                    src = {data?.logo?.original! ?? "/product-placeholder.svg"}
+                    // layout="fill"
+                    className='object-cover sm:object-contain md:object-contain 
+                               lg:object-fill mx-auto w-20 h-20  sm:h-36 sm:w-36'
+                    // objectFit = "fill"
+                  />
                 
               </div>
 
-              <h3 className="text-md font-semibold text-center text-heading mb-2">
+              <h3 className="text-md font-semibold   text-center text-heading mb-2">
                 {data?.name}
+                <div className=' -mt-4  '>
+                    <div className="flex items-center w-full  justify-end p-2 mt-3">
+                        {data?.settings?.socials.map((item: any, index: number) => (
+                        <a
+                            key={index}
+                            href={item?.url}
+                            target="_blank"
+                            className={`text-muted focus:outline-none me-6 last:me-0 transition-colors duration-300 hover:${item.hoverClass}`}
+                        >
+                            {getIcon({
+                            iconList: socialIcons,
+                            iconName: item?.icon,
+                            className: "lg:w-8 lg:h-8 w-6 h-6 opacity-85 ",
+                            })}
+                        </a>
+                        ))}
+                    </div>
+                </div>
+                
               </h3>
+              
 
             </div>
 
