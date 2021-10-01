@@ -68,7 +68,6 @@ class MasterProductRepository extends BaseRepository
 
     public function storeProduct($request)
     {
-        dd($request['categories']);
         try {
             $data = $request->only($this->dataArray);
             $product = $this->create($data);
