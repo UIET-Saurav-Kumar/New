@@ -90,7 +90,7 @@ class MasterProductController extends CoreController
             $product = $this->repository
                 ->with(['type', 'shop', 'categories', 'tags', 'variations.attribute.values', 'variation_options'])
                 ->findOneByFieldOrFail('id', $slug);
-            $product->related_products = $this->repository->fetchRelated($slug, $limit);
+            // $product->related_products = $this->repository->fetchRelated($slug, $limit);
             return $product;
         } catch (\Exception $e) {
             throw new PickbazarException('PICKBAZAR_ERROR.NOT_FOUND');
