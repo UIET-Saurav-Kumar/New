@@ -435,9 +435,11 @@ class ProductController extends CoreController
             unset($product['gallery']);
 
 
+
             // try {
                 $type = Type::find($product['type_id']);
                 if (isset($type->id)) {
+                    $product["slug"]=$this->getSlug($product["name"]);
                     Product::firstOrCreate($product);
                 }
             // } catch (Exception $e) {
@@ -488,6 +490,7 @@ class ProductController extends CoreController
                 // try {
                     $type = Type::find($product['type_id']);
                     if (isset($type->id)) {
+                        $product["slug"]=$this->getSlug($product["name"]);
                         Product::firstOrCreate($product);
                     }
                 // } catch (Exception $e) {
@@ -539,6 +542,25 @@ class ProductController extends CoreController
             return true;
         }
     }
+
+    private function getSlug($name)
+    {
+        $is_unique=FALSE;
+        while(!$is_unique){
+            $permitted_chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+            $postfix=substr(str_shuffle($permitted_chars), 0, 4);
+
+            $slug=str_replace(" ","-",$name)."-".$postfix;
+
+            $product=Product::where('slug',$slug)->first();
+            if(!$product){
+                $is_unique=TRUE;
+            }
+        }
+
+        return $slug;
+    }
+
 
     public function importAllVariationOptions(Request $request)
     {

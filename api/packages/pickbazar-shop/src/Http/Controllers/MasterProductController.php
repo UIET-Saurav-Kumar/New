@@ -310,8 +310,8 @@ class MasterProductController extends CoreController
     {
         $is_unique=FALSE;
         while(!$is_unique){
-            $permitted_chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-            $postfix=substr(str_shuffle($permitted_chars), 0, 2);
+            $permitted_chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+            $postfix=substr(str_shuffle($permitted_chars), 0, 4);
 
             $slug=str_replace(" ","-",$name)."-".$postfix;
 

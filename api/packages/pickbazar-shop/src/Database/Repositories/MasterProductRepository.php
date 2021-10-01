@@ -68,6 +68,7 @@ class MasterProductRepository extends BaseRepository
 
     public function storeProduct($request)
     {
+        dd($request['categories']);
         try {
             $data = $request->only($this->dataArray);
             $product = $this->create($data);
@@ -148,7 +149,7 @@ class MasterProductRepository extends BaseRepository
     public function fetchRelated($slug, $limit = 10)
     {
         try {
-            $product = $this->findOneByFieldOrFail('slug', $slug);
+            $product = $this->findOneByFieldOrFail('id', $slug);
             $categories = $product->categories->pluck('id');
             $products = $this->whereHas('categories', function ($query) use ($categories) {
                 $query->whereIn('categories.id', $categories);

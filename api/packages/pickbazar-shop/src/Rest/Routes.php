@@ -134,6 +134,8 @@ Route::post('import-master-products', 'PickBazar\Http\Controllers\MasterProductC
 Route::get('export-master-variation-options', 'PickBazar\Http\Controllers\MasterProductController@exportMasterVariableOptions');
 Route::post('import-master-variation-options', 'PickBazar\Http\Controllers\MasterProductController@importMasterVariationOptions');
 
+Route::put('status-master-product/{id}',"PickBazar\Http\Controllers\MasterProductController@updateProductStatus");
+
 Route::get('export-shops', 'PickBazar\Http\Controllers\ShopController@exportShop');
 Route::post('import-shops', 'PickBazar\Http\Controllers\ShopController@importShop');
 

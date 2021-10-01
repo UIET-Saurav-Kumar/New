@@ -73,7 +73,10 @@ class ProductRepository extends BaseRepository
     {
         try {
             $data = $request->only($this->dataArray);
+            $data['slug']=$this->getSlug($data['name']);
+
             $product = $this->create($data);
+
             if (isset($request['categories'])) {
                 $product->categories()->attach($request['categories']);
             }
@@ -90,11 +93,28 @@ class ProductRepository extends BaseRepository
             $product->variation_options = $product->variation_options;
             $product->variations = $product->variations;
             $product->type = $product->type;
-            $product->tags = $product->tags;
             return $product;
         } catch (ValidatorException $e) {
             throw new PickbazarException('PICKBAZAR_ERROR.SOMETHING_WENT_WRONG');
         }
+    }
+
+    private function getSlug($name)
+    {
+        $is_unique=FALSE;
+        while(!$is_unique){
+            $permitted_chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+            $postfix=substr(str_shuffle($permitted_chars), 0, 4);
+
+            $slug=str_replace(" ","-",$name)."-".$postfix;
+
+            $product=Product::where('slug',$slug)->first();
+            if(!$product){
+                $is_unique=TRUE;
+            }
+        }
+
+        return $slug;
     }
 
     public function updateProduct($request, $id)
