@@ -49,15 +49,18 @@ const Navbar = ({label}) => {
 
       </div> 
 
-        <ul className="hidden lg:flex items-center space-s-8">
+        <ul className="hidden lg:flex  items-center space-s-8">
           {isAuthorize ? (
             <li key="track-orders">
 
               <Link
                 href={ROUTES.ORDERS}
-                className="font-semibold text-heading flex items-center transition duration-200 w-28 no-underline hover:text-accent focus:text-accent"
+                className="font-semibold text-heading flex items-center transition
+                            duration-200 w-24 no-underline hover:text-accent focus:text-accent"
               >
-                {t("nav-menu-track-order")}
+
+                 {t("nav-menu-track-order")}
+
               </Link>
 
             </li>

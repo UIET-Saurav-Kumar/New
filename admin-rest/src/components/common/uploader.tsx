@@ -14,6 +14,7 @@ const getPreviewImage = (value: any) => {
   }
   return images;
 };
+
 export default function Uploader({ onChange, value, multiple }: any) {
   const { t } = useTranslation();
   const [files, setFiles] = useState<Attachment[]>(getPreviewImage(value));
@@ -54,6 +55,7 @@ export default function Uploader({ onChange, value, multiple }: any) {
       onChange(images);
     }
   };
+
   const thumbs = files?.map((file: any, idx) => {
     if (file.id) {
       return (

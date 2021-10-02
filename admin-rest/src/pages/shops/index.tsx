@@ -14,6 +14,7 @@ import { SortOrder } from "@ts-types/generated";
 import { useModalAction } from "@components/ui/modal/modal.context";
 import { MoreIcon } from "@components/icons/more-icon";
 import Button from "@components/ui/button";
+
 export default function AllShopPage() {
   const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState("");
@@ -35,6 +36,7 @@ export default function AllShopPage() {
 
   if (loading) return <Loader text={t("common:text-loading")} />;
   if (error) return <ErrorMessage message={error.message} />;
+
   function handleSearch({ searchText }: { searchText: string }) {
     setSearchTerm(searchText);
   }
@@ -44,6 +46,7 @@ export default function AllShopPage() {
   function handleImportModal() {
     openModal("EXPORT_IMPORT_SHOPS");
   }
+  
   return (
     <>
       <Card className="flex flex-col md:flex-row items-center justify-between mb-8">

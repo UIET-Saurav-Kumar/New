@@ -23,11 +23,11 @@ export default function OwnerDashboard() {
         </h1>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 3xl:grid-cols-5 gap-5">
-        {data?.shops?.map((myShop) => (
-          <ShopCard shop={myShop} />
-        ))}
-      </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 3xl:grid-cols-5 gap-5">
+          {data?.shops?.map((myShop) => (
+            <ShopCard shop={myShop} />
+          ))}
+        </div>
 
       {!data?.managed_shop && !data?.shops?.length ? (
 
@@ -47,10 +47,10 @@ export default function OwnerDashboard() {
                     </h1> 
 
                     <img 
-                src='https://bluerayws.com/sites/default/files/2019-12/E-COMMERCE-%26-ONLINE-SHOPPING-SERVICES_2.gif'
-                // src='https://previews.123rf.com/images/zuperia/zuperia2003/zuperia200300413/142389355-online-shopping-concept-couple-man-and-woman-are-shopping-online-man-is-carrying-cart-with-purchases.jpg' 
-                className=' w-36 h-36 mx-auto object-contain sm:hidden '
-                />
+                      src='https://bluerayws.com/sites/default/files/2019-12/E-COMMERCE-%26-ONLINE-SHOPPING-SERVICES_2.gif'
+                      // src='https://previews.123rf.com/images/zuperia/zuperia2003/zuperia200300413/142389355-online-shopping-concept-couple-man-and-woman-are-shopping-online-man-is-carrying-cart-with-purchases.jpg' 
+                      className=' w-36 h-36 mx-auto object-contain sm:hidden '
+                    />
                     <p className='text-center text-gray-700'>  </p>
 
                    <div className='mx-auto'> 

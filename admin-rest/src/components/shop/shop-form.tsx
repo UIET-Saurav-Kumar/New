@@ -1,3 +1,5 @@
+
+
 import Button from "@components/ui/button";
 import Input from "@components/ui/input";
 import { useFormState, Control, FieldErrors,useWatch,Controller, useFieldArray, useForm } from "react-hook-form";
@@ -11,12 +13,14 @@ import { shopValidationSchema } from "./shop-validation-schema";
 import { getFormattedImage } from "@utils/get-formatted-image";
 import { useCreateShopMutation } from "@data/shop/use-shop-create.mutation";
 import { useUpdateShopMutation } from "@data/shop/use-shop-update.mutation";
+
 import {
   BalanceInput,
   ShopSettings,
   ShopSocialInput,
   UserAddressInput,
 } from "@ts-types/generated";
+
 import GooglePlacesAutocomplete from "@components/form/google-places-autocomplete";
 import Label from "@components/ui/label";
 import { getIcon } from "@utils/get-icon";
@@ -29,8 +33,8 @@ import Multiselect from 'multiselect-react-dropdown';
 import { useEffect, useState } from "react";
 
 
-
 const socialIcon = [
+
   {
     value: "FacebookIcon",
     label: "Facebook",
@@ -48,6 +52,8 @@ const socialIcon = [
     label: "Youtube",
   },
 ];
+
+
 
 export const updatedIcons = socialIcon.map((item: any) => {
   item.label = (
@@ -69,6 +75,7 @@ type FormValues = {
   name: string;
   description: string;
   cover_image: any;
+
   logo: any;
   balance: BalanceInput;
   address: UserAddressInput;
@@ -82,6 +89,8 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
   const [options,selectOption] = useState([])
   const { t } = useTranslation();
   const { data, isLoading } = useShopCategoryQuery();
+
+
   useEffect(()=>{
     console.log(initialValues,"initialValues");
     if(initialValues){
@@ -121,6 +130,8 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
       : {}),
     resolver: yupResolver(shopValidationSchema),
   });
+
+
   const { fields, append, remove } = useFieldArray({
     control,
     name: "settings.socials",
@@ -147,6 +158,7 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
           }))
         : [],
     };
+    
     if (initialValues) {
       const { ...restAddress } = values.address;
       updateShop({
@@ -214,6 +226,7 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
             <FileInput name="cover_image" control={control} multiple={false} />
           </Card>
         </div>
+
         <div className="flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
           <Description
             title={t("form:shop-basic-info")}
@@ -249,6 +262,127 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
             </div>
           </Card>
         </div>
+
+
+
+
+
+
+
+          {/* Document and Lincenses form */}
+
+        {/* <div className=" cursor-not-allowed flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
+          <Description
+            title={t("form:Documents and Licenses**")}
+            // details={t("form:shop-basic-info-help-text")}
+            className="w-full px-0 sm:pe-4 md:pe-5 pb-5 sm:w-4/12 md:w-1/3 sm:py-8"
+          />
+          <Card className="w-full sm:w-8/12 md:w-2/3">
+            <Input
+              label={t("form:GST Number")}
+              {...register("name")}
+              variant="outline"
+              className="cursor-not-allowed  mb-5"
+              error={t(errors.name?.message!)}
+            />
+
+            <div className="flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
+            <Description
+              title={t("form:GST Certificate")}
+              details='Upload your clear GST Certificate '
+              className="w-full px-0 sm:pe-4 md:pe-5 pb-5 sm:w-4/12 md:w-1/3 sm:py-8"
+            />
+
+            <Card className="w-full sm:w-8/12 md:w-2/3">
+              <FileInput name="cover_image" control={control} multiple={false} />
+            </Card>
+          </div>
+
+        
+            <Input
+              label={t("form:FSSAI Number")}
+              {...register("name")}
+              variant="outline"
+              className="cursor-not-allowed mb-5"
+              error={t(errors.name?.message!)}
+            /> 
+
+            <div className="flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
+              <Description
+                title={t("form:FSSAI Certificate")}
+                details='Upload your clear FSSAI Certificate '
+                className="w-full px-0 sm:pe-4 md:pe-5 pb-5 sm:w-4/12 md:w-1/3 sm:py-8"
+              />
+
+              <Card className="w-full cursor-not-allowed sm:w-8/12 md:w-2/3">
+                <FileInput name="cover_image" control={control} multiple={false} />
+              </Card>
+            </div>
+
+            <div className="flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
+              <Description
+                title={t("form:Cancelled Cheque ")}
+                details='Upload your cancelled Cheque Copy '
+                className="w-full px-0 sm:pe-4 md:pe-5 pb-5 sm:w-4/12 md:w-1/3 sm:py-8"
+              />
+
+              <Card className="w-full cursor-not-allowed sm:w-8/12 md:w-2/3">
+                <FileInput name="cover_image" control={control} multiple={false} />
+              </Card>
+            </div>
+
+            <Input
+              label={t("form:TAN Number")}
+              {...register("name")}
+              variant="outline"
+              className="cursor-not-allowed mb-5"
+              error={t(errors.name?.message!)}
+            /> 
+
+            <div className="flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
+              <Description
+                title={t("form:TAN Certificate ")}
+                details='Upload your cancelled Cheque Copy '
+                className="w-full px-0 sm:pe-4 md:pe-5 pb-5 sm:w-4/12 md:w-1/3 sm:py-8"
+              />
+
+              <Card className="w-full cursor-not-allowed sm:w-8/12 md:w-2/3">
+                <FileInput name="cover_image" control={control} multiple={false} />
+              </Card>
+            </div>
+
+
+
+            <Input
+              label={t("form:PAN Number")}
+              {...register("name")}
+              variant="outline"
+              className="cursor-not-allowed mb-5"
+              error={t(errors.name?.message!)}
+            /> 
+
+            <div className="flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
+              <Description
+                title={t("form:PAN Card ")}
+                details='Upload your PAN Card'
+                className="w-full px-0 sm:pe-4 md:pe-5 pb-5 sm:w-4/12 md:w-1/3 sm:py-8"
+              />
+
+              <Card className="w-full cursor-not-allowed sm:w-8/12 md:w-2/3">
+                <FileInput name="cover_image" control={control} multiple={false} />
+              </Card>
+            </div>
+          
+          
+          </Card>
+        </div> */}
+
+
+
+
+
+
+
         <div className="flex flex-wrap pb-8 border-b border-dashed border-gray-300 my-5 sm:my-8">
           <Description
             title={t("form:shop-payment-info")}

@@ -7,13 +7,12 @@ import { useTranslation } from "next-i18next";
 import { useModalAction } from "@components/ui/modal/modal.context";
 import { useProductQuery } from "@data/product/use-product.query";
 
+
 type NeonProps = {
   product: any;
   className?: string;
   productSlug: string
 };
-
-
 
 
 
@@ -44,6 +43,7 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
   function handleProductQuickView() {
     return openModal("PRODUCT_DETAILS", product.slug);
   }
+
   return (
     <article
       style={{maxWidth:"330px"}}
@@ -57,15 +57,17 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
         onClick={handleProductQuickView}
       >
         <span className="sr-only">{t("text-product-image")}</span>
-        <Image
-          src={product.image?.original?? siteSettings?.product?.placeholderImage}
-          alt={product.name}
-          layout="fill"
-          // height={420}
-          // width={420}
-          objectFit="fill"
-          className="product-image"
-        />
+        
+          <Image
+            src={product.image?.original?? siteSettings?.product?.placeholderImage}
+            alt={product.name}
+            layout="fill"
+            // height={420}
+            // width={420}
+            objectFit="fill"
+            className="product-image"
+          />
+
         {discount && (
           <div className="absolute top-3 end-3 md:top-4 md:end-4 rounded text-xs leading-6 font-semibold px-1.5 sm:px-2 md:px-2.5 bg-accent text-light">
             {discount}
