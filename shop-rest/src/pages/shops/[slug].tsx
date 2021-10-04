@@ -20,6 +20,8 @@ import ShopDescription from "./shop-description";
 import ShopMobileView from "./shop-mobile-view";
 import ShopBanner from "./shop-banner";
 import WebShopBanner from "./web-shop-banner";
+import { useModalAction } from "@components/ui/modal/modal.context"
+
 
 
 
@@ -32,6 +34,16 @@ const ShopPage = ({ data }: any) => {
   
   const { t } = useTranslation("common") ;
   const { width } = useWindowSize() ;
+
+  const { openModal } = useModalAction();
+
+  function handleCategories() {
+    return openModal("SHOP_MOBILE_CATEGORIES");
+  }
+
+  function handlePayment() {
+    return openModal("SHOP_PAYMENT_FORM");
+  }
 
   return (
 
@@ -46,10 +58,10 @@ const ShopPage = ({ data }: any) => {
 
                       <div className="hidden lg:space-x-5 xl:space-x-10  lg:flex justify-between ">
 
-                          <div className=' sticky top-24 overflow-hidden lg:w-1/2 xl:w-1/4 flex h-full flex-col'>
+                          {/* <div className=' sticky top-24 overflow-hidden lg:w-1/2 xl:w-1/4 flex h-full flex-col'>
                             <ShopPaymentForm />
                             <ShopCategoryCard data={data} className="" />
-                          </div>
+                          </div> */}
 
                             {/* <Image
                               alt={t("heading")}
@@ -92,6 +104,32 @@ const ShopPage = ({ data }: any) => {
                     </div>
 
           </div>
+
+        <div className='fixed h-20 w-full border bg-black'> <span onClick={handlePayment} 
+                      className='hidden lg:block fixed  z-1000  bottom-10 -left-2 sm:left-2
+                                 px-3 p-2 rounded-lg  text-white  
+                                  items-center space-x-2'> 
+
+                        <img src='/pay.png' 
+                             className=' h-16 w-16 2xl:h-24 2xl:w-24 opacity-100 active:opacity-100' />
+                        <button >
+                            
+                        </button>
+
+                </span>
+
+                <span onClick={handleCategories} 
+                      className=' hidden lg:block fixed  z-1000  bottom-10 -right-2 sm:right-2
+                                  px-3 p-2 rounded-lg  text-white  
+                                   items-center space-x-2'> 
+
+                       <img src='/menu.png' 
+                            className='h-16 w-16 2xl:h-24 2xl:w-24 opacity-100 active:opacity-100' />
+                       <button >
+                         
+                       </button>
+
+                </span></div> 
 
       <div className='block lg:hidden w-full'>
 
