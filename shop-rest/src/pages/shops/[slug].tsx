@@ -105,31 +105,33 @@ const ShopPage = ({ data }: any) => {
 
           </div>
 
-        <span onClick={handlePayment} 
-                      className='hidden lg:block fixed  z-1000  bottom-10 -left-2 sm:left-2
+          <span onClick={handlePayment} 
+                      className='fixed  z-1000 lg:block hidden bottom-16 -left-2 sm:left-2
                                  px-3 p-2 rounded-lg  text-white  
-                                  items-center space-x-2'> 
+                                 flex items-center space-x-2'> 
 
-                        <img src='/pay.png' 
-                             className=' h-16 w-16 2xl:h-24 2xl:w-24 opacity-100 active:opacity-100' />
-                        <button >
-                            
-                        </button>
-
+                    <span className='flex flex-col items-center '>   
+                       <img src='/fast-pay.jpeg' 
+                            className='h-16 w-16 rounded-full border-2 border-gray-300 opacity-100 active:opacity-100' />
+                            <button className='text-gray-900 font-bold'> Pay Now </button>
+                            </span>
                 </span>
 
                 <span onClick={handleCategories} 
-                      className=' hidden lg:block fixed  z-1000  bottom-10 -right-2 sm:right-2
-                                  px-3 p-2 rounded-lg  text-white  
-                                   items-center space-x-2'> 
+                      className = 'fixed  z-1000 lg:block hidden bottom-16 -right-2 sm:right-2
+                                   px-3 p-2 rounded-lg  text-white  
+                                   flex items-center space-x-2'> 
 
-                       <img src='/menu.png' 
-                            className='h-16 w-16 2xl:h-24 2xl:w-24 opacity-100 active:opacity-100' />
-                       <button >
-                         
-                       </button>
+                   
 
+                    <span className='flex flex-col items-center'>
+                         <img src='/menu.png' 
+                          className='h-14 w-14 opacity-80 active:opacity-100' /> 
+                          <button className='text-gray-900 font-bold'> Categories </button>
+                     </span>
+                        
                 </span>
+                    
 
       <div className='block lg:hidden w-full'>
 

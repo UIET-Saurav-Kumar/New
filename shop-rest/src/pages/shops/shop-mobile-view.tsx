@@ -77,7 +77,7 @@ export default function ShopMobileView({data}) {
                     <span className='flex flex-col items-center '>   
                        <img src='/fast-pay.jpeg' 
                             className='h-16 w-16 rounded-full border-2 border-gray-300 opacity-100 active:opacity-100' />
-                            <button className='text-gray-500 font-semibold'> Pay Now </button>
+                            <button className='text-gray-700 font-semibold'> Pay Now </button>
                             </span>
                 </span>
 
@@ -86,16 +86,16 @@ export default function ShopMobileView({data}) {
                                    px-3 p-2 rounded-lg  text-white  
                                    flex items-center space-x-2'> 
 
-                    <span className='flex flex-col  text-black items-center font-bold'> 
+                   
 
                     <span className='flex flex-col items-center'>
-                      <img src='/menu.png' 
+                         <img src='/menu.png' 
                           className='h-14 w-14 opacity-80 active:opacity-100' /> 
-                          <button className='text-gray-500 font-semibold'> Categories </button>
-                            </span>
+                          <button className='text-gray-700 font-semibold'> Categories </button>
+                     </span>
                         
-                          </span>
-                    </span>
+                </span>
+                    
             
         </div>
         {width < 1022 && <MobileNavigation />}
