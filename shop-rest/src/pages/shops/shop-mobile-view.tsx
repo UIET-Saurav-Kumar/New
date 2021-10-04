@@ -91,7 +91,7 @@ export default function ShopMobileView({data}) {
                     <span className='flex flex-col items-center'>
                       <img src='/menu.png' 
                           className='h-14 w-14 opacity-80 active:opacity-100' /> 
-                          <button className='text-gray-500 font-semibold'> Pay Now </button>
+                          <button className='text-gray-500 font-semibold'> Categories </button>
                             </span>
                         
                           </span>
