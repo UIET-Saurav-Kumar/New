@@ -69,31 +69,33 @@ export default function ShopMobileView({data}) {
 
             {/* menu button */}
 
-                <span onClick={handlePayment} 
+            <span onClick={handlePayment} 
                       className='fixed  z-1000 lg:hidden bottom-16 -left-2 sm:left-2
                                  px-3 p-2 rounded-lg  text-white  
                                  flex items-center space-x-2'> 
 
-                        <img src='/pay.png' 
-                             className='h-14 w-14 opacity-80 active:opacity-100' />
-                        <button >
-                            
-                        </button>
-
+                    <span className='flex flex-col items-center '>   
+                       <img src='/fast-pay.jpeg' 
+                            className='h-16 w-16 rounded-full border-2 border-gray-300 opacity-100 active:opacity-100' />
+                            <button className='text-gray-500 font-semibold'> Pay Now </button>
+                            </span>
                 </span>
 
                 <span onClick={handleCategories} 
-                      className=' fixed  z-1000 lg:hidden bottom-16 -right-2 sm:right-2
-                                  px-3 p-2 rounded-lg  text-white  
-                                  flex items-center space-x-2'> 
+                      className = 'fixed  z-1000 lg:hidden bottom-16 -right-2 sm:right-2
+                                   px-3 p-2 rounded-lg  text-white  
+                                   flex items-center space-x-2'> 
 
-                       <img src='/menu.png' 
-                            className='h-14 w-14 opacity-80 active:opacity-100' />
-                       <button >
-                         
-                       </button>
+                    <span className='flex flex-col  text-black items-center font-bold'> 
 
-                </span>
+                    <span className='flex flex-col items-center'>
+                      <img src='/menu.png' 
+                          className='h-14 w-14 opacity-80 active:opacity-100' /> 
+                          <button className='text-gray-500 font-semibold'> Pay Now </button>
+                            </span>
+                        
+                          </span>
+                    </span>
             
         </div>
         {width < 1022 && <MobileNavigation />}
