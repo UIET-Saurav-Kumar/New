@@ -36,7 +36,7 @@ export default function featuredProducts({}) {
                 <h3 className='text-lg sm:text-lg md:text-lg xl:text-2xl  font-semibold  p-2  '> 
                     Featured Products 
                 </h3>
-                <h3 className=' text-xs font-blue hover:underline cursor-pointer' > view all </h3>
+                {/* <h3 className=' text-xs font-blue hover:underline cursor-pointer' > view all </h3> */}
             </div>
             </div>
 

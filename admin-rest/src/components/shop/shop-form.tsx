@@ -54,7 +54,6 @@ const socialIcon = [
 ];
 
 
-
 export const updatedIcons = socialIcon.map((item: any) => {
   item.label = (
     <div className="flex space-s-4 items-center text-body">

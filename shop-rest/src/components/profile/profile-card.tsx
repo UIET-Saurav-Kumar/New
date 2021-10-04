@@ -65,7 +65,7 @@ type ShopProfileCardProps = {
 
       <aside
         className={cn(
-          "bg-gray-50 sm:bg-white shadow-md  sm:shadow-none px-2 rounded mt-0  lg:mt-0  h-36 items-center border sm:border-none sm:h-64 lg:h-72 w-full sm:1/3 md:w-auto lg:w-56 xl:w-56 2xl:w-56 flex-shrink-0",
+          "bg-gray-50 sm:bg-white shadow-md  sm:shadow-none px-2 rounded mt-0  lg:mt-0  items-center border sm:border-none lg:h-full w-full flex-shrink-0",
           className
         )}
       >

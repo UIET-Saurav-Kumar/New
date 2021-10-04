@@ -74,16 +74,16 @@ const ShopPage = ({ data }: any) => {
 
                           <div className='flex flex-col overflow-y-scroll  w-full'>  
 
-                            <div className='flex  w-full h-72 border'> 
+                            <div className='flex  w-full h-80 border'> 
 
-                                <div className='h-full'>  
+                                <div className='h-full w-1/5'>  
                                   <ShopProfileCard data={data} />
                                 </div>
                                 
                                 <img
                                   alt={t("heading")}
                                   src={data?.cover_image?.original! ?? "/product-placeholder.svg"}
-                                className='h-full w-full object-cover lg:object-cover'
+                                  className='h-full w-full object-cover lg:object-cover'
                                   // layout="fill"
                                   // objectFit="contain"
                                 />
@@ -105,7 +105,7 @@ const ShopPage = ({ data }: any) => {
 
           </div>
 
-        <div className='fixed h-20 w-full border bg-black'> <span onClick={handlePayment} 
+        <span onClick={handlePayment} 
                       className='hidden lg:block fixed  z-1000  bottom-10 -left-2 sm:left-2
                                  px-3 p-2 rounded-lg  text-white  
                                   items-center space-x-2'> 
@@ -129,7 +129,7 @@ const ShopPage = ({ data }: any) => {
                          
                        </button>
 
-                </span></div> 
+                </span>
 
       <div className='block lg:hidden w-full'>
 

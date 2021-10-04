@@ -36,9 +36,9 @@ export default function AmazonShops() {
 
                         {/* <Link href='/restraunt-shop-page'> */}
 
-                           <h3 className='font-blue text-sm sm:text-sm md:text-md 2xl:text-md  hover:underline cursor-pointer font-light text-blue-600 ' >
+                           {/* <h3 className='font-blue text-sm sm:text-sm md:text-md 2xl:text-md  hover:underline cursor-pointer font-light text-blue-600 ' >
                                 view all 
-                           </h3>
+                           </h3> */}
 
                         {/* </Link> */}
 
