@@ -131,15 +131,16 @@ const ShopPage = ({ data }: any) => {
 
            
 
-      <div className='block lg:hidden w-full'>
-
-        <ShopMobileView data={data}/>
-
-      </div>
+     
       
       {width > 1023 && <CartCounterButton />}
 
     </div>
+       <div className='block lg:hidden w-full'>
+
+        <ShopMobileView data={data}/>
+
+      </div>
     </>
   );
 };
