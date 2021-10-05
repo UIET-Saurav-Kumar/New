@@ -32,25 +32,24 @@ export default function ShopMobileView({data}) {
 
         <>
 
-        <div className=' px-6 mt-4  flex flex-col'>
+        <div className=' px-6 mt-4  flex  flex-col'>
 
-            <div className='w-full grid grid-cols-1   xs+++:flex'>
+            <div className='w-full grid grid-cols-1 sm:flex'>
 
-                <div className='hidden xs+++:block w-48'> 
+                <div className='hidden sm:block w-48 h-38 sm:h-60 md:h-72'> 
                     <ShopProfileCard data={data} /> 
                 </div>
                 
                 <div className='w-full flex-grow'>
                    <img alt={t("heading")} 
-                        className='object-cover h-36  sm:h-60 md:h-72 w-full'
+                        className='object-cover h-38 sm:h-60 rounded-lg xs+++:rounded-l-none md:h-72 w-full'
                         src={data?.cover_image?.original! ?? "/product-placeholder.svg"}
                    />
                 </div>
 
-                <div className='block  xs+++:hidden'> 
+                <div className='block  sm:hidden'> 
                     <ShopProfileCard data={data} /> 
                 </div>
-
                 
             </div>
 
@@ -82,9 +81,9 @@ export default function ShopMobileView({data}) {
                 </span>
 
                 <span onClick={handleCategories} 
-                      className = 'fixed  z-1000 lg:hidden bottom-16 -right-2 sm:right-2
+                      className ='fixed  z-1000 lg:hidden bottom-16 -right-2 sm:right-2
                                    px-3 p-2 rounded-lg  text-white  
-                                   flex items-center space-x-2'> 
+                                    items-center space-x-2'> 
 
                    
                     <span className='flex flex-col items-center'>
