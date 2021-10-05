@@ -76,7 +76,7 @@ export default function ShopMobileView({data}) {
                     <span className='flex flex-col items-center '>   
                        <img src='/online-payment.png' 
                             className='h-16 w-16 rounded-full border-2 border-gray-300 opacity-100 active:opacity-100' />
-                            <button className='text-gray-700 font-semibold'> Pay Now </button>
+                            <button className='text-gray-800 font-bold'> Pay Now </button>
                             </span>
                 </span>
 
@@ -89,7 +89,7 @@ export default function ShopMobileView({data}) {
                     <span className='flex flex-col items-center'>
                          <img src='/menu.png' 
                           className='h-14 w-14 opacity-80 active:opacity-100' /> 
-                          <button className='text-gray-700 font-semibold'> Categories </button>
+                          <button className='text-gray-800 font-bold'> Categories </button>
                      </span>
                         
                 </span>
