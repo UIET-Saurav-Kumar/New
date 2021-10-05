@@ -21,6 +21,8 @@ import ShopMobileView from "./shop-mobile-view";
 import ShopBanner from "./shop-banner";
 import WebShopBanner from "./web-shop-banner";
 import { useModalAction } from "@components/ui/modal/modal.context"
+import CategoryCard from "@components/ui/category-card";
+import AllCategories from "@components/home-page-product-section/AllCategories";
 
 
 
@@ -83,7 +85,7 @@ const ShopPage = ({ data }: any) => {
                                 <img
                                   alt={t("heading")}
                                   src={data?.cover_image?.original! ?? "/product-placeholder.svg"}
-                                  className='h-full w-full object-cover lg:object-cover'
+                                  className='h-full w-full object-fill lg:object-fill'
                                   // layout="fill"
                                   // objectFit="contain"
                                 />
@@ -131,14 +133,15 @@ const ShopPage = ({ data }: any) => {
 
            
 
-     
+      
       
       {width > 1023 && <CartCounterButton />}
 
     </div>
-       <div className='block lg:hidden w-full'>
+    <div className='block lg:hidden w-full'>
 
         <ShopMobileView data={data}/>
+        
 
       </div>
     </>
