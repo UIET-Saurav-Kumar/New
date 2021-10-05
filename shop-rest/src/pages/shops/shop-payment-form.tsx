@@ -14,7 +14,7 @@ export default function ShopPaymentForm() {
 
         <form className='flex flex-1 bg-white' noValidate>
 
-                            <div className="mt-0 w-96  h-full p-10  flex-col flex space-y-6">
+                            <div className="mt-0 w-96 lg:w-500  h-600 p-10  flex-col flex space-y-6">
 
                                   <Input
                                     label={t("Enter amount")}

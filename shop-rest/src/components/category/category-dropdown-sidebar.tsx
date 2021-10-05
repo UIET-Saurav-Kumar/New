@@ -35,7 +35,7 @@ const CategoryDropdownSidebar = () => {
   
   return (
 
-    <aside className="sticky w-72 top-22 h-full lg:w-64   bg-light">
+    <aside className="sticky w-96 top-22 h-full lg:w-96   bg-light">
       <div className="max-h-full overflow-hidden">
 
         <Scrollbar className="w-full h-full max-h-screen">
@@ -56,3 +56,5 @@ const CategoryDropdownSidebar = () => {
 };
 
 export default CategoryDropdownSidebar;
+
+

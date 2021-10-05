@@ -85,7 +85,7 @@ function SidebarMenuItem({ className, item, depth = 0 }: any) {
           )}
         >
           {icon && (
-            <span className="flex w-5 h-5 me-4 items-center justify-center">
+            <span className="flex w-8 h-8 me-4 items-center justify-center">
               {getIcon({
                 iconList: CategoryIcons,
                 iconName: icon,
@@ -93,7 +93,7 @@ function SidebarMenuItem({ className, item, depth = 0 }: any) {
               })}
             </span>
           )}
-          <span>{name}</span>
+          <span className='text-lg'>{name}</span>
           <span className="ms-auto">{expandIcon}</span>
         </button>
       </motion.li>
