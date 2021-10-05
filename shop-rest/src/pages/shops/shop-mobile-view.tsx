@@ -75,7 +75,7 @@ export default function ShopMobileView({data}) {
                                  flex items-center space-x-2'> 
 
                     <span className='flex flex-col items-center '>   
-                       <img src='/fast-pay.jpeg' 
+                       <img src='/online-payment.png' 
                             className='h-16 w-16 rounded-full border-2 border-gray-300 opacity-100 active:opacity-100' />
                             <button className='text-gray-700 font-semibold'> Pay Now </button>
                             </span>
