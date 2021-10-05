@@ -63,37 +63,35 @@ type ShopProfileCardProps = {
         </div>
       </div> */}
 
-      <aside
-        className={cn(
-          "bg-gray-50 sm:bg-white shadow-md  sm:shadow-none px-2 rounded mt-0  lg:mt-0  items-center border sm:border-none lg:h-full w-full flex-shrink-0",
-          className
-        )}
-      >
-        <div className="h-full w-full  flex items-center  overflow-hidden">
+     
+        <div className="mt-2 xs+++:mt-0 sm:mt-0 bg-white relative h-full w-full border
+                        rounded-lg xs+++:rounded-r-none flex items-center overflow-hidden">
 
-          <Scrollbar className={cn("w-full", styles.scrollbar_height)}>
+          {/* <Scrollbar className={cn("w-full", styles.scrollbar_height)}> */}
 
-            <div className="w-full -space-y-8 p-0 grid grid-cols-2  gap-x-8 gap-y-0  
-                            xs+++:grid-cols-1 lg:grid-cols-1 items-center">
+            <div className="w-full -space-y-8 p-3 grid grid-cols-2  gap-x-8 gap-y-0  
+                             sm:grid-cols-1 lg:grid-cols-1 items-center">
 
-              <div className="w-full h-34 rounded-lg flex relative mx-auto 
-                              items-center overflow-hidden mb-8">
+              <div className="w-full h-34 rounded-lg flex mt-0 sm:-mt-8 relative mx-auto 
+                              overflow-hidden mb-8">
 
                   <img
                     alt = {t("logo")}
                     src = {data?.logo?.original! ?? "/product-placeholder.svg"}
                     // layout="fill"
-                    className='object-cover sm:object-contain md:object-contain 
-                               lg:object-fill mx-auto w-20 h-20  sm:h-36 sm:w-36'
+                    className='object-contain sm:object-contain  rounded md:object-contain 
+                               lg:object-cover mx-auto w-28 h-28 lg:h-40 lg:w-40'
                     // objectFit = "fill"
                   />
-                
+
               </div>
 
-              <h3 className="text-md font-semibold   text-center text-heading mb-2">
-                {data?.name}
-                <div className=' -mt-4  '>
-                    <div className="flex items-center w-full  justify-end p-2 mt-3">
+              <h3 className="text-sm sm:text-sm lg:text-lg font-semibold mt-0 
+                             lg:mt-8 lg:pt-8  text-center text-heading mb-2">
+                  {data?.name}
+              </h3>
+              
+                    <div className=" absolute flex items-center  bottom-2 right-4  ">
                         {data?.settings?.socials.map((item: any, index: number) => (
                         <a
                             key={index}
@@ -104,22 +102,17 @@ type ShopProfileCardProps = {
                             {getIcon({
                             iconList: socialIcons,
                             iconName: item?.icon,
-                            className: "lg:w-8 lg:h-8 w-6 h-6 opacity-85 ",
+                            className: "lg:w-6 lg:h-6 w-6 h-6 opacity-85",
                             })}
                         </a>
                         ))}
                     </div>
-                </div>
                 
-              </h3>
-              
-
             </div>
 
-          </Scrollbar>
+          {/* </Scrollbar> */}
         </div>
 
-      </aside>
     </>
   );
 };
