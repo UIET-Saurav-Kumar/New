@@ -21,6 +21,7 @@ import Badge from "@components/ui/badge";
 import { CheckMark } from "@components/icons/checkmark";
 import { Table } from "@components/ui/table";
 import { OrderItems } from "@components/order/order-items-table";
+import Invoice from "@components/invoice-format/invoice";
 
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const cookies = parseContextCookie(context?.req?.headers?.cookie);
@@ -46,6 +47,7 @@ export default function OrderPage() {
     resetCart();
     clearCheckoutData();
     updateSearchTerm("");
+    console.log(data?.order)
   }, []);
 
   const { data, isLoading: loading } = useOrderQuery({
@@ -57,20 +59,28 @@ export default function OrderPage() {
   const { price: shipping_charge } = usePrice(
     data && { amount: data?.order?.delivery_fee ?? 0 }
   );
+
   const { price: tax } = usePrice(
     data && { amount: data?.order?.sales_tax ?? 0 }
   );
+
   const { price: discount } = usePrice(
     data && { amount: data?.order?.discount ?? 0 }
   );
 
+  console.log(data?.order);
+
+  
+
   const orderTableColumns = [
+
     {
       title: t("text-tracking-number"),
       dataIndex: "tracking_number",
       key: "tracking_number",
       align: alignLeft,
     },
+
     {
       title: t("text-date"),
       dataIndex: "date",
@@ -78,6 +88,7 @@ export default function OrderPage() {
       align: alignLeft,
       render: (created_at: string) => dayjs(created_at).format("MMMM D, YYYY"),
     },
+
     {
       title: t("text-status"),
       dataIndex: "status",
@@ -87,6 +98,7 @@ export default function OrderPage() {
         <Badge text={status?.name} style={{ backgroundColor: status?.color }} />
       ),
     },
+    
     {
       title: t("text-item"),
       dataIndex: "products",
@@ -94,6 +106,7 @@ export default function OrderPage() {
       align: "center",
       render: (products: any) => formatString(products?.length, t("text-item")),
     },
+
     {
       title: t("text-total-price"),
       dataIndex: "paid_total",
@@ -105,6 +118,7 @@ export default function OrderPage() {
         return <p>{price}</p>;
       },
     },
+
     {
       title: "",
       dataIndex: "tracking_number",
@@ -129,7 +143,7 @@ export default function OrderPage() {
   return (
     <div className="p-4 sm:p-8">
       <div className="p-6 sm:p-8 lg:p-12 max-w-screen-lg w-full mx-auto bg-light rounded border shadow-sm">
-        <h2 className="flex flex-col sm:flex-row items-center justify-between text-base font-bold text-heading mb-9 sm:mb-12">
+      {data?.order?.children?.length ? (  <h2 className="flex flex-col sm:flex-row items-center justify-between text-base font-bold text-heading mb-9 sm:mb-12">
           <span className="mb-5 sm:mb-0 me-auto ">
             <span className="me-4">{t("text-status")} :</span>
             <Badge
@@ -144,9 +158,13 @@ export default function OrderPage() {
           >
             {t("text-back-to-home")}
           </Link>
-        </h2>
+        </h2> ) : null }
 
+        {data?.order?.children?.length ? (  
+          <>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-12">
+
+          {/* tracking no  */}
           <div className="py-4 px-5 border border-border-200 rounded shadow-sm">
             <h3 className="mb-2 text-sm text-heading font-semibold">
               {t("text-order-number")}
@@ -155,6 +173,8 @@ export default function OrderPage() {
               {data?.order?.tracking_number}
             </p>
           </div>
+
+          {/* Date  */}
           <div className="py-4 px-5 border border-border-200 rounded shadow-sm">
             <h3 className="mb-2 text-sm  text-heading font-semibold">
               {t("text-date")}
@@ -163,12 +183,16 @@ export default function OrderPage() {
               {dayjs(data?.order?.created_at).format("MMMM D, YYYY")}
             </p>
           </div>
+
+          {/* total */}
           <div className="py-4 px-5 border border-border-200 rounded shadow-sm">
             <h3 className="mb-2 text-sm  text-heading font-semibold">
               {t("text-total")}
             </h3>
             <p className="text-sm  text-body-dark">{total}</p>
           </div>
+
+          {/* payment method */}
           <div className="py-4 px-5 border border-border-200 rounded shadow-sm">
             <h3 className="mb-2 text-sm  text-heading font-semibold">
               {t("text-payment-method")}
@@ -178,10 +202,9 @@ export default function OrderPage() {
             </p>
           </div>
         </div>
-        {/* end of order received  */}
 
-        <div className="flex flex-col lg:flex-row">
-          <div className="w-full lg:w-1/2 lg:pe-3 mb-12 lg:mb-0">
+        <div className="flex flex-col lg:flex-row mt-6">
+          {/* <div className="w-full lg:w-1/2 lg:pe-3 mb-12 lg:mb-0">
             <h2 className="text-xl font-bold text-heading mb-6">
               {t("text-total-amount")}
             </h2>
@@ -211,24 +234,23 @@ export default function OrderPage() {
                 </strong>
                 :<span className="w-7/12 sm:w-8/12 ps-4 text-sm ">{tax}</span>
               </p>
-              <p className="flex text-body-dark mt-5">
+              <p className="flex text-body-dark border-b mt-5">
                 <strong className="w-5/12 sm:w-4/12 text-sm  text-heading font-semibold">
                   {t("text-discount")}
                 </strong>
                 :
-                <span className="w-7/12 sm:w-8/12 ps-4 text-sm ">
+                <span className="w-7/12  sm:w-8/12 ps-4 text-sm ">
                   {discount}
                 </span>
               </p>
-              <p className="flex text-body-dark mt-5">
-                <strong className="w-5/12 sm:w-4/12 text-sm  text-heading font-semibold">
+              <p className="flex text-body-dark items-center mt-5">
+                <strong className="w-5/12 sm:w-4/12   text-lg font-bold">
                   {t("text-total")}
                 </strong>
-                :<span className="w-7/12 sm:w-8/12 ps-4 text-sm ">{total}</span>
+                :<span className="w-7/12 sm:w-8/12 ps-4 font-bold text-lg ">{total}</span>
               </p>
             </div>
-          </div>
-          {/* end of total amount */}
+          </div> */}
 
           <div className="w-full lg:w-1/2 lg:ps-3">
             <h2 className="text-xl font-bold text-heading mb-6">
@@ -263,9 +285,9 @@ export default function OrderPage() {
                 </span>
               </p>
             </div>
-          </div>
+          </div> 
           {/* end of order details */}
-        </div>
+        </div> </> ) : <Invoice/>}
 
         <div className="mt-12">
           <OrderItems products={data?.order?.products} />
