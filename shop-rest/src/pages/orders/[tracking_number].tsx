@@ -160,7 +160,7 @@ export default function OrderPage() {
           </Link>
         </h2> ) : null }
 
-        {data?.order?.children?.length ? (  
+        {!data?.order?.children?.length ? (  
           <>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-12">
 
