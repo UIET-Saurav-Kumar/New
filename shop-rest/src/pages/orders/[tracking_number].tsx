@@ -68,7 +68,8 @@ export default function OrderPage() {
     data && { amount: data?.order?.discount ?? 0 }
   );
 
-  console.log(data?.order);
+  // console.log(data?.order);
+  console.log(data?.order.children)
 
   
 
@@ -141,10 +142,22 @@ export default function OrderPage() {
   }
 
   return (
+    
     <div className="p-4 sm:p-8">
-      <div className="p-6 sm:p-8 lg:p-12 max-w-screen-lg w-full mx-auto bg-light rounded border shadow-sm">
-      {data?.order?.children?.length ? (  <h2 className="flex flex-col sm:flex-row items-center justify-between text-base font-bold text-heading mb-9 sm:mb-12">
-          <span className="mb-5 sm:mb-0 me-auto ">
+      <div className="p-6 sm:p-8 lg:p-12 max-w-screen-lg w-full mx-auto 
+                      bg-light rounded border shadow-sm">
+      
+      {data?.order?.children?.length ? ( 
+
+        <div className='flex flex-col space-y-10'>
+
+          <h2 className='font-semibold text-sm md:text-md lg:text-lg'> Order Summary </h2>
+
+            <div className=''> 
+              <h2 className="flex flex-col sm:flex-row items-center justify-between
+                             text-base font-bold text-heading mb-9 sm:mb-12">
+
+          <span className="mb-5 sm:mb-0 me-auto">
             <span className="me-4">{t("text-status")} :</span>
             <Badge
               text={data?.order?.status?.name!}
@@ -158,10 +171,14 @@ export default function OrderPage() {
           >
             {t("text-back-to-home")}
           </Link>
-        </h2> ) : null }
+          
+               </h2> 
+           </div> 
+        </div>) : null }
 
-        {!data?.order?.children?.length ? (  
-          <>
+        {(data?.order?.children?.length) > 1 ? (  
+
+      <>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-12">
 
           {/* tracking no  */}
@@ -201,61 +218,17 @@ export default function OrderPage() {
               {data?.order?.payment_gateway?.toUpperCase() ?? "N/A"}
             </p>
           </div>
+
         </div>
 
         <div className="flex flex-col lg:flex-row mt-6">
-          {/* <div className="w-full lg:w-1/2 lg:pe-3 mb-12 lg:mb-0">
-            <h2 className="text-xl font-bold text-heading mb-6">
-              {t("text-total-amount")}
-            </h2>
-
-            <div>
-              <p className="flex text-body-dark mt-5">
-                <strong className="w-5/12 sm:w-4/12 text-sm  text-heading font-semibold">
-                  {t("text-sub-total")}
-                </strong>
-                :
-                <span className="w-7/12 sm:w-8/12 ps-4 text-sm ">
-                  {sub_total}
-                </span>
-              </p>
-              <p className="flex text-body-dark mt-5">
-                <strong className="w-5/12 sm:w-4/12 text-sm  text-heading font-semibold">
-                  {t("text-shipping-charge")}
-                </strong>
-                :
-                <span className="w-7/12 sm:w-8/12 ps-4 text-sm ">
-                  {shipping_charge}
-                </span>
-              </p>
-              <p className="flex text-body-dark mt-5">
-                <strong className="w-5/12 sm:w-4/12 text-sm  text-heading font-semibold">
-                  {t("text-tax")}
-                </strong>
-                :<span className="w-7/12 sm:w-8/12 ps-4 text-sm ">{tax}</span>
-              </p>
-              <p className="flex text-body-dark border-b mt-5">
-                <strong className="w-5/12 sm:w-4/12 text-sm  text-heading font-semibold">
-                  {t("text-discount")}
-                </strong>
-                :
-                <span className="w-7/12  sm:w-8/12 ps-4 text-sm ">
-                  {discount}
-                </span>
-              </p>
-              <p className="flex text-body-dark items-center mt-5">
-                <strong className="w-5/12 sm:w-4/12   text-lg font-bold">
-                  {t("text-total")}
-                </strong>
-                :<span className="w-7/12 sm:w-8/12 ps-4 font-bold text-lg ">{total}</span>
-              </p>
-            </div>
-          </div> */}
+         
 
           <div className="w-full lg:w-1/2 lg:ps-3">
             <h2 className="text-xl font-bold text-heading mb-6">
               {t("text-order-details")}
             </h2>
+
             <div>
               <p className="flex text-body-dark mt-5">
                 <strong className="w-5/12 sm:w-4/12 text-sm  text-heading font-semibold">
@@ -266,6 +239,7 @@ export default function OrderPage() {
                   {formatString(data?.order?.products?.length, t("text-item"))}
                 </span>
               </p>
+
               <p className="flex text-body-dark mt-5">
                 <strong className="w-5/12 sm:w-4/12 text-sm  text-heading font-semibold">
                   {t("text-deliver-time")}
@@ -275,19 +249,21 @@ export default function OrderPage() {
                   {data?.order?.delivery_time}
                 </span>
               </p>
+
               <p className="flex text-body-dark mt-5">
                 <strong className="w-5/12 sm:w-4/12 text-sm  text-heading font-semibold">
                   {t("text-shipping-address")}
                 </strong>
                 :
                 <span className="w-7/12 sm:w-8/12 ps-4 text-sm">
-                  {formatAddress(data?.order?.billing_address!)}
+                  {formatAddress(data?.order?.billing_address)}
                 </span>
               </p>
             </div>
           </div> 
+
           {/* end of order details */}
-        </div> </> ) : <Invoice/>}
+        </div> </> ) : <Invoice/> }
 
         <div className="mt-12">
           <OrderItems products={data?.order?.products} />
@@ -308,6 +284,7 @@ export default function OrderPage() {
                   {t("message-sub-order")}
                 </p>
               </div>
+
               {Array.isArray(data?.order?.children) &&
                 data?.order?.children.length && (
                   <div className="">
@@ -322,6 +299,7 @@ export default function OrderPage() {
                     />
                   </div>
                 )}
+                
             </div>
           </div>
         ) : null}
@@ -329,5 +307,27 @@ export default function OrderPage() {
     </div>
   );
 }
+
+
+// import React, { useRef } from 'react';
+// import { useReactToPrint } from 'react-to-print';
+
+// import { ComponentToPrint } from './ComponentToPrint';
+
+//   const TestPrint = () => {
+//   const componentRef = useRef();
+//   const handlePrint = useReactToPrint({
+//     content: () => componentRef.current,
+//   });
+
+//   return (
+//     <div>
+//       <ComponentToPrint ref={componentRef} />
+//       <button onClick={handlePrint}>Print this out!</button>
+//     </div>
+//   );
+// };
+
+
 
 OrderPage.Layout = Layout;
