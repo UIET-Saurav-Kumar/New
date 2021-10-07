@@ -34,7 +34,7 @@ export const OrderItems = ({ products }: { products: any }) => {
   );
 
 
- 
+  // var converter = require('number-to-words');
 
   
 
@@ -177,8 +177,8 @@ export const OrderItems = ({ products }: { products: any }) => {
         />
 
              {data?.order?.children?.length > 1 ?  <p className=" p-2   flex  w-full text-body-dark items-center ">
-                <div className='flex ml-4 w-full '><strong className="w-5/12 sm:w-4/12   text-lg font-bold">
-                  {t("text-total")}
+                <div className='flex ml-4 w-full '><strong className="w-5/12 sm:w-4/12 tracking-widest text-lg font-extrabold">
+                  {t("text-total-amount")}
                 </strong>
                 :<span className=" items-center justify-end  mr-4 flex w-7/12 sm:w-8/12 ps-4 font-bold text-lg ">{total}</span></div>
               </p> : null }
@@ -187,7 +187,7 @@ export const OrderItems = ({ products }: { products: any }) => {
                 <h1 className='font-semibold w-1/3 h-full text-center items-center justify-center flex border border-r text-lg'>Amount in Words</h1>
                 <p></p>
               </div>   */}
-              
+
     </div>
     
   );
