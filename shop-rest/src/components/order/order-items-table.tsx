@@ -34,7 +34,7 @@ export const OrderItems = ({ products }: { products: any }) => {
   );
 
 
-  var converter = require('number-to-words');
+ 
 
   
 
