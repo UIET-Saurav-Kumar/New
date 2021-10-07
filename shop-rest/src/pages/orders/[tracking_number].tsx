@@ -22,6 +22,7 @@ import { CheckMark } from "@components/icons/checkmark";
 import { Table } from "@components/ui/table";
 import { OrderItems } from "@components/order/order-items-table";
 import Invoice from "@components/invoice-format/invoice";
+import PrintPage from "@components/print-button/print-page";
 
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const cookies = parseContextCookie(context?.req?.headers?.cookie);
@@ -179,57 +180,67 @@ export default function OrderPage() {
         {(data?.order?.children?.length) > 1 ? (  
 
       <>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-12">
 
-          {/* tracking no  */}
-          <div className="py-4 px-5 border border-border-200 rounded shadow-sm">
-            <h3 className="mb-2 text-sm text-heading font-semibold">
-              {t("text-order-number")}
-            </h3>
-            <p className="text-sm text-body-dark">
-              {data?.order?.tracking_number}
-            </p>
-          </div>
+      <div className='flex flex-col shadow-md border-t border-gray-100 h-auto w-full p-2 lg:p-4 space-y-6'>
 
-          {/* Date  */}
-          <div className="py-4 px-5 border border-border-200 rounded shadow-sm">
-            <h3 className="mb-2 text-sm  text-heading font-semibold">
-              {t("text-date")}
-            </h3>
-            <p className="text-sm text-body-dark">
-              {dayjs(data?.order?.created_at).format("MMMM D, YYYY")}
-            </p>
-          </div>
+            <div className='flex justify-between mx-10 '>  
 
-          {/* total */}
-          <div className="py-4 px-5 border border-border-200 rounded shadow-sm">
-            <h3 className="mb-2 text-sm  text-heading font-semibold">
-              {t("text-total")}
-            </h3>
-            <p className="text-sm  text-body-dark">{total}</p>
-          </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 space-x-4 w-1/3">
+                          <h3 className="mb-2 text-sm lg:text-lg text-heading  font-semibold">
+                            {t("text-order-number")}:
+                          </h3>
+                          <p className="text-sm lg:text-lg text-body-dark">
+                            {data?.order?.tracking_number}
+                          </p>
+                  </div>
+                    
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex   w-1/3">
+                          <h3 className="mb-2 text-sm lg:text-lg text-heading w-0  font-semibold">
+                            {t("text-date")}:
+                          </h3>
+                          <p className="text-sm lg:text-lg -ml-24 lg:ml-16 text-body-dark">
+                            {dayjs(data?.order?.created_at).format("MMMM D, YYYY")}
+                          </p>
+                  </div>
 
-          {/* payment method */}
-          <div className="py-4 px-5 border border-border-200 rounded shadow-sm">
-            <h3 className="mb-2 text-sm  text-heading font-semibold">
-              {t("text-payment-method")}
-            </h3>
-            <p className="text-sm text-body-dark">
-              {data?.order?.payment_gateway?.toUpperCase() ?? "N/A"}
-            </p>
-          </div>
+            </div>
 
-        </div>
+            <div className='flex justify-between mx-10'>
 
-        <div className="flex flex-col lg:flex-row mt-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex space-x-4  w-1/3">
+                  <h3 className="mb-2 text-sm lg:text-lg  text-heading font-semibold">
+                    {t("text-total")}:
+                  </h3>
+                  <p className="text-sm lg:text-lg text-body-dark">{total}</p>
+                </div>
+
+                {/* payment method */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex space-x-4   w-1/3">
+                  <h3 className="mb-2 text-sm lg:text-lg text-heading font-semibold">
+                    {t("text-payment-method")}:
+                  </h3>
+                  <p className="text-sm lg:text-lg text-body-dark">
+                    {data?.order?.payment_gateway?.toUpperCase() ?? "N/A"}
+                  </p>
+                </div>
+
+
+            </div>
+
+      </div>
+
+
+
+       
+
+        <div className="flex flex-col lg:flex-row mt-6 w-full">
          
-
-          <div className="w-full lg:w-1/2 lg:ps-3">
+          <div className="w-full  lg:ps-3">
             <h2 className="text-xl font-bold text-heading mb-6">
               {t("text-order-details")}
             </h2>
 
-            <div>
+            <div className='grid grid-cols-1 sm:grid-cols-2 w-full '>
               <p className="flex text-body-dark mt-5">
                 <strong className="w-5/12 sm:w-4/12 text-sm  text-heading font-semibold">
                   {t("text-total-item")}
