@@ -91,14 +91,13 @@ export default function Invoice() {
     <div className='flex flex-col p-0 lg:p-6 sm:p-8  max-w-screen-lg w-full mx-auto bg-light rounded space-y-8'>
 
       <div className='flex text-center font-md flex-col'>
-          <h1 className='text-xs lg:text-lg'>Tax Invoice</h1>
+          <h1 className='font-semibold text-sm md:text-md lg:tex-md'>Tax Invoice</h1>
       </div>
 
       <div className=' mt-0 lg:mt-4 flex items-center justify-between'>
 
         <h1 className='flex items-center font-extrabold text-sm lg:text-xl'>Buyl<span><img src='/transparent-logo.png' className='h-3 w-3 lg:mx-1 lg:h-5 lg:w-5 '/></span>wcal.com</h1>
         
-
       </div>
 
       <div className='flex  flex-col w-full space-y-6 p-4 rounded border bg-gray-50'>
@@ -108,7 +107,7 @@ export default function Invoice() {
                     <div className='flex w-full  space-x-8 justify-between'>
 
                         <div className='flex w-1/2 space-y-2 flex-col'>
-                            <h1 className='text-xs sm:text-sm lg:text-lg font-semibold'>Sold By:</h1>
+                            <h1 className='text-xs sm:text-sm lg:tex-md font-semibold'>Sold By:</h1>
                             <p className='text-xs sm:text-sm lg:text-md font-body'></p>
                             <p className='text-xs sm:text-sm font-body tracking-wide'> 
                                
@@ -117,20 +116,21 @@ export default function Invoice() {
 
                      
                         <div className='flex w-1/2 space-y-2 flex-col'>
-                            <h1 className='text-xs sm:text-sm lg:text-lg font-semibold'>Shipping Address:</h1>
-                            <p className='text-xs sm:text-sm lg:text-sm lg:text-md font-body'>{data?.order?.customer?.name!}</p>
+                            <h1 className='text-xs sm:text-sm lg:tex-md font-semibold'>Shipping Address:</h1>
+                            <p className='text-xs sm:text-sm lg:text-sm lg:text-md text-gray-700 font-body'>{data?.order?.customer?.name!}</p>
                             
                             <p className='text-xs sm:text-sm font-body tracking-wide'> 
-                            <span className="w-7/12 sm:w-8/12 ps-4 text-xs">
+                            <span className="w-7/12 sm:w-8/12 text-gray-700 ps-4 text-xs">
                             {formatAddress(data?.order?.billing_address!)}
                             </span>
                             </p>
-                            <span className='flex items-center'>
-                                <h1 className='text-xs sm:text-sm lg:text-lg font-semibold'>Pin Code:</h1>
+                            <span className='flex items-center  w-full space-x-2'>
+                                <h1 className='text-xs sm:text-sm lg:tex-md font-semibold'>Pin Code:</h1>
+                                <p className='text-xs sm:text-sm lg:text-md font-body text-gray-700'>{data?.order?.billing_address?.zip}</p>
                                 </span>
                             <div className='flex items-center  w-full space-x-2'> 
-                            <h1 className='text-xs sm:text-sm lg:text-lg  font-semibold'>Phone Number:</h1>
-                            <p className='text-xs sm:text-sm lg:text-md font-body'>{data?.order?.customer_contact!}</p>
+                            <h1 className='text-xs sm:text-sm lg:tex-md  font-semibold'>Phone Number:</h1>
+                            <p className='text-xs sm:text-sm lg:tex-md font-body text-gray-700'>{data?.order?.customer_contact!}</p>
                         </div>
                         </div>
 
@@ -144,14 +144,14 @@ export default function Invoice() {
                     <div className='flex w-full space-x-8 justify-between'>
 
                         <div className='flex w-1/2 space-y-2 flex-col'>
-                              <span className='flex items-center'><h1 className='text-xs sm:text-sm lg:text-lg font-semibold'>PAN No:</h1><p className='font-body ml-2'></p></span>
-                              <span className='flex items-center'><h1 className='text-xs sm:text-sm lg:text-lg font-semibold'>GST Registraition No:</h1><p className='font-body ml-2'></p></span>
+                              <span className='flex items-center'><h1 className='text-xs sm:text-sm lg:tex-md font-semibold'>PAN No:</h1><p className='font-body ml-2 text-gray-700'>    </p></span>
+                              <span className='flex items-center'><h1 className='text-xs sm:text-sm lg:tex-md font-semibold'>GST Registraition No:</h1><p className='font-body text-gray-700 ml-2'>    </p></span>
                         </div>
 
 
                         <div className='flex w-1/2 space-y-2 flex-col'>
-                              <span className='flex items-center'><h1 className='text-xs sm:text-sm lg:text-lg font-semibold'>Order No:</h1><p className='text-xs sm:text-sm lg:text-lg font-body ml-2'>{data?.order?.tracking_number}</p></span>
-                              <span className='flex items-center'><h1 className='text-xs sm:text-sm lg:text-lg font-semibold'>Order Date:</h1><p className='text-xs sm:text-sm lg:text-lg font-body ml-2'>{dayjs(data?.order?.created_at).format("MMMM D, YYYY")}</p></span>
+                              <span className='flex items-center'><h1 className='text-xs sm:text-sm lg:tex-md font-semibold'>Order No:</h1><p className='text-xs sm:text-sm lg:tex-md text-gray-700 font-body ml-2'>{data?.order?.tracking_number}</p></span>
+                              <span className='flex items-center'><h1 className='text-xs sm:text-sm lg:tex-md font-semibold'>Order Date:</h1><p className='text-xs sm:text-sm  lg:tex-md text-gray-700 font-body ml-2'>{dayjs(data?.order?.created_at).format("MMMM D, YYYY")}</p></span>
                         </div>
 
                     </div>
