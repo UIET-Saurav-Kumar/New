@@ -34,7 +34,7 @@ export const OrderItems = ({ products }: { products: any }) => {
   );
 
 
-  // var converter = require('number-to-words');
+  var converter = require('number-to-words');
 
   
 
@@ -91,7 +91,6 @@ export const OrderItems = ({ products }: { products: any }) => {
               </span>
             </div>
 
-            
           </div>
         </>
         );
@@ -146,7 +145,7 @@ export const OrderItems = ({ products }: { products: any }) => {
     },
 
     {
-      title: t("Sub Total"),
+      title: (data?.order?.children?.length) > 1 ? t("Sub Total") : t("Total") ,
       dataIndex: "pivot",
       key: "price",
       align: alignRight,
@@ -177,17 +176,18 @@ export const OrderItems = ({ products }: { products: any }) => {
           scroll={{ x: 350, y: 500 }}
         />
 
-              <p className=" p-2   flex  w-full text-body-dark items-center ">
+             {data?.order?.children?.length > 1 ?  <p className=" p-2   flex  w-full text-body-dark items-center ">
                 <div className='flex ml-4 w-full '><strong className="w-5/12 sm:w-4/12   text-lg font-bold">
                   {t("text-total")}
                 </strong>
                 :<span className=" items-center justify-end  mr-4 flex w-7/12 sm:w-8/12 ps-4 font-bold text-lg ">{total}</span></div>
-              </p>
+              </p> : null }
 
               {/* <div className='w-full flex border-t items-center h-20'>
                 <h1 className='font-semibold w-1/3 h-full text-center items-center justify-center flex border border-r text-lg'>Amount in Words</h1>
                 <p></p>
-              </div> */}
+              </div>   */}
+              
     </div>
     
   );
