@@ -168,7 +168,8 @@ export default function OrderPage() {
 
           <Link
             href={ROUTES.HOME}
-            className="inline-flex items-center text-accent text-base font-normal underline hover:no-underline hover:text-accent-hover"
+            className="inline-flex items-center text-accent text-base font-normal
+                       underline hover:no-underline hover:text-accent-hover"
           >
             {t("text-back-to-home")}
           </Link>
@@ -183,9 +184,9 @@ export default function OrderPage() {
 
       <div className='flex flex-col shadow-md border-t border-gray-100 h-auto w-full p-2 lg:p-4 space-y-6'>
 
-            <div className='flex justify-between mx-10 '>  
+            <div className='flex justify-between lg:mx-10 '> 
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 space-x-4 w-1/3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 space-x-4 w-auto  lg:w-1/3">
                           <h3 className="mb-2 text-sm lg:text-lg text-heading  font-semibold">
                             {t("text-order-number")}:
                           </h3>
@@ -194,20 +195,20 @@ export default function OrderPage() {
                           </p>
                   </div>
                     
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex   w-1/3">
-                          <h3 className="mb-2 text-sm lg:text-lg text-heading w-0  font-semibold">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex space-x-2  w-auto lg:w-1/3">
+                          <h3 className="mb-2 text-sm lg:text-lg text-heading  font-semibold">
                             {t("text-date")}:
                           </h3>
-                          <p className="text-sm lg:text-lg -ml-24 lg:ml-16 text-body-dark">
+                          <p className="text-sm lg:text-lg text-body-dark">
                             {dayjs(data?.order?.created_at).format("MMMM D, YYYY")}
                           </p>
                   </div>
 
             </div>
 
-            <div className='flex justify-between mx-10'>
+            <div className='flex justify-between lg:mx-10'>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex space-x-4  w-1/3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex space-x-4 gap-0 w-full lg:w-1/3">
                   <h3 className="mb-2 text-sm lg:text-lg  text-heading font-semibold">
                     {t("text-total")}:
                   </h3>
@@ -215,7 +216,7 @@ export default function OrderPage() {
                 </div>
 
                 {/* payment method */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex space-x-4   w-1/3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex space-x-4   w-full lg:w-1/3">
                   <h3 className="mb-2 text-sm lg:text-lg text-heading font-semibold">
                     {t("text-payment-method")}:
                   </h3>
