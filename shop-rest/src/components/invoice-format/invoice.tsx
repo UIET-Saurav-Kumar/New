@@ -88,24 +88,24 @@ export default function Invoice() {
     
     return (
         
+    <div className='flex flex-col p-0 lg:p-6 sm:p-8  max-w-screen-lg w-full mx-auto bg-light rounded space-y-8'>
 
-   
-    <div className='flex flex-col p-0 lg:p-6 sm:p-8  max-w-screen-lg w-full mx-auto bg-light rounded space-y-8  '>
+      <div className='flex text-center font-md flex-col'>
+          <h1 className='text-xs lg:text-lg'>Tax Invoice</h1>
+      </div>
 
       <div className=' mt-0 lg:mt-4 flex items-center justify-between'>
 
-        <h1 className='flex items-center font-extrabold text-xl '>Buyl<span><img src='/buylowcal-logo.webp' className='h-8 w-8 mt-2'/></span>wcal.com</h1>
-        <div className='flex flex-col'>
-          <h1>Tax Invoice/Bill of Supply</h1>
-        </div>
+        <h1 className='flex items-center font-extrabold text-sm lg:text-xl'>Buyl<span><img src='/transparent-logo.png' className='h-3 w-3 lg:mx-1 lg:h-5 lg:w-5 '/></span>wcal.com</h1>
+        
 
       </div>
 
-      <div className='flex w-full flex-col space-y-6 p-4 rounded border bg-gray-50'>
+      <div className='flex  flex-col w-full space-y-6 p-4 rounded border bg-gray-50'>
                      
 
                      {/* 1st row */}
-                    <div className='flex w-full flex-start space-x-8 justify-between'>
+                    <div className='flex w-full  space-x-8 justify-between'>
 
                         <div className='flex w-1/2 space-y-2 flex-col'>
                             <h1 className='text-xs sm:text-sm lg:text-lg font-semibold'>Sold By:</h1>
