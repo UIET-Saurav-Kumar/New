@@ -34,7 +34,7 @@ export default function ProductGrid() {
             <h3 className='text-lg sm:text-lg md:text-lg xl:text-2xl  font-semibold  p-2  '> 
                 Offers of the Day
             </h3>
-            <h3 className='font-blue hover:underline cursor-pointer' > view all </h3>
+           
         </div>
         </div>
 
