@@ -13,7 +13,7 @@ export default function ImageSlider() {
       slidesToShow: 1,
       autoplay: true,
       slidesToScroll: 1,
-      arrows: true,
+      arrows: false,
      
      
 
