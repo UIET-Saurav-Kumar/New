@@ -13,7 +13,7 @@ export default function ImageSlider() {
       slidesToShow: 1,
       autoplay: true,
       slidesToScroll: 1,
-      arrows: true,
+      arrows: false,
      
      
 
@@ -38,6 +38,8 @@ export default function ImageSlider() {
     
 
     return (
+      <div className='mx-1'>
+      
       <Slider {...settings}>
 
       
@@ -121,6 +123,7 @@ export default function ImageSlider() {
 
        
       </Slider>
+      </div>
     )
 }
 
