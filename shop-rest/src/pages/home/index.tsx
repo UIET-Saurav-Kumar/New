@@ -1,3 +1,5 @@
+
+
 import { useEffect } from "react";
 import DefaultLayout from "@components/layout/default-layout";
 import { useWindowSize } from "@utils/use-window-size";
@@ -24,6 +26,7 @@ import MobileNavigation from "@components/layout/mobile-navigation";
 import StayTuned from '@components/no-shop-msg/stay-tuned'
 import { useShopAvailabilityQuery } from "@data/home/use-shop-availability-query";
 import { useLocation } from "@contexts/location/location.context";
+
 
 
 const ProductFeedLoader = dynamic(
@@ -125,7 +128,6 @@ const {
               </>
             )
           } 
-            
             
         </div>
     )

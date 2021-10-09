@@ -22,7 +22,9 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
   const { openSidebar, setSidebarView, toggleMobileSearch, isAuthorize } =
     useUI();
   const { openModal } = useModalAction();
+  
   const { totalUniqueItems } = useCart();
+
   function handleSidebar(view: string) {
     setSidebarView(view);
     return openSidebar();
@@ -32,7 +34,7 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
   }
 
   return (
-    <div className="visible lg:hidden zh-12 md:h-14">
+    <div className="visible lg:hidden h-12 md:h-14">
       <nav className="h-12 md:h-14 w-full py-1.5 px-2 flex justify-between fixed start-0 bottom-0 z-10 bg-light shadow-400">
         <motion.button
           whileTap={{ scale: 0.88 }}
@@ -40,7 +42,7 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
           className="flex p-2 h-full items-center justify-center focus:outline-none focus:text-accent"
         >
           <span className="sr-only">{t("text-burger-menu")}</span>
-          <NavbarIcon />
+          <img src='/list.png' className='h-8 w-8'/>
         </motion.button>
 
         {search === true && (
@@ -50,7 +52,7 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
             className="flex p-2 h-full items-center justify-center focus:outline-none focus:text-accent"
           >
             <span className="sr-only">{t("text-search")}</span>
-            <SearchIcon width="17.05" height="18" />
+            <img src='/search.png' className='h-7 w-7'/>
           </motion.button>
         )}
 
@@ -60,7 +62,7 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
           className="flex p-2 h-full items-center justify-center focus:outline-none focus:text-accent"
         >
           <span className="sr-only">{t("text-home")}</span>
-          <HomeIcon />
+          <img src='/home.png' className='h-7 w-7'/>
         </motion.button>
 
         <motion.button
@@ -69,7 +71,7 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
           className="flex p-2 product-cart h-full relative items-center justify-center focus:outline-none focus:text-accent"
         >
           <span className="sr-only">{t("text-cart")}</span>
-          <ShoppingBagIcon />
+          <img src='/cart.png' className='h-7 w-7'/>
           {totalUniqueItems > 0 && (
             <span className="bg-accent py-1 px-1.5 text-10px leading-none font-semibold text-light rounded-full absolute top-0 end-0 mt-0.5 -me-0.5">
               {totalUniqueItems}
@@ -84,7 +86,7 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
             className="flex p-2 h-full items-center justify-center focus:outline-none focus:text-accent"
           >
             <span className="sr-only">{t("text-user")}</span>
-            <UserIcon />
+             <img src='/boy.png' className='h-7 w-7'/>
           </motion.button>
         ) : (
           <motion.button
@@ -93,7 +95,7 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
             className="flex p-2 h-full items-center justify-center focus:outline-none focus:text-accent"
           >
             <span className="sr-only">{t("text-user")}</span>
-            <UserIcon />
+             <img src='/boy.png' className='h-7 w-7'/>
           </motion.button>
         )}
       </nav>

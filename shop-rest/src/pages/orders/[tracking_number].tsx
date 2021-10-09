@@ -51,6 +51,8 @@ export default function OrderPage() {
     console.log(data?.order)
   }, []);
 
+  
+
   const { data, isLoading: loading } = useOrderQuery({
     tracking_number: query.tracking_number as string,
   });
@@ -69,10 +71,10 @@ export default function OrderPage() {
     data && { amount: data?.order?.discount ?? 0 }
   );
 
-  // console.log(data?.order);
-  console.log(data?.order.children)
+  console.log('order',data?.order);
+  console.log('children',data?.order.children)
 
-  
+  // console.log(data?.order)  
 
   const orderTableColumns = [
 
@@ -268,7 +270,7 @@ export default function OrderPage() {
                 </strong>
                 :
                 <span className="w-7/12 sm:w-8/12 ps-4 text-sm">
-                  {formatAddress(data?.order?.billing_address)}
+                  {formatAddress(data?.order?.children?.shop.name)}
                 </span>
               </p>
             </div>

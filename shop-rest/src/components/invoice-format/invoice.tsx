@@ -6,6 +6,7 @@ import dayjs from "dayjs";
 import { useIsRTL } from "@utils/locals";
 import Badge from "@components/ui/badge";
 import { formatAddress } from "@utils/format-address";
+import Spinner from '@components/ui/loaders/spinner/spinner';
 
 
 
@@ -21,69 +22,76 @@ export default function Invoice() {
         tracking_number: query.tracking_number as string,
       });
 
-      const orderTableColumns = [
+      console.log('shop name',data?.order?.children)
 
-        {
-          title: t("text-tracking-number"),
-          dataIndex: "tracking_number",
-          key: "tracking_number",
-          align: alignLeft,
-        },
+      // const orderTableColumns = [
+
+      //   {
+      //     title: t("text-tracking-number"),
+      //     dataIndex: "tracking_number",
+      //     key: "tracking_number",
+      //     align: alignLeft,
+      //   },
     
-        {
-          title: t("text-date"),
-          dataIndex: "date",
-          key: "date",
-          align: alignLeft,
-          render: (created_at: string) => dayjs(created_at).format("MMMM D, YYYY"),
-        },
+      //   {
+      //     title: t("text-date"),
+      //     dataIndex: "date",
+      //     key: "date",
+      //     align: alignLeft,
+      //     render: (created_at: string) => dayjs(created_at).format("MMMM D, YYYY"),
+      //   },
     
-        {
-          title: t("text-status"),
-          dataIndex: "status",
-          key: "status",
-          align: "center",
-          render: (status: any) => (
-            <Badge text={status?.name} style={{ backgroundColor: status?.color }} />
-          ),
-        },
+      //   {
+      //     title: t("text-status"),
+      //     dataIndex: "status",
+      //     key: "status",
+      //     align: "center",
+      //     render: (status: any) => (
+      //       <Badge text={status?.name} style={{ backgroundColor: status?.color }} />
+      //     ),
+      //   },
         
-        {
-          title: t("text-item"),
-          dataIndex: "products",
-          key: "products",
-          align: "center",
-          render: (products: any) => formatString(products?.length, t("text-item")),
-        },
+      //   {
+      //     title: t("text-item"),
+      //     dataIndex: "products",
+      //     key: "products",
+      //     align: "center",
+      //     render: (products: any) => formatString(products?.length, t("text-item")),
+      //   },
     
-        {
-          title: t("text-total-price"),
-          dataIndex: "paid_total",
-          key: "paid_total",
-          align: alignRight,
-          // width: 100,
-          render: (paid_total: any) => {
-            const { price } = usePrice(data && { amount: Number(paid_total) });
-            return <p>{price}</p>;
-          },
-        },
+      //   {
+      //     title: t("text-total-price"),
+      //     dataIndex: "paid_total",
+      //     key: "paid_total",
+      //     align: alignRight,
+      //     // width: 100,
+      //     render: (paid_total: any) => {
+      //       const { price } = usePrice(data && { amount: Number(paid_total) });
+      //       return <p>{price}</p>;
+      //     },
+      //   },
     
-        {
-          title: "",
-          dataIndex: "tracking_number",
-          key: "tracking_number",
-          align: alignRight,
-          // width: 100,
-          render: (tracking_number: string) => (
-            <Link
-              href={`${ROUTES.ORDERS}/${tracking_number}`}
-              className="inline-flex items-center justify-center flex-shrink-0 font-semibold leading-none rounded outline-none transition duration-300 ease-in-out focus:outline-none focus:shadow bg-gray-700 text-light border border-transparent hover:bg-gray-900 px-4 py-0 h-10 text-xs"
-            >
-              {t("text-view")}
-            </Link>
-          ),
-        },
-      ];
+      //   {
+      //     title: "",
+      //     dataIndex: "tracking_number",
+      //     key: "tracking_number",
+      //     align: alignRight,
+      //     // width: 100,
+      //     render: (tracking_number: string) => (
+      //       <Link
+      //         href={`${ROUTES.ORDERS}/${tracking_number}`}
+      //         className="inline-flex items-center justify-center flex-shrink-0 font-semibold leading-none rounded outline-none transition duration-300 ease-in-out focus:outline-none focus:shadow bg-gray-700 text-light border border-transparent hover:bg-gray-900 px-4 py-0 h-10 text-xs"
+      //       >
+      //         {t("text-view")}
+      //       </Link>
+      //     ),
+      //   },
+      // ];
+
+      if (loading) {
+        <Spinner/>
+
+      }
 
     
     return (
@@ -108,7 +116,7 @@ export default function Invoice() {
 
                         <div className='flex w-1/2 space-y-2 flex-col'>
                             <h1 className='text-xs sm:text-sm lg:tex-md font-semibold'>Sold By:</h1>
-                            <p className='text-xs sm:text-sm lg:text-md font-body'></p>
+                            <p className='text-xs sm:text-sm lg:text-md font-body'>{data?.order?.children?.amount}</p>
                             <p className='text-xs sm:text-sm font-body tracking-wide'> 
                                
                             </p>

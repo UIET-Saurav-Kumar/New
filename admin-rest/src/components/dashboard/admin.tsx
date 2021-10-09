@@ -15,6 +15,7 @@ import { useWithdrawsQuery } from "@data/withdraw/use-withdraws.query";
 import WithdrawTable from "@components/withdraw/withdraw-table";
 import { ShopIcon } from "@components/icons/sidebar";
 import { DollarIcon } from "@components/icons/shops/dollar";
+import { RupeeIcon } from "@components/icons/shops/rupee-icon";
 
 export default function Dashboard() {
   const { t } = useTranslation();
@@ -71,7 +72,7 @@ export default function Dashboard() {
           <StickerCard
             titleTransKey="sticker-card-title-rev"
             subtitleTransKey="sticker-card-subtitle-rev"
-            icon={<DollarIcon className="w-7 h-7" color="#047857" />}
+            icon={<img src='/rupee.png' className='h-10 w-10'/>}
             iconBgStyle={{ backgroundColor: "#A7F3D0" }}
             price={total_revenue}
           />
@@ -87,7 +88,7 @@ export default function Dashboard() {
         <div className="w-full ">
           <StickerCard
             titleTransKey="sticker-card-title-today-rev"
-            icon={<CoinIcon />}
+            icon={<img src='/rupee.png' className='h-10 w-10'/>}
             price={todays_revenue}
           />
         </div>
