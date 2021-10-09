@@ -22,7 +22,7 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
   const { openSidebar, setSidebarView, toggleMobileSearch, isAuthorize } =
     useUI();
   const { openModal } = useModalAction();
-  
+
   const { totalUniqueItems } = useCart();
 
   function handleSidebar(view: string) {
@@ -58,7 +58,7 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
 
         <motion.button
           whileTap={{ scale: 0.88 }}
-          onClick={() => router.push("/")}
+          onClick={() => router.push("/home")}
           className="flex p-2 h-full items-center justify-center focus:outline-none focus:text-accent"
         >
           <span className="sr-only">{t("text-home")}</span>

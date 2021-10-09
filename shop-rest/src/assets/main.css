@@ -250,7 +250,9 @@
 }
 .css-yk16xz-control{
   height: 55px!important;
-  border-radius: 0px!important;
+  border-top-left-radius: 8px!important;
+  border-bottom-left-radius: 8px!important;
+  border-top-right-radius: 0px!important;
   
 }
 
@@ -367,3 +369,16 @@ svg.custom path.link {
 .rc-pagination .rc-pagination-item.rc-pagination-item-active a{
   color: white;
 }
+
+
+
+  @media (min-width: 1024px) {
+
+    .css-yk16xz-control{
+      border-top-left-radius: 0px!important;
+      border-bottom-left-radius: 0px!important;
+
+    }
+  
+  
+   }

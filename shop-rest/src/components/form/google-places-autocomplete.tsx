@@ -127,7 +127,7 @@ export default function GooglePlacesAutocomplete({address,
           
           className=" mt-16 p-3 pl-8  mx-8 w-full  sm:px-8 sm:w-full sm:mx-auto  xmd:mx-4 md:w-full md:mx-auto 
                       2xl:p-3 lg:p-3 lg:mx-auto  lg:w-full 2xl:w-full 2xl:mx-auto font-light
-                      focus:border-accent focus:bg-light rounded-full  bg-gray-80
+                      focus:border-accent focus:bg-light  rounded-full  bg-gray-80
                       outline-none text-xs sm:text-sm md:text-base lg:text-lg 
                     border-gray-300 shadow-2xl border "
         />

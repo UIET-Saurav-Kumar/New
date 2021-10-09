@@ -99,7 +99,7 @@ export default function HeaderMiddle({children,
               
 
                {/* searchbar  */}
-               <div className=' hidden lg:flex justify-around lg:justify-between p-0 lg:py-4 w-full px-4'>
+               <div className='  hidden lg:flex justify-around lg:justify-between p-0 lg:py-4 w-full px-4'>
 
                     <div className = ' hidden lg:block px-0 mx-0 p-0 m-0  ' >
 
@@ -107,15 +107,14 @@ export default function HeaderMiddle({children,
                                           
                     </div>
                   
+                  {/* Search Bar */}
                    <div className=' flex  focus-ring-2 justify-center
                                      lg:w-3/4 2xl:mx-auto lg:mx-auto 
                                     2xl:flex-1' >
 
-                       
-
                        <input onClick = {handleLocation} 
                               defaultValue = {getLocation?.formattedAddress}  
-                              className ='hidden lg:inline-flex  text-gray-500 lg:w-32 lg+:w-38 2xl:w-52 md:w-32 placeholder:text-gray-500  
+                              className ='hidden  lg:inline-flex  text-gray-500 lg:w-32 lg+:w-38 2xl:w-52 md:w-32 placeholder:text-gray-500  
                                           lg:w-42 rounded-lg  border-l rounded-l-lg rounded-r-none h-12 outline-none 
                                           border border-e-0  focus:border-accent pr-4 border-gray-300 pl-2 ' 
                               placeholder = 'Enter location' id='location_id' />

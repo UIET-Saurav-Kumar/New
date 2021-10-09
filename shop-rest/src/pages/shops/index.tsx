@@ -20,6 +20,11 @@ import { useTypesQuery } from "@data/type/use-types.query";
 import React, { useState } from "react";
 import Footer from '@components/footer/Footer';
 import { useLocation } from "@contexts/location/location.context";
+import MobileNavigation from "@components/layout/mobile-navigation";
+import { useWindowSize } from "@utils/use-window-size";
+
+
+
 
 const ShopsPage = () => {
   
@@ -60,6 +65,9 @@ const ShopsPage = () => {
     }
     return "";
   }
+
+  const { width } = useWindowSize();
+
   // function getSearch(){
   //   var value:any=(window.localStorage.getItem('search'))?window.localStorage.getItem('search'):"";
 
@@ -128,6 +136,11 @@ const ShopsPage = () => {
           
   </div>
 
+  {
+  width < 1023 && 
+    <MobileNavigation />
+}
+
   
         
     </>
@@ -154,6 +167,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     },
   };
 };
+
 
 export default ShopsPage;
 
