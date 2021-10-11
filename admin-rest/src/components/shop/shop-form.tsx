@@ -74,6 +74,11 @@ type FormValues = {
   name: string;
   description: string;
   cover_image: any;
+  gst_certificate_image: any;
+  cancelled_cheque_image: any;
+  pan_card_image: any;
+  tan_certificate_image: any;
+  fssai_certificate_image: any;
   gst_number : any;
   pan_number: any;
   tan_number: any;
@@ -274,7 +279,7 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
 
           {/* Document and Lincenses form */}
 
-       <div className=" cursor-not-allowed flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
+        <div className="  flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
           <Description
             title={t("form:Documents and Licenses**")}
             // details={t("form:shop-basic-info-help-text")}
@@ -285,8 +290,8 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
               label={t("form:GST Number")}
               {...register("gst_number")}
               variant="outline"
-              className="cursor-not-allowed  mb-5"
-              error={t(errors.name?.message!)}
+              className="  mb-5"
+              error={t(errors.gst_number?.message!)}
             />
 
             <div className="flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
@@ -297,7 +302,7 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
             />
 
             <Card className="w-full sm:w-8/12 md:w-2/3">
-              <FileInput name="cover_image" control={control} multiple={false} />
+              <FileInput name="gst_certificate_image" control={control} multiple={false} />
             </Card>
           </div>
 
@@ -306,8 +311,8 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
               label={t("form:FSSAI Number")}
               {...register("fssai_number")}
               variant="outline"
-              className="cursor-not-allowed mb-5"
-              error={t(errors.name?.message!)}
+              className=" mb-5"
+              error={t(errors.fssai_number?.message!)}
             /> 
 
             <div className="flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
@@ -317,8 +322,8 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
                 className="w-full px-0 sm:pe-4 md:pe-5 pb-5 sm:w-4/12 md:w-1/3 sm:py-8"
               />
 
-              <Card className="w-full cursor-not-allowed sm:w-8/12 md:w-2/3">
-                <FileInput name="cover_image" control={control} multiple={false} />
+              <Card className="w-full  sm:w-8/12 md:w-2/3">
+                <FileInput name="fssai_certificate_image" control={control} multiple={false} />
               </Card>
             </div>
 
@@ -329,8 +334,8 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
                 className="w-full px-0 sm:pe-4 md:pe-5 pb-5 sm:w-4/12 md:w-1/3 sm:py-8"
               />
 
-              <Card className="w-full cursor-not-allowed sm:w-8/12 md:w-2/3">
-                <FileInput name="cover_image" control={control} multiple={false} />
+              <Card className="w-full  sm:w-8/12 md:w-2/3">
+                <FileInput name="cancelled_cheque_image" control={control} multiple={false} />
               </Card>
             </div>
 
@@ -338,8 +343,8 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
               label={t("form:TAN Number")}
               {...register("tan_number")}
               variant="outline"
-              className="cursor-not-allowed mb-5"
-              error={t(errors.name?.message!)}
+              className=" mb-5"
+              error={t(errors.tan_number?.message!)}
             /> 
 
             <div className="flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
@@ -349,8 +354,8 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
                 className="w-full px-0 sm:pe-4 md:pe-5 pb-5 sm:w-4/12 md:w-1/3 sm:py-8"
               />
 
-              <Card className="w-full cursor-not-allowed sm:w-8/12 md:w-2/3">
-                <FileInput name="cover_image" control={control} multiple={false} />
+              <Card className="w-full  sm:w-8/12 md:w-2/3">
+                <FileInput name="tan_certificate_image" control={control} multiple={false} />
               </Card>
             </div>
 
@@ -360,8 +365,8 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
               label={t("form:PAN Number")}
               {...register("pan_number")}
               variant="outline"
-              className="cursor-not-allowed mb-5"
-              error={t(errors.name?.message!)}
+              className=" mb-5"
+              error={t(errors.pan_number?.message!)}
             /> 
 
             <div className="flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
@@ -371,14 +376,15 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
                 className="w-full px-0 sm:pe-4 md:pe-5 pb-5 sm:w-4/12 md:w-1/3 sm:py-8"
               />
 
-              <Card className="w-full cursor-not-allowed sm:w-8/12 md:w-2/3">
-                <FileInput name="cover_image" control={control} multiple={false} />
+              <Card className="w-full  sm:w-8/12 md:w-2/3">
+                <FileInput name="pan_card_image" control={control} multiple={false} />
               </Card>
             </div>
           
           
           </Card>
         </div>
+
 
 
 
