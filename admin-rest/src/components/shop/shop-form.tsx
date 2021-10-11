@@ -74,6 +74,10 @@ type FormValues = {
   name: string;
   description: string;
   cover_image: any;
+  gst_number : any;
+  pan_number: any;
+  tan_number: any;
+  fssai_number: number;
 
   logo: any;
   balance: BalanceInput;
@@ -270,7 +274,7 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
 
           {/* Document and Lincenses form */}
 
-        {/* <div className=" cursor-not-allowed flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
+       <div className=" cursor-not-allowed flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
           <Description
             title={t("form:Documents and Licenses**")}
             // details={t("form:shop-basic-info-help-text")}
@@ -279,7 +283,7 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
           <Card className="w-full sm:w-8/12 md:w-2/3">
             <Input
               label={t("form:GST Number")}
-              {...register("name")}
+              {...register("gst_number")}
               variant="outline"
               className="cursor-not-allowed  mb-5"
               error={t(errors.name?.message!)}
@@ -300,7 +304,7 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
         
             <Input
               label={t("form:FSSAI Number")}
-              {...register("name")}
+              {...register("fssai_number")}
               variant="outline"
               className="cursor-not-allowed mb-5"
               error={t(errors.name?.message!)}
@@ -332,7 +336,7 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
 
             <Input
               label={t("form:TAN Number")}
-              {...register("name")}
+              {...register("tan_number")}
               variant="outline"
               className="cursor-not-allowed mb-5"
               error={t(errors.name?.message!)}
@@ -354,7 +358,7 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
 
             <Input
               label={t("form:PAN Number")}
-              {...register("name")}
+              {...register("pan_number")}
               variant="outline"
               className="cursor-not-allowed mb-5"
               error={t(errors.name?.message!)}
@@ -374,7 +378,8 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
           
           
           </Card>
-        </div> */}
+        </div>
+
 
 
 
