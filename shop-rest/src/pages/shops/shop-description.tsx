@@ -3,6 +3,7 @@ import { isEmpty } from "lodash";
 import { formatAddress } from "@utils/format-address";
 import { getIcon } from "@utils/get-icon";
 import * as socialIcons from "@components/icons/social";
+import ReadMore from "@components/ui/truncate";
 
 
 
@@ -25,7 +26,7 @@ export default function ShopDescription({data}) {
                 { data?.description && (
                   
                         <p className="text-lg font-md font-serif tracking-widest text-gray-600 w-24 lg:w-72 lg+:80 xl:w-96 xl+:96 mb-2 leading-relaxed">
-                          {data?.description}
+                            <ReadMore character={70}>{data?.description}</ReadMore>
                         </p>
                 )}
 
