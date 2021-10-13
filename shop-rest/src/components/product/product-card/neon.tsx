@@ -76,7 +76,7 @@ const Neon: React.FC<NeonProps> = ({ product, className }) => {
           className="text-xs md:text-sm text-body  mb-4 cursor-pointer"
           onClick={handleProductQuickView}
         >
-          <div className='flex flex-col'>{name}<h3>{unit}</h3></div>
+          <div className='flex flex-col text-xs md:text-sm text-body truncate mb-4 cursor-pointer'>{name}<h3>{unit}</h3></div>
         </h3>
         {/* End of product title */}
 
