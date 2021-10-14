@@ -265,7 +265,7 @@ const ProductDetailsModalView = ({ productSlug }: { productSlug: string }) => {
 
                 {description && (
                   <div className="mb-5 md:mb-10 mt-3 md:mt-4 text-body text-sm leading-7">
-                      <ReadMore character={130}>
+                      <ReadMore character={190}>
                       {description}
                     </ReadMore>
                   </div>
