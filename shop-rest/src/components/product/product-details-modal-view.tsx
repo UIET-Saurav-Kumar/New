@@ -23,6 +23,8 @@ import { ROUTES } from "@utils/routes";
 const RelatedProducts = dynamic(
   () => import("./product-details/related-products")
 );
+import ReadMore from "@components/ui/truncate";
+
 
 const ProductDetailsModalView = ({ productSlug }: { productSlug: string }) => {
   const router = useRouter();
@@ -263,9 +265,9 @@ const ProductDetailsModalView = ({ productSlug }: { productSlug: string }) => {
 
                 {description && (
                   <div className="mb-5 md:mb-10 mt-3 md:mt-4 text-body text-sm leading-7">
-                    <Truncate character={400} hideButton={true}>
+                      <ReadMore character={130}>
                       {description}
-                    </Truncate>
+                    </ReadMore>
                   </div>
                 )}
 
