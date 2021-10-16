@@ -24,7 +24,6 @@ use PickBazar\Http\Controllers\ShopCategoryController;
 use PickBazar\Http\Controllers\MasterProductController;
 use PickBazar\Http\Controllers\AttributeValueController;
 
-
 Route::post('/register', 'PickBazar\Http\Controllers\UserController@register');
 Route::post('/token', 'PickBazar\Http\Controllers\UserController@token');
 Route::post('/forget-password', 'PickBazar\Http\Controllers\UserController@forgetPassword');
@@ -36,6 +35,8 @@ Route::post('/reset-password', 'PickBazar\Http\Controllers\UserController@resetP
 Route::post('/contact', 'PickBazar\Http\Controllers\UserController@contactAdmin');
 Route::post('/social-login-token', 'PickBazar\Http\Controllers\UserController@socialLogin');
 
+Route::get('/signup-offer','PickBazar\Http\Controllers\SignupOfferController@show');
+Route::post('/signup-offer','PickBazar\Http\Controllers\SignupOfferController@store');
 
 Route::apiResource('products', ProductController::class, [
     'only' => ['index', 'show']
@@ -278,5 +279,4 @@ Route::get('user-withdraws', 'PickBazar\Http\Controllers\WithdrawController@fetc
 Route::post('user-withdraws', 'PickBazar\Http\Controllers\WithdrawController@storeUserWithdraws');
 Route::get('sluggify','PickBazar\Http\Controllers\LogController@sluggify');
 
-Route::get('signup-offer','PickBazar\Http\Controllers\SignupOfferController@show');
-Route::post('signup-offer','PickBazar\Http\Controllers\SignupOfferController@store');
+
