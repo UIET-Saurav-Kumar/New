@@ -14,6 +14,10 @@ class SignupOfferController extends CoreController
 
     public function store(Request $request)
     {
+        $singup_offer=SignupOffer::find(1);
+        if($singup_offer){
+            $singup_offer->update($request->all());
+        }
         SignupOffer::create($request->all());
 
         return 1;
