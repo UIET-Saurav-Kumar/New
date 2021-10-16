@@ -14,11 +14,12 @@ use PickBazar\Mail\ContactAdmin;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use PickBazar\Database\Models\User;
+use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use PickBazar\Database\Models\Invite;
 use App\Http\Resources\UserCollection;
-use App\Http\Resources\UserResource;
+use PickBazar\Database\Models\Balance;
 use Laravel\Socialite\Facades\Socialite;
 use PickBazar\Exceptions\PickbazarException;
 use Illuminate\Validation\ValidationException;
@@ -27,6 +28,7 @@ use PickBazar\Http\Requests\UserUpdateRequest;
 use PickBazar\Http\Requests\ChangePasswordRequest;
 use PickBazar\Database\Repositories\UserRepository;
 use PickBazar\Database\Models\Permission as ModelsPermission;
+use PickBazar\Database\Models\SignupOffer;
 
 class UserController extends CoreController
 {
@@ -174,6 +176,18 @@ class UserController extends CoreController
 
             $invited_by=User::find($request->invited_by);
             SMS::userInvite($invited_by->phone_number,$invited_by->name,$user->name);
+            
+
+            $signup_offer=SignupOffer::find(1);
+            $Inviter_balance = Balance::firstOrNew(['user_id' => $request->invited_by]);
+            $Inviter_balance->total_earnings= $Inviter_balance->total_earnings + $signup_offer->inviter_reward;
+            $Inviter_balance->current_balance=$Inviter_balance->current_balance + $signup_offer->inviter_reward;
+            $Inviter_balance->save();
+
+            $Invitee_balance = Balance::firstOrNew(['user_id' => $user->id]);
+            $Invitee_balance->total_earnings= $Invitee_balance->total_earnings + $signup_offer->invitee_reward;
+            $Invitee_balance->current_balance=$Invitee_balance->current_balance + $signup_offer->invitee_reward;
+            $Invitee_balance->save();
 
         }
 

@@ -27,5 +27,7 @@ export const ROUTES = {
   STAFFS: "/staffs",
   MASTER_PRODUCT:"/master-products",
   COMMISSION:"/commission",
-  LOGS:'/logs'
+  LOGS:'/logs',
+  SIGNUP_OFFERS:"/signup-offers",
+
 };

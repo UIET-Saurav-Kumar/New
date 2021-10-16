@@ -13,7 +13,7 @@ import Link from "@components/ui/link";
 import { allowedRoles, hasAccess, setAuthCredentials } from "@utils/auth-utils";
 import { Permission } from "@ts-types/generated";
 import { useRegisterMutation } from "@data/user/use-register.mutation";
-
+import LicenseFrom from './license-form'
 type FormValues = {
   name: string;
   email: string;
@@ -34,6 +34,8 @@ const registrationFormSchema = yup.object().shape({
 const RegistrationForm = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const { mutate: registerUser, isLoading: loading } = useRegisterMutation();
+  const [isRegistered , setIsRegistered]=useState<Boolean | null>(false);
+  const [user , setUser]=useState<any| null>(false);
 
   const {
     register,
@@ -66,7 +68,9 @@ const RegistrationForm = () => {
 
       {
         onSuccess: ({ data }) => {
-          router.push('/auth/'+data.user.id);
+          setUser(data.user.id);
+          setIsRegistered(true);
+          // router.push('/auth/'+data.user.id);
           return;
           
           if (data?.token) {
@@ -95,67 +99,80 @@ const RegistrationForm = () => {
   return (
     <>
     <h1 className='text-center text-xl  font-md text-gray-600 '>Register Now</h1>
-      <form className='mt-10' onSubmit={handleSubmit(onSubmit)} noValidate>
-        <Input
-          label={t("form:input-label-name")}
-          {...register("name")}
-          variant="outline"
-          className="mb-4"
-          error={t(errors?.name?.message!)}
-        />
-        <Input
-          label={t("form:input-label-email")}
-          {...register("email")}
-          type="email"
-          variant="outline"
-          className="mb-4"
-          error={t(errors?.email?.message!)}
-        />
-        <PasswordInput
-          label={t("form:input-label-password")}
-          {...register("password")}
-          error={t(errors?.password?.message!)}
-          variant="outline"
-          className="mb-4"
-        />
-        <Input
-          label={"Phone Number"}
-          {...register("phone_number")}
-          type="text"
-          variant="outline"
-          className="mb-5"
-          onChange={(e) => setValue("phone_number", getPhoneNumber(e.target.value))}
-          error={t(errors.phone_number?.message!)}
-        />
-        <Button className="w-full" loading={loading} disabled={loading}>
-          {t("form:text-register")}
-        </Button>
+    {
+      (!isRegistered)?
+      (
+        <>
+          <form className='mt-10' onSubmit={handleSubmit(onSubmit)} noValidate>
+            <Input
+              label={t("form:input-label-name")}
+              {...register("name")}
+              variant="outline"
+              className="mb-4"
+              error={t(errors?.name?.message!)}
+            />
+            <Input
+              label={t("form:input-label-email")}
+              {...register("email")}
+              type="email"
+              variant="outline"
+              className="mb-4"
+              error={t(errors?.email?.message!)}
+            />
+            <PasswordInput
+              label={t("form:input-label-password")}
+              {...register("password")}
+              error={t(errors?.password?.message!)}
+              variant="outline"
+              className="mb-4"
+            />
+            <Input
+              label={"Phone Number"}
+              {...register("phone_number")}
+              type="text"
+              variant="outline"
+              className="mb-5"
+              onChange={(e) => setValue("phone_number", getPhoneNumber(e.target.value))}
+              error={t(errors.phone_number?.message!)}
+            />
+            <Button className="w-full" loading={loading} disabled={loading}>
+              {t("form:text-register")}
+            </Button>
 
-        {errorMessage ? (
-          <Alert
-            message={t(errorMessage)}
-            variant="error"
-            closeable={true}
-            className="mt-5"
-            onClose={() => setErrorMessage(null)}
-          />
-        ) : null}
-      </form>
-      <div className="flex flex-col items-center justify-center relative text-sm text-heading mt-8 sm:mt-11 mb-6 sm:mb-8">
-        <hr className="w-full" />
-        <span className="absolute start-2/4 -top-2.5 px-2 -ms-4 bg-light">
-          {t("common:text-or")}
-        </span>
-      </div>
-      <div className="text-sm sm:text-base text-body text-center">
-        {t("form:text-already-account")}{" "}
-        <Link
-          href={ROUTES.LOGIN}
-          className="ms-1 underline text-accent font-semibold transition-colors duration-200 focus:outline-none hover:text-accent-hover focus:text-accent-700 hover:no-underline focus:no-underline"
-        >
-          {t("form:button-label-login")}
-        </Link>
-      </div>
+            {errorMessage ? (
+              <Alert
+                message={t(errorMessage)}
+                variant="error"
+                closeable={true}
+                className="mt-5"
+                onClose={() => setErrorMessage(null)}
+              />
+            ) : null}
+          </form>
+          <div className="flex flex-col items-center justify-center relative text-sm text-heading mt-8 sm:mt-11 mb-6 sm:mb-8">
+            <hr className="w-full" />
+            <span className="absolute start-2/4 -top-2.5 px-2 -ms-4 bg-light">
+              {t("common:text-or")}
+            </span>
+          </div>
+          <div className="text-sm sm:text-base text-body text-center">
+            {t("form:text-already-account")}{" "}
+            <Link
+              href={ROUTES.LOGIN}
+              className="ms-1 underline text-accent font-semibold transition-colors duration-200 focus:outline-none hover:text-accent-hover focus:text-accent-700 hover:no-underline focus:no-underline"
+            >
+              {t("form:button-label-login")}
+            </Link>
+          </div>
+        </>
+      ):(
+        <>
+          <LicenseFrom user={user}/>
+        </>
+      )
+
+    }
+      
     </>
   );
 };

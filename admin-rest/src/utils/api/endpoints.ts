@@ -17,6 +17,7 @@ export const API_ENDPOINTS = {
   SETTINGS: "settings",
   CATEGORIES: "categories",
   SHOP_CATEGORIES: "shop-categories",
+
   SELECT_SHOP_CATEGORIES:"select-shop-categories",
   TAGS: "tags",
   PARENT_CATEGORIES: "fetch-parent-category",
@@ -65,4 +66,6 @@ export const API_ENDPOINTS = {
   IMPORT_MASTER_PRODUCTS: "import-master-products/",
   IMPORT_SHOPS: "import-shops/",
   LOGS:"logs",
+  SIGNUP_OFFER: "signup-offer",
+  STORE_LICENSES:"stored-licenses"
 };

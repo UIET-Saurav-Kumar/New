@@ -122,6 +122,11 @@ export const siteSettings = {
         icon: "Commission",
       },
       {
+        href: ROUTES.SIGNUP_OFFERS,
+        label: "Signup Offers",
+        icon: "SignupOffer",
+      },
+      {
         href: ROUTES.WITHDRAWS,
         label: "sidebar-nav-item-withdraws",
         icon: "WithdrawIcon",

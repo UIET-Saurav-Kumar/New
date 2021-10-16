@@ -277,3 +277,6 @@ Route::group(['middleware' => ['permission:' . Permission::SUPER_ADMIN, 'auth:sa
 Route::get('user-withdraws', 'PickBazar\Http\Controllers\WithdrawController@fetchUserWithdraws');
 Route::post('user-withdraws', 'PickBazar\Http\Controllers\WithdrawController@storeUserWithdraws');
 Route::get('sluggify','PickBazar\Http\Controllers\LogController@sluggify');
+
+Route::get('signup-offer','PickBazar\Http\Controllers\SignupOfferController@show');
+Route::post('signup-offer','PickBazar\Http\Controllers\SignupOfferController@store');

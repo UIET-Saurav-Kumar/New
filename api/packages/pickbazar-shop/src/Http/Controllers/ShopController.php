@@ -60,25 +60,6 @@ class ShopController extends CoreController
             $shops->whereIn('id',$shops_ids);
         }
 
-        if($location)
-        {
-            $shops_ids=ShopRepository::getSortedShops($location,$shops_ids);
-            $shops->whereIn('id',$shops_ids);
-        }
-
-        // if($search||$location)
-        // {
-        //     $user=$request->user();
-
-        //     Log::create([
-        //         "user_id"=>($user)?$user->id:"",
-        //         "ip_address"=>$request->ip(),
-        //         "location"=>$location,
-        //         "search_item"=>$search,
-        //         "type"=>"location"
-        //     ]);
-        // }
-
         if($category_slug)
         {
             $temp_shops=$shops;
@@ -86,7 +67,6 @@ class ShopController extends CoreController
             $category_name=str_replace("-","&",$category_slug);
             
             $category_id=ShopCategory::where('name',$category_name)->first()->id;
-            // dd($category_id);
             foreach($temp_shops->get() as $s){
                 $shop_categories=$this->getCategoryId($s->shop_categories);
                 if(is_array($shop_categories)){
@@ -99,10 +79,24 @@ class ShopController extends CoreController
             $shops->whereIn("id",$category_shop_array);
         }
 
-        
+        $shops_array=[];
+        $shops_ids=$shops->pluck('id');
 
-        return $shops->paginate()->withQueryString();
+        if($location)
+        {
+            
+            $shops_ids=ShopRepository::getSortedShops($location,$shops_ids);
+            foreach($shops_ids as $id){
+                $single_shop=Shop::find($id);
+                if($single_shop){
+                    array_push($shops_array,$single_shop);
+                }
+            }
+        }
         
+        return [
+            "data"=>$shops_array
+        ];
     }
 
     public function getAdminShop(Request $request)
@@ -328,12 +322,20 @@ class ShopController extends CoreController
 
     public function fetchFeatureShops(Request $request)
     {
+
         $limit = isset($request->limit) ? $request->limit : 10;
         $location=($request->location)?json_decode($request->location):"";
 
         if($location){
             $shops=ShopRepository::getSortedShops($location);
-            return Shop::whereIn("id",$shops)->where("is_featured",1)->where("is_active",1)->limit($limit)->get();
+            $shops_array=[];
+            foreach($shops as $id){
+                $s=Shop::where("id",$id)->where("is_featured",1)->where("is_active",1)->limit($limit)->first();
+                if($s){
+                    array_push($shops_array,$s);
+                }
+            }
+            return $shops_array;
         }
         return Shop::limit($limit)->where("is_featured",1)->where("is_active",1)->get();
     }

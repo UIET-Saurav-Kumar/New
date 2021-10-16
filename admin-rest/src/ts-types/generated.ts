@@ -634,7 +634,10 @@ export declare type RegisterInput = {
   permission: Permission;
   phone_number:number;
 };
-
+export declare type SignupOfferInput = {
+  invitee_reward: Scalars["String"];
+  inviter_reward: Scalars["String"];
+};
 export type ChangePasswordInput = {
   oldPassword: Scalars["String"];
   newPassword: Scalars["String"];

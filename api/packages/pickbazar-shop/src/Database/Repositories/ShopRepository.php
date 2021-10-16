@@ -140,6 +140,7 @@ class ShopRepository extends BaseRepository
                 }
             }
         }
+
         $sorted_shops=ShopRepository::quick_sort($sorted_shops);
         $shops_array=[];
         foreach($sorted_shops as $shop)
