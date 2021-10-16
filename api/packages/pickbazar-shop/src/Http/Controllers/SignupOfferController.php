@@ -17,9 +17,9 @@ class SignupOfferController extends CoreController
         $singup_offer=SignupOffer::find(1);
         if($singup_offer){
             $singup_offer->update($request->all());
+            return 1;
         }
         SignupOffer::create($request->all());
-
         return 1;
     }
 }

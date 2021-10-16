@@ -19,6 +19,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/signup-offer','PickBazar\Http\Controllers\SignupOfferController@show');
+Route::post('/signup-offer','PickBazar\Http\Controllers\SignupOfferController@store');
 
 Route::get('/sluggify-this',function () {
     $products=Product::select('id')->get();    
