@@ -276,6 +276,13 @@ export declare type ShopCategory = {
   created_at: Scalars["DateTime"];
   updated_at: Scalars["DateTime"];
 };
+export declare type SignupReward = {
+  id: Scalars["ID"];
+  invitee_reward: Scalars["String"];
+  inviter_reward: Scalars["String"];
+  created_at: Scalars["DateTime"];
+  updated_at: Scalars["DateTime"];
+};
 export declare type SelectShopCategory = {
   id: Scalars["ID"];
   name: Scalars["String"];

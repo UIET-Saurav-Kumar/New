@@ -8,6 +8,7 @@ import { useTranslation } from "next-i18next";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { customerValidationSchema } from "./validation-schema";
 import { useEffect } from "react";
+import { SignupReward } from "@ts-types/generated";
 
 type FormValues = {
   invitee_reward: string;
@@ -18,8 +19,10 @@ const defaultValues = {
     invitee_reward: "",
     inviter_reward: "",
 };
-
-const Form = ({initialValues}:any) => {
+type IProps = {
+  initialValues?: SignupReward | null;
+};
+export default function Form({initialValues}:IProps){
   const { t } = useTranslation();
   const { mutate: registerSignupOffer, isLoading: loading } = useCreateUserMutation();
 
@@ -29,11 +32,15 @@ const Form = ({initialValues}:any) => {
     setError,
     formState: { errors },
   } = useForm<FormValues>({
+    shouldUnregister: true,
     defaultValues: initialValues?initialValues:defaultValues,
     resolver: yupResolver(customerValidationSchema),
   });
   useEffect(()=>{
-    console.log(initialValues,'initialValues')
+    if(initialValues){
+      document.getElementById('invitee_reward').value=initialValues?.invitee_reward
+      document.getElementById('inviter_reward').value=initialValues?.inviter_reward
+    }
   },[initialValues])
   async function onSubmit({ invitee_reward, inviter_reward}: FormValues) {
     registerSignupOffer(
@@ -66,7 +73,6 @@ const Form = ({initialValues}:any) => {
 
         <Card className="w-full sm:w-8/12 md:w-2/3">
           <Input
-            value={(initialValues)?initialValues.invitee_reward:''}
             label={("Invitee Reward")}
             {...register("invitee_reward")}
             type="text"
@@ -76,7 +82,6 @@ const Form = ({initialValues}:any) => {
           />
 
           <Input
-            value={(initialValues)?initialValues.inviter_reward:''}
             label={("Inviter Reward")}
             {...register("inviter_reward")}
             type="text"
@@ -96,4 +101,4 @@ const Form = ({initialValues}:any) => {
   );
 };
 
-export default Form;
+
