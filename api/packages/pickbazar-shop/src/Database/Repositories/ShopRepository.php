@@ -67,8 +67,13 @@ class ShopRepository extends BaseRepository
     {
         
         try {
+
             $data = $request->only($this->dataArray);
             $data['owner_id'] = $request->user()->id;
+            $data["gst_certificate"]=($data["gst_certificate"]==[])?"":json_encode($data["gst_certificate"]);
+            $data["fssai_certificate"]=($data["fssai_certificate"]==[])?"":json_encode($data["fssai_certificate"]);
+            $data["cancelled_cheque"]=($data["cancelled_cheque"]==[])?"":json_encode($data["cancelled_cheque"]);
+
             $shop = $this->create($data);
             if (isset($request['categories'])) {
                 $shop->categories()->attach($request['categories']);
