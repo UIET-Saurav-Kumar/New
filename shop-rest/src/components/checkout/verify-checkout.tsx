@@ -98,12 +98,12 @@ const VerifyCheckout = () => {
           <p className="text-sm text-body">{t("text-sub-total")}</p>
           <span className="text-sm text-body">{subtotal}</span>
         </div>
-        <div className="flex justify-between">
+        {/* <div className="flex justify-between">
           <p className="text-sm text-body">{t("text-tax")}</p>
           <span className="text-sm text-body">
             {t("text-calculated-checkout")}
           </span>
-        </div>
+        </div> */}
         <div className="flex justify-between">
           <p className="text-sm text-body">{t("text-estimated-shipping")}</p>
           <span className="text-sm text-body">

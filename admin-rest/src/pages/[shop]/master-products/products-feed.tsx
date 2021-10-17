@@ -9,6 +9,7 @@ import useIntersectionObserver from "./useIntersectionObserver";
 import Product from './product';
 import Checkbox from "@components/ui/checkbox/checkbox";
 import { PriceWalletIcon } from "@components/icons/shops/price-wallet";
+import { useTaxQuery } from "@data/tax/use-all-taxes.query";
 
 
 export type FeedType ={
@@ -26,6 +27,7 @@ export default function ProductsFeed({shopId,searchTerm,type,category,orderBy,so
   const {
     data:master,
   } = useProductQuery(shopId as string);
+  const { data:taxes } = useTaxQuery();
   const {
     data,
     isFetchingNextPage,
@@ -101,7 +103,7 @@ export default function ProductsFeed({shopId,searchTerm,type,category,orderBy,so
       {data?.pages.map((products, _idx) => (
           <Fragment key={_idx}>
             {products.products?.data?.map((product:any,id:any) => (
-              <Product product={product} shopId={shopId} key={id} masterIds={master} className={`${master.includes(product.id)}:"hidden":""`}/>
+              <Product taxes={taxes} product={product} shopId={shopId} key={id} masterIds={master} className={`${master.includes(product.id)}:"hidden":""`}/>
             ))}
           </Fragment>
         ))}

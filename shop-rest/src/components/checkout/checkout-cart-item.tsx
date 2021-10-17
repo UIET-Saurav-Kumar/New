@@ -11,7 +11,15 @@ const CheckoutCartItem = ({ item, notAvailable }: Props) => {
   const { price } = usePrice({
     amount: item.itemTotal,
   });
+
+  function getTax(){
+    var tax=JSON.parse(item.tax);
+    if(tax.rate){
+      return tax.rate+"%";
+    }
+  }
   return (
+    <>
     <div className={cn("flex justify-between py-2")} key={item.id}>
       <p className="flex items-center justify-between text-base">
         <span
@@ -35,6 +43,34 @@ const CheckoutCartItem = ({ item, notAvailable }: Props) => {
         {!notAvailable ? price : t("text-unavailable")}
       </span>
     </div>
+    {
+      getTax()&&(
+        <div className={cn("flex justify-between py-2")} key={item.id}>
+          <p className="flex items-center justify-between text-base">
+            <span
+              className={cn("text-sm", notAvailable ? "text-red-500" : "text-body")}
+            >
+              <span
+                className={cn(
+                  "text-sm",
+                  notAvailable ? "text-red-500" : "text-heading"
+                )}
+              >
+                Tax
+              </span>
+
+            </span>
+          </p>
+          <span
+            className={cn("text-sm", notAvailable ? "text-red-500" : "text-body")}
+          >
+            {!notAvailable ? getTax() : t("text-unavailable")}
+          </span>
+        </div>
+      )
+    }
+    
+    </>
   );
 };
 

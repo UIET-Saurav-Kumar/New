@@ -3,7 +3,7 @@ import Button from "@components/ui/button";
 import { useEffect ,Fragment,useState , useRef,useCallback} from "react";
 import { useCreateProductMutation } from "@data/master-products/master-product-create.mutation";
 
-export default function Product({product,shopId,masterIds}:any) {
+export default function Product({product,shopId,masterIds,taxes}:any) {
     const { mutate: createProduct, isLoading: creating } = useCreateProductMutation();
     const [alreayMade,setAlreadyMade]=useState(false);
 
@@ -17,6 +17,7 @@ export default function Product({product,shopId,masterIds}:any) {
         const price = document.getElementById("price_"+product.id)?.value as any;
         const sale_price = document.getElementById("sale_price_"+product.id)?.value as any;
         const quantity = document.getElementById("quantity_"+product.id)?.value as any;
+        const tax = document.getElementById("tax_"+product.id)?.value as any;
         if(price&&sale_price){
             createProduct(
                 {
@@ -25,6 +26,7 @@ export default function Product({product,shopId,masterIds}:any) {
                     master_id:product.id,
                     quantity:quantity,
                     sale_price:sale_price,
+                    tax:tax
                 },
                 {
                     onSuccess:()=>{
@@ -83,11 +85,40 @@ export default function Product({product,shopId,masterIds}:any) {
                     </span>
                 </td>
                 <td className="rc-table-cell text-center" >
+                    <span className="whitespace-nowrap">
+                    <select
+                        style={{
+                            fontSize: "0.875rem",
+                            color: "#6B7280",
+                            paddingLeft: 16,
+                            paddingRight: 16,
+                            paddingTop: 12,
+                            paddingBottom: 12,
+                            cursor: "pointer",
+                            backgroundColor:"#ffffff",
+                            width:"100%",
+                            boxShadow:"0 0px 3px 0 rgba(0, 0, 0, 0.1), 0 0px 2px 0 rgba(0, 0, 0, 0.06)",
+                            borderBottom: "1px solid #E5E7EB"
+                        }}
+                        name="tax"
+                        className="border border-border-base focus:border-accent h-12 mb-2"
+                        id={"tax_"+product.id} >
+                            {
+                                taxes?.map((tax:any)=>{
+                                    return (
+                                        <option value={tax.id} selected>{tax.name+" "+tax.rate+"%"}</option>
+                                    )
+                                })
+                            }
+                    </select>
+                    </span>
+                </td>
+                <td className="rc-table-cell text-center" >
                     <div className="space-s-5 inline-flex items-center w-auto">
                         <Button
                             variant="outline"
                             onClick={addProduct}
-                            className="mr-4"
+                            className="mr-4 mb-2"
                             type="button"
                         >
                             Add

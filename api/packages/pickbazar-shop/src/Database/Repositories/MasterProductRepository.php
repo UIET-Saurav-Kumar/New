@@ -6,6 +6,7 @@ namespace PickBazar\Database\Repositories;
 use Exception;
 use PickBazar\Enums\ProductType;
 use Illuminate\Support\Facades\DB;
+use PickBazar\Database\Models\Tax;
 use Illuminate\Support\Facades\Log;
 use PickBazar\Database\Models\Shop;
 use PickBazar\Database\Models\Product;
@@ -85,6 +86,9 @@ class MasterProductRepository extends BaseRepository
             if (isset($request['tags'])) {
                 $product->tags()->attach($request['tags']);
             }
+            if(isset($request->tax)){
+              $product->tax=Tax::find($request->tax);
+            }
             if (isset($request['variations'])) {
                 $product->variations()->attach($request['variations']);
             }
@@ -111,6 +115,9 @@ class MasterProductRepository extends BaseRepository
             }
             if (isset($request['categories'])) {
                 $product->categories()->sync($request['categories']);
+            }
+            if(isset($request->tax)){
+              $product->tax=Tax::find($request->tax);
             }
             if (isset($request['tags'])) {
                 $product->tags()->sync($request['tags']);

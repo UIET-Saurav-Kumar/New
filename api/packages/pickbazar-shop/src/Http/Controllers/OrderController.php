@@ -99,7 +99,7 @@ class OrderController extends CoreController
     {
         $user = $request->user();
         try {
-            $order = $this->repository->with(['products', 'status', 'children.shop'])->findOneByFieldOrFail('tracking_number', $tracking_number);
+            $order = $this->repository->with(['products','products.shop', 'status', 'children.shop'])->findOneByFieldOrFail('tracking_number', $tracking_number);
             if ($user->id === $order->customer_id || $user->can('super_admin')) {
                 return $order;
             } else {
@@ -189,3 +189,4 @@ class OrderController extends CoreController
         }
     }
 }
+

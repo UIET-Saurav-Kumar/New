@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
+use PickBazar\Database\Models\Tax;
 use Illuminate\Support\Facades\Log;
 use PickBazar\Database\Models\Type;
 use Illuminate\Support\Facades\Schema;
@@ -18,10 +19,10 @@ use PickBazar\Database\Models\MasterProduct;
 use PickBazar\Exceptions\PickbazarException;
 use PickBazar\Database\Models\VariationOption;
 use PickBazar\Database\Repositories\ShopRepository;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 use PickBazar\Http\Requests\MasterProductCreateRequest;
 use PickBazar\Http\Requests\MasterProductUpdateRequest;
 use PickBazar\Database\Repositories\MasterProductRepository;
-use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class MasterProductController extends CoreController
 {
@@ -259,7 +260,6 @@ class MasterProductController extends CoreController
 
     public function storeShopProduct(Request $request)
     {
-
         $master=MasterProduct::find($request->master_id);
         $data=$master->toArray();
         unset($data["id"]);
@@ -275,6 +275,9 @@ class MasterProductController extends CoreController
         $data["price"]=(double)$request->price;
         $data["sale_price"]=(double)$request->sale_price;
         $data["quantity"]=(double)$request->quantity;
+        if(isset($request->tax)){
+            $data["tax"]=Tax::find($request->tax);
+        }
         $data["max_price"]=NULL;
         $data["min_price"]=NULL;
         $data["is_featured"]=NULL;
@@ -323,21 +326,6 @@ class MasterProductController extends CoreController
 
         return $slug;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
