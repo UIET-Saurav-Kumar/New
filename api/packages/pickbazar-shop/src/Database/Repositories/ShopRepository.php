@@ -45,7 +45,9 @@ class ShopRepository extends BaseRepository
         "tan_number",
         "pan_number"
     ];
-
+    // gst_certificate
+    // fssai_certificate
+    // cancelled_cheque
 
     public function boot()
     {
@@ -67,12 +69,12 @@ class ShopRepository extends BaseRepository
     {
         
         try {
-
+            
             $data = $request->only($this->dataArray);
             $data['owner_id'] = $request->user()->id;
-            $data["gst_certificate"]=($data["gst_certificate"]==[])?"":json_encode($data["gst_certificate"]);
-            $data["fssai_certificate"]=($data["fssai_certificate"]==[])?"":json_encode($data["fssai_certificate"]);
-            $data["cancelled_cheque"]=($data["cancelled_cheque"]==[])?"":json_encode($data["cancelled_cheque"]);
+            $data["gst_certificate"]=($data["gst_certificate"]==[])?NULL:json_encode($data["gst_certificate"]);
+            $data["fssai_certificate"]=($data["fssai_certificate"]==[])?NULL:json_encode($data["fssai_certificate"]);
+            $data["cancelled_cheque"]=($data["cancelled_cheque"]==[])?NULL:json_encode($data["cancelled_cheque"]);
 
             $shop = $this->create($data);
             if (isset($request['categories'])) {
@@ -112,11 +114,11 @@ class ShopRepository extends BaseRepository
                     $this->updateBalance($request['balance'], $id);
                 }
             }
-            $data=$request->all();
-            
-            $request->gst_certificate=($data["gst_certificate"]==[])?"":json_encode($data["gst_certificate"]);
-            $request->fssai_certificate=($data["fssai_certificate"]==[])?"":json_encode($data["fssai_certificate"]);
-            $request->cancelled_cheque=($data["cancelled_cheque"]==[])?"":json_encode($data["cancelled_cheque"]);
+            // $data=$request->all();
+
+            // $request->gst_certificate=($data["gst_certificate"]==[])?"":json_encode($data["gst_certificate"]);
+            // $request->fssai_certificate=($data["fssai_certificate"]==[])?"":json_encode($data["fssai_certificate"]);
+            // $request->cancelled_cheque=($data["cancelled_cheque"]==[])?"":json_encode($data["cancelled_cheque"]);
             
             $shop->update($request->only($this->dataArray));
             $shop->categories = $shop->categories;
