@@ -1,5 +1,6 @@
 import Input from "@components/ui/input";
 import TextArea from "@components/ui/text-area";
+import ValidationError from "@components/ui/form-validation-error";
 import { useForm, FormProvider } from "react-hook-form";
 import Button from "@components/ui/button";
 import Description from "@components/ui/description";
@@ -19,6 +20,7 @@ import orderBy from "lodash/orderBy";
 import sum from "lodash/sum";
 import cloneDeep from "lodash/cloneDeep";
 import ProductTypeInput from "./product-type-input";
+import { useTaxQuery } from "@data/tax/use-all-taxes.query";
 import {
   Type,
   ProductType,
@@ -150,7 +152,7 @@ function calculateQuantity(variationOptions: any) {
 export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
+  const { data:taxes } = useTaxQuery();
   const { t } = useTranslation();
 
   const methods = useForm<FormValues>({
@@ -306,6 +308,13 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
       );
     }
   };
+  function isSelected(id:any){
+    if((initialValues?.tax)){
+      var tax =JSON.parse(initialValues.tax);
+      return tax.id===id;
+    }
+    return false;
+  }
   const productTypeValue = watch("productTypeValue");
   return (
     <>
@@ -412,6 +421,39 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
                   label={t("form:input-label-draft")}
                   value="draft"
                 />
+              </div>
+              <div className="mt-5 mb-5">
+                <Label>{("Tax")}</Label>
+                <select
+                  style={{
+                  fontSize: "0.875rem",
+                  color: "#6B7280",
+                  paddingLeft: 16,
+                  paddingRight: 16,
+                  paddingTop: 12,
+                  paddingBottom: 12,
+                  cursor: "pointer",
+                  backgroundColor:"#ffffff",
+                  width:"100%",
+                  boxShadow:"0 0px 3px 0 rgba(0, 0, 0, 0.1), 0 0px 2px 0 rgba(0, 0, 0, 0.06)",
+                  borderBottom: "1px solid #E5E7EB"
+                }}
+                 {...register("tax")} id="tax">
+                   <option value="">Select Tax</option>
+                  {
+                    taxes?.map((tax:any)=>{
+                      if(isSelected(tax.id)){
+                        return (
+                          <option value={tax.id} selected>{tax.name+" "+tax.rate+"%"}</option>
+                        )
+                      }
+                      return (
+                        <option value={tax.id}>{tax.name+" "+tax.rate+"%"}</option>
+                      )
+                    })
+                  }
+                </select>
+                <ValidationError message={t(errors.productTypeValue?.message)} />
               </div>
             </Card>
           </div>

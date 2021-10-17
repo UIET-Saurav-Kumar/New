@@ -65,12 +65,12 @@ const RegistrationForm = () => {
           permission,
         },
       },
-
       {
         onSuccess: ({ data }) => {
           setUser(data.user.id);
-          setIsRegistered(true);
-          // router.push('/auth/'+data.user.id);
+          localStorage.setItem('user_id',data.user.id);
+          // setIsRegistered(true);
+          router.push('/auth/'+data.user.id);
           return;
           
           if (data?.token) {
@@ -98,9 +98,9 @@ const RegistrationForm = () => {
 
   return (
     <>
-    <h1 className='text-center text-xl  font-md text-gray-600 '>Register Now</h1>
+    <h1 className='text-center text-xl  font-md text-gray-600 '>{"Shop License"}</h1>
     {
-      (!isRegistered)?
+      // (!isRegistered)?
       (
         <>
           <form className='mt-10' onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -165,12 +165,12 @@ const RegistrationForm = () => {
             </Link>
           </div>
         </>
-      ):(
-        <>
-          <LicenseFrom user={user}/>
-        </>
       )
-
+      // :(
+      //   <>
+      //     <LicenseFrom user={user}/>
+      //   </>
+      // )
     }
       
     </>

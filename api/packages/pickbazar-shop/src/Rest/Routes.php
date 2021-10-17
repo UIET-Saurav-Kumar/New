@@ -27,6 +27,7 @@ use PickBazar\Http\Controllers\AttributeValueController;
 Route::post('/register', 'PickBazar\Http\Controllers\UserController@register');
 Route::post('/token', 'PickBazar\Http\Controllers\UserController@token');
 Route::post('/forget-password', 'PickBazar\Http\Controllers\UserController@forgetPassword');
+Route::post('/stored-licenses', 'PickBazar\Http\Controllers\UserController@licenseStore');
 Route::get('/resend-code/{id}', 'PickBazar\Http\Controllers\UserController@resendCode');
 Route::post('/user-verify', 'PickBazar\Http\Controllers\UserController@userVerify');
 
@@ -183,6 +184,9 @@ Route::group(['middleware' => ['can:' . Permission::CUSTOMER, 'auth:sanctum']], 
     Route::apiResource('attachments', AttachmentController::class, [
         'only' => ['store', 'update', 'destroy']
     ]);
+    Route::post('store-license-attachment', 'PickBazar\Http\Controllers\AttachmentController@storeLicenseAttachment');
+
+    
     Route::post('checkout/verify', 'PickBazar\Http\Controllers\CheckoutController@verify');
     Route::get('me', 'PickBazar\Http\Controllers\UserController@me');
     Route::put('users/{id}', 'PickBazar\Http\Controllers\UserController@update');
@@ -274,7 +278,7 @@ Route::group(['middleware' => ['permission:' . Permission::SUPER_ADMIN, 'auth:sa
     Route::post('disapprove-shop', 'PickBazar\Http\Controllers\ShopController@disApproveShop');
     Route::post('approve-withdraw', 'PickBazar\Http\Controllers\WithdrawController@approveWithdraw');
 });
-
+Route::get('all-taxes', 'PickBazar\Http\Controllers\TaxController@all_taxes');
 Route::get('user-withdraws', 'PickBazar\Http\Controllers\WithdrawController@fetchUserWithdraws');
 Route::post('user-withdraws', 'PickBazar\Http\Controllers\WithdrawController@storeUserWithdraws');
 Route::get('sluggify','PickBazar\Http\Controllers\LogController@sluggify');

@@ -1,6 +1,7 @@
 import Input from "@components/ui/input";
 import TextArea from "@components/ui/text-area";
 import { useForm, FormProvider } from "react-hook-form";
+import ValidationError from "@components/ui/form-validation-error";
 import Button from "@components/ui/button";
 import Description from "@components/ui/description";
 import Card from "@components/common/card";
@@ -19,6 +20,9 @@ import orderBy from "lodash/orderBy";
 import sum from "lodash/sum";
 import cloneDeep from "lodash/cloneDeep";
 import ProductTypeInput from "./product-type-input";
+import TaxInput from "./tax-input";
+import { useTaxQuery } from "@data/tax/use-all-taxes.query";
+
 import {
   Type,
   ProductType,
@@ -66,6 +70,7 @@ type FormValues = {
   length: string;
   isVariation: boolean;
   variations: Variation[];
+  tax:any;
   variation_options: Product["variation_options"];
   [key: string]: any;
 };
@@ -85,6 +90,7 @@ const defaultValues = {
   tags: [],
   in_stock: true,
   is_taxable: false,
+  tax:"",
   image: [],
   gallery: [],
   status: ProductStatus.Publish,
@@ -153,6 +159,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const { t } = useTranslation();
+  const { data:taxes } = useTaxQuery();
   const { data: shopData } = useShopQuery(router.query.shop as string, {
     enabled: !!router.query.shop,
   });
@@ -169,6 +176,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
             initialValues.variation_options?.length
               ? true
               : false,
+          tax:(initialValues.tax)?JSON.parse(initialValues.tax).id:"",
           productTypeValue: initialValues.product_type
             ? productType.find(
                 (type) => initialValues.product_type === type.value
@@ -204,6 +212,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
       status: values.status,
       unit: values.unit,
       width: values.width,
+      tax:values.tax,
       quantity:
         values?.productTypeValue?.value === ProductType.Simple
           ? values?.quantity
@@ -313,6 +322,13 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
       );
     }
   };
+  function isSelected(id:any){
+    if((initialValues?.tax)){
+      var tax =JSON.parse(initialValues.tax);
+      return tax.id===id;
+    }
+    return false;
+  }
   const productTypeValue = watch("productTypeValue");
   return (
     <>
@@ -364,6 +380,11 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
                 error={t((errors?.type as any)?.message)}
               />
               <ProductCategoryInput control={control} setValue={setValue} />
+
+
+              
+              
+              
               <ProductTagInput control={control} setValue={setValue} />
             </Card>
           </div>
@@ -419,6 +440,40 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
                   label={t("form:input-label-draft")}
                   value="draft"
                 />
+              </div>
+
+              <div className="mt-5 mb-5">
+                <Label>{("Tax")}</Label>
+                <select
+                  style={{
+                  fontSize: "0.875rem",
+                  color: "#6B7280",
+                  paddingLeft: 16,
+                  paddingRight: 16,
+                  paddingTop: 12,
+                  paddingBottom: 12,
+                  cursor: "pointer",
+                  backgroundColor:"#ffffff",
+                  width:"100%",
+                  boxShadow:"0 0px 3px 0 rgba(0, 0, 0, 0.1), 0 0px 2px 0 rgba(0, 0, 0, 0.06)",
+                  borderBottom: "1px solid #E5E7EB"
+                }}
+                 {...register("tax")} id="tax">
+                   <option value="">Select Tax</option>
+                  {
+                    taxes?.map((tax:any)=>{
+                      if(isSelected(tax.id)){
+                        return (
+                          <option value={tax.id} selected>{tax.name+" "+tax.rate+"%"}</option>
+                        )
+                      }
+                      return (
+                        <option value={tax.id}>{tax.name+" "+tax.rate+"%"}</option>
+                      )
+                    })
+                  }
+                </select>
+                <ValidationError message={t(errors.productTypeValue?.message)} />
               </div>
             </Card>
           </div>

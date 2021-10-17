@@ -8,6 +8,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Description from "@components/ui/description";
 import Card from "@components/common/card";
 import FileInput from "@components/ui/file-input";
+import LicenseFileInput from "@components/ui/license-file-input";
+
 import TextArea from "@components/ui/text-area";
 import { shopValidationSchema } from "./shop-validation-schema";
 import { getFormattedImage } from "@utils/get-formatted-image";
@@ -74,11 +76,11 @@ type FormValues = {
   name: string;
   description: string;
   cover_image: any;
-  gst_certificate_image: any;
-  cancelled_cheque_image: any;
-  pan_card_image: any;
-  tan_certificate_image: any;
-  fssai_certificate_image: any;
+  gst_certificate: any;
+  cancelled_cheque: any;
+  // pan_card_image: any;
+  // tan_certificate_image: any;
+  fssai_certificate: any;
   gst_number : any;
   pan_number: any;
   tan_number: any;
@@ -122,6 +124,9 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
             ...initialValues,
             logo: getFormattedImage(initialValues.logo),
             cover_image: getFormattedImage(initialValues.cover_image),
+            fssai_certificate:getFormattedImage(JSON.parse(initialValues.fssai_certificate)),
+            gst_certificate:getFormattedImage(JSON.parse(initialValues.gst_certificate)),
+            cancelled_cheque:getFormattedImage(JSON.parse(initialValues.cancelled_cheque)),
             settings: {
               ...initialValues?.settings,
               socials: initialValues?.settings?.socials
@@ -302,7 +307,7 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
             />
 
             <Card className="w-full sm:w-8/12 md:w-2/3">
-              <FileInput name="gst_certificate_image" control={control} multiple={false} />
+              <LicenseFileInput name="gst_certificate" control={control} multiple={false} />
             </Card>
           </div>
 
@@ -323,7 +328,7 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
               />
 
               <Card className="w-full  sm:w-8/12 md:w-2/3">
-                <FileInput name="fssai_certificate_image" control={control} multiple={false} />
+                <LicenseFileInput name="fssai_certificate" control={control} multiple={false} />
               </Card>
             </div>
 
@@ -335,7 +340,7 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
               />
 
               <Card className="w-full  sm:w-8/12 md:w-2/3">
-                <FileInput name="cancelled_cheque_image" control={control} multiple={false} />
+                <LicenseFileInput name="cancelled_cheque" control={control} multiple={false} />
               </Card>
             </div>
 
@@ -347,7 +352,7 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
               error={t(errors.tan_number?.message!)}
             /> 
 
-            <div className="flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
+            {/* <div className="flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
               <Description
                 title={t("form:TAN Certificate ")}
                 details='Upload your cancelled Cheque Copy '
@@ -357,7 +362,7 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
               <Card className="w-full  sm:w-8/12 md:w-2/3">
                 <FileInput name="tan_certificate_image" control={control} multiple={false} />
               </Card>
-            </div>
+            </div> */}
 
 
 
@@ -369,7 +374,7 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
               error={t(errors.pan_number?.message!)}
             /> 
 
-            <div className="flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
+            {/* <div className="flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
               <Description
                 title={t("form:PAN Card ")}
                 details='Upload your PAN Card'
@@ -379,7 +384,7 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
               <Card className="w-full  sm:w-8/12 md:w-2/3">
                 <FileInput name="pan_card_image" control={control} multiple={false} />
               </Card>
-            </div>
+            </div> */}
           
           
           </Card>

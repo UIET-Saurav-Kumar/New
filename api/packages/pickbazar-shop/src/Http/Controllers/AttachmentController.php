@@ -70,6 +70,35 @@ class AttachmentController extends CoreController
 
         return $path;
     }
+
+
+    public function storeLicenseAttachment(AttachmentRequest $request)
+    {
+
+        $urls = [];
+        foreach ($request->attachment as $media) {
+            $attachment = new Attachment;
+            $attachment->save();
+            $path=$this->storeAttachment($media);
+
+                $converted_url = [
+                    'thumbnail' => url('/').$path,
+                    'original' => url('/').$path,
+                    'id' => $attachment->id
+                ];
+            $urls[] = $converted_url;
+        }
+        return $urls;
+    }
+
+    protected function storeAttachment($attachment){
+        $attachment_name = uniqid().'.'.$attachment->getClientOriginalExtension();
+        $destinationPath=public_path(). '/licenses/';
+        $attachment->move($destinationPath, $attachment_name);
+        $path='/licenses/'.$attachment_name;
+
+        return $path;
+    }
     
     /**
      * Display the specified resource.

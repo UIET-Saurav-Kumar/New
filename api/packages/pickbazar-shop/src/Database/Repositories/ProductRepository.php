@@ -5,6 +5,7 @@ namespace PickBazar\Database\Repositories;
 
 use Exception;
 use PickBazar\Enums\ProductType;
+use PickBazar\Database\Models\Tax;
 use Illuminate\Support\Facades\Log;
 use PickBazar\Database\Models\Shop;
 use PickBazar\Database\Models\Product;
@@ -76,7 +77,9 @@ class ProductRepository extends BaseRepository
             $data['slug']=$this->getSlug($data['name']);
 
             $product = $this->create($data);
-
+            if(isset($request->tax)){
+                $product->tax=Tax::find($request->tax);
+            }
             if (isset($request['categories'])) {
                 $product->categories()->attach($request['categories']);
             }
@@ -119,6 +122,8 @@ class ProductRepository extends BaseRepository
 
     public function updateProduct($request, $id)
     {
+        
+
         try {
             $product = $this->findOrFail($id);
             if(isset($request->is_featured)){
@@ -127,12 +132,16 @@ class ProductRepository extends BaseRepository
             if (isset($request['categories'])) {
                 $product->categories()->sync($request['categories']);
             }
+            if(isset($request->tax)){
+                $product->tax=Tax::find($request->tax);
+            }
             if (isset($request['tags'])) {
                 $product->tags()->sync($request['tags']);
             }
             if (isset($request['variations'])) {
                 $product->variations()->sync($request['variations']);
             }
+
             if (isset($request['variation_options'])) {
                 if (isset($request['variation_options']['upsert'])) {
                     foreach ($request['variation_options']['upsert'] as $key => $variation) {

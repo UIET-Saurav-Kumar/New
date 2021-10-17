@@ -156,7 +156,6 @@ class ShopController extends CoreController
      */
     public function show($slug, Request $request)
     {
-        
         $shop = $this->repository
             ->with(['categories', 'owner','shop_category'])
             ->withCount(['orders', 'products']);

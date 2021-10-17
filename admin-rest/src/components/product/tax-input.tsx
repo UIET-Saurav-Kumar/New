@@ -5,25 +5,31 @@ import Card from "@components/common/card";
 import ValidationError from "@components/ui/form-validation-error";
 import { ProductType } from "@ts-types/generated";
 import { useTranslation } from "next-i18next";
+import { useTaxQuery } from "@data/tax/use-all-taxes.query";
+import { useEffect } from "react";
 
 const productType = [
   { name: "Simple Product", value: ProductType.Simple },
   { name: "Variable Product", value: ProductType.Variable },
 ];
 
-const TaxInput = () => {
+const ProductTypeInput = () => {
   const {
     control,
     formState: { errors },
   } = useFormContext();
+  const { data, isLoading: loading, error } = useTaxQuery();
+
   const { t } = useTranslation();
 
+  useEffect(()=>{
+    console.log(data,'data');
+  },[])
   return (
-    <Card className="w-full sm:w-8/12 md:w-2/3">
-      <div className="mb-5">
-        <Label>{t("form:form-title-product-type")}</Label>
+      <div className="mt-5 mb-5">
+        <Label>{("Tax")}</Label>
         <SelectInput
-          name="productTypeValue"
+          name="tax_id"
           control={control}
           getOptionLabel={(option: any) => option.name}
           getOptionValue={(option: any) => option.value}
@@ -31,8 +37,7 @@ const TaxInput = () => {
         />
         <ValidationError message={t(errors.productTypeValue?.message)} />
       </div>
-    </Card>
   );
 };
 
-export default TaxInput;
+export default ProductTypeInput;

@@ -92,4 +92,9 @@ class TaxController extends CoreController
             throw new PickbazarException('PICKBAZAR_ERROR.NOT_FOUND');
         }
     }
+
+    public function all_taxes(){
+        return $this->repository->all();
+    }
+
 }

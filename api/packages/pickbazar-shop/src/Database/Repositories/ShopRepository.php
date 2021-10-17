@@ -36,7 +36,14 @@ class ShopRepository extends BaseRepository
         'is_active',
         'address',
         'settings',
-        "is_featured"
+        "is_featured",
+        "gst_number",
+        "gst_certificate",
+        "fssai_number",
+        "fssai_certificate",
+        "cancelled_cheque",
+        "tan_number",
+        "pan_number"
     ];
 
 
@@ -58,6 +65,7 @@ class ShopRepository extends BaseRepository
 
     public function storeShop($request)
     {
+        
         try {
             $data = $request->only($this->dataArray);
             $data['owner_id'] = $request->user()->id;

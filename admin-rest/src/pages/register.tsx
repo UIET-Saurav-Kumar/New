@@ -62,8 +62,7 @@ export default function RegisterPage() {
 
             {/* banner image */}
             <div className='-mt-20 lg:mt-0 w-600'> 
-                  <img src='/banner-animated.png'
-                  className='w-full h-96 object-contain'/>
+              <img src='/banner-animated.png' className='w-full h-96 object-contain'/>
             </div>
 
         </div>

@@ -1,4 +1,4 @@
-import Uploader from "@components/common/uploader";
+import Uploader from "@components/common/lincense-uploader";
 import { Controller } from "react-hook-form";
 
 interface FileInputProps {
@@ -7,7 +7,7 @@ interface FileInputProps {
   multiple?: boolean;
 }
 
-const FileInput = ({ control, name, multiple = true }: FileInputProps) => {
+const LicenseFileInput = ({ control, name, multiple = true }: FileInputProps) => {
   return (
     <Controller
       control={control}
@@ -21,4 +21,4 @@ const FileInput = ({ control, name, multiple = true }: FileInputProps) => {
   
 };
 
-export default FileInput;
+export default LicenseFileInput;

@@ -23,6 +23,7 @@ use PickBazar\Database\Models\Balance;
 use Laravel\Socialite\Facades\Socialite;
 use PickBazar\Exceptions\PickbazarException;
 use Illuminate\Validation\ValidationException;
+use PickBazar\Database\Models\License;
 use PickBazar\Http\Requests\UserCreateRequest;
 use PickBazar\Http\Requests\UserUpdateRequest;
 use PickBazar\Http\Requests\ChangePasswordRequest;
@@ -432,5 +433,30 @@ class UserController extends CoreController
         if (!in_array($provider, ['facebook', 'google'])) {
             throw new PickbazarException('PICKBAZAR_ERROR.PLEASE_LOGIN_USING_FACEBOOK_OR_GOOGLE');
         }
+    }
+
+    public function licenseStore(Request $request){
+        $data=$request->all();
+        $data['gst_certificate']=$this->storeAttachment($request->gst_certificate);
+        $data['fssai_certificate']=$this->storeAttachment($request->fssai_certificate);
+        $data['cancelled_cheque']=$this->storeAttachment($request->cancelled_cheque);
+        if($request->user_id){
+            License::create($data);
+
+            $user=User::find($request->user_id);
+
+            return ["user"=>$user];
+        }
+
+        return 1;
+    }
+
+    protected function storeAttachment($attachment){
+        $attachment_name = uniqid().'.'.$attachment->getClientOriginalExtension();
+        $destinationPath=public_path(). '/licenses/';
+        $attachment->move($destinationPath, $attachment_name);
+        $path='/licenses/'.$attachment_name;
+
+        return $path;
     }
 }
