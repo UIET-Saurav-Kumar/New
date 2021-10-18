@@ -143,7 +143,14 @@ export default function OrderPage() {
   if (loading) {
     return <Spinner showText={false} />;
   }
-
+  const getShop=()=>{
+    if(data?.order?.products){
+      if(data?.order?.products[0]){
+        return data?.order?.products[0].shop;
+      }
+    }
+    
+  }
   return (
     
     <div className="p-4 sm:p-8">
@@ -263,17 +270,70 @@ export default function OrderPage() {
                   {data?.order?.delivery_time}
                 </span>
               </p>
-
+or
               <p className="flex text-body-dark mt-5">
                 <strong className="w-5/12 sm:w-4/12 text-sm  text-heading font-semibold">
                   {t("text-shipping-address")}
                 </strong>
                 :
                 <span className="w-7/12 sm:w-8/12 ps-4 text-sm">
-                  {/* {formatAddress(data?.order?.children?.shop?.name)} */}
+                  {data?.order?.children?.shop?formatAddress(data?.order?.children?.shop?.name):""}
                 </span>
               </p>
             </div>
+
+            {
+              data?.order?.products.map(product=>{
+                return (
+                  <>
+                    <hr className="mt-3 mb-3 text-gray-700"/>
+                    <u><i>{product?.name}</i></u>
+                    <div className='grid grid-cols-1 sm:grid-cols-2 w-full '>
+                      <p className="flex text-body-dark mt-5">
+                        <strong className="w-5/12 sm:w-4/12 text-sm  text-heading font-semibold">
+                          Sold by
+                        </strong>
+                        :
+                        <span className="w-7/12 sm:w-8/12 ps-4 text-sm">
+                          {product?.shop?.name}
+                        </span>
+                      </p>
+
+                      <p className="flex text-body-dark mt-5">
+                        <strong className="w-5/12 sm:w-4/12 text-sm  text-heading font-semibold">
+                          Address
+                        </strong>
+                        :
+                        <span className="w-7/12 sm:w-8/12 ps-4 text-sm">
+                          {product?.shop?.address?formatAddress(product?.shop?.address):""}
+                        </span>
+                      </p>
+
+                      <p className="flex text-body-dark mt-5">
+                        <strong className="w-5/12 sm:w-4/12 text-sm  text-heading font-semibold">
+                          GST Number
+                        </strong>
+                        :
+                        <span className="w-7/12 sm:w-8/12 ps-4 text-sm">
+                          {product?.shop?.gst_number}
+                        </span>
+                      </p>
+
+                      <p className="flex text-body-dark mt-5">
+                        <strong className="w-5/12 sm:w-4/12 text-sm  text-heading font-semibold">
+                          PAN Number
+                        </strong>
+                        :
+                        <span className="w-7/12 sm:w-8/12 ps-4 text-sm">
+                          {product?.shop?.pan_number}
+                        </span>
+                      </p>
+                    </div>
+                  </>
+                )
+              })
+            }
+            
           </div> 
 
           {/* end of order details */}

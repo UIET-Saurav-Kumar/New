@@ -36,7 +36,16 @@ export const OrderItems = ({ products }: { products: any }) => {
 
   // var converter = require('number-to-words');
 
-  
+  function calculateTax(tax:any,price:any){
+    tax=tax?tax:0;
+    price=price?price:0;
+    
+    var value=(parseFloat(tax)*parseFloat(price))/100;
+    const {price:total}=usePrice({
+      amount: value,
+    })
+    return total;
+  }
 
   const orderTableColumns = [
 
@@ -52,7 +61,7 @@ export const OrderItems = ({ products }: { products: any }) => {
         const { price } = usePrice({
           amount: +record.pivot?.unit_price,
         });
-
+        
         let name = record.name;
 
         if (record.pivot?.variation_option_id) {
@@ -87,7 +96,7 @@ export const OrderItems = ({ products }: { products: any }) => {
                 </span>
               </div>
               <span className="text-sm text-accent font-semibold mb-1 truncate inline-block overflow-hidden">
-                {price}
+                {price} , {record.tax?JSON.parse(record.tax).rate+"% tax":""}
               </span>
             </div>
 
@@ -124,12 +133,12 @@ export const OrderItems = ({ products }: { products: any }) => {
 
     {
       title: t("Tax"),
-      dataIndex: "pivot",
-      key: "pivot",
+      dataIndex: "",
+      key: "items",
       align: "center",
       width: 100,
-      render: () => {
-        return <p className="text-body">{tax}</p>;
+      render: (_: any, record: any) => {
+        return <p className="text-body">{record.tax?calculateTax(JSON.parse(record.tax).rate,record.pivot.subtotal):""}</p>;
       },
     },
 
