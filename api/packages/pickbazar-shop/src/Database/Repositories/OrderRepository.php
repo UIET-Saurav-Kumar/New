@@ -296,6 +296,7 @@ class OrderRepository extends BaseRepository
 
     private function createReferralEarning($order, $commission_value, $request, $level, $customer, $commission, $commission_level)
     {
+        $commission_value=round(floatval($commission_value),2);
         ReferralEarning::create([
             "user_id" => $level->id,
             "customer_id" => $customer->id,
@@ -307,6 +308,11 @@ class OrderRepository extends BaseRepository
             "earning" => $commission_value,
             "level" => $commission_level
         ]);
+
+        $balance = Balance::firstOrNew(['user_id' => $level->id]);
+        $balance->total_earnings= $balance->total_earnings + $commission_value;
+        $balance->current_balance=$balance->current_balance + $commission_value;
+        $balance->save();
     }
 
     private function get_uplink($user)
