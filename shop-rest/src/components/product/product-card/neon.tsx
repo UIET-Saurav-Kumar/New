@@ -33,7 +33,7 @@ const Neon: React.FC<NeonProps> = ({ product, className }) => {
         className
       )}
     >
-       <Link href={`${ROUTES.PRODUCT}/${slug}`}>
+     
 
       <div
         className="relative flex items-center justify-center cursor-pointer w-auto h-48 sm:h-64"
@@ -61,7 +61,7 @@ const Neon: React.FC<NeonProps> = ({ product, className }) => {
           </div>
         )}
       </div>
-         </Link>
+        
       {/* End of product image */}
 
       <header className="p-3 md:p-6">
