@@ -62,6 +62,7 @@ const Neon: React.FC<NeonProps> = ({ product, className }) => {
           </div>
         )}
       </div>
+        </Link>
         
       {/* End of product image */}
 
@@ -75,7 +76,7 @@ const Neon: React.FC<NeonProps> = ({ product, className }) => {
             <del className="text-xs md:text-sm text-muted ms-2">{price}</del>
           )}
         </div>
-        </Link>
+        
         {/* End of product price */}
 
         <h3
