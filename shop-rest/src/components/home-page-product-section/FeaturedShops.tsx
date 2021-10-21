@@ -37,7 +37,7 @@ export default function FeaturesShops({ }) {
 
                 <div id='featured-shops' className=' flex flex-col mt-8 border-b rounded-t pb-4 bg-gray-50'>
     
-                    <div className='flex justify-between  p-2 px-4'>
+                    <div className='flex justify-between items-center p-2 px-4'>
     
                         <h3 className='text-lg sm:text-lg md:text-lg xl:text-2xl  font-semibold  p-2  '>
                             Trending Local Shops Nearby
