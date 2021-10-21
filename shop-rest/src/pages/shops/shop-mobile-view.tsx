@@ -10,6 +10,9 @@ import { getIcon } from "@utils/get-icon";
 import * as socialIcons from "@components/icons/social";
 import ShopBanner from "./shop-banner";
 import WebShopBanner from "./web-shop-banner";
+import { isEmpty } from "lodash";
+import { formatAddress } from "@utils/format-address";
+import ReadMore from "@components/ui/truncate";
 
 
 export default function ShopMobileView({data}) {
@@ -36,22 +39,37 @@ export default function ShopMobileView({data}) {
 
             <div className='w-full grid grid-cols-1 sm:flex'>
 
-                <div className='hidden sm:block w-48 h-38 sm:h-60 md:h-72'> 
+                <div className='hidden sm:block w-48 h-38 sm:h-72 sm:w-80 md:h-72 lg:w-96'> 
                     <ShopProfileCard data={data} /> 
                 </div>
                 
                 <div className='w-full flex-grow'>
                    <img alt={t("heading")} 
-                        className='object-cover h-38 sm:h-60 rounded-lg xs+++:rounded-l-none md:h-72 w-full'
+                        className='object-cover h-38 sm:h-72 rounded-lg xs+++:rounded-l-none md:h-72 lg:w-2/3 w-full'
                         src={data?.cover_image?.original! ?? "/product-placeholder.svg"}
                    />
+                   
                 </div>
 
-                <div className='block  sm:hidden'> 
+                <div className='block  sm:hidden '> 
                     <ShopProfileCard data={data} /> 
                 </div>
                 
+                
             </div>
+
+            <div className=' flex flex-col p-3 border rounded-lg mt-4 w-full text-left'>
+                <span className="text-lg text-heading font-semibold mb-2">
+                      Description
+                </span>
+
+                {data?.description && (
+                  
+                        <p className="text-sm font-md  font-light tracking-wide text-gray-600  mb-2 leading-relaxed">
+                          <ReadMore character={70}>{data?.description}</ReadMore>
+                        </p>
+                )}
+            </div>  
 
             <div className=''>
                 <WebShopBanner/>
@@ -63,7 +81,6 @@ export default function ShopMobileView({data}) {
                <div className='mx-4 '> 
                   { data && <ShopProductFeed shopId={data.id} /> }
                </div> 
-
 
 
             {/* menu button */}
