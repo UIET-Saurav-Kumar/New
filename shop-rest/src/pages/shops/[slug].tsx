@@ -78,7 +78,7 @@ const ShopPage = ({ data }: any) => {
 
                             <div className='flex  w-full h-80 border'> 
 
-                                <div className='h-full w-1/5'>  
+                                <div className='h-full w-96'>  
                                   <ShopProfileCard data={data} />
                                 </div>
                                 
@@ -91,6 +91,7 @@ const ShopPage = ({ data }: any) => {
                                 />
           
                             </div>
+                            
 
                            
                            <WebShopBanner/>
