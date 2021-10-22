@@ -5,6 +5,8 @@ import usePrice from "@utils/use-price";
 import { AddToCart } from "@components/product/add-to-cart/add-to-cart";
 import { useTranslation } from "next-i18next";
 import { useModalAction } from "@components/ui/modal/modal.context";
+import Link from "@components/ui/link";
+import { ROUTES } from "@utils/routes";
 
 type NeonProps = {
   product: any;
@@ -13,7 +15,7 @@ type NeonProps = {
 
 const Neon: React.FC<NeonProps> = ({ product, className }) => {
   const { t } = useTranslation("common");
-  const { name, image, quantity, unit } = product ?? {};
+  const { name, image,slug, quantity, unit } = product ?? {};
   const { price, basePrice, discount } = usePrice({
     amount: product.price,
     baseAmount: product.sale_price,
@@ -31,10 +33,12 @@ const Neon: React.FC<NeonProps> = ({ product, className }) => {
         className
       )}
     >
+      <Link href={`${ROUTES.PRODUCT}/${slug}`}>
+     
 
       <div
         className="relative flex items-center justify-center cursor-pointer w-auto h-48 sm:h-64"
-        onClick={handleProductQuickView}
+        
       >
 
         <span className="sr-only">{t("text-product-image")}</span>
@@ -58,6 +62,8 @@ const Neon: React.FC<NeonProps> = ({ product, className }) => {
           </div>
         )}
       </div>
+        </Link>
+        
       {/* End of product image */}
 
       <header className="p-3 md:p-6">
@@ -70,11 +76,12 @@ const Neon: React.FC<NeonProps> = ({ product, className }) => {
             <del className="text-xs md:text-sm text-muted ms-2">{price}</del>
           )}
         </div>
+        
         {/* End of product price */}
 
         <h3
           className="text-xs md:text-sm text-body  mb-4 cursor-pointer"
-          onClick={handleProductQuickView}
+         
         >
           <div className='flex flex-col text-xs md:text-sm text-body truncate mb-4 cursor-pointer'>{name}<h3>{unit}</h3></div>
         </h3>

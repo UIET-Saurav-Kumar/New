@@ -37,11 +37,31 @@ class CategoryController extends CoreController
         if($request->search != null)
         {
             $checkslug = (explode(":",$request->search));
-
-            $limit = $request->limit ?   $request->limit : 15;
+            if($checkslug[0] == 'name')
+            {
+                $searchItem = $checkslug[1];
+                $limit = $request->limit ? $request->limit : 15;
+                return Category::with(['type','parent','children.type'])->where(function($query) use ($searchItem)
+                                {
+                                    $query->where('slug', $searchItem);
+                                })
+                                ->orWhere(function($query) use ($searchItem)
+                                {
+                                    $query->where('name', $searchItem);
+                                    
+                                })->orWhere(function($query) use ($searchItem)
+                                {
+                                    $query->where('details', $searchItem);
+                                    
+                                })->orWhere(function($query) use ($searchItem)
+                                {
+                                    $query->where('id', $searchItem);
+                                    
+                                })->paginate($limit);
+            }
+            $limit = $request->limit ? $request->limit : 15;
     
             $shopid = Shop::where('slug', $checkslug[1])->get()->first();
-    
             $findid = Product::where('shop_id', $shopid->id)->get()->first()->type_id ?? 0;
             $shop_id = $shopid->id;
             $res = Category::with(['type','parent','children.type','children.products','products'])

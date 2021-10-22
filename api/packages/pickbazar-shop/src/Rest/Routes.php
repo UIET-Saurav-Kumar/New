@@ -114,7 +114,7 @@ Route::get('get-wallet-commission','PickBazar\Http\Controllers\InviteController@
 
 Route::get('referral-network','PickBazar\Http\Controllers\InviteController@refferral_network');
 
-
+Route::any('order/success','PickBazar\Http\Controllers\GatewayResponse@process_response');
 
 Route::post('import-products', 'PickBazar\Http\Controllers\ProductController@importProducts');
 Route::post('import-variation-options', 'PickBazar\Http\Controllers\ProductController@importVariationOptions');

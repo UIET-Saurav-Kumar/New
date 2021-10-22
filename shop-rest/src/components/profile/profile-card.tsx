@@ -1,4 +1,3 @@
-
 import cn from "classnames";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
@@ -29,6 +28,7 @@ type ShopProfileCardProps = {
     function handleMoreInfoModal() {
       return openModal("SHOP_INFO", data);
     }
+    console.log('shop data', data.address.street_address);
 
   return (
     <>
@@ -72,8 +72,10 @@ type ShopProfileCardProps = {
             <div className="w-full -space-y-8 p-3 grid grid-cols-2  gap-x-8 gap-y-0  
                              sm:grid-cols-1 lg:grid-cols-1 items-center">
 
-              <div className="w-full h-34 rounded-lg flex mt-0 sm:-mt-8 relative mx-auto 
+              <div className="w-full h-34 rounded-lg flex justify-center flex-col space-y-2 mt-0 sm:-mt-8 relative mx-auto 
                               overflow-hidden mb-8">
+
+                  
 
                   <img
                     alt = {t("logo")}
@@ -83,15 +85,27 @@ type ShopProfileCardProps = {
                                lg:object-cover mx-auto w-28 h-28 lg:h-40 lg:w-40'
                     // objectFit = "fill"
                   />
+                   <span className="text-sm sm:hidden text-center font-light tracking-wide  text-gray-600 ">
+
+                      {data && data?.address.street_address}
+
+                  </span>
 
               </div>
 
-              <h3 className="text-sm sm:text-sm lg:text-lg font-semibold mt-0 
-                             lg:mt-8 lg:pt-8  text-center text-heading mb-2">
+              <h3 className="text-lg flex flex-col space-y-4 sm:text-lg w-full lg:text-xl lg:tracking-wide  sm:mt-6 pt-4 font-bold mt-0 
+                             lg:mt-8 lg:pt-8 text-center text-heading mb-2">
                   {data?.name}
+                   <span className="text-sm hidden mt-2 sm:block lg:hidden text-center font-light tracking-wide  text-gray-600">
+
+                      {data && data?.address.street_address}
+
+                  </span>
               </h3>
+
+             
               
-                    <div className=" absolute flex items-center  bottom-2 right-4  ">
+                    <div className=" absolute flex  items-center  bottom-2 right-4  ">
                         {data?.settings?.socials.map((item: any, index: number) => (
                         <a
                             key={index}
@@ -106,6 +120,9 @@ type ShopProfileCardProps = {
                             })}
                         </a>
                         ))}
+                        <div className=''>
+
+                        </div>
                     </div>
                 
             </div>
