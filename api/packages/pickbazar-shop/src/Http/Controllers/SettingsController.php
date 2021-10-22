@@ -93,8 +93,14 @@ class SettingsController extends CoreController
         }else{
             $featured_products=Product::where("is_featured",1)->limit(10)->get();
         }
+        if($location){
+            if(count($shops_ids)>0){
+                $offers=Product::whereIn("shop_id",$shops_ids)->where('is_offer',1)->where("is_featured",1)->get();
+            }
+        }else{
+            $offers=Product::where("is_featured",1)->where('is_offer',1)->limit(10)->get();
+        }
 
-        $offers=Offer::all();
 
         return [
             "logo"=>$logo,
