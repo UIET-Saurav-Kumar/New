@@ -20,6 +20,7 @@ import orderBy from "lodash/orderBy";
 import sum from "lodash/sum";
 import cloneDeep from "lodash/cloneDeep";
 import ProductTypeInput from "./product-type-input";
+import TaxInput from "./tax-input";
 import { useTaxQuery } from "@data/tax/use-all-taxes.query";
 import {
   Type,
@@ -67,6 +68,7 @@ type FormValues = {
   length: string;
   isVariation: boolean;
   variations: Variation[];
+  tax:any;
   variation_options: Product["variation_options"];
   [key: string]: any;
 };
@@ -92,6 +94,7 @@ const defaultValues = {
   width: "",
   height: "",
   length: "",
+  tax:"",
   isVariation: false,
   variations: [],
   variation_options: [],
@@ -167,6 +170,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
             initialValues.variation_options?.length
               ? true
               : false,
+          tax:(initialValues.tax)?JSON.parse(initialValues.tax).id:"",
           productTypeValue: initialValues.product_type
             ? productType.find(
                 (type) => initialValues.product_type === type.value
@@ -202,6 +206,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
       status: values.status,
       unit: values.unit,
       width: values.width,
+      tax:values.tax,
       quantity:
         values?.productTypeValue?.value === ProductType.Simple
           ? values?.quantity

@@ -275,9 +275,9 @@ class MasterProductController extends CoreController
         $data["price"]=(double)$request->price;
         $data["sale_price"]=(double)$request->sale_price;
         $data["quantity"]=(double)$request->quantity;
-        if(isset($request->tax)){
-            $data["tax"]=Tax::find($request->tax);
-        }
+        // if(isset($request->tax)){
+        //     $data["tax"]=Tax::find($request->tax);
+        // }
         $data["max_price"]=NULL;
         $data["min_price"]=NULL;
         $data["is_featured"]=NULL;

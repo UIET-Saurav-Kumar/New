@@ -96,6 +96,19 @@ const OrderList = ({ orders, onPagination }: IProps) => {
       ),
     },
     {
+      title: t("Payment Gateway"),
+      dataIndex: "payment_gateway",
+      key: "payment_gateway",
+      align: alignLeft,
+      render: (payment_gateway:any) => (
+        <span
+          className="whitespace-nowrap font-semibold"
+        >
+          {payment_gateway=="cod"?"Cash On Delivery":payment_gateway}
+        </span>
+      ),
+    },
+    {
       title: t("table:table-item-shipping-address"),
       dataIndex: "shipping_address",
       key: "shipping_address",

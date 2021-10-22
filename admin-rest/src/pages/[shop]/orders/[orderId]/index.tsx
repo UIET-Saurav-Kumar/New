@@ -211,6 +211,10 @@ export default function OrderDetailsPage() {
             <span>{t("common:order-total")}</span>
             <span>{total}</span>
           </div>
+          <div className="flex items-center justify-between text-base text-body">
+            <span>{("Payment Type")}</span>
+            <span >{data?.order?.payment_gateway=="cod"?"Cash On Delivery":data?.order?.payment_gateway}</span>
+          </div>
         </div>
       </div>
 
@@ -230,7 +234,7 @@ export default function OrderDetailsPage() {
             )}
           </div>
         </div>
-
+        
         <div className="w-full sm:w-1/2 sm:ps-8">
           <h3 className="text-heading text-start font-semibold sm:text-end mb-3 pb-2 border-b border-border-200">
             {t("common:shipping-address")}
@@ -244,6 +248,7 @@ export default function OrderDetailsPage() {
             {data?.order?.customer_contact && (
               <span>{data?.order?.customer_contact}</span>
             )}
+            
           </div>
         </div>
       </div>

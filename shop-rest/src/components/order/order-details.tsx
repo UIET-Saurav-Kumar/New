@@ -70,14 +70,24 @@ const OrderDetails = ({ order }: Props) => {
                   {formatAddress(billing_address)}
                 </span>
               </div>
-
-              <div>
+              
+              <div className="mb-4">
                 <span className="text-sm text-heading font-bold mb-2 block">
                   {t("text-billing-address")}
                 </span>
 
                 <span className="text-sm text-body">
                   {formatAddress(billing_address)}
+                </span>
+              </div>
+
+              <div className="mb-4">
+                <span className="text-sm text-heading font-bold mb-2 block">
+                  {t("Payment type")}
+                </span>
+
+                <span className="text-sm text-body">
+                  {order?.payment_gateway=="cod"?"Cash On Delivery":order?.payment_gateway}
                 </span>
               </div>
             </div>

@@ -204,6 +204,10 @@ export default function OrderDetailsPage() {
             <span>{t("common:order-total")}</span>
             <span>{total}</span>
           </div>
+          <div className="flex items-center justify-between text-base text-body">
+            <span>{("Payment Type")}</span>
+            <span >{data?.order?.payment_gateway=="cod"?"Cash On Delivery":data?.order?.payment_gateway}</span>
+          </div>
         </div>
       </div>
 

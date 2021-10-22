@@ -34,6 +34,7 @@ class UserCreateRequest extends FormRequest
             'shop_id' => ['nullable', 'exists:PickBazar\Database\Models\Shop,id'],
             'profile'  => ['array'],
             'address'  => ['array'],
+            "phone_number"=>['required','unique:users']
             // 'shop'  => ['array'],
         ];
     }

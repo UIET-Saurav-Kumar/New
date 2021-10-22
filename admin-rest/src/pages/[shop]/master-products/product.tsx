@@ -17,7 +17,7 @@ export default function Product({product,shopId,masterIds,taxes}:any) {
         const price = document.getElementById("price_"+product.id)?.value as any;
         const sale_price = document.getElementById("sale_price_"+product.id)?.value as any;
         const quantity = document.getElementById("quantity_"+product.id)?.value as any;
-        const tax = document.getElementById("tax_"+product.id)?.value as any;
+        // const tax = document.getElementById("tax_"+product.id)?.value as any;
         if(price&&sale_price){
             createProduct(
                 {
@@ -26,7 +26,7 @@ export default function Product({product,shopId,masterIds,taxes}:any) {
                     master_id:product.id,
                     quantity:quantity,
                     sale_price:sale_price,
-                    tax:tax
+                    // tax:tax
                 },
                 {
                     onSuccess:()=>{
@@ -84,7 +84,7 @@ export default function Product({product,shopId,masterIds,taxes}:any) {
                     />
                     </span>
                 </td>
-                <td className="rc-table-cell text-center" >
+                {/* <td className="rc-table-cell text-center" >
                     <span className="whitespace-nowrap">
                     <select
                         style={{
@@ -112,7 +112,7 @@ export default function Product({product,shopId,masterIds,taxes}:any) {
                             }
                     </select>
                     </span>
-                </td>
+                </td> */}
                 <td className="rc-table-cell text-center" >
                     <div className="space-s-5 inline-flex items-center w-auto">
                         <Button

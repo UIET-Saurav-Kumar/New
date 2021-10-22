@@ -150,6 +150,9 @@ class UserController extends CoreController
 
     public function register(UserCreateRequest $request)
     {
+        // $request->validate([
+        //     "phone_number"=>"required|unique:users"
+        // ]);
         $permissions = [Permission::CUSTOMER];
         if (isset($request->permission)) {
             $permissions[] = isset($request->permission->value) ? $request->permission->value : $request->permission;
