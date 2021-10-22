@@ -38,17 +38,7 @@ class SettingsController extends CoreController
     {
         return $this->repository->first();
     }
-    // customerId,
-    // app_logo,
-    // app_name(
-    //      Feed banners(
-    //          Listed Categories,
-    //          Featured shops near by, Get major discount on major e-stores,
-    //          offers of the day,
-    //          featured products
-    //     )
-    //     categoryimage withId and name
-    // )
+    
     public function homeFeedApi($app_id, Request $request)
     {
         try{
