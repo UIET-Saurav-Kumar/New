@@ -93,6 +93,7 @@ export default function CreateOrUpdateWithdrawForm({ initialValues }: IProps) {
             <Input
               label={("Amount")}
               {...register("amount")}
+              required
               error={t(errors.amount?.message!)}
               variant="outline"
               className="mb-5"
@@ -101,6 +102,7 @@ export default function CreateOrUpdateWithdrawForm({ initialValues }: IProps) {
               label={("Upi Id")}
               {...register("upi_id")}
               error={t(errors.upi_id?.message!)}
+              required
               variant="outline"
               className="mb-5"
             />
