@@ -1099,7 +1099,7 @@ export declare type WithdrawPaginator = {
 
 export declare type CreateWithdrawInput = {
   amount: Scalars["Float"];
-  payment_method?: Maybe<Scalars["String"]>;
+  upi_id?: Maybe<Scalars["String"]>;
   details?: Maybe<Scalars["String"]>;
   note?: Maybe<Scalars["String"]>;
 };
@@ -1133,7 +1133,7 @@ export declare type Withdraw = {
   status?: Maybe<WithdrawStatus>;
   shop_id?: Maybe<Scalars["Int"]>;
   shop?: any;
-  payment_method?: Maybe<Scalars["String"]>;
+  upi_id?: Maybe<Scalars["String"]>;
   details?: Maybe<Scalars["String"]>;
   note?: Maybe<Scalars["String"]>;
   created_at?: Maybe<Scalars["DateTime"]>;

@@ -16,7 +16,7 @@ import { useCreateWithdrawMutation } from "@data/withdraw/use-withdraw-create.mu
 
 type FormValues = {
   amount: number;
-  payment_method: string;
+  upi_id: string;
   details: string;
   note: string;
 };
@@ -47,7 +47,7 @@ export default function CreateOrUpdateWithdrawForm({ initialValues }: IProps) {
     const input = {
       amount: +values.amount,
       details: values.details,
-      payment_method: values.payment_method,
+      upi_id: values.upi_id,
       note: values.note,
     };
 
@@ -98,9 +98,9 @@ export default function CreateOrUpdateWithdrawForm({ initialValues }: IProps) {
               className="mb-5"
             />
             <Input
-              label={("Payment Method")}
-              {...register("payment_method")}
-              error={t(errors.payment_method?.message!)}
+              label={("Upi Id")}
+              {...register("upi_id")}
+              error={t(errors.upi_id?.message!)}
               variant="outline"
               className="mb-5"
             />
