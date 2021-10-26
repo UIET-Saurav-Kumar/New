@@ -1,3 +1,4 @@
+import Logo from "@components/ui/logo";
 import {
   Page,
   Text,
@@ -12,6 +13,7 @@ import usePrice from "@utils/use-price";
 import dayjs from "dayjs";
 
 export default function InvoicePdf({ order }: { order: Order }) {
+
   const { price: subtotal } = usePrice(
     order && {
       amount: order?.amount!,
@@ -41,9 +43,13 @@ export default function InvoicePdf({ order }: { order: Order }) {
     <Document>
       <Page size="A4">
         <View style={styles.container}>
+
+         
           {/* Address */}
           <View style={styles.addressWrapper}>
             <View style={styles.section}>
+            <Logo className='h-10 w-10' />
+            
               <Text style={[styles.addressText, { marginBottom: 20 }]}>
                 Invoice No:
                 <Text style={{ color: "#374151", fontFamily: "Lato Bold" }}>
@@ -61,7 +67,7 @@ export default function InvoicePdf({ order }: { order: Order }) {
               <Text style={styles.addressText}>{order?.customer?.email}</Text>
               <Text style={styles.addressText}>{order?.customer_contact}</Text>
               <Text style={styles.addressText}>
-                {formatAddress(order?.shipping_address as UserAddress)}
+                {formatAddress(order?.shipping_address || order?.billing_address as UserAddress)}
               </Text>
             </View>
 
@@ -75,12 +81,12 @@ export default function InvoicePdf({ order }: { order: Order }) {
                   { color: "#374151", fontFamily: "Lato Bold", fontSize: 12 },
                 ]}
               >
-                Pickbazar
+              <Logo/>
               </Text>
-              <Text style={styles.addressTextRight}>pickbazar@dummy.com</Text>
-              <Text style={styles.addressTextRight}>+123456789</Text>
+              <Text style={styles.addressTextRight}>{order?.billing_address || order?.shipping_address}</Text>
+              <Text style={styles.addressTextRight}>{order?.customer_contact}</Text>
               <Text style={styles.addressTextRight}>
-                21 Jump Street, CA, California
+              {order?.billing_address || order?.shipping_address}
               </Text>
             </View>
           </View>
