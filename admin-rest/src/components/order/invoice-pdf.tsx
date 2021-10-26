@@ -81,6 +81,7 @@ export default function InvoicePdf({ order }: { order: Order }) {
                   { color: "#374151", fontFamily: "Lato Bold", fontSize: 12 },
                 ]}
               >
+                Buylowcal.com
               <Logo/>
               </Text>
               <Text style={styles.addressTextRight}>{order?.billing_address || order?.shipping_address}</Text>
