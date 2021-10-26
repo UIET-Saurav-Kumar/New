@@ -67,7 +67,7 @@ export default function InvoicePdf({ order }: { order: Order }) {
               <Text style={styles.addressText}>{order?.customer?.email}</Text>
               <Text style={styles.addressText}>{order?.customer_contact}</Text>
               <Text style={styles.addressText}>
-                {formatAddress(order?.shipping_address || order?.billing_address as UserAddress)}
+                {formatAddress(order?.shipping_address)}
               </Text>
             </View>
 
@@ -84,10 +84,10 @@ export default function InvoicePdf({ order }: { order: Order }) {
                 Buylowcal.com
               <Logo/>
               </Text>
-              <Text style={styles.addressTextRight}>{order?.billing_address || order?.shipping_address}</Text>
+              <Text style={styles.addressTextRight}>{order?.shipping_address}</Text>
               <Text style={styles.addressTextRight}>{order?.customer_contact}</Text>
               <Text style={styles.addressTextRight}>
-              {order?.billing_address || order?.shipping_address}
+              {order?.shipping_address}
               </Text>
             </View>
           </View>
