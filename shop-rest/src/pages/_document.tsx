@@ -20,6 +20,8 @@ export default class CustomDocument extends Document {
       i18n!.reloadResources(locale);
     }
 
+    const envVariable = `${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`
+
     return (
       <Html>
         
@@ -27,7 +29,7 @@ export default class CustomDocument extends Document {
           {/* Global Site Tag (gtag.js) - Google Analytics */}
           <script
             async
-            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+            src={`https://www.googletagmanager.com/gtag/js?id=${envVariable}`}
           />
           
           <script
@@ -36,7 +38,7 @@ export default class CustomDocument extends Document {
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
+            gtag('config', ${envVariable}, {
               page_path: window.location.pathname,
             });
           `,
