@@ -29,7 +29,7 @@ export default class CustomDocument extends Document {
           {/* Global Site Tag (gtag.js) - Google Analytics */}
           <script
             async
-            src={`https://www.googletagmanager.com/gtag/js?id=${envVariable}`}
+            src={`https://www.googletagmanager.com/gtag/js?id=UA-190495171-1`}
           />
           
           <script
@@ -38,7 +38,7 @@ export default class CustomDocument extends Document {
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', ${envVariable}, {
+            gtag('config', 'UA-190495171-1', {
               page_path: window.location.pathname,
             });
           `,
