@@ -13,6 +13,11 @@ import {
   ProductType,
   Shop,
 } from "@ts-types/generated";
+import {
+  adminOnly,
+  getAuthCredentials,
+  hasAccess,
+} from "@utils/auth-utils";
 import { useIsRTL } from "@utils/locals";
 import Checkbox from "@components/ui/checkbox/checkbox";
 import {useUpdateProductMutation} from "@data/product/offer-status-update.mutation"
@@ -23,6 +28,7 @@ export type IProps = {
 };
 
 const ProductList = ({ products, onPagination }: IProps) => {
+  const { permissions } = getAuthCredentials();
   const { mutate: updateProduct, isLoading: updating } = useUpdateProductMutation();
 
   function checkboxChanged(e:any){
@@ -142,13 +148,14 @@ const ProductList = ({ products, onPagination }: IProps) => {
       align: "center",
       width: 100,
     },
-    {
-      title: "Featured",
+   { 
+     title: "Featured",
       dataIndex: "isfeatured",
       key: "isfeatured",
       align: "center",
       width: 74,
       render: (logo: any, record: any) => (
+        hasAccess(adminOnly, permissions) && ( 
         <>
           <Checkbox
               onChange={checkboxChanged}
@@ -158,7 +165,7 @@ const ProductList = ({ products, onPagination }: IProps) => {
               width={42}
               checked={(record.is_featured==1)?"checked":""}
             />
-        </>
+        </> )
       ),
     },
     {
