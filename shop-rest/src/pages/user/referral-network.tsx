@@ -26,7 +26,7 @@ export default function ReferralNetwork() {
         useLayoutEffect(() => {
           function updateSize() {
             var new_width=(window.innerWidth>=1000)?800:window.innerWidth-10;
-            var new_height=(window.innerWidth>=1000)?800:window.innerWidth-10;
+            var new_height=(window.innerHeight>=3000)?1500:window.innerHeight-10;
             // console.log(new_width,"new_width");
             // console.log(new_height,"new_height");
 
