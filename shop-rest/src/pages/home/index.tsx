@@ -122,9 +122,8 @@ const {
                 <ImageSlider/>
                 <AllCategories/>
                 <FeaturedShops />
-                <AmazonShops />
-                <ProductGrid/>
                 <FeaturedProducts/>
+                <ProductGrid/>
               </>
             )
           } 
