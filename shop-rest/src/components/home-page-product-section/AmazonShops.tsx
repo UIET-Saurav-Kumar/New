@@ -24,9 +24,9 @@ export default function AmazonShops() {
 
 
     return (  
-        <>
+        <div className='hidden'>
 
-            <div id='ecommerce-store' className='hidden flex flex-col mt-8 border-b rounded-t pb-4 bg-gray-50'>
+            <div id='ecommerce-store' className=' flex flex-col mt-8 border-b rounded-t pb-4 bg-gray-50'>
 
                 <div className='flex justify-between  p-2 px-4'>
                     
@@ -83,7 +83,7 @@ export default function AmazonShops() {
                             ))}
                     </div>
 
-               </>
+               </div>
                    
     )
 }
