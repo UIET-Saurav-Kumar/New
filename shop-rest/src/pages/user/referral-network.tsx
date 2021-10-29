@@ -20,64 +20,13 @@ export default function ReferralNetwork() {
     useEffect(()=>{
         console.log(data,"data");
     },[])
-    const showLevel1 = () => {
-        setLevel1(true);
-        setLevel3(false);
-        setLevel2(false);
-        setLevel4(false);
-		setdata1(InvitedUsers.filter( (user) => user.level = '1'))
-			
-	}
-
-    const showLevel2 = () => {
-        setLevel2(true);
-        setLevel3(false);
-        setLevel1(false);
-        setLevel4(false);
-		setdata2(InvitedUsers.filter( (user) => user.level = '2')
-			)
-	}
-
-    const showLevel3 = () => {
-        setLevel3(true);
-        setLevel1(false);
-        setLevel2(false);
-        setLevel4(false);
-		setdata3(InvitedUsers.filter( (user) => user.level = '3')
-			)
-	}
-
-    const showLevel4 = () => {
-        setLevel4(true);
-        setLevel3(false);
-        setLevel1(false);
-        setLevel2(false);
-    
-		setdata4(InvitedUsers.filter( (user) => user.level = '4')
-			)
-	}
-
-    const[data1, setdata1] = useState([]);
-    const[data2, setdata2] = useState([]);
-    const[data3, setdata3 ]= useState([]);
-    const[data4, setdata4] = useState([]);
-
-    const[level1, setLevel1] = useState(false);
-    const[level2, setLevel2] = useState(false);
-    const[level3, setLevel3 ]= useState(false);
-    const[level4, setLevel4] = useState(false);
-
-
-    useEffect(() => {
-      setLevel1(true);
-    }, [])
-
+  
     function useWindowSize() {
         const [size, setSize] = useState([0, 0]);
         useLayoutEffect(() => {
           function updateSize() {
             var new_width=(window.innerWidth>=1000)?800:window.innerWidth-10;
-            var new_height=window.innerHeight;
+            var new_height=(window.innerWidth>=1000)?800:window.innerWidth-10;
             // console.log(new_width,"new_width");
             // console.log(new_height,"new_height");
 
