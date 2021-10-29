@@ -98,7 +98,7 @@ const RegistrationForm = () => {
 
   return (
     <>
-    <h1 className='text-center text-xl  font-md text-gray-600 '>{"Shop License"}</h1>
+    <h1 className='text-center text-xl  font-md text-gray-600 '>{"Shop Registeration Form"}</h1>
     {
       // (!isRegistered)?
       (
