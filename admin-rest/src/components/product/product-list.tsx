@@ -13,11 +13,7 @@ import {
   ProductType,
   Shop,
 } from "@ts-types/generated";
-import {
-  adminOnly,
-  getAuthCredentials,
-  hasAccess,
-} from "@utils/auth-utils";
+
 import { useIsRTL } from "@utils/locals";
 import Checkbox from "@components/ui/checkbox/checkbox";
 import {useUpdateProductMutation} from "@data/product/offer-status-update.mutation"
