@@ -82,13 +82,15 @@ const ShopPage = ({ data }: any) => {
                                   <ShopProfileCard data={data} />
                                 </div>
                                 
-                                <img
+                                <div className='flex w-full'>
+                                  <img
                                   alt={t("heading")}
                                   src={data?.cover_image?.original! ?? "/product-placeholder.svg"}
-                                  className='h-full w-full object-fill lg:object-fill'
+                                  className='h-full w-full object-fill'
                                   // layout="fill"
                                   // objectFit="contain"
-                                />
+                                  /> 
+                              </div>
           
                             </div>
                             
