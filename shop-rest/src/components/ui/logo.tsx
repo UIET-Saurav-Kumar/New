@@ -1,36 +1,45 @@
+
 import Image from "next/image";
 import Link from "@components/ui/link";
 import cn from "classnames";
 import { siteSettings } from "@settings/site.settings";
 import { useSettings } from "@contexts/settings.context";
+import Buylowcal from "@components/landing-page/buylowcal-home";
 
 const Logo: React.FC<React.AnchorHTMLAttributes<{}>> = ({
+
   className,
   ...props
 }) => {
   const { logo, siteTitle } = useSettings();
+
   return (
+
     <Link
       href={siteSettings.logo.href}
-      className={cn("inline-flex", className)}
+      // className={cn("inline-flex", className)}
+      className='flex'
       {...props}
     >
-      <span
-        className="overflow-hidden relative z-10"
+      {/* <span
+        className="overflow-hidden w-10 relative z-10"
         style={{
           width: siteSettings.logo.width,
           height: siteSettings.logo.height,
         }}
-      >
+      > */}
+      <div className='relative z-10 w-10 h-10 lg:w-12 lg:h-12 overflow-hidden'>
         <Image
-          src={ siteSettings.logo.url}
-          alt={siteTitle ?? siteSettings.logo.alt}
+          src='/transparent-logo.png'
+          alt={'Buylowcal.com'}
           layout="fill"
           objectFit="contain"
           loading="eager"
-     
         />
-      </span>
+        </div>
+
+        {/* <img src={ siteSettings.logo.url} className='h-10 w-10' /> */}
+      {/* </span> */}
     </Link>
   );
 };
