@@ -102,7 +102,7 @@ export default function HeaderMiddle({children,
                {/* searchbar  */}
                <div className='  hidden lg:flex justify-around lg:justify-between p-0 lg:py-4 w-full px-4'>
 
-                    <div className = ' hidden lg:block px-0 mx-0 p-0 m-0  ' >
+                    <div className = ' hidden lg:block px-0 mx-0 p-0 m-0' >
 
                         <Logo className=" mx-0 px-0 " />       
                                           
@@ -169,9 +169,11 @@ export default function HeaderMiddle({children,
 
                    <div className='flex justify-between  w-full  items-center  lg:hidden xl:hidden 2xl:hidden'>
 
-                        <div className='block px-0  '>  
-                           <Logo className='mx-0  px-0'/> 
-                        </div>
+                          {/* <div className = ' hidden lg:block px-0 mx-0 p-0 m-0' > */}
+
+                        <Logo className=" mx-0 px-0 " />       
+                                          
+                    {/* </div> */}
 
                        <div className='flex items-center  '>
                                <span>  
@@ -201,9 +203,9 @@ export default function HeaderMiddle({children,
                        ) : (
                            <div className='flex justify-between  w-full  items-center  lg:hidden xl:hidden 2xl:hidden'>
 
-                                <div className='block px-0 -ml-10 sm:-ml-6  '> 
+                                {/* <div className='block px-0 ml-10 sm:-ml-6  '>  */}
                                     <Logo className='mx-0  px-0'/>
-                                 </div>
+                                 {/* </div> */}
 
                                 <div className='flex items-center '>
 
