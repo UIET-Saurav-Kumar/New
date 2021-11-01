@@ -224,46 +224,57 @@
 }
 
 .hdpi.pac-logo:after{
-  background-image:none!important;
+  /* background-image:none!important; */
+  background: #000;
 }
+
 .pac-logo:after{
-  background-image:none!important;
+  background-image:url('/search.png');
+background-color: #000;
 }
+
 .css-tlfecz-indicatorContainer{
   display:none!important;
+  background: #000;
 }
+
 .css-1hb7zxy-IndicatorsContainer{
   display:none!important;
+  background-color: #000;
 }
 
 .css-1pahdxg-control{
-
   border-color: white!important;
   border-radius: 1px!important;
   border-style: solid!important;
   border-width: 1px!important;
   box-shadow: 0 0 0 1px #449E7D!important;
-  height: 54px!important;
+  height: 47px!important;
   border-radius: 0px!important;
   border-left: none;
-
+  background-color: #000;
 }
+
 .css-yk16xz-control{
   height: 55px!important;
   border-top-left-radius: 8px!important;
   border-bottom-left-radius: 8px!important;
-  border-top-right-radius: 0px!important;
-  
+  background-color: #43A093;
+  border-top-right-radius: 8px!important;
+  border-bottom-right-radius: 8px!important;
+  background-color: #000;
 }
+
+  .css-26l3qy-menu{
+    position: fixed;
+    z-index: 1000;
+  }
 
 @media (min-width: 244px) {
 
   .css-yk16xz-control{
-
     height: 40px!important;
-
   }
-
 
  }
 
@@ -377,8 +388,15 @@ svg.custom path.link {
     .css-yk16xz-control{
       border-top-left-radius: 0px!important;
       border-bottom-left-radius: 0px!important;
+    
 
     }
   
   
    }
+   @media screen and (max-width: 767px){   
+    #image-slider{      
+        content:url("/banner7.jpeg");
+        object-fit: cover;
+    } 
+}
