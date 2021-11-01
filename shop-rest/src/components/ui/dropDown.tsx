@@ -8,6 +8,7 @@ import { useLocation } from "@contexts/location/location.context";
 import { useCreateLogMutation } from "@data/log/use-create-log.mutation";
 
 export default function DropDown({getLoc}:{getLoc:any}){
+
   const [inputValue,setInputValue] = useState("");
   const router = useRouter();
   const {getLocation} =useLocation()
@@ -31,6 +32,8 @@ export default function DropDown({getLoc}:{getLoc:any}){
      
       return data;
   };
+
+
   function getSearch(){
     var value;
     if(router.query.text){
@@ -76,20 +79,24 @@ export default function DropDown({getLoc}:{getLoc:any}){
       },
     );
   }
+  
   function hasLocation():boolean{
     if(!getLocation?.formattedAddress){  
       return false
     }
     return true
   }
+
   function handleInputChange(newValue: string){
     return newValue;
   };
+
   function clear(){
       window.localStorage.removeItem("search");
       setInputValue("")
       changeRoute()
   }
+
   function changeRoute(e:any=""){
     if(!hasLocation()){
       getLoc();
@@ -104,9 +111,9 @@ export default function DropDown({getLoc}:{getLoc:any}){
   }
 
     return (
-        <div  className='flex w-full '>
+        <div  className='flex w-full'>
 
-          <div className='w-full  '>
+          <div className='w-full relative'>
             
               <AsyncSelect
                   cacheOptions
@@ -115,19 +122,19 @@ export default function DropDown({getLoc}:{getLoc:any}){
                   value={inputValue}
                   // defaultOptions={loadOptions}
                   onInputChange={handleInputChange}
-                  placeholder="Search | Category | Shops"
+                  // placeholder="Search | Category | Shops"
                   onChange={optionSelected}
-             
-                  
+                 
                 />
+                  <SearchIcon className=" absolute right-3 top-3 lg:top-4  text-gray-400 w-4 h-4 me-2.5" />
           </div>
           
           <div>
-              <button onClick={clear} className="h-10 px-4 lg:h-12 xl:h-12 xl:px-8 flex items-center rounded-lg rounded-ts-none rounded-bs-none bg-accent 
+              {/* <button onClick={clear} className="h-10 px-4 lg:h-12 xl:h-12 xl:px-8 flex items-center rounded-lg rounded-ts-none rounded-bs-none bg-accent 
                                                 text-light font-semibold transition-colors duration-200 focus:outline-none hover:bg-accent-hover focus:bg-accent-hover">
                                                   
                   <SearchIcon className="w-4 h-4 me-2.5" />
-              </button>
+              </button> */}
           </div>
         </div>
     );
