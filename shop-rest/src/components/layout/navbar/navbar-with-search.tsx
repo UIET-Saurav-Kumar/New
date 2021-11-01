@@ -1,3 +1,4 @@
+
 import { useRef } from "react";
 import Link from "@components/ui/link";
 import cn from "classnames";
@@ -12,6 +13,9 @@ import { ROUTES } from "@utils/routes";
 import { useTypesQuery } from "@data/type/use-types.query";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
+import DropDown from "@components/ui/dropDown";
+
+
 
 const AuthorizedMenu = dynamic(
   () => import("@components/layout/navbar/authorized-menu"),
@@ -41,7 +45,7 @@ const NavbarWithSearch = () => {
   return (
     <header
       ref={navbarRef}
-      className="site-header-with-search h-14 md:h-16 lg:h-auto"
+      className=" flex flex-col site-header-with-search h-14 md:h-16 lg:h-auto"
     >
       <nav
         className={cn(
@@ -54,15 +58,55 @@ const NavbarWithSearch = () => {
           }
         )}
       >
-        {displayMobileSearch ? (
-          <div className="w-full">
-            <Search label={t("text-search-label")} variant="minimal" />
+        {!displayMobileSearch ? (
+          <div className="w-full flex space-x-6 items-center  justify-between">
+             <Logo className="mx-auto  bg-black border  p-0 lg:mx-0" />
+            {/* <Search label={t("text-search-label")} variant="minimal" /> */}
+            <DropDown/>
+            <ul className="hidden lg:flex items-center flex-shrink-0 space-s-10">
+              {isAuthorize ? (
+                <li key="track-orders">
+                  <Link
+                    href={ROUTES.ORDERS}
+                    className="font-semibold text-heading flex items-center transition duration-200 no-underline hover:text-accent focus:text-accent"
+                  >
+                    {t("nav-menu-track-order")}
+                  </Link>
+                </li>
+              ) : null
+              }
+
+              {siteSettings.headerLinks.map(({ href, label, icon }) => (
+                <li key={`${href}${label}`}>
+                  <Link
+                    href={href}
+                    className="font-semibold text-heading flex items-center transition duration-200 no-underline hover:text-accent focus:text-accent"
+                  >
+                    {icon && <span className="me-2">{icon}</span>}
+                    {t(label)}
+                  </Link>
+                </li>
+              ))}
+              
+            </ul>
+
+            {/* <h1>gfd</h1> */}
+          <div className=' flex justify-end  ml-10 space-x-4'>  
+             {isAuthorize ? (
+                
+                  <AuthorizedMenu />
+                
+              ) : (
+               
+                  <JoinButton />
+                
+              )} </div>
           </div>
         ) : (
           <>
-            <Logo className="mx-auto lg:mx-0" />
-            <ProductTypeMenu className="ms-10 me-auto hidden xl:block" />
-            <div className="hidden lg:block w-full">
+            <Logo className="mx-auto border bg-black lg:mx-0" />
+            {/* <ProductTypeMenu className="ms-10 me-auto hidden xl:block" /> */}
+            <div className="block w-full">
               <div
                 className={cn(
                   "w-full xl:w-11/12 2xl:w-10/12 mx-auto px-10 overflow-hidden",
@@ -72,10 +116,11 @@ const NavbarWithSearch = () => {
                   }
                 )}
               >
-                <Search label={t("text-search-label")} variant="minimal" />
+                {/* <Search label={t("text-search-label")} variant="minimal" /> */}
+                <DropDown/>
               </div>
             </div>
-            <ul className="hidden lg:flex items-center flex-shrink-0 space-s-10">
+            <ul className="flex items-center flex-shrink-0 space-s-10">
               {isAuthorize ? (
                 <li key="track-orders">
                   <Link
@@ -110,8 +155,12 @@ const NavbarWithSearch = () => {
           </>
         )}
       </nav>
+      <DropDown/>
     </header>
+    
+    
   );
 };
 
 export default NavbarWithSearch;
+
