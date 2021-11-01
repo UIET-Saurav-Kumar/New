@@ -23,6 +23,7 @@ import WebShopBanner from "./web-shop-banner";
 import { useModalAction } from "@components/ui/modal/modal.context"
 import CategoryCard from "@components/ui/category-card";
 import AllCategories from "@components/home-page-product-section/AllCategories";
+import Layout from "@components/layout/layout";
 
 
 
@@ -51,7 +52,7 @@ const ShopPage = ({ data }: any) => {
 
     <>
 
-       <Navbar label='' />
+      
 
           <div className="bg-white lg:bg-gray-100 hidden lg:flex flex-col md:flex-row md:justify-between  
                             md:items-start md:p-8" >
@@ -183,5 +184,5 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   }
 };
 
-// ShopPage.Layout = Layout;
+ShopPage.Layout = Layout;
 export default ShopPage;
