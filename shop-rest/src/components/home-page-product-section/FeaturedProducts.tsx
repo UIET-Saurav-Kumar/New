@@ -31,7 +31,7 @@ export default function featuredProducts({}) {
 
     // data?.featureProducts?.data = []
 
-    const typeId = [1,2,3,4,5,6,7,8,9,10,11,12]
+    const typeId = [1,2,3,4,5,6,7,8,9,10,11,14,15,16,18,19,20,21,22]
 
     const productTypes =  data?.featureProducts.data.filter(function(product){
         return product.type_id == typeId ? product : '';
@@ -84,8 +84,36 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
     return product.type_id == 11 ? product : '';
  })
 
+ const hotelsresortsArray =  data?.featureProducts.data.filter(function(product){
+    return product.type_id == 14 ? product : '';
+ })
+
+ const fruitsvegetablesArray =  data?.featureProducts.data.filter(function(product){
+    return product.type_id == 15 ? product : '';
+ })
+
+ const pharmacyArray =  data?.featureProducts.data.filter(function(product){
+    return product.type_id == 16 ? product : '';
+ })
+
  const beveragesArray =  data?.featureProducts.data.filter(function(product){
     return product.type_id == 18 ? product : '';
+ })
+
+ const healthproductsArray =  data?.featureProducts.data.filter(function(product){
+    return product.type_id == 19 ? product : '';
+ })
+
+ const dairyfarmArray =  data?.featureProducts.data.filter(function(product){
+    return product.type_id == 20 ? product : '';
+ })
+
+ const meatArray =  data?.featureProducts.data.filter(function(product){
+    return product.type_id == 21 ? product : '';
+ })
+
+ const electronicsArray =  data?.featureProducts.data.filter(function(product){
+    return product.type_id == 22 ? product : '';
  })
 
    console.log('grocery Array',groceryArray);
@@ -194,6 +222,132 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                     ))}
 
                 </div>
+            </div> 
+
+            <div className={`${electronicsArray?.length  ? 'block' : 'hidden'} flex flex-col`}>
+
+                  <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
+                       Electrical Appliances
+                  </h3>
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
+                    
+                        {electronicsArray?.map((product :any) => (
+                            <>    
+                                <motion.div key={product.id}>
+                                    {renderProductCard(product) }
+                                </motion.div>
+                            </> 
+                        ))}
+
+                    </div>
+            </div> 
+
+            <div className={`${meatArray?.length  ? 'block' : 'hidden'} flex flex-col`}>
+
+                  <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
+                       Fresh Meat
+                  </h3>
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
+                    
+                        {meatArray?.map((product :any) => (
+                            <>    
+                                <motion.div key={product.id}>
+                                    {renderProductCard(product) }
+                                </motion.div>
+                            </> 
+                        ))}
+
+                    </div>
+            </div> 
+
+            <div className={`${dairyfarmArray?.length  ? 'block' : 'hidden'} flex flex-col`}>
+
+                  <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
+                       Dairy & Farm
+                  </h3>
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
+                    
+                        {dairyfarmArray?.map((product :any) => (
+                            <>    
+                                <motion.div key={product.id}>
+                                    {renderProductCard(product) }
+                                </motion.div>
+                            </> 
+                        ))}
+
+                    </div>
+            </div> 
+
+            <div className={`${healthproductsArray?.length  ? 'block' : 'hidden'} flex flex-col`}>
+
+                  <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
+                       Health Products
+                  </h3>
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
+                    
+                        {healthproductsArray?.map((product :any) => (
+                            <>    
+                                <motion.div key={product.id}>
+                                    {renderProductCard(product) }
+                                </motion.div>
+                            </> 
+                        ))}
+
+                    </div>
+            </div> 
+
+            <div className={`${pharmacyArray?.length  ? 'block' : 'hidden'} flex flex-col`}>
+
+                  <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
+                       Pharmacy & Medicines
+                  </h3>
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
+                    
+                        {pharmacyArray?.map((product :any) => (
+                            <>    
+                                <motion.div key={product.id}>
+                                    {renderProductCard(product) }
+                                </motion.div>
+                            </> 
+                        ))}
+
+                    </div>
+            </div> 
+
+            <div className={`${fruitsvegetablesArray?.length  ? 'block' : 'hidden'} flex flex-col`}>
+
+                  <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
+                       Fruits & Vegetables
+                  </h3>
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
+                    
+                        {fruitsvegetablesArray?.map((product :any) => (
+                            <>    
+                                <motion.div key={product.id}>
+                                    {renderProductCard(product) }
+                                </motion.div>
+                            </> 
+                        ))}
+
+                    </div>
+            </div> 
+
+            <div className={`${hotelsresortsArray?.length  ? 'block' : 'hidden'} flex flex-col`}>
+
+                  <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
+                       Hotel & Resorts
+                  </h3>
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
+                    
+                        {hotelsresortsArray?.map((product :any) => (
+                            <>    
+                                <motion.div key={product.id}>
+                                    {renderProductCard(product) }
+                                </motion.div>
+                            </> 
+                        ))}
+
+                    </div>
             </div> 
             
             
