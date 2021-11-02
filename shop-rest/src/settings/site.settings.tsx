@@ -8,18 +8,18 @@ import { ROUTES } from "@utils/routes";
 
 export const siteSettings = {
 
-  name: "PickBazar",
+  name: "BuyLowcal",
   description: "",
   logo: {
     url: "/transparent-logo.png",
-    alt: "PickBazar",
+    alt: "buylowcal.com",
     href: "/home",
     width: 128,
     height: 52,
   },
 
   defaultLanguage: "en",
-  currencyCode: "USD",
+  currencyCode: "INR",
   product: {
     placeholderImage: "/product-placeholder.svg",
     cardMaps: {
