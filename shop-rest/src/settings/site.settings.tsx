@@ -9,7 +9,7 @@ import { ROUTES } from "@utils/routes";
 export const siteSettings = {
 
   name: "BuyLowcal",
-  description: "",
+  description: "BuyLowcal is a technology platform that connects the nearest local shops with consumers. Consumer Intelligence and Behaviour Analytics",
   logo: {
     url: "/transparent-logo.png",
     alt: "buylowcal.com",
