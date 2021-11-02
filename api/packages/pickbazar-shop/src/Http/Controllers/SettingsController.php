@@ -78,17 +78,17 @@ class SettingsController extends CoreController
         // Featured Products
         if($location){
             if(count($shops_ids)>0){
-                $featured_products=Product::whereIn("shop_id",$shops_ids)->where("is_featured",1)->limit(10)->get();
+                $featured_products=Product::whereIn("shop_id",$shops_ids)->where("is_featured",1)->orderBy('type_id', 'asc')->get();
             }
         }else{
-            $featured_products=Product::where("is_featured",1)->limit(10)->get();
+            $featured_products=Product::where("is_featured",1)->orderBy('type_id', 'asc')->get();
         }
         if($location){
             if(count($shops_ids)>0){
-                $offers=Product::whereIn("shop_id",$shops_ids)->where('is_offer',1)->where("is_featured",1)->get();
+                $offers=Product::whereIn("shop_id",$shops_ids)->where('is_offer',1)->where("is_featured",1)->orderBy('type_id', 'asc')->get();
             }
         }else{
-            $offers=Product::where("is_featured",1)->where('is_offer',1)->limit(10)->get();
+            $offers=Product::where("is_featured",1)->where('is_offer',1)->orderBy('type_id', 'asc')->get();
         }
 
 
