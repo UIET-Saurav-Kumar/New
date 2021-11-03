@@ -169,7 +169,7 @@ const Withdraw = () => {
         {data?.withdraw?.details && (
           <Card className="flex flex-col">
             <div className="mb-2 text-heading font-semibold text-sm">
-              <span>{t("common:text-details")} :</span>
+              <span>{t("common:Phone Number")} :</span>
             </div>
 
             <span className="text-body text-sm">{data?.withdraw?.details}</span>
