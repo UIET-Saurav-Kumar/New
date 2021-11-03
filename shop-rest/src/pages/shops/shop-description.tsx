@@ -59,9 +59,7 @@ export default function ShopDescription({data}) {
                   </span>
 
                   <span className="text-sm font-light tracking-wide text-body">
-                    {data?.settings?.contact
-                      ? t("77430-42380")
-                      : t("77430-42380")}
+                    {data?.settings?.contact}
                   </span>
                   
                   {/* <div className='flex 2xl:hidden '> 
