@@ -84,6 +84,8 @@ const Withdraw = () => {
     });
   }
 
+  console.log('withdraw',data?.withdraw)
+
   if (loading) return <Loader text={t("common:text-loading")} />;
   if (error) return <ErrorMessage message={error.message} />;
 
@@ -138,11 +140,11 @@ const Withdraw = () => {
 
             <div className="flex items-center mb-2">
               <div className="w-4/12 me-5 flex justify-between text-body text-sm flex-shrink-0">
-                <span>{t("common:text-payment-method")}</span>
+                <span>{t("UPI ID")}</span>
                 <span>:</span>
               </div>
               <span className="text-heading text-sm font-semibold w-full">
-                {data?.withdraw?.payment_method ?? "N/A"}
+                {data?.withdraw?.upi_id ?? "N/A"}
               </span>
             </div>
 
