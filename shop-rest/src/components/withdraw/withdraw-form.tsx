@@ -18,6 +18,7 @@ type FormValues = {
   amount: number;
   upi_id: string;
   details: string;
+  phone_number: number;
   note: string;
 };
 
@@ -47,6 +48,7 @@ export default function CreateOrUpdateWithdrawForm({ initialValues }: IProps) {
     const input = {
       amount: +values.amount,
       details: values.details,
+      phone_number: values.phone_number,
       upi_id: values.upi_id,
       note: values.note,
     };
@@ -107,7 +109,16 @@ export default function CreateOrUpdateWithdrawForm({ initialValues }: IProps) {
               className="mb-5"
             />
 
-            <TextArea
+             <Input
+              label={("Phone Number")}
+              {...register("phone_number")}
+              required
+              error={t(errors.phone_number?.message!)}
+              variant="outline"
+              className="mb-5"
+            />
+
+            {/* <TextArea
               label={("Details")}
               {...register("details")}
               variant="outline"
@@ -118,7 +129,7 @@ export default function CreateOrUpdateWithdrawForm({ initialValues }: IProps) {
               {...register("note")}
               variant="outline"
               className="mb-5"
-            />
+            /> */}
           </Card>
         </div>
         <div className="mb-4 text-end">

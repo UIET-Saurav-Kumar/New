@@ -166,13 +166,13 @@ const Withdraw = () => {
       </Card>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5">
-        {data?.withdraw?.details && (
+        {data?.withdraw?.phone_number && (
           <Card className="flex flex-col">
             <div className="mb-2 text-heading font-semibold text-sm">
               <span>{t("common:Phone Number")} :</span>
             </div>
 
-            <span className="text-body text-sm">{data?.withdraw?.details}</span>
+            <span className="text-body text-sm">{data?.withdraw?.phone_number}</span>
           </Card>
         )}
 

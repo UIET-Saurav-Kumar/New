@@ -891,6 +891,7 @@ export declare type Withdraw = {
   shop_id?: Maybe<Scalars["Int"]>;
   shop?: Maybe<Shop>;
   payment_method?: Maybe<Scalars["String"]>;
+  phone_number?: Maybe<Scalars["Int"]>;
   details?: Maybe<Scalars["String"]>;
   note?: Maybe<Scalars["String"]>;
   created_at?: Maybe<Scalars["DateTime"]>;
