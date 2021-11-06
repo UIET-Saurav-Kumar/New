@@ -33,6 +33,8 @@ export default function WithdrawsPage() {
   if (loading) return <Loader text={t("common:text-loading")} />;
   if (error) return <ErrorMessage message={error.message} />;
 
+  
+
   function handlePagination(current: any) {
     setPage(current);
   }

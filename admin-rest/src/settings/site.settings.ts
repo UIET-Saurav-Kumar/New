@@ -2,20 +2,22 @@ import { adminAndOwnerOnly, adminOwnerAndStaffOnly } from "@utils/auth-utils";
 import { ROUTES } from "@utils/routes";
 
 export const siteSettings = {
-  name: "PickBazar",
-  description: "",
+  name: "BuyLowcal",
+  description: "BuyLowcal is a technology platform that connects the nearest local shops with consumers. Consumer Intelligence and Behaviour Analytics",
   logo: {
-    url: "/logo.svg",
-    alt: "PickBazar",
-    href: "/",
+    url: "/transparent-logo.png",
+    alt: "buylowcal.com",
+    href: "/home",
     width: 128,
-    height: 40,
+    height: 52,
   },
   defaultLanguage: "en",
   author: {
-    name: "RedQ, Inc.",
-    websiteUrl: "https://redq.io",
-    address: "",
+    name: "Buylowcal",
+    websiteUrl: "https://buylowcal.com",
+    address: `Lowcal Ventures Pvt Ltd
+    Plot No: 130 | Phase-1 | Industrial Area | Chandigarh`,
+    phone: "+91 77430 42380",
   },
   headerLinks: [],
   authorizedLinks: [
@@ -28,7 +30,7 @@ export const siteSettings = {
       labelTransKey: "authorized-nav-item-logout",
     },
   ],
-  currencyCode: "USD",
+  currencyCode: "INR",
   sidebarLinks: {
     admin: [
       {
@@ -90,6 +92,16 @@ export const siteSettings = {
         href: ROUTES.ORDERS,
         label: "sidebar-nav-item-orders",
         icon: "OrdersIcon",
+      },
+      {
+        href: ROUTES.DELIVERY,
+        label: "Delivery",
+        icon: "ShippingsIcon",
+      },
+      {
+        href: ROUTES.DELIVERY_COST,
+        label: "Delivery Cost",
+        icon: "ShippingsIcon",
       },
       {
         href: ROUTES.ORDER_STATUS,
@@ -177,6 +189,12 @@ export const siteSettings = {
         href: (shop: string) => `/${shop}${ROUTES.ORDERS}`,
         label: "sidebar-nav-item-orders",
         icon: "OrdersIcon",
+        permissions: adminOwnerAndStaffOnly,
+      },
+      {
+        href: (shop: string) => `/${shop}${ROUTES.DELIVERY}`,
+        label: "sidebar-nav-item-delivery",
+        icon: "ShippingIcon",
         permissions: adminOwnerAndStaffOnly,
       },
       {

@@ -243,6 +243,13 @@ export enum SortOrder {
   /** Sort records in descending order. */
   Desc = "desc",
 }
+
+export enum SortDeliveries {
+  /** Sort records in ascending order. */
+  Asc = "asc",
+  /** Sort records in descending order. */
+  Desc = "desc",
+}
 /** A paginated list of Product items. */
 export declare type ProductPaginator = {
   /** Pagination information about the list of items. */
