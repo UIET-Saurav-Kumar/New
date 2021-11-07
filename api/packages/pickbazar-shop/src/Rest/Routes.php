@@ -39,6 +39,8 @@ Route::post('/social-login-token', 'PickBazar\Http\Controllers\UserController@so
 Route::get('/signup-offer','PickBazar\Http\Controllers\SignupOfferController@show');
 Route::post('/signup-offer','PickBazar\Http\Controllers\SignupOfferController@store');
 
+Route::post('/cart-list','PickBazar\Http\Controllers\CartController@store');
+
 Route::apiResource('products', ProductController::class, [
     'only' => ['index', 'show']
 ]);
