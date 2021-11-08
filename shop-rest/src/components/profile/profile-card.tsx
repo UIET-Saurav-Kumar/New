@@ -82,7 +82,7 @@ type ShopProfileCardProps = {
                     src = {data?.logo?.original! ?? "/product-placeholder.svg"}
                     // layout="fill"
                     className='object-contain sm:object-contain  rounded md:object-contain 
-                               lg:object-cover mx-auto w-28 h-28 lg:h-40 lg:w-40'
+                               lg:object-contain mx-auto w-28 h-28 lg:h-40 lg:w-40'
                     // objectFit = "fill"
                   />
                    <span className="text-sm sm:hidden text-center font-light tracking-wide  text-gray-600 ">
