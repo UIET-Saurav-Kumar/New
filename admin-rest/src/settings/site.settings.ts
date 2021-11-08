@@ -93,16 +93,16 @@ export const siteSettings = {
         label: "sidebar-nav-item-orders",
         icon: "OrdersIcon",
       },
-      {
-        href: ROUTES.DELIVERY,
-        label: "Delivery",
-        icon: "ShippingsIcon",
-      },
-      {
-        href: ROUTES.DELIVERY_COST,
-        label: "Delivery Cost",
-        icon: "ShippingsIcon",
-      },
+      // {
+      //   href: ROUTES.DELIVERY,
+      //   label: "Delivery",
+      //   icon: "ShippingsIcon",
+      // },
+      // {
+      //   href: ROUTES.DELIVERY_COST,
+      //   label: "Delivery Cost",
+      //   icon: "ShippingsIcon",
+      // },
       {
         href: ROUTES.ORDER_STATUS,
         label: "sidebar-nav-item-order-status",
@@ -191,12 +191,12 @@ export const siteSettings = {
         icon: "OrdersIcon",
         permissions: adminOwnerAndStaffOnly,
       },
-      {
-        href: (shop: string) => `/${shop}${ROUTES.DELIVERY}`,
-        label: "sidebar-nav-item-delivery",
-        icon: "ShippingIcon",
-        permissions: adminOwnerAndStaffOnly,
-      },
+      // {
+      //   href: (shop: string) => `/${shop}${ROUTES.DELIVERY}`,
+      //   label: "sidebar-nav-item-delivery",
+      //   icon: "ShippingIcon",
+      //   permissions: adminOwnerAndStaffOnly,
+      // },
       {
         href: (shop: string) => `/${shop}${ROUTES.STAFFS}`,
         label: "sidebar-nav-item-staffs",
