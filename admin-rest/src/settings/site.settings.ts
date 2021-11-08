@@ -7,7 +7,7 @@ export const siteSettings = {
   logo: {
     url: "/transparent-logo.png",
     alt: "buylowcal.com",
-    href: "/home",
+    href: "/",
     width: 128,
     height: 52,
   },

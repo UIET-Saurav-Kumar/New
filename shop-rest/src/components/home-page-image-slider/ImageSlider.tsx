@@ -42,6 +42,18 @@ export default function ImageSlider() {
       
       <Slider {...settings}>
 
+
+         <div>
+          <div className="card">
+
+          <img className='rounded-md  w-full  h-40 lg:w-full xl+:h-80 md:h-64 lg:h-72  2xl:h-full 2xl:w-full object-cover object  space-x-9 '   
+               src={'/banner/restaurant.jpg'} 
+               />
+
+          </div>
+        </div>
+
+
       
 
           <div className="card h-72">
@@ -111,16 +123,7 @@ export default function ImageSlider() {
         </div>
 
 
-        {/* <div>
-          <div className="card">
-
-          <img className='rounded-md  w-full  h-40 lg:w-full xl+:h-80 md:h-64 lg:h-72  2xl:h-full 2xl:w-full object-cover object  space-x-9 '   
-               src={'/banner/gyms.jpeg'} 
-               />
-
-          </div>
-        </div> */}
-
+       
        
       </Slider>
       </div>
