@@ -88,6 +88,8 @@ class ShopController extends CoreController
             $shops_ids=ShopRepository::getSortedShops($location,$shops_ids);
             foreach($shops_ids as $id){
                 $single_shop=Shop::find($id);
+                $single_shop->cover_original = $single_shop->cover_image['original'];
+                $single_shop->logo_original = $single_shop->cover_image['original'];
                 if($single_shop){
                     array_push($shops_array,$single_shop);
                 }
@@ -131,8 +133,6 @@ class ShopController extends CoreController
         return $ids;
     }
     
-
-
     /**
      * Store a newly created resource in storage.
      *
