@@ -115,10 +115,10 @@ const ProductList = ({ products, onPagination }: IProps) => {
       key: "price",
       align: alignRight,
       width: 100,
-      render: (value: number, record: Product) => {
+      render: (value: Product, record: Product) => {
         if (record?.product_type === ProductType.Variable) {
           const { price: max_price } = usePrice({
-            amount: record?.max_price as number,
+            amount: record?.sale_price as number,
           });
           const { price: min_price } = usePrice({
             amount: record?.min_price as number,
@@ -130,12 +130,15 @@ const ProductList = ({ products, onPagination }: IProps) => {
             >{`${min_price} - ${max_price}`}</span>
           );
         } else {
-          const { price } = usePrice({
-            amount: value,
+          const { price: sale_price } = usePrice({
+            amount: record.sale_price as number,
+          });
+          const { price: price } = usePrice({
+            amount: record.price as number,
           });
           return (
-            <span className="whitespace-nowrap" title={price}>
-              {price}
+            <span className="flex flex-col whitespace-nowrap" title={sale_price}>
+              {sale_price} <del>{price}</del>
             </span>
           );
         }
