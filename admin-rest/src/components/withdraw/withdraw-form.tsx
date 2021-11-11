@@ -17,10 +17,11 @@ import { useCreateWithdrawMutation } from "@data/withdraw/use-withdraw-create.mu
 
 type FormValues = {
   amount: number;
-  upi_id: string;
+  payment_method: string;
   details: string;
-  phone_number: number;
   note: string;
+  upi_id: string;
+  phone_number: string;
 };
 
 type IProps = {
@@ -36,7 +37,6 @@ export default function CreateOrUpdateWithdrawForm({ initialValues }: IProps) {
   const { t } = useTranslation();
   const { data: shopData } = useShopQuery(shop as string);
   const shopId = shopData?.shop?.id!;
-
   const {
     register,
     handleSubmit,
@@ -53,10 +53,12 @@ export default function CreateOrUpdateWithdrawForm({ initialValues }: IProps) {
   const onSubmit = (values: FormValues) => {
     const input = {
       amount: +values.amount,
-      details: values.details,
-      phone_number: values.phone_number,
+      shop_id: Number(shopId),
+      // details: values.details,
       upi_id: values.upi_id,
-      note: values.note,
+      phone_number: values.phone_number,
+      payment_method: values.payment_method,
+      // note: values.note,
     };
 
     createWithdraw(
@@ -97,39 +99,37 @@ export default function CreateOrUpdateWithdrawForm({ initialValues }: IProps) {
             className="w-full px-0 sm:pe-4 md:pe-5 pb-5 sm:w-4/12 md:w-1/3 sm:py-8 "
           />
 
-        <Card className="w-full sm:w-full md:w-2/3">
+          <Card className="w-full sm:w-8/12 md:w-2/3">
             <Input
-              label={("Amount")}
+              label={t("form:input-label-amount")}
               {...register("amount")}
-              required
               error={t(errors.amount?.message!)}
               variant="outline"
               className="mb-5"
             />
             <Input
-              label={("Upi Id")}
+              label={t("form:UPI Id")}
               {...register("upi_id")}
               error={t(errors.upi_id?.message!)}
-              required
               variant="outline"
               className="mb-5"
             />
              <Input
-              label={("Phone Number")}
+              label={t("form:Phone Number")}
               {...register("phone_number")}
-              required
               error={t(errors.phone_number?.message!)}
               variant="outline"
               className="mb-5"
             />
+
             {/* <TextArea
-              label={("Details")}
+              label={t("form:input-label-details")}
               {...register("details")}
               variant="outline"
               className="mb-5"
             />
             <TextArea
-              label={("Note")}
+              label={t("form:input-label-note")}
               {...register("note")}
               variant="outline"
               className="mb-5"
