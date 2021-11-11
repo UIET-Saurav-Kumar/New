@@ -431,6 +431,14 @@ export declare type UpdateCategory = {
   image?: Maybe<AttachmentInput>;
   icon?: Maybe<Scalars["String"]>;
 };
+
+
+export declare type UpdateDeliveryCost = {
+  price?: Scalars["Float"];
+  distance: Scalars["Float"];
+};
+
+
 export declare type CheckoutVerificationInput = {
   amount: Scalars["Float"];
   products: Array<ConnectProductOrderPivot>;
@@ -898,6 +906,7 @@ export declare type Withdraw = {
   shop_id?: Maybe<Scalars["Int"]>;
   shop?: Maybe<Shop>;
   payment_method?: Maybe<Scalars["String"]>;
+  upi_id?: Maybe<Scalars["String"]>;
   phone_number?: Maybe<Scalars["Int"]>;
   details?: Maybe<Scalars["String"]>;
   note?: Maybe<Scalars["String"]>;
@@ -918,8 +927,7 @@ export declare type WithdrawPaginator = {
 
 export declare type CreateWithdrawInput = {
   amount: Scalars["Float"];
-  shop_id: Scalars["Int"];
-  payment_method?: Maybe<Scalars["String"]>;
+  upi_id?: Maybe<Scalars["String"]>;
   details?: Maybe<Scalars["String"]>;
   note?: Maybe<Scalars["String"]>;
 };
