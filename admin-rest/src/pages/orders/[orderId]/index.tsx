@@ -156,7 +156,7 @@ export default function OrderDetailsPage() {
               {t("form:button-label-change-status")}
             </span>
             <span className="block sm:hidden">
-              {t("form:form:button-label-change")}
+              {t("form:form:Change")}
             </span>
           </Button>
         </form>
