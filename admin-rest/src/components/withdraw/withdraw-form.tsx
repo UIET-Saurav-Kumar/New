@@ -17,8 +17,9 @@ import { useCreateWithdrawMutation } from "@data/withdraw/use-withdraw-create.mu
 
 type FormValues = {
   amount: number;
-  payment_method: string;
+  upi_id: string;
   details: string;
+  phone_number: number;
   note: string;
 };
 
@@ -35,6 +36,7 @@ export default function CreateOrUpdateWithdrawForm({ initialValues }: IProps) {
   const { t } = useTranslation();
   const { data: shopData } = useShopQuery(shop as string);
   const shopId = shopData?.shop?.id!;
+
   const {
     register,
     handleSubmit,
@@ -51,9 +53,9 @@ export default function CreateOrUpdateWithdrawForm({ initialValues }: IProps) {
   const onSubmit = (values: FormValues) => {
     const input = {
       amount: +values.amount,
-      shop_id: Number(shopId),
       details: values.details,
-      payment_method: values.payment_method,
+      phone_number: values.phone_number,
+      upi_id: values.upi_id,
       note: values.note,
     };
 
@@ -95,34 +97,43 @@ export default function CreateOrUpdateWithdrawForm({ initialValues }: IProps) {
             className="w-full px-0 sm:pe-4 md:pe-5 pb-5 sm:w-4/12 md:w-1/3 sm:py-8 "
           />
 
-          <Card className="w-full sm:w-8/12 md:w-2/3">
+        <Card className="w-full sm:w-full md:w-2/3">
             <Input
-              label={t("form:input-label-amount")}
+              label={("Amount")}
               {...register("amount")}
+              required
               error={t(errors.amount?.message!)}
               variant="outline"
               className="mb-5"
             />
             <Input
-              label={t("form:input-label-payment-method")}
-              {...register("payment_method")}
-              error={t(errors.payment_method?.message!)}
+              label={("Upi Id")}
+              {...register("upi_id")}
+              error={t(errors.upi_id?.message!)}
+              required
               variant="outline"
               className="mb-5"
             />
-
-            <TextArea
-              label={t("form:input-label-details")}
+             <Input
+              label={("Phone Number")}
+              {...register("phone_number")}
+              required
+              error={t(errors.phone_number?.message!)}
+              variant="outline"
+              className="mb-5"
+            />
+            {/* <TextArea
+              label={("Details")}
               {...register("details")}
               variant="outline"
               className="mb-5"
             />
             <TextArea
-              label={t("form:input-label-note")}
+              label={("Note")}
               {...register("note")}
               variant="outline"
               className="mb-5"
-            />
+            /> */}
           </Card>
         </div>
         <div className="mb-4 text-end">
