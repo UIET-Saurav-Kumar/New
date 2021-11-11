@@ -12,9 +12,8 @@ export default function LoanPageHeader() {
 
             <div className='hidden lg:flex items-center space-x-6 justify-evenly'>
                 <h1>Any queries</h1>
-                <h1>8789876-292</h1>
-                <h1>Any queries</h1>
-                <h1>Any queries</h1>
+               
+               
             </div>
         </div>
        </>
