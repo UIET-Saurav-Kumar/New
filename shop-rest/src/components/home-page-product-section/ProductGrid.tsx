@@ -29,7 +29,7 @@ export default function ProductGrid() {
 
     return (
       <>
-       <div id='offer-of-the-day' className=' flex flex-col mt-8 border-b rounded-t shadow-lg bg-gray-50 p-4  '>
+       <div id='offer-of-the-day' className={`${data?.offers.data?.length  ? 'block' : 'hidden'} flex flex-col mt-8 border-b rounded-t shadow-lg bg-gray-50 p-4 `}>
         <div className='flex justify-between '>
             <h3 className='text-lg sm:text-lg md:text-lg xl:text-2xl  font-semibold  p-2  '> 
                 Offers of the Day
@@ -38,7 +38,7 @@ export default function ProductGrid() {
         </div>
         </div>
 
-       <div className={`${data?.offers.data?.length  ? 'block' : 'hidden'} grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2`}>
+        <div className={`${data?.offers.data?.length  ? 'block' : 'hidden'} grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2`}>
                                       
                                  
             {data?.offers.data?.map((product) => (
