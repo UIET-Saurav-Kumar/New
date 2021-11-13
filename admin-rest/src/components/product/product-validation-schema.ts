@@ -28,6 +28,7 @@ export const productValidationSchema = yup.object().shape({
     .number()
     .transform((value) => (isNaN(value) ? undefined : value))
     .lessThan(yup.ref("price"), "Sale Price should be less than ${less}")
+    .max(yup.ref("price"), "Sale Price should be ${max} maximum")
     .positive("form:error-sale-price-must-positive"),
   quantity: yup.mixed().when("productTypeValue", {
     is: (productType: {
