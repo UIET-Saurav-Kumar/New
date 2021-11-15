@@ -420,6 +420,7 @@ class ShopController extends CoreController
             $list[$key]['lat'] = $value['settings']['location']['lat'] ?? '';
             $list[$key]['lng'] = $value['settings']['location']['lng'] ?? '';
             $list[$key]['original_image'] = $value['cover_image']['original'] ?? '';
+            $list[$key]['logo_image'] = $value['logo']['original'] ?? '';
         }
         
         # add headers for each column in the CSV download
