@@ -405,12 +405,23 @@ class ShopController extends CoreController
             'Pragma'              => 'public'
         ];
 
-        $list = $this->repository->get()->toArray();
-
+        $list = $this->repository->with('owner')->get()->toArray();
+        
         if (!count($list)) {
             return response()->stream(function () {
             }, 200, $headers);
         }
+        # push owner phone number, location, formattedAddress, city, country, lat, lng original image in $list
+        foreach ($list as $key => $value) {
+            $list[$key]['phone_number'] = $value['settings']['contact'] ?? '';
+            $list[$key]['street_address'] = $value['address']['street_address'] ?? '';
+            $list[$key]['city'] = $value['address']['city'] ?? '';
+            $list[$key]['country'] = $value['address']['country'] ?? '';
+            $list[$key]['lat'] = $value['settings']['location']['lat'] ?? '';
+            $list[$key]['lng'] = $value['settings']['location']['lng'] ?? '';
+            $list[$key]['original_image'] = $value['cover_image']['original'] ?? '';
+        }
+        
         # add headers for each column in the CSV download
         array_unshift($list, array_keys($list[0]));
 
