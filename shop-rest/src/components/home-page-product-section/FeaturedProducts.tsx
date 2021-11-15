@@ -183,6 +183,59 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                 </div>
             </div>
             
+            <div className={`${groceryArray?.length  ? 'block' : 'hidden'} flex flex-col`}>
+
+                  <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
+                       Grocery
+                  </h3>
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
+                    
+                        {groceryArray?.map((product :any) => (
+                            <>    
+                                <motion.div key={product.id}>
+                                    {renderProductCard(product) }
+                                </motion.div>
+                            </> 
+                        ))}
+
+                    </div>
+            </div> 
+            
+             <div className={`${fruitsvegetablesArray?.length  ? 'block' : 'hidden'} flex flex-col`}>
+
+                  <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
+                       Fruits & Vegetables
+                  </h3>
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
+                    
+                        {fruitsvegetablesArray?.map((product :any) => (
+                            <>    
+                                <motion.div key={product.id}>
+                                    {renderProductCard(product) }
+                                </motion.div>
+                            </> 
+                        ))}
+
+                    </div>
+            </div> 
+            
+             <div className={`${beveragesArray?.length  ? 'block' : 'hidden'} flex flex-col`}>
+                <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
+                   Beverages
+                </h3>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
+
+                    {beveragesArray?.map((product :any) => (
+                        <>    
+                            <motion.div key={product.id}>
+                                {renderProductCard(product) }
+                            </motion.div>
+                        </> 
+                    ))}
+
+                </div>
+            </div>
+            
             
              <div className={`${fashionlifestyleArray?.length  ? 'block' : 'hidden'} flex flex-col`}>
 
@@ -314,23 +367,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                     </div>
             </div> 
 
-            <div className={`${fruitsvegetablesArray?.length  ? 'block' : 'hidden'} flex flex-col`}>
-
-                  <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
-                       Fruits & Vegetables
-                  </h3>
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
-                    
-                        {fruitsvegetablesArray?.map((product :any) => (
-                            <>    
-                                <motion.div key={product.id}>
-                                    {renderProductCard(product) }
-                                </motion.div>
-                            </> 
-                        ))}
-
-                    </div>
-            </div> 
+           
 
             <div className={`${hotelsresortsArray?.length  ? 'block' : 'hidden'} flex flex-col`}>
 
@@ -351,23 +388,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
             </div> 
             
             
-            <div className={`${groceryArray?.length  ? 'block' : 'hidden'} flex flex-col`}>
-
-                  <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
-                       Grocery
-                  </h3>
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
-                    
-                        {groceryArray?.map((product :any) => (
-                            <>    
-                                <motion.div key={product.id}>
-                                    {renderProductCard(product) }
-                                </motion.div>
-                            </> 
-                        ))}
-
-                    </div>
-            </div> 
+            
             
         
             <div className={`${bakeryArray?.length  ? 'block' : 'hidden'} flex flex-col`}>
@@ -472,22 +493,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
             
 
            
-            <div className={`${beveragesArray?.length  ? 'block' : 'hidden'} flex flex-col`}>
-                <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
-                   Beverages
-                </h3>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
-
-                    {beveragesArray?.map((product :any) => (
-                        <>    
-                            <motion.div key={product.id}>
-                                {renderProductCard(product) }
-                            </motion.div>
-                        </> 
-                    ))}
-
-                </div>
-            </div>
+           
 
 
 
