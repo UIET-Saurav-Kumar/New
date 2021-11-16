@@ -88,7 +88,8 @@ class ShopController extends CoreController
             $shops_ids=ShopRepository::getSortedShops($location,$shops_ids);
             foreach($shops_ids as $id){
                 $single_shop=Shop::find($id);
-               
+                $single_shop->cover_original = $single_shop->cover_image['original'] ?? '';
+                $single_shop->logo_original = $single_shop->cover_image['original'] ?? '';
                 if($single_shop){
                     array_push($shops_array,$single_shop);
                 }
@@ -406,7 +407,7 @@ class ShopController extends CoreController
         ];
 
         $list = $this->repository->with('owner')->get()->toArray();
-        
+
         if (!count($list)) {
             return response()->stream(function () {
             }, 200, $headers);
@@ -422,10 +423,8 @@ class ShopController extends CoreController
             $list[$key]['original_image'] = $value['cover_image']['original'] ?? '';
             $list[$key]['logo_image'] = $value['logo']['original'] ?? '';
         }
-        
         # add headers for each column in the CSV download
         array_unshift($list, array_keys($list[0]));
-
         $callback = function () use ($list) {
             $FH = fopen('php://output', 'w');
             foreach ($list as $key => $row) {
@@ -444,7 +443,7 @@ class ShopController extends CoreController
                 unset($row['shop_categories']);
                 unset($row['address']);
                 unset($row['settings']);
-
+                unset($row['owner']);
                 
                 fputcsv($FH, $row);
             }
