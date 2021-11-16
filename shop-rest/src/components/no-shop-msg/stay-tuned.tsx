@@ -28,7 +28,7 @@ export default function StayTuned() {
                 
 
                 <h2 className='flex flex-col text-lg px-6 lg:text-3xl lg:flex text-gray-700 text-md items-center space-y-2 '> Presently We are Covering the Cities of  
-                    <span className='font-semibold'> Delhi | Hyderabad | Bangalore | Mumbai | Pune | Kolkata | Chennai | Chandigarh | Panchkula | Mohali | Ludhiana </span> 
+                    <span className='font-semibold'> Chandigarh | Panchkula | Mohali | Ludhiana | Delhi | Gurgaon | Noida | Ahemadabad | Hyderabad | Bangalore | Mumbai | Pune | Kolkata | Chennai | </span> 
                 </h2>
 
       
