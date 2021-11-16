@@ -429,7 +429,7 @@ class ShopController extends CoreController
             $FH = fopen('php://output', 'w');
             foreach ($list as $key => $row) {
                 if ($key === 0) {
-                    $exclude = ['id','slug','created_at', 'updated_at','cover_image','logo','shop_categories','address','settings'];
+                    $exclude = ['id','slug','created_at', 'updated_at','cover_image','logo','shop_categories','address','settings','owner'];
 
                     $row = array_diff($row, $exclude);
    
