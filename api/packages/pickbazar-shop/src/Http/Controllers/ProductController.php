@@ -59,10 +59,10 @@ class ProductController extends CoreController
         }
         $limit = $request->limit ?   $request->limit : 15;    
         $repdata = $this->repository->with(['type', 'shop', 'categories', 'tags', 'variations.attribute'])->orderBy('is_offer', 'desc')->paginate($limit);
-        foreach($repdata as $key=>$val)
-        {
-            $repdata[$key]->image_original = $val->image['original'];
-        }
+        // foreach($repdata as $key=>$val)
+        //  {
+        //     $repdata[$key]->image_original = $val->image['original'];
+        //  }
         return $repdata;
 
         // $category = $request->category != null ? true : false;
