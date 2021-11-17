@@ -23,6 +23,7 @@ use PickBazar\Http\Requests\UserCreateRequest;
 use PickBazar\Database\Models\ReferralCommission;
 use PickBazar\Database\Repositories\ShopRepository;
 use PickBazar\Database\Repositories\ProductRepository;
+use PickBazar\Database\Models\Attachment;
 
 class ShopController extends CoreController
 {
@@ -456,9 +457,8 @@ class ShopController extends CoreController
     public function importShop(Request $request)
     {
         $requestFile = $request->file();
-
+       
         $user = $request->user();
-
         if (count($requestFile)) {
             if (isset($requestFile['csv'])) {
                 $uploadedCsv = $requestFile['csv'];
@@ -466,38 +466,114 @@ class ShopController extends CoreController
                 $uploadedCsv = current($requestFile);
             }
         }
-
         if (!$this->repository->adminPermission($user)) {
             throw new PickbazarException(config('shop.app_notice_domain') . 'ERROR.NOT_AUTHORIZED');
         }
         
         $file = $uploadedCsv->storePubliclyAs('csv-files', 'shops'.'.' . $uploadedCsv->getClientOriginalExtension(), 'public');
-
+        
         $shops = $this->repository->csvToArrayShop(storage_path() . '/app/public/' . $file);
+        
+        foreach ($shops as $key => $shop) 
+        {
+            $owner_email_data = User::where('email',$shop['owner_email'])->first();
+            $owner_number_data = User::where('phone_number',$shop['owner_phone'])->first();
 
+            $email_exist = $owner_email_data != null ? true : false;
+            $phone_number_exist = $owner_number_data != null ? true : false;
+            if($email_exist){
+                throw new PickbazarException(config('shop.app_notice_domain') . 'ERROR.Owner email exist '.$owner_number_data->email);
+            }
+            if($phone_number_exist){
+                throw new PickbazarException(config('shop.app_notice_domain') . 'ERROR.Owner phone exit '.$owner_number_data->phone_number);
+            }
+            
+            $shop_data = Shop::where('name',$shop['name'])->first();
+            $shop_exist = $shop_data != null ? true : false;
+            if($shop_exist){
+                throw new PickbazarException(config('shop.app_notice_domain') . 'ERROR.Shop existed ('.$shop_data->name.')');
+            }
+        }
+        
         foreach ($shops as $key => $shop) {
             // if (!isset($shop['type_id'])) {
             //     throw new PickbazarException("MARVEL_ERROR.WRONG_CSV");
             // }
-            unset($shop['id']);
-            unset($shop['updated_at']);
-            unset($shop['created_at']);
-            unset($shop['slug']);
-            unset($shop['logo']);
-            unset($shop['cover_image']);
-            unset($shop['settings']);
-            unset($shop['shop_categories']);
-            unset($shop['address']);
+            #-----------------------start of user creation------------------------#
+            $params = array(
+                                'name'=>$shop['owner_name'],
+                                'email'=>$shop['owner_email'],
+                                'password'=>Hash::make($shop['password']),
+                                'phone_number'=>$shop['owner_phone'],
+                                'is_active'=>1
+                            );
+            $permissions = [Permission::STORE_OWNER,Permission::CUSTOMER];
+            
+            $user = User::create($params);
+                            
+            if($user)
+            {
+                $user->givePermissionTo($permissions);
+                
+                $shop['owner_id'] = $user->id;
+                #-------------storing shop cover_image and logo-----------------#
+                $coverimage_path = url('/')."/images/".$shop['original_image'];
+                $coverimg_attach = new Attachment;
+                $coverimg_attach->save();
+                $shop['cover_image'] = array(
+                                                "thumbnail"=>$coverimage_path,
+                                                "original"=>$coverimage_path,
+                                                "id"=>$coverimg_attach->id,
+                    
+                                            );
+                $logoimage_path = url('/')."/images/".$shop['original_image'];
+                $logo_attach = new Attachment;
+                $logo_attach->save();
+                
+                $shop['logo'] = array(
+                                "thumbnail"=>$logoimage_path,
+                                "original"=>$logoimage_path,
+                                "id"=>$logo_attach->id,
+                                
+                );
+                #-----------------------adding shop categories--------------------#
+                $categories_arr = explode(',',$shop['categories']);
+                $shop_categories = ShopCategory::select('name','id')->whereIn('id',$categories_arr)->get();
+                $shop['shop_categories'] = $shop_categories;
+                
+                #-----------------------adding setting column--------------------#
+                unset($shop['id']);
+                unset($shop['updated_at']);
+                unset($shop['created_at']);
+                unset($shop['slug']);
+                unset($shop['categories']);
+                unset($shop['settings']);
+                unset($shop['address']);
+                unset($shop['owner']);
 
-            if(!$shop['commission']){
-                unset($shop['commission']);
+                unset($shop['phone_number']);
+                unset($shop['street_address']);
+                unset($shop['city']);
+                unset($shop['country']);
+                unset($shop['lat']);
+                unset($shop['lng']);
+                unset($shop['original_image']);
+                unset($shop['logo_image']);
+
+                unset($shop['owner_name']);
+                unset($shop['owner_email']);
+                unset($shop['password']);
+                unset($shop['owner_phone']);
+
+                //unset $shop empty value
+                $shop = array_filter($shop);
+
+                if(!$shop['commission']){
+                    unset($shop['commission']);
+                }                            
+                $stored_shop = Shop::create($shop);
             }
-            
-            
-            Shop::create($shop);
-            
         }
         return true;
-        
     }   
 }
