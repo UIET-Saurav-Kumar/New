@@ -20,11 +20,23 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import SelectInput from "@components/ui/select-input";
 import { useIsRTL } from "@utils/locals";
+import {useRef} from 'react';
+import {  PDFExport, savePDF} from '@progress/kendo-react-pdf'
 
 type FormValues = {
   order_status: any;
 };
 export default function OrderDetailsPage() {
+  const pdfExportComponent = useRef(null);
+  const contentArea = useRef(null);
+
+  const handleExportWithComponent = (event) => {
+    pdfExportComponent.current.save();
+  }
+
+  const handleExportWithMethod = (event) =>{
+    savePDF(contentArea.current, {paperSize:'A4'});
+  }
   const { t } = useTranslation();
   const { query } = useRouter();
   const { alignLeft, alignRight } = useIsRTL();
@@ -129,6 +141,7 @@ export default function OrderDetailsPage() {
   ];
 
   return (
+    
     <Card>
       <div className="flex flex-col lg:flex-row items-center">
         <h3 className="text-2xl font-semibold text-heading text-center lg:text-start w-full lg:w-1/3 mb-8 lg:mb-0 whitespace-nowrap">
@@ -168,7 +181,9 @@ export default function OrderDetailsPage() {
           status={data?.order?.status?.serial!}
         />
       </div>
-
+     <div className=''>
+     <PDFExport ref={pdfExportComponent} paperSize='A4'>
+    <div ref={contentArea}>
       <div className="mb-10">
         {data?.order ? (
           <Table
@@ -210,6 +225,7 @@ export default function OrderDetailsPage() {
           </div>
         </div>
       </div>
+      
 
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between">
         <div className="w-full sm:w-1/2 sm:pe-8 mb-10 sm:mb-0">
@@ -244,7 +260,17 @@ export default function OrderDetailsPage() {
           </div>
         </div>
       </div>
+      </div>
+      </PDFExport>
+      </div>
+   <div className='w-full text-center'> 
+       <button className='   text-blue-700 text-lg hover:underline mt-8 h-9  w-38' 
+        onClick={handleExportWithComponent}>Download Invoice
+        </button></div>
+      {/* <button className=' text-sm h-16 w-28' onClick={handleExportWithMethod}> Download Invoice</button> */}
+      
     </Card>
+   
   );
 }
 OrderDetailsPage.Layout = Layout;
