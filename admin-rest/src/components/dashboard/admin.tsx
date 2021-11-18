@@ -65,9 +65,11 @@ export default function Dashboard() {
       item.total.toFixed(2)
     );
   }
+
+  console.log('dashboard',data)
   return (
     <>
-      <div className="w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 mb-6">
+      <div className="w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-5 mb-6">
         <div className="w-full ">
           <StickerCard
             titleTransKey="sticker-card-title-rev"
@@ -98,6 +100,14 @@ export default function Dashboard() {
             icon={<ShopIcon className="w-6" color="#1D4ED8" />}
             iconBgStyle={{ backgroundColor: "#93C5FD" }}
             price={data?.totalShops}
+          />
+        </div>
+        <div className="w-full">
+          <StickerCard
+            titleTransKey="New Customers"
+            icon={<img src='/team.png' className='h-10 w-10' />}
+            iconBgStyle={{ backgroundColor: "#93C5FD" }}
+            price={data?.newCustomers}
           />
         </div>
       </div>
