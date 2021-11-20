@@ -79,6 +79,7 @@ export const siteSettings = {
     { href: ROUTES.REFERRAL_NETWORK, label: "Referral Network" },
     { href: ROUTES.WALLET, label: "Wallet" },
     { href: ROUTES.WITHDRAWS, label: "Withdraws" },
+    { href: ROUTES.UPLOAD_INVOICE, label: "Upload Invoice" },
     { href: ROUTES.LOGOUT, label: "Logout" },
   ],  
 
@@ -118,6 +119,12 @@ export const siteSettings = {
       href: ROUTES.WITHDRAWS,
       menulabel: "Widthdraws",
     },
+
+    {
+      href: ROUTES.UPLOAD_INVOICE,
+      menulabel: "Upload Invoice",
+    },
+
     // {
     //   href: ROUTES.HELP,
     //   menulabel: "profile-sidebar-help",

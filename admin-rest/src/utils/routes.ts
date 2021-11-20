@@ -31,5 +31,6 @@ export const ROUTES = {
   COMMISSION:"/commission",
   LOGS:'/logs',
   SIGNUP_OFFERS:"/signup-offers",
-
+  INVOICES_REWARD: '/invoices-reward',
+  INVOICES_REWARD_DATA: '/invoices-reward-data',
 };

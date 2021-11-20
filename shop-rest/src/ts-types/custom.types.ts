@@ -97,6 +97,14 @@ export declare type Category = {
   created_at: Date;
   updated_at: Date;
 };
+
+export enum SortOrder {
+  /** Sort records in ascending order. */
+  Asc = "ASC",
+  /** Sort records in descending order. */
+  Desc = "DESC",
+}
+
 export declare type Attachment = {
   id?: number | string;
   thumbnail?: string;
@@ -200,6 +208,16 @@ export type Search = {
 };
 
 export type WithdrawsQueryOptionsType = {
+  text?: string;
+  shop_id?: number;
+  page?: number;
+  parent?: number | null;
+  limit?: number;
+  orderBy?: string;
+  sortedBy?: SortOrder;
+};
+
+export type InvoiceUploadQueryOptionsType = {
   text?: string;
   shop_id?: number;
   page?: number;

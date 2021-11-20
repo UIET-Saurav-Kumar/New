@@ -35,6 +35,16 @@ export declare type Scalars = {
   /** A datetime and timezone string in ISO 8601 format `Y-m-dTH:i:sO`, e.g. `2020-04-20T13:53:12+02:00`. */
   DateTimeTz: any;
 };
+export declare type BillUpload = {
+  __typename?: "BillUpload";
+  name?: Maybe<Scalars["String"]>;
+  address?: Maybe<UserAddress>;
+  shop_city?: Maybe<UserAddress>;
+  shop_address?: Maybe<UserAddress>;
+  city?: Maybe<UserAddress>;
+  shop_name?: Maybe<Scalars["String"]>;
+  bill_amount: Scalars["Float"];
+};
 export declare type Query = {
   __typename?: "Query";
   address: Array<Address>;
@@ -1096,6 +1106,16 @@ export declare type WithdrawPaginator = {
   data: Array<Withdraw>;
 };
 
+export declare type InvoiceUploadPaginator = {
+  __typename?: "InvoiceUploadPaginator";
+  /** Pagination information about the list of items. */
+
+  paginatorInfo: PaginatorInfo;
+  /** A list of Withdraw items. */
+
+  data: Array<BillUpload>;
+};
+
 
 export declare type CreateWithdrawInput = {
   amount: Scalars["Float"];
@@ -1104,12 +1124,61 @@ export declare type CreateWithdrawInput = {
   note?: Maybe<Scalars["String"]>;
 };
 
+export declare type CreateInvoiceUploadInput = {
+ 
+  name?: Maybe<Scalars["String"]>;
+  address?: Maybe<UserAddress>;
+  shop_city?: Maybe<UserAddress>;
+  shop_address?: Maybe<UserAddress>;
+  city?: Maybe<UserAddress>;
+  shop_name?: Maybe<Scalars["String"]>;
+  bill_amount: Scalars["Float"];
+};
+
+export declare type CreateInvoiceRewardInput = {
+ 
+  cashback: Scalars["Float"];
+  max_cashback: Scalars["Float"];
+ };
+
+ export declare type CreateInvoiceInput = {
+ 
+  name?: Maybe<Scalars["String"]>;
+  address?: Maybe<UserAddress>;
+  shop_city?: Maybe<UserAddress>;
+  shop_address?: Maybe<UserAddress>;
+};
+
 export declare type ApproveWithdrawInput = {
   id: Scalars["ID"];
   status: WithdrawStatus;
 };
 
+export declare type ApproveInvoiceUploadInput = {
+  id: Scalars["ID"];
+  status: InvoiceUploadStatus;
+};
+
+
 export declare enum WithdrawStatus {
+  /** Approved */
+  Approved = "APPROVED",
+
+  /** Pending */
+  Pending = "PENDING",
+
+  /** On hold */
+  OnHold = "ON_HOLD",
+
+  /** Rejected */
+  Rejected = "REJECTED",
+
+  /** Processing */
+  Processing = "PROCESSING",
+}
+
+
+export declare enum InvoiceUploadStatus {
   /** Approved */
   Approved = "APPROVED",
 

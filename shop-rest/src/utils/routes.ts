@@ -38,5 +38,7 @@ export const ROUTES = {
   REFERRAL_ACTIVITY: '/user/referral-activity',
   REFERRAL_NETWORK: '/user/referral-network',
   WALLET:"/user/wallet",
-  WITHDRAWS:"/user/withdraws"
+  WITHDRAWS:"/user/withdraws",
+  UPLOAD_INVOICE: '/user/upload-invoice',
+  
 };

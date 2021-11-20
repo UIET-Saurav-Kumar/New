@@ -54,6 +54,16 @@ export const siteSettings = {
         icon: "ProductsIcon",
       },
       {
+        href: ROUTES.INVOICES_REWARD,
+        label: "Invoice Rewards",
+        icon: "Offers",
+      },
+      {
+        href: ROUTES.INVOICES_REWARD_DATA,
+        label: "Invoice Rewards Data",
+        icon: "UsersIcon",
+      },
+      {
         href: ROUTES.MASTER_PRODUCT,
         label: "Master Products",
         icon: "MasterProductsIcon",

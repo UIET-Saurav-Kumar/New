@@ -35,5 +35,7 @@ export const API_ENDPOINTS: Record<string, string> = {
   RESEND_CODE:"resend-code",
   SHOP_AVAILABILITY:'shop-availability',
   USER_WITHDRAWS:'user-withdraws',
+  USER_INVOICE_UPLOAD: 'user-invoice-upload',
+
   LOGS:'logs'
 };

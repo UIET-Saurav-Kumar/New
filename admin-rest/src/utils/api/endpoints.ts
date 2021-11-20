@@ -42,6 +42,7 @@ export const API_ENDPOINTS = {
   MY_SHOPS: "my-shops",
   WITHDRAWS: "withdraws",
   APPROVE_WITHDRAW: "approve-withdraw",
+  APPROVE_INVOICE_UPLOAD: "approve-invoice-upload",
   STAFFS: "staffs",
   ADD_STAFF: "users/add-staff",
   MASTER_PRODUCT: "master-products",
@@ -69,6 +70,8 @@ export const API_ENDPOINTS = {
   SIGNUP_OFFER: "signup-offer",
   STORE_LICENSES:"stored-licenses",
   STORE_LICENSE_ATTACHMENT:"store-license-attachment",
-  ALL_TAXES:"all-taxes"
+  ALL_TAXES:"all-taxes",
+  INVOICES_REWARD: 'invoices-reward',
+
 
 };

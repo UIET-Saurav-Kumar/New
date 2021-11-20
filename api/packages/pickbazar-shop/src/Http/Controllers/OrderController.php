@@ -145,6 +145,7 @@ class OrderController extends CoreController
     }
 
     public function changeOrderStatus($order, $status)
+    
     {
         $order->status = $status;
         $order->save();
@@ -169,8 +170,6 @@ class OrderController extends CoreController
                 $child_order->save();
             }
         }
-
-        
         return $order;
     }
 
@@ -184,7 +183,7 @@ class OrderController extends CoreController
     {
         try {
             return $this->repository->findOrFail($id)->delete();
-        } catch (\Exception $e) {
+        }   catch (\Exception $e) {
             throw new PickbazarException('PICKBAZAR_ERROR.NOT_FOUND');
         }
     }
