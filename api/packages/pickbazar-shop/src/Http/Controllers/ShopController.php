@@ -562,8 +562,8 @@ class ShopController extends CoreController
                                             "website"=>$shop['website'] ?? '#',
                                             "socials"=>$shop['socials'] ?? array(),
                                             "location"=>array(
-                                                                "lat"=>$shop['lat'] ?? '',
-                                                                "lng"=>$shop['lng'] ?? '',
+                                                                "lat"=>$shop['lat'] ?? '00.000',
+                                                                "lng"=>$shop['lng'] ?? '00.000',
                                                                 "city"=>$shop['city'] ?? '',
                                                                 "state"=>$shop['state'] ?? '',
                                                                 "country"=>$shop['country'] ?? '',
