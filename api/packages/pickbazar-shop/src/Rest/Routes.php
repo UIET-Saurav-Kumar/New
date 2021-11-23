@@ -23,6 +23,7 @@ use PickBazar\Http\Controllers\OrderStatusController;
 use PickBazar\Http\Controllers\ShopCategoryController;
 use PickBazar\Http\Controllers\MasterProductController;
 use PickBazar\Http\Controllers\AttributeValueController;
+use PickBazar\Http\Controllers\BillController;
 
 Route::post('/register', 'PickBazar\Http\Controllers\UserController@register');
 Route::post('/token', 'PickBazar\Http\Controllers\UserController@token');
@@ -187,7 +188,8 @@ Route::group(['middleware' => ['can:' . Permission::CUSTOMER, 'auth:sanctum']], 
         'only' => ['store', 'update', 'destroy']
     ]);
     Route::post('store-license-attachment', 'PickBazar\Http\Controllers\AttachmentController@storeLicenseAttachment');
-
+    Route::post('bill-attachment', 'PickBazar\Http\Controllers\AttachmentController@storeBillAttachment');
+    
     
     Route::post('checkout/verify', 'PickBazar\Http\Controllers\CheckoutController@verify');
     Route::get('me', 'PickBazar\Http\Controllers\UserController@me');
@@ -197,6 +199,9 @@ Route::group(['middleware' => ['can:' . Permission::CUSTOMER, 'auth:sanctum']], 
         'only' => ['destroy']
     ]);
 });
+
+Route::resource('bill',BillController::class);
+Route::post('approve-bill','PickBazar\Http\Controllers\BillController@approveBill');
 
 
 Route::group(

@@ -71,6 +71,32 @@ class AttachmentController extends CoreController
         return $path;
     }
 
+    public function storeBillAttachment(AttachmentRequest $request){
+        $urls = [];
+        foreach ($request->attachment as $media) {
+            $attachment = new Attachment;
+            $attachment->save();
+            $path=$this->storeBill($media);
+
+                $converted_url = [
+                    'thumbnail' => url('/').$path,
+                    'original' => url('/').$path,
+                    'id' => $attachment->id
+                ];
+            $urls[] = $converted_url;
+        }
+        return $urls;
+    }
+
+    protected function storeBill($bill){
+        $bill_name = uniqid().'.'.$bill->getClientOriginalExtension();
+        $destinationPath=public_path(). '/bills/';
+        $bill->move($destinationPath, $bill_name);
+        $path='/bills/'.$bill_name;
+
+        return $path;
+    }
+
 
     public function storeLicenseAttachment(AttachmentRequest $request)
     {
@@ -141,4 +167,6 @@ class AttachmentController extends CoreController
             throw new PickbazarException('PICKBAZAR_ERROR.NOT_FOUND');
         }
     }
+
+
 }

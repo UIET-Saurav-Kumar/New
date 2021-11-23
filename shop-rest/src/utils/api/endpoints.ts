@@ -9,6 +9,7 @@ export const API_ENDPOINTS: Record<string, string> = {
   PARENT_CATEGORIES: "fetch-parent-category",
   TYPE: "types",
   UPLOAD: "attachments",
+  BILL:"bill-attachment",
   ORDER: "orders",
   ORDER_STATUS: "order_status",
   LOGIN: "token",
@@ -35,7 +36,7 @@ export const API_ENDPOINTS: Record<string, string> = {
   RESEND_CODE:"resend-code",
   SHOP_AVAILABILITY:'shop-availability',
   USER_WITHDRAWS:'user-withdraws',
-  USER_INVOICE_UPLOAD: 'user-invoice-upload',
-
+  USER_INVOICE_UPLOAD: 'bill',
+  BILL_ATTACHMENT:"bill-attachment",
   LOGS:'logs'
 };

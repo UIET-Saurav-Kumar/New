@@ -72,6 +72,7 @@ export const API_ENDPOINTS = {
   STORE_LICENSE_ATTACHMENT:"store-license-attachment",
   ALL_TAXES:"all-taxes",
   INVOICES_REWARD: 'invoices-reward',
-
-
+  BILL: 'bill',
+  APPROVE_BILL: "approve-bill",
 };
+

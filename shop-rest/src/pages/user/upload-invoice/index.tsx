@@ -76,11 +76,11 @@ export default function UploadInvoice() {
                     />
 
                     <LinkButton
-                    href={`/user/invoice-upload/create`}
+                    href={`/user/upload-invoice/upload-form`}
                     className="h-12 ms-4 md:ms-6"
                     >
                     <span className="hidden md:block">
-                        + {("Request Withdraw")}
+                        + {("Upload Invoice")}
                     </span>
                     <span className="md:hidden">+ {("Add")}</span>
                     </LinkButton>

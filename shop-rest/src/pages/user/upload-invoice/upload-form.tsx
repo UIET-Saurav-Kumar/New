@@ -1,9 +1,7 @@
 import Layout from "@components/layout/layout";
 import ProfileSidebar from "@components/profile/profile-sidebar";
-import ProfileForm from "@components/profile/profile-form";
 import { useCustomerQuery } from "@data/customer/use-customer.query";
 import ErrorMessage from "@components/ui/error-message";
-import Address from "@components/address/address";
 import Card from "@components/ui/card";
 import { GetServerSideProps } from "next";
 import { parseContextCookie } from "@utils/parse-cookie";
@@ -14,11 +12,14 @@ import { useTranslation } from "next-i18next";
 import { useForm } from "react-hook-form";
 import pick from "lodash/pick";
 import { BillUpload, User } from "@ts-types/generated";
-import FileInput from "@components/ui/file-input";
+import FileInput from "@components/ui/file-input-bill";
 import Label from "@components/ui/label";
 import  Button  from "@components/ui/button";
 import { toast } from "react-toastify";
-import { useBillUploadMutation } from "@data/bill-upload/use-bill-upload.query";
+import {uploadInvoiceValidationSchema} from './use-invoice-validation-schema'
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useInvocieUploadMutation } from "@data/bill-upload/use-bill-upload.query";
+import { useRouter } from "next/router";
 
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const cookies = parseContextCookie(context?.req?.headers?.cookie);
@@ -48,49 +49,53 @@ interface Props {
 
 export default function UploadBill({user} : Props) {
 
-    const { register, control } = useForm<UserFormValues>(
+    const { register, handleSubmit,formState: { errors },reset,control } = useForm<UserFormValues>(
         {
             defaultValues: {
               ...(user &&
                 pick(user, [
                   "name",
                   "address",
-                  "shop-name",
-                  "shop-address",
-                  'shop-city',
-                  'bill-amount',
+                  "shop_name",
+                  "shop_address",
+                  'shop_city',
+                  'bill_amount',
                 ])),
             },
+            resolver: yupResolver(uploadInvoiceValidationSchema),
           }
         );
-
         
+  const router = useRouter();
 
   const { t } = useTranslation("common");
 
   const { isLoading: loading, data, error } = useCustomerQuery();
 
-  const { mutate: createProfile } =
-    useBillUploadMutation();
+  const { mutate: storeBill } =useInvocieUploadMutation();
 
   if (error) return <ErrorMessage message={error.message} />;
 
 
   function onSubmit(values: any) {
-    createProfile(
+    console.log(values);
+    storeBill(
       {
-       
         name: values.name,
         address: values.address,
         shop_name: values.shop_name,
         shop_address: values.shop_address,
         shop_city: values.shop_city,
         bill_amount: values.bill_amount,
-        
+        bill:values.bill
       },
       {
         onSuccess: () => {
           toast.success(t("Thank You for Shopping through Local Shops, Your Wallet Will be Credited Within 24 Hours. In case of Any Query Please Call Us at +91 8427990450 "));
+          reset();
+          setTimeout(() => {
+            router.push("/user/upload-invoice/")
+          }, 1000);
         },
       }
     );
@@ -105,42 +110,32 @@ export default function UploadBill({user} : Props) {
             <Spinner showText={false} />
         ) : (
 
-            <form onSubmit={onSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex w-full mr-20  flex-col sm:flex-row sm:space-s-4 mb-6">
-          {/* <div className="mb-8">
-            <ProfileForm user={data?.me} />
-          </div> */}
           <Card className="w-full grid grid-cols-1 items-center gap-4 md:grid md:grid-cols-2 space-y-4">
-
-          {/* <div className=' grid grid-cols-1  md:grid md:grid-cols-2  md:justify-between space-x-10'> */}
-            
             <Input
               className="flex-1"
               label={t("text-name")}
               {...register("name")}
-              //error={error.message}
+              error={errors.name?.message}
               required
               variant="outline"
               value={data?.me?.name}
             />
-
             <Input
               className="flex-1"
               label={t("text-address")}
               required
               {...register("address")}
-            //   error='Please enter this field'
+              error={errors.address?.message}
               variant="outline"
             />
-            {/* </div> */}
-
-            {/* <div className=' flex flex-cols items-center md:grid md:grid-cols-2  justify-between space-x-10'> */}
             
             <Input
               className="flex-1"
               label={t("Shop Name")}
               required
-            //   error='Please enter this field'
+              error={errors.shop_name?.message}
               {...register("shop_name")}
               variant="outline"
             />
@@ -148,7 +143,7 @@ export default function UploadBill({user} : Props) {
             <Input
               className="flex-1"
               label={t("Shop Address")}
-            //   error='Please enter this field'
+              error={errors.shop_address?.message}
               required
               {...register("shop_address")}
               variant="outline"
@@ -157,7 +152,7 @@ export default function UploadBill({user} : Props) {
             <Input
               className="flex-1"
               label={t("Shop City")}
-            //   error='Please enter this field'
+              error={errors.shop_city?.message}
               required
               {...register("shop_city")}
               variant="outline"
@@ -166,23 +161,18 @@ export default function UploadBill({user} : Props) {
             <Input
               className="flex-1"
               label={t("Bill Amount (without GST)")}
-            //   error='Please enter this field'
+              error={errors.bill_amount?.message}
               required
               {...register("bill_amount")}
               variant="outline"
             />
 
-          
-            {/* </div> */}
-
              <div className="mb-8">
                  <Label>Upload bill</Label>
-                 <FileInput control={control} name="bill"/>
-                 {/* <input type='file' accept='image/*' capture className='h-16 w-96 border'/> */}
+                 <FileInput control={control} name="bill" />
              </div>
              <Button>Submit</Button>
             
-             {/* </div> */}
 
           </Card>
           
