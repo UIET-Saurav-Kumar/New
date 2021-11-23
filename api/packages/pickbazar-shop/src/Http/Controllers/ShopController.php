@@ -51,7 +51,6 @@ class ShopController extends CoreController
         }
         $shops_ids=[];
         
-
         $limit = $request->limit ?  $request->limit : 15;
 
         $shops=$this->fetchShops($request)->where("is_active",1);
@@ -415,9 +414,16 @@ class ShopController extends CoreController
         }
         # push owner phone number, location, formattedAddress, city, country, lat, lng original image in $list
         foreach ($list as $key => $value) {
+            $list[$key]['owner_name'] = $value['owner']['name'] ?? '';
+            $list[$key]['owner_email'] = $value['owner']['email'] ?? '';
+            $list[$key]['password'] = 'password';
+            $list[$key]['owner_phone'] = $value['owner']['phone_number'] ?? '';
+            $list[$key]['categories'] = '1,2';
             $list[$key]['phone_number'] = $value['settings']['contact'] ?? '';
             $list[$key]['street_address'] = $value['address']['street_address'] ?? '';
             $list[$key]['city'] = $value['address']['city'] ?? '';
+            $list[$key]['state'] = $value['settings']['location']['state'] ?? '';
+            $list[$key]['zip'] = $value['settings']['location']['zip'] ?? '';
             $list[$key]['country'] = $value['address']['country'] ?? '';
             $list[$key]['lat'] = $value['settings']['location']['lat'] ?? '';
             $list[$key]['lng'] = $value['settings']['location']['lng'] ?? '';
@@ -430,11 +436,12 @@ class ShopController extends CoreController
             $FH = fopen('php://output', 'w');
             foreach ($list as $key => $row) {
                 if ($key === 0) {
-                    $exclude = ['id','slug','created_at', 'updated_at','cover_image','logo','shop_categories','address','settings','owner'];
+                    $exclude = ['owner_id','id','slug','created_at', 'updated_at','cover_image','logo','shop_categories','address','settings','owner'];
 
                     $row = array_diff($row, $exclude);
    
                 }
+                unset($row['owner_id']);
                 unset($row['id']);
                 unset($row['updated_at']);
                 unset($row['created_at']);
@@ -473,7 +480,7 @@ class ShopController extends CoreController
         $file = $uploadedCsv->storePubliclyAs('csv-files', 'shops'.'.' . $uploadedCsv->getClientOriginalExtension(), 'public');
         
         $shops = $this->repository->csvToArrayShop(storage_path() . '/app/public/' . $file);
-        
+
         foreach ($shops as $key => $shop) 
         {
             $owner_email_data = User::where('email',$shop['owner_email'])->first();
@@ -482,10 +489,10 @@ class ShopController extends CoreController
             $email_exist = $owner_email_data != null ? true : false;
             $phone_number_exist = $owner_number_data != null ? true : false;
             if($email_exist){
-                throw new PickbazarException(config('shop.app_notice_domain') . 'ERROR.Owner email exist '.$owner_number_data->email);
+                throw new PickbazarException(config('shop.app_notice_domain') . 'ERROR.Owner email exist '.$owner_email_data->email);
             }
             if($phone_number_exist){
-                throw new PickbazarException(config('shop.app_notice_domain') . 'ERROR.Owner phone exit '.$owner_number_data->phone_number);
+                throw new PickbazarException(config('shop.app_notice_domain') . 'ERROR.Owner phone exit '.$owner_number_data);
             }
             
             $shop_data = Shop::where('name',$shop['name'])->first();
@@ -501,7 +508,7 @@ class ShopController extends CoreController
             // }
             #-----------------------start of user creation------------------------#
             $params = array(
-                                'name'=>$shop['owner_name'],
+                                'name'=>$shop['owner_name'] ?? $shop['﻿owner_name'],
                                 'email'=>$shop['owner_email'],
                                 'password'=>Hash::make($shop['password']),
                                 'phone_number'=>$shop['owner_phone'],
@@ -541,14 +548,35 @@ class ShopController extends CoreController
                 $shop_categories = ShopCategory::select('name','id')->whereIn('id',$categories_arr)->get();
                 $shop['shop_categories'] = $shop_categories;
                 
-                #-----------------------adding setting column--------------------#
+                #-----------------------adding address column--------------------#
+                $shop['address'] = array(
+                                            "country"=>$shop['country'],
+                                            "city"=>$shop['city'],
+                                            "state"=>$shop['state'],
+                                            "zip"=>$shop['zip'],
+                                            "street_address"=>$shop['street_address']
+                                        );
+                #-----------------------adding settings column--------------------#
+                $shop['settings'] = array(
+                                            "contact"=>$shop['phone_number'],
+                                            "website"=>$shop['website'] ?? '#',
+                                            "socials"=>$shop['socials'] ?? array(),
+                                            "location"=>array(
+                                                                "lat"=>$shop['lat'] ?? '00.000',
+                                                                "lng"=>$shop['lng'] ?? '00.000',
+                                                                "city"=>$shop['city'] ?? '',
+                                                                "state"=>$shop['state'] ?? '',
+                                                                "country"=>$shop['country'] ?? '',
+                                                                "formattedAddress"=>$shop['street_address'] ?? ''
+                                            )
+                                        );
                 unset($shop['id']);
                 unset($shop['updated_at']);
                 unset($shop['created_at']);
                 unset($shop['slug']);
                 unset($shop['categories']);
-                unset($shop['settings']);
-                unset($shop['address']);
+                unset($shop['zip']);
+                unset($shop['state']);
                 unset($shop['owner']);
 
                 unset($shop['phone_number']);
@@ -560,9 +588,9 @@ class ShopController extends CoreController
                 unset($shop['original_image']);
                 unset($shop['logo_image']);
 
-                unset($shop['owner_name']);
                 unset($shop['owner_email']);
                 unset($shop['password']);
+                unset($shop['﻿owner_name']);
                 unset($shop['owner_phone']);
 
                 //unset $shop empty value
