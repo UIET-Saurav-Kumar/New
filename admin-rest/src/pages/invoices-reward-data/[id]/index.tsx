@@ -79,7 +79,9 @@ const Withdraw = () => {
   function getImage(){
     if(data?.withdraw){
       var img=JSON.parse(data?.withdraw?.bill);
-      return img.thumbnail;
+      if(img){
+        return img.thumbnail;
+      }
     }
   }
   function handleApproveWithdraw({ status ,note,approved_amount_percentage}: any) {
@@ -216,21 +218,38 @@ const Withdraw = () => {
           </Card>
         )}
 
-        
-          <Card className="flex flex-col">
-          {data?.withdraw?.note && (
-            <>
-            <div className="mb-2 text-heading font-semibold text-sm">
-              <span>{t("common:text-note")} :</span>
-            </div>
-            <div className="mb-2 text-heading font-semibold text-sm">
-              
-            </div>
-            <span className="text-body text-sm">{data?.withdraw?.note}</span>
-            </>
-            )}
-            <img src={getImage()} alt="" style={{maxWidth:"400px"}}/>
-          </Card>
+{
+  (data?.withdraw?.note||data?.withdraw?.approved_amount||getImage())&&
+  <Card className="flex flex-col" >
+  {data?.withdraw?.note && (
+    <>
+      <div className="mb-2 text-heading font-semibold text-sm">
+        <span>{t("common:text-note")} :</span>
+      </div>
+      <div className="mb-2 text-heading font-semibold text-sm">
+        <span className="text-body text-sm">{data?.withdraw?.note}</span>
+      </div>
+    </>
+  )}
+  {data?.withdraw?.approved_amount && (
+    <>
+      <div className="mb-2 text-heading font-semibold text-sm">
+        <span>{("Approved Amount")} :</span>
+      </div>
+      <div className="mb-2 text-heading font-semibold text-sm">
+        <span className="text-body text-sm">{data?.withdraw?.approved_amount}</span>
+      </div>
+    </>
+  )}
+    {
+      getImage()&&(
+        <img src={getImage()} alt="" style={{maxWidth:"400px"}}/>
+      )
+    }
+    
+  </Card>
+}        
+          
         
       </div>
     </>

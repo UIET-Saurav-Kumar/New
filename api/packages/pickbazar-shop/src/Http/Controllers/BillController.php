@@ -160,13 +160,15 @@ class BillController extends CoreController
 
         $bill->status = $status;
         $bill->note = $request->note;
-        if($request->approved_amount_percentage){
-            $amount=($request->approved_amount_percentage*$bill->bill_amount)/100;
-            $bill->approved_amount=$amount;
-            $balance = Balance::where('user_id', '=', $bill->user_id)->first();
-            $balance->total_earnings = $balance->total_earnings + $amount;
-            $balance->current_balance = $balance->current_balance + $amount;
-            $balance->save();
+        if($bill->status=="approved"){
+            if($request->approved_amount_percentage){
+                $amount=($request->approved_amount_percentage*$bill->bill_amount)/100;
+                $bill->approved_amount=$amount;
+                $balance = Balance::where('user_id', '=', $bill->user_id)->first();
+                $balance->total_earnings = $balance->total_earnings + $amount;
+                $balance->current_balance = $balance->current_balance + $amount;
+                $balance->save();
+            }
         }
 
         $bill->save();
