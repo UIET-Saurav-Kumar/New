@@ -508,7 +508,7 @@ class ShopController extends CoreController
             // }
             #-----------------------start of user creation------------------------#
             $params = array(
-                                'name'=>$shop['owner_name'] ?? $shop['﻿owner_name'],
+                                'name'=>$shop['owner_name'] ?? $shop['ï»¿owner_name'],
                                 'email'=>$shop['owner_email'],
                                 'password'=>Hash::make($shop['password']),
                                 'phone_number'=>$shop['owner_phone'],
@@ -590,7 +590,8 @@ class ShopController extends CoreController
 
                 unset($shop['owner_email']);
                 unset($shop['password']);
-                unset($shop['﻿owner_name']);
+                unset($shop['ï»¿owner_name']);
+                unset($shop['owner_name']);
                 unset($shop['owner_phone']);
 
                 //unset $shop empty value
