@@ -10,10 +10,10 @@ import Layout from "@components/layouts/admin";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Button from '@components/ui/button';
 import { yupResolver } from "@hookform/resolvers/yup";
-import { invoiceRewardValidationSchema } from "../../pages/invoices-reward/validation-schema";
-  import Description from "@components/ui/description";
-  import { useCreateInvoiceRewardMutation } from "@data/invoice-reward/use-invoice-reward.mutation";
-  import { useEffect } from "react";
+import { invoiceRewardValidationSchema } from "@data/invoices-reward-data/validation-schema";
+import Description from "@components/ui/description";
+import { useCreateInvoiceRewardMutation } from "@data/invoice-reward/use-invoice-reward.mutation";
+import { useEffect } from "react";
 
 
 interface FormValues {

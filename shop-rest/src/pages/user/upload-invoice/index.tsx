@@ -4,9 +4,9 @@ import ErrorMessage from "@components/ui/error-message";
 import Loader from "@components/ui/loader/loader";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import InvoiceUploadList from "./invoice-upload-list";
+import InvoiceUploadList from "@components/bill/invoice-upload-list";
 import LinkButton from "@components/ui/link-button";
-import { useInvoiceUploadQuery} from "./use-invoices-upload.query";
+import { useInvoiceUploadQuery} from "@data/bill-upload/use-invoices-upload.query";
 import {  useState } from "react";
 import { SortOrder } from "@ts-types/generated";
 import ProfileSidebar from "@components/profile/profile-sidebar";
@@ -53,7 +53,7 @@ export default function UploadInvoice() {
             <Card className="flex flex-col md:flex-row items-center justify-between mb-8">
               <div className="md:w-1/4 mb-4 md:mb-0">
                 <h1 className="text-lg font-semibold text-heading">
-                  {("invoice_upload")}
+                  {("invoice upload")}
                 </h1>
               </div>
 

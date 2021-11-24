@@ -16,7 +16,7 @@ import FileInput from "@components/ui/file-input-bill";
 import Label from "@components/ui/label";
 import  Button  from "@components/ui/button";
 import { toast } from "react-toastify";
-import {uploadInvoiceValidationSchema} from './use-invoice-validation-schema'
+import {uploadInvoiceValidationSchema} from '@data/bill-upload/use-invoice-validation-schema'
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useInvocieUploadMutation } from "@data/bill-upload/use-bill-upload.query";
 import { useRouter } from "next/router";

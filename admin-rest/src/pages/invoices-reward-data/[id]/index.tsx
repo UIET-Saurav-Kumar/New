@@ -106,7 +106,7 @@ const Withdraw = () => {
   return (
     <>
       <h3 className="w-full text-xl font-semibold text-heading mb-6">
-        {t("common:text-withdrawal-info")}
+        {t("Invoice Information")}
       </h3>
       <Card className="flex flex-col">
         <div className="flex flex-col md:flex-row items-start">
@@ -203,6 +203,34 @@ const Withdraw = () => {
                 }
               </span>
             </div>
+            
+            {data?.withdraw?.note && (
+              <>
+                <div className="mb-2 text-heading font-semibold text-sm">
+                  <span>{t("common:text-note")} :</span>
+                </div>
+                <div className="mb-2 text-heading font-semibold text-sm">
+                  <span className="text-body text-sm">{data?.withdraw?.note}</span>
+                </div>
+              </>
+            )}
+            {data?.withdraw?.approved_amount > 0&& (
+              <>
+                <div className="mb-2 text-heading font-semibold text-sm">
+                  <span>{("Approved Amount")} :</span>
+                </div>
+                <div className="mb-2 text-heading font-semibold text-sm">
+                  <span className="text-body text-sm">{data?.withdraw?.approved_amount}</span>
+                </div>
+              </>
+            )}
+              {
+                getImage()&&(
+                  <img src={getImage()} alt="" style={{maxWidth:"400px"}} className="mt-4"/>
+                )
+              }
+              
+            
           </div>
         </div>
       </Card>
@@ -219,35 +247,7 @@ const Withdraw = () => {
         )}
 
 {
-  (data?.withdraw?.note||data?.withdraw?.approved_amount||getImage())&&
-  <Card className="flex flex-col" >
-  {data?.withdraw?.note && (
-    <>
-      <div className="mb-2 text-heading font-semibold text-sm">
-        <span>{t("common:text-note")} :</span>
-      </div>
-      <div className="mb-2 text-heading font-semibold text-sm">
-        <span className="text-body text-sm">{data?.withdraw?.note}</span>
-      </div>
-    </>
-  )}
-  {data?.withdraw?.approved_amount && (
-    <>
-      <div className="mb-2 text-heading font-semibold text-sm">
-        <span>{("Approved Amount")} :</span>
-      </div>
-      <div className="mb-2 text-heading font-semibold text-sm">
-        <span className="text-body text-sm">{data?.withdraw?.approved_amount}</span>
-      </div>
-    </>
-  )}
-    {
-      getImage()&&(
-        <img src={getImage()} alt="" style={{maxWidth:"400px"}}/>
-      )
-    }
-    
-  </Card>
+  
 }        
           
         
