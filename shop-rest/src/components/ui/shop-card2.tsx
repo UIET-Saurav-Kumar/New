@@ -6,9 +6,21 @@ import { formatAddress } from "@utils/format-address";
 import { ROUTES } from "@utils/routes";
 import Link from "./link";
 import isEmpty from "lodash/isEmpty";
+import Avatar from 'react-avatar';
 
 type ShopCardProps = {
   shop: any;
+};
+
+const imageCheck = (logo: any , record:any, imgsize:any, imgDim:any, classname: string) => {
+  console.log(logo)
+  let check = false;
+  let splitLength = logo.split("/").length;
+  let lastSplit = logo.split("/")[splitLength - 1];
+  if (lastSplit != "") {
+    check = true;
+  }
+  return (check ? <img src={logo} alt={record?.name} style={{ objectFit: "contain" }} className={classname} />:<Avatar name={record?.name} size={imgsize} round={imgDim}  />);
 };
 
 const ShopCard2: React.FC<ShopCardProps> = ({ shop }) => {
@@ -27,13 +39,9 @@ const ShopCard2: React.FC<ShopCardProps> = ({ shop }) => {
 
                           <div className='flex p-4 px-2 rounded-lg bg-white flex-col w-auto h-auto'>
 
-                          
-
-                        
-
          <div className='h-1/2 w-full'>
-                <img  className=' h-48 w-full object-contain ' 
-                src = {shop?.logo?.thumbnail ?? "/product-placeholder.svg"} />
+            {imageCheck(shop?.logo?.thumbnail, shop, '190', false,'h-48 w-full object-contain')}
+    
           </div> 
 
               <div className='flex flex-col space-y-1 mt-8
