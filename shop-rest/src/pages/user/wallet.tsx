@@ -83,7 +83,7 @@ const ReferralActivity = () => {
 
                             {/* Mini Dashboard */}
                             <div className="order-4 mx-auto xl:order-3 col-span-12 xl:col-span-9">
-                                <div className="grid grid-cols-1 md:grid-cols-4  bg-light p-4 mx-auto rounded h-full">
+                                <div className="grid grid-cols-1 md:grid-cols-4 gap-5 bg-light p-4 mx-auto rounded h-full">
                                 
 
                                 <div className="space-y-3  w-full" style={{maxWidth:"250px"}}>
