@@ -9,6 +9,7 @@ import Scrollbar from "@components/ui/scrollbar";
 import styles from "./profile-card.module.css";
 import { getIcon } from "@utils/get-icon";
 import * as socialIcons from "@components/icons/social";
+import Avatar from 'react-avatar';
 
 type ShopProfileCardProps = {
   data: any;
@@ -28,7 +29,16 @@ type ShopProfileCardProps = {
     function handleMoreInfoModal() {
       return openModal("SHOP_INFO", data);
     }
-    console.log('shop data', data.address.street_address);
+    const imageCheck = (logo: any , record:any, imgsize:any, imgDim:any, classname: string) => {
+      console.log(logo)
+      let check = false;
+      let splitLength = logo.split("/").length;
+      let lastSplit = logo.split("/")[splitLength - 1];
+      if (lastSplit != "") {
+        check = true;
+      }
+      return (check ? <Image src={logo} alt={record?.name} className={classname} width={200} height={200} />:<Avatar name={record?.name} size={imgsize} round={imgDim} maxInitials={2} />);
+    }
 
   return (
     <>
@@ -74,17 +84,8 @@ type ShopProfileCardProps = {
 
               <div className="w-full h-34 rounded-lg flex justify-center flex-col space-y-2 mt-0 sm:-mt-8 relative mx-auto 
                               overflow-hidden mb-8">
-
+                  {imageCheck(data?.logo?.original, data, '250', false,'object-contain sm:object-contain rounded md:object-contain lg:object-contain mx-auto w-28 h-28 lg:h-40 lg:w-40')}              
                   
-
-                  <img
-                    alt = {t("logo")}
-                    src = {data?.logo?.original! ?? "/product-placeholder.svg"}
-                    // layout="fill"
-                    className='object-contain sm:object-contain  rounded md:object-contain 
-                               lg:object-contain mx-auto w-28 h-28 lg:h-40 lg:w-40'
-                    // objectFit = "fill"
-                  />
                    <span className="text-sm sm:hidden text-center font-light tracking-wide  text-gray-600 ">
 
                       {data && data?.address.street_address}

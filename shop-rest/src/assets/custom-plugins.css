@@ -237,3 +237,12 @@ Overlay Scrollbar - os-theme-thin-dark
   > .os-scrollbar-handle:before {
   transition: width 0.3s, margin-left 0.3s, background 0.2s;
 }
+
+.h-80 > div:nth-child(2) > .sb-avatar--text {
+  width: auto !important;
+}
+
+.h-80 > div:nth-child(2) > div:nth-child(1) > .sb-avatar__text {
+width: auto !important;
+}
+ 

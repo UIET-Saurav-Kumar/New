@@ -19,6 +19,7 @@
     "camelcase-keys": "^7.0.0",
     "classnames": "^2.3.1",
     "cleave.js": "^1.6.0",
+    "core-js": "2",
     "dayjs": "^1.10.5",
     "framer-motion": "4.1.17",
     "js-cookie": "^2.2.1",
@@ -33,6 +34,7 @@
     "rc-pagination": "^3.1.9",
     "rc-table": "^7.17.0",
     "react": "17.0.2",
+    "react-avatar": "^3.7.0",
     "react-content-loader": "^6.0.3",
     "react-copy-to-clipboard": "^5.0.3",
     "react-countup": "^5.2.0",
@@ -53,8 +55,7 @@
     "swiper": "^6.7.5",
     "yup": "^0.32.9"
   },
-
-    "devDependencies": {
+  "devDependencies": {
     "@types/body-scroll-lock": "^2.6.1",
     "@types/cleave.js": "^1.4.4",
     "@types/js-cookie": "^2.2.6",
