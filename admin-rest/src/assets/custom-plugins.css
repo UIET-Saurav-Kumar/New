@@ -651,3 +651,12 @@ Overlay Scrollbar - os-theme-thin-dark
   > .os-scrollbar-handle:before {
   transition: width 0.3s, margin-left 0.3s, background 0.2s;
 }
+
+.order-1 > div:nth-child(1) {
+  width: auto !important;
+ }
+ 
+ .order-1 > div:nth-child(1) > div:nth-child(1) {
+  width: auto !important;
+ }
+

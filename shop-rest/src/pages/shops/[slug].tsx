@@ -24,14 +24,22 @@ import { useModalAction } from "@components/ui/modal/modal.context"
 import CategoryCard from "@components/ui/category-card";
 import AllCategories from "@components/home-page-product-section/AllCategories";
 import Layout from "@components/layout/layout";
-
-
-
+import Avatar from 'react-avatar';
 
 const CartCounterButton = dynamic(
   () => import("@components/cart/cart-counter-button"),
   { ssr: false }
 );
+const imageCheck = (logo: any , record:any, imgsize:any, imgDim:any, classname: string) => {
+  console.log(logo)
+  let check = false;
+  let splitLength = logo.split("/").length;
+  let lastSplit = logo.split("/")[splitLength - 1];
+  if (lastSplit != "") {
+    check = true;
+  }
+  return (check ? <Image src={logo} alt={record?.name}  width={1500} height={200} className={classname} />:<Avatar name={record?.name} size={imgsize} round={imgDim}  />);
+}
 
 const ShopPage = ({ data }: any) => {
   
@@ -84,13 +92,8 @@ const ShopPage = ({ data }: any) => {
                                 </div>
                                 
                                 <div className='flex w-full'>
-                                  <img
-                                  alt={t("heading")}
-                                  src={data?.cover_image?.original! ?? "/product-placeholder.svg"}
-                                  className='h-full w-full object-fill'
-                                  // layout="fill"
-                                  // objectFit="contain"
-                                  /> 
+                                  {imageCheck(data?.cover_image?.original, data, '317', false,'h-full w-full object-fill')}
+                                  
                               </div>
           
                             </div>

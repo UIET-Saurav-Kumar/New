@@ -9,7 +9,8 @@ import Badge from "@components/ui/badge/badge";
 import Checkbox from "@components/ui/checkbox/checkbox";
 import { ShopPaginator } from "@ts-types/generated";
 import { useUpdateShopMutation } from "@data/shop/use-shop-update.mutation";
-import { conforms } from "lodash";
+import { conforms, split } from "lodash";
+import Avatar from 'react-avatar';
 
 type IProps = {
   shops: ShopPaginator | null | undefined;
@@ -22,6 +23,15 @@ const ShopList = ({ shops, onPagination }: IProps) => {
   const { t } = useTranslation();
   const { alignLeft, alignRight } = useIsRTL();
   const { mutate: updateShop, isLoading: updating } = useUpdateShopMutation();
+
+  const imageCheck = (logo: any , record:any) => {
+    let check = false;
+    let lastSplit = split(logo?.thumbnail, "/")[split(logo?.thumbnail, "/").length - 1];
+    if (lastSplit != "") {
+      check = true;
+    }
+    return (check ? <Image src={logo?.thumbnail ?? siteSettings.product.placeholder} alt={record?.name} layout="fixed" width={42} height={42} className="rounded overflow-hidden" />:<Avatar name={record?.name} size={42} round={true} maxInitials={2} />);
+  }
 
   function checkboxChanged(e:any){
     var id=e.target.id.split('_')[1];
@@ -45,16 +55,7 @@ const ShopList = ({ shops, onPagination }: IProps) => {
       key: "logo",
       align: "center",
       width: 74,
-      render: (logo: any, record: any) => (
-        <Image
-          src={logo?.thumbnail ?? siteSettings.product.placeholder}
-          alt={record?.name}
-          layout="fixed"
-          width={42}
-          height={42}
-          className="rounded overflow-hidden"
-        />
-      ),
+      render: (logo: any, record: any) => (imageCheck(logo,record)),
     },
     {
       title: t("table:table-item-title"),
