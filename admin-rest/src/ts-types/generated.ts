@@ -931,7 +931,10 @@ export declare type CreateWithdrawInput = {
   details?: Maybe<Scalars["String"]>;
   note?: Maybe<Scalars["String"]>;
 };
-
+export declare type CreateInvoiceRewardInput = {
+  cashback_percentage: Scalars["Float"];
+  max_cashback: Scalars["Float"];
+};
 export declare type AddStaffInput = {
   email: Scalars["String"];
   password: Scalars["String"];

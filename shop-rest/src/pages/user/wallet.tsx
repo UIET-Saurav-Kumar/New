@@ -32,7 +32,11 @@ const ReferralActivity = () => {
             amount: data?.balance?.withdrawn_amount!,
         }
     );
-    
+    const { price: bill_transfered_amount } = usePrice(
+        data && {
+            amount: data?.bill_transfered_amount!,
+        }
+    );
     function formateDate(date:string):string{
         var temp=date.substring(0,10).split('-');
         
@@ -79,10 +83,10 @@ const ReferralActivity = () => {
 
                             {/* Mini Dashboard */}
                             <div className="order-4 mx-auto xl:order-3 col-span-12 xl:col-span-9">
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-5 bg-light p-4 mx-auto rounded h-full">
+                                <div className="grid grid-cols-1 md:grid-cols-4  bg-light p-4 mx-auto rounded h-full">
                                 
 
-                                <div className="space-y-3  w-full">
+                                <div className="space-y-3  w-full" style={{maxWidth:"250px"}}>
                                     <div className="border border-gray-100">
 
                                         <div className="flex items-center py-3 px-4 border-b border-gray-100">
@@ -106,7 +110,7 @@ const ReferralActivity = () => {
                                 </div>
 
 
-                                <div className="space-y-3">
+                                <div className="space-y-3" style={{maxWidth:"250px"}}>
                                     <div className="border border-gray-100">
                                         <div className="flex items-center  py-3 px-4">
                                             <div className="p-3 rounded-full w-11 h-11 flex items-center justify-center bg-[#FFA7AE] text-light">
@@ -127,7 +131,7 @@ const ReferralActivity = () => {
 
 
 
-                                <div className="space-y-3">
+                                <div className="space-y-3" style={{maxWidth:"250px"}}>
                                     <div className="border border-gray-100">
                                         <div className="flex items-center py-3 px-4">
                                             <div className="p-3 rounded-full w-11 h-11 flex items-center justify-center bg-[#6EBBFD] text-light">
@@ -145,7 +149,24 @@ const ReferralActivity = () => {
                                         </div>
                                     </div>
                                 </div>
+                                <div className="space-y-3" style={{maxWidth:"250px"}}>
+                                    <div className="border border-gray-100">
+                                        <div className="flex items-center py-3 px-4">
+                                            <div className="p-3 rounded-full w-11 h-11 flex items-center justify-center bg-[#6EBBFD] text-light">
+                                               <DollarIcon width={12} />
+                                            </div>
 
+                                            <div className="ml-3">
+                                                <p className="text-md lg:text-lg font-semibold text-sub-heading mb-0.5">
+                                                    {bill_transfered_amount}
+                                                </p>
+                                                <p className="text-sm text-muted mt-0">
+                                                    {("Transfered Amount")}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
                             </div>
                         </div>

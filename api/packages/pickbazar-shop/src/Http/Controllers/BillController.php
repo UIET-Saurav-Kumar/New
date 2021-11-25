@@ -8,12 +8,12 @@ use PickBazar\Enums\Permission;
 use PickBazar\Database\Models\Bill;
 use PickBazar\Enums\WithdrawStatus;
 use Illuminate\Support\Facades\Schema;
-
 use PickBazar\Database\Models\Balance;
 use Illuminate\Database\Schema\Blueprint;
 use PickBazar\Exceptions\PickbazarException;
 use Illuminate\Database\Migrations\Migration;
 use PickBazar\Database\Repositories\BillRepository;
+use App\Models\BillReward;
 
 class BillController extends CoreController
 {
@@ -32,8 +32,8 @@ class BillController extends CoreController
     public function index(Request $request)
     {
         $limit = $request->limit ?   $request->limit : 15;
-        $user=$request->user();
-        if ($user && $user->hasPermissionTo(Permission::SUPER_ADMIN)){
+        $user = $request->user();
+        if ($user && $user->hasPermissionTo(Permission::SUPER_ADMIN)) {
             return $this->repository->paginate($limit);
         }
         return $this->repository->where('user_id', '=', $user->id)->paginate($limit);
@@ -47,7 +47,7 @@ class BillController extends CoreController
         if ($user->id) {
             return $this->repository->where('user_id', '=', $user->id)->paginate($limit);
         }
-    }   
+    }
 
     public function fetchWithdraws(Request $request)
     {
@@ -85,9 +85,9 @@ class BillController extends CoreController
     public function store(Request $request)
     {
         $user = $request->user();
-        $data=$request->all();
-        $data['user_id']=$user->id;
-        $data['bill']=json_encode(json_decode($data['bill']));
+        $data = $request->all();
+        $data['user_id'] = $user->id;
+        $data['bill'] = json_encode(json_decode($data['bill']));
 
         return $this->repository->create($data);
     }
@@ -112,9 +112,8 @@ class BillController extends CoreController
         } catch (\Exception $e) {
             throw new PickbazarException('PICKBAZAR_ERROR.NOT_FOUND');
         }
-        
+
         return $bill;
-        
     }
 
     /**
@@ -160,10 +159,14 @@ class BillController extends CoreController
 
         $bill->status = $status;
         $bill->note = $request->note;
-        if($bill->status=="approved"){
-            if($request->approved_amount_percentage){
-                $amount=($request->approved_amount_percentage*$bill->bill_amount)/100;
-                $bill->approved_amount=$amount;
+        if ($bill->status == "approved") {
+            if ($request->approved_amount_percentage) {
+                $reward=BillReward::find(1);
+                $amount = ($request->approved_amount_percentage * $reward->cashback_percentage) / 100;
+                if($amount>$reward->max_cashback){
+                    $amount=$reward->max_cashback;
+                }
+                $bill->approved_amount = $amount;
                 $balance = Balance::where('user_id', '=', $bill->user_id)->first();
                 $balance->total_earnings = $balance->total_earnings + $amount;
                 $balance->current_balance = $balance->current_balance + $amount;
@@ -174,5 +177,21 @@ class BillController extends CoreController
         $bill->save();
 
         return $bill;
+    }
+
+    public function billReward(Request $request)
+    {
+        $bill_reward = BillReward::find(1);
+        if ($bill_reward) {
+            $bill_reward->update($request->all());
+        } else {
+            BillReward::create($request->all());
+        }
+        return $bill_reward;
+    }
+
+    public function getbillReward()
+    {
+        return BillReward::find(1);
     }
 }

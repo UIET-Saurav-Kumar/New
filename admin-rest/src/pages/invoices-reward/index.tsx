@@ -12,17 +12,18 @@ import Button from '@components/ui/button';
 import { yupResolver } from "@hookform/resolvers/yup";
 import { invoiceRewardValidationSchema } from "@data/invoices-reward-data/validation-schema";
 import Description from "@components/ui/description";
-import { useCreateInvoiceRewardMutation } from "@data/invoice-reward/use-invoice-reward.mutation";
+import { useCreateInvoiceRewardMutation } from "@data/invoices-reward/use-invoice-reward.mutation";
+import { useBillRewardQuery } from "@data/invoices-reward/use-invoice-reward.query";
 import { useEffect } from "react";
 
 
 interface FormValues {
-  cashback: number;
+  cashback_percentage: number;
   max_cashback: number;
   }
 
   const defaultValues = {
-    cashback: 0,
+    cashback_percentage: 0,
     max_cashback: 0,
 };
 
@@ -30,11 +31,14 @@ interface FormValues {
     initialValues?: BillCashback | null;
   };
 
-export default function InvoicesReward({initialValues}:IProps) {
+export default function InvoicesReward() {
 
-    const { t } = useTranslation("common");
-    // const { mutate: registerInvoiceReward, isLoading: loading } = useCreateInvoiceRewardMutation();
-
+  const { t } = useTranslation("common");
+  const { mutate: registerInvoiceReward, isLoading: loading } = useCreateInvoiceRewardMutation();
+  const {
+    data
+  } = useBillRewardQuery();
+  
   const {
     register,
     handleSubmit,
@@ -42,23 +46,24 @@ export default function InvoicesReward({initialValues}:IProps) {
     formState: { errors },
   } = useForm<FormValues>({
     shouldUnregister: true,
-    defaultValues: initialValues?initialValues:defaultValues,
+    defaultValues: data?.reward ? data.reward : defaultValues,
     resolver: yupResolver(invoiceRewardValidationSchema),
   });
 
   useEffect(()=>{
-    if(initialValues){
-      document.getElementById('cashback').value=initialValues?.cashback
-      document.getElementById('max_cashback').value=initialValues?.max_cashback
+    if(data){
+      console.log(data.reward,'data')
+      document.getElementById('cashback_percentage').value=data.reward?.cashback_percentage
+      document.getElementById('max_cashback').value=data.reward?.max_cashback
     }
-  },[initialValues])
+  },[data])
   
-  async function onSubmit({ cashback, max_cashback}: FormValues) {
+  async function onSubmit({ cashback_percentage, max_cashback}: FormValues) {
     registerInvoiceReward(
       {
         variables: {
-            cashback,
-            max_cashback,
+          cashback_percentage,
+          max_cashback,
         },
       },
       {
@@ -88,17 +93,19 @@ export default function InvoicesReward({initialValues}:IProps) {
           title={t("Invoices Cashback ")}
           details={("Set Cashback Amount")}
           className="w-full px-0 sm:pe-4 md:pe-5 pb-5 sm:w-4/12 md:w-1/3 sm:py-8"
+          
         />
 
         <Card className="w-full sm:w-8/12 md:w-2/3">
           <Input
             label={("Cashback (%)")}
-            {...register("cashback")}
+            {...register("cashback_percentage")}
             type="text"
             variant="outline"
+            id="cashback_percentage"
             className="mb-4"
             placeholder='%'
-            error={t(errors.cashback?.message!)}
+            error={t(errors.cashback_percentage?.message!)}
           />
 
           <Input
@@ -108,6 +115,7 @@ export default function InvoicesReward({initialValues}:IProps) {
             variant="outline"
             className="mb-4"
             placeholder='₹'
+            id="max_cashback"
             error={t(errors.max_cashback?.message!)}
           />
         </Card>

@@ -202,6 +202,8 @@ Route::group(['middleware' => ['can:' . Permission::CUSTOMER, 'auth:sanctum']], 
 
 Route::resource('bill',BillController::class);
 Route::post('approve-bill','PickBazar\Http\Controllers\BillController@approveBill');
+Route::post('bill-reward','PickBazar\Http\Controllers\BillController@billReward');
+Route::get('bill-reward','PickBazar\Http\Controllers\BillController@getbillReward');
 
 
 Route::group(

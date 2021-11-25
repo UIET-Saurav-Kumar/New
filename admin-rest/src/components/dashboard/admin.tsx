@@ -69,7 +69,7 @@ export default function Dashboard() {
   console.log('dashboard',data)
   return (
     <>
-      <div className="w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-5 mb-6">
+      <div className="w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2 mb-6">
         <div className="w-full ">
           <StickerCard
             titleTransKey="sticker-card-title-rev"
@@ -110,6 +110,15 @@ export default function Dashboard() {
             price={data?.newCustomers}
           />
         </div>
+        <div className="w-full">
+          <StickerCard
+            titleTransKey="Invoice Transfered Amount"
+            icon={<img src='/team.png' className='h-10 w-10' />}
+            iconBgStyle={{ backgroundColor: "rgb(240, 161, 54)" }}
+            price={"$"+data?.bill_transfered_amount}
+          />
+        </div>
+        
       </div>
 
       <div className="w-full flex flex-wrap mb-6">

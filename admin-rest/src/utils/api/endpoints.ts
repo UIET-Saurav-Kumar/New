@@ -73,6 +73,7 @@ export const API_ENDPOINTS = {
   ALL_TAXES:"all-taxes",
   INVOICES_REWARD: 'invoices-reward',
   BILL: 'bill',
+  BILL_REWARD: 'bill-reward',
   APPROVE_BILL: "approve-bill",
 };
 

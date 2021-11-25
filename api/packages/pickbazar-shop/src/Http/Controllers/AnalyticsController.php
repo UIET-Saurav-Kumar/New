@@ -2,15 +2,16 @@
 
 namespace PickBazar\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use PickBazar\Database\Repositories\AddressRepository;
 use Carbon\Carbon;
-use Illuminate\Validation\ValidationException;
-use PickBazar\Database\Models\Product;
-use PickBazar\Database\Models\Shop;
+use Illuminate\Http\Request;
 use PickBazar\Enums\Permission;
+use Illuminate\Support\Facades\DB;
+use PickBazar\Database\Models\Bill;
+use PickBazar\Database\Models\Shop;
+use PickBazar\Database\Models\Product;
 use PickBazar\Exceptions\PickbazarException;
+use Illuminate\Validation\ValidationException;
+use PickBazar\Database\Repositories\AddressRepository;
 use Spatie\Permission\Models\Permission as ModelsPermission;
 
 class AnalyticsController extends CoreController
@@ -28,6 +29,7 @@ class AnalyticsController extends CoreController
         $user = $request->user();
         if ($user && ($user->hasPermissionTo(Permission::SUPER_ADMIN) || $user->hasPermissionTo(Permission::STORE_OWNER))) {
             $totalRevenueQuery = DB::table('orders')->whereDate('created_at', '>', Carbon::now()->subDays(30));
+
             if ($user && $user->hasPermissionTo(Permission::SUPER_ADMIN)) {
                 $totalRevenue = $totalRevenueQuery->sum('paid_total');
             } else {
@@ -91,13 +93,20 @@ class AnalyticsController extends CoreController
                     }
                 }
             }
+
+            $invoice_bills = Bill::all();
+            $bill_transfered_amount=0;
+            foreach($invoice_bills as $bill){
+                $bill_transfered_amount+=$bill->approved_amount;
+            }
             return [
                 'totalRevenue' => $totalRevenue,
                 'totalShops' => $totalShops,
                 'todaysRevenue' => $todaysRevenue,
                 'totalOrders' => $totalOrders,
                 'newCustomers' =>  $newCustomers,
-                'totalYearSaleByMonth' => $processedData
+                'totalYearSaleByMonth' => $processedData,
+                'bill_transfered_amount' =>$bill_transfered_amount
             ];
         }
         throw new PickbazarException('PICKBAZAR_ERROR.NOT_AUTHORIZED');
