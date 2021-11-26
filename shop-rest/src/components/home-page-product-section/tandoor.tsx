@@ -20,8 +20,11 @@ export default function Tandoor() {
 		return pathname;
 		// +"?text="+text;
 	}
+
+    const address = getLocation?.formattedAddress;
+
     function location(){
-      return  getLocation?.formattedAddress.includes('Chandigarh')
+      return  address.includes('Mohali') || address.includes('Chandigarh') || address.includes('Panchkula')
     }
 
 
