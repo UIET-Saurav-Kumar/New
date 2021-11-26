@@ -1,5 +1,4 @@
 
-import Image from "next/image";
 import ShopProductFeed from "@components/product/feed-shop";
 import { fetchShop } from "@data/shop/use-shop.query";
 import { useTranslation } from "next-i18next";
@@ -13,16 +12,7 @@ import { QueryClient } from "react-query";
 import { fetchProducts } from "@data/product/use-products.query";
 import { fetchSettings } from "@data/settings/use-settings.query";
 import { dehydrate } from "react-query/hydration";
-import ShopCategoryCard from "@components/category/shop-category-card";
-import Navbar from "@components/layout/navbar/navbar";
-import ShopPaymentForm from "./shop-payment-form";
-import ShopDescription from "./shop-description";
-import ShopMobileView from "./shop-mobile-view";
-import ShopBanner from "./shop-banner";
-import WebShopBanner from "./web-shop-banner";
 import { useModalAction } from "@components/ui/modal/modal.context"
-import CategoryCard from "@components/ui/category-card";
-import AllCategories from "@components/home-page-product-section/AllCategories";
 import Layout from "@components/layout/layout";
 
 
