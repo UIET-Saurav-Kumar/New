@@ -24,7 +24,7 @@ import { useModalAction } from "@components/ui/modal/modal.context"
 import CategoryCard from "@components/ui/category-card";
 import AllCategories from "@components/home-page-product-section/AllCategories";
 import Layout from "@components/layout/layout";
-import TandoorPage from ".";
+
 
 
 
