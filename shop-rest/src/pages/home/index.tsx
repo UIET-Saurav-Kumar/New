@@ -26,6 +26,7 @@ import MobileNavigation from "@components/layout/mobile-navigation";
 import StayTuned from '@components/no-shop-msg/stay-tuned'
 import { useShopAvailabilityQuery } from "@data/home/use-shop-availability-query";
 import { useLocation } from "@contexts/location/location.context";
+import Tandoor from "@components/home-page-product-section/tandoor";
 
 
 
@@ -121,6 +122,7 @@ const {
               <>
                 <ImageSlider/>
                 <AllCategories/>
+                <Tandoor/>
                 <FeaturedShops />
                 <FeaturedProducts/>
                 <ProductGrid/>
