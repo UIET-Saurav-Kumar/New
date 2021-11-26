@@ -12,7 +12,7 @@ export default function InvoiceBanner() {
     const { type } = query;
 
     function getLink() {
-		var pathname="/"+router.locale+"/user/upload-invoice";
+		var pathname="/user/upload-invoice";
 		// const { type, ...rest } = query;
 		// var text=(query.text)?query.text:"";
 
