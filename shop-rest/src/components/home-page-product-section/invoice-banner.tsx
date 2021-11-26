@@ -25,7 +25,7 @@ export default function InvoiceBanner() {
 
      <Link href={getLink()}>   
    <div className='flex w-full mt-8 md:mt-10 h-auto border'>   
-   <img src='/invoice.jpg' className=' md:h-auto object-contain pt-0 lg:w-full -sm-pt-60 lg:object-contain lg:mt-8 xl:object-cover'/>
+   <img src='/invoice.jpg' className=' md:h-auto object-contain cursor-pointer pt-0 lg:w-full -sm-pt-60 lg:object-contain lg:mt-8 xl:object-cover'/>
             
               </div> 
         </Link>
