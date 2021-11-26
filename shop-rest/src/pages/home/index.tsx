@@ -27,6 +27,7 @@ import StayTuned from '@components/no-shop-msg/stay-tuned'
 import { useShopAvailabilityQuery } from "@data/home/use-shop-availability-query";
 import { useLocation } from "@contexts/location/location.context";
 import Tandoor from "@components/home-page-product-section/tandoor";
+import InvoiceBanner from "@components/home-page-product-section/invoice-banner";
 
 
 
@@ -121,6 +122,7 @@ const {
             (
               <>
                 <ImageSlider/>
+                <InvoiceBanner/>
                 <AllCategories/>
                 <Tandoor/>
                 <FeaturedShops />
