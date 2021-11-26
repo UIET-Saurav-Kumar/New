@@ -25,7 +25,7 @@ export default function Tandoor() {
 
      <Link className="categories-link"  href={getLink('Tandoors of Chandigarh')}>   
    <div className='flex w-full mt-0 -sm-mt-60 border'>   
-   <img src='/tandoor-banner.jpg' className=' md:h-70 object-contain pt-0 lg:w-full -sm-pt-60 lg:object-contain lg:mt-8 xl:object-cover'/>
+   <img src='/tandoor-banner.jpg' className=' md:h-70 object-contain pt-0 cursor-pointer lg:w-full -sm-pt-60 lg:object-contain lg:mt-8 xl:object-cover'/>
             
               </div> 
         </Link>
