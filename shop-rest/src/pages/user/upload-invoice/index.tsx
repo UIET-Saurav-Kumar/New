@@ -12,13 +12,29 @@ import { SortOrder } from "@ts-types/generated";
 import ProfileSidebar from "@components/profile/profile-sidebar";
 import SortForm from "@components/common/sort-form";
 import Navbar from '@components/layout/navbar/navbar';
+import { useModalAction } from "@components/ui/modal/modal.context";
+import { useCustomerQuery } from "@data/customer/use-customer.query";
+import { useEffect } from "react";
+import { useUI } from "@contexts/ui.context";
+
 
 export default function UploadInvoice() {
   const { t } = useTranslation();
   const [page, setPage] = useState(1);
   const [orderBy, setOrder] = useState("created_at");
   const [sortedBy, setColumn] = useState<SortOrder>(SortOrder.Desc);
-
+  const { refetch } = useCustomerQuery();
+  const { isAuthorize } = useUI();
+  const { openModal } = useModalAction();
+  
+  useEffect(() => {
+    if (!isAuthorize) {
+      return openModal("LOGIN_VIEW");
+    }
+    if (isAuthorize) {
+      refetch();
+    }
+  }, [isAuthorize]);
 
   const {
     data,
