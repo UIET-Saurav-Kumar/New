@@ -4,6 +4,7 @@ import { ROUTES } from "@utils/routes";
 import { useRouter } from "next/router";
 import { useFeatureShopQuery } from "@data/home/use-feature-shop-query";
 import { useLocation } from "@contexts/location/location.context";
+import Avatar from 'react-avatar';
 
 export default function FeaturesShops({ }) {
 
@@ -12,6 +13,17 @@ export default function FeaturesShops({ }) {
     const { type } = query;
     const router = useRouter();
     const {getLocation} =useLocation()
+
+    const imageCheck = (logo: any , record:any, imgsize:any, imgDim:any, classname: string) => {
+        console.log(logo)
+        let check = false;
+        let splitLength = logo.split("/").length;
+        let lastSplit = logo.split("/")[splitLength - 1];
+        if (lastSplit != "") {
+          check = true;
+        }
+        return (check ? <img src={logo} alt={record?.name} style={{ objectFit: "contain" }} className={classname} />:<Avatar name={record?.name} size={imgsize} round={imgDim}  />);
+      }
 
     const {
         data,
@@ -63,11 +75,8 @@ export default function FeaturesShops({ }) {
                                    
                                           {/* <img className='rounded-0 w-10 h-10 xs+:w-16 xs+:h-16 xs++:w-20 xs++:h-20 sm:w-28 
                                                           sm:h-24 md:w-20 lg:w-28 lg:h-32 2xl:w-38 2xl:h-38'  */}
-                                                          <img className='  w-16 h-16 xs++:w-16 xs++:h-16 xs+++:w-20 xs+++:h-20 sm:w-20 sm:h-20 
-                                                                md:w-16 md:h-16 ml-2  lg:w-28 lg:h-28 lg+:w-28 lg+:h-28 xl+:w-32 xl+:h-32 xl++:w-32 
-                                                                xl++:h-32 2xl:w-32 2xl:h-32 object-contain'  
-                                                               src={shop.logo?.thumbnail}
-                                                               style={{ objectFit: "contain" }} />
+                                                     
+                                        {imageCheck(shop.logo?.thumbnail, shop, '130', false,'w-16 h-16 xs++:w-16 xs++:h-16 xs+++:w-20 xs+++:h-20 sm:w-20 sm:h-20 md:w-16 md:h-16 ml-2  lg:w-28 lg:h-28 lg+:w-28 lg+:h-28 xl+:w-32 xl+:h-32 xl++:w-32 xl++:h-32 2xl:w-32 2xl:h-32 object-contain')}
         
                                     <div className='flex flex-col justify-center w-20 sm+:ml-0 md-w-24 lg:w-38 2xl:w-64 2xl:h-40 space-y-1 px-2 md:px-3 lg:px-4 2xl:px-4'>
                                         <h3 className='font-semibold text-10px  md:text-md lg:text-sm 2xl:text-lg  '> {shop.name}</h3>
