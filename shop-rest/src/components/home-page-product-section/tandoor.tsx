@@ -1,8 +1,7 @@
 import React from 'react'
 import Link from 'next/link';
-import { useCategoriesQuery } from "@data/home/use-categories-query";
 import { useRouter } from "next/router";
-import { tail } from 'lodash';
+import { useLocation } from "@contexts/location/location.context";
 
 
 export default function Tandoor() {
@@ -10,6 +9,8 @@ export default function Tandoor() {
     const router = useRouter();
 	const { query } = useRouter();
     const { type } = query;
+    const {getLocation} =useLocation()
+
 
     function getLink(tandoor :any) {
 		var pathname="/"+router.locale+"/tandoor-page?category="+tandoor.replace("&","-");
@@ -19,15 +20,18 @@ export default function Tandoor() {
 		return pathname;
 		// +"?text="+text;
 	}
+    function location(){
+      return  getLocation?.formattedAddress.includes('Chandigarh')
+    }
 
 
     return (
 
-     <Link className="categories-link"  href={getLink('Tandoors of Chandigarh')}>   
+    <div className={` ${location() ? 'block' : 'hidden'}`}><Link className="categories-link"  href={getLink('Tandoors of Chandigarh')}>   
    <div className='flex w-full mt-0 -sm-mt-60 border'>   
-   <img src='/tandoor-banner.jpg' className=' md:h-70 object-contain pt-0 cursor-pointer lg:w-full -sm-pt-60 lg:object-contain lg:mt-8 xl:object-cover'/>
+   <img src='/tandoor-banner.jpg' className=' md:h-70 object-contain pt-0 lg:w-full -sm-pt-60 lg:object-contain lg:mt-8 xl:object-cover'/>
             
               </div> 
-        </Link>
+        </Link></div>
     )
 }
