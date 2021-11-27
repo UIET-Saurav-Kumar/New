@@ -20,7 +20,7 @@ export default class CustomDocument extends Document {
       i18n!.reloadResources(locale);
     }
 
-    const envVariable = `${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`
+    // const envVariable = `${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`
 
     return (
       <Html>

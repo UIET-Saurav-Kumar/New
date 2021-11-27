@@ -32,7 +32,7 @@ import MobileJoinButton from "@components/layout/navbar/mobile-join-button";
 import { useFeatureProductQuery } from "@data/home/use-feature-product-query";
 import { motion } from "framer-motion";
 import renderProductCard from "@components/product/home-product-card";
-
+import { Head } from "next/document";
 import Layout from "@components/layout/layout";
 
 
@@ -126,7 +126,18 @@ const TandoorsPage = () => {
  console.log('tandoorArray',tandoorArray);
 
   return (
+  <>
 
+       <Head>
+       <title>{'title-heading'}</title>
+    <meta property="og:type" content="website"/>
+    <meta name="description" content='Discover the oldest Traditional tandoors shops established in Chandigarh since 1980s'/>
+    <meta property="og:title" content='Tandoors of chandigarh'/>
+    <meta name="keywords" content='Local Tandoor shops, traditionnal tandoor shops of chandigarh'/>
+   
+        
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
     <div className='bg-gray-50'>
         <div  className="container-fluid mt-0 border-10  border-red-200 ">
               
@@ -159,7 +170,7 @@ const TandoorsPage = () => {
         {/* <ChachaSlider/> */}
 
        {/* <div className=' grid grid-cols-1 lg:flex lg:items-center justify-evenly w-full pt-0 bg-gray-50 h-96  p-4'> */}
-          <h3 className='text-center text-lg lg:text-2xl mt-6 p-4 font-semibold w-full '>Discover the Tandoor Recipes</h3>
+          <h3 className=' tandoor-heading text-center text-lg lg:text-2xl mt-6 p-4 font-semibold w-full '>Discover the Tandoor Recipes</h3>
           <div className='w-full  flex justify-center space-x-2 items-center'>
               {/* <img src='tandoor-food.png' className='w-24 h-full object-cover'/>
               <img src='tandoor-food.png' className='w-24 h-full object-cover'/>
@@ -277,7 +288,7 @@ const TandoorsPage = () => {
   }
        
     </div>
-    
+    </>
   );
 };
 
