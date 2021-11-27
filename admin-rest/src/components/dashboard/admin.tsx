@@ -121,7 +121,7 @@ export default function Dashboard() {
         
       </div>
 
-      <div className="w-full flex flex-wrap mb-6">
+      {/* <div className="w-full flex flex-wrap mb-6">
         <ColumnChart
           widgetTitle="Sale History"
           colors={["#03D3B5"]}
@@ -141,7 +141,7 @@ export default function Dashboard() {
             t("common:december"),
           ]}
         />
-      </div>
+      </div> */}
 
       <div className="w-full flex flex-wrap mb-6">
         <div className="w-full sm:w-1/2 xl:w-1/2 sm:px-3 sm:pl-0 mb-6 xl:mb-0">
