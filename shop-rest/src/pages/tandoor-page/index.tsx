@@ -32,7 +32,6 @@ import MobileJoinButton from "@components/layout/navbar/mobile-join-button";
 import { useFeatureProductQuery } from "@data/home/use-feature-product-query";
 import { motion } from "framer-motion";
 import renderProductCard from "@components/product/home-product-card";
-import { Head } from "next/document";
 import Layout from "@components/layout/layout";
 
 
@@ -128,16 +127,7 @@ const TandoorsPage = () => {
   return (
   <>
 
-       <Head>
-       <title>{'title-heading'}</title>
-    <meta property="og:type" content="website"/>
-    <meta name="description" content='Discover the oldest Traditional tandoors shops established in Chandigarh since 1980s'/>
-    <meta property="og:title" content='Tandoors of chandigarh'/>
-    <meta name="keywords" content='Local Tandoor shops, traditionnal tandoor shops of chandigarh'/>
-   
-        
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head>
+       
     <div className='bg-gray-50'>
         <div  className="container-fluid mt-0 border-10  border-red-200 ">
               
