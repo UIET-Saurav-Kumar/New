@@ -16,6 +16,7 @@ import WithdrawTable from "@components/withdraw/withdraw-table";
 import { ShopIcon } from "@components/icons/sidebar";
 import { DollarIcon } from "@components/icons/shops/dollar";
 import { RupeeIcon } from "@components/icons/shops/rupee-icon";
+import WithdrawsPage from "src/pages/invoices-reward-data";
 
 export default function Dashboard() {
   const { t } = useTranslation();
@@ -144,11 +145,16 @@ export default function Dashboard() {
       </div> */}
 
       <div className="w-full flex flex-wrap mb-6">
+
         <div className="w-full sm:w-1/2 xl:w-1/2 sm:px-3 sm:pl-0 mb-6 xl:mb-0">
           <RecentOrders
             orders={orderData?.orders?.data}
             title={t("table:recent-order-table-title")}
           />
+        </div>
+
+        <div className="w-full sm:w-1/2 xl:w-1/2 sm:px-3 sm:pl-0 mb-6 xl:mb-0">
+          <WithdrawsPage/>
         </div>
 
         <div className="w-full sm:w-1/2 xl:w-1/2 sm:px-3 sm:pr-0 mb-6 xl:mb-0">
