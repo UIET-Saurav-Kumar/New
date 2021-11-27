@@ -125,9 +125,10 @@ const {
                 <InvoiceBanner/>
                 <AllCategories/>
                 <Tandoor/>
+                <ProductGrid/>
                 <FeaturedShops />
                 <FeaturedProducts/>
-                <ProductGrid/>
+                
               </>
             )
           } 
