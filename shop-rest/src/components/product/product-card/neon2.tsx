@@ -64,9 +64,7 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
             src={product.image?.original?? siteSettings?.product?.placeholderImage}
             alt={product.name}
             layout="fill"
-            // height={420}
-            // width={420}
-            objectFit="fill"
+            objectFit="contain"
             className="product-image"
           />
 
@@ -94,7 +92,6 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
 
         <h3
           className="text-xs md:text-sm text-body truncate mb-4 cursor-pointer"
-         
         >
            <div className='flex flex-col'>{name}<h3>{unit}</h3></div>
         </h3>
