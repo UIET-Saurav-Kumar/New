@@ -18,12 +18,12 @@ const AddToCartBtn: React.FC<Props> = ({ variant, onClick, disabled }) => {
         <button
           onClick={onClick}
           disabled={disabled}
-          className="group w-full h-7 md:h-9 flex items-center justify-between text-xs md:text-sm text-body-dark rounded bg-gray-100 transition-colors hover:bg-accent hover:border-accent hover:text-light focus:outline-none focus:bg-accent focus:border-accent focus:text-light"
+          className="group w-full h-7 md:h-9 flex items-center justify-between text-xs md:text-sm text-body-dark rounded bg-pink-600 transition-colors hover:bg-yellow-500 hover:border-accent hover:text-light focus:outline-none focus:bg-yellow-500 focus:border-accent focus:text-light"
         >
-          <span className="flex-1">{t("text-add")}</span>
-          <span className="w-7 h-7 md:w-9 md:h-9 bg-gray-200 grid place-items-center rounded-te rounded-be transition-colors duration-200 group-hover:bg-accent-600 group-focus:bg-accent-600">
-            <PlusIcon className="w-4 h-4 stroke-2" />
-          </span>
+          <span className="flex-1 font-bold text-white">{t("text-add")}</span>
+              <span className="w-7 h-7 md:w-9 md:h-9 bg-yellow-500 grid place-items-center rounded-te rounded-be transition-colors duration-200 group-hover:bg-pink-600 group-focus:bg-yellow-500">
+                <PlusIcon className="w-4 h-4 text-white stroke-2" />
+              </span>
         </button>
       );
     case "argon":

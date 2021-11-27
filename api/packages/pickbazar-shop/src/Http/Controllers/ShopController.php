@@ -473,14 +473,17 @@ class ShopController extends CoreController
                 $uploadedCsv = current($requestFile);
             }
         }
-        if (!$this->repository->adminPermission($user)) {
-            throw new PickbazarException(config('shop.app_notice_domain') . 'ERROR.NOT_AUTHORIZED');
-        }
+        // if (!$this->repository->adminPermission($user)) {
+        //     throw new PickbazarException(config('shop.app_notice_domain') . 'ERROR.NOT_AUTHORIZED');
+        // }
         
         $file = $uploadedCsv->storePubliclyAs('csv-files', 'shops'.'.' . $uploadedCsv->getClientOriginalExtension(), 'public');
         
         $shops = $this->repository->csvToArrayShop(storage_path() . '/app/public/' . $file);
-
+        if(empty($shops))
+        {
+            throw new PickbazarException(config('shop.app_notice_domain') . 'ERROR.CSV_FILE_IS_EMPTY');
+        }
         foreach ($shops as $key => $shop) 
         {
             $owner_email_data = User::where('email',$shop['owner_email'])->first();
@@ -601,6 +604,10 @@ class ShopController extends CoreController
                     unset($shop['commission']);
                 }                            
                 $stored_shop = Shop::create($shop);
+            }
+            else
+            {
+                throw new PickbazarException("ERROR.USER NOT ADDED CHECK ".$shop['owner_email']);
             }
         }
         return true;

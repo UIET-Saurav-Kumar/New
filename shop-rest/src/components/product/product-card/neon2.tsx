@@ -69,7 +69,8 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
           />
 
         {discount && (
-          <div className="absolute top-3 end-3 md:top-4 md:end-4 rounded text-xs leading-6 font-semibold px-1.5 sm:px-2 md:px-2.5 bg-accent text-light">
+          <div className="absolute top-3 end-3 md:top-4 md:end-4 rounded text-xs leading-6 
+          font-semibold px-1.5 sm:px-2 md:px-2.5 bg-yellow-500 text-light">
             {discount}
           </div>
         )}
@@ -80,18 +81,18 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
       <header className="p-3 md:p-6">
 
         <div className="flex items-center  mb-2">
-          <span className="text-sm md:text-base text-heading font-semibold">
+          <span className="text-sm md:text-base text-pink-600 font-bold">
             {basePrice ? basePrice : price}
           </span>
           {discount && (
-            <del className="text-xs md:text-sm text-muted ms-2">{price}</del>
+            <del className="text-xs md:text-sm text-yellow-500 ms-2">{price}</del>
             
           )}
         </div>
         {/* End of product price */}
 
         <h3
-          className="text-xs md:text-sm text-body truncate mb-4 cursor-pointer"
+          className="text-xs md:text-sm font-semibold text-gray-700 truncate mb-4 cursor-pointer"
         >
            <div className='flex flex-col'>{name}<h3>{unit}</h3></div>
         </h3>

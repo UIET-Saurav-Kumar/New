@@ -18,7 +18,7 @@ export const useImportShopsMutation = () => {
     },
     {
       onSuccess: () => {
-        toast.success(t("common:product-imported-successfully"));
+        toast.success(t("common:shops-imported-successfully"));
       },
       onError: (error: any) => {
         toast.error(t(`common:${error?.response?.data.message}`));
