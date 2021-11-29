@@ -147,18 +147,18 @@ export default function Dashboard() {
 
       <div className="w-full flex flex-wrap mb-6">
 
-        <div className="w-full sm:w-1/2 xl:w-1/2 sm:px-3 sm:pl-0 mb-6 xl:mb-0">
+        <div className="w-full  sm:px-3 sm:pl-0 mb-6 xl:mb-0">
             <RecentOrders
               orders={orderData?.orders?.data}
               title={t("table:recent-order-table-title")}
             />
         </div>
 
-        <div className="w-full sm:w-1/2 xl:w-1/2 sm:px-3 sm:pl-0 mb-6 xl:mb-0">
+        <div className="w-full  sm:px-3 sm:pl-0 mb-6 xl:mb-0">
           <WithdrawsPage/>
         </div>
 
-        <div className="w-full sm:w-1/2 xl:w-1/2 sm:px-3 sm:pr-0 mb-6 xl:mb-0">
+        <div className="w-full mt-4 sm:px-3 sm:pr-0 mb-6 xl:mb-0">
           <WithdrawTable
             //@ts-ignore
             withdraws={withdrawsData?.withdraws}
@@ -166,13 +166,14 @@ export default function Dashboard() {
           />
         </div>
 
-      </div>
+     
 
       <div className="w-full sm:pe-0 mb-6 xl:mb-0">
         <PopularProductList
           products={popularProductData}
           title={t("table:popular-products-table-title")}
         />
+      </div>
       </div>
     </>
   );
