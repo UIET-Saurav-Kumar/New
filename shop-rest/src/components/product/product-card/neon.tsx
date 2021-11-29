@@ -32,7 +32,7 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
     amount: product.price,
     baseAmount: product.sale_price,
   });
-  
+
   const { openModal } = useModalAction();
 
   // const isSelected = !isEmpty(variations)
@@ -65,7 +65,7 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
           src={product.image?.original?? siteSettings?.product?.placeholderImage}
           alt={product.name}
           layout="fill"
-          objectFit="cover"
+          objectFit="contain"
           className="product-image"
         />
 
