@@ -18,6 +18,7 @@ type IProps = {
 };
 
 
+
 const ShopList = ({ shops, onPagination }: IProps) => {
   const { data, paginatorInfo } = shops! ?? {};
   const { t } = useTranslation();
@@ -32,6 +33,8 @@ const ShopList = ({ shops, onPagination }: IProps) => {
     }
     return (check ? <Image src={logo?.thumbnail ?? siteSettings.product.placeholder} alt={record?.name} layout="fixed" width={42} height={42} className="rounded overflow-hidden" />:<Avatar name={record?.name} size={42} round={true} maxInitials={2} />);
   }
+
+  console.log('shop address', shops?.data)
 
   function checkboxChanged(e:any){
     var id=e.target.id.split('_')[1];
@@ -70,6 +73,13 @@ const ShopList = ({ shops, onPagination }: IProps) => {
       key: "owner",
       align: "center",
       render: (owner: any) => owner.name,
+    },
+    {
+      title: t("table:table-item-city"),
+      dataIndex: "address",
+      key: "address",
+      align: "center",
+      render: (address: any) => <span className="whitespace-nowrap">{address?.city}</span>,
     },
     {
       title: t("table:table-item-total-products"),
