@@ -64,7 +64,7 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
             src={product.image?.original?? siteSettings?.product?.placeholderImage}
             alt={product.name}
             layout="fill"
-            objectFit="contain"
+            objectFit="cover"
             className="product-image"
           />
 
