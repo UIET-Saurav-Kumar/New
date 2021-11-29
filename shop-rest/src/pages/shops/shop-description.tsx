@@ -10,69 +10,64 @@ import { scroller, Element } from "react-scroll";
 
 
 
-export default function ShopDescription({data}) {
+export default function ShopDescription({data} :any) {
 
- 
+ console.log('shop description', data.address.street_address);
 
     const { t } = useTranslation("common") ;
 
     return (
       
-        <div className=' hidden lg:inline-flex  bg-white space-x-6 justify-between xl:space-x-8 px-2 xl:px-16 mt-1  ;
+        <div className='  inline-flex  bg-white space-x-6 justify-between xl:space-x-8 px-2 xl:px-16 mt-4 md:mt-1  ;
                          text-10px lg:text-sm pt-4 '>
 
              {/* Description */}
             <div className=' flex flex-col  w-full text-left'>
-                <span className="text-lg text-heading font-semibold mb-2">
+                <span className="text-sm lg:text-lg text-heading font-semibold mb-2">
                       Description
                 </span>
 
                 { data?.description && (
                   
-                        <p className="text-sm font-md  font-light tracking-wide text-gray-600  mb-2 leading-relaxed">
+                        <p className="text-xs sm:text-sm font-md  font-light tracking-wide text-gray-600  mb-2 leading-relaxed">
                           <ReadMore character={70}>{data?.description}</ReadMore>
                         </p>
                 )}
             </div>  
 
-{/* <div className="p-4 flex justify-evenly  space-x-5"> */}
+           {/* <div className="p-4 flex justify-evenly  space-x-5"> */}
 
               {/* Address */}
-              <div className="mb-7 last:mb-0 flex flex-col  w-full text-left">
-                  <span className="text-lg text-heading font-semibold mb-2">
+              <div className="  mb-7 h-auto last:mb-0 flex flex-col  w-full text-left">
+                  <span className="text-sm lg:text-lg text-heading font-semibold mb-2">
                     {t("text-address")}
                   </span>
 
-                  <span className="text-sm font-light tracking-wide  text-gray-600 ">
-
-                      {!isEmpty(formatAddress(data?.address))
-                    ? formatAddress(data?.address)
-                    : t("common:text-no-address")}
-
+                  <span className=" justify-between text-xs sm:text-sm font-light tracking-wide  text-gray-600 ">
+                      {data?.address?.street_address}
                   </span>
+
+                  <div className="sm:hidden mt-5 mb-0 last:mb-0 flex flex-col  w-full text-left">
+                          <span className="text-sm md:text-lg text-heading font-semibold mb-2">
+                            {t("Whatsapp/Call to order")}
+                          </span>
+
+                          <span className=" text-xs md:text-lg font-light tracking-wide text-body">
+                            {data?.settings?.contact}
+                          </span>
+                  </div>
               </div>
               
-              {/* Contaact number */}
-              <div className="mb-7 last:mb-0 flex flex-col  w-full text-left">
-                  <span className="text-lg text-heading font-semibold mb-2">
+              {/* Contact number */}
+              <div className=" hidden  mb-7 last:mb-0 sm:flex flex-col  w-full text-left">
+                  <span className="text-sm md:text-sm lg:text-lg text-heading font-semibold mb-2">
                     {t("Whatsapp/Call to order")}
                   </span>
 
-                  <span className="text-sm font-light tracking-wide text-body">
+                  <span className=" text-sm font-light tracking-wide text-body">
                     {data?.settings?.contact}
                   </span>
-                  
-                  {/* <div className='flex 2xl:hidden '> 
-
-                      <a
-                          href={data?.settings?.website}
-                          target="_blank"
-                          className="text-md text-accent  bg-gray-100 rounded-md px-2 p-2 mt-4 
-                          font-bold hover:text-accent-hover focus:outline-none focus:text-accent-hover"
-                        >
-                          {t("text-visit-site")}
-                      </a>
-                  </div> */}
+                 
               </div>
 
  {/* {data?.settings?.website && (

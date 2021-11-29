@@ -63,9 +63,9 @@ export default function FeaturesShops({ }) {
 
                 </div>
     
-                <div className=' grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 lg:gap-2  gap-2
-                                            lg:place-items-center 2xl:gap-2 2xl:grid-cols-4
-                                            mt-0 px-2 lg:px-4 bg-gray-100 p-4' >
+                <div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 lg:gap-2  gap-2
+                                lg:place-items-center 2xl:gap-2 2xl:grid-cols-4
+                                mt-0 px-2 lg:px-4 bg-gray-100 p-4' >
     
     
                         {data?.featureShops.data?.map((shop, _idx) => (
@@ -86,7 +86,7 @@ export default function FeaturesShops({ }) {
                                 </div>
                             </Link>
                         ))}
-                    </div>
+                </div>
     
               </>
 

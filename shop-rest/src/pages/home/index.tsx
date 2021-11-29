@@ -32,7 +32,8 @@ import InvoiceBanner from "@components/home-page-product-section/invoice-banner"
 
 
 const ProductFeedLoader = dynamic(
-  () => import("@components/ui/loaders/product-feed-loader")
+  () => import("@components/ui/loaders/product-feed-loader"),
+  { ssr: false }
 );
 
 export const getStaticProps: GetStaticProps = async ({ locale, params }) => {

@@ -25,6 +25,7 @@ import CategoryCard from "@components/ui/category-card";
 import AllCategories from "@components/home-page-product-section/AllCategories";
 import Layout from "@components/layout/layout";
 import Avatar from 'react-avatar';
+import OfferCards from "./offer-cards";
 
 const CartCounterButton = dynamic(
   () => import("@components/cart/cart-counter-button"),
@@ -67,23 +68,11 @@ const ShopPage = ({ data }: any) => {
 
                     <div className='hidden  p-3 lg:flex w-full flex-col '>
 
-                      <div className="hidden lg:space-x-5 xl:space-x-10  lg:flex justify-between ">
+                      {/* <div className="hidden lg:space-x-5 xl:space-x-10  lg:flex justify-between "> */}
 
-                          {/* <div className=' sticky top-24 overflow-hidden lg:w-1/2 xl:w-1/4 flex h-full flex-col'>
-                            <ShopPaymentForm />
-                            <ShopCategoryCard data={data} className="" />
-                          </div> */}
+                          
 
-                            {/* <Image
-                              alt={t("heading")}
-                              src={data?.cover_image?.original! ?? "/product-placeholder.svg"}
-                              height={400}
-                              width={1200}
-                              // layout="fill"
-                              objectFit="fill"
-                            /> */}
-
-                          <div className='flex flex-col overflow-y-scroll  w-full'>  
+                          <div className='flex flex-col overflow-y-scroll space-y-4 w-full'>  
 
                             <div className='flex  w-full h-80 border'> 
 
@@ -93,22 +82,27 @@ const ShopPage = ({ data }: any) => {
                                 
                                 <div className='flex w-full'>
                                   {imageCheck(data?.cover_image?.original, data, '317', false,'h-full w-full object-fill')}
-                                  
-                              </div>
+                                </div>
           
                             </div>
                             
 
                            
+                           <div className='flex  w-full'> 
                            <WebShopBanner/>
+                           </div>
 
-                             <ShopDescription data = {data} />
+                            {/* <div className='w-full mt-7'> */}
+                               <ShopDescription data = {data}/>
+                            {/* </div> */}
+
+                            <OfferCards/>
 
                             { data && <ShopProductFeed shopId={data.id} /> }
 
                           </div>
 
-                       </div>
+                       {/* </div> */}
                          
                          {/* bottom corner button */}
                            
@@ -134,7 +128,7 @@ const ShopPage = ({ data }: any) => {
       {width > 1023 && <CartCounterButton />}
 
     </div>
-    <div className='block lg:hidden w-full'>
+    <div className='block lg:hidden w-screen'>
 
         <ShopMobileView data={data}/>
         

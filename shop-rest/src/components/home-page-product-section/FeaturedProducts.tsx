@@ -31,89 +31,140 @@ export default function featuredProducts({}) {
 
     // data?.featureProducts?.data = []
 
+    const types = {
+        cosmetics : {
+            title:"Cosmetics",
+            id:1,
+        },
+        groceries : {
+            title:"Groceries",
+            id:2,
+        },
+        pharmacy : {
+            title:"Pharmacy",
+            id:3,
+        },
+        salon_spa : {
+            title:"Salon & Spa",
+            id:4,
+        },
+        veggies : {
+            title:"Vegetables & Fruits",
+            id:5,
+        },
+        restaurants : {
+            title:"Restaurants",
+            id:6,
+        },
+        fashionlifestyle : {
+            title:"Fashion & Lifestyle",
+            id:7,
+        },
+        takeaways : {
+            title:"Takeaways",
+            id:8,
+        },
+        gym_health : {
+            title:"Gym & Health Products",
+            id:12,
+        },
+        electrical : {
+            title:"Electrical & Electronics",
+            id:13,
+        },
+        dairy : {
+            title:"Dairy & Meat",
+            id:16,
+        },
+        services : {
+            title:"Services",
+            id:19,
+        },
+    }
+
     const typeId = [1,2,3,4,5,6,7,8,9,10,11,14,15,16,18,19,20,21,22]
 
-    const productTypes =  data?.featureProducts.data.filter(function(product){
-        return product.type_id == typeId ? product : '';
-     })
+    // const productTypes =  data?.featureProducts.data.filter(function(product){
+    //     return product.type_id == id ? product : null;
+    //  })
 
-     console.log(productTypes)
+    //  console.log(productTypes)
 
-
+       
    const groceryArray =  data?.featureProducts.data.filter(function(product){
-      return product.type_id == 1 ? product : '';
+      return product.type_id == 1 ? product : null;
    })
 
    const bakeryArray =  data?.featureProducts.data.filter(function(product){
-    return product.type_id == 2 ? product : '';
+    return product.type_id == 2 ? product : null;
 })
 
 const makeupArray =  data?.featureProducts.data.filter(function(product){
-   return product.type_id == 3 ? product : '';
+   return product.type_id == 3 ? product : null;
 })
 
 const bagsArray =  data?.featureProducts.data.filter(function(product){
-   return product.type_id == 4 ? product : '';
+   return product.type_id == 4 ? product : null;
 })
 
 const clothingArray =  data?.featureProducts.data.filter(function(product){
-    return product.type_id == 5 ? product : '';
+    return product.type_id == 5 ? product : null;
  })
 
  const furnitureArray =  data?.featureProducts.data.filter(function(product){
-    return product.type_id == 6 ? product : '';
+    return product.type_id == 6 ? product : null;
  })
 
  const salonspaArray =  data?.featureProducts.data.filter(function(product){
-    return product.type_id == 7 ? product : '';
+    return product.type_id == 7 ? product : null;
  })
 
  const restrauntsArray =  data?.featureProducts.data.filter(function(product){
-    return product.type_id == 8 ? product : '';
+    return product.type_id == 8 ? product : null;
  })
 
  const buffetArray =  data?.featureProducts.data.filter(function(product){
-    return product.type_id == 9 ? product : '';
+    return product.type_id == 9 ? product : null;
  })
 
  const groceryoffersArray =  data?.featureProducts.data.filter(function(product){
-    return product.type_id == 10 ? product : '';
+    return product.type_id == 10 ? product : null;
  })
 
  const fashionlifestyleArray =  data?.featureProducts.data.filter(function(product){
-    return product.type_id == 11 ? product : '';
+    return product.type_id == 11 ? product : null;
  })
 
  const hotelsresortsArray =  data?.featureProducts.data.filter(function(product){
-    return product.type_id == 14 ? product : '';
+    return product.type_id == 14 ? product : null;
  })
 
  const fruitsvegetablesArray =  data?.featureProducts.data.filter(function(product){
-    return product.type_id == 15 ? product : '';
+    return product.type_id == 15 ? product : null;
  })
 
  const pharmacyArray =  data?.featureProducts.data.filter(function(product){
-    return product.type_id == 16 ? product : '';
+    return product.type_id == 16 ? product : null;
  })
 
  const beveragesArray =  data?.featureProducts.data.filter(function(product){
-    return product.type_id == 18 ? product : '';
+    return product.type_id == 18 ? product : null;
  })
 
  const healthproductsArray =  data?.featureProducts.data.filter(function(product){
-    return product.type_id == 19 ? product : '';
+    return product.type_id == 19 ? product : null;
  })
 
  const dairyfarmArray =  data?.featureProducts.data.filter(function(product){
-    return product.type_id == 20 ? product : '';
+    return product.type_id == 20 ? product : null;
  })
 
  const meatArray =  data?.featureProducts.data.filter(function(product){
-    return product.type_id == 21 ? product : '';
+    return product.type_id == 21 ? product : null;
  })
 
  const electronicsArray =  data?.featureProducts.data.filter(function(product){
-    return product.type_id == 22 ? product : '';
+    return product.type_id == 22 ? product : null;
  })
 
    console.log('grocery Array',groceryArray);

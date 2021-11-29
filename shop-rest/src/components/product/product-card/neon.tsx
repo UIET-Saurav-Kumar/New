@@ -32,6 +32,7 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
     amount: product.price,
     baseAmount: product.sale_price,
   });
+  
   const { openModal } = useModalAction();
 
   // const isSelected = !isEmpty(variations)
@@ -86,7 +87,6 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
         </span>
         {discount && (
           <del className="text-xs md:text-sm text-yellow-500 ms-2">{price}</del>
-          
         )}
       </div>
       {/* End of product price */}

@@ -13,6 +13,8 @@ import WebShopBanner from "./web-shop-banner";
 import { isEmpty } from "lodash";
 import { formatAddress } from "@utils/format-address";
 import ReadMore from "@components/ui/truncate";
+import ShopDescription from "./shop-description";
+import OfferCards from "./offer-cards";
 
 
 export default function ShopMobileView({data}) {
@@ -35,7 +37,7 @@ export default function ShopMobileView({data}) {
 
         <>
 
-        <div className=' px-6 mt-4  flex  flex-col'>
+        <div className=' px-2 mt-4  flex  flex-col'>
 
             <div className='w-full grid grid-cols-1 sm:flex'>
 
@@ -58,7 +60,9 @@ export default function ShopMobileView({data}) {
                 
             </div>
 
-            <div className=' flex flex-col p-3 border rounded-lg mt-4 w-full text-left'>
+            <ShopDescription data={data}/>
+
+            {/* <div className=' flex flex-col p-3 border bg-white rounded-lg mt-4 w-full text-left'>
                 <span className="text-lg text-heading font-semibold mb-2">
                       Description
                 </span>
@@ -69,16 +73,18 @@ export default function ShopMobileView({data}) {
                           <ReadMore character={70}>{data?.description}</ReadMore>
                         </p>
                 )}
-            </div>  
+            </div>   */}
 
             <div className=''>
                 <WebShopBanner/>
                 {/* <ShopBanner/> */}
             </div>
 
+            <div className=' flex'><OfferCards/></div>
+
               {/* <div className='mt-6 sm:mt-6 border '> <PaymentForm /></div>   */}
               
-               <div className='mx-4 '> 
+               <div className='mx-0 mt-2 '> 
                   { data && <ShopProductFeed shopId={data.id} /> }
                </div> 
 
