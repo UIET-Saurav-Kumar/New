@@ -177,7 +177,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
 
     return (
 
-        <>
+        <div className={`${data?.featureProducts.data?.length  ? 'block' : 'hidden'}`}>
             <div id='featured-products' className=' flex flex-col w-full mt-8 border-b rounded-t p-4 bg-gray-50 '>
                 <div className='flex justify-between items-center '>
 
@@ -575,7 +575,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                }
             `}</style>
             
-       </>
+       </div>
     )
 }
 
