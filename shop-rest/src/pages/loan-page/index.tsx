@@ -23,7 +23,7 @@ export default function LoanPage() {
          <div className='bg-gray-100'>
 
          <div className='bg-black'><img src='/11.jpg' 
-         className='relative w-full opacity-30 lg:opacity-60 h-screen  object-cover'/></div>
+         className='relative w-full opacity-30 lg:opacity-40 h-screen  object-cover'/></div>
                
                 <div className='absolute bg-transparent top-0 h-screen w-full'>
 
