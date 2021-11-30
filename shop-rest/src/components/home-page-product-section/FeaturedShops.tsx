@@ -45,7 +45,7 @@ export default function FeaturesShops({ }) {
 
         return (
 
-            <>
+            <div className={`${data?.featureShops.data?.length  ? 'block' : 'hidden'}`}>
 
                 <div id='featured-shops' className=' flex flex-col mt-8 border-b rounded-t pb-4 bg-gray-50'>
     
@@ -88,7 +88,7 @@ export default function FeaturesShops({ }) {
                         ))}
                 </div>
     
-              </>
+              </div>
 
         )
 }
