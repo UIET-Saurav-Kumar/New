@@ -14,12 +14,12 @@
     /*
     * primary color
     */
-    --color-accent: 0, 159, 127;
+    --color-accent: 224 ,29 ,86;
 
     /*
     * Hover state color of primary color
     */
-    --color-accent-hover: 1, 147, 118;
+    --color-accent-hover: 223 ,176, 84;
 
     /*
     * shade of primary color
@@ -111,7 +111,7 @@
     /*
     * border color 50
     */
-    --color-border-50: 249, 250, 251;
+    --color-border-50: 223 ,176 ,84;
 
     /*
     * border color 100
