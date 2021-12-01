@@ -68,7 +68,7 @@ const ShopCard2: React.FC<ShopCardProps> = ({ shop }) => {
                               
                                </h5>
                           </div> 
-                          <button className='bg-yellow-500 text-xs lg:text-sm rounded-lg mb- mt-10 py-1 px-1 text-white '> 
+                          <button className='bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-600 hover:to-yellow-600 focus:from-pink-500 focus:to-yellow-500  text-xs lg:text-sm rounded-lg mb- mt-10 py-1 px-1 text-white '> 
                               Products and offers
                       </button> 
 
