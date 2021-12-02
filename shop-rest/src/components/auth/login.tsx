@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import Cookies from "js-cookie";
 import { signIn } from "next-auth/client";
@@ -40,6 +41,7 @@ const LoginForm = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const { authorize } = useUI();
   const { openModal, closeModal } = useModalAction();
+
   const {
     register,
     handleSubmit,
@@ -76,12 +78,12 @@ const LoginForm = () => {
   }
   return (
     <div className="py-6 px-5 sm:p-8 bg-light w-screen md:max-w-md h-screen md:h-auto flex flex-col justify-center">
-      <div className="flex justify-center">
-        <Logo />
-      </div>
-      <p className="text-center text-sm md:text-base text-body mt-4 sm:mt-5 mb-8 sm:mb-10">
-        {t("login-helper")}
-      </p>
+        <div className="flex justify-center">
+          <Logo />
+        </div>
+        <p className="text-center text-sm md:text-base text-body mt-4 sm:mt-5 mb-8 sm:mb-10">
+          {t("login-helper")}
+        </p>
       {errorMsg && (
         <Alert
           variant="error"
@@ -120,12 +122,12 @@ const LoginForm = () => {
       </form>
       {/* End of forgot login form */}
 
-      <div className="flex flex-col items-center justify-center relative text-sm text-heading mt-8 sm:mt-11 mb-6 sm:mb-8">
-        <hr className="w-full" />
-        <span className="absolute start-2/4 -top-2.5 px-2 -ms-4 bg-light">
-          {t("text-or")}
-        </span>
-      </div>
+      {/* <div className="flex flex-col items-center justify-center relative text-sm text-heading mt-8 sm:mt-11 mb-6 sm:mb-8">
+          <hr className="w-full" />
+          <span className="absolute start-2/4 -top-2.5 px-2 -ms-4 bg-light">
+            {t("text-or")}
+          </span>
+      </div> */}
 
       <div className="grid grid-cols-1 gap-4 mt-2">
         {/* Uncomment below code to use facebook login */}
@@ -140,7 +142,7 @@ const LoginForm = () => {
           <FacebookIcon className="w-4 h-4 mr-3" />
           {t("text-login-facebook")}
         </Button> */}
-        <Button
+        {/* <Button
           className="bg-plus hover:bg-gradient-to-tl  from-gold to-magenta"
           // loading={loading}
           disabled={loading}
@@ -150,7 +152,7 @@ const LoginForm = () => {
         >
           <GoogleIcon className="w-4 h-4 mr-3 " />
           {t("text-login-google")}
-        </Button>
+        </Button> */}
       </div>
 
       <div className="flex flex-col items-center justify-center relative text-sm text-heading mt-8 sm:mt-11 mb-6 sm:mb-8">
