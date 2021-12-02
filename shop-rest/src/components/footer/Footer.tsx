@@ -40,7 +40,7 @@ const Footer = () => {
 
 			  		<h5 className='footer-links-title mt-10 font-bold text-lg tracking-widest'> About  </h5>
 
-					  <div className=' tracking-widest   space-y-4'>
+					  <div className=' tracking-widest space-y-4'>
 
 						<Link href='./about-us'><h5 className='phone-number cursor-pointer text-sm md:text-xl hover:underline text-primary font-normal -mt-'> About Buylowcal</h5></Link>
 						<Link href='./careers'><h5 className='phone-number cursor-pointer text-sm md:text-xl hover:underline text-primary font-normal -mt-'> Careers</h5></Link>
