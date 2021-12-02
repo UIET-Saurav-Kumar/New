@@ -186,6 +186,22 @@ export default function UploadBill({user} : Props) {
         </form>
       )}
     </div>
+    <Card>
+      <h2 className='text-blue-600 font-lg py-4 text-center'> Terms and conditions Apply</h2>
+
+      <ul className='font-light text-gray-700 font-mono'>
+              Maximum Cash in Account is Rs.50 Per Invoice or 10% of the Invoice Value without GST.
+          <li>*Maximum Amount any Consumer can earn in a month is Rs.200</li>
+          <li>*The Name or Number on the invoice should match the account holder 
+               and registered mobile number on BuyLowcal.com</li>
+          <li>*The bill should be maximum 3 days old from the date it is uploaded</li>
+          <li>*The offer is subjected to fair usability and shall not be exploited. 
+                In case of unfair usage, the account might get blocked over buylowcal.com</li>
+          <li>*The offer cannot be clubbed with another offers on the site or with the vendors</li>
+          <li>*This is an independent offer by buylowcal to promote local businesses and the vendors from whom
+               the purchase is being done does not hold or have any responsibilities under this offer</li>
+      </ul>
+    </Card>
     </>
   );
 }

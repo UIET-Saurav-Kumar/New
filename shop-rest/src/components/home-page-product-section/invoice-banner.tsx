@@ -19,7 +19,7 @@ export default function InvoiceBanner() {
     function getLink() {
 		
         if (isAuthorize) {
-            router.push("/user/upload-invoice")
+            router.push("/user/upload-invoice/upload-form")
           
           }
           if (!isAuthorize) {
