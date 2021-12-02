@@ -101,7 +101,7 @@ module.exports = {
 
         'hero-pattern': "url('/shops-frame.jpg')",
 
-        'pink-footer': "url('/pink-footer.jpg')",
+        'pink-footer': "url('/footer.jpg')",
        },
 
        backgroundColor: theme => ({
