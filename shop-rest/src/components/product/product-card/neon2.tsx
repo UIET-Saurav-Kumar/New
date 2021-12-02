@@ -49,7 +49,7 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
     <article
       style={{maxWidth:"330px"}}
       className={cn(
-        "product-card cart-type-neon rounded h-full bg-light overflow-hidden shadow-sm transition-all duration-200 hover:shadow transform hover:-translate-y-0.5",
+        "product-card cart-type-neon rounded h-full bg-light overflow-hidden shadow-sm transition-all duration-200 hover:shadow ",
         className
       )}
     >
@@ -70,7 +70,7 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
 
         {discount && (
           <div className="absolute top-3 end-3 md:top-4 md:end-4 rounded text-xs leading-6 
-          font-semibold px-1.5 sm:px-2 md:px-2.5 bg-yellow-500 text-light">
+                          shadow-md font-semibold px-1.5 sm:px-2 md:px-2.5  bg-gold text-white">
             {discount}
           </div>
         )}
@@ -81,11 +81,11 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
       <header className="p-3 md:p-6">
 
         <div className="flex items-center  mb-2">
-          <span className="text-sm md:text-base text-pink-600 font-bold">
+          <span className="text-sm md:text-base text-product-price font-bold">
             {basePrice ? basePrice : price}
           </span>
           {discount && (
-            <del className="text-xs md:text-sm text-yellow-500 ms-2">{price}</del>
+            <del className="text-xs md:text-sm text-discount ms-2">{price}</del>
             
           )}
         </div>

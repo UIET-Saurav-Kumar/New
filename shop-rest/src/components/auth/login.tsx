@@ -110,7 +110,7 @@ const LoginForm = () => {
         />
         <div className="mt-8">
           <Button
-            className="w-full h-11 sm:h-12"
+            className="w-full bg-btn hover:bg-gradient-to-tl  from-magenta to-gold h-11 sm:h-12"
             loading={loading}
             disabled={loading}
           >
@@ -141,14 +141,14 @@ const LoginForm = () => {
           {t("text-login-facebook")}
         </Button> */}
         <Button
-          className="!bg-social-google hover:!bg-social-google-hover"
+          className="bg-plus hover:bg-gradient-to-tl  from-gold to-magenta"
           // loading={loading}
           disabled={loading}
           onClick={() => {
             signIn("google");
           }}
         >
-          <GoogleIcon className="w-4 h-4 mr-3" />
+          <GoogleIcon className="w-4 h-4 mr-3 " />
           {t("text-login-google")}
         </Button>
       </div>

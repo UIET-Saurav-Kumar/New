@@ -97,7 +97,28 @@ module.exports = {
         "10px": "0.625rem",
       },
 
+      backgroundImage: {
+
+        'hero-pattern': "url('/shops-frame.jpg')",
+
+        'footer-texture': "url('/img/footer-texture.png')",
+       },
+
+       backgroundColor: theme => ({
+
+        ...theme('colors'),
+ 
+        'btn': '#e01d56',
+ 
+        'plus': '#dfb054',
+ 
+        'other': '#e3342f',
+       }),
+
       colors: {
+        'magenta': '#e01d56',
+        'gold': '#dfb054',
+        'mix': '#e3342f',
         light: withOpacity("--color-light"),
         dark: withOpacity("--color-dark"),
         accent: withOpacity("--color-accent"),
@@ -129,11 +150,13 @@ module.exports = {
           twitter: "#1da1f2",
           instagram: "#e1306c",
           youtube: "#ff0000",
-          google: "#DB4437",
-          "google-hover": "#cc3e30",
+          google: "#e9a82b",
+          "google-hover": "#dfb054",
         },
       },
       textColor: {
+        'product-price': '#e01d56',
+        'discount': '#dfb054',
         body: withOpacity("--text-base"),
         "body-dark": withOpacity("--text-base-dark"),
         muted: withOpacity("--text-muted"),
@@ -142,6 +165,7 @@ module.exports = {
         "sub-heading": withOpacity("--text-sub-heading"),
         bolder: withOpacity("--text-text-bolder"),
       },
+
       minHeight: {
         580: "580px",
         140: "35rem", // 560px

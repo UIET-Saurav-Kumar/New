@@ -65,10 +65,10 @@ const ShopCard2: React.FC<ShopCardProps> = ({ shop }) => {
                                 {!isEmpty(formatAddress(shop?.address))
                                   ? formatAddress(shop?.address)
                                   : t("common:text-no-address")}  
-                              
+                              view
                                </h5>
                           </div> 
-                          <button className='bg-yellow-500 text-xs lg:text-sm rounded-lg mb- mt-10 py-1 px-1 text-white '> 
+                          <button className='bg-gradient-to-r shadow-md from-magenta to-gold hover:from-gold hover:to-magenta focus:from-pink-500 focus:to-yellow-500  text-xs lg:text-sm  mb- mt-10 py-1 px-0 text-white '> 
                               Products and offers
                       </button> 
 
