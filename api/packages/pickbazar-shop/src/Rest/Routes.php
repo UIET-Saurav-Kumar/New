@@ -5,6 +5,7 @@ use PickBazar\Enums\Permission;
 use Illuminate\Support\Facades\Route;
 use PickBazar\Http\Controllers\TagController;
 use PickBazar\Http\Controllers\TaxController;
+use PickBazar\Http\Controllers\BillController;
 use PickBazar\Http\Controllers\ShopController;
 use PickBazar\Http\Controllers\TypeController;
 use PickBazar\Http\Controllers\UserController;
@@ -14,6 +15,7 @@ use PickBazar\Http\Controllers\CouponController;
 use PickBazar\Http\Controllers\AddressController;
 use PickBazar\Http\Controllers\ProductController;
 use PickBazar\Http\Controllers\CategoryController;
+use PickBazar\Http\Controllers\DeliveryController;
 use PickBazar\Http\Controllers\SettingsController;
 use PickBazar\Http\Controllers\ShippingController;
 use PickBazar\Http\Controllers\WithdrawController;
@@ -23,7 +25,6 @@ use PickBazar\Http\Controllers\OrderStatusController;
 use PickBazar\Http\Controllers\ShopCategoryController;
 use PickBazar\Http\Controllers\MasterProductController;
 use PickBazar\Http\Controllers\AttributeValueController;
-use PickBazar\Http\Controllers\BillController;
 
 Route::post('/register', 'PickBazar\Http\Controllers\UserController@register');
 Route::post('/token', 'PickBazar\Http\Controllers\UserController@token');
@@ -238,7 +239,7 @@ Route::group(
         Route::apiResource('withdraws', WithdrawController::class, [
             'only' => ['store', 'index', 'show']
         ]);
-
+        
 
         Route::post('users/add-staff', 'PickBazar\Http\Controllers\ShopController@addStaff');
         Route::post('users/remove-staff', 'PickBazar\Http\Controllers\ShopController@removeStaff');
@@ -287,9 +288,16 @@ Route::group(['middleware' => ['permission:' . Permission::SUPER_ADMIN, 'auth:sa
     Route::post('disapprove-shop', 'PickBazar\Http\Controllers\ShopController@disApproveShop');
     Route::post('approve-withdraw', 'PickBazar\Http\Controllers\WithdrawController@approveWithdraw');
 });
+
 Route::get('all-taxes', 'PickBazar\Http\Controllers\TaxController@all_taxes');
 Route::get('user-withdraws', 'PickBazar\Http\Controllers\WithdrawController@fetchUserWithdraws');
 Route::post('user-withdraws', 'PickBazar\Http\Controllers\WithdrawController@storeUserWithdraws');
 Route::get('sluggify','PickBazar\Http\Controllers\LogController@sluggify');
 
 
+Route::group(['middleware' => ['auth:sanctum']], function () {
+
+    Route::apiResource('delivery', DeliveryController::class, [
+        'only' => ['store', 'index', 'show']
+    ]);
+});

@@ -11,6 +11,7 @@ export const API_ENDPOINTS: Record<string, string> = {
   UPLOAD: "attachments",
   BILL:"bill-attachment",
   ORDER: "orders",
+  DELIVERY: "delivery",
   ORDER_STATUS: "order_status",
   LOGIN: "token",
   SOCIAL_LOGIN: "social-login-token",

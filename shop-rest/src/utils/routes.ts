@@ -40,5 +40,6 @@ export const ROUTES = {
   WALLET:"/user/wallet",
   WITHDRAWS:"/user/withdraws",
   UPLOAD_INVOICE: '/user/upload-invoice',
+  DELIVERY: '/user/delivery',
   
 };

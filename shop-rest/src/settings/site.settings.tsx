@@ -125,6 +125,10 @@ export const siteSettings = {
       menulabel: "Upload Invoice",
     },
 
+    {
+      href: ROUTES.DELIVERY,
+      menulabel: "Delivery",
+    },
     // {
     //   href: ROUTES.HELP,
     //   menulabel: "profile-sidebar-help",
