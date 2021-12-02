@@ -106,7 +106,7 @@ const Footer = () => {
 			  
 			  <div className='footer-bottom-section text-center sm:text-right w-full mb-16 sm:mb-6 p-2 px-4 -mt-0'>
 			  	 
-				    <h5 id='heading' className='font-semibold text-sm sm:text-xl text-gray-200'> 
+				    <h5 id='heading' className='font-md text-sm sm:text-xl text-gray-200'> 
 					 © 4221 BuyLowcal.com All Rights Reserved
 				    </h5>
  
