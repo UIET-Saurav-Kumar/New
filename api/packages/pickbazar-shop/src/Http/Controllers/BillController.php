@@ -167,7 +167,7 @@ class BillController extends CoreController
                     $amount=$reward->max_cashback;
                 }
                 $bill->approved_amount = $amount;
-                $balance = Balance::where('user_id', '=', $bill->user_id)->first();
+                $balance = Balance::firstOrNew(['user_id' => $bill->user_id]);
                 $balance->total_earnings = $balance->total_earnings + $amount;
                 $balance->current_balance = $balance->current_balance + $amount;
                 $balance->save();
