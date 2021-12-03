@@ -44,7 +44,7 @@ const WithdrawList = ({ withdraws, onPagination }: IProps) => {
     {
       title: ("Name"),
       align: alignLeft,
-      render: (data:any) => (data.user)?data.user.name:(data.shop.name),
+      render: (data:any) => (data.user)?data?.user?.name:(data?.shop?.name),
     },
     {
       title: t("table:table-item-amount"),
