@@ -109,7 +109,7 @@ export default function HeaderMiddle({children,
                     </div>
                   
                   {/* Search Bar */}
-                   <div className=' flex  focus-ring-2 justify-center
+                   <div className=' flex focus-ring-2 justify-center
                                      lg:w-3/4 2xl:mx-auto lg:mx-auto 
                                     2xl:flex-1' >
 
@@ -140,8 +140,10 @@ export default function HeaderMiddle({children,
                </div>
 
                {/* Location screen */}
+               <div className={` ${location ? 'fixed inset-0 bg-gray-900 bg-opacity-60 scroll-y-none w-full h-full' : ''} `}></div>
+               
               <div className={` absolute flex flex-col  w-full z-1000 inset-0 shadow-lg transform ml-0 duration-200 ease-in 
-                               ${location ? 'translate-y-0  ' : '-translate-y-full ' } ${useBlurBackdrop && "use-blur-backdrop"} transform border-5 h-screen lg:h-96 bg-gray-50  overflow-y-hidden overflow-hidden  `}>
+                               ${location ? ' fixed translate-y-0  ' : '-translate-y-full ' } ${useBlurBackdrop && "use-blur-backdrop"} transform border-5 h-screen lg:h-96 bg-gray-50  overflow-y-hidden overflow-hidden  `}>
                    <div className='flex items-center justify-between mx-auto mt-20 '>
 
                        {/* <Logo className="mx-auto" /> */}
@@ -161,6 +163,8 @@ export default function HeaderMiddle({children,
                       <GetCurrentLocation onChange = {changeLocation} />  
 
                   </div>
+                  {/* <Dialog.Overlay className="fixed inset-0 bg-gray-900 bg-opacity-80 w-full h-full" /> */}
+
 
               </div> 
 
