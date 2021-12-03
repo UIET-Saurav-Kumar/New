@@ -152,14 +152,11 @@ export async function getStaticPaths({ locales }: GetStaticPathsContext) {
   // { fallback: false } means other routes should 404.
   return { paths, fallback: "blocking" };
 }
-
 // This also gets called at build time
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 
-
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery("settings", fetchSettings);
-
 
   try {
     const shop = await fetchShop(params!.slug as string);
@@ -167,7 +164,6 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       ["products", { shop_id: shop?.id }],
       fetchProducts
     );
-
 
     return {
       props: {
@@ -178,15 +174,12 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       revalidate: 120,
     };
 
-    
-
   } catch (error) {
     return {
       notFound: false,
     };
   }
 };
-
 
 ShopPage.Layout = Layout;
 export default ShopPage;
