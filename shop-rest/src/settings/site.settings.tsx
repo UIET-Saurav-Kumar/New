@@ -2,9 +2,8 @@
 import { FacebookIcon } from "@components/icons/facebook";
 import { InstagramIcon } from "@components/icons/instagram";
 import { LinkedInIcon } from "@components/icons/social/linkedin";
-import { TwitterIcon } from "@components/icons/twitter";
-import { YouTubeIcon } from "@components/icons/youtube";
 import { ROUTES } from "@utils/routes";
+
 
 export const siteSettings = {
 

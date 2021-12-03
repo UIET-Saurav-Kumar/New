@@ -12,11 +12,13 @@ import { useTranslation } from "next-i18next";
 import { useCart } from "@contexts/quick-cart/cart.context";
 import { formatString } from "@utils/format-string";
 
+
 const CartSidebarView = () => {
   const { t } = useTranslation("common");
   const { items, totalUniqueItems, total } = useCart();
   const { closeSidebar } = useUI();
   const router = useRouter();
+  
   function handleCheckout() {
     router.push(ROUTES.CHECKOUT);
     return closeSidebar();

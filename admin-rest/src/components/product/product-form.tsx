@@ -135,6 +135,7 @@ function calculateMaxMinPrice(variationOptions: any) {
       max_price: null,
     };
   }
+  
   const sortedVariationsByPrice = orderBy(variationOptions, ["price"]);
   const sortedVariationsBySalePrice = orderBy(variationOptions, ["sale_price"]);
   return {
