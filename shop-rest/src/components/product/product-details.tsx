@@ -204,7 +204,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
           {!!categories?.length && (
             <ProductCategories
               categories={categories}
-              basePath={`/${type?.slug}`}
+              basePath={`/shops/${shop.slug}`}
             />
           )}
 
