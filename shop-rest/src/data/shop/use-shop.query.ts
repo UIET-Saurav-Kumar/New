@@ -5,9 +5,10 @@ import url from "@utils/api/server_url";
 import { useQuery } from "react-query";
 
 export const fetchShop = async (slug: string) => {
-  const { data } = await http.get(`${url}/${API_ENDPOINTS.SETTINGS}?shop_slug=${slug}`);
+  const { data } = await http.get(`${url}/${API_ENDPOINTS.SHOPS}/${slug}`);
   return data;
 };
+
 export const useShopQuery = (slug: string) => {
   return useQuery<Shop, Error>([API_ENDPOINTS.SHOPS, slug], () =>
     fetchShop(slug)
