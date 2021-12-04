@@ -27,7 +27,7 @@ import { useSession } from "next-auth/client";
 import { useSocialLoginMutation } from "@data/auth/use-social-login-mutation";
 import { CUSTOMER } from "@utils/constants";
 import Cookies from "js-cookie";
-import { fetchShop } from "@data/shop/use-shop.query";
+import { fetchShopSeo } from "@data/shop/use-shop.query";
 import ManagedModal from "@components/ui/modal/managed-modal";
 import {
   ModalProvider,
@@ -45,7 +45,7 @@ const AppSettings: React.FC = (props) => {
   // console.log(props?.children?._owner?.pendingProps.router.query.slug)
   if(props?.children?._owner?.pendingProps?.router?.query?.slug !== undefined)
   {
-    const shop = fetchShop(props?.children?._owner?.pendingProps?.router?.query?.slug as string);
+    const shop = fetchShopSeo(props?.children?._owner?.pendingProps?.router?.query?.slug as string);
 
   const { data, isLoading: loading, error } = useSettingsQuery();
 
@@ -55,7 +55,7 @@ const AppSettings: React.FC = (props) => {
   }
   else
   {
-    // const shop = fetchShop(props?.children?._owner?.pendingProps.router.query.slug as string);
+    // const shop = fetchShopSeo(props?.children?._owner?.pendingProps.router.query.slug as string);
 
   const { data, isLoading: loading, error } = useSettingsQuery();
 
