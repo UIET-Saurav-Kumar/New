@@ -36,6 +36,41 @@ class SettingsController extends CoreController
      */
     public function index(Request $request)
     {
+        $shop_slug = $request->shop_slug ?? NULL;
+        
+        if(!empty($shop_slug))
+        {
+            $seo_data = json_decode($this->repository->first(), true);
+            $shop_data = Shop::where('slug',$shop_slug)->first();
+            $shop_metaTags = "";
+            $shop_categories = "";
+            foreach(json_decode($shop_data->shop_categories, true) as $key => $value)
+            {
+                $shop_categories = " | ".$value['name'];
+            }
+            foreach(json_decode($shop_data->shop_categories, true) as $key => $value)
+            {
+                if ($key === array_key_last(json_decode($shop_data->shop_categories, true)))
+                {
+                    $shop_metaTags = $value['name'];
+                }
+                else
+                {
+                    $shop_metaTags = $value['name']. " | ";
+                }
+            }
+            $seo_data['options']['seo']['metaTitle'] = $shop_data->name." ".$shop_categories;
+            $seo_data['options']['seo']['metaDescription'] = $shop_data->description;
+            $seo_data['options']['seo']['metaTags'] = $shop_metaTags;
+            $seo_data['options']['seo']['ogTitle'] = $shop_data->name." ".$shop_categories;
+            $seo_data['options']['seo']['ogDescription'] = $shop_data->description;
+            
+            // $seo_data['options']['seo']['ogImage'] = $shop_data->cover_image ;
+            // $seo_data['options']['logo'] = $shop_data->logo;
+
+            return $seo_data;
+        }
+        
         return $this->repository->first();
     }
     
