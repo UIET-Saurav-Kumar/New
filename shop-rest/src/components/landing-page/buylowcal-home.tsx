@@ -132,7 +132,7 @@ export default function Buylowcal() {
                         className=' opacity-40 h-full w-full object-fill  bg-black ' 
                     /> 
 
-                    <div id='enter-location' className= 'flex flex-col rounded p-6 shadow-5xl w-full items-center text-white absolute space-y-4 z-1 bg-transparent opacity-90'>
+                    <div id='enter-location' className= 'flex flex-col rounded p-6 shadow-5xl w-full items-center text-white absolute space-y-1 z-1 bg-transparent opacity-90'>
                        
                        <div className='flex flex-col space-y-16'> 
                           <h2 className='font-bold text-2xl xs+:text-3xl md:text-4xl w-full lg:text-5xl flex -mb-10 justify-center'> 
