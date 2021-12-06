@@ -11,7 +11,11 @@ export const fetchShop = async (slug: string) => {
 
 export const fetchShopSeo = async (slug: string) => {
   const { data } = await http.get(`${url}/${API_ENDPOINTS.SETTINGS}?shop_slug=${slug}`);
-  console.log(data);
+  console.log('fetchShopSeo start');
+  console.log(${API_ENDPOINTS.SETTINGS});
+  console.log(${slug});
+  console.log({ data });
+  console.log('fetchShopSeo end');
   setTimeout(() => {
     const eltitle = document.querySelector('title');
     eltitle.innerText = `BuyLowcal | ${data?.options?.seo?.metaTitle}`;
