@@ -16,6 +16,7 @@ import PageLoader from "@components/ui/page-loader/page-loader";
 import { useSettingsQuery } from "@data/settings/use-settings.query";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Hydrate } from "react-query/hydration";
+import { ReactQueryDevtools } from "react-query/devtools";
 import { appWithTranslation } from "next-i18next";
 import { useEffect, useRef, useState } from "react";
 import { ToastContainer } from "react-toastify";
