@@ -50,11 +50,11 @@ class InviteController extends CoreController
             }
         }
         if($size>100){
-            $size=1500;
+            $size=2000;
         }else if ($size>80){
-            $size=1000;
+            $size=1500;
         }else{
-            $size=800;
+            $size=1000;
         }
 
         return [
