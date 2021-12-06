@@ -4,9 +4,6 @@ import { LocationInput } from "@ts-types/generated";
 import React, { useState ,useEffect } from "react";
 import { useTranslation } from "next-i18next";
 import Loader from "@components/ui/loader/loader";
-import { useLocation } from "@contexts/location/location.context";
-
-import useOnClickOutside from "@utils/use-click-outside";
 
 
 const libraries: Libraries = ["places"];
@@ -20,11 +17,6 @@ export default function DeliveryPlacesAutocomplete({address,
 }) {
   const { t } = useTranslation();
   const [loc,setLocation]=useState(address);
-  const {addLocation,getLocation} =useLocation()
-
-  useEffect(()=>{
-    setLocation(getLocation?.formattedAddress)
-  });
 
   const { isLoaded, loadError } = useJsApiLoader({
     id: "google_map_autocomplete",
@@ -87,8 +79,6 @@ export default function DeliveryPlacesAutocomplete({address,
       }
     }
     if (onChange) {
-      addLocation(location);
-      
       onChange(location);
     }
   };

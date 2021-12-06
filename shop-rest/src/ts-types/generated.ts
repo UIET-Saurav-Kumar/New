@@ -1123,6 +1123,20 @@ export declare type CreateWithdrawInput = {
   details?: Maybe<Scalars["String"]>;
   note?: Maybe<Scalars["String"]>;
 };
+export declare type CreateDeliveryInput = {
+  sender_name:any,
+  reciever_name:any,
+  sender_complete_address:any,
+  reciever_complete_address:any,
+  sender_phone_number:any,
+  reciever_phone_number:any,
+  package_type:any,
+  package_name:any,
+  package_weight:any,
+  package_qty:any,
+  total_weight:any,
+  payment_method:any,
+};
 
 export declare type CreateInvoiceUploadInput = {
  

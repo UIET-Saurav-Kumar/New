@@ -87,7 +87,7 @@ export default function DeliveriesPage() {
                 {!loading && !data?.pages?.[0]?.data?.length && (
                   <div className="w-full h-full flex items-center justify-center my-auto">
                     <h4 className="text-sm font-semibold text-body text-center">
-                      {t("error-no-orders")}
+                      {t("You didn't deliver anything yet")}
                     </h4>
                   </div>
                 )}
@@ -105,6 +105,7 @@ export default function DeliveriesPage() {
               </Scrollbar>
             </div>
           </div>
+          
           {/* End of Order List */}
           {!!data?.pages?.[0]?.data?.length ? (
             <OrderDetails order={order} />

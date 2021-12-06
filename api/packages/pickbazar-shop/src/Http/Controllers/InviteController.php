@@ -19,7 +19,7 @@ class InviteController extends CoreController
         $data = $this->getNode($root, true);
 
         $first_layer_invitees = $this->get_invitees($root->id);
-
+        $size=0;
         foreach ($first_layer_invitees as $invitee) {
             $second_layer_invitees = $this->get_invitees($invitee->invitee_id);
 
@@ -27,15 +27,17 @@ class InviteController extends CoreController
             $second_layer = [];
 
             $first_layer = $this->getNode($invitee);
+            $size++;
 
             foreach ($second_layer_invitees as $key => $second_invitees) {
                 $third_layer = [];
 
                 $third_layer_invitees = $this->get_invitees($second_invitees->invitee_id);
                 array_push($second_layer, $this->getNode($second_invitees));
-
+                $size++;
                 foreach ($third_layer_invitees as $third_invitee) {
                     array_push($third_layer, $this->getNode($third_invitee));
+                    $size++;
                 }
 
                 $second_layer[$key]["children"] = $third_layer;
@@ -44,11 +46,13 @@ class InviteController extends CoreController
             if (isset($first_layer["children"])) {
                 $first_layer["children"] = $second_layer;
                 array_push($data["children"], $first_layer);
+                $size++;
             }
         }
 
         return [
-            "data" => $data
+            "data" => $data,
+            "size"=>$size
         ];
     }
 

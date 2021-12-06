@@ -103,16 +103,16 @@ export const siteSettings = {
         label: "sidebar-nav-item-orders",
         icon: "OrdersIcon",
       },
-      // {
-      //   href: ROUTES.DELIVERY,
-      //   label: "Delivery",
-      //   icon: "ShippingsIcon",
-      // },
-      // {
-      //   href: ROUTES.DELIVERY_COST,
-      //   label: "Delivery Cost",
-      //   icon: "ShippingsIcon",
-      // },
+      {
+        href: ROUTES.DELIVERY,
+        label: "Delivery",
+        icon: "Delivery",
+      },
+      {
+        href: ROUTES.DELIVERY_COST,
+        label: "Delivery Cost",
+        icon: "DeliveryCost",
+      },
       {
         href: ROUTES.ORDER_STATUS,
         label: "sidebar-nav-item-order-status",
@@ -199,6 +199,12 @@ export const siteSettings = {
         href: (shop: string) => `/${shop}${ROUTES.ORDERS}`,
         label: "sidebar-nav-item-orders",
         icon: "OrdersIcon",
+        permissions: adminOwnerAndStaffOnly,
+      },
+      {
+        href: (shop: string) => `/${shop}${ROUTES.DELIVERY}`,
+        label: "Delivery",
+        icon: "Delivery",
         permissions: adminOwnerAndStaffOnly,
       },
       // {

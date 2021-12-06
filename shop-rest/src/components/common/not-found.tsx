@@ -1,5 +1,8 @@
 import cn from "classnames";
 import { useTranslation } from "next-i18next";
+import { ROUTES } from "@utils/routes";
+import { PlusIcon } from "@components/icons/plus-icon";
+import Link from "@components/ui/link";
 interface Props {
   text?: string;
   className?: string;
@@ -8,7 +11,16 @@ interface Props {
 const NotFound: React.FC<Props> = (props) => {
   const { t } = useTranslation("common");
   return (
-    <div className={cn("flex flex-col items-center", props.className)}>
+    <div className={cn("flex  flex-col items-center", props.className)}>
+      <div className="flex flex-col items-end w-full">
+          <Link
+              href={`${ROUTES.DELIVERY}/create`}
+              className="font-semibold text-sm text-accent flex items-center transition duration-200 no-underline hover:text-accent-hover focus:text-accent-hover"
+            >
+              <PlusIcon width={20} className="me-2" />
+              {("New Delivery")}
+          </Link>
+      </div>
       <div className="w-full h-full flex items-center justify-center">
         <img
           src="/no-result.svg"
