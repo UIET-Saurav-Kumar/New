@@ -38,13 +38,13 @@ const Footer = () => {
 
 					  <div className=' tracking-widest space-y-4'>
 
-							<Link href='./about-us'><h5 className='phone-number cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline text-primary font-normal -mt-'> About Buylowcal</h5></Link>
-							<Link href='./careers'><h5 className='phone-number cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline text-primary font-normal -mt-'> Careers</h5></Link>
-							<Link href='./terms'><h5 className='phone-number cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline text-primary font-normal -mt-'> Terms of Service</h5></Link>
+							<Link href='/about-us'><h5 className='phone-number cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline text-primary font-normal -mt-'> About Buylowcal</h5></Link>
+							<Link href='/careers'><h5 className='phone-number cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline text-primary font-normal -mt-'> Careers</h5></Link>
+							<Link href='/terms'><h5 className='phone-number cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline text-primary font-normal -mt-'> Terms of Service</h5></Link>
 
-							<Link href='./return-policy'><h5 className=' cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline phone-number text-primary font-normal -mt-'> Refunds/Cancellations/Shipping</h5></Link> 
-							<Link href='./privacy'><h5 className=' cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline phone-number text-primary font-normal -mt-'>Privacy Policy</h5></Link> 
-							<Link href='./contact'><h5 className=' cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline phone-number text-primary font-normal -mt-'>Contact Us</h5></Link> 
+							<Link href='/return-policy'><h5 className=' cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline phone-number text-primary font-normal -mt-'> Refunds/Cancellations/Shipping</h5></Link> 
+							<Link href='/privacy'><h5 className=' cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline phone-number text-primary font-normal -mt-'>Privacy Policy</h5></Link> 
+							<Link href='/contact'><h5 className=' cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline phone-number text-primary font-normal -mt-'>Contact Us</h5></Link> 
 
 					 </div>
 			  		
