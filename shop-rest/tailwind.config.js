@@ -98,10 +98,11 @@ module.exports = {
       },
 
       backgroundImage: {
-
+        
         'hero-pattern': "url('/shops-frame.jpg')",
-
         'pink-footer': "url('/footer.jpg')",
+        'india': "url('/india.jpg')",
+
        },
 
        backgroundColor: theme => ({

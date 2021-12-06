@@ -38,13 +38,13 @@ const Footer = () => {
 
 					  <div className=' tracking-widest space-y-4'>
 
-							<Link href='./about-us'><h5 className='phone-number cursor-pointer text-sm md:text-lg lg:text-xl hover:underline text-primary font-normal -mt-'> About Buylowcal</h5></Link>
-							<Link href='./careers'><h5 className='phone-number cursor-pointer text-sm md:text-lg lg:text-xl hover:underline text-primary font-normal -mt-'> Careers</h5></Link>
-							<Link href='./terms'><h5 className='phone-number cursor-pointer text-sm md:text-lg lg:text-xl hover:underline text-primary font-normal -mt-'> Terms of Service</h5></Link>
+							<Link href='./about-us'><h5 className='phone-number cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline text-primary font-normal -mt-'> About Buylowcal</h5></Link>
+							<Link href='./careers'><h5 className='phone-number cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline text-primary font-normal -mt-'> Careers</h5></Link>
+							<Link href='./terms'><h5 className='phone-number cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline text-primary font-normal -mt-'> Terms of Service</h5></Link>
 
-							<Link href='./return-policy'><h5 className=' cursor-pointer text-sm md:text-lg lg:text-xl hover:underline phone-number text-primary font-normal -mt-'> Refunds/Cancellations/Shipping</h5></Link> 
-							<Link href='./privacy'><h5 className=' cursor-pointer text-sm md:text-lg lg:text-xl hover:underline phone-number text-primary font-normal -mt-'>Privacy Policy</h5></Link> 
-							<Link href='./contact'><h5 className=' cursor-pointer text-sm md:text-lg lg:text-xl hover:underline phone-number text-primary font-normal -mt-'>Contact Us</h5></Link> 
+							<Link href='./return-policy'><h5 className=' cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline phone-number text-primary font-normal -mt-'> Refunds/Cancellations/Shipping</h5></Link> 
+							<Link href='./privacy'><h5 className=' cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline phone-number text-primary font-normal -mt-'>Privacy Policy</h5></Link> 
+							<Link href='./contact'><h5 className=' cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline phone-number text-primary font-normal -mt-'>Contact Us</h5></Link> 
 
 					 </div>
 			  		
@@ -57,11 +57,11 @@ const Footer = () => {
 						<h5 className = 'footer-links-title font-bold tracking-widest  text-lg' > More </h5>
 
 						<div className='space-y-0 tracking-widest'> 
-						<a className='light-text cursor-pointer text-sm md:text-lg lg:text-xl hover:underline font-light mt-' href='./home#all-categories'><h5 className='light-text mt-4 font-light'>Categories</h5></a>
-						<a className='light-text cursor-pointer text-sm md:text-lg lg:text-xl hover:underline font-light mt-' href='./home#featured-shops'><h5 className='light-text mt-4 font-light'> Local Shops</h5></a>
-						<a className='light-text cursor-pointer text-sm md:text-lg lg:text-xl hover:underline font-light mt-' href='./home#ecommerce-store'><h5 className='light-text mt-4 font-light'> E-Stores</h5></a>	
-						<a className='light-text cursor-pointer text-sm md:text-lg lg:text-xl hover:underline font-light mt-' href='./home#offer-of-the-day'><h5  className='light-text mt-4 font-light'> Offer of the Day</h5></a>
-						<a className='light-text cursor-pointer text-sm md:text-lg lg:text-xl hover:underline font-light' href='./home#featured-products'><h5  className='light-text mt-4 font-light'> Featured Products</h5></a>
+						<a className='light-text cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline font-light mt-' href='./home#all-categories'><h5 className='light-text mt-4 font-light'>Categories</h5></a>
+						<a className='light-text cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline font-light mt-' href='./home#featured-shops'><h5 className='light-text mt-4 font-light'> Local Shops</h5></a>
+						<a className='light-text cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline font-light mt-' href='./home#ecommerce-store'><h5 className='light-text mt-4 font-light'> E-Stores</h5></a>	
+						<a className='light-text cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline font-light mt-' href='./home#offer-of-the-day'><h5  className='light-text mt-4 font-light'> Offer of the Day</h5></a>
+						<a className='light-text cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline font-light' href='./home#featured-products'><h5  className='light-text mt-4 font-light'> Featured Products</h5></a>
 						</div> 
 			  	 </div>
 
@@ -70,10 +70,10 @@ const Footer = () => {
 
 						<div className=' space-y-4 tracking-widest '>
 							<Link href='https://admin.buylowcal.com/register'>
-								<h5 className='light-text cursor-pointer text-sm md:text-lg lg:text-xl hover:underline font-light'>
+								<h5 className='light-text cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline font-light'>
 									Register as Vendor </h5>
 							</Link>
-							<h5 onClick={handleJoin} className='light-text cursor-pointer text-sm md:text-lg lg:text-xl hover:underline font-light'>
+							<h5 onClick={handleJoin} className='light-text cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline font-light'>
 								Register as Customer 
 							</h5>
 						</div>		  		
