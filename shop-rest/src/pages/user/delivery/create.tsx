@@ -1,6 +1,6 @@
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import CreateOrUpdateWithdrawForm from "@components/withdraw/withdraw-form";
+import CreateOrUpdateDeliveryForm from "@components/deliveries/delivery-form";
 import Navbar from '@components/layout/navbar/navbar';
 import ProfileSidebar from "@components/profile/profile-sidebar";
 
@@ -16,10 +16,10 @@ export default function CreateWithdrawPage() {
         <div className="w-full overflow-hidden">
           <div className="py-5 sm:py-8 flex border-b border-dashed border-gray-300">
             <h1 className="text-lg font-semibold  text-heading">
-              {("Create Withdraw")}
+              {("Create Delivery")}
             </h1>
           </div>
-          <CreateOrUpdateWithdrawForm />
+          <CreateOrUpdateDeliveryForm />
         </div>
       </div>
     </div>

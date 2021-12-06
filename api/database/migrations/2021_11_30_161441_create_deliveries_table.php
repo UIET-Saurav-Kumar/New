@@ -22,8 +22,8 @@ class CreateDeliveriesTable extends Migration
             $table->string('sender_name');
             $table->string('reciever_name');
 
-            $table->string('pickup_location');
-            $table->string('drop_location');
+            $table->text('pickup_location');
+            $table->text('drop_location');
 
             $table->string('sender_complete_address');
             $table->string('reciever_complete_address');
@@ -36,13 +36,7 @@ class CreateDeliveriesTable extends Migration
             $table->string('package_weight')->nullable();
             $table->integer('package_qty')->nullable();
             $table->string('total_weight')->nullable();
-            $table->enum('status', [
-                WithdrawStatus::APPROVED,
-                WithdrawStatus::PROCESSING,
-                WithdrawStatus::REJECTED,
-                WithdrawStatus::PENDING,
-                WithdrawStatus::ON_HOLD,
-            ])->default(WithdrawStatus::PENDING);
+            $table->interger('status')->default(1);
 
             
             $table->float('amount')->nullable();
@@ -51,6 +45,7 @@ class CreateDeliveriesTable extends Migration
             
             $table->float('distance')->nullable();
             $table->string("shop_id")->nullable();
+            $table->integer("is_approved")->default(0);
 
             $table->timestamps();
         });
@@ -66,3 +61,4 @@ class CreateDeliveriesTable extends Migration
         Schema::dropIfExists('deliveries');
     }
 }
+

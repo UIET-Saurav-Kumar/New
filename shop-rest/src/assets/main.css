@@ -231,6 +231,7 @@
 .pac-logo:after{
   background-image:url('/search.png');
 background-color: #000;
+display: none;
 }
 
 .css-tlfecz-indicatorContainer{

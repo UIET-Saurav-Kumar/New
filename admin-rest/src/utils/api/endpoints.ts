@@ -75,5 +75,10 @@ export const API_ENDPOINTS = {
   BILL: 'bill',
   BILL_REWARD: 'bill-reward',
   APPROVE_BILL: "approve-bill",
+  ADMIN_DELIVERY:'admin/delivery',
+  DELIVERY:'delivery',
+  APPROVE_DELIVERY: "approve-delivery",
+  DELIVERY_COST:"delivery-cost",
+  VERIFY_CHECKOUT: "checkout/verify",
 };
 

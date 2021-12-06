@@ -300,4 +300,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::apiResource('delivery', DeliveryController::class, [
         'only' => ['store', 'index', 'show']
     ]);
+    Route::post('/delivery/payment','PickBazar\Http\Controllers\DeliveryController@payment');
+    Route::get('/admin/delivery','PickBazar\Http\Controllers\DeliveryController@fetchAdminDeliverys');
+    Route::post('/approve-delivery','PickBazar\Http\Controllers\DeliveryController@approveDelivery');
+    Route::post('/delivery-cost ','PickBazar\Http\Controllers\DeliveryController@storeDeliveryCost');
+    Route::get('/delivery-cost','PickBazar\Http\Controllers\DeliveryController@fetchDeliveryCost');
+
+    
+
 });
