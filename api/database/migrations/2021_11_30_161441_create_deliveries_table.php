@@ -36,7 +36,7 @@ class CreateDeliveriesTable extends Migration
             $table->string('package_weight')->nullable();
             $table->integer('package_qty')->nullable();
             $table->string('total_weight')->nullable();
-            $table->interger('status')->default(1);
+            $table->integer('status')->default(1);
 
             
             $table->float('amount')->nullable();
