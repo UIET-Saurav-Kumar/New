@@ -15,8 +15,8 @@ type ShopCardProps = {
 const imageCheck = (logo: any , record:any, imgsize:any, imgDim:any, classname: string) => {
   console.log(logo)
   let check = false;
-  let splitLength = logo.split("/").length;
-  let lastSplit = logo.split("/")[splitLength - 1];
+  let splitLength = logo?.split("/").length;
+  let lastSplit = logo?.split("/")[splitLength - 1];
   if (lastSplit != "") {
     check = true;
   }
@@ -33,8 +33,8 @@ const ShopCard2: React.FC<ShopCardProps> = ({ shop }) => {
 
     <Link href={`${ROUTES.SHOPS}/${shop.slug}`}>
         {/* <div className='flex flex-col w-68 h-80 xs+:w-62 xs+:h-80 xs++:w-44 xs++:h-96 sm:w-36 sm:h-96  md:w-60 md:h-72  md+:w-56 md+:h-96 md++:w-64 md++:h-96 lg:w-54 lg:h-96 
-                        lg+:w-52 lg+:h-96 xs+:h-500  xl:w-58 xl+:w-52 xl+:h-800 xl++:w-60 xl++:h-96  2xl:w-96 2xl:h-96 border rounded-xl
-                        bg-white shadow-md p-6 py-6 mx-1 my-2  cursor-pointer' > */}
+              lg+:w-52 lg+:h-96 xs+:h-500  xl:w-58 xl+:w-52 xl+:h-800 xl++:w-60 xl++:h-96  2xl:w-96 2xl:h-96 border rounded-xl
+              bg-white shadow-md p-6 py-6 mx-1 my-2  cursor-pointer' > */}
 
 
                           <div className='flex p-4 px-2 rounded-lg bg-white flex-col w-auto h-auto'>

@@ -27,19 +27,36 @@ import { useSession } from "next-auth/client";
 import { useSocialLoginMutation } from "@data/auth/use-social-login-mutation";
 import { CUSTOMER } from "@utils/constants";
 import Cookies from "js-cookie";
+import { fetchShop } from "@data/shop/use-shop.query";
 import ManagedModal from "@components/ui/modal/managed-modal";
+import { fetchShopSeo } from "@data/shop/use-shop.query";
 import {
   ModalProvider,
   useModalAction,
 } from "@components/ui/modal/modal.context";
 
+
 const Noop: React.FC = ({ children }) => <>{children}</>;
 
 const AppSettings: React.FC = (props) => {
-  const { data, isLoading: loading, error } = useSettingsQuery();
-  if (loading) return <PageLoader />;
-  if (error) return <ErrorMessage message={error.message} />;
-  return <SettingsProvider initialValue={data?.settings?.options} {...props} />;
+  if(props?.children?._owner?.pendingProps?.router?.query?.slug !== undefined)
+  {
+    const { data, isLoading: loading, error } = useSettingsQuery();
+
+    const shop = fetchShopSeo(props?.children?._owner?.pendingProps?.router?.query?.slug as string);
+   
+    if (loading) return <PageLoader />;
+    if (error) return <ErrorMessage message={error.message} />;
+    return <SettingsProvider initialValue={shop?.settings?.options} {...props} />;
+  }
+  else
+  {
+    const { data, isLoading: loading, error } = useSettingsQuery();
+
+    if (loading) return <PageLoader />;
+    if (error) return <ErrorMessage message={error.message} />;
+    return <SettingsProvider initialValue={data?.settings?.options} {...props} />;
+  }
 };
 
 const SocialLoginProvider: React.FC = () => {

@@ -132,23 +132,28 @@ export default function Buylowcal() {
                         className=' opacity-40 h-full w-full object-fill  bg-black ' 
                     /> 
 
-                    <div className= 'flex flex-col  rounded p-6 shadow-5xl   w-full items-center 
-                                 text-white absolute space-y-4 z-1   bg-transparent   opacity-90  ' >
+                    <div id='enter-location' className= 'flex flex-col rounded p-6 shadow-5xl w-full items-center text-white absolute space-y-1 z-1 bg-transparent opacity-90'>
+                       
+                       <div className='flex flex-col space-y-16'> 
+                          <h2 className='font-bold text-2xl xs+:text-3xl md:text-4xl w-full lg:text-5xl flex -mb-10 justify-center'> 
+                              अपने आस-पास की दुकानों का पता लगाने के लिए, कृपया अपना स्थान दर्ज करें 
+                            </h2>
 
-                        <h1 className='font-bold text-2xl xs+:text-3xl md:text-4xl w-full lg:text-5xl flex    -mb-10 justify-center '> 
-                                        Shop, Save and Earn from your Nearest Local Shops 
-                        </h1>
+                            <h2 className='font-bold text-2xl xs+:text-3xl md:text-4xl w-full lg:text-5xl flex    -mb-10 justify-center '> 
+                                            Shop, Save and Earn from your Nearest Local Shops 
+                            </h2>
+                        </div>
 
                             <div className=' px-4  mt-10 text-black w-400 lg:w-700 ' >
 
-                            {/* <div className=' flex text-black flex-col w-full lg:w-full h-full ' > */}
+                                  {/* <div className=' flex text-black flex-col w-full lg:w-full h-full ' > */}
 
                                     <GooglePlacesAutocomplete  onChange = {changeLocation} 
                                         address = {getLocation?.formattedAddress} />
 
                                     <GetCurrentLocation onChange = {changeLocation} />
 
-                            {/* </div> */}
+                               {/* </div> */}
 
                             </div>
                         
@@ -173,7 +178,7 @@ export default function Buylowcal() {
         <div className='grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 text-center gap-2 place-items-center space-x-4 '>
           <img className='h-16 w-16 md:h-20 md:w-20' src='/grocery.png'/>
           <h1 className='font-lg text-sm md:text-xl tracking-widest'>Groceries</h1>
-
+              
         </div>
 
         <div className='grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 text-center gap-2 place-items-center space-x-4 '>
@@ -271,20 +276,20 @@ export default function Buylowcal() {
 
              <div className='flex items-center w-full mt-10'>   
                  <h1 className='text-3xl lg:text-4xl font-serif px-4 md:px-0 font-bold w-full space-y-6 text-center text-gray-800 '>
-                     Explore everything you need around you
+                     Explore Now everything you need around you
                </h1> </div>
             
 
                 <div className=' flex  flex-col mt-16 w-10/12 space-y-10 justify-center items-center mx-auto'>
 
-                      <div className='grid grid-cols-1 space-y-2 border-b-4 pb-6 xs:space-y-4 md:grid-cols-2 shadow-inner md:px-20 
+                      <div className='animate- grid grid-cols-1 space-y-2 border-b-4 pb-6 xs:space-y-4 md:grid-cols-2 shadow-inner md:px-20 
                                       w-full justify-around items-center md:shadow-lg py-0 md:py-10'>
 
                             <div className=' space-y-3 md:space-y-8 flex flex-col w-full text-center  md:w-1/2'>
                                     <h1 className='font-bold text-lg lg:text-2xl'> Grocery at your doorstep.</h1> 
                                     <p className='text-sm md:text-md text-gray-700 lg:text-lg'> Buy groceries from your nearest grocery stores.
                                     </p>
-                                    {/* <button className='p-2 rounded-xl px-4 w-28 bg-green-800 text-white'>Explore </button> */}
+                                    <a className='' href='./buylowcal#enter-location'><button className='animate-bounce animate-bounce p-2 rounded-xl px-4 w-36 bg-green-800 text-white'>Explore Now </button></a>
                             </div>
 
                             <div className='flex'>
@@ -310,7 +315,7 @@ export default function Buylowcal() {
                                     <h1 className='font-bold  text-lg lg:text-2xl'> Fresh Fruits and Veggies.</h1> 
                                     <p className='text-sm md:text-md text-gray-700 lg:text-lg'> Buy Fresh fruits and vegetables from near supermarkets and avail extra cashback
                                     </p>
-                                    {/* <button className='p-2 rounded-xl px-4 w-28 bg-green-800 text-white'> Explore </button> */}
+                                    <a className='' href='./buylowcal#enter-location'><button className='animate-bounce animate-bounce p-2 rounded-xl px-4 w-36 bg-green-800 text-white'> Explore Now </button></a>
                             </div>
                             
                         </div>
@@ -324,13 +329,15 @@ export default function Buylowcal() {
                                         <h1 className='font-bold text-lg lg:text-2xl'> Look good Feel Good </h1> 
                                         <p className='text-sm md:text-md text-gray-700 lg:text-lg '> Every brand on your finger tips,
                                         <h2>  Shop now and Avail discounts and offers on best brands around you </h2> </p>
-                                        {/* <button className='p-2 rounded-xl px-4 w-28 bg-green-800 text-white'>Explore</button> */}
+                                        <a className='' href='./buylowcal#enter-location'><button className='animate-bounce animate-bounce p-2 rounded-xl px-4 w-36 bg-green-800 text-white'>Explore Now</button></a>
                                 </div>
 
-                                <div className='flex'><img 
+                                <div className='flex w-full'>
+                                  <img 
                                     src='/clothing.jpg'
                                     // src='https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=768,format=auto,quality=50/https://cdn.doordash.com/media/consumer/home/landing/new/all_in_one.jpg' 
                                     className=' h-full w-full object-fill sm:object-contain lg:w-full lg:object-contain' />
+                                    
                                 </div>
                         </div>
 
@@ -344,11 +351,11 @@ export default function Buylowcal() {
                                         src='/restraunts.jpg'
                                         className='h-full w-full object-fill sm:object-contain lg:w-full lg:object-contain'/>
                                 </div>
-                                <div className='space-y-3 md:space-y-8 flex flex-col w-full text-center  '>
+                                <div className='space-y-3 md:space-y-8 flex flex-col w-full items-center text-center  '>
                                         <h1 className='font-bold text-lg lg:text-2xl'> Your favourite food at your doorstep.</h1> 
                                         <p className='md:text-md text-gray-700 lg:text-lg'> Order your favourite food from best restraunts near you.
                                         </p>
-                                        {/* <button className='p-2 rounded-xl px-4 w-28 bg-green-800 text-white'> Explore </button> */}
+                                        <a className='' href='./buylowcal#enter-location'><button className='animate-bounce animate-bounce p-2 rounded-xl px-4 w-36 bg-green-800 text-white'> Explore Now </button></a>
                                 </div>
                             
                         </div>
@@ -358,7 +365,7 @@ export default function Buylowcal() {
                                         w-full justify-around items-center md:shadow-lg py-0 md:py-10 '>
                         
                     
-                        <div className ='space-y-3 md:space-y-8 flex flex-col w-full text-center   md:w-2/3' >
+                        <div className ='space-y-3 md:space-y-8 flex flex-col items-center w-full text-center   md:w-2/3' >
 
                                 <h1 className='font-bold text-lg lg:text-2xl'>
                                      Luxurious resorts near you. 
@@ -368,9 +375,7 @@ export default function Buylowcal() {
                                     Discover the luxurious resorts near you 
                                 </p>
 
-                                {/* <button className='p-2 rounded-xl px-4 w-28 bg-green-800 text-white'>
-                                    Explore 
-                                </button> */}
+                                <a className='' href='./buylowcal#enter-location'><button className='animate-bounce animate-bounce p-2 rounded-xl px-4 w-36 bg-green-800 text-center text-white'> Explore Now </button></a>
 
                         </div>
                         <div className='flex w-full '><img 
@@ -393,13 +398,13 @@ export default function Buylowcal() {
                              className=' h-full w-full object-fill sm:object-contain lg:w-full lg:object-contain' />
                         </div>
 
-                        <div className='space-y-3 md:space-y-8 flex flex-col w-full text-center  '>
+                        <div className='space-y-3 md:space-y-8 flex flex-col w-full items-center text-center  '>
                                 <h1 className='font-bold text-lg lg:text-2xl'>It’s all here. 
                                     Salon n Spas.</h1> 
                                 <p className='md:text-md text-gray-700 lg:text-lg'> Discover local, salon and spas and
                                     and more.
                                 </p>
-                                {/* <button className='p-2 rounded-xl px-4 w-28 bg-green-800 text-white'>Explore </button> */}
+                                <a className='' href='./buylowcal#enter-location'><button className='animate-bounce  p-2 rounded-xl px-4 w-36 bg-green-800 text-white'>Explore Now </button></a>
                         </div>
 
                     
@@ -409,10 +414,10 @@ export default function Buylowcal() {
                     <div className ='grid grid-cols-1 space-y-2 border-b-4 pb-6 xs:space-y-4 md:grid-cols-2 md:px-20 
                                         w-full justify-around items-center md:shadow-lg py-0 md:py-10'>
                     
-                        <div className='space-y-3 md:space-y-8 flex flex-col w-full text-center  md:w-2/3 '>
+                        <div className='space-y-3 md:space-y-8 flex flex-col w-full text-center items-center md:w-2/3 '>
                                 <h1 className='font-bold text-lg lg:text-2xl'>Premium gyms</h1> 
                                 <p className='md:text-md text-gray-700 lg:text-lg'> Discover Premium Health and fitness centers, gyms around you</p>
-                                {/* <button className='p-2 rounded-xl px-4 w-28 bg-green-800 text-white'> Explore </button> */}
+                                <a className='' href='./buylowcal#enter-location'><button className='animate-bounce animate-bounce p-2 rounded-xl px-4 w-36 bg-green-800 text-white'> Explore Now </button></a>
                         </div>
 
 

@@ -23,6 +23,7 @@ import {
   UserAddressInput,
 } from "@ts-types/generated";
 
+
 import GooglePlacesAutocomplete from "@components/form/google-places-autocomplete";
 import Label from "@components/ui/label";
 import { getIcon } from "@utils/get-icon";
@@ -35,8 +36,8 @@ import Multiselect from 'multiselect-react-dropdown';
 import { useEffect, useState } from "react";
 
 
-const socialIcon = [
 
+const socialIcon = [
   {
     value: "FacebookIcon",
     label: "Facebook",
@@ -56,6 +57,7 @@ const socialIcon = [
 ];
 
 
+
 export const updatedIcons = socialIcon.map((item: any) => {
   item.label = (
     <div className="flex space-s-4 items-center text-body">
@@ -71,6 +73,7 @@ export const updatedIcons = socialIcon.map((item: any) => {
   );
   return item;
 });
+
 
 type FormValues = {
   name: string;
@@ -110,6 +113,7 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
     }
     // console.log(initialValues);
   },[])
+
   const {
     register,
     handleSubmit,

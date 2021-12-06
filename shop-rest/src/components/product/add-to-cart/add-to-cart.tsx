@@ -18,9 +18,11 @@ interface Props {
   counterClass?: string;
   variation?: any;
   disabled?: boolean;
+  onClick?: (e: any) => void;
 }
 
 export const AddToCart = ({
+  onClick,
   data,
   variant = "helium",
   counterVariant,
@@ -43,6 +45,7 @@ export const AddToCart = ({
     e: React.MouseEvent<HTMLButtonElement | MouseEvent>
   ) => {
     e.stopPropagation();
+    onClick && onClick(e);
     addItemToCart(item, 1);
     if (!isInCart(item.id)) {
       cartAnimation(e);

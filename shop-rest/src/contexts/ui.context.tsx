@@ -1,3 +1,4 @@
+
 import { loggedIn } from "@utils/is-loggedin";
 import React, { FC, useMemo } from "react";
 
@@ -120,6 +121,7 @@ function uiReducer(state: State, action: Action) {
 }
 
 export const UIProvider: FC = (props) => {
+  
   const [state, dispatch] = React.useReducer(uiReducer, initialState);
 
   const authorize = () => dispatch({ type: "AUTHORIZE" });
@@ -133,6 +135,7 @@ export const UIProvider: FC = (props) => {
 
   const closeSidebarIfPresent = () =>
     state.displaySidebar && dispatch({ type: "CLOSE_SIDEBAR" });
+
   const setSidebarView = (view: SIDEBAR_VIEW) =>
     dispatch({ type: "SET_SIDEBAR_VIEW", view });
 

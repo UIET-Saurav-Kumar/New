@@ -50,7 +50,7 @@ export default function UploadInvoice() {
   );
 
   if (loading) return <Loader text={("Loading...")} />;
-  if (error) return <ErrorMessage message={error.message} />;
+  if (error) return <ErrorMessage message='Please login or register first' />;
 
   function handlePagination(current: any) {
     setPage(current);
@@ -69,7 +69,7 @@ export default function UploadInvoice() {
             <Card className="flex flex-col md:flex-row items-center justify-between mb-8">
               <div className="md:w-1/4 mb-4 md:mb-0">
                 <h1 className="text-lg font-semibold text-heading">
-                  {("invoice upload")}
+                  {("Invoice Upload")}
                 </h1>
               </div>
 
@@ -98,7 +98,7 @@ export default function UploadInvoice() {
                     <span className="hidden md:block">
                         + {("Upload Invoice")}
                     </span>
-                    <span className="md:hidden">+ {("Add")}</span>
+                    <span className="md:hidden">+ {("Upload Invoice")}</span>
                     </LinkButton>
               </div>
 

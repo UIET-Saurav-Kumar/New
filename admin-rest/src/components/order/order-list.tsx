@@ -33,6 +33,15 @@ const OrderList = ({ orders, onPagination }: IProps) => {
 
   const columns = [
     {
+      title: t("table:Customer Name"),
+      dataIndex: "customer",
+      key: "customer",
+      align: alignLeft,
+      render: (customer: any) => (
+        <div>{customer.name}</div>
+      ),
+    },
+    {
       title: t("table:table-item-tracking-number"),
       dataIndex: "tracking_number",
       key: "tracking_number",
@@ -76,7 +85,7 @@ const OrderList = ({ orders, onPagination }: IProps) => {
         dayjs.extend(timezone);
         return (
           <span className="whitespace-nowrap">
-            {dayjs.utc(date).tz(dayjs.tz.guess()).fromNow()}
+            {dayjs(date).utc().fromNow()}
           </span>
         );
       },
@@ -110,11 +119,11 @@ const OrderList = ({ orders, onPagination }: IProps) => {
     },
     {
       title: t("table:table-item-shipping-address"),
-      dataIndex: "shipping_address",
-      key: "shipping_address",
+      dataIndex: "billing_address",
+      key: "billing_address",
       align: alignLeft,
-      render: (shipping_address: UserAddress) => (
-        <div>{formatAddress(shipping_address)}</div>
+      render: (billing_address: UserAddress) => (
+        <div>{formatAddress(billing_address)}</div>
       ),
     },
     

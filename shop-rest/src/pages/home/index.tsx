@@ -129,7 +129,6 @@ const {
                 <ProductGrid/>
                 <FeaturedShops />
                 <FeaturedProducts/>
-                
               </>
             )
           } 

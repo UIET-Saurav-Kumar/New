@@ -15,6 +15,8 @@ import VariationPrice from "./product-details/product-variant-price";
 import ProductAttributes from "./product-details/product-attributes";
 import { useRouter } from "next/router";
 import { ROUTES } from "@utils/routes";
+import { useUI } from "@contexts/ui.context";
+
 
 type Props = {
   product: any;
@@ -34,6 +36,13 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
     quantity,
     shop,
   } = product ?? {};
+
+  const { openSidebar, setSidebarView } = useUI();
+
+  function handleCartSidebar() {
+    setSidebarView("CART_VIEW");
+    return openSidebar();
+  }
 
   const { t } = useTranslation("common");
   const [attributes, setAttributes] = useState<{ [key: string]: string }>({});
@@ -156,8 +165,9 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
             </div>
 
             <div className="mt-4 md:mt-6 flex flex-col lg:flex-row items-center">
-              <div className="mb-3 lg:mb-0 w-full lg:max-w-[400px]">
+              <div  className="mb-3 lg:mb-0 w-full lg:max-w-[400px]">
                 <AddToCart
+                onClick={handleCartSidebar}
                   data={product}
                   variant="big"
                   variation={selectedVariation}
@@ -194,7 +204,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
           {!!categories?.length && (
             <ProductCategories
               categories={categories}
-              basePath={`/${type?.slug}`}
+              basePath={`/shops/${shop.slug}`}
             />
           )}
 

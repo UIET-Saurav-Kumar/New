@@ -13,7 +13,7 @@ module.exports = withPWA({
     return [
       {
         source: "/",
-        destination: "/buylowcal",
+        destination: "/home",
         permanent: false,
       },
     ];

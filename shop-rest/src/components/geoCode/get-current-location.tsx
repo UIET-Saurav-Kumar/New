@@ -1,7 +1,7 @@
 import getAddress from "@components/geoCode/geo-code"
 import { MapPin } from '@components/icons/map-pin';
 import { useLocation } from "@contexts/location/location.context";
-
+import { useState } from "react";
 export default function GetCurrentLocation({
     onChange
   }:{
@@ -9,7 +9,10 @@ export default function GetCurrentLocation({
   }){
     const {addLocation} =useLocation()
 
+    const [spin, setSpin] = useState(false);
+
     function getLoc() {
+        setSpin(true)
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition);
         } else { 
@@ -37,7 +40,7 @@ export default function GetCurrentLocation({
         <>
             
             <button onClick = {getLoc} className=' flex items-start justify-center text-xs sm:text-sm relative bg-white border mt-10 px-1 p-1 sm:px-1 2xl:px-8 2xl:p-2 mx-auto rounded-lg text-accent shadow-lg font-semibold' > 
-            <img src='/gps.png' className=' mr-2 ml-2  text-green-400   w-3 h-3 sm:w-6 sm:h-6'/>     Get current location
+            <img src='/gps.png' className={` ${spin ? 'animate-spin' : ''} mr-2 ml-2  text-green-400   w-3 h-3 sm:w-6 sm:h-6`}/>     Get current location
                
             </button>
         </>
