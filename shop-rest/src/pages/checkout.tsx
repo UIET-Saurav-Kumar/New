@@ -12,6 +12,7 @@ export default function CheckoutPage() {
   const { data, refetch } = useCustomerQuery();
   const { isAuthorize } = useUI();
   const { openModal } = useModalAction();
+
   useEffect(() => {
     if (!isAuthorize) {
       return openModal("LOGIN_VIEW");
@@ -20,6 +21,7 @@ export default function CheckoutPage() {
       refetch();
     }
   }, [isAuthorize]);
+
   return (
     <div className="py-8 px-4 lg:py-10 lg:px-8 xl:py-14 xl:px-16 2xl:px-20">
       <div className="flex flex-col lg:flex-row items-center lg:items-start m-auto lg:space-s-8 w-full max-w-5xl">
@@ -28,7 +30,7 @@ export default function CheckoutPage() {
             
             <Address
               id={data?.me?.id!}
-              heading="text-billing-address"
+              heading="Billing Address / Shipping-address"
               addresses={data?.me?.address?.filter(
                 (address: any) => address.type === "billing"
               )}

@@ -79,6 +79,7 @@ export const siteSettings = {
     { href: ROUTES.WALLET, label: "Wallet" },
     { href: ROUTES.WITHDRAWS, label: "Withdraws" },
     { href: ROUTES.UPLOAD_INVOICE, label: "Upload Invoice" },
+    { href: ROUTES.DELIVERY, label: "Deliveries" },
     { href: ROUTES.LOGOUT, label: "Logout" },
   ],  
 
@@ -149,11 +150,11 @@ export const siteSettings = {
       title: "Self Pickup",
       description: "Self Pickup",
     },
-    {
-      id: "1",
-      title: "express-delivery",
-      description: "90 min express delivery",
-    },
+    // {
+    //   id: "1",
+    //   title: "express-delivery",
+    //   description: "90 min express delivery",
+    // },
     {
       id: "2",
       title: "8am-11am",
