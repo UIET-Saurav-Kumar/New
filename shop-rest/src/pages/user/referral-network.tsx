@@ -17,18 +17,20 @@ export default function ReferralNetwork() {
         search:"",
     });
 
-    useEffect(()=>{
-        console.log(data,"data");
-    },[])
+    
   
     function useWindowSize() {
         const [size, setSize] = useState([0, 0]);
         useLayoutEffect(() => {
           function updateSize() {
+              if(data?.size>50){
+                var initial_height=1500
+              }else{
+                var initial_height=4000
+              }
             var new_width=(window.innerWidth>=1000)?800:window.innerWidth-10;
-            var new_height=(window.innerHeight>=3000)?1500:window.innerHeight-10;
-            // console.log(new_width,"new_width");
-            // console.log(new_height,"new_height");
+            var new_height=(window.innerHeight>=3000)?initial_height:window.innerHeight-10;
+  
 
             setSize([new_width, new_height]);
           }
@@ -52,9 +54,9 @@ export default function ReferralNetwork() {
 
                     <div className="flex flex-col  justify-evenly bg-white overflow-y-scroll min-h-screen lg:h-auto p-4 w-screen  border  mt-14" style={{backgroundColor:"#2c2d25"}}>
                     {
-                        data&&(
+                        data?.data&&(
                             <Tree
-                                data={data}
+                                data={data?.data}
                                 height={height}
                                 width={width}
                                 svgProps={{

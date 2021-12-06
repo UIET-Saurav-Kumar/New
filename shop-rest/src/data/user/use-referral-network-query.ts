@@ -12,7 +12,7 @@ export const fetchReferralNetworkProduct = async ({ queryKey }: QueryParamsType)
     data
   } = await referralNetworkService.fetchUrl(API_ENDPOINTS.REFERRAL_NETWORK);
 
-  return data.data;
+  return data;
 };
 export const useReferralNetworkQuery = (options: FetureProductOptionsType) => {
   return useQuery<{ referralNetwork: { data: FeatureProduct[] } }, Error>(

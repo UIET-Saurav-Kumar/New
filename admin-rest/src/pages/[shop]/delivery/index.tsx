@@ -16,8 +16,6 @@ import { useDeliveriesQuery } from "@data/shop-delivery/use-deliveries.query";
 import Button from "@components/ui/button";
 import NotFound from "@components/common/not-found";
 
-
-
 export default function DeliveriesPage() {
   const { t } = useTranslation("common");
   const [order, setOrder] = useState<any>({});
