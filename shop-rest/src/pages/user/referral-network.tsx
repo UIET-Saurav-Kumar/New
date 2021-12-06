@@ -57,7 +57,7 @@ export default function ReferralNetwork() {
                         data?.data&&(
                             <Tree
                                 data={data?.data}
-                                height={1000}
+                                height={data?.size}
                                 width={width}
                                 svgProps={{
                                     className: 'custom'
