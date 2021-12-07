@@ -117,15 +117,22 @@ class ProductController extends CoreController
      */
     public function show($slug, Request $request)
     {
-        try {
-            $limit = isset($request->limit) ? $request->limit : 10;
-            $product = $this->repository
-                ->with(['type', 'shop', 'categories', 'tags', 'variations.attribute.values', 'variation_options'])
-                ->findOneByFieldOrFail('slug', $slug);
-            $product->related_products = $this->repository->fetchRelated($slug, $limit);
-            return $product;
-        } catch (\Exception $e) {
-            throw new PickbazarException('PICKBAZAR_ERROR.NOT_FOUND');
+        if(!empty($request->all()))
+        {
+            try {
+                $limit = isset($request->limit) ? $request->limit : 10;
+                $product = $this->repository
+                    ->with(['type', 'shop', 'categories', 'tags', 'variations.attribute.values', 'variation_options'])
+                    ->findOneByFieldOrFail('slug', $slug);
+                $product->related_products = $this->repository->fetchRelated($slug, $limit);
+                return $product;
+            } catch (\Exception $e) {
+                throw new PickbazarException('PICKBAZAR_ERROR.NOT_FOUND');
+            }
+        }
+        else
+        {
+            return array();
         }
     }
 
