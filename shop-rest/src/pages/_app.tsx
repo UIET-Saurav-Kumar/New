@@ -44,6 +44,7 @@ const AppSettings: React.FC = (props) => {
     const { data, isLoading: loading, error } = useSettingsQuery();
 
     const shop = fetchShopSeo(props?.children?._owner?.pendingProps?.router?.query?.slug as string);
+    console.log('app tsx console');
     console.log(shop);
     if (loading) return <PageLoader />;
     if (error) return <ErrorMessage message={error.message} />;
