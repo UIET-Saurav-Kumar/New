@@ -78,7 +78,7 @@ const PaymentForm = () => {
         <p className="text-base font-semibold text-heading">
           {("Total Amount")}
         </p>
-        <span className="text-base font-semibold text-heading">{delivery?.amount} ₹</span>
+        <span className="text-base font-semibold text-heading">{Math.round(delivery?.amount)} ₹</span>
         <input type="hidden" {...register('amount')} value={delivery?.amount}/>
         <input type="hidden" {...register('id')} value={delivery?.id}/>
       </div>

@@ -35,10 +35,6 @@ CreateDeliveryPage.authenticate = {
 CreateDeliveryPage.Layout = ShopLayout;
 
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
-  const cookies = parseContextCookie(context?.req?.headers?.cookie);
-  if (!cookies?.auth_token) {
-    return { redirect: { destination: "/", permanent: false } };
-  }
   return {
     props: {
       ...(await serverSideTranslations(context.locale, ["common"])),
