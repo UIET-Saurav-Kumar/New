@@ -42,8 +42,11 @@ const CreateOrUpdateAddressForm = () => {
   const {
     data: { customerId, address, type },
   } = useModalState();
+  
   const { closeModal } = useModalAction();
+
   const { mutate: updateProfile } = useUpdateCustomerMutation();
+
   const {
     register,
     handleSubmit,

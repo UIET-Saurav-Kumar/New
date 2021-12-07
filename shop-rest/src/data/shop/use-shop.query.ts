@@ -1,8 +1,10 @@
+
 import { Shop } from "@ts-types/custom.types";
 import { API_ENDPOINTS } from "@utils/api/endpoints";
 import http from "@utils/api/http";
 import url from "@utils/api/server_url";
 import { useQuery } from "react-query";
+
 
 export const fetchShop = async (slug: string) => {
   const { data } = await http.get(`${url}/${API_ENDPOINTS.SHOPS}/${slug}`);
@@ -11,7 +13,11 @@ export const fetchShop = async (slug: string) => {
 
 export const fetchShopSeo = async (slug: string) => {
   const { data } = await http.get(`${url}/${API_ENDPOINTS.SETTINGS}?shop_slug=${slug}`);
-  console.log(data);
+  // console.log('fetchShopSeo start');
+  console.log('api endpoint',API_ENDPOINTS.SETTINGS);
+  console.log('slug',slug);
+  console.log('data',data);
+  // console.log('fetchShopSeo end');
   setTimeout(() => {
     const eltitle = document.querySelector('title');
     eltitle.innerText = `BuyLowcal | ${data?.options?.seo?.metaTitle}`;

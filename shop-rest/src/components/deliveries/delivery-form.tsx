@@ -79,7 +79,7 @@ export default function CreateOrUpdateDeliveryForm({ initialValues }: IProps) {
   }
   
   const onSubmit = (values: FormValues) => {
-    values.package_type=(values.package_type)?values.package_type.name:"";
+    values.package_type=(values.package_type)?values?.package_type?.name:"";
     values.pickup_location=pickupLocation
     values.drop_location=dropLocation
     const inputs=values;
