@@ -28,7 +28,8 @@ class AnalyticsController extends CoreController
     {
         $user = $request->user();
         if ($user && ($user->hasPermissionTo(Permission::SUPER_ADMIN) || $user->hasPermissionTo(Permission::STORE_OWNER))) {
-            $totalRevenueQuery = DB::table('orders')->whereDate('created_at', '>', Carbon::now()->subDays(30));
+            // $totalRevenueQuery = DB::table('orders')->whereDate('created_at', '>', Carbon::now()->subDays(30));
+            $totalRevenueQuery = DB::table('orders');
 
             if ($user && $user->hasPermissionTo(Permission::SUPER_ADMIN)) {
                 $totalRevenue = $totalRevenueQuery->sum('paid_total');
@@ -43,7 +44,9 @@ class AnalyticsController extends CoreController
             } else {
                 $todaysRevenue = $todaysRevenueQuery->where('shop_id', '=', $user->id)->sum('paid_total');
             }
-            $totalOrdersQuery = DB::table('orders')->whereDate('created_at', '>', Carbon::now()->subDays(30));
+            // $totalOrdersQuery = DB::table('orders')->whereDate('created_at', '>', Carbon::now()->subDays(30));
+            $totalOrdersQuery = DB::table('orders');
+
             if ($user && $user->hasPermissionTo(Permission::SUPER_ADMIN)) {
                 $totalOrders = $totalOrdersQuery->count();
             } else {

@@ -75,7 +75,8 @@ export default function Dashboard() {
         <div className="w-full ">
           <StickerCard
             titleTransKey="sticker-card-title-rev"
-            subtitleTransKey="sticker-card-subtitle-rev"
+            // sticker-card-subtitle-rev
+            subtitleTransKey=""
             icon={<img src='/rupee.png' className='h-10 w-10'/>}
             iconBgStyle={{ backgroundColor: "#A7F3D0" }}
             price={total_revenue}
@@ -84,7 +85,8 @@ export default function Dashboard() {
         <div className="w-full ">
           <StickerCard
             titleTransKey="sticker-card-title-order"
-            subtitleTransKey="sticker-card-subtitle-order"
+            // sticker-card-subtitle-order
+            subtitleTransKey=""
             icon={<CartIconBig />}
             price={data?.totalOrders}
           />
@@ -117,7 +119,7 @@ export default function Dashboard() {
             titleTransKey="Invoice Transfered Amount"
             icon={<img src='/team.png' className='h-10 w-10' />}
             iconBgStyle={{ backgroundColor: "rgb(240, 161, 54)" }}
-            price={"₹"+data?.bill_transfered_amount}
+            price={"₹"+Math.round(data?.bill_transfered_amount)}
           />
         </div>
         

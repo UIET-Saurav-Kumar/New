@@ -48,7 +48,7 @@ type PriceProps = {
   currencyCode?: string;
 };
 export default function usePrice(data?: PriceProps | null) {
-  const { currency } = useSettings();
+  const currency = "INR";
   const { amount, baseAmount, currencyCode = currency } = data ?? {};
   const locale = siteSettings.defaultLanguage;
   const value = useMemo(() => {
