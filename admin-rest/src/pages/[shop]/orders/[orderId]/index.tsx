@@ -21,11 +21,25 @@ import { useUpdateOrderMutation } from "@data/order/use-order-update.mutation";
 import { useOrderStatusesQuery } from "@data/order-status/use-order-statuses.query";
 import { useOrderQuery } from "@data/order/use-order.query";
 import { Attachment } from "@ts-types/generated";
+import {  PDFExport, savePDF} from '@progress/kendo-react-pdf'
+import {useRef} from 'react';
+
 
 type FormValues = {
   order_status: any;
 };
 export default function OrderDetailsPage() {
+
+  const pdfExportComponent = useRef(null);
+  const contentArea = useRef(null);
+
+  const handleExportWithComponent = (event) => {
+    pdfExportComponent.current.save();
+  }
+  const handleExportWithMethod = (event) =>{
+    savePDF(contentArea.current, {paperSize:'A4'});
+  }
+
   const { t } = useTranslation();
   const { query } = useRouter();
   const { alignLeft, alignRight } = useIsRTL();
@@ -174,7 +188,9 @@ export default function OrderDetailsPage() {
           status={data?.order?.status?.serial!}
         />
       </div>
-
+      <div className=''>
+     <PDFExport ref={pdfExportComponent} paperSize='A4'>
+    <div ref={contentArea}>
       <div className="mb-10">
         {data?.order ? (
           <Table
@@ -252,6 +268,13 @@ export default function OrderDetailsPage() {
           </div>
         </div>
       </div>
+      </div>
+      </PDFExport>
+      </div>
+   <div className='w-full text-center'> 
+       <button className='   text-blue-700 text-lg hover:underline mt-8 h-9  w-38' 
+        onClick={handleExportWithComponent}>Download Invoice
+        </button></div>
     </Card>
   );
 }
