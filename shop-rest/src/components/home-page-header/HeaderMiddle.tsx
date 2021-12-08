@@ -12,7 +12,22 @@ import GetCurrentLocation from "@components/geoCode/get-current-location"
 import { useLocation } from "@contexts/location/location.context";
 import MobileJoinButton from '@components/layout/navbar/mobile-join-button';
 
-
+const cities1 = [ 
+    
+'Chandigarh', 
+        
+    'Panchkula',
+    'Mohali',
+   'Ludhiana',
+    'Delhi',
+  'Gurgaon',    'Noida',
+  
+]
+const cities2 = ['Ahemdabad',
+'Hyderabad',
+'Bangalore',
+'Mumbai',
+'Chennai',    'Kolkata',    'Pune',]
 
 export default function HeaderMiddle({children,
     open = false,
@@ -50,8 +65,8 @@ export default function HeaderMiddle({children,
 
     const openNav = () => {
         setClick(!click);
-
     }
+
     useEffect(()=>{
         if(!getLocation?.formattedAddress){
             setLocation(true);
@@ -62,7 +77,7 @@ export default function HeaderMiddle({children,
     },[])
 
     function changeLocation(data:any){
-
+       
         var location=JSON.stringify(data);
         console.log(data?.formattedAddress);
         document.getElementById("location_id").value=data?.formattedAddress;
@@ -71,6 +86,7 @@ export default function HeaderMiddle({children,
         if(location){
             
             setHasLoction(true);
+            // closeLocation(); 
         }
 
         var { query ,pathname} = router;
@@ -96,7 +112,7 @@ export default function HeaderMiddle({children,
              className='flex flex-col  shadow-md md:bg-white lg:bg-white'> 
 
 
-       <div className=' relative z-30 px-4 flex  justify-evenly max-w-full pt-8 pb-6 '>
+       <div className='relative z-30 px-4 flex justify-evenly max-w-full pt-8 pb-6 '>
               
 
                {/* searchbar  */}
@@ -104,14 +120,14 @@ export default function HeaderMiddle({children,
 
                     <div className = ' hidden lg:block px-0 mx-0 p-0 m-0' >
 
-                        <Logo className=" mx-0 px-0 " />       
+                       <div style={{zIndex: 0}} className=''><Logo className=" mx-0 px-0 " /> </div>       
                                           
                     </div>
                   
                   {/* Search Bar */}
                    <div className=' flex focus-ring-2 justify-center
                                      lg:w-3/4 2xl:mx-auto lg:mx-auto 
-                                    2xl:flex-1' >
+                                    2xl:flex-1'>
 
                        <input onClick = {handleLocation} 
                               defaultValue = {getLocation?.formattedAddress}  
@@ -120,19 +136,18 @@ export default function HeaderMiddle({children,
                                           border border-e-0  focus:border-accent pr-4 border-gray-300 pl-2 ' 
                               placeholder = 'Enter location' id='location_id' />
                        
-                           <div className='hidden  lg:flex lg:w-3/5   
-                                           ' >
+                           <div className='hidden  lg:flex lg:w-3/5'>
                                 <DropDown  getLoc={handleLocation} />
                            </div>
 
                     </div>
 
                            { isAuthorize ? 
-                               <div className='hidden lg:inline-flex lg:ml-8 lg+:ml-0  xl:inline-flex  '>
+                               <div className='hidden lg:inline-flex lg:ml-8 lg+:ml-0  xl:inline-flex'>
                                  <AuthorizedMenu/>
                                </div>
                             : 
-                               <div className=' hidden lg:inline-flex xl:inline-flex lg:ml-4 lg+:ml-0    '>
+                               <div className=' hidden lg:inline-flex xl:inline-flex lg:ml-4 lg+:ml-0'>
                                  <JoinButton/>
                                </div> 
                            }  
@@ -140,63 +155,91 @@ export default function HeaderMiddle({children,
                </div>
 
                {/* Location screen */}
-               <div className={` ${location ? 'fixed inset-0 bg-gray-900 bg-opacity-60 scroll-y-none w-full h-full' : ''} `}></div>
+               <div className={` ${location ? 'fixed inset-0 bg-gray-900 bg-opacity-60 scroll-y-none w-full h-full' : ' '} `}></div>
                
-              <div className={` absolute flex flex-col  w-full z-1000 inset-0 shadow-lg transform ml-0 duration-200 ease-in 
-                               ${location ? ' fixed translate-y-0  ' : '-translate-y-full ' } ${useBlurBackdrop && "use-blur-backdrop"} transform border-5 h-screen lg:h-96 bg-gray-50  overflow-y-hidden overflow-hidden  `}>
-                   <div className='flex items-center justify-between mx-auto mt-20 '>
+                    <div style={{zIndex: 1000}}  className={`absolute  flex flex-col  w-full z-1000 inset-0 shadow-lg transform ml-0 duration-200 ease-in bg-drop-down bg-no-repeat bg-fill lg:bg-fill
+                                    ${location ? '  translate-y-0  ' : '-translate-y-full ' }  transform border-5 bg-gray-100 h-screen lg:h-100 overflow-y-hidden overflow-hidden `}>
+                                       
+                                        {/* <HeaderMiddle/> */}
+                            <div className='flex items-center justify-between mx-auto mt-20 '>
 
-                       {/* <Logo className="mx-auto" /> */}
-                       <img src="/icons/x.svg"  onClick = {closeLocation} 
-                            className={`${(hasLocation)?"":"hidden"} absolute font-bold z-40 h-6 w-6 top-2 right-2 2xl:top-20 text-gray-400 2xl:h-8 2xl:w-8 2xl:right-20 `}/>
-                       <h2 className=' font-md text-md sm:text-lg md:text-lg lg:text-lg 2xl:text-2xl '> Get best deals in your city </h2>
+                                {/* <Logo className="mx-auto" /> */}
+                                <img src="/icons/x.svg"  onClick = {closeLocation} 
+                                     style={{zIndex: 100}} className={`${(hasLocation)?"":"hidden"} absolute font-bold z-40 h-7 w-7 top-2 bg-gold  rounded-full right-2 2xl:top-5 text-gray-400 2xl:h-8  2xl:w-8 2xl:right-7 `}/>
+                                {/* <h2 className=' font-md text-md sm:text-lg md:text-lg lg:text-lg 2xl:text-2xl '> Get best deals in your name </h2> */}
 
-                   </div>
-                   
-                  <div className='w-auto sm:w-400 lg:w-800 mx-auto items-center '> 
-                  
-                        <GooglePlacesAutocomplete  onChange = {changeLocation} 
-                                                   address  = {getLocation?.formattedAddress} /> 
-                  </div>
-        
-                  <div className='flex mx-auto items-center'> 
-                      <GetCurrentLocation onChange = {changeLocation} />  
+                            </div>
+                            {/* <img src='/drop-down.jpg' className='relative   top-0 object-contain'/> */}
+                            
+                            <div style={{zIndex: 1000}} className=' absolute flex flex-col justify-center 
+                                          items-center w-2/3 lg:w-2/3  space-y-6 ml-6 sm:ml-12 lg:ml-10  mt-80'> 
+                                          
+                                <div  style = {{zIndex: 1000}}  
+                                      className='w-full'> 
+                                    <GooglePlacesAutocomplete onChange = {changeLocation} 
+                                                              address  = {getLocation?.formattedAddress} /> 
+                                </div>
+    
+                                
+                        
+                                <div style={{zIndex: 1000}}  className='sm:w-full'> 
+                                     <GetCurrentLocation onChange = {changeLocation} />  
+                                </div>
+                                
 
-                  </div>
-                  {/* <Dialog.Overlay className="fixed inset-0 bg-gray-900 bg-opacity-80 w-full h-full" /> */}
+                            </div>
+                            
+                        {/* <Dialog.Overlay className="fixed inset-0 bg-gray-900 bg-opaname-80 w-full h-full" /> */}
+                           <div style={{zIndex:1000}} className='  absolute flex w-full flex-col bottom-5 sm:bottom-5 md:bottom-1 lg:bottom-4 space-y-4 md:space-y-6'>
+                               
+                               <div style={{zIndex:1000}} className='  w-full mt-2 lg:mt-4 grid grid-cols-3 sm:grid-cols-4 sm:gap-1 gap-2  md:gap-3 justify-evenly text-xs sm:text-sm md:text-lg px-6 
+                                        lg:text-sm lg:flex text-gray-700 text-md items-center '>
+                                       {cities1.map((city)=>{
+                                        return   <button className='border bg-white hover:border-magenta p-2 md:p-1 px-3 md:px-4 lg:px-8 rounded-full'>{city}</button>
+                                       })}
+                                    {/* <button className='border-magenta w-20 h-20 p-3 rounded-lg'>{name}</button> */}
+                                       
+                                </div>
+                                
+                                <div style={{zIndex:1000}} className='  w-full mt-4 grid grid-cols-3 sm:grid-cols-4 gap-2 sm:gap-1 md:gap-3  justify-between text-xs sm:text-sm md:text-lg px-6 
+                                            lg:text-sm lg:flex text-gray-700 text-md items-center'>
+                                                {cities2.map((city)=>{
+                                            return   <button className='border bg-white hover:border-magenta p-2 px-3 md:px-4 lg:px-8 md:p-1 rounded-full'>{city}</button>
+                                            })}
+                                </div>
+                           </div>
 
-
-              </div> 
+                </div> 
 
 
                {isAuthorize ? (
 
-                   <div className='flex justify-between  w-full  items-center  lg:hidden xl:hidden 2xl:hidden'>
+                   <div className='flex justify-between w-full items-center lg:hidden xl:hidden 2xl:hidden'>
 
                           {/* <div className = ' hidden lg:block px-0 mx-0 p-0 m-0' > */}
 
                         <Logo className=" mx-0 px-0 " />       
                                           
-                    {/* </div> */}
+                          {/* </div> */}
 
                        <div className='flex items-center  '>
-                               <span>  
-                                    <h3 onClick={handleLocation}  
-                                        className='flex  text-gray-600 items-center text-xs sm:text-sm md:text-md lg:hidden  
-                                                                    md:text-gray-600 mr-0 md:mr-0 md:text-md'>
+                            <span>  
+                                <h3 onClick={handleLocation}  
+                                    className='flex  text-gray-600 items-center text-xs sm:text-sm md:text-md lg:hidden  
+                                                                md:text-gray-600 mr-0 md:mr-0 md:text-md'>
 
-                                            <CaretDown className='text-gray-500 mr-2 w-3 h-3 md:w-5 md:h-5'/> 
+                                    <CaretDown className='text-gray-500 mr-2 w-3 h-3 md:w-5 md:h-5'/> 
 
-                                                    <button className='border text-gray-500 w-auto sm:w-96  rounded-xl border-gray-400 p-1 px-2'>
+                                            <button className='border text-gray-500 w-auto sm:w-96  rounded-xl border-gray-400 p-1 px-2'>
 
-                                                        { truncate(` ${getLocation?.formattedAddress} `, 21) }
+                                                { truncate(` ${getLocation?.formattedAddress} `, 21) }
 
-                                                        {/* { getLocation?.formattedAddress } */}
-                                                        {/* Chandigarh */}
+                                                {/* { getLocation?.formattedAddress } */}
+                                                {/* Chandigarh */}
 
-                                                    </button>
-                                        </h3> 
-                                </span>
+                                            </button>
+                                </h3> 
+                            </span>
                                
                        </div>
 
@@ -218,13 +261,13 @@ export default function HeaderMiddle({children,
                                                 className='flex  text-gray-600 items-center text-xs sm:text-sm md:text-md lg:hidden  
                                                             md:text-gray-600 mr-0 md:mr-0 md:text-md'>
                     
-                                                    <CaretDown className='text-gray-500 mr-2 w-5 h-5'/> 
+                                                <CaretDown className='text-gray-500 mr-2 w-5 h-5'/> 
 
-                                                        <button className='border text-gray-500  rounded-xl border-gray-400 p-1 px-2'>
+                                                    <button className='border text-gray-500  rounded-xl border-gray-400 p-1 px-2'>
 
-                                                            { truncate(` ${getLocation?.formattedAddress} `, 21) }
+                                                        { truncate(` ${getLocation?.formattedAddress} `, 21) }
 
-                                                        </button>
+                                                    </button>
                                             </h3> 
                                         </span>
 
