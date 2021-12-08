@@ -7,12 +7,13 @@ import Loader from "@components/ui/loader/loader";
 import { useLocation } from "@contexts/location/location.context";
 import { useCreateLogMutation } from "@data/log/use-create-log.mutation";
 import useOnClickOutside from "@utils/use-click-outside";
+import { MapIcon } from "@heroicons/react/outline";
 
 
 const libraries: Libraries = ["places"];
 // data,
 // data: LocationInput;
-export default function GooglePlacesAutocomplete({address,
+export default function GooglePlacesAutocomplete({address,closeLocation,
   onChange
 }: {
   onChange: any;
@@ -40,13 +41,16 @@ export default function GooglePlacesAutocomplete({address,
   }, []);
 
   const onUnmount = React.useCallback(function callback() {
+    
     setAutocomplete(null);
   }, []);
 
   const onPlaceChanged = () => {
     const place = autocomplete.getPlace();
+    
 
     if (!place.geometry || !place.geometry.location) {
+      
       console.log("Returned place contains no geometry");
       return;
     }
@@ -92,9 +96,11 @@ export default function GooglePlacesAutocomplete({address,
       addLocation(location);
       
       onChange(location);
+      
 
       createLog({location:location.formattedAddress}, {
         onSuccess: (data: any) => {
+         
           console.log(data)
         },
         onError: (error: any) => {
@@ -112,6 +118,7 @@ export default function GooglePlacesAutocomplete({address,
     
       <Autocomplete
         onLoad={onLoad}
+     
         onPlaceChanged={onPlaceChanged}
         onUnmount={onUnmount}
         fields={["address_components", "geometry.location", "formatted_address"]}
@@ -119,20 +126,33 @@ export default function GooglePlacesAutocomplete({address,
         className="flex"
       >
 
-        <input
+       <div  style={{zIndex:9}} className='flex   items-center'>
+
+          <div className='relative flex text-center  items-center '>
+            <img style={{zIndex:10}} src='/placeholder.png' 
+                 className='absolute  ml-6 md:ml-7 text-center object-contain h-4 w-4 '/>
+            <span className=' sm:p-3  bg-white sm:px-2 w-4 border-l-2 h-14 rounded-lg 
+                              rounded-r-none border-r-0 border-2'/>
+          </div>  
+          
+         <div style={{zIndex:8}} className='flex w-full'><input
           type = "text"
           // placeholder={t("common:placeholder-search-location")}
           placeholder='Enter your location'
           defaultValue={loc}
+          style={{zIndex:100}}
           
-          className=" mt-16 p-3 pl-8  mx-8 w-full  sm:px-8 sm:w-full sm:mx-auto  xmd:mx-4 md:w-full md:mx-auto 
-                      2xl:p-3 lg:p-3 lg:mx-auto  lg:w-full 2xl:w-full 2xl:mx-auto font-light
-                      focus:border-accent focus:bg-light  rounded-full  bg-gray-80
-                      outline-none text-xs sm:text-sm md:text-base lg:text-lg 
-                    border-gray-300 shadow-2xl border "
-        />
+          // className=" mt-16 p-3 pl-8  mx-8 w-full  sm:px-8 sm:w-full sm:mx-auto  xmd:mx-4 md:w-full md:mx-auto 
+          //             2xl:p-3 md:p-3 md:mx-auto  md:w-full 2xl:w-full 2xl:mx-auto font-light
+          //             focus:border-accent focus:bg-light  rounded-full  bg-gray-80
+          //             outline-none text-xs sm:text-sm md:text-base md:text-lg 
+          //           border-gray-300 shadow-2xl border "
+          className='border-l-0 z-50 outline-none w-200 xs+:w-500 sm:w-500 md:w-650 lg:w-700 h-14 
+                     rounded-l-none sm:p-3 md:p-2 rounded-lg  px-7 sm:px-6 md:px-9 border-2'
+        /></div>
+        </div>
 
-      </Autocomplete >
+      </Autocomplete>
 
   ) : (
 
