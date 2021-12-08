@@ -25,7 +25,9 @@ module.exports = {
         '400': '400px',
         '500': '500px',
         '600' : '600px',
+        '650' : '650px',
         '700':  '700px',
+        '750':  '750px',
         '800': '800px',
         '900': '900px',
         '1000': '1000px',
@@ -102,6 +104,7 @@ module.exports = {
         'hero-pattern': "url('/shops-frame.jpg')",
         'pink-footer': "url('/footer.jpg')",
         'india': "url('/india.jpg')",
+        'drop-down': "url('/drop-down.jpg')",
 
        },
 
@@ -177,6 +180,7 @@ module.exports = {
         4.5: "1.125rem",
         13: "3.125rem",
         22: "5.25rem",
+        100:'39rem',
         double: "200%",
       },
       maxHeight: {
