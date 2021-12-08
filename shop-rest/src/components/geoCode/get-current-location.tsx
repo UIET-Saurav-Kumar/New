@@ -12,7 +12,7 @@ export default function GetCurrentLocation({
     const [spin, setSpin] = useState(false);
 
     function getLoc() {
-        setSpin(true)
+        setSpin((setSpin) => !setSpin);
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition);
         } else { 
@@ -30,6 +30,7 @@ export default function GetCurrentLocation({
             lng: position?.coords.longitude,
             formattedAddress: address,
           };
+
         console.log(location);
         addLocation(location)
 
@@ -37,11 +38,14 @@ export default function GetCurrentLocation({
     }
 
     return (
+
         <>
-            
-            <button onClick = {getLoc} className=' flex items-start justify-center text-xs sm:text-sm relative bg-white border mt-10 px-1 p-1 sm:px-1 2xl:px-8 2xl:p-2 mx-auto rounded-lg text-accent shadow-lg font-semibold' > 
-            <img src='/gps.png' className={` ${spin ? 'animate-spin' : ''} mr-2 ml-2  text-green-400   w-3 h-3 sm:w-6 sm:h-6`}/>     Get current location
-               
+            <button onClick = {getLoc} className=' flex float-left  items-center  text-sm sm:text-sm md:text-md 
+                               text-white relative bg-magenta transition duration-500 ease-in-out  transform active:-translate-y-1 active:scale-95 
+                                 px-6 p-2 sm:p-3 sm:px-4 md:px-4 2xl:px-8 2xl:p-3 mx-auto rounded-full   shadow-md font-md '> 
+            <span className='mr-1 md:mr-1.5 md:w-4'><img src='/gps-white.png' className={`${spin ? 'animate-pulse' : 'animate-none'}
+                             mx-1 md:-mx-1  object-cover w-3 h-3 sm:w-4 sm:h-4`}/></span>
+                Get current location     
             </button>
         </>
     )
