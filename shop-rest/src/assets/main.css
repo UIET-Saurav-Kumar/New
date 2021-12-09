@@ -194,6 +194,9 @@
     -webkit-tap-highlight-color: transparent;
 	  scroll-behavior: smooth;
   }
+  input::-moz-focus-inner {
+    border: 0;
+  }
 
   body {
     @apply font-body;
@@ -390,15 +393,52 @@ svg.custom path.link {
     .css-yk16xz-control{
       border-top-left-radius: 0px!important;
       border-bottom-left-radius: 0px!important;
-    
-
     }
-  
-  
    }
+
    @media screen and (max-width: 767px){   
     #image-slider{      
         content:url("/banner7.jpeg");
         object-fit: cover;
     } 
-}
+    }
+
+    @media screen and (max-width: 1030px){   
+      #location-input{      
+         margin-top: 17%;
+      } 
+      }
+      @media screen and (max-width: 912px){   
+        #location-input{      
+           margin-top: 20%;
+        } 
+        }
+
+       
+
+            /* @media screen and (max-width: 348px){   
+              #location-input{      
+                 margin-top: 20%;
+              } 
+              } */
+              
+
+            @media screen and (max-width: 1620px){   
+              #location-input{      
+                 margin-top: 16%;
+              } 
+              }
+
+              @media screen and (max-width: 1720px){   
+                #location-input{      
+                   margin-top: 16%;
+                } 
+                }
+
+      @media screen and (max-width: 1030px){   
+        #cities{      
+           margin-top: 4%;
+        } 
+        }
+
+        
