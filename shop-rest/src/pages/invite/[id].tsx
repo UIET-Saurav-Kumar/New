@@ -16,6 +16,7 @@ import { useModalAction } from "@components/ui/modal/modal.context";
 import { GetServerSideProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { maskPhoneNumber } from "@utils/mask-phone-number";
+import LoginForm from "./loginform";
 
 type FormValues = {
   name: string;
@@ -117,29 +118,35 @@ const RegisterForm = () => {
       }
     );
   }
+
+  const [click, setClick] = useState(false);
+
   return (
+
     <div className="flex items-center justify-center bg-white sm:bg-gray-100 " >
         
-        <div className="py-6 px-5 sm:p-8 bg-light md:max-w-md h-screen md:h-auto flex flex-col justify-center m-auto max-w-md w-full bg-white sm:shadow p-5 sm:p-8 rounded mt-5 mb-5">
+        { !click ? <div className="py-6 px-5 sm:p-8 bg-light md:max-w-md h-screen md:h-auto flex flex-col justify-center m-auto max-w-md w-full bg-white sm:shadow p-5 sm:p-8 rounded mt-5 mb-5">
+            
             <div className="flex justify-center">
                 <Logo />
             </div>
-            <p className="text-center text-sm md:text-base leading-relaxed px-2 sm:px-0 text-body mt-4 sm:mt-5 mb-7 sm:mb-10">
-                {t("registration-helper")}
-                <span
-                onClick={() => handleNavigate("terms")}
-                className="mx-1 underline cursor-pointer text-accent hover:no-underline"
-                >
-                {t("text-terms")}
-                </span>
-                &
-                <span
-                onClick={() => handleNavigate("privacy")}
-                className="ms-1 underline cursor-pointer text-accent hover:no-underline"
-                >
-                {t("text-policy")}
-                </span>
-            </p>
+              <p className="text-center text-sm md:text-base leading-relaxed px-2 sm:px-0 text-body mt-4 sm:mt-5 mb-7 sm:mb-10">
+                  {t("registration-helper")}
+                  <span
+                  onClick={() => handleNavigate("terms")}
+                  className="mx-1 underline cursor-pointer text-accent hover:no-underline"
+                  >
+                  {t("text-terms")}
+                  </span>
+                  &
+                  <span
+                  onClick={() => handleNavigate("privacy")}
+                  className="ms-1 underline cursor-pointer text-accent hover:no-underline"
+                  >
+                  {t("text-policy")}
+                  </span>
+              </p>
+
             {errorMsg && (
                 <Alert
                 variant="error"
@@ -191,7 +198,7 @@ const RegisterForm = () => {
             </form>
             {/* End of forgot register form */}
 
-            {/* <div className="flex flex-col items-center justify-center relative text-sm text-heading mt-8 sm:mt-11 mb-6 sm:mb-8">
+            <div className="flex flex-col items-center justify-center relative text-sm text-heading mt-8 sm:mt-11 mb-6 sm:mb-8">
                 <hr className="w-full" />
                 <span className="absolute start-2/4 -top-2.5 px-2 -ms-4 bg-light">
                 {t("text-or")}
@@ -204,8 +211,8 @@ const RegisterForm = () => {
                   >
                   {t("text-login")}
                 </button>
-            </div> */}
-        </div>
+            </div>
+        </div> : <LoginForm />}
     </div>
   );
 };
