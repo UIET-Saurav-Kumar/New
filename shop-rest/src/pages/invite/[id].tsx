@@ -16,6 +16,7 @@ import { useModalAction } from "@components/ui/modal/modal.context";
 import { GetServerSideProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { maskPhoneNumber } from "@utils/mask-phone-number";
+import LoginForm from "./loginform";
 
 type FormValues = {
   name: string;
@@ -117,29 +118,35 @@ const RegisterForm = () => {
       }
     );
   }
+
+  const [click, setClick] = useState(false);
+
   return (
+
     <div className="flex items-center justify-center bg-white sm:bg-gray-100 " >
         
-        <div className="py-6 px-5 sm:p-8 bg-light md:max-w-md h-screen md:h-auto flex flex-col justify-center m-auto max-w-md w-full bg-white sm:shadow p-5 sm:p-8 rounded mt-5 mb-5">
+        { !click ? <div className="py-6 px-5 sm:p-8 bg-light md:max-w-md h-screen md:h-auto flex flex-col justify-center m-auto max-w-md w-full bg-white sm:shadow p-5 sm:p-8 rounded mt-5 mb-5">
+            
             <div className="flex justify-center">
                 <Logo />
             </div>
-            <p className="text-center text-sm md:text-base leading-relaxed px-2 sm:px-0 text-body mt-4 sm:mt-5 mb-7 sm:mb-10">
-                {t("registration-helper")}
-                <span
-                onClick={() => handleNavigate("terms")}
-                className="mx-1 underline cursor-pointer text-accent hover:no-underline"
-                >
-                {t("text-terms")}
-                </span>
-                &
-                <span
-                onClick={() => handleNavigate("privacy")}
-                className="ms-1 underline cursor-pointer text-accent hover:no-underline"
-                >
-                {t("text-policy")}
-                </span>
-            </p>
+              <p className="text-center text-sm md:text-base leading-relaxed px-2 sm:px-0 text-body mt-4 sm:mt-5 mb-7 sm:mb-10">
+                  {t("registration-helper")}
+                  <span
+                  onClick={() => handleNavigate("terms")}
+                  className="mx-1 underline cursor-pointer text-accent hover:no-underline"
+                  >
+                  {t("text-terms")}
+                  </span>
+                  &
+                  <span
+                  onClick={() => handleNavigate("privacy")}
+                  className="ms-1 underline cursor-pointer text-accent hover:no-underline"
+                  >
+                  {t("text-policy")}
+                  </span>
+              </p>
+
             {errorMsg && (
                 <Alert
                 variant="error"
@@ -149,6 +156,7 @@ const RegisterForm = () => {
                 onClose={() => setErrorMsg("")}
                 />
             )}
+
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
                 <Input
                 label={t("text-name")}
@@ -183,9 +191,9 @@ const RegisterForm = () => {
                   error={t(errors.phone_number?.message!)}
                 />
                 <div className="mt-8">
-                <Button className="w-full h-12" loading={loading} disabled={loading}>
-                    {t("text-register")}
-                </Button>
+                  <Button className="w-full h-12" loading={loading} disabled={loading}>
+                      {t("text-register")}
+                  </Button>
                 </div>
             </form>
             {/* End of forgot register form */}
@@ -196,15 +204,16 @@ const RegisterForm = () => {
                 {t("text-or")}
                 </span>
             </div>
+            
             <div className="text-sm sm:text-base text-body text-center">
                 {t("text-already-account")}{" "}
-                <button
-                className="ms-1 underline text-accent font-semibold transition-colors duration-200 focus:outline-none hover:text-accent-hover focus:text-accent-hover hover:no-underline focus:no-underline"
-                >
-                {t("text-login")}
+                <button onClick={() => setClick(true)} 
+                  className="ms-1 underline text-accent font-semibold transition-colors duration-200 focus:outline-none hover:text-accent-hover focus:text-accent-hover hover:no-underline focus:no-underline"
+                  >
+                  {t("text-login")}
                 </button>
             </div>
-        </div>
+        </div> : <LoginForm />}
     </div>
   );
 };

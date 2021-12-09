@@ -16,6 +16,7 @@ import * as yup from "yup";
 import { FacebookIcon } from "@components/icons/facebook";
 import { GoogleIcon } from "@components/icons/google";
 import { useModalAction } from "@components/ui/modal/modal.context";
+import RegisterForm from "./[id]";
 
 
 
@@ -38,13 +39,11 @@ const defaultValues = {
 };
 
 const LoginForm = () => {
-  
   const { t } = useTranslation("common");
   const { mutate: login, isLoading: loading } = useLoginMutation();
   const [errorMsg, setErrorMsg] = useState("");
   const { authorize } = useUI();
   const { openModal, closeModal } = useModalAction();
-
 
   const {
     register,
@@ -80,8 +79,12 @@ const LoginForm = () => {
       }
     );
   }
+  const [click, setClick] = useState(false);
+
+
   return (
-    <div className="py-6 px-5 sm:p-8 bg-light w-screen md:max-w-md h-screen md:h-auto flex flex-col justify-center">
+
+    <> { !click ? <div className="py-6 px-5 sm:p-8 bg-light w-screen md:max-w-md h-screen md:h-auto flex flex-col justify-center">
         <div className="flex justify-center">
           <Logo />
         </div>
@@ -166,13 +169,14 @@ const LoginForm = () => {
       <div className="text-sm sm:text-base text-body text-center">
         {t("text-no-account")}{" "}
         <button
-          onClick={() => openModal("REGISTER")}
+          onClick={() => setClick(true)}
           className="ms-1 underline text-accent font-semibold transition-colors duration-200 focus:outline-none hover:text-accent-hover focus:text-accent-hover hover:no-underline focus:no-underline"
         >
           {t("text-register")}
         </button>
       </div>
-    </div>
+    </div> : <RegisterForm /> }
+    </>
   );
 };
 

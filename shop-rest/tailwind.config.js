@@ -186,6 +186,7 @@ module.exports = {
         80: "20rem",
         100:'30rem',
         110:'36.5rem',
+        200:'39rem',
 
         double: "200%",
       },
