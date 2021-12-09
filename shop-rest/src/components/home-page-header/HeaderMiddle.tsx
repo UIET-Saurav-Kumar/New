@@ -204,7 +204,7 @@ export default function HeaderMiddle({children,
                             </div>
                             
                         {/* <Dialog.Overlay className="fixed inset-0 bg-gray-900 bg-opaname-80 w-full h-full" /> */}
-                           <div id='cities' style={{zIndex:0}} className='  absolute flex w-full flex-col bottom-44 md:bottom-36 lg:bottom-16 2xl:bottom-8 space-y-4 md:space-y-6'>
+                           <div id='cities' style={{zIndex:0}} className='  fixed flex w-full flex-col bottom-44 md:bottom-36 lg:bottom-16 2xl:bottom-8 space-y-4 md:space-y-6'>
                                
                                <div style={{zIndex:0}} className='  w-full mt-2 lg:mt-4 grid grid-cols-4 sm:grid-cols-4 sm:gap-1 gap-2  md:gap-3 justify-evenly text-xs sm:text-sm md:text-lg px-0 sm:px-6 
                                         lg:text-sm lg:flex text-gray-700 text-md items-center '>
