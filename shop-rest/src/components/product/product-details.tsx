@@ -17,7 +17,6 @@ import { useRouter } from "next/router";
 import { ROUTES } from "@utils/routes";
 import { useUI } from "@contexts/ui.context";
 
-
 type Props = {
   product: any;
   variant?: "defaultView" | "modalView";
@@ -91,6 +90,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
         <div className="md:w-1/2 p-6 pt-8 lg:p-14 xl:p-16">
           <div className="flex items-center justify-between mb-8 lg:mb-10">
             <BackButton />
+            <button className="text-sm text-magenta underline" onClick={() => navigate(`${ROUTES.SHOPS}/${shop?.slug}`)}>More from This Seller</button>
             {discount && (
               <div className="rounded-full text-xs leading-6 font-semibold px-3 bg-yellow-500 text-light">
                 {discount}
@@ -211,7 +211,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
           {shop?.name && (
             <div className="flex items-center mt-2">
               <span className="text-sm font-semibold text-heading capitalize me-6 py-1">
-                {t("common:text-sellers")}
+                {t("common:Seller")}
               </span>
 
               <button
