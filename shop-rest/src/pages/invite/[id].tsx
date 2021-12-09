@@ -149,6 +149,7 @@ const RegisterForm = () => {
                 onClose={() => setErrorMsg("")}
                 />
             )}
+
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
                 <Input
                 label={t("text-name")}
@@ -183,14 +184,14 @@ const RegisterForm = () => {
                   error={t(errors.phone_number?.message!)}
                 />
                 <div className="mt-8">
-                <Button className="w-full h-12" loading={loading} disabled={loading}>
-                    {t("text-register")}
-                </Button>
+                  <Button className="w-full h-12" loading={loading} disabled={loading}>
+                      {t("text-register")}
+                  </Button>
                 </div>
             </form>
             {/* End of forgot register form */}
 
-            <div className="flex flex-col items-center justify-center relative text-sm text-heading mt-8 sm:mt-11 mb-6 sm:mb-8">
+            {/* <div className="flex flex-col items-center justify-center relative text-sm text-heading mt-8 sm:mt-11 mb-6 sm:mb-8">
                 <hr className="w-full" />
                 <span className="absolute start-2/4 -top-2.5 px-2 -ms-4 bg-light">
                 {t("text-or")}
@@ -198,12 +199,12 @@ const RegisterForm = () => {
             </div>
             <div className="text-sm sm:text-base text-body text-center">
                 {t("text-already-account")}{" "}
-                <button
-                className="ms-1 underline text-accent font-semibold transition-colors duration-200 focus:outline-none hover:text-accent-hover focus:text-accent-hover hover:no-underline focus:no-underline"
-                >
-                {t("text-login")}
+                <button onClick={() => setClick(true)} 
+                  className="ms-1 underline text-accent font-semibold transition-colors duration-200 focus:outline-none hover:text-accent-hover focus:text-accent-hover hover:no-underline focus:no-underline"
+                  >
+                  {t("text-login")}
                 </button>
-            </div>
+            </div> */}
         </div>
     </div>
   );
