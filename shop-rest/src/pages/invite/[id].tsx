@@ -145,8 +145,9 @@ const RegisterForm = () => {
                   >
                   {t("text-policy")}
                   </span>
+                  <h4 className="font-semibold text-magenta text-xl mt-5">Register form</h4>
               </p>
-
+              
             {errorMsg && (
                 <Alert
                 variant="error"
@@ -204,7 +205,6 @@ const RegisterForm = () => {
                 {t("text-or")}
                 </span>
             </div>
-            
             <div className="text-sm sm:text-base text-body text-center">
                 {t("text-already-account")}{" "}
                 <button onClick={() => setClick(true)} 

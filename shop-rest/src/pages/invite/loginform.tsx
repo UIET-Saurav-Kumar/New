@@ -84,12 +84,12 @@ const LoginForm = () => {
 
   return (
 
-    <> { !click ? <div className="py-6 px-5 sm:p-8 bg-light w-screen md:max-w-md h-screen md:h-auto flex flex-col justify-center">
+    <div className=""> { !click ? <div className="py-6 px-5 sm:p-8 bg-light w-screen md:max-w-md h-screen md:h-auto flex flex-col justify-center">
         <div className="flex justify-center">
           <Logo />
         </div>
-        <p className="text-center text-sm md:text-base text-body mt-4 sm:mt-5 mb-8 sm:mb-10">
-          {t("login-helper")}
+        <p className=" text-center font-semibold text-magenta text-xl mt-5 sm:mt-5 mb-8 sm:mb-10">
+          Login Form
         </p>
       {errorMsg && (
         <Alert
@@ -176,7 +176,7 @@ const LoginForm = () => {
         </button>
       </div>
     </div> : <RegisterForm /> }
-    </>
+    </div>
   );
 };
 
