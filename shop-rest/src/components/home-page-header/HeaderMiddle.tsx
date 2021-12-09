@@ -14,20 +14,22 @@ import MobileJoinButton from '@components/layout/navbar/mobile-join-button';
 
 const cities1 = [ 
     
-'Chandigarh', 
+{id:1,
+    name:'Chandigarh'}, 
         
-    'Panchkula',
-    'Mohali',
-   'Ludhiana',
-    'Delhi',
-  'Gurgaon',    'Noida',
+    {id:2, name:'Panchkula'},
+    {id:3, name:'Mohali'},
+    {id:4, name:'Ludhiana'},
+    {id:5, name:'Delhi'},
+    {id:6, name:'Gurgaon'},    
+    {id:7, name:'Noida'},
   
 ]
-const cities2 = ['Ahemdabad',
-'Hyderabad',
-'Bangalore',
-'Mumbai',
-'Chennai',    'Kolkata',    'Pune',]
+const cities2 = [{id:8, name:'Ahemdabad'},
+{id:9, name:'Hyderabad'},
+{id:10, name:'Bangalore'},
+{id:11, name:'Mumbai'},
+{id:12, name:'Chennai'},    {id:13, name:'Kolkata'},    {id:14, name:'Pune'},]
 
 export default function HeaderMiddle({children,
     open = false,
@@ -157,9 +159,23 @@ export default function HeaderMiddle({children,
                {/* Location screen */}
                <div className={` ${location ? 'fixed inset-0 bg-gray-900 bg-opacity-60 scroll-y-none w-full h-full' : ' '} `}></div>
                
-                    <div style={{zIndex: 1000}}  className={`absolute  flex flex-col  w-full z-1000 inset-0 shadow-lg transform ml-0 duration-200 ease-in bg-drop-down bg-no-repeat bg-fill lg:bg-fill
-                                    ${location ? '  translate-y-0  ' : '-translate-y-full ' }  transform border-5 bg-gray-100 h-screen lg:h-100 overflow-y-hidden overflow-hidden `}>
-                                       
+                    <div style={{zIndex: 1000}}  className={`absolute  flex flex-col  w-full z-1000 inset-0 shadow-lg transform ml-0 duration-200 ease-in 
+                                    ${location ? '  translate-y-0  ' : '-translate-y-full ' }  transform border-5 bg-gray-100 h-screen lg:h-100 xl:h-110 2xl:h-110 overflow-y-hidden overflow-hidden `}>
+                                      
+                                       <div className='  border-red-400 flex w-full'>
+                                           <div className='flex flex-col'>
+                                               <h4 className='block lg:hidden text-2xl md:text-3xl lg:text-4xl mx-4 sm:mx-16 md:mx-16 mt-8 text-magenta font-heading font-semibold'>
+                                                   Buy at lowest prices from nearest local shops
+                                               </h4>
+                                               <div className=''>
+                                                   <p className=' lg:hidden flex mx-4  sm:mx-16 md:mx-16 mt-4 font-semibold items-center text-xs xs+:text-sm sm:text-sm text-gray-700'>| Groceries | Veggies & Fruits | Salon & Spa | Takeaways | Restaurants | Pharmacy |</p>
+                                                   <p className=' lg:hidden flex mx-4 sm:mx-16 md:mx-16 mt-0 font-semibold items-center text-xs xs+:text-sm sm:text-sm text-gray-700'>| Cosmetics | Lifestyle & Home | Gym & Health | Electronics | Poultry & Farm | Services |</p>
+                                                   
+                                               </div>
+                                           </div>
+                                           <img src='/drop-down.jpg' className=' hidden lg:block md:relative object-fill md:object-contain'/>
+                                       </div>
+
                                         {/* <HeaderMiddle/> */}
                             <div className='flex items-center justify-between mx-auto mt-20 '>
 
@@ -171,18 +187,16 @@ export default function HeaderMiddle({children,
                             </div>
                             {/* <img src='/drop-down.jpg' className='relative   top-0 object-contain'/> */}
                             
-                            <div style={{zIndex: 1000}} className=' absolute flex flex-col justify-center 
-                                          items-center w-2/3 lg:w-2/3  space-y-6 ml-6 sm:ml-12 lg:ml-10  mt-80'> 
+                            <div id='location-input' style={{zIndex: 0}} className='absolute flex flex-col justify-center 
+                                       w-full lg:w-full    items-center  pt-36  sm:pt-20 md:pt-4 lg:pt-0 space-y-6 ml-0 mx-3 sm:mx-16 md:ml-16 lg:ml-6 xl:ml-8 2xl:ml-10 lg:mt-80'> 
                                           
                                 <div  style = {{zIndex: 1000}}  
                                       className='w-full'> 
                                     <GooglePlacesAutocomplete onChange = {changeLocation} 
                                                               address  = {getLocation?.formattedAddress} /> 
                                 </div>
-    
-                                
-                        
-                                <div style={{zIndex: 1000}}  className='sm:w-full'> 
+        
+                                <div style={{zIndex: 1000}}  className='w-full'> 
                                      <GetCurrentLocation onChange = {changeLocation} />  
                                 </div>
                                 
@@ -190,21 +204,21 @@ export default function HeaderMiddle({children,
                             </div>
                             
                         {/* <Dialog.Overlay className="fixed inset-0 bg-gray-900 bg-opaname-80 w-full h-full" /> */}
-                           <div style={{zIndex:1000}} className='  absolute flex w-full flex-col bottom-5 sm:bottom-5 md:bottom-1 lg:bottom-4 space-y-4 md:space-y-6'>
+                           <div id='cities' style={{zIndex:0}} className='  absolute flex w-full flex-col bottom-44 md:bottom-36 lg:bottom-16 2xl:bottom-8 space-y-4 md:space-y-6'>
                                
-                               <div style={{zIndex:1000}} className='  w-full mt-2 lg:mt-4 grid grid-cols-3 sm:grid-cols-4 sm:gap-1 gap-2  md:gap-3 justify-evenly text-xs sm:text-sm md:text-lg px-6 
+                               <div style={{zIndex:0}} className='  w-full mt-2 lg:mt-4 grid grid-cols-4 sm:grid-cols-4 sm:gap-1 gap-2  md:gap-3 justify-evenly text-xs sm:text-sm md:text-lg px-0 sm:px-6 
                                         lg:text-sm lg:flex text-gray-700 text-md items-center '>
-                                       {cities1.map((city)=>{
-                                        return   <button className='border bg-white hover:border-magenta p-2 md:p-1 px-3 md:px-4 lg:px-8 rounded-full'>{city}</button>
+                                       {cities1.map((city, )=>{
+                                        return   <button key={city.id} className='border bg-white hover:border-magenta p-2 md:p-1 px-3 md:px-4 lg:px-8 rounded-full'>{city.name}</button>
                                        })}
                                     {/* <button className='border-magenta w-20 h-20 p-3 rounded-lg'>{name}</button> */}
                                        
                                 </div>
                                 
-                                <div style={{zIndex:1000}} className='  w-full mt-4 grid grid-cols-3 sm:grid-cols-4 gap-2 sm:gap-1 md:gap-3  justify-between text-xs sm:text-sm md:text-lg px-6 
+                                <div style={{zIndex:0}} className='  w-full mt-4 grid grid-cols-4 sm:grid-cols-4 gap-2 sm:gap-1 md:gap-3  justify-between text-xs sm:text-sm md:text-lg px-0 sm:px-6 
                                             lg:text-sm lg:flex text-gray-700 text-md items-center'>
                                                 {cities2.map((city)=>{
-                                            return   <button className='border bg-white hover:border-magenta p-2 px-3 md:px-4 lg:px-8 md:p-1 rounded-full'>{city}</button>
+                                            return   <button key={city.id} className='border bg-white hover:border-magenta p-2 px-3 md:px-4 lg:px-8 md:p-1 rounded-full'>{city.name}</button>
                                             })}
                                 </div>
                            </div>
