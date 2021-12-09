@@ -126,13 +126,13 @@ export default function GooglePlacesAutocomplete({address,closeLocation,
         className="flex"
       >
 
-       <div  style={{zIndex:9}} className='flex   items-center'>
+       <div style={{zIndex:9}} className='flex w-full mx-4 sm:mx-0 items-center'>
 
           <div className='relative flex text-center  items-center '>
-            <img style={{zIndex:10}} src='/placeholder.png' 
-                 className='absolute  ml-6 md:ml-7 text-center object-contain h-4 w-4 '/>
-            <span className=' sm:p-3  bg-white sm:px-2 w-4 border-l-2 h-14 rounded-lg 
-                              rounded-r-none border-r-0 border-2'/>
+              <img style={{zIndex:10}} src='/placeholder.png' 
+                  className='absolute ml-6 md:ml-7 text-center object-contain h-4 w-4 '/>
+              <span className=' sm:p-3  bg-white sm:px-2 w-4 border-l-2 h-14 rounded-lg 
+                                rounded-r-none border-r-0 border-2'/>
           </div>  
           
          <div style={{zIndex:8}} className='flex w-full'><input
@@ -147,7 +147,7 @@ export default function GooglePlacesAutocomplete({address,closeLocation,
           //             focus:border-accent focus:bg-light  rounded-full  bg-gray-80
           //             outline-none text-xs sm:text-sm md:text-base md:text-lg 
           //           border-gray-300 shadow-2xl border "
-          className='border-l-0 z-50 outline-none w-200 xs+:w-500 sm:w-500 md:w-650 lg:w-700 h-14 
+          className='border-l-0 z-50 outline-none w-full   sm:w-2/3 md:w-2/3 lg:w-1/3 h-14 
                      rounded-l-none sm:p-3 md:p-2 rounded-lg  px-7 sm:px-6 md:px-9 border-2'
         /></div>
         </div>
