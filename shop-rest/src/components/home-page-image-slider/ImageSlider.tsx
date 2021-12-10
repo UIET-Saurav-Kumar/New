@@ -74,7 +74,7 @@ export default function ImageSlider() {
           <div className="card flex relative w-full h-40 lg:h-72 xl+:h-80 2xl:h-72 md:h-64 ">
             <Image  layout='fill' objectFit='fill'
             //  className='rounded-md  w-full h-40 lg:w-full lg:h-72 xl+:h-80 md:h-64  2xl:h-72 2xl:w-full object-fill  space-x-9 '   
-                  src={'/banner/salonspa-banner.jpeg'} 
+                  src={'/banner/salon.jpg'} 
                   />
             </div> 
     
@@ -92,7 +92,7 @@ export default function ImageSlider() {
 
           <Image layout='fill' objectFit='fill'
           //  className='rounded-md  w-full  h-40 lg:w-full lg:h-72 xl+:h-80 md:h-64 2xl:h-72 2xl:w-full object-fill space-x-9 '   
-               src={'/banner/lifestyle-banner.jpeg'} 
+               src={'/banner/lifestyle.jpg'} 
                />
 
           </div>
@@ -103,7 +103,7 @@ export default function ImageSlider() {
 
           <Image layout='fill' objectFit='fill'
           //  className='rounded-md  w-full  h-40 lg:w-full lg:h-72 xl+:h-80 md:h-64 2xl:h-72 2xl:w-full object-fill space-x-9 '   
-               src={'/banner/gym-banner.jpeg'} 
+               src={'/banner/gym.jpg'} 
                />
 
           </div>
@@ -114,7 +114,7 @@ export default function ImageSlider() {
 
           <Image layout='fill' objectFit='fill'
           //  className='rounded-md  w-full  h-40 lg:w-full xl+:h-80 md:h-64 lg:h-72 2xl:h-72 2xl:w-full object-fill  space-x-9 '   
-               src={'/banner/furnishing-banner.jpeg'} 
+               src={'/banner/furniture.jpg'} 
                />
 
           </div>
@@ -125,7 +125,7 @@ export default function ImageSlider() {
 
           <Image layout='fill' objectFit='fill'
           //  className='rounded-md  w-full  h-40 lg:w-full xl+:h-80 md:h-64 lg:h-72  2xl:h-full 2xl:w-full object-fill space-x-9 '   
-               src={'/banner/resorts-banner.jpeg'} 
+               src={'/banner/hotel.jpg'} 
                />
 
           </div>

@@ -111,10 +111,10 @@ export default function DropDown({getLoc}:{getLoc:any}){
   }
 
     return (
-
         <div  className='flex w-full'>
 
           <div className='w-full relative'>
+            
               <AsyncSelect
                   cacheOptions
                   // defaultValue={inputValue.value}
@@ -122,9 +122,10 @@ export default function DropDown({getLoc}:{getLoc:any}){
                   value={inputValue}
                   // defaultOptions={loadOptions}
                   onInputChange={handleInputChange}
-                  // placeholder="Search | Category | Shops"
+                  placeholder="Search | Category | Shops"
                   onChange={optionSelected}
-              />
+                 
+                />
                   <SearchIcon className=" absolute right-3 top-3 lg:top-4  text-gray-400 w-4 h-4 me-2.5" />
           </div>
           
