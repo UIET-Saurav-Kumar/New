@@ -119,6 +119,7 @@ Route::get('get-wallet-commission','PickBazar\Http\Controllers\InviteController@
 Route::get('referral-network','PickBazar\Http\Controllers\InviteController@refferral_network');
 
 Route::any('order/success','PickBazar\Http\Controllers\GatewayResponse@process_response');
+Route::any('delivery/success','PickBazar\Http\Controllers\GatewayResponse@process_delivery_response');
 
 Route::post('import-products', 'PickBazar\Http\Controllers\ProductController@importProducts');
 Route::post('import-variation-options', 'PickBazar\Http\Controllers\ProductController@importVariationOptions');
@@ -301,6 +302,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         'only' => ['store', 'index', 'show']
     ]);
     Route::post('/delivery/payment','PickBazar\Http\Controllers\DeliveryController@payment');
+    Route::get('/delivery/payment','PickBazar\Http\Controllers\DeliveryController@returnToPayment');
     Route::get('/admin/delivery','PickBazar\Http\Controllers\DeliveryController@fetchAdminDeliverys');
     Route::post('/approve-delivery','PickBazar\Http\Controllers\DeliveryController@approveDelivery');
     Route::post('/delivery-cost ','PickBazar\Http\Controllers\DeliveryController@storeDeliveryCost');

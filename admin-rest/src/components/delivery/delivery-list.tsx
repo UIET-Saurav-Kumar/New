@@ -68,6 +68,11 @@ const DeliveryList = ({ withdraws, onPagination }: IProps) => {
       render: (data:any) => (data.package_type),
     },
     {
+      title: ("Distance"),
+      align: alignLeft,
+      render: (data:any) => (data.distance+" km"),
+    },
+    {
       title: t("table:table-item-amount"),
       dataIndex: "amount",
       key: "amount",

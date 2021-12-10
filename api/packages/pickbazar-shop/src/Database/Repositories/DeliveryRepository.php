@@ -3,8 +3,8 @@
 
 namespace PickBazar\Database\Repositories;
 
-use App\Models\Delivery;
-use App\Models\DeliveryConfig;
+use PickBazar\Database\Models\Delivery;
+use PickBazar\Database\Models\DeliveryConfig;
 use Illuminate\Support\Facades\Request;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Illuminate\Support\Str;
