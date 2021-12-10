@@ -17,6 +17,7 @@ import { FacebookIcon } from "@components/icons/facebook";
 import { GoogleIcon } from "@components/icons/google";
 import { useModalAction } from "@components/ui/modal/modal.context";
 import RegisterForm from "./[id]";
+import { useRouter } from "next/router";
 
 
 
@@ -43,6 +44,8 @@ const LoginForm = () => {
   const { mutate: login, isLoading: loading } = useLoginMutation();
   const [errorMsg, setErrorMsg] = useState("");
   const { authorize } = useUI();
+  const router = useRouter();
+
   const { openModal, closeModal } = useModalAction();
 
   const {
@@ -66,7 +69,7 @@ const LoginForm = () => {
             Cookies.set("auth_token", data.token);
             Cookies.set("auth_permissions", data.permissions);
             authorize();
-            closeModal();
+            router.push('/');
             return;
           }
           if (!data.token) {

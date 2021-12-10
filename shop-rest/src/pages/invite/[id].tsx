@@ -130,23 +130,25 @@ const RegisterForm = () => {
             <div className="flex justify-center">
                 <Logo />
             </div>
+
               <p className="text-center text-sm md:text-base leading-relaxed px-2 sm:px-0 text-body mt-4 sm:mt-5 mb-7 sm:mb-10">
                   {t("registration-helper")}
                   <span
-                  onClick={() => handleNavigate("terms")}
-                  className="mx-1 underline cursor-pointer text-accent hover:no-underline"
-                  >
-                  {t("text-terms")}
+                    onClick={() => handleNavigate("terms")}
+                    className="mx-1 underline cursor-pointer text-accent hover:no-underline"
+                    >
+                    {t("text-terms")}
                   </span>
                   &
                   <span
-                  onClick={() => handleNavigate("privacy")}
-                  className="ms-1 underline cursor-pointer text-accent hover:no-underline"
-                  >
-                  {t("text-policy")}
+                    onClick={() => handleNavigate("privacy")}
+                    className="ms-1 underline cursor-pointer text-accent hover:no-underline"
+                    >
+                    {t("text-policy")}
                   </span>
                   <h4 className="font-semibold text-magenta text-xl mt-5">Register form</h4>
               </p>
+
               
             {errorMsg && (
                 <Alert
@@ -207,7 +209,7 @@ const RegisterForm = () => {
             </div>
             <div className="text-sm sm:text-base text-body text-center">
                 {t("text-already-account")}{" "}
-                <button onClick={() => setClick(true)} 
+                <button onClick={() => setClick(!click)}
                   className="ms-1 underline text-accent font-semibold transition-colors duration-200 focus:outline-none hover:text-accent-hover focus:text-accent-hover hover:no-underline focus:no-underline"
                   >
                   {t("text-login")}
