@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { scroller, Element } from "react-scroll";
@@ -19,6 +20,7 @@ import { fetchTypes } from "@data/type/use-types.query";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { fetchSettings } from "@data/settings/use-settings.query";
 
+
 const CartCounterButton = dynamic(
   () => import("@components/cart/cart-counter-button"),
   { ssr: false }
@@ -27,7 +29,9 @@ const CartCounterButton = dynamic(
 const PAGE_TYPE = "bakery";
 
 export default function BakeryPage() {
+
   const { query } = useRouter();
+  
   useEffect(() => {
     if (query.text || query.category) {
       scroller.scrollTo("grid", {
