@@ -59,7 +59,7 @@ class GatewayResponse extends CoreController
             $delivery->is_approved=1;
             $delivery->save();
             // $url = \Config::get('app.shop_url')."/orders/".$order_id;
-            $url = "https://buylowcal.com/orders/" . $order_id;
+            $url = "https://buylowcal.com/user/delivery";
     
             return redirect()->away($url);
         }

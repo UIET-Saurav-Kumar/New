@@ -43,7 +43,7 @@ class DeliveryController extends CoreController
 
         $limit = $request->limit ?   $request->limit : 15;
         $Delivery = $this->fetchDeliverys($request);
-        return $Delivery->where('payment_method', "!=", NULL)->paginate($limit);
+        return $Delivery->where('payment_method', "!=", NULL)->orderBy('id', 'desc')->paginate($limit);
     }
 
     public function fetchDeliverys(Request $request)
@@ -64,7 +64,7 @@ class DeliveryController extends CoreController
         $user = $request->user();
 
         if ($user->id) {
-            return $this->repository->where('user_id', '=', $user->id)->where('is_approved',1)->paginate($limit);
+            return $this->repository->where('user_id', '=', $user->id)->where('is_approved',1)->orderBy('id', 'desc')->paginate($limit);
         }
     }
 
@@ -72,7 +72,7 @@ class DeliveryController extends CoreController
     {
         $limit = $request->limit ?   $request->limit : 15;
 
-        return $this->repository->where('is_approved',1)->paginate($limit);
+        return $this->repository->where('is_approved',1)->orderBy('id', 'desc')->paginate($limit);
     }
     /**
      * Store a newly created resource in storage.
