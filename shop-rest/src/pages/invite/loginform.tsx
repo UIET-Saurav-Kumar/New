@@ -66,7 +66,7 @@ const LoginForm = () => {
             Cookies.set("auth_token", data.token);
             Cookies.set("auth_permissions", data.permissions);
             authorize();
-            closeModal();
+           router.push('/');
             return;
           }
           if (!data.token) {
@@ -169,7 +169,7 @@ const LoginForm = () => {
       <div className="text-sm sm:text-base text-body text-center">
         {t("text-no-account")}{" "}
         <button
-          onClick={() => setClick(true)}
+          onClick={() => setClick(!click)}
           className="ms-1 underline text-accent font-semibold transition-colors duration-200 focus:outline-none hover:text-accent-hover focus:text-accent-hover hover:no-underline focus:no-underline"
         >
           {t("text-register")}
