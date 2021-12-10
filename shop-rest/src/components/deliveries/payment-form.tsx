@@ -60,7 +60,13 @@ const PaymentForm = () => {
 
     createPayment(input, {
       onSuccess: (order: any) => {
-        router.push(`/user/delivery`);
+        if (order?.tracking_number) {
+          router.push(`/user/delivery`);
+        }
+        if (order?.paymentLink)
+        {
+          window.location.replace(order?.paymentLink)
+        }
       },
       onError: (error: any) => {
         console.log(error?.response?.data?.message);

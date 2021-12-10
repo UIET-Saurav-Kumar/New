@@ -2,27 +2,29 @@
 
 namespace PickBazar\Http\Controllers;
 
-use App\Models\DeliveryConfig;
 use Exception;
 use Illuminate\Http\Request;
+use PickBazar\Http\Util\SMS;
+use PickBazar\Database\Models\DeliveryConfig;
 use PickBazar\Enums\Permission;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
+use PickBazar\Enums\WithdrawStatus;
+use Illuminate\Support\Facades\Schema;
 use PickBazar\Database\Models\Balance;
 use PickBazar\Database\Models\Delivery;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Eloquent\Collection;
 use PickBazar\Exceptions\PickbazarException;
 use PickBazar\Http\Requests\DeliveryRequest;
 use Prettus\Validator\Exceptions\ValidatorException;
+
 use PickBazar\Database\Repositories\DeliveryRepository;
 use LoveyCom\CashFree\PaymentGateway\Order as CashFreeOrder;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 
-use PickBazar\Enums\WithdrawStatus;
 class DeliveryController extends CoreController
 {
-    
+
     public $repository;
 
     public function __construct(DeliveryRepository $repository)
@@ -38,18 +40,18 @@ class DeliveryController extends CoreController
 
     public function index(Request $request)
     {
-        
+
         $limit = $request->limit ?   $request->limit : 15;
         $Delivery = $this->fetchDeliverys($request);
-        return $Delivery->where('payment_method',"!=",NULL)->paginate($limit);
+        return $Delivery->where('payment_method', "!=", NULL)->paginate($limit);
     }
 
     public function fetchDeliverys(Request $request)
     {
         $user = $request->user();
-        
-        if ($user) {           
-            return $this->repository->where('user_id',$user->id)->with(['user']);
+
+        if ($user) {
+            return $this->repository->where('user_id', $user->id)->where('is_approved',1)->with(['user']);
         } else {
             throw new PickbazarException('PICKBAZAR_ERROR.NOT_AUTHORIZED');
         }
@@ -61,18 +63,16 @@ class DeliveryController extends CoreController
         $limit = $request->limit ?   $request->limit : 15;
         $user = $request->user();
 
-        if ($user->id){
-            return $this->repository->where('user_id', '=', $user->id)->paginate($limit);
+        if ($user->id) {
+            return $this->repository->where('user_id', '=', $user->id)->where('is_approved',1)->paginate($limit);
         }
-        
     }
 
     public function fetchAdminDeliverys(Request $request)
     {
         $limit = $request->limit ?   $request->limit : 15;
 
-        return $this->repository->paginate($limit);
-        
+        return $this->repository->where('is_approved',1)->paginate($limit);
     }
     /**
      * Store a newly created resource in storage.
@@ -95,15 +95,27 @@ class DeliveryController extends CoreController
      */
     public function payment(DeliveryRequest $request)
     {
-        $delivery=$this->repository->find($request->id);
+        $delivery = $this->repository->find($request->id);
+        $user = $request->user();
+        if ($request->payment_gateway == "cod") {
 
-        $user=$request->user();
-        if($request->payment_gateway=="cod"){
-            $delivery->payment_method="cod";
+            $delivery->payment_method = "cod";
+            $delivery->is_approved=1;
             $delivery->save();
-        }else{
-            $delivery->payment_method=$request->payment_gateway;
-            $delivery->save();
+            SMS::customerPurchase($delivery->sender_phone_number, $request->user()->name);
+        } else {
+            $payment_method = 'cc';
+
+            if ($payment_method == 'cashfree') {
+                $payment_method = 'cc';
+            }
+            if ($payment_method == 'upi') {
+                $payment_method = 'upi';
+            }
+            if ($payment_method == 'wallet') {
+                $payment_method = 'dc';
+            }
+
             $orderFree = new CashFreeOrder();
             $od["orderId"] = $delivery->tracking_number;
             $od["orderAmount"] = $delivery->amount;
@@ -111,14 +123,23 @@ class DeliveryController extends CoreController
             $od["customerPhone"] = $delivery->sender_phone_number;
             $od["customerName"] = $user->name;
             $od["customerEmail"] = $user->email ?? "test@cashfree.com";
-            $od["payment_methods"] = $request->payment_gateway;
-            $od["returnUrl"] = url("user/delivery/payment");
-            $od["notifyUrl"] = url("order/success");
+            $od["payment_methods"] = $payment_method;
+            $od["returnUrl"] = url("delivery/payment");
+            $od["notifyUrl"] = url("delivery/success");
             $orderFree->create($od);
+
+            SMS::customerPurchase($delivery->sender_phone_number, $request->user()->name);
+
+            $delivery->payment_method = $request->payment_gateway;
+            $delivery->save();
+
+            $link = $orderFree->getLink($od['orderId']);
+
+            return json_encode($link);
         }
 
-        
-        return "success";
+
+        return $delivery;
     }
     /**
      * Store a newly created resource in storage.
@@ -131,7 +152,7 @@ class DeliveryController extends CoreController
     {
         $validatedData = $request->all();
         $user = $request->user();
-        $validatedData["user_id"]=$user->id;
+        $validatedData["user_id"] = $user->id;
         if (isset($user)) {
             $balance = Balance::where('user_id', '=', $user->id)->first();
             if (isset($balance->current_balance) && $balance->current_balance >= $validatedData['amount']) {
@@ -166,7 +187,7 @@ class DeliveryController extends CoreController
         $id = $request->id;
         try {
             $Delivery = $this->repository->findOrFail($id);
-            
+
             return $Delivery;
         } catch (\Exception $e) {
             throw new PickbazarException('PICKBAZAR_ERROR.NOT_FOUND');
@@ -191,17 +212,26 @@ class DeliveryController extends CoreController
         return $Delivery;
     }
 
-    public function fetchDeliveryCost(){
+    public function fetchDeliveryCost()
+    {
         return DeliveryConfig::find(1);
     }
 
-    public function storeDeliveryCost(Request $request){
-        $config=DeliveryConfig::find(1);
-        if($config){
+    public function storeDeliveryCost(Request $request)
+    {
+        $config = DeliveryConfig::find(1);
+        if ($config) {
             $config->update($request->all());
         }
-        $config=DeliveryConfig::create($request->all());
+        $config = DeliveryConfig::create($request->all());
 
         return $config;
+    }
+
+    public function returnToPayment(Request $request)
+    {
+        $url = "https://buylowcal.com/user/delivery/payment";
+
+        return redirect()->away($url);
     }
 }
