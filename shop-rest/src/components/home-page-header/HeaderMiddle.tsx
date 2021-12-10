@@ -160,7 +160,7 @@ export default function HeaderMiddle({children,
                <div className={` ${location ? 'fixed inset-0 bg-gray-900 bg-opacity-60 scroll-y-none w-full h-full' : ' '} `}></div>
                
                     <div style={{zIndex: 1000}}  className={`absolute  flex flex-col  w-full z-1000 inset-0 shadow-lg transform ml-0 duration-200 ease-in 
-                                    ${location ? '  translate-y-0  ' : '-translate-y-full ' }  transform border-5 bg-gray-100 h-screen lg:h-100 xl:h-110 2xl:h-110 overflow-y-hidden overflow-hidden `}>
+                                    ${location ? ' translate-y-0 ' : '-translate-y-full' }  transform border-5 bg-gray-100 h-screen lg:h-100 xl:h-110 2xl:h-110 overflow-y-hidden overflow-hidden `}>
                                       
                                        <div className='  border-red-400 flex w-full'>
                                            <div className='flex flex-col'>
@@ -173,7 +173,7 @@ export default function HeaderMiddle({children,
                                                    
                                                </div>
                                            </div>
-                                           <img src='/drop-down.jpg' className=' hidden lg:block md:relative object-fill md:object-contain'/>
+                                           <img src='/drop-down.jpg' className='hidden lg:block md:relative object-fill md:object-contain'/>
                                        </div>
 
                                         {/* <HeaderMiddle/> */}
