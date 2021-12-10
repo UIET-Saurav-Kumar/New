@@ -19,7 +19,7 @@ const ShopCard: React.FC<ShopCardProps> = ({ shop }) => {
 
     <Link href={`${ROUTES.SHOPS}/${shop.slug}`}>
 
-      <div className="flex items-center p-5 border border-gray-200 rounded cursor-pointer relative">
+      <div className="flex items-center p-5  rounded border-4 border-gold cursor-pointer relative">
         {isNew && (
           <span className="text-xs text-light px-2 py-1 rounded bg-blue-500 absolute top-2 end-2">
             {t("common:text-new")}

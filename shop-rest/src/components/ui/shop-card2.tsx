@@ -37,15 +37,15 @@ const ShopCard2: React.FC<ShopCardProps> = ({ shop }) => {
               bg-white shadow-md p-6 py-6 mx-1 my-2  cursor-pointer' > */}
 
 
-                          <div className='flex p-4 px-2 rounded-lg bg-white flex-col w-auto h-auto'>
+                          <div className='flex p-4 shadow-md border-3  border-gold rounded-sm bg-white flex-col w-auto h-auto'>
 
          <div className='h-1/2 w-full'>
             {imageCheck(shop?.logo?.thumbnail, shop, '190', false,'h-48 w-full object-contain')}
     
           </div> 
 
-              <div className='flex flex-col space-y-1 mt-8
-                              justify-evenly h-52  md:h-auto xl:h-auto 2xl:h-auto' >
+              <div className='flex flex-col space-y-1 mt-4 md:mt-8
+                              justify-evenly h-44 md:h-52   xl:h-auto 2xl:h-auto' >
 
                       <div className='flex justify-between  h-10  '> 
 
@@ -57,25 +57,28 @@ const ShopCard2: React.FC<ShopCardProps> = ({ shop }) => {
                       </div>
 
 
-                       <div className='h-20  '> 
+                       <div className='h-20'> 
 
-                              <h5 className='text-xs text-body flex'>
+                              <h5 className='text-xs  text-gray-700 flex'>
                               
-                                <MapPin className="w-3.5 h-3.5 me-1 text-muted flex-shrink-0" />
+                                <MapPin className="w-3.5 h-3.5 me-1 text-muted  flex-shrink-0" />
                                 {!isEmpty(formatAddress(shop?.address))
                                   ? formatAddress(shop?.address)
                                   : t("common:text-no-address")}  
                               view
                                </h5>
                           </div> 
-                          <button className='bg-gradient-to-r shadow-md from-magenta to-gold hover:from-gold hover:to-magenta focus:from-pink-500 focus:to-yellow-500  text-xs lg:text-sm  mb- mt-10 py-1 px-0 text-white '> 
+                          <button className='bg-gradient-to-r shadow-md from-magenta to-gold hover:from-gold hover:to-magenta focus:from-pink-500 
+                                        font-medium   focus:to-yellow-500 font-serif text-xs lg:text-lg   mt-10 py-1 px-0 text-white '> 
                               Products and offers
                       </button> 
+                          
 
 
                           
 
               </div>
+             
 
                      
           

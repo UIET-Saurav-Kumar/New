@@ -63,24 +63,24 @@ export default function FeaturesShops({ }) {
 
                 </div>
     
-                <div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 lg:gap-2  gap-2
-                                lg:place-items-center 2xl:gap-2 2xl:grid-cols-4
-                                mt-0 px-2 lg:px-4 bg-gray-100 p-4' >
+                <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 lg:gap-2  gap-2
+                                lg:place-items-center 2xl:gap-5 2xl:grid-cols-5
+                                mt-0 px-2 lg:px-4 p-4'>
     
     
                         {data?.featureShops.data?.map((shop, _idx) => (
                             <Link href={`${ROUTES.SHOPS}/${shop.slug}`} key={_idx}>
-                                <div  className='flex justify-evenly lg:justify-evenly items-center h-32 w-full  md:h-34  lg:h-40 2xl:h-48  xl:justify-evenly 
-                                     2xl:items-center border p-4 md:p-2  bg-white rounded-md px-0 cursor-pointer hover:border-gray-400'>
+                                <div  className='flex flex-col justify-evenly lg:justify-evenly items-center h-44 w-full  md:h-44  lg:h-64 2xl:h-96  xl:justify-evenly 
+                                        hover:-translate-y-1 hover:scale-95 duration-200   2xl:items-center border-3 md:border-4 border-gold p-4 md:p-2 shadow-lg  bg-white rounded-sm px-0 cursor-pointer transition duration-800 hover:ease-out hover:border-magenta'>
                                    
                                           {/* <img className='rounded-0 w-10 h-10 xs+:w-16 xs+:h-16 xs++:w-20 xs++:h-20 sm:w-28 
                                                           sm:h-24 md:w-20 lg:w-28 lg:h-32 2xl:w-38 2xl:h-38'  */}
                                                      
-                                        {imageCheck(shop.logo?.thumbnail, shop, '130', false,'w-16 h-16 xs++:w-16 xs++:h-16 xs+++:w-20 xs+++:h-20 sm:w-20 sm:h-20 md:w-16 md:h-16 ml-2  lg:w-28 lg:h-28 lg+:w-28 lg+:h-28 xl+:w-32 xl+:h-32 xl++:w-32 xl++:h-32 2xl:w-32 2xl:h-32 object-contain')}
+                                        {imageCheck(shop.logo?.thumbnail, shop, '130', false,'group-hover:-translate-y-1 hover:scale-110 duration-200 w-20 h-20 xs++:w-20 xs++:h-20 xs+++:w-20 xs+++:h-20 sm:w-20 sm:h-20 md:w-16 md:h-16  lg:w-28 lg:h-28 lg+:w-28 lg+:h-28 xl+:w-32 xl+:h-32 xl++:w-48 xl++:h-48 2xl:w-44 2xl:h-44 object-contain')}
         
-                                    <div className='flex flex-col justify-center w-20 sm+:ml-0 md-w-24 lg:w-38 2xl:w-64 2xl:h-40 space-y-1 px-2 md:px-3 lg:px-4 2xl:px-4'>
-                                        <h3 className='font-semibold text-10px  md:text-md lg:text-sm 2xl:text-lg  '> {shop.name}</h3>
-                                        <h3 className='font-light text-10px sm:text-xs md:text-md lg:text-md 2xl:text-md ' >   {shop?.address?.city} </h3>
+                                    <div className='flex flex-col text-center justify-center w-full space-y-1 px-2 md:px-3 lg:px-4 2xl:px-4'>
+                                        <h3 className='font-semibold text-10px  md:text-md lg:text-sm 2xl:text-lg text-gray-700 font-serif  '> {shop.name}</h3>
+                                        <h3 className='font-light text-10px sm:text-xs md:text-md lg:text-md 2xl:text-md text-gray-700'>   {shop?.address?.city} </h3>
                                     </div>
     
                                 </div>

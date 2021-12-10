@@ -116,7 +116,7 @@ const {
     {loading ? (
          <img src='/preloader/cir.gif' className='mx-auto my-auto'/>
         ) : (
-        <div className='lg:px-10 md:px-7'>
+        <div className='lg:px-10 md:px-7 '>
           {
             (data?.ShopAvailability?.data?.check==0)?
             (<StayTuned/>):

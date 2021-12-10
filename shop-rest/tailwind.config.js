@@ -91,6 +91,21 @@ module.exports = {
         "3xl": "2100px",
       },
 
+      fontWeight: {     
+         hairline: 100,  
+            'extra-light': 100,    
+              thin: 200,   
+              light: 300,  
+              normal: 400,   
+              medium: 500,  
+              'md': 550,
+                semibold: 600,  
+                bold: 700,    
+              extrabold: 800,  
+              'extra-bold': 800,    
+                black: 900,
+              },
+
       zIndex: {
         "-1": "-1",
       },
