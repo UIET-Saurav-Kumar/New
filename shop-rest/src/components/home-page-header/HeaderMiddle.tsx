@@ -204,24 +204,7 @@ export default function HeaderMiddle({children,
                             </div>
                             
                         {/* <Dialog.Overlay className="fixed inset-0 bg-gray-900 bg-opaname-80 w-full h-full" /> */}
-                           <div id='cities' style={{zIndex:0}} className='  fixed  hidden lg:flex w-full flex-col bottom-44 md:bottom-36 lg:bottom-16 2xl:bottom-8 space-y-4 md:space-y-6'>
-                               
-                               <div style={{zIndex:0}} className='  w-full mt-2 lg:mt-4 grid grid-cols-4 sm:grid-cols-4 sm:gap-1 gap-2  md:gap-3 justify-evenly text-xs sm:text-sm md:text-lg px-0 sm:px-6 
-                                        lg:text-sm lg:flex text-gray-700 text-md items-center '>
-                                       {cities1.map((city, )=>{
-                                        return   <button key={city.id} className='border bg-white hover:border-magenta p-2 md:p-1 px-3 md:px-4 lg:px-8 rounded-full'>{city.name}</button>
-                                       })}
-                                    {/* <button className='border-magenta w-20 h-20 p-3 rounded-lg'>{name}</button> */}
-                                       
-                                </div>
-                                
-                                <div style={{zIndex:0}} className='  w-full mt-4 grid grid-cols-4 sm:grid-cols-4 gap-2 sm:gap-1 md:gap-3  justify-between text-xs sm:text-sm md:text-lg px-0 sm:px-6 
-                                            lg:text-sm lg:flex text-gray-700 text-md items-center'>
-                                                {cities2.map((city)=>{
-                                            return   <button key={city.id} className='border bg-white hover:border-magenta p-2 px-3 md:px-4 lg:px-8 md:p-1 rounded-full'>{city.name}</button>
-                                            })}
-                                </div>
-                           </div>
+                           
 
                 </div> 
 
