@@ -12,8 +12,10 @@ use Prettus\Validator\Exceptions\ValidatorException;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class GatewayResponse extends CoreController
+
 {
     public function process_response(Request $request)
+
     {
         $response = request()->all();
 
@@ -52,6 +54,7 @@ class GatewayResponse extends CoreController
         $txMsg = $response['txMsg'] ?? null;
         $txTime = $response['txTime'] ?? null;
         $signature = $response['signature'] ?? null;
+        
 
         $id = Delivery::where('tracking_number', $order_id)->first()->id;
         if ($txStatus != "SUCCESS") {
