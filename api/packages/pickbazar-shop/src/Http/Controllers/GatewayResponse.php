@@ -35,7 +35,7 @@ class GatewayResponse extends CoreController
         Order::where('id', $parent_orderid)->update(['gateway_response' => json_encode(request()->all())]);
 
         // $url = \Config::get('app.shop_url')."/orders/".$order_id;
-        $url = "https://buylowcal.com/order/" . $order_id;
+        $url = "https://buylowcal.com/orders/" . $order_id;
 
         return redirect()->away($url);
     }
