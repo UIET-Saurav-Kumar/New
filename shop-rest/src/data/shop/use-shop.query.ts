@@ -14,6 +14,7 @@ export const fetchShop = async (slug: string) => {
 export const fetchShopSeo = async (slug: string) => {
   const { data } = await http.get(`${url}/${API_ENDPOINTS.SETTINGS}?shop_slug=${slug}`);
   // console.log('fetchShopSeo start');
+  console.log('vinender');
   console.log('api endpoint',API_ENDPOINTS.SETTINGS);
   console.log('slug',slug);
   console.log('data',data);
