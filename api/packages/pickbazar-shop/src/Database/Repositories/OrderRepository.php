@@ -163,7 +163,7 @@ class OrderRepository extends BaseRepository
     {
         $card = Omnipay::creditCard($request['card']);
         $amount = $request['paid_total'];
-        $currency = 'USD';
+        $currency = 'INR';
         $transaction =
             Omnipay::purchase(array(
                 'amount'   => $amount,

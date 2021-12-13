@@ -63,7 +63,5 @@ class GatewayResponse extends CoreController
     
             return redirect()->away($url);
         }
-
-
     }
 }

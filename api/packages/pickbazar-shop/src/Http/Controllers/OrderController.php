@@ -83,6 +83,7 @@ class OrderController extends CoreController
         } catch (\Exception $e) {
             throw new PickbazarException('PICKBAZAR_ERROR.NOT_FOUND');
         }
+        
         if ($user->hasPermissionTo(Permission::SUPER_ADMIN)) {
             return $order;
         } elseif (isset($order->shop_id)) {
@@ -132,11 +133,13 @@ class OrderController extends CoreController
         } catch (\Exception $e) {
             throw new PickbazarException('PICKBAZAR_ERROR.NOT_FOUND');
         }
+
         $user = $request->user();
         if (isset($order->shop_id)) {
             if ($this->repository->hasPermission($user, $order->shop_id)) {
                 return $this->changeOrderStatus($order, $request->status);
             }
+
         } else if ($user->hasPermissionTo(Permission::SUPER_ADMIN)) {
             return $this->changeOrderStatus($order, $request->status);
         } else {
