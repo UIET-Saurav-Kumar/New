@@ -45,8 +45,11 @@ const AppSettings: React.FC = (props) => {
   const routname  = props?.children?._owner?.pendingProps?.router?.route.split('/')[1];
   const slugname  = props?.children?._owner?.pendingProps?.router?.query?.slug;
   console.log('routname',routname);
-  if(slugname !== undefined && routname == 'shops')
+  console.log('slugname', slugname);
+  if(slugname == undefined ? routname == 'undefined shops' : routname == 'valid slugname')
+ 
   {
+    console.log('slugname', slugname);
     const { data, isLoading: loading, error } = useSettingsQuery();
 
     const shop = fetchShopSeo(props?.children?._owner?.pendingProps?.router?.query?.slug as string);

@@ -119,6 +119,7 @@ class OrderController extends CoreController
      * @return JsonResponse
      */
     public function update(OrderUpdateRequest $request, $id)
+    
     {
         $request->id = $id;
         $order = $this->updateOrder($request);
