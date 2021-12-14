@@ -44,7 +44,7 @@ export default function ImageSlider() {
       
       <Slider {...settings}>
 
-      <div>
+        <div>
             <div className="card flex relative w-full h-40 lg:h-72 xl+:h-80 2xl:h-72 md:h-64 ">
 
                 <Link href='/shops/heater-and-geyser-wholesaler'><Image layout='fill' objectFit='fill'
@@ -62,7 +62,7 @@ export default function ImageSlider() {
                   src={'/banner/grocery-offer.jpg'} 
                   />
 
-          </div>
+        </div>
 
 
          <div>
@@ -75,11 +75,6 @@ export default function ImageSlider() {
 
             </div>
         </div>
-
-
-      
-
-          
 
         
           {/* <div className="card flex relative w-full h-40 lg:h-72 xl+:h-80 2xl:h-72 md:h-64 ">

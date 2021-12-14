@@ -66,7 +66,6 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
        <Link href={`${ROUTES.PRODUCT}/${slug}`}>
       <div
         className="relative flex items-center justify-center cursor-pointer w-auto h-48 p-4 xl:p-12 sm:h-64"
-        
       >
         <span className="sr-only">{t("text-product-image")}</span>
         
@@ -102,13 +101,13 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
           </div>
         ) : (
           <div className="flex items-center  mb-2">
-        <span className="text-sm md:text-base text-product-price font-bold">
-          {basePrice ? basePrice : price}
-        </span>
-        {discount && (
-          <del className="text-xs md:text-sm text-discount ms-2">{price}</del>
-        )}
-      </div>
+            <span className="text-sm md:text-base text-product-price font-bold">
+              {basePrice ? basePrice : price}
+            </span>
+            {discount && (
+              <del className="text-xs md:text-sm text-discount ms-2">{price}</del>
+            )}
+          </div>
         )}
         {/* End of product price */}
 

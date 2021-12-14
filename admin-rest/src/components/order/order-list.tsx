@@ -85,7 +85,7 @@ const OrderList = ({ orders, onPagination }: IProps) => {
         dayjs.extend(timezone);
         return (
           <span className="whitespace-nowrap">
-            {dayjs(date).utc().fromNow()}
+            {date.split('T')[0].split("-").reverse().join("-")}
           </span>
         );
       },

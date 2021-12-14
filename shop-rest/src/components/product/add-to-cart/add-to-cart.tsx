@@ -17,6 +17,11 @@ interface Props {
     | "oganesson"
     | "single"
     | "details";
+
+      
+
+          
+
   counterClass?: string;
   variation?: any;
   disabled?: boolean;
@@ -39,7 +44,7 @@ export const AddToCart = ({
     getItemFromCart,
     isInCart,
   } = useCart();
-  
+
   const item = generateCartItem(data, variation);
   const { mutate: createLog} = useCreateLogMutation();
   const {getLocation} =useLocation()

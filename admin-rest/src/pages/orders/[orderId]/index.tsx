@@ -95,6 +95,7 @@ export default function OrderDetailsPage() {
   );
   if (loading) return <Loader text={t("common:text-loading")} />;
   if (error) return <ErrorMessage message={error.message} />;
+  console.log('order data', data)
 
   const columns = [
     {
