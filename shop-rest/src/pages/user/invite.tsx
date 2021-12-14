@@ -16,6 +16,7 @@ import Navbar from "@components/layout/navbar/navbar";
 import Link from 'next/link';
 import {ClipboardIcon} from '@heroicons/react/outline';
 
+
 const contactFormSchema = yup.object().shape({
   name: yup.string().required("error-name-required"),
   email: yup
@@ -43,6 +44,7 @@ export const InvitePage = () => {
     mutate(values);
     reset();
   }
+  
   function copyLink(url:string){
     navigator.clipboard.writeText(url.toString());
     tooltext.current.innerHTML="copied!"
