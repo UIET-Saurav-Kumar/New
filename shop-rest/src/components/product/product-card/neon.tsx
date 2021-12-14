@@ -95,7 +95,7 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
             <span className="text-sm md:text-base text-product-price font-bold">
               {minPrice}
             </span>
-            <span className="text-magenta font-bold"> {!minPrice ? `Starting ${basePrice || maxPrice}` : '-'} </span>
+            <span className="text-magenta font-bold"> {!minPrice ? `Starting ${basePrice}` : '-'} </span>
             <span className="text-sm md:text-base text-magenta font-bold">
               {maxPrice}
             </span>

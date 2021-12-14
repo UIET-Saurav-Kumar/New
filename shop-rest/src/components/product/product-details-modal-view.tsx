@@ -99,7 +99,7 @@ const ProductDetailsModalView = ({ productSlug }: { productSlug: string }) => {
   if (loading)
     return (
       <div className="w-96 flex justify-center items-center h-96 bg-light relative">
-        <Spinner text={t("common:text-loading")} />
+          <Spinner text={t("common:text-loading")} />
       </div>
     );
 
