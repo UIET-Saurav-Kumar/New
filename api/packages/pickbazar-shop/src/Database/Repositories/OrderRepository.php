@@ -125,6 +125,7 @@ class OrderRepository extends BaseRepository
         {
             $payment_method = 'dc';
         }
+        
         $orderFree = new CashFreeOrder();
         $od["orderId"] = $request['tracking_number'];
         $od["orderAmount"] = $request['total'];
@@ -133,7 +134,7 @@ class OrderRepository extends BaseRepository
         $od["customerName"] = $user->name;
         $od["customerEmail"] = $user->email ?? "test@cashfree.com";
         $od["payment_methods"] = $payment_method;
-        $od["returnUrl"] = url("order/success");
+        $od["returnUrl"] =  url("order/success");
         $od["notifyUrl"] = url("order/success");
         $orderFree->create($od);
         $this->createOrder($request);
