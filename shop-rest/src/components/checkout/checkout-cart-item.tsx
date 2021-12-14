@@ -1,6 +1,8 @@
+
 import usePrice from "@utils/use-price";
 import cn from "classnames";
 import { useTranslation } from "next-i18next";
+
 interface Props {
   item: any;
   notAvailable?: boolean;
@@ -24,8 +26,10 @@ const CheckoutCartItem = ({ item, notAvailable }: Props) => {
       return total;
     }
   }
+
   return (
     <>
+    
     <div className={cn("flex justify-between py-2")} key={item.id}>
       <p className="flex items-center justify-between text-base">
         <span
