@@ -9,6 +9,7 @@ import { useProductQuery } from "@data/product/use-product.query";
 import Link from "@components/ui/link";
 import { ROUTES } from "@utils/routes";
 import { PlusIcon } from "@heroicons/react/outline";
+import { min } from "lodash";
 
 type NeonProps = {
   product: any;
@@ -91,11 +92,11 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
 
         {product_type.toLowerCase() === 'variable' ? (
           <div className="mb-2">
-            <span className="text-sm md:text-base text-magenta font-semibold">
+            <span className="text-sm md:text-base text-product-price font-bold">
               {minPrice}
             </span>
-            <span> - </span>
-            <span className="text-sm md:text-base text-magenta font-semibold">
+            <span className="text-magenta font-bold"> {!minPrice ? `Starting ${basePrice || maxPrice}` : '-'} </span>
+            <span className="text-sm md:text-base text-magenta font-bold">
               {maxPrice}
             </span>
           </div>
