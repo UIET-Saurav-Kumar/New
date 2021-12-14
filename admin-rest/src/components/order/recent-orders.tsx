@@ -17,6 +17,15 @@ const RecentOrders = ({ orders, title }: IProps) => {
 
   const columns = [
     {
+      title: t("table:Customer Name"),
+      dataIndex: "customer",
+      key: "customer",
+      align: "center",
+      render: (customer: any) => (
+        <div>{customer.name}</div>
+      ),
+    },
+    {
       title: t("table:table-item-tracking-number"),
       dataIndex: "tracking_number",
       key: "tracking_number",
@@ -46,7 +55,7 @@ const RecentOrders = ({ orders, title }: IProps) => {
         dayjs.extend(timezone);
         return (
           <span className="whitespace-nowrap">
-            {dayjs.utc(date).tz(dayjs.tz.guess()).fromNow()}
+            {date.split('T')[0].split("-").reverse().join("-")}
           </span>
         );
       },
