@@ -133,7 +133,7 @@ class OrderRepository extends BaseRepository
         $od["customerName"] = $user->name;
         $od["customerEmail"] = $user->email ?? "test@cashfree.com";
         $od["payment_methods"] = $payment_method;
-        $od["returnUrl"] = "https://buylowcal.com/checkout";
+        $od["returnUrl"] = url("order/success");
         $od["notifyUrl"] = url("order/success");
         $orderFree->create($od);
         $this->createOrder($request);

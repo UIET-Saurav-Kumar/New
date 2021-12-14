@@ -1,8 +1,8 @@
 
 import Slider from "react-slick";
 
-import Image from 'next/image'
-
+import Image from 'next/image';
+import Link from 'next/link';
 
 export default function ImageSlider() {
     var settings = {
@@ -34,7 +34,6 @@ export default function ImageSlider() {
     };
 
    
-
     
 
     return (
@@ -43,6 +42,17 @@ export default function ImageSlider() {
       <div className='mx-1'>
       
       <Slider {...settings}>
+
+      <div>
+            <div className="card flex relative w-full h-40 lg:h-72 xl+:h-80 2xl:h-72 md:h-64 ">
+
+                <Link href='/shops/heater-and-geyser-wholesaler'><Image layout='fill' objectFit='fill'
+                //  className='rounded-md  w-full  h-40 lg:w-full xl+:h-80 md:h-64 lg:h-72  2xl:h-full 2xl:w-full object-cover object  space-x-9 '   
+                    src={'/banner/heater-banner.jpg'} 
+                    /></Link>
+
+            </div>
+        </div>
 
 
          <div>
