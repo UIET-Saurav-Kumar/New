@@ -50,6 +50,7 @@ function SidebarMenuItem({ className, item, depth = 0 }: any) {
           scroll: false,
         }
       );
+
     if (Array.isArray(items) && !!items.length) {
       toggleCollapse();
       navigate();
@@ -70,33 +71,41 @@ function SidebarMenuItem({ className, item, depth = 0 }: any) {
 
   return (
     <>
-      <motion.li
-        initial={false}
-        animate={{ backgroundColor: "#ffffff" }}
+      <div 
+        // initial={false}
+        // animate={{ backgroundColor: "black" }}/
         onClick={onClick}
         
-        className="py-1 rounded-md"
+        className="flex items-center relative top-0  w-full py-1 rounded-md"
       >
-        <button
+        
+        {/* <div className='flex items-center justify-between'> */}
+          <button
           className={cn(
-            "flex items-center w-full py-2 text-start outline-none text-body-dark font-semibold  focus:outline-none focus:ring-0 focus:text-accent",
-            isOpen ? "text-accent" : "text-body-dark",
+            "flex flex-col lg:flex  items-center divide-y py-1 text-start outline-none text-body-dark font-semibold  focus:outline-none focus:ring-0 focus:text-accent",
+            isOpen ? "text-accent underline transition duration-800 ease-in-out" : "text-body-dark",
             className ? className : "text-sm"
           )}
         >
-          {icon && (
-            <span className="flex w-8 h-8 me-4 items-center justify-center">
-              {getIcon({
-                iconList: CategoryIcons,
-                iconName: icon,
-                className: "max-h-full max-w-full",
-              })}
-            </span>
-          )}
-          <span className='text-lg'>{name}</span>
-          <span className="ms-auto">{expandIcon}</span>
+         <div className='grid grid-cols-1  w-auto sm:w-20 px-2 place-items-center lg:flex  mx-auto items-center'>
+         {icon && (
+              <span className="flex text-center w-8 h-8 items-center justify-center">
+                {getIcon({
+                  iconList: CategoryIcons,
+                  iconName: icon,
+                  className: "max-h-full  max-w-full",
+                })}
+              </span>
+            )}
+            <div className=" flex items-center">
+              <span className='text-xs text-center'>{name}</span>
+              <span className=" text-center mx-auto">{expandIcon}</span>
+            </div>
+          </div>
         </button>
-      </motion.li>
+        {/* </div> */}
+
+      </div>
       <AnimatePresence initial={false}>
         {Array.isArray(items) && isOpen ? (
           <li>
@@ -109,8 +118,8 @@ function SidebarMenuItem({ className, item, depth = 0 }: any) {
                 open: { opacity: 1, height: "auto" },
                 collapsed: { opacity: 0, height: 0 },
               }}
-              transition={{ duration: 0.8, ease: [0.04, 0.62, 0.23, 0.98] }}
-              className="ms-4 text-xs"
+              transition={{ duration: 1, ease: [0.04, 0.62, 0.23, 0.98] }}
+              className="text-xs text-light"
             >
               {items?.map((currentItem) => {
                 const childDepth = depth + 1;
@@ -119,7 +128,7 @@ function SidebarMenuItem({ className, item, depth = 0 }: any) {
                     key={`${currentItem.name}${currentItem.slug}`}
                     item={currentItem}
                     depth={childDepth}
-                    className={cn("text-sm text-body ms-5")}
+                    className={cn("text-sm text-body ")}
                   />
                 );
               })}
@@ -132,8 +141,11 @@ function SidebarMenuItem({ className, item, depth = 0 }: any) {
 }
 
 function SidebarMenu({ items, className }: any) {
+
   return (
-    <ul className={cn("text-xs", className)}>
+    <ul className='flex flex-col lg:flex justify-between 
+                    w-full items-center lg:items-start'>
+     {/* <ul className={cn("text-xs", className)}> */}
       {items?.map((item: any) => (
         <SidebarMenuItem key={`${item.name}${item.slug}`} item={item} />
       ))}
