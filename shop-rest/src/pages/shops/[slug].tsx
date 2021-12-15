@@ -74,22 +74,22 @@ const ShopPage = ({ data }: any) => {
 
                           <div className='flex flex-col overflow-y-scroll space-y-4 w-full'>  
 
-                            <div className='flex  w-full h-80 border'> 
+                              <div className='flex  w-full h-80 border'> 
 
-                                <div className='h-full w-96'>  
-                                  <ShopProfileCard data={data} />
-                                </div>
-                                
-                                <div className='flex w-full'>
-                                  {imageCheck(data?.cover_image?.original, data, '317', false,'h-full w-full object-fill')}
-                                </div>
-          
-                            </div>
+                                  <div className='h-full w-96'>  
+                                    <ShopProfileCard data={data} />
+                                  </div>
+                                  
+                                  <div className='flex w-full'>
+                                    {imageCheck(data?.cover_image?.original, data, '317', false,'h-full w-full object-fill')}
+                                  </div>
+            
+                              </div>
                             
 
                            
-                           <div className='flex  w-full'> 
-                           <WebShopBanner/>
+                           <div className='flex w-full'> 
+                               <WebShopBanner/>
                            </div>
 
                             {/* <div className='w-full mt-7'> */}
@@ -98,7 +98,7 @@ const ShopPage = ({ data }: any) => {
 
                             <OfferCards/>
 
-                            { data && <ShopProductFeed shopId={data.id} /> }
+                            {data && <ShopProductFeed shopId={data.id} /> }
 
                           </div>
 
@@ -108,7 +108,7 @@ const ShopPage = ({ data }: any) => {
                            
 
                            <div onClick={handleCategories} 
-                                className ='fixed  z-1000 lg:block hidden bottom-16 -right-2 sm:right-2
+                                className =' fixed  z-1000  bottom-16 -right-2 sm:right-2
                                    px-3 p-2 rounded-lg  text-white  
                                    items-center space-x-2 '> 
 
@@ -117,7 +117,7 @@ const ShopPage = ({ data }: any) => {
                                       className='h-14 w-14 opacity-80 active:opacity-100' /> 
                                   <p className='text-gray-900 font-bold'> Categories </p>
                                 </button>
-                            </div>
+                           </div>
 
           </div>
 
@@ -128,10 +128,9 @@ const ShopPage = ({ data }: any) => {
       {width > 1023 && <CartCounterButton />}
 
     </div>
-    <div className='block lg:hidden w-screen'>
+      <div className='block lg:hidden w-screen'>
 
-        <ShopMobileView data={data}/>
-        
+          <ShopMobileView data={data}/>
 
       </div>
     </>
