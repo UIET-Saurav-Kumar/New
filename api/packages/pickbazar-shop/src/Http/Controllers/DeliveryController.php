@@ -128,8 +128,6 @@ class DeliveryController extends CoreController
             $od["notifyUrl"] = url("delivery/success");
             $orderFree->create($od);
 
-            SMS::customerPurchase($delivery->sender_phone_number, $request->user()->name);
-
             $delivery->payment_method = $request->payment_gateway;
             $delivery->save();
 

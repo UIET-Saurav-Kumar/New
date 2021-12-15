@@ -2,11 +2,13 @@
 
 namespace PickBazar\Http\Controllers;
 
-use PickBazar\Database\Models\Delivery;
 use Illuminate\Http\Request;
+use PickBazar\Http\Util\SMS;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
+use PickBazar\Database\Models\User;
 use PickBazar\Database\Models\Order;
+use PickBazar\Database\Models\Delivery;
 use PickBazar\Exceptions\PickbazarException;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -55,15 +57,16 @@ class GatewayResponse extends CoreController
 
         $id = Delivery::where('tracking_number', $order_id)->first()->id;
         if ($txStatus != "SUCCESS") {
-            $delivery=Delivery::where('id', $id)->update(['is_approved' => 1]);
-            $delivery->is_approved=1;
+            $delivery = Delivery::where('id', $id)->update(['is_approved' => 1]);
+            $user = User::find($delivery->user_id);
+            $delivery->is_approved = 1;
             $delivery->save();
             // $url = \Config::get('app.shop_url')."/orders/".$order_id;
+            SMS::customerPurchase($delivery->sender_phone_number, $user->name);
+
             $url = "https://buylowcal.com/user/delivery";
-    
+
             return redirect()->away($url);
         }
-
-
     }
 }

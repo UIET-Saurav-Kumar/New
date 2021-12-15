@@ -10,6 +10,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use PickBazar\Database\Models\Log;
 use PickBazar\Events\OrderCreated;
+use PickBazar\Database\Models\Shop;
 use PickBazar\Database\Models\User;
 use PickBazar\Database\Models\Order;
 use PickBazar\Database\Models\Coupon;
@@ -112,6 +113,17 @@ class OrderRepository extends BaseRepository
 
         // $response = $this->capturePayment($request);
         SMS::customerPurchase($request->user()->phone_number, $request->user()->name);
+        
+        if(isset($request['shop_id'])){
+            $shop=Shop::find($request['shop_id']);
+            if(isset($shop)){
+                $user=$shop->owner;
+                if($user){
+                    SMS::purchaseToVendor($user->phone_number, $$user->name);    
+                }
+            }
+        }
+        
         $payment_method = 'cc';
         if($payment_method == 'cashfree')
         {
