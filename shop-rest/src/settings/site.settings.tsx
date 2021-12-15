@@ -117,7 +117,7 @@ export const siteSettings = {
     },
     {
       href: ROUTES.WITHDRAWS,
-      menulabel: "Widthdraws",
+      menulabel: "Withdraws",
     },
 
     {

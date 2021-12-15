@@ -41,6 +41,16 @@ const OrderList = ({ orders, onPagination }: IProps) => {
         <div>{customer.name}</div>
       ),
     },
+
+    // {
+    //   title: t("table:Shop Name"),
+    //   dataIndex: "shop",
+    //   key: "shop",
+    //   align: alignLeft,
+    //   render: (shop: any) => (
+    //     <div>{shop?.name}</div>
+    //   ),
+    // },
     {
       title: t("table:table-item-tracking-number"),
       dataIndex: "tracking_number",
@@ -85,7 +95,7 @@ const OrderList = ({ orders, onPagination }: IProps) => {
         dayjs.extend(timezone);
         return (
           <span className="whitespace-nowrap">
-            {dayjs(date).utc().fromNow()}
+            {date.split('T')[0].split("-").reverse().join("-")}
           </span>
         );
       },

@@ -34,17 +34,29 @@ import {
   ModalProvider,
   useModalAction,
 } from "@components/ui/modal/modal.context";
-
+import { test } from "@data/shop/use-shop.query";
 
 const Noop: React.FC = ({ children }) => <>{children}</>;
 
 const AppSettings: React.FC = (props) => {
-  if(props?.children?._owner?.pendingProps?.router?.query?.slug !== undefined)
+  // console.log('%c inside appsetting apptsx test','color:red', test);
+  // const testfunction = test();
+  // console.log('%c inside appsetting testfunciton','color:red', testfunction);
+  const routname  = props?.children?._owner?.pendingProps?.router?.route.split('/')[1];
+  const slugname  = props?.children?._owner?.pendingProps?.router?.query?.slug;
+  console.log('routname',routname);
+  console.log('slugname', slugname);
+  if(slugname !== undefined && routname == 'shops')
+ 
   {
+    // console.log('slugname', slugname);
     const { data, isLoading: loading, error } = useSettingsQuery();
 
     const shop = fetchShopSeo(props?.children?._owner?.pendingProps?.router?.query?.slug as string);
     console.log('app tsx console');
+  //   console.log('%c inside fetchshopSEO test','color:red', test);
+  // const testfunction = test();
+  // console.log('%c inside fetchshopSEO  testfunciton','color:red', testfunction);
     console.log(shop);
     if (loading) return <PageLoader />;
     if (error) return <ErrorMessage message={error.message} />;
@@ -59,6 +71,8 @@ const AppSettings: React.FC = (props) => {
     return <SettingsProvider initialValue={data?.settings?.options} {...props} />;
   }
 };
+
+
 
 const SocialLoginProvider: React.FC = () => {
   const [session, loading] = useSession();

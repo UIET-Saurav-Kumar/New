@@ -24,6 +24,7 @@ const fetchShops = async ({
   queryKey,
   pageParam,
 }: QueryParamsType): Promise<PaginatedShop> => {
+  
   const [_key, params] = queryKey;
   let fetchedData: any = {};
   if (pageParam) {

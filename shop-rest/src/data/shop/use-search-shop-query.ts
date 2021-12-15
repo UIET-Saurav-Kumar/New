@@ -11,17 +11,20 @@ import {
     useInfiniteQuery,
     UseInfiniteQueryOptions,
   } from "react-query";
+
   const ShopService = new CoreApi(API_ENDPOINTS.SHOPS);
   type PaginatedShop = {
     data: Shop[];
     paginatorInfo: any;
   };
+
   const fetchShops = async ({
     queryKey,
     pageParam,
   }: QueryParamsType): Promise<PaginatedShop> => {
     const [_key, params] = queryKey;
     let fetchedData: any = {};
+    
     if (pageParam) {
       const response = await ShopService.fetchUrl(pageParam);
       fetchedData = response.data;

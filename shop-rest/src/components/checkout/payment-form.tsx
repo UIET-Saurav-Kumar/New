@@ -20,6 +20,9 @@ import {
   calculatePaidTotal,
   calculateTotal,
 } from "@contexts/quick-cart/cart.utils";
+import { useCustomerQuery } from "@data/customer/use-customer.query";
+
+import { Data } from "@react-google-maps/api";
 interface FormValues {
   payment_gateway: "cod" | "cashfree" | "upi" | "wallet";
   contact: string;
@@ -52,6 +55,7 @@ const PaymentForm = () => {
   const router = useRouter();
   const { mutate: createOrder, isLoading: loading } = useCreateOrderMutation();
   const { data: orderStatusData } = useOrderStatusesQuery();
+  const { data } = useCustomerQuery();
   const {getLocation} =useLocation()
   const {
     register,
@@ -64,8 +68,12 @@ const PaymentForm = () => {
     resolver: yupResolver(paymentSchema),
     defaultValues: {
       payment_gateway: "cashfree",
+      contact: data?.me?.phone_number,
+      
     },
   });
+  
+  console.log('phone number',data?.me?.phone_number)
 
   const { items } = useCart();
   const {
@@ -139,6 +147,8 @@ const PaymentForm = () => {
       },
     });
   }
+
+  console.log('customer',data)
   const isCashOnDelivery = watch("payment_gateway");
   return (
     <form
@@ -151,6 +161,7 @@ const PaymentForm = () => {
         label={t("text-enter-contact-number")}
         variant="outline"
         className="flex-1"
+        value={data?.customer?.contact}
         onChange={(e) => setValue("contact", maskPhoneNumber(e.target.value))}
         error={t(errors?.contact?.message!)}
       />

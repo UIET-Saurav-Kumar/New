@@ -50,6 +50,14 @@ module.exports = {
         "gray-800": withOpacity("--color-gray-800"),
         "gray-900": withOpacity("--color-gray-900"),
       },
+      backgroundImage: {
+        
+        // 'hero-pattern': "url('/shops-frame.jpg')",
+        'pink-footer': "url('/footer.jpg')",
+        // 'india': "url('/india.jpg')",
+        // 'drop-down': "url('/drop-down.jpg')",
+
+       },
 
       textColor: {
         body: withOpacity("--text-base"),

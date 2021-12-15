@@ -1,3 +1,4 @@
+
 import Counter from "@components/ui/counter";
 import AddToCartBtn from "@components/product/add-to-cart/add-to-cart-btn";
 import { cartAnimation } from "@utils/cart-animation";
@@ -5,6 +6,7 @@ import { useCart } from "@contexts/quick-cart/cart.context";
 import { generateCartItem } from "@contexts/quick-cart/generate-cart-item";
 import { useCreateLogMutation } from "@data/log/use-create-log.mutation";
 import { useLocation } from "@contexts/location/location.context";
+
 interface Props {
   data: any;
   variant?: "helium" | "neon" | "argon" | "oganesson" | "single" | "big";
@@ -15,6 +17,11 @@ interface Props {
     | "oganesson"
     | "single"
     | "details";
+
+      
+
+          
+
   counterClass?: string;
   variation?: any;
   disabled?: boolean;
@@ -37,6 +44,7 @@ export const AddToCart = ({
     getItemFromCart,
     isInCart,
   } = useCart();
+
   const item = generateCartItem(data, variation);
   const { mutate: createLog} = useCreateLogMutation();
   const {getLocation} =useLocation()

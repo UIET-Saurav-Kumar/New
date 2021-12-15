@@ -6,6 +6,10 @@ import url from "@utils/api/server_url";
 
 
 export const fetchProduct = async (slug: string) => {
+  if(slug == undefined)
+  {
+    return null;
+  }
   const { data } = await http.get(`${url}/${API_ENDPOINTS.PRODUCTS}/${slug}`);
   return data;
 };

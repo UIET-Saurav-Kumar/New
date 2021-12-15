@@ -8,6 +8,7 @@ import { useModalAction } from "@components/ui/modal/modal.context";
 import { useProductQuery } from "@data/product/use-product.query";
 import Link from "@components/ui/link";
 import { ROUTES } from "@utils/routes";
+import { PlusIcon } from "@heroicons/react/outline";
 
 type NeonProps = {
   product: any;
@@ -26,12 +27,19 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
 
   const { t } = useTranslation("common");
 
-  const { name, quantity, unit, slug } = product ?? {};
-
+  const { name,unit,slug, image, quantity, min_price, max_price, product_type } =
+    product ?? {};
   const { price, basePrice, discount } = usePrice({
-    amount: product.price,
-    baseAmount: product.sale_price,
+    amount: product.sale_price ? product.sale_price : product.price!,
+    baseAmount: product.price,
   });
+  const { price: minPrice } = usePrice({
+    amount: min_price,
+  });
+  const { price: maxPrice } = usePrice({
+    amount: max_price,
+  });
+
   const { openModal } = useModalAction();
 
   // const isSelected = !isEmpty(variations)
@@ -46,6 +54,7 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
   }
 
   return (
+
     <article
       style={{maxWidth:"330px"}}
       className={cn(
@@ -80,15 +89,26 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
 
       <header className="p-3 md:p-6">
 
-        <div className="flex items-center  mb-2">
+        {product_type.toLowerCase() === 'variable' ? (
+          <div className="mb-2">
+            <span className="text-sm md:text-base text-heading font-semibold">
+              {minPrice}
+            </span>
+            <span> - </span>
+            <span className="text-sm md:text-base text-heading font-semibold">
+              {maxPrice}
+            </span>
+          </div>
+        ) : (
+          <div className="flex items-center  mb-2">
           <span className="text-sm md:text-base text-product-price font-bold">
             {basePrice ? basePrice : price}
           </span>
           {discount && (
             <del className="text-xs md:text-sm text-discount ms-2">{price}</del>
-            
           )}
         </div>
+        )}
         {/* End of product price */}
 
         <h3
@@ -97,14 +117,34 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
            <div className='flex flex-col'>{name}<h3>{unit}</h3></div>
         </h3>
         {/* End of product title */}
-
-        {quantity > 0 ? (
-          <AddToCart variant="neon" data={product} />
+        {product_type.toLowerCase() === 'variable' ? (
+          <>
+            {Number(quantity) > 0 && (
+              <button
+                onClick={handleProductQuickView}
+                className="group w-full h-7 md:h-9 flex items-center justify-between text-xs md:text-sm text-body-dark rounded bg-gray-100 transition-colors hover:bg-accent hover:border-accent hover:text-light focus:outline-none focus:bg-accent focus:border-accent focus:text-light"
+              >
+                <span className="flex-1">{t('text-add')}</span>
+                <span className="w-7 h-7 md:w-9 md:h-9 bg-gray-200 grid place-items-center rounded-te rounded-be transition-colors duration-200 group-hover:bg-accent-600 group-focus:bg-accent-600">
+                  <PlusIcon className="w-4 h-4 stroke-2" />
+                </span>
+              </button>
+            )}
+          </>
         ) : (
+          <>
+            {Number(quantity) > 0 && (
+              <AddToCart variant="neon" data={product} />
+            )}
+          </>
+        )}
+
+        {Number(quantity) <= 0 && (
           <div className="bg-red-500 rounded text-xs text-center text-light px-2 py-1.5 sm:py-2.5">
-            {t("text-out-stock")}
+            {t('text-out-stock')}
           </div>
         )}
+        
         {/* End of add to cart */}
       </header>
     </article>
