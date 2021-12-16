@@ -35,6 +35,8 @@ function SidebarMenuItem({ className, item, depth = 0 }: any) {
 
   const { closeModal } = useModalAction();
 
+  
+
   function onClick() {
    
     const { pathname, query } = router;
@@ -43,7 +45,7 @@ function SidebarMenuItem({ className, item, depth = 0 }: any) {
       router.push(
         {
           pathname,
-          query: { ...query, category: slug },
+          query: { ...query, category: slug || 'all' },
         },
         undefined,
         {
@@ -83,7 +85,7 @@ function SidebarMenuItem({ className, item, depth = 0 }: any) {
           <button
           className={cn(
             "flex flex-col lg:flex  items-center divide-y py-1 text-start outline-none text-body-dark font-semibold  focus:outline-none focus:ring-0 focus:text-accent",
-            isOpen ? "text-accent underline transition duration-800 ease-in-out" : "text-body-dark",
+            isOpen ? "text-accent  transition duration-800 ease-in-out" : "text-body-dark",
             className ? className : "text-sm"
           )}
         >
