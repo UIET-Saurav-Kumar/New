@@ -7,10 +7,11 @@ import CategoryListLoader from "@components/ui/loaders/category-loader";
 import NotFound from "@components/common/not-found";
 import { useCategoriesQuery } from "@data/category/use-categories.query";
 
-
 const CategoryDropdownSidebar = () => {
   const { query } = useRouter();
   const { type } = query;
+
+ 
 
   const {
     data,
@@ -20,10 +21,37 @@ const CategoryDropdownSidebar = () => {
     type: query.slug as string,
   });
 
+  function allCategories() {
+
+   
+   
+    const { pathname , query } = router;
+    
+    const navigate = () =>
+      router.push(
+        {
+          pathname,
+          query: { ...query, category: null },
+        },
+        undefined,
+        {
+          scroll: false,
+        }
+      );
+
+    if (Array.isArray(data?.categories?.data) && !!data?.categories?.data.length) {
+      navigate();
+    } else {
+      navigate();
+      
+    }
+  }
+  
+
 
   if (loading) {
     return (
-      <div className="block">
+      <div className=" hidden lg:block">
         <div className="w-60 mt-8 px-2">
             <CategoryListLoader />
         </div>
@@ -45,7 +73,8 @@ const CategoryDropdownSidebar = () => {
         <Scrollbar className="w-full h-full max-h-screen">
           {data?.categories?.data?.length ? (
             <div className="px-5 h-96">
-              <SidebarMenu items={data?.categories?.data} className="py-8" />
+              <SidebarMenu items={data?.categories?.data} 
+              className="py-8" />
             </div>
           ) : (
             <div className="min-h-full pt-6 pb-8 px-9 lg:p-8">
@@ -56,7 +85,7 @@ const CategoryDropdownSidebar = () => {
     </aside>
 
     {/* Mobile */}
-    <div className='lg:hidden relative  flex '> 
+    <div className='lg:hidden relative flex'> 
     {/* <div className='flex  h-screen top-14 sticky flex-col w-20'>    */}
       <div className=" h-screen top-0 sticky  flex-col  flex  overflow-y-scroll justify-between  space-y-8 text-center">
 
@@ -64,7 +93,9 @@ const CategoryDropdownSidebar = () => {
       
           {data?.categories?.data?.length ? (
             <div className="px-5 h-96">
-              <button onClick={()=> router.push('')} className="text-sm  font-semibold text-gray-600">All</button>
+              <button onClick={allCategories} className={` ${query.category == ''  ? 'text-magenta' : 'text-gray-600'} text-sm focus:text-magenta font-semibold `}>
+              <img src='/categories.png' className='w-10 tracking-widest  h-10 ' /> ALL
+              </button>
               <SidebarMenu items={data?.categories?.data} className="whitespace-nowrap  py-8" />
             </div>
           ) : (
