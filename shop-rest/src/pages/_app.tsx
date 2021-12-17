@@ -44,8 +44,8 @@ const AppSettings: React.FC = (props) => {
   // console.log('%c inside appsetting testfunciton','color:red', testfunction);
   const routname  = props?.children?._owner?.pendingProps?.router?.route.split('/')[1];
   const slugname  = props?.children?._owner?.pendingProps?.router?.query?.slug;
-  console.log('routname',routname);
-  console.log('slugname', slugname);
+  // console.log('routname',routname);
+  // console.log('slugname', slugname);
   if(slugname !== undefined && routname == 'shops')
  
   {
@@ -57,7 +57,7 @@ const AppSettings: React.FC = (props) => {
   //   console.log('%c inside fetchshopSEO test','color:red', test);
   // const testfunction = test();
   // console.log('%c inside fetchshopSEO  testfunciton','color:red', testfunction);
-    console.log(shop);
+    console.log('shop',shop);
     if (loading) return <PageLoader />;
     if (error) return <ErrorMessage message={error.message} />;
     return <SettingsProvider initialValue={shop?.settings?.options} {...props} />;
