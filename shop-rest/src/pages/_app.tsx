@@ -65,6 +65,7 @@ const AppSettings: React.FC = (props) => {
   else
   {
     const { data, isLoading: loading, error } = useSettingsQuery();
+    console.log('else app tsx console');
 
     if (loading) return <PageLoader />;
     if (error) return <ErrorMessage message={error.message} />;
