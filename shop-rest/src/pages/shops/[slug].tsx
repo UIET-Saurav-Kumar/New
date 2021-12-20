@@ -26,6 +26,12 @@ import AllCategories from "@components/home-page-product-section/AllCategories";
 import Layout from "@components/layout/layout";
 import Avatar from 'react-avatar';
 import OfferCards from "./offer-cards";
+import CategoryDropdownSidebar from "@components/category/category-dropdown-sidebar";
+import { useRouter } from "next/router";
+import RelatedProducts from "@components/product/product-details/related-products";
+import { useCategoriesQuery } from "@data/category/use-categories.query";
+
+
 
 const CartCounterButton = dynamic(
   () => import("@components/cart/cart-counter-button"),
@@ -42,7 +48,13 @@ const imageCheck = (logo: any , record:any, imgsize:any, imgDim:any, classname: 
   return (check ? <Image src={logo} alt={record?.name}  width={1500} height={200} className={classname} />:<Avatar name={record?.name} size={imgsize} round={imgDim}  />);
 }
 
+
+
 const ShopPage = ({ data }: any) => {
+
+  const router = useRouter();
+
+const { pathname, query } = router;
   
   const { t } = useTranslation("common") ;
   const { width } = useWindowSize() ;
@@ -57,11 +69,17 @@ const ShopPage = ({ data }: any) => {
     return openModal("SHOP_PAYMENT_FORM");
   }
 
+  const {
+    data : categoryData,
+    isLoading: loading,
+    error,
+  } = useCategoriesQuery({
+    type: query.slug as string,
+  });
+
   return (
 
     <>
-
-      
 
           <div className="bg-white lg:bg-gray-100 hidden lg:flex flex-col md:flex-row md:justify-between  
                             md:items-start md:p-8" >
@@ -86,7 +104,6 @@ const ShopPage = ({ data }: any) => {
             
                               </div>
                             
-
                            
                            <div className='flex w-full'> 
                                <WebShopBanner/>
@@ -98,16 +115,29 @@ const ShopPage = ({ data }: any) => {
 
                             <OfferCards/>
 
-                            {data && <ShopProductFeed shopId={data.id} /> }
-
                           </div>
+
+                          <div className='  relative top-0 flex flex-col  '> 
+                          {categoryData?.categories?.data?.length ? 
+                          <> 
+                          <div style={{top:'85px'}} className='flex z-50 sticky mt-5 border bg-white   flex-col w-full'>   
+                                    <CategoryDropdownSidebar/>
+                              
+
+                              <h1 style={{top:'155px'}} id='product-heading' className="text-lg sticky border-t bg-white  py-3 px-2 z-50 font-semibold text-gray-600 font-mono mt-5 transition-transform duration-75">  
+                                { query?.category?.replace(/\b\w/g, (l :any) => l.toUpperCase())   } Products
+                              </h1> 
+                          </div> </> : ' '  }
+                              <div  className="static  z-10 top-10 w-full">{data && <ShopProductFeed shopId={data.id} />}</div>
+                        </div> 
+
 
                        {/* </div> */}
                          
                          {/* bottom corner button */}
                            
 
-                           <div onClick={handleCategories} 
+                           {/* <div onClick={handleCategories} 
                                 className =' fixed  z-1000  bottom-16 -right-2 sm:right-2
                                    px-3 p-2 rounded-lg  text-white  
                                    items-center space-x-2 '> 
@@ -117,7 +147,7 @@ const ShopPage = ({ data }: any) => {
                                       className='h-14 w-14 opacity-80 active:opacity-100' /> 
                                   <p className='text-gray-900 font-bold'> Categories </p>
                                 </button>
-                           </div>
+                           </div> */}
 
           </div>
 
