@@ -102,18 +102,18 @@ export default function ShopMobileView({data}: any) {
 
               {/* <div className='mt-6 sm:mt-6 border '> <PaymentForm /></div>   */}
               
-               <div className='relative mt-2 flex   '> 
-                    <div className='flex  border bg-white h-screen top-14 sticky  flex-col w-1/6'>   
-                            {/* <div className=" border-b flex bg-pink-50 flex-col overflow-y-scroll justify-between h-full space-y-8 text-center"> */}
-                                <CategoryDropdownSidebar/>
-                               {/* {categoryData?.categories?.data.map((category: any) => (
-                                     <ul key={category.name}>
-                                         <li className="text-xs border-b text-center items-center ">{category.name}</li>
-                                     </ul>
-                               ))} */}
-                            {/* </div> */}
+               <div className='relative mt-2 flex '> 
+                    <div className='flex  border bg-white h-screen top-14 sticky  flex-col w-auto'>   
+                                <CategoryDropdownSidebar />
+                              
                     </div>   
-                 <div className=" w-5/6">{data && <ShopProductFeed shopId={data.id} />}</div>
+                 <div className="flex flex-col w-5/6">
+                 <h1 id='category-heading' style={{top:'56px'}} id='product-heading' 
+                 className=" sticky border-t bg-white  py-3 px-2 z-50 font-semibold text-gray-600 font-mono  text-sm sm:text-lg transition-transform duration-75">  
+                                { query?.category?.replace(/\b\w/g, (l :any) => l.toUpperCase())   } Products
+                              </h1>
+                   {data && <ShopProductFeed shopId={data.id} />}
+                   </div>
                </div> 
 
 
@@ -129,7 +129,7 @@ export default function ShopMobileView({data}: any) {
                          <img src='/menu.png' 
                           className='h-14 w-14 opacity-80 active:opacity-100' /> 
                           <button className='text-gray-800 font-bold'>Categories</button>
-                     </span>
+                     </span>  <
                         
                 </span> */}
                     
