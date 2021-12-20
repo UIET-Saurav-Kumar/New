@@ -1,3 +1,4 @@
+
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
 import cn from "classnames";
@@ -14,6 +15,7 @@ import { useModalAction, useModalState } from "./modal/modal.context";
 function SidebarMenuItem({ className, item, depth = 0 }: any) {
 
   const router = useRouter();
+  
 
   const active = router?.query?.category;
 
@@ -26,6 +28,7 @@ function SidebarMenuItem({ className, item, depth = 0 }: any) {
   useEffect(() => {
     setOpen(isActive);
   }, [isActive]);
+
   const { slug, name, children: items, icon } = item;
   const { displaySidebar, closeSidebar } = useUI();
 
@@ -36,17 +39,23 @@ function SidebarMenuItem({ className, item, depth = 0 }: any) {
   const { closeModal } = useModalAction();
 
   
+  
 
   function onClick() {
    
     const { pathname, query } = router;
-    closeModal()
+
     const navigate = () =>
+    // setOpen(false);
+   displaySidebar && closeSidebar();
+    
       router.push(
         {
           pathname,
           query: { ...query, category: slug || 'all' },
+          
         },
+       
         undefined,
         {
           scroll: false,
@@ -54,20 +63,26 @@ function SidebarMenuItem({ className, item, depth = 0 }: any) {
       );
 
     if (Array.isArray(items) && !!items.length) {
+
       toggleCollapse();
       navigate();
+
+      displaySidebar && closeSidebar()
     } else {
+     
       navigate();
-      displaySidebar && closeSidebar();
+      closeSidebar();
     }
   }
 
   let expandIcon;
   if (Array.isArray(items) && items.length) {
+   
     expandIcon = !isOpen ? (
-      <ExpandLessIcon className="w-3 h-3" />
+      <ExpandLessIcon className="w-4 h-4" />
+      
     ) : (
-      <ExpandMoreIcon className="w-3 h-3" />
+      <ExpandMoreIcon className="w-4 h-4" />
     );
   }
 
@@ -77,40 +92,41 @@ function SidebarMenuItem({ className, item, depth = 0 }: any) {
         // initial={false}
         // animate={{ backgroundColor: "black" }}/
         onClick={onClick}
-        
-        className="flex items-center relative top-0  w-full py-1 rounded-md"
+        className="flex lg:grid lg:grid-cols-1 items-center relative top-0 lg:border-l "
       >
         
         {/* <div className='flex items-center justify-between'> */}
           <button
           className={cn(
-            "flex flex-col lg:flex  items-center divide-y py-1 text-start outline-none text-body-dark font-semibold  focus:outline-none focus:ring-0 focus:text-accent",
+            "grid grid-cols-1  whitespace-normal items-center  py-1 text-start outline-none text-body-dark font-semibold  focus:outline-none focus:ring-0 focus:text-accent",
             isOpen ? "text-accent  transition duration-800 ease-in-out" : "text-body-dark",
             className ? className : "text-sm"
           )}
         >
-         <div className='grid grid-cols-1  w-auto sm:w-20 px-2 place-items-center lg:flex  mx-auto items-center'>
-         {icon && (
-              <span className="flex text-center w-8 h-8 items-center justify-center">
-                {getIcon({
-                  iconList: CategoryIcons,
-                  iconName: icon,
-                  className: "max-h-full  max-w-full",
-                })}
-              </span>
-            )}
-            <div className=" flex items-center">
-              <span className='text-xs text-center'>{name}</span>
-              <span className=" text-center mx-auto">{expandIcon}</span>
+         <div className='relative flex flex-col justify-center mx-auto h-auto  w-auto sm:w-20 px-2  place-items-center lg:grid-cols-2   lg:w-auto  items-center'>
+              {icon && (
+                <span className="flex  text-center  w-full items-center justify-center">
+                  {getIcon({
+                    iconList: CategoryIcons,
+                    iconName: icon,
+                    className: " w-6 h-6 lg:h-8 lg:w-8",
+                  })}
+                </span>
+              )}
+            <div className="flex  px-auto items-center">
+              <span className='text-xs w-auto  whitespace-normal text-center'>{name}</span>
+              <span className=" text-center px-auto ">{expandIcon}</span>
             </div>
-          </div>
+         </div>
         </button>
         {/* </div> */}
 
       </div>
+
+    <div style={{zIndex:10000}} className="  text-lg">
       <AnimatePresence initial={false}>
         {Array.isArray(items) && isOpen ? (
-          <li>
+          <li className='  z-100' style={{zIndex: 100000}}>
             <motion.ul
               key="content"
               initial="collapsed"
@@ -120,8 +136,9 @@ function SidebarMenuItem({ className, item, depth = 0 }: any) {
                 open: { opacity: 1, height: "auto" },
                 collapsed: { opacity: 0, height: 0 },
               }}
-              transition={{ duration: 1, ease: [0.04, 0.62, 0.23, 0.98] }}
-              className="text-xs text-light"
+              // transition={{ duration: 1, ease: [0.6, 0.1,0.1, 1.3] }}
+              style={{zIndex: 10000}}  className=" static lg:absolute text-xs z-100  bg-light text-left lg:text-center border-b
+                                                  lg:top-16  w-auto  lg:px-auto lg:shadow-lg  text-light"
             >
               {items?.map((currentItem) => {
                 const childDepth = depth + 1;
@@ -130,28 +147,49 @@ function SidebarMenuItem({ className, item, depth = 0 }: any) {
                     key={`${currentItem.name}${currentItem.slug}`}
                     item={currentItem}
                     depth={childDepth}
-                    className={cn("text-sm text-body ")}
+                    className={cn("text-sm lg:text-lg text-body ")}
+                    
                   />
                 );
               })}
             </motion.ul>
           </li>
         ) : null}
-      </AnimatePresence>
+       </AnimatePresence>
+      </div>
     </>
   );
 }
 
 function SidebarMenu({ items, className }: any) {
+  // const router = useRouter();
+  // const { pathname, query } = router;
 
   return (
-    <ul className='flex flex-col lg:flex justify-between 
-                    w-full items-center lg:items-start'>
-     {/* <ul className={cn("text-xs", className)}> */}
-      {items?.map((item: any) => (
+    <>
+
+    {/* web */}
+      <ul  className='hidden lg:flex lg:justify-evenly xl:justify-between 
+                     w-full items-center'>
+      {/* <ul className={cn("text-xs", className)}> */}
+        {items?.map((item: any) => (
+         <a  >
+           <SidebarMenuItem key={`${item.name}${item.slug}`} item={item} />
+          </a>
+        ))}
+      </ul>
+
+      {/* mobile */}
+      <ul className='flex flex-col lg:hidden justify-between 
+                      w-full items-center lg:items-start'>
+      {/* <ul className={cn("text-xs", className)}> */}
+        {items?.map((item: any) => (
+        <a> 
         <SidebarMenuItem key={`${item.name}${item.slug}`} item={item} />
-      ))}
-    </ul>
+        </a> 
+        ))}
+      </ul>
+    </>
   );
 }
 
