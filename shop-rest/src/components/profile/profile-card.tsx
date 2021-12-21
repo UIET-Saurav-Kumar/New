@@ -1,3 +1,4 @@
+
 import cn from "classnames";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
@@ -10,6 +11,7 @@ import styles from "./profile-card.module.css";
 import { getIcon } from "@utils/get-icon";
 import * as socialIcons from "@components/icons/social";
 import Avatar from 'react-avatar';
+
 
 type ShopProfileCardProps = {
   data: any;
@@ -29,6 +31,7 @@ type ShopProfileCardProps = {
     function handleMoreInfoModal() {
       return openModal("SHOP_INFO", data);
     }
+
     const imageCheck = (logo: any , record:any, imgsize:any, imgDim:any, classname: string) => {
       console.log(logo)
       let check = false;
@@ -75,20 +78,20 @@ type ShopProfileCardProps = {
 
              
               
-                    <div className=" absolute flex  items-center  bottom-2 right-4  ">
+                    <div className=" absolute flex  items-center  bottom-2 right-4 ">
                         {data?.settings?.socials.map((item: any, index: number) => (
-                        <a
-                            key={index}
-                            href={item?.url}
-                            target="_blank"
-                            className={`text-muted focus:outline-none me-6 last:me-0 transition-colors duration-300 hover:${item.hoverClass}`}
-                        >
-                            {getIcon({
-                            iconList: socialIcons,
-                            iconName: item?.icon,
-                            className: "lg:w-6 lg:h-6 w-6 h-6 opacity-85",
-                            })}
-                        </a>
+                          <a
+                              key={index}
+                              href={item?.url}
+                              target="_blank"
+                              className={`text-muted focus:outline-none me-6 last:me-0 transition-colors duration-300 hover:${item.hoverClass}`}
+                          >
+                              {getIcon({
+                              iconList: socialIcons,
+                              iconName: item?.icon,
+                              className: "lg:w-6 lg:h-6 w-6 h-6 opacity-85",
+                              })}
+                          </a>
                         ))}
                         <div className=''>
 
