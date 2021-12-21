@@ -18,6 +18,7 @@ import { PDFDownloadLink } from "@react-pdf/renderer";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { useIsRTL } from "@utils/locals";
+import { Children } from "react";
 
 type IProps = {
   orders: OrderPaginator | null | undefined;
@@ -30,6 +31,8 @@ const OrderList = ({ orders, onPagination }: IProps) => {
   const rowExpandable = (record: any) => record.children?.length;
   const router = useRouter();
   const { alignLeft } = useIsRTL();
+
+  console.log('orders', orders);
 
   const columns = [
     {
@@ -47,10 +50,11 @@ const OrderList = ({ orders, onPagination }: IProps) => {
     //   dataIndex: "shop",
     //   key: "shop",
     //   align: alignLeft,
-    //   render: (shop: any) => (
-    //     <div>{shop?.name}</div>
+    //   render: (shop: any, item: any) => (
+    //     <div>{}</div>
     //   ),
     // },
+
     {
       title: t("table:table-item-tracking-number"),
       dataIndex: "tracking_number",

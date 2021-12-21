@@ -20,7 +20,7 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import SelectInput from "@components/ui/select-input";
 import { useIsRTL } from "@utils/locals";
-import {useRef} from 'react';
+import {Children, useRef} from 'react';
 import {  PDFExport, savePDF} from '@progress/kendo-react-pdf'
 
 type FormValues = {
@@ -112,6 +112,7 @@ export default function OrderDetailsPage() {
         />
       ),
     },
+    
     {
       title: t("table:table-item-products"),
       dataIndex: "name",
@@ -127,6 +128,43 @@ export default function OrderDetailsPage() {
         </div>
       ),
     },
+
+
+    {
+      title: t("table:Shop Name"),
+      dataIndex: "shop",
+      key: "shop",
+      align: alignLeft,
+      render: () => {
+        const {
+          data,
+          isLoading: loading,
+          error,
+        } = useOrderQuery(query.orderId as string);
+
+      //   const shop = data?.order?.products?.filter(function (product :any) {
+      //     console.log('product shop id',product.shop_id)
+      //     console.log('product', product)
+      //   return product.shop_id 
+      // });
+
+      // console.log('shop',shop)
+
+      var shop =data?.order?.children
+      console.log('childre',shop)
+      var products = data?.order?.products
+      console.log('object')
+
+      var shopnamefilter = shop.map(function (shop :any) {
+        return shop.name
+      })
+   
+      console.log('shopname',shopnamefilter)
+         return <span key={shopnamefilter} className="text-black">{shopnamefilter}</span>
+      },
+    },
+
+
     {
       title: t("table:table-item-total"),
       dataIndex: "price",

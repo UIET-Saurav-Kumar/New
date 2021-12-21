@@ -107,7 +107,7 @@ const ProductDetailsModalView = ({ productSlug }: { productSlug: string }) => {
   return (
     <article className="bg-light w-full max-w-6xl relative z-[51]">
       
-      <button onClick={() => closeModal()} className="sticky  rounded-full z-50 w-10 h-10 bg-magenta hover:bg-gold text-white  top-5"> X </button>
+      <button onClick={() => closeModal()} className="absolute rounded-full  w-10 h-10 bg-magenta hover:bg-gold text-white  right-8 top-5"> X </button>
       {/* Sticky bar */}
       <div
         className={cn(
