@@ -93,9 +93,20 @@ export default function OrderDetailsPage() {
       amount: data?.order?.sales_tax!,
     }
   );
+  const getShopName = (itemdata: any, orderdata: any) => {
+    const childrens = orderdata.children;
+    const shop_id = itemdata.shop_id;
+
+    for(let item of childrens)
+    {
+      if(item.shop.id === shop_id)
+      {
+        return item.shop.name;
+      }
+    }
+  };
   if (loading) return <Loader text={t("common:text-loading")} />;
   if (error) return <ErrorMessage message={error.message} />;
-  console.log('order data', data)
 
   const columns = [
     {
@@ -165,6 +176,20 @@ export default function OrderDetailsPage() {
     },
 
 
+    {
+      title: t("table:Shop Name"),
+      dataIndex: "shop",
+      key: "shop",
+      align: alignLeft,
+      render: (name: string, item: any) => (
+        <div>
+          <span>{name}</span>
+          <span className="font-semibold text-heading">
+            {getShopName(item,data?.order)}
+          </span>
+        </div>
+      ),
+    },
     {
       title: t("table:table-item-total"),
       dataIndex: "price",

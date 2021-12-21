@@ -169,7 +169,7 @@ function SidebarMenu({ items, className }: any) {
     <>
 
     {/* web */}
-      <ul  className='hidden lg:flex lg:justify-evenly xl:justify-between 
+      <ul  className='hidden lg:flex lg:justify-evenly xl:justify-evenly 
                      w-full items-center'>
       {/* <ul className={cn("text-xs", className)}> */}
         {items?.map((item: any) => (
