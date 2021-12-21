@@ -47,7 +47,7 @@ const CartSidebarView = () => {
       {/* End of cart header */}
 
       <AnimateSharedLayout>
-        <motion.div layout className="flex-grow pt-16">
+        <motion.div layout className="flex-grow pt-16 overflow-y-scroll">
           {items.length > 0 ? (
             items?.map((item) => <CartItem item={item} key={item.id} />)
           ) : (
