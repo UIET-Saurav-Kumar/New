@@ -94,14 +94,14 @@ export default function OrderDetailsPage() {
     }
   );
   const getShopName = (itemdata: any, orderdata: any) => {
-    const childrens = orderdata.children;
-    const shop_id = itemdata.shop_id;
+    const childrens = orderdata?.children;
+    const shop_id = itemdata?.shop_id;
 
     for(let item of childrens)
     {
-      if(item.shop.id === shop_id)
+      if(item?.shop?.id === shop_id)
       {
-        return item.shop.name;
+        return item?.shop?.name;
       }
     }
   };
