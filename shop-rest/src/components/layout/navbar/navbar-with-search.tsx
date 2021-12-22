@@ -18,6 +18,8 @@ import { useEffect, useState } from 'react';
 import { useLocation } from "@contexts/location/location.context";
 import GooglePlacesAutocomplete from "@components/form/google-places-autocomplete";
 import GetCurrentLocation from "@components/geoCode/get-current-location";
+import { CaretDown } from "@components/icons/caret-down";
+import MobileJoinButton from "./mobile-join-button";
 
 
 const AuthorizedMenu = dynamic(
@@ -64,7 +66,10 @@ const router = useRouter();
   const [click, setClick ] = useState(false);
     const [hasLocation, setHasLoction] = useState(false);
     
+    const truncate = (txt:any, n:number) => {
+      return  txt.length > 10 ? txt.substring(0, n) : txt
 
+    }
     
    
     const closeNav = () => {
@@ -99,12 +104,7 @@ const router = useRouter();
             
             setHasLoction(true);
             // closeLocation(); 
-        }data
-        data
-        data
-        data
-        data
-
+        }
         var { query ,pathname} = router;
         var pathname="/"+router.locale+pathname
         
@@ -121,8 +121,6 @@ const router = useRouter();
         handleLocation()
     }
 
-
-  
 
   return (
 
@@ -145,7 +143,7 @@ const router = useRouter();
           <div className="w-full flex space-x-6 items-center  justify-between">
              <Logo className="mx-auto  bg-black border  p-0 lg:mx-0" />
             {/* <Search label={t("text-search-label")} variant="minimal" /> */}
-            <div className=' flex focus-ring-2 justify-center
+            <div className='hidden lg:flex focus-ring-2 justify-center
                                      lg:w-3/4 2xl:mx-auto lg:mx-auto 
                                     2xl:flex-1'>
 
@@ -161,9 +159,20 @@ const router = useRouter();
                            </div>
 
                     </div>
-                    <div className={` ${location ? 'fixed inset-0 bg-gray-900 bg-opacity-60 scroll-y-none w-full h-full' : ' '} `}></div>
-                    <div style={{zIndex: 1000}}  className={`absolute  flex flex-col  w-full z-1000 inset-0 shadow-lg transform ml-0 duration-200 ease-in 
-                                    ${location ? ' translate-y-0 ' : '-translate-y-full' }  transform border-5 bg-gray-100 h-screen lg:h-100 xl:h-110 2xl:h-110 overflow-y-hidden overflow-hidden `}>
+                    <div onClick = {handleLocation}  className='flex items-center w-full lg:hidden'>
+
+                   <CaretDown className='w-4 cursor-pointer mr-2 text-gray-400 h-4 '/> 
+                   <input 
+                              defaultValue = {getLocation?.formattedAddress}  
+                              className ='lg:hidden  block w-full text-gray-500 placeholder:text-gray-500  
+                                           rounded-lg  border rounded-l-lg pl-4 h-6 sm:h-8 outline-none text-xs sm:text-sm
+                                           border-e-0  focus:border-accent border-gray-300 pr-2 cursor-pointer hover:border-gray-400' 
+                              placeholder = 'Enter location' id='location_id' />
+
+                                </div>
+                    <div className={` ${location ? 'fixed inset-0 bg-gray-900 bg-opacity-60 scroll-y-none w-auto  h-full' : ' '} `}></div>
+                    <div style={{zIndex: 999999999}}  className={`absolute flex flex-col   z-100 inset-0 shadow-lg transform -pl-10 duration-200 ease-in 
+                                    ${location ? ' translate-y-0 ' : '-translate-y-full' }  transform border-5 bg-gray-100 h-96 lg:h-screen  overflow-y-hidden overflow-hidden `}>
                                       
                                        <div className='  border-red-400 flex w-full'>
                                            <div className='flex flex-col'>
@@ -173,7 +182,6 @@ const router = useRouter();
                                                <div className=''>
                                                    <p className=' lg:hidden flex mx-4  sm:mx-16 md:mx-16 mt-4 font-semibold items-center text-xs xs+:text-sm sm:text-sm text-gray-700'>| Groceries | Veggies & Fruits | Salon & Spa | Takeaways | Restaurants | Pharmacy |</p>
                                                    <p className=' lg:hidden flex mx-4 sm:mx-16 md:mx-16 mt-0 font-semibold items-center text-xs xs+:text-sm sm:text-sm text-gray-700'>| Cosmetics | Lifestyle & Home | Gym & Health | Electronics | Poultry & Farm | Services |</p>
-                                                   
                                                </div>
                                            </div>
                                            <img src='/drop-down.jpg' className='hidden lg:block md:relative object-fill md:object-contain'/>
@@ -191,7 +199,8 @@ const router = useRouter();
                             {/* <img src='/drop-down.jpg' className='relative   top-0 object-contain'/> */}
                             
                             <div id='location-input' style={{zIndex: 0}} className='absolute flex flex-col justify-center 
-                                       w-full lg:w-full    items-center  pt-36  sm:pt-20 md:pt-4 lg:pt-0 space-y-6 ml-0 mx-3 sm:mx-16 md:ml-16 lg:ml-6 xl:ml-8 2xl:ml-10 lg:mt-80'> 
+                                       w-full lg:w-full items-center pt-36 sm:pt-20 md:pt-4 lg:pt-0 space-y-6 ml-0 mx-3 
+                                       sm:mx-16 md:ml-16 lg:ml-6 xl:ml-8 2xl:ml-10 lg:mt-80'> 
                                           
                                 <div  style = {{zIndex: 1000}}  
                                       className='w-full'> 
@@ -203,7 +212,6 @@ const router = useRouter();
                                      <GetCurrentLocation onChange = {changeLocation} />  
                                 </div>
                                 
-
                             </div>
                             
                         {/* <Dialog.Overlay className="fixed inset-0 bg-gray-900 bg-opaname-80 w-full h-full" /> */}
@@ -245,7 +253,8 @@ const router = useRouter();
                 
               ) : (
                
-                  <JoinButton />
+                  <> <div className='block lg:hidden'><MobileJoinButton /></div>
+                  <div className='hidden lg:block'><JoinButton /></div></>
                 
               )} </div>
           </div>
