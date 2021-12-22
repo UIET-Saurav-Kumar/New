@@ -94,14 +94,14 @@ export default function OrderDetailsPage() {
     }
   );
   const getShopName = (itemdata: any, orderdata: any) => {
-    const childrens = orderdata.children;
-    const shop_id = itemdata.shop_id;
+    const childrens = orderdata?.children;
+    const shop_id = itemdata?.shop_id;
 
     for(let item of childrens)
     {
-      if(item.shop.id === shop_id)
+      if(item?.shop?.id === shop_id)
       {
-        return item.shop.name;
+        return item?.shop?.name;
       }
     }
   };
@@ -141,39 +141,7 @@ export default function OrderDetailsPage() {
     },
 
 
-    {
-      title: t("table:Shop Name"),
-      dataIndex: "shop",
-      key: "shop",
-      align: alignLeft,
-      render: () => {
-        const {
-          data,
-          isLoading: loading,
-          error,
-        } = useOrderQuery(query.orderId as string);
-
-      //   const shop = data?.order?.products?.filter(function (product :any) {
-      //     console.log('product shop id',product.shop_id)
-      //     console.log('product', product)
-      //   return product.shop_id 
-      // });
-
-      // console.log('shop',shop)
-
-      var shop =data?.order?.children
-      console.log('childre',shop)
-      var products = data?.order?.products
-      console.log('object')
-
-      var shopnamefilter = shop.map(function (shop :any) {
-        return shop.name
-      })
    
-      console.log('shopname',shopnamefilter)
-         return <span key={shopnamefilter} className="text-black">{shopnamefilter}</span>
-      },
-    },
 
 
     {
@@ -184,7 +152,7 @@ export default function OrderDetailsPage() {
       render: (name: string, item: any) => (
         <div>
           <span>{name}</span>
-          <span className="font-semibold text-heading">
+          <span className="">
             {getShopName(item,data?.order)}
           </span>
         </div>
