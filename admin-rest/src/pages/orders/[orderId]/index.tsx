@@ -215,7 +215,13 @@ export default function OrderDetailsPage() {
       </div>
      <div className=''>
      <PDFExport ref={pdfExportComponent} paperSize='A4'>
-    <div ref={contentArea}>
+    <div className="p-4 font-serif" ref={contentArea}>
+    <span className='flex items-center py-3 font-extrabold text-sm lg:text-xl'>
+      Buyl<span>
+          <img src='/transparent-logo.png' 
+            className='h-3 w-3 lg:mx-1 lg:h-5 lg:w-5 '/>
+          </span>wcal.com
+      </span>
       <div className="mb-10">
         {data?.order ? (
           <Table
