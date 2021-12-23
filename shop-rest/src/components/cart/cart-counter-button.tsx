@@ -15,10 +15,12 @@ const CartCounterButton = () => {
     amount: total,
   });
 
+
   function handleCartSidebar() {
     setSidebarView("CART_VIEW");
     return openSidebar();
   }
+  
 
   return (
 

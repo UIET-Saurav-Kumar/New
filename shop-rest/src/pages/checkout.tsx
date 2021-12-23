@@ -7,6 +7,7 @@ import { useUI } from "@contexts/ui.context";
 import { useCustomerQuery } from "@data/customer/use-customer.query";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useModalAction } from "@components/ui/modal/modal.context";
+import BackButton from "@components/ui/back-button";
 
 export default function CheckoutPage() {
   const { data, refetch } = useCustomerQuery();
@@ -24,6 +25,7 @@ export default function CheckoutPage() {
 
   return (
     <div className="py-8 px-4 lg:py-10 lg:px-8 xl:py-14 xl:px-16 2xl:px-20">
+      <div className="sticky z-50 top-12 w-full bg-white  px-2 py-3"><BackButton/></div>
       <div className="flex flex-col lg:flex-row items-center lg:items-start m-auto lg:space-s-8 w-full max-w-5xl">
         <div className="lg:max-w-2xl w-full space-y-6">
           <div className="shadow-700 bg-light p-5 md:p-8">

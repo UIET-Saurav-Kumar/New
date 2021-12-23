@@ -9,6 +9,8 @@ import { useProductQuery } from "@data/product/use-product.query";
 import Link from "@components/ui/link";
 import { ROUTES } from "@utils/routes";
 import { PlusIcon } from "@heroicons/react/outline";
+import router from "next/router";
+
 
 type NeonProps = {
   product: any;
@@ -121,7 +123,7 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
           <>
             {Number(quantity) > 0 && (
               <button
-                onClick={handleProductQuickView}
+                onClick={()=>router.push(`${ROUTES.PRODUCT}/${slug}`)}
                 className="group w-full h-7 md:h-9 flex items-center justify-between text-xs md:text-sm text-body-dark rounded bg-gray-100 transition-colors hover:bg-accent hover:border-accent hover:text-light focus:outline-none focus:bg-accent focus:border-accent focus:text-light"
               >
                 <span className="flex-1">{t('text-add')}</span>

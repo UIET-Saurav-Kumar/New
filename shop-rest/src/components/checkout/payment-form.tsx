@@ -23,6 +23,9 @@ import {
 import { useCustomerQuery } from "@data/customer/use-customer.query";
 
 import { Data } from "@react-google-maps/api";
+
+import BackButton from "@components/ui/back-button";
+
 interface FormValues {
   payment_gateway: "cod" | "cashfree" | "upi" | "wallet";
   contact: string;
@@ -151,6 +154,8 @@ const PaymentForm = () => {
   console.log('customer',data)
   const isCashOnDelivery = watch("payment_gateway");
   return (
+    <>
+    <div className="sticky z-50 top-12 w-full bg-white  px-2 py-3"><BackButton/></div>
     <form
       onSubmit={handleSubmit(onSubmit)}
       noValidate
@@ -224,6 +229,7 @@ const PaymentForm = () => {
         {t("text-place-order")}
       </Button>
     </form>
+    </>
   );
 };
 

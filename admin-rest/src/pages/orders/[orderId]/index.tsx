@@ -20,7 +20,7 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import SelectInput from "@components/ui/select-input";
 import { useIsRTL } from "@utils/locals";
-import {useRef} from 'react';
+import {Children, useRef} from 'react';
 import {  PDFExport, savePDF} from '@progress/kendo-react-pdf'
 
 type FormValues = {
@@ -93,9 +93,20 @@ export default function OrderDetailsPage() {
       amount: data?.order?.sales_tax!,
     }
   );
+  const getShopName = (itemdata: any, orderdata: any) => {
+    const childrens = orderdata?.children;
+    const shop_id = itemdata?.shop_id;
+
+    for(let item of childrens)
+    {
+      if(item?.shop?.id === shop_id)
+      {
+        return item?.shop?.name;
+      }
+    }
+  };
   if (loading) return <Loader text={t("common:text-loading")} />;
   if (error) return <ErrorMessage message={error.message} />;
-  console.log('order data', data)
 
   const columns = [
     {
@@ -112,6 +123,7 @@ export default function OrderDetailsPage() {
         />
       ),
     },
+    
     {
       title: t("table:table-item-products"),
       dataIndex: "name",
@@ -123,6 +135,25 @@ export default function OrderDetailsPage() {
           <span className="mx-2">x</span>
           <span className="font-semibold text-heading">
             {item.pivot.order_quantity}
+          </span>
+        </div>
+      ),
+    },
+
+
+   
+
+
+    {
+      title: t("table:Shop Name"),
+      dataIndex: "shop",
+      key: "shop",
+      align: alignLeft,
+      render: (name: string, item: any) => (
+        <div>
+          <span>{name}</span>
+          <span className="">
+            {getShopName(item,data?.order)}
           </span>
         </div>
       ),
@@ -184,7 +215,13 @@ export default function OrderDetailsPage() {
       </div>
      <div className=''>
      <PDFExport ref={pdfExportComponent} paperSize='A4'>
-    <div ref={contentArea}>
+    <div className="p-4 font-serif" ref={contentArea}>
+    <span className='flex items-center py-3 font-extrabold text-sm lg:text-xl'>
+      Buyl<span>
+          <img src='/transparent-logo.png' 
+            className='h-3 w-3 lg:mx-1 lg:h-5 lg:w-5 '/>
+          </span>wcal.com
+      </span>
       <div className="mb-10">
         {data?.order ? (
           <Table

@@ -432,6 +432,13 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
               error={t(errors.balance?.payment_info?.bank?.message!)}
             />
             <Input
+              label={t("form:IFSC Code")}
+              {...register("balance.payment_info.ifsc")}
+              variant="outline"
+              className="mb-5"
+              error={t(errors.balance?.payment_info?.ifsc?.message!)}
+            />
+            <Input
               label={t("form:input-label-account-number")}
               {...register("balance.payment_info.account")}
               variant="outline"

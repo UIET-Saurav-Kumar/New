@@ -85,6 +85,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
    * {size: "Large", color: "Black", weight: "1kg"}
    */
   return (
+    
     <article className="rounded-lg bg-light">
       <div className="flex flex-col md:flex-row border-b border-border-200 border-opacity-70">
         <div className="md:w-1/2 p-6 pt-8 lg:p-14 xl:p-16">

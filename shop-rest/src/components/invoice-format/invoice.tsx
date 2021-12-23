@@ -104,7 +104,8 @@ export default function Invoice() {
 
       <div className=' mt-0 lg:mt-4 flex items-center justify-between'>
 
-        <h1 className='flex items-center font-extrabold text-sm lg:text-xl'>Buyl<span><img src='/transparent-logo.png' className='h-3 w-3 lg:mx-1 lg:h-5 lg:w-5 '/></span>wcal.com</h1>
+        <h1 className='flex items-center font-extrabold text-sm lg:text-xl'>Buyl<span><img src='/transparent-logo.png' className='h-3 w-3 lg:mx-1 lg:h-5 lg:w-5 '/>
+        </span>wcal.com</h1>
         
       </div>
 
@@ -135,14 +136,12 @@ export default function Invoice() {
                             <span className='flex items-center  w-full space-x-2'>
                                 <h1 className='text-xs sm:text-sm lg:tex-md font-semibold'>Pin Code:</h1>
                                 <p className='text-xs sm:text-sm lg:text-md font-body text-gray-700'>{data?.order?.billing_address?.zip}</p>
-                                </span>
+                            </span>
                             <div className='flex items-center  w-full space-x-2'> 
                             <h1 className='text-xs sm:text-sm lg:tex-md  font-semibold'>Phone Number:</h1>
                             <p className='text-xs sm:text-sm lg:tex-md font-body text-gray-700'>{data?.order?.customer_contact!}</p>
                         </div>
                         </div>
-
-                       
 
                     </div>
 

@@ -11,6 +11,7 @@ import { getIcon } from "@utils/get-icon";
 import * as socialIcons from "@components/icons/social";
 import Avatar from 'react-avatar';
 
+
 type ShopProfileCardProps = {
   data: any;
   className?: string;
@@ -29,6 +30,7 @@ type ShopProfileCardProps = {
     function handleMoreInfoModal() {
       return openModal("SHOP_INFO", data);
     }
+    
     const imageCheck = (logo: any , record:any, imgsize:any, imgDim:any, classname: string) => {
       console.log(logo)
       let check = false;

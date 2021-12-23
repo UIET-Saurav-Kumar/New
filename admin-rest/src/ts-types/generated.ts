@@ -805,12 +805,14 @@ export declare type PaymentInfo = {
   account?: Maybe<Scalars["String"]>;
   name?: Maybe<Scalars["String"]>;
   email?: Maybe<Scalars["String"]>;
+  ifsc?: Maybe<Scalars["String"]>;
   bank?: Maybe<Scalars["String"]>;
 };
 export declare type PaymentInfoInput = {
   account?: Maybe<Scalars["String"]>;
   name?: Maybe<Scalars["String"]>;
   email?: Maybe<Scalars["String"]>;
+  ifsc?: Maybe<Scalars["String"]>;
   bank?: Maybe<Scalars["String"]>;
 };
 

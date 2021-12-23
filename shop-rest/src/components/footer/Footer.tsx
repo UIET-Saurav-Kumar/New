@@ -57,11 +57,11 @@ const Footer = () => {
 						<h5 className = 'footer-links-title font-bold tracking-widest  text-lg' > More </h5>
 
 						<div className='space-y-0 tracking-widest'> 
-						<a className='light-text cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline font-light mt-' href='./home#all-categories'><h5 className='light-text mt-4 font-light'>Categories</h5></a>
-						<a className='light-text cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline font-light mt-' href='./home#featured-shops'><h5 className='light-text mt-4 font-light'> Local Shops</h5></a>
-						<a className='light-text cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline font-light mt-' href='./home#ecommerce-store'><h5 className='light-text mt-4 font-light'> E-Stores</h5></a>	
-						<a className='light-text cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline font-light mt-' href='./home#offer-of-the-day'><h5  className='light-text mt-4 font-light'> Offer of the Day</h5></a>
-						<a className='light-text cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline font-light' href='./home#featured-products'><h5  className='light-text mt-4 font-light'> Featured Products</h5></a>
+						<a className='light-text cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline font-light mt-' href='/home#all-categories'><h5 className='light-text mt-4 font-light'>Categories</h5></a>
+						<a className='light-text cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline font-light mt-' href='/home#featured-shops'><h5 className='light-text mt-4 font-light'> Local Shops</h5></a>
+						<a className='light-text cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline font-light mt-' href='/home#ecommerce-store'><h5 className='light-text mt-4 font-light'> E-Stores</h5></a>	
+						<a className='light-text cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline font-light mt-' href='/home#offer-of-the-day'><h5  className='light-text mt-4 font-light'> Offer of the Day</h5></a>
+						<a className='light-text cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline font-light' href='/home#featured-products'><h5  className='light-text mt-4 font-light'> Featured Products</h5></a>
 						</div> 
 			  	 </div>
 
