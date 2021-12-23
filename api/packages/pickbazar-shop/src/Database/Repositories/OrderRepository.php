@@ -119,7 +119,7 @@ class OrderRepository extends BaseRepository
             if(isset($shop)){
                 $user=$shop->owner;
                 if($user){
-                    SMS::purchaseToVendor($user->phone_number, $$user->name);    
+                    SMS::purchaseToVendor($user->phone_number, $user->name);    
                 }
             }
         }
@@ -374,12 +374,10 @@ class OrderRepository extends BaseRepository
     {
         $products = $request->products;
         $productsByShop = [];
-
         foreach ($products as $key => $cartProduct) {
             $product = Product::findOrFail($cartProduct['product_id']);
             $productsByShop[$product->shop_id][] = $cartProduct;
         }
-
         foreach ($productsByShop as $shop_id => $cartProduct) {
             $amount = array_sum(array_column($cartProduct, 'subtotal'));
             $orderInput = [
@@ -400,7 +398,11 @@ class OrderRepository extends BaseRepository
             ];
 
             $order = $this->create($orderInput);
-            $order->products()->attach($cartProduct);
+            
+            foreach($cartProduct as $product){
+                $order->products()->attach([$product]);
+            }
+            
         }
     }
 }

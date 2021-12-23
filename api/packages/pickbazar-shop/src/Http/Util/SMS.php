@@ -151,3 +151,31 @@ class SMS
         }
     }
 }
+
+
+// Insert value list does not match column list:
+//    1136 Column count doesn't match value count at row 2 (SQL: 
+//    insert into `order_product` 
+//    (`created_at`, 
+//    `order_id`,
+//     `order_quantity`,
+//     `product_id`, 
+//     `subtotal`, 
+//     `unit_price`, 
+//     `updated_at`) values 
+
+//     (2021-12-21 11:39:46,
+//      1001,
+//      1,
+//      7845,
+//      89, 
+//      89, 
+//      2021-12-21 11:39:46), 
+//     (2021-12-21 11:39:46,
+//      1001,
+//      1, 
+//      7822, 
+//      199, 
+//      199, 
+//      2021-12-21 11:39:46, 
+//      473))
