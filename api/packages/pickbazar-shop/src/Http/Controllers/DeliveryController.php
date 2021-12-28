@@ -102,7 +102,7 @@ class DeliveryController extends CoreController
             $delivery->payment_method = "cod";
             $delivery->is_approved=1;
             $delivery->save();
-            SMS::customerPurchase($delivery->sender_phone_number, $request->user()->name);
+            SMS::customerPurchase($delivery->sender_phone_number, $request->user()->name, 'BuyLowcal');
         } else {
             $payment_method = 'cc';
 

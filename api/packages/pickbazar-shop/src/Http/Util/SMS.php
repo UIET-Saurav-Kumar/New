@@ -62,7 +62,7 @@ class SMS
         }
     }
 
-    public static function customerPurchase($phone_number,$username)
+    public static function customerPurchase($phone_number,$username, $shop_name="")
     {
         if(!$phone_number){
             return;
@@ -73,7 +73,7 @@ class SMS
         $client = new Client();
         
         $template="CustomerPurchasing";
-        $url = "https://2factor.in/API/R1/?module=TRANS_SMS&apikey=$key&to=$phone_number&from=LOWCAL&templatename=$template&var1=$username&var2=$username";
+        $url = "https://2factor.in/API/R1/?module=TRANS_SMS&apikey=$key&to=$phone_number&from=LOWCAL&templatename=$template&var1=$username&var2=$shop_name";
 
         $response = $client->request('GET', "$url");
 

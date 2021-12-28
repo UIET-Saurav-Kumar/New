@@ -102,7 +102,7 @@ class OrderRepository extends BaseRepository
         switch ($payment_gateway) {
             case 'cod':
                 // Cash on Delivery no need to capture payment
-                return $this->createOrder($request);
+                
                 break;
             case 'cashfree':
                 // For default gateway no need to set gateway
@@ -110,19 +110,27 @@ class OrderRepository extends BaseRepository
                 // return $this->createOrder($request);
                 break;
         }
+        if($payment_gateway=='cod'){
+            $order=$this->createOrder($request);
+            if($order){
+                if($order->shop_id){
+                    $shop=Shop::find($order->shop_id);
+                    SMS::customerPurchase($request->user()->phone_number,$request->user()->name,$shop->name);
+                    if(isset($shop)){
+                        $user=$shop->owner;
+                        if($user){
+                            SMS::purchaseToVendor($user->phone_number, $user->name);    
+                        }
+                    }
+                }    
+            }   
 
-        // $response = $this->capturePayment($request);
-        SMS::customerPurchase($request->user()->phone_number, $request->user()->name);
-        
-        if(isset($request['shop_id'])){
-            $shop=Shop::find($request['shop_id']);
-            if(isset($shop)){
-                $user=$shop->owner;
-                if($user){
-                    SMS::purchaseToVendor($user->phone_number, $user->name);    
-                }
-            }
+            return $order;
+
         }
+        
+        // $response = $this->capturePayment($request);
+        
         
         $payment_method = 'cc';
         if($payment_method == 'cashfree')
@@ -149,7 +157,21 @@ class OrderRepository extends BaseRepository
         $od["returnUrl"] =  url("order/success");
         $od["notifyUrl"] = url("order/success");
         $orderFree->create($od);
-        $this->createOrder($request);
+        $order = $this->createOrder($request);
+
+        if($order){
+            if($order->shop_id){
+                $shop=Shop::find($order->shop_id);
+                SMS::customerPurchase($request->user()->phone_number,$request->user()->name,$shop->name);
+                if(isset($shop)){
+                    $user=$shop->owner;
+                    if($user){
+                        SMS::purchaseToVendor($user->phone_number, $user->name);    
+                    }
+                }
+            }    
+        } 
+        
         $link = $orderFree->getLink($od['orderId']);
         return json_encode($link);
         // if () {
