@@ -99,6 +99,10 @@ export default function home() {
 const { width } = useWindowSize();
 const { query } = useRouter();
 const {getLocation} =useLocation()
+useEffect(() => {
+  
+  window.scrollTo(0, 0);
+}, []);
 
 
 const {
