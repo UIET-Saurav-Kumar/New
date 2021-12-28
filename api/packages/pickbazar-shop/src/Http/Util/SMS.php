@@ -72,7 +72,7 @@ class SMS
         $key=SMS::$key;
         $client = new Client();
         
-        $template="CustomerPurchase";
+        $template="CustomerPurchasing";
         $url = "https://2factor.in/API/R1/?module=TRANS_SMS&apikey=$key&to=$phone_number&from=LOWCAL&templatename=$template&var1=$username&var2=$username";
 
         $response = $client->request('GET', "$url");
