@@ -11,31 +11,65 @@ import Logo from "@components/ui/logo";
 import GetCurrentLocation from "@components/geoCode/get-current-location"
 import { useLocation } from "@contexts/location/location.context";
 import MobileJoinButton from '@components/layout/navbar/mobile-join-button';
+import CityButton from '@components/geoCode/city-buttton';
 
-const cities1 = [ 
-    
-{id:1,
-    name:'Chandigarh'}, 
-        
-    {id:2, name:'Panchkula'},
-    {id:3, name:'Mohali'},
-    {id:4, name:'Ludhiana'},
-    {id:5, name:'Delhi'},
-    {id:6, name:'Gurgaon'},    
-    {id:7, name:'Noida'},
-  
-]
-const cities2 = [{id:8, name:'Ahemdabad'},
-{id:9, name:'Hyderabad'},
-{id:10, name:'Bangalore'},
-{id:11, name:'Mumbai'},
-{id:12, name:'Chennai'},    {id:13, name:'Kolkata'},    {id:14, name:'Pune'},]
+const cities = //create object of major  indian cities with lat, lng and city name
+    [
+        {
+            city: "Chandigarh",
+            lat: 30.7333,
+            lng: 76.7794
+        },
+        {
+            city: "Mohali",
+            lat: 30.7333,
+            lng: 76.7794
+        },
+        {
+            city: "Panchkula",
+            lat: 30.7333,
+            lng: 76.7794
+        },
+        {
+            city: "Delhi",
+            lat: 28.7041,
+            lng: 77.1025
+        },
+        {
+            city: "Ahemdabad",
+            lat: 23.0225,
+            lng: 72.5714
+        },
+        {
+            city: "Kolkata",
+            lat: 22.5726,
+            lng: 88.3639
+        },
+        {
+            city: "Mumbai",
+            lat: 19.0760,
+            lng: 72.8777
+        },
+        {
+            city: "Bangalore",
+            lat: 12.9716,
+            lng: 77.5946
+        },
+        {
+            city: "Hyderabad",
+            lat: 17.3850,
+            lng: 78.4867
+        },
+        {
+            city: "Chennai",
+            lat: 13.0827,
+            lng: 80.2707
+        },
 
-export default function HeaderMiddle({children,
-    open = false,
-    variant = "right",
-    useBlurBackdrop,
-    onClose,}) {
+    ]
+
+
+export default function HeaderMiddle() {
     
 
     const truncate = (txt:any, n:number) => {
@@ -201,6 +235,19 @@ export default function HeaderMiddle({children,
                                 </div>
                                 
 
+                            </div>
+
+                            <div className='hidden lg:flex justify-evenly items-center -mt-10'>
+                                {cities.map((city, index) => (
+                                    <CityButton onChange = {changeLocation} key={index} lat={city.lat} lng={city.lng} city={city.city} />
+                                ))}
+
+                            </div>
+
+                            <div className='grid grid-cols-1 xs+:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:hidden justify-evenly gap-y-3 overflow-y-scroll py-3 items-center w-full place-items-center mt-20 xs+:mt-32 sm:mt-36'>
+                                {cities.map((city, index) => (
+                                    <CityButton onChange = {changeLocation} key={index} lat={city.lat} lng={city.lng} city={city.city} />
+                                ))}
                             </div>
                             
                         {/* <Dialog.Overlay className="fixed inset-0 bg-gray-900 bg-opaname-80 w-full h-full" /> */}
