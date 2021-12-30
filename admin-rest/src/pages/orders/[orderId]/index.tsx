@@ -141,15 +141,9 @@ export default function OrderDetailsPage() {
           <span className="font-semibold text-heading">
             {item.pivot.order_quantity}
           </span>
-          
-          
-        
         </div>
       ),
     },
-
-
-   
 
 
     {

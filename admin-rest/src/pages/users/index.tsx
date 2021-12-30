@@ -26,11 +26,14 @@ export default function Customers() {
   });
 
   if (loading) return <Loader text={t("common:text-loading")} />;
+
   if (error) return <ErrorMessage message={error.message} />;
+
   function handleSearch({ searchText }: { searchText: string }) {
     setSearchTerm(searchText);
     setPage(1);
   }
+
   function handlePagination(current: any) {
     setPage(current);
   }
