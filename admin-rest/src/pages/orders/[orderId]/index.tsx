@@ -49,6 +49,8 @@ export default function OrderDetailsPage() {
     error,
   } = useOrderQuery(query.orderId as string);
 
+  console.log('order data',data)
+
   const {
     handleSubmit,
     control,
@@ -131,11 +133,17 @@ export default function OrderDetailsPage() {
       align: alignLeft,
       render: (name: string, item: any) => (
         <div>
+          <span className=" mx-2">
+            {item.unit}
+          </span>
           <span>{name}</span>
           <span className="mx-2">x</span>
           <span className="font-semibold text-heading">
             {item.pivot.order_quantity}
           </span>
+          
+          
+        
         </div>
       ),
     },
