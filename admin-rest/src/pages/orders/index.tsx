@@ -1,3 +1,4 @@
+
 import Card from "@components/common/card";
 import Layout from "@components/layouts/admin";
 import Search from "@components/common/search";
@@ -11,12 +12,15 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { SortOrder } from "@ts-types/generated";
 import SortForm from "@components/common/sort-form";
 
+
 export default function Orders() {
+
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(1);
   const { t } = useTranslation();
   const [orderBy, setOrder] = useState("created_at");
   const [sortedBy, setColumn] = useState<SortOrder>(SortOrder.Desc);
+
 
   const {
     data,
@@ -27,8 +31,11 @@ export default function Orders() {
     page,
     text: searchTerm,
   });
+
   if (loading) return <Loader text={t("common:text-loading")} />;
+
   if (error) return <ErrorMessage message={error.message} />;
+
   function handleSearch({ searchText }: { searchText: string }) {
     setSearchTerm(searchText);
     setPage(1);
@@ -69,6 +76,7 @@ export default function Orders() {
     </>
   );
 }
+
 Orders.Layout = Layout;
 
 export const getStaticProps = async ({ locale }: any) => ({

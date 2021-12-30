@@ -177,7 +177,8 @@ export default function RegisterPage() {
           </p>
 
           <img 
-          src='https://redq.io/landing/_next/static/images/1-73db406dcd877c4776e7a485a4767d5d.png'
+          src='/shop-shot.png'
+          // src='https://redq.io/landing/_next/static/images/1-73db406dcd877c4776e7a485a4767d5d.png'
           // src='/shop-dashboard.png' 
           className='w-full border-1 h-72 object-fill lg:object-contain  lg:hover:transition-transform duration-700 ease-in-out hover:scale-125'/>
         
@@ -186,7 +187,7 @@ export default function RegisterPage() {
     </div>
      
      {/* how to get customer */}
-    <div className='grid grid-cols-1 sm:grid-cols-2 place-items-center lg:place-items-start w-full mx-4 md:mx-0 lg:mx-6 xl:mx-40 mt-20 space-x-0 lg:space-x-0 lg:mt-40'>
+    <div className='grid grid-cols-1 sm:grid-cols-2 place-items-center lg:place-items-center  w-full   mt-20 space-x-0 lg:space-x-0 lg:mt-40'>
 
         <div className=' flex flex-col items-center sm:hidden '>
           <h1 className='block sm:hidden font-bold tracking-widest text-2xl sm:text-3xl lg:text-4xl xl:text-5xl text-center '>How we get customers? </h1>

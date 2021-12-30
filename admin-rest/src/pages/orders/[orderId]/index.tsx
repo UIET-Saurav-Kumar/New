@@ -107,6 +107,7 @@ export default function OrderDetailsPage() {
       }
     }
   };
+
   if (loading) return <Loader text={t("common:text-loading")} />;
   if (error) return <ErrorMessage message={error.message} />;
 
@@ -132,6 +133,7 @@ export default function OrderDetailsPage() {
       key: "name",
       align: alignLeft,
       render: (name: string, item: any) => (
+        
         <div>
           <span className=" mx-2">
             {item.unit}

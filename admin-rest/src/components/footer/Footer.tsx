@@ -21,7 +21,7 @@ const Footer = () => {
 			// backgroundSize: '1900px 900px',
 			// height: '900px',
 			// objectFit: 'fill',
-		}} className=' bg-pink-footer border-b-8 border-r-0 border-l-0  sm:border-16 border-gold border-t-0 sm:border-t-0 bg-cover   bg-no-repeat footer-wrapper 
+		}} className=' bg-pink-footer border-b-8 border-r-8 border-l-8  sm:border-16 border-gold border-t-0 sm:border-t-0 bg-cover   bg-no-repeat footer-wrapper 
 		        text-10px py-2 p-4 md:pt-10
 	           rounded-sm text-white mx-0 md:mx-10  mb-16 lg:mb-0 lg:px-20 justify-evenly mt-16'>
 			  
@@ -59,7 +59,7 @@ const Footer = () => {
 						<div className='space-y-0 tracking-widest'> 
 						<a className='light-text cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline font-light mt-' href='./home#all-categories'><h5 className='light-text mt-4 font-light'>Categories</h5></a>
 						<a className='light-text cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline font-light mt-' href='./home#featured-shops'><h5 className='light-text mt-4 font-light'> Local Shops</h5></a>
-						<a className='light-text cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline font-light mt-' href='./home#ecommerce-store'><h5 className='light-text mt-4 font-light'> E-Stores</h5></a>	
+						{/* <a className='light-text cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline font-light mt-' href='./home#ecommerce-store'><h5 className='light-text mt-4 font-light'> E-Stores</h5></a>	 */}
 						<a className='light-text cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline font-light mt-' href='./home#offer-of-the-day'><h5  className='light-text mt-4 font-light'> Offer of the Day</h5></a>
 						<a className='light-text cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline font-light' href='./home#featured-products'><h5  className='light-text mt-4 font-light'> Featured Products</h5></a>
 						</div> 
