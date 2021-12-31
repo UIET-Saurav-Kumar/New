@@ -33,8 +33,6 @@ class ShopController extends CoreController
     {
         $this->repository = $repository;
     }
-
-
     /**
      * Display a listing of the resource.
      *

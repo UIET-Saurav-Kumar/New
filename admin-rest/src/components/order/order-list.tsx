@@ -45,6 +45,27 @@ const OrderList = ({ orders, onPagination }: IProps) => {
       ),
     },
 
+    {
+      title: t("table:Phone Number"),
+      dataIndex: "customer",
+      key: "customer",
+      align: alignLeft,
+      render: (order: any) => (
+        <div>{order.phone_number}</div>
+      ),
+    },
+
+    {
+      title: t("table:Email Id"),
+      dataIndex: "customer",
+      key: "customer",
+      align: alignLeft,
+      render: (order: any) => (
+        <div className="whitespace-nowrap">{order.email}</div>
+      ),
+    },
+    
+
     // {
     //   title: t("table:Shop Name"),
     //   dataIndex: "shop",
@@ -62,6 +83,7 @@ const OrderList = ({ orders, onPagination }: IProps) => {
       align: "center",
       width: 150,
     },
+
     {
       title: t("table:table-item-delivery-fee"),
       dataIndex: "delivery_fee",
@@ -75,6 +97,7 @@ const OrderList = ({ orders, onPagination }: IProps) => {
         return <span>{price}</span>;
       },
     },
+
     {
       title: t("table:table-item-total"),
       dataIndex: "total",
@@ -88,6 +111,8 @@ const OrderList = ({ orders, onPagination }: IProps) => {
         return <span className="whitespace-nowrap">{price}</span>;
       },
     },
+
+
     {
       title: t("table:table-item-order-date"),
       dataIndex: "created_at",
@@ -104,6 +129,7 @@ const OrderList = ({ orders, onPagination }: IProps) => {
         );
       },
     },
+
     {
       title: t("table:table-item-status"),
       dataIndex: "status",

@@ -95,6 +95,7 @@ export default function OrderDetailsPage() {
       amount: data?.order?.sales_tax!,
     }
   );
+  
   const getShopName = (itemdata: any, orderdata: any) => {
     const childrens = orderdata?.children;
     const shop_id = itemdata?.shop_id;

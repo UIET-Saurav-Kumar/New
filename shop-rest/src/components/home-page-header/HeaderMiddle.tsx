@@ -13,7 +13,8 @@ import { useLocation } from "@contexts/location/location.context";
 import MobileJoinButton from '@components/layout/navbar/mobile-join-button';
 import CityButton from '@components/geoCode/city-buttton';
 
-const cities = //create object of major  indian cities with lat, lng and city name
+
+const cities = 
     [
         {
             city: "Chandigarh",
@@ -22,8 +23,8 @@ const cities = //create object of major  indian cities with lat, lng and city na
         },
         {
             city: "Mohali",
-            lat: 30.7333,
-            lng: 76.7794
+            lat: 30.732068,
+            lng: 76.705423
         },
         {
             city: "Panchkula",
@@ -74,8 +75,8 @@ export default function HeaderMiddle() {
 
     const truncate = (txt:any, n:number) => {
       return  txt.length > 10 ? txt.substring(0, n) : txt
-
     }
+
 
     const {getLocation} =useLocation()
     
@@ -85,6 +86,7 @@ export default function HeaderMiddle() {
 
     const [click, setClick ] = useState(false);
     const [hasLocation, setHasLoction] = useState(false);
+
     const handleLocation = () => {
         setLocation(!location);
     }
@@ -111,6 +113,7 @@ export default function HeaderMiddle() {
             setHasLoction(true);
         }
     },[])
+
 
     function changeLocation(data:any){
        
@@ -140,6 +143,7 @@ export default function HeaderMiddle() {
         );
         handleLocation()
     }
+
 
 
     return (
@@ -204,7 +208,6 @@ export default function HeaderMiddle() {
                                                <div className=''>
                                                    <p className=' lg:hidden flex mx-4  sm:mx-16 md:mx-16 mt-4 font-semibold items-center text-xs xs+:text-sm sm:text-sm text-gray-700'>| Groceries | Veggies & Fruits | Salon & Spa | Takeaways | Restaurants | Pharmacy |</p>
                                                    <p className=' lg:hidden flex mx-4 sm:mx-16 md:mx-16 mt-0 font-semibold items-center text-xs xs+:text-sm sm:text-sm text-gray-700'>| Cosmetics | Lifestyle & Home | Gym & Health | Electronics | Poultry & Farm | Services |</p>
-                                                   
                                                </div>
                                            </div>
                                            <img src='/drop-down.jpg' className='hidden lg:block md:relative object-fill md:object-contain'/>
@@ -271,7 +274,6 @@ export default function HeaderMiddle() {
                                 <h3 onClick={handleLocation}  
                                     className='flex  text-gray-600 items-center text-xs sm:text-sm md:text-md lg:hidden  
                                                                 md:text-gray-600 mr-0 md:mr-0 md:text-md'>
-
                                     <CaretDown className='text-gray-500 mr-2 w-3 h-3 md:w-5 md:h-5'/> 
 
                                             <button className='border text-gray-500 w-auto sm:w-96  rounded-xl border-gray-400 p-1 px-2'>
@@ -280,7 +282,6 @@ export default function HeaderMiddle() {
 
                                                 {/* { getLocation?.formattedAddress } */}
                                                 {/* Chandigarh */}
-
                                             </button>
                                 </h3> 
                             </span>
