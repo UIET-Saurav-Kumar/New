@@ -99,7 +99,7 @@ const { pathname, query } = router;
                                   </div>
                                   
                                   <div className='flex w-full'>
-                                    {imageCheck(data?.cover_image?.original, data, '317', false,'h-full w-full object-cover')}
+                                    {imageCheck(data?.cover_image?.original, data, '317', false,'h-full w-full object-fill')}
                                   </div>
             
                               </div>
