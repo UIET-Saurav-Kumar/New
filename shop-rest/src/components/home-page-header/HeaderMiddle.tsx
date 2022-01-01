@@ -17,18 +17,18 @@ const cities = //create object of major  indian cities with lat, lng and city na
     [
         {
             city: "Chandigarh",
-            lat: 30.7333,
-            lng: 76.7794
+            lat: 30.7320,
+            lng: 76.7726
         },
         {
             city: "Mohali",
-            lat: 30.7333,
-            lng: 76.7794
+            lat: 30.714274,
+            lng: 76.722701
         },
         {
             city: "Panchkula",
-            lat: 30.7333,
-            lng: 76.7794
+            lat: 30.690112,
+            lng: 76.847901
         },
         {
             city: "Delhi",
