@@ -49,6 +49,8 @@ export default function OrderDetailsPage() {
     error,
   } = useOrderQuery(query.orderId as string);
 
+  console.log('order data',data)
+
   const {
     handleSubmit,
     control,
@@ -93,6 +95,7 @@ export default function OrderDetailsPage() {
       amount: data?.order?.sales_tax!,
     }
   );
+  
   const getShopName = (itemdata: any, orderdata: any) => {
     const childrens = orderdata?.children;
     const shop_id = itemdata?.shop_id;
@@ -105,6 +108,7 @@ export default function OrderDetailsPage() {
       }
     }
   };
+
   if (loading) return <Loader text={t("common:text-loading")} />;
   if (error) return <ErrorMessage message={error.message} />;
 
@@ -130,7 +134,11 @@ export default function OrderDetailsPage() {
       key: "name",
       align: alignLeft,
       render: (name: string, item: any) => (
+        
         <div>
+          <span className=" mx-2">
+            {item.unit}
+          </span>
           <span>{name}</span>
           <span className="mx-2">x</span>
           <span className="font-semibold text-heading">
@@ -139,9 +147,6 @@ export default function OrderDetailsPage() {
         </div>
       ),
     },
-
-
-   
 
 
     {

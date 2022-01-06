@@ -12,6 +12,7 @@ import Spinner from '@components/ui/loaders/spinner/spinner';
 
 
 export default function Invoice() {
+
     const { t } = useTranslation('common');
     const { alignLeft, alignRight } = useIsRTL();
 
@@ -23,6 +24,7 @@ export default function Invoice() {
       });
 
       console.log('shop name',data?.order?.children)
+      console.log('data',data)
 
       // const orderTableColumns = [
 
@@ -114,31 +116,43 @@ export default function Invoice() {
 
                      {/* 1st row */}
                     <div className='flex w-full  space-x-8 justify-between'>
-
-                        <div className='flex w-1/2 space-y-2 flex-col'>
-                            <h1 className='text-xs sm:text-sm lg:tex-md font-semibold'>Sold By:</h1>
-                            <p className='text-xs sm:text-sm lg:text-md font-body'>{data?.order?.children?.amount}</p>
-                            <p className='text-xs sm:text-sm font-body tracking-wide'> 
-                               
-                            </p>
+                    {
+              data?.order?.products.map(product=>{
+                return (
+                  <div className='flex flex-col  w-1/2  space-y-2 '>
+                        <div className='grid grid-cols-1 lg:flex w-full  lg:space-x-6 '>
+                            <h1 className='text-xs sm:text-sm lg:tex-md font-semibold'>Seller :</h1>
+                            <p className='text-xs sm:text-sm lg:text-md text-gray-700 font-body'>{product?.shop?.name}</p>
+                            
                         </div>
+
+                        <div className='flex flex-col w-full space-y-3 '>
+                            <h1 className='text-xs sm:text-sm lg:tex-md   font-semibold'>Seller Address :</h1>
+                            <p className='w-full sm:w-8/12 text-gray-700 tracking-wide text-xs'>{product?.shop?.settings?.location.formattedAddress}</p>
+                            
+                        </div>
+                  </div>
+                )})}
 
                      
                         <div className='flex w-1/2 space-y-2 flex-col'>
+                        <span className='grid grid-cols-1 lg:flex items-center  w-full lg:space-x-2'>
+                                <h1 className='text-xs sm:text-sm lg:tex-md font-semibold'>Customer:</h1>
+                                <p className='text-xs sm:text-sm lg:text-md font-body text-gray-700'>{data?.order?.customer?.name!}</p>
+                            </span>
                             <h1 className='text-xs sm:text-sm lg:tex-md font-semibold'>Shipping Address:</h1>
-                            <p className='text-xs sm:text-sm lg:text-sm lg:text-md text-gray-700 font-body'>{data?.order?.customer?.name!}</p>
                             
                             <p className='text-xs sm:text-sm font-body tracking-wide'> 
-                            <span className="w-7/12 sm:w-8/12 text-gray-700 ps-4 text-xs">
+                            <span className="w-7/12 sm:w-8/12 text-gray-700  text-xs">
                             {formatAddress(data?.order?.billing_address!)}
                             </span>
                             </p>
-                            <span className='flex items-center  w-full space-x-2'>
-                                <h1 className='text-xs sm:text-sm lg:tex-md font-semibold'>Pin Code:</h1>
+                            <span className='grid grid-cols-1 lg:flex items-center  w-full lg:space-x-2'>
+                                <h1 className='text-xs sm:text-sm lg:tex-md font-semibold'>Pin Code :</h1>
                                 <p className='text-xs sm:text-sm lg:text-md font-body text-gray-700'>{data?.order?.billing_address?.zip}</p>
                             </span>
-                            <div className='flex items-center  w-full space-x-2'> 
-                            <h1 className='text-xs sm:text-sm lg:tex-md  font-semibold'>Phone Number:</h1>
+                            <div className=' grid grid-cols-1 lg:flex items-center  w-full lg:space-x-2 '> 
+                            <h1 className='text-xs sm:text-sm lg:tex-md  font-semibold'>Phone No :</h1>
                             <p className='text-xs sm:text-sm lg:tex-md font-body text-gray-700'>{data?.order?.customer_contact!}</p>
                         </div>
                         </div>
@@ -148,20 +162,58 @@ export default function Invoice() {
                    
 
                      {/* 2nd row */}
+                     {
+              data?.order?.products.map(product=>{
+                return (
+                  <>
                     <div className='flex w-full space-x-8 justify-between'>
 
                         <div className='flex w-1/2 space-y-2 flex-col'>
-                              <span className='flex items-center'><h1 className='text-xs sm:text-sm lg:tex-md font-semibold'>PAN No:</h1><p className='font-body ml-2 text-gray-700'>    </p></span>
-                              <span className='flex items-center'><h1 className='text-xs sm:text-sm lg:tex-md font-semibold'>GST Registraition No:</h1><p className='font-body text-gray-700 ml-2'>    </p></span>
+
+                              <span className='grid grid-cols-1 lg:flex items-center'>
+                                    <h1 className='text-xs sm:text-sm w-20 lg:tex-md font-semibold'>
+                                      FSSAI No :
+                                    </h1>
+                                    <p className='text-xs sm:text-sm lg:tex-md font-body tracking-wide text-gray-700'>
+                                        {product?.shop?.fssai_number} 
+                                    </p>
+                              </span>
+
+                              <span className='grid grid-cols-1 lg:flex items-center'>
+                                    <h1 className='text-xs sm:text-sm w-20 lg:tex-md font-semibold'>
+                                      GST No :
+                                    </h1>
+                                    <p className='text-xs sm:text-sm lg:tex-md font-body tracking-wide text-gray-700'> 
+                                      {product?.shop?.gst_number} 
+                                    </p>
+                              </span>
+
                         </div>
 
 
                         <div className='flex w-1/2 space-y-2 flex-col'>
-                              <span className='flex items-center'><h1 className='text-xs sm:text-sm lg:tex-md font-semibold'>Order No:</h1><p className='text-xs sm:text-sm lg:tex-md text-gray-700 font-body ml-2'>{data?.order?.tracking_number}</p></span>
-                              <span className='flex items-center'><h1 className='text-xs sm:text-sm lg:tex-md font-semibold'>Order Date:</h1><p className='text-xs sm:text-sm  lg:tex-md text-gray-700 font-body ml-2'>{dayjs(data?.order?.created_at).format("MMMM D, YYYY")}</p></span>
+                              <span className='grid grid-cols-1 lg:flex items-center'><h1 className='text-xs sm:text-sm lg:tex-md font-semibold'>
+                                Order No:
+                                </h1>
+                                <p className='text-xs sm:text-sm lg:tex-md text-gray-700 font-body ml-2'>
+                                  {data?.order?.tracking_number}
+                                </p>
+                              </span>
+                              <span className='grid grid-cols-1 lg:flex items-center'>
+                                <h1 className='text-xs sm:text-sm lg:tex-md font-semibold'>
+                                  Order Date:
+                                  </h1>
+                                  <p className='text-xs sm:text-sm  lg:tex-md text-gray-700 font-body ml-2'>
+                                    {dayjs(data?.order?.created_at).format("MMMM D, YYYY")}
+                                  </p>
+                              </span>
                         </div>
 
                     </div>
+                    </>
+                )
+              })
+            }
 
       </div>
       </div> 

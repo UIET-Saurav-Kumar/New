@@ -25,6 +25,9 @@ module.exports = {
         heading: ["Open Sans", "system-ui", "sans-serif"],
       },
       colors: {
+        'magenta': '#e01d56',
+        'gold': '#dfb054',
+        'mix': '#e3342f',
         light: withOpacity("--color-light"),
         dark: withOpacity("--color-dark"),
         accent: withOpacity("--color-accent"),
@@ -51,12 +54,10 @@ module.exports = {
         "gray-900": withOpacity("--color-gray-900"),
       },
       backgroundImage: {
-        
         // 'hero-pattern': "url('/shops-frame.jpg')",
         'pink-footer': "url('/footer.jpg')",
         // 'india': "url('/india.jpg')",
         // 'drop-down': "url('/drop-down.jpg')",
-
        },
 
       textColor: {
@@ -68,6 +69,18 @@ module.exports = {
         "sub-heading": withOpacity("--text-sub-heading"),
         bolder: withOpacity("--text-text-bolder"),
       },
+
+
+      backgroundColor: theme => ({
+
+        ...theme('colors'),
+ 
+        'btn': '#e01d56',
+ 
+        'plus': '#dfb054',
+ 
+        'other': '#e3342f',
+       }),
 
       height: {
         13: "3.125rem",

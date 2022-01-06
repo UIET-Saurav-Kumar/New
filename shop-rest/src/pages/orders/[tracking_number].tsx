@@ -134,7 +134,7 @@ export default function OrderPage() {
           href={`${ROUTES.ORDERS}/${tracking_number}`}
           className="inline-flex items-center justify-center flex-shrink-0 font-semibold leading-none rounded outline-none transition duration-300 ease-in-out focus:outline-none focus:shadow bg-gray-700 text-light border border-transparent hover:bg-gray-900 px-4 py-0 h-10 text-sm"
         >
-          {t("text-view")}
+          {t("Invoice")}
         </Link>
       ),
     },

@@ -148,7 +148,7 @@ export const siteSettings = {
     {
       id: "0",
       title: "Self Pickup",
-      description: "Self Pickup",
+      description: "self pickup",
     },
     // {
     //   id: "1",
@@ -156,29 +156,15 @@ export const siteSettings = {
     //   description: "90 min express delivery",
     // },
     {
-      id: "2",
-      title: "8am-11am",
-      description: "8.00 AM - 11.00 AM",
+      id: "6",
+      title: "today",
+      description: "Applicable if order is placed before 4PM",
     },
-    {
-      id: "3",
-      title: "11am-2pm",
-      description: "11.00 AM - 2.00 PM",
-    },
-    {
-      id: "4",
-      title: "2pm-5pm",
-      description: "2.00 PM - 5.00 PM",
-    },
-    {
-      id: "5",
-      title: "5pm-8pm",
-      description: "5.00 PM - 8.00 PM",
-    },
+    
     {
       id: "6",
       title: "next day",
-      description: "Next Day",
+      description: "Delivery between 11AM and 4PM",
     },
   ],
   homePageSidenav: [

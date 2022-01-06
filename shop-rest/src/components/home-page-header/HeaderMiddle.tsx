@@ -11,31 +11,162 @@ import Logo from "@components/ui/logo";
 import GetCurrentLocation from "@components/geoCode/get-current-location"
 import { useLocation } from "@contexts/location/location.context";
 import MobileJoinButton from '@components/layout/navbar/mobile-join-button';
+import CityButton from '@components/geoCode/city-buttton';
 
-const cities1 = [ 
-    
-{id:1,
-    name:'Chandigarh'}, 
+const cities = //create object of major  indian cities with lat, lng and city name
+    [
+        {
+            city: "Chandigarh",
+            lat: 30.7320,
+            lng: 76.7726
+        },
         
-    {id:2, name:'Panchkula'},
-    {id:3, name:'Mohali'},
-    {id:4, name:'Ludhiana'},
-    {id:5, name:'Delhi'},
-    {id:6, name:'Gurgaon'},    
-    {id:7, name:'Noida'},
-  
-]
-const cities2 = [{id:8, name:'Ahemdabad'},
-{id:9, name:'Hyderabad'},
-{id:10, name:'Bangalore'},
-{id:11, name:'Mumbai'},
-{id:12, name:'Chennai'},    {id:13, name:'Kolkata'},    {id:14, name:'Pune'},]
+        {
+            city: "Mohali",
+            lat: 30.714274,
+            lng: 76.722701
+        },
+        {
+            city: "Panchkula",
+            lat: 30.690112,
+            lng: 76.847901
+        },
+        {
+            city:'Shimla',
+            lat: 31.1048,
+            lng: 77.1734
+        },
+        {
+            city: "Ambala",
+            lat: 30.3643,
+            lng: 76.7721
+        },
+        
+        {
+            city:'Amritsar',
+            lat: 31.633,
+            lng: 74.87
+        },
+        {
+            city:'Jalandhar',
+            lat: 31.32,
+            lng: 75.57
+        },
+        {
+            city:'Ludhiana',
+            lat: 30.89,
+            lng: 75.85
+        },
+        {
+            city:'Jaipur',
+            lat: 26.9124,
+            lng: 75.7873
+        },
+        {
+            city:'Kota',
+            lat: 30.3,
+            lng: 76.22
+        },
+        {
+            city: "Delhi",
+            lat: 28.7041,
+            lng: 77.1025
+        },
+        {
+            city:'Gurgaon',
+            lat: 28.4600,
+            lng: 77.0300
+        },
+        {
+            city:'Patna',
+            lat: 25.59,
+            lng: 85.13
+        },
+        {
+            city:'Gwalior',
+            lat: 26.22,
+            lng: 78.17
+        },
+        {
+            city:'Guwahati',
+            lat: 26.14,
+            lng: 91.73
+        },
+        {
+            city:'Ranchi',
+            lat: 23.34,
+            lng: 85.31,
+        },
+        {
+            city:'Surat',
+            lat: 21.17,
+            lng: 72.83,
+        },
+        {
+            city: 'Kanpur',
+            lat: 26.44,
+            lng: 80.33
+        },
+        {
+            city: "Ahemdabad",
+            lat: 23.0225,
+            lng: 72.5714
+        },
+        {
+            city: "Kolkata",
+            lat: 22.5726,
+            lng: 88.3639
+        },
+        {
+            city: "Mumbai",
+            lat: 19.0760,
+            lng: 72.8777
+        },
+        {
+            city:'Nashik',
+            lat: 20.01,
+            lng: 73.02
+        },
+        {
+            city: "Bangalore",
+            lat: 12.9716,
+            lng: 77.5946
+        },
+        {
+            city: "Hyderabad",
+            lat: 17.3850,
+            lng: 78.4867
+        },
+        {
+            city:'Varanasi',
+            lat: 25.3,
+            lng: 82.97
+        },
+        {
+            city:'Vadodara',
+            lat: 22.31,
+            lng: 73.19,
+        },
+        {
+            city: "Chennai",
+            lat: 13.0827,
+            lng: 80.2707
+        },
+        {
+            city:'Vishakhapatnam',
+            lat: 17.68,
+            lng: 83.22
+        }
+        
+        
 
-export default function HeaderMiddle({children,
-    open = false,
-    variant = "right",
-    useBlurBackdrop,
-    onClose,}) {
+
+        
+
+    ]
+
+
+export default function HeaderMiddle() {
     
 
     const truncate = (txt:any, n:number) => {
@@ -107,7 +238,7 @@ export default function HeaderMiddle({children,
         handleLocation()
     }
 
-
+    
     return (
 
         <div id='amazon-shops' 
@@ -160,7 +291,7 @@ export default function HeaderMiddle({children,
                <div className={` ${location ? 'fixed inset-0 bg-gray-900 bg-opacity-60 scroll-y-none w-full h-full' : ' '} `}></div>
                
                     <div style={{zIndex: 1000}}  className={`absolute  flex flex-col  w-full z-1000 inset-0 shadow-lg transform ml-0 duration-200 ease-in 
-                                    ${location ? ' translate-y-0 ' : '-translate-y-full' }  transform border-5 bg-gray-100 h-screen lg:h-100 xl:h-110 2xl:h-110 overflow-y-hidden overflow-hidden `}>
+                                    ${location ? ' translate-y-0 ' : '-translate-y-full' }  transform border-5 bg-gray-100 h-screen lg:h-110 xl:h-200 2xl:h-200 overflow-y-hidden overflow-hidden `}>
                                       
                                        <div className='  border-red-400 flex w-full'>
                                            <div className='flex flex-col'>
@@ -201,6 +332,19 @@ export default function HeaderMiddle({children,
                                 </div>
                                 
 
+                            </div>
+
+                            <div className='hidden lg:grid lg:grid-cols-6 xl:grid-cols-7 gap-2 lg:justify-between items-center -mt-12 xl:-mt-24'>
+                                {cities.map((city, index) => (
+                                    <CityButton onChange = {changeLocation} key={index} lat={city.lat} lng={city.lng} city={city.city} />
+                                ))}
+
+                            </div>
+
+                            <div className='grid grid-cols-1 xs+:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:hidden justify-evenly gap-y-3 overflow-y-scroll py-3 items-center w-full place-items-center mt-20 xs+:mt-32 sm:mt-36'>
+                                {cities.map((city, index) => (
+                                    <CityButton onChange = {changeLocation} key={index} lat={city.lat} lng={city.lng} city={city.city} />
+                                ))}
                             </div>
                             
                         {/* <Dialog.Overlay className="fixed inset-0 bg-gray-900 bg-opaname-80 w-full h-full" /> */}

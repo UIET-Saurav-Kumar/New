@@ -20,6 +20,62 @@ import GooglePlacesAutocomplete from "@components/form/google-places-autocomplet
 import GetCurrentLocation from "@components/geoCode/get-current-location";
 import { CaretDown } from "@components/icons/caret-down";
 import MobileJoinButton from "./mobile-join-button";
+import CityButton from "@components/geoCode/city-buttton";
+
+const cities = //create object of major  indian cities with lat, lng and city name
+    [
+        {
+            city: "Chandigarh",
+            lat: 30.7333,
+            lng: 76.7794
+        },
+        {
+            city: "Mohali",
+            lat: 30.7333,
+            lng: 76.7794
+        },
+        {
+            city: "Panchkula",
+            lat: 30.7333,
+            lng: 76.7794
+        },
+        {
+            city: "Delhi",
+            lat: 28.7041,
+            lng: 77.1025
+        },
+        {
+            city: "Ahemdabad",
+            lat: 23.0225,
+            lng: 72.5714
+        },
+        {
+            city: "Kolkata",
+            lat: 22.5726,
+            lng: 88.3639
+        },
+        {
+            city: "Mumbai",
+            lat: 19.0760,
+            lng: 72.8777
+        },
+        {
+            city: "Bangalore",
+            lat: 12.9716,
+            lng: 77.5946
+        },
+        {
+            city: "Hyderabad",
+            lat: 17.3850,
+            lng: 78.4867
+        },
+        {
+            city: "Chennai",
+            lat: 13.0827,
+            lng: 80.2707
+        },
+
+    ]
 
 
 const AuthorizedMenu = dynamic(
@@ -172,7 +228,7 @@ const router = useRouter();
                                 </div>
                     <div className={` ${location ? 'fixed inset-0 bg-gray-900 bg-opacity-60 scroll-y-none w-auto  h-full' : ' '} `}></div>
                     <div style={{zIndex: 999999999}}  className={`absolute flex flex-col   z-100 inset-0 shadow-lg transform -pl-10 duration-200 ease-in 
-                                    ${location ? ' translate-y-0 ' : '-translate-y-full' }  transform border-5 bg-gray-100 h-96 lg:h-screen  overflow-y-hidden overflow-hidden `}>
+                                    ${location ? ' translate-y-0 ' : '-translate-y-full' }  transform border-5 bg-gray-100 h-screen lg:h-screen  overflow-y-hidden overflow-hidden `}>
                                       
                                        <div className='  border-red-400 flex w-full'>
                                            <div className='flex flex-col'>
@@ -212,6 +268,19 @@ const router = useRouter();
                                      <GetCurrentLocation onChange = {changeLocation} />  
                                 </div>
                                 
+                            </div>
+
+                            <div className='hidden lg:flex justify-evenly items-center -mt-10'>
+                                {cities.map((city, index) => (
+                                    <CityButton onChange = {changeLocation} key={index} lat={city.lat} lng={city.lng} city={city.city} />
+                                ))}
+
+                            </div>
+
+                            <div className='grid grid-cols-1 xs+:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:hidden justify-evenly gap-y-3 overflow-y-scroll py-3 items-center w-full place-items-center mt-20 xs+:mt-32 sm:mt-36'>
+                                {cities.map((city, index) => (
+                                    <CityButton onChange = {changeLocation} key={index} lat={city.lat} lng={city.lng} city={city.city} />
+                                ))}
                             </div>
                             
                         {/* <Dialog.Overlay className="fixed inset-0 bg-gray-900 bg-opaname-80 w-full h-full" /> */}
