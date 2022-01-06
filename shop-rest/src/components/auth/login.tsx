@@ -64,8 +64,8 @@ const LoginForm = () => {
       {
         onSuccess: (data) => {
           if (data?.token && data?.permissions?.length) {
-            Cookies.set("auth_token", data.token);
-            Cookies.set("auth_permissions", data.permissions);
+            Cookies.set("auth_token", data.token, { expires: 10 });
+            Cookies.set("auth_permissions", data.permissions, { expires: 10 });
             authorize();
             closeModal();
             return;
