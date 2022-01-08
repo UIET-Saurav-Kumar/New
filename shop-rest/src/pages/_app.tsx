@@ -41,7 +41,8 @@ const Noop: React.FC = ({ children }) => <>{children}</>;
 const AppSettings: React.FC = (props) => {
   const routname  = props?.children?._owner?.pendingProps?.router?.route.split('/')[1];
   const slugname  = props?.children?._owner?.pendingProps?.router?.query?.slug;
-  console.log('after slugname')
+  console.log('after routname',routname)
+  console.log('after slugname',slugname)
   if(slugname !== undefined && routname == 'shops')
   {
     console.log('inside if')
