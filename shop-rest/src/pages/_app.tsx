@@ -43,6 +43,7 @@ const AppSettings: React.FC = (props) => {
   const slugname  = props?.children?._owner?.pendingProps?.router?.query?.slug;
   if(slugname !== undefined && routname == 'shops')
   {
+    console.log('inside if')
     const { data, isLoading: loading, error } = useSettingsQuery();
 
     const shop = fetchShopSeo(props?.children?._owner?.pendingProps?.router?.query?.slug as string);
@@ -54,6 +55,7 @@ const AppSettings: React.FC = (props) => {
   }
   else
   {
+    console.log('inside else')
     const { data, isLoading: loading, error } = useSettingsQuery();
 
     if (loading) return <PageLoader />;
