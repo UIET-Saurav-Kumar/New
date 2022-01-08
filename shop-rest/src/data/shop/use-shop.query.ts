@@ -23,14 +23,7 @@ export const fetchShop = async (slug: string) => {
 
 export const fetchShopSeo = async (slug: string) => {
   const { data } = await http.get(`${url}/${API_ENDPOINTS.SETTINGS}?shop_slug=${slug}`);
-  // console.log('fetchShopSeo start');
-  console.log('fetchShopSeo')
-  console.log('api endpoint',API_ENDPOINTS.SETTINGS);
-  console.log('slug',slug);
-  console.log('data',data);
-  // console.log(' %c inside fetchShopSeo','color:green', test)
-  // console.log('fetchShopSeo end');
-  setTimeout(() => {
+  if (typeof window !== "undefined") {
     const eltitle = document.querySelector('title');
     eltitle.innerText = `BuyLowcal | ${data?.options?.seo?.metaTitle}`;
 
@@ -42,8 +35,7 @@ export const fetchShopSeo = async (slug: string) => {
 
     const ogDesc = document.querySelector("meta[property='og:description']");
     ogDesc.setAttribute('content',data?.options?.seo?.ogDescription);
-    
-  }, 1000);
+  }
     return data;
 };
 
