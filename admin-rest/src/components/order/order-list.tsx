@@ -1,3 +1,4 @@
+
 import Pagination from "@components/ui/pagination";
 import dayjs from "dayjs";
 import { Table } from "@components/ui/table";
@@ -12,6 +13,7 @@ import {
   OrderPaginator,
   OrderStatus,
   UserAddress,
+  Shop
 } from "@ts-types/generated";
 import InvoicePdf from "./invoice-pdf";
 import { PDFDownloadLink } from "@react-pdf/renderer";
@@ -32,18 +34,58 @@ const OrderList = ({ orders, onPagination }: IProps) => {
   const router = useRouter();
   const { alignLeft } = useIsRTL();
 
-  console.log('orders', orders);
+
+ 
+
+  // console.log('orders', data?.order?.products.map(order => order.shop.name));
+ 
 
   const columns = [
+
+    // invoice pdf download button
+
+    {
+      title: t("Download Invoice"),
+      dataIndex: "customer",
+      key: "customer",
+      align: alignLeft,
+      render: (customer: any,order:any) => {
+
+        return (
+
+        <PDFDownloadLink
+        
+          document={<InvoicePdf  order={order} />}
+          fileName={`${customer.name}-invoice.pdf`}
+          style={{
+            textDecoration: "none",
+            color: "blue",
+            padding: "0.5rem",
+          }}
+        >
+          {({ blob, url, loading, error }) =>
+            loading ? (
+              <span className="">Loading....</span>
+            ) : (
+              <a className='hover:underline cursor-pointer' href={url} target='_blank'>{t("Invoice")}</a>
+            )
+          }
+
+        </PDFDownloadLink>
+        )
+
+    }},
+        
     {
       title: t("table:Customer Name"),
       dataIndex: "customer",
       key: "customer",
       align: alignLeft,
       render: (customer: any) => (
-        <div>{customer.name}</div>
+        <div className="whitespace-nowrap font-semibold">{customer.name}</div>
       ),
     },
+
 
     {
       title: t("table:Phone Number"),
@@ -55,6 +97,7 @@ const OrderList = ({ orders, onPagination }: IProps) => {
       ),
     },
 
+
     {
       title: t("table:Email Id"),
       dataIndex: "customer",
@@ -64,17 +107,7 @@ const OrderList = ({ orders, onPagination }: IProps) => {
         <div className="whitespace-nowrap">{order.email}</div>
       ),
     },
-    
 
-    // {
-    //   title: t("table:Shop Name"),
-    //   dataIndex: "shop",
-    //   key: "shop",
-    //   align: alignLeft,
-    //   render: (shop: any, item: any) => (
-    //     <div>{}</div>
-    //   ),
-    // },
 
     {
       title: t("table:table-item-tracking-number"),
@@ -108,7 +141,7 @@ const OrderList = ({ orders, onPagination }: IProps) => {
         const { price } = usePrice({
           amount: value,
         });
-        return <span className="whitespace-nowrap">{price}</span>;
+        return <span className="whitespace-nowrap font-semibold">{price}</span>;
       },
     },
 
@@ -153,7 +186,7 @@ const OrderList = ({ orders, onPagination }: IProps) => {
         <span
           className="whitespace-nowrap font-semibold"
         >
-          {payment_gateway=="cod"?"Cash On Delivery":payment_gateway}
+          {payment_gateway=="cod"?"COD":payment_gateway}
         </span>
       ),
     },
