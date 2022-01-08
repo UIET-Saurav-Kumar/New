@@ -38,9 +38,10 @@ import {
 
 const Noop: React.FC = ({ children }) => <>{children}</>;
 
-const AppSettings: React.FC = (props) => {
+const AppSettings: React.FC = (props: any) => {
   const routname  = props?.children?._owner?.pendingProps?.router?.route.split('/')[1];
   const slugname  = props?.children?._owner?.pendingProps?.router?.query?.slug;
+
   console.log('props',props)
   console.log('children',props?.children)
   console.log('owner',props?.children?._owner);
