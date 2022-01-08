@@ -41,6 +41,8 @@ const Noop: React.FC = ({ children }) => <>{children}</>;
 const AppSettings: React.FC = (props) => {
   const routname  = props?.children?._owner?.pendingProps?.router?.route.split('/')[1];
   const slugname  = props?.children?._owner?.pendingProps?.router?.query?.slug;
+  console.log('props',props)
+  console.log('props',props?.children)
   console.log('owner',props?.children?._owner);
   console.log('after routname',routname)
   console.log('after slugname',slugname)
