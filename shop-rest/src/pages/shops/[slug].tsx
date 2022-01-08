@@ -30,8 +30,7 @@ import CategoryDropdownSidebar from "@components/category/category-dropdown-side
 import { useRouter } from "next/router";
 import RelatedProducts from "@components/product/product-details/related-products";
 import { useCategoriesQuery } from "@data/category/use-categories.query";
-
-
+import { fetchShopSeo } from "@data/shop/use-shop.query";
 
 const CartCounterButton = dynamic(
   () => import("@components/cart/cart-counter-button"),
@@ -47,8 +46,6 @@ const imageCheck = (logo: any , record:any, imgsize:any, imgDim:any, classname: 
   }
   return (check ? <Image src={logo} alt={record?.name}  width={1500} height={200} className={classname} />:<Avatar name={record?.name} size={imgsize} round={imgDim}  />);
 }
-
-
 
 const ShopPage = ({ data }: any) => {
 
