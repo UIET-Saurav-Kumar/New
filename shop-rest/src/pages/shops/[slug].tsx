@@ -76,7 +76,15 @@ const { pathname, query } = router;
   } = useCategoriesQuery({
     type: query.slug as string,
   });
+  const seoFunction = async(data:any) => {
 
+    const seoData = await fetchShopSeo(data.slug)
+
+    console.log(seoData);
+    console.log('hello',data);
+  };
+
+  seoFunction(data);
   return (
 
     <>
