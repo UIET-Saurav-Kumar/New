@@ -29,7 +29,7 @@ import { CUSTOMER } from "@utils/constants";
 import Cookies from "js-cookie";
 import { fetchShop } from "@data/shop/use-shop.query";
 import ManagedModal from "@components/ui/modal/managed-modal";
-// import { fetchShopSeo } from "@data/shop/use-shop.query";
+import { fetchShopSeo } from "@data/shop/use-shop.query";
 import {
   ModalProvider,
   useModalAction,
