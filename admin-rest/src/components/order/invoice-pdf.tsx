@@ -108,6 +108,7 @@ export default function InvoicePdf({ order }: { order: Order }) {
                       {index + 1}
                     </Text>
                     <Text style={[styles.td, { flex: 1 }]}>{product.name}</Text>
+                    <Text style={[styles.td, { flex: 1 }]}>{product.shop?.name}</Text>
                     <Text
                       style={[styles.td, { width: 100, textAlign: "right" }]}
                     >
