@@ -42,11 +42,13 @@ const AppSettings: React.FC = (props: any) => {
   const routname  = props?.children?._owner?.pendingProps?.router?.route.split('/')[1];
   const slugname  = props?.children?._owner?.pendingProps?.router?.query?.slug;
 
+  
   console.log('props',props)
   console.log('children',props?.children)
   console.log('owner',props?.children?._owner);
   console.log('after routname',routname)
   console.log('after slugname',slugname)
+
   if(slugname !== undefined && routname == 'shops')
   {
     console.log('inside if')
@@ -57,7 +59,7 @@ const AppSettings: React.FC = (props: any) => {
     console.log(shop);
     if (loading) return <PageLoader />;
     if (error) return <ErrorMessage message={error.message} />;
-    return <SettingsProvider initialValue={shop?.settings?.options} {...props} />;
+    return <SettingsProvider initialValue={data?.settings?.options} {...props} />;
   }
   else
   {
