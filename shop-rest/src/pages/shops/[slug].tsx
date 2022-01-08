@@ -98,7 +98,7 @@ const { pathname, query } = router;
                                     <ShopProfileCard data={data} />
                                   </div>
                                   
-                                  <div className='flex w-full'>
+                                  <div className='flex  w-full'>
                                     {imageCheck(data?.cover_image?.original, data, '317', false,'h-full w-full object-fill')}
                                   </div>
             
