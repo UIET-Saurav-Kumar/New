@@ -23,9 +23,13 @@ import { useIsRTL } from "@utils/locals";
 import {Children, useRef} from 'react';
 import {  PDFExport, savePDF} from '@progress/kendo-react-pdf'
 
+
+
 type FormValues = {
   order_status: any;
 };
+
+
 export default function OrderDetailsPage() {
   const pdfExportComponent = useRef(null);
   const contentArea = useRef(null);
@@ -70,6 +74,8 @@ export default function OrderDetailsPage() {
       },
     });
   };
+
+
   const { price: subtotal } = usePrice(
     data && {
       amount: data?.order?.amount!,
@@ -95,6 +101,7 @@ export default function OrderDetailsPage() {
       amount: data?.order?.sales_tax!,
     }
   );
+
   
   const getShopName = (itemdata: any, orderdata: any) => {
     const childrens = orderdata?.children;
@@ -109,10 +116,12 @@ export default function OrderDetailsPage() {
     }
   };
 
+
   if (loading) return <Loader text={t("common:text-loading")} />;
   if (error) return <ErrorMessage message={error.message} />;
 
   const columns = [
+
     {
       dataIndex: "image",
       key: "image",
@@ -148,7 +157,6 @@ export default function OrderDetailsPage() {
       ),
     },
 
-
     {
       title: t("table:Shop Name"),
       dataIndex: "shop",
@@ -156,13 +164,14 @@ export default function OrderDetailsPage() {
       align: alignLeft,
       render: (name: string, item: any) => (
         <div>
-          <span>{name}</span>
+          {/* <span>{name}</span> */}
           <span className="">
             {getShopName(item,data?.order)}
           </span>
         </div>
       ),
     },
+
     {
       title: t("table:table-item-total"),
       dataIndex: "price",
@@ -218,15 +227,18 @@ export default function OrderDetailsPage() {
           status={data?.order?.status?.serial!}
         />
       </div>
+
      <div className=''>
      <PDFExport ref={pdfExportComponent} paperSize='A4'>
     <div className="p-4 font-serif" ref={contentArea}>
-    <span className='flex items-center py-3 font-extrabold text-sm lg:text-xl'>
-      Buyl<span>
+
+      <span className='flex items-center py-3 font-extrabold text-sm lg:text-xl'>
+        Buyl<span>
           <img src='/transparent-logo.png' 
             className='h-3 w-3 lg:mx-1 lg:h-5 lg:w-5 '/>
           </span>wcal.com
       </span>
+
       <div className="mb-10">
         {data?.order ? (
           <Table
@@ -306,10 +318,11 @@ export default function OrderDetailsPage() {
       </div>
       </PDFExport>
       </div>
-   <div className='w-full text-center'> 
-       <button className='   text-blue-700 text-lg hover:underline mt-8 h-9  w-38' 
-        onClick={handleExportWithComponent}>Download Invoice
-        </button></div>
+      <div className='w-full text-center'> 
+          <button className='   text-blue-700 text-lg hover:underline mt-8 h-9  w-38' 
+            onClick={handleExportWithComponent}>Download Invoice
+            </button>
+      </div>
       {/* <button className=' text-sm h-16 w-28' onClick={handleExportWithMethod}> Download Invoice</button> */}
       
     </Card>
