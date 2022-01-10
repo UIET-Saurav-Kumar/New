@@ -264,7 +264,7 @@ export default function HeaderMiddle() {
 
                        <input onClick = {handleLocation} 
                               defaultValue = {getLocation?.formattedAddress}  
-                              className ='hidden  lg:inline-flex  text-gray-500 lg:w-32 lg+:w-38 2xl:w-52 md:w-32 placeholder:text-gray-500  
+                              className ='hidden  lg:inline-flex shadow-md text-gray-500 lg:w-32 lg+:w-38 2xl:w-52 md:w-32 placeholder:text-gray-500  
                                           lg:w-42 rounded-lg text-sm rounded-l-lg rounded-r-none h-12 outline-none active:border-gray-400
                                           border-2 border-e-0  focus:border-accent pr-4  border-gray-400 pl-2 ' 
                               placeholder = 'Enter location' id='location_id' />
