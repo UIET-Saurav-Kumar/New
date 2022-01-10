@@ -115,7 +115,7 @@ export default function DropDown({getLoc}:{getLoc:any}){
     return (
         <div  className='flex w-full'>
 
-          <div className='w-full relative'>
+          <div className='w-full shadow-md  relative'>
             
               <AsyncSelect
                   cacheOptions
