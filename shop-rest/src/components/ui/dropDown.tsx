@@ -105,6 +105,7 @@ export default function DropDown({getLoc}:{getLoc:any}){
     }
   }
 
+  
   function optionSelected(e:any){
     // clear()
     // setInputValue(e);
@@ -118,12 +119,13 @@ export default function DropDown({getLoc}:{getLoc:any}){
             
               <AsyncSelect
                   cacheOptions
+                  // style={customStyles}
                   // defaultValue={inputValue.value}
                   loadOptions={loadOptions} 
                   // value={inputValue}
                   // defaultOptions={loadOptions}
                   // onInputChange={handleInputChange}
-                  placeholder="Search  Restraunts | Salons | Groceries "
+                  placeholder={ <div className='text-xs sm:text-sm md:text:md  lg:text-sm'> Restraunts | Salons | Groceries </div>}
                   onChange={optionSelected}
                  
                 />
