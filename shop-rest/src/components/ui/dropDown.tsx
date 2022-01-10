@@ -123,7 +123,7 @@ export default function DropDown({getLoc}:{getLoc:any}){
                   // value={inputValue}
                   // defaultOptions={loadOptions}
                   // onInputChange={handleInputChange}
-                  placeholder="Search  Restraunts | Sloons | Groceries "
+                  placeholder="Search  Restraunts | Saloons | Groceries "
                   onChange={optionSelected}
                  
                 />
