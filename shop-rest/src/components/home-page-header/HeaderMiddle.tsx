@@ -242,7 +242,7 @@ export default function HeaderMiddle() {
     return (
 
         <div id='amazon-shops' 
-             className='flex flex-col  shadow-md md:bg-white lg:bg-white'> 
+             className='flex flex-col  lg:shadow-md md:bg-white lg:bg-white'> 
 
 
        <div className='relative z-30 px-4 flex justify-evenly max-w-full pt-8 pb-6 '>
