@@ -14,9 +14,9 @@ export default function DropDown({getLoc}:{getLoc:any}){
   const {getLocation} =useLocation()
   const { mutate: createLog, isLoading: loading } = useCreateLogMutation();
   
-  useEffect(()=>{
-    setInputValue(getSearch())
-  },[])
+  // useEffect(()=>{
+  //   setInputValue(getSearch())
+  // },[])
 
   const filterColors = (inputValue: string) => {
     return colourOptions.filter(i =>
@@ -106,7 +106,8 @@ export default function DropDown({getLoc}:{getLoc:any}){
   }
 
   function optionSelected(e:any){
-    setInputValue(e);
+    // clear()
+    // setInputValue(e);
     changeRoute(e)
   }
 
@@ -119,10 +120,10 @@ export default function DropDown({getLoc}:{getLoc:any}){
                   cacheOptions
                   // defaultValue={inputValue.value}
                   loadOptions={loadOptions} 
-                  value={inputValue}
+                  // value={inputValue}
                   // defaultOptions={loadOptions}
-                  onInputChange={handleInputChange}
-                  placeholder="Search | Category | Shops"
+                  // onInputChange={handleInputChange}
+                  placeholder="Search  Restraunts | Sloons | Groceries "
                   onChange={optionSelected}
                  
                 />
