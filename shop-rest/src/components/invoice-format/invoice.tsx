@@ -116,23 +116,23 @@ export default function Invoice() {
 
                      {/* 1st row */}
                     <div className='flex w-full  space-x-8 justify-between'>
-                    {
-              data?.order?.products.map(product=>{
-                return (
+                    {/* {
+              data?.order?.children.map(product=>{
+                return ( */}
                   <div className='flex flex-col  w-1/2  space-y-2 '>
                         <div className='grid grid-cols-1 lg:flex w-full  lg:space-x-6 '>
                             <h1 className='text-xs sm:text-sm lg:tex-md font-semibold'>Seller :</h1>
-                            <p className='text-xs sm:text-sm lg:text-md text-gray-700 font-body'>{product?.shop?.name}</p>
+                            <p className='text-xs sm:text-sm lg:text-md text-gray-700 font-body'>{data?.order?.products[0]?.shop?.name}</p>
                             
                         </div>
 
                         <div className='flex flex-col w-full space-y-3 '>
                             <h1 className='text-xs sm:text-sm lg:tex-md   font-semibold'>Seller Address :</h1>
-                            <p className='w-full sm:w-8/12 text-gray-700 tracking-wide text-xs'>{product?.shop?.settings?.location.formattedAddress}</p>
+                            <p className='w-full sm:w-8/12 text-gray-700 tracking-wide text-xs'>{data?.order?.products[0]?.shop?.settings?.location.formattedAddress}</p>
                             
                         </div>
                   </div>
-                )})}
+                {/* )})} */}
 
                      
                         <div className='flex w-1/2 space-y-2 flex-col'>
@@ -162,9 +162,9 @@ export default function Invoice() {
                    
 
                      {/* 2nd row */}
-                     {
+                     {/* {
               data?.order?.products.map(product=>{
-                return (
+                return ( */}
                   <>
                     <div className='flex w-full space-x-8 justify-between'>
 
@@ -175,7 +175,7 @@ export default function Invoice() {
                                       FSSAI No :
                                     </h1>
                                     <p className='text-xs sm:text-sm lg:tex-md font-body tracking-wide text-gray-700'>
-                                        {product?.shop?.fssai_number} 
+                                        {data?.order?.products[0]?.shop?.fssai_number} 
                                     </p>
                               </span>
 
@@ -184,7 +184,7 @@ export default function Invoice() {
                                       GST No :
                                     </h1>
                                     <p className='text-xs sm:text-sm lg:tex-md font-body tracking-wide text-gray-700'> 
-                                      {product?.shop?.gst_number} 
+                                      {data?.order?.products[0]?.shop?.gst_number} 
                                     </p>
                               </span>
 
@@ -211,9 +211,9 @@ export default function Invoice() {
 
                     </div>
                     </>
-                )
+                {/* )
               })
-            }
+            } */}
 
       </div>
       </div> 
