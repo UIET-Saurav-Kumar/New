@@ -250,6 +250,43 @@ width: 100%;
 
 @import "./custom-plugins.css";
 
+.k-pdf-export h2 {
+  font-size: 0.8em;
+  font-weight: 500;
+  margin-bottom: 0.2em;
+}
+
+.k-pdf-export h3 {
+  font-size: 0.8em;
+  font-weight: 250;
+  margin-bottom: 0.2em;
+}
+
+.k-pdf-export p {
+  font-size: 0.8em;
+  font-weight: 300;
+  margin-bottom: 0.2em;
+}
+
+.k-pdf-export span {
+  font-size: 0.8em;
+  font-weight: 190;
+  margin-bottom: 0.2em;
+}
+.k-pdf-export strong {
+  font-size: 0.8em;
+  font-weight: 190;
+  margin-bottom: 0.2em;
+}
+
+.k-pdf-export i,u {
+  font-size: 0.8em;
+  font-weight: 190;
+  margin-bottom: 0.2em;
+}
+
+
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -449,6 +486,13 @@ svg.custom path.link {
     } 
     }
 
+    @media screen and (max-width: 480px){   
+      #grocery{      
+          content:url("/banner/mobile-grocery.jpg");
+          object-fit: fill;
+       } 
+      }
+
     @media screen and (max-width: 1030px){   
       #location-input{      
          margin-top: 17%;
@@ -486,5 +530,7 @@ svg.custom path.link {
            margin-top: 4%;
         } 
         }
+
+
 
         
