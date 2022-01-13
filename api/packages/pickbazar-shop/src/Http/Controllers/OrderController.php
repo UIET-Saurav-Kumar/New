@@ -177,6 +177,57 @@ class OrderController extends CoreController
         return $order;
     }
 
+    // function to exportOrders in csv  format
+    public function exportOrder(Request $request)
+
+    {
+        $filename = 'orders'.'.csv';
+        $headers = [
+            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
+            'Content-type'        => 'text/csv',
+            'Content-Disposition' => 'attachment; filename=' . $filename,
+            'Expires'             => '0',
+            'Pragma'              => 'public'
+        ];
+
+        $list = $this->repository->get()->toArray();
+        if (!count($list)) {
+            return response()->stream(function () {
+            }, 200, $headers);
+        }
+
+        foreach ($list as $key => $value) {
+            // push customer name, tracking number
+            $list[$key]['tracking_number'] = $value['tracking_number'];
+        }
+        
+        # add headers for each column in the CSV download
+        array_unshift($list, array_keys($list[0]));
+
+        $callback = function () use ($list) {
+            $FH = fopen('php://output', 'w');
+            foreach ($list as $key => $row) {
+                if ($key === 0) {
+                    $exclude = ['id', 'slug', 'deleted_at','status', 'created_at', 'updated_at', 'shipping_class_id','image','gallery'];
+                    $row = array_diff($row, $exclude);
+                }
+                unset($row['id']);
+                unset($row['deleted_at']);
+                unset($row['shipping_class_id']);
+                unset($row['updated_at']);
+                unset($row['created_at']);
+                unset($row['slug']);
+                unset($row['image']);
+                unset($row['gallery']);
+                
+                fputcsv($FH, $row);
+            }
+            fclose($FH);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
