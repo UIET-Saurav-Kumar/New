@@ -1,101 +1,52 @@
-import Modal from "@components/ui/modal/modal";
 import dynamic from "next/dynamic";
+import Modal from "@components/ui/modal/modal";
 import { useModalAction, useModalState } from "./modal.context";
-const TagDeleteView = dynamic(() => import("@components/tag/tag-delete-view"));
-const TaxDeleteView = dynamic(() => import("@components/tax/tax-delete-view"));
-const BanCustomerView = dynamic(() => import("@components/user/user-ban-view"));
-const ShippingDeleteView = dynamic(
-  () => import("@components/shipping/shipping-delete-view")
-);
-const CategoryDeleteView = dynamic(
-  () => import("@components/category/category-delete-view")
-);
-const ShopCategoryDeleteView = dynamic(
-  () => import("@components/shop-categories/category-delete-view")
-);
-const OfferDeleteView = dynamic(
-  () => import("@components/offers/offer-delete-view")
-);
-const CouponDeleteView = dynamic(
-  () => import("@components/coupon/coupon-delete-view")
+import ShopProfileCard from "@components/profile/profile-card";
+import CategoryDropdownSidebar from "@components/category/category-dropdown-sidebar";
+import ShopPaymentForm from "src/pages/shops/shop-payment-form";
+
+
+const Login = dynamic(() => import("@components/auth/login"));
+const Register = dynamic(() => import("@components/auth/register"));
+const ForgotPassword = dynamic(
+  () => import("@components/auth/forget-password/forget-password")
 );
 
-const ProductDeleteView = dynamic(
-  () => import("@components/product/product-delete-view")
-);
-const MasterProductDeleteView = dynamic(
-  () => import("@components/master-products/product-delete-view")
-);
-const TypeDeleteView = dynamic(
-  () => import("@components/group/group-delete-view")
-);
-const AttributeDeleteView = dynamic(
-  () => import("@components/attribute/attribute-delete-view")
+const ProductDetailsModalView = dynamic(
+  () => import("@components/product/product-details-modal-view")
 );
 
-const ApproveShopView = dynamic(
-  () => import("@components/shop/approve-shop-view")
-);
-const DisApproveShopView = dynamic(
-  () => import("@components/shop/disapprove-shop-view")
-);
-const RemoveStaffView = dynamic(
-  () => import("@components/shop/staff-delete-view")
+const CreateOrUpdateAddressForm = dynamic(
+  () => import("@components/address/address-form")
 );
 
-const ExportImportView = dynamic(
-  () => import("@components/product/import-export-modal")
-);
-
-const AttributeExportImport = dynamic(
-  () => import("@components/attribute/attribute-import-export")
-);
-const AllProductsExportImport = dynamic(
-  () => import("@components/product/import-export-modal-all-products")
-);
-const MasterProductsExportImport = dynamic(
-  () => import("@components/product/import-export-modal-master-products")
-);
-const ShopsExportImport = dynamic(
-  () => import("@components/product/import-export-modal-shop")
-);
-const OrdersExportImport = dynamic(
-  () => import("@components/product/import-export-modal-orders")
-);
-const LogDeleteView = dynamic(
-  () => import("@components/logs/log-delete-view")
+const AddressDeleteView = dynamic(
+  () => import("@components/address/address-delete-view")
 );
 
 const ManagedModal = () => {
-  const { isOpen, view } = useModalState();
+  const { isOpen, view, data } = useModalState();
   const { closeModal } = useModalAction();
 
   return (
     <Modal open={isOpen} onClose={closeModal}>
-      
-      {view === "DELETE_OFFER" && <OfferDeleteView />}
-      {view === "DELETE_SHOP_CATEGORY" && <ShopCategoryDeleteView />}
-      {view === "DELETE_LOG" && <LogDeleteView />}
-      {view === "DELETE_PRODUCT" && <ProductDeleteView />}
-      {view === "MASTER_DELETE_PRODUCT" && <MasterProductDeleteView />}
-      {view === "DELETE_TYPE" && <TypeDeleteView />}
-      {view === "DELETE_ATTRIBUTE" && <AttributeDeleteView />}
-      {view === "DELETE_CATEGORY" && <CategoryDeleteView />}
-      {view === "DELETE_COUPON" && <CouponDeleteView />}
-      {view === "DELETE_TAX" && <TaxDeleteView />}
-      {view === "DELETE_SHIPPING" && <ShippingDeleteView />}
-      {view === "DELETE_TAG" && <TagDeleteView />}
-      {view === "BAN_CUSTOMER" && <BanCustomerView />}
-      {view === "SHOP_APPROVE_VIEW" && <ApproveShopView />}
-      {view === "SHOP_DISAPPROVE_VIEW" && <DisApproveShopView />}
-      {view === "DELETE_STAFF" && <RemoveStaffView />}
-      {view === "EXPORT_IMPORT_PRODUCT" && <ExportImportView />}
-      {view === "EXPORT_IMPORT_ATTRIBUTE" && <AttributeExportImport />}
-      {view === "EXPORT_IMPORT_ADMIN_PRODUCT" && <AllProductsExportImport />}
-      {view === "EXPORT_IMPORT_SHOPS" && <ShopsExportImport />}
-      {view === "EXPORT_IMPORT_ORDERS" && <OrdersExportImport />}
-      {view === "EXPORT_IMPORT_MASTER_PRODUCT" && <MasterProductsExportImport />}
-
+      {view === "LOGIN_VIEW" && <Login />}
+      {view === "REGISTER" && <Register />}
+      {view === "FORGOT_VIEW" && <ForgotPassword />}
+      {view === "ADD_OR_UPDATE_ADDRESS" && <CreateOrUpdateAddressForm />}
+      {view === "DELETE_ADDRESS" && <AddressDeleteView />}
+      {view === "SHOP_MOBILE_CATEGORIES" && <CategoryDropdownSidebar />}
+      {view === "SHOP_PAYMENT_FORM" && <ShopPaymentForm />}
+      {view === "PRODUCT_DETAILS" && (
+        <ProductDetailsModalView productSlug={data} />
+      )}
+      {view === "SHOP_INFO" && (
+        <ShopProfileCard
+          data={data}
+          cardClassName="!hidden"
+          className="!flex flex-col !w-screen !h-screen !rounded-none"
+        />
+      )}
     </Modal>
   );
 };
