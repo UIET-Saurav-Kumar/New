@@ -11,6 +11,9 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { SortOrder } from "@ts-types/generated";
 import SortForm from "@components/common/sort-form";
+import Button from "@components/ui/button";
+import { useModalAction } from "@components/ui/modal/modal.context";
+import { MoreIcon } from "@components/icons/more-icon";
 
 
 export default function Orders() {
@@ -20,7 +23,7 @@ export default function Orders() {
   const { t } = useTranslation();
   const [orderBy, setOrder] = useState("created_at");
   const [sortedBy, setColumn] = useState<SortOrder>(SortOrder.Desc);
-
+  const { openModal } = useModalAction();
 
   const {
     data,
@@ -43,6 +46,9 @@ export default function Orders() {
   function handlePagination(current: any) {
     setPage(current);
   }
+  function handleImportModal() {
+    openModal("EXPORT_IMPORT_ORDERS");
+  }
   return (
     <>
       <Card className="flex flex-col md:flex-row items-center justify-between mb-8">
@@ -54,6 +60,12 @@ export default function Orders() {
 
         <div className="w-full md:w-3/4 flex flex-col md:flex-row items-center ms-auto">
           <Search onSearch={handleSearch} />
+          <Button
+              onClick={handleImportModal}
+              className="mt-5 w-full md:hidden"
+            >
+              {t("common:text-export-import")}
+          </Button>
           <SortForm
             showLabel={false}
             className="w-full md:w-1/2 md:ms-5 mt-5 md:mt-0 flex-shrink-0"
@@ -69,6 +81,12 @@ export default function Orders() {
               { value: "updated_at", label: "Updated At" },
             ]}
           />
+           <button
+              onClick={handleImportModal}
+              className="hidden md:flex w-8 h-8 rounded-full bg-gray-50 hover:bg-gray-100 items-center justify-center flex-shrink-0 ms-5 transition duration-300"
+            >
+             <MoreIcon className="w-3.5 text-body" />
+          </button>
         </div>
       </Card>
 
