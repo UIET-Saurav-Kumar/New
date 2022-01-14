@@ -23,6 +23,9 @@ import { Table } from "@components/ui/table";
 import { OrderItems } from "@components/order/order-items-table";
 import Invoice from "@components/invoice-format/invoice";
 import PrintPage from "@components/print-button/print-page";
+import {Children, useRef} from 'react';
+import {  PDFExport, savePDF} from '@progress/kendo-react-pdf'
+
 
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const cookies = parseContextCookie(context?.req?.headers?.cookie);
@@ -37,6 +40,20 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
 };
 
 export default function OrderPage() {
+  const pdfExportComponent = useRef(null);
+  const contentArea = useRef(null);
+
+
+  const handleExportWithComponent = (event) => {
+    pdfExportComponent.current.save();
+  }
+
+
+  const handleExportWithMethod = (event) =>{
+    savePDF(contentArea.current, {paperSize:'A4'});
+  }
+
+
   const { t } = useTranslation("common");
   const { query } = useRouter();
   const { resetCart } = useCart();
@@ -71,7 +88,7 @@ export default function OrderPage() {
     data && { amount: data?.order?.discount ?? 0 }
   );
 
-  console.log('order',data?.order);
+  console.log('order/id',data?.order);
   console.log('children',data?.order.children)
 
   // console.log(data?.order)  
@@ -143,21 +160,27 @@ export default function OrderPage() {
   if (loading) {
     return <Spinner showText={false} />;
   }
+
   const getShop=()=>{
     if(data?.order?.products){
       if(data?.order?.products[0]){
         return data?.order?.products[0].shop;
       }
     }
-    
   }
+
+  
+
   return (
     
     <div className="p-4 sm:p-8">
       <div className="p-6 sm:p-8 lg:p-12 max-w-screen-lg w-full mx-auto 
                       bg-light rounded border shadow-sm">
       
-      {data?.order?.children?.length ? ( 
+      <div className=''>
+     <PDFExport ref={pdfExportComponent}  paperSize='A4'>
+    <div className="p-4 font-serif" ref={contentArea}>
+     {data?.order?.children?.length ? ( 
 
         <div className='flex flex-col space-y-10'>
 
@@ -270,22 +293,25 @@ export default function OrderPage() {
                   {data?.order?.delivery_time}
                 </span>
               </p>
-or
+            or
               <p className="flex text-body-dark mt-5">
                 <strong className="w-5/12 sm:w-4/12 text-sm  text-heading font-semibold">
                   {t("text-shipping-address")}
                 </strong>
                 :
                 <span className="w-7/12 sm:w-8/12 ps-4 text-sm">
-                  {data?.order?.children?.shop?formatAddress(data?.order?.children?.shop?.name):""}
+                {data?.order?.billing_address?.street_address + ', ' + data?.order?.billing_address?.city }
+
+
                 </span>
               </p>
             </div>
 
             {
               data?.order?.products.map(product=>{
+
                 return (
-                  <>
+                  <div id='product'>
                     <hr className="mt-3 mb-3 text-gray-700"/>
                     <u><i>{product?.name}</i></u>
                     <div className='grid grid-cols-1 sm:grid-cols-2 w-full '>
@@ -301,7 +327,7 @@ or
 
                       <p className="flex text-body-dark mt-5">
                         <strong className="w-5/12 sm:w-4/12 text-sm  text-heading font-semibold">
-                          Address
+                          Seller Address
                         </strong>
                         :
                         <span className="w-7/12 sm:w-8/12 ps-4 text-sm">
@@ -321,15 +347,15 @@ or
 
                       <p className="flex text-body-dark mt-5">
                         <strong className="w-5/12 sm:w-4/12 text-sm  text-heading font-semibold">
-                          PAN Number
+                          FSSAI Number
                         </strong>
                         :
                         <span className="w-7/12 sm:w-8/12 ps-4 text-sm">
-                          {product?.shop?.pan_number}
+                          {product?.shop?.fssai_number}
                         </span>
                       </p>
                     </div>
-                  </>
+                  </div>
                 )
               })
             }
@@ -342,6 +368,14 @@ or
         <div className="mt-12">
           <OrderItems products={data?.order?.products} />
         </div>
+        </div>
+      </PDFExport>
+      <div className='w-full text-center'> 
+          <button className='   text-blue-700 text-lg hover:underline mt-8 h-9  w-38' 
+            onClick={handleExportWithComponent}>Download Invoice
+            </button>
+      </div>
+      </div>
 
         {data?.order?.children?.length ? (
           <div>
@@ -349,7 +383,7 @@ or
               {t("text-sub-orders")}
             </h2>
             <div>
-              <div className="flex items-start border border-gray-700 rounded p-4 mb-12">
+              {/* <div className="flex items-start border border-gray-700 rounded p-4 mb-12">
                 <span className="w-4 h-4 px-2 rounded-sm bg-dark flex items-center justify-center me-3 mt-0.5">
                   <CheckMark className="w-2 h-2 text-light flex-shrink-0" />
                 </span>
@@ -357,11 +391,11 @@ or
                   <span className="font-bold">{t("text-note")}:</span>{" "}
                   {t("message-sub-order")}
                 </p>
-              </div>
+              </div> */}
 
               {Array.isArray(data?.order?.children) &&
                 data?.order?.children.length && (
-                  <div className="">
+                  <div className="h-auto">
                     <Table
                       //@ts-ignore
                       columns={orderTableColumns}
@@ -379,6 +413,8 @@ or
         ) : null}
       </div>
     </div>
+    
+      
   );
 }
 

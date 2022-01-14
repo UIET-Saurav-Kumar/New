@@ -177,6 +177,66 @@ class OrderController extends CoreController
         return $order;
     }
 
+    // function to exportOrders in csv  format
+    // function to exportOrders in csv  format
+    public function exportOrder(Request $request)
+    {
+        $filename = 'Orders'.'.csv';
+        $headers = [
+            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
+            'Content-type'        => 'text/csv',
+            'Content-Disposition' => 'attachment; filename=' . $filename,
+            'Expires'             => '0',
+            'Pragma'              => 'public'
+        ];
+
+        $list = $this->repository->get()->toArray();
+        if (!count($list)) {
+            return response()->stream(function () {
+            }, 200, $headers);
+        }
+
+        foreach($list as $key=>$val)
+        {
+            $list[$key]['customer_name'] = $val['customer']['name'];
+            $list[$key]['customer_email'] = $val['customer']['email'];
+            $list[$key]['order_status'] = $val['status']['name'];
+        }
+        
+        # add headers for each column in the CSV download
+        array_unshift($list, array_keys($list[0]));
+
+        $callback = function () use ($list) {
+            $FH = fopen('php://output', 'w');
+            foreach ($list as $key => $row) {
+                if ($key === 0) {
+                    $exclude = ['customer_id','id', 'status', 'deleted_at', 'created_at', 'updated_at', 'shipping_address', 'billing_address', 'customer', 'products','gateway_response', 'coupon_id', 'parent_id','shop_id'];
+                    $row = array_diff($row, $exclude);
+                }
+                unset($row['id']);
+                unset($row['customer_id']);
+                unset($row['status']);
+                unset($row['deleted_at']);
+                unset($row['updated_at']);
+                unset($row['created_at']);
+
+                unset($row['shipping_address']);
+                unset($row['billing_address']);
+                unset($row['customer']);
+                unset($row['products']);
+                unset($row['gateway_response']);
+                unset($row['coupon_id']);
+                unset($row['parent_id']);
+                unset($row['shop_id']);
+                
+                fputcsv($FH, $row);
+            }
+            fclose($FH);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
+
     /**
      * Remove the specified resource from storage.
      *

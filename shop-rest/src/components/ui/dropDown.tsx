@@ -14,9 +14,9 @@ export default function DropDown({getLoc}:{getLoc:any}){
   const {getLocation} =useLocation()
   const { mutate: createLog, isLoading: loading } = useCreateLogMutation();
   
-  useEffect(()=>{
-    setInputValue(getSearch())
-  },[])
+  // useEffect(()=>{
+  //   setInputValue(getSearch())
+  // },[])
 
   const filterColors = (inputValue: string) => {
     return colourOptions.filter(i =>
@@ -105,24 +105,27 @@ export default function DropDown({getLoc}:{getLoc:any}){
     }
   }
 
+  
   function optionSelected(e:any){
-    setInputValue(e);
+    // clear()
+    // setInputValue(e);
     changeRoute(e)
   }
 
     return (
         <div  className='flex w-full'>
 
-          <div className='w-full relative'>
+          <div className='w-full shadow-md  relative'>
             
               <AsyncSelect
                   cacheOptions
+                  // style={customStyles}
                   // defaultValue={inputValue.value}
                   loadOptions={loadOptions} 
-                  value={inputValue}
+                  // value={inputValue}
                   // defaultOptions={loadOptions}
-                  onInputChange={handleInputChange}
-                  placeholder="Search | Category | Shops"
+                  // onInputChange={handleInputChange}
+                  placeholder={ <div className='text-xs sm:text-sm md:text:md  lg:text-sm'> Restraunts | Salons | Groceries </div>}
                   onChange={optionSelected}
                  
                 />

@@ -250,6 +250,43 @@ width: 100%;
 
 @import "./custom-plugins.css";
 
+.k-pdf-export h2 {
+  font-size: 0.8em;
+  font-weight: 500;
+  margin-bottom: 0.2em;
+}
+
+.k-pdf-export h3 {
+  font-size: 0.8em;
+  font-weight: 250;
+  margin-bottom: 0.2em;
+}
+
+.k-pdf-export p {
+  font-size: 0.8em;
+  font-weight: 300;
+  margin-bottom: 0.2em;
+}
+
+.k-pdf-export span {
+  font-size: 0.8em;
+  font-weight: 190;
+  margin-bottom: 0.2em;
+}
+.k-pdf-export strong {
+  font-size: 0.8em;
+  font-weight: 190;
+  margin-bottom: 0.2em;
+}
+
+.k-pdf-export i,u {
+  font-size: 0.8em;
+  font-weight: 190;
+  margin-bottom: 0.2em;
+}
+
+
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -261,8 +298,8 @@ width: 100%;
 }
 
 .hdpi.pac-logo:after{
-  /* background-image:none!important; */
-  background: #000;
+  background-image:none!important; 
+   background: #000; 
 }
 
 .pac-logo:after{
@@ -285,27 +322,41 @@ display: none;
   border-color: white!important;
   border-radius: 1px!important;
   border-style: solid!important;
-  border-width: 1px!important;
-  box-shadow: 0 0 0 1px #449E7D!important;
+  border-width: 2px!important;
+  box-shadow: 1 2 2 1px #449E7D!important;
   height: 47px!important;
   border-radius: 0px!important;
   border-left: none;
   background-color: #000;
 }
 
+
+
 .css-yk16xz-control{
   height: 55px!important;
   border-top-left-radius: 8px!important;
   border-bottom-left-radius: 8px!important;
-  background-color: #43A093;
+  /* background-color: #43A093; */
   border-top-right-radius: 8px!important;
   border-bottom-right-radius: 8px!important;
-  background-color: #000;
+  border-width: 2px!important;
+  border-style:dotted ;
+  
+  background-color: gray;
+  border-color: #41645ea2!important;
+}
+
+.css-yk16xz-control::placeholder {
+  /* color: rgb(236, 15, 15)!important; */
+  font-size: 0.2em!important;
+  font-weight: bold!important;
 }
 
   .css-26l3qy-menu{
     position: fixed;
     z-index: 1000;
+    /* background-color: #000; */
+    
   }
 
 @media (min-width: 244px) {
@@ -313,7 +364,6 @@ display: none;
   .css-yk16xz-control{
     height: 40px!important;
   }
-
  }
 
  @media (min-width: 1024px) {
@@ -436,6 +486,13 @@ svg.custom path.link {
     } 
     }
 
+    @media screen and (max-width: 480px){   
+      #grocery{      
+          content:url("/banner/mobile-grocery.jpg");
+          object-fit: fill;
+       } 
+      }
+
     @media screen and (max-width: 1030px){   
       #location-input{      
          margin-top: 17%;
@@ -473,5 +530,7 @@ svg.custom path.link {
            margin-top: 4%;
         } 
         }
+
+
 
         

@@ -20,13 +20,17 @@ import WithdrawsPage from "src/pages/invoices-reward-data";
 
 
 export default function Dashboard() {
+
   const { t } = useTranslation();
+
   const { data, isLoading: loading } = useAnalyticsQuery();
-  const { price: total_revenue } = usePrice(
-    data && {
-      amount: data?.totalRevenue!,
-    }
-  );
+
+  // const { price: total_revenue } = usePrice(
+  //   data && {
+  //     amount: data?.totalRevenue!,
+  //   }
+  // );
+
   const { price: todays_revenue } = usePrice(
     data && {
       amount: data?.todaysRevenue!,
@@ -41,6 +45,9 @@ export default function Dashboard() {
     limit: 10,
     page: 1,
   });
+
+  console.log('order query  data', data)
+
   const {
     data: popularProductData,
     isLoading: popularProductLoading,
@@ -54,6 +61,7 @@ export default function Dashboard() {
   if (loading || orderLoading || popularProductLoading || withdrawLoading) {
     return <Loader text={t("common:text-loading")} />;
   }
+
   if (orderError || popularProductError) {
     return (
       <ErrorMessage
@@ -61,12 +69,14 @@ export default function Dashboard() {
       />
     );
   }
+
   let salesByYear: number[] = Array.from({ length: 12 }, (_) => 0);
   if (!!data?.totalYearSaleByMonth?.length) {
     salesByYear = data.totalYearSaleByMonth.map((item: any) =>
       item.total.toFixed(2)
     );
   }
+
 
   console.log('dashboard',data)
   return (
@@ -79,23 +89,15 @@ export default function Dashboard() {
             subtitleTransKey=""
             icon={<img src='/rupee.png' className='h-10 w-10'/>}
             iconBgStyle={{ backgroundColor: "#A7F3D0" }}
-            price={total_revenue}
-          />
-        </div>
-        <div className="w-full ">
-          <StickerCard
-            titleTransKey="sticker-card-title-order"
-            // sticker-card-subtitle-order
-            subtitleTransKey=""
-            icon={<CartIconBig />}
-            price={data?.totalOrders}
+            
+            price={new Intl.NumberFormat('en-IN', { style: "currency", currency: "INR" }).format(data?.totalRevenue / 2)}
           />
         </div>
         <div className="w-full ">
           <StickerCard
             titleTransKey="sticker-card-title-today-rev"
             icon={<img src='/rupee.png' className='h-10 w-10'/>}
-            price={todays_revenue}
+            price={new Intl.NumberFormat('en-IN', { style: "currency", currency: "INR" }).format(data?.todaysRevenue / 2)}
           />
         </div>
         <div className="w-full ">
@@ -106,9 +108,43 @@ export default function Dashboard() {
             price={data?.totalShops}
           />
         </div>
+        <div className="w-full ">
+          <StickerCard
+            titleTransKey="sticker-card-title-order"
+            // sticker-card-subtitle-order
+            subtitleTransKey=""
+            icon={<CartIconBig />}
+            price={data?.totalOrders   }
+          />
+        </div>
+        <div className="w-full ">
+          <StickerCard
+            titleTransKey="Today's Orders"
+            // sticker-card-subtitle-order
+            subtitleTransKey=""
+            icon={<CartIconBig />}
+            price={data?.todaysOrders   }
+          />
+        </div>
+        <div className="w-full ">
+          <StickerCard
+            titleTransKey="Total Orders (in last 30 days)"
+            // sticker-card-subtitle-order
+            subtitleTransKey=""
+            icon={<CartIconBig />}
+            price={data?.totalOrdersInLast30Days  }
+          />
+        </div>
+        <div className="w-full ">
+          <StickerCard
+            titleTransKey="Total customers"
+            icon={<img src='/team.png' className='h-10 w-10' />}
+            price={data?.totalCustomers - data?.totalShops}
+          />
+        </div>
         <div className="w-full">
           <StickerCard
-            titleTransKey="New Customers"
+            titleTransKey="New Customers  (in last 30 days)"
             icon={<img src='/team.png' className='h-10 w-10' />}
             iconBgStyle={{ backgroundColor: "#93C5FD" }}
             price={data?.newCustomers}
@@ -116,7 +152,7 @@ export default function Dashboard() {
         </div>
         <div className="w-full">
           <StickerCard
-            titleTransKey="Invoice Transfered Amount"
+            titleTransKey="Invoice Approved Amount"
             icon={<img src='/team.png' className='h-10 w-10' />}
             iconBgStyle={{ backgroundColor: "rgb(240, 161, 54)" }}
             price={"₹"+Math.round(data?.bill_transfered_amount)}

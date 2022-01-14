@@ -27,6 +27,7 @@ class AnalyticsController extends CoreController
     public function analytics(Request $request)
     {
         $user = $request->user();
+
         if ($user && ($user->hasPermissionTo(Permission::SUPER_ADMIN) || $user->hasPermissionTo(Permission::STORE_OWNER))) {
             // $totalRevenueQuery = DB::table('orders')->whereDate('created_at', '>', Carbon::now()->subDays(30));
             $totalRevenueQuery = DB::table('orders');
@@ -44,7 +45,7 @@ class AnalyticsController extends CoreController
             } else {
                 $todaysRevenue = $todaysRevenueQuery->where('shop_id', '=', $user->id)->sum('paid_total');
             }
-            // $totalOrdersQuery = DB::table('orders')->whereDate('created_at', '>', Carbon::now()->subDays(30));
+            $totalOrdersInLast30Days = DB::table('orders')->whereDate('created_at', '>', Carbon::now()->subDays(30))->count();
             $totalOrdersQuery = DB::table('orders');
 
             if ($user && $user->hasPermissionTo(Permission::SUPER_ADMIN)) {
@@ -59,6 +60,12 @@ class AnalyticsController extends CoreController
             }
             $customerPermission = ModelsPermission::where('name', Permission::CUSTOMER)->first();
             $newCustomers = $customerPermission->users()->whereDate('created_at', '>', Carbon::now()->subDays(30))->count();
+            //total customers
+            $totalCustomers = $customerPermission->users()->count();
+            // todays orders
+            $todaysOrders = DB::table('orders')->whereDate('created_at', '>', Carbon::now()->subDays(1))->count();
+            //total orders in last 30days
+            // $totalOrdersInLast30Days = $customerPermission->users()->whereDate('created_at', '>', Carbon::now()->subDays(30))->count();
             $totalYearSaleByMonthQuery =
                 DB::table('orders')->selectRaw(
                     "sum(paid_total) as total, DATE_FORMAT(created_at,'%M') as month"
@@ -107,7 +114,10 @@ class AnalyticsController extends CoreController
                 'totalShops' => $totalShops,
                 'todaysRevenue' => $todaysRevenue,
                 'totalOrders' => $totalOrders,
+                'todaysOrders' => $todaysOrders,
+                'totalOrdersInLast30Days' => $totalOrdersInLast30Days,
                 'newCustomers' =>  $newCustomers,
+                'totalCustomers' => $totalCustomers,
                 'totalYearSaleByMonth' => $processedData,
                 'bill_transfered_amount' =>$bill_transfered_amount
             ];

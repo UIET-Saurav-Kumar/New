@@ -154,6 +154,8 @@ Route::put('status-master-product/{id}',"PickBazar\Http\Controllers\MasterProduc
 Route::get('export-shops', 'PickBazar\Http\Controllers\ShopController@exportShop');
 Route::post('import-shops', 'PickBazar\Http\Controllers\ShopController@importShop');
 
+Route::get('export-orders', 'PickBazar\Http\Controllers\OrderController@exportOrder');
+
 Route::post('logs', 'PickBazar\Http\Controllers\LogController@store');
 Route::get('logs', 'PickBazar\Http\Controllers\LogController@fetchLogs');
 Route::delete('logs/{id}', 'PickBazar\Http\Controllers\LogController@destory');
