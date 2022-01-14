@@ -142,7 +142,7 @@ export default function Dashboard() {
        
         <div className="w-full">
           <StickerCard
-            titleTransKey="Invoice Transfered Amount"
+            titleTransKey="Invoice Approved Amount"
             icon={<img src='/team.png' className='h-10 w-10' />}
             iconBgStyle={{ backgroundColor: "rgb(240, 161, 54)" }}
             price={"₹"+Math.round(data?.bill_transfered_amount)}
