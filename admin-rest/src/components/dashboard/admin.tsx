@@ -20,18 +20,24 @@ import WithdrawsPage from "src/pages/invoices-reward-data";
 
 
 export default function Dashboard() {
+
   const { t } = useTranslation();
+
   const { data, isLoading: loading } = useAnalyticsQuery();
+
   const { price: total_revenue } = usePrice(
     data && {
       amount: data?.totalRevenue!,
     }
   );
+
   const { price: todays_revenue } = usePrice(
     data && {
       amount: data?.todaysRevenue!,
     }
   );
+
+
 
   const {
     data: orderData,
@@ -41,6 +47,7 @@ export default function Dashboard() {
     limit: 10,
     page: 1,
   });
+
   const {
     data: popularProductData,
     isLoading: popularProductLoading,
@@ -84,15 +91,6 @@ export default function Dashboard() {
         </div>
         <div className="w-full ">
           <StickerCard
-            titleTransKey="sticker-card-title-order"
-            // sticker-card-subtitle-order
-            subtitleTransKey=""
-            icon={<CartIconBig />}
-            price={data?.totalOrders}
-          />
-        </div>
-        <div className="w-full ">
-          <StickerCard
             titleTransKey="sticker-card-title-today-rev"
             icon={<img src='/rupee.png' className='h-10 w-10'/>}
             price={todays_revenue}
@@ -106,14 +104,42 @@ export default function Dashboard() {
             price={data?.totalShops}
           />
         </div>
+        <div className="w-full ">
+          <StickerCard
+            titleTransKey="sticker-card-title-order"
+            // sticker-card-subtitle-order
+            subtitleTransKey=""
+            icon={<CartIconBig />}
+            price={data?.totalOrders}
+          />
+        </div>
+        <div className="w-full ">
+          <StickerCard
+            titleTransKey="Total Orders (in last 30 days)"
+            // sticker-card-subtitle-order
+            subtitleTransKey=""
+            icon={<CartIconBig />}
+            price={data?.totalOrdersInLast30Days}
+          />
+        </div>
+        
+        <div className="w-full ">
+          <StickerCard
+            titleTransKey="Total customers"
+            icon={<img src='/team.png' className='h-10 w-10' />}
+            price={data?.totalCustomers - data?.totalShops}
+          />
+        </div>
         <div className="w-full">
           <StickerCard
-            titleTransKey="New Customers"
+            titleTransKey="New Customers  (in last 30 days)"
             icon={<img src='/team.png' className='h-10 w-10' />}
             iconBgStyle={{ backgroundColor: "#93C5FD" }}
             price={data?.newCustomers}
           />
         </div>
+       
+       
         <div className="w-full">
           <StickerCard
             titleTransKey="Invoice Transfered Amount"
