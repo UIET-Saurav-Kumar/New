@@ -27,7 +27,7 @@ class AnalyticsController extends CoreController
     public function analytics(Request $request)
     {
         $user = $request->user();
-        
+
         if ($user && ($user->hasPermissionTo(Permission::SUPER_ADMIN) || $user->hasPermissionTo(Permission::STORE_OWNER))) {
             // $totalRevenueQuery = DB::table('orders')->whereDate('created_at', '>', Carbon::now()->subDays(30));
             $totalRevenueQuery = DB::table('orders');
@@ -62,6 +62,8 @@ class AnalyticsController extends CoreController
             $newCustomers = $customerPermission->users()->whereDate('created_at', '>', Carbon::now()->subDays(30))->count();
             //total customers
             $totalCustomers = $customerPermission->users()->count();
+            // todays orders
+            $todaysOrders = DB::table('orders')->whereDate('created_at', '>', Carbon::now()->subDays(1))->count();
             //total orders in last 30days
             // $totalOrdersInLast30Days = $customerPermission->users()->whereDate('created_at', '>', Carbon::now()->subDays(30))->count();
             $totalYearSaleByMonthQuery =
@@ -112,6 +114,7 @@ class AnalyticsController extends CoreController
                 'totalShops' => $totalShops,
                 'todaysRevenue' => $todaysRevenue,
                 'totalOrders' => $totalOrders,
+                'todaysOrders' => $todaysOrders,
                 'totalOrdersInLast30Days' => $totalOrdersInLast30Days,
                 'newCustomers' =>  $newCustomers,
                 'totalCustomers' => $totalCustomers,
