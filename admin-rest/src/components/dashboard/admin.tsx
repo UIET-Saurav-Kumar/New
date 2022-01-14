@@ -115,6 +115,15 @@ export default function Dashboard() {
         </div>
         <div className="w-full ">
           <StickerCard
+            titleTransKey="Today's Orders"
+            // sticker-card-subtitle-order
+            subtitleTransKey=""
+            icon={<CartIconBig />}
+            price={data?.todaysOrders}
+          />
+        </div>
+        <div className="w-full ">
+          <StickerCard
             titleTransKey="Total Orders (in last 30 days)"
             // sticker-card-subtitle-order
             subtitleTransKey=""
