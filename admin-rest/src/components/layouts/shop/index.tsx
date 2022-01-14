@@ -6,12 +6,16 @@ import SidebarItem from "@components/layouts/navigation/sidebar-item";
 import { siteSettings } from "@settings/site.settings";
 import { useTranslation } from "next-i18next";
 import MobileNavigation from "@components/layouts/navigation/mobile-navigation";
+import { useShopQuery } from "@data/shop/use-shop.query";
 
 const ShopLayout: React.FC = ({ children }) => {
   const { t } = useTranslation();
+  
   const {
     query: { shop },
   } = useRouter();
+
+  const { data } = useShopQuery(shop!.toString());
 
   const { permissions: currentUserPermissions } = getAuthCredentials();
 
@@ -19,6 +23,9 @@ const ShopLayout: React.FC = ({ children }) => {
     <Fragment>
       {siteSettings.sidebarLinks.shop.map(
         ({ href, label, icon, permissions }) => {
+          if(label.includes('Delivery')){
+            if(data?.shop?.delivery_status==0) return null;
+          }
           if (!hasAccess(permissions, currentUserPermissions)) return null;
           return (
             <SidebarItem

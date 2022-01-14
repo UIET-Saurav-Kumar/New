@@ -76,8 +76,34 @@ export const calculateItemTotals = (items: Item[]) =>
     itemTotal: item.price * item.quantity!,
   }));
 
-export const calculateTotal = (items: Item[]) =>
-  items.reduce((total, item) => total + item.quantity! * item.price, 0);
+export const calculateTotal = (items: Item[]) =>{
+  var shops:any=[]
+  var total=items.reduce((total, item) =>{
+    if(item.shop){
+      if(item.shop.delivery_status){
+        var index=shops.findIndex((shop:any)=>shop.slug==item.shop.slug)
+        if(!(index>=0)){
+          shops.push({
+            slug:item.shop.slug,
+            delivery_charges:item.shop.delivery_charges,
+            order_price:item.quantity! * item.price   
+          })
+        }else{
+          shops[index].order_price=(item.quantity! * item.price )+shops[index].order_price;
+        }
+      }
+    }
+    return total + item.quantity! * item.price
+  } , 0);
+
+  shops.forEach((shop:any)=>{
+    if(shop.order_price<=shop.delivery_charges){
+      total=total+parseFloat(shop.delivery_charges);
+    }
+  })
+
+  return total
+}
 
 export const calculateTotalItems = (items: Item[]) =>
   items.reduce((sum, item) => sum + item.quantity!, 0);

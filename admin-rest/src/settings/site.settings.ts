@@ -207,6 +207,12 @@ export const siteSettings = {
         icon: "Delivery",
         permissions: adminOwnerAndStaffOnly,
       },
+      {
+        href: (shop: string) => `/${shop}${ROUTES.SHOP_DELIVERY_CONFIG}`,
+        label: "Delivery Config",
+        icon: "DeliveryConfig",
+        permissions: adminOwnerAndStaffOnly,
+      },
       // {
       //   href: (shop: string) => `/${shop}${ROUTES.DELIVERY}`,
       //   label: "sidebar-nav-item-delivery",

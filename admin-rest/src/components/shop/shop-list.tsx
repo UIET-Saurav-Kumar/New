@@ -129,11 +129,13 @@ const ShopList = ({ shops, onPagination }: IProps) => {
       dataIndex: "id",
       key: "actions",
       align: alignRight,
-      render: (id: string, { slug, is_active }: any) => {
+      render: (id: string, { slug, is_active,delivery_status }: any) => {
         return (
           <ActionButtons
             id={id}
+            shopPage={true}
             approveButton={true}
+            deliveryButton={delivery_status}
             detailsUrl={`/${slug}`}
             isShopActive={is_active}
           />

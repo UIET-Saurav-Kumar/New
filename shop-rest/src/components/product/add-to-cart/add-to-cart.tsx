@@ -88,11 +88,14 @@ export const AddToCart = ({
   };
   const outOfStock = isInCart(item?.id) && !isInStock(item.id);
   return !isInCart(item?.id) ? (
-    <AddToCartBtn
-      disabled={disabled || outOfStock}
-      variant={variant}
-      onClick={handleAddClick}
-    />
+
+    <>
+      <AddToCartBtn
+        disabled={disabled || outOfStock}
+        variant={variant}
+        onClick={handleAddClick}
+      />
+    </>
   ) : (
     <>
       <Counter

@@ -30,7 +30,7 @@ const VerifyCheckout = () => {
 
   const { mutate: verifyCheckout, isLoading: loading } =
         useVerifyCheckoutMutation();
-
+  
   async function handleVerifyCheckout() {
 
     if (loggedIn()) {
@@ -89,7 +89,12 @@ const VerifyCheckout = () => {
           </div>
           
         ) : (
-          items?.map((item) => <CheckoutCartItem item={item} key={item.id} />)
+            items?.map((item) =>(
+              <>
+                <CheckoutCartItem item={item} key={item.id} />
+              </>
+            ) 
+          )
         )}
 
       </div>

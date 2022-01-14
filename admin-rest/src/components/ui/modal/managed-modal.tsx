@@ -39,6 +39,9 @@ const ApproveShopView = dynamic(
 const DisApproveShopView = dynamic(
   () => import("@components/shop/disapprove-shop-view")
 );
+const DeliveryStatusView = dynamic(
+  () => import("@components/shop/delivery-status-view")
+);
 const RemoveStaffView = dynamic(
   () => import("@components/shop/staff-delete-view")
 );
@@ -85,6 +88,9 @@ const ManagedModal = () => {
       {view === "BAN_CUSTOMER" && <BanCustomerView />}
       {view === "SHOP_APPROVE_VIEW" && <ApproveShopView />}
       {view === "SHOP_DISAPPROVE_VIEW" && <DisApproveShopView />}
+      
+      {view === "DELIVERY_STATUS_VIEW" && <DeliveryStatusView />}
+
       {view === "DELETE_STAFF" && <RemoveStaffView />}
       {view === "EXPORT_IMPORT_PRODUCT" && <ExportImportView />}
       {view === "EXPORT_IMPORT_ATTRIBUTE" && <AttributeExportImport />}

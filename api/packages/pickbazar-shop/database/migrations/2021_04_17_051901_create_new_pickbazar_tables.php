@@ -70,6 +70,7 @@ class CreateNewPickbazarTables extends Migration
             $table->boolean('is_active')->default(false);
             $table->json('address')->nullable();
             $table->json('settings')->nullable();
+            $table->integer('delivery_status')->defalut(0);
             $table->timestamps();
         });
         Schema::create('balances', function (Blueprint $table) {

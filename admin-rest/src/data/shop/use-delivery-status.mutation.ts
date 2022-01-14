@@ -1,28 +1,24 @@
-import { ApproveShopInput } from "@ts-types/generated";
-import { ROUTES } from "@utils/routes";
 import Shop from "@repositories/shop";
-import { useRouter } from "next/router";
 import { useMutation, useQueryClient } from "react-query";
 import { API_ENDPOINTS } from "@utils/api/endpoints";
 import { toast } from "react-toastify";
 import { useTranslation } from "next-i18next";
 export interface IShopApproveVariables {
   variables: {
-    input: ApproveShopInput;
+    id: string;
   };
 }
 
-export const useApproveShopMutation = () => {
+export const useDeliveryShopMutation = () => {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
   return useMutation(
-    ({ variables: { input } }: IShopApproveVariables) =>
-      Shop.approve(API_ENDPOINTS.APPROVE_SHOP, input),
+    ({ variables }: IShopApproveVariables) =>
+      Shop.disapprove(API_ENDPOINTS.SHOP_DELIVERY_STATUS, variables),
     {
       onSuccess: () => {
         toast.success(t("common:successfully-updated"));
       },
-      // Always refetch after error or success:
       onSettled: () => {
         queryClient.invalidateQueries(API_ENDPOINTS.ADMIN_SHOP);
       },

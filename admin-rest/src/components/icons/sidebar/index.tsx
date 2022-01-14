@@ -23,4 +23,6 @@ export { Logs } from "@components/icons/sidebar/logs"
 export {SignupOffer} from "@components/icons/sidebar/signup-offers"
 export {Delivery} from "@components/icons/sidebar/delivery"
 export {DeliveryCost} from "@components/icons/sidebar/delivery-cost"
+export {DeliveryConfig} from "@components/icons/sidebar/delivery-config"
+
 

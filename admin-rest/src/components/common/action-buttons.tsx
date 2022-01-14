@@ -7,6 +7,7 @@ import { useTranslation } from "next-i18next";
 import { CheckMarkCircle } from "@components/icons/checkmark-circle";
 import { useModalAction } from "@components/ui/modal/modal.context";
 import { CloseFillIcon } from "@components/icons/close-fill";
+import {DeliveryBtn} from "@components/icons/delivery-btn";
 
 type Props = {
   id: string;
@@ -17,6 +18,8 @@ type Props = {
   userStatus?: boolean;
   isShopActive?: boolean;
   approveButton?: boolean;
+  deliveryButton?: boolean;
+  shopPage?: boolean;
 };
 
 const ActionButtons = ({
@@ -28,6 +31,8 @@ const ActionButtons = ({
   isUserActive = false,
   isShopActive,
   approveButton = false,
+  shopPage = false,
+  deliveryButton = false,
 }: Props) => {
   const { t } = useTranslation();
   const { openModal } = useModalAction();
@@ -42,6 +47,13 @@ const ActionButtons = ({
       openModal("SHOP_APPROVE_VIEW", id);
     } else {
       openModal("SHOP_DISAPPROVE_VIEW", id);
+    }
+  }
+  function handleDeliveryStatus(status: boolean) {
+    if (status === true) {
+      openModal("DELIVERY_STATUS_VIEW", id);
+    } else {
+      openModal("DELIVERY_STATUS_VIEW", id);
     }
   }
   return (
@@ -73,6 +85,24 @@ const ActionButtons = ({
             <CloseFillIcon width={20} />
           </button>
         ))}
+        {
+        (shopPage&&(deliveryButton ? (
+          <button
+            onClick={() => handleDeliveryStatus(true)}
+            className="text-accent transition duration-200 hover:text-accent-hover focus:outline-none"
+            title={t("text-approve-shop")}
+          >
+            <DeliveryBtn  />
+          </button>
+        ) : (
+          <button
+            onClick={() => handleDeliveryStatus(false)}
+            className="text-red-500 transition duration-200 hover:text-red-600 focus:outline-none"
+            title={t("text-disapprove-shop")}
+          >
+            <DeliveryBtn  />
+          </button>
+        )))}
       {userStatus && (
         <>
           {isUserActive ? (

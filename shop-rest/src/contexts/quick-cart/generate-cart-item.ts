@@ -33,6 +33,7 @@ export function generateCartItem(item: Item, variation: Variation) {
       stock: variation.quantity,
       price: variation.sale_price ? variation.sale_price : variation.price,
       image: image?.thumbnail,
+      shop:item.shop,
       variationId: variation.id,
     };
   }
@@ -43,6 +44,7 @@ export function generateCartItem(item: Item, variation: Variation) {
     tax,
     unit,
     image: image?.thumbnail,
+    shop:item.shop,
     stock: quantity,
     price: sale_price ? sale_price : price,
   };

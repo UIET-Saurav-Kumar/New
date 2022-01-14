@@ -612,4 +612,34 @@ class ShopController extends CoreController
         }
         return true;
     }   
+
+    public function shopDeliveryStatus(Request $request){
+        $id = $request->id;
+        try {
+            $shop = $this->repository->findOrFail($id);
+        } catch (\Exception $e) {
+            throw new PickbazarException('PICKBAZAR_ERROR.NOT_FOUND');
+        }
+
+        $shop->delivery_status = ($shop->delivery_status==0)?1:0;
+        $shop->save();
+
+        return $shop;
+    }
+
+
+    public function shopDeliveryConfig(Request $request){
+        $id = $request->id;
+        try {
+            $shop = $this->repository->findOrFail($id);
+        } catch (\Exception $e) {
+            throw new PickbazarException('PICKBAZAR_ERROR.NOT_FOUND');
+        }
+        $shop->free_delivery_order_value = $request->free_delivery_order_value;
+        $shop->delivery_charges = $request->delivery_charges;
+
+        $shop->save();
+
+        return $shop;    
+    }
 }

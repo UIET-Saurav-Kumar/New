@@ -148,6 +148,7 @@ export const siteSettings = {
     {
       id: "0",
       title: "Self Pickup",
+      is_delivery:false,
       description: "self pickup",
     },
     // {
@@ -158,12 +159,14 @@ export const siteSettings = {
     {
       id: "6",
       title: "today",
+      is_delivery:true,
       description: "Applicable if order is placed before 4PM",
     },
     
     {
       id: "6",
       title: "next day",
+      is_delivery:true,
       description: "Delivery between 11AM and 4PM",
     },
   ],

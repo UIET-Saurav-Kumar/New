@@ -37,6 +37,7 @@ export const API_ENDPOINTS = {
   DOWNLOAD_INVOICE: "download/invoice",
   APPROVE_SHOP: "approve-shop",
   DISAPPROVE_SHOP: "disapprove-shop",
+  SHOP_DELIVERY_STATUS: "shop-delivery-status",
   SHOPS: "all-shop",
   ADMIN_SHOP:"admin-shop",
   MY_SHOPS: "my-shops",
@@ -78,6 +79,7 @@ export const API_ENDPOINTS = {
   ADMIN_DELIVERY:'admin/delivery',
   DELIVERY:'delivery',
   APPROVE_DELIVERY: "approve-delivery",
+  SHOP_DELIVERY_CONFIG: "shop-delivery-config",
   DELIVERY_COST:"delivery-cost",
   VERIFY_CHECKOUT: "checkout/verify",
 };

@@ -8,6 +8,7 @@ export const ROUTES = {
   ORDERS: "/orders",
   DELIVERY: '/delivery',
   DELIVERY_COST: '/delivery-cost',
+  SHOP_DELIVERY_CONFIG: '/delivery/config',
   PRODUCTS: "/products",
   COUPONS: "/coupons",
   USERS: "/users",

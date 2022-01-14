@@ -114,6 +114,14 @@ Route::put('update-referral-commission','PickBazar\Http\Controllers\ShopControll
 
 Route::get('get-referral-commission','PickBazar\Http\Controllers\ShopController@getReferralCommission');
 
+Route::post('shop-delivery-status','PickBazar\Http\Controllers\ShopController@shopDeliveryStatus');
+
+
+Route::post('shop-delivery-config','PickBazar\Http\Controllers\ShopController@shopDeliveryConfig');
+
+
+
+
 Route::get('get-wallet-commission','PickBazar\Http\Controllers\InviteController@getWalletCommission');
 
 Route::get('referral-network','PickBazar\Http\Controllers\InviteController@refferral_network');
