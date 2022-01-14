@@ -178,10 +178,10 @@ class OrderController extends CoreController
     }
 
     // function to exportOrders in csv  format
+    // function to exportOrders in csv  format
     public function exportOrder(Request $request)
-
     {
-        $filename = 'orders'.'.csv';
+        $filename = 'Orders'.'.csv';
         $headers = [
             'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
             'Content-type'        => 'text/csv',
@@ -196,9 +196,11 @@ class OrderController extends CoreController
             }, 200, $headers);
         }
 
-        foreach ($list as $key => $value) {
-            // push customer name, tracking number
-            $list[$key]['tracking_number'] = $value['tracking_number'];
+        foreach($list as $key=>$val)
+        {
+            $list[$key]['customer_name'] = $val['customer']['name'];
+            $list[$key]['customer_email'] = $val['customer']['email'];
+            $list[$key]['order_status'] = $val['status']['name'];
         }
         
         # add headers for each column in the CSV download
@@ -208,17 +210,24 @@ class OrderController extends CoreController
             $FH = fopen('php://output', 'w');
             foreach ($list as $key => $row) {
                 if ($key === 0) {
-                    $exclude = ['id', 'slug', 'deleted_at','status', 'created_at', 'updated_at', 'shipping_class_id','image','gallery'];
+                    $exclude = ['customer_id','id', 'status', 'deleted_at', 'created_at', 'updated_at', 'shipping_address', 'billing_address', 'customer', 'products','gateway_response', 'coupon_id', 'parent_id','shop_id'];
                     $row = array_diff($row, $exclude);
                 }
                 unset($row['id']);
+                unset($row['customer_id']);
+                unset($row['status']);
                 unset($row['deleted_at']);
-                unset($row['shipping_class_id']);
                 unset($row['updated_at']);
                 unset($row['created_at']);
-                unset($row['slug']);
-                unset($row['image']);
-                unset($row['gallery']);
+
+                unset($row['shipping_address']);
+                unset($row['billing_address']);
+                unset($row['customer']);
+                unset($row['products']);
+                unset($row['gateway_response']);
+                unset($row['coupon_id']);
+                unset($row['parent_id']);
+                unset($row['shop_id']);
                 
                 fputcsv($FH, $row);
             }
