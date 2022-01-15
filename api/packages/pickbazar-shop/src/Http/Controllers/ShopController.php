@@ -89,7 +89,7 @@ class ShopController extends CoreController
             foreach($shops_ids as $id){
                 $single_shop=Shop::find($id);
                 $single_shop->cover_original = $single_shop->cover_image['original'] ?? '';
-                $single_shop->logo_original = $single_shop->cover_image['original'] ?? '';
+                $single_shop->logo_original = $single_shop->logo['original'] ?? '';
                 if($single_shop){
                     array_push($shops_array,$single_shop);
                 }
