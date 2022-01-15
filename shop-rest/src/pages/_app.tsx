@@ -55,7 +55,6 @@ const AppSettings: React.FC = (props: any) => {
   }
   else
   {
-    console.log('inside else')
     const { data, isLoading: loading, error } = useSettingsQuery();
 
     if (loading) return <PageLoader />;

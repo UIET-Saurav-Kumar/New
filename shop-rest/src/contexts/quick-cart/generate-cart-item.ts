@@ -37,7 +37,6 @@ export function generateCartItem(item: Item, variation: Variation) {
       variationId: variation.id,
     };
   }
-  console.log(item.shop,'item.shop')
   return {
     id,
     name,
