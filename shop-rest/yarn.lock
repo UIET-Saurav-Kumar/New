@@ -1127,6 +1127,37 @@
   resolved "https://registry.yarnpkg.com/@panva/asn1.js/-/asn1.js-1.0.0.tgz#dd55ae7b8129e02049f009408b97c61ccf9032f6"
   integrity sha512-UdkG3mLEqXgnlKsWanWcgb6dOjUzJ+XC5f+aWw30qrtjxeNUSfKX1cd5FBzOaXQumoe9nIqeZUvrRJS03HCCtw==
 
+"@progress/kendo-drawing@^1.16.0":
+  version "1.16.1"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-drawing/-/kendo-drawing-1.16.1.tgz#c32837bf00f50e27c3cc00365462a7e09a80f993"
+  integrity sha512-D+IWvTRw4AxNatSDxPdV3XP1DS5natnUNilePMEexZ27Ii9WHr43kc6OoW/ZDqalC2QPh9YW233PZHUcCjemmQ==
+  dependencies:
+    "@progress/pako-esm" "^1.0.1"
+
+"@progress/kendo-file-saver@^1.0.1":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-file-saver/-/kendo-file-saver-1.1.0.tgz#d87b18d230b2df39d7eebca7317f5fe3a51b7db2"
+  integrity sha512-26iPl67d0izUlzU6p98QM5f/spOK3QCdmSJrEzGakw1Yp0qyFmp2V9uKeswfWgX0NhKmJApWjlAxxrtRvYjHYA==
+
+"@progress/kendo-licensing@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-licensing/-/kendo-licensing-1.2.1.tgz#aa8189e9699b9f7c2c879fcab9f6da54faeb256f"
+  integrity sha512-j17Mvl1wxdF8C+v6iokssV7tdaeWqCr8zkczTr5jfTe6Fg9DEbFfvt0bl8UnTLg41dc5R14dp8ZVhdnS+sdDrg==
+  dependencies:
+    jsonwebtoken "^8.5.1"
+
+"@progress/kendo-react-pdf@^4.10.0":
+  version "4.13.0"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-react-pdf/-/kendo-react-pdf-4.13.0.tgz#c03f7184bd8c670877b610e3656995ee756f2858"
+  integrity sha512-vjzQzw7uEd3cuvrH3X8RvZWv07WC4Mk4VYeuVVsETdRxmUhKWb4vG/riY1NdW/NsauKPSp2UD1irovbN+dvkzQ==
+  dependencies:
+    "@progress/kendo-file-saver" "^1.0.1"
+
+"@progress/pako-esm@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@progress/pako-esm/-/pako-esm-1.0.1.tgz#eeb7d2c3f8e865198edf23fb42645bd8cb513a11"
+  integrity sha512-O4A3b1EuE9Xe1pC3Xz9Tcn1M/CYrL71f4y/5TXeytOVTkmkzBgYW97fYP2f+54H0e0erWRaqV/kUUB/a8Uxfbw==
+
 "@reach/portal@^0.15.2":
   version "0.15.3"
   resolved "https://registry.yarnpkg.com/@reach/portal/-/portal-0.15.3.tgz#56fe4f6575ff07fc7d1a151481713171c7e37c88"

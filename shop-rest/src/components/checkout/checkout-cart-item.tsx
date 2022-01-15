@@ -138,7 +138,7 @@ const CheckoutCartItem = ({ item, notAvailable }: Props) => {
 
 
     {
-      isWithDelivery()&&shopItems.at(-1)?.id==item.id&&(
+      isWithDelivery()&&(
         <>
           <div className={cn("flex justify-between py-2")} key={item.id}>
             <p className="flex items-center justify-between text-base">
