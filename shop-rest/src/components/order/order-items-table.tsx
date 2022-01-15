@@ -119,16 +119,16 @@ export const OrderItems = ({ products }: { products: any }) => {
     },
   
     
-    {
-      title: t("Shipping Charge"),
-      dataIndex: "pivot",
-      key: "pivot",
-      align: "center",
-      width: 100,
-      render: () => {
-        return <p className="text-body">{shipping_charge}</p>;
-      },
-    },
+    // {
+    //   title: t("Shipping Charge"),
+    //   dataIndex: "pivot",
+    //   key: "pivot",
+    //   align: "center",
+    //   width: 100,
+    //   render: () => {
+    //     return <p className="text-body">{shipping_charge}</p>;
+    //   },
+    // },
 
 
     {
@@ -184,7 +184,12 @@ export const OrderItems = ({ products }: { products: any }) => {
           className="orderDetailsTable w-full"
           scroll={{ x: 350, y: 500 }}
         />
-
+              {shipping_charge > 0 ?  <p className=" p-2   flex  w-full text-body-dark items-center ">
+                <div className='flex ml-4 w-full '><strong className="w-5/12 sm:w-4/12 tracking-widest text-lg font-extrabold">
+                  {t("Shipping Charges")}
+                </strong>
+                :<span className=" items-center justify-end  mr-4 flex w-7/12 sm:w-8/12 ps-4 font-bold text-lg ">{shipping_charge}</span></div>
+              </p> : null }
              {data?.order?.children?.length > 1 ?  <p className=" p-2   flex  w-full text-body-dark items-center ">
                 <div className='flex ml-4 w-full '><strong className="w-5/12 sm:w-4/12 tracking-widest text-lg font-extrabold">
                   {t("text-total-amount")}
