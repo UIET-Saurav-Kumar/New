@@ -86,6 +86,7 @@ export const calculateTotal = (items: Item[]) =>{
           shops.push({
             slug:item.shop.slug,
             delivery_charges:item.shop.delivery_charges,
+            free_delivery_order_value:item.shop.free_delivery_order_value,
             order_price:item.quantity! * item.price   
           })
         }else{
@@ -97,7 +98,7 @@ export const calculateTotal = (items: Item[]) =>{
   } , 0);
 
   shops.forEach((shop:any)=>{
-    if(shop.order_price<=shop.delivery_charges){
+    if(shop.order_price<shop.free_delivery_order_value){
       total=total+parseFloat(shop.delivery_charges);
     }
   })
