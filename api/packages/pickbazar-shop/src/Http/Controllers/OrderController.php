@@ -198,9 +198,9 @@ class OrderController extends CoreController
 
         foreach($list as $key=>$val)
         {
-            $list[$key]['customer_name'] = $val['customer']['name'];
-            $list[$key]['customer_email'] = $val['customer']['email'];
-            $list[$key]['order_status'] = $val['status']['name'];
+            $list[$key]['customer_name'] = $val['customer']['name'] ?? '';
+            $list[$key]['customer_email'] = $val['customer']['email'] ?? '';
+            $list[$key]['order_status'] = $val['status']['name'] ?? '';
         }
         
         # add headers for each column in the CSV download
