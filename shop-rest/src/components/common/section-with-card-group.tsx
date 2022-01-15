@@ -16,6 +16,7 @@ interface ICardItem {
 interface Props {
   count?: number;
   heading: string;
+  delivery_status:boolean;
   addActionText?: string;
   items: ICardItem[] | undefined;
   onSelect: (item: any) => void;
@@ -29,6 +30,7 @@ const SectionWithCardGroup = ({
   heading,
   addActionText,
   items,
+  delivery_status,
   onAdd,
   onEdit,
   onDelete,
@@ -43,6 +45,7 @@ const SectionWithCardGroup = ({
 
   return (
     <>
+    
       <div className="flex items-center justify-between mb-5 md:mb-8">
         <div className="flex items-center space-s-3 md:space-s-4">
           {count && (
@@ -70,53 +73,117 @@ const SectionWithCardGroup = ({
       <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {items?.length ? (
           items?.map((item, idx) => (
-            <div
-              key={item.id}
-              className={cn(
-                "relative p-4 rounded border cursor-pointer group hover:border-accent",
-                {
-                  "border-accent shadow-sm": selected === idx,
-                  "bg-gray-100 border-transparent": selected !== idx,
-                }
-              )}
-              onClick={() => select(item, idx)}
-            >
-              <p className="text-sm text-heading font-semibold mb-3 capitalize">
-                {item.title}
-              </p>
+            (delivery_status==true)  
+            ?
+            <>
+            {
               
-              <p className="text-sm text-sub-heading">
-                {(item.title=="Self Pickup") &&
-                (
-                  <>
-                    
-                  </>
+              (item.id==0)
+              ?
+              ""
+              :
+              (<div
+                key={item.id}
+                className={cn(
+                  "relative p-4 rounded border cursor-pointer group hover:border-accent",
+                  {
+                    "border-accent shadow-sm": selected === idx,
+                    "bg-gray-100 border-transparent": selected !== idx,
+                  }
                 )}
-                {item.description
-                  ? item.description
-                  : formatAddress(item.address)}
-              </p>
-              <div className="absolute top-4 end-4 flex space-s-2 opacity-0 group-hover:opacity-100">
-                {onEdit && (
-                  <button
-                    className="flex items-center justify-center w-5 h-5 rounded-full bg-accent text-light"
-                    onClick={() => onEdit(item)}
-                  >
-                    <span className="sr-only">{t("text-edit")}</span>
-                    <PencilIcon className="w-3 h-3" />
-                  </button>
+                onClick={() => select(item, idx)}
+              >
+                <p className="text-sm text-heading font-semibold mb-3 capitalize">
+                  {item.title}
+                </p>
+                
+                <p className="text-sm text-sub-heading">
+                  {(item.title=="Self Pickup") &&
+                  (
+                    <>
+                      
+                    </>
+                  )}
+                  {item.description
+                    ? item.description
+                    : formatAddress(item.address)}
+                </p>
+                <div className="absolute top-4 end-4 flex space-s-2 opacity-0 group-hover:opacity-100">
+                  {onEdit && (
+                    <button
+                      className="flex items-center justify-center w-5 h-5 rounded-full bg-accent text-light"
+                      onClick={() => onEdit(item)}
+                    >
+                      <span className="sr-only">{t("text-edit")}</span>
+                      <PencilIcon className="w-3 h-3" />
+                    </button>
+                  )}
+                  {onDelete && (
+                    <button
+                      className="flex items-center justify-center w-5 h-5 rounded-full bg-red-600 text-light"
+                      onClick={() => onDelete(item)}
+                    >
+                      <span className="sr-only">{t("text-delete")}</span>
+                      <CloseIcon className="w-3 h-3" />
+                    </button>
+                  )}
+                </div>
+              </div>)
+            }
+            </>
+            :
+            (item.id==0
+            ?
+            <>
+              <div
+                key={item.id}
+                className={cn(
+                  "relative p-4 rounded border cursor-pointer group hover:border-accent",
+                  {
+                    "border-accent shadow-sm": selected === idx,
+                    "bg-gray-100 border-transparent": selected !== idx,
+                  }
                 )}
-                {onDelete && (
-                  <button
-                    className="flex items-center justify-center w-5 h-5 rounded-full bg-red-600 text-light"
-                    onClick={() => onDelete(item)}
-                  >
-                    <span className="sr-only">{t("text-delete")}</span>
-                    <CloseIcon className="w-3 h-3" />
-                  </button>
-                )}
+                onClick={() => select(item, idx)}
+              >
+                <p className="text-sm text-heading font-semibold mb-3 capitalize">
+                  {item.title}
+                </p>
+                
+                <p className="text-sm text-sub-heading">
+                  {(item.title=="Self Pickup") &&
+                  (
+                    <>
+                      
+                    </>
+                  )}
+                  {item.description
+                    ? item.description
+                    : formatAddress(item.address)}
+                </p>
+                <div className="absolute top-4 end-4 flex space-s-2 opacity-0 group-hover:opacity-100">
+                  {onEdit && (
+                    <button
+                      className="flex items-center justify-center w-5 h-5 rounded-full bg-accent text-light"
+                      onClick={() => onEdit(item)}
+                    >
+                      <span className="sr-only">{t("text-edit")}</span>
+                      <PencilIcon className="w-3 h-3" />
+                    </button>
+                  )}
+                  {onDelete && (
+                    <button
+                      className="flex items-center justify-center w-5 h-5 rounded-full bg-red-600 text-light"
+                      onClick={() => onDelete(item)}
+                    >
+                      <span className="sr-only">{t("text-delete")}</span>
+                      <CloseIcon className="w-3 h-3" />
+                    </button>
+                  )}
+                </div>
               </div>
-            </div>
+            </>
+            :"")
           ))
         ) : (
           <div className="relative px-5 py-6 text-body text-center bg-gray-100 rounded border border-border-200">

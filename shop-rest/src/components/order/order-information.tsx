@@ -33,7 +33,7 @@ const OrderInformation = (props: Props) => {
       amount: checkoutData.shipping_charge ?? 0,
     }
   );
-  const base_amount = calculateTotal(available_items);
+  const base_amount = calculateTotal(available_items).total;
   const { price: sub_total } = usePrice(
     checkoutData && {
       amount: base_amount,
@@ -86,10 +86,10 @@ const OrderInformation = (props: Props) => {
           <p className="text-sm text-body">{t("text-tax")}</p>
           <span className="text-sm text-body">{tax}</span>
         </div> */}
-        <div className="flex justify-between mb-3">
+        {/* <div className="flex justify-between mb-3">
           <p className="text-sm text-body">{t("text-shipping")}</p>
           <span className="text-sm text-body">{shipping}</span>
-        </div>
+        </div> */}
         {discount ? (
           <div className="flex justify-between mb-4">
             <p className="text-sm text-body me-4">{t("text-discount")}</p>

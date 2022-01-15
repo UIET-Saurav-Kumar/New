@@ -88,14 +88,18 @@ class OrderRepository extends BaseRepository
         $discount = $this->calculateDiscount($request);
         if ($discount) {
 
-            $request['paid_total'] = $request['amount'] + $request['sales_tax'] + $request['delivery_fee'] - $discount;
-            $request['total'] = $request['amount'] + $request['sales_tax'] + $request['delivery_fee'] - $discount;
+            $request['paid_total'] = $request['amount'] + $request['sales_tax']  - $discount;
+            // + $request['delivery_fee']
+            $request['total'] = $request['amount'] + $request['sales_tax']  - $discount;
+            // + $request['delivery_fee']
 
 
             $request['discount'] =  $discount;
         } else {
-            $request['paid_total'] = $request['amount'] + $request['sales_tax'] + $request['delivery_fee'];
-            $request['total'] = $request['amount'] + $request['sales_tax'] + $request['delivery_fee'];
+            $request['paid_total'] = $request['amount'] + $request['sales_tax'] ;
+            // + $request['delivery_fee']
+            $request['total'] = $request['amount'] + $request['sales_tax'] ;
+            // + $request['delivery_fee']
         }
         $payment_gateway = $request['payment_gateway'];
 
@@ -402,6 +406,7 @@ class OrderRepository extends BaseRepository
         }
         foreach ($productsByShop as $shop_id => $cartProduct) {
             $amount = array_sum(array_column($cartProduct, 'subtotal'));
+            $delivery_fee=$this->getDeliveryCharges($request,$shop_id);
             $orderInput = [
                 'tracking_number' => Str::random(12),
                 'shop_id' => $shop_id,
@@ -410,7 +415,7 @@ class OrderRepository extends BaseRepository
                 'shipping_address' => $request->shipping_address,
                 'customer_contact' => $request->customer_contact,
                 'delivery_time' => $request->delivery_time,
-                'delivery_fee' => 0,
+                'delivery_fee' => $delivery_fee,
                 'sales_tax' => 0,
                 'discount' => 0,
                 'parent_id' => $id,
@@ -426,5 +431,13 @@ class OrderRepository extends BaseRepository
             }
             
         }
+    }
+
+    public function getDeliveryCharges($request,$shop_id){
+        $shop=Shop::find($shop_id);
+        if($request['delivery_fee']>0){
+            return $shop->delivery_charges;
+        }
+        return 0;
     }
 }

@@ -78,7 +78,7 @@ const PaymentForm = () => {
   
   console.log('phone number',data?.me?.phone_number)
 
-  const { items } = useCart();
+  const { items, delivery_charges} = useCart();
   const {
     billing_address,
     shipping_address,
@@ -92,7 +92,7 @@ const PaymentForm = () => {
     (item: any) => !checkoutData?.unavailable_products?.includes(item.id)
   );
 
-  const subtotal = calculateTotal(available_items);
+  const subtotal = calculateTotal(available_items).total;
   const total = calculatePaidTotal(
     {
       totalAmount: subtotal,
@@ -114,7 +114,7 @@ const PaymentForm = () => {
       paid_total: total,
       total,
       sales_tax: checkoutData?.total_tax,
-      delivery_fee: checkoutData?.shipping_charge,
+      delivery_fee: delivery_charges,
       delivery_time: delivery_time?.description,
       payment_gateway: values.payment_gateway,
       billing_address: {

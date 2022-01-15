@@ -84,7 +84,8 @@ const generateFinalState = (state: State, items: Item[]) => {
     items: calculateItemTotals(items),
     totalItems: calculateTotalItems(items),
     totalUniqueItems,
-    total: calculateTotal(items),
+    total: calculateTotal(items).total,
+    delivery_charges:calculateTotal(items).delivery_charges,
     isEmpty: totalUniqueItems === 0,
   };
 };

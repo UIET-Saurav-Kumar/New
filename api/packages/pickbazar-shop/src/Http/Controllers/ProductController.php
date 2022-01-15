@@ -193,7 +193,7 @@ class ProductController extends CoreController
 
         if($location){
             $shops=ShopRepository::getSortedShops($location);
-            return Product::whereIn("shop_id",$shops)->where("is_featured",1)->get();
+            return Product::whereIn("shop_id",$shops)->with(['shop'])->where("is_featured",1)->get();
 
         }
         return Product::where("is_featured",1)->limit($limit)->get();
@@ -250,7 +250,7 @@ class ProductController extends CoreController
 
         if($location){
             $shops=ShopRepository::getSortedShops($location);
-            return Product::whereIn("shop_id",$shops)->where('is_offer',1)->where("is_featured",1)->get();
+            return Product::whereIn("shop_id",$shops)->with(['shop'])->where('is_offer',1)->where("is_featured",1)->get();
 
         }
         return Product::where("is_featured",1)->where('is_offer',1)->limit($limit)->get();

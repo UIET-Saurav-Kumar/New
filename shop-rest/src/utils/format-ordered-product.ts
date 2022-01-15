@@ -1,3 +1,4 @@
+
 export function formatOrderedProduct(product: any) {
   return {
     product_id: product?.productId ? product.productId : product.id,

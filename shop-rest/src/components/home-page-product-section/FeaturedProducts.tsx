@@ -23,11 +23,8 @@ export default function featuredProducts({}) {
         location : ((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any
     });
 
-    useEffect(()=>{
-        console.log(getLocation?.formattedAddress,"from featured products")
-    })
 
-    console.log('featured product',data)
+
 
     // data?.featureProducts?.data = []
 
@@ -83,12 +80,6 @@ export default function featuredProducts({}) {
     }
 
     const typeId = [1,2,3,4,5,6,7,8,9,10,11,14,15,16,18,19,20,21,22]
-
-    // const productTypes =  data?.featureProducts.data.filter(function(product){
-    //     return product.type_id == id ? product : null;
-    //  })
-
-    //  console.log(productTypes)
 
        
    const groceryArray =  data?.featureProducts.data.filter(function(product){
@@ -167,12 +158,6 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
     return product.type_id == 22 ? product : null;
  })
 
-   console.log('grocery Array',groceryArray);
-   console.log('bakery Array',bakeryArray);
-   console.log('makeup Array',makeupArray);
-   console.log('bags Array',bagsArray);
-   console.log('buffet Array',buffetArray);
-   console.log('array length', groceryArray?.length)
 
 
     return (

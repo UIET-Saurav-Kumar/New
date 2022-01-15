@@ -65,7 +65,6 @@ export default function OrderPage() {
     resetCart();
     clearCheckoutData();
     updateSearchTerm("");
-    console.log(data?.order)
   }, []);
 
   
@@ -139,7 +138,17 @@ export default function OrderPage() {
         return <p>{price}</p>;
       },
     },
-
+    {
+      title: t("Delivery Fee"),
+      dataIndex: "delivery_fee",
+      key: "delivery_fee",
+      align: alignRight,
+      // width: 100,
+      render: (delivery_fee: any) => {
+        const { price } = usePrice(data && { amount: Number(delivery_fee) });
+        return <p>{price}</p>;
+      },
+    },
     {
       title: "",
       dataIndex: "tracking_number",

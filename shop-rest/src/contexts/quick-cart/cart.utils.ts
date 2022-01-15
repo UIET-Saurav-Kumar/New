@@ -96,14 +96,18 @@ export const calculateTotal = (items: Item[]) =>{
     }
     return total + item.quantity! * item.price
   } , 0);
-
+  var delivery_charges=0;
   shops.forEach((shop:any)=>{
     if(shop.order_price<shop.free_delivery_order_value){
       total=total+parseFloat(shop.delivery_charges);
+      delivery_charges=delivery_charges+parseFloat(shop.delivery_charges);
     }
   })
 
-  return total
+  return {
+    total:total,
+    delivery_charges:delivery_charges
+  }
 }
 
 export const calculateTotalItems = (items: Item[]) =>
@@ -126,3 +130,4 @@ export const calculatePaidTotal = (
   }
   return paidTotal;
 };
+
