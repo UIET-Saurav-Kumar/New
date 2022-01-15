@@ -1,4 +1,4 @@
-import SectionWithCardGroup from "@components/common/section-with-card-group";
+import SectionWithCardGroup from "@components/common/section-with-card-group-address";
 import { useModalAction } from "@components/ui/modal/modal.context";
 import { useCheckout } from "@contexts/checkout.context";
 import { loggedIn } from "@utils/is-loggedin";

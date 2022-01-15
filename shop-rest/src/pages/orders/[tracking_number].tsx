@@ -126,18 +126,6 @@ export default function OrderPage() {
       align: "center",
       render: (products: any) => formatString(products?.length, t("text-item")),
     },
-
-    {
-      title: t("Price"),
-      dataIndex: "paid_total",
-      key: "paid_total",
-      align: alignRight,
-      // width: 100,
-      render: (paid_total: any) => {
-        const { price } = usePrice(data && { amount: Number(paid_total) });
-        return <p>{price}</p>;
-      },
-    },
     {
       title: t("Delivery Fee"),
       dataIndex: "delivery_fee",
@@ -149,6 +137,18 @@ export default function OrderPage() {
         return <p>{price}</p>;
       },
     },
+    {
+      title: t("text-total-price"),
+      dataIndex: "paid_total",
+      key: "paid_total",
+      align: alignRight,
+      // width: 100,
+      render: (paid_total: any) => {
+        const { price } = usePrice(data && { amount: Number(paid_total) });
+        return <p>{price}</p>;
+      },
+    },
+    
     {
       title: "",
       dataIndex: "tracking_number",
