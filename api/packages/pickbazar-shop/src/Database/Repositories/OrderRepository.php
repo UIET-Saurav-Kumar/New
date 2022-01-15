@@ -420,8 +420,8 @@ class OrderRepository extends BaseRepository
                 'discount' => 0,
                 'parent_id' => $id,
                 'amount' => $amount,
-                'total' => $amount,
-                'paid_total' => $amount,
+                'total' => $amount+$delivery_fee,
+                'paid_total' => $amount+$delivery_fee,
             ];
 
             $order = $this->create($orderInput);

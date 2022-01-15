@@ -128,7 +128,7 @@ export default function OrderPage() {
     },
 
     {
-      title: t("text-total-price"),
+      title: t("Price"),
       dataIndex: "paid_total",
       key: "paid_total",
       align: alignRight,
