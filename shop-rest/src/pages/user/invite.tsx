@@ -59,9 +59,7 @@ export const InvitePage = () => {
 	const copyText = () => {
         setClick(true);
 	}
-  useEffect(()=>{
-    console.log(data);
-  },[])
+
   return (
     <>
     <Navbar label='Invite Friends'/>

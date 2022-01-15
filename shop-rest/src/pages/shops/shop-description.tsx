@@ -12,7 +12,6 @@ import { scroller, Element } from "react-scroll";
 
 export default function ShopDescription({data} :any) {
 
- console.log('shop description', data.address.street_address);
 
     const { t } = useTranslation("common") ;
 

@@ -87,8 +87,6 @@ export default function OrderPage() {
     data && { amount: data?.order?.discount ?? 0 }
   );
 
-  console.log('order/id',data?.order);
-  console.log('children',data?.order.children)
 
   // console.log(data?.order)  
 

@@ -77,8 +77,6 @@ const { pathname, query } = router;
 
     const seoData = await fetchShopSeo(data.slug)
 
-    console.log(seoData);
-    console.log('hello',data);
   };
 
   seoFunction(data);

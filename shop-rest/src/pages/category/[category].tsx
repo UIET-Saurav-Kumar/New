@@ -37,7 +37,6 @@ export async function getStaticPaths({ locales }: GetStaticPathsContext) {
   }
 export const getStaticProps: GetStaticProps = async ({ params,locale }) => {
 
-    console.log(params)
     const queryClient = new QueryClient();
     await queryClient.prefetchQuery("settings", fetchSettings);
     await queryClient.prefetchInfiniteQuery(
@@ -76,7 +75,6 @@ const ShopsPage = () => {
 
   useEffect(()=>{
     const { query } = router;
-    console.log(query.text,"query");
   }),
 
   function handleClick(path: string) {

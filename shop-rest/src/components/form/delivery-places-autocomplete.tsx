@@ -38,7 +38,7 @@ export default function DeliveryPlacesAutocomplete({address,
     const place = autocomplete.getPlace();
 
     if (!place.geometry || !place.geometry.location) {
-      console.log("Returned place contains no geometry");
+      ("Returned place contains no geometry");
       return;
     }
 

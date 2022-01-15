@@ -48,8 +48,6 @@ const useShopsQuery = (
     QueryKey
   >
 ) => {
-  console.log(params,"params");
-  console.log(options,"options");
   return useInfiniteQuery<PaginatedShop, Error>(
     [API_ENDPOINTS.SHOPS, params],
     fetchShops,

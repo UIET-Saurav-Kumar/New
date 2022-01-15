@@ -78,7 +78,6 @@ export default function UploadBill({user} : Props) {
 
 
   function onSubmit(values: any) {
-    console.log(values);
     storeBill(
       {
         name: values.name,

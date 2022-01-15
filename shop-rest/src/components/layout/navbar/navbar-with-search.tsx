@@ -152,7 +152,6 @@ const router = useRouter();
     function changeLocation(data:any){
        
         var location=JSON.stringify(data);
-        console.log(data?.formattedAddress);
         document.getElementById("location_id").value=data?.formattedAddress;
         setLocation(data?.formattedAddress);
 

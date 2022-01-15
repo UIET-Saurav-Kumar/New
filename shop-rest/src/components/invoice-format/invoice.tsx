@@ -23,9 +23,6 @@ export default function Invoice() {
         tracking_number: query.tracking_number as string,
       });
 
-      console.log('shop name',data?.order?.children)
-      console.log('data',data)
-
       // const orderTableColumns = [
 
       //   {

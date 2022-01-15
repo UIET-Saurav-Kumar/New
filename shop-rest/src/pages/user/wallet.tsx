@@ -49,9 +49,6 @@ const ReferralActivity = () => {
         }
     }
 
-    useEffect(()=>{
-        console.log(data)
-    },[data])
 
 
 	const [accepted, setAccepted ] = useState([]);

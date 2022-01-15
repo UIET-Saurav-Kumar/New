@@ -32,7 +32,6 @@ const fetchProducts = async ({
     const response = await ProductService.fetchUrl(pageParam);
     fetchedData = response.data;
   } else {
-    console.log(params,"params")
     const response = await ProductService.find(params as ParamsType);
     fetchedData = response.data;
   }

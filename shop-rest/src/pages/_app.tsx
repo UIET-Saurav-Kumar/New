@@ -43,20 +43,12 @@ const AppSettings: React.FC = (props: any) => {
   const slugname  = props?.children?._owner?.pendingProps?.router?.query?.slug;
 
   
-  console.log('props',props)
-  console.log('children',props?.children)
-  console.log('owner',props?.children?._owner);
-  console.log('after routname',routname)
-  console.log('after slugname',slugname)
 
   if(slugname !== undefined && routname == 'shops')
   {
-    console.log('inside if')
     const { data, isLoading: loading, error } = useSettingsQuery();
 
     const shop = fetchShopSeo(props?.children?._owner?.pendingProps?.router?.query?.slug as string);
-    console.log('app tsx console');
-    console.log(shop);
     if (loading) return <PageLoader />;
     if (error) return <ErrorMessage message={error.message} />;
     return <SettingsProvider initialValue={data?.settings?.options} {...props} />;

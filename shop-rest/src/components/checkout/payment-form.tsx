@@ -151,7 +151,6 @@ const PaymentForm = () => {
     });
   }
 
-  console.log('customer',data)
   const isCashOnDelivery = watch("payment_gateway");
   return (
     <>
