@@ -41,8 +41,6 @@ Route::post('/social-login-token', 'PickBazar\Http\Controllers\UserController@so
 Route::get('/signup-offer','PickBazar\Http\Controllers\SignupOfferController@show');
 Route::post('/signup-offer','PickBazar\Http\Controllers\SignupOfferController@store');
 
-Route::post('/cart-list','PickBazar\Http\Controllers\CartController@store');
-
 Route::apiResource('products', ProductController::class, [
     'only' => ['index', 'show']
 ]);
@@ -116,18 +114,13 @@ Route::get('get-referral-commission','PickBazar\Http\Controllers\ShopController@
 
 Route::post('shop-delivery-status','PickBazar\Http\Controllers\ShopController@shopDeliveryStatus');
 
-
 Route::post('shop-delivery-config','PickBazar\Http\Controllers\ShopController@shopDeliveryConfig');
-
-
-
 
 Route::get('get-wallet-commission','PickBazar\Http\Controllers\InviteController@getWalletCommission');
 
 Route::get('referral-network','PickBazar\Http\Controllers\InviteController@refferral_network');
 
 Route::any('order/success','PickBazar\Http\Controllers\GatewayResponse@process_response');
-
 
 Route::post('import-products', 'PickBazar\Http\Controllers\ProductController@importProducts');
 Route::post('import-variation-options', 'PickBazar\Http\Controllers\ProductController@importVariationOptions');
@@ -205,6 +198,9 @@ Route::group(['middleware' => ['can:' . Permission::CUSTOMER, 'auth:sanctum']], 
     Route::post('store-license-attachment', 'PickBazar\Http\Controllers\AttachmentController@storeLicenseAttachment');
     Route::post('bill-attachment', 'PickBazar\Http\Controllers\AttachmentController@storeBillAttachment');
     
+    Route::post('/cart-list','PickBazar\Http\Controllers\CartController@index');
+    Route::post('/cart-add','PickBazar\Http\Controllers\CartController@store');
+    Route::post('/cart-remove','PickBazar\Http\Controllers\CartController@remove');
     
     Route::post('checkout/verify', 'PickBazar\Http\Controllers\CheckoutController@verify');
     Route::get('me', 'PickBazar\Http\Controllers\UserController@me');
