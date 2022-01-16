@@ -11,14 +11,43 @@ use PickBazar\Exceptions\PickbazarException;
 
 class CartController extends CoreController
 {
+    public function index(Request $request)
+    {
+        $user = $request->user();
+        $itemlist = json_decode($user->cart_list,true);
+        $cart_list = [];
+        foreach ($itemlist as $key => $value) 
+        {
+            if (empty($value)) 
+            {
+                return new PickbazarException('Invalid Request', 400);
+            }
+            else
+            {
+                $product_detail = Product::find($value['productId']);
+                $cart_list[] = array(
+                    'product_id' => $value['productId'],
+                    'product_name' => $product_detail->name,
+                    'product_price' => $product_detail->price,
+                    'product_quantity' => $value['qty'],
+                    'product_image' => $product_detail->image['thumbnail'],
+                    'product_total' => $value['qty'] * $product_detail->sale_price,
+                );
+            }
+        }
+        
+        return $cart_list;
+    }
     public function store(Request $request)
     {
+        $user = $request->user();
+        
         $req_data = $request->all();
         $product_detail = array();
         $cart_list = array();
-        $itemlist = $req_data['items'] ?? [];
-        $remove_item = $req_data['itemremove'] ?? [];
-        $add_item  = $req_data['itemadd'] ?? [];
+        $itemlist = json_decode($user->cart_list, true);
+        
+        $add_item  = $req_data['items'] ?? [];
 
         // merge itemlist and add_item
         $itemlist = array_merge($itemlist, $add_item);
@@ -31,37 +60,65 @@ class CartController extends CoreController
             }
             else
             {
-                if(!empty($remove_item))
-                {
-                    $is_exist = array_search($value['productId'], array_column($remove_item, 'productId'));
-                    if($is_exist > -1)
-                        continue;
-                    
-                    $product_detail = Product::find($value['productId']);
-                    $cart_list[] = array(
-                        'product_id' => $value['productId'],
-                        'product_name' => $product_detail->name,
-                        'product_price' => $product_detail->price,
-                        'product_quantity' => $value['qty'],
-                        'product_image' => $product_detail->image['thumbnail'],
-                        'product_total' => $value['qty'] * $product_detail->sale_price,
-                    );
-                }
-                else
-                {
-                    $product_detail = Product::find($value['productId']);
-                    $cart_list[] = array(
-                        'product_id' => $value['productId'],
-                        'product_name' => $product_detail->name,
-                        'product_price' => $product_detail->price,
-                        'product_quantity' => $value['qty'],
-                        'product_image' => $product_detail->image['thumbnail'],
-                        'product_total' => $value['qty'] * $product_detail->sale_price,
-                    );
-                }
-                
+                $product_detail = Product::find($value['productId']);
+                $cart_list[] = array(
+                    'product_id' => $value['productId'],
+                    'product_name' => $product_detail->name,
+                    'product_price' => $product_detail->price,
+                    'product_quantity' => $value['qty'],
+                    'product_image' => $product_detail->image['thumbnail'],
+                    'product_total' => $value['qty'] * $product_detail->sale_price,
+                );
             }
         }
+        // add cart list to user cart list
+        $user->cart_list = json_encode($itemlist);
+        $user->save();
+        return $cart_list;
+    }
+
+    public function remove(Request $request)
+    {
+        $user = $request->user();
+    
+        $req_data = $request->all();
+        $product_detail = array();
+        $cart_list = array();
+        $itemlist = json_decode($user->cart_list, true);
+        $remove_item = $req_data['items'] ?? [];
+    
+        foreach ($itemlist as $key => $value) 
+        {
+            if (empty($value)) 
+            {
+                return new PickbazarException('Invalid Request', 400);
+            }
+            else
+            {
+                $is_exist = array_search($value['productId'], array_column($remove_item, 'productId'));
+                if($is_exist > -1)
+                {
+                    unset($itemlist[$key]);
+                    continue;
+                }
+                
+                $product_detail = Product::find($value['productId']);
+                $cart_list[] = array(
+                    'product_id' => $value['productId'],
+                    'product_name' => $product_detail->name,
+                    'product_price' => $product_detail->price,
+                    'product_quantity' => $value['qty'],
+                    'product_image' => $product_detail->image['thumbnail'],
+                    'product_total' => $value['qty'] * $product_detail->sale_price,
+                );
+            }
+        }
+        //rest itemlist index after remove
+        $itemlist = array_values($itemlist);
+        // add cart list to user cart list
+        $user->cart_list = json_encode($itemlist);
+        $user->save();
+
         return $cart_list;
     }
 }
