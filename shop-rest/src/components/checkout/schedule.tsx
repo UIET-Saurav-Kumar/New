@@ -15,7 +15,7 @@ const Schedule = ({ count }: Props) => {
   function isDeliveryAvailable():Boolean{
     var delivery_status=false;
     items.forEach(element=>{
-      if(element.shop.delivery_status==1){
+      if(element?.shop?.delivery_status == 1){
         delivery_status=true;
       }
     })
@@ -29,6 +29,7 @@ const Schedule = ({ count }: Props) => {
   function handleSelect(item: any) {
     updateDeliveryTime(item);
   }
+
   return (
     <SectionWithCardGroup
       count={count}

@@ -17,13 +17,13 @@ const CheckoutCartItem = ({ item, notAvailable }: Props) => {
   const router = useRouter();
 
   const { price } = usePrice({
-    amount: item.itemTotal,
+    amount: item?.itemTotal,
   });
   const { price:delivery_charges } = usePrice({
-    amount: parseFloat(item.shop.delivery_charges),
+    amount: parseFloat(item?.shop?.delivery_charges),
   });
   const { price:free_delivery_order_value } = usePrice({
-    amount: parseFloat(item.shop.free_delivery_order_value),
+    amount: parseFloat(item?.shop?.free_delivery_order_value),
   });
   
   const { items } = useCart();
@@ -35,25 +35,25 @@ const CheckoutCartItem = ({ item, notAvailable }: Props) => {
     var shop_items:any=[];
     var p:number=0;
     items.forEach(element=>{
-      if(item.shop.slug==element.shop.slug){
+      if(item?.shop?.slug==element?.shop?.slug){
         shop_items.push(element);
-        p=p+parseInt(element.itemTotal);
+        p=p+parseInt(element?.itemTotal);
       }
     })
     setShopOrderPrice(p)
     setShopItems(shop_items)    
   }, [])
   function isWithDelivery():Boolean{
-    if(item.shop.delivery_status){
+    if(item?.shop?.delivery_status){
       return true;
     }
     return false
   }
 
   function calculateTax(){
-    var tax=JSON.parse(item.tax);
+    var tax=JSON.parse(item?.tax);
     if(tax){
-      var itemTotal=(item.itemTotal)?item.itemTotal:0;
+      var itemTotal=(item?.itemTotal)?item.itemTotal:0;
       var rate=(tax.rate)?tax.rate:0;
       var value=(parseFloat(rate)*parseFloat(itemTotal))/100;
       const {price:total}=usePrice({
@@ -65,7 +65,7 @@ const CheckoutCartItem = ({ item, notAvailable }: Props) => {
 
   return (
     <>
-    <div className={cn("flex justify-between py-2")} key={item.id}>
+    <div className={cn("flex justify-between py-2")} key={item?.id}>
       <p className="flex items-center justify-between text-base">
         <span
           className={cn("text-sm", notAvailable ? "text-red-500" : "text-body")}
@@ -83,10 +83,10 @@ const CheckoutCartItem = ({ item, notAvailable }: Props) => {
       <span
         className={cn("text-sm", notAvailable ? "text-red-500" : "text-body")}
       >
-        {item.shop.name}
+        {item?.shop?.name}
       </span>
     </div>
-    <div className={cn("flex justify-between py-2")} key={item.id}>
+    <div className={cn("flex justify-between py-2")} key={item?.id}>
       <p className="flex items-center justify-between text-base">
         <span
           className={cn("text-sm", notAvailable ? "text-red-500" : "text-body")}
@@ -97,10 +97,10 @@ const CheckoutCartItem = ({ item, notAvailable }: Props) => {
               notAvailable ? "text-red-500" : "text-heading"
             )}
           >
-            {item.quantity}
+            {item?.quantity}
           </span>
           <span className="mx-2">x</span>
-          <span>{item.name}</span> | <span>{item.unit}</span>
+          <span>{item?.name}</span> | <span>{item?.unit}</span>
         </span>
       </p>
       <span
@@ -111,7 +111,7 @@ const CheckoutCartItem = ({ item, notAvailable }: Props) => {
     </div>
     {
       calculateTax()&&(
-        <div className={cn("flex justify-between py-2")} key={item.id}>
+        <div className={cn("flex justify-between py-2")} key={item?.id}>
           <p className="flex items-center justify-between text-base">
             <span
               className={cn("text-sm", notAvailable ? "text-red-500" : "text-body")}
@@ -140,7 +140,7 @@ const CheckoutCartItem = ({ item, notAvailable }: Props) => {
     {
       isWithDelivery()&&(
         <>
-          <div className={cn("flex justify-between py-2")} key={item.id}>
+          <div className={cn("flex justify-between py-2")} key={item?.id}>
             <p className="flex items-center justify-between text-base">
               <span
                 className={cn("text-sm", notAvailable ? "text-red-500" : "text-body")}
@@ -152,7 +152,7 @@ const CheckoutCartItem = ({ item, notAvailable }: Props) => {
               className={cn("text-sm", notAvailable ? "text-red-500" : "text-body")}
             >
             {
-              shopOrderPrice>item.shop.free_delivery_order_value
+              shopOrderPrice>item?.shop?.free_delivery_order_value
               ?
               "Free Delivery"
               :
@@ -164,7 +164,7 @@ const CheckoutCartItem = ({ item, notAvailable }: Props) => {
  
             {
               
-              shopOrderPrice>item.shop.free_delivery_order_value
+              shopOrderPrice>item?.shop?.free_delivery_order_value
               ?
               ""
               :
@@ -174,7 +174,7 @@ const CheckoutCartItem = ({ item, notAvailable }: Props) => {
                     className="text-sm text-red-500"
                   >
                     Buy items of {free_delivery_order_value} to get free delivery
-                    <button onClick={()=>router.push("/shops/"+item.shop?.slug)} className="inline-flex items-center justify-center flex-shrink-0 font-semibold leading-none rounded outline-none transition duration-300 ease-in-out focus:outline-none focus:shadow focus:ring-1 focus:ring-accent-700 bg-accent text-light border border-transparent hover:bg-accent-hover px-2 py-0 h-8 w-10 mt-5 ml-3" style={{fontSize:"10px"}}>Buy more</button>
+                    <button onClick={()=>router.push("/shops/"+item?.shop?.slug)} className="inline-flex items-center justify-center flex-shrink-0 font-semibold leading-none rounded outline-none transition duration-300 ease-in-out focus:outline-none focus:shadow focus:ring-1 focus:ring-accent-700 bg-accent text-light border border-transparent hover:bg-accent-hover px-2 py-0 h-8 w-10 mt-5 ml-3" style={{fontSize:"10px"}}>Buy more</button>
                   </p>
                 )
           
