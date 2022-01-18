@@ -88,7 +88,7 @@ const CreateOrUpdateAddressForm = () => {
       <form
         onSubmit={handleSubmit(onSubmit)}
         noValidate
-        className="grid grid-cols-2 gap-5 h-full"
+        className="grid grid-cols-2 -mt-20 gap-5 h-full"
       >
         <div>
           {/* <Label>{t("text-type")}</Label> */}
