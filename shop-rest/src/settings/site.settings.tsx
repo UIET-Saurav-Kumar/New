@@ -147,9 +147,9 @@ export const siteSettings = {
   deliverySchedule: [
     {
       id: "0",
-      title: "Self Pickup",
+      title: " Pickup or Avail ",
       is_delivery:false,
-      description: "self pickup",
+      description: "at Shop | Salon | Restraunt | Takeaways",
     },
     // {
     //   id: "1",
