@@ -31,6 +31,7 @@ const SectionWithCardGroup = ({
   addActionText,
   items,
   delivery_status,
+  shopCategory,
   onAdd,
   onEdit,
   onDelete,
@@ -63,7 +64,7 @@ const SectionWithCardGroup = ({
       <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {items?.length ? (
           items?.map((item, idx) => (
-            (delivery_status==true)  
+            (delivery_status==true || (shopCategory !== 'Services','') || (shopCategory !== 'Salon & Spa','') ) 
             ?
             <>
             {
@@ -81,7 +82,7 @@ const SectionWithCardGroup = ({
                     "bg-gray-100 border-transparent": selected !== idx,
                   }
                 )}
-                onClick={() => select(item, idx)}
+                onClick={() => select(item, idx)}object
               >
                 <p className="text-sm text-heading font-semibold mb-3 capitalize">
                   {item.title}
@@ -98,6 +99,7 @@ const SectionWithCardGroup = ({
                     ? item.description
                     : formatAddress(item.address)}
                 </p>
+
                 <div className="absolute top-4 end-4 flex space-s-2 opacity-0 group-hover:opacity-100">
                   {onEdit && (
                     <button
@@ -122,7 +124,7 @@ const SectionWithCardGroup = ({
             }
             </>
             :
-            (item.id==0
+            (item.id==0 
             ?
             <>
               <div
