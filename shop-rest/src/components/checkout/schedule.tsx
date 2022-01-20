@@ -1,3 +1,4 @@
+
 import SectionWithCardGroup from "@components/common/section-with-card-group";
 import { useCheckout } from "@contexts/checkout.context";
 import { siteSettings } from "@settings/site.settings";
@@ -22,9 +23,22 @@ const Schedule = ({ count }: Props) => {
     return delivery_status;
   }
 
+  // getShopCategory
+  function getShopCategory(){
+
+    var shopCategory = items[0].shop?.shop_categories?.replace(/[{":,0123456789}]/g,'').slice(5,-3)
+
+    return shopCategory;
+  }
+
+  console.log('items',items);
+  console.log('shop category',getShopCategory());
+
+
   useEffect(() => {
     updateDeliveryTime(siteSettings.deliverySchedule[0]);
   }, []);
+
 
   function handleSelect(item: any) {
     updateDeliveryTime(item);
@@ -37,6 +51,7 @@ const Schedule = ({ count }: Props) => {
       items={siteSettings.deliverySchedule}
       onSelect={handleSelect}
       delivery_status={isDeliveryAvailable()}
+      shopCategory={getShopCategory()}
     />
   );
 };

@@ -2,6 +2,7 @@ import React, { FC, useMemo } from "react";
 type UserAddress = {
   [key: string]: unknown;
 };
+
 export interface State {
   billing_address: UserAddress | null;
   // shipping_address: UserAddress | null;
@@ -23,6 +24,7 @@ const defaultState = {
   discount: 0,
   coupon: null,
 };
+
 const initialState =
   typeof window !== "undefined" && localStorage.getItem("checkout")
     ? JSON.parse(localStorage.getItem("checkout")!)
@@ -60,6 +62,7 @@ export const CheckoutContext = React.createContext<State | any>(initialState);
 CheckoutContext.displayName = "CheckoutContext";
 
 function checkoutReducer(state: State, action: Action) {
+
   switch (action.type) {
 
     case "UPDATE_BILLING_ADDRESS": {
@@ -80,15 +83,18 @@ function checkoutReducer(state: State, action: Action) {
         checkoutData: action.payload,
       };
     }
+
     case "UPDATE_DELIVERY_TIME": {
       return {
         ...state,
         delivery_time: action.payload,
       };
     }
+
     case "CLEAR_CHECKOUT": {
       return defaultState;
     }
+
     case "APPLY_COUPON": {
       return {
         ...state,
@@ -103,8 +109,10 @@ function checkoutReducer(state: State, action: Action) {
         coupon: null,
       };
     }
+
   }
 }
+
 
 function calculateDiscount(state: any, coupon: any, amount: number = 1) {
   switch (coupon.type) {
@@ -117,13 +125,17 @@ function calculateDiscount(state: any, coupon: any, amount: number = 1) {
   }
 }
 
+
 export const CheckoutProvider: FC = (props) => {
 
+
   const [state, dispatch] = React.useReducer(checkoutReducer, initialState);
+
 
   React.useEffect(() => {
     localStorage.setItem("checkout", JSON.stringify(state));
   }, [state]);
+
 
   const updateBillingAddress = (payload: UserAddress) =>
     dispatch({ type: "UPDATE_BILLING_ADDRESS", payload });
@@ -131,16 +143,21 @@ export const CheckoutProvider: FC = (props) => {
   // const updateShippingAddress = (payload: UserAddress) =>
   //   dispatch({ type: "UPDATE_SHIPPING_ADDRESS", payload });
 
+
   const updateDeliveryTime = (payload: any) =>
     dispatch({ type: "UPDATE_DELIVERY_TIME", payload });
+
 
   const setCheckoutData = (payload: any) =>
     dispatch({ type: "SET_CHECKOUT_DATA", payload });
 
+
   const applyCoupon = (payload: any) =>
     dispatch({ type: "APPLY_COUPON", payload });
 
+
   const removeCoupon = () => dispatch({ type: "REMOVE_COUPON" });
+
 
   const clearCheckoutData = () => {
     localStorage.removeItem("checkout");

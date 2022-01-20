@@ -8,6 +8,7 @@ export type IProps = {
   attributes: Attribute[] | undefined;
 };
 const AttributeList = ({ attributes }: IProps) => {
+
   const { t } = useTranslation();
   const router = useRouter();
 
@@ -17,6 +18,7 @@ const AttributeList = ({ attributes }: IProps) => {
     router.locale === "ar" || router.locale === "he" ? "left" : "right";
 
   let columns = [
+
     {
       title: t("table:table-item-id"),
       dataIndex: "id",
@@ -24,6 +26,8 @@ const AttributeList = ({ attributes }: IProps) => {
       align: "center",
       width: 60,
     },
+
+
     {
       title: t("table:table-item-title"),
       dataIndex: "name",
@@ -31,6 +35,8 @@ const AttributeList = ({ attributes }: IProps) => {
       align: alignLeft,
       render: (name: any) => <span className="whitespace-nowrap">{name}</span>,
     },
+
+
     {
       title: t("table:table-item-shop"),
       dataIndex: "shop",
@@ -42,6 +48,8 @@ const AttributeList = ({ attributes }: IProps) => {
         <span className="whitespace-nowrap truncate">{shop?.name}</span>
       ),
     },
+
+
     {
       title: t("table:table-item-values"),
       dataIndex: "values",
@@ -59,6 +67,8 @@ const AttributeList = ({ attributes }: IProps) => {
         );
       },
     },
+
+
     {
       title: t("table:table-item-actions"),
       dataIndex: "id",
@@ -72,11 +82,15 @@ const AttributeList = ({ attributes }: IProps) => {
         />
       ),
     },
+
   ];
+  
 
   if (router?.query?.shop) {
     columns = columns?.filter((column) => column?.key !== "shop");
   }
+
+
   return (
     <div className="rounded overflow-hidden shadow mb-8">
       <Table

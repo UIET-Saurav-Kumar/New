@@ -213,6 +213,7 @@ class OrderController extends CoreController
                     $exclude = ['customer_id','id', 'status', 'deleted_at', 'created_at', 'updated_at', 'shipping_address', 'billing_address', 'customer', 'products','gateway_response', 'coupon_id', 'parent_id','shop_id'];
                     $row = array_diff($row, $exclude);
                 }
+                
                 unset($row['id']);
                 unset($row['customer_id']);
                 unset($row['status']);

@@ -3,6 +3,25 @@ import { FacebookIcon } from "@components/icons/facebook";
 import { InstagramIcon } from "@components/icons/instagram";
 import { LinkedInIcon } from "@components/icons/social/linkedin";
 import { ROUTES } from "@utils/routes";
+import { toUnicode } from "punycode";
+
+var today = new Date();
+var month = today.getMonth() ;
+const monthNames = ["Jan", "Feb", "March", "April", "May", "June",
+  "July", "Aug", "Sep", "Oct", "Nov", "Dec"
+];
+
+const day = //day array
+[
+  'Sunday',
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday"
+];
+
 
 
 export const siteSettings = {
@@ -133,9 +152,6 @@ export const siteSettings = {
     //   href: ROUTES.HELP,
     //   menulabel: "profile-sidebar-help",
     // },
-
-
-    
     {
       href: ROUTES.LOGOUT,
       menulabel: "profile-sidebar-logout",
@@ -143,19 +159,64 @@ export const siteSettings = {
 
   ],
 
-
+ 
   deliverySchedule: [
+
     {
       id: "0",
-      title: " Pickup or Avail ",
+      title: "  Today  " + '('  + today.getDate() + ' ' +  monthNames[today.getMonth() ] + ')',
       is_delivery:false,
-      description: "at Shop | Salon | Restraunt | Takeaways",
+      description: "Visit around 10:00 AM to 2:00 PM",
     },
+
+    {
+      id: "0",
+      title: "  Today  " + '('  + today.getDate() + ' ' +  monthNames[today.getMonth() ] + ')',
+      is_delivery:false,
+      description: "Visit around 2:00 PM to 7:00 PM",
+    },
+
+    {
+      id: "2",
+      title:  'Tomorrow' + ' ' +  '('  + (today.getDate() + 1) + ' ' +  monthNames[today.getMonth() ] + ')',
+      is_delivery:false,
+      description: "Visit tomorrow",
+    },
+
+    {
+      id: "3",
+      title: day[6] + ' ' + '('  + (today.getDate() + 2) + ' ' +  monthNames[today.getMonth() ] + ')',
+      is_delivery:false,
+      description: "Open 10AM to 7PM",
+    },
+
+    {
+      id: "4",
+      title:  day[0] + ' ' +  '('  + (today.getDate() + 3 ) + ' ' +  monthNames[today.getMonth()] + ')',
+      is_delivery:false,
+      description: "Open 10AM to 7PM",
+    },
+
+    {
+      id: "5",
+      title: day[1] + '  ' + '('  + (today.getDate() + 4) + ' ' +  monthNames[today.getMonth() ] + ')',
+      is_delivery:false,
+      description: "Open 10AM to 7PM",
+    },
+
+    {
+      id: "7",
+      title: day[2] + ' ' + '('  + (today.getDate() + 5) + ' ' +  monthNames[today.getMonth() ] + ')',
+      is_delivery:false,
+      description: "Open 10AM to 7PM",
+    },
+    
     // {
     //   id: "1",
     //   title: "express-delivery",
     //   description: "90 min express delivery",
     // },
+    
     {
       id: "6",
       title: "today",

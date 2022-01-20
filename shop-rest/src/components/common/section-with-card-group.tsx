@@ -31,6 +31,7 @@ const SectionWithCardGroup = ({
   addActionText,
   items,
   delivery_status,
+  shopCategory,
   onAdd,
   onEdit,
   onDelete,
@@ -46,7 +47,7 @@ const SectionWithCardGroup = ({
   return (
     <>
       <div className="flex items-center justify-between mb-5 md:mb-8">
-    
+            
         {onAdd && (
           <button
             className="flex items-center text-sm font-semibold text-accent transition-colors duration-200 focus:outline-none focus:text-accent-hover hover:text-accent-hover"
@@ -60,15 +61,16 @@ const SectionWithCardGroup = ({
           </button>
         )}
       </div>
+      
       <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {items?.length ? (
           items?.map((item, idx) => (
-            (delivery_status==true)  
+            (delivery_status==true || (shopCategory !== 'Services','') || (shopCategory !== 'Salon & Spa','') ) 
             ?
             <>
             {
               
-              (item.id==0)
+              (item.id==0 || item.id==7 ||  item.id==3 || item.id==2 || item.id==4 || item.id == 5)
               ?
               ""
               :
@@ -98,6 +100,7 @@ const SectionWithCardGroup = ({
                     ? item.description
                     : formatAddress(item.address)}
                 </p>
+
                 <div className="absolute top-4 end-4 flex space-s-2 opacity-0 group-hover:opacity-100">
                   {onEdit && (
                     <button
@@ -122,7 +125,7 @@ const SectionWithCardGroup = ({
             }
             </>
             :
-            (item.id==0
+            (item.id==0 || item.id==3 || item.id==2 || item.id==4 || item.id == 5 || item.id == 7
             ?
             <>
               <div

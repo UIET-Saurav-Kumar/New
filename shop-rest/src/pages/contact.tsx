@@ -10,6 +10,7 @@ import { useTranslation } from "next-i18next";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
+
 const contactFormSchema = yup.object().shape({
   name: yup.string().required("error-name-required"),
   email: yup
@@ -19,6 +20,7 @@ const contactFormSchema = yup.object().shape({
   subject: yup.string().required("error-subject-required"),
   description: yup.string().required("error-description-required"),
 });
+
 
 export const ContactPage = () => {
   const { t } = useTranslation("common");
@@ -33,7 +35,9 @@ export const ContactPage = () => {
     mutate(values);
     reset();
   }
+
   return (
+    
     <div className="w-full bg-gray-100">
       <div className="flex flex-col md:flex-row max-w-7xl w-full mx-auto py-10 px-5 xl:py-14 xl:px-8 2xl:px-14">
         {/* sidebar */}
