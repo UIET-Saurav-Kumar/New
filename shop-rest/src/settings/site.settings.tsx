@@ -13,7 +13,7 @@ const monthNames = ["Jan", "Feb", "March", "April", "May", "June",
 
 const day = //day array
 [
- 
+  'Sunday',
   "Monday",
   "Tuesday",
   "Wednesday",
@@ -185,28 +185,28 @@ export const siteSettings = {
 
     {
       id: "3",
-      title: day[today.getDay() + 1 ] + ' ' + '('  + (today.getDate() + 2) + ' ' +  monthNames[today.getMonth() ] + ')',
+      title: day[6] + ' ' + '('  + (today.getDate() + 2) + ' ' +  monthNames[today.getMonth() ] + ')',
       is_delivery:false,
       description: "Open 10AM to 7PM",
     },
 
     {
       id: "4",
-      title:  day[0] + '  ' + '('  + (today.getDate() + 4 ) + ' ' +  monthNames[today.getMonth()] + ')',
+      title:  day[0] + ' ' +  '('  + (today.getDate() + 3 ) + ' ' +  monthNames[today.getMonth()] + ')',
       is_delivery:false,
       description: "Open 10AM to 7PM",
     },
 
     {
       id: "5",
-      title: day[1] + '  ' + '('  + (today.getDate() + 5) + ' ' +  monthNames[today.getMonth() ] + ')',
+      title: day[1] + '  ' + '('  + (today.getDate() + 4) + ' ' +  monthNames[today.getMonth() ] + ')',
       is_delivery:false,
       description: "Open 10AM to 7PM",
     },
 
     {
       id: "7",
-      title: day[2] + ' ' + '('  + (today.getDate() + 6) + ' ' +  monthNames[today.getMonth() ] + ')',
+      title: day[2] + ' ' + '('  + (today.getDate() + 5) + ' ' +  monthNames[today.getMonth() ] + ')',
       is_delivery:false,
       description: "Open 10AM to 7PM",
     },
