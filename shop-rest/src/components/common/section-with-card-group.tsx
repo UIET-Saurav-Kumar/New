@@ -61,6 +61,7 @@ const SectionWithCardGroup = ({
           </button>
         )}
       </div>
+      
       <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {items?.length ? (
           items?.map((item, idx) => (
@@ -69,7 +70,7 @@ const SectionWithCardGroup = ({
             <>
             {
               
-              (item.id==0)
+              (item.id==0 || item.id==7 ||  item.id==3 || item.id==2 || item.id==4 || item.id == 5)
               ?
               ""
               :
@@ -82,7 +83,7 @@ const SectionWithCardGroup = ({
                     "bg-gray-100 border-transparent": selected !== idx,
                   }
                 )}
-                onClick={() => select(item, idx)}object
+                onClick={() => select(item, idx)}
               >
                 <p className="text-sm text-heading font-semibold mb-3 capitalize">
                   {item.title}
@@ -124,7 +125,7 @@ const SectionWithCardGroup = ({
             }
             </>
             :
-            (item.id==0 
+            (item.id==0 || item.id==3 || item.id==2 || item.id==4 || item.id == 5 || item.id == 7
             ?
             <>
               <div
