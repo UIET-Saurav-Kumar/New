@@ -24,6 +24,7 @@ export default function CheckoutPage() {
   }, [isAuthorize]);
 
   return (
+
     <div className="py-8 px-4 lg:py-10 lg:px-8 xl:py-14 xl:px-16 2xl:px-20">
       <div className="sticky z-50 top-12 w-full bg-white  px-2 py-3"><BackButton/></div>
       <div className="flex flex-col lg:flex-row items-center lg:items-start m-auto lg:space-s-8 w-full max-w-5xl">
@@ -36,9 +37,10 @@ export default function CheckoutPage() {
               addresses={data?.me?.address?.filter(
                 (address: any) => address.type === "billing"
               )}
-              count={1}
+              // count={1}
               type="billing"
             />
+
           </div>
           {/* <div className="shadow-700 bg-light p-5 md:p-8">
             <Address
@@ -52,7 +54,7 @@ export default function CheckoutPage() {
             />
           </div> */}
           <div className="shadow-700 bg-light p-5 md:p-8">
-            <Schedule count={3} />
+            <Schedule count={2} />
           </div>
 
         </div>

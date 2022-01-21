@@ -185,28 +185,28 @@ export const siteSettings = {
 
     {
       id: "3",
-      title: day[6] + ' ' + '('  + (today.getDate() + 2) + ' ' +  monthNames[today.getMonth() ] + ')',
+      title: day[today.getDay() + 2 >6 ? today.getDay()+2 - 7 :today.getDay() + 2   ] + ' ' + '('  + (today.getDate() + 2) + ' ' +  monthNames[today.getMonth() ] + ')',
       is_delivery:false,
       description: "Open 10AM to 7PM",
     },
 
     {
       id: "4",
-      title:  day[0] + ' ' +  '('  + (today.getDate() + 3 ) + ' ' +  monthNames[today.getMonth()] + ')',
+      title:  day[today.getDay() + 3 >6 ? today.getDay()+3 - 7 :today.getDay() + 2   ]  + ' ' +  '('  + (today.getDate() + 3 ) + ' ' +  monthNames[today.getMonth()] + ')',
       is_delivery:false,
       description: "Open 10AM to 7PM",
     },
 
     {
       id: "5",
-      title: day[1] + '  ' + '('  + (today.getDate() + 4) + ' ' +  monthNames[today.getMonth() ] + ')',
+      title: day[today.getDay() + 4 >6 ? today.getDay()+4 - 7 :today.getDay() + 2   ]  + '  ' + '('  + (today.getDate() + 4) + ' ' +  monthNames[today.getMonth() ] + ')',
       is_delivery:false,
       description: "Open 10AM to 7PM",
     },
 
     {
       id: "7",
-      title: day[2] + ' ' + '('  + (today.getDate() + 5) + ' ' +  monthNames[today.getMonth() ] + ')',
+      title: day[today.getDay() + 5 >6 ? today.getDay()+5 - 7 :today.getDay() + 2   ]  + ' ' + '('  + (today.getDate() + 5) + ' ' +  monthNames[today.getMonth() ] + ')',
       is_delivery:false,
       description: "Open 10AM to 7PM",
     },
@@ -216,7 +216,7 @@ export const siteSettings = {
     //   title: "express-delivery",
     //   description: "90 min express delivery",
     // },
-    
+
     {
       id: "6",
       title: "today",
@@ -358,6 +358,7 @@ export const siteSettings = {
       location: 'Sector 34 A',
       type: 'restraunt '
     },
+
     {
       href: '/',
       label: 'Barbeque Nation',
@@ -372,7 +373,6 @@ export const siteSettings = {
       image: '/hot-millions.jpg',
       location: 'Sector 22 A',
       type: 'restraunt '
-
     },
 
     {
@@ -382,6 +382,7 @@ export const siteSettings = {
       location: 'Sector 18',
       type: 'restraunt '
     },
+
     {
       href: '/',
       label: 'The cove',
@@ -389,6 +390,7 @@ export const siteSettings = {
       location: 'Sector 17',
       type: 'restraunt '
     },
+    
    ],
 
    featuredEStores:  
