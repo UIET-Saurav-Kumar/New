@@ -101,6 +101,8 @@ const PaymentForm = () => {
     },
     discount
   );
+
+  
   function onSubmit(values: FormValues) {
     let input = {
       //@ts-ignore
@@ -115,7 +117,8 @@ const PaymentForm = () => {
       total,
       sales_tax: checkoutData?.total_tax,
       delivery_fee: delivery_charges,
-      delivery_time: delivery_time?.description,
+     
+      delivery_time: delivery_time?.title ,
       payment_gateway: values.payment_gateway,
       billing_address: {
         ...(billing_address?.address && billing_address.address),
@@ -152,6 +155,7 @@ const PaymentForm = () => {
   }
 
   const isCashOnDelivery = watch("payment_gateway");
+
   return (
     <>
     <div className="sticky z-50 top-12 w-full bg-white  px-2 py-3"><BackButton/></div>
