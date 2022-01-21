@@ -219,14 +219,14 @@ export const siteSettings = {
 
     {
       id: "6",
-      title: "today",
+      title: "  Today  " + '('  + today.getDate() + ' ' +  monthNames[today.getMonth() ] + ')',
       is_delivery:true,
       description: "Applicable if order is placed before 4PM",
     },
     
     {
       id: "6",
-      title: "next day",
+      title:  'Tomorrow' + ' ' +  '('  + (today.getDate() + 1) + ' ' +  monthNames[today.getMonth() ] + ')',
       is_delivery:true,
       description: "Delivery between 11AM and 4PM",
     },
@@ -358,6 +358,7 @@ export const siteSettings = {
       location: 'Sector 34 A',
       type: 'restraunt '
     },
+
     {
       href: '/',
       label: 'Barbeque Nation',
@@ -372,7 +373,6 @@ export const siteSettings = {
       image: '/hot-millions.jpg',
       location: 'Sector 22 A',
       type: 'restraunt '
-
     },
 
     {
@@ -382,6 +382,7 @@ export const siteSettings = {
       location: 'Sector 18',
       type: 'restraunt '
     },
+
     {
       href: '/',
       label: 'The cove',
@@ -389,6 +390,7 @@ export const siteSettings = {
       location: 'Sector 17',
       type: 'restraunt '
     },
+    
    ],
 
    featuredEStores:  
