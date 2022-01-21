@@ -73,6 +73,8 @@ export default function OrderPage() {
     tracking_number: query.tracking_number as string,
   });
 
+  console.log('order data',data);
+
   const { price: total } = usePrice(data && { amount: data.order.paid_total });
   const { price: sub_total } = usePrice(data && { amount: data.order.amount });
   const { price: shipping_charge } = usePrice(
@@ -167,6 +169,8 @@ export default function OrderPage() {
   if (loading) {
     return <Spinner showText={false} />;
   }
+
+  console.log('delivery time',data?.order?.delivery_time);
 
   const getShop=()=>{
     if(data?.order?.products){
@@ -264,6 +268,15 @@ export default function OrderPage() {
                   </p>
                 </div>
 
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex space-x-4   w-full lg:w-1/3">
+                  <h3 className="mb-2 text-sm lg:text-lg text-heading font-semibold">
+                    {t("Delivery Time/Appointment")}:
+                  </h3>
+                  <p className="text-sm lg:text-lg text-body-dark">
+                    {data?.order?.children[0]?.shop?.shop_categories.replace(/[{":,0123456789}]/g,'').slice(5,-3) != 'Salon & Spa' ? data?.order?.delivery_time.slice(0,5) : data?.order?.delivery_time }
+                  </p>
+                </div>
+
 
             </div>
 
@@ -293,7 +306,7 @@ export default function OrderPage() {
 
               <p className="flex text-body-dark mt-5">
                 <strong className="w-5/12 sm:w-4/12 text-sm  text-heading font-semibold">
-                  {t("text-deliver-time")}
+                  {t("Delivery Time/Appointment")}
                 </strong>
                 :
                 <span className="w-7/12 sm:w-8/12 ps-4 text-sm">
@@ -308,8 +321,6 @@ export default function OrderPage() {
                 :
                 <span className="w-7/12 sm:w-8/12 ps-4 text-sm">
                 {data?.order?.billing_address?.street_address + ', ' + data?.order?.billing_address?.city }
-
-
                 </span>
               </p>
             </div>
