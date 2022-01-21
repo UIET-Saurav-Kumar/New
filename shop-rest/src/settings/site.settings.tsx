@@ -185,28 +185,28 @@ export const siteSettings = {
 
     {
       id: "3",
-      title: day[0] + ' ' + '('  + (today.getDate() + 2) + ' ' +  monthNames[today.getMonth() ] + ')',
+      title: day[today.getDay() + 2 >6 ? today.getDay()+2 - 7 :today.getDay() + 2   ] + ' ' + '('  + (today.getDate() + 2) + ' ' +  monthNames[today.getMonth() ] + ')',
       is_delivery:false,
       description: "Open 10AM to 7PM",
     },
 
     {
       id: "4",
-      title:  day[1] + ' ' +  '('  + (today.getDate() + 3 ) + ' ' +  monthNames[today.getMonth()] + ')',
+      title:  day[today.getDay() + 3 >6 ? today.getDay()+3 - 7 :today.getDay() + 2   ]  + ' ' +  '('  + (today.getDate() + 3 ) + ' ' +  monthNames[today.getMonth()] + ')',
       is_delivery:false,
       description: "Open 10AM to 7PM",
     },
 
     {
       id: "5",
-      title: day[2] + '  ' + '('  + (today.getDate() + 4) + ' ' +  monthNames[today.getMonth() ] + ')',
+      title: day[today.getDay() + 4 >6 ? today.getDay()+4 - 7 :today.getDay() + 2   ]  + '  ' + '('  + (today.getDate() + 4) + ' ' +  monthNames[today.getMonth() ] + ')',
       is_delivery:false,
       description: "Open 10AM to 7PM",
     },
 
     {
       id: "7",
-      title: day[3] + ' ' + '('  + (today.getDate() + 5) + ' ' +  monthNames[today.getMonth() ] + ')',
+      title: day[today.getDay() + 5 >6 ? today.getDay()+5 - 7 :today.getDay() + 2   ]  + ' ' + '('  + (today.getDate() + 5) + ' ' +  monthNames[today.getMonth() ] + ')',
       is_delivery:false,
       description: "Open 10AM to 7PM",
     },
