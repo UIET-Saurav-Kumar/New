@@ -75,6 +75,18 @@ const OrderList = ({ orders, onPagination }: IProps) => {
         )
 
     }},
+
+    {
+      title: t("table:table-item-actions"),
+      dataIndex: "id",
+      key: "actions",
+      align: "center",
+      width: 100,
+      render: (id: string) => (
+        <ActionButtons id={id} detailsUrl={`${router.asPath}/${id}`} />
+      ),
+    },
+
         
     {
       title: t("table:Customer Name"),
@@ -85,7 +97,6 @@ const OrderList = ({ orders, onPagination }: IProps) => {
         <div className="whitespace-nowrap font-semibold">{customer.name}</div>
       ),
     },
-
 
     {
       title: t("table:Phone Number"),
@@ -109,27 +120,6 @@ const OrderList = ({ orders, onPagination }: IProps) => {
     },
 
 
-    {
-      title: t("table:table-item-tracking-number"),
-      dataIndex: "tracking_number",
-      key: "tracking_number",
-      align: "center",
-      width: 150,
-    },
-
-    {
-      title: t("table:table-item-delivery-fee"),
-      dataIndex: "delivery_fee",
-      key: "delivery_fee",
-      align: "center",
-      render: (value: any) => {
-        const delivery_fee = value ? value : 0;
-        const { price } = usePrice({
-          amount: delivery_fee,
-        });
-        return <span>{price}</span>;
-      },
-    },
 
     // delivery time
     {
@@ -190,6 +180,7 @@ const OrderList = ({ orders, onPagination }: IProps) => {
         </span>
       ),
     },
+
     {
       title: t("Payment Gateway"),
       dataIndex: "payment_gateway",
@@ -203,6 +194,8 @@ const OrderList = ({ orders, onPagination }: IProps) => {
         </span>
       ),
     },
+
+
     {
       title: t("table:table-item-shipping-address"),
       dataIndex: "billing_address",
@@ -213,16 +206,29 @@ const OrderList = ({ orders, onPagination }: IProps) => {
       ),
     },
     
+    
     {
-      title: t("table:table-item-actions"),
-      dataIndex: "id",
-      key: "actions",
+      title: t("table:table-item-tracking-number"),
+      dataIndex: "tracking_number",
+      key: "tracking_number",
       align: "center",
-      width: 100,
-      render: (id: string) => (
-        <ActionButtons id={id} detailsUrl={`${router.asPath}/${id}`} />
-      ),
+      width: 150,
     },
+
+    {
+      title: t("table:table-item-delivery-fee"),
+      dataIndex: "delivery_fee",
+      key: "delivery_fee",
+      align: "center",
+      render: (value: any) => {
+        const delivery_fee = value ? value : 0;
+        const { price } = usePrice({
+          amount: delivery_fee,
+        });
+        return <span>{price}</span>;
+      },
+    },
+
   ];
 
   return (
