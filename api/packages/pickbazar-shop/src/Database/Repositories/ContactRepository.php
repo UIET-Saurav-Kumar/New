@@ -13,8 +13,10 @@ class ContactRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-       
-        'user_id'
+        'name'        => 'like',
+        "email",
+        "subject",
+        "description",
     ];
 
     public function boot()
