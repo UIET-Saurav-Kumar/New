@@ -56,6 +56,8 @@ const OrderInformation = (props: Props) => {
       ),
     }
   );
+
+  console.log('checkout data',checkoutData);
   return (
     <div className={props.className}>
       <div className="flex flex-col border-b pb-2 border-border-200">
@@ -99,7 +101,7 @@ const OrderInformation = (props: Props) => {
                 <CloseIcon className="w-3 h-3 ms-2" />
               </button>
             </span>
-            <span className="text-sm text-body">{discountPrice}</span>
+            <span className="text-sm text-body">{discountPrice}</span>z
           </div>
         ) : (
           <div className="flex justify-between mt-5 mb-4">

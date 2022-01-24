@@ -11,7 +11,7 @@ type OrderCardProps = {
 
 const OrderCard: React.FC<OrderCardProps> = ({ onClick, order, isActive }) => {
   const { t } = useTranslation("common");
-  const { id, status, created_at, delivery_time } = order ?? {};
+  const { id, status, created_at, delivery_time, delivery_date } = order ?? {};
   const { price: amount } = usePrice({
     amount: order?.amount,
   });
@@ -57,6 +57,13 @@ const OrderCard: React.FC<OrderCardProps> = ({ onClick, order, isActive }) => {
           </span>
           <span className="me-auto">:</span>
           <span className="ms-1 truncate">{delivery_time}</span>
+        </p>
+        <p className="text-sm text-heading w-full flex justify-between items-center mb-4 last:mb-0">
+          <span className="w-24 overflow-hidden flex-shrink-0">
+            {t("text-deliver-time")}
+          </span>
+          <span className="me-auto">:</span>
+          <span className="ms-1 truncate">{delivery_date}</span>
         </p>
         <p className="text-sm font-bold text-heading w-full flex justify-between items-center mb-4 last:mb-0">
           <span className="w-24 overflow-hidden flex-shrink-0">

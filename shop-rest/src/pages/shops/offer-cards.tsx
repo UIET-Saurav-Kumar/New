@@ -22,8 +22,6 @@ export default function OfferCards() {
 		// +"?text="+text;
 	}
 
-    
-
 
     return (
 

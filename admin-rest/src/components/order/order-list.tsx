@@ -37,7 +37,7 @@ const OrderList = ({ orders, onPagination }: IProps) => {
 
  
 
-  // console.log('orders', data?.order?.products.map(order => order.shop.name));
+  console.log('orders list', data);
  
 
   const columns = [
@@ -130,6 +130,19 @@ const OrderList = ({ orders, onPagination }: IProps) => {
         return <span>{price}</span>;
       },
     },
+
+    // delivery time
+    {
+      title: t("table:Delivery/Appointment"),
+      dataIndex: "delivery_time",
+      key: "delivery_time",
+      align: "center",
+      render: (delivery_time: any) => {
+       
+        return <span>{delivery_time}</span>;
+      },
+    },
+
 
     {
       title: t("table:table-item-total"),

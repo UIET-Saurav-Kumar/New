@@ -23,7 +23,6 @@ export default function InvoiceBanner() {
           
           }
           if (!isAuthorize) {
-            
             return openModal("LOGIN_VIEW");
           }
 		// +"?text="+text;

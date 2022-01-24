@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use PickBazar\Http\Controllers\TagController;
 use PickBazar\Http\Controllers\TaxController;
 use PickBazar\Http\Controllers\BillController;
+use PickBazar\Http\Controllers\ContactController;
 use PickBazar\Http\Controllers\ShopController;
 use PickBazar\Http\Controllers\TypeController;
 use PickBazar\Http\Controllers\UserController;
@@ -35,7 +36,7 @@ Route::post('/user-verify', 'PickBazar\Http\Controllers\UserController@userVerif
 
 Route::post('/verify-forget-password-token', 'PickBazar\Http\Controllers\UserController@verifyForgetPasswordToken');
 Route::post('/reset-password', 'PickBazar\Http\Controllers\UserController@resetPassword');
-Route::post('/contact', 'PickBazar\Http\Controllers\UserController@contactAdmin');
+// Route::post('/contact', 'PickBazar\Http\Controllers\UserController@contactAdmin');
 Route::post('/social-login-token', 'PickBazar\Http\Controllers\UserController@socialLogin');
 
 Route::get('/signup-offer','PickBazar\Http\Controllers\SignupOfferController@show');
@@ -158,6 +159,10 @@ Route::apiResource('coupons', CouponController::class, [
     'only' => ['index', 'show']
 ]);
 
+Route::apiResource('contact', ContactController::class, [
+    'only' => ['index', 'show']
+]);
+
 Route::post('coupons/verify', 'PickBazar\Http\Controllers\CouponController@verify');
 
 
@@ -212,6 +217,7 @@ Route::group(['middleware' => ['can:' . Permission::CUSTOMER, 'auth:sanctum']], 
 });
 
 Route::resource('bill',BillController::class);
+Route::resource('contact',ContactController::class);
 Route::post('approve-bill','PickBazar\Http\Controllers\BillController@approveBill');
 Route::post('bill-reward','PickBazar\Http\Controllers\BillController@billReward');
 Route::get('bill-reward','PickBazar\Http\Controllers\BillController@getbillReward');
@@ -239,6 +245,7 @@ Route::group(
         Route::get('popular-products', 'PickBazar\Http\Controllers\AnalyticsController@popularProducts');
     }
 );
+
 Route::put('status-product/{id}',"PickBazar\Http\Controllers\ProductController@updateProductStatus");
 Route::group(
     ['middleware' => ['permission:' . Permission::STORE_OWNER, 'auth:sanctum']],

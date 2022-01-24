@@ -45,6 +45,17 @@ export declare type BillUpload = {
   shop_name?: Maybe<Scalars["String"]>;
   bill_amount: Scalars["Float"];
 };
+
+
+export declare type ContactUpload = {
+  __typename?: "ContactUpload";
+  name?: Maybe<Scalars["String"]>;
+  email?: Maybe<Scalars["String"]>;
+  subject?: Maybe<Scalars["String"]>;
+  description?: Maybe<Scalars["String"]>;
+};
+
+
 export declare type Query = {
   __typename?: "Query";
   address: Array<Address>;
@@ -1106,6 +1117,28 @@ export declare type WithdrawPaginator = {
   data: Array<Withdraw>;
 };
 
+export declare type ContactPaginator = {
+  __typename?: "ContactPaginator";
+  /** Pagination information about the list of items. */
+
+  paginatorInfo: PaginatorInfo;
+  /** A list of Withdraw items. */
+
+  data: Array<Contacts>;
+};
+
+export declare type Contacts = {
+  __typename?: "Contacts";
+  id?: Maybe<Scalars["ID"]>;
+  name?:Maybe<Scalars["String"]>;
+  email?:Maybe<Scalars["String"]>;
+  subject?:Maybe<Scalars["String"]>;
+  description?:Maybe<Scalars["String"]>;
+  created_at?: Maybe<Scalars["DateTime"]>;
+  updated_at?: Maybe<Scalars["DateTime"]>;
+};
+
+
 export declare type InvoiceUploadPaginator = {
   __typename?: "InvoiceUploadPaginator";
   /** Pagination information about the list of items. */
@@ -1222,6 +1255,12 @@ export declare type Withdraw = {
   created_at?: Maybe<Scalars["DateTime"]>;
   updated_at?: Maybe<Scalars["DateTime"]>;
 };
+
+
+
+
+
+
 
 // export declare type ProductsQuery = {
 //   __typename?: "Query";

@@ -70,6 +70,7 @@ const WithdrawList = ({ withdraws, onPagination }: IProps) => {
         return <div>{price}</div>;
       },
     },
+    
     {
       title: ("Shop Name"),
       dataIndex: "shop_name",
@@ -79,6 +80,7 @@ const WithdrawList = ({ withdraws, onPagination }: IProps) => {
         return <div>{shop_name}</div>;
       },
     },
+
     {
       title: ("Shop Address"),
       dataIndex: "shop_address",
@@ -88,6 +90,7 @@ const WithdrawList = ({ withdraws, onPagination }: IProps) => {
         return <div>{shop_address}</div>;
       },
     },
+
     {
       title: ("Shop City"),
       dataIndex: "shop_city",
@@ -97,6 +100,7 @@ const WithdrawList = ({ withdraws, onPagination }: IProps) => {
         return <div>{shop_city}</div>;
       },
     },
+
     {
       title: t("table:table-item-status"),
       dataIndex: "status",
@@ -104,6 +108,7 @@ const WithdrawList = ({ withdraws, onPagination }: IProps) => {
       align: "center",
       render: (status: string) => renderStatusBadge(status),
     },
+
     {
       title: t("table:table-item-created-at"),
       dataIndex: "created_at",
@@ -120,6 +125,7 @@ const WithdrawList = ({ withdraws, onPagination }: IProps) => {
         );
       },
     },
+
     {
       title: t("table:table-item-actions"),
       dataIndex: "id",
@@ -136,9 +142,11 @@ const WithdrawList = ({ withdraws, onPagination }: IProps) => {
       },
     },
   ];
+
   if (router?.query?.shop) {
     columns = columns?.filter((column) => column?.key !== "actions");
   }
+
   return (
     <>
       <div className="rounded overflow-hidden shadow mb-6">
