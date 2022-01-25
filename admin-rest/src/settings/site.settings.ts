@@ -11,6 +11,7 @@ export const siteSettings = {
     width: 128,
     height: 52,
   },
+
   defaultLanguage: "en",
   author: {
     name: "Buylowcal",
@@ -19,6 +20,7 @@ export const siteSettings = {
     Plot No: 130 | Phase-1 | Industrial Area | Chandigarh`,
     phone: "+91 77430 42380",
   },
+
   headerLinks: [],
   authorizedLinks: [
     {
@@ -30,6 +32,7 @@ export const siteSettings = {
       labelTransKey: "authorized-nav-item-logout",
     },
   ],
+  
   currencyCode: "INR",
   sidebarLinks: {
     admin: [
@@ -59,7 +62,6 @@ export const siteSettings = {
         label: " Contact Queries",
         icon: "CategoriesIcon",
       },
-
       {
         href: ROUTES.INVOICES_REWARD,
         label: "Invoice Rewards",

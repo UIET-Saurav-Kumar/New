@@ -73,7 +73,7 @@ export default function InvoicePdf({ order }: { order: Order }) {
 
             <View style={[styles.section]}>
               <Text style={[styles.addressTextRight, { marginBottom: 20 }]}>
-                Date: {dayjs().format("D MMMM, YYYY")}
+                Date: {order.created_at.split('T')[0].split("-").reverse().join("-")}
               </Text>
               <Text
                 style={[

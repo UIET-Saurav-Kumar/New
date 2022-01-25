@@ -16,6 +16,7 @@ import { useDeliveriesQuery } from "@data/delivery/use-deliveries.query";
 import Button from "@components/ui/button";
 import NotFound from "@components/common/not-found";
 
+
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const cookies = parseContextCookie(context?.req?.headers?.cookie);
   if (!cookies?.auth_token) {

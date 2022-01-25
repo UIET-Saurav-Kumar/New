@@ -92,7 +92,7 @@ function SidebarMenuItem({ className, item, depth = 0 }: any) {
         // initial={false}
         // animate={{ backgroundColor: "black" }}/
         onClick={onClick}
-        className="flex lg:grid lg:grid-cols-1 items-center relative top-0 lg:border-l "
+        className="flex lg:grid lg:grid-cols-1 items-center lg:w-20 relative top-0 lg:border-l "
       >
         
         {/* <div className='flex items-center justify-between'> */}

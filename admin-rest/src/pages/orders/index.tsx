@@ -46,9 +46,12 @@ export default function Orders() {
   function handlePagination(current: any) {
     setPage(current);
   }
+
   function handleImportModal() {
     openModal("EXPORT_IMPORT_ORDERS");
   }
+  
+
   return (
     <>
       <Card className="flex flex-col md:flex-row items-center justify-between mb-8">
