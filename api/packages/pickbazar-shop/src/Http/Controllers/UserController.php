@@ -355,7 +355,7 @@ class UserController extends CoreController
         }
     }
     public function contactAdmin(Request $request)
-    {
+       {
         try {
             $details = $request->only('subject', 'name', 'email', 'description');
             Mail::to(config('shop.admin_email'))->send(new ContactAdmin($details));

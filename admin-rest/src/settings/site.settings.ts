@@ -53,6 +53,13 @@ export const siteSettings = {
         label: "sidebar-nav-item-products",
         icon: "ProductsIcon",
       },
+
+      {
+        href: ROUTES.CONTACT,
+        label: " Contact Queries",
+        icon: "CategoriesIcon",
+      },
+
       {
         href: ROUTES.INVOICES_REWARD,
         label: "Invoice Rewards",
@@ -225,6 +232,7 @@ export const siteSettings = {
         icon: "UsersIcon",
         permissions: adminAndOwnerOnly,
       },
+
       {
         href: (shop: string) => `/${shop}${ROUTES.WITHDRAWS}`,
         label: "sidebar-nav-item-withdraws",

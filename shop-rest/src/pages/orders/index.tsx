@@ -29,6 +29,7 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
 };
 
 export default function OrdersPage() {
+
   const { t } = useTranslation("common");
   const [order, setOrder] = useState<any>({});
   const {
@@ -39,13 +40,21 @@ export default function OrdersPage() {
     hasNextPage,
     isFetchingNextPage: loadingMore,
   } = useOrdersQuery({});
+
   useEffect(() => {
     if (data?.pages?.[0].data.length) {
       setOrder(data.pages[0].data[0]);
     }
   }, [data?.pages?.length]);
+
+
+  console.log('order',data);
+
+
   if (error) return <ErrorMessage message={error.message} />;
+
   return (
+
     <div className="w-full bg-light">
       <div className="flex flex-col xl:flex-row items-start max-w-1920 w-full mx-auto py-10 px-5 xl:py-14 xl:px-8 2xl:px-14  min-h-screen">
         <ProfileSidebar className="flex-shrink-0 hidden xl:block xl:w-80 me-8" />

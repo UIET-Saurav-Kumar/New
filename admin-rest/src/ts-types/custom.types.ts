@@ -1,4 +1,5 @@
 import { QueryKey } from "react-query";
+import { SortContacts } from "./generated";
 import { SortOrder } from "./generated";
 
 export type CategoriesQueryOptionsType = {
@@ -35,6 +36,16 @@ export type WithdrawsQueryOptionsType = {
   limit?: number;
   orderBy?: string;
   sortedBy?: SortOrder;
+};
+export type ContactsQueryOptionsType = {
+  text?: string;
+  shop_id?: number;
+  id?: number;
+  page?: number;
+  parent?: number | null;
+  limit?: number;
+  orderBy?: string;
+  sortedBy?: SortContacts;
 };
 export type ProductsQueryOptionsType = {
   page?: number;

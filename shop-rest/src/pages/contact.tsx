@@ -5,10 +5,34 @@ import TextArea from "@components/ui/text-area";
 import Button from "@components/ui/button";
 import { useContactMutation } from "@data/customer/use-contact.mutation";
 import { siteSettings } from "@settings/site.settings";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { parseContextCookie } from "@utils/parse-cookie";
+import pick from "lodash/pick";
+import { useRouter } from "next/router";
+import { useCustomerQuery } from "@data/customer/use-customer.query";
+import ErrorMessage from "@components/ui/error-message";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { GetServerSideProps } from "next";
+import { ContactUpload, User } from "@ts-types/generated";
+import { toast } from "react-toastify";
+import { useContactUploadMutation } from "@data/contact/use-contact-upload.query";
+
+
+
+export const getServerSideProps: GetServerSideProps = async (context: any) => {
+  const cookies = parseContextCookie(context?.req?.headers?.cookie);
+  if (!cookies?.auth_token) {
+    return { redirect: { destination: "/", permanent: false } };
+  }
+  return {
+    props: {
+      ...(await serverSideTranslations(context.locale, ["common", "forms"])),
+    },
+  };
+};
+
 
 const contactFormSchema = yup.object().shape({
   name: yup.string().required("error-name-required"),
@@ -20,20 +44,68 @@ const contactFormSchema = yup.object().shape({
   description: yup.string().required("error-description-required"),
 });
 
-export const ContactPage = () => {
+
+
+interface Props {
+    user: ContactUpload;
+  }
+  
+  type UserFormValues = {
+    name?: ContactUpload["name"];
+    email?: ContactUpload["email"];
+    subject?: ContactUpload["subject"];
+    description?: ContactUpload["description"];
+  };
+
+export default function ContactPage({user} : Props) {
+
+    const { register, handleSubmit,formState: { errors },reset,control } = useForm<UserFormValues>(
+        {
+            defaultValues: {
+              ...(user &&
+                pick(user, [
+                  "name",
+                  'email',
+                  'description',
+                ])),
+            },
+            resolver: yupResolver(contactFormSchema),
+          }
+        );
+        
+  const router = useRouter();
+
   const { t } = useTranslation("common");
-  const { mutate, isLoading } = useContactMutation();
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(contactFormSchema) });
+
+  const { isLoading, data, error } = useCustomerQuery();
+
+  const { mutate: storeContact } =useContactUploadMutation();
+
+  if (error) return <ErrorMessage message={error.message} />;
+
+
   function onSubmit(values: any) {
-    mutate(values);
-    reset();
+    storeContact(
+      {
+        name: values.name,
+        email: values.email,
+        subject: values.subject,
+        description: values.description,
+        
+      },
+      {
+        onSuccess: () => {
+          toast.success(t("Thank You for Shopping through Local Shops, Your Wallet Will be Credited Within 24 Hours. In case of Any Query Please Call Us at +91 8427990450 "));
+          reset();
+          setTimeout(() => {
+            router.push("/contact")
+          }, 1000);
+        },
+      }
+    );
   }
   return (
+    
     <div className="w-full bg-gray-100">
       <div className="flex flex-col md:flex-row max-w-7xl w-full mx-auto py-10 px-5 xl:py-14 xl:px-8 2xl:px-14">
         {/* sidebar */}
@@ -123,6 +195,7 @@ export const ContactPage = () => {
                 error={t(errors.email?.message!)}
               />
             </div>
+
             <Input
               label={t("text-subject")}
               {...register("subject")}
@@ -130,6 +203,7 @@ export const ContactPage = () => {
               className="my-6"
               error={t(errors.subject?.message!)}
             />
+
             <TextArea
               label={t("text-description")}
               {...register("description")}
@@ -149,12 +223,12 @@ export const ContactPage = () => {
   );
 };
 ContactPage.Layout = Layout;
-export default ContactPage;
 
-export const getStaticProps = async ({ locale }: any) => {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ["common"])),
-    },
-  };
-};
+
+// export const getStaticProps = async ({ locale }: any) => {
+//   return {
+//     props: {
+//       ...(await serverSideTranslations(locale, ["common"])),
+//     },
+//   };
+// };

@@ -39,5 +39,9 @@ export const API_ENDPOINTS: Record<string, string> = {
   USER_WITHDRAWS:'user-withdraws',
   USER_INVOICE_UPLOAD: 'bill',
   BILL_ATTACHMENT:"bill-attachment",
+
+  USER_CONTACT_UPLOAD: 'contact',
+
+
   LOGS:'logs'
 };

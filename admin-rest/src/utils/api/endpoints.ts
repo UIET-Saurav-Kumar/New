@@ -1,4 +1,6 @@
+
 export const API_ENDPOINTS = {
+
   ATTACHMENTS: "attachments",
   ANALYTICS: "analytics",
   ATTRIBUTES: "attributes",
@@ -82,5 +84,7 @@ export const API_ENDPOINTS = {
   SHOP_DELIVERY_CONFIG: "shop-delivery-config",
   DELIVERY_COST:"delivery-cost",
   VERIFY_CHECKOUT: "checkout/verify",
+
+  CONTACT: '/contact',
 };
 

@@ -201,6 +201,8 @@ class OrderController extends CoreController
             $list[$key]['customer_name'] = $val['customer']['name'] ?? '';
             $list[$key]['customer_email'] = $val['customer']['email'] ?? '';
             $list[$key]['order_status'] = $val['status']['name'] ?? '';
+            //created_at
+            // $list[$key]['created_at'] = $val['created_at']->format('d-m-Y H:i:s');
         }
         
         # add headers for each column in the CSV download
@@ -210,15 +212,16 @@ class OrderController extends CoreController
             $FH = fopen('php://output', 'w');
             foreach ($list as $key => $row) {
                 if ($key === 0) {
-                    $exclude = ['customer_id','id', 'status', 'deleted_at', 'created_at', 'updated_at', 'shipping_address', 'billing_address', 'customer', 'products','gateway_response', 'coupon_id', 'parent_id','shop_id'];
+                    $exclude = ['customer_id','id', 'status', 'deleted_at','updated_at', 'shipping_address', 'billing_address', 'customer', 'products','gateway_response', 'coupon_id', 'parent_id','shop_id'];
                     $row = array_diff($row, $exclude);
                 }
+                
                 unset($row['id']);
                 unset($row['customer_id']);
                 unset($row['status']);
                 unset($row['deleted_at']);
                 unset($row['updated_at']);
-                unset($row['created_at']);
+                // unset($row['created_at']);
 
                 unset($row['shipping_address']);
                 unset($row['billing_address']);

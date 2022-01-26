@@ -49,6 +49,28 @@ export declare type User = {
   orders?: Maybe<OrderPaginator>;
 };
 
+export declare type ContactPaginator = {
+  __typename?: "ContactPaginator";
+  /** Pagination information about the list of items. */
+
+  paginatorInfo: PaginatorInfo;
+  /** A list of Withdraw items. */
+
+  data: Array<Contacts>;
+};
+
+export declare type Contacts = {
+  __typename?: "Contacts";
+  id?: Maybe<Scalars["ID"]>;
+  name?:Maybe<Scalars["String"]>;
+  email?:Maybe<Scalars["String"]>;
+  subject?:Maybe<Scalars["String"]>;
+  description?:Maybe<Scalars["String"]>;
+  created_at?: Maybe<Scalars["DateTime"]>;
+  updated_at?: Maybe<Scalars["DateTime"]>;
+};
+
+
 export declare type Profile = {
   id: Scalars["ID"];
   avatar?: Maybe<Attachment>;
@@ -243,6 +265,14 @@ export enum SortOrder {
   /** Sort records in descending order. */
   Desc = "desc",
 }
+
+export enum SortContacts {
+  /** Sort records in ascending order. */
+  Asc = "asc",
+  /** Sort records in descending order. */
+  Desc = "desc",
+}
+
 
 export enum SortDeliveries {
   /** Sort records in ascending order. */
@@ -496,6 +526,21 @@ export declare type CouponInput = {
   active_from: Scalars["DateTime"];
   expire_at: Scalars["DateTime"];
 };
+
+export declare type ContactInput = {
+  name: Scalars["String"];
+  email?:Maybe<Scalars["String"]>; 
+  subject?:Maybe<Scalars["String"]>;
+  description?:Maybe<Scalars["String"]>;
+ 
+};
+export declare type ContactUpdateInput = {
+  name: Scalars["String"];
+  email?:Maybe<Scalars["String"]>; 
+  subject?:Maybe<Scalars["String"]>;
+  description?:Maybe<Scalars["String"]>;
+};
+
 export enum CouponType {
   /** Fixed coupon */
   FixedCoupon = "fixed",

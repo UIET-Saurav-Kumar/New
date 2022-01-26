@@ -11,7 +11,7 @@ const monthNames = ["Jan", "Feb", "March", "April", "May", "June",
   "July", "Aug", "Sep", "Oct", "Nov", "Dec"
 ];
 
-const day = //day array
+const day = 
 [
   'Sunday',
   "Monday",
@@ -192,21 +192,21 @@ export const siteSettings = {
 
     {
       id: "4",
-      title:  day[today.getDay() + 3 >6 ? today.getDay()+3 - 7 :today.getDay() + 2   ]  + ' ' +  '('  + (today.getDate() + 3 ) + ' ' +  monthNames[today.getMonth()] + ')',
+      title:  day[today.getDay() + 3 >6 ? today.getDay()+3 - 7 :today.getDay() + 3   ]  + ' ' +  '('  + (today.getDate() + 3 ) + ' ' +  monthNames[today.getMonth()] + ')',
       is_delivery:false,
       description: "Open 10AM to 7PM",
     },
 
     {
       id: "5",
-      title: day[today.getDay() + 4 >6 ? today.getDay()+4 - 7 :today.getDay() + 2   ]  + '  ' + '('  + (today.getDate() + 4) + ' ' +  monthNames[today.getMonth() ] + ')',
+      title: day[today.getDay() + 4 >6 ? today.getDay()+4 - 7 :today.getDay() + 4   ]  + '  ' + '('  + (today.getDate() + 4) + ' ' +  monthNames[today.getMonth() ] + ')',
       is_delivery:false,
       description: "Open 10AM to 7PM",
     },
 
     {
       id: "7",
-      title: day[today.getDay() + 5 >6 ? today.getDay()+5 - 7 :today.getDay() + 2   ]  + ' ' + '('  + (today.getDate() + 5) + ' ' +  monthNames[today.getMonth() ] + ')',
+      title: day[today.getDay() + 5 >6 ? today.getDay()+5 - 7 :today.getDay() + 5   ]  + ' ' + '('  + (today.getDate() + 5) + ' ' +  monthNames[today.getMonth() ] + ')',
       is_delivery:false,
       description: "Open 10AM to 7PM",
     },
@@ -231,6 +231,7 @@ export const siteSettings = {
       description: "Delivery between 11AM and 4PM",
     },
   ],
+  
   homePageSidenav: [
     {
        href: ROUTES.ALLCATEGORIES,
@@ -685,7 +686,6 @@ export const InvitedUsers = [
      purchases: 'null',
      level: '3',
      date : '20/June/2021',
-
  },
 
  {
@@ -696,6 +696,5 @@ export const InvitedUsers = [
      purchases: 'null',
      level: '4',
      date : '20/June/2021',
-
  },
 ]
