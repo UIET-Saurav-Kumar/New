@@ -16,7 +16,7 @@ import { formatString } from "@utils/format-string";
 const CartSidebarView = () => {
 
   const { t } = useTranslation("common");
-  const { items, totalUniqueItems, total } = useCart();
+  const { items, totalUniqueItems, total,delivery_charges } = useCart();
   const { closeSidebar } = useUI();
   const router = useRouter();
   
@@ -26,7 +26,7 @@ const CartSidebarView = () => {
   }
 
   const { price: totalPrice } = usePrice({
-    amount: total,
+    amount: total-delivery_charges,
   });
   
 
