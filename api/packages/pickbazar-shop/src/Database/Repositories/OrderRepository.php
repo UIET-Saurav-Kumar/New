@@ -159,7 +159,7 @@ class OrderRepository extends BaseRepository
 
     }
 
-   private function sendSMS($order){
+    private function sendSMS($order){
         try{
             if($order){
                 if($order->shop_id){
@@ -167,7 +167,14 @@ class OrderRepository extends BaseRepository
                     $customer=$order->customer;
                     $phone_number=$this->clearStr($order->customer_contact);
                     SMS::customerPurchase($phone_number,$customer->name,$shop->name);
-                    
+
+                    // enable msg to vendor
+                    // if(isset($shop)){
+                    //     $user=$shop->owner;
+                    //     if($user){
+                    //         SMS::purchaseToVendor($user->phone_number, $user->name);    
+                    //     }
+                    // }
                 }    
             }
         }catch(Exception $e) {
@@ -345,7 +352,6 @@ class OrderRepository extends BaseRepository
         $balance->save();
     }
 
-
     private function get_uplink($user)
     {
         return ($user->invited_by) ? User::find($user->invited_by) : "";
@@ -396,7 +402,6 @@ class OrderRepository extends BaseRepository
             $product = Product::findOrFail($cartProduct['product_id']);
             $productsByShop[$product->shop_id][] = $cartProduct;
         }
-        
         foreach ($productsByShop as $shop_id => $cartProduct) {
             $amount = array_sum(array_column($cartProduct, 'subtotal'));
             $delivery_fee=$this->getDeliveryCharges($request,$shop_id);
@@ -417,7 +422,6 @@ class OrderRepository extends BaseRepository
                 'paid_total' => $amount+$delivery_fee,
             ];
 
-
             $order = $this->create($orderInput);
             
             $this->sendSMS($order); 
@@ -425,6 +429,7 @@ class OrderRepository extends BaseRepository
             foreach($cartProduct as $product){
                 $order->products()->attach([$product]);
             }
+            
         }
     }
 
