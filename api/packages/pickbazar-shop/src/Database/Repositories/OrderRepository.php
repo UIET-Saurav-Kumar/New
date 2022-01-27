@@ -159,7 +159,7 @@ class OrderRepository extends BaseRepository
 
     }
 
-    private function sendSMS($order){
+   private function sendSMS($order){
         try{
             if($order){
                 if($order->shop_id){
@@ -167,12 +167,7 @@ class OrderRepository extends BaseRepository
                     $customer=$order->customer;
                     $phone_number=$this->clearStr($order->customer_contact);
                     SMS::customerPurchase($phone_number,$customer->name,$shop->name);
-                    if(isset($shop)){
-                        $user=$shop->owner;
-                        if($user){
-                            SMS::purchaseToVendor($user->phone_number, $user->name);    
-                        }
-                    }
+                    
                 }    
             }
         }catch(Exception $e) {
