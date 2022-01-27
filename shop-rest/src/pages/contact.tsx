@@ -66,6 +66,7 @@ export default function ContactPage({user} : Props) {
                 pick(user, [
                   "name",
                   'email',
+                  'subject',
                   'description',
                 ])),
             },
@@ -95,7 +96,7 @@ export default function ContactPage({user} : Props) {
       },
       {
         onSuccess: () => {
-          toast.success(t("Thank You for Shopping through Local Shops, Your Wallet Will be Credited Within 24 Hours. In case of Any Query Please Call Us at +91 8427990450 "));
+          toast.success(t("Thank You for your Query. Our team will get back to you soon."));
           reset();
           setTimeout(() => {
             router.push("/contact")
@@ -104,6 +105,7 @@ export default function ContactPage({user} : Props) {
       }
     );
   }
+  
   return (
     
     <div className="w-full bg-gray-100">

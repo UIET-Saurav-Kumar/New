@@ -26,7 +26,7 @@ const Schedule = ({ count }: Props) => {
   // getShopCategory
   function getShopCategory(){
 
-    var shopCategory = items[0].shop?.shop_categories?.replace(/[{":,0123456789}]/g,'').slice(5,-3)
+    var shopCategory = items[0]?.shop?.shop_categories?.replace(/[{":,0123456789}]/g,'').slice(5,-3)
 
     return shopCategory;
   }

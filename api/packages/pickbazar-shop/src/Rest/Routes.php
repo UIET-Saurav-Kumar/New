@@ -160,7 +160,7 @@ Route::apiResource('coupons', CouponController::class, [
 ]);
 
 Route::apiResource('contact', ContactController::class, [
-    'only' => ['index', 'show']
+    'only' => ['index', 'store']
 ]);
 
 Route::post('coupons/verify', 'PickBazar\Http\Controllers\CouponController@verify');

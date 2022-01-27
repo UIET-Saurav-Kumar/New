@@ -1,3 +1,4 @@
+
 import { CoreApi } from "@utils/api/core.api";
 import { API_ENDPOINTS } from "@utils/api/endpoints";
 
@@ -5,6 +6,7 @@ export type CustomerType = {
   id: string;
   [key: string]: unknown;
 };
+
 export type ContactType = {
   name: string;
   email: string;

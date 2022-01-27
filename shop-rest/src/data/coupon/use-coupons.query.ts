@@ -22,6 +22,7 @@ export const fetchCoupons = async ({
   return { data, paginatorInfo: mapPaginatorData({ ...rest }) };
 };
 
+
 export const useCouponsQuery = (options: any = { limit: 15 }) => {
   return useInfiniteQuery<{ data: Coupon[]; paginatorInfo: any }, Error>(
     [API_ENDPOINTS.COUPONS, options],

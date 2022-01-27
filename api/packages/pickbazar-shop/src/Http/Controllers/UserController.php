@@ -153,6 +153,7 @@ class UserController extends CoreController
         // $request->validate([
         //     "phone_number"=>"required|unique:users"
         // ]);
+
         $permissions = [Permission::CUSTOMER];
         if (isset($request->permission)) {
             $permissions[] = isset($request->permission->value) ? $request->permission->value : $request->permission;
@@ -264,6 +265,7 @@ class UserController extends CoreController
         if (!$user) {
             return ['message' => 'PICKBAZAR_MESSAGE.NOT_FOUND', 'success' => false];
         }
+        
         // $tokenData = DB::table('password_resets')
         //     ->where('email', $request->email)->first();
         // if (!$tokenData) {

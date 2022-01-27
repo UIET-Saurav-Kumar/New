@@ -13,7 +13,6 @@ const CategoryDropdownSidebar = () => {
   const { query } = useRouter();
   const { type } = query;
 
-
   const {
     data,
     isLoading: loading,
@@ -21,6 +20,7 @@ const CategoryDropdownSidebar = () => {
   } = useCategoriesQuery({
     type: query.slug as string,
   });
+
 
   function allCategories() {
 
@@ -66,13 +66,14 @@ const CategoryDropdownSidebar = () => {
     {/* web */}
     
     <aside className="hidden lg:block items-center justify-center h-full   bg-light">
-      <div className="max-h-full max-w-full ">
+      <div className="max-h-full flex max-w-full ">
+      <button onClick={allCategories} className={` ${query.category == ''  ? 'text-magenta' : 'text-gray-600'} text-sm sticky bg-white z-1000 ml-0 lg:px-4 top-0 z-50 focus:text-magenta justify-center  flex flex-col font-semibold `}>
+              <img src='/categories.png' className='  w-2 h-2 lg:w-6 tracking-widest lg:h-6 mr-2'/> ALL
+              </button>
         {/* <Scrollbar className="w-full h-full max-h-screen"> */}
         {data?.categories?.data?.length ? (
             <div className=" flex lg:overflow-x-scroll relative justify-evenly w-full">
-              <button onClick={allCategories} className={` ${query.category == ''  ? 'text-magenta' : 'text-gray-600'} text-sm sticky bg-white z-1000 ml-0 lg:px-4 top-0 z-50 focus:text-magenta justify-center  flex flex-col font-semibold `}>
-              <img src='/categories.png' className='  w-2 h-2 lg:w-6 tracking-widest lg:h-6 mr-2'/> ALL
-              </button>
+              
               <SidebarMenu items={data?.categories?.data} className="whitespace-nowrap overflow-x-scroll sticky py-2" />
             </div>
           ) : (
@@ -108,8 +109,7 @@ const CategoryDropdownSidebar = () => {
       {/* </div> */}
     </>
 
-    
-    
+
   );
 };
 

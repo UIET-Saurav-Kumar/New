@@ -35,8 +35,6 @@ const OrderList = ({ orders, onPagination }: IProps) => {
   const { alignLeft } = useIsRTL();
 
 
- 
-
   console.log('orders list', data);
  
 

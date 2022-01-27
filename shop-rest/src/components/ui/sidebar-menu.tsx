@@ -113,10 +113,10 @@ function SidebarMenuItem({ className, item, depth = 0 }: any) {
                   })}
                 </span>
               )}
-            <div className="flex  px-auto items-center">
-              <span className='text-xs w-auto  whitespace-normal text-center'>{name}</span>
-              <span className=" text-center px-auto ">{expandIcon}</span>
-            </div>
+              <div className="flex  px-auto items-center">
+                <span className='text-xs w-auto  whitespace-normal text-center'>{name}</span>
+                <span className=" text-center px-auto ">{expandIcon}</span>
+              </div>
          </div>
         </button>
         {/* </div> */}

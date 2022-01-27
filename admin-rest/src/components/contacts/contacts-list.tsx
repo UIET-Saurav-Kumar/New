@@ -1,3 +1,5 @@
+
+
 import Pagination from "@components/ui/pagination";
 import { Table } from "@components/ui/table";
 import ActionButtons from "@components/common/action-buttons";
@@ -13,6 +15,8 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+
+
 
 type IProps = {
   contacts: ContactPaginator | null | undefined;
@@ -41,11 +45,13 @@ const ContactsList = ({ contacts, onPagination }: IProps) => {
 //   };
 
   let columns = [
+    
     {
       title: ("Name"),
       align: alignLeft,
       render: (data:any) => data.name,
     },
+
     {
       title: ("Email"),
       dataIndex: "email",
@@ -56,6 +62,8 @@ const ContactsList = ({ contacts, onPagination }: IProps) => {
         return <div>{email}</div>;
       },
     },
+    
+
     {
       title: ("Subject"),
       dataIndex: "subject",
@@ -66,6 +74,7 @@ const ContactsList = ({ contacts, onPagination }: IProps) => {
         return <div>{subject}</div>;
       },
     },
+
     {
       title: ("Description"),
       dataIndex: "description",
@@ -83,6 +92,7 @@ const ContactsList = ({ contacts, onPagination }: IProps) => {
     //   align: "center",
     //   render: (status: string) => renderStatusBadge(status),
     // },
+
     {
       title: t("table:table-item-created-at"),
       dataIndex: "created_at",
@@ -118,7 +128,10 @@ const ContactsList = ({ contacts, onPagination }: IProps) => {
 //   if (router?.query?.shop) {
 //     columns = columns?.filter((column) => column?.key !== "actions");
 //   }
+
+
   return (
+
     <>
       <div className="rounded overflow-hidden shadow mb-6">
         <Table

@@ -30,12 +30,7 @@ class ContactController extends CoreController
      */
     public function index(Request $request)
     {
-        $limit = $request->limit ?  $request->limit : 15;
-        $user = $request->user();
-        if ($user && $user->hasPermissionTo(Permission::SUPER_ADMIN)) {
-            return $this->repository->paginate($limit);
-        }
-        return $this->repository->where('user_id', '=', $user->id)->paginate($limit);
+        return $this->repository->get();
     }
 
     /**
@@ -47,12 +42,7 @@ class ContactController extends CoreController
      */
     public function store(Request $request)
     {
-        $user = $request->user();
-        $data = $request->all();
-        $data['user_id'] = $user->id;
-        $data['contact'] = json_encode(json_decode($data['contact']));
-
-        return $this->repository->create($data);
+        return $this->repository->create($request->all());
     }
 
     /**
