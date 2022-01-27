@@ -85,27 +85,7 @@ class SMS
     }
 
     
-    public static function purchaseToVendor($phone_number,$username)
-    {
-        if(!$phone_number){
-            return;
-        }
-
-        $phone_number=SMS::formate_number($phone_number);
-        $key=SMS::$key;
-        $client = new Client();
-        
-        $template="PurchaseToVendor";
-        $url = "https://2factor.in/API/R1/?module=TRANS_SMS&apikey=$key&to=$phone_number&from=LOWCAL&templatename=$template&var1=$username&var2=$username";
-
-        $response = $client->request('GET', "$url");
-
-        if ($response->getStatusCode() == 200) {
-            return "Success";
-        }else{
-            //dd('not sent');
-        }
-    }
+   
 
     public static function orderStatusChanged($phone_number,$username,$order_tracking_number,$status)
     {
