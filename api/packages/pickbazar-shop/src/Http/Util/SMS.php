@@ -83,7 +83,6 @@ class SMS
             //dd('not sent');
         }
     }
-
     
     public static function purchaseToVendor($phone_number,$username)
     {
@@ -106,6 +105,9 @@ class SMS
             //dd('not sent');
         }
     }
+
+    
+   
 
     public static function orderStatusChanged($phone_number,$username,$order_tracking_number,$status)
     {
