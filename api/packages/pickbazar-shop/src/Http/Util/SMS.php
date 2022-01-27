@@ -61,6 +61,7 @@ class SMS
             //dd('not sent');
         }
     }
+   
 
     public static function customerPurchase($phone_number,$username, $shop_name="")
     {
