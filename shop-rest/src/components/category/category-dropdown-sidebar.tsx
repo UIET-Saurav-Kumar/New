@@ -88,7 +88,6 @@ const CategoryDropdownSidebar = () => {
     <div className='lg:hidden w-20 sm:w-full relative flex'> 
     {/* <div className='flex  h-screen top-14 sticky flex-col w-20'>    */}
       <div className=" h-screen top-0 sticky flex-col flex overflow-y-scroll justify-between  space-y-8 text-center">
-
         <Scrollbar className="w-full h-full max-h-screen">
       
           {data?.categories?.data?.length ? (

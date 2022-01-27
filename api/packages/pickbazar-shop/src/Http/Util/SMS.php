@@ -57,7 +57,7 @@ class SMS
 
         if ($response->getStatusCode() == 200) {
             return "Success";
-        }else{
+        } else{
             //dd('not sent');
         }
     }
@@ -146,7 +146,7 @@ class SMS
 
         if ($response->getStatusCode() == 200) {
             return "Success";
-        }else{
+        } else {
             //dd('not sent');
         }
     }

@@ -125,7 +125,7 @@ export default function DropDown({getLoc}:{getLoc:any}){
                   // value={inputValue}
                   // defaultOptions={loadOptions}
                   // onInputChange={handleInputChange}
-                  placeholder={ <div className='text-xs sm:text-sm md:text:md  lg:text-sm'> Restraunts | Salons | Groceries </div>}
+                  placeholder={ <div className='text-xs sm:text-sm md:text:md  lg:text-sm'> Restaurants | Salons | Groceries </div>}
                   onChange={optionSelected}
                  
                 />

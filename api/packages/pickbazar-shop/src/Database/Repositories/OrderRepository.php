@@ -3,6 +3,7 @@
 
 namespace PickBazar\Database\Repositories;
 
+use Exception;
 use Illuminate\Support\Str;
 use PickBazar\Http\Util\SMS;
 use App\Models\ReferralEarning;
@@ -116,18 +117,7 @@ class OrderRepository extends BaseRepository
         }
         if($payment_gateway=='cod'){
             $order=$this->createOrder($request);
-            if($order){
-                if($order->shop_id){
-                    $shop=Shop::find($order->shop_id);
-                    SMS::customerPurchase($request->user()->phone_number,$request->user()->name,$shop->name);
-                    if(isset($shop)){
-                        $user=$shop->owner;
-                        if($user){
-                            SMS::purchaseToVendor($user->phone_number, $user->name);    
-                        }
-                    }
-                }    
-            }   
+            $this->sendSMS($order); 
 
             return $order;
 
@@ -163,37 +153,41 @@ class OrderRepository extends BaseRepository
         $orderFree->create($od);
         $order = $this->createOrder($request);
 
-        if($order){
-            if($order->shop_id){
-                $shop=Shop::find($order->shop_id);
-                SMS::customerPurchase($request->user()->phone_number,$request->user()->name,$shop->name);
-                if(isset($shop)){
-                    $user=$shop->owner;
-                    if($user){
-                        SMS::purchaseToVendor($user->phone_number, $user->name);    
-                    }
-                }
-            }    
-        } 
         
         $link = $orderFree->getLink($od['orderId']);
         return json_encode($link);
-        // if () {
-        // $payment_id = $response->getTransactionReference();
-        // $request['payment_id'] = $payment_id;
 
-        // $link = $orderFree->getLink($od['orderId']);
-        // return $link;
-        // return $order;
-        // }
-        // elseif ($response->isRedirect()) {
-        // return $response->getRedirectResponse();
-        // } 
-        // else {
-        // throw new PickbazarException('PICKBAZAR_ERROR.PAYMENT_FAILED');
-        // }
     }
 
+    private function sendSMS($order){
+        try{
+            if($order){
+                if($order->shop_id){
+                    $shop=Shop::find($order->shop_id);
+                    $customer=$order->customer;
+                    $phone_number=$this->clearStr($order->customer_contact);
+                    SMS::customerPurchase($phone_number,$customer->name,$shop->name);
+                    if(isset($shop)){
+                        $user=$shop->owner;
+                        if($user){
+                            SMS::purchaseToVendor($user->phone_number, $user->name);    
+                        }
+                    }
+                }    
+            }
+        }catch(Exception $e) {
+
+        }
+           
+    }
+
+    private function clearStr($str){
+        
+        $str=str_replace("(","",$str);
+        $str=str_replace(")","",$str);
+        $str=str_replace(" ","",$str);
+        return $str;
+    }
     /**
      * @param $request
      * @return mixed
@@ -232,6 +226,7 @@ class OrderRepository extends BaseRepository
             $orderInput = $request->only($this->dataArray);
             $products = $this->processProducts($request['products']);
             $order = $this->create($orderInput);
+            $this->sendSMS($order); 
             $id=isset($order["id"])?$order["id"]:$order->id;
             $order=Order::findOrFail($id);
 
@@ -242,6 +237,7 @@ class OrderRepository extends BaseRepository
 
             if($order)
             {
+
                 $product_id=$request->products[0]["product_id"];
                 $product=Product::find($product_id);
                 $user=$request->user();                
@@ -354,6 +350,7 @@ class OrderRepository extends BaseRepository
         $balance->save();
     }
 
+
     private function get_uplink($user)
     {
         return ($user->invited_by) ? User::find($user->invited_by) : "";
@@ -404,6 +401,7 @@ class OrderRepository extends BaseRepository
             $product = Product::findOrFail($cartProduct['product_id']);
             $productsByShop[$product->shop_id][] = $cartProduct;
         }
+        
         foreach ($productsByShop as $shop_id => $cartProduct) {
             $amount = array_sum(array_column($cartProduct, 'subtotal'));
             $delivery_fee=$this->getDeliveryCharges($request,$shop_id);
@@ -424,12 +422,14 @@ class OrderRepository extends BaseRepository
                 'paid_total' => $amount+$delivery_fee,
             ];
 
+
             $order = $this->create($orderInput);
             
+            $this->sendSMS($order); 
+
             foreach($cartProduct as $product){
                 $order->products()->attach([$product]);
             }
-            
         }
     }
 

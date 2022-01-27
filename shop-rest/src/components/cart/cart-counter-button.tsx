@@ -9,10 +9,10 @@ import { useTranslation } from "next-i18next";
 const CartCounterButton = () => {
 
   const { t } = useTranslation();
-  const { totalUniqueItems, total } = useCart();
+  const { totalUniqueItems, total ,delivery_charges} = useCart();
   const { openSidebar, setSidebarView } = useUI();
   const { price: totalPrice } = usePrice({
-    amount: total,
+    amount: total-delivery_charges,
   });
 
 

@@ -2,6 +2,7 @@
 
 namespace PickBazar\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
 use PickBazar\Http\Util\SMS;
 use Illuminate\Http\JsonResponse;
@@ -65,7 +66,10 @@ class GatewayResponse extends CoreController
             $delivery->is_approved = 1;
             $delivery->save();
             // $url = \Config::get('app.shop_url')."/orders/".$order_id;
-            SMS::customerPurchase($delivery->sender_phone_number, $user->name);
+            try{
+                SMS::customerPurchase($delivery->sender_phone_number, $user->name);
+            }catch(Exception $e){
+            }
 
             $url = "https://buylowcal.com/user/delivery";
 
