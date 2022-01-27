@@ -7,9 +7,12 @@ import { toUnicode } from "punycode";
 
 var today = new Date();
 var month = today.getMonth() ;
+var date = today.getDate();
 const monthNames = ["Jan", "Feb", "March", "April", "May", "June",
   "July", "Aug", "Sep", "Oct", "Nov", "Dec"
 ];
+
+var weekDay = today.getDay();
 
 const day = 
 [
@@ -164,54 +167,54 @@ export const siteSettings = {
 
     {
       id: "0",
-      title: "  Today  " + '('  + today.getDate() + ' ' +  monthNames[today.getMonth() ] + ')',
+      title: "  Today  " + '('  + date + ' ' +  monthNames[month ] + ')',
       is_delivery:false,
       description: "Visit around 10:00 AM to 2:00 PM",
     },
 
     {
       id: "0",
-      title: "  Today  " + '('  + today.getDate() + ' ' +  monthNames[today.getMonth() ] + ')',
+      title: "  Today  " + '('  + date + ' ' +  monthNames[month ] + ')',
       is_delivery:false,
       description: "Visit around 2:00 PM to 7:00 PM",
     },
 
     {
       id: "2",
-      title:  'Tomorrow' + ' ' +  '('  + (today.getMonth() % 2 === 0 ? (today.getDate() + 1 > 31 ? today.getDate() + 1 - 31  : today.getDate() + 1 ) : (today.getDate() + 1 > 30 ? today.getDate() + 1 - 30  : today.getDate() + 1 )) + ' ' + 
-               monthNames[today.getDate() + 1 > 31 ? (today.getMonth() + 1 > 12 ? today.getMonth() + 1 - 12 : today.getMonth() + 1 ) : today.getMonth()] + ')',
+      title:  'Tomorrow' + ' ' +  '('  + (month % 2 === 0 ? (date + 1 > 31 ? date + 1 - 31  : date + 1 ) : (date + 1 > 30 ? date + 1 - 30  : date + 1 )) + ' ' + 
+               monthNames[date + 1 > 31 ? (month + 1 > 12 ? month + 1 - 12 : month + 1 ) : month] + ')',
       is_delivery:false,
       description: "Visit tomorrow",
     },
 
     {
       id: "3",
-      title: day[today.getDay() + 2 >6 ? today.getDay()+2 - 7 :today.getDay() + 2   ] + ' ' + '('  + (today.getMonth() % 2 === 0 ? (today.getDate() + 2 > 31 ? today.getDate() + 2 - 31  : today.getDate() + 2 ) : '') + ' ' +  
-             monthNames[today.getDate() + 2 > 31 ? (today.getMonth() + 1 > 12 ? today.getMonth() + 1 - 12 : today.getMonth() + 1 ) : today.getMonth()] + ')',
+      title: day[weekDay + 2 >6 ? weekDay + 2 - 7 :weekDay + 2   ] + ' ' + '('  + (month % 2 === 0 ? (date + 2 > 31 ? date + 2 - 31  : date + 2 ) : '') + ' ' +  
+             monthNames[date + 2 > 31 ? (month + 1 > 12 ? month + 1 - 12 : month + 1 ) : month] + ')',
       is_delivery:false,
       description: "Open 10AM to 7PM",
     },
 
     {
       id: "4",
-      title:  day[today.getDay() + 3 >6 ? today.getDay()+3 - 7 :today.getDay() + 3   ]  + ' ' +  '('  + (today.getMonth() % 2 === 0 ? (today.getDate() + 3 > 31 ? today.getDate() + 3 - 31  : today.getDate() + 3 ) : '') + ' ' + 
-              monthNames[today.getDate() + 3 > 31 ? (today.getMonth() + 1 > 12 ? today.getMonth() + 1 - 12 : today.getMonth() + 1 ) : today.getMonth()] + ')',
+      title:  day[weekDay + 3 >6 ? weekDay + 3 - 7 : weekDay + 3   ]  + ' ' +  '('  + (month % 2 === 0 ? (date + 3 > 31 ? date + 3 - 31  : date + 3 ) : '') + ' ' + 
+              monthNames[date + 3 > 31 ? (month + 1 > 12 ? month + 1 - 12 : month + 1 ) : month] + ')',
       is_delivery:false,
       description: "Open 10AM to 7PM",
     },
 
     {
       id: "5",
-      title: day[today.getDay() + 4 >6 ? today.getDay()+4 - 7 :today.getDay() + 4   ]  + '  ' + '('  + (today.getMonth() % 2 === 0 ? (today.getDate() + 4 > 31 ? today.getDate() + 4 - 31  : today.getDate() + 4 ) : '') + ' ' + 
-             monthNames[today.getDate() + 4 > 31 ? (today.getMonth() + 1 > 12 ? today.getMonth() + 1 - 12 : today.getMonth() + 1 ) : today.getMonth()] + ')',
+      title: day[weekDay + 4 >6 ? weekDay + 4 - 7 : weekDay + 4   ]  + '  ' + '('  + (month % 2 === 0 ? (date + 4 > 31 ? date + 4 - 31  : date + 4 ) : '') + ' ' + 
+             monthNames[date + 4 > 31 ? (month + 1 > 12 ? month + 1 - 12 : month + 1 ) : month] + ')',
       is_delivery:false,
       description: "Open 10AM to 7PM",
     },
 
     {
       id: "7",
-      title: day[today.getDay() + 5 >6 ? today.getDay()+5 - 7 : today.getDay() + 5   ]  + ' ' + '('  + (today.getMonth() % 2 === 0 ? (today.getDate() + 5 > 31 ? today.getDate() + 5 - 31  : today.getDate() + 5 ) : '') + ' ' +  
-             monthNames[today.getDate() + 5 > 31 ? (today.getMonth() + 1 > 12 ? today.getMonth() + 1 - 12 : today.getMonth() + 1 ) : today.getMonth()] + ')',
+      title: day[weekDay + 5 >6 ? weekDay + 5 - 7 : weekDay + 5   ]  + ' ' + '('  + (month % 2 === 0 ? (date + 5 > 31 ? date + 5 - 31  : date + 5 ) : '') + ' ' +  
+      monthNames[date + 5 > 31 ? (month + 1 > 12 ? month + 1 - 12 : month + 1 ) : month] + ')',
       is_delivery:false,
       description: "Open 10AM to 7PM",
     },
@@ -224,14 +227,14 @@ export const siteSettings = {
 
     {
       id: "6",
-      title: "  Today  " + '('  + today.getDate() + ' ' +  monthNames[today.getMonth() ] + ')',
+      title: "  Today  " + '('  + date + ' ' +  monthNames[month ] + ')',
       is_delivery:true,
       description: "Applicable if order is placed before 4PM",
     },
     
     {
       id: "6",
-      title:  'Tomorrow' + ' ' +  '('  + (today.getDate() + 1) + ' ' +  monthNames[today.getMonth() ] + ')',
+      title:  'Tomorrow' + ' ' +  '('  + (date + 1) + ' ' +  monthNames[month ] + ')',
       is_delivery:true,
       description: "Delivery between 11AM and 4PM",
     },
