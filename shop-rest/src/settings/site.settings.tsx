@@ -204,12 +204,7 @@ export const siteSettings = {
       description: "Open 10AM to 7PM",
     },
 
-    {
-      id: "7",
-      title: day[today.getDay() + 5 >6 ? today.getDay()+5 - 7 :today.getDay() + 5   ]  + ' ' + '('  + (today.getDate() + 5) + ' ' +  monthNames[today.getMonth() ] + ')',
-      is_delivery:false,
-      description: "Open 10AM to 7PM",
-    },
+   
     
     // {
     //   id: "1",
