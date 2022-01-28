@@ -30,7 +30,9 @@ class ContactController extends CoreController
      */
     public function index(Request $request)
     {
-        return $this->repository->get();
+        $limit = $request->limit ?  $request->limit : 15;
+        $contact = $this->repository;
+        return $contact->paginate($limit);
     }
 
     /**
