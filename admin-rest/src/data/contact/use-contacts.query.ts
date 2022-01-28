@@ -21,12 +21,12 @@ const fetchContacts = async ({
     page,
     limit = 15,
    
-    orderBy = "updated_at",
+    // orderBy = "updated_at",
     sortedBy = "DESC",
   } = params as ContactsQueryOptionsType;
 
 
-  const url = `${API_ENDPOINTS.CONTACT}?&limit=${limit}&page=${page}&orderBy=${orderBy}&sortedBy=${sortedBy}`;
+  const url = `${API_ENDPOINTS.CONTACT}?&limit=${limit}&page=${page}&sortedBy=${sortedBy}`;
 
   const {
     data: { data, ...rest },
@@ -39,7 +39,6 @@ const fetchContacts = async ({
   };
 };
 
-
 const useContactsQuery = (
   params: ContactsQueryOptionsType,
   options: any = {}
@@ -49,6 +48,7 @@ const useContactsQuery = (
     fetchContacts,
     { ...options, keepPreviousData: true }
   );
+  
 };
 
 export { useContactsQuery, fetchContacts };
