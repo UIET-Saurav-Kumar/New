@@ -21,6 +21,7 @@ import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { useIsRTL } from "@utils/locals";
 import { Children } from "react";
+import product from "@repositories/product";
 
 type IProps = {
   orders: OrderPaginator | null | undefined;
@@ -28,9 +29,10 @@ type IProps = {
 };
 
 const OrderList = ({ orders, onPagination }: IProps) => {
+
   const { data, paginatorInfo } = orders! ?? {};
   const { t } = useTranslation();
-  const rowExpandable = (record: any) => record.children?.length;
+  const rowExpandable = (record: any) => record.children?.length > 1 ? record.children?.length : '';
   const router = useRouter();
   const { alignLeft } = useIsRTL();
 
@@ -97,16 +99,37 @@ const OrderList = ({ orders, onPagination }: IProps) => {
     },
 
     // {
-    //   title: t('table: Children'),
+    //   title: t('table: Items'),
     //   dataIndex: 'children',
     //   key: 'children',
     //   align: alignLeft,
     //   render: (children: any) => (
-    //     <div className="whitespace-nowrap font-semibold">{
-    //       children.map( (child:any) => child.products.map((item:any) => item.name))
+        
+    //     <div className="whitespace-wrap w-48 font-semibold">{
+    //       children?.map( (child:any) => child.products.map((item:any) => {
+    //      var price = child.products.map((prod:any) => prod.sale_price)
+    //       return <h1>◦{item.name  }</h1>
+    //       }))
     //       }</div>
     //   ),
     // },
+
+    {
+      title: t('table: Shops'),
+      dataIndex: 'children',
+      key: 'children',
+      align: alignLeft,
+      render: (children: any) => {
+        
+        
+        var shopName =  children?.map( (child:any) => <h1>⊛ {child.shop.name}</h1>
+          )
+          return  <h1 className="whitespace-wrap w-48 font-light">
+                 {shopName}
+                  </h1>
+      },
+    },
+    
 
     {
       title: t("table:Phone Number"),

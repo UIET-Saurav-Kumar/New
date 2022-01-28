@@ -24,8 +24,12 @@ type IProps = {
 };
 
 const ContactsList = ({ contacts, onPagination }: IProps) => {
+
   const { t } = useTranslation();
+  
   const { alignLeft } = useIsRTL();
+  
+  console.log('contact prop', contacts);
 
   const router = useRouter();
 
@@ -69,9 +73,9 @@ const ContactsList = ({ contacts, onPagination }: IProps) => {
       dataIndex: "subject",
       key: "subject",
       align: "right",
-      render: (subject: any) => {
+      render: (contacts: any) => {
         
-        return <div>{subject}</div>;
+        return <div>{contacts.subject}</div>;
       },
     },
 

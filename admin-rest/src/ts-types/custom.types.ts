@@ -28,6 +28,7 @@ export type ShopsQueryOptionsType = {
   orderBy?: string;
   sortedBy?: SortOrder;
 };
+
 export type WithdrawsQueryOptionsType = {
   text?: string;
   shop_id?: number;
@@ -37,12 +38,11 @@ export type WithdrawsQueryOptionsType = {
   orderBy?: string;
   sortedBy?: SortOrder;
 };
+
 export type ContactsQueryOptionsType = {
   text?: string;
-  shop_id?: number;
   id?: number;
   page?: number;
-  parent?: number | null;
   limit?: number;
   orderBy?: string;
   sortedBy?: SortContacts;

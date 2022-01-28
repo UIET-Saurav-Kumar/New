@@ -28,6 +28,7 @@ const fetchContacts = async ({
 
   const url = `${API_ENDPOINTS.CONTACT}?&limit=${limit}&page=${page}&orderBy=${orderBy}&sortedBy=${sortedBy}`;
 
+  
   const {
     data: { data, ...rest },
   } = await Contact.all(url);
@@ -49,6 +50,7 @@ const useContactsQuery = (
     fetchContacts,
     { ...options, keepPreviousData: true }
   );
+
 };
 
 export { useContactsQuery, fetchContacts };

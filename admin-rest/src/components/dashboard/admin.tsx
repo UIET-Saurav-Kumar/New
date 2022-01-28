@@ -17,6 +17,7 @@ import { ShopIcon } from "@components/icons/sidebar";
 import { DollarIcon } from "@components/icons/shops/dollar";
 import { RupeeIcon } from "@components/icons/shops/rupee-icon";
 import WithdrawsPage from "src/pages/invoices-reward-data";
+import { useUsersQuery } from "@data/user/use-users.query";
 
 
 export default function Dashboard() {
@@ -38,6 +39,19 @@ export default function Dashboard() {
   );
 
   const {
+    data: usersData,
+    isLoading: userLoading,
+    error: userError,
+  } = useUsersQuery({
+    limit: 20,
+    page : 1,
+    
+    
+  });
+
+  // console.log('users', usersData?.users?.data.map( user => user.filter(user.role === 'customer')           ));
+
+  const {
     data: orderData,
     isLoading: orderLoading,
     error: orderError,
@@ -45,6 +59,10 @@ export default function Dashboard() {
     limit: 10,
     page: 1,
   });
+
+  // console.log(usersData.data.map( (user:any) => user.data.map( (usr:any) => usr.filter( usr => usr.role === 'customer'))));
+
+  // console.log(usersData?.users?.data?.map(( user:any ) => user.map( (usr) => usr.map(usr.role))) );
 
   console.log('order query  data', data)
 

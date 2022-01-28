@@ -60,6 +60,7 @@ const WithdrawList = ({ withdraws, onPagination }: IProps) => {
         return <div>{price}</div>;
       },
     },
+    
     {
       title: t("table:table-item-status"),
       dataIndex: "status",

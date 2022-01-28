@@ -19,6 +19,7 @@ export default function InvoicePdf({ order }: { order: Order }) {
       amount: order?.amount!,
     }
   );
+
   const { price: total } = usePrice(
     order && {
       amount: order?.paid_total!,
@@ -29,11 +30,13 @@ export default function InvoicePdf({ order }: { order: Order }) {
       amount: order?.discount!,
     }
   );
+  
   const { price: delivery_fee } = usePrice(
     order && {
       amount: order?.delivery_fee!,
     }
   );
+
   const { price: sales_tax } = usePrice(
     order && {
       amount: order?.sales_tax!,

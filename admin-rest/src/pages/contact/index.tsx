@@ -38,6 +38,8 @@ export default function ContactsPage() {
   function handlePagination(current: any) {
     setPage(current);
   }
+
+  console.log('contact data',data?.contacts.paginatorInfo);
   
   return (
     <>
@@ -69,6 +71,7 @@ export default function ContactsPage() {
         contacts={data?.contacts}
         onPagination={handlePagination}
       />
+
     </>
   );
 }

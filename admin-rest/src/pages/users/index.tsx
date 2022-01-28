@@ -29,6 +29,7 @@ export default function Customers() {
     page,
     text: searchTerm,
   });
+   //
 
   if (loading) return <Loader text={t("common:text-loading")} />;
   if (error) return <ErrorMessage message={error.message} />;
@@ -42,10 +43,13 @@ export default function Customers() {
     setPage(current);
   }
 
+  console.log('users',data);
+
 
   return (
     <>
       <Card className="flex flex-col md:flex-row items-center mb-8">
+
         <div className="md:w-1/4 mb-4 md:mb-0">
             <h1 className="text-lg font-semibold text-heading">
               {t("form:input-label-customers")}
@@ -64,6 +68,7 @@ export default function Customers() {
             <span className="md:hidden">+ {t("form:button-label-add")}</span>
           </LinkButton>
         </div>
+        
       </Card>
 
       {loading ? null : (
@@ -72,6 +77,7 @@ export default function Customers() {
     </>
   );
 }
+
 Customers.Layout = Layout;
 
 export const getStaticProps = async ({ locale }: any) => ({
