@@ -36,7 +36,7 @@ class CartController extends CoreController
             }
         }
         
-        return $cart_list;
+        return array('code'=>200, 'message'=>'Cart list response', 'data'=> $cart_list);
     }
     public function store(Request $request)
     {
@@ -74,7 +74,8 @@ class CartController extends CoreController
         // add cart list to user cart list
         $user->cart_list = json_encode($itemlist);
         $user->save();
-        return $cart_list;
+
+        return array('code'=>200, 'message'=>'Cart add response', 'data'=> $cart_list);
     }
 
     public function remove(Request $request)
@@ -119,6 +120,6 @@ class CartController extends CoreController
         $user->cart_list = json_encode($itemlist);
         $user->save();
 
-        return $cart_list;
+        return array('code'=>200, 'message'=>'Cart remove response', 'data'=> $cart_list);
     }
 }
