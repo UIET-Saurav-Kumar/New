@@ -24,28 +24,18 @@ import Footer from "@components/footer/Footer";
 
 
 
-export const getServerSideProps: GetServerSideProps = async (context: any) => {
-  const cookies = parseContextCookie(context?.req?.headers?.cookie);
-  if (!cookies?.auth_token) {
-    return { redirect: { destination: "/", permanent: false } };
-  }
-  return {
-    props: {
-      ...(await serverSideTranslations(context.locale, ["common", "forms"])),
-    },
-  };
-};
+
 
 
 
 const contactFormSchema = yup.object().shape({
-  name: yup.string().required("error-name-required"),
+  name: yup.string().required("Name is required"),
   email: yup
     .string()
-    .email("error-email-format")
-    .required("error-email-required"),
-  subject: yup.string().required("error-subject-required"),
-  description: yup.string().required("error-description-required"),
+    .email("invalid email address")
+    .required("Email is required"),
+  subject: yup.string().required("Mobile Number required"),
+  description: yup.string().required("City required"),
 });
 
 
@@ -83,11 +73,11 @@ export default function Appointment({user} : Props) {
 
   const { t } = useTranslation("common");
 
-  const { isLoading, data, error } = useCustomerQuery();
+  // const { isLoading, data, error } = useCustomerQuery();
 
   const { mutate: storeContact } =useContactUploadMutation();
 
-  if (error) return <ErrorMessage message={error.message} />;
+  // if (error) return <ErrorMessage message={error.message} />;
 
 
   function onSubmit(values: any) {
@@ -143,20 +133,19 @@ export default function Appointment({user} : Props) {
           <form className="grid grid-cols-1 shadow-2xl p-8 sm:grid-cols-2 gap-2" onSubmit={handleSubmit(onSubmit)} noValidate>
             {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-2"> */}
               <Input
-                label={t("text-name")}
+                label={t("Name")}
                 {...register("name")}
                 variant="outline"
                 error={t(errors.name?.message!)}
               />
               <Input
-                label={t("text-email")}
+                label={t("Email")}
                 {...register("email")}
                 type="email"
                 variant="outline"
                 error={t(errors.email?.message!)}
               />
            
-
             <Input
               label={t("Mobile Number")}
               {...register("subject")}
@@ -173,16 +162,16 @@ export default function Appointment({user} : Props) {
               error={t(errors.description?.message!)}
             />
             
-
-            <Button loading={isLoading} disabled={isLoading}>
-              {t("text-submit")}
+            <Button >
+              {t("Submit")}
             </Button>
 
           </form>
 
           <div className="text-center mt-10 font-sans text-lg">
               <img src='/salon-ad.jpeg' className="h-full object-cover"/>
-              </div>
+          </div>
+
         </div>
       </div>
       <Footer/>
