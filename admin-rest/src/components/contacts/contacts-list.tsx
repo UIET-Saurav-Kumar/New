@@ -117,6 +117,9 @@ const ContactsList = ({ contacts, onPagination }: IProps) => {
         );
       },
     },
+
+    
+
     // {
     //   title: t("table:table-item-actions"),
     //   dataIndex: "id",

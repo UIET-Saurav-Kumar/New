@@ -19,14 +19,13 @@ const fetchContacts = async ({
 
   const {
     page,
-    limit = 15,
-   
-    // orderBy = "updated_at",
+    limit = 25,
+    orderBy = "updated_at",
     sortedBy = "DESC",
   } = params as ContactsQueryOptionsType;
 
 
-  const url = `${API_ENDPOINTS.CONTACT}?&limit=${limit}&page=${page}&sortedBy=${sortedBy}`;
+  const url = `${API_ENDPOINTS.CONTACT}?&limit=${limit}&page=${page}&orderBy=${orderBy}&sortedBy=${sortedBy}`;
 
   const {
     data: { data, ...rest },
