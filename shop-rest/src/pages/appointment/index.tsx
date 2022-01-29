@@ -124,13 +124,13 @@ export default function Appointment({user} : Props) {
 
         
         {/* Contact form */}
-        <div className="w-full order-1 md:order-2 mb-8 md:mb-0 md:ms-7 lg:ms-9 p-5 md:p-8 bg-light">
-                 <div className="text-center  font-sans text-lg">
-                     <p>
-                         Grab the offer
-                     </p> <span className="font-sans text-sm text-blue-400"> or Call us - 84279-90450 </span>
+        <div className="w-full order-1 md:order-2 drop-shadow-2xl  mb-8 md:mb-0 md:ms-7 lg:ms-9 p-5 md:p-8 bg-light">
+                 <div className="text-center mb-8 font-sans font-normal text-lg lg:text-3xl">
+                     <p className="text-gray-700">
+                         Grab the offer, Send your details
+                     </p> 
                  </div>
-          <form className="grid grid-cols-1 shadow-2xl p-8 sm:grid-cols-2 gap-2" onSubmit={handleSubmit(onSubmit)} noValidate>
+          <form className="grid grid-cols-1 border shadow-xl mt-3 p-8 sm:grid-cols-2 gap-2" onSubmit={handleSubmit(onSubmit)} noValidate>
             {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-2"> */}
               <Input
                 label={t("Name")}
@@ -162,9 +162,19 @@ export default function Appointment({user} : Props) {
               error={t(errors.description?.message!)}
             />
             
-            <Button >
+            <Button className="mt-4" >
               {t("Submit")}
             </Button>
+
+            <span className="font-sans flex   w-full 
+                             items-end   text-green-600"> 
+               <p className=" text-center  font-normal text-gray-700 text-sm mt-4 lg:text-right w-full"> 
+                    Any queries?<p className=" text-center text-sm  text-gray-800 mt-4 lg:text-right w-full">
+               Call us/Whatsapp - 84279-90450
+               </p>
+               </p>
+               
+            </span>
 
           </form>
 
