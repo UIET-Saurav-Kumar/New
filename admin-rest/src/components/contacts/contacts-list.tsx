@@ -65,22 +65,22 @@ const ContactsList = ({ contacts, onPagination }: IProps) => {
     
 
     {
-      title: ("Subject"),
+      title: ("Mobile Number"),
       dataIndex: "subject",
       key: "subject",
       align: "right",
-      render: (subject: any) => {
+      render: (subject: number) => {
         
         return <div>{subject}</div>;
       },
     },
 
     {
-      title: ("Description"),
+      title: ("City"),
       dataIndex: "description",
       key: "description",
       align: "right",
-      render: (description: any) => {
+      render: (description: string) => {
         return <div>{description}</div>;
       },
     },
@@ -94,7 +94,7 @@ const ContactsList = ({ contacts, onPagination }: IProps) => {
     // },
 
     {
-      title: t("table:table-item-created-at"),
+      title: t("table:Time"),
       dataIndex: "created_at",
       key: "created_at",
       align: "center",
@@ -104,7 +104,10 @@ const ContactsList = ({ contacts, onPagination }: IProps) => {
         dayjs.extend(timezone);
         return (
           <span className="whitespace-nowrap">
-            {dayjs.utc(date).tz(dayjs.tz.guess()).fromNow()}
+            {
+               //get date and time in india timezone
+              dayjs.utc(date).tz("Asia/Kolkata").format("DD MMM YYYY hh:mm A")
+            }
           </span>
         );
       },
