@@ -102,7 +102,7 @@ export default function Appointment({user} : Props) {
 
       {
         onSuccess: () => {
-          toast.success(t("Thank You. Our team will get back to you soon."));
+          toast.success(t("Thank You. Our team will contact you soon."));
           reset();
           setTimeout(() => {
             router.push("/home")

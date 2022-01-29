@@ -29,7 +29,7 @@ export default function OfferCards() {
                     place-content-center '>
             <div className=''><img  onClick={getLink}  src='/shop-offer4.jpg' className='cursor-pointer border object-cover '/></div>
             <a  href='/user/upload-invoice/upload-form' target='_blank'><div className=''><img   src='/shop-offer3.jpg' className=' cursor-pointer border object-cover '/></div></a>
-            <a  href='/user/invite' target='_blank'><div className=''><img   src='/shop-offer2.jpg' className='cursor-pointer border object-cover '/></div></a>
+            <div  href='/user/invite' target='_blank'><div className=''><img   src='/shop-offer2.jpg' className='cursor-pointer border object-cover '/></div></div>
             <a  href='/user/invite' target='_blank'><div className=''><img   src='/shop-offer1.jpg' className='cursor-pointer border-gray-100 hover-border-red-900 object-cover '/></div></a>
         </div>
     )
