@@ -23,6 +23,7 @@ export default class CustomDocument extends Document {
     // const envVariable = `${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`
 
     return (
+      
       <Html>
         
       <Head>
