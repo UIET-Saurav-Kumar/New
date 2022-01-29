@@ -73,9 +73,10 @@ const Footer = () => {
 								<h5 className='light-text cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline font-light'>
 									Register as Vendor </h5>
 							</Link>
-							<h5 onClick={handleJoin} className='light-text cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline font-light'>
-								Register as Customer 
-							</h5>
+							<Link href='https://buylowcal.com'>
+								<h5 className='light-text cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline font-light'>
+									Register as Customer </h5>
+							</Link>
 						</div>		  		
 			  	  </div>
 

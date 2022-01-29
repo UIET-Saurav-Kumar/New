@@ -14,6 +14,7 @@ import { allowedRoles, hasAccess, setAuthCredentials } from "@utils/auth-utils";
 import { Permission } from "@ts-types/generated";
 import { useRegisterMutation } from "@data/user/use-register.mutation";
 import LicenseFrom from './license-form'
+
 type FormValues = {
   name: string;
   email: string;
