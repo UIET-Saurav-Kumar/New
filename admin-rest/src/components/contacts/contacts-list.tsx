@@ -105,8 +105,13 @@ const ContactsList = ({ contacts, onPagination }: IProps) => {
         return (
           <span className="whitespace-nowrap">
             {
-               //get date and time in india timezone
-              dayjs.utc(date).tz("Asia/Kolkata").format("DD MMM YYYY hh:mm A")
+               //get date and time in india timezone, for current date show today
+              dayjs.utc(date).tz("Asia/Kolkata").format("DD MMM YYYY") === dayjs().format("DD MMM YYYY")
+                ? 'Today' + ' ' + dayjs.utc(date).tz("Asia/Kolkata").format(" hh:mm A")
+                :  dayjs.utc(date).tz("Asia/Kolkata").format("DD MMM YYYY hh:mm A")
+            
+              // dayjs.utc(date).tz("Asia/Kolkata").format("hh:mm A DD MMM YYYY ")
+
             }
           </span>
         );
