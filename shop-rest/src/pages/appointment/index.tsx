@@ -170,7 +170,7 @@ export default function Appointment({user} : Props) {
                              items-end   text-green-600"> 
                <p className=" text-center  font-normal text-gray-700 text-sm mt-4 lg:text-right w-full"> 
                     Any queries?<p className=" text-center text-sm  text-gray-800 mt-4 lg:text-right w-full">
-               Call us/Whatsapp - 84279-90450
+               Call us/Whatsapp - <a href='tel:84279-90450' className="hover:underline text-blue-800"> 84279-90450</a>
                </p>
                </p>
                
