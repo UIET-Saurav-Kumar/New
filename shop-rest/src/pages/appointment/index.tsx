@@ -123,7 +123,7 @@ export default function Appointment({user} : Props) {
         <div className="w-full">
             <div className="flex p-2  items-center ">
                {/* <Logo/> */}
-               <img src='/bn.jpg' className="w-full object-contain h-full" />
+               <img src='/bn.jpg' className="w-full object-cover  lg:h-100" />
             </div>
             <div>
 
@@ -135,12 +135,12 @@ export default function Appointment({user} : Props) {
         
         {/* Contact form */}
         <div className="w-full order-1 md:order-2 mb-8 md:mb-0 md:ms-7 lg:ms-9 p-5 md:p-8 bg-light">
-                 <div className="text-center font-sans text-lg">
+                 <div className="text-center  font-sans text-lg">
                      <p>
-                         Book Now
-                     </p>
+                         Grab the offer
+                     </p> <span className="font-sans text-sm text-blue-400"> or Call us - 84279-90450 </span>
                  </div>
-          <form className="grid grid-cols-1 -mt-10 sm:grid-cols-2 gap-2" onSubmit={handleSubmit(onSubmit)} noValidate>
+          <form className="grid grid-cols-1 shadow-2xl p-8 sm:grid-cols-2 gap-2" onSubmit={handleSubmit(onSubmit)} noValidate>
             {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-2"> */}
               <Input
                 label={t("text-name")}
@@ -180,7 +180,7 @@ export default function Appointment({user} : Props) {
 
           </form>
 
-          <div className="text-center font-sans text-lg">
+          <div className="text-center mt-10 font-sans text-lg">
               <img src='/salon-ad.jpeg' className="h-full object-cover"/>
               </div>
         </div>
