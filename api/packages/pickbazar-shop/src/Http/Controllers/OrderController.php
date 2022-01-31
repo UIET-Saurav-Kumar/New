@@ -111,6 +111,8 @@ class OrderController extends CoreController
         }
     }
 
+   
+
     /**
      * Update the specified resource in storage.
      *
@@ -177,11 +179,12 @@ class OrderController extends CoreController
         return $order;
     }
 
-    // function to exportOrders in csv  format
-    // function to exportOrders in csv  format
+
     public function exportOrder(Request $request)
+
     {
         $filename = 'Orders'.'.csv';
+
         $headers = [
             'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
             'Content-type'        => 'text/csv',
@@ -190,6 +193,8 @@ class OrderController extends CoreController
             'Pragma'              => 'public'
         ];
 
+        $order = $this->repository->with(['products', 'status', 'children.shop'])->findOrFail($request->id);   ;
+
         $list = $this->repository->get()->toArray();
         if (!count($list)) {
             return response()->stream(function () {
@@ -197,12 +202,35 @@ class OrderController extends CoreController
         }
 
         foreach($list as $key=>$val)
+        
         {
             $list[$key]['customer_name'] = $val['customer']['name'] ?? '';
             $list[$key]['customer_email'] = $val['customer']['email'] ?? '';
             $list[$key]['order_status'] = $val['status']['name'] ?? '';
-            //created_at
-            // $list[$key]['created_at'] = $val['created_at']->format('d-m-Y H:i:s');
+
+            // $children = json_decode($val('children'));
+            $children = json_decode($list->children);
+
+            // $children= $val['children'] ?? '';
+            // undefined array key children
+
+            if (is_array($children) && count($children)) {
+                foreach ($children as $child) {
+                    $list[$key]['children'] = $val['child']['shop']['name'] ?? '';
+                }
+            }
+
+            // if (is_array($children) && count($children)) {
+            //     $child_shops = [];
+            //     foreach ($children as $child) {
+            //         $child_shops[] = $child->shop->name;
+            //     }
+            //     $list[$key]['children_shops'] = implode(',', $child_shops);
+            // } else {
+            //     $list[$key]['children_shops'] = '';
+            // }
+            
+
         }
         
         # add headers for each column in the CSV download
@@ -234,6 +262,7 @@ class OrderController extends CoreController
                 
                 fputcsv($FH, $row);
             }
+
             fclose($FH);
         };
 
