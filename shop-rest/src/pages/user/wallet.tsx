@@ -117,6 +117,20 @@ const ReferralActivity = () => {
             return date.getMonth() === lastMonth && date.getFullYear() === relevantYear;
         }).reduce((prev, curr) => prev +  parseFloat(curr.earning),0);
 
+        var level_1_purchase = data?.level1?.filter((i:any) => {
+            
+            var date = new Date(i.created_at);
+            // console.log(data.customer_level);
+            console.log('created at',date);
+            console.log('curr month',currMonth);
+            console.log('year',date.getFullYear());
+            console.log('order month',date.getMonth());
+            
+            console.log('last month',lastMonth);
+        
+            return date.getMonth() === lastMonth && date.getFullYear() === relevantYear;
+        }).reduce((prev, curr) => prev +  parseFloat(curr.commission_value),0);
+
         var level_2 = data?.level2?.filter((i:any) => {
             
             var date = new Date(i.created_at);
@@ -130,6 +144,20 @@ const ReferralActivity = () => {
         
             return date.getMonth() === lastMonth && date.getFullYear() === relevantYear;
         }).reduce((prev, curr) => prev +  parseFloat(curr.earning),0);
+
+        var level_2_purchase = data?.level2?.filter((i:any) => {
+            
+            var date = new Date(i.created_at);
+            // console.log(data.customer_level);
+            console.log('created at',date);
+            console.log('curr month',currMonth);
+            console.log('year',date.getFullYear());
+            console.log('order month',date.getMonth());
+            
+            console.log('last month',lastMonth);
+        
+            return date.getMonth() === lastMonth && date.getFullYear() === relevantYear;
+        }).reduce((prev, curr) => prev +  parseFloat(curr.commission_value),0);
 
         var level_3 = data?.level3?.filter((i:any) => {
             
@@ -145,6 +173,20 @@ const ReferralActivity = () => {
             return date.getMonth() === lastMonth && date.getFullYear() === relevantYear;
         }).reduce((prev, curr) => prev +  parseFloat(curr.earning),0);
 
+        var level_3_purchase = data?.level3?.filter((i:any) => {
+            
+            var date = new Date(i.created_at);
+            // console.log(data.customer_level);
+            console.log('created at',date);
+            console.log('curr month',currMonth);
+            console.log('year',date.getFullYear());
+            console.log('order month',date.getMonth());
+            
+            console.log('last month',lastMonth);
+        
+            return date.getMonth() === lastMonth && date.getFullYear() === relevantYear;
+        }).reduce((prev, curr) => prev +  parseFloat(curr.commission_value),0);
+
         console.log('total',total);
 
 	return (
@@ -158,205 +200,272 @@ const ReferralActivity = () => {
 
             <Navbar label=''/>
 
-            <div className='flex mx-8 -space-x-4 lg:mx-auto lg:space-x-0 '>
+            <div className='flex mx-0 md:mx-8 -space-x-4 lg:mx-auto lg:space-x-0 '>
                 
-                <ProfileSidebar className="lg:sticky lg:top-22 flex-shrink-0 hidden mt-0 sm:mt-0 lg:mt-14 xl:block xl:w-80 ml-8" />  
+                <ProfileSidebar className="lg:sticky lg:top-22 flex-shrink-0 hidden mt-0 sm:mt-0 lg:mt-14 xl:block xl:w-80 ml-0 md:ml-8" />  
 
-                <div className="flex flex-col  justify-evenly p-4 xl:w-1000 xl+:1100 2xl:w-1300 mx-8  mt-6">
-                    <div className='invite-tabs flex flex-col bg-white p-4 w-full mx-4 text-left mt-5 px-8'>
-                        <div className="users-list mt-10">
+                <div className="flex flex-col  justify-evenly p-4 w-full lg:mx-8  lg:mt-6">
+                    <div className='invite-tabs flex flex-col bg-white p-4 w-full mx-4 text-left lg:mt-5 '>
+                        <div className="users-list lg:mt-10">
                             <h1 className="text-lg mb-5 font-semibold text-heading">Your Wallet</h1>
 
                             {/* Mini Dashboard */}
                             <div className="order-4 mx-auto xl:order-3 col-span-12 xl:col-span-9">
-                                <div className="grid grid-cols-1 md:grid-cols-4 gap-5 bg-light p-4 mx-auto rounded h-full">
-                                <div className="space-y-3  w-full" style={{maxWidth:"250px"}}>
-                                    <div className="border border-gray-100">
-
-                                        <div className="flex items-center py-3 px-4 border-b border-gray-100">
-
-                                            <div className="p-3 rounded-full w-11 h-11 flex items-center justify-center bg-[#C7AF99] text-light">
-                                                    <PriceWalletIcon width={16} />
-                                            </div>
-
-                                            <div className="ml-3">
-                                                <p className="text-md lg:text-lg font-semibold text-sub-heading mb-0.5">
-                                                ₹{total.toFixed(2)}
-                                                </p>
-                                                <p className="text-sm text-gray-700 mt-0">
-                                                    {("Leader last month")}
-                                                </p>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <div className="space-y-3  w-full" style={{maxWidth:"250px"}}>
-                                    <div className="border border-gray-100">
-
-                                        <div className="flex items-center py-3 px-4 border-b border-gray-100">
-
-                                            <div className="p-3 rounded-full w-11 h-11 flex items-center justify-center bg-[#C7AF99] text-light">
-                                                    <PriceWalletIcon width={16} />
-                                            </div>
-
-                                            <div className="ml-3">
-                                                <p className="text-md lg:text-lg font-semibold text-sub-heading mb-0.5">
-                                                {totalEarnings}
-                                                </p>
-                                                <p className="text-sm text-gray-700 mt-0">
-                                                    {("Total Earning")}
-                                                </p>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <div className="space-y-3" style={{maxWidth:"250px"}}>
-                                    <div className="border border-gray-100">
-                                        <div className="flex items-center  py-3 px-4">
-                                            <div className="p-3 rounded-full w-11 h-11 flex items-center justify-center bg-[#FFA7AE] text-light">
-                                                <DollarIcon width={12} />
-                                            </div>
-
-                                            <div className="ml-3">
-                                                <p className="text-md lg:text-lg font-semibold text-sub-heading mb-0.5">
-                                                ₹{Math.abs(data?.customer_level?.map( item => item.earning).reduce((prev,next) => (prev + parseFloat(next)) ,0)).toFixed(2)}
-                                                </p>
-                                                <p className="text-sm text-gray-700 mt-0">
-                                                    {("Leader earning")}
-                                                </p>
-                                            </div>
-                                        </div>  
-                                    </div>
-                                </div>
-
-
-                                <div className="space-y-3" style={{maxWidth:"250px"}}>
-                                    <div className="border border-gray-100">
-                                        <div className="flex items-center  py-3 px-4">
-                                            <div className="p-3 rounded-full w-11 h-11 flex items-center justify-center bg-[#FFA7AE] text-light">
-                                                <DollarIcon width={12} />
-                                            </div>
-
-                                            <div className="ml-3">
-                                                <p className="text-md lg:text-lg font-semibold text-sub-heading mb-0.5">
-                                                    {currentBalance}
-                                                </p>
-                                                <p className="text-sm text-gray-700 mt-0">
-                                                    {("Current Balance")}
-                                                </p>
-                                            </div>
-                                        </div>  
-                                    </div>
-                                </div>
-
+                                <div className="grid grid-cols-1  sm:grid-cols-2 md:grid-cols-3 gap-2 lg:gap-5 bg-light p-4 mx-auto rounded h-full">
 
                                
 
+                                <div className="space-y-3 shadow-lg border  w-full" style={{maxWidth:"450px",maxHeight:'200px'}}>
+                                        <div className="">
 
-                                <div className="space-y-3" style={{maxWidth:"250px"}}>
-                                    <div className="border border-gray-100">
-                                        <div className="flex items-center  py-3 px-4">
-                                            <div className="p-3 rounded-full w-11 h-11 flex items-center justify-center bg-[#FFA7AE] text-light">
-                                                <DollarIcon width={12} />
+                                            <div className="flex items-center py-3 px-4 border-b border-gray-100">
+
+                                                <div className="p-3 rounded-full w-11 h-11 flex items-center justify-center bg-[#C7AF99] text-light">
+                                                        <PriceWalletIcon width={16} />
+                                                </div>
+
+                                                <div className="ml-3">
+                                                    <p className="text-md lg:text-lg font-semibold text-sub-heading mb-0.5">
+                                                    {totalEarnings}
+                                                    </p>
+                                                    <p className="text-sm text-gray-700 mt-0">
+                                                        {("Total Earning")}
+                                                    </p>
+                                                </div>
+
                                             </div>
 
-                                            <div className="ml-3">
-                                                <p className="text-md lg:text-lg font-semibold text-sub-heading mb-0.5">
-                                                    {/* {Math.abs(data?.level1?.map( item => item.earning).reduce((prev,next) => (prev + parseFloat(next)) ,0).toFixed(2))} */}
-                                                    ₹{level_1.toFixed(2)}
-                                                </p>
-                                                <p className="text-sm text-gray-700 mt-0">
-                                                    {("1st Family (last month)")}
-                                                </p>
-                                            </div>
-                                        </div>  
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div className="space-y-3" style={{maxWidth:"250px"}}>
-                                    <div className="border border-gray-100">
-                                        <div className="flex items-center  py-3 px-4">
-                                            <div className="p-3 rounded-full w-11 h-11 flex items-center justify-center bg-[#FFA7AE] text-light">
-                                                <DollarIcon width={12} />
-                                            </div>
+                                    <div className="space-y-3 shadow-lg border" style={{maxWidth:"450px",maxHeight:'200px'}}>
+                                        <div className="">
+                                            <div className="flex items-center  py-3 px-4">
+                                                <div className="p-3 rounded-full w-11 h-11 flex items-center justify-center bg-[#FFA7AE] text-light">
+                                                    <DollarIcon width={12} />
+                                                </div>
 
-                                            <div className="ml-3">
-                                                <p className="text-md lg:text-lg font-semibold text-sub-heading mb-0.5">
-                                                    {/* {Math.abs(data?.level2?.map( item => item.earning).reduce((prev,next) => (prev-next) ,0).toFixed(2))} */}
-                                                    ₹{level_2.toFixed(2)}
-                                                </p>
-                                                <p className="text-sm text-gray-700 mt-0">
-                                                    {("2nd Family (last month)")}
-                                                </p>
-                                            </div>
-                                        </div>  
+                                                <div className="ml-3">
+                                                    <p className="text-md lg:text-lg font-semibold text-sub-heading mb-0.5">
+                                                        {currentBalance}
+                                                    </p>
+                                                    <p className="text-sm text-gray-700 mt-0">
+                                                        {("Current Balance")}
+                                                    </p>
+                                                </div>
+                                            </div>  
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div className="space-y-3" style={{maxWidth:"250px"}}>
-                                    <div className="border border-gray-100">
-                                        <div className="flex items-center  py-3 px-4">
-                                            <div className="p-3 rounded-full w-11 h-11 flex items-center justify-center bg-[#FFA7AE] text-light">
-                                                <DollarIcon width={12} />
-                                            </div>
+                                    <div className="space-y-3 shadow-lg border" style={{maxWidth:"450px",maxHeight:'200px'}}>
+                                        <div className="">
+                                            <div className="flex items-center  py-3 px-4">
+                                                <div className="p-3 rounded-full w-11 h-11 flex items-center justify-center bg-[#FFA7AE] text-light">
+                                                    <DollarIcon width={12} />
+                                                </div>
 
-                                            <div className="ml-3">
-                                                <p className="text-md lg:text-lg font-semibold text-sub-heading mb-0.5">
-                                                    {/* {Math.abs(data?.level3?.map( item => item.earning).reduce((prev,next) => (prev-next) ,0).toFixed(2))} */}
-                                                    ₹{level_3.toFixed(2)}
-                                                </p>
-                                                <p className="text-sm text-gray-700 mt-0">
-                                                    {("3rd Family (last month)")}
-                                                </p>
-                                            </div>
-                                        </div>  
+                                                <div className="ml-3">
+                                                    <p className="text-md lg:text-lg font-semibold text-sub-heading mb-0.5">
+                                                    ₹{Math.abs(data?.customer_level?.map( item => item.earning).reduce((prev,next) => (prev + parseFloat(next)) ,0)).toFixed(2)}
+                                                    </p>
+                                                    <p className="text-sm text-gray-700 mt-0">
+                                                        {("Leader earning")}
+                                                    </p>
+                                                </div>
+                                            </div>  
+                                        </div>
                                     </div>
-                                </div>
+                                    
+                                    <div className="space-y-3 shadow-lg border  w-full" style={{maxWidth:"450px",maxHeight:'200px'}}>
+                                        <div className="">
 
+                                            <div className="flex items-center py-3 px-4 border-b border-gray-100">
 
+                                                <div className="p-3 rounded-full w-11 h-11 flex items-center justify-center bg-[#C7AF99] text-light">
+                                                        <PriceWalletIcon width={16} />
+                                                </div>
 
-                                <div className="space-y-3" style={{maxWidth:"250px"}}>
-                                    <div className="border border-gray-100">
-                                        <div className="flex items-center py-3 px-4">
-                                            <div className="p-3 rounded-full w-11 h-11 flex items-center justify-center bg-[#6EBBFD] text-light">
-                                               <PriceWalletIcon width={16} />
+                                                <div className="ml-3">
+                                                    <p className="text-md lg:text-lg font-semibold text-sub-heading mb-0.5">
+                                                    ₹{total.toFixed(2)}
+                                                    </p>
+                                                    <p className="text-sm text-gray-700 mt-0">
+                                                        {("Leader last month earning")}
+                                                    </p>
+                                                </div>
+
                                             </div>
 
-                                            <div className="ml-3">
-                                                <p className="text-md lg:text-lg font-semibold text-sub-heading mb-0.5">
-                                                    {withdrawnAmount}
-                                                </p>
-                                                <p className="text-sm text-gray-700 mt-0">
-                                                    {("Withdrawn Amount")}
-                                                </p>
+                                        </div>
+                                    </div>
+
+
+                                    <div className="space-y-3 shadow-lg border" style={{maxWidth:"450px",maxHeight:'200px'}}>
+                                        <div className="">
+                                            <div className="flex items-center  py-3 px-4">
+                                                <div className="p-3 rounded-full w-11 h-11 flex items-center justify-center bg-[#FFA7AE] text-light">
+                                                    <DollarIcon width={12} />
+                                                </div>
+
+                                                <div className="ml-3">
+                                                    <p className="text-md lg:text-lg font-semibold text-sub-heading mb-0.5">
+                                                        {/* {Math.abs(data?.level1?.map( item => item.earning).reduce((prev,next) => (prev + parseFloat(next)) ,0).toFixed(2))} */}
+                                                        ₹{level_1.toFixed(2)}
+                                                    </p>
+                                                    <p className="text-sm text-gray-700 mt-0">
+                                                        {("1st Family (last month earning)")}
+                                                    </p>
+                                                </div>
+                                            </div>  
+                                        </div>
+                                    </div>
+
+
+                                    <div className="space-y-3 shadow-lg border" style={{maxWidth:"450px",maxHeight:'200px'}}>
+                                        <div className="">
+                                            <div className="flex items-center  py-3 px-4">
+                                                <div className="p-3 rounded-full w-11 h-11 flex items-center justify-center bg-[#FFA7AE] text-light">
+                                                    <DollarIcon width={12} />
+                                                </div>
+
+                                                <div className="ml-3">
+                                                    <p className="text-md lg:text-lg font-semibold text-sub-heading mb-0.5">
+                                                    {/* ₹{Math.abs(data?.level1?.map( item => item.commission_value).reduce((prev,next) => (prev + parseFloat(next)) ,0).toFixed(2))} */}
+                                                        ₹{level_1_purchase.toFixed(2)}
+                                                    </p>
+                                                    <p className="text-sm text-gray-700 mt-0">
+                                                        {("1st Family (last month purchase)")}
+                                                    </p>
+                                                </div>
+                                            </div>  
+                                        </div>
+                                    </div>
+
+                                    
+
+                                    <div className="space-y-3 shadow-lg border" style={{maxWidth:"450px",maxHeight:'200px'}}>
+                                        <div className="">
+                                            <div className="flex items-center  py-3 px-4">
+                                                <div className="p-3 rounded-full w-11 h-11 flex items-center justify-center bg-[#FFA7AE] text-light">
+                                                    <DollarIcon width={12} />
+                                                </div>
+
+                                                <div className="ml-3">
+                                                    <p className="text-md lg:text-lg font-semibold text-sub-heading mb-0.5">
+                                                        {/* {Math.abs(data?.level2?.map( item => item.earning).reduce((prev,next) => (prev-next) ,0).toFixed(2))} */}
+                                                        ₹{level_2.toFixed(2)}
+                                                    </p>
+                                                    <p className="text-sm text-gray-700 mt-0">
+                                                        {("2nd Family (last month earning)")}
+                                                    </p>
+                                                </div>
+                                            </div>  
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-3 shadow-lg border" style={{maxWidth:"450px",maxHeight:'200px'}}>
+                                        <div className="">
+                                            <div className="flex items-center  py-3 px-4">
+                                                <div className="p-3 rounded-full w-11 h-11 flex items-center justify-center bg-[#FFA7AE] text-light">
+                                                    <DollarIcon width={12} />
+                                                </div>
+
+                                                <div className="ml-3">
+                                                    <p className="text-md lg:text-lg font-semibold text-sub-heading mb-0.5">
+                                                    {/* ₹{Math.abs(data?.level2?.map( item => item.commission_value).reduce((prev,next) => (prev + parseFloat(next)) ,0).toFixed(2))} */}
+                                                        ₹{level_2_purchase.toFixed(2)}
+                                                    </p>
+                                                    <p className="text-sm text-gray-700 mt-0">
+                                                        {("2nd Family (last month purchase)")}
+                                                    </p>
+                                                </div>
+                                            </div>  
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-3 shadow-lg border" style={{maxWidth:"450px",maxHeight:'200px'}}>
+                                        <div className="">
+                                            <div className="flex items-center  py-3 px-4">
+                                                <div className="p-3 rounded-full w-11 h-11 flex items-center justify-center bg-[#FFA7AE] text-light">
+                                                    <DollarIcon width={12} />
+                                                </div>
+
+                                                <div className="ml-3">
+                                                    <p className="text-md lg:text-lg font-semibold text-sub-heading mb-0.5">
+                                                        {/* {Math.abs(data?.level3?.map( item => item.earning).reduce((prev,next) => (prev-next) ,0).toFixed(2))} */}
+                                                        ₹{level_3.toFixed(2)}
+                                                    </p>
+                                                    <p className="text-sm text-gray-700 mt-0">
+                                                        {("3rd Family (last month earning)")}
+                                                    </p>
+                                                </div>
+                                            </div>  
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-3 shadow-lg border" style={{maxWidth:"450px",maxHeight:'200px'}}>
+                                        <div className="">
+                                            <div className="flex items-center  py-3 px-4">
+                                                <div className="p-3 rounded-full w-11 h-11 flex items-center justify-center bg-[#FFA7AE] text-light">
+                                                    <DollarIcon width={12} />
+                                                </div>
+
+                                                <div className="ml-3">
+                                                    <p className="text-md lg:text-lg font-semibold text-sub-heading mb-0.5">
+                                                    {/* ₹{Math.abs(data?.level3?.map( item => item.commission_value).reduce((prev,next) => (prev + parseFloat(next)) ,0).toFixed(2))} */}
+                                                        ₹{level_3_purchase.toFixed(2)}
+                                                    </p>
+                                                    <p className="text-sm text-gray-700 mt-0">
+                                                        {("3rd Family (last month purchase)")}
+                                                    </p>
+                                                </div>
+                                            </div>  
+                                        </div>
+                                    </div>
+
+
+
+                                    <div className="space-y-3 shadow-lg border" style={{maxWidth:"450px",maxHeight:'200px'}}>
+                                        <div className="">
+                                            <div className="flex items-center py-3 px-4">
+                                                <div className="p-3 rounded-full w-11 h-11 flex items-center justify-center bg-[#6EBBFD] text-light">
+                                                <PriceWalletIcon width={16} />
+                                                </div>
+
+                                                <div className="ml-3">
+                                                    <p className="text-md lg:text-lg font-semibold text-sub-heading mb-0.5">
+                                                        {withdrawnAmount}
+                                                    </p>
+                                                    <p className="text-sm text-gray-700 mt-0">
+                                                        {("Withdrawn Amount")}
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="space-y-3" style={{maxWidth:"250px"}}>
-                                    <div className="border border-gray-100">
-                                        <div className="flex items-center py-3 px-4">
-                                            <div className="p-3 rounded-full w-11 h-11 flex items-center justify-center bg-[#6EBBFD] text-light">
-                                               <DollarIcon width={12} />
-                                            </div>
 
-                                            <div className="ml-3">
-                                                <p className="text-md lg:text-lg font-semibold text-sub-heading mb-0.5">
-                                                    {bill_transfered_amount}
-                                                </p>
-                                                <p className="text-sm text-gray-700 mt-0">
-                                                    {("Transfered Amount")}
-                                                </p>
+
+                                   
+
+
+                                    <div className="space-y-3 shadow-lg border" style={{maxWidth:"450px",maxHeight:'200px'}}>
+                                        <div className="">
+                                            <div className="flex items-center py-3 px-4">
+                                                <div className="p-3 rounded-full w-11 h-11 flex items-center justify-center bg-[#6EBBFD] text-light">
+                                                <DollarIcon width={12} />
+                                                </div>
+
+                                                <div className="ml-3">
+                                                    <p className="text-md lg:text-lg font-semibold text-sub-heading mb-0.5">
+                                                        {bill_transfered_amount}
+                                                    </p>
+                                                    <p className="text-sm text-gray-700 mt-0">
+                                                        {("Transfered Amount")}
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
                             </div>
                         </div>
