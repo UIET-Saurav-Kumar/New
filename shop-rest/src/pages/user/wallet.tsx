@@ -181,7 +181,7 @@ const ReferralActivity = () => {
 
                                             <div className="ml-3">
                                                 <p className="text-md lg:text-lg font-semibold text-sub-heading mb-0.5">
-                                                ₹{total}
+                                                ₹{total.toFixed(2)}
                                                 </p>
                                                 <p className="text-sm text-gray-700 mt-0">
                                                     {("Leader last month")}
@@ -225,7 +225,7 @@ const ReferralActivity = () => {
 
                                             <div className="ml-3">
                                                 <p className="text-md lg:text-lg font-semibold text-sub-heading mb-0.5">
-                                                ₹{Math.abs(data?.customer_level?.map( item => item.earning).reduce((prev,next) => (prev + parseFloat(next)) ,0).toFixed(2))}
+                                                ₹{Math.abs(data?.customer_level?.map( item => item.earning).reduce((prev,next) => (prev + parseFloat(next)) ,0)).toFixed(2)}
                                                 </p>
                                                 <p className="text-sm text-gray-700 mt-0">
                                                     {("Leader earning")}
@@ -269,7 +269,7 @@ const ReferralActivity = () => {
                                             <div className="ml-3">
                                                 <p className="text-md lg:text-lg font-semibold text-sub-heading mb-0.5">
                                                     {/* {Math.abs(data?.level1?.map( item => item.earning).reduce((prev,next) => (prev + parseFloat(next)) ,0).toFixed(2))} */}
-                                                    ₹{level_1}
+                                                    ₹{level_1.toFixed(2)}
                                                 </p>
                                                 <p className="text-sm text-gray-700 mt-0">
                                                     {("1st Family (last month)")}
@@ -289,7 +289,7 @@ const ReferralActivity = () => {
                                             <div className="ml-3">
                                                 <p className="text-md lg:text-lg font-semibold text-sub-heading mb-0.5">
                                                     {/* {Math.abs(data?.level2?.map( item => item.earning).reduce((prev,next) => (prev-next) ,0).toFixed(2))} */}
-                                                    ₹{level_2}
+                                                    ₹{level_2.toFixed(2)}
                                                 </p>
                                                 <p className="text-sm text-gray-700 mt-0">
                                                     {("2nd Family (last month)")}
@@ -309,7 +309,7 @@ const ReferralActivity = () => {
                                             <div className="ml-3">
                                                 <p className="text-md lg:text-lg font-semibold text-sub-heading mb-0.5">
                                                     {/* {Math.abs(data?.level3?.map( item => item.earning).reduce((prev,next) => (prev-next) ,0).toFixed(2))} */}
-                                                    ₹{level_3}
+                                                    ₹{level_3.toFixed(2)}
                                                 </p>
                                                 <p className="text-sm text-gray-700 mt-0">
                                                     {("3rd Family (last month)")}
