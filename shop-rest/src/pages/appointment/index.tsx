@@ -113,7 +113,8 @@ export default function Appointment({user} : Props) {
         <div className="w-full">
             <div className="flex p-2  items-center ">
                {/* <Logo/> */}
-               <img src='/bn.jpg' className="w-full object-cover  lg:h-100" />
+               <img src='/bn.jpg' className=" ml-16 hidden lg:block w-full object-cover -mr-96 lg:h-100" />
+               <img src='/salon-chd.jpg' className="w-full flex object-contain -mr-72 lg:object-contain  lg:h-100" />
             </div>
             <div>
 
