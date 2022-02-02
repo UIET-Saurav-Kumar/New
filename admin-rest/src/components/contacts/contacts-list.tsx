@@ -26,7 +26,7 @@ type IProps = {
 const ContactsList = ({ contacts, onPagination }: IProps) => {
 
   const { t } = useTranslation();
-  
+
   const { alignLeft } = useIsRTL();
   
   console.log('contact prop', contacts);
@@ -69,18 +69,18 @@ const ContactsList = ({ contacts, onPagination }: IProps) => {
     
 
     {
-      title: ("Subject"),
+      title: ("Mobile Number"),
       dataIndex: "subject",
       key: "subject",
       align: "right",
-      render: (contacts: any) => {
+      render: (subject: any) => {
         
-        return <div>{contacts.subject}</div>;
+        return <div>{subject}</div>;
       },
     },
 
     {
-      title: ("Description"),
+      title: ("City"),
       dataIndex: "description",
       key: "description",
       align: "right",
