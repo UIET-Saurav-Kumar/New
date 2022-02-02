@@ -21,6 +21,7 @@ import { toast } from "react-toastify";
 import { useContactUploadMutation } from "@data/contact/use-contact-upload.query";
 import  Logo  from "@components/ui/logo";
 import Footer from "@components/footer/Footer";
+import PromotionSlider from "@components/common/promotion-slider";
 
 
 
@@ -118,12 +119,15 @@ export default function Appointment({user} : Props) {
         <div className="w-full">
             <div className="flex p-2  items-center ">
                {/* <Logo/> */}
-               <img src='/bn.jpg' className=" ml-16 hidden lg:block w-full object-cover -mr-96 lg:h-100" />
-               <img onClick={handleClick} src='/salon-chd.jpg' className="w-full cursor-pointer flex object-contain -mr-72 lg:object-contain  lg:h-100" />
+               <img src='/ad-banner.jpg' className=" block w-full object-contain " />
+               {/* <img onClick={handleClick} src='/salon-chd.jpg' className="w-full cursor-pointer flex object-contain -mr-72 lg:object-contain  lg:h-100" /> */}
             </div>
-            <div>
+            
+        </div>
+        <div className=" border-b space-y-4 mt-5 py-5">
+              <p className="font-sans text-xl underline pl-2 lg:pl-10 ">Top Brands </p>
+              <PromotionSlider/>
 
-            </div>
         </div>
 
       <div className="flex flex-col md:flex-row max-w-7xl w-full mx-auto   xl:py-14 xl:px-8 2xl:px-14">
@@ -131,12 +135,19 @@ export default function Appointment({user} : Props) {
         
         {/* Contact form */}
         <div className="w-full order-1 md:order-2 drop-shadow-2xl  mb-8 md:mb-0 md:ms-7 lg:ms-9 p-5 md:p-8 bg-light">
-                 <div className="text-center mb-8 font-sans font-normal text-lg lg:text-3xl">
-                     <p className="text-gray-700">
-                         Grab the offer, Send your details
+          <div className="">
+            
+          </div>
+                 <div className="text-center mb-8 font-sans flex items-center font-normal text-lg lg:text-2xl">
+                  
+                     <p className="text-gray-700 flex items-center px-auto">
+                     <img src='/hurry-up.png' className="w-24 h-24"/>
+                         <p className="flex flex-col">Free Booking 
+                         <span className="text-red-600 rounded-full text-sm  animate-pulse">10 slots left</span></p>
                      </p> 
+
                  </div>
-          <form className="grid grid-cols-1 border shadow-xl mt-3 p-8 sm:grid-cols-2 gap-2" onSubmit={handleSubmit(onSubmit)} noValidate>
+          <form className="grid grid-cols-1 border shadow-xl -mt-8 p-4 sm:grid-cols-2 gap-1" onSubmit={handleSubmit(onSubmit)} noValidate>
             {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-2"> */}
               <Input
                 label={t("Name")}
@@ -172,11 +183,11 @@ export default function Appointment({user} : Props) {
               {t("Submit")}
             </Button>
 
-            <span className="font-sans flex   w-full 
-                             items-end   text-green-600"> 
+            <span className="font-sans flex w-full 
+                             items-end text-green-600"> 
                <p className=" text-center  font-normal text-gray-700 text-sm mt-4 lg:text-right w-full"> 
-                    Any queries?<p className=" text-center text-sm  text-gray-800 mt-4 lg:text-right w-full">
-               Call us/Whatsapp - <a href='tel:84279-90450' className="hover:underline text-blue-800"> 84279-90450</a>
+                  Any queries?<p className=" text-center text-sm  text-gray-800 mt-4 lg:text-right w-full">
+                  Call us/Whatsapp - <a href='tel:84279-90450' className="hover:underline text-blue-800"> 84279-90450</a>
                </p>
                </p>
                
