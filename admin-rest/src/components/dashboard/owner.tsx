@@ -13,7 +13,7 @@ export default function OwnerDashboard() {
   const { t } = useTranslation();
   const { data, isLoading: loading, error } = useMeQuery();
 
-  if (loading) return <Loader text={t("common:text-loading")} />;
+  if (loading) return <Loader text={t("common:loading")} />;
   if (error) return <ErrorMessage message={error.message} />;
   return (
     <>

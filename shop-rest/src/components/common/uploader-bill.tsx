@@ -86,7 +86,7 @@ export default function Uploader({ onChange, value, name, onBlur }: any) {
           {loading && (
             <div className="h-16 flex items-center mt-2 ms-2">
               <Spinner
-                text={t("text-loading")}
+                text={t("loading")}
                 simple={true}
                 className="w-6 h-6"
               />
