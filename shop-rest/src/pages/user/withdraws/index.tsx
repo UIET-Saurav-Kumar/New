@@ -11,6 +11,8 @@ import { SortOrder } from "@ts-types/generated";
 import ProfileSidebar from "@components/profile/profile-sidebar";
 import SortForm from "@components/common/sort-form";
 import Navbar from '@components/layout/navbar/navbar';
+import {useWalletCommissionQuery} from '@data/user/use-wallet-commission-query'
+import usePrice from "@utils/use-price";
 
 export default function WithdrawsPage() {
   const { t } = useTranslation();
@@ -31,6 +33,18 @@ export default function WithdrawsPage() {
       sortedBy,
     },
   );
+
+  const { data:walletData,
+    isLoading } = useWalletCommissionQuery({
+    limit: 10 as number,
+    search:"",
+});
+
+const { price: currentBalance } = usePrice(
+  walletData && {
+      amount: walletData?.balance?.current_balance!,
+  }
+);
 
   if (loading) return <Loader text={("Loading...")} />;
   if (error) return <ErrorMessage message={error.message} />;
@@ -85,6 +99,14 @@ export default function WithdrawsPage() {
                 </LinkButton>
               </div>
 
+            </Card>
+
+            <Card>
+              
+              <div className=" flex items-center font-md">
+                <p className="text-gray-700">Wallet Amount :</p>
+                <p className=" ml-6 text-gray-600">{currentBalance}</p>
+              </div>
             </Card>
 
             <WithdrawList

@@ -73,7 +73,7 @@ const ContactsList = ({ contacts, onPagination }: IProps) => {
       dataIndex: "subject",
       key: "subject",
       align: "right",
-      render: (subject: any) => {
+      render: (subject: number) => {
         
         return <div>{subject}</div>;
       },
@@ -84,7 +84,7 @@ const ContactsList = ({ contacts, onPagination }: IProps) => {
       dataIndex: "description",
       key: "description",
       align: "right",
-      render: (description: any) => {
+      render: (description: string) => {
         return <div>{description}</div>;
       },
     },
@@ -98,7 +98,7 @@ const ContactsList = ({ contacts, onPagination }: IProps) => {
     // },
 
     {
-      title: t("table:table-item-created-at"),
+      title: t("table:Time"),
       dataIndex: "created_at",
       key: "created_at",
       align: "center",
@@ -108,11 +108,22 @@ const ContactsList = ({ contacts, onPagination }: IProps) => {
         dayjs.extend(timezone);
         return (
           <span className="whitespace-nowrap">
-            {dayjs.utc(date).tz(dayjs.tz.guess()).fromNow()}
+            {
+               //get date and time in india timezone, for current date show today
+              dayjs.utc(date).tz("Asia/Kolkata").format("DD MMM YYYY") === dayjs().format("DD MMM YYYY")
+                ? 'Today' + ' ' + dayjs.utc(date).tz("Asia/Kolkata").format(" hh:mm A")
+                :  dayjs.utc(date).tz("Asia/Kolkata").format("DD MMM YYYY hh:mm A")
+            
+              // dayjs.utc(date).tz("Asia/Kolkata").format("hh:mm A DD MMM YYYY ")
+
+            }
           </span>
         );
       },
     },
+
+    
+
     // {
     //   title: t("table:table-item-actions"),
     //   dataIndex: "id",

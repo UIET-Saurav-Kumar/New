@@ -29,7 +29,7 @@ type IProps = {
 };
 
 const OrderList = ({ orders, onPagination }: IProps) => {
-
+  
   const { data, paginatorInfo } = orders! ?? {};
   const { t } = useTranslation();
   const rowExpandable = (record: any) => record.children?.length > 1 ? record.children?.length : '';
@@ -121,9 +121,9 @@ const OrderList = ({ orders, onPagination }: IProps) => {
       align: alignLeft,
       render: (children: any) => {
         
-        
-        var shopName =  children?.map( (child:any) => <h1>⊛ {child.shop.name}</h1>
-          )
+        var shopName =  children?.map( (child:any) =>
+         <h1>⊛ {child.shop.name}</h1>
+        )
           return  <h1 className="whitespace-wrap w-48 font-light">
                  {shopName}
                   </h1>
@@ -181,7 +181,6 @@ const OrderList = ({ orders, onPagination }: IProps) => {
       },
     },
 
-
     {
       title: t("table:table-item-order-date"),
       dataIndex: "created_at",
@@ -228,7 +227,6 @@ const OrderList = ({ orders, onPagination }: IProps) => {
       ),
     },
 
-
     {
       title: t("table:table-item-shipping-address"),
       dataIndex: "billing_address",
@@ -238,7 +236,6 @@ const OrderList = ({ orders, onPagination }: IProps) => {
         <div>{formatAddress(billing_address)}</div>
       ),
     },
-    
     
     {
       title: t("table:table-item-tracking-number"),

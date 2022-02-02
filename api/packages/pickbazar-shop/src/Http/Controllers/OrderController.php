@@ -111,6 +111,8 @@ class OrderController extends CoreController
         }
     }
 
+   
+
     /**
      * Update the specified resource in storage.
      *
@@ -177,11 +179,11 @@ class OrderController extends CoreController
         return $order;
     }
 
-    // function to exportOrders in csv  format
-    // function to exportOrders in csv  format
+
     public function exportOrder(Request $request)
     {
         $filename = 'Orders'.'.csv';
+
         $headers = [
             'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
             'Content-type'        => 'text/csv',
@@ -190,21 +192,29 @@ class OrderController extends CoreController
             'Pragma'              => 'public'
         ];
 
-        $list = $this->repository->get()->toArray();
+        $list = $this->repository->with(['products','products.shop', 'status', 'children.shop'])->get()->toArray();
         if (!count($list)) {
             return response()->stream(function () {
             }, 200, $headers);
         }
-
         foreach($list as $key=>$val)
         {
+            $shopnames = "";
             $list[$key]['customer_name'] = $val['customer']['name'] ?? '';
             $list[$key]['customer_email'] = $val['customer']['email'] ?? '';
             $list[$key]['order_status'] = $val['status']['name'] ?? '';
+            if(!empty($val['children']))
+            {
+                foreach($val['children'] as $shop)
+                {
+                    $shopnames = !empty($shop['shop']) ? $shopnames.$shop['shop']['name'].", " : '';
+                }
+            }
+            
+            $list[$key]['shop_name'] = trim($shopnames);
             //created_at
             // $list[$key]['created_at'] = $val['created_at']->format('d-m-Y H:i:s');
         }
-        
         # add headers for each column in the CSV download
         array_unshift($list, array_keys($list[0]));
 
@@ -212,7 +222,7 @@ class OrderController extends CoreController
             $FH = fopen('php://output', 'w');
             foreach ($list as $key => $row) {
                 if ($key === 0) {
-                    $exclude = ['customer_id','id', 'status', 'deleted_at','updated_at', 'shipping_address', 'billing_address', 'customer', 'products','gateway_response', 'coupon_id', 'parent_id','shop_id'];
+                    $exclude = ['customer_id','id', 'status', 'deleted_at','updated_at', 'shipping_address', 'billing_address', 'customer', 'products','gateway_response', 'coupon_id', 'parent_id','shop_id','children'];
                     $row = array_diff($row, $exclude);
                 }
                 
@@ -231,9 +241,11 @@ class OrderController extends CoreController
                 unset($row['coupon_id']);
                 unset($row['parent_id']);
                 unset($row['shop_id']);
+                unset($row['children']);
                 
                 fputcsv($FH, $row);
             }
+
             fclose($FH);
         };
 

@@ -23,9 +23,11 @@ export default class CustomDocument extends Document {
     // const envVariable = `${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`
 
     return (
+      
       <Html>
         
       <Head>
+      <meta name="facebook-domain-verification" content="8mvkzpangtng356xvg4hqubj4mbuyq" />
           {/* Global Site Tag (gtag.js) - Google Analytics */}
           <script
             async

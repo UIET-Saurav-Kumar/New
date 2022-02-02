@@ -15,6 +15,7 @@ use Illuminate\Database\Migrations\Migration;
 use PickBazar\Database\Repositories\ContactRepository;
 
 class ContactController extends CoreController
+
 {
     public $repository;
 
@@ -30,7 +31,7 @@ class ContactController extends CoreController
      */
     public function index(Request $request)
     {
-        $limit = $request->limit ?  $request->limit : 15;
+        $limit = $request->limit ?  $request->limit : 25;
         $contact = $this->repository;
         return $contact->paginate($limit);
     }

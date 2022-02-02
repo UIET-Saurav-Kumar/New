@@ -189,7 +189,7 @@ export const siteSettings = {
 
     {
       id: "3",
-      title: day[weekDay + 2 >6 ? weekDay + 2 - 7 :weekDay + 2   ] + ' ' + '('  + (month % 2 === 0 ? (date + 2 > 31 ? date + 2 - 31  : date + 2 ) : '') + ' ' +  
+      title: day[weekDay + 2 >6 ? weekDay + 2 - 7 :weekDay + 2   ] + ' ' + '('  + (month % 2 === 0 ? (date + 2 > 31 ? date + 2 - 31  : date + 2 ) : (date + 2 > 30 ? date + 2 - 30  : date + 2 )) + ' ' +  
              monthNames[date + 2 > 31 ? (month + 1 > 12 ? month + 1 - 12 : month + 1 ) : month] + ')',
       is_delivery:false,
       description: "Open 10AM to 7PM",
@@ -197,7 +197,7 @@ export const siteSettings = {
 
     {
       id: "4",
-      title:  day[weekDay + 3 >6 ? weekDay + 3 - 7 : weekDay + 3   ]  + ' ' +  '('  + (month % 2 === 0 ? (date + 3 > 31 ? date + 3 - 31  : date + 3 ) : '') + ' ' + 
+      title:  day[weekDay + 3 >6 ? weekDay + 3 - 7 : weekDay + 3   ]  + ' ' +  '('  + (month % 2 === 0 ? (date + 3 > 31 ? date + 3 - 31  : date + 3 ) : (date + 3 > 30 ? date + 3 - 30  : date + 3 )) + ' ' + 
               monthNames[date + 3 > 31 ? (month + 1 > 12 ? month + 1 - 12 : month + 1 ) : month] + ')',
       is_delivery:false,
       description: "Open 10AM to 7PM",
@@ -205,7 +205,7 @@ export const siteSettings = {
 
     {
       id: "5",
-      title: day[weekDay + 4 >6 ? weekDay + 4 - 7 : weekDay + 4   ]  + '  ' + '('  + (month % 2 === 0 ? (date + 4 > 31 ? date + 4 - 31  : date + 4 ) : '') + ' ' + 
+      title: day[weekDay + 4 >6 ? weekDay + 4 - 7 : weekDay + 4   ]  + '  ' + '('  + (month % 2 === 0 ? (date + 4 > 31 ? date + 4 - 31  : date + 4 ) : (date + 4 > 30 ? date + 4 - 30  : date + 4 )) + ' ' + 
              monthNames[date + 4 > 31 ? (month + 1 > 12 ? month + 1 - 12 : month + 1 ) : month] + ')',
       is_delivery:false,
       description: "Open 10AM to 7PM",
@@ -213,7 +213,7 @@ export const siteSettings = {
 
     {
       id: "7",
-      title: day[weekDay + 5 >6 ? weekDay + 5 - 7 : weekDay + 5   ]  + ' ' + '('  + (month % 2 === 0 ? (date + 5 > 31 ? date + 5 - 31  : date + 5 ) : '') + ' ' +  
+      title: day[weekDay + 5 >6 ? weekDay + 5 - 7 : weekDay + 5   ]  + ' ' + '('  + (month % 2 === 0 ? (date + 5 > 31 ? date + 5 - 31  : date + 5 ) : (date + 5 > 30 ? date + 5 - 30  : date + 5 )) + ' ' +  
       monthNames[date + 5 > 31 ? (month + 1 > 12 ? month + 1 - 12 : month + 1 ) : month] + ')',
       is_delivery:false,
       description: "Open 10AM to 7PM",
