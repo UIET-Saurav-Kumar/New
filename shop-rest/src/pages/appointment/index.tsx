@@ -125,7 +125,7 @@ export default function Appointment({user} : Props) {
             
         </div>
         <div className=" border-b space-y-4 mt-5 py-5">
-              <p className="font-sans text-xl underline pl-2 lg:pl-10 ">Top Brands </p>
+              <p className="font-sans text-xl  pl-2 lg:pl-10 ">Top Salon Brands </p>
               <PromotionSlider/>
 
         </div>
@@ -138,12 +138,12 @@ export default function Appointment({user} : Props) {
           <div className="">
             
           </div>
-                 <div className="text-center mb-8 font-sans flex items-center font-normal text-lg lg:text-2xl">
+                 <div className="text-center mb-8 font-sans w-full mx-auto flex items-center  font-normal text-lg lg:text-2xl">
                   
-                     <p className="text-gray-700 flex items-center px-auto">
-                     <img src='/hurry-up.png' className="w-24 h-24"/>
-                         <p className="flex flex-col">Free Booking 
-                         <span className="text-red-600 rounded-full text-sm  animate-pulse">10 slots left</span></p>
+                     <p className="text-gray-700 flex  mx-auto items-center ">
+                     {/* <img src='/hurry-up.png' className="w-24 h-24"/> */}
+                         <p className="flex flex-col"><span><span className="text-red-600">Free</span>, Book your slot now</span>
+                         <span className="text-red-600 rounded-full text-sm  animate-pulse">Only 10 slots left</span></p>
                      </p> 
 
                  </div>
