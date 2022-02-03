@@ -48,10 +48,25 @@ class CartController extends CoreController
         $itemlist = json_decode($user->cart_list, true);
         
         $add_item  = $req_data['items'] ?? [];
-
-        // merge itemlist and add_item
-        $itemlist = array_merge($itemlist, $add_item);
-      
+        $newitems = array();
+        // merge itemlist and add_item 
+        foreach($add_item as $key => $value)
+        {
+            $item_productid = $value['productId'];
+            // search key in itemlist where productid is equal to item_productid
+            $item_productkey = array_search($item_productid, array_column($itemlist, 'productId'));
+            if($item_productkey !== false)
+            {
+                $itemlist[$item_productkey]['qty'] += $value['qty'];
+            }
+            else
+            {
+                $newitems[] = $value;
+            }
+        }
+        
+        $itemlist = array_merge($itemlist, $newitems);
+     
         foreach ($itemlist as $key => $value) 
         {
             if (empty($value)) 
@@ -88,6 +103,23 @@ class CartController extends CoreController
         $itemlist = json_decode($user->cart_list, true);
         $remove_item = $req_data['items'] ?? [];
     
+        foreach($remove_item as $key => $value)
+        {
+            $item_productid = $value['productId'];
+            // search key in itemlist where productid is equal to item_productid
+            $item_productkey = array_search($item_productid, array_column($itemlist, 'productId'));
+            if($item_productkey !== false)
+            {
+                $itemlist[$item_productkey]['qty'] -= $value['qty'];
+                
+                if($itemlist[$item_productkey]['qty'] <= 0)
+                {
+                    unset($itemlist[$item_productkey]);
+                    array_values($itemlist);
+                }
+            }
+        }
+       
         foreach ($itemlist as $key => $value) 
         {
             if (empty($value)) 
@@ -96,13 +128,6 @@ class CartController extends CoreController
             }
             else
             {
-                $is_exist = array_search($value['productId'], array_column($remove_item, 'productId'));
-                if($is_exist > -1)
-                {
-                    unset($itemlist[$key]);
-                    continue;
-                }
-                
                 $product_detail = Product::find($value['productId']);
                 $cart_list[] = array(
                     'product_id' => $value['productId'],
