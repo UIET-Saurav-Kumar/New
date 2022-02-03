@@ -49,7 +49,7 @@ export default function ImageSlider() {
 
                 <Link href='/appointment'><Image layout='fill' objectFit='fill'
                 //  className='rounded-md  w-full  h-40 lg:w-full xl+:h-80 md:h-64 lg:h-72  2xl:h-full 2xl:w-full object-cover object  space-x-9 '   
-                    src={'/ad-banner.jpg'} 
+                    src={'/banner/salon-ad.jpg'} 
                     /></Link>
 
             </div>
