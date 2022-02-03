@@ -149,7 +149,7 @@ export default function Dashboard() {
             price={data?.todaysOrders   }
           />
         </div>
-        <div className="w-full ">
+        <div className="w-full">
           <StickerCard
             titleTransKey="Total Orders (in last 30 days)"
             // sticker-card-subtitle-order
@@ -158,7 +158,7 @@ export default function Dashboard() {
             price={data?.totalOrdersInLast30Days  }
           />
         </div>
-        <div className="w-full ">
+        <div className="w-full">
           <StickerCard
             titleTransKey="Total customers"
             icon={<img src='/team.png' className='h-10 w-10' />}

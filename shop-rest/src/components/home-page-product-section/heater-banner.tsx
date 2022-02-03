@@ -18,16 +18,14 @@ export default function HeaterBanner() {
 
     function getLink() {
 		
-            router.push("/shops/heater-and-geyser-wholesaler")
-         
+            router.push("/appointment")
 	}
-
 
     return (
 
    
    <div onClick={getLink} className='flex w-full mt-8 md:mt-10 h-auto '>   
-            <img src='/heater-banner.jpg' 
+            <img src='/ad-banner.jpg' 
                 className=' md:h-auto object-contain cursor-pointer pt-0 lg:w-full -sm-pt-60 
                             lg:object-contain lg:mt-8 xl:object-cover'/>
             

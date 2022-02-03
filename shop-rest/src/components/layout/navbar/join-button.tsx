@@ -14,7 +14,7 @@ export default function JoinButton() {
   
   return (
     <Button className="font-semibold p-5" size="medium" onClick={handleJoin}>
-      {t("join-button")}
+      {t("Join")}
     </Button>
   );
 }

@@ -87,8 +87,8 @@ const offerSliderBreakpoints = {
     spaceBetween: 2,
   },
   1024: {
-    slidesPerView: 6,
-    spaceBetween: 10,
+    slidesPerView: 7,
+    spaceBetween: 4,
   },
   1920: {
     slidesPerView: 6,
@@ -114,7 +114,7 @@ export default function PromotionSlider() {
           {data?.map((d) => (
             <SwiperSlide key={d.id}>
               <img
-                className="w-28 object-fit h-28 lg:h-44 lg:w-44 border-t "
+                className="w-28 object-fit h-28 lg:h-44 lg:w-44 border "
                 src={d.bannerUrl}
                 // alt={t(d.title)}
               
@@ -123,14 +123,14 @@ export default function PromotionSlider() {
           ))}
         </Swiper>
         <div
-          className="prev cursor-pointer absolute top-2/4 -start-2 md:-start-5 z-10 -mt-4 md:-mt-5 w-8 h-8 md:w-9 md:h-9 rounded-full bg-light shadow-xl border border-border-200 border-opacity-70 flex items-center justify-center text-heading transition-all duration-200 hover:bg-accent hover:text-light hover:border-accent"
+          className="prev cursor-pointer bg-gold absolute text-white top-2/4 -start-2 md:-start-5 z-10 -mt-4 md:-mt-5 w-8 h-8 md:w-9 md:h-9 rounded-full bg-light shadow-xl border border-border-200  flex items-center justify-center text-heading transition-all duration-200 hover:bg-accent hover:text-light hover:border-accent"
           role="button"
         >
           <span className="sr-only">{t("common:text-previous")}</span>
           <ArrowPrev width={24} height={24} />
         </div>
         <div
-          className="next cursor-pointer absolute top-2/4 -end-2 md:-end-5 z-10 -mt-4 md:-mt-5 w-8 h-8 md:w-9 md:h-9 rounded-full bg-light shadow-xl border border-border-200 border-opacity-70 flex items-center justify-center text-heading transition-all duration-200 hover:bg-accent hover:text-light hover:border-accent"
+          className="next cursor-pointer bg-gold  text-white absolute top-2/4 -end-2 md:-end-5 z-10 -mt-4 md:-mt-5 w-8 h-8 md:w-9 md:h-9 rounded-full bg-light shadow-xl border border-border-200  flex items-center justify-center text-heading transition-all duration-200 hover:bg-accent hover:text-light hover:border-accent"
           role="button"
         >
           <span className="sr-only">{t("common:text-next")}</span>
