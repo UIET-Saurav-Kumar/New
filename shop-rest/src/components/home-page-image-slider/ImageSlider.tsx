@@ -45,11 +45,11 @@ export default function ImageSlider() {
       <Slider {...settings}>
 
         <div>
-            <div className="card flex relative w-full h-40 lg:h-72 xl+:h-80 2xl:h-72 md:h-64 ">
+            <div className=" cursor-pointer card flex relative w-full h-40 lg:h-72 xl+:h-80 2xl:h-72 md:h-64 ">
 
-                <Link href='/shops/heater-and-geyser-wholesaler'><Image layout='fill' objectFit='fill'
+                <Link href='/appointment'><Image layout='fill' objectFit='fill'
                 //  className='rounded-md  w-full  h-40 lg:w-full xl+:h-80 md:h-64 lg:h-72  2xl:h-full 2xl:w-full object-cover object  space-x-9 '   
-                    src={'/banner/heater-banner.jpg'} 
+                    src={'/banner/salon-ad.jpg'} 
                     /></Link>
 
             </div>
@@ -73,10 +73,6 @@ export default function ImageSlider() {
 
         </div>
 
-
-       
-
-        
           {/* <div className="card flex relative w-full h-40 lg:h-72 xl+:h-80 2xl:h-72 md:h-64 ">
             <Image  layout='fill' objectFit='fill'
             //  className='rounded-md  w-full h-40 lg:w-full lg:h-72 xl+:h-80 md:h-64  2xl:h-72 2xl:w-full object-fill  space-x-9 '   

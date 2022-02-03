@@ -113,7 +113,7 @@ export default function Appointment({user} : Props) {
         <div className="w-full">
             <div className="flex p-2  items-center ">
                {/* <Logo/> */}
-               <img src='/ad-banner.jpg' className=" block w-full object-contain " />
+               <img src='/ad-banner.jpg' className=" block w-full object-contain lg:object-cover" />
                {/* <img onClick={handleClick} src='/salon-chd.jpg' className="w-full cursor-pointer flex object-contain -mr-72 lg:object-contain  lg:h-100" /> */}
             </div>
             
@@ -132,16 +132,17 @@ export default function Appointment({user} : Props) {
           <div className="">
             
           </div>
-                 <div className="text-center mb-8 font-sans w-full mx-auto flex items-center  font-normal text-lg lg:text-2xl">
-                  
-                     <p className="text-gray-700 flex  mx-auto items-center ">
-                     {/* <img src='/hurry-up.png' className="w-24 h-24"/> */}
-                         <p className="flex flex-col"><span><span className="text-red-600">Free</span>, Book your slot now</span>
-                         <span className="text-red-600 rounded-full text-sm  animate-pulse">Only 10 slots left</span></p>
-                     </p> 
+                <div className="text-center mb-8 font-sans w-full mx-auto flex items-center  font-normal text-lg lg:text-2xl">
+                
+                    <p className="text-gray-700 flex  mx-auto items-center ">
+                    {/* <img src='/hurry-up.png' className="w-24 h-24"/> */}
+                        <p className="flex flex-col"><span><span className="text-red-600">Free</span>, Book your slot now</span>
+                        <span className="text-red-600 rounded-full text-sm  animate-pulse">Only 10 slots left</span></p>
+                    </p> 
 
-                 </div>
-          <form className="grid grid-cols-1 border shadow-xl -mt-8 p-4 sm:grid-cols-2 gap-1" onSubmit={handleSubmit(onSubmit)} noValidate>
+                </div>
+                
+          <form className="grid grid-cols-1 border shadow-xl -mt-6 p-4 sm:grid-cols-2 gap-1 lg:gap-4 lg:mt-3" onSubmit={handleSubmit(onSubmit)} noValidate>
             {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-2"> */}
               <Input
                 label={t("Name")}

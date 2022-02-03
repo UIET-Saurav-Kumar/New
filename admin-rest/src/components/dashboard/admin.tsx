@@ -43,13 +43,18 @@ export default function Dashboard() {
     isLoading: userLoading,
     error: userError,
   } = useUsersQuery({
-    limit: 20,
+    limit: 10,
     page : 1,
-    
-    
   });
+ 
+  var count = 0;
+  var filtered = usersData?.users?.data.filter ( function ( d ) {
+    count++;
+    return d.role === 'Customer';
+});
 
-  // console.log('users', usersData?.users?.data.map( user => user.filter(user.role === 'customer')           ));
+  console.log('filtered', filtered)
+  console.log('user list', usersData?.users?.data);
 
   const {
     data: orderData,
@@ -60,7 +65,7 @@ export default function Dashboard() {
     page: 1,
   });
 
-  // console.log(usersData.data.map( (user:any) => user.data.map( (usr:any) => usr.filter( usr => usr.role === 'customer'))));
+  console.log(usersData?.data?.map( (user:any) => user.data.filter( (usr:any) => usr.filter( usr => usr.role = 'customer'))));
 
   // console.log(usersData?.users?.data?.map(( user:any ) => user.map( (usr) => usr.map(usr.role))) );
 
@@ -144,7 +149,7 @@ export default function Dashboard() {
             price={data?.todaysOrders   }
           />
         </div>
-        <div className="w-full ">
+        <div className="w-full">
           <StickerCard
             titleTransKey="Total Orders (in last 30 days)"
             // sticker-card-subtitle-order
@@ -153,7 +158,7 @@ export default function Dashboard() {
             price={data?.totalOrdersInLast30Days  }
           />
         </div>
-        <div className="w-full ">
+        <div className="w-full">
           <StickerCard
             titleTransKey="Total customers"
             icon={<img src='/team.png' className='h-10 w-10' />}

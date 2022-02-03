@@ -127,6 +127,7 @@ const {
             (<StayTuned/>):
             (
               <>
+              
                 <ImageSlider/>
                 <InvoiceBanner/>
                 <AllCategories/>
