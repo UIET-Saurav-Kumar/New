@@ -44,16 +44,27 @@ export default function ImageSlider() {
       
       <Slider {...settings}>
 
-        <div>
-            <div className=" cursor-pointer card flex relative w-full h-40 lg:h-72 xl+:h-80 2xl:h-72 md:h-64 ">
+        
+            <div className="cursor-pointer flex card  relative w-full h-40 lg:h-72 xl+:h-80 2xl:h-72 md:h-64 ">
 
-                <Link href='/appointment'><Image layout='fill' objectFit='fill'
-                //  className='rounded-md  w-full  h-40 lg:w-full xl+:h-80 md:h-64 lg:h-72  2xl:h-full 2xl:w-full object-cover object  space-x-9 '   
-                    src={'/banner/salon-ad.jpg'} 
-                    /></Link>
-
+                <Link  href='/appointment'><picture className="w-full h-full" >
+                              <source media="(max-width: 1023px)" style={{objectFit:'fill'}} srcset="/ad-banner.jpg"/>
+                              <source media="(min-width: 1024px)" style={{objectFit:'fill'}} srcset="/banner/salon-ad.jpg"/>
+                              <img src="/ad-banner.jpg" style={{height:'100%', width:'100%'}} alt="best salon offers"/>
+                        </picture></Link>
+                    
             </div>
-        </div>
+
+            {/* <div className="hidden cursor-pointer card  lg:block relative w-full h-40 lg:h-72 xl+:h-80 2xl:h-72 md:h-64 ">
+
+                <Link href='/appointment'><img className="hidden lg:block lg:w-full lg:object-contain" 
+               
+                    src={'/banner/salon-ad.jpg'}
+                    
+                    /></Link>
+                    
+            </div> */}
+        
 
         <div className="card flex relative w-full h-40 lg:h-72 xl+:h-80 2xl:h-72 md:h-64 ">
 
@@ -64,14 +75,14 @@ export default function ImageSlider() {
 
           </div>
 
-        <div className="card flex relative w-full h-40 lg:h-72 xl+:h-80 2xl:h-72 md:h-64 ">
+          <div className="card flex relative w-full h-40 lg:h-72 xl+:h-80 2xl:h-72 md:h-64 ">
 
-            <Image  layout='fill' objectFit='fill'
-            //  className='rounded-md w-full opacity-90  h-40 lg:w-full lg:h-72 xl+:h-80 md:h-64  2xl:h-72 2xl:w-full space-x-9 object-fill object '  
-                  src={'/banner/grocery-offer.jpg'} 
-                  />
+              <Image  layout='fill' objectFit='fill'
+              //  className='rounded-md w-full opacity-90  h-40 lg:w-full lg:h-72 xl+:h-80 md:h-64  2xl:h-72 2xl:w-full space-x-9 object-fill object '  
+                    src={'/banner/grocery-offer.jpg'} 
+                    />
 
-        </div>
+          </div>
 
           {/* <div className="card flex relative w-full h-40 lg:h-72 xl+:h-80 2xl:h-72 md:h-64 ">
             <Image  layout='fill' objectFit='fill'
@@ -109,14 +120,14 @@ export default function ImageSlider() {
 
           </div>
         
-        <div className="card flex relative w-full h-40 lg:h-72 xl+:h-80 2xl:h-72 md:h-64 ">
+          <div className="card flex relative w-full h-40 lg:h-72 xl+:h-80 2xl:h-72 md:h-64 ">
 
-            <Image layout='fill' objectFit='fill'
-            //  className='rounded-md  w-full  h-40 lg:w-full lg:h-72 xl+:h-80 md:h-64 2xl:h-72 2xl:w-full object-fill space-x-9 '   
-                src={'/banner/pharma.jpg'} 
-                />
+              <Image layout='fill' objectFit='fill'
+              //  className='rounded-md  w-full  h-40 lg:w-full lg:h-72 xl+:h-80 md:h-64 2xl:h-72 2xl:w-full object-fill space-x-9 '   
+                  src={'/banner/pharma.jpg'} 
+                  />
 
-          </div>
+            </div>
       
 
         

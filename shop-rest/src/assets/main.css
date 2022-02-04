@@ -273,6 +273,7 @@ width: 100%;
   font-weight: 190;
   margin-bottom: 0.2em;
 }
+
 .k-pdf-export strong {
   font-size: 0.8em;
   font-weight: 190;
@@ -415,7 +416,6 @@ display: none;
 
 div.custom-container {
 	background-color: #242424;
-  
 }
 
 
@@ -470,9 +470,7 @@ svg.custom path.link {
 }
 
 
-
   @media (min-width: 1024px) {
-
     .css-yk16xz-control{
       border-top-left-radius: 0px!important;
       border-bottom-left-radius: 0px!important;
@@ -483,7 +481,7 @@ svg.custom path.link {
     #image-slider{      
         content:url("/banner7.jpeg");
         object-fit: cover;
-    } 
+     } 
     }
 
     @media screen and (max-width: 480px){   
@@ -496,34 +494,40 @@ svg.custom path.link {
     @media screen and (max-width: 1030px){   
       #location-input{      
          margin-top: 17%;
-      } 
-      }
+       } 
+    }
+
       @media screen and (max-width: 912px){   
         #location-input{      
            margin-top: 20%;
         } 
+      }
+
+
+  /* @media screen and (max-width: 240px){   
+     #salon-banner{      
+      src: 'ad-banner.jpg';
+      } 
+    } */
+
+  @media screen and (max-width: 1023px){   
+    #salon-banner {      
+      src: '/banner/salon-ad.jpg';
+      } 
+    }
+      
+
+    @media screen and (max-width: 1620px){   
+      #location-input{      
+          margin-top: 16%;
+       } 
+      }
+
+      @media screen and (max-width: 1720px){   
+        #location-input{      
+            margin-top: 16%;
+        } 
         }
-
-       
-
-            /* @media screen and (max-width: 348px){   
-              #location-input{      
-                 margin-top: 20%;
-              } 
-              } */
-              
-
-            @media screen and (max-width: 1620px){   
-              #location-input{      
-                 margin-top: 16%;
-              } 
-              }
-
-              @media screen and (max-width: 1720px){   
-                #location-input{      
-                   margin-top: 16%;
-                } 
-                }
 
       @media screen and (max-width: 1030px){   
         #cities{      
