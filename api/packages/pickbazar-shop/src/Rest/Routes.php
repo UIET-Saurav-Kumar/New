@@ -41,6 +41,10 @@ Route::post('/social-login-token', 'PickBazar\Http\Controllers\UserController@so
 
 Route::get('/signup-offer','PickBazar\Http\Controllers\SignupOfferController@show');
 Route::post('/signup-offer','PickBazar\Http\Controllers\SignupOfferController@store');
+#---------------------whatsapp api  start----------------------------#
+
+Route::post('/track/user', 'PickBazar\Http\Controllers\WhatsappController@trackUser');
+Route::post('/track/event', 'PickBazar\Http\Controllers\WhatsappController@trackEvent');
 
 Route::apiResource('products', ProductController::class, [
     'only' => ['index', 'show']
