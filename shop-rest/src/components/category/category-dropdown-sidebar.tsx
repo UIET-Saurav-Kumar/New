@@ -6,6 +6,7 @@ import Scrollbar from "@components/ui/scrollbar";
 import CategoryListLoader from "@components/ui/loaders/category-loader";
 import NotFound from "@components/common/not-found";
 import { useCategoriesQuery } from "@data/category/use-categories.query";
+import CategorySlider from "./category-slider";
 
 
 const CategoryDropdownSidebar = () => {
@@ -73,8 +74,8 @@ const CategoryDropdownSidebar = () => {
         {/* <Scrollbar className="w-full h-full max-h-screen"> */}
         {data?.categories?.data?.length ? (
             <div className=" flex lg:overflow-x-scroll relative justify-evenly w-full">
-              
-              <SidebarMenu items={data?.categories?.data} className="whitespace-nowrap overflow-x-scroll sticky py-2" />
+              <CategorySlider items={data?.categories?.data} />
+              {/* <SidebarMenu items={data?.categories?.data} className="whitespace-nowrap overflow-x-scroll sticky py-2" /> */}
             </div>
           ) : (
             ' '
@@ -85,7 +86,7 @@ const CategoryDropdownSidebar = () => {
 
 
     {/* Mobile */}
-    <div className='lg:hidden w-20 sm:w-full relative flex'> 
+    <div className='lg:hidden w-full sm:w-full  relative flex'> 
     {/* <div className='flex  h-screen top-14 sticky flex-col w-20'>    */}
       <div className=" h-screen top-0 sticky flex-col flex overflow-y-scroll justify-between  space-y-8 text-center">
         <Scrollbar className="w-full h-full max-h-screen">
