@@ -12,11 +12,10 @@ import { useModalAction, useModalState } from "./modal/modal.context";
 
 
 
-function SidebarMenuItem({ className, item, depth = 0 }: any) {
+export function SidebarMenuItem({ className, item, depth = 0 }: any) {
 
   const router = useRouter();
   
-
   const active = router?.query?.category;
 
   const isActive =
@@ -75,55 +74,58 @@ function SidebarMenuItem({ className, item, depth = 0 }: any) {
     }
   }
 
-  let expandIcon;
-  if (Array.isArray(items) && items.length) {
-   
-    expandIcon = !isOpen ? (
-      <ExpandLessIcon className="w-4 h-4" />
-      
-    ) : (
-      <ExpandMoreIcon className="w-4 h-4" />
-    );
-  }
+    let expandIcon;
+    if (Array.isArray(items) && items.length) {
+    
+      expandIcon = !isOpen ? (
+        <ExpandLessIcon className="w-4 h-4" />
+        
+      ) : (
+        <ExpandMoreIcon className="w-4 h-4" />
+      );
+    }
 
   return (
+
     <>
+
       <div 
         // initial={false}
         // animate={{ backgroundColor: "black" }}/
         onClick={onClick}
-        className="flex lg:grid lg:grid-cols-1 items-center lg:w-20 relative top-0 lg:border-l "
+        className="flex lg:grid lg:grid-cols-1 items-center  lg:w-16 relative top-0"
       >
         
         {/* <div className='flex items-center justify-between'> */}
           <button
-          className={cn(
-            "grid grid-cols-1  whitespace-normal items-center  py-1 text-start outline-none text-body-dark font-semibold  focus:outline-none focus:ring-0 focus:text-accent",
-            isOpen ? "text-accent  transition duration-800 ease-in-out" : "text-body-dark",
-            className ? className : "text-sm"
-          )}
-        >
-         <div className='relative flex flex-col justify-center mx-auto h-auto  w-auto sm:w-20 px-2  place-items-center lg:grid-cols-2   lg:w-auto  items-center'>
-              {icon && (
-                <span className="flex  text-center  w-full items-center justify-center">
-                  {getIcon({
-                    iconList: CategoryIcons,
-                    iconName: icon,
-                    className: " w-6 h-6 lg:h-8 lg:w-8",
-                  })}
-                </span>
-              )}
-              <div className="flex  px-auto items-center">
-                <span className='text-xs w-auto  whitespace-normal text-center'>{name}</span>
-                <span className=" text-center px-auto ">{expandIcon}</span>
-              </div>
-         </div>
+            className={cn(
+              "grid grid-cols-1  whitespace-normal items-center  py-1 text-start outline-none text-body-dark font-semibold  focus:outline-none focus:ring-0 focus:text-accent",
+              isOpen ? "text-accent  transition duration-800 ease-in-out" : "text-body-dark",
+              className ? className : "text-sm"
+            )}
+          >
+          <div className='relative py-2 flex flex-col mx-auto h-auto  w-auto sm:w-20  px-2  place-items-center lg:grid-cols-2   lg:w-28  items-center'>
+                {icon && (
+                  <span className="flex  text-center  w-full items-center justify-center">
+                    {getIcon({
+                      iconList: CategoryIcons,
+                      iconName: icon,
+                      className: " w-6 h-6 lg:h-8 lg:w-8",
+                    })}
+                  </span>
+                )}
+                <div className="flex px-auto items-center">
+                  <span className='text-xs w-auto whitespace-normal lg:whitespace-nowrap text-center'>{name}</span>
+                  <span className="block lg:hidden text-center ">{expandIcon}</span>
+                </div>
+          </div>
+
         </button>
         {/* </div> */}
 
       </div>
 
-    <div style={{zIndex:10000}} className="  text-lg">
+    <div style={{zIndex:1000000}} className="text-lg">
       <AnimatePresence initial={false}>
         {Array.isArray(items) && isOpen ? (
           <li className='  z-100' style={{zIndex: 100000}}>
@@ -137,18 +139,19 @@ function SidebarMenuItem({ className, item, depth = 0 }: any) {
                 collapsed: { opacity: 0, height: 0 },
               }}
               // transition={{ duration: 1, ease: [0.6, 0.1,0.1, 1.3] }}
-              style={{zIndex: 10000}}  className=" static lg:absolute text-xs z-100  bg-light text-left lg:text-center border-b
+              style={{zIndex: 10000}}  className="static lg:absolute text-xs z-100  bg-light text-left lg:text-center border-b
                                                   lg:top-16  w-auto  lg:px-auto lg:shadow-lg  text-light"
             >
               {items?.map((currentItem) => {
                 const childDepth = depth + 1;
+
                 return (
+
                   <SidebarMenuItem
                     key={`${currentItem.name}${currentItem.slug}`}
                     item={currentItem}
                     depth={childDepth}
                     className={cn("text-sm lg:text-lg text-body ")}
-                    
                   />
                 );
               })}
@@ -169,11 +172,11 @@ function SidebarMenu({ items, className }: any) {
     <>
 
     {/* web */}
-      <ul  className='hidden lg:flex lg:justify-evenly xl:justify-evenly 
+      <ul  className='hidden lg:flex  lg:justify-evenly xl:justify-evenly 
                      w-full items-center'>
       {/* <ul className={cn("text-xs", className)}> */}
         {items?.map((item: any) => (
-         <a  >
+         <a>
            <SidebarMenuItem key={`${item.name}${item.slug}`} item={item} />
           </a>
         ))}
@@ -181,7 +184,7 @@ function SidebarMenu({ items, className }: any) {
 
       {/* mobile */}
       <ul className='flex flex-col lg:hidden justify-between 
-                      w-full items-center lg:items-start'>
+                      w-full items-start'>
       {/* <ul className={cn("text-xs", className)}> */}
         {items?.map((item: any) => (
         <a> 
