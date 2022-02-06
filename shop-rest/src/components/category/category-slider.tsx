@@ -114,8 +114,8 @@ export default function CategorySlider({items}:any) {
           }}
         >
           {items?.map((item) => (
-            <SwiperSlide key={item.name}>
-               <a>  <SidebarMenuItem key={`${item.name}${item.slug}`} item={item} />  </a> 
+            <SwiperSlide key={item?.name}>
+               <a>  <SidebarMenuItem key={`${item?.name}${item?.slug}`} item={item} />  </a> 
             </SwiperSlide>
           ))}
         </Swiper>
