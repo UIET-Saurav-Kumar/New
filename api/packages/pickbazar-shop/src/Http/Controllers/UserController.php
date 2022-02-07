@@ -30,6 +30,7 @@ use PickBazar\Http\Requests\ChangePasswordRequest;
 use PickBazar\Database\Repositories\UserRepository;
 use PickBazar\Database\Models\Permission as ModelsPermission;
 use PickBazar\Database\Models\SignupOffer;
+use PickBazar\Helpers\InteraktHelper;
 
 class UserController extends CoreController
 {
@@ -158,9 +159,9 @@ class UserController extends CoreController
         if (isset($request->permission)) {
             $permissions[] = isset($request->permission->value) ? $request->permission->value : $request->permission;
         }
-        
-
-        $code=SMS::sendOTP($request->phone_number);
+        $country_code = '+91';
+        $phone_number = $country_code.$request->phone_number;
+        $code=SMS::sendOTP($phone_number);
 
         $user = $this->repository->create([
             'name'     => $request->name,
@@ -198,9 +199,27 @@ class UserController extends CoreController
 
         $user->givePermissionTo($permissions);
 
-        return ["user"=>$user];
+        #--------------creating whatapp user-----------------#
+        $CURLOPT_POSTFIELDS     = array(
+                                        "userId"=> $user->id,
+                                        "phoneNumber"=> $user->phone_number,
+                                        "countryCode"=> $country_code,
+                                        "traits"=> [
+                                            "name"=> $user->name,
+                                            "email"=> $user->email,
+                                        ],
+                                        "createdAt"=> date('Y-m-d H:i:s')
+                                    );
+        
+        $endpoint = 'track/users/';
 
-        return ["token" => $user->createToken('auth_token')->plainTextToken,"permissions" => $user->getPermissionNames()];
+        $response   = InteraktHelper::interaktApi(json_encode($CURLOPT_POSTFIELDS),$endpoint);
+        #--------------creating whatapp user-----------------#
+
+
+        return ["user"=>$user, 'interakt_response' => $response];
+
+        return ["token" => $user->createToken('auth_token')->plainTextToken,"permissions" => $user->getPermissionNames(), 'interakt_response' => $response];
     }
 
     

@@ -25,6 +25,7 @@ use Prettus\Repository\Exceptions\RepositoryException;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Ignited\LaravelOmnipay\Facades\OmnipayFacade as Omnipay;
 use LoveyCom\CashFree\PaymentGateway\Order as CashFreeOrder;
+use PickBazar\Helpers\InteraktHelper;
 
 class OrderRepository extends BaseRepository
 {
@@ -239,7 +240,6 @@ class OrderRepository extends BaseRepository
 
             if($order)
             {
-
                 $product_id=$request->products[0]["product_id"];
                 $product=Product::find($product_id);
                 $user=$request->user();                
@@ -251,8 +251,25 @@ class OrderRepository extends BaseRepository
                     'shop_id'=>$product->shop_id,
                     "type"=>"order"
                 ]);
+                #---------------------creating whatsapp message-----------------#
+                $payload = array(
+                    "userId"=> $user->id,
+                    "phoneNumber"=> $user->phone_number,
+                    "countryCode"=> "+91",
+                    "event"=> "Order Placed Successfully",
+                    "traits"=> [
+                        "productDetail"=> json_encode($request->products),
+                        "price"=> $request->amount,
+                        "orderId"=> $request->tracking_number,
+                        "payment_gateway"=> $request->payment_gateway,
+                        "currency"=>"INR"
+                    ],
+                    "createdAt"=> date('Y-m-d H:i:s')
+                );
+                $interkt_response = $this->createWhatsappOrderEvent($payload);
+                #---------------------creating whatsapp message-----------------#
             }
-            
+            $order->interakt_response = $interkt_response;
             return $order;
         } catch (ValidatorException $e) {
             throw new PickbazarException('PICKBAZAR_ERROR.SOMETHING_WENT_WRONG');
@@ -439,5 +456,16 @@ class OrderRepository extends BaseRepository
             return $shop->delivery_charges;
         }
         return 0;
+    }
+
+    public function createWhatsappOrderEvent($payload)
+    {
+        $CURLOPT_POSTFIELDS     = $payload;
+        
+        $endpoint = 'track/events/';
+
+        $response   = InteraktHelper::interaktApi(json_encode($CURLOPT_POSTFIELDS),$endpoint);
+
+        return $response;
     }
 }
