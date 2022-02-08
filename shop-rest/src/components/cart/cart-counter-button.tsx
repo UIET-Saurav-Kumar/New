@@ -37,7 +37,7 @@ const CartCounterButton = () => {
       </span>
 
       <span className="bg-light rounded w-full py-2 px-2 text-accent mt-3">
-         {totalPrice}
+         {totalPrice ? totalPrice : 0}
       </span>
       
     </button>
