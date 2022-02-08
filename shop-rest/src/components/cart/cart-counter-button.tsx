@@ -21,6 +21,8 @@ const CartCounterButton = () => {
     setSidebarView("CART_VIEW");
     return openSidebar();
   }
+
+  console.log('total price',totalPrice);
   
 
   return (
