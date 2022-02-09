@@ -41,14 +41,12 @@ export default function ProductGrid() {
         <div className={`${data?.offers.data?.length  ? 'block' : 'hidden'} grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2`}>
                                       
                                  
-            {data?.offers.data?.map((product) => (
-
-                <>    
-                    <motion.div key={product.id}>
-                        {renderProductCard(product)}
-                    </motion.div>
-                </> 
-            ))}
+           {/* // filter products with status publish */}
+              {data?.offers.data.filter(product => product?.status === 'publish').map(product => (
+                <motion.div key={product.id}>
+                {renderProductCard(product)}
+                </motion.div>
+                ))}
 
         </div>
    </>
