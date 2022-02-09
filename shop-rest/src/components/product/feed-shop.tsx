@@ -74,11 +74,11 @@ const ShopProductFeed = ({ shopId }: { shopId: string }) => {
           <>
             {data?.pages.map((products, _idx) => (
               <Fragment key={_idx}>
-                {products?.data?.map((product) => (
-                  <motion.div key={product.id}>
+                  {products.data.filter(product => product?.status === 'publish').map(product => (
+                    <motion.div key={product.id}>
                     {renderProductCard(product)}
                   </motion.div>
-                ))}
+                  ))}
               </Fragment>
             ))}
           </>
