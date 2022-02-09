@@ -207,10 +207,11 @@ class UserController extends CoreController
                                         "traits"=> [
                                             "name"=> $user->name,
                                             "email"=> $user->email,
+                                            "user_role"=> $user->permissions[0]->name,
                                         ],
                                         "createdAt"=> date('Y-m-d H:i:s')
                                     );
-        
+    
         $endpoint = 'track/users/';
 
         $response   = InteraktHelper::interaktApi(json_encode($CURLOPT_POSTFIELDS),$endpoint);
