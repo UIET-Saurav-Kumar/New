@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { useCategoriesQuery } from "@data/home/use-categories-query";
 import { useRouter } from "next/router";
+import { useLocation } from "@contexts/location/location.context";
 
 
 
@@ -10,6 +11,7 @@ const AllCategories = () => {
 	const router = useRouter();
 	const { query } = useRouter();
     const { type } = query;
+	const {getLocation} =useLocation()
     
     const {
         data,
@@ -20,16 +22,35 @@ const AllCategories = () => {
         limit: 16 as number
     });
 
+	const address =   getLocation?.formattedAddress || "chandigarh";
+
+	function location(){
+        return address?.includes('Mohali') || address?.includes('Chandigarh') || address.includes('Panchkula') ;
+    }
+
 
 
 	function getLink(category:String){
+
 		var pathname="/"+router.locale+"/shops?category="+category.replace("&","-");
-		// const { type, ...rest } = query;
-		// var text=(query.text)?query.text:"";
+		
 
 		return pathname;
-		// +"?text="+text;
+		
 	}
+
+
+	function getLinkGrocery(){
+
+		var pathname="/shops/chandigarhgrocerystore";
+		
+		return pathname;
+		
+	}
+
+	
+
+	console.log('categories',data?.categories?.data)
 
 	
 	return (
@@ -45,23 +66,23 @@ const AllCategories = () => {
                         2xl:grid-cols-5 mt-0  h-full gap-2 lg:gap-6 p-4  bg-gray-100'>
 
     
-		  {data?.categories?.data.filter(category => category.id = 20 ).map( (category,_idx) => (
-			  
-				<Link className="categories-link" 
-				      key={_idx} href={getLink(category.name)}>
-			       
-					<div className='rounded flex flex-col w-full  cursor-pointer  border-gray-200 
-					                hover:border-gray-400  items-center'
-						 key={category.id} >
-
-						    <img className=' w-full h-full object-cover'  
-
-							     src={category?.image.thumbnail} 
-							 />   
-					</div>
+			{data?.categories?.data.map( (category,_idx) => (
 				
-				</Link>
-		  ))}
+					<Link className="categories-link" 
+						key={_idx} href={category.name === 'Groceries' && location() ?  getLinkGrocery()    :    getLink(category.name)}>
+					
+						<div className='rounded flex flex-col w-full  cursor-pointer  border-gray-200 
+										hover:border-gray-400  items-center'
+							key={category.id} >
+
+								<img className=' w-full h-full object-cover'  
+
+									src={category?.image.thumbnail} 
+								/>   
+						</div>
+					
+					</Link>
+			))}
 		  
 			
 		</div>
