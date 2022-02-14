@@ -31,6 +31,11 @@ import { useRouter } from "next/router";
 import RelatedProducts from "@components/product/product-details/related-products";
 import { useCategoriesQuery } from "@data/category/use-categories.query";
 import { fetchShopSeo } from "@data/shop/use-shop.query";
+import Feed from "@components/product/feed";
+import { useEffect } from "react";
+import { scroller, Element } from "react-scroll";
+
+
 
 const CartCounterButton = dynamic(
   () => import("@components/cart/cart-counter-button"),
@@ -48,10 +53,22 @@ const imageCheck = (logo: any , record:any, imgsize:any, imgDim:any, classname: 
 }
 
 const ShopPage = ({ data }: any) => {
-
   const router = useRouter();
+  const { pathname, query } = router;
 
-const { pathname, query } = router;
+  // useEffect(() => {
+  //  // scroll to product feed when user searches for a product
+  //   if (query.search) {
+  //     scroller.scrollTo("product-feed", {
+  //       duration: 500,
+  //       delay: 100,
+  //       smooth: true,
+  //       offset: -100,
+  //     })
+  //   }
+  // }, [query.text, query.category]);
+
+
   
   const { t } = useTranslation("common") ;
   const { width } = useWindowSize() ;
@@ -79,6 +96,15 @@ const { pathname, query } = router;
 
   };
 
+  //after searching scroll down to the product section
+  const scrollToProduct = () => {
+    const element = document.getElementById("product-feed");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+
   seoFunction(data);
   return (
 
@@ -95,7 +121,7 @@ const { pathname, query } = router;
 
                           <div className='flex flex-col overflow-y-scroll space-y-4 w-full'>  
 
-                              <div className='flex  w-full h-80 border'> 
+                              <div className='flex w-full h-80 border'> 
 
                                   <div className='h-full w-96'>  
                                     <ShopProfileCard data={data} />
@@ -108,15 +134,15 @@ const { pathname, query } = router;
                               </div>
                             
                            
-                           <div className='flex w-full'> 
-                               <WebShopBanner/>
-                           </div>
+                            <div className='flex w-full'> 
+                                <WebShopBanner/>
+                            </div>
 
-                            {/* <div className='w-full mt-7'> */}
-                               <ShopDescription data = {data}/>
-                            {/* </div> */}
+                              {/* <div className='w-full mt-7'> */}
+                                <ShopDescription data = {data}/>
+                              {/* </div> */}
 
-                            <OfferCards/>
+                              <OfferCards/>
 
                           </div>
 
@@ -131,7 +157,10 @@ const { pathname, query } = router;
                                 { query?.category?.replace(/\b\w/g, (l :any) => l.toUpperCase())   } Products
                               </h1> 
                           </div> </> : ' '  }
-                              <div  className="static  z-10 top-10 w-full">{data && <ShopProductFeed shopId={data.id} />}</div>
+                              <div  className="static  z-10 top-10 w-full">{data && 
+                              // <ShopProductFeed shopId={data.id} />
+                              <Feed shopId={data.id}/>
+                              }</div>
                         </div> 
 
 

@@ -13,7 +13,7 @@ const ProductFeedLoader = dynamic(
   () => import("@components/ui/loaders/product-feed-loader")
 );
 
-const Feed = () => {
+const Feed = ({ shopId }: { shopId: string }) => {
 
   const { t } = useTranslation("common");
   const { query } = useRouter();
@@ -27,9 +27,14 @@ const Feed = () => {
     data,
     error,
   } = useProductsQuery({
-    type: query.type as string,
+    shop_id: Number(shopId),
+    // type: query.type as string,
     text: query?.text as string,
     category: query?.category as string,
+  },
+  {
+    enabled: Boolean(shopId),
+
   });
 
   if (isError && error) return <ErrorMessage message={error.message} />;

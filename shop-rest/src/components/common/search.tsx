@@ -2,32 +2,45 @@ import SearchBox from "@components/ui/search-box";
 import { useSearch } from "@contexts/search.context";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
+
 interface Props {
   label: string;
   [key: string]: unknown;
 }
 
 const Search: React.FC<Props> = ({ label, ...props }) => {
+
   const { t } = useTranslation();
   const router = useRouter();
   const { searchTerm, updateSearchTerm } = useSearch();
+  
   const handleOnChange = (e: any) => {
     const { value } = e.target;
     updateSearchTerm(value);
   };
 
+  //allow suggestions while typing
+  const handleOnKeyDown = (e: any) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      router.push(`/search?q=${searchTerm}`);
+    }
+  };
+
+
   const onSearch = (e: any) => {
+    
     e.preventDefault();
     if (!searchTerm) return;
     const { pathname, query } = router;
     const { type, ...rest } = query;
     router.push(
       {
-        pathname,
-        query: { ...rest, text: searchTerm },
+        // pathname,
+        query: { ...rest, text: searchTerm, category: undefined },
       },
       {
-        pathname: type ? `/${type}` : pathname,
+        pathname: type ? `/${type}` : '',
         query: { ...rest, text: searchTerm },
       },
       {
@@ -37,27 +50,38 @@ const Search: React.FC<Props> = ({ label, ...props }) => {
   };
 
   function clearSearch() {
+
     updateSearchTerm("");
+    
+    
     const { pathname, query } = router;
     const { type, text, ...rest } = query;
+
+    console.log('pathname',pathname);
+    console.log('query',query);
+
     if (text) {
       router.push(
         {
-          pathname,
+          query: { ...rest, category: null },
+         },
+       
+
+
+        {
+          // pathname: type ? `/${type}` : pathname,
           query: { ...rest },
+       
         },
         {
-          pathname: type ? `/${type}` : pathname,
-          query: { ...rest },
-        },
-        {
-          scroll: false,
+          scroll: true,
         }
       );
     }
   }
 
   return (
+
     <SearchBox
       label={label}
       onSubmit={onSearch}
@@ -65,9 +89,10 @@ const Search: React.FC<Props> = ({ label, ...props }) => {
       onChange={handleOnChange}
       value={searchTerm}
       name="search"
-      placeholder={t("common:text-search-placeholder")}
+      placeholder={'Search Products'}
       {...props}
     />
+
   );
 };
 

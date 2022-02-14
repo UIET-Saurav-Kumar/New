@@ -11,33 +11,34 @@ import {
   useInfiniteQuery,
   UseInfiniteQueryOptions,
 } from "react-query";
+
 const ProductService = new CoreApi(API_ENDPOINTS.PRODUCTS);
+
 type PaginatedProduct = {
   data: Product[];
   paginatorInfo: any;
 };
+
 const fetchProducts = async ({
   queryKey,
   pageParam,
 }: QueryParamsType): Promise<PaginatedProduct> => {
+
   const [_key, params] = queryKey;
   let fetchedData: any = {};
+  
   if (pageParam) {
-    if(process.browser&&window.document.domain!="localhost"){
-      pageParam=pageParam.replace("http","http");
-    }
-
-    pageParam = pageParam+'&search=shop_id:'+params.shop_id+'&category='+params.category;
-    
     const response = await ProductService.fetchUrl(pageParam);
     fetchedData = response.data;
   } else {
     const response = await ProductService.find(params as ParamsType);
     fetchedData = response.data;
   }
+
   const { data, ...rest } = fetchedData;
   return { data, paginatorInfo: mapPaginatorData({ ...rest }) };
 };
+
 
 const useProductsQuery = (
   params: ProductsQueryOptionsType,
@@ -58,5 +59,6 @@ const useProductsQuery = (
     }
   );
 };
+
 
 export { useProductsQuery, fetchProducts };

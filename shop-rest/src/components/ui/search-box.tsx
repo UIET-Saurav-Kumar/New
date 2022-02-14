@@ -5,16 +5,18 @@ import { CloseIcon } from "@components/icons/close-icon";
 import { useTranslation } from "next-i18next";
 
 export interface Props extends InputHTMLAttributes<HTMLInputElement> {
+
   className?: string;
   label: string;
   variant?: "minimal" | "normal";
   onSubmit: (e: any) => void;
   onClearSearch: (e: any) => void;
+  
 }
 
 const classes = {
   normal:
-    "bg-light ps-6 pe-14 rounded-te-none rounded-be-none rounded-l-none rounded  border border-gray-300 border-e-0 border-transparent focus:border-accent",
+    "bg-light ps-6 pe-14 rounded-l-none   border border-e-0 border-transparent focus:border-accent",
   minimal:
     "bg-gray-100 ps-10 pe-12 md:ps-14 border border-border-200 focus:border-accent focus:bg-light",
 };
@@ -31,11 +33,11 @@ const SearchBox: React.FC<Props> = ({
   const { t } = useTranslation();
 
   return (
-    <form onSubmit={onSubmit} className="w-full">
+    <form onSubmit={onSubmit}  className="w-2/3">
       <div
         className={cn(
-          "rounded md:rounded-lg flex ",
-          variant === "normal" ? "h-8  md:h-12 xmd:h-10 lg:h-12 shadow-900" : "h-11 md:h-12"
+          "rounded md:rounded-lg flex relative",
+          variant === "normal" ? "h-14 shadow-900" : "h-8 w-52 lg:w-full md:h-12"
         )}
       >
         <label htmlFor={label} className="sr-only">
@@ -43,44 +45,41 @@ const SearchBox: React.FC<Props> = ({
         </label>
 
         <input
-          id = {label}
+          id={label}
           type="text"
           value={value}
           autoComplete="off"
-          
-          placeholder='Search Category | Shop | Product'
           className={cn(
-            "w-full h-full  flex item-center appearance-none transition duration-300 ease-in-out text-heading text-sm placeholder-gray-500 overflow-hidden rounded-lg focus:outline-none focus:ring-0",
+            "w-full h-full flex item-center appearance-none transition duration-300 ease-in-out text-heading text-sm bg-gray-50 placeholder-gray-500 overflow-hidden rounded-lg lg:rounded-l-none border-gray-400 lg:border-2 focus:outline-none focus:ring-0",
             classes[variant]
           )}
           {...rest}
         />
         {value && (
           <button
-          type="button"
-          onClick={onClearSearch}
-          className={cn(
-            "cursor-pointer h-full w-10 md:w-12 flex items-center justify-center absolute text-body transition-colors duration-200 focus:outline-none hover:text-accent-hover focus:text-accent-hover",
-            {
-              "end-36": variant === "normal",
-              "end-0": variant !== "normal",
-            }
-          )}
-        >
+            type="button"
+            onClick={onClearSearch}
+            className={cn(
+              "cursor-pointer h-full w-10 md:w-14 flex items-center justify-center absolute text-body transition-colors duration-200 focus:outline-none hover:text-accent-hover focus:text-accent-hover",
+              {
+                "end-36": variant === "normal",
+                "end-0": variant !== "normal",
+              }
+            )}
+          >
             <span className="sr-only">{t("common:text-close")}</span>
             <CloseIcon className="w-3.5 h-3.5 md:w-3 md:h-3" />
           </button>
         )}
 
-         {variant === "normal" ? (
-          <button className="h-full px-2 xmd:px-6 md:px-8 flex items-center rounded-lg rounded-ts-none rounded-bs-none bg-accent text-light font-semibold transition-colors duration-200 focus:outline-none hover:bg-accent-hover focus:bg-accent-hover">
+        {variant === "normal" ? (
+          <button className="h-full px-8 flex items-center rounded-l-none  rounded-bs-none bg-accent text-light font-semibold transition-colors duration-200 focus:outline-none hover:bg-accent-hover focus:bg-accent-hover">
             <SearchIcon className="w-4 h-4 me-2.5" />
-            {/* { t("Search")} */}
-            
+            {t("common:text-search")}
           </button>
         ) : (
           <button className="h-full w-10 md:w-14 flex items-center justify-center absolute start-0 text-body transition-colors duration-200 focus:outline-none hover:text-accent-hover focus:text-accent-hover">
-            <span className="sr-only">{t("search")}</span>
+            <span className="sr-only">{t("common:text-search")}</span>
             <SearchIcon className="w-3.5 h-3.5 md:w-4 md:h-4" />
           </button>
         )}

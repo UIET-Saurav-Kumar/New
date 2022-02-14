@@ -71,7 +71,9 @@ export const getStaticProps: GetStaticProps = async ({ locale, params }) => {
 };
 
 export default function HomePage() {
+  
   const { query } = useRouter();
+
   useEffect(() => {
     if (query.text || query.category) {
       scroller.scrollTo("grid", {

@@ -68,7 +68,7 @@ const CategoryDropdownSidebar = () => {
     
     <aside className="hidden lg:block items-center justify-center h-full   bg-light">
       <div className="max-h-full flex max-w-full ">
-      <button onClick={allCategories} className={` ${query.category == ''  ? 'text-magenta' : 'text-gray-600'} text-sm sticky bg-white z-1000 ml-0 lg:px-4 top-0 z-50 focus:text-magenta justify-center  flex flex-col font-semibold `}>
+      <button onClick={allCategories} className={` ${query.category == ''  ? 'text-magenta' : 'text-gray-600'} text-sm sticky bg-white  ml-0 lg:px-4 top-0 z-40 focus:text-magenta justify-center  flex flex-col font-semibold `}>
               <img src='/categories.png' className='  w-2 h-2 lg:w-6 tracking-widest lg:h-6 mr-2'/> ALL
               </button>
         {/* <Scrollbar className="w-full h-full max-h-screen"> */}

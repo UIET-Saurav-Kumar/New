@@ -17,6 +17,7 @@ import SidebarMenu from "@components/ui/sidebar-menu";
 import { useCategoriesQuery } from "@data/category/use-categories.query";
 import { useRouter } from "next/router";
 import CategoryDropdownSidebar from "@components/category/category-dropdown-sidebar";
+import Feed from "@components/product/feed";
 
 
 export default function ShopMobileView({data}: any) {
@@ -112,7 +113,7 @@ export default function ShopMobileView({data}: any) {
                  className=" sticky border-t bg-white  py-3 px-2 z-50 font-semibold text-gray-600 font-mono  text-sm sm:text-lg transition-transform duration-75">  
                                 { query?.category?.replace(/\b\w/g, (l :any) => l.toUpperCase())   } Products
                               </h1>
-                   {data && <ShopProductFeed shopId={data.id} />}
+                   {data && <Feed shopId={data.id} />}
                    </div>
                </div> 
 

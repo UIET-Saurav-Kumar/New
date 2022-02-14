@@ -17,6 +17,7 @@ const ProductFeedLoader = dynamic(
 
 
 const ShopProductFeed = ({ shopId }: { shopId: string }) => {
+  
   const { t } = useTranslation("common");
   var cat = 'all';   
   const router = useRouter();
