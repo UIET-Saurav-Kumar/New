@@ -193,18 +193,18 @@ const PaymentForm = () => {
             type="radio"
             {...register("payment_gateway")}
             value="cashfree"
-            label={t("text-creditcard")}
+            label={t("Upi / Debit Card / Credit Card")} 
             className=""
           />
 
-          <Radio
+          {/* <Radio
             id="upi"
             type="radio"
             {...register("payment_gateway")}
             value="upi"
             label={t("text-upi")}
             className=""
-          />
+          /> */}
 
           <Radio
             id="wallet"
