@@ -34,6 +34,7 @@ export function SidebarMenuItem({ className, item, depth = 0 }: any) {
   function toggleCollapse() {
     setOpen((prevValue) => !prevValue);
   }
+  
 
   const { closeModal } = useModalAction();
 
@@ -47,6 +48,7 @@ export function SidebarMenuItem({ className, item, depth = 0 }: any) {
     const navigate = () =>
     // setOpen(false);
    displaySidebar && closeSidebar();
+   window.scrollTo(0, 1110);
     
       router.push(
         {
