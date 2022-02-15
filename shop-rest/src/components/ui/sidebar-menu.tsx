@@ -51,7 +51,7 @@ export function SidebarMenuItem({ className, item, depth = 0 }: any) {
       router.push(
         {
           pathname,
-          query: { ...query, category: slug || 'all' },
+          query: { ...query, category: slug , text: null || null },
           
         },
        

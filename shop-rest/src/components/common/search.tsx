@@ -35,23 +35,23 @@ const Search: React.FC<Props> = ({ label, ...props }) => {
     const { pathname, query } = router;
     const { type, ...rest } = query;
     //scroll down to product feed on lg screens
-    if (type === "shop") {
-      window.scrollTo({
-        top: document.querySelector(".product-feed")?.offsetTop,
-        behavior: "smooth",
-      });
-    }
+    // if (type === "shop") {
+    //   window.scrollTo({
+    //     top: document.querySelector(".product-feed")?.offsetTop,
+    //     behavior: "smooth",
+    //   });
+    // }
 
     window.scrollTo(0, 1110);
 
     router.push(
       {
         // pathname,
-        query: { ...rest, text: searchTerm, category: undefined },
+        query: { ...rest, text: searchTerm, category: null },
       },
       {
         pathname: type ? `/${type}` : '',
-        query: { ...rest, text: searchTerm },
+        query: { ...rest, text: searchTerm, category: null },
       },
       {
         scroll: false,

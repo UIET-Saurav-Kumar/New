@@ -83,6 +83,12 @@ const ShopPage = ({ data }: any) => {
     return openModal("SHOP_PAYMENT_FORM");
   }
 
+  // useeffect  window.scrollTo(0, 1000)
+  useEffect(() => {
+    window.scrollTo(0, 1110);
+  }, []);
+
+
   const {
     data : categoryData,
     isLoading: loading,
