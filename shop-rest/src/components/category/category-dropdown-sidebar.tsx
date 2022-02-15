@@ -30,8 +30,8 @@ const CategoryDropdownSidebar = () => {
     const navigate = () =>
       router.push(
         {
-          pathname,
-          query: { ...query, category: null },
+          // pathname,
+          query: { ...query, category: null, text: null },
         },
         undefined,
         {

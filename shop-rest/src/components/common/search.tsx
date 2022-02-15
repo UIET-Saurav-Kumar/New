@@ -34,6 +34,16 @@ const Search: React.FC<Props> = ({ label, ...props }) => {
     if (!searchTerm) return;
     const { pathname, query } = router;
     const { type, ...rest } = query;
+    //scroll down to product feed on lg screens
+    if (type === "shop") {
+      window.scrollTo({
+        top: document.querySelector(".product-feed")?.offsetTop,
+        behavior: "smooth",
+      });
+    }
+
+    window.scrollTo(0, 1110);
+
     router.push(
       {
         // pathname,
@@ -56,14 +66,20 @@ const Search: React.FC<Props> = ({ label, ...props }) => {
     
     const { pathname, query } = router;
     const { type, text, ...rest } = query;
+    // scroll down to product feed
+    // window.scrollTo(0, 1000);
+
+    // window.scrollTo(1000, 0);
 
     console.log('pathname',pathname);
     console.log('query',query);
 
     if (text) {
+      query.category == null ?  window.scrollTo(0, 1000) : window.scrollTo(0, 1110);
       router.push(
         {
           query: { ...rest, category: null },
+          
          },
        
 
@@ -74,7 +90,7 @@ const Search: React.FC<Props> = ({ label, ...props }) => {
        
         },
         {
-          scroll: true,
+          scroll: false,
         }
       );
     }
