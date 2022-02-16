@@ -126,7 +126,9 @@ export const calculatePaidTotal = (
 ) => {
   let paidTotal = totalAmount + tax + shipping_charge;
   if (discount) {
-    paidTotal = paidTotal - discount;
+    // paid total minus percentage of discount
+    paidTotal = paidTotal - (paidTotal * discount) / 100;
+    // paidTotal = paidTotal - discount;
   }
   return paidTotal;
 };

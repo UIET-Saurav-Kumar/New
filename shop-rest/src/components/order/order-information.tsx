@@ -20,30 +20,36 @@ const OrderInformation = (props: Props) => {
   const { items, isEmpty } = useCart();
 
   const { checkoutData, discount, removeCoupon, coupon } = useCheckout();
+
   const available_items = items?.filter(
     (item: any) => !checkoutData?.unavailable_products?.includes(item.id)
   );
+
   const { price: tax } = usePrice(
     checkoutData && {
       amount: checkoutData.total_tax ?? 0,
     }
   );
+
   const { price: shipping } = usePrice(
     checkoutData && {
       amount: checkoutData.shipping_charge ?? 0,
     }
   );
+
   const base_amount = calculateTotal(available_items).total;
   const { price: sub_total } = usePrice(
     checkoutData && {
       amount: base_amount,
     }
   );
+
   const { price: discountPrice } = usePrice(
     discount && {
       amount: discount,
     }
   );
+  
   const { price: total } = usePrice(
     checkoutData && {
       amount: calculatePaidTotal(
@@ -57,9 +63,13 @@ const OrderInformation = (props: Props) => {
     }
   );
 
+  console.log('subtotal', sub_total);
+  console.log('total', total);
+  console.log('discount ', sub_total.split('.')[0].replace('₹',' ').split(',').join('') )
+
   console.log('checkout data',checkoutData);
   return (
-    <div className={props.className}>
+    <div className={props.className + ' ' + ' shadow-2xl'}>
       <div className="flex flex-col border-b pb-2 border-border-200">
         {!isEmpty ? (
           items?.map((item: any) => {
@@ -79,10 +89,10 @@ const OrderInformation = (props: Props) => {
         )}
       </div>
 
-      <div className="mt-4">
+      <div className="-mt-2  bg-white p-5">
         <div className="flex justify-between mb-3">
-          <p className="text-sm text-body">{t("text-sub-total")}</p>
-          <span className="text-sm text-body">{sub_total}</span>
+          <p className="text-sm font-semibold">{t("text-sub-total")}</p>
+          <span className="text-sm font-bold">{sub_total}</span>
         </div>
         {/* <div className="flex justify-between mb-3">
           <p className="text-sm text-body">{t("text-tax")}</p>
@@ -93,16 +103,22 @@ const OrderInformation = (props: Props) => {
           <span className="text-sm text-body">{shipping}</span>
         </div> */}
         {discount ? (
-          <div className="flex justify-between mb-4">
+          <>
+          <div className="flex justify-between  mb-4">
             <p className="text-sm text-body me-4">{t("text-discount")}</p>
             <span className="text-xs font-semibold text-red-500 flex items-center me-auto">
-              ({coupon.code})
+              ({coupon.code })
               <button onClick={removeCoupon}>
                 <CloseIcon className="w-3 h-3 ms-2" />
               </button>
             </span>
-            <span className="text-sm text-body">{discountPrice}</span>z
+            <span className="text-sm font-semibold text-green-600">{discountPrice.split('.')[0].replace('₹','') + ''+ '%' + ' '+ 'OFF'}</span>
+
           </div>
+          <div className=" flex justify-between items-center ">
+            <p className="text-blue-500 font-bold mb-2 text-sm  me-4">Yay, you saved </p>
+          <span className="text-sm text-gray-800 font-bold">₹{sub_total.split('.')[0].replace('₹',' ').split(',').join('') - total.split('.')[0].replace('₹',' ').split(',').join('') + ''+ '.00' }</span></div>
+          </>
         ) : (
           <div className="flex justify-between mt-5 mb-4">
             <Coupon />
@@ -112,7 +128,7 @@ const OrderInformation = (props: Props) => {
           <p className="text-base font-semibold text-heading">
             {t("text-total")}
           </p>
-          <span className="text-base font-semibold text-heading">{total}</span>
+          <span className="text-gray-800 font-semibold ">{total}</span>
         </div>
       </div>
     </div>

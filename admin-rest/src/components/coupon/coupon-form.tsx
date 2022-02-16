@@ -74,8 +74,8 @@ export default function CreateOrUpdateCouponForm({ initialValues }: IProps) {
       type: CouponType.FixedCoupon,
       description: values.description,
       amount: values.amount,
-      active_from: values.active_from,
-      expire_at: values.expire_at,
+      active_from: new Date(values.active_from).toISOString(),
+      expire_at: new Date(values.expire_at).toISOString(),
       image: {
         thumbnail: values?.image?.thumbnail,
         original: values?.image?.original,
@@ -164,14 +164,16 @@ export default function CreateOrUpdateCouponForm({ initialValues }: IProps) {
           />
           {couponType !== CouponType.FreeShippingCoupon && (
             <Input
-              label={`${t("form:input-label-amount")}(${currency})`}
+              label={`${t("% Off")}`}
               {...register("amount")}
               type="number"
               error={t(errors.amount?.message!)}
               variant="outline"
+              placeholder="%"
               className="mb-5"
             />
           )}
+
           <div className="flex flex-col sm:flex-row">
             <div className="w-full sm:w-1/2 p-0 sm:pe-2 mb-5 sm:mb-0">
               <Label>{t("form:coupon-active-from")}</Label>

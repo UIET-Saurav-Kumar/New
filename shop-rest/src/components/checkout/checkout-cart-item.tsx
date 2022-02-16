@@ -64,15 +64,15 @@ const CheckoutCartItem = ({ item, notAvailable }: Props) => {
   }
 
   return (
-    <>
-    <div className={cn("flex justify-between py-2")} key={item?.id}>
+    <div className=" bg-white p-5">
+    <div className={cn("flex  justify-between py-2")} key={item?.id}>
       <p className="flex items-center justify-between text-base">
         <span
           className={cn("text-sm", notAvailable ? "text-red-500" : "text-body")}
         >
           <span
             className={cn(
-              "text-sm",
+              "text-lg",
               notAvailable ? "text-red-500" : "text-heading"
             )}
           >
@@ -81,7 +81,7 @@ const CheckoutCartItem = ({ item, notAvailable }: Props) => {
         </span>
       </p>
       <span
-        className={cn("text-sm", notAvailable ? "text-red-500" : "text-body")}
+        className={cn("text-lg text-gray-700", notAvailable ? "text-red-500" : "text-body")}
       >
         {item?.shop?.name}
       </span>
@@ -99,12 +99,12 @@ const CheckoutCartItem = ({ item, notAvailable }: Props) => {
           >
             {item?.quantity}
           </span>
-          <span className="mx-2">x</span>
-          <span>{item?.name}</span> | <span>{item?.unit}</span>
+          <span className="mx-2 ">x</span>
+          <span className="text-gray-800 font-semibold text-md">{item?.name}</span> | <span>{item?.unit}</span>
         </span>
       </p>
       <span
-        className={cn("text-sm", notAvailable ? "text-red-500" : "text-body")}
+        className={cn("text-sm", notAvailable ? "text-red-500" : "font-semibold")}
       >
         {!notAvailable ? price : t("text-unavailable")}
       </span>
@@ -185,7 +185,7 @@ const CheckoutCartItem = ({ item, notAvailable }: Props) => {
     }
     <hr style={{color:"#a1a7af",marginBottom:"10px"}}/>
     
-    </>
+    </div>
   );
 };
 

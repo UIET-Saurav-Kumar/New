@@ -59,7 +59,7 @@ const CouponList = ({ coupons, onPagination }: IProps) => {
       ),
     },
     {
-      title: t("table:table-item-amount"),
+    title: t("table: % Off "),
       dataIndex: "amount",
       key: "amount",
       align: "center",
@@ -71,7 +71,7 @@ const CouponList = ({ coupons, onPagination }: IProps) => {
         if (record.type === "PERCENTAGE_COUPON") {
           return <span>{amount}%</span>;
         }
-        return <span>{price}</span>;
+        return <span>{price.replace('₹','').split('.')[0] + '%'}</span>;
       },
     },
     {
