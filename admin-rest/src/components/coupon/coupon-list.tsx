@@ -26,6 +26,7 @@ const CouponList = ({ coupons, onPagination }: IProps) => {
   const { t } = useTranslation();
 
   const columns = [
+
     {
       title: t("table:table-item-id"),
       dataIndex: "id",
@@ -33,6 +34,7 @@ const CouponList = ({ coupons, onPagination }: IProps) => {
       align: "center",
       width: 64,
     },
+
     {
       title: t("table:table-item-banner"),
       dataIndex: "image",
@@ -49,6 +51,7 @@ const CouponList = ({ coupons, onPagination }: IProps) => {
         />
       ),
     },
+
     {
       title: t("table:table-item-code"),
       dataIndex: "code",
@@ -58,8 +61,19 @@ const CouponList = ({ coupons, onPagination }: IProps) => {
         <span className="whitespace-nowrap">{text}</span>
       ),
     },
+
     {
-    title: t("table: % Off "),
+      title: t("table:table-item-type"),
+      dataIndex: "type",
+      key: "type",
+      align: "center",
+      render: (type: string) => (
+        <span className="whitespace-nowrap">{type}</span>
+      ),
+    },
+
+    {
+      title: t("table:table-item-amount"),
       dataIndex: "amount",
       key: "amount",
       align: "center",
@@ -68,12 +82,14 @@ const CouponList = ({ coupons, onPagination }: IProps) => {
         const { price } = usePrice({
           amount: amount,
         });
-        if (record.type === "PERCENTAGE_COUPON") {
+        if (record.type === "percentage") {
+          console.log('type', record.type)
           return <span>{amount}%</span>;
         }
-        return <span>{price.replace('₹','').split('.')[0] + '%'}</span>;
+        return <span>{price}</span>;
       },
     },
+
     {
       title: t("table:table-item-active"),
       dataIndex: "active_from",
@@ -85,6 +101,7 @@ const CouponList = ({ coupons, onPagination }: IProps) => {
         </span>
       ),
     },
+
     {
       title: t("table:table-item-expired"),
       dataIndex: "expire_at",
@@ -96,6 +113,7 @@ const CouponList = ({ coupons, onPagination }: IProps) => {
         </span>
       ),
     },
+
     {
       title: t("table:table-item-actions"),
       dataIndex: "id",
@@ -109,6 +127,7 @@ const CouponList = ({ coupons, onPagination }: IProps) => {
         />
       ),
     },
+
   ];
 
   return (

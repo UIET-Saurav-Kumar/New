@@ -1,3 +1,6 @@
+import Coupon from "@components/checkout/coupon";
+import { useCheckout } from "@contexts/checkout.context";
+
 export interface Item {
   id: string | number;
   price: number;
@@ -18,6 +21,8 @@ export function addItemWithQuantity(
   const existingItemIndex = items.findIndex(
     (existingItem) => existingItem.id === item.id
   );
+
+
 
   if (existingItemIndex > -1) {
     const newItems = [...items];
@@ -120,16 +125,31 @@ interface PriceValues {
   tax: number;
   shipping_charge: number;
 }
+
 export const calculatePaidTotal = (
   { totalAmount, tax, shipping_charge }: PriceValues,
   discount?: number
 ) => {
+  const {  coupon } = useCheckout();
+
   let paidTotal = totalAmount + tax + shipping_charge;
+  console.log('Coupon type',coupon?.type)
+  console.log('discount',discount)
+  
   if (discount) {
+    // if coupon type is fixed then subtract discount from total amount
+    if (coupon.type === "fixed")  {
+      paidTotal = paidTotal - discount;
+    }
+    // if coupon type is percentage then subtract discount from total amount  
+    if (coupon.type === "percentage") {
+      paidTotal = paidTotal - (paidTotal * discount*100) / 100;
+    }
     // paid total minus percentage of discount
-    paidTotal = paidTotal - (paidTotal * discount) / 100;
+    // paidTotal = paidTotal - (paidTotal * discount) / 100;
     // paidTotal = paidTotal - discount;
   }
+
   return paidTotal;
 };
 

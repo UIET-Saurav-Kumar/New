@@ -46,7 +46,7 @@ const OrderInformation = (props: Props) => {
 
   const { price: discountPrice } = usePrice(
     discount && {
-      amount: discount,
+      amount: coupon.type === 'percentage' ? (discount * 100) : discount,
     }
   );
   
@@ -65,9 +65,11 @@ const OrderInformation = (props: Props) => {
 
   console.log('subtotal', sub_total);
   console.log('total', total);
-  console.log('discount ', sub_total.split('.')[0].replace('₹',' ').split(',').join('') )
-
+  console.log('subtotal split ', sub_total.split('.')[0].replace('₹',' ').split(',').join('') )
+  console.log('coupon code',coupon?.type)
+  console.log('discount price',discountPrice)
   console.log('checkout data',checkoutData);
+
   return (
     <div className={props.className + ' ' + ' shadow-2xl'}>
       <div className="flex flex-col border-b pb-2 border-border-200">
@@ -103,16 +105,25 @@ const OrderInformation = (props: Props) => {
           <span className="text-sm text-body">{shipping}</span>
         </div> */}
         {discount ? (
+
           <>
+
           <div className="flex justify-between  mb-4">
+
             <p className="text-sm text-body me-4">{t("text-discount")}</p>
+
             <span className="text-xs font-semibold text-red-500 flex items-center me-auto">
               ({coupon.code })
               <button onClick={removeCoupon}>
                 <CloseIcon className="w-3 h-3 ms-2" />
               </button>
             </span>
-            <span className="text-sm font-semibold text-green-600">{discountPrice.split('.')[0].replace('₹','') + ''+ '%' + ' '+ 'OFF'}</span>
+
+            <span className="text-sm font-semibold text-green-600">{coupon.type === 'percentage' ?
+              (discountPrice.replace('₹','').split('.')[0] + ''+ '%' + ' '+ 'OFF' ) 
+              : discountPrice.split('.')[0] + '' + ' '+ 'OFF'
+              }
+             </span>
 
           </div>
           <div className=" flex justify-between items-center ">

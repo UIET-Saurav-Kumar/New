@@ -13,6 +13,7 @@ export default class CustomDocument extends Document {
   }
 
   render() {
+
     const { locale } = this.props.__NEXT_DATA__;
     const dir = locale === "ar" || locale === "he" ? "rtl" : "ltr";
 
@@ -26,26 +27,49 @@ export default class CustomDocument extends Document {
       
       <Html>
         
-      <Head>
-      <meta name="facebook-domain-verification" content="8mvkzpangtng356xvg4hqubj4mbuyq" />
-          {/* Global Site Tag (gtag.js) - Google Analytics */}
+        <Head>
+        <meta name="facebook-domain-verification" content="8mvkzpangtng356xvg4hqubj4mbuyq" />
+            {/* Global Site Tag (gtag.js) - Google Analytics */}
+            <script
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=UA-190495171-1`}
+            />
+            
+
+            {/* google analytics */}
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'UA-190495171-1', {
+                page_path: window.location.pathname,
+              });
+            `,
+              }}
+            />
+
+           {/* interakt */}
           <script
-            async
-            src={`https://www.googletagmanager.com/gtag/js?id=UA-190495171-1`}
-          />
-          
-          <script
+            
             dangerouslySetInnerHTML={{
-              __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'UA-190495171-1', {
-              page_path: window.location.pathname,
-            });
-          `,
-            }}
-          />
+              __html: `(function(w,d,s,c,r,a,m){
+                w['KiwiObject']=r;
+                w[r]=w[r] || function () {
+                  (w[r].q=w[r].q||[]).push(arguments)};
+                w[r].l=1*new Date();
+                  a=d.createElement(s);
+                  m=d.getElementsByTagName(s)[0];
+                a.async=1;
+                a.src=c;
+                m.parentNode.insertBefore(a,m)
+              })(window,document,'script',"https://app.interakt.ai/kiwi-sdk/kiwi-sdk-17-prod-min.js?v="+ new Date().getTime(),'kiwi');
+              window.onload = function () {
+                kiwi.init('', 'R74PF9xANjTtlgpYCm6WFEpmXvX7ZJ42', {});`,
+              }}
+            />
+          
           
           <script
             dangerouslySetInnerHTML={{
@@ -69,6 +93,8 @@ export default class CustomDocument extends Document {
             }}
           />
         
+
+        {/* hotjar */}
          <script
          
           dangerouslySetInnerHTML={{
@@ -83,8 +109,6 @@ export default class CustomDocument extends Document {
             `,}}
             />
 
-         
-          
         </Head>
        
         <body dir={dir}>

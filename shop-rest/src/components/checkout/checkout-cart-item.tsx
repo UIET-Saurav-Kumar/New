@@ -43,6 +43,7 @@ const CheckoutCartItem = ({ item, notAvailable }: Props) => {
     setShopOrderPrice(p)
     setShopItems(shop_items)    
   }, [])
+
   function isWithDelivery():Boolean{
     if(item?.shop?.delivery_status){
       return true;
@@ -64,6 +65,7 @@ const CheckoutCartItem = ({ item, notAvailable }: Props) => {
   }
 
   return (
+    
     <div className=" bg-white p-5">
     <div className={cn("flex  justify-between py-2")} key={item?.id}>
       <p className="flex items-center justify-between text-base">

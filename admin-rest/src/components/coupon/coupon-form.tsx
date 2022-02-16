@@ -16,6 +16,8 @@ import { useTranslation } from "next-i18next";
 import FileInput from "@components/ui/file-input";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { couponValidationSchema } from "./coupon-validation-schema";
+import Radio from "@components/ui/radio/radio";
+
 
 type FormValues = {
   code: string;
@@ -51,10 +53,14 @@ export default function CreateOrUpdateCouponForm({ initialValues }: IProps) {
   } = useForm<FormValues>({
     // @ts-ignore
     defaultValues: initialValues
+    
       ? {
           ...initialValues,
           active_from: new Date(initialValues.active_from!),
           expire_at: new Date(initialValues.expire_at!),
+          // set default value for coupon type
+          type:  "fixed",
+
         }
       : defaultValues,
     resolver: yupResolver(couponValidationSchema),
@@ -71,7 +77,7 @@ export default function CreateOrUpdateCouponForm({ initialValues }: IProps) {
   const onSubmit = async (values: FormValues) => {
     const input = {
       code: values.code,
-      type: CouponType.FixedCoupon,
+      type: values.type,
       description: values.description,
       amount: values.amount,
       active_from: new Date(values.active_from).toISOString(),
@@ -162,17 +168,107 @@ export default function CreateOrUpdateCouponForm({ initialValues }: IProps) {
             variant="outline"
             className="mb-5"
           />
-          {couponType !== CouponType.FreeShippingCoupon && (
+
+          {/* <Label
+                htmlFor="fixed"
+                className="block text-sm font-bold mb-2"
+              >
+                {t("form:Coupon Type")}
+              </Label> */}
+
+         <div className="flex  flex-col  mb-5 ">
+         <Label
+                htmlFor="fixed"
+                className="block text-sm font-bold mb-2"
+              >
+                {t("form:Coupon Type")}
+              </Label>
+
+              <div className="flex ">
+            <div className="w-full sm:w-4/12 md:w-1/3 sm:px-4 md:px-5">
+              
+              <div className="relative flex">
+                <Radio
+                  // name="type"
+                  id="fixed"
+                  value={CouponType.FixedCoupon}
+                  
+                  // control={control}
+                  {...register("type")}
+                  className="mb-2"
+                />
+                <span className="text-sm">
+                  {t("form:Fixed")}
+                </span>
+              </div>
+            </div>
+            <div className="w-full sm:w-4/12 md:w-1/3 sm:px-4 md:px-5">
+              <div className="relative flex ">
+                <Radio
+                  // name="type"
+                  {...register("type")}
+                  id="percentage"
+                  value={CouponType.PercentageCoupon}
+                  // control={control}
+                  className="mb-2"
+                />
+                <span className="text-sm">
+                  {t("form:Percentage")}
+                </span>
+              </div>
+            </div>
+            </div>
+            {/* <div className="w-full sm:w-4/12 md:w-1/3 sm:px-4 md:px-5">
+              <div className="relative flex items-center">
+                <Radio
+                  // name="type"
+                  {...register("type")}
+                  id="free-shipping"
+                  value={CouponType.FreeShippingCoupon}
+                  // control={control}
+                  className="mb-2"
+                />
+                <span className="text-sm">
+                  {t("form:Free-shipping")}
+                </span>
+              </div>
+            </div> */}
+          </div>
+
+
+          {couponType == CouponType.FixedCoupon && (
             <Input
-              label={`${t("% Off")}`}
+              label={`${t("form:input-label-amount")}(${currency})`}
               {...register("amount")}
               type="number"
               error={t(errors.amount?.message!)}
               variant="outline"
-              placeholder="%"
               className="mb-5"
             />
           )}
+
+          {couponType == CouponType.PercentageCoupon && (
+            <Input
+              label={`${t("form:input-label-amount")}(${'%'})`}
+              {...register("amount")}
+              type="number"
+              error={t(errors.amount?.message!)}
+              variant="outline"
+              className="mb-5"
+            />
+          )}
+
+           {/* {couponType == CouponType.FreeShippingCoupon && (
+            <Input
+              label={`${t("form:input-label-amount")}(${'₹'})`}
+              {...register("amount")}
+              type="number"
+              error={t(errors.amount?.message!)}
+              variant="outline"
+              className="mb-5"
+            />
+          )} */}
+
 
           <div className="flex flex-col sm:flex-row">
             <div className="w-full sm:w-1/2 p-0 sm:pe-2 mb-5 sm:mb-0">

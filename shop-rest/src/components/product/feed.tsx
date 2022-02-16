@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Button from "@components/ui/button";
 import ErrorMessage from "@components/ui/error-message";
 import renderProductCard from "@components/product/render-product-card";
-import NotFound from "@components/common/not-found";
+import ProductNotFound from "@components/common/product-not-found";
 import { useProductsQuery } from "@data/product/use-products.query";
 import { Fragment } from "react";
 import { useTranslation } from "next-i18next";
@@ -45,12 +45,19 @@ const Feed = ({ shopId }: { shopId: string }) => {
   if (!loading && !data?.pages?.[0]?.data?.length) {
     return (
       <div className="bg-gray-100 min-h-full pt-6 pb-8 px-4 lg:p-8">
-        <NotFound text="text-not-found" className="w-7/12 mx-auto" />
+        {/* <ProductNotFound text="text-not-found" className="w-1/3 mx-auto" /> */}
+        <img src='/not-found.png'
+        className="object-contain mx-auto"/>
+
+        
+
+
       </div>
     );
   }
   
   return (
+
     <div className="bg-gray-100 min-h-full pt-6 pb-8 px-4 lg:p-8">
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 gap-3">
         {loading && !data?.pages?.length ? (
@@ -69,6 +76,7 @@ const Feed = ({ shopId }: { shopId: string }) => {
           </>
         )}
       </div>
+      
       {hasNextPage && (
         <div className="flex justify-center mt-8 lg:mt-12">
           <Button
