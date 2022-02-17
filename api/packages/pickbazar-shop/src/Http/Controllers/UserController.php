@@ -216,9 +216,26 @@ class UserController extends CoreController
 
         $response   = InteraktHelper::interaktApi(json_encode($CURLOPT_POSTFIELDS),$endpoint);
         #--------------creating whatapp user-----------------#
+        
+        #---------------------creating Register Event-----------------#
+        $payload = array(
+            "userId"=> $user->id,
+            "phoneNumber"=> $user->phone_number,
+            "countryCode"=> "+91",
+            "event"=> "User Registered",
+            "traits"=> [
+                "name"=> $user->name,
+                "email"=> $user->email,
+                "user_role"=> $user->permissions[0]->name,
+            ],
+            "createdAt"=> date('Y-m-d H:i:s')
+        );
+        $endpoint_event = 'track/events/';
 
+        $response_event   = InteraktHelper::interaktApi(json_encode($payload),$endpoint_event);
+        #---------------------creating Register Event-----------------#
 
-        return ["user"=>$user, 'interakt_response' => $response];
+        return ["user"=>$user, 'interakt_response' => $response, 'interakt_event_response' => $response_event];
 
         return ["token" => $user->createToken('auth_token')->plainTextToken,"permissions" => $user->getPermissionNames(), 'interakt_response' => $response];
     }
