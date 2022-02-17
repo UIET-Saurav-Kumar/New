@@ -78,10 +78,11 @@ export default function ImageSlider() {
           <div className=' cursor-pointer card  relative w-full h-40 lg:h-72 xl+:h-80 2xl:h-72 md:h-64'>
 
           <Link  
-						 href={ location() ?  getLinkGrocery() : getLink('groceries')}><Image  layout='fill' objectFit='fill'
-            //  className='rounded-md w-full opacity-90  h-40 lg:w-full lg:h-72 xl+:h-80 md:h-64  2xl:h-72 2xl:w-full space-x-9 object-fill object '  
-                  src={'/banner/online-grocery-web.jpg'} 
-                  /></Link>
+						 href={ location() ?  getLinkGrocery() : getLink('groceries')}><picture className="w-full h-full" >
+             <source media="(max-width: 1023px)" style={{objectFit:'contain'}} srcset="/banner/online-grocery.jpg"/>
+             <source media="(min-width: 1024px)" style={{objectFit:'contain'}} srcset="/banner/online-grocery-web.jpg"/>
+             <img src="/ad-banner.jpg" style={{height:'100%', width:'100%'}} alt="best salon offers"/>
+       </picture></Link>
 
           </div>
 

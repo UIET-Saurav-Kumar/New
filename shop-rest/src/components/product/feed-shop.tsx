@@ -11,6 +11,7 @@ import { Fragment ,useRef} from "react";
 import useIntersectionObserver from "./useIntersectionObserver";
 import { useRouter } from "next/router";
 
+
 const ProductFeedLoader = dynamic(
   () => import("@components/ui/loaders/product-feed-loader")
 );

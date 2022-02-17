@@ -85,7 +85,7 @@ const ShopPage = ({ data }: any) => {
 
   // useeffect  window.scrollTo(0, 1000)
   useEffect(() => {
-    window.scrollTo(0, 1110);
+     data.slug !== 'chandigarhgrocerystore' ? window.scrollTo(0, 670) : window.scrollTo(0, 0)
   }, []);
 
 
@@ -113,9 +113,9 @@ const ShopPage = ({ data }: any) => {
   };
 
   console.log('shop data',data)
-
-
   seoFunction(data);
+  
+
   return (
 
     <>
@@ -165,9 +165,9 @@ const ShopPage = ({ data }: any) => {
 
                           </div>
 
-                          <div className="w-full -mt-80 object-contain">
+                          { data.slug == 'chandigarhgrocerystore' ? (  <div className="w-full -mt-80 object-contain">
                                     <img src='/grocery-web.jpg' className="object-contain" />
-                          </div>
+                          </div> ) : null }
 
                           <div className='  relative top-0 flex flex-col  '> 
                               {categoryData?.categories?.data?.length ? 

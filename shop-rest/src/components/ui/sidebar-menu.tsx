@@ -9,6 +9,7 @@ import * as CategoryIcons from "@components/icons/category";
 import { useUI } from "@contexts/ui.context";
 import { useEffect, useState } from "react";
 import { useModalAction, useModalState } from "./modal/modal.context";
+import { useCategoriesQuery } from "@data/category/use-categories.query";
 
 
 
@@ -27,6 +28,19 @@ export function SidebarMenuItem({ className, item, depth = 0 }: any) {
   useEffect(() => {
     setOpen(isActive);
   }, [isActive]);
+
+  
+  const { pathname, query } = router;
+
+
+
+  const {
+    data : categoryData,
+    isLoading: loading,
+    error,
+  } = useCategoriesQuery({
+    type: query.slug as string,
+  });
 
   const { slug, name, children: items, icon } = item;
   const { displaySidebar, closeSidebar } = useUI();
@@ -50,7 +64,8 @@ export function SidebarMenuItem({ className, item, depth = 0 }: any) {
     const navigate = () =>
     // setOpen(false);
    displaySidebar && closeSidebar();
-   window.scrollTo(0, 1110);
+   { categoryData?.slug !== 'chandigarhgrocerystore' ?   window.scrollTo(0, 670) :
+   window.scrollTo(0, 0)};
     
       router.push(
         {
@@ -89,6 +104,8 @@ export function SidebarMenuItem({ className, item, depth = 0 }: any) {
       );
     }
 
+    console.log('sidebar menu data', categoryData)
+
   return (
 
     <>
@@ -104,18 +121,28 @@ export function SidebarMenuItem({ className, item, depth = 0 }: any) {
           <button
             className={cn(
               "grid grid-cols-1  whitespace-normal items-center  py-1 text-start outline-none text-body-dark font-semibold  focus:outline-none focus:ring-0 focus:text-accent",
-              isOpen ? "text-accent bg-pink-100 transition duration-800 ease-in-out" : "text-body-dark",
+              isOpen ? "text-accent bg-pink-100 lg:bg-gray-50 transition duration-800 ease-in-out" : "text-body-dark",
               className ? className : "text-sm"
             )}
           >
           <div className='relative py-2 flex flex-col mx-auto h-auto  w-auto sm:w-20  px-2  place-items-center lg:grid-cols-2   lg:w-28  items-center'>
-                {item.image && (
+                {    item?.image.id ? (
                   <span className="flex  text-center  w-full items-center justify-center">
-                    <img src={item.image.original} className='w-16 h-16 rounded-full object-contain' />
+                    <img src={item?.image?.original} className='w-16 h-16 rounded-full object-contain' />
                   </span>
-                )}
+                ) :
+                  <span className="flex  text-center  w-full items-center justify-center">
+                    {getIcon({
+                      iconList: CategoryIcons,
+                      iconName: icon,
+                      className: " w-6 h-6 lg:h-8 lg:w-8",
+                    })}
+                  </span>
+                }
+
+                
                 <div className="flex px-auto items-center">
-                  <span className='text-10px w-auto whitespace-wrap lg:whitespace-nowrap text-center'>{name}</span>
+                  <span className='text-10px lg:text-sm w-auto whitespace-wrap lg:whitespace-nowrap text-center'>{name}</span>
                   {/* <span className="block lg:hidden text-center ">{expandIcon}</span> */}
                 </div>
           </div>

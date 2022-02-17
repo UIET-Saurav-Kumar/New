@@ -6,8 +6,10 @@ import ErrorMessage from "@components/ui/error-message";
 import renderProductCard from "@components/product/render-product-card";
 import ProductNotFound from "@components/common/product-not-found";
 import { useProductsQuery } from "@data/product/use-products.query";
-import { Fragment } from "react";
+import { Fragment, useRef } from "react";
 import { useTranslation } from "next-i18next";
+import useIntersectionObserver from "./useIntersectionObserver";
+
 
 const ProductFeedLoader = dynamic(
   () => import("@components/ui/loaders/product-feed-loader")
@@ -18,9 +20,13 @@ const Feed = ({ shopId }: { shopId: string }) => {
   const { t } = useTranslation("common");
   const { query } = useRouter();
 
+  const loadMoreRef = useRef()
+
+  
+
   const {
     isFetching: loading,
-    isFetchingNextPage: loadingMore,
+    isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
     isError,
@@ -36,6 +42,12 @@ const Feed = ({ shopId }: { shopId: string }) => {
     enabled: Boolean(shopId),
 
   });
+
+  useIntersectionObserver({
+    target: loadMoreRef,
+    onIntersect: fetchNextPage,
+    enabled: hasNextPage,
+})
 
   if (isError && error) return <ErrorMessage message={error.message} />;
   function handleLoadMore() {
@@ -77,17 +89,18 @@ const Feed = ({ shopId }: { shopId: string }) => {
         )}
       </div>
       
-      {hasNextPage && (
-        <div className="flex justify-center mt-8 lg:mt-12">
-          <Button
-            loading={loadingMore}
-            onClick={handleLoadMore}
-            className="text-sm md:text-base font-semibold h-11"
-          >
-            {t("text-load-more")}
-          </Button>
-        </div>
-      )}
+      <div ref={loadMoreRef} className={`${!hasNextPage ? "hidden" : ""}`}>
+              {
+                (isFetchingNextPage)
+                &&
+                (
+                  <>
+                    {/* <span>Loading </span> */}
+                    <img src="/preloader/cir.gif" className="w-full mt-10 mx-auto" style={{width:"30px",height:"30px"}}/>
+                  </>
+                ) 
+              }
+      </div>
     </div>
   );
 };

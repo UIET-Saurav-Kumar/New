@@ -18,6 +18,7 @@ import { useCategoriesQuery } from "@data/category/use-categories.query";
 import { useRouter } from "next/router";
 import CategoryDropdownSidebar from "@components/category/category-dropdown-sidebar";
 import Feed from "@components/product/feed";
+import { useEffect } from "react";
 
 
 export default function ShopMobileView({data}: any) {
@@ -32,6 +33,10 @@ export default function ShopMobileView({data}: any) {
   } = useCategoriesQuery({
     type: query.slug as string,
   });
+
+  useEffect(() => {
+    data.slug !== 'chandigarhgrocerystore' ? window.scrollTo(0, 670) : window.scrollTo(0, 0)
+ }, []);
 
   const categoryItem = () => {
     if (categoryData?.categories?.length) {
@@ -104,6 +109,13 @@ export default function ShopMobileView({data}: any) {
                 {/* <WebShopBanner/> */}
                 {/* <ShopBanner/> */}
             </div>
+
+            { data.slug !== 'chandigarhgrocerystore' ? 
+                          ( <div className='flex w-full'> 
+                                <WebShopBanner/>
+                            </div>)
+                            : null
+                          }
 
             {/* <div className='px-2 flex'><OfferCards/></div> */}
 
