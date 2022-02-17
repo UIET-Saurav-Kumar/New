@@ -102,6 +102,8 @@ const ShopPage = ({ data }: any) => {
 
   };
 
+
+
   //after searching scroll down to the product section
   const scrollToProduct = () => {
     const element = document.getElementById("product-feed");
@@ -109,6 +111,8 @@ const ShopPage = ({ data }: any) => {
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  console.log('shop data',data)
 
 
   seoFunction(data);
@@ -125,48 +129,61 @@ const ShopPage = ({ data }: any) => {
 
                           
 
-                          <div className='flex flex-col overflow-y-scroll space-y-4 w-full'>  
+                          <div className='flex flex-col overflow-y-scroll space-y-4  w-full'>  
 
                               <div className='flex w-full h-80 border'> 
 
-                                  <div className='h-full w-96'>  
-                                    <ShopProfileCard data={data} />
-                                  </div>
-                                  
-                                  <div className='flex  w-full'>
-                                    {imageCheck(data?.cover_image?.original, data, '317', false,'h-full w-full object-fill')}
-                                  </div>
-            
+                                { data.slug !== 'chandigarhgrocerystore' ? 
+                                    ( <div className='h-full w-96'>  
+                                      <ShopProfileCard data={data} />
+                                    </div> ) : null }
+                                    
+                                    { data.slug !== 'chandigarhgrocerystore' ? 
+                                    ( <div className='flex w-full  '>
+                                      {imageCheck(data?.cover_image?.original, data, '317', false,'h-full w-full object-fill')}
+                                    </div> ) : '' }
+                   
                               </div>
                             
                            
-                            <div className='flex w-full'> 
+                          { data.slug !== 'chandigarhgrocerystore' ? 
+                          ( <div className='flex w-full'> 
                                 <WebShopBanner/>
-                            </div>
+                            </div>)
+                            : null
+                          }
 
-                              {/* <div className='w-full mt-7'> */}
-                                <ShopDescription data = {data}/>
-                              {/* </div> */}
+                            { data.slug !== 'chandigarhgrocerystore' ? 
+                            //  (<div className='w-full mt-7'> 
+                                (<ShopDescription data = {data}/>
+                              // </div>
+                              )
+                            : null
+                            }
 
-                              <OfferCards/>
+                              {/* <OfferCards/> */}
 
                           </div>
 
-                          <div className='  relative top-0 flex flex-col  '> 
-                          {categoryData?.categories?.data?.length ? 
-                          <> 
-                          <div style={{top:'85px'}} className='flex z-50 sticky mt-5 border bg-white   flex-col w-full'>   
-                                    <CategoryDropdownSidebar/>
-                              
+                          <div className="w-full -mt-80 object-contain">
+                                    <img src='/grocery-web.jpg' className="object-contain" />
+                          </div>
 
-                              <h1 style={{top:'155px'}} id='product-heading' className="text-lg sticky border-t bg-white  py-3 px-2 z-50 font-semibold text-gray-600 font-mono mt-5 transition-transform duration-75">  
-                                { query?.category?.replace(/\b\w/g, (l :any) => l.toUpperCase())   } Products
-                              </h1> 
-                          </div> </> : ' '  }
-                              <div  className="static  z-10 top-10 w-full">{data && 
-                              // <ShopProductFeed shopId={data.id} />
-                              <Feed shopId={data.id}/>
-                              }</div>
+                          <div className='  relative top-0 flex flex-col  '> 
+                              {categoryData?.categories?.data?.length ? 
+                              <> 
+                              <div style={{top:'85px'}} className='flex z-50 sticky mt-5 border bg-white   flex-col w-full'>  
+
+                                        <CategoryDropdownSidebar/>
+
+                                  <h1 style={{top:'155px'}} id='product-heading' className="text-lg sticky border-t bg-white  py-3 px-2 z-50 font-semibold text-gray-600 font-mono mt-5 transition-transform duration-75">  
+                                    { query?.category?.replace(/\b\w/g, (l :any) => l.toUpperCase())   } Products
+                                  </h1> 
+                              </div> </> : ' '  }
+                                  <div  className="static  z-10 top-10 w-full">{data && 
+                                  // <ShopProductFeed shopId={data.id} />
+                                  <Feed shopId={data.id}/>
+                                  }</div>
                         </div> 
 
 

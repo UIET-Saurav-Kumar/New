@@ -3,9 +3,39 @@ import Slider from "react-slick";
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from "next/router";
+import { useLocation } from "@contexts/location/location.context";
 
 export default function ImageSlider() {
-  
+
+  const router = useRouter();
+  const { query } = useRouter();
+  const {getLocation} =useLocation();
+
+  const address =   getLocation?.formattedAddress || "chandigarh";
+
+  function location(){
+    return address?.includes('Mohali') || address?.includes('Chandigarh') || address.includes('Panchkula') ;
+}
+
+
+    function getLink(category:String){
+
+      var pathname="/"+router.locale+"/shops?category="+category.replace("&","-");
+      
+
+      return pathname;
+      
+    }
+
+    function getLinkGrocery(){
+
+      var pathname="/shops/chandigarhgrocerystore";
+      
+      return pathname;
+      
+    }
+
     var settings = {
 
       dots: true,
@@ -43,6 +73,18 @@ export default function ImageSlider() {
       <div className='mx-1'>
       
       <Slider {...settings}>
+
+
+          <div className=' cursor-pointer card  relative w-full h-40 lg:h-72 xl+:h-80 2xl:h-72 md:h-64'>
+
+          <Link  
+						 href={ location() ?  getLinkGrocery() : getLink('groceries')}><Image  layout='fill' objectFit='fill'
+            //  className='rounded-md w-full opacity-90  h-40 lg:w-full lg:h-72 xl+:h-80 md:h-64  2xl:h-72 2xl:w-full space-x-9 object-fill object '  
+                  src={'/banner/online-grocery-web.jpg'} 
+                  /></Link>
+
+          </div>
+
 
         
             <div className="cursor-pointer flex card  relative w-full h-40 lg:h-72 xl+:h-80 2xl:h-72 md:h-64 ">

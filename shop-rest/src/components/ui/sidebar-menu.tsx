@@ -34,6 +34,8 @@ export function SidebarMenuItem({ className, item, depth = 0 }: any) {
   function toggleCollapse() {
     setOpen((prevValue) => !prevValue);
   }
+
+  // console.log(' product item', item)
   
 
   const { closeModal } = useModalAction();
@@ -102,23 +104,19 @@ export function SidebarMenuItem({ className, item, depth = 0 }: any) {
           <button
             className={cn(
               "grid grid-cols-1  whitespace-normal items-center  py-1 text-start outline-none text-body-dark font-semibold  focus:outline-none focus:ring-0 focus:text-accent",
-              isOpen ? "text-accent  transition duration-800 ease-in-out" : "text-body-dark",
+              isOpen ? "text-accent bg-pink-100 transition duration-800 ease-in-out" : "text-body-dark",
               className ? className : "text-sm"
             )}
           >
           <div className='relative py-2 flex flex-col mx-auto h-auto  w-auto sm:w-20  px-2  place-items-center lg:grid-cols-2   lg:w-28  items-center'>
-                {icon && (
+                {item.image && (
                   <span className="flex  text-center  w-full items-center justify-center">
-                    {getIcon({
-                      iconList: CategoryIcons,
-                      iconName: icon,
-                      className: " w-6 h-6 lg:h-8 lg:w-8",
-                    })}
+                    <img src={item.image.original} className='w-16 h-16 rounded-full object-contain' />
                   </span>
                 )}
                 <div className="flex px-auto items-center">
-                  <span className='text-xs w-auto whitespace-normal lg:whitespace-nowrap text-center'>{name}</span>
-                  <span className="block lg:hidden text-center ">{expandIcon}</span>
+                  <span className='text-10px w-auto whitespace-wrap lg:whitespace-nowrap text-center'>{name}</span>
+                  {/* <span className="block lg:hidden text-center ">{expandIcon}</span> */}
                 </div>
           </div>
 
@@ -127,10 +125,10 @@ export function SidebarMenuItem({ className, item, depth = 0 }: any) {
 
       </div>
 
-    <div style={{zIndex:1000000}} className="text-lg">
+    {/* <div style={{zIndex:1000000}} className="text-lg">
       <AnimatePresence initial={false}>
         {Array.isArray(items) && isOpen ? (
-          <li className='  z-100' style={{zIndex: 100000}}>
+          <li className='  z-50' style={{zIndex: 100000}}>
             <motion.ul
               key="content"
               initial="collapsed"
@@ -161,7 +159,7 @@ export function SidebarMenuItem({ className, item, depth = 0 }: any) {
           </li>
         ) : null}
        </AnimatePresence>
-      </div>
+      </div> */}
     </>
   );
 }
@@ -186,7 +184,7 @@ function SidebarMenu({ items, className }: any) {
 
       {/* mobile */}
       <ul className='flex flex-col lg:hidden justify-between 
-                      w-full items-start'>
+                      overflow-x-hidden  mb-24'>
       {/* <ul className={cn("text-xs", className)}> */}
         {items?.map((item: any) => (
         <a> 

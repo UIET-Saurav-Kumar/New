@@ -114,6 +114,12 @@ module.exports = {
         heading: ["Open Sans", "system-ui", "sans-serif"],
       },
       fontSize: {
+        
+        '5px': '0.313rem',
+        '6px': '0.375rem',
+        '7px': '0.438rem',
+        '8px': '0.5rem',
+        '9px': '0.563rem',
         "10px": "0.625rem",
       },
 
@@ -255,5 +261,8 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-rtl")],
+  plugins: [require("tailwindcss-rtl"),
+            require('tailwind-scrollbar-hide')
+          ],
+  
 };

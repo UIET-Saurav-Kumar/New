@@ -66,7 +66,7 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
     >
        <Link href={`${ROUTES.PRODUCT}/${slug}`}>
       <div
-        className="relative flex items-center justify-center cursor-pointer w-auto h-48 p-4 xl:p-12 sm:h-64"
+        className="relative flex items-center justify-center cursor-pointer w-auto h-20 lg:h-48 p-4 xl:p-12 sm:h-64"
       >
         <span className="sr-only">{t("text-product-image")}</span>
         

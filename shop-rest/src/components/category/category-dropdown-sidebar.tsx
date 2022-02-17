@@ -67,9 +67,12 @@ const CategoryDropdownSidebar = () => {
     {/* web */}
     
     <aside className="hidden lg:block items-center justify-center h-full   bg-light">
-      <div className="max-h-full flex max-w-full ">
+      <div className="max-h-full flex max-w-full">
       <button onClick={allCategories} className={` ${query.category == ''  ? 'text-magenta' : 'text-gray-600'} text-sm sticky bg-white  ml-0 lg:px-4 top-0 z-40 focus:text-magenta justify-center  flex flex-col font-semibold `}>
-              <img src='/categories.png' className='  w-2 h-2 lg:w-6 tracking-widest lg:h-6 mr-2'/> ALL
+              <img 
+              src='/categories.png'
+              // src='/categories.png'
+               className='  w-2 h-2 lg:w-6 tracking-widest lg:h-6 mr-2'/> ALL
               </button>
         {/* <Scrollbar className="w-full h-full max-h-screen"> */}
         {data?.categories?.data?.length ? (
@@ -86,24 +89,27 @@ const CategoryDropdownSidebar = () => {
 
 
     {/* Mobile */}
-    <div className='lg:hidden w-20 sm:w-full  relative flex'> 
+    <div className='lg:hidden w-16 sm:w-full  relative flex'> 
     {/* <div className='flex  h-screen top-14 sticky flex-col w-20'>    */}
-      <div className=" h-screen top-0 sticky flex-col flex overflow-y-scroll justify-between  space-y-8 text-center">
-        <Scrollbar className="w-full h-full max-h-screen">
+      <div className=" h-screen top-0 sticky flex-col flex overflow-y-scroll scrollbar-hide justify-between  space-y-8 text-center">
+        {/* <Scrollbar className="w-full h-full max-h-screen"> */}
       
           {data?.categories?.data?.length ? (
             <div className="">
               <button onClick={allCategories} className={` ${query.category == ''  ? 'text-magenta' : 'text-gray-600'} text-sm focus:text-magenta font-semibold `}>
-              <img src='/categories.png' className='w-8 tracking-widest  h-8 ' /> ALL
+              <img
+              src='/categories.png'
+              //  src='/grocery-all.png' 
+               className='w-5 tracking-widest  h-5 object-contain ' /> ALL
               </button>
-              <SidebarMenu items={data?.categories?.data} className="whitespace-nowrap  py-8" />
+              <SidebarMenu items={data?.categories?.data} className="whitespace-nowrap w-full  py-8" />
             </div>
           ) : (
             ''
             // <div className="min-h-full pt-6 pb-8 px-9 lg:p-8">
             // </div>
           )}   
-        </Scrollbar>
+        {/* </Scrollbar> */}
       </div>
     </div>
       {/* </div> */}

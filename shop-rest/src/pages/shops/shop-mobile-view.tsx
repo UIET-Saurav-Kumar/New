@@ -62,9 +62,10 @@ export default function ShopMobileView({data}: any) {
 
             <div className='px-2 w-full grid grid-cols-1 sm:flex'>
 
-                <div className='hidden sm:block w-48 h-38 sm:h-72 sm:w-80 md:h-72 lg:w-96'> 
+            { data.slug !== 'chandigarhgrocerystore' ? 
+                (   <div className='hidden sm:block w-48 h-38 sm:h-72 sm:w-80 md:h-72 lg:w-96'> 
                     <ShopProfileCard data={data} /> 
-                </div>
+                </div>) : null }
                 
                 <div className='w-full flex-grow'>
                    <img alt={t("heading")} 
@@ -73,13 +74,18 @@ export default function ShopMobileView({data}: any) {
                    />
                 </div>
 
-                <div className='block sm:hidden'> 
+                { data.slug !== 'chandigarhgrocerystore' ? 
+                ( <div className='block sm:hidden'> 
                     <ShopProfileCard data={data}/> 
-                </div>
+                </div>) : null }
                 
             </div>
 
-            <div className="px-2"><ShopDescription data={data}/></div>
+            { data.slug !== 'chandigarhgrocerystore' ? 
+             (<div className="px-2"><ShopDescription data={data}/>
+             </div>)
+                : null
+            }
 
             {/* <div className=' flex flex-col p-3 border bg-white rounded-lg mt-4 w-full text-left'>
                 <span className="text-lg text-heading font-semibold mb-2">
@@ -95,11 +101,11 @@ export default function ShopMobileView({data}: any) {
             </div>   */}
 
             <div className='px-2'>
-                <WebShopBanner/>
+                {/* <WebShopBanner/> */}
                 {/* <ShopBanner/> */}
             </div>
 
-            <div className='px-2 flex'><OfferCards/></div>
+            {/* <div className='px-2 flex'><OfferCards/></div> */}
 
               {/* <div className='mt-6 sm:mt-6 border '> <PaymentForm /></div>   */}
               
