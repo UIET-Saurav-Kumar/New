@@ -169,7 +169,7 @@ class OrderRepository extends BaseRepository
                     $phone_number=$this->clearStr($order->customer_contact);
                     SMS::customerPurchase($phone_number,$customer->name,$shop->name);
 
-                    enable msg to vendor
+                   
                     if(isset($shop)){
                         $user=$shop->owner;
                         if($user){
