@@ -85,7 +85,8 @@ class SMS
     }
 
     
-   public static function purchaseToVendor($phone_number,$username)
+  
+    public static function purchaseToVendor($phone_number,$username)
     {
         if(!$phone_number){
             return;
@@ -96,7 +97,7 @@ class SMS
         $client = new Client();
         
         $template="PurchaseToVendor";
-        $url = "https://2factor.in/API/R1/?module=TRANS_SMS&apikey=$key&to=9056147024&from=LOWCAL&templatename=$template&var1=$username&var2=$username";
+        $url = "https://2factor.in/API/R1/?module=TRANS_SMS&apikey=$key&to=$phone_number&from=LOWCAL&templatename=$template&var1=$username&var2=$username";
 
         $response = $client->request('GET', "$url");
 
@@ -106,6 +107,7 @@ class SMS
             //dd('not sent');
         }
     }
+
 
 
     public static function orderStatusChanged($phone_number,$username,$order_tracking_number,$status)
