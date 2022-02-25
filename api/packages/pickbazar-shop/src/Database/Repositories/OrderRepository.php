@@ -160,7 +160,7 @@ class OrderRepository extends BaseRepository
 
     }
 
-    private function sendSMS($order){
+   private function sendSMS($order){
         try{
             if($order){
                 if($order->shop_id){
