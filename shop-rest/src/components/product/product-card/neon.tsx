@@ -113,9 +113,9 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
         {/* End of product price */}
 
         <h3
-          className="text-xs md:text-sm font-semibold text-gray-700 truncate mb-4 cursor-pointer"
+          className="text-12px font-semibold md:text-sm flex flex-wrap  text-gray-700  truncate mb-4 cursor-pointer"
         >
-           <div className='flex flex-col'>{name}<h3>{unit}</h3></div>
+           <div className='flex flex-wrap flex-col'>{name}<h3>{unit}</h3></div>
         </h3>
         {/* End of product title */}
         {product_type.toLowerCase() === 'variable' ? (

@@ -34,8 +34,8 @@ import { fetchShopSeo } from "@data/shop/use-shop.query";
 import Feed from "@components/product/feed";
 import { useEffect } from "react";
 import { scroller, Element } from "react-scroll";
-
-
+import { HidingHeader } from 'hiding-header-react'
+import { useState } from "react";
 
 const CartCounterButton = dynamic(
   () => import("@components/cart/cart-counter-button"),
@@ -68,7 +68,11 @@ const ShopPage = ({ data }: any) => {
   //   }
   // }, [query.text, query.category]);
 
+  const [pageURL, setPageUrl] = useState('');
 
+  useEffect(() => {
+    setPageUrl(window.location.href)
+  }, []);
   
   const { t } = useTranslation("common") ;
   const { width } = useWindowSize() ;
@@ -85,7 +89,7 @@ const ShopPage = ({ data }: any) => {
 
   // useeffect  window.scrollTo(0, 1000)
   useEffect(() => {
-     data.slug !== 'chandigarhgrocerystore' ? window.scrollTo(0, 670) : window.scrollTo(0, 0)
+    pageURL.includes('chandigarhgrocerystore') ? window.scrollTo(0, 670) : window.scrollTo(0, 0)
   }, []);
 
 
@@ -121,15 +125,15 @@ const ShopPage = ({ data }: any) => {
     <>
 
           <div className="bg-white lg:bg-gray-100 hidden lg:flex flex-col md:flex-row md:justify-between  
-                            md:items-start md:p-8" >
+                            md:items-start " >
 
-                    <div className='hidden  p-3 lg:flex w-full flex-col '>
+                    <div className='flex w-full lg:flex flex-col'>
 
                       {/* <div className="hidden lg:space-x-5 xl:space-x-10  lg:flex justify-between "> */}
 
                           
 
-                          <div className='flex flex-col overflow-y-scroll space-y-4  w-full'>  
+                          <div className=' hidden lg:flex flex-col overflow-y-scroll space-y-4  w-full'>  
 
                               <div className='flex w-full h-80 border'> 
 
@@ -145,38 +149,67 @@ const ShopPage = ({ data }: any) => {
                    
                               </div>
                             
-                           
-                          { data.slug !== 'chandigarhgrocerystore' ? 
-                          ( <div className='flex w-full'> 
-                                <WebShopBanner/>
-                            </div>)
-                            : null
-                          }
+{/*                                 
+                                { data.slug !== 'chandigarhgrocerystore' ? 
+                                ( <div className='flex w-full'> 
+                                      <WebShopBanner/>
+                                  </div>)
+                                  : null
+                                } */}
 
-                            { data.slug !== 'chandigarhgrocerystore' ? 
-                            //  (<div className='w-full mt-7'> 
-                                (<ShopDescription data = {data}/>
-                              // </div>
-                              )
-                            : null
-                            }
+                                  { data.slug !== 'chandigarhgrocerystore' ? 
+                                  //  (<div className='w-full mt-7'> 
+                                      (<ShopDescription data = {data}/>
+                                    // </div>
+                                    )
+                                  : null
+                                  }
 
-                              {/* <OfferCards/> */}
-
+                                    {/* <OfferCards/> */}
                           </div>
+
+                           <div className='lg:hidden px-2  w-full grid grid-cols-1 sm:flex'>
+
+                                      { data.slug !== 'chandigarhgrocerystore' ? 
+                                          (   <div className='hidden sm:block w-48 h-38 sm:h-72 sm:w-80 md:h-72 lg:w-96'> 
+                                              <ShopProfileCard data={data} /> 
+                                          </div>) : null }
+                                          
+                                          <div className='w-full flex-grow'>
+                                            <img alt={t("heading")} 
+                                                  className='object-cover h-38 sm:h-72 rounded-lg xs+++:rounded-l-none md:h-72 lg:w-2/3 w-full'
+                                                  src={data?.cover_image?.original! ?? "/product-placeholder.svg"}
+                                            />
+                                          </div>
+
+                                          { data.slug !== 'chandigarhgrocerystore' ? 
+                                          ( <div className='block sm:hidden'> 
+                                              <ShopProfileCard data={data}/> 
+                                          </div> ) : null }
+                                          
+                            </div>
 
                           { data.slug == 'chandigarhgrocerystore' ? (  <div className="w-full -mt-80 object-contain">
                                     <img src='/grocery-web.jpg' className="object-contain" />
                           </div> ) : null }
 
-                          <div className='  relative top-0 flex flex-col  '> 
+                          <HidingHeader>
+                                                                               
+                              <CategoryDropdownSidebar data={data}/>
+                                         
+                          </HidingHeader> 
+
+                          <div className='relative top-0 flex flex-col'> 
                               {categoryData?.categories?.data?.length ? 
                               <> 
-                              <div style={{top:'85px'}} className='flex z-50 sticky mt-5 border bg-white   flex-col w-full'>  
+                              <div id='category-dropdown-sidebar'  
+                                   className='flex border bg-white  flex-col w-full'>  
+                              {/* <CategoryDropdownSidebar/> */}
 
-                                        <CategoryDropdownSidebar/>
+                                        {/* <CategoryDropdownSidebar/> */}
 
-                                  <h1 style={{top:'155px'}} id='product-heading' className="text-lg sticky border-t bg-white  py-3 px-2 z-50 font-semibold text-gray-600 font-mono mt-5 transition-transform duration-75">  
+                                        
+                                  <h1 style={{top:'155px'}} id='product-heading' className="text-lg sticky  bg-gray-100  py-3 px-2  font-semibold text-gray-600 font-mono mt-5 transition-transform duration-75">  
                                     { query?.category?.replace(/\b\w/g, (l :any) => l.toUpperCase())   } Products
                                   </h1> 
                               </div> </> : ' '  }
@@ -184,7 +217,7 @@ const ShopPage = ({ data }: any) => {
                                   // <ShopProductFeed shopId={data.id} />
                                   <Feed shopId={data.id}/>
                                   }</div>
-                        </div> 
+                           </div> 
 
 
                        {/* </div> */}

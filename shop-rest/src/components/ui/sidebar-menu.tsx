@@ -10,10 +10,12 @@ import { useUI } from "@contexts/ui.context";
 import { useEffect, useState } from "react";
 import { useModalAction, useModalState } from "./modal/modal.context";
 import { useCategoriesQuery } from "@data/category/use-categories.query";
-
+import { useWindowDimensions } from "@components/common/search";
 
 
 export function SidebarMenuItem({ className, item, depth = 0 }: any) {
+
+   const { height, width } = useWindowDimensions();
 
   const router = useRouter();
   
@@ -24,10 +26,15 @@ export function SidebarMenuItem({ className, item, depth = 0 }: any) {
     item?.children?.some((_item: any) => _item.slug === active);
 
   const [isOpen, setOpen] = useState<boolean>(isActive);
+  const [pageURL, setPageUrl] = useState('');
 
   useEffect(() => {
     setOpen(isActive);
+    setPageUrl(window.location.href)
   }, [isActive]);
+
+
+  console.log('url',pageURL)
 
   
   const { pathname, query } = router;
@@ -64,8 +71,14 @@ export function SidebarMenuItem({ className, item, depth = 0 }: any) {
     const navigate = () =>
     // setOpen(false);
    displaySidebar && closeSidebar();
-   { categoryData?.slug !== 'chandigarhgrocerystore' ?   window.scrollTo(0, 670) :
-   window.scrollTo(0, 0)};
+
+   { width < 976 ?
+    ( pageURL.includes('chandigarhgrocerystore') ?   window.scrollTo(0, 200) :
+     window.scrollTo(0, 670) ) : 
+     ( pageURL.includes('chandigarhgrocerystore') ?   window.scrollTo(0, 600) :
+     window.scrollTo(0, 0) )
+
+};
     
       router.push(
         {
@@ -104,6 +117,8 @@ export function SidebarMenuItem({ className, item, depth = 0 }: any) {
       );
     }
 
+    
+
     console.log('sidebar menu data', categoryData)
 
   return (
@@ -114,40 +129,41 @@ export function SidebarMenuItem({ className, item, depth = 0 }: any) {
         // initial={false}
         // animate={{ backgroundColor: "black" }}/
         onClick={onClick}
-        className="flex lg:grid lg:grid-cols-1 items-center  lg:w-16 relative top-0"
+        className="grid grid-cols-1 items-center w-auto relative"
       >
         
         {/* <div className='flex items-center justify-between'> */}
           <button
-            className={cn(
-              "grid grid-cols-1  whitespace-normal items-center  py-1 text-start outline-none text-body-dark font-semibold  focus:outline-none focus:ring-0 focus:text-accent",
-              isOpen ? "text-accent bg-pink-100 lg:bg-gray-50 transition duration-800 ease-in-out" : "text-body-dark",
-              className ? className : "text-sm"
-            )}
-          >
-          <div className='relative py-2 flex flex-col mx-auto h-auto  w-auto sm:w-20  px-2  place-items-center lg:grid-cols-2   lg:w-28  items-center'>
-                {    item?.image.id ? (
-                  <span className="flex  text-center  w-full items-center justify-center">
-                    <img src={item?.image?.original} className='w-16 h-16 rounded-full object-contain' />
-                  </span>
-                ) :
-                  <span className="flex  text-center  w-full items-center justify-center">
-                    {getIcon({
-                      iconList: CategoryIcons,
-                      iconName: icon,
-                      className: " w-6 h-6 lg:h-8 lg:w-8",
-                    })}
-                  </span>
-                }
+              className={cn(
+                "grid grid-cols-1  whitespace-normal items-center  py-1 text-start outline-none text-body-dark font-semibold  focus:outline-none focus:ring-0 focus:text-accent",
+                isOpen ? "text-accent  lg:bg-gray-50 transition duration-800 ease-in-out" : "text-body-dark",
+                className ? className : "text-sm"
+              )}
+            >
+            <div className='relative py-2 flex flex-col mx-auto h-auto  w-auto   px-2  place-items-center lg:grid-cols-2    items-center'>
+                  { item?.image.id ? (
+                    <span className="flex  text-center w-auto h-auto items-center justify-center">
+                      <img src={item?.image?.original} className={` ${pageURL.includes('kosmetics-india') ? 'object-contain' : 'h-16 w-16 object-contain rounded-full'}  `} />
+                    </span>
+                  ) :
+                    <span className="flex  text-center  w-full items-center justify-center">
+                      {getIcon({
+                        iconList: CategoryIcons,
+                        iconName: icon,
+                        className: " w-6 h-6 lg:h-8 lg:w-8",
+                      })}
+                    </span>
+                  }
+                  
+                  <div className="flex px-auto items-center">
+                    <span className='text-10px lg:text-sm w-auto whitespace-wrap lg:whitespace-nowrap text-center'>
+                      { pageURL.includes('kosmetics-india')   ?  null : name }
+                    </span>
+                    {/* <span className="block lg:hidden text-center ">{expandIcon}</span> */}
+                  </div>
+            </div>
 
-                
-                <div className="flex px-auto items-center">
-                  <span className='text-10px lg:text-sm w-auto whitespace-wrap lg:whitespace-nowrap text-center'>{name}</span>
-                  {/* <span className="block lg:hidden text-center ">{expandIcon}</span> */}
-                </div>
-          </div>
-
-        </button>
+          </button>
         {/* </div> */}
 
       </div>
@@ -207,6 +223,7 @@ function SidebarMenu({ items, className }: any) {
            <SidebarMenuItem key={`${item.name}${item.slug}`} item={item} />
           </a>
         ))}
+        
       </ul>
 
       {/* mobile */}
@@ -218,6 +235,7 @@ function SidebarMenu({ items, className }: any) {
         <SidebarMenuItem key={`${item.name}${item.slug}`} item={item} />
         </a> 
         ))}
+
       </ul>
     </>
   );

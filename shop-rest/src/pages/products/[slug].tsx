@@ -57,9 +57,11 @@ export default function ProductSinglePage({ product }: any) {
   return (
     <>
       <div className="bg-light min-h-screen">
+
         <ProductDetails product={product} />
 
         {product?.related_products?.length > 1 && (
+          
           <div className="p-5 lg:p-14 xl:p-16">
             <RelatedProducts
               products={product?.related_products}

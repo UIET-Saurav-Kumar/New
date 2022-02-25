@@ -19,6 +19,9 @@ import { useRouter } from "next/router";
 import CategoryDropdownSidebar from "@components/category/category-dropdown-sidebar";
 import Feed from "@components/product/feed";
 import { useEffect } from "react";
+import { HidingHeader } from "hiding-header-react";
+import Layout from "@components/layout/layout";
+
 
 
 export default function ShopMobileView({data}: any) {
@@ -110,30 +113,68 @@ export default function ShopMobileView({data}: any) {
                 {/* <ShopBanner/> */}
             </div>
 
-            { data.slug !== 'chandigarhgrocerystore' ? 
+            {/* { data.slug !== 'chandigarhgrocerystore' ? 
                           ( <div className='flex w-full'> 
                                 <WebShopBanner/>
                             </div>)
                             : null
-                          }
+                          } */}
 
             {/* <div className='px-2 flex'><OfferCards/></div> */}
 
               {/* <div className='mt-6 sm:mt-6 border '> <PaymentForm /></div>   */}
+          { categoryData?.slug === 'Kosmetics-india'   ?   
+             
+                <>  <HidingHeader>
+                                                                                                    
+                        <CategoryDropdownSidebar/>
+                                  
+                    </HidingHeader>
               
-               <div className='relative mt-2 flex '> 
-                    <div className='flex  border bg-white h-screen top-14 sticky  flex-col w-auto'>   
-                                <CategoryDropdownSidebar />
-                              
-                    </div>   
-                 <div className="flex flex-col w-5/6">
-                 <h1 id='category-heading' style={{top:'56px'}} id='product-heading' 
-                 className=" sticky border-t bg-white  py-3 px-2 z-50 font-semibold text-gray-600 font-mono  text-sm sm:text-lg transition-transform duration-75">  
-                                { query?.category?.replace(/\b\w/g, (l :any) => l.toUpperCase())   } Products
-                              </h1>
-                   {data && <Feed shopId={data.id} />}
-                   </div>
-               </div> 
+             <div className='relative mt-2 flex flex-col'> 
+                                
+                       <div className='relative top-0 flex flex-col'> 
+                              {categoryData?.categories?.data?.length ? 
+                              <> 
+                              <div id='category-dropdown-sidebar'  
+                                   className='flex border bg-white  flex-col w-full'>  
+                              {/* <CategoryDropdownSidebar/> */}
+
+                                        {/* <CategoryDropdownSidebar/> */}
+
+                                        
+                                  <h1 style={{top:'155px'}} id='product-heading' className="text-lg sticky  bg-gray-100  py-3 px-2  font-semibold text-gray-600 font-mono mt-5 transition-transform duration-75">  
+                                    { query?.category?.replace(/\b\w/g, (l :any) => l.toUpperCase())   } Products
+                                  </h1> 
+                              </div> </> : ' '  }
+                                  <div  className="static  z-10 top-10 w-full">{data && 
+                                  // <ShopProductFeed shopId={data.id} />
+                                  <Feed shopId={data.id}/>
+                                  }</div>
+                        </div>
+
+               </div>
+
+               </>  :
+                <div className='relative mt-2 flex'> 
+                <div className='flex  border bg-white h-screen top-14 sticky  flex-col w-auto'>   
+                            <CategoryDropdownSidebar />
+                          
+                </div>   
+             <div className="flex flex-col w-5/6">
+             <h1 id='category-heading' style={{top:'56px'}} id='product-heading' 
+             className=" sticky border-t bg-white  py-3 px-2 z-50 font-semibold text-gray-600 font-mono  text-sm sm:text-lg transition-transform duration-75">  
+                            { query?.category?.replace(/\b\w/g, (l :any) => l.toUpperCase())   } Products
+                          </h1>
+               {data && <Feed shopId={data.id} />}
+               </div>
+           </div> 
+
+
+               }
+
+
+               
 
 
             {/* menu button */}
@@ -158,3 +199,5 @@ export default function ShopMobileView({data}: any) {
         </>
     )
 }
+
+ShopMobileView.Layout = Layout;

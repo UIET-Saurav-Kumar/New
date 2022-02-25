@@ -1,14 +1,52 @@
+
 import SearchBox from "@components/ui/search-box";
 import { useSearch } from "@contexts/search.context";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
+import { useCategoriesQuery } from "@data/category/use-categories.query";
+import { useEffect, useState } from "react";
+
 
 interface Props {
   label: string;
   [key: string]: unknown;
 }
 
+function getWindowDimensions() {
+  // window is not defined
+  if (typeof window === "undefined") {
+    return {
+      width: 0,
+      height: 0,
+    };
+  }
+  const { innerWidth: width, innerHeight: height } = window   ;
+  return {
+    width,
+    height
+  };
+}
+
+export  function useWindowDimensions() {
+  const [windowDimensions, setWindowDimensions] = useState(
+    getWindowDimensions()
+  );
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowDimensions(getWindowDimensions());
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return windowDimensions;
+}
+
 const Search: React.FC<Props> = ({ label, ...props }) => {
+
+  const { height, width } = useWindowDimensions();
 
   const { t } = useTranslation();
   const router = useRouter();
@@ -19,6 +57,8 @@ const Search: React.FC<Props> = ({ label, ...props }) => {
     updateSearchTerm(value);
   };
 
+  const { pathname, query } = router;
+
   //allow suggestions while typing
   const handleOnKeyDown = (e: any) => {
     if (e.key === "Enter") {
@@ -26,6 +66,25 @@ const Search: React.FC<Props> = ({ label, ...props }) => {
       router.push(`/search?q=${searchTerm}`);
     }
   };
+
+
+  const {
+    data : categoryData,
+    isLoading: loading,
+    error,
+  } = useCategoriesQuery({
+    type: query.slug as string,
+  });
+
+  const [pageURL, setPageUrl] = useState('');
+
+
+
+  useEffect(() => {
+    setPageUrl(window.location.href)
+  }, []);
+
+  
 
 
   const onSearch = (e: any) => {
@@ -42,7 +101,13 @@ const Search: React.FC<Props> = ({ label, ...props }) => {
     //   });
     // }
 
-    window.scrollTo(0, 1110);
+    { width < 976 ?
+      ( pageURL.includes('chandigarhgrocerystore') ?   window.scrollTo(0, 200) :
+       window.scrollTo(0, 670) ) : 
+       ( pageURL.includes('chandigarhgrocerystore') ?   window.scrollTo(0, 600) :
+       window.scrollTo(0, 0) )
+  
+  };
 
     router.push(
       {
@@ -66,16 +131,21 @@ const Search: React.FC<Props> = ({ label, ...props }) => {
     
     const { pathname, query } = router;
     const { type, text, ...rest } = query;
-    // scroll down to product feed
-    // window.scrollTo(0, 1000);
 
-    // window.scrollTo(1000, 0);
+
+ 
+    { width < 976 ?
+      ( pageURL.includes('chandigarhgrocerystore') ?   window.scrollTo(0, 200) :
+       window.scrollTo(0, 670) ) : 
+       ( pageURL.includes('chandigarhgrocerystore') ?   window.scrollTo(0, 600) :
+       window.scrollTo(0, 0) )
+  
+  };
 
     console.log('pathname',pathname);
     console.log('query',query);
 
     if (text) {
-      query.category == null ?  window.scrollTo(0, 1000) : window.scrollTo(0, 1110);
       router.push(
         {
           query: { ...rest, category: null },
@@ -95,6 +165,8 @@ const Search: React.FC<Props> = ({ label, ...props }) => {
       );
     }
   }
+
+  console.log('width',width);
 
   return (
 

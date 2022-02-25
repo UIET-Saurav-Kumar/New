@@ -159,6 +159,7 @@ class UserController extends CoreController
         if (isset($request->permission)) {
             $permissions[] = isset($request->permission->value) ? $request->permission->value : $request->permission;
         }
+
         $country_code = '+91';
         $phone_number = $country_code.$request->phone_number;
         $code=SMS::sendOTP($phone_number);
@@ -335,6 +336,7 @@ class UserController extends CoreController
         //     return ['message' => 'PICKBAZAR_MESSAGE.SOMETHING_WENT_WRONG', 'success' => false];
         // }
     }
+
     private function getStars($size){
         $stars="";
         for($i=0;$i<$size;$i++){
@@ -343,6 +345,7 @@ class UserController extends CoreController
 
         return $stars;
     }
+    
     public function verifyForgetPasswordToken(Request $request)
     {
 

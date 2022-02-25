@@ -1,3 +1,4 @@
+
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
@@ -9,6 +10,7 @@ import { useProductsQuery } from "@data/product/use-products.query";
 import { Fragment, useRef } from "react";
 import { useTranslation } from "next-i18next";
 import useIntersectionObserver from "./useIntersectionObserver";
+import RelatedProducts from "./product-details/related-products";
 
 
 const ProductFeedLoader = dynamic(
@@ -22,7 +24,6 @@ const Feed = ({ shopId }: { shopId: string }) => {
 
   const loadMoreRef = useRef()
 
-  
 
   const {
     isFetching: loading,
@@ -61,9 +62,6 @@ const Feed = ({ shopId }: { shopId: string }) => {
         <img src='/not-found.png'
         className="object-contain mx-auto"/>
 
-        
-
-
       </div>
     );
   }
@@ -78,29 +76,36 @@ const Feed = ({ shopId }: { shopId: string }) => {
           <>
             {data?.pages.map((products, _idx) => (
               <Fragment key={_idx}>
-                {products?.data?.map((product) => (
+                {products.data.filter(product => product?.status === 'publish').map(product => (
                   <motion.div key={product.id}>
                     {renderProductCard(product)}
                   </motion.div>
                 ))}
+                
               </Fragment>
             ))}
           </>
         )}
+
+        
       </div>
+
+      {/* <RelatedProducts products={products}/> */}
       
-      <div ref={loadMoreRef} className={`${!hasNextPage ? "hidden" : ""}`}>
-              {
-                (isFetchingNextPage)
-                &&
-                (
-                  <>
-                    {/* <span>Loading </span> */}
-                    <img src="/preloader/cir.gif" className="w-full mt-10 mx-auto" style={{width:"30px",height:"30px"}}/>
-                  </>
-                ) 
-              }
-      </div>
+          <div ref={loadMoreRef} className={`${!hasNextPage ? "hidden" : ""}`}>
+                  {
+                    (isFetchingNextPage)
+                    &&
+                    (
+                      <>
+                        {/* <span>Loading </span> */}
+                        <img src="/preloader/cir.gif" 
+                            className="w-full mt-10 mx-auto" 
+                            style={{width:"30px",height:"30px"}}/>
+                      </>
+                    ) 
+                  }
+          </div>
     </div>
   );
 };

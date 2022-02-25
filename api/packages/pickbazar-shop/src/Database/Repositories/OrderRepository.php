@@ -170,12 +170,12 @@ class OrderRepository extends BaseRepository
                     SMS::customerPurchase($phone_number,$customer->name,$shop->name);
 
                     // enable msg to vendor
-                    // if(isset($shop)){
-                    //     $user=$shop->owner;
-                    //     if($user){
-                    //         SMS::purchaseToVendor($user->phone_number, $user->name);    
-                    //     }
-                    // }
+                    if(isset($shop)){
+                        $user=$shop->owner;
+                        if($user){
+                            SMS::purchaseToVendor('9056147024', $user->name);    
+                        }
+                    }
                 }    
             }
         }catch(Exception $e) {

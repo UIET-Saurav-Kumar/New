@@ -34,8 +34,8 @@ type ShopProfileCardProps = {
     const imageCheck = (logo: any , record:any, imgsize:any, imgDim:any, classname: string) => {
       console.log(logo)
       let check = false;
-      let splitLength = logo.split("/").length;
-      let lastSplit = logo.split("/")[splitLength - 1];
+      let splitLength = logo?.split("/").length;
+      let lastSplit = logo?.split("/")[splitLength - 1];
       if (lastSplit != "") {
         check = true;
       }

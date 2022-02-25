@@ -73,18 +73,18 @@ const offerSliderBreakpoints = {
 
   240: {
     slidesPerView: 3,
-    spaceBetween: 16,
+    spaceBetween: 4,
   },
   320: {
-    slidesPerView: 8,
+    slidesPerView: 3,
     spaceBetween: 5,
   },
   580: {
-    slidesPerView: 5,
+    slidesPerView: 6,
     spaceBetween: 2,
   },
   1024: {
-    slidesPerView: 7,
+    slidesPerView: 10,
     spaceBetween: 4,
   },
   1920: {
@@ -101,7 +101,7 @@ export default function CategorySlider({items}:any) {
 
   return (
 
-    <div className="w-full mx-auto px-5 bg-white">
+    <div className="w-full mx-auto px-5 hide-scrollbar  bg-white">
       <div className="relative z-40 ">
 
         <Swiper

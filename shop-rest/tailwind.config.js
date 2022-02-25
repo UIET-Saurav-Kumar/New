@@ -98,21 +98,23 @@ module.exports = {
               light: 300,  
               normal: 400,   
               medium: 500,  
-              'md': 550,
+              'md': 450,
                 semibold: 600,  
                 bold: 700,    
               extrabold: 800,  
-              'extra-bold': 800,    
+              'extra-bold': 900,    
                 black: 900,
               },
 
       zIndex: {
         "-1": "-1",
       },
+
       fontFamily: {
         body: ["Open Sans", "system-ui", "sans-serif"],
         heading: ["Open Sans", "system-ui", "sans-serif"],
       },
+      
       fontSize: {
         
         '5px': '0.313rem',
@@ -121,6 +123,12 @@ module.exports = {
         '8px': '0.5rem',
         '9px': '0.563rem',
         "10px": "0.625rem",
+        "11px": "0.688rem",
+        "12px": "0.75rem",
+        "13px": "0.813rem",
+        "14px": "0.875rem",
+        "15px": "0.938rem",
+        
       },
 
       backgroundImage: {
