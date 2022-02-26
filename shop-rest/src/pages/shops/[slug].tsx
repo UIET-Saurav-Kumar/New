@@ -94,6 +94,10 @@ const ShopPage = ({ data }: any) => {
     pageURL.includes('chandigarhgrocerystore') ? window.scrollTo(0, 670) : window.scrollTo(0, 0)
   }, []);
 
+  // var ProductFeed = document.getElementById("product-feed");
+
+  // console.log('offset value', ProductFeed?.offsetTop)
+
 
   const {
     data : categoryData,
@@ -117,7 +121,11 @@ const ShopPage = ({ data }: any) => {
   };
 
   console.log('shop data',data)
+
+  console.log('shop slug is', data?.slug?.includes('chandigarhgrocerystore' ,'kosmetics-india'))
   seoFunction(data);
+
+  const slug = ['chandigarhgrocerystore', 'kosmetics-india'];
   
 
   return (
@@ -131,22 +139,22 @@ const ShopPage = ({ data }: any) => {
 
                       {/* <div className="hidden lg:space-x-5 xl:space-x-10  lg:flex justify-between "> */}
 
-                          <div className=' hidden lg:flex flex-col overflow-y-scroll space-y-4  w-full'>  
+                          <div className = 'hidden lg:flex flex-col overflow-y-scroll space-y-4  w-full'>  
 
                               <div className='flex w-full mt-10 h-80 border'> 
 
-                                { data.slug !== 'chandigarhgrocerystore' ? 
+                                { slug.some(el => data.slug.includes(el)) ? null :
                                     ( <div className='h-full w-96'>  
                                          <ShopProfileCard data={data} />
-                                      </div> ) : null }
+                                      </div> )  }
                                     
-                                    { data.slug !== 'chandigarhgrocerystore' ? 
+                                    { slug.some(el => data.slug.includes(el)) ? null :
                                     ( <div className='flex w-full  '>
                                       {imageCheck(data?.cover_image?.original, data, '317', false,'h-full w-full object-fill')}
-                                    </div> ) : '' }
+                                    </div> )  }
                    
                               </div> 
-                              
+           
                             
 {/*                                 
                                 { data.slug !== 'chandigarhgrocerystore' ? 
@@ -156,12 +164,12 @@ const ShopPage = ({ data }: any) => {
                                   : null
                                 } */}
 
-                                  { data.slug !== 'chandigarhgrocerystore' ? 
+                                  { slug.some(el => data.slug.includes(el)) ? null :
                                   //  (<div className='w-full mt-7'> 
                                       (<ShopDescription data = {data}/>
                                     // </div>
                                     )
-                                  : null
+                                 
                                   }
 
                                     {/* <OfferCards/> */}
@@ -169,28 +177,36 @@ const ShopPage = ({ data }: any) => {
 
                             <div className='lg:hidden px-2  w-full grid grid-cols-1 sm:flex'>
 
-                              { data.slug !== 'chandigarhgrocerystore' ? 
-                                  (   <div className='hidden sm:block w-48 h-38 sm:h-72 sm:w-80 md:h-72 lg:w-96'> 
+                              { slug.some(el => data.slug.includes(el))  ? 
+                                 null : ( <div className='hidden sm:block w-48 h-38 sm:h-72 sm:w-80 md:h-72 lg:w-96'> 
                                           <ShopProfileCard data={data} /> 
-                                      </div>) : null }
+                                      </div>)  }
+
+                                     
                                   
-                                  <div className='w-full flex-grow'>
+                                  {/* <div className='w-full flex-grow'>
                                     <img alt={t("heading")} 
                                           className='object-cover h-38 sm:h-72 rounded-lg xs+++:rounded-l-none md:h-72 lg:w-2/3 w-full'
                                           src={data?.cover_image?.original! ?? "/product-placeholder.svg"}
                                     />
-                                  </div>
+                                  </div> */}
 
-                                  { data.slug !== 'chandigarhgrocerystore' ? 
-                                  ( <div className='block sm:hidden'> 
+                                  { slug.some(el => data.slug.includes(el)) ? null
+                                 : ( <div className='block sm:hidden'> 
                                       <ShopProfileCard data={data}/> 
-                                  </div> ) : null }
+                                  </div> )  }
+
                                           
                             </div>
 
-                          { data.slug == 'chandigarhgrocerystore' ? ( 
+                            { data.slug == 'chandigarhgrocerystore' ? ( 
                              <div className="w-full -mt-80 object-contain">
                                     <img src='/grocery-web.jpg' className="object-contain" />
+                             </div> ) : null }
+
+                             { data.slug == 'kosmetics-india' ? ( 
+                             <div className="w-full -mt-80 object-contain">
+                                    <img src='/kosmetics.jpg' className="object-contain" />
                              </div> ) : null }
 
                           <HidingHeader>
@@ -214,9 +230,9 @@ const ShopPage = ({ data }: any) => {
                                   
                                 </div> 
                               </> : ' '  }
-                                <div  className="static  z-10 top-10 w-full">{data && 
+                                <div id='product-feed' className="static  z-10 top-10 w-full">{data && 
                                 // <ShopProductFeed shopId={data.id} />
-                                    <Feed shopId={data.id}/>
+                                    <Feed shopId={data.id} />
                                 }</div>
                            </div> 
 

@@ -46,6 +46,9 @@ export  function useWindowDimensions() {
   return windowDimensions;
 }
 
+const slug = ['chandigarhgrocerystore', 'kosmetics-india'];
+
+
 const Search: React.FC<Props> = ({ label, ...props }) => {
 
   const { height, width } = useWindowDimensions();
@@ -85,11 +88,21 @@ const Search: React.FC<Props> = ({ label, ...props }) => {
     setPageUrl(window.location.href)
   }, []);
 
+
+  const scrollToProduct = () => {
+    const element = document.getElementById("product-feed");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   
 
   const onSearch = (e: any) => {
     
     e.preventDefault();
+    scrollToProduct();
+
     if (!searchTerm) return;
     const { pathname, query } = router;
     const { type, ...rest } = query;
@@ -102,12 +115,11 @@ const Search: React.FC<Props> = ({ label, ...props }) => {
     // }
 
     { width < 976 ?
-      ( pageURL.includes('chandigarhgrocerystore') ?   window.scrollTo(0, 200) :
+      ( slug.some(el => pageURL.includes(el)) ?   window.scrollTo(0, 150) : 
        window.scrollTo(0, 670) ) : 
-       ( pageURL.includes('chandigarhgrocerystore') ?   window.scrollTo(0, 600) :
+       ( slug.some(el => pageURL.includes(el)) ?   window.scrollTo(0, 600) :
        window.scrollTo(0, 0) )
-  
-  };
+    };
 
     router.push(
       {
@@ -135,12 +147,11 @@ const Search: React.FC<Props> = ({ label, ...props }) => {
 
  
     { width < 976 ?
-      ( pageURL.includes('chandigarhgrocerystore') ?   window.scrollTo(0, 200) :
+      ( slug.some(el => pageURL.includes(el)) ?   window.scrollTo(0, 150) : 
        window.scrollTo(0, 670) ) : 
-       ( pageURL.includes('chandigarhgrocerystore') ?   window.scrollTo(0, 600) :
+       ( slug.some(el => pageURL.includes(el)) ?   window.scrollTo(0, 600) :
        window.scrollTo(0, 0) )
-  
-  };
+    };
 
     console.log('pathname',pathname);
     console.log('query',query);

@@ -90,7 +90,7 @@ const CategoryDropdownSidebar = ({data}) => {
 
     {/* Mobile */}
    { data?.slug !== 'kosmetics-india' ? <> 
-   <div className='lg:hidden w-16 sm:w-full  relative flex'> 
+   <div className='lg:hidden w-16 sm:w-full relative flex'> 
     {/* <div className='flex  h-screen top-14 sticky flex-col w-20'>    */}
       <div className=" h-screen top-0 sticky flex-col flex overflow-y-scroll scrollbar-hide justify-between  space-y-8 text-center">
         {/* <Scrollbar className="w-full h-full max-h-screen"> */}
@@ -98,12 +98,13 @@ const CategoryDropdownSidebar = ({data}) => {
           {categoryData?.categories?.data?.length ? (
             <div className="">
               <button onClick={allCategories} className={` ${query.category == ''  ? 'text-magenta' : 'text-gray-600'} text-sm focus:text-magenta font-semibold `}>
-              <img
-              src='/categories.png'
-              //  src='/grocery-all.png' 
-               className='w-5 tracking-widest  h-5 object-contain ' /> ALL
+                <img
+                src='/categories.png'
+                //  src='/grocery-all.png' 
+                className='w-5 tracking-widest h-5 object-contain' /> ALL
               </button>
-              <SidebarMenu items={categoryData?.categories?.data} className="whitespace-nowrap w-full  py-8" />
+              <SidebarMenu items={categoryData?.categories?.data} 
+                           className="whitespace-nowrap w-full py-8" />
             </div>
           ) : (
             ''
@@ -123,7 +124,7 @@ const CategoryDropdownSidebar = ({data}) => {
                         src='/categories.png'
                         // src='/categories.png'
                         className='  w-2 h-2 lg:w-6 tracking-widest lg:h-6 mr-2'/> ALL
-                  </button>
+                </button>
               {/* <Scrollbar className="w-full h-full max-h-screen"> */}
               {categoryData?.categories?.data?.length ? (
                   <div className=" flex overflow-x-scroll relative justify-evenly w-full">

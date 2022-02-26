@@ -119,7 +119,7 @@ export function SidebarMenuItem({ className, item, depth = 0 }: any) {
 
     
 
-    console.log('sidebar menu data', categoryData)
+    // console.log('sidebar menu data', categoryData)
 
   return (
 

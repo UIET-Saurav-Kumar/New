@@ -62,6 +62,8 @@ export default function ShopMobileView({data}: any) {
   function handlePayment() {
     return openModal("SHOP_PAYMENT_FORM");
    }
+
+   const slug = ['chandigarhgrocerystore', 'kosmetics-india'];
   
     return (
 
@@ -70,10 +72,10 @@ export default function ShopMobileView({data}: any) {
 
             <div className='px-2 w-full grid grid-cols-1 sm:flex'>
 
-            { data.slug !== 'chandigarhgrocerystore' ? 
+            {  slug.some(el => data.slug.includes(el)) ? null :
                 (   <div className='hidden sm:block w-48 h-38 sm:h-72 sm:w-80 md:h-72 lg:w-96'> 
                     <ShopProfileCard data={data} /> 
-                </div>) : null }
+                </div>)  }
                 
                 <div className='w-full flex-grow'>
                    <img alt={t("heading")} 
@@ -82,17 +84,17 @@ export default function ShopMobileView({data}: any) {
                    />
                 </div>
 
-                { data.slug !== 'chandigarhgrocerystore' ? 
+                {  slug.some(el => data.slug.includes(el)) ? null : 
                 ( <div className='block sm:hidden'> 
                     <ShopProfileCard data={data}/> 
-                </div>) : null }
+                </div>)  }
                 
             </div>
 
-            { data.slug !== 'chandigarhgrocerystore' ? 
+            {  slug.some(el => data.slug.includes(el)) ? null : 
              (<div className="px-2"><ShopDescription data={data}/>
              </div>)
-                : null
+                
             }
 
             {/* <div className=' flex flex-col p-3 border bg-white rounded-lg mt-4 w-full text-left'>
@@ -131,29 +133,29 @@ export default function ShopMobileView({data}: any) {
                                   
                     </HidingHeader>
               
-             <div className='relative mt-2 flex flex-col'> 
-                                
-                       <div className='relative top-0 flex flex-col'> 
-                              {categoryData?.categories?.data?.length ? 
-                              <> 
-                              <div id='category-dropdown-sidebar'  
-                                   className='flex border bg-white  flex-col w-full'>  
-                              {/* <CategoryDropdownSidebar/> */}
+              <div className='relative mt-2 flex flex-col'> 
+                                  
+                        <div className='relative top-0 flex flex-col'> 
+                                {categoryData?.categories?.data?.length ? 
+                                <> 
+                                <div id='category-dropdown-sidebar'  
+                                    className='flex border bg-white  flex-col w-full'>  
+                                {/* <CategoryDropdownSidebar/> */}
 
-                                        {/* <CategoryDropdownSidebar/> */}
+                                          {/* <CategoryDropdownSidebar/> */}
 
-                                        
-                                  <h1 style={{top:'155px'}} id='product-heading' className="text-lg sticky  bg-gray-100  py-3 px-2  font-semibold text-gray-600 font-mono mt-5 transition-transform duration-75">  
-                                    { query?.category?.replace(/\b\w/g, (l :any) => l.toUpperCase())   } Products
-                                  </h1> 
-                              </div> </> : ' '  }
-                                  <div  className="static  z-10 top-10 w-full">{data && 
-                                  // <ShopProductFeed shopId={data.id} />
-                                  <Feed shopId={data.id}/>
-                                  }</div>
-                        </div>
+                                          
+                                    <h1 style={{top:'155px'}} id='product-heading' className="text-lg sticky  bg-gray-100  py-3 px-2  font-semibold text-gray-600 font-mono mt-5 transition-transform duration-75">  
+                                      { query?.category?.replace(/\b\w/g, (l :any) => l.toUpperCase())   } Products
+                                    </h1> 
+                                </div> </> : ' '  }
+                                    <div id='product-feed' className="static  z-10 top-10 w-full">{data && 
+                                    // <ShopProductFeed shopId={data.id} />
+                                        <Feed shopId={data.id}/>
+                                    }</div>
+                          </div>
 
-               </div>
+                </div>
 
                </>  :
                 <div className='relative mt-2 flex'> 
