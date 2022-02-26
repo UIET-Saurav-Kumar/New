@@ -20,6 +20,7 @@ function getWindowDimensions() {
       height: 0,
     };
   }
+
   const { innerWidth: width, innerHeight: height } = window   ;
   return {
     width,
@@ -41,6 +42,7 @@ export  function useWindowDimensions() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  
   return windowDimensions;
 }
 
@@ -79,13 +81,11 @@ const Search: React.FC<Props> = ({ label, ...props }) => {
   const [pageURL, setPageUrl] = useState('');
 
 
-
   useEffect(() => {
     setPageUrl(window.location.href)
   }, []);
 
   
-
 
   const onSearch = (e: any) => {
     

@@ -156,8 +156,13 @@ export function SidebarMenuItem({ className, item, depth = 0 }: any) {
                   }
                   
                   <div className="flex px-auto items-center">
-                    <span className='text-10px lg:text-sm w-auto whitespace-wrap lg:whitespace-nowrap text-center'>
+                    <span className='hidden lg:block lg:text-10px lg:text-sm w-auto whitespace-wrap lg:whitespace-nowrap text-center'>
                       { pageURL.includes('kosmetics-india')   ?  null : name }
+                      {/* {name} */}
+                    </span>
+                    <span className='block lg:hidden text-10px lg:text-sm w-auto whitespace-wrap lg:whitespace-nowrap text-center'>
+                      {/* { pageURL.includes('kosmetics-india')   ?  null : name } */}
+                      {name}
                     </span>
                     {/* <span className="block lg:hidden text-center ">{expandIcon}</span> */}
                   </div>

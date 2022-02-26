@@ -37,10 +37,12 @@ import { scroller, Element } from "react-scroll";
 import { HidingHeader } from 'hiding-header-react'
 import { useState } from "react";
 
+
 const CartCounterButton = dynamic(
   () => import("@components/cart/cart-counter-button"),
   { ssr: false }
 );
+
 const imageCheck = (logo: any , record:any, imgsize:any, imgDim:any, classname: string) => {
   console.log('logo',logo)
   let check = false;
@@ -100,15 +102,13 @@ const ShopPage = ({ data }: any) => {
   } = useCategoriesQuery({
     type: query.slug as string,
   });
+
   const seoFunction = async(data:any) => {
 
     const seoData = await fetchShopSeo(data.slug)
 
   };
 
-
-
-  //after searching scroll down to the product section
   const scrollToProduct = () => {
     const element = document.getElementById("product-feed");
     if (element) {
@@ -124,30 +124,29 @@ const ShopPage = ({ data }: any) => {
 
     <>
 
-          <div className="bg-white lg:bg-gray-100 hidden lg:flex flex-col md:flex-row md:justify-between  
-                            md:items-start " >
+              <div className="bg-white lg:bg-gray-100 hidden lg:flex flex-col md:flex-row md:justify-between  
+                                md:items-start ">
 
                     <div className='flex w-full lg:flex flex-col'>
 
                       {/* <div className="hidden lg:space-x-5 xl:space-x-10  lg:flex justify-between "> */}
 
-                          
-
                           <div className=' hidden lg:flex flex-col overflow-y-scroll space-y-4  w-full'>  
 
-                              <div className='flex w-full h-80 border'> 
+                              <div className='flex w-full mt-10 h-80 border'> 
 
                                 { data.slug !== 'chandigarhgrocerystore' ? 
                                     ( <div className='h-full w-96'>  
-                                      <ShopProfileCard data={data} />
-                                    </div> ) : null }
+                                         <ShopProfileCard data={data} />
+                                      </div> ) : null }
                                     
                                     { data.slug !== 'chandigarhgrocerystore' ? 
                                     ( <div className='flex w-full  '>
                                       {imageCheck(data?.cover_image?.original, data, '317', false,'h-full w-full object-fill')}
                                     </div> ) : '' }
                    
-                              </div>
+                              </div> 
+                              
                             
 {/*                                 
                                 { data.slug !== 'chandigarhgrocerystore' ? 
@@ -168,55 +167,57 @@ const ShopPage = ({ data }: any) => {
                                     {/* <OfferCards/> */}
                           </div>
 
-                           <div className='lg:hidden px-2  w-full grid grid-cols-1 sm:flex'>
+                            <div className='lg:hidden px-2  w-full grid grid-cols-1 sm:flex'>
 
-                                      { data.slug !== 'chandigarhgrocerystore' ? 
-                                          (   <div className='hidden sm:block w-48 h-38 sm:h-72 sm:w-80 md:h-72 lg:w-96'> 
-                                              <ShopProfileCard data={data} /> 
-                                          </div>) : null }
-                                          
-                                          <div className='w-full flex-grow'>
-                                            <img alt={t("heading")} 
-                                                  className='object-cover h-38 sm:h-72 rounded-lg xs+++:rounded-l-none md:h-72 lg:w-2/3 w-full'
-                                                  src={data?.cover_image?.original! ?? "/product-placeholder.svg"}
-                                            />
-                                          </div>
+                              { data.slug !== 'chandigarhgrocerystore' ? 
+                                  (   <div className='hidden sm:block w-48 h-38 sm:h-72 sm:w-80 md:h-72 lg:w-96'> 
+                                          <ShopProfileCard data={data} /> 
+                                      </div>) : null }
+                                  
+                                  <div className='w-full flex-grow'>
+                                    <img alt={t("heading")} 
+                                          className='object-cover h-38 sm:h-72 rounded-lg xs+++:rounded-l-none md:h-72 lg:w-2/3 w-full'
+                                          src={data?.cover_image?.original! ?? "/product-placeholder.svg"}
+                                    />
+                                  </div>
 
-                                          { data.slug !== 'chandigarhgrocerystore' ? 
-                                          ( <div className='block sm:hidden'> 
-                                              <ShopProfileCard data={data}/> 
-                                          </div> ) : null }
+                                  { data.slug !== 'chandigarhgrocerystore' ? 
+                                  ( <div className='block sm:hidden'> 
+                                      <ShopProfileCard data={data}/> 
+                                  </div> ) : null }
                                           
                             </div>
 
-                          { data.slug == 'chandigarhgrocerystore' ? (  <div className="w-full -mt-80 object-contain">
+                          { data.slug == 'chandigarhgrocerystore' ? ( 
+                             <div className="w-full -mt-80 object-contain">
                                     <img src='/grocery-web.jpg' className="object-contain" />
-                          </div> ) : null }
+                             </div> ) : null }
 
                           <HidingHeader>
                                                                                
-                              <CategoryDropdownSidebar data={data}/>
+                              <CategoryDropdownSidebar data={data} />
                                          
                           </HidingHeader> 
 
                           <div className='relative top-0 flex flex-col'> 
-                              {categoryData?.categories?.data?.length ? 
+                              { categoryData?.categories?.data?.length ? 
                               <> 
-                              <div id='category-dropdown-sidebar'  
-                                   className='flex border bg-white  flex-col w-full'>  
-                              {/* <CategoryDropdownSidebar/> */}
+                                <div id='category-dropdown-sidebar'  
+                                    className='flex border bg-white flex-col w-full'>
 
-                                        {/* <CategoryDropdownSidebar/> */}
-
-                                        
-                                  <h1 style={{top:'155px'}} id='product-heading' className="text-lg sticky  bg-gray-100  py-3 px-2  font-semibold text-gray-600 font-mono mt-5 transition-transform duration-75">  
-                                    { query?.category?.replace(/\b\w/g, (l :any) => l.toUpperCase())   } Products
-                                  </h1> 
-                              </div> </> : ' '  }
-                                  <div  className="static  z-10 top-10 w-full">{data && 
-                                  // <ShopProductFeed shopId={data.id} />
-                                  <Feed shopId={data.id}/>
-                                  }</div>
+                                    {/*<CategoryDropdownSidebar/> */}
+                                    {/* <CategoryDropdownSidebar/> */}
+                                          
+                                    <h1 style={{top:'155px'}} id='product-heading' className="text-lg sticky  bg-gray-100  py-3 px-2  font-semibold text-gray-600 font-mono mt-5 transition-transform duration-75">  
+                                      { query?.category?.replace(/\b\w/g, (l :any) => l.toUpperCase())   } Products
+                                    </h1> 
+                                  
+                                </div> 
+                              </> : ' '  }
+                                <div  className="static  z-10 top-10 w-full">{data && 
+                                // <ShopProductFeed shopId={data.id} />
+                                    <Feed shopId={data.id}/>
+                                }</div>
                            </div> 
 
 
@@ -239,9 +240,6 @@ const ShopPage = ({ data }: any) => {
 
           </div>
 
-           
-
-      
       
       {width > 1023 && <CartCounterButton />}
 

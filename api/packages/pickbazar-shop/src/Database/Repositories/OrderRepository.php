@@ -161,7 +161,9 @@ class OrderRepository extends BaseRepository
     }
 
    private function sendSMS($order){
+
         try{
+            
             if($order){
                 if($order->shop_id){
                     $shop=Shop::find($order->shop_id);

@@ -33,7 +33,9 @@ const SearchBox: React.FC<Props> = ({
   const { t } = useTranslation();
 
   return (
+
     <form onSubmit={onSubmit}  className="w-2/3">
+
       <div
         className={cn(
           "rounded md:rounded-lg flex relative",
@@ -55,6 +57,7 @@ const SearchBox: React.FC<Props> = ({
           )}
           {...rest}
         />
+        
         {value && (
           <button
             type="button"
@@ -84,6 +87,7 @@ const SearchBox: React.FC<Props> = ({
           </button>
         )}
       </div>
+
     </form>
   );
 };

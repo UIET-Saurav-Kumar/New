@@ -54,13 +54,15 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 };
 
 export default function ProductSinglePage({ product }: any) {
+
   return (
+
     <>
       <div className="bg-light min-h-screen">
 
         <ProductDetails product={product} />
 
-        {product?.related_products?.length > 1 && (
+        { product?.related_products?.length > 1 && (
           
           <div className="p-5 lg:p-14 xl:p-16">
             <RelatedProducts
