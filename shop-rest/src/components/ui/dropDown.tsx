@@ -105,16 +105,121 @@ export default function DropDown({getLoc}:{getLoc:any}){
     }
   }
 
+  // set default options as user last searched keywords
+  const defaultOptions = getSearch();
+  const [options, setOptions] = useState(defaultOptions);
+
+  //setOptions
+  // useEffect(()=>{
+  //   setOptions(defaultOptions)
+  // },[defaultOptions])
+
+//   return (
+//     <div className="relative w-full flex flex-col items-center">
+//       <div className="relative w-full flex flex-col items-center">
+        
+//         <AsyncSelect
+//           cacheOptions
+//           defaultOptions
+//           loadOptions={loadOptions}
+//           onChange={changeRoute}
+//           onInputChange={handleInputChange}
+//           value={options}
+//           placeholder="Search Products"
+//           className="w-full"
+//           classNamePrefix="search-select"
+//           styles={{
+//             control: (base: any, state: any) => ({
+//               ...base,
+//               borderRadius: "5px",
+//               border: "1px solid #e6e6e6",
+//               boxShadow: "none",
+//               "&:hover": {
+//                 borderColor: "#e6e6e6",
+//               },
+//               "&:focus": {
+//                 borderColor: "#e6e6e6",
+//               },
+//             }),
+//             menu: (base: any, state: any) => ({
+//               ...base,
+//               borderRadius: "5px",
+//               border: "1px solid #e6e6e6",
+//               boxShadow: "none",
+//               "&:focus": {
+//                 borderColor: "#e6e6e6",
+//               },
+//             }),
+//             option: (base: any, state: any) => ({
+//               ...base,
+//               backgroundColor: "#fff",
+//               "&:hover": {
+//                 backgroundColor: "#fff",
+//               },
+//               "&:focus": {
+//                 backgroundColor: "#fff",
+//               },
+//             }),
+//           }}
+//         />
+//       </div>
+//       <div className="absolute top-0 right-0 mt-1 mr-1">
+//         <button
+//           onClick={clear}
+//           className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+//         >
+//           <SearchIcon />
+//         </button>
+//       </div>
+//     </div>
+//   );
+// }
+
+                  // styles={{
+                  //               control: (base: any, state: any) => ({
+                  //                 ...base,
+                  //                 borderRadius: "5px",
+                  //                 border: "1px solid #e6e6e6",
+                  //                 boxShadow: "none",
+                  //                 "&:hover": {
+                  //                   borderColor: "#e6e6e6",
+                  //                 },
+                  //                 "&:focus": {
+                  //                   borderColor: "#e6e6e6",
+                  //                 },
+                  //               }),
+                  //               menu: (base: any, state: any) => ({
+                  //                 ...base,
+                  //                 borderRadius: "5px",
+                  //                 border: "1px solid #e6e6e6",
+                  //                 boxShadow: "none",
+                  //                 "&:focus": {
+                  //                   borderColor: "#e6e6e6",
+                  //                 },
+                  //               }),
+                  //               option: (base: any, state: any) => ({
+                  //                 ...base,
+                  //                 backgroundColor: "#fff",
+                  //                 "&:hover": {
+                  //                   backgroundColor: "#fff",
+                  //                 },
+                  //                 "&:focus": {
+                  //                   backgroundColor: "#fff",
+                  //                 },
+                  //               }),
+                  //             }}
+
+
   
   function optionSelected(e:any){
-    // clear()
+    clear()
     // setInputValue(e);
     changeRoute(e)
   }
 
     return (
-        <div  className='flex w-full'>
 
+        <div  className='flex w-full'>
           <div className='w-full shadow-md  relative'>
             
               <AsyncSelect
@@ -122,11 +227,45 @@ export default function DropDown({getLoc}:{getLoc:any}){
                   // style={customStyles}
                   // defaultValue={inputValue.value}
                   loadOptions={loadOptions} 
-                  // value={inputValue}
+                  onClear={clear}
+                  value={inputValue}
                   // defaultOptions={loadOptions}
                   // onInputChange={handleInputChange}
                   placeholder={ <div className='text-xs sm:text-sm md:text:md  lg:text-sm'> Restaurants | Salons | Groceries </div>}
                   onChange={optionSelected}
+                  // styles={{
+                  //               control: (base: any, state: any) => ({
+                  //                 ...base,
+                  //                 borderRadius: "5px",
+                  //                 border: "1px solid #e6e6e6",
+                  //                 boxShadow: "none",
+                  //                 "&:hover": {
+                  //                   borderColor: "#e6e6e6",
+                  //                 },
+                  //                 "&:focus": {
+                  //                   borderColor: "#e6e6e6",
+                  //                 },
+                  //               }),
+                  //               menu: (base: any, state: any) => ({
+                  //                 ...base,
+                  //                 borderRadius: "5px",
+                  //                 border: "1px solid #e6e6e6",
+                  //                 boxShadow: "none",
+                  //                 "&:focus": {
+                  //                   borderColor: "#e6e6e6",
+                  //                 },
+                  //               }),
+                  //               option: (base: any, state: any) => ({
+                  //                 ...base,
+                  //                 backgroundColor: "#fff",
+                  //                 "&:hover": {
+                  //                   backgroundColor: "#fff",
+                  //                 },
+                  //                 "&:focus": {
+                  //                   backgroundColor: "#fff",
+                  //                 },
+                  //               }),
+                  //             }}
                  
                 />
                   <SearchIcon className=" absolute right-3 top-3 lg:top-4  text-gray-400 w-4 h-4 me-2.5" />
