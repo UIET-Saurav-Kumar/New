@@ -12,6 +12,22 @@ const monthNames = ["Jan", "Feb", "March", "April", "May", "June",
   "July", "Aug", "Sep", "Oct", "Nov", "Dec"
 ];
 
+// var myFutureDate=  new Date(today);
+// var dt = new Date();
+var tomorrow = new Date();
+var day3 = new Date();
+var day4 = new Date();
+var day5 = new Date();
+var day6 = new Date();
+var day7 = new Date();
+
+tomorrow.setDate(tomorrow.getDate() + 1);
+day3.setDate(day3.getDate() + 2);
+day4.setDate(day4.getDate() + 3);
+day5.setDate(day5.getDate() + 4);
+day6.setDate(day6.getDate() + 5);
+day7.setDate(day7.getDate() + 6);
+
 var weekDay = today.getDay();
 
 const day = 
@@ -24,7 +40,6 @@ const day =
   "Friday",
   "Saturday"
 ];
-
 
 
 export const siteSettings = {
@@ -181,40 +196,37 @@ export const siteSettings = {
 
     {
       id: "2",
-      title:  'Tomorrow' + ' ' +  '('  + (month % 2 === 0 ? (date + 1 > 31 ? date + 1 - 31  : date + 1 ) : (date + 1 > 30 ? date + 1 - 30  : date + 1 )) + ' ' + 
-               monthNames[date + 1 > 31 ? (month + 1 > 12 ? month + 1 - 12 : month + 1 ) : month] + ')',
+      title:  'Tomorrow' + ' ' +  '('  + 
+      tomorrow.toDateString().split(' ')[2]  + ' ' + tomorrow.toDateString().split(' ')[1] + ' ' + tomorrow.toDateString().split(' ')[0] + ')'
+             ,
       is_delivery:false,
       description: "Visit tomorrow",
     },
 
     {
       id: "3",
-      title: day[weekDay + 2 >6 ? weekDay + 2 - 7 :weekDay + 2   ] + ' ' + '('  + (month % 2 === 0 ? (date + 2 > 31 ? date + 2 - 31  : date + 2 ) : (date + 2 > 30 ? date + 2 - 30  : date + 2 )) + ' ' +  
-             monthNames[date + 2 > 31 ? (month + 1 > 12 ? month + 1 - 12 : month + 1 ) : month] + ')',
+      title:  day3.toDateString().split(' ')[0]  + ' ' + '(' + ' ' + day3.toDateString().split(' ')[2]  + ' ' + day3.toDateString().split(' ')[1] + ' ' + ')',
       is_delivery:false,
       description: "Open 10AM to 7PM",
     },
 
     {
       id: "4",
-      title:  day[weekDay + 3 >6 ? weekDay + 3 - 7 : weekDay + 3   ]  + ' ' +  '('  + (month % 2 === 0 ? (date + 3 > 31 ? date + 3 - 31  : date + 3 ) : (date + 3 > 30 ? date + 3 - 30  : date + 3 )) + ' ' + 
-              monthNames[date + 3 > 31 ? (month + 1 > 12 ? month + 1 - 12 : month + 1 ) : month] + ')',
+      title:   day4.toDateString().split(' ')[0]  + ' ' + '(' + ' ' + day4.toDateString().split(' ')[2]  + ' ' + day4.toDateString().split(' ')[1] + ' ' + ')',
       is_delivery:false,
       description: "Open 10AM to 7PM",
     },
 
     {
       id: "5",
-      title: day[weekDay + 4 >6 ? weekDay + 4 - 7 : weekDay + 4   ]  + '  ' + '('  + (month % 2 === 0 ? (date + 4 > 31 ? date + 4 - 31  : date + 4 ) : (date + 4 > 30 ? date + 4 - 30  : date + 4 )) + ' ' + 
-             monthNames[date + 4 > 31 ? (month + 1 > 12 ? month + 1 - 12 : month + 1 ) : month] + ')',
+      title: day5.toDateString().split(' ')[0]  + ' ' + '(' + ' ' + day5.toDateString().split(' ')[2]  + ' ' + day5.toDateString().split(' ')[1] + ' ' + ')',
       is_delivery:false,
       description: "Open 10AM to 7PM",
     },
 
     {
       id: "7",
-      title: day[weekDay + 5 >6 ? weekDay + 5 - 7 : weekDay + 5   ]  + ' ' + '('  + (month % 2 === 0 ? (date + 5 > 31 ? date + 5 - 31  : date + 5 ) : (date + 5 > 30 ? date + 5 - 30  : date + 5 )) + ' ' +  
-      monthNames[date + 5 > 31 ? (month + 1 > 12 ? month + 1 - 12 : month + 1 ) : month] + ')',
+      title:  day6.toDateString().split(' ')[0]  + ' ' + '(' + ' ' + day6.toDateString().split(' ')[2]  + ' ' + day6.toDateString().split(' ')[1] + ' ' + ')',
       is_delivery:false,
       description: "Open 10AM to 7PM",
     },
