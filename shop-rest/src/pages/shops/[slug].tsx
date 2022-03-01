@@ -109,7 +109,7 @@ const ShopPage = ({ data }: any) => {
 
   const seoFunction = async(data:any) => {
 
-    const seoData = await fetchShopSeo(data.slug)
+    const seoData = await fetchShopSeo(data?.slug)
 
   };
 
@@ -143,12 +143,12 @@ const ShopPage = ({ data }: any) => {
 
                               <div className='flex w-full mt-10 h-80 border'> 
 
-                                { slug.some(el => data.slug.includes(el)) ? null :
+                                { slug?.some(el => data?.slug?.includes(el)) ? null :
                                     ( <div className='h-full w-96'>  
                                          <ShopProfileCard data={data} />
                                       </div> )  }
                                     
-                                    { slug.some(el => data.slug.includes(el)) ? null :
+                                    { slug?.some(el => data?.slug?.includes(el)) ? null :
                                     ( <div className='flex w-full  '>
                                       {imageCheck(data?.cover_image?.original, data, '317', false,'h-full w-full object-fill')}
                                     </div> )  }
@@ -164,7 +164,7 @@ const ShopPage = ({ data }: any) => {
                                   : null
                                 } */}
 
-                                  { slug.some(el => data.slug.includes(el)) ? null :
+                                  { slug?.some(el => data?.slug?.includes(el)) ? null :
                                   //  (<div className='w-full mt-7'> 
                                       (<ShopDescription data = {data}/>
                                     // </div>
@@ -177,7 +177,7 @@ const ShopPage = ({ data }: any) => {
 
                             <div className='lg:hidden px-2  w-full grid grid-cols-1 sm:flex'>
 
-                              { slug.some(el => data.slug.includes(el))  ? 
+                              { slug?.some(el => data?.slug?.includes(el))  ? 
                                  null : ( <div className='hidden sm:block w-48 h-38 sm:h-72 sm:w-80 md:h-72 lg:w-96'> 
                                           <ShopProfileCard data={data} /> 
                                       </div>)  }
@@ -191,7 +191,7 @@ const ShopPage = ({ data }: any) => {
                                     />
                                   </div> */}
 
-                                  { slug.some(el => data.slug.includes(el)) ? null
+                                  { slug?.some(el => data?.slug?.includes(el)) ? null
                                  : ( <div className='block sm:hidden'> 
                                       <ShopProfileCard data={data}/> 
                                   </div> )  }
@@ -199,12 +199,12 @@ const ShopPage = ({ data }: any) => {
                                           
                             </div>
 
-                            { data.slug == 'chandigarhgrocerystore' ? ( 
+                            { data?.slug == 'chandigarhgrocerystore' ? ( 
                              <div className="w-full -mt-80 object-contain">
                                     <img src='/grocery-web.jpg' className="object-contain" />
                              </div> ) : null }
 
-                             { data.slug == 'kosmetics-india' ? ( 
+                             { data?.slug == 'kosmetics-india' ? ( 
                              <div className="w-full -mt-80 object-contain">
                                     <img src='/kosmetics.jpg' className="object-contain" />
                              </div> ) : null }

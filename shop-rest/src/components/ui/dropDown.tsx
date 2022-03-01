@@ -9,9 +9,10 @@ import { useCreateLogMutation } from "@data/log/use-create-log.mutation";
 
 export default function DropDown({getLoc}:{getLoc:any}){
 
+
   const [inputValue,setInputValue] = useState("");
   const router = useRouter();
-  const {getLocation} =useLocation()
+  const {getLocation} = useLocation()
   const { mutate: createLog, isLoading: loading } = useCreateLogMutation();
   
   // useEffect(()=>{
@@ -25,11 +26,10 @@ export default function DropDown({getLoc}:{getLoc:any}){
   };
   
   const loadOptions = async (inputValue:any, callback:any) => {
-
       var data = await fetchSearch(inputValue);      
+      console.log('dropdown data',data)
       
       callback(data);
-     
       return data;
   };
 
@@ -42,13 +42,12 @@ export default function DropDown({getLoc}:{getLoc:any}){
         label:text,
         value:text
       }
-    }else{
+    } else {
       value={
         label:"",
         value:""
       }
     }
-
     return value;
   }
 
@@ -115,6 +114,7 @@ export default function DropDown({getLoc}:{getLoc:any}){
   }
 
     return (
+
         <div  className='flex w-full'>
 
           <div className='w-full shadow-md  relative'>
@@ -142,6 +142,7 @@ export default function DropDown({getLoc}:{getLoc:any}){
                   <SearchIcon className="w-4 h-4 me-2.5" />
               </button> */}
           </div>
+
         </div>
     );
 }

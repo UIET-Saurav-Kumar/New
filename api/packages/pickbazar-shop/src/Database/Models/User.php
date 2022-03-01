@@ -115,6 +115,7 @@ class User extends Authenticatable
     }
 
     public function role(){
+        
         if($this->hasPermissionTo(Permission::SUPER_ADMIN)){
             $role="Super Admin";
         }else if($this->hasPermissionTo(Permission::STORE_OWNER)){
