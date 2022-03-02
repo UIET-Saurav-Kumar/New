@@ -91,18 +91,18 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
       <header className="p-3 md:p-6">
 
         {product_type.toLowerCase() === 'variable' ? (
-          <div className="mb-2">
-            <span className="text-sm md:text-base text-product-price font-bold">
+          <div className="flex items-center  mb-2">
+            <span className="text-xs md:text-base text-product-price font-bold">
               {minPrice}
             </span>
             <span className="text-magenta font-bold"> {!minPrice ? `Starting ${basePrice}` : '-'} </span>
-            <span className="text-sm md:text-base text-magenta font-bold">
+            <span className="text-xs md:text-base text-magenta font-bold">
               {maxPrice}
             </span>
           </div>
         ) : (
-          <div className="flex items-center  mb-2">
-            <span className="text-sm md:text-base text-product-price font-bold">
+          <div className="flex items-center  p-1 md:p-0 mb-2">
+            <span className="text-xs md:text-base text-product-price font-bold">
               {basePrice ? basePrice : price}
             </span>
             {discount && (
@@ -113,7 +113,7 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
         {/* End of product price */}
 
         <h3
-          className="text-12px font-semibold md:text-sm flex flex-wrap  text-gray-700  truncate mb-4 cursor-pointer"
+          className="text-xs font-semibold  md:text-sm flex flex-wrap  text-gray-700  truncate mb-4 cursor-pointer"
         >
            <div className='flex flex-wrap flex-col'>{name}<h3>{unit}</h3></div>
         </h3>
