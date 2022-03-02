@@ -188,7 +188,7 @@ const OrderList = ({ orders, onPagination }: IProps) => {
       align: "center",
       render: (delivery_time: any) => {
        
-        return <span>{currDate ===  delivery_time.split('(')[1].replace(')', '') ? 'Today' + ' ' + delivery_time.split('(')[1].replace(')', '') :  delivery_time.split('(')[1].replace(')', '')   }</span>;
+        return <span>{ delivery_time.includes('Today') ? delivery_time.replace('Today', '') : delivery_time.includes('Tomorrow') ? delivery_time.replace('Tomorrow', '') : delivery_time } </span>
       },
     },
 

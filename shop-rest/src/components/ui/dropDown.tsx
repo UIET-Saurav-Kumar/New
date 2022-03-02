@@ -113,6 +113,7 @@ export default function DropDown({getLoc}:{getLoc:any}) {
   }
 
     return (
+
         <div  className='flex w-full'>
 
           <div className='w-full shadow-md  relative'>
@@ -122,7 +123,7 @@ export default function DropDown({getLoc}:{getLoc:any}) {
                   // style={customStyles}
                   // defaultValue={inputValue.value}
                   loadOptions={loadOptions} 
-                  // value={inputValue}
+                  value={inputValue}
                   // defaultOptions={loadOptions}
                   // onInputChange={handleInputChange}
                   placeholder={ <div className='text-xs sm:text-sm md:text:md  lg:text-sm'> Restaurants | Salons | Groceries </div>}
