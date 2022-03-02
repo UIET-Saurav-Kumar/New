@@ -32,7 +32,7 @@ const OrderList = ({ orders, onPagination }: IProps) => {
   
   const { data, paginatorInfo } = orders! ?? {};
   const { t } = useTranslation();
-  const rowExpandable = (record: any) => record.children?.length > 1 ? record.children?.length : '';
+  const rowExpandable = (record: any) => record?.children?.length > 1 ? record?.children?.length : '';
   const router = useRouter();
   const { alignLeft } = useIsRTL();
 
@@ -56,7 +56,7 @@ const OrderList = ({ orders, onPagination }: IProps) => {
         <PDFDownloadLink
         
           document={<InvoicePdf  order={order} />}
-          fileName={`${customer.name}-invoice.pdf`}
+          fileName={`${customer?.name}-invoice.pdf`}
           style={{
             textDecoration: "none",
             color: "blue",
@@ -94,7 +94,7 @@ const OrderList = ({ orders, onPagination }: IProps) => {
       key: "customer",
       align: alignLeft,
       render: (customer: any) => (
-        <div className="whitespace-nowrap font-semibold">{customer.name}</div>
+        <div className="whitespace-nowrap font-semibold">{customer?.name}</div>
       ),
     },
 
@@ -137,7 +137,7 @@ const OrderList = ({ orders, onPagination }: IProps) => {
       key: "customer",
       align: alignLeft,
       render: (order: any) => (
-        <div>{order.phone_number}</div>
+        <div>{order?.phone_number}</div>
       ),
     },
 
@@ -148,7 +148,7 @@ const OrderList = ({ orders, onPagination }: IProps) => {
       key: "customer",
       align: alignLeft,
       render: (order: any) => (
-        <div className="whitespace-nowrap">{order.email}</div>
+        <div className="whitespace-nowrap">{order?.email}</div>
       ),
     },
 
