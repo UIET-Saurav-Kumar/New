@@ -112,6 +112,27 @@ export default function DropDown({getLoc}:{getLoc:any}) {
     changeRoute(e)
   }
 
+  //save the search keywords with corresponding image if its a shop to local storage
+  function saveSearch(e:any){
+    var {value}=e;
+    if(value){
+      window.localStorage.setItem("search",value);
+    }
+  }
+
+
+  // some default options object with image
+  const defaultOptions = [
+    { value: 'Kosmetic+India', label: 'Kosmetic India', image: { avatar: true, src: 'https://placeimg.com/64/64/1' } },
+    { value: 'Chandigarh+Grocery+Store', label: 'Chandigarh grocery store', image: { avatar: true, src: 'https://placeimg.com/64/64/2' } },
+    { value: 'Beauzo+Salon', label: 'Beauzo Salon', image: { avatar: true, src: 'https://placeimg.com/64/64/3' } },
+    { value: 'Salman+s+Makeover', label: 'Salman Makeover ', image: { avatar: true, src: 'https://placeimg.com/64/64/3' } },
+    { value: 'Green+Gush+Organics', label: 'Green Gush Organics', image: { avatar: true, src: 'https://placeimg.com/64/64/1' } },
+    
+
+  ];
+  
+
     return (
 
         <div  className='flex w-full'>
@@ -124,7 +145,7 @@ export default function DropDown({getLoc}:{getLoc:any}) {
                   // defaultValue={inputValue.value}
                   loadOptions={loadOptions} 
                   value={inputValue}
-                  // defaultOptions={loadOptions}
+                  defaultOptions={defaultOptions}
                   // onInputChange={handleInputChange}
                   placeholder={ <div className='text-xs sm:text-sm md:text:md  lg:text-sm'> Restaurants | Salons | Groceries </div>}
                   onChange={optionSelected}
