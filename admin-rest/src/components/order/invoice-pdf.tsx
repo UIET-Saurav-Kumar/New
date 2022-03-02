@@ -56,7 +56,7 @@ export default function InvoicePdf({ order }: { order: Order }) {
               <Text style={[styles.addressText, { marginBottom: 20 }]}>
                 Invoice No:
                 <Text style={{ color: "#374151", fontFamily: "Lato Bold" }}>
-                  {order.tracking_number}
+                  {order?.tracking_number}
                 </Text>
               </Text>
               <Text
@@ -74,9 +74,9 @@ export default function InvoicePdf({ order }: { order: Order }) {
               </Text>
             </View>
 
-            <View style={[styles.section]}>
+            {/* <View style={[styles.section]}>
               <Text style={[styles.addressTextRight, { marginBottom: 20 }]}>
-                Date: {order.created_at.split('T')[0].split("-").reverse().join("-")}
+                Date: {order?.created_at?.split('T')[0].split("-").reverse().join("-")}
               </Text>
               <Text
                 style={[
@@ -92,7 +92,7 @@ export default function InvoicePdf({ order }: { order: Order }) {
               <Text style={styles.addressTextRight}>
               {order?.shipping_address}
               </Text>
-            </View>
+            </View> */}
           </View>
 
           {/* Table */}
@@ -100,7 +100,7 @@ export default function InvoicePdf({ order }: { order: Order }) {
             {order.products.map((product, index) => {
               const { price } = usePrice({
                 // @ts-ignore
-                amount: parseFloat(product.pivot.subtotal),
+                amount: parseFloat(product?.pivot?.subtotal),
               });
               return (
                 <View style={styles.tbody} key={index}>
@@ -110,8 +110,8 @@ export default function InvoicePdf({ order }: { order: Order }) {
                     >
                       {index + 1}
                     </Text>
-                    <Text style={[styles.td, { flex: 1 }]}>{product.name}</Text>
-                    <Text style={[styles.td, { flex: 1 }]}>{product.shop?.name}</Text>
+                    <Text style={[styles.td, { flex: 1 }]}>{product?.name}</Text>
+                    <Text style={[styles.td, { flex: 1 }]}>{product?.shop?.name}</Text>
                     <Text
                       style={[styles.td, { width: 100, textAlign: "right" }]}
                     >

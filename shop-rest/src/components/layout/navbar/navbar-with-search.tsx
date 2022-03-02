@@ -1,4 +1,5 @@
 
+
 import { useRef } from "react";
 import Link from "@components/ui/link";
 import cn from "classnames";
@@ -21,6 +22,7 @@ import GetCurrentLocation from "@components/geoCode/get-current-location";
 import { CaretDown } from "@components/icons/caret-down";
 import MobileJoinButton from "./mobile-join-button";
 import CityButton from "@components/geoCode/city-buttton";
+
 
 const cities = //create object of major  indian cities with lat, lng and city name
     [
@@ -86,18 +88,18 @@ const AuthorizedMenu = dynamic(
 type DivElementRef = React.MutableRefObject<HTMLDivElement>;
 
 const NavbarWithSearch = () => {
+
   const { t } = useTranslation("common");
   const { asPath } = useRouter();
   const { data } = useTypesQuery();
-  const {getLocation} =useLocation()
+  const {getLocation} =useLocation();
   const [location, setLocation] = useState(false);
+
   const handleLocation = () => {
     setLocation(!location);
-}
+  }
 
-const router = useRouter();
-
-
+  const router = useRouter();
 
 
   const slugs = data?.types?.map((item) => item.slug);
@@ -112,7 +114,9 @@ const router = useRouter();
 
   const navbarRef = useRef() as DivElementRef;
   const { isAuthorize, displayHeaderSearch, displayMobileSearch } = useUI();
+
   // location prompt if user landed on any page without entering location
+
   useEffect(() => {
     if (getLocation?.formattedAddress === false) {
       handleLocation();
@@ -124,7 +128,6 @@ const router = useRouter();
     
     const truncate = (txt:any, n:number) => {
       return  txt.length > 10 ? txt.substring(0, n) : txt
-
     }
     
    
@@ -236,7 +239,7 @@ const router = useRouter();
                     <div   className={`absolute flex flex-col   z-50 inset-0 shadow-lg transform -pl-10 duration-200 ease-in 
                                     ${location ? ' translate-y-0 ' : '-translate-y-full' }  transform border-5 bg-gray-100 h-screen lg:h-screen  overflow-y-hidden overflow-hidden `}>
                                       
-                                       <div className='  border-red-400 flex w-full'>
+                                       <div className='border-red-400 flex w-full'>
                                            <div className='flex flex-col'>
                                                <h4 className='block lg:hidden text-2xl md:text-3xl lg:text-4xl mx-4 sm:mx-16 md:mx-16 mt-8 text-magenta font-heading font-semibold'>
                                                    Buy at lowest prices from nearest local shops

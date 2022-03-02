@@ -59,7 +59,7 @@ const ShopPage = ({ data }: any) => {
   const { pathname, query } = router;
 
   // useEffect(() => {
-  //  // scroll to product feed when user searches for a product
+  
   //   if (query.search) {
   //     scroller.scrollTo("product-feed", {
   //       duration: 500,
@@ -135,7 +135,7 @@ const ShopPage = ({ data }: any) => {
               <div className="bg-white lg:bg-gray-100 hidden lg:flex flex-col md:flex-row md:justify-between  
                                 md:items-start ">
 
-                    <div className='flex w-full lg:flex flex-col'>
+                    <div className='flex w-full  lg:flex flex-col'>
 
                       {/* <div className="hidden lg:space-x-5 xl:space-x-10  lg:flex justify-between "> */}
 

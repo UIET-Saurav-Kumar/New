@@ -122,7 +122,7 @@ const OrderList = ({ orders, onPagination }: IProps) => {
       render: (children: any) => {
         
         var shopName =  children?.map( (child:any) =>
-         <h1>⊛ {child.shop.name}</h1>
+         <h1>⊛ {child?.shop?.name}</h1>
         )
           return  <h1 className="whitespace-wrap w-48 font-light">
                  {shopName}

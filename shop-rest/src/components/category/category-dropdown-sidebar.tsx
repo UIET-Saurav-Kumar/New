@@ -7,6 +7,8 @@ import CategoryListLoader from "@components/ui/loaders/category-loader";
 import NotFound from "@components/common/not-found";
 import { useCategoriesQuery } from "@data/category/use-categories.query";
 import CategorySlider from "./category-slider";
+import { useWindowDimensions } from "@components/common/search";
+import { useEffect, useState } from "react";
 
 
 const CategoryDropdownSidebar = ({data}) => {
@@ -22,12 +24,24 @@ const CategoryDropdownSidebar = ({data}) => {
     type: query.slug as string,
   });
 
+  const { height, width } = useWindowDimensions();
+
+  const [pageURL, setPageUrl] = useState('');
+  const slug = ['chandigarhgrocerystore', 'kosmetics-india'];
+
 
   function allCategories() {
 
     const { pathname , query } = router;
-    
+
     const navigate = () =>
+    { width < 976 ?
+      ( slug?.some(el => pageURL.includes(el)) ?   window.scrollTo(0, 150) : 
+       window.scrollTo(0, 620) ) : 
+       ( slug?.some(el => pageURL.includes(el)) ?   window.scrollTo(0, 570) :
+       window.scrollTo(0, 550) )
+    };
+
       router.push(
         {
           // pathname,
@@ -63,6 +77,7 @@ const CategoryDropdownSidebar = ({data}) => {
 
   
   return (
+
     <>
     {/* web */}
     
@@ -90,14 +105,16 @@ const CategoryDropdownSidebar = ({data}) => {
 
     {/* Mobile */}
    { data?.slug !== 'kosmetics-india' ? <> 
+
    <div className='lg:hidden w-16 sm:w-full relative flex'> 
     {/* <div className='flex  h-screen top-14 sticky flex-col w-20'>    */}
       <div className=" h-screen top-0 sticky flex-col flex overflow-y-scroll scrollbar-hide justify-between  space-y-8 text-center">
         {/* <Scrollbar className="w-full h-full max-h-screen"> */}
       
           {categoryData?.categories?.data?.length ? (
+
             <div className="">
-              <button onClick={allCategories} className={` ${query.category == ''  ? 'text-magenta' : 'text-gray-600'} text-sm focus:text-magenta font-semibold `}>
+              <button onClick = {allCategories} className={` ${query.category == ''  ? 'text-magenta' : 'text-gray-600'} text-sm focus:text-magenta font-semibold `}>
                 <img
                 src='/categories.png'
                 //  src='/grocery-all.png' 
@@ -119,7 +136,7 @@ const CategoryDropdownSidebar = ({data}) => {
 
         <aside className="lg:hidden flex items-center justify-center h-full   bg-light">
             <div className="max-h-full flex max-w-full">
-                <button onClick={allCategories} className={` ${query.category == ''  ? 'text-magenta' : 'text-gray-600'} text-sm sticky bg-white  ml-0 lg:px-4 top-0 z-40 focus:text-magenta justify-center  flex flex-col font-semibold `}>
+                <button onClick={allCategories} className={` ${query.category == ''  ? 'text-magenta' : 'text-gray-600'} text-sm sticky bg-white  ml-0 lg:px-4 top-0 z-30 focus:text-magenta justify-center  flex flex-col font-semibold `}>
                         <img 
                         src='/categories.png'
                         // src='/categories.png'

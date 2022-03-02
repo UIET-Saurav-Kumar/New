@@ -61,7 +61,7 @@ export function SidebarMenuItem({ className, item, depth = 0 }: any) {
 
   const { closeModal } = useModalAction();
 
-  
+  const shop_slug = ['chandigarhgrocerystore', 'kosmetics-india'];
   
 
   function onClick() {
@@ -73,12 +73,11 @@ export function SidebarMenuItem({ className, item, depth = 0 }: any) {
    displaySidebar && closeSidebar();
 
    { width < 976 ?
-    ( pageURL.includes('chandigarhgrocerystore') ?   window.scrollTo(0, 200) :
-     window.scrollTo(0, 670) ) : 
-     ( pageURL.includes('chandigarhgrocerystore') ?   window.scrollTo(0, 600) :
-     window.scrollTo(0, 0) )
-
-};
+    ( shop_slug?.some(el => pageURL.includes(el)) ?   window.scrollTo(0, 150) : 
+     window.scrollTo(0, 620) ) : 
+     ( shop_slug?.some(el => pageURL.includes(el)) ?   window.scrollTo(0, 570) :
+     window.scrollTo(0, 550) )
+  };
     
       router.push(
         {
@@ -142,7 +141,7 @@ export function SidebarMenuItem({ className, item, depth = 0 }: any) {
             >
             <div className='relative py-2 flex flex-col mx-auto h-auto  w-auto   px-2  place-items-center lg:grid-cols-2    items-center'>
                   { item?.image.id ? (
-                    <span className="flex  text-center w-auto h-auto items-center justify-center">
+                    <span className="flex text-center w-auto h-auto items-center justify-center">
                       <img src={item?.image?.original} className={` ${pageURL.includes('kosmetics-india') ? 'object-contain' : 'h-16 w-16 object-contain rounded-full'}  `} />
                     </span>
                   ) :

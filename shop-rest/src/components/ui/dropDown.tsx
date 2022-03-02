@@ -7,12 +7,11 @@ import { useRouter } from "next/router";
 import { useLocation } from "@contexts/location/location.context";
 import { useCreateLogMutation } from "@data/log/use-create-log.mutation";
 
-export default function DropDown({getLoc}:{getLoc:any}){
-
+export default function DropDown({getLoc}:{getLoc:any}) {
 
   const [inputValue,setInputValue] = useState("");
   const router = useRouter();
-  const {getLocation} = useLocation()
+  const {getLocation} =useLocation()
   const { mutate: createLog, isLoading: loading } = useCreateLogMutation();
   
   // useEffect(()=>{
@@ -26,10 +25,11 @@ export default function DropDown({getLoc}:{getLoc:any}){
   };
   
   const loadOptions = async (inputValue:any, callback:any) => {
+
       var data = await fetchSearch(inputValue);      
-      console.log('dropdown data',data)
       
       callback(data);
+     
       return data;
   };
 
@@ -37,22 +37,22 @@ export default function DropDown({getLoc}:{getLoc:any}){
   function getSearch(){
     var value;
     if(router.query.text){
-      var text=router.query.text as string;
+      var text = router.query.text as string;
       value={
         label:text,
         value:text
       }
-    } else {
+    }else{
       value={
         label:"",
         value:""
       }
     }
+
     return value;
   }
 
   function route(e:any=""){
-    
     var {pathname}=router;
     pathname="/"+router.locale+"/shops";
     const { type, ...rest } = router.query;
@@ -64,7 +64,6 @@ export default function DropDown({getLoc}:{getLoc:any}){
       search:text
     }, {
       onSuccess: (data: any) => {
-       
         console.log(data)
       },
     });
@@ -108,13 +107,12 @@ export default function DropDown({getLoc}:{getLoc:any}){
 
   
   function optionSelected(e:any){
-    clear()
+    // clear()
     // setInputValue(e);
     changeRoute(e)
   }
 
     return (
-
         <div  className='flex w-full'>
 
           <div className='w-full shadow-md  relative'>
@@ -124,8 +122,7 @@ export default function DropDown({getLoc}:{getLoc:any}){
                   // style={customStyles}
                   // defaultValue={inputValue.value}
                   loadOptions={loadOptions} 
-                  onClear={clear}
-                  value={inputValue}
+                  // value={inputValue}
                   // defaultOptions={loadOptions}
                   // onInputChange={handleInputChange}
                   placeholder={ <div className='text-xs sm:text-sm md:text:md  lg:text-sm'> Restaurants | Salons | Groceries </div>}
@@ -142,7 +139,6 @@ export default function DropDown({getLoc}:{getLoc:any}){
                   <SearchIcon className="w-4 h-4 me-2.5" />
               </button> */}
           </div>
-
         </div>
     );
 }

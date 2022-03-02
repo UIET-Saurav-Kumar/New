@@ -46,10 +46,12 @@ export  function useWindowDimensions() {
   return windowDimensions;
 }
 
-const slug = ['chandigarhgrocerystore', 'kosmetics-india'];
+
 
 
 const Search: React.FC<Props> = ({ label, ...props }) => {
+
+  const slug = ['chandigarhgrocerystore', 'kosmetics-india'];
 
   const { height, width } = useWindowDimensions();
 
@@ -115,10 +117,10 @@ const Search: React.FC<Props> = ({ label, ...props }) => {
     // }
 
     { width < 976 ?
-      ( slug.some(el => pageURL.includes(el)) ?   window.scrollTo(0, 150) : 
-       window.scrollTo(0, 670) ) : 
-       ( slug.some(el => pageURL.includes(el)) ?   window.scrollTo(0, 600) :
-       window.scrollTo(0, 0) )
+      ( slug?.some(el => pageURL.includes(el)) ?   window.scrollTo(0, 150) : 
+       window.scrollTo(0, 620) ) : 
+       ( slug?.some(el => pageURL.includes(el)) ?   window.scrollTo(0, 570) :
+       window.scrollTo(0, 560) )
     };
 
     router.push(
@@ -148,9 +150,9 @@ const Search: React.FC<Props> = ({ label, ...props }) => {
  
     { width < 976 ?
       ( slug.some(el => pageURL.includes(el)) ?   window.scrollTo(0, 150) : 
-       window.scrollTo(0, 670) ) : 
-       ( slug.some(el => pageURL.includes(el)) ?   window.scrollTo(0, 600) :
-       window.scrollTo(0, 0) )
+       window.scrollTo(0, 620) ) : 
+       ( slug.some(el => pageURL.includes(el)) ?   window.scrollTo(0, 570) :
+       window.scrollTo(0, 560) )
     };
 
     console.log('pathname',pathname);
