@@ -122,13 +122,27 @@ const OrderList = ({ orders, onPagination }: IProps) => {
       render: (children: any) => {
         
         var shopName =  children?.map( (child:any) =>
+        
          <h1>⊛ {child?.shop?.name}</h1>
         )
+        console.log('children', children)
           return  <h1 className="whitespace-wrap w-48 font-light">
-                 {shopName}
+                      {shopName}
                   </h1>
       },
     },
+
+
+    // {
+    //   title: t("shop name"),
+    //   dataIndex: "shop",
+    //   key: "shop",
+    //   align: "center",
+    //   render: (shop: any) => {
+       
+    //     return <span>{shop?.name}</span>;
+    //   },
+    // },
     
 
     {
@@ -162,10 +176,11 @@ const OrderList = ({ orders, onPagination }: IProps) => {
       align: "center",
       render: (delivery_time: any) => {
        
-        return <span>{delivery_time}</span>;
+        return <span>{delivery_time.split('(')[1].replace(')', '')}</span>;
       },
     },
 
+    //shop name
 
     {
       title: t("table:table-item-total"),
