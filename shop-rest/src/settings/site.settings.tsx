@@ -6,8 +6,11 @@ import { ROUTES } from "@utils/routes";
 import { toUnicode } from "punycode";
 
 var today = new Date();
+
 var month = today.getMonth() ;
+
 var date = today.getDate();
+
 const monthNames = ["Jan", "Feb", "March", "April", "May", "June",
   "July", "Aug", "Sep", "Oct", "Nov", "Dec"
 ];

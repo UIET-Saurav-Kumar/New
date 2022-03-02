@@ -36,6 +36,18 @@ const OrderList = ({ orders, onPagination }: IProps) => {
   const router = useRouter();
   const { alignLeft } = useIsRTL();
 
+  var today = new Date();
+
+  var month = today.getMonth() ;
+
+  const monthNames = ["Jan", "Feb", "March", "April", "May", "June",
+  "July", "Aug", "Sep", "Oct", "Nov", "Dec"
+];
+
+  var currDate = today.getDate() + ' ' + monthNames[month]
+
+  console.log('date',today.getDate() + ' ' + monthNames[month] );
+
 
   console.log('orders list', data);
  
@@ -176,7 +188,7 @@ const OrderList = ({ orders, onPagination }: IProps) => {
       align: "center",
       render: (delivery_time: any) => {
        
-        return <span>{delivery_time.split('(')[1].replace(')', '')}</span>;
+        return <span>{currDate ===  delivery_time.split('(')[1].replace(')', '') ? 'Today' + ' ' + delivery_time.split('(')[1].replace(')', '') :  delivery_time.split('(')[1].replace(')', '')   }</span>;
       },
     },
 
