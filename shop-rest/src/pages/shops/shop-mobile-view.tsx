@@ -38,7 +38,7 @@ export default function ShopMobileView({data}: any) {
   });
 
   useEffect(() => {
-    data.slug !== 'chandigarhgrocerystore' ? window.scrollTo(0, 670) : window.scrollTo(0, 0)
+    // data.slug !== 'chandigarhgrocerystore' ? window.scrollTo(0, 670) : window.scrollTo(0, 0)
  }, []);
 
   const categoryItem = () => {
