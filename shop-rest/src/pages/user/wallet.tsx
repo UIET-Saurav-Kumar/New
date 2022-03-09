@@ -10,9 +10,12 @@ import {useWalletCommissionQuery} from '@data/user/use-wallet-commission-query'
 import usePrice from "@utils/use-price";
 import { PriceWalletIcon } from "@components/icons/price-wallet";
 import { DollarIcon } from "@components/icons/dollar";
+import { useCustomerQuery } from "@data/customer/use-customer.query";
 
 
 const ReferralActivity = () => {
+
+    const { data:customerData } = useCustomerQuery();
     
     const { data,isLoading:loading } = useWalletCommissionQuery({
         limit: 10 as number,
@@ -74,6 +77,7 @@ const ReferralActivity = () => {
           </div>
         );
       }
+
 
       const month = ["Jan", "Feb", "March", "April", "May", "June",
                      "July", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -207,13 +211,13 @@ const ReferralActivity = () => {
                 <div className="flex flex-col  justify-evenly p-4 w-full lg:mx-8  lg:mt-6">
                     <div className='invite-tabs flex flex-col bg-white p-4 w-full mx-4 text-left lg:mt-5 '>
                         <div className="users-list lg:mt-10">
-                            <h1 className="text-lg mb-5 font-semibold text-heading">Your Wallet</h1>
+                           <div className='flex items-center justify-between'> <h1 className="text-lg mb-5 font-semibold text-heading">Your Wallet</h1>
+                           <p className=" mb-5 font-light text-gray-600 text-md">{customerData?.me?.name}</p></div>
 
                             {/* Mini Dashboard */}
                             <div className="order-4 mx-auto xl:order-3 col-span-12 xl:col-span-9">
                                 <div className="grid grid-cols-1  sm:grid-cols-2 md:grid-cols-3 gap-2 lg:gap-5 bg-light p-4 mx-auto rounded h-full">
-
-                               
+           
 
                                 <div className="space-y-3 shadow-lg border  w-full" style={{maxWidth:"450px",maxHeight:'200px'}}>
                                         <div className="">
