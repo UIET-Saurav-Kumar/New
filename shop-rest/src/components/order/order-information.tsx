@@ -72,7 +72,7 @@ const OrderInformation = (props: Props) => {
 
   return (
     <div className={props.className + ' ' + ' shadow-2xl'}>
-      <div className="flex flex-col border-b pb-2 border-border-200">
+      {/* <div className="flex flex-col border-b pb-2 border-border-200">
         {!isEmpty ? (
           items?.map((item: any) => {
             const notAvailable = checkoutData?.unavailable_products?.find(
@@ -89,21 +89,21 @@ const OrderInformation = (props: Props) => {
         ) : (
           <EmptyCartIcon />
         )}
-      </div>
+      </div> */}
 
       <div className="-mt-2  bg-white p-5">
         <div className="flex justify-between mb-3">
           <p className="text-sm font-semibold">{t("text-sub-total")}</p>
           <span className="text-sm font-bold">{sub_total}</span>
         </div>
-        {/* <div className="flex justify-between mb-3">
+        <div className="flex justify-between mb-3">
           <p className="text-sm text-body">{t("text-tax")}</p>
           <span className="text-sm text-body">{tax}</span>
-        </div> */}
-        {/* <div className="flex justify-between mb-3">
+        </div>
+        <div className="flex justify-between mb-3">
           <p className="text-sm text-body">{t("text-shipping")}</p>
           <span className="text-sm text-body">{shipping}</span>
-        </div> */}
+        </div>
         {discount ? (
 
           <>
