@@ -16,9 +16,9 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
 
 const classes = {
   normal:
-    "bg-light ps-6 pe-14 rounded-l-none   border border-e-0 border-transparent focus:border-accent",
+    "bg-light ps-6 pe-14 rounded-l-none  border border-e-0 border-transparent focus:border-accent",
   minimal:
-    "bg-gray-100 ps-10 pe-12 md:ps-14 border border-border-200 focus:border-accent focus:bg-light",
+    "bg-gray-100 ps-10 pe-6 md:ps-10 border border-border-200 focus:border-accent focus:bg-light",
 };
 
 const SearchBox: React.FC<Props> = ({
@@ -39,7 +39,7 @@ const SearchBox: React.FC<Props> = ({
       <div
         className={cn(
           "rounded md:rounded-lg flex relative",
-          variant === "normal" ? "h-14 shadow-900" : "h-8 w-full   items-center lg:w-full md:h-12"
+          variant === "normal" ? "h-14 shadow-900" : "h-8 w-full items-center lg:w-full md:h-12"
         )}
       >
         <label htmlFor={label} className="sr-only">
@@ -58,7 +58,7 @@ const SearchBox: React.FC<Props> = ({
           {...rest}
         />
         
-        {value && (
+        { value && (
           <button
             type="button"
             onClick={onClearSearch}

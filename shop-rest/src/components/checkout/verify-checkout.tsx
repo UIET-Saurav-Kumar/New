@@ -15,6 +15,8 @@ import { useCart } from "@contexts/quick-cart/cart.context";
 import { useModalAction } from "@components/ui/modal/modal.context";
 import { useWindowSize } from "@utils/use-window-size";
 import dynamic from "next/dynamic";
+import Scrollbar from "@components/ui/scrollbar";
+
 
 const CartCounterButton = dynamic(
   () => import("@components/cart/cart-counter-button"),
@@ -86,7 +88,7 @@ const VerifyCheckout = () => {
 
   return (
 
-    <div className="w-full relative">
+    <div className="w-full h-screen relative">
       <div style={{top: '102px'}} className="flex flex-col space-y-2 mt-4  p-2 sticky border border-blue-100  bg-blue-50">
 
         <div className="flex items-center justify-between space-s-4 mb-4">
@@ -110,7 +112,11 @@ const VerifyCheckout = () => {
         </div>
       </div>
 
-      <div className="flex flex-col py-3 border-b border-border-200">
+      <Scrollbar
+                className="w-full h-full lg:h-110"
+                // style={{ height: "calc(100% - 80px)" }}
+              >  
+        <div className="flex flex-col py-3 border-b border-border-200">
         {isEmpty ? (
           <div className="h-full flex flex-col items-center justify-center mb-4">
             <EmptyCartIcon width={140} height={176} />
@@ -129,6 +135,7 @@ const VerifyCheckout = () => {
         )}
 
       </div>
+      </Scrollbar>
       {/* <div className="space-y-2 mt-4">
         <div className="flex justify-between">
           <p className="text-sm text-body">{t("text-sub-total")}</p>
@@ -145,7 +152,7 @@ const VerifyCheckout = () => {
 
       <Button
         loading={loading}
-        className="w-full mt-5 sticky bottom-14  md:bottom-2"
+        className="w-full -mt-4 sticky bottom-14  md:bottom-2"
         onClick={handleVerifyCheckout}
         disabled={isEmpty}
       >
