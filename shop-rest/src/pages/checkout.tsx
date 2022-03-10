@@ -59,7 +59,7 @@ export default function CheckoutPage() {
 
         </div>
         
-        <div className="w-full lg:w-96 mb-10 sm:mb-12 lg:mb-0 mt-10">
+        <div className="w-full lg:w-96 mb-10 sm:mb-12  ">
           <VerifyCheckout />
         </div>
       </div>
