@@ -135,9 +135,9 @@ export default function DropDown({getLoc}:{getLoc:any}) {
 
     return (
 
-        <div  className='flex w-full'>
+        <div  className=' w-full relative'>
 
-          <div className='w-full shadow-md  relative'>
+          {/* <div className='w-full shadow-md  relative'> */}
             
               <AsyncSelect
                   cacheOptions
@@ -152,7 +152,7 @@ export default function DropDown({getLoc}:{getLoc:any}) {
                  
                 />
                   <SearchIcon className=" absolute right-3 top-3 lg:top-4  text-gray-400 w-4 h-4 me-2.5" />
-          </div>
+          {/* </div> */}
           
           <div>
               {/* <button onClick={clear} className="h-10 px-4 lg:h-12 xl:h-12 xl:px-8 flex items-center rounded-lg rounded-ts-none rounded-bs-none bg-accent 
