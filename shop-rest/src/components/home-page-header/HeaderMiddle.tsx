@@ -245,15 +245,15 @@ export default function HeaderMiddle() {
              className='flex flex-col  lg:shadow-md md:bg-white lg:bg-white'> 
 
 
-       <div className='relative z-30 px-4 flex justify-evenly max-w-full pt-8 pb-6 '>
+       <div className='relative z-30 px-4 flex justify-evenly max-w-full pt-4 pb-4 lg:pt-0 lg:pb-0  '>
               
 
                {/* searchbar  */}
-               <div className='  hidden lg:flex justify-around lg:justify-between p-0 lg:py-4 w-full px-4'>
+               <div className='  hidden lg:flex lg:items-center justify-around lg:justify-between p-0 lg:py-4 w-full px-4'>
 
-                    <div className = ' hidden lg:block px-0 mx-0 p-0 m-0' >
+                    <div className = ' hidden lg:block ' >
 
-                       <div style={{zIndex: 0}} className=''><Logo className=" mx-0 px-0 " /> </div>       
+                       <div style={{zIndex: 0}} className=''><Logo className="  " /> </div>       
                                           
                     </div>
                   
