@@ -9,6 +9,9 @@ import { ROUTES } from "@utils/routes";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import { useCart } from "@contexts/quick-cart/cart.context";
+import dynamic from "next/dynamic";
+import { useWindowSize } from "@utils/use-window-size";
+
 
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const cookies = parseContextCookie(context?.req?.headers?.cookie);
@@ -22,7 +25,13 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
   };
 };
 
+const CartCounterButton = dynamic(
+  () => import("@components/cart/cart-counter-button"),
+  { ssr: false }
+);
+
   const OrderPage = () => {
+    const { width } = useWindowSize();
   const { t } = useTranslation("common");
   const { isEmpty } = useCart();
   if (isEmpty) {
@@ -54,10 +63,11 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
             <PaymentForm />
           </div>
         </div>
-        <div className="w-full lg:w-96 order-1 lg:order-2 mb-10 sm:mb-12 lg:mb-0">
+        <div className="w-full lg:w-96 order-1 mt-2 lg:order-2 mb-10 sm:mb-12 lg:mb-0">
           <OrderInformation />
         </div>
       </div>
+      {width > 1023 && <CartCounterButton />}
     </div>
   );
 };
