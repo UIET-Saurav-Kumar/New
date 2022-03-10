@@ -147,16 +147,16 @@ const CheckoutCartItem = ({ item, notAvailable }: Props) => {
               <span
                 className={cn("text-sm", notAvailable ? "text-red-500" : "text-body")}
               >
-                <span>Delivery Charges</span>
+                <span className="text-gray-800 ">Delivery Charges</span>
               </span>
             </p>
             <span
-              className={cn("text-sm", notAvailable ? "text-red-500" : "text-body")}
+              className={cn("text-sm", notAvailable ? "text-red-500" : "text-green-500")}
             >
             {
               shopOrderPrice>item?.shop?.free_delivery_order_value
               ?
-              "Free Delivery"
+              <span className="font-semibold">Free Delivery</span>
               :
               delivery_charges
             } 
@@ -175,7 +175,7 @@ const CheckoutCartItem = ({ item, notAvailable }: Props) => {
                   <p
                     className="text-sm text-red-500"
                   >
-                    Buy items of {free_delivery_order_value} to get free delivery
+                    Buy items of {free_delivery_order_value} to get free delivery on this item
                     <button onClick={()=>router.push("/shops/"+item?.shop?.slug)} className="inline-flex items-center justify-center flex-shrink-0 font-semibold leading-none rounded outline-none transition duration-300 ease-in-out focus:outline-none focus:shadow focus:ring-1 focus:ring-accent-700 bg-accent text-light border border-transparent hover:bg-accent-hover px-2 py-0 h-8 w-10 mt-5 ml-3" style={{fontSize:"10px"}}>Buy more</button>
                   </p>
                 )
