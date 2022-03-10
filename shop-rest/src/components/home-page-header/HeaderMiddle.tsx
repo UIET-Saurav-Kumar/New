@@ -275,14 +275,18 @@ export default function HeaderMiddle() {
 
                     </div>
 
-                           { isAuthorize ? 
+                           { isAuthorize && 
                                <div className='hidden lg:inline-flex lg:ml-8 lg+:ml-0  xl:inline-flex'>
                                  <AuthorizedMenu/>
                                </div>
-                            : 
-                               <div className=' hidden lg:inline-flex xl:inline-flex lg:ml-4 lg+:ml-0'>
+                           
+                           }  
+
+                           { !isAuthorize && 
+                               <div className='hidden lg:inline-flex lg:ml-8 lg+:ml-0  xl:inline-flex'>
                                  <JoinButton/>
-                               </div> 
+                               </div>
+                           
                            }  
 
                </div>
