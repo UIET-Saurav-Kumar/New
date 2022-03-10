@@ -28,15 +28,7 @@ const Logo: React.FC<React.AnchorHTMLAttributes<{}>> = ({
           height: siteSettings.logo.height,
         }}
       > */}
-      <div className='relative z-10 w-10 h-10 lg:w-12 lg:h-12 overflow-hidden'>
-        <Image
-          src='/transparent-logo.png'
-          alt={'Buylowcal.com'}
-          layout="fill"
-          objectFit="contain"
-          loading="eager"
-        />
-        </div>
+      <img src='3d-logo.png' className='lg:w-16 w-10' />
 
         {/* <img src={ siteSettings.logo.url} className='h-10 w-10' /> */}
       {/* </span> */}
