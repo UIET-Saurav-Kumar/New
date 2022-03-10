@@ -199,7 +199,7 @@ const NavbarWithSearch = () => {
       >
         {!displayMobileSearch ? (
           <div className="w-full flex space-x-6 items-center  justify-between">
-             <Logo className="mx-auto  bg-black border  p-0 lg:mx-0" />
+           <div className="w-20" > <Logo className="" /></div>
             {/* <Search label={t("text-search-label")} variant="minimal" /> */}
                 <div className='hidden lg:flex items-center focus-ring-2 justify-center
                                       lg:w-3/4 2xl:mx-auto lg:mx-auto 
