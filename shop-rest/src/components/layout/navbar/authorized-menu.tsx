@@ -33,11 +33,13 @@ export default function AuthorizedMenu() {
     close();
     router.push(path);
   }
+
+  console.log('me data',data)
   return (
     <>
       <button
         type="button"
-        className="flex items-center  md:mr-16 lg:mr-10 lg+:pl-12 focus:outline-none"
+        className="flex flex-col items-center  md:mr-16 lg:mr-10 lg+:pl-12 focus:outline-none"
         aria-label="toggle profile dropdown"
         onClick={() => setOpen(!isOpen)}
         {...triggerProps}
@@ -48,6 +50,7 @@ export default function AuthorizedMenu() {
           }
           title="user name"
         />
+        { <p className="text-xs tracking-wide text-gray-700">{data?.me?.name.split(' ')[0]}</p>}
         <span className="sr-only">{t("user-avatar")}</span>
       </button>
 
