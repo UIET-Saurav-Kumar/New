@@ -25,8 +25,6 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
 
   const { data, isLoading: loading } = useProductQuery(productSlug);
 
-
-
   const { t } = useTranslation("common");
 
   const { name,unit,slug, image, quantity, min_price, max_price, product_type } =
@@ -35,9 +33,11 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
     amount: product.price ? product.price : product.price!,
     baseAmount: product.sale_price,
   });
+  
   const { price: minPrice } = usePrice({
     amount: min_price,
   });
+
   const { price: maxPrice } = usePrice({
     amount: max_price,
   });

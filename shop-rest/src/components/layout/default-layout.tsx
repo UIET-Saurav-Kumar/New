@@ -10,9 +10,9 @@ const DefaultLayout: React.FC = ({ children }) => {
 
   return (
        
-    <div className="flex flex-col transition-colors duration-150">
+    <div className="relative flex flex-col transition-colors duration-150">
         {/* <HeaderTop/>  */}
-        <HeaderMiddle/> 
+       <div className='sticky z-50 bg-white top-0'> <HeaderMiddle/> </div>
             <div>{children}</div>
             <Footer/>
     </div>

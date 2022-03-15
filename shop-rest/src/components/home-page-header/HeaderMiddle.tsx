@@ -238,6 +238,8 @@ export default function HeaderMiddle() {
         handleLocation()
     }
 
+    console.log('Login', isAuthorize);
+
     
     return (
 
@@ -275,19 +277,19 @@ export default function HeaderMiddle() {
 
                     </div>
 
-                           { isAuthorize && 
+                          
                                <div className='hidden lg:inline-flex lg:ml-8 lg+:ml-0  xl:inline-flex'>
-                                 <AuthorizedMenu/>
+                               { isAuthorize ?  <AuthorizedMenu/> : <JoinButton/> }
                                </div>
                            
-                           }  
+                          
 
-                           { !isAuthorize && 
+                           {/* { !isAuthorize && 
                                <div className='hidden lg:inline-flex lg:ml-8 lg+:ml-0  xl:inline-flex'>
-                                 <JoinButton/>
+                                 
                                </div>
                            
-                           }  
+                           }   */}
 
                </div>
 

@@ -6,6 +6,8 @@ import { AddToCart } from "@components/product/add-to-cart/add-to-cart";
 import { useTranslation } from "next-i18next";
 import { useModalAction } from "@components/ui/modal/modal.context";
 import { useEffect,useState } from "react";
+import Link from "@components/ui/link";
+import { ROUTES } from "@utils/routes";
 
 
 type HeliumProps = {
@@ -15,7 +17,7 @@ type HeliumProps = {
 
 const Helium: React.FC<HeliumProps> = ({ product, className }) => {
   const { t } = useTranslation("common");
-  const { name, image, unit, quantity } = product ?? {};
+  const { name, image, unit,slug, quantity } = product ?? {};
   const { openModal } = useModalAction();
   const { price, basePrice, discount } = usePrice({
     amount: product.price,
@@ -39,8 +41,9 @@ const Helium: React.FC<HeliumProps> = ({ product, className }) => {
         className
       )}
     >
+      <Link href={`${ROUTES.PRODUCT}/${slug}`}>
       <div
-        onClick={handleProductQuickView}
+        // onClick={handleProductQuickView}
         className="relative flex items-center justify-center w-auto h-24 sm:h-64"
         role="button"
       >
@@ -58,6 +61,8 @@ const Helium: React.FC<HeliumProps> = ({ product, className }) => {
           </div>
         )}
       </div>
+
+      </Link>
       {/* End of product image */}
 
       <header className="p-3 md:p-6 relative">

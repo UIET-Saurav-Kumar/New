@@ -4,7 +4,7 @@ import React from 'react';
 import Layout from "@components/layout/layout";
 import { useRouter } from "next/router";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useState, useRef } from "react";
+import { useState, useRef,useEffect } from "react";
 import { useAllProductsQuery } from "@data/product/products.query";
 import { motion } from "framer-motion";
 import SalonCard from '@components/product/product-card/salon-card';
@@ -264,6 +264,37 @@ export default function SalonProducts() {
     useOnClickOutside(sortRef, () => setSortList(false));
     useOnClickOutside(sortGenderRef, () => setSortGenderList(false));
 
+
+
+    const [show, setShow] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(200);
+  
+    const controlNavbar = () => {
+      if (typeof window !== 'undefined') { 
+        if (window.scrollY > lastScrollY) { // if scroll down hide the navbar
+          setShow(false); 
+        } else { // if scroll up show the navbar
+          setShow(true);  
+        }
+  
+        // remember current page location to use in the next move
+        setLastScrollY(window.scrollY); 
+      }
+    };
+
+    console.log('scrolly', window.scrollY);
+  
+    useEffect(() => {
+      if (typeof window !== 'undefined') {
+        window.addEventListener('scroll', controlNavbar);
+  
+        // cleanup function
+        return () => {
+          window.removeEventListener('scroll', controlNavbar);
+        };
+      }
+    }, [lastScrollY]);
+
     // const category = query?.category as string;
 
 
@@ -281,14 +312,14 @@ export default function SalonProducts() {
                     
                   {/* <CategoryDropdownSidebar data={data}/> */}
                   {/* <HidingHeader>   */}
-                     <div className=''> <SalonProductsCategories  btn2={btn2} btn={btn} /> </div>
+                     <div className='sticky top-14 z-40'> <SalonProductsCategories  btn2={btn2} btn={btn} /> </div>
                       {/* </HidingHeader>  */}
 
                   
 
                   {/* <h1>{sortList ? () => alert('true') : false}</h1> */}
 
-             <div className='flex items-center bg-white justify-between w-full'>  
+                     <div style={{top:'134px'}} className={` ${show ? 'block' :'hidden' } flex sticky z-40 items-center bg-white justify-between w-full`}>  
 
                <div className='relative mt-3 w-24 lg:w-28 bg-white flex justify-end ml-2 lg:ml-4 rounded'>
 
@@ -342,7 +373,7 @@ export default function SalonProducts() {
                     </div>
                   </div>
 
-                  </div>
+                  </div> 
                   
 
                             
