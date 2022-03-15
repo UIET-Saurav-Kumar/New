@@ -54,7 +54,7 @@ export const getStaticProps = async ({ locale }: any) => {
         src : '/salon/3.jpg',
         icon: '/salon/facial-women.jpeg',
         slug: 'facial',
-        name:'Facial'
+        name: 'Facial'
     },
     {
         id : "4",
@@ -106,7 +106,7 @@ export const getStaticProps = async ({ locale }: any) => {
         id : "10",
         src : '/salon/10.jpg',
         icon: '/salon/skincare.png',
-        slug: 'facial',
+        slug: 'men-facial',
         name: 'Facial'
     },
     {
@@ -188,7 +188,6 @@ export default function SalonProducts() {
 
     function  handleClick(img: any) {
       
-
       const { pathname, query } = router;
       // const { pathname, query } = router;
   

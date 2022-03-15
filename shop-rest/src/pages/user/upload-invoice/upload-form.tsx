@@ -193,7 +193,7 @@ export default function UploadBill({user} : Props) {
 
       <ul className='font-light text-gray-700 font-serif space-y-4 tracking-normal'>
           <li>● Maximum Cash in Account is Rs.50 Per Invoice or 10% of the Invoice Value without GST.</li>
-          <li>● Maximum Amount any Consumer can earn in a month is Rs.200</li>
+          <li>● User can avail cashback on one invoice only. </li>
           <li>● The Name or Number on the invoice should match the account holder 
                and registered mobile number on BuyLowcal.com</li>
           <li>● The bill should be maximum 3 days old from the date it is uploaded</li>

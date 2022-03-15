@@ -20,8 +20,6 @@ type NeonProps = {
 };
 
 
-
-
 const SalonCard: React.FC<NeonProps> = ({ product, className, productSlug }) => {
 
   const { data, isLoading: loading } = useProductQuery(productSlug);
