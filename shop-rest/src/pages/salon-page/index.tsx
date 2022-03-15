@@ -11,7 +11,7 @@ import { Fragment, useRef } from "react";
 import dynamic from "next/dynamic";
 import { useAllProductsQuery } from "@data/product/products.query";
 import { useState } from "react";
-import product from './repositories/product';
+import product from '../../components/repositories/product';
 import Layout from '@components/layout/layout';
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import SalonCard from '@components/product/product-card/salon-card';

@@ -6,7 +6,7 @@ import {
 
 import { mapPaginatorData,parseSearchString } from "@utils/data-mappers";
 import { useQuery } from "react-query";
-import Product from "../../pages/salon-page/repositories/product";
+import Product from "../../components/repositories/product";
 import { API_ENDPOINTS } from "@utils/api/endpoints";
 
 
