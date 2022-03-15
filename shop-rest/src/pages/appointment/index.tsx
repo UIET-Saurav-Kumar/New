@@ -105,8 +105,8 @@ export default function Appointment({user} : Props) {
   
   return (
     
-    <div className="w-full">
-        <div className=" flex w-full p-3 h-16 shadow-lg sticky mt-0">
+    <div className="relative w-full">
+        <div className=" sticky top-0 z-40 flex w-full p-3 shadow-lg bg-white mt-0">
             <Logo/>
         </div>
 
