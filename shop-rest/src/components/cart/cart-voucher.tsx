@@ -15,6 +15,7 @@ const CartVoucher = () => {
     e.preventDefault();
   }
   return (
+    
     <div ref={voucherRef} className="text-center mt-2 mb-5">
       <AnimatePresence initial={false}>
         {toggleVoucher ? (

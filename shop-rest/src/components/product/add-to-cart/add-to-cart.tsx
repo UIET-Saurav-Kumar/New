@@ -45,10 +45,12 @@ export const AddToCart = ({
     isInCart,
   } = useCart();
 
+
   const item = generateCartItem(data, variation);
   const { mutate: createLog} = useCreateLogMutation();
   const {getLocation} =useLocation()
 
+  
   const handleAddClick = (
     e: React.MouseEvent<HTMLButtonElement | MouseEvent>
   ) => {

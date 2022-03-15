@@ -52,6 +52,7 @@ export  function useWindowDimensions() {
 const Search: React.FC<Props> = ({ label, ...props }) => {
 
   const slug = ['chandigarhgrocerystore', 'kosmetics-india'];
+  const slug2 = ['salon-page', 'salon-products']
 
   const { height, width } = useWindowDimensions();
 
@@ -120,10 +121,13 @@ const Search: React.FC<Props> = ({ label, ...props }) => {
       ( slug?.some(el => pageURL.includes(el)) ?   window.scrollTo(0, 150) : 
        window.scrollTo(0, 620) ) : 
        ( slug?.some(el => pageURL.includes(el)) ?   window.scrollTo(0, 570) :
+       slug2?.some(el => pageURL.includes(el)) ?   window.scrollTo(0, 0) :
        window.scrollTo(0, 560) )
     };
 
-    router.push(
+    console.log('pathname', pathname)
+
+  { pathname !== '/salon-page' ? router.push(
       {
         // pathname,
         query: { ...rest, text: searchTerm, category: null },
@@ -135,33 +139,40 @@ const Search: React.FC<Props> = ({ label, ...props }) => {
       {
         scroll: false,
       }
-    );
+    )    :   router.push(
+     
+      {
+        pathname: '/salon-products',
+        query: { ...rest, text: searchTerm, category: null },
+      },
+     
+      )
+  }
   };
 
   function clearSearch() {
 
     updateSearchTerm("");
-    
-    
+
     const { pathname, query } = router;
     const { type, text, ...rest } = query;
-
-
  
     { width < 976 ?
       ( slug.some(el => pageURL.includes(el)) ?   window.scrollTo(0, 150) : 
        window.scrollTo(0, 620) ) : 
        ( slug.some(el => pageURL.includes(el)) ?   window.scrollTo(0, 570) :
+       slug2?.some(el => pageURL.includes(el)) ?   window.scrollTo(0, 0) :
        window.scrollTo(0, 560) )
     };
 
     console.log('pathname',pathname);
     console.log('query',query);
+    console.log('url',query.slug)
 
     if (text) {
       router.push(
         {
-          query: { ...rest, category: null },
+          query: { ...rest, category: pathname === '/salon-products' ? 'menicure-pedicure' : null},
           
          },
        

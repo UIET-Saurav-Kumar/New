@@ -4,36 +4,45 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { useTranslation } from "next-i18next";
 import "swiper/swiper-bundle.css";
 // dummy data
+
+
 const data = [
 
   {
     id: 3,
     title: "banner:promotion-slide-three",
-    bannerUrl: "/ad-banner/3.jpeg",
+    bannerUrl: "/ad-banner/sevensky.jpg",
   },
-
   {
     id: 8,
     title: "banner:promotion-slide-eight",
-    bannerUrl: "/ad-banner/8.jpeg",
+    bannerUrl: "/ad-banner/fly.jpg",
+  },
+  {
+    id: 18,
+    title: "banner:promotion-slide-eight",
+    bannerUrl: "/ad-banner/hanif.jpg",
+  },
+  {
+    id: 48,
+    title: "banner:promotion-slide-eight",
+    bannerUrl: "/ad-banner/ki-ka.jpg",
   },
   {
     id: 9,
     title: "banner:promotion-slide-nine",
-    bannerUrl: "/ad-banner/9.jpeg",
+    bannerUrl: "/ad-banner/2.jpeg",
   },
   {
     id: 10,
     title: "banner:promotion-slide-ten",
-    bannerUrl: "/ad-banner/10.jpeg",
+    bannerUrl: "/ad-banner/4.jpeg",
   },
-  
   {
     id: 11,
     title: "banner:promotion-slide-eleven",
     bannerUrl: "/ad-banner/11.jpeg",
   },
-
   {
     id: 1,
     title: "banner:promotion-slide-one",
@@ -42,14 +51,9 @@ const data = [
   {
     id: 2,
     title: "banner:promotion-slide-two",
-    bannerUrl: "/ad-banner/2.jpeg",
+    bannerUrl: "/ad-banner/9.jpeg",
   },
   
-  {
-    id: 4,
-    title: "banner:promotion-slide-four",
-    bannerUrl: "/ad-banner/4.jpeg",
-  },
   {
     id: 5,
     title: "banner:promotion-slide-five",
@@ -65,12 +69,12 @@ const data = [
     title: "banner:promotion-slide-seven",
     bannerUrl: "/ad-banner/7.jpeg",
   },
+  {
+    id: 4,
+    title: "banner:promotion-slide-four",
+    bannerUrl: "/ad-banner/10.jpeg",
+  },
  
-  
-
- 
-
-
 ];
 
 const offerSliderBreakpoints = {
@@ -87,7 +91,7 @@ const offerSliderBreakpoints = {
     spaceBetween: 2,
   },
   1024: {
-    slidesPerView: 7,
+    slidesPerView: 9,
     spaceBetween: 4,
   },
   1920: {
@@ -95,12 +99,15 @@ const offerSliderBreakpoints = {
     spaceBetween: 10,
   },
 };
+
 SwiperCore.use([Navigation]);
 
 export default function PromotionSlider() {
   const { t } = useTranslation();
+
   return (
-    <div className=" px-2 md:px-8 xl:px-8  ">
+
+    <div className=" px-2 md:px-8 xl:px-8">
       <div className="relative">
         <Swiper
           id="offer"
@@ -114,7 +121,7 @@ export default function PromotionSlider() {
           {data?.map((d) => (
             <SwiperSlide key={d.id}>
               <img
-                className="w-28 object-fit h-28 lg:h-44 lg:w-44 border "
+                className="w-28 object-fit rounded h-28 lg:h-44 lg:w-44 border "
                 src={d.bannerUrl}
                 // alt={t(d.title)}
               

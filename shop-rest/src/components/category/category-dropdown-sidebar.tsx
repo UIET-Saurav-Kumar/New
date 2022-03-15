@@ -35,12 +35,13 @@ const CategoryDropdownSidebar = ({data}) => {
     const { pathname , query } = router;
 
     const navigate = () =>
-    { width < 976 ?
-      ( slug?.some(el => pageURL.includes(el)) ?   window.scrollTo(0, 150) : 
-       window.scrollTo(0, 620) ) : 
-       ( slug?.some(el => pageURL.includes(el)) ?   window.scrollTo(0, 570) :
-       window.scrollTo(0, 550) )
-    };
+    
+      { width < 976 ?
+        ( slug?.some(el => pageURL.includes(el)) ?   window.scrollTo(0, 150) : 
+        window.scrollTo(0, 620) ) : 
+        ( slug?.some(el => pageURL.includes(el)) ?   window.scrollTo(0, 570) :
+        window.scrollTo(0, 550) )
+      };
 
       router.push(
         {
@@ -81,7 +82,7 @@ const CategoryDropdownSidebar = ({data}) => {
     <>
     {/* web */}
     
-    <aside className="hidden lg:block items-center justify-center h-full   bg-light">
+    <aside className="hidden lg:block items-center justify-center h-full bg-light">
       <div className="max-h-full flex max-w-full">
         <button onClick={allCategories} className={` ${query.category == ''  ? 'text-magenta' : 'text-gray-600'} text-sm sticky bg-white  ml-0 lg:px-4 top-0 z-40 focus:text-magenta justify-center  flex flex-col font-semibold `}>
                 <img 

@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 
 export default function AuthorizedMenu() {
+
   const { data } = useCustomerQuery();
   const [isOpen, setOpen] = useState(false);
   const router = useRouter();
@@ -35,23 +36,26 @@ export default function AuthorizedMenu() {
   }
 
   console.log('me data',data)
+
   return (
+
     <>
+
       <button
-        type="button"
-        className="flex flex-col items-center  md:mr-16 lg:mr-10 lg+:pl-12 focus:outline-none"
-        aria-label="toggle profile dropdown"
-        onClick={() => setOpen(!isOpen)}
-        {...triggerProps}
-      >
-        <Avatar
-          src={
-            data?.me?.profile?.avatar?.thumbnail ?? "/avatar-placeholder.svg"
-          }
-          title="user name"
-        />
-        { <p className="text-xs tracking-wide text-gray-700">{data?.me?.name.split(' ')[0]}</p>}
-        <span className="sr-only">{t("user-avatar")}</span>
+          type="button"
+          className="flex flex-col items-center  md:mr-16 lg:mr-10 lg+:pl-12 focus:outline-none"
+          aria-label="toggle profile dropdown"
+          onClick={() => setOpen(!isOpen)}
+          {...triggerProps}
+        >
+          <Avatar
+            src={
+              data?.me?.profile?.avatar?.thumbnail ?? "/avatar-placeholder.svg"
+            }
+            title="user name"
+          />
+          { <p className="text-xs tracking-wide text-gray-700">{data?.me?.name.split(' ')[0]}</p>}
+          <span className="sr-only">{t("user-avatar")}</span>
       </button>
 
       {renderLayer(
@@ -67,12 +71,12 @@ export default function AuthorizedMenu() {
             >
               {siteSettings.authorizedLinks.map(({ href, label }) => (
                 <li key={`${href}${label}`}>
-                  <button
-                    onClick={() => handleClick(href)}
-                    className="block w-full py-2.5 px-6 text-sm text-start font-semibold capitalize text-heading transition duration-200 hover:text-accent focus:outline-none"
-                  >
-                    {t(label)}
-                  </button>
+                    <button
+                      onClick={() => handleClick(href)}
+                      className="block w-full py-2.5 px-6 text-sm text-start font-semibold capitalize text-heading transition duration-200 hover:text-accent focus:outline-none"
+                    >
+                      {t(label)}
+                    </button>
                 </li>
               ))}
             </motion.ul>

@@ -33,7 +33,6 @@ const AllCategories = () => {
 	function getLink(category:String){
 
 		var pathname="/"+router.locale+"/shops?category="+category.replace("&","-");
-		
 
 		return pathname;
 		
@@ -48,9 +47,16 @@ const AllCategories = () => {
 		
 	}
 
-	
+	//getLinkSalonSpa
+	function getLinkSalonSpa(){
 
-	console.log('categories',data?.categories?.data)
+		var pathname="/salon-page";
+
+		return pathname;
+	}
+
+
+	// console.log('categories',data?.categories?.data)
 
 	
 	return (
@@ -69,7 +75,7 @@ const AllCategories = () => {
 			{data?.categories?.data.map( (category,_idx) => (
 				
 					<Link className="categories-link" 
-						key={_idx} href={category.name === 'Groceries' && location() ?  getLinkGrocery()    :    getLink(category.name)}>
+						key={_idx} href={category.name === 'Groceries' && location() ?  getLinkGrocery()    : category?.name === 'Salon & Spa' && location() ? getLinkSalonSpa() :  getLink(category.name)}>
 					
 						<div className='rounded flex flex-col w-full  cursor-pointer  border-gray-200 
 										hover:border-gray-400  items-center'

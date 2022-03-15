@@ -10,7 +10,8 @@ import Link from "@components/ui/link";
 import { ROUTES } from "@utils/routes";
 import { PlusIcon } from "@heroicons/react/outline";
 import router from "next/router";
-
+import { useRouter } from "next/router";
+import { useEffect,useState } from "react";
 
 type NeonProps = {
   product: any;
@@ -21,11 +22,9 @@ type NeonProps = {
 
 
 
-const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
+const SalonCard: React.FC<NeonProps> = ({ product, className, productSlug }) => {
 
   const { data, isLoading: loading } = useProductQuery(productSlug);
-
-
 
   const { t } = useTranslation("common");
 
@@ -51,28 +50,37 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
   //     )
   //   : true;
 
+  const [pageURL, setPageUrl] = useState('');
+
+  useEffect(() => {
+    setPageUrl(window.location.href)
+  }, []);
+
+
   function handleProductQuickView() {
     return openModal("PRODUCT_DETAILS", product.slug);
   }
+
+  console.log('product shop name', product)
 
   return (
 
     <article
       style={{maxWidth:"330px"}}
       className={cn(
-        "product-card cart-type-neon rounded h-full bg-light overflow-hidden shadow-sm transition-all duration-200 hover:shadow ",
+        "product-card relative cart-type-neon rounded h-full bg-light overflow-hidden shadow-sm transition-all duration-200 hover:shadow ",
         className
       )}
     >
        <Link href={`${ROUTES.PRODUCT}/${slug}`}>
-         
       <div
         className="relative flex items-center justify-center cursor-pointer w-auto h-48 p-4 xl:p-12 sm:h-64"
+        
       >
         <span className="sr-only">{t("text-product-image")}</span>
         
           <Image
-            src={product.image?.original?? siteSettings?.product?.placeholderImage}
+            src={product?.shop?.logo?.original?? siteSettings?.product?.placeholderImage}
             alt={product.name}
             layout="fill"
             objectFit="contain"
@@ -103,28 +111,38 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
           </div>
         ) : (
           <div className="flex items-center  mb-2">
-          <span className="text-sm md:text-base text-product-price font-bold">
-            {basePrice ? basePrice : price}
-          </span>
-          {discount && (
-            <del className="text-xs md:text-sm text-discount ms-2">{price}</del>
-          )}
-        </div>
+            <span className="text-sm md:text-base text-product-price font-bold">
+              {basePrice ? basePrice : price}
+            </span>
+            {discount && (
+              <del className="text-xs md:text-sm text-discount ms-2">{price}</del>
+            )}
+          </div>
         )}
+
+        
         {/* End of product price */}
 
         <h3
-          className="text-xs md:text-sm font-semibold text-gray-700 truncate mb-4 cursor-pointer"
+          className="text-xs md:text-sm font-semibold text-gray-700 truncate mb-2 cursor-pointer"
         >
            <div className='flex flex-col'>{name}<h3>{unit}</h3></div>
         </h3>
         {/* End of product title */}
+
+        {pageURL.includes('salon-page') ? (
+          <div className=' flex text-xs text-gray-800 mb-4 font-light'>
+            {product?.shop?.name} 
+            </div> ) :
+            null
+        }
+
         {product_type.toLowerCase() === 'variable' ? (
           <>
             {Number(quantity) > 0 && (
               <button
-                onClick={()=>router.push(`${ROUTES.PRODUCT}/${slug}`)}
-                className="group w-full h-7 md:h-9 flex items-center justify-between text-xs md:text-sm text-body-dark rounded bg-gray-100 transition-colors hover:bg-accent hover:border-accent hover:text-light focus:outline-none focus:bg-accent focus:border-accent focus:text-light"
+                onClick = {()=>router.push(`${ROUTES.PRODUCT}/${slug}`)}
+                className = "group w-full h-7 md:h-9 flex items-center justify-between text-xs md:text-sm text-body-dark rounded bg-gray-100 transition-colors hover:bg-accent hover:border-accent hover:text-light focus:outline-none focus:bg-accent focus:border-accent focus:text-light"
               >
                 <span className="flex-1">{t('text-add')}</span>
                 <span className="w-7 h-7 md:w-9 md:h-9 bg-gray-200 grid place-items-center rounded-te rounded-be transition-colors duration-200 group-hover:bg-accent-600 group-focus:bg-accent-600">
@@ -132,6 +150,7 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
                 </span>
               </button>
             )}
+
           </>
         ) : (
           <>
@@ -153,4 +172,4 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
   );
 };
 
-export default Neon2;
+export default SalonCard;

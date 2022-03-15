@@ -5,6 +5,8 @@ import { siteSettings } from "@settings/site.settings";
 import { AddToCart } from "@components/product/add-to-cart/add-to-cart";
 import { useTranslation } from "next-i18next";
 import { useModalAction } from "@components/ui/modal/modal.context";
+import { useEffect,useState } from "react";
+
 
 type HeliumProps = {
   product: any;
@@ -23,17 +25,23 @@ const Helium: React.FC<HeliumProps> = ({ product, className }) => {
   function handleProductQuickView() {
     return openModal("PRODUCT_DETAILS", product.slug);
   }
+  const [pageURL, setPageUrl] = useState('');
+
+  useEffect(() => {
+    setPageUrl(window.location.href)
+  }, []);
+
 
   return (
     <article
       className={cn(
-        "product-card cart-type-helium rounded h-full bg-light overflow-hidden transition-shadow duration-200 hover:shadow-sm",
+        "product-card cart-type-helium border  rounded h-full bg-light overflow-hidden transition-shadow duration-200 hover:shadow-sm",
         className
       )}
     >
       <div
         onClick={handleProductQuickView}
-        className="relative flex items-center justify-center w-auto h-48 sm:h-64"
+        className="relative flex items-center justify-center w-auto h-24 sm:h-64"
         role="button"
       >
         <span className="sr-only">{t("text-product-image")}</span>
@@ -61,6 +69,13 @@ const Helium: React.FC<HeliumProps> = ({ product, className }) => {
           {name}
         </h3>
         <p className="text-muted text-xs">{unit}</p>
+
+        {pageURL.includes('salon-products') ? (
+          <div className=' flex text-xs text-gray-600 mb-4  mt-2 font-light'>
+            {product?.shop?.name} 
+            </div> ) :
+            null
+        }
         {/* End of product info */}
 
         <div className="flex items-center justify-between min-h-6 mt-7 md:mt-8 relative">

@@ -72,10 +72,10 @@ export default function ShopMobileView({data}: any) {
 
             <div className='px-2 w-full grid grid-cols-1 sm:flex'>
 
-            {  slug.some(el => data.slug.includes(el)) ? null :
+            { slug.some(el => data.slug.includes(el)) ? null :
                 (   <div className='hidden sm:block w-48 h-38 sm:h-72 sm:w-80 md:h-72 lg:w-96'> 
                     <ShopProfileCard data={data} /> 
-                </div>)  }
+                   </div>)  }
                 
                 <div className='w-full flex-grow'>
                    <img alt={t("heading")} 

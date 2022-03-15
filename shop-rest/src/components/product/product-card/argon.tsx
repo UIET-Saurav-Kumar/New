@@ -33,6 +33,7 @@ const Argon: React.FC<ArgonProps> = ({ product, className }) => {
       role="button"
     >
       <div className="relative flex items-center justify-center w-auto h-48 sm:h-52">
+       
         <span className="sr-only">{t("text-product-image")}</span>
         <Image
           src={image?.original ?? siteSettings?.product?.placeholderImage}
@@ -46,6 +47,7 @@ const Argon: React.FC<ArgonProps> = ({ product, className }) => {
             {discount}
           </div>
         )}
+
         <div className="absolute top-3 end-3 md:top-4 md:end-4">
           {quantity > 0 ? (
             <AddToCart variant="argon" data={product} />
@@ -55,6 +57,7 @@ const Argon: React.FC<ArgonProps> = ({ product, className }) => {
             </div>
           )}
         </div>
+
       </div>
       {/* End of product image */}
 
