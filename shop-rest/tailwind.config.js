@@ -190,6 +190,7 @@ module.exports = {
           "google-hover": "#dfb054",
         },
       },
+
       textColor: {
         'product-price': '#e01d56',
         'discount': '#dfb054',
@@ -208,10 +209,27 @@ module.exports = {
         40: "10rem", // 140px
         6: "2.5rem",
       },
+
       height: {
         4.5: "1.125rem",
         13: "3.125rem",
         22: "5.25rem",
+        30: "6.25rem",
+        40: "10rem",
+        50: "12.5rem",
+        65: "16.25rem",
+        66: "16.5rem",
+        67: "16.75rem",
+        68: "17rem",
+        69: "17.25rem",
+        60: "15rem",
+        70: "17.5rem",
+        71: "17.75rem",
+        72: "18rem",
+        73: "18.25rem",
+        74: "18.5rem",
+        75: "18.75rem",
+        76: "19rem",
         80: "20rem",
         100:'30rem',
         110:'36.5rem',
@@ -219,20 +237,25 @@ module.exports = {
 
         double: "200%",
       },
+
       maxHeight: {
         "70vh": "70vh",
         "85vh": "85vh",
         140: "35rem", // 560px
       },
+
       maxWidth: {
         1920: "1920px",
       },
+
       minWidth: {
         150: "150px",
       },
+
       borderRadius: {
         DEFAULT: "5px",
       },
+
       borderWidth: {
         DEFAULT: '1px',
         '0': '0',
@@ -252,12 +275,34 @@ module.exports = {
         '20': '20px',
 
       },
+
       inset: {
         22: "5.25rem",
+        23: "5.375rem",
+        24: "5.5rem",
+        25: "5.625rem",
+        26: "5.75rem",
+        30: "6.25rem",
+        31: "6.375rem",
+        37: "7.375rem",
+        41: "8.125rem",
+        42: "8.25rem",
+        43: "8.375rem",
+        44: "8.5rem",
+        45: "8.625rem",
+        46: "8.75rem",
+        55: "10.25rem",
+        56: "10.5rem",
+        57: "10.75rem",
+        58: "11rem",
+        59: "11.25rem",
+        61: "9.75rem",
       },
+
       strokeWidth: {
         2.5: "2.5",
       },
+
       boxShadow: {
         200: "rgba(0, 0, 0, 0.16) 0px 3px 6px",
         300: "rgba(0, 0, 0, 0.16) 0px 0px 6px",
@@ -267,6 +312,7 @@ module.exports = {
         700: "rgba(0, 0, 0, 0.08) 0px 2px 16px",
         900: "rgba(0, 0, 0, 0.05) 0px 21px 36px",
       },
+
     },
   },
   plugins: [require("tailwindcss-rtl"),

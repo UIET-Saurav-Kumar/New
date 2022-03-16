@@ -20,7 +20,9 @@ import { ROUTES } from "@utils/routes";
 import Neon from '@components/product/product-card/neon';
 import Neon2 from '@components/product/product-card/neon2';
 import { useEffect } from "react";
-
+import Helium from '@components/product/product-card/helium';
+import CartCounterButton from '@components/cart/cart-counter-button';
+import { useWindowDimensions } from '@components/common/search';
 
   const ProductFeedLoader = dynamic(
     () => import("@components/ui/loaders/product-feed-loader")
@@ -115,6 +117,8 @@ import { useEffect } from "react";
 
     
 export default function SalonPage() {
+
+  const {width} = useWindowDimensions();
 
     const {getLocation} = useLocation()
     const router = useRouter();
@@ -223,9 +227,9 @@ export default function SalonPage() {
               setBtn2(true);
           }
 
-        // console.log('salon products',salonProducts?.products.data);
-          
-          console.log('salonProduct', salonProducts?.products.data.filter(product => product?.status === 'publish' && product?.categories?.name === 'Hair Spa'  )  )
+          console.log('salon category products',salonProducts?.products.data.filter(product => product?.categories.map( cat => cat.name === 'Services')   )  )
+            
+          console.log('salonProduct',salonProducts?.products.data.filter(product => product?.status === 'publish' && product?.categories?.name === 'Hair Spa'  )  )
 
 
   return (
@@ -240,23 +244,24 @@ export default function SalonPage() {
 
       <>
 
-    <div className='h-full border bg-white w-full'>
+    <div className='bg-gradient-to-r from-indigo-50 via-purple-50 to-pink-50 h-full border bg-white w-full'>
       
         <div className='w-full h-full'>
-            <img  
-            // src='https://thesalonbusiness.com/wp-content/uploads/square-online-store-example-salon-website-1024x732.png'
-            src='/salon-banner.jpeg'
-            className='w-full h-full object-cover' />
+        <picture className="w-full h-full" >
+                  <source media="(max-width: 1023px)" style={{objectFit:'cover'}} srcset="/mob-salon-banner.jpeg"/>
+                  <source media="(min-width: 1024px)" style={{objectFit:'contain'}} srcset="/salon-banner.jpeg"/>
+                  <img src="/ad-banner.jpg" style={{height:'100%', width:'100%'}} alt="Top Salon Services on Buylowcal"/>
+              </picture>
         </div>
 
         <div className='flex flex-col lg:px-4 py-4'>
-            <h4 className='text-2xl font-semibold ml-4 lg:ml-4 py-4 tracking-widest'>Top Brands</h4>
+            <h4 className='text-2xl lg:text-3xl font-serif text-gray-900 font-semibold ml-2 lg:ml-4 py-4 tracking-normal'>Top Salons of Tricity</h4>
             <PromotionSlider/>
         </div>
 
-        <h3 className='font-semibold text-2xl py-4 ml-4  lg:mt-10 tracking-wide'>WOMEN</h3>
+        <h3 className='font-semibold text-2xl font-serif lg:text-3xl text-gray-900 py-4 ml-2 lg:ml-8  lg:mt-10 tracking-normal'>Women</h3>
 
-            <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7 placeitems-center items-center w-full overflow-x-scroll gap-3 '>        
+            <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7 placeitems-center items-center scrollbar-hide w-full px-2 lg:px-8 overflow-x-scroll gap-3 '>        
             {/* // map over womenImg and display images */}
                   {womenImg.map(img => (
                     <div  key={img?.id} onClick={ () => handleCategory(img)} className='flex cursor-pointer placeitems-center gap-3 items-center justify-around '>
@@ -266,20 +271,20 @@ export default function SalonPage() {
 
             </div>  
 
-        <h3 className='font-semibold text-2xl ml-4 py-4 lg:mt-10 tracking-wide'>MEN</h3>
+        <h3 className='font-semibold text-2xl lg:text-3xl font-serif text-gray-900 ml-2 lg:ml-8 py-4 lg:mt-10 tracking-normal'>Men</h3>
 
-            <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7 placeitems-center items-center w-full overflow-x-scroll gap-3'>
+            <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7  placeitems-center items-center scrollbar-hide w-full px-2 lg:px-8 overflow-x-scroll gap-3'>
               {/* // map over womenImg and display images */}
                 {menImg.map(img => (
                     <div onClick={ () => handleCategory(img)}  key={img?.id} className='flex cursor-pointer items-center justify-around space-x-4'>
-                        <img src={img?.src} className='w-full h-full object-cover' />
+                        <img src={img?.src} className='w-full  h-full object-cover' />
                     </div>
                 ))}
             </div> 
 
-         <h3 className='font-semibold text-2xl ml-4 mt-10 lg:mt-10 tracking-wide'>Featured Products</h3>
+         <h3 className='text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 font-semibold text-2xl lg:text-3xl text-gray-900 font-serif ml-4 lg:ml-8 mt-10 lg:mt-10 tracking-normal'>Featured Products</h3>
 
-            <div className={`${data?.offers.data?.length  ? 'block' : 'hidden'} grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-50 p-4`}>
+            <div className={`${data?.offers.data?.length  ? 'block' : 'hidden'} grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-50 mt-3 p-2 lg:p-6 gap-2`}>
               {fetching && !data?.pages?.length ? (
                         <ProductFeedLoader limit={5} />
                       ) : (
@@ -288,7 +293,7 @@ export default function SalonPage() {
                       //filter products with status publish and whose shop category is Salon & Spa
                       salonProducts?.products.data.filter(product => product.status === 'publish' && product.is_featured === 1 && product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','') =='Salon  Spa' ) .map(product => (
                               <motion.div key={product.id}>
-                                <Neon2 product={product}/>
+                                <Helium product={product}/>
                               </motion.div>
                               ))
                     }
@@ -297,19 +302,19 @@ export default function SalonPage() {
             </div>
 
 
-        <h3 className='font-semibold text-2xl ml-4   mt-10 tracking-wide'>OFFER OF THE DAY</h3>
+        <h3 className='font-semibold text-2xl lg:text-3xl text-gray-900 font-serif  ml-4 lg:ml-8  mt-3 tracking-normal'>Offer of the day</h3>
 
-            <div className={`${data?.offers.data?.length  ? 'block' : 'hidden'} grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-50 mt-10 p-4 gap-2`}>
+            <div className={`${data?.offers.data?.length  ? 'block' : 'hidden'} grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-50 mt-3 p-2 lg:p-6 gap-2`}>
                {fetching && !data?.pages?.length ? (
                       <ProductFeedLoader limit={5} />
                     ) : (
                  <>
                       {
                           // filter products with price high to low
-                          salonProducts?.products.data.filter(product => product.status === 'publish' && product.is_featured === 1 && product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','') =='Salon  Spa' ) .sort((a, b) => b.price - a.price).map(product => (
+                          salonProducts?.products.data.filter(product => product.status === 'publish' && product.is_offer === 1 && product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','') =='Salon  Spa' ) .sort((a, b) => b.price - a.price).map(product => (
                           // salonProducts?.products.data.filter(product => product.status === 'publish' && product.is_offer === 1 && product.is_featured === 1 && product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','') =='Salon  Spa' ) .map(product => (
                                   <motion.div key={product.id}>
-                                  <Neon2 product={product}/>
+                                  <Helium product={product}/>
                                   </motion.div>
                                   ))
                       }
@@ -317,22 +322,23 @@ export default function SalonPage() {
                     )}
             </div>
 
-            <div className={`${data?.offers.data?.length  ? 'block' : 'hidden'} grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-50 mt-10 p-4 gap-2`}>
+            {/* <div className={`${data?.offers.data?.length  ? 'block' : 'hidden'} grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-50 mt-10 p-4 gap-2`}>
                {fetching && !data?.pages?.length ? (
                       <ProductFeedLoader limit={5} />
                     ) : (
                  <>
                     {
+                      //filterm
                         //filter products whose categories array contain category hair spa
-                        salonProducts?.products.data.filter(product => product.status === 'publish' && product.is_offer === 1 && product.is_featured === 1 && product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','') =='Hair Spa' ) .map(product => (
+                        salonProducts?.products.data.filter(product => product.status === 'publish' && product.is_offer === 1 && product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','') =='Hair Spa' ) .map(product => (
                                 <motion.div key={product.id}>
-                                 <Neon2 product={product}/>
+                                 <Helium product={product}/>
                                 </motion.div>
                                 ))
                     }
                  </>
                     )}
-            </div>
+            </div> */}
 
         {/* <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 gap-1">
             {loading && !data?.pages?.length ? (
@@ -341,7 +347,7 @@ export default function SalonPage() {
             <>
                 {
                     //filter products with status publish and whose shop category is Salon & Spa
-                    salonProducts?.products.data.filter(product => product?.status === 'publish' && product?.shop?.shop_categories.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','') === 'Salon  Spa'  ).map(product => (
+                    salonProducts?.products.data.filter(product => product?.status === 'publish' && product.is_offer === 1 && product?.shop?.shop_categories.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','') === 'Salon  Spa'  ).map(product => (
                         <motion.div key={product.id}>
                         {renderProductCard(product)}
                         </motion.div>
@@ -354,6 +360,11 @@ export default function SalonPage() {
         
 
     </div>
+
+    { width > 768 ? (
+      <CartCounterButton/>)
+      : null
+      }
 
     </>
         //             )}

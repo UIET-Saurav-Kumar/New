@@ -39,6 +39,12 @@ export default function ImageSlider() {
        return pathname;
     }
 
+
+    function getLinkSalon(){
+      var pathname="/salon-page";
+       return pathname;
+    }
+
     var settings = {
 
       dots: true,
@@ -76,6 +82,37 @@ export default function ImageSlider() {
       <div className='mx-1'>
       
       <Slider {...settings}>
+
+        <div className="card flex relative w-full h-40 lg:h-72 xl+:h-80 2xl:h-72 md:h-64 ">
+
+            <Image  layout='fill' objectFit='fill'
+            //  className='rounded-md w-full opacity-90  h-40 lg:w-full lg:h-72 xl+:h-80 md:h-64  2xl:h-72 2xl:w-full space-x-9 object-fill object '  
+                  src={'/banner/community.jpg'} 
+                  />
+
+          </div>
+
+
+        <div className="card flex relative w-full h-40 lg:h-72 xl+:h-80 2xl:h-72 md:h-64 ">
+
+            <Image  layout='fill' objectFit='fill'
+            //  className='rounded-md w-full opacity-90  h-40 lg:w-full lg:h-72 xl+:h-80 md:h-64  2xl:h-72 2xl:w-full space-x-9 object-fill object '  
+                  src={'/banner/global.jpg'} 
+                  />
+
+          </div>
+
+            <div className=' cursor-pointer card  relative w-full h-40 lg:h-72 xl+:h-80 2xl:h-72 md:h-64'>
+
+            <Link  
+              href={ location() ?  getLinkSalon() : getLink('salon spa')}>
+              <picture className="w-full h-full" >
+                  <source media="(max-width: 1023px)" style={{objectFit:'cover'}} srcset="/banner/salon-mb.jpg"/>
+                  <source media="(min-width: 1024px)" style={{objectFit:'contain'}} srcset="/banner/salon-web.jpg"/>
+                  <img src="/ad-banner.jpg" style={{height:'100%', width:'100%'}} alt="best salon offers"/>
+              </picture></Link>
+
+          </div>
 
 
          <div className=' cursor-pointer card  relative w-full h-40 lg:h-72 xl+:h-80 2xl:h-72 md:h-64'>

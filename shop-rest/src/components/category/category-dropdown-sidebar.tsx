@@ -92,7 +92,7 @@ const CategoryDropdownSidebar = ({data}) => {
         </button>
         {/* <Scrollbar className="w-full h-full max-h-screen"> */}
         {categoryData?.categories?.data?.length ? (
-            <div className=" flex lg:overflow-x-scroll relative justify-evenly w-full">
+            <div className=" flex lg:overflow-x-scroll scrollbar-hide relative justify-evenly w-full">
               <CategorySlider items={categoryData?.categories?.data} />
               {/* <SidebarMenu items={data?.categories?.data} className="whitespace-nowrap overflow-x-scroll sticky py-2" /> */}
             </div>
@@ -143,8 +143,8 @@ const CategoryDropdownSidebar = ({data}) => {
                         // src='/categories.png'
                         className='  w-2 h-2 lg:w-6 tracking-widest lg:h-6 mr-2'/> ALL
                 </button>
-              {/* <Scrollbar className="w-full h-full max-h-screen"> */}
-              {categoryData?.categories?.data?.length ? (
+                {/* <Scrollbar className="w-full h-full max-h-screen"> */}
+                {categoryData?.categories?.data?.length ? (
                   <div className=" flex overflow-x-scroll relative justify-evenly w-full">
                     <CategorySlider items={categoryData?.categories?.data} />
                     {/* <SidebarMenu items={data?.categories?.data} className="whitespace-nowrap overflow-x-scroll sticky py-2" /> */}

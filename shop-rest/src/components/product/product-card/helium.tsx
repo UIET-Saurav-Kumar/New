@@ -35,19 +35,22 @@ const Helium: React.FC<HeliumProps> = ({ product, className }) => {
 
 
   return (
+
     <article
       className={cn(
-        "product-card cart-type-helium border  rounded h-full bg-light overflow-hidden transition-shadow duration-200 hover:shadow-sm",
+        "product-card cart-type-helium border rounded h-full bg-light overflow-hidden transition-shadow duration-200 hover:shadow-sm",
         className
       )}
     >
       <Link href={`${ROUTES.PRODUCT}/${slug}`}>
+
       <div
         // onClick={handleProductQuickView}
         className="relative flex items-center justify-center w-auto h-24 sm:h-64"
         role="button"
       >
         <span className="sr-only">{t("text-product-image")}</span>
+
         <Image
           src={image?.original ?? siteSettings?.product?.placeholderImage}
           alt={name}
@@ -66,6 +69,7 @@ const Helium: React.FC<HeliumProps> = ({ product, className }) => {
       {/* End of product image */}
 
       <header className="p-3 md:p-6 relative">
+
         <h3
           onClick={handleProductQuickView}
           role="button"
@@ -73,17 +77,20 @@ const Helium: React.FC<HeliumProps> = ({ product, className }) => {
         >
           {name}
         </h3>
+
         <p className="text-muted text-xs">{unit}</p>
 
-        {pageURL.includes('salon-products') ? (
-          <div className=' flex text-xs text-gray-600 mb-4  mt-2 font-light'>
+        { pageURL.includes('salon-products') || pageURL.includes('salon-page') ? (
+          <div className=' flex text-xs text-gray-600 mb-4 h-4 mt-2 font-light'>
             {product?.shop?.name} 
-            </div> ) :
+          </div> ) :
             null
         }
+
         {/* End of product info */}
 
         <div className="flex items-center justify-between min-h-6 mt-7 md:mt-8 relative">
+         
           <div className="relative">
             {discount && (
               <del className="text-xs text-muted text-opacity-75 absolute -top-4 md:-top-5 italic">
@@ -94,6 +101,7 @@ const Helium: React.FC<HeliumProps> = ({ product, className }) => {
               {basePrice ? basePrice : price}
             </span>
           </div>
+
           {/* End of product price */}
 
           {quantity > 0 ? (
@@ -105,6 +113,7 @@ const Helium: React.FC<HeliumProps> = ({ product, className }) => {
           )}
           {/* End of add to cart */}
         </div>
+
       </header>
     </article>
   );

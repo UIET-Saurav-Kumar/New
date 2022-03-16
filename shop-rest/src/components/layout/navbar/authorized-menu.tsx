@@ -67,7 +67,7 @@ export default function AuthorizedMenu() {
               animate="to"
               exit="from"
               variants={zoomInBottom()}
-              className="py-4 w-48 bg-light rounded shadow-700 z-20"
+              className="py-4 w-48 bg-light rounded shadow-700 z-50"
             >
               {siteSettings.authorizedLinks.map(({ href, label }) => (
                 <li key={`${href}${label}`}>

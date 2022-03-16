@@ -116,12 +116,11 @@ export default function Appointment({user} : Props) {
                <img src='/ad-banner.jpg' className=" block w-full object-contain lg:object-cover" />
                {/* <img onClick={handleClick} src='/salon-chd.jpg' className="w-full cursor-pointer flex object-contain -mr-72 lg:object-contain  lg:h-100" /> */}
             </div>
-            
         </div>
+
         <div className=" border-b space-y-4 mt-5 py-5">
               <p className="font-sans text-xl  pl-2 lg:pl-10 ">Top Salon Brands </p>
               <PromotionSlider/>
-
         </div>
 
       <div className="flex flex-col md:flex-row max-w-7xl w-full mx-auto   xl:py-14 xl:px-8 2xl:px-14">
@@ -129,6 +128,7 @@ export default function Appointment({user} : Props) {
         
         {/* Contact form */}
         <div className="w-full order-1 md:order-2 drop-shadow-2xl  mb-8 md:mb-0 md:ms-7 lg:ms-9 p-5 md:p-8 bg-light">
+          
           <div className="">
             
           </div>
@@ -179,10 +179,10 @@ export default function Appointment({user} : Props) {
 
             <span className="font-sans flex w-full 
                              items-end text-green-600"> 
-               <p className=" text-center  font-normal text-gray-700 text-sm mt-4 lg:text-right w-full"> 
-                  Any queries?<p className=" text-center text-sm  text-gray-800 mt-4 lg:text-right w-full">
-                  Call us/Whatsapp - <a href='tel:84279-90450' className="hover:underline text-blue-800"> 84279-90450</a>
-               </p>
+                <p className=" text-center  font-normal text-gray-700 text-sm mt-4 lg:text-right w-full"> 
+                    Any queries?<p className=" text-center text-sm  text-gray-800 mt-4 lg:text-right w-full">
+                    Call us/Whatsapp - <a href='tel:84279-90450' className="hover:underline text-blue-800"> 84279-90450</a>
+                </p>
                </p>
                
             </span>
