@@ -55,7 +55,6 @@ module.exports = {
         '15px':'15px',
 
         'xs': '244px',
-        
 
         'xs+': '384px',
 
@@ -92,18 +91,18 @@ module.exports = {
       },
 
       fontWeight: {     
-         hairline: 100,  
-            'extra-light': 100,    
+             hairline: 100,  
+             'extra-light': 100,    
               thin: 200,   
               light: 300,  
               normal: 400,   
-              medium: 500,  
-              'md': 450,
-                semibold: 600,  
-                bold: 700,    
+              medium: 520,  
+              md: 520,
+              semibold: 600,  
+              bold: 700,    
               extrabold: 800,  
               'extra-bold': 900,    
-                black: 900,
+              black: 900,
               },
 
       zIndex: {

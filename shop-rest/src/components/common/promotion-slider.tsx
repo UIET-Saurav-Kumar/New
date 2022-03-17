@@ -91,7 +91,7 @@ const offerSliderBreakpoints = {
     spaceBetween: 2,
   },
   1024: {
-    slidesPerView: 9,
+    slidesPerView: 10,
     spaceBetween: 4,
   },
   1920: {
@@ -121,7 +121,7 @@ export default function PromotionSlider() {
           {data?.map((d) => (
             <SwiperSlide key={d.id}>
               <img
-                className="w-20 object-fit rounded h-20 lg:h-44 lg:w-44 border "
+                className="w-20 object-fit rounded h-20 lg:h-32 border-3 border-gold lg:w-32  "
                 src={d.bannerUrl}
                 // alt={t(d.title)}
               

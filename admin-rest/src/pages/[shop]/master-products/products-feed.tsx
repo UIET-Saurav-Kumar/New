@@ -76,7 +76,7 @@ export default function ProductsFeed({shopId,searchTerm,type,category,orderBy,so
         onIntersect: fetchNextPage,
         enabled: hasNextPage,
   })
-  if (isError && error) return <ErrorMessage message={error.message} />;
+  if (isError && error) return <ErrorMessage message={error?.message} />;
 
   // if (!loading && !data?.pages?.length) {
   //   return (
@@ -102,8 +102,8 @@ export default function ProductsFeed({shopId,searchTerm,type,category,orderBy,so
       <tbody className="rc-table-tbody">
       {data?.pages.map((products, _idx) => (
           <Fragment key={_idx}>
-            {products.products?.data?.map((product:any,id:any) => (
-              <Product taxes={taxes} product={product} shopId={shopId} key={id} masterIds={master} className={`${master.includes(product.id)}:"hidden":""`}/>
+            {products?.products?.data?.map((product:any,id:any) => (
+              <Product taxes={taxes} product={product} shopId={shopId} key={id} masterIds={master} className={`${master.includes(product?.id)}:"hidden":""`}/>
             ))}
           </Fragment>
         ))}

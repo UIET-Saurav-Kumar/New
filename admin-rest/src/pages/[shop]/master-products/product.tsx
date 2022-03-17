@@ -8,22 +8,22 @@ export default function Product({product,shopId,masterIds,taxes}:any) {
     const [alreayMade,setAlreadyMade]=useState(false);
 
     useEffect(()=>{
-        if(masterIds.includes(product.id)){
+        if(masterIds.includes(product?.id)){
             setAlreadyMade(true);
         }
     })
     function addProduct():any{
-        console.log(product.id);
-        const price = document.getElementById("price_"+product.id)?.value as any;
-        const sale_price = document.getElementById("sale_price_"+product.id)?.value as any;
-        const quantity = document.getElementById("quantity_"+product.id)?.value as any;
+        console.log(product?.id);
+        const price = document.getElementById("price_"+product?.id)?.value as any;
+        const sale_price = document.getElementById("sale_price_"+product?.id)?.value as any;
+        const quantity = document.getElementById("quantity_"+product?.id)?.value as any;
         // const tax = document.getElementById("tax_"+product.id)?.value as any;
         if(price&&sale_price){
             createProduct(
                 {
                     shop_id:shopId,
                     price:price,
-                    master_id:product.id,
+                    master_id:product?.id,
                     quantity:quantity,
                     sale_price:sale_price,
                     // tax:tax
@@ -48,19 +48,19 @@ export default function Product({product,shopId,masterIds,taxes}:any) {
             <tr data-row-key="542" className="rc-table-row rc-table-row-level-0 h-24 `text-center`">
                 <td className="rc-table-cell text-center">
                     <div style={{boxSizing: "border-box", display: "inline-block", position: "relative", width: "60px", height: "auto"}}>
-                        <img alt={product.name} src={product?.image?.original ?product?.image?.original:''} decoding="async" className="rounded overflow-hidden"/>
+                        <img alt={product?.name} src={product?.image?.original ?product?.image?.original:''} decoding="async" className="rounded overflow-hidden"/>
                     </div>
                 </td>
-                <td title="cosmos" className="rc-table-cell rc-table-cell-ellipsis text-center">{product.name}</td>
+                <td title="cosmos" className="rc-table-cell rc-table-cell-ellipsis text-center">{product?.name}</td>
                 
                 <td className="rc-table-cell text-center" >
-                    <span className="whitespace-nowrap" title={"$"+product.price}>
+                    <span className="whitespace-nowrap" title={"$"+product?.price}>
                     <Input
                         name="price"
                         variant="outline"
                         className="mb-5"
                         placeholder="price"
-                        id={"price_"+product.id}
+                        id={"price_"+product?.id}
                     />
                     </span>
                 </td>
@@ -70,17 +70,17 @@ export default function Product({product,shopId,masterIds,taxes}:any) {
                         variant="outline"
                         placeholder="sale price"
                         className="mb-5"
-                        id={"sale_price_"+product.id}
+                        id={"sale_price_"+product?.id}
                     />
                 </td>
                 <td className="rc-table-cell text-center" >
-                    <span className="whitespace-nowrap" title={"$"+product.quantity}>
+                    <span className="whitespace-nowrap" title={"$"+product?.quantity}>
                     <Input
                         name="quantity"
                         variant="outline"
                         className="mb-5"
                         placeholder="quantity"
-                        id={"quantity_"+product.id}
+                        id={"quantity_"+product?.id}
                     />
                     </span>
                 </td>

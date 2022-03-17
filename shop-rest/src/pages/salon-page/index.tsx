@@ -247,19 +247,19 @@ export default function SalonPage() {
     <div className='bg-gradient-to-r from-indigo-50 via-purple-50 to-pink-50 h-full border bg-white w-full'>
       
         <div className='w-full h-full'>
-        <picture className="w-full h-full" >
+            <picture className="w-full h-full" >
                   <source media="(max-width: 1023px)" style={{objectFit:'cover'}} srcset="/mob-salon-banner.jpeg"/>
-                  <source media="(min-width: 1024px)" style={{objectFit:'contain'}} srcset="/salon-banner.jpeg"/>
+                  <source media="(min-width: 1024px)" style={{objectFit:'contain'}} srcset="/salon-banner.jpg"/>
                   <img src="/ad-banner.jpg" style={{height:'100%', width:'100%'}} alt="Top Salon Services on Buylowcal"/>
               </picture>
         </div>
 
         <div className='flex flex-col lg:px-4 py-4'>
-            <h4 className='text-2xl lg:text-3xl font-serif text-gray-900 font-semibold ml-2 lg:ml-4 py-4 tracking-normal'>Top Salons of Tricity</h4>
+            <h4 className='text-2xl lg:text-3xl font-serif text-gray-900 font-medium ml-2 lg:ml-4 py-4 tracking-normal'>Top Salons of Tricity</h4>
             <PromotionSlider/>
         </div>
 
-        <h3 className='font-semibold text-2xl font-serif lg:text-3xl text-gray-900 py-4 ml-2 lg:ml-8  lg:mt-10 tracking-normal'>Women</h3>
+        <h3 className='font-medium text-2xl font-serif lg:text-3xl text-gray-900 py-4 ml-2 lg:ml-8  lg:mt-10 tracking-normal'>Women</h3>
 
             <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7 placeitems-center items-center scrollbar-hide w-full px-2 lg:px-8 overflow-x-scroll gap-3 '>        
             {/* // map over womenImg and display images */}
@@ -271,7 +271,7 @@ export default function SalonPage() {
 
             </div>  
 
-        <h3 className='font-semibold text-2xl lg:text-3xl font-serif text-gray-900 ml-2 lg:ml-8 py-4 lg:mt-10 tracking-normal'>Men</h3>
+        <h3 className='font-medium text-2xl lg:text-3xl font-serif text-gray-900 ml-2 lg:ml-8 py-4 lg:mt-10 tracking-normal'>Men</h3>
 
             <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7  placeitems-center items-center scrollbar-hide w-full px-2 lg:px-8 overflow-x-scroll gap-3'>
               {/* // map over womenImg and display images */}
@@ -282,7 +282,7 @@ export default function SalonPage() {
                 ))}
             </div> 
 
-         <h3 className='text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 font-semibold text-2xl lg:text-3xl text-gray-900 font-serif ml-4 lg:ml-8 mt-10 lg:mt-10 tracking-normal'>Featured Products</h3>
+         <h3 className='text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 font-medium text-2xl lg:text-3xl text-gray-900 font-serif ml-4 lg:ml-8 mt-10 lg:mt-10 tracking-normal'>Featured Products</h3>
 
             <div className={`${data?.offers.data?.length  ? 'block' : 'hidden'} grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-50 mt-3 p-2 lg:p-6 gap-2`}>
               {fetching && !data?.pages?.length ? (
@@ -302,7 +302,7 @@ export default function SalonPage() {
             </div>
 
 
-        <h3 className='font-semibold text-2xl lg:text-3xl text-gray-900 font-serif  ml-4 lg:ml-8  mt-3 tracking-normal'>Offer of the day</h3>
+        <h3 className='font-medium text-2xl lg:text-3xl text-gray-900 font-serif  ml-4 lg:ml-8  mt-3 tracking-normal'>Offer of the day</h3>
 
             <div className={`${data?.offers.data?.length  ? 'block' : 'hidden'} grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-50 mt-3 p-2 lg:p-6 gap-2`}>
                {fetching && !data?.pages?.length ? (
