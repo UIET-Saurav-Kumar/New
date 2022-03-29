@@ -194,10 +194,10 @@ class ProductRepository extends BaseRepository
     public static function searchByValue($value)
 
     {
-        $shop_ids=Product::where("name","like","%".$value."%")->distinct()->pluck("shop_id")->toArray();
+        $shop_ids=Product::where("status",1)->where("name","like","%".$value."%")->distinct()->pluck("shop_id")->toArray();
         $categories=Category::where("name","like","%".$value."%")->with("products")->distinct()->get();
         $shop_categories_ids=ShopCategory::where("name","like","%".$value."%")->pluck("id")->toArray();
-        $select_shops=Shop::where("name","like","%".$value."%")->pluck("id")->toArray();
+        $select_shops=Shop::where("is_active",1)->where("name","like","%".$value."%")->pluck("id")->toArray();
 
         $shop_ids=array_merge($shop_ids,$select_shops);
         
