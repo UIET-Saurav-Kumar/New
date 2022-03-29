@@ -200,12 +200,30 @@ class ProductController extends CoreController
         
     }
 
-    public function search($slug)
+    public function search(Request $request, $slug )
     {
         $data=[];
         $slug=str_replace("-","&",$slug);
 
-        $names=Product::where('name', 'like', '%' . $slug . '%')->limit(6)->pluck("name");
+         $location=($request->location)?json_decode($request->location):"";
+
+        $names=//active prpducts only
+        Product::where("status",1)->limit(6)
+        ->where('name', 'LIKE', $slug.'%')
+        ->pluck('name');
+        // corresponding shop name of the product
+        // render products and shop name present in selected location
+        // $shops=ShopRepository::getSortedShops();
+        // $products=Product::whereIn("shop_id",$shops)->where('name', 'LIKE', $slug.'%')->limit(6)->pluck('name');
+       
+        foreach($names as $name){
+            array_push($data,[
+                "label"=>$name,
+                "value"=>$name
+            ]);
+        }
+
+        $names=Category::where('name', 'LIKE', $slug.'%')->limit(6)->pluck('name');
 
         foreach($names as $name){
             array_push($data,[
@@ -214,8 +232,7 @@ class ProductController extends CoreController
             ]);
         }
 
-        $names=Category::where('name', 'like', '%' . $slug . '%')->limit(6)->pluck('name');
-
+        $names=ShopCategory::where('name', 'LIKE', $slug.'%')->limit(6)->pluck('name');
         foreach($names as $name){
             array_push($data,[
                 "label"=>$name,
@@ -223,7 +240,7 @@ class ProductController extends CoreController
             ]);
         }
 
-        $names=ShopCategory::where('name', 'like', '%' . $slug . '%')->limit(6)->pluck('name');
+        $names=Shop::where("is_active",1)->where('name', 'LIKE', $slug.'%')->limit(6)->pluck('name');
         foreach($names as $name){
             array_push($data,[
                 "label"=>$name,
@@ -231,14 +248,8 @@ class ProductController extends CoreController
             ]);
         }
 
-        $names=Shop::where('name', 'like', '%' . $slug . '%')->limit(6)->pluck('name');
 
-        foreach($names as $name){
-            array_push($data,[
-                "label"=>$name,
-                "value"=>$name
-            ]);
-        }
+    
 
         return $data;
     }

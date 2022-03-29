@@ -38,7 +38,7 @@ export const getStaticProps = async ({ locale }: any) => {
     {
         id : "1",
         src : '/salon/1.jpg',
-        icon: '/salon/women-menicure.png',
+        icon: '/salon/manicure.png',
         slug: 'menicure-pedicure',
         name: 'Menicure pedicure'
     },
@@ -91,7 +91,7 @@ export const getStaticProps = async ({ locale }: any) => {
     {
         id : "8",
         src : '/salon/8.jpg',
-        icon: '/salon/women-menicure.png',
+        icon: '/salon/manicure.png',
         slug: 'menicure-pedicure',
         name: 'Menicure pedicure' 
     },
@@ -192,6 +192,9 @@ export default function SalonProducts() {
       // const { pathname, query } = router;
   
       const navigate = () => {
+
+        loading && !data?.pages?.length ? 
+          <ProductFeedLoader limit={30} /> : null 
       
       // setOpen(false);
       //    displaySidebar && closeSidebar();
@@ -427,10 +430,11 @@ export default function SalonProducts() {
                               <motion.div key={product.id}>
                                 <Helium product={product}/>
                               </motion.div>
-                          )) : <div className="bg-gray-100 min-h-full w-full pt-6 pb-8 px-4 lg:p-8">
-                          {/* <ProductNotFound text="text-not-found" className="w-1/3 mx-auto" /> */}
-                          <img src='/not-found.png'
-                          className="object-contain w-full mx-auto"/>
+                          )) : 
+                          <div className="bg-gray-100 min-h-full w-full pt-6 pb-8 px-4 lg:p-8">
+                               {/* <ProductNotFound text="text-not-found" className="w-1/3 mx-auto" /> */}
+                              <img src='/not-found.png'
+                              className="object-contain w-full mx-auto"/>
                   
                         </div>
                         }

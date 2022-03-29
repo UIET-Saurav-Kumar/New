@@ -122,10 +122,10 @@ class ProductRepository extends BaseRepository
 
     public function updateProduct($request, $id)
     {
-        
 
         try {
             $product = $this->findOrFail($id);
+
             if(isset($request->is_featured)){
                 $product->is_featured=$request->is_featured;
             }
@@ -192,6 +192,7 @@ class ProductRepository extends BaseRepository
     }
 
     public static function searchByValue($value)
+
     {
         $shop_ids=Product::where("name","like","%".$value."%")->distinct()->pluck("shop_id")->toArray();
         $categories=Category::where("name","like","%".$value."%")->with("products")->distinct()->get();
@@ -207,10 +208,11 @@ class ProductRepository extends BaseRepository
         }
 
         foreach($shop_categories_ids as $category_id)
-        {
+
+        { 
             $shops=Shop::all();
             foreach($shops as $shop){
-                $category_array=ProductRepository::getCategoryId($shop->shop_categories);
+                $category_array = ProductRepository::getCategoryId($shop->shop_categories);
                 if(is_array($category_array)){
                     if(in_array($category_id,$category_array)){
                         array_push($shop_ids,$shop->id);
@@ -224,10 +226,13 @@ class ProductRepository extends BaseRepository
         return $shop_ids;
     }
 
+
     private static function getCategoryId($shop_categories)
+
     {
         $shop_categories=json_decode($shop_categories);
         $ids=[];
+
         if(!is_array($shop_categories)){
             return "";
         }

@@ -96,9 +96,11 @@ export default function ProductsPage() {
               onSortChange={({ value }: { value: SortOrder }) => {
                 setColumn(value);
               }}
+
               onOrderChange={({ value }: { value: string }) => {
                 setOrder(value);
               }}
+
               options={[
                 { value: "name", label: "Name" },
                 { value: "price", label: "Price" },
@@ -109,6 +111,7 @@ export default function ProductsPage() {
                 { value: "created_at", label: "Created At" },
                 { value: "updated_at", label: "Updated At" },
               ]}
+              
             />
           </div>
         </div>
