@@ -79,8 +79,11 @@ class InviteController extends CoreController
     public function getWalletCommission(Request $request)
     {
         $user = $request->user();
-
+     
+        
         $balance = $user->balance;
+        
+        $name = $user->name;
         $customer_level = ReferralEarning::where('user_id', $user->id)->where('level', "0")->get();
         $level1 = ReferralEarning::where('user_id', $user->id)->where('level', "1")->get();
         $level2 = ReferralEarning::where('user_id', $user->id)->where('level', "2")->get();
@@ -93,6 +96,7 @@ class InviteController extends CoreController
 
 
         return [
+            'name'=>$name,
             "balance" => $balance,
             "customer_level" => $customer_level,
             "level1" => $level1,
@@ -100,5 +104,37 @@ class InviteController extends CoreController
             "level3" => $level3,
             "bill_transfered_amount"=>$bill_transfered_amount
         ];
+    }
+
+    // getwalletcommssion query with id as argument
+    public function getUserWalletDetails(Request $request, $id)
+    {
+        $user = User::find($id);
+        
+        $balance = $user->balance;
+        
+        
+        $name = $user->name;
+        $customer_level = ReferralEarning::where('user_id', $user->id)->where('level', "0")->get();
+        $level1 = ReferralEarning::where('user_id', $user->id)->where('level', "1")->get();
+        $level2 = ReferralEarning::where('user_id', $user->id)->where('level', "2")->get();
+        $level3 = ReferralEarning::where('user_id', $user->id)->where('level', "3")->get();
+        $invoice_bills = Bill::where('user_id', $user->id)->get();
+        $bill_transfered_amount = 0;
+        foreach ($invoice_bills as $bill) {
+            $bill_transfered_amount += $bill->approved_amount;
+        }
+
+
+        return [
+            'name'=>$name,
+            "balance" => $balance,
+            "customer_level" => $customer_level,
+            "level1" => $level1,
+            "level2" => $level2,
+            "level3" => $level3,
+            "bill_transfered_amount"=>$bill_transfered_amount
+        ];
+
     }
 }

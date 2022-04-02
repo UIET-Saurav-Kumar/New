@@ -86,5 +86,9 @@ export const API_ENDPOINTS = {
   VERIFY_CHECKOUT: "checkout/verify",
 
   CONTACT: '/contact',
+
+  GET_WALLET_COMMISSION:"get-wallet-commission",
+  GET_USER_WALLET_DETAILS:"get-user-wallet-details",
+
 };
 

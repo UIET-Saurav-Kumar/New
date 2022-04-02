@@ -122,6 +122,7 @@ Route::post('shop-delivery-status','PickBazar\Http\Controllers\ShopController@sh
 Route::post('shop-delivery-config','PickBazar\Http\Controllers\ShopController@shopDeliveryConfig');
 
 Route::get('get-wallet-commission','PickBazar\Http\Controllers\InviteController@getWalletCommission');
+Route::get('get-user-wallet-details/{id}','PickBazar\Http\Controllers\InviteController@getUserWalletDetails');
 
 Route::get('referral-network','PickBazar\Http\Controllers\InviteController@refferral_network');
 

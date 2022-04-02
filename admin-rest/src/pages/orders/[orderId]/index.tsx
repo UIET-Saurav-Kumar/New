@@ -319,7 +319,7 @@ export default function OrderDetailsPage() {
       </PDFExport>
       </div>
       <div className='w-full text-center'> 
-          <button className='   text-blue-700 text-lg hover:underline mt-8 h-9  w-38' 
+          <button className=' text-blue-700 text-lg hover:underline mt-8 h-9  w-38' 
             onClick={handleExportWithComponent}>Download Invoice
             </button>
       </div>

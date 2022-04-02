@@ -192,6 +192,7 @@ const ReferralActivity = () => {
         }).reduce((prev, curr) => prev +  parseFloat(curr.commission_value),0);
 
         console.log('total',total);
+        console.log('data',data)
 
 	return (
         <> 
@@ -449,14 +450,12 @@ const ReferralActivity = () => {
                                     </div>
 
 
-                                   
-
 
                                     <div className="space-y-3 shadow-lg border" style={{maxWidth:"450px",maxHeight:'200px'}}>
                                         <div className="">
                                             <div className="flex items-center py-3 px-4">
                                                 <div className="p-3 rounded-full w-11 h-11 flex items-center justify-center bg-[#6EBBFD] text-light">
-                                                <DollarIcon width={12} />
+                                                   <DollarIcon width={12} />
                                                 </div>
 
                                                 <div className="ml-3">

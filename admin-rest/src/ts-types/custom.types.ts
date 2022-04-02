@@ -11,6 +11,21 @@ export type CategoriesQueryOptionsType = {
   orderBy?: string;
   sortedBy?: SortOrder;
 };
+export type FetureShopOptionsType = {
+  location?:any;
+  category?:string;
+  is_active?:string;
+  search?:string;
+  limit?: number;
+};
+export type FetureProductOptionsType = {
+  location?:any;
+  id?:string;
+  category?:string;
+  is_active?:string;
+  search?:string;
+  limit?: number;
+};
 export type TagsQueryOptionsType = {
   type?: string;
   text?: string;
@@ -115,5 +130,10 @@ export type QueryOptionsType = {
 
 export type QueryParamsType = {
   queryKey: QueryKey;
+  userId: number;
   pageParam?: string;
+};
+
+export type FeatureProduct = {
+  [key: string]: any;
 };

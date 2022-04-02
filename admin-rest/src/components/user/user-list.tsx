@@ -8,15 +8,29 @@ import { UserPaginator } from "@ts-types/generated";
 import { useMeQuery } from "@data/user/use-me.query";
 import { useTranslation } from "next-i18next";
 import { useIsRTL } from "@utils/locals";
+// import { useCustomerQuery } from "@data/customer/use-customer.query";
+import { useRouter } from "next/router";
+import {useWalletCommissionQuery} from '@data/user/use-wallet-commission-query'
+
+
 
 type IProps = {
   customers: UserPaginator | null | undefined;
   onPagination: (current: number) => void;
 };
 const CustomerList = ({ customers, onPagination }: IProps) => {
+  const router = useRouter();
+
   const { data, paginatorInfo } = customers!;
   const { t } = useTranslation();
   const { alignLeft } = useIsRTL();
+
+  const { data:walletData,isLoading:loading } = useWalletCommissionQuery({
+    limit: 10 as number,
+    search:"",
+});
+  // const { data:customerData } = useCustomerQuery();
+  console.log(' customer data',data)
 
   const columns = [
     {
@@ -67,6 +81,7 @@ const CustomerList = ({ customers, onPagination }: IProps) => {
       align: "center",
       render: (is_active: boolean) => (is_active ? "Active" : "Inactive"),
     },
+
     {
       title: t("table:table-item-actions"),
       dataIndex: "id",
@@ -81,6 +96,34 @@ const CustomerList = ({ customers, onPagination }: IProps) => {
                 id={id}
                 userStatus={true}
                 isUserActive={is_active}
+              />
+            )}
+          </>
+        );
+      },
+    },
+    
+    // action button which on click will display users wallet details
+    {
+      title: t("table:Wallet"),
+      dataIndex: "id",
+      key: "wallet",
+      align: "center",
+      render: (id: string, { is_active }: any) => {
+        // const { data } = useMeQuery();
+        const { data, paginatorInfo } = customers!;
+        return (
+          <>
+            {data?.id != id && (
+              <ActionButtons
+                id={id}
+                //redirect to wallet details
+                walletData={walletData}
+                detailsUrl={`${router.asPath}/${id}`}
+
+               
+                // isUserActive={is_active}
+                // wallet={true}
               />
             )}
           </>

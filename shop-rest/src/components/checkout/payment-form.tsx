@@ -206,14 +206,14 @@ const PaymentForm = () => {
             className=""
           /> */}
 
-          <Radio
+          {/* <Radio
             id="wallet"
             type="radio"
             {...register("payment_gateway")}
             value="wallet"
             label={t("text-wallet")}
             className=""
-          />
+          /> */}
         </div>
       </div>
 
