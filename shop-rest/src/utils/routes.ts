@@ -10,6 +10,7 @@ export const ROUTES = {
   ORDER_RECEIVED: "/order-received",
   PRODUCT: "/products",
   ORDER: "/order",
+  EVENTS: '/events',
   PRIVACY: "/privacy",
   TERMS: "/terms",
   CONTACT: "/contact",

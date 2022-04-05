@@ -8,6 +8,7 @@ export enum PATH {
   TOKEN = "token",
   REGISTER = "register",
   CHECKOUT = "checkout/verify",
+  EVENTS = "events",
   ADDRESS = "address",
   TYPE = "types",
   CHANGE_PASSWORD = "change-password",
