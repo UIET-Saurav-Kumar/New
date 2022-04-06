@@ -240,6 +240,20 @@ class ProductController extends CoreController
             ]);
         }
 
+        // push sorted shops name that present in the current location
+        // $shops=ShopRepository::getSortedShops($location);
+        // $shops=Shop::where("id",$shops)->where('name', 'like', $slug.'%')->limit(6)->pluck('name');
+        // foreach($shops as $shop){
+        //     array_push($data,[
+        //         "label"=>$shop->name,
+        //         "value"=>$shop->name
+        //     ]);
+        // }
+
+        
+       
+        
+
         $names=Shop::where("is_active",1)->where('name', 'like', $slug.'%')->limit(6)->pluck('name');
         foreach($names as $name){
             array_push($data,[

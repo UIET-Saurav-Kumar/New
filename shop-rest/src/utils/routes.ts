@@ -10,7 +10,7 @@ export const ROUTES = {
   ORDER_RECEIVED: "/order-received",
   PRODUCT: "/products",
   ORDER: "/order",
-  EVENTS: '/events',
+  EVENTS: '/buylowcal-magazines',
   PRIVACY: "/privacy",
   TERMS: "/terms",
   CONTACT: "/contact",

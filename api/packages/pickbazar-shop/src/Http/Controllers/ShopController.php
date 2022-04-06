@@ -155,6 +155,7 @@ class ShopController extends CoreController
      * @return JsonResponse
      */
     public function show($slug, Request $request)
+    
     {
         $shop = $this->repository
             ->with(['categories', 'owner','shop_category'])
@@ -371,6 +372,7 @@ class ShopController extends CoreController
     }
 
     public function updateReferralCommission(Request $request)
+
     {
         $request->validate([
             "customer_commission"=>"required",
@@ -378,7 +380,9 @@ class ShopController extends CoreController
             "level2_commission"=>"required",
             "level3_commission"=>"required",
         ]);
+
         $referral=ReferralCommission::find(1);
+
         if($referral){
             $referral->update($request->all());
         }else{

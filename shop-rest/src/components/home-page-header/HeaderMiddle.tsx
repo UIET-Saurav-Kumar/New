@@ -26,16 +26,19 @@ const cities = //create object of major  indian cities with lat, lng and city na
             lat: 30.714274,
             lng: 76.722701
         },
+
         {
             city: "Panchkula",
             lat: 30.690112,
             lng: 76.847901
         },
+
         {
             city:'Shimla',
             lat: 31.1048,
             lng: 77.1734
         },
+
         {
             city: "Ambala",
             lat: 30.3643,
@@ -157,12 +160,6 @@ const cities = //create object of major  indian cities with lat, lng and city na
             lat: 17.68,
             lng: 83.22
         }
-        
-        
-
-
-        
-
     ]
 
 

@@ -31,7 +31,7 @@ const Navbar = ({label}) => {
   return (
 
     <header ref={navbarRef} className="site-header h-14 md:h-16 lg:h-22">
-      <nav className="h-14 md:h-16 lg:h-22 fixed w-full z-20 bg-light shadow-sm py-5 px-4 lg:px-5 xl:px-8 flex justify-between items-center">
+      <nav className="h-14 md:h-16 lg:h-22 fixed w-full z-50 bg-light shadow-sm py-5 px-4 lg:px-5 xl:px-8 flex justify-between items-center">
        
       <div className='flex items-center justify-between w-full space-x-8'> 
        

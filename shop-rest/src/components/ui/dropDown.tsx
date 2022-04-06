@@ -27,6 +27,9 @@ export default function DropDown({getLoc}:{getLoc:any}) {
   const loadOptions = async (inputValue:any, callback:any) => {
 
       var data = await fetchSearch(inputValue);      
+
+
+      console.log('search data',data)
       
       callback(data);
      

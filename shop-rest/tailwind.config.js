@@ -137,6 +137,9 @@ module.exports = {
         'india': "url('/india.jpg')",
         'drop-down': "url('/drop-down.jpg')",
 
+        'dark-bg': "url('/dark-bg.jpg')",
+        'collage': "url('/collage.jpeg')",
+
        },
 
        backgroundColor: theme => ({
@@ -233,6 +236,8 @@ module.exports = {
         100:'30rem',
         110:'36.5rem',
         200:'42rem',
+        210: '45rem',
+        220:'48rem',
 
         double: "200%",
       },

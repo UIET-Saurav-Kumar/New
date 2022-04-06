@@ -113,7 +113,7 @@ export const siteSettings = {
   authorizedLinks: [
     { href: ROUTES.PROFILE, label: "Profile" },
     { href: ROUTES.CHECKOUT, label: "Checkout" },
-    { href: ROUTES.EVENTS, label: "Events" },
+    { href: ROUTES.EVENTS, label: "Magazines" },
     { href: ROUTES.ORDERS, label: "Orders" },
     { href: ROUTES.INVITE_FRIENDS, label: "Invite Friends" },
     { href: ROUTES.REFERRAL_NETWORK, label: "Referral Network" },
@@ -138,7 +138,7 @@ export const siteSettings = {
 
     {
       href: ROUTES.EVENTS,
-      menulabel: "Events",
+      menulabel: "Magazines",
     },
     
     {
