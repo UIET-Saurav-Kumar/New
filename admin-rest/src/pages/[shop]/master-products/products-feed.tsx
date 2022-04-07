@@ -96,6 +96,8 @@ export default function ProductsFeed({shopId,searchTerm,type,category,orderBy,so
               <th className="rc-table-cell w-48 " >Price</th>
               <th className="rc-table-cell w-48 " >Sale Price</th>
               <th className="rc-table-cell w-48 " >Quantity</th>
+              
+              <th className="rc-table-cell w-48 " >Tax</th>
               <th className="rc-table-cell w-48 " >Actions</th>
           </tr>
       </thead>
