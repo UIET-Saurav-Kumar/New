@@ -16,6 +16,7 @@ import {
 import { useIsRTL } from "@utils/locals";
 import Checkbox from "@components/ui/checkbox/checkbox";
 import {useUpdateProductMutation} from "@data/product/product-status-update.mutation"
+import { useTaxesQuery } from "@data/tax/use-taxes.query";
 
 export type IProps = {
   products?: ProductPaginator;
@@ -23,12 +24,15 @@ export type IProps = {
 };
 
 const ProductList = ({ products, onPagination }: IProps) => {
+
   const { mutate: updateProduct, isLoading: updating } = useUpdateProductMutation();
 
   function checkboxChanged(e:any){
+
     var id=e.target.id.split('_')[1];
 
     var value=(e.target.checked)?1:0;
+
     updateProduct({
       variables: {
         id:id,
@@ -37,7 +41,9 @@ const ProductList = ({ products, onPagination }: IProps) => {
         }
       }
     });
+
   }
+
 
   const { data, paginatorInfo } = products! ?? {};
 
@@ -46,6 +52,7 @@ const ProductList = ({ products, onPagination }: IProps) => {
   const { alignLeft, alignRight } = useIsRTL();
 
   let columns = [
+
     {
       title: t("table:table-item-image"),
       dataIndex: "image",
@@ -53,6 +60,7 @@ const ProductList = ({ products, onPagination }: IProps) => {
       align: alignLeft,
       width: 74,
       render: (image: any, { name }: { name: string }) => (
+
         <Image
           src={image?.thumbnail ?? siteSettings.product.placeholder}
           alt={name}
@@ -61,16 +69,41 @@ const ProductList = ({ products, onPagination }: IProps) => {
           height={42}
           className="rounded overflow-hidden"
         />
+        
       ),
     },
+
     {
       title: t("table:table-item-title"),
       dataIndex: "name",
       key: "name",
       align: alignLeft,
-      width: 200,
+      width: 100,
       ellipsis: true,
     },
+
+    {
+      //tax
+      title: t("Tax"),
+      dataIndex: "tax",
+      key: "tax",
+      align: alignLeft,
+      width: 100,
+      render: (tax: string, { name }: { name: string }) => {
+       const tx = tax?.toString();
+       // convert tax to array
+        const taxArray = tx?.split(',');
+        // get tax name
+        const taxName = taxArray?.[6].split(':')[1].replace('"','').replace('"','');
+        
+        return taxName ?? tax;
+        
+      },
+    
+     
+    },
+    
+    
     {
       title: t("table:table-item-group"),
       dataIndex: "type",
@@ -82,6 +115,23 @@ const ProductList = ({ products, onPagination }: IProps) => {
         <span className="whitespace-nowrap truncate">{type?.name}</span>
       ),
     },
+
+    {
+      title: t("Categories"),
+      dataIndex: "categories",
+      key: "categories",
+      width: 120,
+      align: "left",
+      ellipsis: true,
+      render: (categories: any) => (
+        <span className="whitespace-normal truncate">
+          {categories?.map((category: any) => (
+           <p>{'•' + ' ' + category?.name }</p>
+          ))}
+        </span>
+      ),
+    },
+
     {
       title: "Product Type",
       dataIndex: "product_type",
@@ -92,6 +142,7 @@ const ProductList = ({ products, onPagination }: IProps) => {
         <span className="whitespace-nowrap truncate">{product_type}</span>
       ),
     },
+
     {
       title: t("table:table-item-unit"),
       dataIndex: "price",
@@ -124,6 +175,7 @@ const ProductList = ({ products, onPagination }: IProps) => {
         }
       },
     },
+
     {
       title: t("table:table-item-status"),
       dataIndex: "status",

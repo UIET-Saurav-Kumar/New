@@ -447,13 +447,17 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
                    <option value="">Select Tax</option>
                   {
                     taxes?.map((tax:any)=>{
-                      if(isSelected(tax.id)){
+                      if(isSelected(tax?.id)){
                         return (
-                          <option value={tax.id} selected>{tax.name+" "+tax.rate+"%"}</option>
+                          <option value={tax?.id} selected>
+                            {tax?.name+" "+tax?.rate+"%"}
+                          </option>
                         )
                       }
                       return (
-                        <option value={tax.id}>{tax.name+" "+tax.rate+"%"}</option>
+                        <option value={tax?.id}>
+                          {tax?.name+" "+tax?.rate+"%"}
+                        </option>
                       )
                     })
                   }

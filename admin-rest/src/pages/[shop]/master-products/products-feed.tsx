@@ -55,8 +55,9 @@ export default function ProductsFeed({shopId,searchTerm,type,category,orderBy,so
     console.log(master,'master');
     
   },[])
+
   function addProduct(id:number):any{
-    const price = document.getElementById("pirce_"+id)?.nodeValue;
+    const price = document.getElementById("price_"+id)?.nodeValue;
     const quantity = document.getElementById("quantity_"+id)?.nodeValue;
     console.log(price,quantity)
     if(!(price&&quantity)){
@@ -65,6 +66,7 @@ export default function ProductsFeed({shopId,searchTerm,type,category,orderBy,so
     console.log(price,quantity);
     console.log(id);
   }
+
   function handleLoadMore() {    
     console.log("handleLoadMore");
     fetchNextPage();
@@ -78,34 +80,34 @@ export default function ProductsFeed({shopId,searchTerm,type,category,orderBy,so
   })
   if (isError && error) return <ErrorMessage message={error?.message} />;
 
-  // if (!loading && !data?.pages?.length) {
-  //   return (
-  //     <div className="bg-gray-100 pt-6 pb-8 px-4 lg:p-8">
-  //       <NotFound text="text-not-found" className="w-7/12 mx-auto" />
-  //     </div>
-  //   );
-  // }
+  if (!loading && !data?.pages?.length) {
+    return (
+      <div className="bg-gray-100 pt-6 pb-8 px-4 lg:p-8">
+        <NotFound text="text-not-found" className="w-7/12 mx-auto" />
+      </div>
+    );
+  }
 
   return (
     <>
-    <table >
-      <thead className="rc-table-thead">
-          <tr>
+    <table className="">
+      <thead className=" rc-table-thead">
+          <tr className="">
               <th className="rc-table-cell w-48 " >Image</th>
               <th title="Name" className="rc-table-cell w-48 " >Name</th>
               <th className="rc-table-cell w-48 " >Price</th>
               <th className="rc-table-cell w-48 " >Sale Price</th>
               <th className="rc-table-cell w-48 " >Quantity</th>
               
-              <th className="rc-table-cell w-48 " >Tax</th>
+              {/* <th className="rc-table-cell w-48 " >Tax</th> */}
               <th className="rc-table-cell w-48 " >Actions</th>
           </tr>
       </thead>
-      <tbody className="rc-table-tbody">
+      <tbody className="rc-table-tbody ">
       {data?.pages.map((products, _idx) => (
           <Fragment key={_idx}>
             {products?.products?.data?.map((product:any,id:any) => (
-              <Product taxes={taxes} product={product} shopId={shopId} key={id} masterIds={master} className={`${master.includes(product?.id)}:"hidden":""`}/>
+              <Product taxes={taxes} product={product} shopId={shopId} key={id} masterIds={master} className={`${master.includes(product?.id)} : "hidden" : ""`}/>
             ))}
           </Fragment>
         ))}

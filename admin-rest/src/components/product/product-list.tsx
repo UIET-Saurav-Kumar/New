@@ -56,7 +56,7 @@ const ProductList = ({ products, onPagination }: IProps) => {
       title: t("table:table-item-image"),
       dataIndex: "image",
       key: "image",
-      align: alignLeft,
+      align: 'left',
       width: 74,
       render: (image: any, { name }: { name: string }) => (
         <Image
@@ -73,7 +73,7 @@ const ProductList = ({ products, onPagination }: IProps) => {
       title: t("table:table-item-title"),
       dataIndex: "name",
       key: "name",
-      align: alignLeft,
+      align: 'left',
       width: 200,
       ellipsis: true,
     },
@@ -82,38 +82,58 @@ const ProductList = ({ products, onPagination }: IProps) => {
       dataIndex: "type",
       key: "type",
       width: 120,
-      align: "center",
+      align: "left",
       ellipsis: true,
       render: (type: any) => (
-        <span className="whitespace-nowrap truncate">{type?.name}</span>
+        <span className="whitespace-normal truncate">{type?.name}</span>
       ),
     },
+
+    // product categories
+    {
+      title: t("Categories"),
+      dataIndex: "categories",
+      key: "categories",
+      width: 120,
+      align: "left",
+      ellipsis: true,
+      render: (categories: any) => (
+        <span className="whitespace-normal truncate">
+          {categories?.map((category: any) => (
+           <p>{'•' + ' ' + category?.name }</p>
+          ))}
+        </span>
+      ),
+    },
+    
     {
       title: t("table:table-item-shop"),
       dataIndex: "shop",
       key: "shop",
       width: 120,
-      align: "center",
+      align: "left",
       ellipsis: true,
       render: (shop: Shop) => (
-        <span className="whitespace-nowrap truncate">{shop?.name}</span>
+        <span className="whitespace-normal truncate">{shop?.name}</span>
       ),
     },
+
     {
       title: "Product Type",
       dataIndex: "product_type",
       key: "product_type",
       width: 120,
-      align: "center",
+      align: "left",
       render: (product_type: string) => (
         <span className="whitespace-nowrap truncate">{product_type}</span>
       ),
     },
+
     {
       title: t("table:table-item-unit"),
       dataIndex: "price",
       key: "price",
-      align: alignRight,
+      align: 'left',
       width: 100,
       render: (value: Product, record: Product) => {
         if (record?.product_type === ProductType.Variable) {
@@ -137,13 +157,37 @@ const ProductList = ({ products, onPagination }: IProps) => {
             amount: record.price as number,
           });
           return (
-            <span className="flex flex-col whitespace-nowrap" title={sale_price}>
-              {sale_price} <del>{price}</del>
+            <span className=" text-green-600 font-semibold font-xl flex flex-col whitespace-nowrap" title={sale_price}>
+              {sale_price} <del className="font-light text-red-500">{price}</del>
             </span>
           );
         }
       },
     },
+
+    // product tax
+    {
+      //tax
+      title: t("Tax"),
+      dataIndex: "tax",
+      key: "tax",
+      align: alignLeft,
+      width: 100,
+      render: (tax: string, { name }: { name: string }) => {
+       const tx = tax?.toString();
+       // convert tax to array
+        const taxArray = tx?.split(',');
+        // get tax name
+        const taxName = taxArray?.[6].split(':')[1].replace('"','').replace('"','');
+        
+        return taxName ?? tax;
+        
+      },
+    
+     
+    },
+
+    
     {
       title: t("table:table-item-quantity"),
       dataIndex: "quantity",
