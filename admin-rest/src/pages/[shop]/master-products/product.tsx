@@ -70,10 +70,10 @@ export default function Product({product,shopId,masterIds,taxes}:any) {
                     <Input
                         name="price"
                         variant="outline"
-                        value={('₹' + ' ' + product?.price)}
+                        // value={('₹' + ' ' + product?.price)}
                         
                         className="mb-5"
-                        placeholder="price"
+                        placeholder={product?.price}
                         id={"price_"+product?.id}
                     />
                     </span>
@@ -83,9 +83,9 @@ export default function Product({product,shopId,masterIds,taxes}:any) {
                     <Input
                         name="sale_price"
                         variant="outline"
-                        value={'₹' + ' ' + (product?.sale_price === null  ? product?.price : product?.sale_price)}
+                        // value={'₹' + ' ' + (product?.sale_price === null  ? product?.price : product?.sale_price)}
                         
-                        placeholder="sale price"
+                        placeholder={product?.sale_price}
                         className="  mb-5"
                         id={"sale_price_"+product?.id}
                     />
@@ -97,9 +97,9 @@ export default function Product({product,shopId,masterIds,taxes}:any) {
                     <Input
                         name="quantity"
                         variant="outline"
-                        value={ product?.quantity}
+                        // value={ product?.quantity}
                         className="mb-5"
-                        placeholder="quantity"
+                        placeholder={product?.quantity}
                         id={"quantity_"+product?.id}
                     />
                     </span>

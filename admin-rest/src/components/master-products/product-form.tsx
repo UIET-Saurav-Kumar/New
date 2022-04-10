@@ -294,6 +294,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
       createProduct(
         {
           ...inputValues,
+         
         },
         {
           onError: (error: any) => {
@@ -313,6 +314,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
       );
     }
   };
+
   function isSelected(id:any){
     if((initialValues?.tax)){
       var tax =JSON.parse(initialValues.tax);
@@ -320,6 +322,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
     }
     return false;
   }
+  
   const productTypeValue = watch("productTypeValue");
   return (
     <>
@@ -449,7 +452,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
                     taxes?.map((tax:any)=>{
                       if(isSelected(tax?.id)){
                         return (
-                          <option value={tax?.id} selected>
+                          <option  value={tax?.id} selected>
                             {tax?.name+" "+tax?.rate+"%"}
                           </option>
                         )

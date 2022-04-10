@@ -67,6 +67,11 @@ export default function ProductsFeed({shopId,searchTerm,type,category,orderBy,so
     console.log(id);
   }
 
+  console.log('product', data?.pages.map((products, _idx) => (
+    products
+  )))
+    
+
   function handleLoadMore() {    
     console.log("handleLoadMore");
     fetchNextPage();
@@ -107,7 +112,14 @@ export default function ProductsFeed({shopId,searchTerm,type,category,orderBy,so
       {data?.pages.map((products, _idx) => (
           <Fragment key={_idx}>
             {products?.products?.data?.map((product:any,id:any) => (
-              <Product taxes={taxes} product={product} shopId={shopId} key={id} masterIds={master} className={`${master.includes(product?.id)} : "hidden" : ""`}/>
+
+              <Product taxes={taxes} 
+                      product={product} 
+                      shopId={shopId} key={id} 
+                      masterIds={master} 
+                      className={`${master.includes(product?.id)} : "hidden" : ""`}
+                />
+            
             ))}
           </Fragment>
         ))}

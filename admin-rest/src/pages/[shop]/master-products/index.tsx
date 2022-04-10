@@ -123,6 +123,7 @@ export default function ProductsPage() {
                 shopId={shopId}
                 searchTerm={searchTerm}
                 category={category}
+              
                 
                 type={type}
                 orderBy={orderBy}

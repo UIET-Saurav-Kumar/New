@@ -622,6 +622,7 @@ export declare type CreateProduct = {
   sale_price?: Maybe<Scalars["Float"]>;
   quantity: Scalars["Int"];
   unit: Scalars["String"];
+  tax: Maybe<Scalars["String"]>;
   description?: Maybe<Scalars["String"]>;
   categories?: Maybe<Array<Scalars["ID"]>>;
   variations?: Maybe<Array<AttributeProductPivot>>;
@@ -646,6 +647,7 @@ export declare type UpdateProduct = {
   sale_price?: Maybe<Scalars["Float"]>;
   quantity: Scalars["Int"];
   unit: Scalars["String"];
+  tax:Maybe<Scalars["String"]>
   description?: Maybe<Scalars["String"]>;
   categories?: Maybe<Array<Scalars["ID"]>>;
   variations?: Maybe<Array<AttributeProductPivot>>;
