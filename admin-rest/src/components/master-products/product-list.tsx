@@ -80,6 +80,9 @@ const ProductList = ({ products, onPagination }: IProps) => {
       align: alignLeft,
       width: 100,
       ellipsis: true,
+      render: (name: string) => (
+        <span className="whitespace-normal">{name}</span>
+      )
     },
 
     {
