@@ -48,10 +48,9 @@ class UserController extends CoreController
      */
     public function index(Request $request)
     {
-        $limit = $request->limit ?   $request->limit : 15;
-        $data= UserResource::collection(User::paginate($limit));
-        
-        return $data->resource;
+      $limit = $request->limit ?   $request->limit : 15;   
+
+        return $this->repository->paginate($limit);
         
     }
 
