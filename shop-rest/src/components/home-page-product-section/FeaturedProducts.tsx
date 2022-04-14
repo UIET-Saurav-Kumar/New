@@ -79,7 +79,7 @@ export default function featuredProducts({}) {
         },
     }
 
-    const typeId = [1,2,3,4,5,6,7,8,9,10,11,14,15,16,18,19,20,21,22]
+    // const typeId = [1,2,3,4,5,6,7,8,9,10,11,14,15,16,18,19,20,21,22]
 
        
    const groceryArray =  data?.featureProducts.data.filter(function(product){
@@ -158,6 +158,86 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
     return product.type_id == 22 ? product : null;
  })
 
+ const arrays = [
+    {
+        name:'groceryArray',
+        title:'Grocery',
+    },
+    {
+        name:'bakeryArray',
+        title:'Bakery',
+    },
+    {
+        name:'makeupArray',
+        title:'Makeup',
+    },
+    {
+        name:'bagsArray',
+        title:'Bags',
+    },
+    {
+        name:'clothingArray',
+        title:'Clothing',
+    },
+    {
+        name:'furnitureArray',
+        title:'Furniture',
+    },
+    {
+        name:'salonspaArray',
+        title:'Salon & Spa',
+    },
+    {
+        name:'restrauntsArray',
+        title:'Restaurants',
+    },
+    {
+        name:'buffetArray',
+        title:'Buffet',
+    },
+    {
+        name:'groceryoffersArray',
+        title:'Grocery Offers',
+    },
+    {
+        name:'fashionlifestyleArray',
+        title:'Fashion & Lifestyle',
+    },
+    {
+        name:'hotelsresortsArray',
+        title:'Hotels & Resorts',
+    },
+    {
+        name:'fruitsvegetablesArray',
+        title:'Fruits & Vegetables',
+    },
+    {
+        name:'pharmacyArray',
+        title:'Pharmacy',
+    },
+    {
+        name:'beveragesArray',
+        title:'Beverages',
+    },
+    {
+        name:'healthproductsArray',
+        title:'Health Products',
+    },
+    {
+        name:'dairyfarmArray',
+        title:'Dairy & Farm',
+    },
+    {
+        name:'meatArray',
+        title:'Meat',
+    },
+    {
+        name:'electronicsArray',
+        title:'Electronics',
+    },
+    
+]
+
 
 
     return (
@@ -170,52 +250,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                         Featured Products 
                     </h3>
 
-                    {/* <div className='flex space-x-16 lg:space-x-20 px-6'>
-
-                                <span className='relative space-y-2 cursor-pointer items-center h-14 border p-3 flex flex-col'>
-                                     <img id='icon-image' src='/fruits-and-vegetables.png' 
-                                          className=' featured-product-icon rounded-full h-10 w-10 lg:w-34 object-cover sm:object-cover'/>
-                                      <h1 className=' absolute bottom-0 text-gray-600 font-semibold w-28 text-center text-xs'>Grocery</h1>
-                                </span>
-
-                                <span className='relative space-y-2 cursor-pointer h-14 items-center flex flex-col'> 
-                                   <img src='/restaurant.png' 
-                                        className='featured-product-icon rounded-full h-10 w-10 lg:w-34 object-cover sm:object-cover'/> 
-                                    <h1 className='text-center absolute bottom-0 text-gray-600 font-semibold w-28  text-xs'>Restraunts</h1> 
-                                </span>
-
-                                <span className='relative space-y-2 cursor-pointer h-14 items-center flex flex-col'> 
-                                   <img src='/wardrobe.png' 
-                                        className='featured-product-icon rounded-full h-10 w-10 lg:w-34 object-cover sm:object-cover'/>
-                                    <h1 className='text-center absolute bottom-0 text-gray-600 font-semibold w-28  text-xs'>Clothing</h1> 
-                                </span>
-
-                                <span className='relative space-y-2 cursor-pointer h-14 items-center flex flex-col'>
-                                     <img src='/weightlifting.png' 
-                                          className='featured-product-icon rounded-full h-10 w-10 lg:w-34 object-cover sm:object-cover'/>
-                                      <h1 className='text-center absolute bottom-0 text-gray-600 font-semibold w-28  text-xs'>Health & Fitness</h1> 
-                                </span>
-
-                                <span className='relative space-y-2 cursor-pointer h-14 items-center flex flex-col'>
-                                    <img src='/pharmacy.png' 
-                                        className='featured-product-icon rounded-full h-10 w-10 lg:w-34 object-cover sm:object-cover'/>
-                                    <h1 className='text-center absolute bottom-0 text-gray-600 font-semibold w-28  text-xs'>Pharmacy</h1> 
-                                </span>
-
-                                <span className='relative space-y-2 cursor-pointer h-14 items-center flex flex-col'>
-                                    <img src='/pedicure.png' 
-                                        className='featured-product-icon rounded-full h-10 w-10 lg:w-34 object-cover sm:object-cover'/> 
-                                    <h1 className='text-center absolute bottom-0 text-gray-600 font-semibold w-28  text-xs'>Salon & Spa</h1>
-                                </span>
-
-                                <span className='relative space-y-2 cursor-pointerh-14 items-center flex flex-col'>
-                                     <img src='/food-and-drink.png' 
-                                          className='featured-product-icon rounded-full h-10 w-10 lg:w-34 object-cover sm:object-cover'/> 
-                                      <h1 className='text-center absolute bottom-0 text-gray-600 font-semibold w-28  text-xs'>Fruits & Vegetables</h1>
-                                </span>
-                                  
-                    </div> */}
-                    {/* <h3 className=' text-xs font-blue hover:underline cursor-pointer' > view all </h3> */}
+                    
                 </div>
             </div>
             
@@ -228,7 +263,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
             
 
 
-                    {salonspaArray?.map((product :any) => (
+                    { salonspaArray?.filter(product => product?.status === 'publish').map((product :any) => (
                         <>    
                             <motion.div key={product.id}>
                                 {renderProductCard(product) }
@@ -246,7 +281,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                   </h3>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
                     
-                        {groceryArray?.map((product :any) => (
+                        {groceryArray?.filter(product=> product?.status === 'publish').map((product :any) => (
                             <>    
                                 <motion.div key={product.id}>
                                     {renderProductCard(product) }
@@ -264,7 +299,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                   </h3>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
                     
-                        {fruitsvegetablesArray?.map((product :any) => (
+                        {fruitsvegetablesArray?.filter(product=> product?.status === 'publish').map((product :any) => (
                             <>    
                                 <motion.div key={product.id}>
                                     {renderProductCard(product) }
@@ -281,7 +316,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                 </h3>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
 
-                    {beveragesArray?.map((product :any) => (
+                    {beveragesArray?.filter(product=> product?.status === 'publish').map((product :any) => (
                         <>    
                             <motion.div key={product.id}>
                                 {renderProductCard(product) }
@@ -302,7 +337,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
             
 
 
-                    {fashionlifestyleArray?.map((product :any) => (
+                    {fashionlifestyleArray?.filter(product=> product?.status === 'publish').map((product :any) => (
                         <>    
                             <motion.div key={product.id}>
                                 {renderProductCard(product) }
@@ -322,7 +357,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                   </h3>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
                     
-                        {electronicsArray?.map((product :any) => (
+                        {electronicsArray?.filter(product=> product?.status === 'publish').map((product :any) => (
                             <>    
                                 <motion.div key={product.id}>
                                     {renderProductCard(product) }
@@ -340,7 +375,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                   </h3>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
                     
-                        {meatArray?.map((product :any) => (
+                        {meatArray?.filter(product=> product?.status === 'publish').map((product :any) => (
                             <>    
                                 <motion.div key={product.id}>
                                     {renderProductCard(product) }
@@ -358,7 +393,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                   </h3>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
                     
-                        {dairyfarmArray?.map((product :any) => (
+                        {dairyfarmArray?.filter(product=> product?.status === 'publish').map((product :any) => (
                             <>    
                                 <motion.div key={product.id}>
                                     {renderProductCard(product) }
@@ -376,7 +411,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                   </h3>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
                     
-                        {healthproductsArray?.map((product :any) => (
+                        {healthproductsArray?.filter(product=> product?.status === 'publish').map((product :any) => (
                             <>    
                                 <motion.div key={product.id}>
                                     {renderProductCard(product) }
@@ -394,7 +429,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                   </h3>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
                     
-                        {pharmacyArray?.map((product :any) => (
+                        {pharmacyArray?.filter(product=> product?.status === 'publish').map((product :any) => (
                             <>    
                                 <motion.div key={product.id}>
                                     {renderProductCard(product) }
@@ -414,7 +449,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                   </h3>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
                     
-                        {hotelsresortsArray?.map((product :any) => (
+                        {hotelsresortsArray?.filter(product=> product?.status === 'publish').map((product :any) => (
                             <>    
                                 <motion.div key={product.id}>
                                     {renderProductCard(product) }
@@ -437,7 +472,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
             
 
-                    {bakeryArray?.map((product :any) => (
+                    {bakeryArray?.filter(product=> product?.status === 'publish').map((product :any) => (
                         <>    
                             <motion.div key={product.id}>
                                 {renderProductCard(product) }
@@ -459,7 +494,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
             
 
 
-                    {groceryoffersArray?.map((product :any) => (
+                    {groceryoffersArray?.filter(product=> product?.status === 'publish').map((product :any) => (
                         <>    
                             <motion.div key={product.id}>
                                 {renderProductCard(product) }
@@ -471,14 +506,14 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
             </div> 
              
            
-             <div className={`${clothingArray?.length  ? 'block' : 'hidden'} flex flex-col`}>
+            <div className={`${clothingArray?.length  ? 'block' : 'hidden'} flex flex-col`}>
 
                 <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
                     Clothing
                 </h3>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
             
-                    {clothingArray?.map((product :any) => (
+                    {clothingArray?.filter(product=> product?.status === 'publish').map((product :any) => (
                         <>    
                             <motion.div key={product.id}>
                                 {renderProductCard(product) }
@@ -499,7 +534,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
             
 
 
-                    {furnitureArray?.map((product :any) => (
+                    {furnitureArray?.filter(product=> product?.status === 'publish').map((product :any) => (
                         <>    
                             <motion.div key={product.id}>
                                 {renderProductCard(product) }
@@ -516,7 +551,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                 </h3>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
 
-                    {buffetArray?.map((product :any) => (
+                    {buffetArray?.filter(product=> product?.status === 'publish').map((product :any) => (
                         <>    
                             <motion.div key={product.id}>
                                 {renderProductCard(product) }
@@ -528,12 +563,6 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
             </div> 
 
             
-            
-
-           
-           
-
-
 
           <div className={`${restrauntsArray?.length  ? 'block' : 'hidden'} flex flex-col`}>
                 <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl text-gray-800 font-semibold  p-2'> 
@@ -541,7 +570,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                 </h3>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
 
-                    {restrauntsArray?.map((product :any) => (
+                    {restrauntsArray?.filter(product=> product?.status === 'publish').map((product :any) => (
                         <>    
                             <motion.div key={product.id}>
                                 {renderProductCard(product) }
