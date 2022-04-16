@@ -460,7 +460,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
                   borderBottom: "1px solid #E5E7EB"
                 }}
                  {...register("tax")} id="tax">
-                   <option value="">Select Tax</option>
+                   <option value={null}>Select Tax</option>
                   {
                     taxes?.map((tax:any)=>{
                       if(isSelected(tax.id)){
