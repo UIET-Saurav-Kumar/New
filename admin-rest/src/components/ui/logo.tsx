@@ -25,7 +25,7 @@ const Logo: React.FC<React.AnchorHTMLAttributes<{}>> = ({
         }}
       >
         <Image
-          src={logo?.original ?? siteSettings.logo.url}
+          src='/only-logo.png'
           alt={siteTitle ?? siteSettings.logo.alt}
           layout="fill"
           objectFit="contain"
