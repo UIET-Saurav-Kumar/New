@@ -135,7 +135,7 @@ module.exports = {
         'hero-pattern': "url('/shops-frame.jpg')",
         'pink-footer': "url('/footer.jpg')",
         'india': "url('/india.jpg')",
-        'drop-down': "url('/drop-down.jpg')",
+        'drop-down': "url('/drop-down1.jpg')",
 
         'dark-bg': "url('/dark-bg.jpg')",
         'collage': "url('/collage.jpeg')",
@@ -152,6 +152,7 @@ module.exports = {
  
         'other': '#e3342f',
        }),
+
 
       colors: {
         'magenta': '#e01d56',
