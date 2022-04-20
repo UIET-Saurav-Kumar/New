@@ -109,7 +109,7 @@ const ReferralActivity = () => {
 
 
 
-        var leader_this_month_purchse = data?.customer_level?.filter((i:any) => {
+        var leader_this_month_purchase = data?.customer_level?.filter((i:any) => {
             
             var date = new Date(i.created_at);
             // console.log(data.customer_level);
@@ -328,7 +328,7 @@ const ReferralActivity = () => {
 
                                                 <div className="ml-3">
                                                     <p className="text-md lg:text-lg font-semibold text-sub-heading mb-0.5">
-                                                    ₹{leader_this_month_purchse.toFixed(2)}
+                                                    ₹{leader_this_month_purchase?.toFixed(2)}
                                                     </p>
                                                     <p className="text-sm text-gray-700 mt-0">
                                                         {("Leader This Month Purchase")}
