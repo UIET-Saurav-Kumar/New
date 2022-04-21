@@ -1,6 +1,6 @@
 import React from "react";
 import { cartReducer, State, initialState } from "./cart.reducer";
-import { Item, getItem, inStock } from "./cart.utils";
+import { Item, getItem, inStock, isStatus } from "./cart.utils";
 import { useLocalStorage } from "@utils/use-local-storage";
 import { CART_KEY } from "@utils/constants";
 
@@ -14,6 +14,8 @@ interface CartProviderState extends State {
   getItemFromCart: (id: Item["id"]) => any | undefined;
   isInCart: (id: Item["id"]) => boolean;
   isInStock: (id: Item["id"]) => boolean;
+  // product status
+  isProductAvailable: (item: Item, id: Item["id"]) => boolean;
   resetCart: () => void;
   // updateCartMetadata: (metadata: Metadata) => void;
 }
@@ -56,6 +58,7 @@ export const CartProvider: React.FC = (props) => {
   const isInCart = (id: Item["id"]) => !!getItem(state.items, id);
   const getItemFromCart = (id: Item["id"]) => getItem(state.items, id);
   const isInStock = (id: Item["id"]) => inStock(state.items, id);
+  const isProductAvailable = (id: Item["id"]) => isStatus(state.items, id);
   const resetCart = () => dispatch({ type: "RESET_CART" });
 
 
@@ -65,6 +68,7 @@ export const CartProvider: React.FC = (props) => {
       ...state,
       addItemToCart,
       removeItemFromCart,
+      isProductAvailable,
       clearItemFromCart,
       getItemFromCart,
       isInCart,

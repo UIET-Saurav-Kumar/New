@@ -30,13 +30,24 @@ const VerifyCheckout = () => {
   const { width } = useWindowSize();
   const router = useRouter();
   const [errorMessage, setError] = useState("");
-  const { billing_address, setCheckoutData } = useCheckout();
+  const { billing_address, setCheckoutData, checkoutData } = useCheckout();
   const { items, total, isEmpty } = useCart();
   const { openModal } = useModalAction();
 
+  const available_items = items?.filter(
+    (item: any) => 
+    //check if item have status attribute
+     !checkoutData?.unavailable_products.map((item: any) => item.name).includes(item.name) 
+  );
+
+  const available_items_total = available_items?.reduce(
+    (acc: number, item: any) => acc + item.itemTotal,
+    0
+  );
+
   const { price: subtotal } = usePrice(
-    items && {
-      amount: total,
+    available_items && {
+      amount: available_items_total,
     }
   );
 
@@ -95,7 +106,7 @@ const VerifyCheckout = () => {
           <span className="text-base font-bold text-heading">
             {t("text-your-order")}
           </span>
-          <span className="text-md text-gray-800">{items.length + ' ' + 'items'} </span>
+          <span className="text-md text-gray-800">{available_items.length + ' ' + 'items'} </span>
         </div>
 
         <div className=" ">
@@ -126,7 +137,7 @@ const VerifyCheckout = () => {
           </div>
           
         ) : (
-            items?.map((item) =>(
+          available_items?.map((item) =>(
               <>
                 <CheckoutCartItem item={item} key={item.id} />
               </>

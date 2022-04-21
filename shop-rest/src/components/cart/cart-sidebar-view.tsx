@@ -11,6 +11,7 @@ import usePrice from "@utils/use-price";
 import { useTranslation } from "next-i18next";
 import { useCart } from "@contexts/quick-cart/cart.context";
 import { formatString } from "@utils/format-string";
+import { useCheckout } from "@contexts/checkout.context";
 
 
 const CartSidebarView = () => {
@@ -19,6 +20,33 @@ const CartSidebarView = () => {
   const { items, totalUniqueItems, total,delivery_charges } = useCart();
   const { closeSidebar } = useUI();
   const router = useRouter();
+
+  const {
+    billing_address,
+    shipping_address,
+    delivery_time,
+    checkoutData,
+    coupon,
+    discount,
+  } = useCheckout();
+
+ 
+  const available_items = items?.filter(
+    (item: any) => 
+    //check if item have status attribute
+     !checkoutData?.unavailable_products.map((item: any) => item.name).includes(item.name) 
+  );
+
+  const available_items_total = available_items?.reduce(
+    (acc: number, item: any) => acc + item.itemTotal,
+    0
+  );
+
+  const allItems = items?.filter(
+    (item: any) =>
+    checkoutData?.cart_items.map((item: any) => item.name)
+
+  );
   
   function handleCheckout() {
     router.push(ROUTES.CHECKOUT);
@@ -26,18 +54,23 @@ const CartSidebarView = () => {
   }
 
   const { price: totalPrice } = usePrice({
-    amount: total-delivery_charges,
+    amount: available_items_total,
   });
-  
+
+  //available items sum total
+ 
+  console.log('available_items_total', totalPrice);
+  console.log('cart sidebar items', allItems)
 
   return (
+
     <section className="flex flex-col  h-full relative">
       <header className="fixed max-w-md w-full top-0 z-10 bg-light py-4 px-6 flex 
              items-center justify-between border-b border-border-200 border-opacity-75">
         <div className="flex text-accent font-semibold">
           <CartCheckBagIcon className="flex-shrink-0" width={24} height={22} />
           <span className="flex ms-2">
-            {formatString(totalUniqueItems, t("text-item"))}
+            {formatString(available_items.length, t("text-item"))}
           </span>
         </div>
         <button
@@ -53,7 +86,8 @@ const CartSidebarView = () => {
       <AnimateSharedLayout>
         <motion.div layout className="flex-grow pt-16 overflow-y-scroll">
           {items.length > 0 ? (
-            items?.map((item) => <CartItem item={item} key={item.id} />)
+            items?.map((item) =>
+             <CartItem item={item} key={item.id} />)
           ) : (
             <motion.div
               layout
@@ -82,7 +116,7 @@ const CartSidebarView = () => {
             {t("text-checkout")}
           </span>
           <span className="flex items-center flex-shrink-0 h-full bg-light text-accent rounded-full px-5">
-            {totalPrice}
+          ₹{available_items_total.toFixed(2) }
           </span>
         </button>
       </footer>

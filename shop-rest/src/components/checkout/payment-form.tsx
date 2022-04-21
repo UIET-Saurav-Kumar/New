@@ -54,12 +54,14 @@ const paymentSchema = Yup.object().shape({
 });
 
 const PaymentForm = () => {
+
   const { t } = useTranslation("common");
   const router = useRouter();
   const { mutate: createOrder, isLoading: loading } = useCreateOrderMutation();
   const { data: orderStatusData } = useOrderStatusesQuery();
   const { data } = useCustomerQuery();
   const {getLocation} =useLocation()
+
   const {
     register,
     handleSubmit,
@@ -77,8 +79,6 @@ const PaymentForm = () => {
   });
   
   console.log('phone number',data?.me?.phone_number)
-
-  const { items, delivery_charges} = useCart();
   const {
     billing_address,
     shipping_address,
@@ -88,11 +88,41 @@ const PaymentForm = () => {
     discount,
   } = useCheckout();
 
+  const notAvailableItems = checkoutData.unavailable_products
+   
+  const allItems = () => {
+    let avItems = [];
+    for(let i=0;i<notAvailableItems.length;i++){
+      avItems = notAvailableItems[i].name
+  }
+  return avItems
+}
+  
+  console.log('notAvailableItems',notAvailableItems)
+  console.log('notAvailableItemsName',allItems())
+
+
+  const { items, delivery_charges} = useCart();
+
+ 
   const available_items = items?.filter(
-    (item: any) => !checkoutData?.unavailable_products?.includes(item.id)
+    (item: any) => 
+    //check if item have status attribute
+     !checkoutData?.unavailable_products.map((item: any) => item.name).includes(item.name) 
   );
 
+  const draftProducts = items?.filter(
+    (item: any) => 
+    checkoutData?.unavailable_products.includes(item.id) 
+  );
+
+    console.log('cart items',items)
+    console.log('available products', available_items)
+    console.log('draft products', draftProducts)
+
+
   const subtotal = calculateTotal(available_items).total;
+
   const total = calculatePaidTotal(
     {
       totalAmount: subtotal,
@@ -218,16 +248,16 @@ const PaymentForm = () => {
         </div>
       </div>
 
-     
-      {!subtotal && <ValidationError message={t("error-order-unavailable")} />}
+{/*      
+      {!subtotal ||  notAvailableItems.length > 0 && <ValidationError message={allItems()+' ' + 'is not available'}/>}
       {total < 0 && (
         <div className="mt-3">
-          <ValidationError message={t("error-cant-process-order")} />
+          <ValidationError message={allItems()} />
         </div>
-      )}
+      )} */}
       <Button
         loading={loading}
-        disabled={!subtotal || total < 0}
+        // disabled={!subtotal || total < 0 || notAvailableItems.length > 0}
         className="w-full mt-5 lg:w-auto lg:ms-auto"
       >
         {t("text-place-order")}

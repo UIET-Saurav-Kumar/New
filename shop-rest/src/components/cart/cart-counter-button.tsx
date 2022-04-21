@@ -5,16 +5,41 @@ import { formatString } from "@utils/format-string";
 import usePrice from "@utils/use-price";
 import { useCart } from "@contexts/quick-cart/cart.context";
 import { useTranslation } from "next-i18next";
+import { useCheckout } from "@contexts/checkout.context";
+
 
 const CartCounterButton = () => {
 
   const { t } = useTranslation();
-  const { totalUniqueItems, total ,delivery_charges} = useCart();
+  const { totalUniqueItems,items, total ,delivery_charges} = useCart();
   const { openSidebar, setSidebarView } = useUI();
   
+
+  const {
+    billing_address,
+    shipping_address,
+    delivery_time,
+    checkoutData,
+    coupon,
+    discount,
+  } = useCheckout();
+  
+
+  const available_items = items?.filter(
+    (item: any) => 
+    //check if item have status attribute
+     !checkoutData?.unavailable_products.map((item: any) => item.name).includes(item.name) 
+  );
+
+  const available_items_total = available_items?.reduce(
+    (acc: number, item: any) => acc + item.itemTotal,
+    0
+  );
+
   const { price: totalPrice } = usePrice({
-    amount: total - delivery_charges,
+    amount: available_items_total - delivery_charges,
   });
+
 
 
   function handleCartSidebar() {
@@ -23,7 +48,6 @@ const CartCounterButton = () => {
   }
 
   console.log('total price',totalPrice);
-  
 
   return (
 
@@ -34,7 +58,7 @@ const CartCounterButton = () => {
       <span className="flex pb-0.5">
         <CartCheckBagIcon className="flex-shrink-0" width={14} height={16} />
         <span className="flex ms-2">
-           {formatString(totalUniqueItems, t("common:text-item"))}
+           {formatString(available_items.length, t("common:text-item"))}
         </span>
       </span>
 

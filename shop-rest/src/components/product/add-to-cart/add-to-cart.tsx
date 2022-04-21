@@ -41,6 +41,7 @@ export const AddToCart = ({
     addItemToCart,
     removeItemFromCart,
     isInStock,
+    isProductAvailable,
     getItemFromCart,
     isInCart,
   } = useCart();
@@ -88,7 +89,7 @@ export const AddToCart = ({
     });
 
   };
-  const outOfStock = isInCart(item?.id) && !isInStock(item.id);
+  const outOfStock = isInCart(item?.id) && !isInStock(item.id) && !isProductAvailable(item.id);
   return !isInCart(item?.id) ? (
 
     <>

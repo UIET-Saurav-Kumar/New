@@ -20,13 +20,17 @@ class CheckoutRepository
         $amount = $this->getOrderAmount($request, $unavailable_products);
         $shipping_charge = $this->calculateShippingCharge($request, $amount);
         $tax = $this->calculateTax($request, $shipping_charge, $amount);
+        $allItems = $this->allCartProducts($request['products']);
+
         return [
             'total_tax'            => $tax,
             'shipping_charge'      => $shipping_charge,
-            'unavailable_products' => $unavailable_products
+            'unavailable_products' => $unavailable_products,
+            'cart_items'           => $allItems,
         ];
     }
 
+  
     public function getOrderAmount($request, $unavailable_products)
     {
         if (count($unavailable_products)) {
@@ -89,18 +93,33 @@ class CheckoutRepository
         return 0;
     }
 
+    //all products
+    protected function allCartProducts($products)
+    {
+        $all_items = [];
+        foreach ($products as $product) {
+            
+            $all_items[] = $product;
+        }
+        return $all_items;
+    }
+
+
     public function checkStock($products)
     {
         $unavailable_products = [];
         foreach ($products as $product) {
+            
             if (isset($product['variation_option_id'])) {
                 $is_not_in_stock = $this->isVariationInStock($product['variation_option_id'], $product['order_quantity']);
             } else {
-                $is_not_in_stock = $this->isInStock($product['product_id'], $product['order_quantity']);
+             // $is_not_in_stock = $this->isAvailable($product['product_id']);
+                $is_not_in_stock = $this->isInStock( $product['product_id'], $product['order_quantity']  ) ;
             }
             if ($is_not_in_stock) {
-                $unavailable_products[] = $is_not_in_stock;
+                $unavailable_products[] =  $is_not_in_stock;
             }
+
         }
         return $unavailable_products;
     }
@@ -109,14 +128,28 @@ class CheckoutRepository
     {
         try {
             $product = Product::findOrFail($id);
-            if ($order_quantity > $product->quantity) {
-                return $id;
+            if ($order_quantity > $product->quantity || $product->status === 'draft') {
+                $item = $product->toArray();
+                return $item;
             }
             return false;
         } catch (Exception $e) {
             return false;
         }
     }
+
+    // protected function isAvailable($id)
+    // {
+    //     try {
+    //         $product = Product::findOrFail($id);
+    //         if ($product->status === 'publish') {
+    //             return $product->name;
+    //         }
+    //         return false;
+    //     } catch (Exception $e) {
+    //         return false;
+    //     }
+    // }
 
     protected function isVariationInStock($variation_id, $order_quantity)
     {

@@ -80,6 +80,7 @@ class ProductRepository extends BaseRepository
             if(isset($request->tax)){
                 $product->tax=Tax::find($request->tax);
             }
+     
             if (isset($request['categories'])) {
                 $product->categories()->attach($request['categories']);
             }

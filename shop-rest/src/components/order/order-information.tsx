@@ -16,13 +16,22 @@ interface Props {
 }
 
 const OrderInformation = (props: Props) => {
+
   const { t } = useTranslation("common");
+
   const { items, isEmpty } = useCart();
 
   const { checkoutData, discount, removeCoupon, coupon } = useCheckout();
 
   const available_items = items?.filter(
-    (item: any) => !checkoutData?.unavailable_products?.includes(item.id)
+    (item: any) => 
+    //check if item have status attribute
+     !checkoutData?.unavailable_products.map((item: any) => item.name).includes(item.name) 
+  );
+
+  const available_items_total = available_items?.reduce(
+    (acc: number, item: any) => acc + item.itemTotal,
+    0
   );
 
   const { price: tax } = usePrice(

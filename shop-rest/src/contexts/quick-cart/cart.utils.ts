@@ -5,6 +5,7 @@ export interface Item {
   id: string | number;
   price: number;
   quantity?: number;
+  status?: string;
   stock?: number;
   [key: string]: any;
 }
@@ -75,6 +76,20 @@ export function inStock(items: Item[], id: Item["id"]) {
   if (item) return item["quantity"]! < item["stock"]!;
   return false;
 }
+
+console.log('inStock', inStock)
+
+//status
+export function isStatus(items: Item[], id: Item["id"]) {
+  const item = getItem(items, id);
+  if (item) return item["status"] === "publish";
+  return false;
+}
+
+console.log('isStatus', isStatus)
+
+
+
 export const calculateItemTotals = (items: Item[]) =>
   items.map((item) => ({
     ...item,

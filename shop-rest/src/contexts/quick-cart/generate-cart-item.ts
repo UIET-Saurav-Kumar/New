@@ -6,6 +6,7 @@ interface Item {
   id: string | number;
   name: string;
   slug: string;
+  status: string;
   image: {
     thumbnail: string;
     [key: string]: unknown;
@@ -20,6 +21,7 @@ interface Item {
 interface Variation {
   id: string | number;
   title: string;
+  status: string;
   price: number;
   sale_price?: number;
   quantity: number;
@@ -27,7 +29,7 @@ interface Variation {
 }
 
 export function generateCartItem(item: Item, variation: Variation) {
-  const { id, name, slug, image, price, sale_price, quantity, unit,tax } = item;
+  const { id, name, slug, image, price, sale_price, status, quantity, unit,tax } = item;
 
   if (!isEmpty(variation)) {
     return {
@@ -36,6 +38,7 @@ export function generateCartItem(item: Item, variation: Variation) {
       name: `${name} - ${variation.title}`,
       slug,
       tax,
+      status,
       unit,
       stock: variation.quantity,
       price: variation.sale_price ? variation.sale_price : variation.price,
@@ -49,6 +52,7 @@ export function generateCartItem(item: Item, variation: Variation) {
     id,
     name,
     slug,
+    status,
     tax,
     unit,
     image: image?.thumbnail,

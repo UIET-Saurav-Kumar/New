@@ -29,6 +29,7 @@ const initialState =
   typeof window !== "undefined" && localStorage.getItem("checkout")
     ? JSON.parse(localStorage.getItem("checkout")!)
     : defaultState;
+    
 type Action =
   | {
       type: "UPDATE_BILLING_ADDRESS";
