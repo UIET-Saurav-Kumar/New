@@ -114,6 +114,35 @@ const UserWallet = () => {
             return date.getMonth() === lastMonth && date.getFullYear() === relevantYear;
         }).reduce((prev, curr) => prev +  parseFloat(curr.earning),0);
 
+        var leader_this_month_purchase = data?.customer_level?.filter((i:any) => {
+            
+            var date = new Date(i.created_at);
+            // console.log(data.customer_level);
+            console.log('created at',date);
+            console.log('curr month',currMonth);
+            console.log('year',date.getFullYear());
+            console.log('order month',date.getMonth());
+            
+            console.log('last month',lastMonth);
+        
+            return date.getMonth() === currMonth && date.getFullYear() === relevantYear;
+        }).reduce((prev, curr) => prev +  parseFloat(curr.commission_value),0);
+
+
+        var leader_this_month_earning= data?.customer_level?.filter((i:any) => {
+            
+            var date = new Date(i.created_at);
+            // console.log(data.customer_level);
+            console.log('created at',date);
+            console.log('curr month',currMonth);
+            console.log('year',date.getFullYear());
+            console.log('order month',date.getMonth());
+            
+            console.log('last month',lastMonth);
+        
+            return date.getMonth() === currMonth && date.getFullYear() === relevantYear;
+        }).reduce((prev, curr) => prev +  parseFloat(curr.earning),0);
+
         var level_1 = data?.level1?.filter((i:any) => {
             
             var date = new Date(i.created_at);
@@ -284,6 +313,52 @@ const UserWallet = () => {
                                                     </p>
                                                 </div>
                                             </div>  
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-3 shadow-lg border  w-full" style={{maxWidth:"450px",maxHeight:'200px'}}>
+                                        <div className="">
+
+                                            <div className="flex items-center py-3 px-4 border-b border-gray-100">
+
+                                                <div className="p-3 rounded-full w-11 h-11 flex items-center justify-center bg-[#C7AF99] text-light">
+                                                        <PriceWalletIcon width={16} />
+                                                </div>
+
+                                                <div className="ml-3">
+                                                    <p className="text-md lg:text-lg font-semibold text-sub-heading mb-0.5">
+                                                    ₹{leader_this_month_purchase?.toFixed(2)}
+                                                    </p>
+                                                    <p className="text-sm text-gray-700 mt-0">
+                                                        {("Leader This Month Purchase")}
+                                                    </p>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-3 shadow-lg border  w-full" style={{maxWidth:"450px",maxHeight:'200px'}}>
+                                        <div className="">
+
+                                            <div className="flex items-center py-3 px-4 border-b border-gray-100">
+
+                                                <div className="p-3 rounded-full w-11 h-11 flex items-center justify-center bg-[#C7AF99] text-light">
+                                                        <PriceWalletIcon width={16} />
+                                                </div>
+
+                                                <div className="ml-3">
+                                                    <p className="text-md lg:text-lg font-semibold text-sub-heading mb-0.5">
+                                                    ₹{leader_this_month_earning?.toFixed(2)}
+                                                    </p>
+                                                    <p className="text-sm text-gray-700 mt-0">
+                                                        {("Leader This Month Earning")}
+                                                    </p>
+                                                </div>
+
+                                            </div>
+
                                         </div>
                                     </div>
 

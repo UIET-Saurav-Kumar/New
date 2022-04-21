@@ -168,7 +168,6 @@ export default function HeaderMiddle() {
 
     const truncate = (txt:any, n:number) => {
       return  txt.length > 10 ? txt.substring(0, n) : txt
-
     }
 
     const {getLocation} =useLocation()
@@ -299,12 +298,13 @@ export default function HeaderMiddle() {
                                        <div className='  border-red-400 flex w-full'>
                                            <div className='flex flex-col'>
                                                <h4 className='block lg:hidden text-2xl md:text-3xl lg:text-4xl mx-4 sm:mx-16 md:mx-16 mt-8 text-magenta font-heading font-semibold'>
-                                                   Buy at lowest prices from nearest local shops
+                                                   Wow..now you earn for buying from the same nearest local shops
                                                </h4>
                                                <div className=''>
-                                                   <p className=' lg:hidden flex mx-4  sm:mx-16 md:mx-16 mt-4 font-semibold items-center text-xs xs+:text-sm sm:text-sm text-gray-700'>| Groceries | Veggies & Fruits | Salon & Spa | Takeaways | Restaurants | Pharmacy |</p>
-                                                   <p className=' lg:hidden flex mx-4 sm:mx-16 md:mx-16 mt-0 font-semibold items-center text-xs xs+:text-sm sm:text-sm text-gray-700'>| Cosmetics | Lifestyle & Home | Gym & Health | Electronics | Poultry & Farm | Services |</p>
-                                                   
+                                                   <p className=' lg:hidden flex mx-4  sm:mx-16 md:mx-16 mt-4 font-semibold items-center text-xs xs+:text-sm sm:text-sm text-gray-700'>
+                                                       | Groceries | Cosmetics | Veggies & Fruits | Salon & Spa | Takeaways | Restaurants | Electronics | Pharmacy |</p>
+                                                   <p className=' lg:hidden hidden md:flex mx-4 sm:mx-16 md:mx-16 mt-0 font-semibold items-center text-xs xs+:text-sm sm:text-sm text-gray-700'>
+                                                       | Cosmetics | Lifestyle & Home | Gym & Health | Electronics | Poultry & Farm | Services |</p>
                                                </div>
                                            </div>
                                            <img src='/drop-down.jpg' className='hidden lg:block md:relative object-fill md:object-contain'/>
@@ -322,7 +322,7 @@ export default function HeaderMiddle() {
                             {/* <img src='/drop-down.jpg' className='relative   top-0 object-contain'/> */}
                             
                             <div id='location-input' style={{zIndex: 0}} className='absolute flex flex-col justify-center 
-                                       w-full lg:w-full    items-center  pt-36  sm:pt-20 md:pt-4 lg:pt-0 space-y-6 ml-0 mx-3 sm:mx-16 md:ml-16 lg:ml-6 xl:ml-8 2xl:ml-10 lg:mt-80'> 
+                                       w-full lg:w-full    items-center  pt-40 sm:pt-20 md:pt-20 lg:pt-0 space-y-6 ml-0 mx-3 sm:mx-16 md:ml-16 lg:ml-6 xl:ml-8 2xl:ml-10 lg:mt-80'> 
                                           
                                 <div  style = {{zIndex: 1000}}  
                                       className='w-full'> 
@@ -330,14 +330,22 @@ export default function HeaderMiddle() {
                                                               address  = {getLocation?.formattedAddress} /> 
                                 </div>
         
-                                <div style={{zIndex: 1000}}  className='w-full'> 
+                                <div style={{zIndex: 1000}}  className='w-full '> 
                                      <GetCurrentLocation onChange = {changeLocation} />  
+                                     {/* <span className='text-gray-600 font-semibold ml-10'>
+                                        <span className=' mr-10 text-xl font-semibold text-magenta'>
+                                            Or
+                                        </span>
+                                          Select Your City 
+                                     </span> */}
                                 </div>
                                 
 
                             </div>
+                            
 
-                            <div className='hidden lg:grid lg:grid-cols-6 xl:grid-cols-7 gap-2 lg:justify-between items-center -mt-12 xl:-mt-24'>
+                            <div className='hidden lg:grid lg:grid-cols-6 xl:grid-cols-7 gap-2 lg:justify-between items-center -mt-12 xl:-mt-22 2xl:-mt-24'>
+                                
                                 {cities.map((city, index) => (
                                     <CityButton onChange = {changeLocation} key={index} lat={city.lat} lng={city.lng} city={city.city} />
                                 ))}
@@ -345,6 +353,7 @@ export default function HeaderMiddle() {
                             </div>
 
                             <div className='grid grid-cols-1 xs+:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:hidden justify-evenly gap-y-3 overflow-y-scroll py-3 items-center w-full place-items-center mt-20 xs+:mt-32 sm:mt-36'>
+                                
                                 {cities.map((city, index) => (
                                     <CityButton onChange = {changeLocation} key={index} lat={city.lat} lng={city.lng} city={city.city} />
                                 ))}
@@ -369,7 +378,7 @@ export default function HeaderMiddle() {
                        <div className='flex items-center  '>
                             <span>  
                                 <h3 onClick={handleLocation}  
-                                    className='flex  text-gray-600 items-center text-xs sm:text-sm md:text-md lg:hidden  
+                                    className='flex text-gray-600 items-center text-xs sm:text-sm md:text-md lg:hidden  
                                                                 md:text-gray-600 mr-0 md:mr-0 md:text-md'>
 
                                     <CaretDown className='text-gray-500 mr-2 w-3 h-3 md:w-5 md:h-5'/> 
