@@ -163,6 +163,12 @@ const cities = //create object of major  indian cities with lat, lng and city na
     ]
 
 
+
+
+
+
+
+
 export default function HeaderMiddle() {
     
 
@@ -256,6 +262,7 @@ export default function HeaderMiddle() {
                     </div>
                   
                   {/* Search Bar */}
+                <div className='flex flex-col  w-full space-y-2'>
                    <div className=' flex focus-ring-2 justify-center
                                      lg:w-3/4 2xl:mx-auto lg:mx-auto 
                                     2xl:flex-1'>
@@ -272,6 +279,15 @@ export default function HeaderMiddle() {
                            </div>
 
                     </div>
+
+                    <div className='flex items-center mx-auto space-x-10  text-gray-500 '>
+                        <span className=' text-blue-600'>बायलोकल</span>
+                        <span className='  text-red-600'>Buylowcal</span>
+                        <span className='text-yellow-600'>ਬਾਏਲੋਕਲ </span>
+                        <span className='text-green-600'> বাইলোকাল </span>
+                    
+                    </div>
+                </div>
 
                           
                                <div className='hidden lg:inline-flex lg:ml-8 lg+:ml-0  xl:inline-flex'>
@@ -432,8 +448,17 @@ export default function HeaderMiddle() {
              
                )}
        </div>
+       <div className='w-full flex flex-col lg:hidden -mb-3  '>
        <div className='flex md:flex w-full lg:hidden px-4 mb-2 mt-0' >
            <DropDown getLoc={handleLocation}/>
+       </div>
+       <div className='z-50 bg-white flex items-center mx-auto space-x-4 text-12px w-full justify-evenly text-gray-500 '>
+                        <span className=' text-blue-600'>बायलोकल</span>
+                        <span className='  text-red-600'>Buylowcal</span>
+                        <span className='text-yellow-600'>ਬਾਏਲੋਕਲ </span>
+                        <span className='text-green-600'> বাইলোকাল </span>
+                    
+        </div>
        </div>
    </div>
 
