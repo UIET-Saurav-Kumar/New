@@ -25,7 +25,7 @@ const CartItem = ({ item }: CartItemProps) => {
   const draftItems = items?.filter(
     (item: any) => 
     //check if item have status attribute
-     !checkoutData?.unavailable_products.map((item: any) => item.name).includes(item.name) 
+     !checkoutData?.unavailable_products.map((item: any) => item?.name).includes(item?.name) 
   );
 
   const {
@@ -40,7 +40,7 @@ const CartItem = ({ item }: CartItemProps) => {
   const available_items = items?.filter(
     (item: any) => 
     //check if item have status attribute
-     !checkoutData?.unavailable_products.map((item: any) => item.name).includes(item.name) 
+     !checkoutData?.unavailable_products.map((item: any) => item?.name).includes(item?.name) 
   );
 
   console.log('item', item)
@@ -50,11 +50,11 @@ const CartItem = ({ item }: CartItemProps) => {
     useCart();
 
   const { price } = usePrice({
-    amount: item.price,
+    amount: item?.price,
   });
 
   const { price: itemPrice } = usePrice({
-    amount: item.itemTotal,
+    amount: item?.itemTotal,
   });
 
   const { mutate: createLog} = useCreateLogMutation();
@@ -66,7 +66,7 @@ const CartItem = ({ item }: CartItemProps) => {
 
   //items whose id matches with the notAvailabelItems id
   const notAvailableItem = notAvailableItems?.filter(
-    (itm: any) => itm.id === item.id
+    (itm: any) => itm?.id === item?.id
   );
 
   function handleIncrement(e: any) {
@@ -88,7 +88,7 @@ const CartItem = ({ item }: CartItemProps) => {
   const handleRemoveClick = (e: any) => {
 
     e.stopPropagation();
-    removeItemFromCart(item.id);
+    removeItemFromCart(item?.id);
 
     createLog({
       location:getLocation?.formattedAddress,
@@ -104,9 +104,9 @@ const CartItem = ({ item }: CartItemProps) => {
 
   console.log('cart item status', item)
 
-  console.log('json shop categories', JSON.parse(item?.shop?.shop_categories).map((category: any) => category.name)[0])
+  console.log('json shop categories', JSON.parse(item?.shop?.shop_categories).map((category: any) => category?.name)[0])
 
-  const outOfStock = !isInStock(item.id) && !isProductAvailable(item,item.id);
+  const outOfStock = !isInStock(item?.id) && !isProductAvailable(item,item?.id);
 
   return (
 
@@ -123,26 +123,26 @@ const CartItem = ({ item }: CartItemProps) => {
         <Counter
           value={item?.quantity}
           onDecrement={handleRemoveClick}
-          onIncrement={item.quantity > item.stock ? null : handleIncrement}
+          onIncrement={item?.quantity > item?.stock ? null : handleIncrement}
           variant="pillVertical"
-          disabled={outOfStock || !item.status }
+          disabled={outOfStock || !item?.status }
         />
       </div>
 
       <div className="w-10 sm:w-16 h-10 sm:h-16 flex items-center justify-center overflow-hidden bg-gray-100 mx-4 flex-shrink-0 relative">
         <Image
           src={item?.image ?? siteSettings?.product?.placeholderImage}
-          alt={item.name}
+          alt={item?.name}
           layout="fill"
           objectFit="contain"
         />
       </div>
 
       <div>
-        <h3 className="font-bold text-heading">{item.name}</h3>
+        <h3 className="font-bold text-heading">{item?.name}</h3>
         <p className="my-2.5 font-semibold text-accent">{price}</p>
         <span className="text-xs text-body">
-          {item.quantity} X {item.unit}
+          {item?.quantity} X {item?.unit}
         </span>
       </div>
 
@@ -161,11 +161,11 @@ const CartItem = ({ item }: CartItemProps) => {
         </div>
 
        <span className="flex justify-end  mb-0 h-full ml-10 mt-5  text-xs font-light text-red-500">
-          {notAvailableItem.length ? 
+          {notAvailableItem?.length ? 
           'Sorry, this product is not available' : 
-          null ||  item.stock <= item.quantity ?
-          `Sorry, only ${item.stock} item available` : 
-          JSON.parse(item?.shop?.shop_categories).map((category: any) => category.name)[0] !== 'Salon & Spa' ? (item.stock + ' ' + 'Available') : ''  }
+          null ||  item?.stock <= item?.quantity ?
+          `Sorry, only ${item?.stock} item available` : 
+          JSON.parse(item?.shop?.shop_categories).map((category: any) => category?.name)[0] !== 'Salon & Spa' ? (item?.stock + ' ' + 'Available') : ''  }
        </span>
 
       </div>
