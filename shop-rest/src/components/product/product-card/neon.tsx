@@ -29,6 +29,7 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
 
   const { name,unit,slug, image, quantity, min_price, max_price, product_type } =
     product ?? {};
+    
   const { price, basePrice, discount } = usePrice({
     amount: product.price ? product.price : product.price!,
     baseAmount: product.sale_price,

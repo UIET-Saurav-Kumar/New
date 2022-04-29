@@ -44,7 +44,7 @@ const CartSidebarView = () => {
 
   const allItems = items?.filter(
     (item: any) =>
-    checkoutData?.cart_items.map((item: any) => item.name)
+    checkoutData?.cart_items?.map((item: any) => item?.name)
 
   );
   

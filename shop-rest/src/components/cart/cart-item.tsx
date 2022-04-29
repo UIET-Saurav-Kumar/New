@@ -116,7 +116,7 @@ const CartItem = ({ item }: CartItemProps) => {
       animate="to"
       exit="from"
       variants={fadeInOut(0.25)}
-      className={` ${!item.status  ? 'bg-red-500 ' : ''}  flex items-center py-4 px-4 sm:px-6 text-sm border-b border-solid border-border-200 border-opacity-75`}
+      className={` ${!item?.status  ? '' : ''}  flex items-center py-4 px-4 sm:px-6 text-sm border-b border-solid border-border-200 border-opacity-75`}
     >
 
       <div  className="flex-shrink-0">
@@ -148,22 +148,26 @@ const CartItem = ({ item }: CartItemProps) => {
 
       <div className="flex h-full w-full flex-col">
         <div className="flex items-center">
-            <span className="ms-auto font-bold text-heading">{itemPrice}</span>
-            <button
-              className="w-7 h-7 ms-3 -me-2 flex items-center justify-center rounded-full 
-                         text-muted transition-all duration-200 focus:outline-none hover:bg-gray-100 
-                         focus:bg-gray-100 hover:text-red-600 focus:text-red-600"
-              onClick={() => clearItemFromCart(item?.id)}
-            >
-              <span className="sr-only">{t("text-close")}</span>
-              <CloseIcon className="w-3 h-3" />
-            </button>
-          </div>
+          <span className="ms-auto font-bold text-heading">{itemPrice}</span>
+          <button
+            className="w-7 h-7 ms-3 -me-2 flex items-center justify-center rounded-full 
+                        text-muted transition-all duration-200 focus:outline-none hover:bg-gray-100 
+                        focus:bg-gray-100 hover:text-red-600 focus:text-red-600"
+            onClick={() => clearItemFromCart(item?.id)}
+          >
+            <span className="sr-only">{t("text-close")}</span>
+            <CloseIcon className="w-3 h-3" />
+          </button>
+        </div>
 
        <span className="flex justify-end  mb-0 h-full ml-10 mt-5  text-xs font-light text-red-500">
-          {notAvailableItem?.length || item.stock < item.quantity ?
-          'Sorry, this item is no longer available' : JSON.parse(item?.shop?.shop_categories).map((category: any) => category.name)[0] !== 'Salon & Spa' ? (item.stock + ' ' + 'Available') : ''  }
+          {notAvailableItem.length ? 
+          'Sorry, this product is not available' : 
+          null ||  item.stock <= item.quantity ?
+          `Sorry, only ${item.stock} item available` : 
+          JSON.parse(item?.shop?.shop_categories).map((category: any) => category.name)[0] !== 'Salon & Spa' ? (item.stock + ' ' + 'Available') : ''  }
        </span>
+
       </div>
     </motion.div>
   );
