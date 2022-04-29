@@ -238,7 +238,7 @@ export default function SalonPage() {
 
   //  <>
   //  {fetching && !data?.pages?.length ? (
-  //    <img src='/not-found.png'
+  //    <img src='/'
   //    className="object-contain mx-auto" />
   // ) : (
 

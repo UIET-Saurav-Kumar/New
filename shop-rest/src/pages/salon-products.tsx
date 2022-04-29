@@ -21,6 +21,7 @@ import { ExpandMoreIcon } from '@components/icons/expand-more-icon';
 import useOnClickOutside from '@utils/use-click-outside';
 import NotFound from '@components/common/not-found';
 import { HidingHeader } from 'hiding-header-react';
+import ProductNotFound from '@components/common/product-not-found';
 
 
 
@@ -432,9 +433,9 @@ export default function SalonProducts() {
                               </motion.div>
                           )) : 
                           <div className="bg-gray-100 min-h-full w-full pt-6 pb-8 px-4 lg:p-8">
-                               {/* <ProductNotFound text="text-not-found" className="w-1/3 mx-auto" /> */}
-                              <img src='/not-found.png'
-                              className="object-contain w-full mx-auto"/>
+                               <ProductNotFound text="text-not-found" className="w-1/3 mx-auto" />
+                              {/* <img src='/not-found.png'
+                              className="object-contain w-full mx-auto"/> */}
                   
                         </div>
                         }

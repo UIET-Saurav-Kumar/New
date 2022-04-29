@@ -58,9 +58,9 @@ const Feed = ({ shopId }: { shopId: string }) => {
   if (!loading && !data?.pages?.[0]?.data?.length) {
     return (
       <div className="bg-gray-100 min-h-full pt-6 pb-8 px-4 lg:p-8">
-        {/* <ProductNotFound text="text-not-found" className="w-1/3 mx-auto" /> */}
-        <img src='/not-found.png'
-        className="object-contain mx-auto"/>
+        <ProductNotFound text="text-not-found" className="w-1/3 mx-auto" />
+        {/* <img src='/not-found.png'
+        className="object-contain mx-auto"/> */}
 
       </div>
     );
