@@ -17,7 +17,7 @@ type HeliumProps = {
 
 const Helium: React.FC<HeliumProps> = ({ product, className }) => {
   const { t } = useTranslation("common");
-  const { name, image, unit,slug, quantity } = product ?? {};
+  const { name, image, unit,slug, quantity, orders_count} = product ?? {};
   const { openModal } = useModalAction();
   const { price, basePrice, discount } = usePrice({
     amount: product.price,
@@ -38,7 +38,7 @@ const Helium: React.FC<HeliumProps> = ({ product, className }) => {
 
     <article
       className={cn(
-        "product-card cart-type-helium border rounded h-full bg-light overflow-hidden transition-shadow duration-200 hover:shadow-sm",
+        "relative product-card cart-type-helium border rounded h-full bg-light overflow-hidden transition-shadow duration-200 hover:shadow-sm",
         className
       )}
     >
@@ -65,6 +65,11 @@ const Helium: React.FC<HeliumProps> = ({ product, className }) => {
         )}
       </div>
 
+      <span className="absolute bottom-0 bg-gray-50 w-full py-1 px-3 lg:px-6 text-gray-500 lg:text-gray-600 text-xs lg:text-sm ">
+        { orders_count !== 0  ?  orders_count + ' ' + 'bought' : null}
+        </span>
+
+
       </Link>
       {/* End of product image */}
 
@@ -81,8 +86,9 @@ const Helium: React.FC<HeliumProps> = ({ product, className }) => {
         <p className="text-muted text-xs">{unit}</p>
 
         { pageURL.includes('salon-products') || pageURL.includes('salon-page') ? (
-          <div className=' flex text-xs text-gray-600 mb-4 h-4 mt-2 font-light'>
+          <div className=' flex justify-between text-xs text-gray-600 mb-4 h-4 mt-2 font-light'>
             {product?.shop?.name} 
+            {/* <span className="font-light text-gray-800">{'sold' + ' ' + orders_count}</span> */}
           </div> ) :
             null
         }
@@ -102,10 +108,13 @@ const Helium: React.FC<HeliumProps> = ({ product, className }) => {
             </span>
           </div>
 
+          
+
           {/* End of product price */}
 
           {quantity > 0 ? (
             <AddToCart data={product} variant="single" />
+            
           ) : (
             <div className="bg-red-500 rounded text-xs text-light px-2 py-1">
               {t("text-out-stock")}

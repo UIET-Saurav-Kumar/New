@@ -1,3 +1,4 @@
+
 import Card from "@components/common/card";
 import Layout from "@components/layouts/admin";
 import ErrorMessage from "@components/ui/error-message";
@@ -14,12 +15,15 @@ import SortForm from "@components/common/sort-form";
 import { SortOrder } from "@ts-types/generated";
 import ReferalCommissionForm from "@components/commission/referal-commission-form"
 
+
 export default function AllShopPage() {
+
   const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(1);
   const [orderBy, setOrder] = useState("created_at");
   const [sortedBy, setColumn] = useState<SortOrder>(SortOrder.Desc);
+  
   const {
     data,
     isLoading: loading,

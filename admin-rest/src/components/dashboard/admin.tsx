@@ -81,6 +81,8 @@ export default function Dashboard() {
     { limit: 10 }
   );
 
+  console.log('popular product data', popularProductData)
+
   if (loading || orderLoading || popularProductLoading || withdrawLoading) {
     return <Loader text={t("common:text-loading")} />;
   }

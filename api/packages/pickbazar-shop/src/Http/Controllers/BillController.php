@@ -15,6 +15,7 @@ use Illuminate\Database\Migrations\Migration;
 use PickBazar\Database\Repositories\BillRepository;
 use App\Models\BillReward;
 
+
 class BillController extends CoreController
 {
     public $repository;

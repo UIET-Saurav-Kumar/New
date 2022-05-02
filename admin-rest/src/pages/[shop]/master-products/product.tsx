@@ -8,7 +8,7 @@ export default function Product({product,shopId,masterIds,taxes}:any) {
     const [alreayMade,setAlreadyMade]=useState(false);
 
     useEffect(()=>{
-        if(masterIds.includes(product?.id)){
+        if(masterIds?.includes(product?.id)){
             setAlreadyMade(true);
         }
     })
@@ -17,7 +17,7 @@ export default function Product({product,shopId,masterIds,taxes}:any) {
     const tx = product?.tax
     const taxArray = tx?.split(',');
     // get tax name
-    const taxName = product.tax ?  taxArray?.[6].split(':')[1].replace('"','').replace('"','') + ' ' + taxArray?.[5].split(':')[1].replace('"','').replace('"','') + '%' : '';
+    // const taxName = product?.tax ?  taxArray?.[6].split(':')[1].replace('"','').replace('"','') + ' ' + taxArray?.[5].split(':')[1].replace('"','').replace('"','') + '%' : '';
 
     
 
@@ -28,7 +28,7 @@ export default function Product({product,shopId,masterIds,taxes}:any) {
         const price = document.getElementById("price_"+product?.id)?.value as any;
         const sale_price = document.getElementById("sale_price_"+product?.id)?.value as any;
         const quantity = document.getElementById("quantity_"+product?.id)?.value as any;
-        const tax = document.getElementById("tax_"+product.id?.value) as any;
+        const tax = document.getElementById("tax_"+product?.id?.value) as any;
         if(price&&sale_price){
             createProduct(
                 {
@@ -55,6 +55,7 @@ export default function Product({product,shopId,masterIds,taxes}:any) {
     if(alreayMade){
         return ("");
     }
+
     return (
         <>          
             <tr data-row-key="542" className="rc-table-row rc-table-row-level-0 h-24 `text-center`">
@@ -67,15 +68,15 @@ export default function Product({product,shopId,masterIds,taxes}:any) {
                 
                 <td className="rc-table-cell  text-center" >
                     <span className="whitespace-nowrap" title={"$"+product?.price}>
-                    <Input
-                        name="price"
-                        variant="outline"
-                        // value={('₹' + ' ' + product?.price)}
-                        
-                        className="mb-5"
-                        placeholder={product?.price}
-                        id={"price_"+product?.id}
-                    />
+                        <Input
+                            name="price"
+                            variant="outline"
+                            // value={('₹' + ' ' + product?.price)}
+                            
+                            className="mb-5"
+                            placeholder={product?.price}
+                            id={"price_"+product?.id}
+                        />
                     </span>
                 </td>
 

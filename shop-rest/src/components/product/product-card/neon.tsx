@@ -27,7 +27,7 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
 
   const { t } = useTranslation("common");
 
-  const { name,unit,slug, image, quantity, min_price, max_price, product_type } =
+  const { name,unit,slug, image,orders_count, quantity, min_price, max_price, product_type } =
     product ?? {};
     
   const { price, basePrice, discount } = usePrice({
@@ -114,10 +114,18 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
         {/* End of product price */}
 
         <h3
-          className="text-xs font-semibold  md:text-sm flex flex-wrap  text-gray-700  truncate mb-4 cursor-pointer"
+          className="text-xs font-semibold flex-normal md:text-sm flex flex-col   text-gray-700  truncate mb-4 cursor-pointer"
         >
-           <div className='flex flex-wrap flex-col'>{name}<h3>{unit}</h3></div>
+           <span className=''>
+             {name}
+              
+           </span>
+           <span className="flex items-center justify-between">
+             <p>{unit}</p>
+             <p className="font-light  text-gray-500">{orders_count + ' ' + 'sold'}</p>
+           </span>
         </h3>
+        
         {/* End of product title */}
         {product_type.toLowerCase() === 'variable' ? (
           <>

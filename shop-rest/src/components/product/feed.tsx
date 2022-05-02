@@ -44,6 +44,8 @@ const Feed = ({ shopId }: { shopId: string }) => {
 
   });
 
+   console.log('feed ',data)
+
   useIntersectionObserver({
     target: loadMoreRef,
     onIntersect: fetchNextPage,
@@ -51,6 +53,7 @@ const Feed = ({ shopId }: { shopId: string }) => {
 })
 
   if (isError && error) return <ErrorMessage message={error.message} />;
+  
   function handleLoadMore() {
     fetchNextPage();
   }
@@ -61,7 +64,6 @@ const Feed = ({ shopId }: { shopId: string }) => {
         <ProductNotFound text="text-not-found" className="w-1/3 mx-auto" />
         {/* <img src='/not-found.png'
         className="object-contain mx-auto"/> */}
-
       </div>
     );
   }

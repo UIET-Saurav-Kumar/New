@@ -83,12 +83,13 @@ export default function ProductsFeed({shopId,searchTerm,type,category,orderBy,so
         onIntersect: fetchNextPage,
         enabled: hasNextPage,
   })
+  
   if (isError && error) return <ErrorMessage message={error?.message} />;
 
   if (!loading && !data?.pages?.length) {
     return (
       <div className="bg-gray-100 pt-6 pb-8 px-4 lg:p-8">
-        <NotFound text="text-not-found" className="w-7/12 mx-auto" />
+        <NotFound text="not found" className="w-7/12 mx-auto" />
       </div>
     );
   }
@@ -108,7 +109,7 @@ export default function ProductsFeed({shopId,searchTerm,type,category,orderBy,so
               <th className="rc-table-cell w-48 " >Actions</th>
           </tr>
       </thead>
-      <tbody className="rc-table-tbody ">
+      <tbody className="rc-table-tbody">
       {data?.pages.map((products, _idx) => (
           <Fragment key={_idx}>
             {products?.products?.data?.map((product:any,id:any) => (
@@ -117,7 +118,7 @@ export default function ProductsFeed({shopId,searchTerm,type,category,orderBy,so
                       product={product} 
                       shopId={shopId} key={id} 
                       masterIds={master} 
-                      className={`${master.includes(product?.id)} : "hidden" : ""`}
+                      className={`${master?.includes(product?.id)} : "hidden" : ""`}
                 />
             
             ))}

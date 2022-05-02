@@ -44,6 +44,9 @@ const ShopProductFeed = ({ shopId }: { shopId: string }) => {
       enabled: Boolean(shopId),
     }
   );
+
+  console.log('feed shop',data)
+
   const loadMoreRef = useRef()
 
   useIntersectionObserver({
