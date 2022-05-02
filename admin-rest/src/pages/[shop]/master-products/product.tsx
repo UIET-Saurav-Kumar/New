@@ -14,10 +14,10 @@ export default function Product({product,shopId,masterIds,taxes}:any) {
     })
 
 
-    const tx = product?.tax
-    const taxArray = tx?.split(',');
+   // const tx = product?.tax
+    // const taxArray = tx?.split(',');
     // get tax name
-    // const taxName = product?.tax ?  taxArray?.[6].split(':')[1].replace('"','').replace('"','') + ' ' + taxArray?.[5].split(':')[1].replace('"','').replace('"','') + '%' : '';
+    // const taxName = product.tax ?  taxArray?.[6].split(':')[1].replace('"','').replace('"','') + ' ' + taxArray?.[5].split(':')[1].replace('"','').replace('"','') + '%' : '';
 
     
 
