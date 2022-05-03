@@ -46,7 +46,7 @@ export default function ReferralNetwork() {
         <div className='bg-gray-100'>
 
 
-            <Navbar label="Referral Network "/>
+            <Navbar label="Your Community"/>
 
                 <div className='  flex mx-4 sm:mx-10  space-x-0 lg:space-x-10'>
 
