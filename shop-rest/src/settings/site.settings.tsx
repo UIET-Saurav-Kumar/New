@@ -116,7 +116,7 @@ export const siteSettings = {
     { href: ROUTES.EVENTS, label: "Magazines" },
     { href: ROUTES.ORDERS, label: "Orders" },
     { href: ROUTES.INVITE_FRIENDS, label: "Invite Friends" },
-    { href: ROUTES.REFERRAL_NETWORK, label: "Referral Network" },
+    { href: ROUTES.REFERRAL_NETWORK, label: "Your Community" },
     { href: ROUTES.WALLET, label: "Wallet" },
     { href: ROUTES.WITHDRAWS, label: "Withdraws" },
     { href: ROUTES.UPLOAD_INVOICE, label: "Upload Invoice" },
@@ -145,13 +145,15 @@ export const siteSettings = {
       href: ROUTES.ORDERS,
       menulabel: "profile-sidebar-orders",
     },
+
     {
       href: ROUTES.INVITE_FRIENDS,
       menulabel: "Invite Friends",
     },
+    
     {
       href: ROUTES.REFERRAL_NETWORK,
-      menulabel: "Referral Network",
+      menulabel: "Your Community",
     },
     // {
     //   href: ROUTES.REFERRAL_ACTIVITY,
