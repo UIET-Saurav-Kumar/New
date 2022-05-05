@@ -122,7 +122,7 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
            </span>
            <span className="flex items-center justify-between">
              <p>{unit}</p>
-             <p className="font-light  text-gray-500">{orders_count + ' ' + 'sold'}</p>
+            {/* <p className="font-light  text-gray-500">{orders_count + ' ' + 'sold'}</p> */}
            </span>
         </h3>
         
