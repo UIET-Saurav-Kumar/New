@@ -57,8 +57,12 @@ class ProductController extends CoreController
                     ]);
             }
         }
-        $limit = $request->limit ?   $request->limit : 15;    
-        $repdata = $this->repository->withCount('orders')->with(['type', 'shop'])->orderBy('updated_at','desc')->paginate($limit);
+        $limit = $request->limit ?   $request->limit : 15;   
+        // order count
+       // $repdata = $this->repository->withCount('orders')->with(['type', 'shop'])->orderBy('updated_at','desc')->paginate($limit);
+        
+         $repdata = $this->repository->with(['type', 'shop', 'categories', 'tags', 'variations.attribute'])->orderBy('is_offer', 'desc')->paginate($limit);
+        
         foreach($repdata as $key=>$val)
          {
             $repdata[$key]->image_original = $val->image['original'] ?? '';
