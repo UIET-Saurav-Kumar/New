@@ -65,9 +65,9 @@ const Helium: React.FC<HeliumProps> = ({ product, className }) => {
         )}
       </div>
 
-      <span className="absolute bottom-0 bg-gray-50 w-full py-1 px-3 lg:px-6 text-gray-500 lg:text-gray-600 text-xs lg:text-sm ">
+      {/* <span className="absolute bottom-0 bg-gray-50 w-full py-1 px-3 lg:px-6 text-gray-500 lg:text-gray-600 text-xs lg:text-sm ">
         { orders_count !== 0  ?  orders_count + ' ' + 'bought' : null}
-        </span>
+        </span> */}
 
 
       </Link>
