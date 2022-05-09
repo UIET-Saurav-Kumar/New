@@ -33,10 +33,13 @@ const Helium: React.FC<HeliumProps> = ({ product, className }) => {
     setPageUrl(window.location.href)
   }, []);
 
+  console.log('helium product',product)
+
 
   return (
 
     <article
+    onClick={handleProductQuickView}
       className={cn(
         "relative product-card cart-type-helium border rounded h-full bg-light overflow-hidden transition-shadow duration-200 hover:shadow-sm",
         className
@@ -88,6 +91,7 @@ const Helium: React.FC<HeliumProps> = ({ product, className }) => {
         { pageURL.includes('salon-products') || pageURL.includes('salon-page') ? (
           <div className=' flex justify-between text-xs text-gray-600 mb-4 h-4 mt-2 font-light'>
             {product?.shop?.name} 
+            <span>{product?.shop?.address?.city}</span>
             {/* <span className="font-light text-gray-800">{'sold' + ' ' + orders_count}</span> */}
           </div> ) :
             null
@@ -109,7 +113,6 @@ const Helium: React.FC<HeliumProps> = ({ product, className }) => {
           </div>
 
           
-
           {/* End of product price */}
 
           {quantity > 0 ? (
