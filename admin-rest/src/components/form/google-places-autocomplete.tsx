@@ -85,7 +85,7 @@ export default function GooglePlacesAutocomplete({
       onPlaceChanged={onPlaceChanged}
       onUnmount={onUnmount}
       fields={["address_components", "geometry.location", "formatted_address"]}
-      types={["address"]}
+      types={["'establishment', 'geocode'"]}
     >
       <input
         type="text"
