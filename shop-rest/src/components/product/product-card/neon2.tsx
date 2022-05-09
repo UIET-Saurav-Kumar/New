@@ -117,7 +117,8 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
           className="text-xs md:text-sm font-semibold text-gray-700 truncate mb-4 cursor-pointer"
         >
            <div className='flex flex-col'>{name}<h3>{unit}</h3>
-           {/* <span>{orders_count}</span></div> */}
+           {/* <span>{orders_count}</span> */}
+           </div> 
              
         </h3>
         {/* End of product title */}
