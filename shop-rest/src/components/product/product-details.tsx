@@ -105,7 +105,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
             ) : (
               <div className="w-full h-full flex items-center justify-center">
                 <Image
-                  src={image?.original ?? "/product-placeholder.svg"}
+                  src={image?.thumbnail ?? "/product-placeholder.svg"}
                   alt={name}
                   width={450}
                   height={450}
