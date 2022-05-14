@@ -85,12 +85,9 @@ export default function ImageSlider() {
 
         <div className="card flex relative w-full h-40 lg:h-72 xl+:h-80 2xl:h-72 md:h-64 ">
 
-            <Image className="object-fill h-full w-full"
+            <img className="object-fill h-full w-full"
             //  className='rounded-md w-full opacity-90  h-40 lg:w-full lg:h-72 xl+:h-80 md:h-64  2xl:h-72 2xl:w-full space-x-9 object-fill object '  
                   src={'/banner/community.jpg'} 
-                  alt="community"
-                  layout="fill"
-                  objectFit="cover"
                   />
 
           </div>
@@ -98,12 +95,9 @@ export default function ImageSlider() {
 
         <div className="card flex relative w-full h-40 lg:h-72 xl+:h-80 2xl:h-72 md:h-64 ">
 
-            <Image className="object-fill h-full w-full"
+            <img className="object-fill h-full w-full"
             //  className='rounded-md w-full opacity-90  h-40 lg:w-full lg:h-72 xl+:h-80 md:h-64  2xl:h-72 2xl:w-full space-x-9 object-fill object '  
                   src={'/banner/shop-community.jpg'} 
-                  alt="community"
-                  layout="fill"
-                  objectFit="cover"
                   />
 
           </div>
