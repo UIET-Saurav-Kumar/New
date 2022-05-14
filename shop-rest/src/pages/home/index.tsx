@@ -130,8 +130,9 @@ const {
               <>
               
                 <ImageSlider/>
-                <InvoiceBanner/>
+               
                 <AllCategories/>
+                {/* <InvoiceBanner/> */}
                 <Tandoor/>
                 <ProductGrid/>
                 <HeaterBanner/>

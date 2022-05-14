@@ -280,7 +280,7 @@ export default function HeaderMiddle() {
 
                     </div>
 
-                    <div className='flex items-center mx-auto space-x-10  text-gray-500 '>
+                    <div className=' z-10 flex items-center mx-auto space-x-10  text-gray-500 '>
                         <span className=' text-blue-600'>बायलोकल</span>
                         <span className='  text-red-600'>Buylowcal</span>
                         <span className='text-yellow-600'>ਬਾਏਲੋਕਲ </span>
@@ -452,7 +452,7 @@ export default function HeaderMiddle() {
        <div className='flex md:flex w-full lg:hidden px-4 mb-2 mt-0' >
            <DropDown getLoc={handleLocation}/>
        </div>
-       <div className='z-50 bg-white flex items-center mx-auto space-x-4 text-12px w-full justify-evenly text-gray-500 '>
+       <div className='z-10 bg-white flex items-center mx-auto space-x-4 text-12px w-full justify-evenly text-gray-500 '>
                         <span className=' text-blue-600'>बायलोकल</span>
                         <span className='  text-red-600'>Buylowcal</span>
                         <span className='text-yellow-600'>ਬਾਏਲੋਕਲ </span>
