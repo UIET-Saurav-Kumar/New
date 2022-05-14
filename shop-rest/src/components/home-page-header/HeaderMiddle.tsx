@@ -253,7 +253,7 @@ export default function HeaderMiddle() {
               
 
                {/* searchbar  */}
-               <div className='  hidden lg:flex lg:items-center justify-around lg:justify-between p-0 lg:py-4 w-full px-4'>
+               <div className='  hidden lg:flex lg:items-start justify-around lg:justify-between p-0 lg:py-4 w-full px-4'>
 
                     <div className = ' hidden lg:block ' >
 
@@ -291,7 +291,7 @@ export default function HeaderMiddle() {
 
                           
                                <div className='hidden lg:inline-flex lg:ml-8 lg+:ml-0  xl:inline-flex'>
-                               { isAuthorize ?  <AuthorizedMenu/> : <JoinButton/> }
+                               { !!isAuthorize &&  <AuthorizedMenu/> || !isAuthorize && <JoinButton/> }
                                </div>
                            
                           
@@ -381,7 +381,7 @@ export default function HeaderMiddle() {
                 </div> 
 
 
-               {isAuthorize ? (
+               {!!isAuthorize && (
 
                    <div className='flex justify-between w-full items-center lg:hidden xl:hidden 2xl:hidden'>
 
@@ -416,7 +416,8 @@ export default function HeaderMiddle() {
 
                    </div>
                        
-                       ) : (
+                       ) } {
+                            !isAuthorize && (
                            <div className='flex justify-between  w-full  items-center  lg:hidden xl:hidden 2xl:hidden'>
 
                                 {/* <div className='block px-0 ml-10 sm:-ml-6  '>  */}
