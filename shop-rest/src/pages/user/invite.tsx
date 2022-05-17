@@ -102,7 +102,8 @@ export const InvitePage = () => {
     try {
         const contacts = await windowNav?.contacts.select(props, opts);
        //send message to that contact
-       setContacts(contacts?.props?.tel);
+       setContacts(JSON.stringify(contacts));
+       alert(JSON.stringify(contacts));
       //  toast(props.tel)
       //  setContacts(contacts?.props?.tel);
       //  setProps(props?.tel)
@@ -144,14 +145,13 @@ export const InvitePage = () => {
                 <span ref={tooltext} className="tiptext">copy</span>
               </div>
               <p className="invite-link">{process.env.NEXT_PUBLIC_URL+"/invite/"+data?.me?.id}</p>
-
-              
             </div>
           )}
+
           <button onClick={getContacts} 
                   className='rounded-lg mt-5 p-2 px-3 bg-blue-600 
                            hover:bg-blue-700 text-white'>
-                Get Contacts
+                  Get Contacts
           </button>
 
           <p className="text-md text-black">
