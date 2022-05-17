@@ -282,6 +282,7 @@ export async function getStaticPaths({ locales }: GetStaticPathsContext) {
   // We'll pre-render only these paths at build time.
   // { fallback: false } means other routes should 404.
   return { paths, fallback: "blocking" };
+  
 }
 // This also gets called at build time
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {

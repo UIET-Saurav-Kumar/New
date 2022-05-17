@@ -4,6 +4,7 @@ import { Fragment, useRef } from "react";
 import { useTranslation } from "next-i18next";
 
 export default function Modal({ open, onClose, children }: any) {
+  
   const cancelButtonRef = useRef(null);
   const { t } = useTranslation("common");
 

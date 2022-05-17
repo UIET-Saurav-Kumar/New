@@ -7,6 +7,7 @@ import Footer from '@components/footer/Footer';
 
 const DefaultLayout: React.FC = ({ children }) => {
   
+  
 
   return (
        

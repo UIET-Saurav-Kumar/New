@@ -26,6 +26,8 @@ import  Logo  from '@components/ui/logo';
 import AuthorizedMenu from '@components/layout/navbar/authorized-menu';
 import MobileJoinButton from '@components/layout/navbar/mobile-join-button';
 import MobileNavigation from '@components/layout/mobile-navigation';
+import { useEffect } from 'react';
+
 
 const ref = React.createRef();
 
@@ -56,6 +58,27 @@ export default function Magzine() {
     savePDF(contentArea.current, {paperSize:'A4'});
   }
 
+  //scroll event listenr when scrollY > 100 change background to black
+  const handleScroll = () => {
+    if (window.scrollY > 100) {
+      document.body.style.backgroundColor = 'black';
+    } else {
+      document.body.style.backgroundColor = 'white';
+    }
+  }
+  //scroll event listener in useEffect
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    }
+  }, [])
+
+  
+
+ 
+
+
   const [febMag, setFebMag] = React.useState(true);
 
   const [marchMag, setMarchMag] = React.useState(false);
@@ -64,116 +87,105 @@ export default function Magzine() {
 
   const [networkMag, setNetworkMag] = React.useState(false);
 
+  const [mayMag, setMayMag] = React.useState(false);
+
   function handleFebMag() {
     window.open('https://drive.google.com/file/d/1Vwj8z6SvlT7gOokmNpvhUBvXTNPkBZSI/view?usp=sharing')
-    // setFebMag(true);
-    // setMarchMag(false);
-    // setAprilMag(false);
-    // setNetworkMag(false);
+   
   }
 
   function handleMarchMag() {
     window.open('https://drive.google.com/file/d/1rI_KGwYk0kdUkBPOXea-mHvBEd9SXhKy/view?usp=sharing')
-    // setMarchMag(true);
-    // setFebMag(false);
-    // setAprilMag(false);
-    // setNetworkMag(false);
+    
   }
 
   function handleAprilMag() {
     window.open('https://drive.google.com/file/d/1NDvGnJvcgBzGGxfRz-iNPfK91LVLhphv/view?usp=sharing', '_blank');
-    // router.push('https://drive.google.com/file/d/1NDvGnJvcgBzGGxfRz-iNPfK91LVLhphv/view?usp=sharing' )
-    // setAprilMag(true);
-    // setMarchMag(false);
-    // setFebMag(false);
-    // setNetworkMag(false);
+   
   }
 
   function handleNetworkMag() {
     window.open("https://drive.google.com/file/d/1M_14BeWQXLXVuRX0lDpCEexoqvO9uBne/view?usp=sharing")
-    // setNetworkMag(true);
-    // setFebMag(false);
-    // setMarchMag(false);
-    // setAprilMag(false);
+  
+  }
+
+  //may
+  function handleMayMag() {
+    window.open('https://drive.google.com/file/d/1trajPdO_pzoYFaZJT1bz4ZxnpRlrCIj0/view?usp=sharing')
   }
     
-        // download the magzine
-        // const download = () => {
-        //     const link = document.createElement('a');
-        //     link.href = '/magzines/magzine.pdf';
-        //     link.download = './magzine.pdf';
-        //     link.click();
-        // }
+     
 
 
   return (
 
-      <div className=' h-full bg-collage  overflow-y-hidden  w-full'>
+      <div className=' h-full   overflow-y-scroll  w-full'>
 
-      <Navbar />
+        <img className='' src='' />
 
-      {/* <div className="App">
-     <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.5.207/build/pdf.worker.min.js">
-    <div id="pdfviewer">
-        <Viewer fileUrl={mags} /> 
-    </div>
-    </Worker>
-    </div> */}
+      {/* <Navbar /> */}
 
-<div   className='absolute lg:fixed  z-40 top-10 md:top-36 grid grid-cols-1  sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 px-4 gap-6 max-h-full overflow-y-scroll lg:overflow-y-hidden py-24 md:gap-4 md:top-18'>
-
-<div onClick={handleNetworkMag} className='  flex flex-col  overflow-y-hidden  space-y-4 text-center'>
-  <img src='/magzine/network-cover.jpg'  className={` ${ networkMag ? 'opacity-100  ' : 'opacity-100'} border w-9/12 lg:w-full mx-auto lg:hover:scale-90 transform-gpu transition-transform duration-300  `}/>  
-  <p className='text-white text-lg cursor-pointer hover:bg-white hover:text-black active:bg-white active:text-black lg:text-3xl tracking-wider border  w-auto px-2 lg:w-72 py-1 mx-auto text-center font-serif'>January Edition</p>
-</div>
-
-<div onClick={handleFebMag} className=' flex flex-col space-y-4 overflow-y-hidden  text-center '>
-  <img src='/magzine/feb-cover.jpg'  className={` ${ febMag ? 'opacity-100  ' : 'opacity-100'} border w-9/12 lg:w-full mx-auto lg:hover:scale-90 transform-gpu transition-transform duration-300  `}/>  
-  <p className='text-white text-lg  cursor-pointer hover:bg-white hover:text-black active:bg-white active:text-black lg:text-3xl tracking-wider border  w-auto px-4 lg:w-72 py-1 mx-auto text-center font-serif'>February Edition</p>
-</div>
-
-<div onClick={handleMarchMag} className='  flex flex-col overflow-y-hidden space-y-4 text-center '>
-  <img src='/magzine/march-cover.jpg'  className={` ${ marchMag ? 'opacity-100  ' : 'opacity-100'} border w-9/12 lg:w-full mx-auto lg:hover:scale-90 transform-gpu transition-transform duration-300  `}/>
-  <p className='text-white text-lg cursor-pointer hover:bg-white hover:text-black active:bg-white active:text-black lg:text-3xl tracking-wider border  w-auto px-4 lg:w-72 py-1 mx-auto text-center font-serif'>March Edition</p>
-</div>
-
-<div onClick={handleAprilMag} className=' flex flex-col overflow-y-hidden  space-y-4 text-center  '>
-  <img src='/magzine/april-cover.jpg'  className={` ${ aprilMag ? 'opacity-100  ' : 'opacity-100'} border w-9/12 lg:w-full mx-auto lg:hover:scale-90 transform-gpu transition-transform duration-300  `}/>
-  <p className='text-white text-lg cursor-pointer hover:bg-white hover:text-black active:bg-white active:text-black lg:text-3xl tracking-wider border  w-auto px-2 lg:w-72 py-1 mx-auto text-center font-serif'>April Edition</p>
-</div>
-
-</div>
-
+   
        
       <div style={{}} id='magzine' className='  bg-collage w-full h-screen bg-fixed bg-center overflow-y-hidden '>
 
-        {/* <div className='  absolute  z-10 w-full h-full'>
-                 <img src='/collage.jpeg' className='  w-full h-full object-contain ' />
-          </div> */}
-
-         
 
           <div className='relative bg-black  opacity-80 z-30 w-full h-screen '>
           </div>
 
-        {/* <div className='flex absolute z-40 top-0  mt-3 w-full items-center  justify-between px-3'>
-           
-            <Logo/>
-            <h1 className=' top-0 left-1/3 text-lg md:text-5xl text-white text-center  font-bold font-serif'>
-              Buylowcal Monthly magzines
-            </h1>
-            <div className='hidden md:inline-flex lg:ml-8 lg+:ml-0  xl:inline-flex'>
-                                { isAuthorize ?  <AuthorizedMenu/> : <JoinButton/> }
-            </div>
-            <div className='inline-flex md:hidden  lg:ml-8 lg+:ml-0  '>
-            { isAuthorize ?  <AuthorizedMenu/> : <MobileJoinButton/> }
-            </div>
+          <div  className='absolute z-30 top-20 grid grid-cols-1  sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 px-4 gap-6 max-h-full overflow-y-scroll pb-24 md:gap-4 md:top-24'>
 
-        </div> */}
+              <div onClick={handleNetworkMag} className='  flex flex-col  overflow-y-hidden  space-y-4 text-center'>
+                <img src='/magzine/network-cover.jpg'  className={` ${ networkMag ? 'opacity-100  ' : 'opacity-100'} border w-9/12 lg:w-full mx-auto lg:hover:scale-90 transform-gpu transition-transform duration-300  `}/>  
+                <p className='text-white text-lg cursor-pointer hover:bg-white hover:text-black active:bg-white active:text-black lg:text-3xl tracking-wider border  w-auto px-2 lg:w-72 py-1 mx-auto text-center font-serif'>
+                  January Edition</p>
+              </div>
 
-        <h1 className='fixed z-30 top-10  pt-9 lg:pt-20  mx-auto w-full text-lg md:text-5xl text-white text-center  font-bold font-serif'>
+              <div onClick={handleFebMag} className=' flex flex-col space-y-4 overflow-y-hidden  text-center '>
+                <img src='/magzine/feb-cover.jpg'  className={` ${ febMag ? 'opacity-100  ' : 'opacity-100'} border w-9/12 lg:w-full mx-auto lg:hover:scale-90 transform-gpu transition-transform duration-300  `}/>  
+                <p className='text-white text-lg  cursor-pointer hover:bg-white hover:text-black active:bg-white active:text-black lg:text-3xl tracking-wider border  w-auto px-4 lg:w-72 py-1 mx-auto text-center font-serif'>
+                  February Edition</p>
+              </div>
+
+              <div onClick={handleMarchMag} className='  flex flex-col overflow-y-hidden space-y-4 text-center '>
+                <img src='/magzine/march-cover.jpg'  className={` ${ marchMag ? 'opacity-100  ' : 'opacity-100'} border w-9/12 lg:w-full mx-auto lg:hover:scale-90 transform-gpu transition-transform duration-300  `}/>
+                <p className='text-white text-lg cursor-pointer hover:bg-white hover:text-black active:bg-white active:text-black lg:text-3xl tracking-wider border  w-auto px-4 lg:w-72 py-1 mx-auto text-center font-serif'>
+                  March Edition</p>
+              </div>
+
+              <div onClick={handleAprilMag} className=' flex flex-col overflow-y-hidden  space-y-4 text-center  '>
+                <img src='/magzine/april-cover.jpg'  className={` ${ aprilMag ? 'opacity-100  ' : 'opacity-100'} border w-9/12 lg:w-full mx-auto lg:hover:scale-90 transform-gpu transition-transform duration-300  `}/>
+                <p className='text-white text-lg cursor-pointer hover:bg-white hover:text-black active:bg-white active:text-black lg:text-3xl tracking-wider border  w-auto px-2 lg:w-72 py-1 mx-auto text-center font-serif'>
+                  April Edition</p>
+              </div>
+
+              <div onClick={handleMayMag} className=' flex flex-col overflow-y-hidden  space-y-4 text-center  '>
+                <img src='/magzine/may-cover.jpg'  className={` ${ mayMag ? 'opacity-100  ' : 'opacity-100'} border w-9/12 lg:w-full mx-auto lg:hover:scale-90 transform-gpu transition-transform duration-300  `}/>
+                <p className='text-white text-lg cursor-pointer hover:bg-white hover:text-black active:bg-white active:text-black lg:text-3xl tracking-wider border  w-auto px-2 lg:w-72 py-1 mx-auto text-center font-serif'>
+                  May Edition</p>
+              </div>
+
+        </div>
+
+
+          <div id='header' onScroll={handleScroll} className='  flex absolute shadow-4xl z-50 top-0 lg:p-4 mt-3 w-full items-center  justify-between px-3'>
+            
+              <Logo/>
+              <h1 className=' top-0 left-1/3 text-lg md:text-5xl text-white text-center  font-bold font-serif'>
+                Buylowcal Monthly Magzines
+              </h1>
+              <div className='hidden md:inline-flex lg:ml-8 lg+:ml-0  xl:inline-flex'>
+                  { isAuthorize ?  <AuthorizedMenu/> : <JoinButton/> }
+              </div>
+              <div className='inline-flex md:hidden  lg:ml-8 lg+:ml-0  '>
+              { isAuthorize ?  <AuthorizedMenu/> : <MobileJoinButton/> }
+              </div>
+
+          </div>
+
+        {/* <h1 className='fixed z-30 top-10  pt-9 lg:pt-20  mx-auto w-full text-lg md:text-5xl text-white text-center  font-bold font-serif'>
               Buylowcal Monthly Magazines
-        </h1>
+        </h1> */}
 
       </div>
       <MobileNavigation search={false} />

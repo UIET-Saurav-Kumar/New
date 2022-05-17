@@ -130,7 +130,7 @@ export default function DropDown({getLoc}:{getLoc:any}) {
     { value: 'Chandigarh+Grocery+Store', label: 'Chandigarh grocery store', image: { avatar: true, src: 'https://placeimg.com/64/64/2' } },
     { value: 'Beauzo+Salon', label: 'Beauzo Salon', image: { avatar: true, src: 'https://placeimg.com/64/64/3' } },
     { value: 'Salman+s+Makeover', label: 'Salman Makeover ', image: { avatar: true, src: 'https://placeimg.com/64/64/3' } },
-    { value: 'Green+Gush+Organics', label: 'Green Gush Organics', image: { avatar: true, src: 'https://placeimg.com/64/64/1' } },
+    { value: 'Shri+Balaji+Fruits+And+Vegetables', label: 'Balaji Fruits & Vegetables', image: { avatar: true, src: 'https://placeimg.com/64/64/1' } },
     
 
   ];
@@ -138,7 +138,7 @@ export default function DropDown({getLoc}:{getLoc:any}) {
 
     return (
 
-        <div  className=' w-full relative'>
+        <div  className=' w-full z-10 relative'>
 
           {/* <div className='w-full shadow-md  relative'> */}
             

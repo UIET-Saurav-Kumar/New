@@ -12,6 +12,9 @@ import GetCurrentLocation from "@components/geoCode/get-current-location"
 import { useLocation } from "@contexts/location/location.context";
 import MobileJoinButton from '@components/layout/navbar/mobile-join-button';
 import CityButton from '@components/geoCode/city-buttton';
+import { SearchIcon } from '@components/icons/search-icon';
+import { useModalAction } from "@components/ui/modal/modal.context";
+
 
 const cities = //create object of major  indian cities with lat, lng and city name
     [
@@ -187,6 +190,11 @@ export default function HeaderMiddle() {
     const handleLocation = () => {
         setLocation(!location);
     }
+    const { openModal } = useModalAction();
+
+    function handleSearchModal() {
+        return openModal("SEARCH_BAR_MODAL");
+      }
 
     const [location, setLocation] = useState(false);
    
@@ -452,6 +460,7 @@ export default function HeaderMiddle() {
        <div className='w-full flex flex-col lg:hidden -mb-3  '>
        <div className='flex md:flex w-full lg:hidden px-4 mb-2 mt-0' >
            <DropDown getLoc={handleLocation}/>
+           {/* <SearchIcon onClick={handleSearchModal} className='text-gray-500 h-10 w-10 cursor-pointer'/> */}
        </div>
        <div className='z-10 bg-white flex items-center mx-auto space-x-4 text-12px w-full justify-evenly text-gray-500 '>
                         <span className=' text-blue-600'>बायलोकल</span>

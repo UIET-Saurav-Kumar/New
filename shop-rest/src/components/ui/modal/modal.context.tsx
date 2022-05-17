@@ -9,7 +9,8 @@ type MODAL_VIEWS =
   | "PRODUCT_DETAILS"
   | "SHOP_INFO"
   | 'SHOP_MOBILE_CATEGORIES'
-  | 'SHOP_PAYMENT_FORM';
+  | 'SHOP_PAYMENT_FORM'
+  | 'SEARCH_BAR_MODAL';
 
 interface State {
   view?: MODAL_VIEWS;

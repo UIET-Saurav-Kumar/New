@@ -58,9 +58,9 @@ const ShopsPage = () => {
     }
     return "";
   }
+
   function getCategory():string{
     const { query } = useRouter();
-    
     if(query.category){
       return query.category as string
     }
@@ -87,6 +87,7 @@ const ShopsPage = () => {
     close();
     router.push(path);
   }
+
   const handleFilter = () => {
       setFilter(true);
   }
@@ -103,7 +104,7 @@ const ShopsPage = () => {
       setSort(false);
   }
 
-  console.log('shops',data?.pages?.filter((shop: any) => shop.is_active === 1))
+  console.log('shops',data?.pages?.filter((shop: any) => shop?.is_active === 1))
   console.log('shops name',data?.pages?.data?.map((shop: any) => shop))
 
   return (
