@@ -93,8 +93,8 @@ export const InvitePage = () => {
     const props = ['name', 'email', 'tel', 'address', 'icon'];
   const opts = {multiple: true};
 
-  const [contacts, setContacts] = useState([]);
-   const [prop, setProps] = useState();
+  const [contacts, setContacts] = useState('');
+   const [prop, setProps] = useState('');
   //  const [opts, setOpts] = useState([]);
 
 
@@ -102,9 +102,9 @@ export const InvitePage = () => {
     try {
         const contacts = await windowNav?.contacts.select(props, opts);
        //send message to that contact
-       alert(contacts.props.tel);
+       setContacts(contacts?.props);
       //  toast(props.tel)
-       setContacts(contacts?.props?.tel);
+      //  setContacts(contacts?.props?.tel);
       //  setProps(props?.tel)
         // setOpts(opts)
       
@@ -154,8 +154,8 @@ export const InvitePage = () => {
                 Get Contacts
           </button>
 
-          {/* <p>{!!contacts && contacts}</p>
-          <p>{!!prop && prop}</p> */}
+          <p>{contacts}</p>
+          {/* <p>{prop}</p> */}
           {/* <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <Input
