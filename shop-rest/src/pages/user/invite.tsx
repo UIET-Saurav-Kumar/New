@@ -60,6 +60,48 @@ export const InvitePage = () => {
         setClick(true);
 	}
 
+  const supportsContacts = ('contacts' in navigator && 'ContactsManager' in window)
+
+    console.log('contacts',supportsContacts);
+
+    let windowNav : any;
+    let nav : any;
+    windowNav = window.navigator;
+    nav = navigator;
+
+
+    async function checkProperties() {
+      const supportedProperties = await windowNav.contacts.getProperties();
+      if (supportedProperties.includes('name')) {
+        // run code for name support
+      }
+      if (supportedProperties.includes('email')) {
+        // run code for email support
+      }
+      if (supportedProperties.includes('tel')) {
+        // run code for telephone number support
+      }
+      if (supportedProperties.includes('address')) {
+        // run code for address support
+      }
+      if (supportedProperties.includes('icon')) {
+        // run code for avatar support
+      }
+    }
+
+    const props = ['name', 'email', 'tel', 'address', 'icon'];
+  const opts = {multiple: true};
+
+
+  async function getContacts() {
+    try {
+        const contacts = await windowNav?.contacts.select(props, opts);
+        console.log('contacts',contacts);
+    } catch (ex) {
+        console.log('not supported', ex);
+    }
+  }
+
   return (
     <>
     <Navbar label='Invite Friends'/>
@@ -91,8 +133,13 @@ export const InvitePage = () => {
                 <span ref={tooltext} className="tiptext">copy</span>
               </div>
               <p className="invite-link">{process.env.NEXT_PUBLIC_URL+"/invite/"+data?.me?.id}</p>
+
+              
             </div>
           )}
+          <button onClick={getContacts} className='rounded-lg mt-5 p-2 px-3 bg-blue-600 hover:bg-blue-700 text-white '>
+                Get Contacts
+              </button>
           {/* <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <Input

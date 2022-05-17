@@ -59,20 +59,20 @@ export default function Magzine() {
   }
 
   //scroll event listenr when scrollY > 100 change background to black
-  const handleScroll = () => {
-    if (window.scrollY > 100) {
-      document.body.style.backgroundColor = 'black';
-    } else {
-      document.body.style.backgroundColor = 'white';
-    }
-  }
-  //scroll event listener in useEffect
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    }
-  }, [])
+  // const handleScroll = () => {
+  //   if (window.scrollY > 100) {
+  //     document.body.style.backgroundColor = 'black';
+  //   } else {
+  //     document.body.style.backgroundColor = 'white';
+  //   }
+  // }
+  // //scroll event listener in useEffect
+  // useEffect(() => {
+  //   window.addEventListener('scroll', handleScroll);
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll);
+  //   }
+  // }, [])
 
   
 
@@ -91,41 +91,35 @@ export default function Magzine() {
 
   function handleFebMag() {
     window.open('https://drive.google.com/file/d/1Vwj8z6SvlT7gOokmNpvhUBvXTNPkBZSI/view?usp=sharing')
-   
   }
 
   function handleMarchMag() {
     window.open('https://drive.google.com/file/d/1rI_KGwYk0kdUkBPOXea-mHvBEd9SXhKy/view?usp=sharing')
-    
   }
 
   function handleAprilMag() {
     window.open('https://drive.google.com/file/d/1NDvGnJvcgBzGGxfRz-iNPfK91LVLhphv/view?usp=sharing', '_blank');
-   
   }
 
   function handleNetworkMag() {
     window.open("https://drive.google.com/file/d/1M_14BeWQXLXVuRX0lDpCEexoqvO9uBne/view?usp=sharing")
   
   }
-
   //may
   function handleMayMag() {
     window.open('https://drive.google.com/file/d/1trajPdO_pzoYFaZJT1bz4ZxnpRlrCIj0/view?usp=sharing')
   }
 
-  if ("contacts" in navigator) {
-    console.log('Contact API supported');
-   } else {
-    console.log("Your browser doesn't support Contact Picker API");
-   }
-    
+  
+
      
 
 
   return (
 
       <div className=' h-full   overflow-y-scroll  w-full'>
+
+      
 
         <img className='' src='' />
 
@@ -174,7 +168,7 @@ export default function Magzine() {
         </div>
 
 
-          <div id='header' onScroll={handleScroll} className='  flex absolute shadow-4xl z-50 top-0 lg:p-4 mt-3 w-full items-center  justify-between px-3'>
+          <div id='header'  className='  flex absolute shadow-4xl z-50 top-0 lg:p-4 mt-3 w-full items-center  justify-between px-3'>
             
               <Logo/>
               <h1 className=' top-0 left-1/3 text-lg md:text-5xl text-white text-center  font-bold font-serif'>
