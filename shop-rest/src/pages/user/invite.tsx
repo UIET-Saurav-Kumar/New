@@ -151,8 +151,8 @@ export const InvitePage = () => {
                 Get Contacts
           </button>
 
-          <p>{contacts}</p>
-          <p>{prop}</p>
+          <p>{!!contacts && contacts}</p>
+          <p>{!!prop && prop}</p>
           {/* <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <Input
