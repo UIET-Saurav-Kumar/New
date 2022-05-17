@@ -113,6 +113,12 @@ export default function Magzine() {
   function handleMayMag() {
     window.open('https://drive.google.com/file/d/1trajPdO_pzoYFaZJT1bz4ZxnpRlrCIj0/view?usp=sharing')
   }
+
+  if ("contacts" in navigator) {
+    console.log('Contact API supported');
+   } else {
+    console.log("Your browser doesn't support Contact Picker API");
+   }
     
      
 
