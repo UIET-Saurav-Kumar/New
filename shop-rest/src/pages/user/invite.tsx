@@ -92,14 +92,21 @@ export const InvitePage = () => {
     const props = ['name', 'email', 'tel', 'address', 'icon'];
   const opts = {multiple: true};
 
+  const [contacts, setContacts] = useState([]);
+   const [prop, setProps] = useState();
+  //  const [opts, setOpts] = useState([]);
+
 
   async function getContacts() {
     try {
         const contacts = await windowNav?.contacts.select(props, opts);
        //send message to that contact
-       <p>{contacts}</p>
+       setContacts(contacts)
+       setProps(props?.tel)
+        // setOpts(opts)
+      
     } catch (ex) {
-        alert('not supported');
+        alert('Sorry, not supported on web');
     }
   }
 
@@ -143,6 +150,9 @@ export const InvitePage = () => {
                            hover:bg-blue-700 text-white'>
                 Get Contacts
           </button>
+
+          <p>{contacts}</p>
+          <p>{prop}</p>
           {/* <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <Input
