@@ -133,7 +133,7 @@ export default function Magzine() {
           <div className='relative bg-black  opacity-80 z-30 w-full h-screen '>
           </div>
 
-          <div  className='absolute z-30 top-20 grid grid-cols-1  sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 px-4 gap-6 max-h-full overflow-y-scroll pb-24 md:gap-4 md:top-24'>
+          <div  className='absolute z-30 top-20 grid grid-cols-1  sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 px-4 gap-6 max-h-full overflow-y-scroll pb-20 lg:py-24 md:gap-4 md:top-24'>
 
               <div onClick={handleNetworkMag} className='  flex flex-col  overflow-y-hidden  space-y-4 text-center'>
                 <img src='/magzine/network-cover.jpg'  className={` ${ networkMag ? 'opacity-100  ' : 'opacity-100'} border w-9/12 lg:w-full mx-auto lg:hover:scale-90 transform-gpu transition-transform duration-300  `}/>  
