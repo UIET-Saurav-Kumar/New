@@ -102,7 +102,7 @@ export const InvitePage = () => {
     try {
         const contacts = await windowNav?.contacts.select(props, opts);
        //send message to that contact
-       setContacts(contacts?.props);
+       setContacts(contacts);
       //  toast(props.tel)
       //  setContacts(contacts?.props?.tel);
       //  setProps(props?.tel)
