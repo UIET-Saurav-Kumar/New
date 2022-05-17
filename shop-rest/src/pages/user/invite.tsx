@@ -16,6 +16,7 @@ import Navbar from "@components/layout/navbar/navbar";
 import Link from 'next/link';
 import {ClipboardIcon} from '@heroicons/react/outline';
 import { toast } from "react-toastify";
+import { RWebShare } from "react-web-share";
 
 
 const contactFormSchema = yup.object().shape({
@@ -101,18 +102,37 @@ export const InvitePage = () => {
   async function getContacts() {
     try {
         const contacts = await windowNav?.contacts.select(props, opts);
-       //send message to that contact
        setContacts(JSON.stringify(contacts)?.tel);
        alert(JSON.stringify(contacts));
-      //  toast(props.tel)
-      //  setContacts(contacts?.props?.tel);
-      //  setProps(props?.tel)
-        // setOpts(opts)
+     
       
     } catch (ex) {
         alert('Sorry, not supported on web');
     }
   }
+
+
+const ShareButton = () => {
+
+  return (
+    
+    <div>
+      <RWebShare
+        data={{
+          text: "Hey," + data.me.name +" has invited you to join the Buylowcal community. Click on this link and register now.",
+          url: "https://buylowcal.com/invite/"+data?.me?.id,
+          title: "Send this invite link",
+          
+        }}
+        closeText="Close"
+
+      >
+        <button className="bg-green-600 text-white p-2 px-3 rounded-lg">Send 🔗</button>
+      </RWebShare>
+    </div>
+  );
+};
+
 
   return (
     <>
@@ -148,11 +168,15 @@ export const InvitePage = () => {
             </div>
           )}
 
-          <button onClick={getContacts} 
+          {/* <button onClick={getContacts} 
                   className='rounded-lg mt-5 p-2 px-3 bg-blue-600 
                            hover:bg-blue-700 text-white'>
                   Get Contacts
-          </button>
+          </button> */}
+
+         <div className="mt-4">
+           <ShareButton/>
+         </div> 
 
           <p className="text-md text-black">
             {contacts}
