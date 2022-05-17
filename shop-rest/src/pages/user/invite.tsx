@@ -102,7 +102,7 @@ export const InvitePage = () => {
     try {
         const contacts = await windowNav?.contacts.select(props, opts);
        //send message to that contact
-       setContacts(contacts);
+       setContacts(contacts?.props?.tel);
       //  toast(props.tel)
       //  setContacts(contacts?.props?.tel);
       //  setProps(props?.tel)
@@ -154,7 +154,9 @@ export const InvitePage = () => {
                 Get Contacts
           </button>
 
-          <p>{contacts}</p>
+          <p className="text-md text-black">
+            {contacts}
+          </p>
           {/* <p>{prop}</p> */}
           {/* <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
