@@ -96,9 +96,10 @@ export const InvitePage = () => {
   async function getContacts() {
     try {
         const contacts = await windowNav?.contacts.select(props, opts);
-        console.log('contacts',contacts);
+       //send message to that contact
+       <p>{contacts}</p>
     } catch (ex) {
-        console.log('not supported', ex);
+        alert('not supported');
     }
   }
 
@@ -137,9 +138,11 @@ export const InvitePage = () => {
               
             </div>
           )}
-          <button onClick={getContacts} className='rounded-lg mt-5 p-2 px-3 bg-blue-600 hover:bg-blue-700 text-white '>
+          <button onClick={getContacts} 
+                  className='rounded-lg mt-5 p-2 px-3 bg-blue-600 
+                           hover:bg-blue-700 text-white'>
                 Get Contacts
-              </button>
+          </button>
           {/* <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <Input
