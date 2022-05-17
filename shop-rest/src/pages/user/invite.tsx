@@ -62,64 +62,64 @@ export const InvitePage = () => {
         setClick(true);
 	}
 
-  const supportsContacts = ('contacts' in navigator && 'ContactsManager' in window)
+  // const supportsContacts = ('contacts' in navigator && 'ContactsManager' in window)
 
-    console.log('contacts',supportsContacts);
+  //   console.log('contacts',supportsContacts);
 
-    let windowNav : any;
-    let nav : any;
-    windowNav = window.navigator;
-    nav = navigator;
-
-
-    async function checkProperties() {
-      const supportedProperties = await windowNav.contacts.getProperties();
-      if (supportedProperties.includes('name')) {
-        // run code for name support
-      }
-      if (supportedProperties.includes('email')) {
-        // run code for email support
-      }
-      if (supportedProperties.includes('tel')) {
-        // run code for telephone number support
-      }
-      if (supportedProperties.includes('address')) {
-        // run code for address support
-      }
-      if (supportedProperties.includes('icon')) {
-        // run code for avatar support
-      }
-    }
-
-    const props = ['name', 'email', 'tel', 'address', 'icon'];
-  const opts = {multiple: true};
-
-  const [contacts, setContacts] = useState('');
-   const [prop, setProps] = useState('');
-  //  const [opts, setOpts] = useState([]);
+  //   let windowNav : any;
+  //   let nav : any;
+  //   windowNav = window.navigator;
+  //   nav = navigator;
 
 
-  async function getContacts() {
-    try {
-        const contacts = await windowNav?.contacts.select(props, opts);
-       setContacts(JSON.stringify(contacts)?.tel);
-       alert(JSON.stringify(contacts));
+  //   async function checkProperties() {
+  //     const supportedProperties = await windowNav.contacts.getProperties();
+  //     if (supportedProperties.includes('name')) {
+  //       // run code for name support
+  //     }
+  //     if (supportedProperties.includes('email')) {
+  //       // run code for email support
+  //     }
+  //     if (supportedProperties.includes('tel')) {
+  //       // run code for telephone number support
+  //     }
+  //     if (supportedProperties.includes('address')) {
+  //       // run code for address support
+  //     }
+  //     if (supportedProperties.includes('icon')) {
+  //       // run code for avatar support
+  //     }
+  //   }
+
+  //   const props = ['name', 'email', 'tel', 'address', 'icon'];
+  // const opts = {multiple: true};
+
+  // const [contacts, setContacts] = useState('');
+  //  const [prop, setProps] = useState('');
+  // //  const [opts, setOpts] = useState([]);
+
+
+  // async function getContacts() {
+  //   try {
+  //       const contacts = await windowNav?.contacts.select(props, opts);
+  //      setContacts(JSON.stringify(contacts)?.tel);
+  //      alert(JSON.stringify(contacts));
      
       
-    } catch (ex) {
-        alert('Sorry, not supported on web');
-    }
-  }
+  //   } catch (ex) {
+  //       alert('Sorry, not supported on web');
+  //   }
+  // }
 
 
 const ShareButton = () => {
 
   return (
-    
+
     <div>
       <RWebShare
         data={{
-          text: "Hey," + data.me.name +" has invited you to join the Buylowcal community. Click on this link and register now.",
+          text: "Hey," + data?.me?.name +" has invited you to join the Buylowcal community. Click on this link and register now.",
           url: "https://buylowcal.com/invite/"+data?.me?.id,
           title: "Send this invite link",
           
@@ -178,9 +178,9 @@ const ShareButton = () => {
            <ShareButton/>
          </div> 
 
-          <p className="text-md text-black">
+          {/* <p className="text-md text-black">
             {contacts}
-          </p>
+          </p> */}
           {/* <p>{prop}</p> */}
           {/* <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
