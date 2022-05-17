@@ -15,6 +15,7 @@ import { useCustomerQuery } from "@data/customer/use-customer.query";
 import Navbar from "@components/layout/navbar/navbar";
 import Link from 'next/link';
 import {ClipboardIcon} from '@heroicons/react/outline';
+import { toast } from "react-toastify";
 
 
 const contactFormSchema = yup.object().shape({
@@ -101,8 +102,10 @@ export const InvitePage = () => {
     try {
         const contacts = await windowNav?.contacts.select(props, opts);
        //send message to that contact
-       setContacts(contacts)
-       setProps(props?.tel)
+       alert(contacts.props.tel);
+      //  toast(props.tel)
+       setContacts(contacts?.props?.tel);
+      //  setProps(props?.tel)
         // setOpts(opts)
       
     } catch (ex) {
@@ -151,8 +154,8 @@ export const InvitePage = () => {
                 Get Contacts
           </button>
 
-          <p>{!!contacts && contacts}</p>
-          <p>{!!prop && prop}</p>
+          {/* <p>{!!contacts && contacts}</p>
+          <p>{!!prop && prop}</p> */}
           {/* <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <Input
