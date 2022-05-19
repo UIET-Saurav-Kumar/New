@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
+
 use PickBazar\Http\Controllers\TagController;
 
 class Product extends Model
@@ -24,6 +26,14 @@ class Product extends Model
     protected $casts = [
         'image'   => 'json',
         'gallery' => 'json',
+    ];
+
+    protected $appends = [
+        'ratings',
+        'total_reviews',
+        'rating_count',
+        'my_review',
+        'in_wishlist'
     ];
 
     // protected static function boot()
@@ -118,6 +128,27 @@ class Product extends Model
         return $this->hasMany(Variation::class, 'product_id');
     }
 
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class, 'product_id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function questions(): HasMany
+    {
+        return $this->hasMany(Question::class, 'product_id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function wishlists(): HasMany
+    {
+        return $this->hasMany(Wishlist::class, 'product_id');
+    }
+
     /**
      * @return belongsToMany
      */
@@ -132,5 +163,36 @@ class Product extends Model
     public function variations(): BelongsToMany
     {
         return $this->belongsToMany(AttributeValue::class, 'attribute_product');
+    }
+
+    public function getRatingsAttribute()
+    {
+        return round($this->reviews()->avg('rating'), 2);
+    }
+
+    public function getTotalReviewsAttribute()
+    {
+        return $this->reviews()->count();
+    }
+
+    public function getRatingCountAttribute()
+    {
+        return $this->reviews()->orderBy('rating', 'DESC')->groupBy('rating')->select('rating', DB::raw('count(*) as total'))->get();
+    }
+
+    public function getMyReviewAttribute()
+    {
+        if (auth()->user() && !empty($this->reviews()->where('user_id', auth()->user()->id)->first())) {
+            return $this->reviews()->where('user_id', auth()->user()->id)->get();
+        }
+        return null;
+    }
+
+    public function getInWishlistAttribute()
+    {
+        if (auth()->user() && !empty($this->wishlists()->where('user_id', auth()->user()->id)->first())) {
+            return true;
+        }
+        return false;
     }
 }

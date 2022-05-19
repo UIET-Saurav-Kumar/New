@@ -62,12 +62,9 @@ class ProductController extends CoreController
                     ]);
             }
         }
-        $limit = $request->limit ?   $request->limit : 15;   
-        // order count
-       // $repdata = $this->repository->withCount('orders')->with(['type', 'shop'])->orderBy('updated_at','desc')->paginate($limit);
-        
-         $repdata = $this->repository->with(['type', 'shop', 'categories', 'tags', 'variations.attribute'])->orderBy('is_offer', 'desc')->paginate($limit);
-        
+        $limit = $request->limit ?   $request->limit : 15;    
+        // $repdata = $this->repository->withCount('orders')->with(['type', 'shop'])->orderBy('updated_at','desc')->paginate($limit);
+        $repdata = $this->repository->with(['type', 'shop', 'categories', 'tags', 'variations.attribute'])->orderBy('is_offer', 'desc')->paginate($limit);
         foreach($repdata as $key=>$val)
          {
             $repdata[$key]->image_original = $val->image['original'] ?? '';
@@ -638,28 +635,17 @@ class ProductController extends CoreController
     public function myWishlists(Request $request)
     {
         $limit = $request->limit ? $request->limit : 10;
-        // call to member function paginate on null
-        // if (isset($user->id)) {
-            $wishlists = Wishlist::where('user_id', $request->user()->id)->paginate($limit);
-            return $wishlists;
-        // }
-        // $wishlists = Wishlist::where('user_id', $request->user()->id)->paginate($limit);
-        // return $wishlists;
-
-        // return $this->fetchWishlists($request)->paginate($limit);
+        
+        //    return $wishlists = Wishlist::where('user_id', $request->user()->id)->paginate($limit);
+           return $this->fetchWishlists($request)->paginate($limit);
     }
 
     public function fetchWishlists(Request $request)
     {
         $user = $request->user();
-        // attempt to read property id on null on line 645
-        // if (isset($user->id)) {
-            $wishlists = Wishlist::where('user_id', $user->id)->pluck('product_id');
-            return $wishlists;
-        // }
-        // $wishlist = Wishlist::where('user_id', $user->id)->pluck('product_id');
-        // return $wishlist;
-
+       
+            $wishlist = Wishlist::where('user_id', $user->id)->pluck('product_id');
+            return $this->repository->whereIn('id', $wishlist);
     }
 
 

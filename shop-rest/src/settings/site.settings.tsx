@@ -113,7 +113,8 @@ export const siteSettings = {
   authorizedLinks: [
     { href: ROUTES.PROFILE, label: "Profile" },
     { href: ROUTES.CHECKOUT, label: "Checkout" },
-    // { href: ROUTES.WISHLIST, label: 'My wishlist' },
+    { href: ROUTES.WISHLIST, label: 'My wishlist' },
+    { href:ROUTES.QUESTIONS, label: 'My Questions' },
     { href: ROUTES.EVENTS, label: "Magazines" },
     { href: ROUTES.ORDERS, label: "Orders" },
     { href: ROUTES.INVITE_FRIENDS, label: "Invite Friends" },
@@ -142,14 +143,14 @@ export const siteSettings = {
       menulabel: "Magazines",
     },
 
-    // {
-    //   href: ROUTES.WISHLIST,
-    //   menulabel: 'My wishlist',
-    // },
-    // {
-    //   href: ROUTES.QUESTIONS,
-    //   menulabel: 'My Questions',
-    // },
+    {
+      href: ROUTES.WISHLIST,
+      menulabel: 'My wishlist',
+    },
+    {
+      href: ROUTES.QUESTIONS,
+      menulabel: 'My Questions',
+    },
     
     {
       href: ROUTES.ORDERS,
@@ -192,10 +193,10 @@ export const siteSettings = {
       href: ROUTES.REPORTS,
       label: 'My Reports',
     },
-    // {
-    //   href: ROUTES.HELP,
-    //   menulabel: "profile-sidebar-help",
-    // },
+    {
+      href: ROUTES.HELP,
+      menulabel: "profile-sidebar-help",
+    },
     {
       href: ROUTES.LOGOUT,
       menulabel: "profile-sidebar-logout",

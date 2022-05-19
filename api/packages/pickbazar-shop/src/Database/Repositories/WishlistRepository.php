@@ -68,7 +68,7 @@ class WishlistRepository extends BaseRepository
         try {
             $user_id = $request->user()->id;
             $wishlist = $this->findOneWhere((['user_id' => $user_id, 'product_id' => $request['product_id']]));
-            if (!empty($wishlist)) {
+            if (empty($wishlist)) {
                 $request['user_id'] = $user_id;
                 $wishlistInput = $request->only($this->dataArray);
                 $this->create($wishlistInput);

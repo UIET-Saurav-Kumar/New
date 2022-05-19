@@ -46,9 +46,9 @@ export function useRemoveFromWishlist() {
     mutate: removeFromWishlist,
     isLoading,
     isSuccess,
-  } = useMutation(client.wishlist.remove, {
+  } = useMutation(client?.wishlist?.remove, {
     onSuccess: () => {
-      toast.success(t('text-removed-from-wishlist'));
+      toast.success(t('Removed from wishlist'));
       queryClient.refetchQueries([API_ENDPOINTS.USERS_WISHLIST]);
     },
 
@@ -88,15 +88,15 @@ export function useWishlist(options?: WishlistQueryOptions) {
   
   return {
     wishlists: data?.pages.flatMap((page) => page.data) ?? [],
-    // paginatorInfo: Array.isArray(data?.pages)
-    //   ? mapPaginatorData(data?.pages[data.pages.length - 1])
-    //   : null,
-    // isLoading,
-    // error,
-    // isFetching,
-    // isLoadingMore: isFetchingNextPage,
-    // loadMore: handleLoadMore,
-    // hasMore: Boolean(hasNextPage),
+    paginatorInfo: Array.isArray(data?.pages)
+      ? mapPaginatorData(data?.pages[data.pages.length - 1])
+      : null,
+    isLoading,
+    error,
+    isFetching,
+    isLoadingMore: isFetchingNextPage,
+    loadMore: handleLoadMore,
+    hasMore: Boolean(hasNextPage),
   };
 }
 

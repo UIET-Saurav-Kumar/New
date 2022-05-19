@@ -55,7 +55,11 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   }
 };
 
+
+
 export default function ProductSinglePage({ product }: any) {
+
+  console.log('product rating',product)
 
   return (
 
@@ -64,12 +68,15 @@ export default function ProductSinglePage({ product }: any) {
 
         <ProductDetails product={product} />
 
-        <AverageRatings
+       
+          {/* <div className="lg:w-80 lg:h-80">    */}
+          <AverageRatings
                 title={product?.name}
                 ratingCount={product?.rating_count}
                 totalReviews={product?.total_reviews}
                 ratings={product?.ratings}
               />
+              {/* </div> */}
 
         <ProductReviews
             productId={product?.id}

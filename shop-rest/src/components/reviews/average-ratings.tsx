@@ -19,7 +19,10 @@ const AverageRatings: React.FC<AverageRatingsProps> = ({
   const { t } = useTranslation('common');
 
   //TODO: need to check
-  if (!ratingCount) return null;
+  if (!ratings) return null;
+
+  console.log('totalReviews', totalReviews);
+  console.log('ratings', ratings);
 
   return (
     <div className="p-5 md:py-12 lg:px-16">
@@ -30,22 +33,22 @@ const AverageRatings: React.FC<AverageRatingsProps> = ({
       <div className="flex w-full flex-col divide-y divide-gray-200 divide-opacity-70 sm:flex-row sm:items-center sm:space-x-8 sm:divide-y-0 sm:divide-x rtl:sm:space-x-reverse rtl:sm:divide-x-reverse">
         <div className="w-full pb-4 sm:w-auto sm:pb-0">
           <RatingsBadge rating={ratings} className="mb-4" variant="large" />
-          <p className="text-base text-gray-400">
+          <p className="text-base text-gray-700">
             <span>
               {totalReviews} {t('text-ratings')}
             </span>
           </p>
         </div>
-        <div className="w-full space-y-3 py-0.5 pt-4 sm:w-auto sm:pt-0 ltr:sm:pl-8 rtl:sm:pr-8">
+        <div className="w-full space-y-3 py-0.5 pt-4 sm:w-auto sm:pt-0 sm:ltr:pl-8 sm:rtl:pr-8">
           <RatingProgressBar
-            ratingProgressItem={ratingCount.find(
+            ratingProgressItem={ratingCount?.find(
               (rating) => Number(rating?.rating) === 5
             )}
             ratingId={5}
             totalReviews={totalReviews!}
           />
           <RatingProgressBar
-            ratingProgressItem={ratingCount.find(
+            ratingProgressItem={ratingCount?.find(
               (rating) => Number(rating?.rating) === 4
             )}
             ratingId={4}
@@ -53,7 +56,7 @@ const AverageRatings: React.FC<AverageRatingsProps> = ({
             colorClassName="bg-teal-500"
           />
           <RatingProgressBar
-            ratingProgressItem={ratingCount.find(
+            ratingProgressItem={ratingCount?.find(
               (rating) => Number(rating?.rating) === 3
             )}
             ratingId={3}
@@ -61,7 +64,7 @@ const AverageRatings: React.FC<AverageRatingsProps> = ({
             colorClassName="bg-teal-400"
           />
           <RatingProgressBar
-            ratingProgressItem={ratingCount.find(
+            ratingProgressItem={ratingCount?.find(
               (rating) => Number(rating?.rating) === 2
             )}
             ratingId={2}
@@ -69,7 +72,7 @@ const AverageRatings: React.FC<AverageRatingsProps> = ({
             colorClassName="bg-amber-500"
           />
           <RatingProgressBar
-            ratingProgressItem={ratingCount.find(
+            ratingProgressItem={ratingCount?.find(
               (rating) => Number(rating?.rating) === 1
             )}
             ratingId={1}

@@ -81,17 +81,11 @@ class WishlistController extends CoreController
 
     public function delete(Request $request)
     {
+       
         if (!$request->user()) {
             throw new PickbazarException('NOT_AUTHORIZED');
         }
         $product = Product::where('slug', $request->slug)->first();
-        //attempt to read propert id on null
-        if (!$product) {
-            throw new PickbazarException('PRODUCT_NOT_FOUND');
-        }
-        $this->repository->deleteWishlist($request, $product);
-        return response()->json(['success' => true]);
-    
         $wishlist = $this->repository->where('product_id', $product->id)->where('user_id', auth()->user()->id)->first();
         if (!empty($wishlist)) {
             return $wishlist->delete();

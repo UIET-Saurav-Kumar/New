@@ -83,7 +83,7 @@ export default function ReviewCard({ review }: ReviewCardProps) {
             onClick={() => handleImageClick(idx)}
           >
             <Image
-              src={photo.thumbnail ?? productPlaceholder}
+              src={photo.thumbnail ?? ''}
               alt={user.name ?? ''}
               width={80}
               height={80}

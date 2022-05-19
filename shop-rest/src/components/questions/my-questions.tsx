@@ -66,6 +66,9 @@ function QuestionItem({ question }: { question: Question }) {
           <Image
             src={product?.image?.thumbnail ?? siteSettings?.product?.placeholderImage}
             layout="fill"
+            alt="text"
+            className="absolute inset-0 object-cover"
+            
           />
         </div>
         <div className="flex flex-col">

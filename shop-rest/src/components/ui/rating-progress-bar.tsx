@@ -12,7 +12,7 @@ export default function RatingProgressBar({
   ratingId = 0,
   ratingProgressItem,
   totalReviews,
-  colorClassName = 'bg-accent',
+  colorClassName = 'bg-gold',
 }: RatingProgressProps) {
   return (
     <div className="flex items-center text-sm text-heading">
@@ -20,7 +20,7 @@ export default function RatingProgressBar({
         <span className="text-sm font-semibold text-heading">{ratingId}</span>{' '}
         <StarIcon className="h-2.5 w-2.5 ltr:ml-1.5 rtl:mr-1.5" />
       </div>
-      <div className="relative h-[5px] w-52 overflow-hidden rounded-md bg-[#F1F1F1]">
+      <div className="relative h-[10px] w-52 overflow-hidden rounded-md bg-[#F1F1F1]">
         <div
           className={cn('absolute h-full rounded-md', colorClassName)}
           style={{

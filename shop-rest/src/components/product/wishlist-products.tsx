@@ -43,9 +43,9 @@ function WishlistItem({ product }: { product: Product }) {
     <div className="flex w-full items-start space-x-4 border-b border-gray-200 py-5 first:pt-0 last:border-0 last:pb-0 rtl:space-x-reverse sm:space-x-5 xl:items-center">
       <div className="relative flex h-16 w-16 shrink-0 items-center justify-center border border-gray-200 sm:h-[74px] sm:w-[74px]">
         <Image
-          src={product?.image?.thumbnail ?? productPlaceholder}
-          alt="text"
-          layout="fill"
+          src={product?.image?.thumbnail ?? '/images/product-placeholder.png'}
+          alt={product?.name}
+          // layout="fill"
           className="absolute inset-0 object-cover"
           width={74}
           height={74}
@@ -123,7 +123,7 @@ function WishlistItem({ product }: { product: Product }) {
               onClick={() => removeFromWishlist(product?.slug)}
               disabled={isLoading}
             >
-              {t('text-remove')}
+              {t('Remove')}
             </button>
           </div>
         </div>
@@ -166,7 +166,7 @@ const WishlistProducts: React.FC = () => {
           </h1>
         </div>
         <NotFound
-          text="text-no-download"
+          text="Not found"
           className="mx-auto w-full md:w-7/12"
         />
       </div>
