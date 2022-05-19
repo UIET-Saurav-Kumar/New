@@ -1,4 +1,4 @@
-import 'swiper/swiper-bundle.esm.js'
+import 'swiper/swiper-bundle.min.css'
 
 // swiper core styles
 import 'swiper/swiper.min.css'
