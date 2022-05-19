@@ -127,7 +127,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
               <h1 className="font-semibold text-lg md:text-xl xl:text-2xl tracking-tight text-heading">
               {name}
             </h1>
-            <div className="">
+            {/* <div className="">
               <WishlistButton productId={product?.id}/>
             
                 <div className="inline-flex shrink-0 mt-2 text-white items-center rounded border border-accent bg-accent px-3 py-1 text-sm ">
@@ -135,7 +135,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
                   <StarIcon className="h-5 w-5 ltr:ml-1 rtl:mr-1" />
                 </div>
              
-            </div>
+            </div> */}
           </div>
 
             {unit && isEmpty(variations) && (
