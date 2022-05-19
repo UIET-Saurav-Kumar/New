@@ -30,7 +30,7 @@ export const ROUTES = {
   ALLCATEGORIES: './all-categories',
   SELLER: './seller-registration',
   
-  WISHLIST: './my-wishlist',
+  // WISHLIST: './my-wishlist',
   NOTIFICATONS: './notifications',
 
   PROFILE: "/user/profile",
@@ -42,5 +42,9 @@ export const ROUTES = {
   WITHDRAWS:"/user/withdraws",
   UPLOAD_INVOICE: '/user/upload-invoice',
   DELIVERY: '/user/delivery',
+
+  WISHLIST: '/wishlists',
+  QUESTIONS: '/questions',
+  REPORTS: '/reports',
   
 };

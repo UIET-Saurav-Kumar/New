@@ -40,6 +40,7 @@ const ProductFeedLoader = dynamic(
 export const getStaticProps: GetStaticProps = async ({ locale, params }) => {
 
     const queryClient = new QueryClient();
+    
     await queryClient.prefetchQuery("settings", fetchSettings);
   
     await queryClient.prefetchInfiniteQuery(

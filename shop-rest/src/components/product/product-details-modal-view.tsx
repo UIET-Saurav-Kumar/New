@@ -25,6 +25,7 @@ const RelatedProducts = dynamic(
 );
 import ReadMore from "@components/ui/truncate";
 import BackButton from "@components/ui/back-button";
+import Link from "next/link";
 
 
 const ProductDetailsModalView = ({ productSlug }: { productSlug: string }) => {
@@ -57,6 +58,9 @@ const ProductDetailsModalView = ({ productSlug }: { productSlug: string }) => {
     router.push(path);
     closeModal();
   };
+
+  let lat = shop?.settings?.location?.lat
+  let lng = shop?.settings?.location?.lng
 
   const navigate = (path: string) => {
     router.push(path);
@@ -351,9 +355,10 @@ const ProductDetailsModalView = ({ productSlug }: { productSlug: string }) => {
               )}
 
               {shop?.name && (
+                <div className="flex flex-col">
                 <div className="flex items-center mt-2">
                   <span className="text-sm font-semibold text-heading capitalize me-6 py-1">
-                    {t("common:text-sellers")}
+                    {t("Seller")}
                   </span>
 
                   <button
@@ -363,6 +368,17 @@ const ProductDetailsModalView = ({ productSlug }: { productSlug: string }) => {
                     {shop?.name}
                   </button>
                 </div>
+                <div className="flex  text-sm text-gray-500 tracking-wider mt-5 transition ">
+                  <span className="text-xs lg:text-sm font-semibold text-heading capitalize me-6 py-1">Address</span>
+                  <span className="">{shop?.address?.city + ' ' + shop?.address?.street_address}......
+                  <a target='_blank' href={`https://maps.google.com/?q=${lat},${lng}`}>
+                  <span className="text-sm mt-5 cursor-pointer hover:underline text-blue-600">View on map</span></a>
+                  </span>
+                  </div>
+                  {/* <a target='_blank' href={`https://maps.google.com/?q=${lat},${lng}`}>
+                  <span className="text-sm mt-5 cursor-pointer hover:underline text-blue-600">View on map</span></a> */}
+                </div>
+                
               )}
             </div>
           </Waypoint>

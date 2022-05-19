@@ -274,5 +274,8 @@
   "button-label-add-social": "Add New Social Profile",
   "input-label-select-platform": "Select social platform",
   "input-label-social-url": "Add profile url",
+  "input-label-reviews": "Reviews",
+  "error-maximum-question-limit": "Maximum question limit is required",
+  "input-label-maximum-question-limit": "Maximum Question Limit",
   "placeholder-search-location": "Search location form here"
 }

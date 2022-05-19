@@ -113,7 +113,6 @@ class InviteController extends CoreController
         
         $balance = $user->balance;
         
-        
         $name = $user->name;
         $customer_level = ReferralEarning::where('user_id', $user->id)->where('level', "0")->get();
         $level1 = ReferralEarning::where('user_id', $user->id)->where('level', "1")->get();

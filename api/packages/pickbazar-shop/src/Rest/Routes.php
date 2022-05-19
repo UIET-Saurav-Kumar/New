@@ -1,7 +1,7 @@
 <?php
 
 use PickBazar\Enums\Permission;
-
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 use PickBazar\Http\Controllers\TagController;
 use PickBazar\Http\Controllers\TaxController;
@@ -27,6 +27,17 @@ use PickBazar\Http\Controllers\ShopCategoryController;
 use PickBazar\Http\Controllers\MasterProductController;
 use PickBazar\Http\Controllers\AttributeValueController;
 
+use PickBazar\Http\Controllers\QuestionController;
+// use PickBazar\Http\Controllers\RefundController;
+use PickBazar\Http\Controllers\ReviewController;
+use PickBazar\Http\Controllers\WishlistController;
+use PickBazar\Http\Controllers\AbusiveReportController;
+use PickBazar\Http\Controllers\FeedbackController;
+
+
+
+
+
 Route::post('/register', 'PickBazar\Http\Controllers\UserController@register');
 Route::post('/token', 'PickBazar\Http\Controllers\UserController@token');
 Route::post('/forget-password', 'PickBazar\Http\Controllers\UserController@forgetPassword');
@@ -49,6 +60,60 @@ Route::post('/track/event', 'PickBazar\Http\Controllers\WhatsappController@track
 Route::apiResource('products', ProductController::class, [
     'only' => ['index', 'show']
 ]);
+
+Route::apiResource('reviews', ReviewController::class, [
+    'only' => ['index', 'show'],
+]);
+Route::apiResource('questions', QuestionController::class, [
+    'only' => ['index', 'show'],
+]);
+Route::apiResource('feedbacks', FeedbackController::class, [
+    'only' => ['index', 'show'],
+]);
+
+Route::apiResource('reviews', ReviewController::class, [
+    'only' => ['store', 'update']
+]);
+Route::apiResource('questions', QuestionController::class, [
+    'only' => ['store'],
+]);
+Route::apiResource('feedbacks', FeedbackController::class, [
+    'only' => ['store'],
+]);
+Route::apiResource('abusive_reports', AbusiveReportController::class, [
+    'only' => ['store'],
+]);
+Route::get('my-questions', [QuestionController::class, 'myQuestions']);
+Route::get('my-reports', [AbusiveReportController::class, 'myReports']);
+Route::post('wishlists/toggle', [WishlistController::class, 'toggle']);
+Route::apiResource('wishlists', WishlistController::class, [
+    'only' => ['index', 'store', 'destroy'],
+]);
+Route::get('wishlists/in_wishlist/{product_id}', [WishlistController::class, 'in_wishlist']);
+Route::get('my-wishlists', [ProductController::class, 'myWishlists']);
+
+Route::apiResource('questions', QuestionController::class, [
+    'only' => ['update'],
+]);
+
+Route::apiResource('reviews', ReviewController::class, [
+    'only' => ['destroy']
+]);
+
+Route::apiResource('questions', QuestionController::class, [
+    'only' => ['destroy'],
+]);
+Route::apiResource('feedbacks', QuestionController::class, [
+    'only' => ['update', 'destroy'],
+]);
+Route::apiResource('abusive_reports', AbusiveReportController::class, [
+    'only' => ['index', 'show', 'update', 'destroy'],
+]);
+Route::post('abusive_reports/accept', [AbusiveReportController::class, 'accept']);
+Route::post('abusive_reports/reject', [AbusiveReportController::class, 'reject']);
+
+
+
 Route::apiResource('master-products', MasterProductController::class, [
     'only' => ['index', 'show']
 ]);

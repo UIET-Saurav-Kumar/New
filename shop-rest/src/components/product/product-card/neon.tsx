@@ -12,13 +12,12 @@ import { PlusIcon } from "@heroicons/react/outline";
 import { min } from "lodash";
 import router from "next/router";
 
+
 type NeonProps = {
   product: any;
   className?: string;
   productSlug: string
 };
-
-
 
 
 const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
@@ -118,11 +117,10 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
         >
            <span className=''>
              {name}
-              
            </span>
            <span className="flex items-center justify-between">
              <p>{unit}</p>
-             <p className="font-light  text-gray-500">{orders_count + ' ' + 'sold'}</p>
+             {/* <p className="font-light  text-gray-500">{orders_count + ' ' + 'sold'}</p> */}
            </span>
         </h3>
         

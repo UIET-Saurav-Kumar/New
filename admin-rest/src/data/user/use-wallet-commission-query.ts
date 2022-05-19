@@ -34,5 +34,4 @@ export const useWalletCommissionQuery = (id: string) => {
   };
   return useQuery(["walletCommissionProduct", id], () => fetchWalletCommissionProduct(id));
    
-  
 }

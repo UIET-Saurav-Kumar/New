@@ -61,7 +61,7 @@ export default function Product({product,shopId,masterIds,taxes}:any) {
             <tr data-row-key="542" className="rc-table-row rc-table-row-level-0 h-24 `text-center`">
                 <td className="rc-table-cell text-center">
                     <div style={{boxSizing: "border-box", display: "inline-block", position: "relative", width: "60px", height: "auto"}}>
-                        <img alt={product?.name} src={product?.image?.original ?product?.image?.original:''} decoding="async" className="rounded overflow-hidden"/>
+                        <img alt={product?.name} src={product?.image?.thumbnail ?product?.image?.thumbnail:''} decoding="async" className="rounded overflow-hidden"/>
                     </div>
                 </td>
                 <td title="cosmos" className="rc-table-cell rc-table-cell-ellipsis  text-center">{product?.name}</td>

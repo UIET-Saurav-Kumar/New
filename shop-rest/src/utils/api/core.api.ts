@@ -89,9 +89,7 @@ export class CoreApi {
     
     const queryString = `?search=${search?search:""}&category=${category?category:""}&location=${location?location:""}&is_active=${is_active?is_active:""}&limit=${limit?limit:""}`;
     return this.http.get(this._base_path + queryString);
-    
    }
-
 
   findAll() {
     return this.http.get(this._base_path);

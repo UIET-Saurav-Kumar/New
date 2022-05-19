@@ -35,4 +35,7 @@ export const ROUTES = {
   INVOICES_REWARD: '/invoices-reward',
   INVOICES_REWARD_DATA: '/invoices-reward-data',
   CONTACT:'/contact',
+
+  REVIEWS: "/reviews",
+  QUESTIONS: "/questions",
 };

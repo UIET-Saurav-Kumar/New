@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Log;
 use PickBazar\Database\Models\Shop;
 use PickBazar\Database\Models\Type;
 use PickBazar\Database\Models\Product;
+use PickBazar\Database\Models\Wishlist;
 use PickBazar\Database\Models\Category;
 use PickBazar\Database\Models\ShopCategory;
 use Illuminate\Database\Eloquent\Collection;
@@ -19,6 +20,10 @@ use PickBazar\Http\Requests\ProductCreateRequest;
 use PickBazar\Http\Requests\ProductUpdateRequest;
 use PickBazar\Database\Repositories\ShopRepository;
 use PickBazar\Database\Repositories\ProductRepository;
+
+// use App\Models\Wishlist;
+use PickBazar\Database\Repositories\WishlistRepository;
+
 
 class ProductController extends CoreController
 {
@@ -58,7 +63,8 @@ class ProductController extends CoreController
             }
         }
         $limit = $request->limit ?   $request->limit : 15;    
-        $repdata = $this->repository->withCount('orders')->with(['type', 'shop'])->orderBy('orders_count', 'desc')->paginate($limit);
+        // $repdata = $this->repository->withCount('orders')->with(['type', 'shop'])->orderBy('updated_at','desc')->paginate($limit);
+        $repdata = $this->repository->with(['type', 'shop', 'categories', 'tags', 'variations.attribute'])->orderBy('is_offer', 'desc')->paginate($limit);
         foreach($repdata as $key=>$val)
          {
             $repdata[$key]->image_original = $val->image['original'] ?? '';
@@ -193,7 +199,7 @@ class ProductController extends CoreController
 
         if($location){
             $shops=ShopRepository::getSortedShops($location);
-            return Product::whereIn("shop_id",$shops)->with(['shop'])->where("is_featured",1)->get();
+            return Product::withCount('orders')->whereIn("shop_id",$shops)->with(['shop'])->where("is_featured",1)->get();
 
         }
         return Product::where("is_featured",1)->limit($limit)->get();
@@ -625,6 +631,34 @@ class ProductController extends CoreController
             return true;
         }
     }
+
+    public function myWishlists(Request $request)
+    {
+        $limit = $request->limit ? $request->limit : 10;
+        // call to member function paginate on null
+        // if (isset($user->id)) {
+            $wishlists = Wishlist::where('user_id', $request->user()->id)->paginate($limit);
+            return $wishlists;
+        // }
+        // $wishlists = Wishlist::where('user_id', $request->user()->id)->paginate($limit);
+        // return $wishlists;
+
+        // return $this->fetchWishlists($request)->paginate($limit);
+    }
+
+    public function fetchWishlists(Request $request)
+    {
+        $user = $request->user();
+        // attempt to read property id on null on line 645
+        // if (isset($user->id)) {
+            $wishlists = Wishlist::where('user_id', $user->id)->pluck('product_id');
+            return $wishlists;
+        // }
+        // $wishlist = Wishlist::where('user_id', $user->id)->pluck('product_id');
+        // return $wishlist;
+
+    }
+
 
     public function exportAllVariableOptions(Request $request)
     {

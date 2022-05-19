@@ -86,6 +86,11 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
           </div>
         )}
       </div>
+
+      {/* <span className="absolute bottom-0 bg-gray-50 w-full py-1 px-3 lg:px-6 text-gray-500 lg:text-gray-600 text-xs lg:text-sm ">
+        { orders_count !== 0  ?  orders_count + ' ' + 'bought' : null}
+      </span> */}
+
       </Link>
       {/* End of product image */}
 
@@ -117,7 +122,8 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
           className="text-xs md:text-sm font-semibold text-gray-700 truncate mb-4 cursor-pointer"
         >
            <div className='flex flex-col'>{name}<h3>{unit}</h3>
-           <span>{orders_count}</span></div>
+           
+           </div>
         </h3>
         {/* End of product title */}
         {product_type.toLowerCase() === 'variable' ? (

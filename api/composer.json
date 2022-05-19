@@ -1,7 +1,7 @@
 {
     "name": "redq/pickbazar-laravel",
     "type": "project",
-    "description": "Backend Implementation for pickbazar",
+    "description": "Backend Implementation for buylowcal",
     "keywords": [
         "pickbazar",
         "graphql",

@@ -58,7 +58,7 @@ export const selectStyles = {
   }),
   valueContainer: (provided: any, _: any) => ({
     ...provided,
-    paddingLeft: 16,
+    width: 155,
   }),
   singleValue: (provided: any, _: any) => ({
     ...provided,

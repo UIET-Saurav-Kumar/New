@@ -109,6 +109,25 @@ class User extends Authenticatable
         return $this->hasMany(Provider::class, 'user_id', 'id');
     }
 
+      /**
+     * @return HasMany
+     */
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class, 'user_id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function questions(): HasMany
+    {
+        return $this->hasMany(Question::class, 'user_id');
+    }
+
+    
+
+
     public function balance(): HasOne
     {
         return $this->hasOne(Balance::class, 'user_id');

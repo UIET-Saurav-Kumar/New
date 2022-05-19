@@ -3,17 +3,36 @@ import pickBy from "lodash/pickBy";
 
 interface PaginatorInfo {
   [key: string]: unknown;
+
+  current_page: number;
+  first_page_url: string;
+  from: number;
+  last_page: number;
+  last_page_url: string;
+  links: any[];
+  next_page_url: string | null;
+  path: string;
+  per_page: number;
+  prev_page_url: string | null;
+  to: number;
+  total: number;
+  data?: any[];
 }
-type PaginatorOutputType = {
-  hasMorePages: boolean;
-  nextPageUrl: string;
-  [key: string]: unknown;
-};
-export const mapPaginatorData = (obj: PaginatorInfo): PaginatorOutputType => {
-  const formattedValues = camelcaseKeys(obj);
+
+// type PaginatorOutputType = {
+//   hasMorePages: boolean;
+//   nextPageUrl: string;
+//   [key: string]: unknown;
+// };
+
+export const mapPaginatorData = (obj: PaginatorInfo | undefined) => {
+  if (!obj) return null;
+  const { data, ...formattedValues } = camelcaseKeys(obj);
   return {
-    ...(formattedValues as PaginatorOutputType),
+    ...formattedValues,
     hasMorePages: formattedValues.lastPage !== formattedValues.currentPage,
+    firstItem: formattedValues.from,
+    lastItem: formattedValues.to,
   };
 };
 

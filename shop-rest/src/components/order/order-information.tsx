@@ -74,9 +74,9 @@ const OrderInformation = (props: Props) => {
 
   console.log('subtotal', sub_total);
   console.log('total', total);
-  console.log('subtotal split ', sub_total.split('.')[0].replace('₹',' ').split(',').join('') )
-  console.log('coupon code',coupon?.type)
-  console.log('discount price',discountPrice)
+  console.log('subtotal split ', sub_total.split('.')[0].replace('₹',' ').split(',').join('') );
+  console.log('coupon code',coupon?.type);
+  console.log('discount price',discountPrice);
   console.log('checkout data',checkoutData);
 
   return (

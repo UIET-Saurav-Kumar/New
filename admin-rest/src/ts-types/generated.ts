@@ -876,6 +876,29 @@ export declare type BalanceInput = {
   id?: Maybe<Scalars["ID"]>;
   payment_info?: Maybe<PaymentInfoInput>;
 };
+
+
+export declare type ReplyQuestion = {
+  question?: Scalars["String"];
+  answer: Scalars["String"];
+};
+
+export declare type ReplyReview = {
+  id: Scalars["ID"];
+  product_id: Scalars["Int"];
+  rating?: Scalars["Int"];
+};
+
+export declare type UpdateReview = {
+  id: Scalars["ID"];
+  product_id: Scalars["Int"];
+  rating?: Scalars["Int"];
+};
+
+
+
+
+
 export declare type ShopInput = {
   name: Scalars["String"];
   description?: Maybe<Scalars["String"]>;

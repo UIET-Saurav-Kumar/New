@@ -5,14 +5,16 @@ import { useTranslation } from "next-i18next";
 import { useIsRTL } from "@utils/locals";
 import { useOrderQuery } from "@data/order/use-order.query";
 import { useRouter } from "next/router";
+import { getReview } from '@utils/get-review';
+import { useModalAction } from '@components/ui/modal/modal.context';
 
 
-export const OrderItems = ({ products }: { products: any }) => {
+export const OrderItems = ({ products,orderId,orderStatus }: { products: any }) => {
   const { t } = useTranslation("common");
   const { alignLeft, alignRight } = useIsRTL();
   // const { items, isEmpty } = useCart();
   const { query } = useRouter();
-
+  const { openModal } = useModalAction();
 
 
   const { data, isLoading: loading } = useOrderQuery({
@@ -32,6 +34,9 @@ export const OrderItems = ({ products }: { products: any }) => {
   const { price: discount } = usePrice(
     data && { amount: data?.order?.discount ?? 0 }
   );
+
+
+  console.log('orderStatus',orderStatus);
 
 
   // var converter = require('number-to-words');
@@ -166,6 +171,42 @@ export const OrderItems = ({ products }: { products: any }) => {
         return <p className=''>{price}</p>;
       },
     },
+
+    orderStatus === 11 ? { 
+      title: '',
+      dataIndex: '',
+      align: alignRight,
+      width: 140,
+      render: function RenderReview(_: any, record: any) {
+        
+        function openReviewModal() {
+          openModal('REVIEW_RATING', {
+            product_id: record?.id,
+            shop_id: record?.shop_id,
+            order_id: orderId,
+            name: record?.name,
+            image: record?.image,
+            my_review: getReview(record),
+            ...(record?.pivot?.variation_option_id && {
+              variation_option_id: record?.pivot?.variation_option_id,
+            }),
+          });
+        }
+
+        return (
+
+          
+          <button
+            onClick={openReviewModal}
+            className="cursor-pointer text-sm font-semibold text-body transition-colors hover:text-accent"
+          >
+            {getReview(record)
+              ? t('text-update-review')
+              : t('text-write-review')}
+          </button>
+        );
+      },
+    } : {},
 
   ];
 

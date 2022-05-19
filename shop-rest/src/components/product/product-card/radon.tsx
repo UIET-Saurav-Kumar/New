@@ -39,7 +39,7 @@ const Radon: React.FC<RadonProps> = ({ product, className }) => {
             {name}
           </h3>
           <p className="text-xs md:text-sm text-body">
-            {t("text-by")} {author}
+            {t("By")} {author}
           </p>
         </header>
         {/* End of product info */}

@@ -23,7 +23,7 @@ export default function featuredProducts({}) {
         location : ((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any
     });
 
-
+     console.log('feature product',data)
 
 
     // data?.featureProducts?.data = []

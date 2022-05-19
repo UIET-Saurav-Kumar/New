@@ -283,6 +283,162 @@ export declare type Coupon = {
   created_at: Scalars["DateTime"];
   updated_at: Scalars["DateTime"];
 };
+
+// export type RatingCount = {
+//   __typename?: "RatingCount";
+//   rating: Scalars["Int"];
+//   total: Scalars["Int"];
+// };
+
+export interface ReviewQueryOptions extends QueryOptions {
+  product_id: string;
+  rating?: string;
+  orderBy?: string;
+  sortedBy?: string;
+}
+export interface QuestionQueryOptions extends QueryOptions {
+  product_id: string;
+  question?: string;
+}
+export interface MyQuestionQueryOptions extends QueryOptions {}
+export interface MyReportsQueryOptions extends QueryOptions {}
+export interface WishlistQueryOptions extends QueryOptions {}
+
+// export interface Attachment {
+//   id: number;
+//   original: string;
+//   thumbnail: string;
+//   __typename?: string;
+// }
+
+
+
+export interface RatingCount {
+  rating: number;
+  total: number;
+}
+
+export interface CreateReviewInput {
+  product_id: string;
+  shop_id: string;
+  order_id: string;
+  variation_option_id: string;
+  comment?: string;
+  rating: number;
+  photos?: Attachment[];
+}
+export interface UpdateReviewInput extends CreateReviewInput {
+  id: string;
+}
+export interface ReviewResponse {
+  product_id: string;
+}
+
+export interface CreateFeedbackInput {
+  model_id: string;
+  model_type: string;
+  positive?: boolean;
+  negative?: boolean;
+}
+export interface CreateQuestionInput {
+  question: string;
+  product_id: string;
+  shop_id: string;
+}
+export interface CreateAbuseReportInput {
+  model_id: string;
+  model_type: string;
+  message: string;
+}
+
+
+
+export interface Feedback {
+  id: string;
+  user_id: string;
+  model_type: string;
+  model_id: string;
+  positive: boolean;
+  negative: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+
+export interface Question {
+  id: string;
+  answer: string;
+  my_feedback: Feedback;
+  negative_feedbacks_count: number;
+  positive_feedbacks_count: number;
+  question: string;
+  created_at: string;
+  updated_at: string;
+  product: Product;
+}
+
+export interface Review {
+  id: string;
+  name: string;
+  rating: number;
+  comment: string;
+  photos: Attachment[];
+  user: User;
+  product: Product;
+  shop: Shop;
+  feedbacks: Feedback[];
+  positive_feedbacks_count: number;
+  negative_feedbacks_count: number;
+  my_feedback: Feedback;
+  created_at: string;
+  updated_at: string;
+}
+export interface Question {
+  id: string;
+  answer: string;
+  my_feedback: Feedback;
+  negative_feedbacks_count: number;
+  positive_feedbacks_count: number;
+  question: string;
+  created_at: string;
+  updated_at: string;
+  product: Product;
+}
+export interface Wishlist {
+  id: string;
+  product: Product;
+  product_id: string;
+  user: User[];
+  user_id: string;
+}
+// export interface Product {
+//   id: string;
+//   name: string;
+//   slug: string;
+//   sku: string;
+//   is_digital: boolean;
+//   product_type: string;
+//   description: string;
+//   price: number;
+//   sale_price: number;
+//   min_price: number;
+//   max_price: number;
+//   unit: string;
+//   quantity: number;
+//   image: Attachment;
+//   gallery: Attachment[];
+//   total_reviews: number;
+//   ratings: number;
+//   in_wishlist: boolean;
+//   variations: object[];
+//   variation_options: object[];
+//   rating_count: RatingCount[];
+//   related_products: Product[];
+//   created_at: string;
+//   updated_at: string;
+// }
+
+
 export declare type Product = {
   __typename?: "Product";
   id: Scalars["ID"];
@@ -297,11 +453,15 @@ export declare type Product = {
   in_stock?: Maybe<Scalars["Boolean"]>;
   is_taxable?: Maybe<Scalars["Boolean"]>;
   sale_price?: Maybe<Scalars["Float"]>;
+  total_reviews?: Maybe<Scalars["Int"]>;
+  ratings?: Maybe<Scalars["Int"]>;
+  in_wishlist?: Maybe<Scalars["Int"]>;
   sku?: Maybe<Scalars["String"]>;
   gallery?: Maybe<Array<Maybe<Attachment>>>;
   image?: Maybe<Attachment>;
   status?: Maybe<ProductStatus>;
   height?: Maybe<Scalars["String"]>;
+  rating_count: RatingCount[];
   length?: Maybe<Scalars["String"]>;
   width?: Maybe<Scalars["String"]>;
   price: Scalars["Float"];
@@ -310,6 +470,8 @@ export declare type Product = {
   created_at: Scalars["DateTime"];
   updated_at: Scalars["DateTime"];
 };
+
+
 export declare type Type = {
   __typename?: "Type";
   id: Scalars["ID"];
@@ -319,6 +481,7 @@ export declare type Type = {
   created_at: Scalars["DateTime"];
   updated_at: Scalars["DateTime"];
 };
+
 export declare type TypeProductsArgs = {
   orderBy?: Maybe<Array<ProductsOrderByOrderByClause>>;
   text?: Maybe<Scalars["String"]>;
@@ -326,6 +489,7 @@ export declare type TypeProductsArgs = {
   first: Scalars["Int"];
   page?: Maybe<Scalars["Int"]>;
 };
+
 /** Order by clause for the `orderBy` argument on the query `products`. */
 export declare type ProductsOrderByOrderByClause = {
   /** The column that is used for ordering. */

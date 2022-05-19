@@ -43,6 +43,18 @@ export const API_ENDPOINTS: Record<string, string> = {
 
   USER_CONTACT_UPLOAD: 'contact',
 
+  USERS_WISHLIST: '/my-wishlists',
+  WISHLIST: '/wishlists',
+  USERS_WISHLIST_TOGGLE: '/wishlists/toggle',
+  UPLOADS: '/attachments',
+  MY_QUESTIONS: '/my-questions',
+  MY_REPORTS: '/my-reports',
+
+  PRODUCTS_REVIEWS: '/reviews',
+  PRODUCTS_REVIEWS_ABUSE_REPORT: '/abusive_reports',
+  PRODUCTS_QUESTIONS: '/questions',
+  FEEDBACK: '/feedbacks',
+
 
   LOGS:'logs'
 };

@@ -16,6 +16,8 @@ import ProductAttributes from "./product-details/product-attributes";
 import { useRouter } from "next/router";
 import { ROUTES } from "@utils/routes";
 import { useUI } from "@contexts/ui.context";
+import WishlistButton from "./product-details/wishlist-button";
+import { StarIcon } from "@heroicons/react/outline";
 
 type Props = {
   product: any;
@@ -34,6 +36,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
     type,
     quantity,
     shop,
+    ratings,
   } = product ?? {};
 
   const { openSidebar, setSidebarView } = useUI();
@@ -80,6 +83,8 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
     });
   };
 
+  console.log('rating',ratings)
+
   /**
    *
    * {size: "Large", color: "Black", weight: "1kg"}
@@ -105,7 +110,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
             ) : (
               <div className="w-full h-full flex items-center justify-center">
                 <Image
-                  src={image?.original ?? "/product-placeholder.svg"}
+                  src={image?.thumbnail ?? "/product-placeholder.svg"}
                   alt={name}
                   width={450}
                   height={450}
@@ -118,9 +123,20 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
         <div className="flex flex-col items-start md:w-1/2 p-5 lg:p-14 xl:p-16">
           
           <div className="w-full">
-            <h1 className="font-semibold text-lg md:text-xl xl:text-2xl tracking-tight text-heading">
+            <div className="">
+              <h1 className="font-semibold text-lg md:text-xl xl:text-2xl tracking-tight text-heading">
               {name}
             </h1>
+            <div className="">
+              <WishlistButton productId={product?.id}/>
+            
+                <div className="inline-flex shrink-0 mt-2 text-white items-center rounded border border-accent bg-accent px-3 py-1 text-sm ">
+                  {ratings}
+                  <StarIcon className="h-5 w-5 ltr:ml-1 rtl:mr-1" />
+                </div>
+             
+            </div>
+          </div>
 
             {unit && isEmpty(variations) && (
               <span className="text-sm font-normal text-body mt-2 md:mt-3 block">

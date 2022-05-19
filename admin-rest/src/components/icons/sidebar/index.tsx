@@ -24,5 +24,7 @@ export {SignupOffer} from "@components/icons/sidebar/signup-offers"
 export {Delivery} from "@components/icons/sidebar/delivery"
 export {DeliveryCost} from "@components/icons/sidebar/delivery-cost"
 export {DeliveryConfig} from "@components/icons/sidebar/delivery-config"
+export { ReviewIcon } from "@components/icons/sidebar/review";
+export { QuestionIcon } from "@components/icons/sidebar/question";
 
 

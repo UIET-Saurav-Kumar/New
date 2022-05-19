@@ -19,7 +19,14 @@ const ProductDetailsModalView = dynamic(
 const CreateOrUpdateAddressForm = dynamic(
   () => import("@components/address/address-form")
 );
-
+const ReviewRating = dynamic(() => import('@components/reviews/review-form'));
+const QuestionForm = dynamic(
+  () => import('@components/questions/question-form')
+);
+const AbuseReport = dynamic(() => import('@components/reviews/abuse-report'));
+const ReviewImageModal = dynamic(
+  () => import('@components/reviews/review-image-modal')
+);
 const AddressDeleteView = dynamic(
   () => import("@components/address/address-delete-view")
 );
@@ -37,9 +44,14 @@ const ManagedModal = () => {
       {view === "DELETE_ADDRESS" && <AddressDeleteView />}
       {view === "SHOP_MOBILE_CATEGORIES" && <CategoryDropdownSidebar />}
       {view === "SHOP_PAYMENT_FORM" && <ShopPaymentForm />}
+      {view === 'REVIEW_RATING' && <ReviewRating />}
+      {view === 'ABUSE_REPORT' && <AbuseReport data={data} />}
+      {view === 'QUESTION_FORM' && <QuestionForm />}
+      {view === 'REVIEW_IMAGE_POPOVER' && <ReviewImageModal />}
       {view === "PRODUCT_DETAILS" && (
         <ProductDetailsModalView productSlug={data} />
       )}
+       
       {view === "SHOP_INFO" && (
         <ShopProfileCard
           data={data}

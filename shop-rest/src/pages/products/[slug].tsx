@@ -10,7 +10,9 @@ import RelatedProducts from "@components/product/product-details/related-product
 import { QueryClient } from "react-query";
 import { fetchSettings } from "@data/settings/use-settings.query";
 import { dehydrate } from "react-query/hydration";
-
+import ProductQuestions from '@components/questions/product-questions';
+import AverageRatings from '@components/reviews/average-ratings';
+import ProductReviews from '@components/reviews/product-reviews';
 
 const CartCounterButton = dynamic(
   () => import("@components/cart/cart-counter-button"),
@@ -62,7 +64,24 @@ export default function ProductSinglePage({ product }: any) {
 
         <ProductDetails product={product} />
 
-        { product?.related_products?.length > 1 && (
+        <AverageRatings
+                title={product?.name}
+                ratingCount={product?.rating_count}
+                totalReviews={product?.total_reviews}
+                ratings={product?.ratings}
+              />
+
+        <ProductReviews
+            productId={product?.id}
+            productType={product?.type?.slug}
+          />
+          <ProductQuestions
+            productId={product?.id}
+            shopId={product?.shop?.id}
+            productType={product?.type?.slug}
+          />
+
+         {product?.related_products?.length > 1 && (
           
           <div className="p-5 lg:p-14 xl:p-16">
             <RelatedProducts

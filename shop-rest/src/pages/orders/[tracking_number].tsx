@@ -384,7 +384,7 @@ export default function OrderPage() {
         </div> </> ) : <Invoice/> }
 
         <div className="mt-12">
-          <OrderItems products={data?.order?.products} />
+          <OrderItems  products={data?.order?.products} />
         </div>
         </div>
       </PDFExport>

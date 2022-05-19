@@ -78,6 +78,16 @@ export const siteSettings = {
         icon: "MasterProductsIcon",
       },
       {
+        href: ROUTES.QUESTIONS,
+        label: "Questions",
+        icon: "QuestionIcon",
+      },
+      {
+        href: ROUTES.REVIEWS,
+        label: "Reviews",
+        icon: "ReviewIcon",
+      },
+      {
         href: ROUTES.ATTRIBUTES,
         label: "sidebar-nav-item-attributes",
         icon: "AttributeIcon",
@@ -203,6 +213,19 @@ export const siteSettings = {
         label: "Special Offers",
         icon: "Offers",
         permissions: adminOwnerAndStaffOnly,
+      },
+
+      {
+        href: (shop: string) => `/${shop}${ROUTES.REVIEWS}`,
+        label: "All Reviews",
+        icon: "ReviewIcon",
+        permissions: adminAndOwnerOnly,
+      },
+      {
+        href: (shop: string) => `/${shop}${ROUTES.QUESTIONS}`,
+        label: "All Questions",
+        icon: "QuestionIcon",
+        permissions: adminAndOwnerOnly,
       },
       {
         href: (shop: string) => `/${shop}${ROUTES.ORDERS}`,

@@ -113,10 +113,11 @@ export const siteSettings = {
   authorizedLinks: [
     { href: ROUTES.PROFILE, label: "Profile" },
     { href: ROUTES.CHECKOUT, label: "Checkout" },
+    // { href: ROUTES.WISHLIST, label: 'My wishlist' },
     { href: ROUTES.EVENTS, label: "Magazines" },
     { href: ROUTES.ORDERS, label: "Orders" },
     { href: ROUTES.INVITE_FRIENDS, label: "Invite Friends" },
-    { href: ROUTES.REFERRAL_NETWORK, label: "Referral Network" },
+    { href: ROUTES.REFERRAL_NETWORK, label: "Your Community" },
     { href: ROUTES.WALLET, label: "Wallet" },
     { href: ROUTES.WITHDRAWS, label: "Withdraws" },
     { href: ROUTES.UPLOAD_INVOICE, label: "Upload Invoice" },
@@ -140,18 +141,29 @@ export const siteSettings = {
       href: ROUTES.EVENTS,
       menulabel: "Magazines",
     },
+
+    // {
+    //   href: ROUTES.WISHLIST,
+    //   menulabel: 'My wishlist',
+    // },
+    // {
+    //   href: ROUTES.QUESTIONS,
+    //   menulabel: 'My Questions',
+    // },
     
     {
       href: ROUTES.ORDERS,
       menulabel: "profile-sidebar-orders",
     },
+
     {
       href: ROUTES.INVITE_FRIENDS,
       menulabel: "Invite Friends",
     },
+    
     {
       href: ROUTES.REFERRAL_NETWORK,
-      menulabel: "Referral Network",
+      menulabel: "Your Community",
     },
     // {
     //   href: ROUTES.REFERRAL_ACTIVITY,
@@ -174,6 +186,11 @@ export const siteSettings = {
     {
       href: ROUTES.DELIVERY,
       menulabel: "Delivery",
+    },
+
+    {
+      href: ROUTES.REPORTS,
+      label: 'My Reports',
     },
     // {
     //   href: ROUTES.HELP,

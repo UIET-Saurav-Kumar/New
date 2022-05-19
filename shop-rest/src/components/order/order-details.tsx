@@ -17,6 +17,7 @@ interface Props {
 const OrderDetails = ({ order }: Props) => {
   const { t } = useTranslation("common");
   const {
+    id,
     products,
     status,
     shipping_address,
@@ -128,7 +129,7 @@ const OrderDetails = ({ order }: Props) => {
             <div className="w-full flex justify-center items-center px-6">
               <OrderStatus status={status?.serial} />
             </div>
-            <OrderItems products={products} />
+            <OrderItems orderStatus={status?.serial}  products={products} orderId={id} />
           </div>
         </>
       ) : (

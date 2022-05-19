@@ -53,6 +53,12 @@ export default function GooglePlacesAutocomplete({
           break;
         }
 
+        //establishment
+        // case "establishment": {
+        //   location["establishment"] = component.long_name;
+        //   break;
+        // }
+
         case "postal_code_suffix": {
           location["zip"] = `${location?.zip}-${component.long_name}`;
           break;
@@ -85,7 +91,7 @@ export default function GooglePlacesAutocomplete({
       onPlaceChanged={onPlaceChanged}
       onUnmount={onUnmount}
       fields={["address_components", "geometry.location", "formatted_address"]}
-      types={["address"]}
+      types={['establishment', 'geocode']}
     >
       <input
         type="text"

@@ -7,6 +7,7 @@ import { useModalAction } from "@components/ui/modal/modal.context";
 type Props = {
   id: string;
   deleteModalView?: string | any;
+  editModalView?: string | any;
   editUrl?: string;
   detailsUrl?: string;
   isUserActive?: boolean;
@@ -18,12 +19,16 @@ type Props = {
 const ActionButtons = ({
   id,
   deleteModalView,
+  editModalView,
   editUrl,
   detailsUrl,
 }: Props) => {
   const { openModal } = useModalAction();
   function handleDelete() {
     openModal(deleteModalView, id);
+  }
+  function handleEditModal() {
+    openModal(editModalView, id);
   }
 
 
@@ -43,10 +48,19 @@ const ActionButtons = ({
         <Link
           href={editUrl}
           className="text-base transition duration-200 hover:text-heading"
-          title={("Edit")}
+          title={"Edit"}
         >
           <EditIcon width={16} />
         </Link>
+      )}
+      {editModalView && (
+        <button
+          onClick={handleEditModal}
+          className="transition duration-200 text-body hover:text-heading focus:outline-none"
+          title={"Edit"}
+        >
+          <EditIcon width={16} />
+        </button>
       )}
       {detailsUrl && (
         <Link

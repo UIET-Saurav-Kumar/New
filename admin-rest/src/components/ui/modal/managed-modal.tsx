@@ -69,11 +69,35 @@ const LogDeleteView = dynamic(
   () => import("@components/logs/log-delete-view")
 );
 
+const ReviewImageModal = dynamic(
+  () => import("@components/reviews/review-image-modal")
+);
+const QuestionReplyView = dynamic(
+  () => import("@components/question/question-reply-view")
+);
+const QuestionDeleteView = dynamic(
+  () => import("@components/question/question-delete-view")
+);
+const ReviewDeleteView = dynamic(
+  () => import("@components/reviews/review-delete-view")
+);
+
+const AcceptAbuseReportView = dynamic(
+  () => import("@components/reviews/acccpt-report-confirmation")
+);
+
+const DeclineAbuseReportView = dynamic(
+  () => import("@components/reviews/decline-report-confirmation")
+);
+
+const AbuseReport = dynamic(() => import("@components/reviews/abuse-report"));
+
 const ManagedModal = () => {
-  const { isOpen, view } = useModalState();
+  const { isOpen, view,data } = useModalState();
   const { closeModal } = useModalAction();
 
   return (
+    
     <Modal open={isOpen} onClose={closeModal}>
       
       {view === "DELETE_OFFER" && <OfferDeleteView />}
@@ -91,6 +115,13 @@ const ManagedModal = () => {
       {view === "BAN_CUSTOMER" && <BanCustomerView />}
       {view === "SHOP_APPROVE_VIEW" && <ApproveShopView />}
       {view === "SHOP_DISAPPROVE_VIEW" && <DisApproveShopView />}
+      {view===  'REPLY_QUESTION' && <QuestionReplyView />}
+      {view===  'DELETE_QUESTION' && <QuestionDeleteView />}
+      {view===  'DELETE_REVIEW' && <ReviewDeleteView />}
+      {view ===  'ACCEPT_ABUSE_REPORT' && <AcceptAbuseReportView />}
+      {view ===  'DECLINE_ABUSE_REPORT' && <DeclineAbuseReportView />}
+      {view ===  'ABUSE_REPORT' && <AbuseReport data={data}/>}
+      {view === 'REVIEW_IMAGE_POPOVER' && <ReviewImageModal />}
       
       {view === "DELIVERY_STATUS_VIEW" && <DeliveryStatusView />}
 
