@@ -62,6 +62,26 @@ class SMS
         }
     }
 
+
+     function inviteFriend($phone_number,$username)
+    {
+        $phone_number=SMS::formate_number($phone_number);
+        $key=SMS::$key;
+        $client = new Client();
+
+        $template="LowcalInvite";
+        $url = "https://2factor.in/API/R1/?module=INVITE_SMS&apikey=$key&to=$phone_number&from=LOWCAL&templatename=$template&var1=$username&var2=$username";
+
+        $response = $client->request('GET', "$url");
+
+        if ($response->getStatusCode() == 200) {
+            return "Success";
+        }else{
+            //dd('not sent');
+        }
+    }
+    
+
     public static function customerPurchase($phone_number,$username, $shop_name="")
     {
         if(!$phone_number){

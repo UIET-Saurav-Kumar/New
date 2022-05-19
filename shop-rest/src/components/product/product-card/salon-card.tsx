@@ -78,7 +78,7 @@ const SalonCard: React.FC<NeonProps> = ({ product, className, productSlug }) => 
         <span className="sr-only">{t("text-product-image")}</span>
         
           <Image
-            src={product?.shop?.logo?.original?? siteSettings?.product?.placeholderImage}
+            src={product?.shop?.logo?.thumbnail?? siteSettings?.product?.placeholderImage}
             alt={product.name}
             layout="fill"
             objectFit="contain"

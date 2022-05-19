@@ -35,6 +35,10 @@ export default function AuthorizedMenu() {
     router.push(path);
   }
 
+  function url(){
+   return window.location.href.includes('buylowcal-magazines')
+   }
+
   console.log('me data',data)
 
   return (
@@ -54,7 +58,7 @@ export default function AuthorizedMenu() {
             }
             title="user name"
           />
-          { <p className="text-xs tracking-wide text-gray-700">{data?.me?.name.split(' ')[0]}</p>}
+          {<p className={` ${url() ?'text-white' : 'text-black'} text-xs tracking-wide text-gray-700`}>{data?.me?.name.split(' ')[0]}</p>}
           <span className="sr-only">{t("user-avatar")}</span>
       </button>
 

@@ -42,7 +42,7 @@ export const ThumbsCarousel: React.FC<Props> = ({ gallery }) => {
             className="flex items-center justify-center"
           >
             <Image
-              src={item?.original ?? "/product-placeholder.svg"}
+              src={item?.thumbnail ?? "/product-placeholder.svg"}
               alt={`Product gallery ${item.id}`}
               width={450}
               height={450}

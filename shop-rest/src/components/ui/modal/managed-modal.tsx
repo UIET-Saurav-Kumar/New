@@ -31,6 +31,8 @@ const AddressDeleteView = dynamic(
   () => import("@components/address/address-delete-view")
 );
 
+const SearchBarModal = dynamic(() => import("@components/common/search-bar-modal"));
+
 const ManagedModal = () => {
   const { isOpen, view, data } = useModalState();
   const { closeModal } = useModalAction();
@@ -48,6 +50,7 @@ const ManagedModal = () => {
       {view === 'ABUSE_REPORT' && <AbuseReport data={data} />}
       {view === 'QUESTION_FORM' && <QuestionForm />}
       {view === 'REVIEW_IMAGE_POPOVER' && <ReviewImageModal />}
+      {/* { view=== 'SEARCH_BAR_MODAL' && <SearchBarModal />} */}
       {view === "PRODUCT_DETAILS" && (
         <ProductDetailsModalView productSlug={data} />
       )}

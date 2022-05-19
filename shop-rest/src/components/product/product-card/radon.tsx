@@ -25,7 +25,7 @@ const Radon: React.FC<RadonProps> = ({ product, className }) => {
         <div className="relative flex items-center justify-center w-auto h-48 sm:h-64">
           <span className="sr-only">{t("text-product-image")}</span>
           <Image
-            src={image?.original ?? siteSettings?.product?.placeholderImage}
+            src={image?.thumbnail ?? siteSettings?.product?.placeholderImage}
             alt={name}
             layout="fill"
             objectFit="contain"

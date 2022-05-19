@@ -15,6 +15,8 @@ import { useCustomerQuery } from "@data/customer/use-customer.query";
 import Navbar from "@components/layout/navbar/navbar";
 import Link from 'next/link';
 import {ClipboardIcon} from '@heroicons/react/outline';
+import { toast } from "react-toastify";
+import { RWebShare } from "react-web-share";
 
 
 const contactFormSchema = yup.object().shape({
@@ -33,6 +35,7 @@ export const InvitePage = () => {
   const { mutate, isLoading } = useContactMutation();
   const { data } = useCustomerQuery();
   const tooltext =useRef("copy") as any;
+
   const {
     register,
     handleSubmit,
@@ -60,8 +63,82 @@ export const InvitePage = () => {
         setClick(true);
 	}
 
+  // const supportsContacts = ('contacts' in navigator && 'ContactsManager' in window)
+
+  //   console.log('contacts',supportsContacts);
+
+  //   let windowNav : any;
+  //   let nav : any;
+  //   windowNav = window.navigator;
+  //   nav = navigator;
+
+
+  //   async function checkProperties() {
+  //     const supportedProperties = await windowNav.contacts.getProperties();
+  //     if (supportedProperties.includes('name')) {
+  //       // run code for name support
+  //     }
+  //     if (supportedProperties.includes('email')) {
+  //       // run code for email support
+  //     }
+  //     if (supportedProperties.includes('tel')) {
+  //       // run code for telephone number support
+  //     }
+  //     if (supportedProperties.includes('address')) {
+  //       // run code for address support
+  //     }
+  //     if (supportedProperties.includes('icon')) {
+  //       // run code for avatar support
+  //     }
+  //   }
+
+  //   const props = ['name', 'email', 'tel', 'address', 'icon'];
+  // const opts = {multiple: true};
+
+  // const [contacts, setContacts] = useState('');
+  //  const [prop, setProps] = useState('');
+  // //  const [opts, setOpts] = useState([]);
+
+
+  // async function getContacts() {
+  //   try {
+  //       const contacts = await windowNav?.contacts.select(props, opts);
+  //      setContacts(JSON.stringify(contacts)?.tel);
+  //      alert(JSON.stringify(contacts));
+     
+      
+  //   } catch (ex) {
+  //       alert('Sorry, not supported on web');
+  //   }
+  // }
+
+
+const ShareButton = () => {
+
   return (
+
+    <div>
+      <RWebShare
+        data={{
+          text: "Hey," + data?.me?.name +" has invited you to join the Buylowcal community. Click on this link and register now.",
+          url: "https://buylowcal.com/invite/"+data?.me?.id,
+          title: "Send this invite link",
+        }}
+
+        closeText="Close"
+
+      >
+        <button className="bg-green-600 text-white p-2 px-3 rounded-lg">Send 🔗</button>
+      </RWebShare>
+    </div>
+  );
+};
+
+
+  return (
+
     <>
+
     <Navbar label='Invite Friends'/>
     <div className="w-full bg-gray-100">
       <div className="flex flex-col md:flex-row max-w-7xl w-full mx-auto py-10 px-5 xl:py-14 xl:px-8 2xl:px-0">
@@ -72,7 +149,7 @@ export const InvitePage = () => {
         {/* Right side content */}
         <div className="w-full order-1 md:order-2 mb-8 md:mb-0 md:ms-7 lg:ms-9 p-5 md:p-8 bg-light">
           <div className='flex  w-full justify-between'>
-            <div className='flex flex-col w-full   mb-8'>
+            <div className='flex flex-col w-full   mb-3'>
               <h1 className='text:sm sm:text-sm md:text-md lg:text-2xl 3xl:text-3xl font-bold tracking-wide '>Save and Earn Hard Cash Each Time You or Your Friends, Family, Network Shops </h1>
               <p className='text-gray-500 text-sm tracking-wide mt-2'>
                 <h4 className='text:sm sm:text-sm md:text-md lg:text-lg font-bold mt-2 '>Shop - Save – Earn</h4>
@@ -81,11 +158,12 @@ export const InvitePage = () => {
                 <h4 className='text-sm font-semibold mt-2'>Be an Entrepreneur, Be Your Own Boss</h4>
                 <h5 className='text-green-500 font-semibold mt-2 '> Terms apply </h5>
               </p>
+              <span  className="font-semibold text-gray-800  mt-4">Share this link with your friends</span>
             </div>
           </div>
           {data?.me&&
           (
-            <div className="flex items-center">  
+            <div className="flex  items-center">  
               <div className="tip">
                 <ClipboardIcon onClick={()=>{copyLink(process.env.NEXT_PUBLIC_URL+"/invite/"+data?.me?.id)}} className="icon-clipboard"/>
                 <span ref={tooltext} className="tiptext">copy</span>
@@ -93,6 +171,21 @@ export const InvitePage = () => {
               <p className="invite-link">{process.env.NEXT_PUBLIC_URL+"/invite/"+data?.me?.id}</p>
             </div>
           )}
+
+          {/* <button onClick={getContacts} 
+                  className='rounded-lg mt-5 p-2 px-3 bg-blue-600 
+                           hover:bg-blue-700 text-white'>
+                  Get Contacts
+          </button> */}
+
+         <div className="mt-4">
+           <ShareButton/>
+         </div> 
+
+          {/* <p className="text-md text-black">
+            {contacts}
+          </p> */}
+          {/* <p>{prop}</p> */}
           {/* <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <Input

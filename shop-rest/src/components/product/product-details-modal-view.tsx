@@ -134,7 +134,7 @@ const ProductDetailsModalView = ({ productSlug }: { productSlug: string }) => {
             )}
           >
             <Image
-              src={image?.original! ?? "/product-placeholder.svg"}
+              src={image?.thumbnail! ?? "/product-placeholder.svg"}
               alt={name}
               layout="fill"
               objectFit="contain"
@@ -236,7 +236,7 @@ const ProductDetailsModalView = ({ productSlug }: { productSlug: string }) => {
             ) : (
               <div className="w-full h-[90%] flex items-center justify-center">
                 <Image
-                  src={image?.original ?? "/product-placeholder.svg"}
+                  src={image?.thumbnail ?? "/product-placeholder.svg"}
                   alt={name}
                   width={450}
                   height={450}

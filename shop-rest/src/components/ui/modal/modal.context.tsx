@@ -14,6 +14,7 @@ type MODAL_VIEWS =
   | 'SHOP_MOBILE_CATEGORIES'
   | 'SHOP_PAYMENT_FORM'
   | 'REVIEW_IMAGE_POPOVER';
+  // | 'SEARCH_BAR_MODAL';
 
 interface State {
   view?: MODAL_VIEWS;
