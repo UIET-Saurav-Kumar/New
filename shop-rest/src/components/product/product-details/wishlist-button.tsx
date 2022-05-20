@@ -73,18 +73,18 @@ export default function WishlistButton({
     <button
       type="button"
       className={classNames(
-        'mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-gray-300 transition-colors',
+        'mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full  transition-colors',
         {
-          '!border-accent': inWishlist,
+          '': inWishlist,
         },
         className
       )}
       onClick={toggle}
     >
       {inWishlist ? (
-        <HeartFillIcon className="h-5 w-5 text-accent" />
+        <HeartFillIcon className="h-5 w-5  text-red-600" />
       ) : (
-        <HeartOutlineIcon className="h-5 w-5 text-accent" />
+        <HeartOutlineIcon className="h-5 w-5 text-red-600" />
       )}
     </button>
   );

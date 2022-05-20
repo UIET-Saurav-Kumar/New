@@ -1,6 +1,7 @@
 
 import { FacebookIcon } from "@components/icons/facebook";
 import { InstagramIcon } from "@components/icons/instagram";
+import { IShopIcon } from "@components/icons/shop-icon";
 import { LinkedInIcon } from "@components/icons/social/linkedin";
 import { ROUTES } from "@utils/routes";
 import { toUnicode } from "punycode";
@@ -105,9 +106,25 @@ export const siteSettings = {
 
   headerLinks: [
     { href: ROUTES.SHOPS, icon: null, label: "Shops" },
+    // { href: ROUTES.WISHLIST, label: "Wishlist" },
+    
+
+    //questions
+    // { href: ROUTES.QUESTIONS, label: "Questions" },
+    // { href: ROUTES.EVENTS, label: "Magazines" },
+    // { href: ROUTES.ORDERS, label: "Orders" },
+    // { href: ROUTES.INVITE_FRIENDS, label: "Invite Friends" },
+    // { href: ROUTES.REFERRAL_NETWORK, label: "Your Community" },
+    // { href: ROUTES.WALLET, label: "Wallet" },
+    // { href: ROUTES.WITHDRAWS, label: "Withdraws" },
+    // { href: ROUTES.UPLOAD_INVOICE, label: "Upload Invoice" },
+    // { href: ROUTES.DELIVERY, label: "Deliveries" },
+
     // { href: ROUTES.OFFERS, icon: null, label: "Offer" },
     // { href: ROUTES.HELP, label: "FAQ" },
     { href: ROUTES.CONTACT, label: "Contact" },
+    //wishlists
+    
   ],
 
   authorizedLinks: [

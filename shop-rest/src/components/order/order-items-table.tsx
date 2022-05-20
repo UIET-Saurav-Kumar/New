@@ -201,7 +201,7 @@ export const OrderItems = ({ products,orderId,orderStatus }: { products: any }) 
             className="cursor-pointer text-sm font-semibold text-body transition-colors hover:text-accent"
           >
             {getReview(record)
-              ? t('text-update-review')
+              ? t('Update Review')
               : t('text-write-review')}
           </button>
         );

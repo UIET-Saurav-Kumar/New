@@ -40,8 +40,9 @@ function WishlistItem({ product }: { product: Product }) {
   console.log('wishlist item', product);
 
   return (
+    <div className='flex py-2 w-full'>
     <div className="flex w-full items-start space-x-4 border-b border-gray-200 py-5 first:pt-0 last:border-0 last:pb-0 rtl:space-x-reverse sm:space-x-5 xl:items-center">
-      <div className="relative flex h-16 w-16 shrink-0 items-center justify-center border border-gray-200 sm:h-[74px] sm:w-[74px]">
+      <div className="hidden sm:relative sm:flex h-16 w-16  items-center justify-center border border-gray-200 sm:h-[74px] sm:w-[74px]">
         <Image
           src={product?.image?.thumbnail ?? '/images/product-placeholder.png'}
           alt={product?.name}
@@ -55,12 +56,14 @@ function WishlistItem({ product }: { product: Product }) {
 
       <div className="flex w-full flex-col items-start sm:flex-row sm:justify-between sm:space-x-4 rtl:sm:space-x-reverse xl:items-center">
         <div className="flex w-full flex-col sm:items-start">
-          <Link
+         <div className='flex justify-between '> <Link
              href={`${ROUTES.PRODUCT}/${product?.slug}`}
-            className="text-lg font-semibold text-heading transition-colors hover:text-accent"
+            className=" text-md md:text-lg font-semibold text-heading transition-colors hover:text-accent"
           >
             {product?.name}
           </Link>
+         
+          </div>
 
           {/* <p className="mt-3 space-y-2 space-x-3.5 sm:space-y-0 rtl:sm:space-x-reverse"> */}
           <p className="mt-1.5 flex flex-col items-start space-y-3">
@@ -73,8 +76,9 @@ function WishlistItem({ product }: { product: Product }) {
             <Rating rating={product?.ratings} variant="xs" boxed />
           </p>
         </div>
+        
 
-        <div className="mt-4 flex w-full flex-col justify-between space-y-3 xs:flex-row xs:space-y-0 sm:w-auto sm:flex-col sm:justify-end sm:space-y-3 md:mt-0">
+        <div className="mt-4 flex w-full  justify-between space-y-3 xs:flex-row xs:space-y-0 sm:w-auto sm:flex-col sm:justify-end sm:space-y-3 md:mt-0">
           {product?.product_type === 'variable' ? (
             <div className="flex items-center space-x-1.5 rtl:space-x-reverse">
               <span className="text-xl font-semibold text-heading">
@@ -86,8 +90,8 @@ function WishlistItem({ product }: { product: Product }) {
               </span>
             </div>
           ) : (
-            <span className="flex min-w-150 items-center sm:justify-end">
-              <ins className="text-xl font-semibold text-heading no-underline">
+            <span className="flex   items-center sm:justify-end">
+              <ins className="text-md md:text-xl font-light text-gray-900 no-underline">
                 {price}
               </ins>
               {basePrice && (
@@ -98,18 +102,18 @@ function WishlistItem({ product }: { product: Product }) {
             </span>
           )}
 
-          <div className="flex items-center space-x-6 rtl:space-x-reverse sm:justify-end">
+          <div className="flex  items-center space-x-2 rtl:space-x-reverse sm:justify-between">
             {Number(product?.quantity) > 0 && (
-              <>
+              <div className='space-x-4'>
                 {product?.product_type.toLowerCase() === 'variable' ? (
                   <AddToCartBtn
                     variant="text"
                     onClick={handleVariableProduct}
                   />
                 ) : (
-                  <AddToCart variant="text" data={product} />
+                 <div className='ml-3'> <AddToCart variant="radon" data={product} /></div>
                 )}
-              </>
+              </div>
             )}
 
             {Number(product?.quantity) <= 0 && (
@@ -129,6 +133,19 @@ function WishlistItem({ product }: { product: Product }) {
         </div>
       </div>
     </div>
+
+     <div className=" sm:hidden    items-start   border-gray-200 ">
+      <Image
+        src={product?.image?.thumbnail ?? '/images/product-placeholder.png'}
+        alt={product?.name}
+        // layout="fill"
+        className=" inset-0 object-cover"
+        width={74}
+        height={74}
+      />
+   </div>
+
+   </div>
   );
 }
 

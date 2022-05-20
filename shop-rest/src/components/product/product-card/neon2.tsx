@@ -10,6 +10,8 @@ import Link from "@components/ui/link";
 import { ROUTES } from "@utils/routes";
 import { PlusIcon } from "@heroicons/react/outline";
 import router from "next/router";
+import WishlistButton from "../product-details/wishlist-button";
+import { HeartFillIcon } from "@components/icons/heart-fill";
 
 
 type NeonProps = {
@@ -107,16 +109,25 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
             </span>
           </div>
         ) : (
-          <div className="flex items-center  mb-2">
+          <div className="flex items-center justify-between  mb-2">
+            <>
           <span className="text-sm md:text-base text-product-price font-bold">
             {basePrice ? basePrice : price}
           </span>
+          <span>
+            {/* <RatingsBadge rating={product?.ratings} variant="xs" boxed /> */}
+
+            </span>
           {discount && (
             <del className="text-xs md:text-sm text-discount ms-2">{price}</del>
           )}
+          </>
+          <WishlistButton className="h-5" productId={product?.id} />
         </div>
         )}
         {/* End of product price */}
+
+        
 
         <h3
           className="text-xs md:text-sm font-semibold text-gray-700 truncate mb-4 cursor-pointer"

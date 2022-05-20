@@ -36,6 +36,7 @@ import { useEffect } from "react";
 import { scroller, Element } from "react-scroll";
 import { HidingHeader } from 'hiding-header-react'
 import { useState } from "react";
+import { getReview } from '@utils/get-review';
 
 
 const CartCounterButton = dynamic(
@@ -57,6 +58,16 @@ const imageCheck = (logo: any , record:any, imgsize:any, imgDim:any, classname: 
 const ShopPage = ({ data }: any) => {
   const router = useRouter();
   const { pathname, query } = router;
+
+  function openReviewModal() {
+    openModal('REVIEW_RATING', {
+      shop_id: data.id,
+      name: data?.name,
+      my_review: getReview(data),
+      shop_review: data?.review,
+    });
+  }
+
 
   // useEffect(() => {
   
@@ -156,7 +167,7 @@ const ShopPage = ({ data }: any) => {
                               </div> 
            
                             
-{/*                                 
+                              {/*                                 
                                 { data.slug !== 'chandigarhgrocerystore' ? 
                                 ( <div className='flex w-full'> 
                                       <WebShopBanner/>
@@ -220,10 +231,7 @@ const ShopPage = ({ data }: any) => {
                               <> 
                                 <div id='category-dropdown-sidebar'  
                                     className='flex border bg-white flex-col w-full'>
-
-                                    {/*<CategoryDropdownSidebar/> */}
-                                    {/* <CategoryDropdownSidebar/> */}
-                                          
+   
                                     <h1 style={{top:'155px'}} id='product-heading' className="text-lg sticky  bg-gray-100  py-3 px-2  font-semibold text-gray-600 font-mono mt-5 transition-transform duration-75">  
                                       { query?.category?.replace(/\b\w/g, (l :any) => l.toUpperCase())   } Products
                                     </h1> 
@@ -232,7 +240,16 @@ const ShopPage = ({ data }: any) => {
                               </> : ' '  }
                                 <div id='product-feed' className="static  z-10 top-10 w-full">{data && 
                                 // <ShopProductFeed shopId={data.id} />
+                              <>  <button
+                                onClick={openReviewModal}
+                                className="cursor-pointer text-sm font-semibold text-body transition-colors hover:text-accent"
+                              >
+                                {getReview(data)
+                                  ? t('Update Review')
+                                  : t('text-write-review')}
+                              </button>
                                     <Feed shopId={data.id} />
+                                    </>
                                 }</div>
                            </div> 
 

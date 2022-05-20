@@ -9,6 +9,8 @@ import { UserIcon } from "@components/icons/user-icon";
 import { useTranslation } from "next-i18next";
 import { useCart } from "@contexts/quick-cart/cart.context";
 import { useModalAction } from "@components/ui/modal/modal.context";
+import AuthorizedMenu from '@components/layout/navbar/authorized-menu';
+
 
 type MobileNavigationProps = {
   search?: boolean;
@@ -18,6 +20,7 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
   search = true,
 }) => {
   const router = useRouter();
+
   const { t } = useTranslation("common");
   const { openSidebar, setSidebarView, toggleMobileSearch, isAuthorize } =
     useUI();
@@ -45,14 +48,18 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
           <img src='/list.png' className='h-8 w-8'/>
         </motion.button>
 
-        {search === true && (
+        {isAuthorize && (
           <motion.button
             whileTap={{ scale: 0.88 }}
-            onClick={toggleMobileSearch}
+            onClick= //navigate to wishlist page
+            {() => {
+              router.push("/wishlists");
+            }
+            }
             className="flex p-2 h-full items-center justify-center focus:outline-none focus:text-accent"
           >
             <span className="sr-only">{t("text-search")}</span>
-            <img src='/search.png' className='h-7 w-7'/>
+            <img src='/wishlist.png' className='h-7 w-7'/>
           </motion.button>
         )}
 

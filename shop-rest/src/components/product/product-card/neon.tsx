@@ -11,6 +11,8 @@ import { ROUTES } from "@utils/routes";
 import { PlusIcon } from "@heroicons/react/outline";
 import { min } from "lodash";
 import router from "next/router";
+import WishlistButton from "../product-details/wishlist-button";
+import RatingsBadge from "@components/ui/rating-badge";
 
 
 type NeonProps = {
@@ -69,6 +71,8 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
         className="relative flex items-center justify-center cursor-pointer w-auto h-20 lg:h-48 p-4 xl:p-12 sm:h-64"
       >
         <span className="sr-only">{t("text-product-image")}</span>
+
+        
         
           <Image
             src={product.image?.thumbnail?? siteSettings?.product?.placeholderImage}
@@ -102,12 +106,19 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
           </div>
         ) : (
           <div className="flex items-center  p-1 md:p-0 mb-2">
+            <>
             <span className="text-xs md:text-base text-product-price font-bold">
               {basePrice ? basePrice : price}
             </span>
+            <span>
+            {/* <RatingsBadge rating={product?.ratings} variant="xs" boxed /> */}
+
+            </span>
             {discount && (
               <del className="text-xs md:text-sm text-discount ms-2">{price}</del>
-            )}
+              
+            )}</>
+            <WishlistButton className="h-5" productId={product?.id}/>
           </div>
         )}
         {/* End of product price */}
