@@ -114,9 +114,15 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
                   {/* <span>
                       <RatingsBadge rating={product?.ratings} variant="xs" boxed />
                   </span> */}
-                  {discount && (
-                    <del className="text-xs md:text-sm text-discount ms-2">{price}</del>
-                  )}
+                  {discount ? (
+                    <del className="text-xs md:text-sm text-discount ms-2">
+                      {price}
+                    </del>
+                  ) : <del className="text-xs md:text-sm h-4 text-discount ms-2">
+                  
+                </del>
+                } 
+
                 </div>
             </>
           <WishlistButton className="h-5" productId={product?.id} />
@@ -154,7 +160,9 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
         ) : (
           <>
             {Number(quantity) > 0 && (
-              <AddToCart variant="organesson" data={product} />
+             <div className="md:pt-3">
+                <AddToCart  variant="organesson" data={product} />
+                </div>
             )}
           </>
         )}
