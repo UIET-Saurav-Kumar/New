@@ -21,7 +21,7 @@ const MyQuestionsPage = () => {
     <div className='flex lg:p-10  lg:mt-10'>
       <Seo noindex={true} nofollow={true} />
       <div className='hidden lg:block w-1/3'><DashboardSidebar/></div> 
-      <Card className="w-full shadow-none sm:shadow">
+      <Card className="w-full h-screen lg:h-auto shadow-none sm:shadow">
         <MyQuestions />
       </Card>
       {width > 1023 && <CartCounterButton />}

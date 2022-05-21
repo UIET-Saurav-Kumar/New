@@ -124,9 +124,7 @@ class QuestionController extends CoreController
         
         $limit = $request->limit ? $request->limit : 15;
 
-        if(isset($user->id)){
-            return $this->repository->where('user_id', auth()->user()->id)->with('product')->paginate($limit);
-        }
+        return $this->repository->where('user_id', auth()->user()->id)->with('product')->paginate($limit);
 
         // return $this->repository->where('user_id', auth()->user()->id)->with('product')->paginate($limit);
     }

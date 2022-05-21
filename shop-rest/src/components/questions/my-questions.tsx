@@ -55,8 +55,6 @@ function QuestionItem({ question }: { question: Question }) {
 
   console.log('questions', myQuestion);
 
-   
-
   return (
 
     <div className="border-t border-border-200 border-opacity-70 py-7 first:border-t-0">
@@ -181,7 +179,7 @@ const MyQuestions: React.FC = () => {
           </h1>
         </div>
         <NotFound
-          text="text-no-download"
+          text="No Questions Found"
           className="mx-auto w-full md:w-7/12"
         />
       </div>
