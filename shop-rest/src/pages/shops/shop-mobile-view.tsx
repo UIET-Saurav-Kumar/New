@@ -68,7 +68,14 @@ export default function ShopMobileView({data}: any) {
     return (
 
       <>
-        <div className='mt-4 flex flex-col'>
+        <div className='relative mt-4 flex flex-col'>
+
+            <div className="fixed z-50 bottom-16 right-6 flex justify-center items-center">
+                  <img src='/up-arrow.png' 
+                      className="w-8 h-8" 
+                      onClick={() => window.scrollTo(0, 0)} />
+                            
+            </div>
 
             <div className='px-2 w-full grid grid-cols-1 sm:flex'>
 
