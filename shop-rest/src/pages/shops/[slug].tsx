@@ -240,16 +240,7 @@ const ShopPage = ({ data }: any) => {
                               </> : ' '  }
                                 <div id='product-feed' className="static  z-10 top-10 w-full">{data && 
                                 // <ShopProductFeed shopId={data.id} />
-                              <>  <button
-                                onClick={openReviewModal}
-                                className="cursor-pointer text-sm font-semibold text-body transition-colors hover:text-accent"
-                              >
-                                {getReview(data)
-                                  ? t('Update Review')
-                                  : t('text-write-review')}
-                              </button>
                                     <Feed shopId={data.id} />
-                                    </>
                                 }</div>
                            </div> 
 
