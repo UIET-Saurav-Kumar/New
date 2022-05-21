@@ -60,7 +60,7 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
   return (
 
     <article
-      style={{maxWidth:"330px"}}
+      // style={{maxWidth:"330px"}}
       className={cn(
         "product-card cart-type-neon rounded h-full bg-light overflow-hidden shadow-sm transition-all duration-200 hover:shadow ",
         className
@@ -110,20 +110,21 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
           </div>
         ) : (
           <div className="flex items-center justify-between  mb-2">
-            <>
-          <span className="text-sm md:text-base text-product-price font-bold">
-            {basePrice ? basePrice : price}
-          </span>
-          <span>
-            {/* <RatingsBadge rating={product?.ratings} variant="xs" boxed /> */}
-
-            </span>
-          {discount && (
-            <del className="text-xs md:text-sm text-discount ms-2">{price}</del>
-          )}
-          </>
-          <WishlistButton className="h-5" productId={product?.id} />
-        </div>
+              <>
+                  <div className=""> 
+                    <span className="text-sm md:text-base text-product-price font-bold">
+                        {basePrice ? basePrice : price}
+                    </span>
+                    <span>
+                        {/* <RatingsBadge rating={product?.ratings} variant="xs" boxed /> */}
+                    </span>
+                    {discount && (
+                      <del className="text-xs md:text-sm text-discount ms-2">{price}</del>
+                    )}
+                  </div>
+              </>
+              <WishlistButton className="h-5" productId={product?.id} />
+            </div>
         )}
         {/* End of product price */}
 
@@ -154,7 +155,7 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
         ) : (
           <>
             {Number(quantity) > 0 && (
-              <AddToCart variant="neon" data={product} />
+             <div className="relative w-full"> <AddToCart className='border absolute z-50' variant="organesson" data={product} /></div>
             )}
           </>
         )}

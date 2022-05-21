@@ -42,10 +42,10 @@ const AddToCartBtn: React.FC<Props> = ({ variant, onClick, disabled }) => {
         <button
           onClick={onClick}
           disabled={disabled}
-          className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center text-sm rounded-full text-light bg-accent shadow-500 transition-colors hover:bg-accent hover:border-accent hover:text-light focus:outline-none focus:bg-accent focus:border-accent focus:text-light"
+          className="w-8 h-8  md:w-10 md:h-10 flex  border-2 items-center justify-center text-sm rounded-full text-light bg-accent shadow-500 transition-colors hover:bg-accent hover:border-accent hover:text-light focus:outline-none focus:bg-accent focus:border-accent focus:text-light"
         >
           <span className="sr-only">{t("text-plus")}</span>
-          <PlusIcon className="w-5 h-5 md:w-6 md:h-6 stroke-2" />
+          <PlusIcon className="w-5 h-5 md:w-6 border-4  md:h-6 stroke-2" />
         </button>
       );
     case "single":

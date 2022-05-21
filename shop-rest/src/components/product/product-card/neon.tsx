@@ -60,9 +60,9 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
   return (
 
     <article
-      style={{maxWidth:"330px"}}
+      // style={{maxWidth:"330px"}}
       className={cn(
-        "product-card cart-type-neon rounded h-full bg-light overflow-hidden shadow-sm transition-all duration-200 hover:shadow ",
+        "product-card cart-type-neon rounded h-auto p-2 bg-light overflow-hidden shadow-sm transition-all duration-200 hover:shadow ",
         className
       )}
     >
@@ -92,7 +92,7 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
       </Link>
       {/* End of product image */}
 
-      <header className="p-3 md:p-6">
+      <header className="py-1 md:p-6">
 
         {product_type.toLowerCase() === 'variable' ? (
           <div className="flex items-center  mb-2">
@@ -105,26 +105,27 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
             </span>
           </div>
         ) : (
-          <div className="flex items-center  p-1 md:p-0 mb-2">
-            <>
-            <span className="text-xs md:text-base text-product-price font-bold">
-              {basePrice ? basePrice : price}
-            </span>
-            <span>
-            {/* <RatingsBadge rating={product?.ratings} variant="xs" boxed /> */}
-
-            </span>
-            {discount && (
-              <del className="text-xs md:text-sm text-discount ms-2">{price}</del>
-              
-            )}</>
-            <WishlistButton className="h-5" productId={product?.id}/>
-          </div>
+          <div className="flex items- justify-between  mb-2">
+             <>
+              <div className="grid grid-cols-1 md:flex  md:items-center  place-items-"> 
+                  <span className="text-sm md:text-base text-product-price font-bold">
+                      {basePrice ? basePrice : price}
+                  </span>
+                  {/* <span>
+                      <RatingsBadge rating={product?.ratings} variant="xs" boxed />
+                  </span> */}
+                  {discount && (
+                    <del className="text-xs md:text-sm text-discount ms-2">{price}</del>
+                  )}
+                </div>
+            </>
+          <WishlistButton className="h-5" productId={product?.id} />
+        </div>
         )}
         {/* End of product price */}
 
         <h3
-          className="text-xs font-semibold flex-normal md:text-sm flex flex-col   text-gray-700  truncate mb-4 cursor-pointer"
+          className="text-xs font-semibold flex-normal md:text-sm flex flex-col   text-gray-700  truncate mb-2 cursor-pointer"
         >
            <span className=''>
              {name}
@@ -153,7 +154,7 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
         ) : (
           <>
             {Number(quantity) > 0 && (
-              <AddToCart variant="neon" data={product} />
+              <AddToCart variant="organesson" data={product} />
             )}
           </>
         )}

@@ -86,7 +86,7 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
           )}
         </motion.button>
 
-        {isAuthorize ? (
+        {!!isAuthorize ? (
           <motion.button
             whileTap={{ scale: 0.88 }}
             onClick={() => handleSidebar("AUTH_MENU_VIEW")}
