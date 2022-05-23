@@ -146,7 +146,10 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
         {product_type.toLowerCase() === 'variable' ? (
           <>
             {Number(quantity) > 0 && (
-              <button
+
+             <Link href={(`${ROUTES.PRODUCT}/${slug}`)}> 
+             <AddToCart  variant="organesson" data={product} />
+              {/* <button
                 onClick={()=>router.push(`${ROUTES.PRODUCT}/${slug}`)}
                 className="group w-full h-7 md:h-9 flex items-center justify-between text-xs md:text-sm text-white rounded bg-magenta transition-colors hover:bg-gold hover:border-gold hover:text-light focus:outline-none focus:bg-gold focus:border-accent focus:text-light"
               >
@@ -154,7 +157,8 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
                 <span className="w-7 h-7 md:w-9 md:h-9 bg-gold grid place-items-center rounded-te rounded-be transition-colors duration-200 group-hover:bg-magenta group-focus:bg-magenta">
                   <PlusIcon className="w-4 h-4 stroke-2" />
                 </span>
-              </button>
+              </button> */}
+              </Link>
             )}
           </>
         ) : (
