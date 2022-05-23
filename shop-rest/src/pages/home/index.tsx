@@ -118,17 +118,26 @@ const {
 });
 
     return (
-        <>
+        <div className=" h-full">
 
     {loading ? (
-         <img src='/preloader/cir.gif' className='mx-auto my-auto'/>
+         <div className="absolute top-0 left-0  h-screen bg-black opacity-80   z-50 w-full">
+           {/* <img src='/preloader/cir.gif' className='sticky top-1/2 left-1/2 right- object-contain '/> */}
+           <iframe className="mx-auto mt-1/2 h-full " src="https://giphy.com/embed/3ohs7TrCSp7c8ZrxBe" width="80" height="80" frameBorder="0" class="giphy-embed" allowFullScreen>
+             </iframe>
+             
+           </div>
         ) : (
-        <div className='lg:px-10 md:px-7 '>
+        <div className='lg:px-10 md:px-7 h-full '>
           {
             (data?.ShopAvailability?.data?.check==0)?
             (<StayTuned/>):
             (
-              <>
+              <div className="relative w-full">
+              
+                {/* // animation on component load */}
+                {/* <div className="absolute top-0 left-0 w-full h-full bg-black opacity-75" /> */}
+                
               
                 <ImageSlider/>
                
@@ -139,7 +148,7 @@ const {
                 <HeaterBanner/>
                 <FeaturedShops />
                 <FeaturedProducts/>
-              </>
+              </div>
             )
           } 
             
@@ -154,7 +163,7 @@ const {
         width < 1023 && 
           <MobileNavigation />
       }
-        </>
+        </div>
     )
     
 }
