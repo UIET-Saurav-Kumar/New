@@ -123,8 +123,8 @@ const {
     {loading ? (
          <div className="absolute top-0 left-0  h-screen bg-black opacity-80   z-50 w-full">
            {/* <img src='/preloader/cir.gif' className='sticky top-1/2 left-1/2 right- object-contain '/> */}
-           <iframe className="mx-auto mt-1/2 h-full " src="https://giphy.com/embed/3ohs7TrCSp7c8ZrxBe" width="80" height="80" frameBorder="0" class="giphy-embed" allowFullScreen>
-             </iframe>
+           {/* <iframe className="mx-auto mt-1/2 h-full " src="https://giphy.com/embed/3ohs7TrCSp7c8ZrxBe" width="80" height="80" frameBorder="0" class="giphy-embed" allowFullScreen>
+             </iframe> */}
              
            </div>
         ) : (
@@ -138,7 +138,6 @@ const {
                 {/* // animation on component load */}
                 {/* <div className="absolute top-0 left-0 w-full h-full bg-black opacity-75" /> */}
                 
-              
                 <ImageSlider/>
                
                 <AllCategories/>
