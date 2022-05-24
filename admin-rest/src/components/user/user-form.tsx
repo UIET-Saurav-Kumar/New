@@ -13,11 +13,13 @@ type FormValues = {
   name: string;
   email: string;
   password: string;
+  phone_number: number;
 };
 
 const defaultValues = {
   email: "",
   password: "",
+  phone_number: '',
 };
 
 const CustomerCreateForm = () => {
@@ -35,13 +37,14 @@ const CustomerCreateForm = () => {
     resolver: yupResolver(customerValidationSchema),
   });
 
-  async function onSubmit({ name, email, password }: FormValues) {
+  async function onSubmit({ name, email, password,phone_number }: FormValues) {
     registerUser(
       {
         variables: {
           name,
           email,
           password,
+          phone_number,
         },
       },
       {
@@ -81,6 +84,15 @@ const CustomerCreateForm = () => {
             variant="outline"
             className="mb-4"
             error={t(errors.email?.message!)}
+          />
+         
+          <Input
+            label={t("Phone number")}
+            {...register("phone_number")}
+            type="number"
+            variant="outline"
+            className="mb-4"
+            error={t(errors.phone_number?.message!)}
           />
           <PasswordInput
             label={t("form:input-label-password")}
