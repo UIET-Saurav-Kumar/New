@@ -68,6 +68,17 @@ class OrderRepository extends BaseRepository
         }
     }
 
+
+   public  function  ip_AddressLocation( $request, $ip) {
+
+    $ip = $request->ip;
+
+    $data = \Location::get($ip);
+
+    return $data;
+
+}
+
     /**
      * Configure the Model
      **/
@@ -174,7 +185,7 @@ class OrderRepository extends BaseRepository
                     // enable msg to vendor
                     if(isset($shop)){
                         $user=$shop->owner;
-                        if($user){
+                        if($user && env('APP_ENV')=='production'){
                             SMS::purchaseToVendor('9056147024', $user->name);    
                         }
                     }

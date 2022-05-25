@@ -23,18 +23,35 @@ class LogController extends CoreController
         return $this->repository->with('user')->with('order')->with('shop')->paginate($limit);
     }
 
+
+   public  function  ip_AddressLocation(Request $request) {
+
+        $ip = $request->ip();
+       
+        // $ip ='103.81.156.163';
+    
+        $data = \Location::get($ip);
+    
+        //  dd($data);
+         return $data;
+    
+    }
+
     public function store(Request $request)
     {
         $location=$request->location;
         $search=$request->search;
         $user=$request->user();
         $product=$request->product;
+        $ip_location=$this->ip_AddressLocation($request);
+     
 
         if($request->type=="item-removed"){
             $product=Product::find($product["id"]);
             Log::create([
                 "user_id"=>($user)?$user->id:NULL,
                 "ip_address"=>$request->ip(),
+                'ip_location'=>$ip_location,
                 "location"=>$location,
                 "products"=>$product['name'],
                 "shop_id"=>$product->shop_id,
@@ -46,17 +63,48 @@ class LogController extends CoreController
             Log::create([
                 "user_id"=>($user)?$user->id:NULL,
                 "ip_address"=>$request->ip(),
+                'ip_location'=>$ip_location,
                 "location"=>$location,
                 "products"=>$product['name'],
                 "shop_id"=>$product->shop_id,
                 "type"=>"item-added"
             ]);
         }
+
+        //item-added-to-wishlist
+        else if($request->type=="item-added-to-wishlist"){
+            $product=Product::find($product["id"]);
+            Log::create([
+                "user_id"=>($user)?$user->id:NULL,
+                "ip_address"=>$request->ip(),
+                'ip_location'=>$ip_location,
+                "location"=>$location,
+                "products"=>$product['name'],
+                "shop_id"=>$product->shop_id,
+                "type"=>"item-added-to-wishlist"
+            ]);
+        }
+
+        //item-removed-from-wishlist
+        else if($request->type=="item-removed-from-wishlist"){
+            $product=Product::find($product["id"]);
+            Log::create([
+                "user_id"=>($user)?$user->id:NULL,
+                "ip_address"=>$request->ip(),
+                'ip_location'=>$ip_location,
+                "location"=>$location,
+                "products"=>$product['name'],
+                "shop_id"=>$product->shop_id,
+                "type"=>"item-removed-from-wishlist"
+            ]);
+        }
+
         else if($search)
         {
             Log::create([
                 "user_id"=>($user)?$user->id:NULL,
                 "ip_address"=>$request->ip(),
+                'ip_location'=>$ip_location,
                 "location"=>$location,
                 "search_item"=>$search,
                 "type"=>"search_item"
@@ -67,6 +115,7 @@ class LogController extends CoreController
             Log::create([
                 "user_id"=>($user)?$user->id:NULL,
                 "ip_address"=>$request->ip(),
+                'ip_location'=>$ip_location,
                 "location"=>$location,
                 "type"=>"location"
             ]);

@@ -32,3 +32,14 @@ Route::get('/sluggify-this',function () {
 
     return "done";
 });
+
+
+// Route::get('ip-details', function () {
+
+// 	$ip = '66.102.0.0';
+
+//     $data = \Location::get($ip);
+
+//     return $data;
+
+// });

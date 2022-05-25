@@ -20,6 +20,7 @@ class LogRepository extends BaseRepository
         'name'        => 'like',
         "ip_address",
         "search_item",
+        'ip_location',
         "products"
     ];
 

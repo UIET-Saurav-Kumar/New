@@ -95,6 +95,7 @@ Route::get('my-wishlists', [ProductController::class, 'myWishlists']);
 Route::apiResource('questions', QuestionController::class, [
     'only' => ['update'],
 ]);
+Route::get('ip','PickBazar\Http\Controllers\LogController@ip_AddressLocation');
 
 Route::apiResource('reviews', ReviewController::class, [
     'only' => ['destroy']
@@ -103,6 +104,7 @@ Route::apiResource('reviews', ReviewController::class, [
 Route::apiResource('questions', QuestionController::class, [
     'only' => ['destroy'],
 ]);
+
 Route::apiResource('feedbacks', QuestionController::class, [
     'only' => ['update', 'destroy'],
 ]);
