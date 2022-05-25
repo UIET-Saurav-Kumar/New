@@ -33,7 +33,7 @@ class LogController extends CoreController
         $data = \Location::get($ip);
     
         //  dd($data);
-         return $data;
+         return $data->cityName;
     
     }
 
