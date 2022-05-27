@@ -1,6 +1,7 @@
 import getAddress from "@components/geoCode/geo-code"
 import { MapPin } from '@components/icons/map-pin';
 import { useLocation } from "@contexts/location/location.context";
+import { getLocation } from "@contexts/location/location.utils";
 import { useEffect, useState } from "react";
 
 export default function GetCurrentLocation({
@@ -32,9 +33,9 @@ export default function GetCurrentLocation({
         }
     }
 
-   // call get loc when page loads
+//    call get loc when page loads
     useEffect(() => {
-        getLoc()
+       !showPosition?.location && getLoc()
     }, []);
 
 
@@ -53,6 +54,8 @@ export default function GetCurrentLocation({
             lng: position?.coords?.longitude,
             formattedAddress: address,
           };
+
+          console.log('lat lng',location)
 
         // alert(location);
         addLocation(location)
