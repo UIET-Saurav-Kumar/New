@@ -29,9 +29,13 @@ import { useUI } from "@contexts/ui.context";
 import { useInWishlist, useToggleWishlist } from '@utils/wishlist';
 import { useIntersection } from 'react-use';
 import { StarIcon } from '@components/icons/star-icon';
+import { useCreateLogMutation } from "@data/log/use-create-log.mutation";
+import { useLocation } from "@contexts/location/location.context";
+
 
 export default function WishlistButton({
   productId,
+  product,
   variationId,
   className,
 }: {
@@ -45,6 +49,9 @@ export default function WishlistButton({
     enabled: isAuthorize,
     product_id: productId,
   });
+  const { mutate: createLog} = useCreateLogMutation();
+  const {getLocation} =useLocation();
+
 
   const { openModal } = useModalAction();
   function toggle() {
@@ -53,6 +60,16 @@ export default function WishlistButton({
       return;
     }
     toggleWishlist({ product_id: productId });
+     createLog({
+      location:getLocation?.formattedAddress,
+      product:product,
+      type:'item-added-to-wishlist',
+    }, {
+      onSuccess: (data: any) => {
+        console.log(data)
+      },
+    }) 
+    
   }
 
   const isLoading = adding || checking;
@@ -82,6 +99,7 @@ export default function WishlistButton({
       onClick={toggle}
     >
       {inWishlist ? (
+       
         <HeartFillIcon className="h-5 w-5  text-red-600" />
       ) : (
         <HeartOutlineIcon className="h-5 w-5 text-red-600" />

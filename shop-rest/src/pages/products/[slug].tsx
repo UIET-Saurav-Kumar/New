@@ -70,15 +70,15 @@ export default function ProductSinglePage({ product }: any) {
 
        
           {/* <div className="lg:w-80 lg:h-80">    */}
-          <AverageRatings
+          {/* <AverageRatings
                 title={product?.name}
                 ratingCount={product?.rating_count}
                 totalReviews={product?.total_reviews}
                 ratings={product?.ratings}
-              />
+              /> */}
               {/* </div> */}
 
-        <ProductReviews
+        {/* <ProductReviews
             productId={product?.id}
             productType={product?.type?.slug}
           />
@@ -86,7 +86,7 @@ export default function ProductSinglePage({ product }: any) {
             productId={product?.id}
             shopId={product?.shop?.id}
             productType={product?.type?.slug}
-          />
+          /> */}
 
          {product?.related_products?.length > 1 && (
           

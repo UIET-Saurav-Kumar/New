@@ -5,6 +5,7 @@ import { useQuery } from "react-query";
 
 
 const CustomerService = new CoreApi(API_ENDPOINTS.CUSTOMER);
+
 export const fetchMe = async () => {
   const { data } = await CustomerService.findAll();
   return { me: data };

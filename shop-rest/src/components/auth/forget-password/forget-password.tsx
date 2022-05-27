@@ -7,9 +7,11 @@ import { useResetPasswordMutation } from "@data/auth/use-reset-password.mutation
 import { useTranslation } from "next-i18next";
 import dynamic from "next/dynamic";
 import { useModalAction } from "@components/ui/modal/modal.context";
+
 const EnterEmailView = dynamic(() => import("./enter-email-view"));
 const EnterTokenView = dynamic(() => import("./enter-token-view"));
 const EnterNewPasswordView = dynamic(() => import("./enter-new-password-view"));
+
 
 const ForgotPassword = () => {
   const { t } = useTranslation("common");

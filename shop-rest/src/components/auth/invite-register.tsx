@@ -13,11 +13,13 @@ import { useTranslation } from "next-i18next";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useModalAction } from "@components/ui/modal/modal.context";
+import { getLocation } from "@contexts/location/location.utils";
 
 type FormValues = {
   name: string;
   email: string;
   password: string;
+  current_location:string;
 };
 
 const registerFormSchema = yup.object().shape({
@@ -33,6 +35,7 @@ const defaultValues = {
   name: "",
   email: "",
   password: "",
+  current_location: getLocation?.formattedAddress,
 };
 
 const RegisterForm = () => {

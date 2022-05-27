@@ -15,13 +15,19 @@ import * as yup from "yup";
 import { useModalAction } from "@components/ui/modal/modal.context";
 import { maskPhoneNumber } from "@utils/mask-phone-number";
 import { route } from "next/dist/next-server/server/router";
+import GetCurrentLocation from "@components/geoCode/get-current-location";
+import { useLocation } from "@contexts/location/location.context";
+
 
 type FormValues = {
   name: string;
   email: string;
   password: string;
-  phone_number:number
+  phone_number:number;
+  current_location:string;
 };
+
+
 
 const registerFormSchema = yup.object().shape({
   name: yup.string().required("error-name-required"),
@@ -31,16 +37,21 @@ const registerFormSchema = yup.object().shape({
     .required("error-email-required"),
   password: yup.string().required("error-password-required"),
   phone_number:yup.string().max(10, "Phone number should be of 10 digits only").min(10, 'Phone number should be of 10 digits only').required("error-contact-required"),
+  // current_location:yup.string().required("error-location-required"),
 });
 
 const defaultValues = {
   name: "",
   email: "",
   password: "",
-  phone_number:""
+  phone_number:"",
+  current_location:'',
 };
 
+// console.log('loc',getLocation.formattedAddress)
+
 const RegisterForm = () => {
+  const {getLocation} =useLocation()
   const { t } = useTranslation("common");
   const { mutate, isLoading: loading } = useRegisterMutation();
   const [errorMsg, setErrorMsg] = useState("");
@@ -64,7 +75,13 @@ const RegisterForm = () => {
   function getPhoneNumber(value:any){
     return value;
   }
-  function onSubmit({ name, email, password,phone_number }: FormValues) {
+
+  function getCurrentLocation(value:any){
+    return value;
+  }
+
+  
+  function onSubmit({ name, email, password,phone_number,current_location }: FormValues) {
     mutate(
       {
         name,
@@ -72,6 +89,7 @@ const RegisterForm = () => {
         password,
         phone_number,
         invited_by:'',
+        current_location,
       },
       {
         onSuccess: (data) => {
@@ -103,6 +121,14 @@ const RegisterForm = () => {
       }
     );
   }
+
+
+
+  function onChange(e: any) {
+    const { name, value } = e.target;
+    setValue(name, value);
+  }
+
   return (
     <div className="py-6 px-5 sm:p-8 bg-light w-screen md:max-w-md h-screen md:h-auto flex flex-col justify-center">
       <div className="flex justify-center">
@@ -143,6 +169,7 @@ const RegisterForm = () => {
           error={t(errors.name?.message!)}
         />
         <Input
+    
           label={t("text-email")}
           {...register("email")}
           type="email"
@@ -166,6 +193,22 @@ const RegisterForm = () => {
           onChange={(e) => setValue("phone_number", getPhoneNumber(e.target.value))}
           error={t(errors.phone_number?.message!)}
         />
+
+        <Input
+            value={getLocation?.formattedAddress}
+            label={"Current Location"} 
+            {...register("current_location")} 
+            type="text" 
+            variant="outline" 
+            className="mb-5 " 
+         
+            error={t(errors.current_location?.message!)} />
+          {/* {getLocation?.formattedAddress} */}
+         
+
+      {/* <GetCurrentLocation onChange={onChange} />   */}
+
+
         <div className="mt-8">
           <Button className="w-full h-12" loading={loading} disabled={loading}>
             {t("text-register")}

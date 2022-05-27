@@ -1,5 +1,4 @@
 
-
 import 
     { OfferOptionsType, Offer, QueryParamsType}
     from "@ts-types/custom.types";
@@ -8,6 +7,7 @@ import { API_ENDPOINTS } from "@utils/api/endpoints";
 import { useQuery } from "react-query";
 
 const OfferService = new CoreApi(API_ENDPOINTS.HOME_OFFERS);
+
 export const fetchOfferQuery = async ({ queryKey }: QueryParamsType) => {
   const [_key, params] = queryKey;
   const {
@@ -16,6 +16,7 @@ export const fetchOfferQuery = async ({ queryKey }: QueryParamsType) => {
 
   return { offers: { data } };
 };
+
 export const useOfferQuery = (options: OfferOptionsType) => {
   return useQuery<{ offers: { data: Offer[] } }, Error>(
     [API_ENDPOINTS.HOME_OFFERS, options],

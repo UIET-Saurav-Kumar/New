@@ -12,12 +12,14 @@ export type ContactType = {
   email: string;
   subject: string;
   description: string;
+  current_location: string;
 };
 
 class Customer extends CoreApi {
   constructor(_base_path: string) {
     super(_base_path);
   }
+
   updateCustomer(input: CustomerType) {
     return this.http
       .put(this._base_path + "/" + input.id, input)

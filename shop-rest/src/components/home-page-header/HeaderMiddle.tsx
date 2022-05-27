@@ -166,12 +166,6 @@ const cities = //create object of major  indian cities with lat, lng and city na
     ]
 
 
-
-
-
-
-
-
 export default function HeaderMiddle() {
     
 
@@ -202,6 +196,19 @@ export default function HeaderMiddle() {
         setClick(!click)
     }
 
+    //outside click close location
+    // useEffect(() => {
+    //     const handleClick = (e:any) => {
+    //         if (click && e.target.className !== "location-button") {
+    //             setLocation(false);
+    //         }
+    //     }
+    //     document.addEventListener("click", handleClick);
+    //     return () => {
+    //         document.removeEventListener("click", handleClick);
+    //     };
+    // }, [click]);
+
     const closeLocation = () => {
         setLocation(!location)
     }
@@ -227,7 +234,6 @@ export default function HeaderMiddle() {
         setLocation(data?.formattedAddress);
 
         if(location){
-            
             setHasLoction(true);
             // closeLocation(); 
         }
@@ -313,10 +319,10 @@ export default function HeaderMiddle() {
                </div>
 
                {/* Location screen */}
-               <div className={` ${location ? 'fixed inset-0 bg-gray-900 bg-opacity-60 scroll-y-none w-full h-full' : ' '} `}></div>
+               <div className={` ${!location ? 'fixed inset-0 bg-gray-900 bg-opacity-60 scroll-y-none w-full h-full' : ' '} `}></div>
                
                     <div style={{zIndex: 1000}}  className={`absolute  flex flex-col  w-full z-1000 inset-0 shadow-lg transform ml-0 duration-200 ease-in 
-                                    ${location ? ' translate-y-0 ' : '-translate-y-full' }  transform border-5 bg-gray-100 h-screen lg:h-110 xl:h-200 2xl:h-200 overflow-y-hidden overflow-hidden `}>
+                                    ${!location ? ' translate-y-0 ' : '-translate-y-full' }  transform border-5 bg-gray-100 h-screen lg:h-110 xl:h-200 2xl:h-200 overflow-y-hidden overflow-hidden `}>
                                       
                                        <div className='  border-red-400 flex w-full'>
                                            <div className='flex flex-col'>

@@ -144,11 +144,12 @@ const NavbarWithSearch = () => {
     }
 
     useEffect(()=>{
-        if(!getLocation?.formattedAddress){
+        if(getLocation?.formattedAddress?.length){
             setLocation(true);
             setHasLoction(false);
         }else{
             setHasLoction(true);
+            // setLocation(false);
         }
     },[])
 
@@ -159,7 +160,6 @@ const NavbarWithSearch = () => {
         setLocation(data?.formattedAddress);
 
         if(location){
-            
             setHasLoction(true);
             // closeLocation(); 
         }
@@ -235,9 +235,9 @@ const NavbarWithSearch = () => {
 
                       </div>
 
-                    <div className={` ${location ? 'fixed inset-0 bg-gray-900 bg-opacity-60 scroll-y-none w-auto  h-full' : ' '} `}></div>
+                    <div className={` ${!location ? 'fixed inset-0 bg-gray-900 bg-opacity-60 scroll-y-none w-auto  h-full' : ' '} `}></div>
                     <div   className={`absolute flex flex-col   z-50 inset-0 shadow-lg transform -pl-10 duration-200 ease-in 
-                                    ${location ? ' translate-y-0 ' : '-translate-y-full' }  transform border-5 bg-gray-100 h-screen lg:h-screen  overflow-y-hidden overflow-hidden `}>
+                                    ${!location ? ' translate-y-0 ' : '-translate-y-full' }  transform border-5 bg-gray-100 h-screen lg:h-screen  overflow-y-hidden overflow-hidden `}>
                                       
                                        <div className='border-red-400 flex w-full'>
                                            <div className='flex flex-col'>

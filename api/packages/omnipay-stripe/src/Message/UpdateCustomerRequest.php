@@ -57,6 +57,12 @@ class UpdateCustomerRequest extends AbstractRequest
         return $this->setParameter('email', $value);
     }
 
+    //current_location
+    public function getCurrentLocation()
+    {
+        return $this->getParameter('current_location');
+    }
+
     /**
      * Get the customer's source.
      *

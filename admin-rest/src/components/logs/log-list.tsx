@@ -32,7 +32,6 @@ const LogList = ({ logs, onPagination }: IProps) => {
     if(data?.type=="search_item"){
       return data?.search_item+" is Searched"
     }
-   
     if(data?.type=="item-added-to-wishlist"){
       return `${data?.products} is added to wishlist`
     }
@@ -105,22 +104,6 @@ const LogList = ({ logs, onPagination }: IProps) => {
 
   }
 
-  //fetch data from url
-  // const [ipData, setIpData] = useState([]);
-
-  // useEffect(() => {
-  //   fetch("http://127.0.0.1:8000/ip")
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setIpData(data);
-  //     }
-  //     );
-  // }, []);
-
-  // console.log('ipData',ipData)
-
-  
-
   const columns = [
 
     {
@@ -136,15 +119,13 @@ const LogList = ({ logs, onPagination }: IProps) => {
       width: 60,
     },
     // column for getLocation
-    {
-      title: ("Ip Location"),
-      dataIndex: "ip_location",
-      key: "ip_location",
-      align: "center",
-      width: 60,
-    },
-
-
+    // {
+    //   title: ("Ip Location"),
+    //   dataIndex: "ip_location",
+    //   key: "ip_location",
+    //   align: "center",
+    //   width: 60,
+    // },
     {
       title: ("User"),
       align: alignLeft,

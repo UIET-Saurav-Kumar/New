@@ -11,6 +11,7 @@ export type RegisterUserInputType = {
 	password: string;
 	invited_by:number;
 	phone_number:number;
+	current_location: string;
 };
 export type VerifyUserInputType = {
 	id: string;

@@ -128,21 +128,12 @@ export default function SalonPage() {
     }, []);
 
 
-    const {
-        data,
-        isLoading: loading,
-        error,
-    } = useOfferQuery({
-        limit: 10 as number,
-        search:"",
-        location : ((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any
-    }); 
 
-    console.log('offer data', data)
+    // console.log('offer data', data)
 
-    console.log( 'category',data?.offers.data.map(product => {
-        return product?.shop?.shop_categories.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','')}
-    ));
+    // console.log( 'category',data?.offers.data.map(product => {
+    //     return product?.shop?.shop_categories.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','')}
+    // ));
 
         const { query } = useRouter();
         const [searchTerm, setSearchTerm] = useState("");
@@ -153,34 +144,46 @@ export default function SalonPage() {
 
 //   const [sortedBy, setColumn] = useState<SortOrder>(SortOrder.Desc);
 
-        const {
-            data: salonProducts,
-            isLoading: fetching,
-            errors,
-          } = useAllProductsQuery({
-              limit: 90000,
-              page,
-              type,
-              category,
-              text: query?.text as string,
-          });
+        // const {
+        //     data: salonProducts,
+        //     isLoading: fetching,
+        //     errors,
+        //   } = useAllProductsQuery({
+        //       limit: 90000,
+        //       page,
+        //       type,
+        //       category,
+        //       text: query?.text as string,
+        //   });
 
+
+          const {
+              data,
+              isLoading: loading,
+              error,
+          } = useOfferQuery({
+              limit: 20 as number,
+              search:"",
+              location : ((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any
+          }); 
+
+          
           function handleSearch({ searchText }: { searchText: string }) {
             setSearchTerm(searchText);
             setPage(1);
           }
 
-          function shopCategory(){
-            var cat =  salonProducts?.products.data.filter(product => product.status === 'publish'   && product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','') == 'Salon  Spa') 
-            return cat
-          }
+          // function shopCategory(){
+          //   var cat =  salonProducts?.products.data.filter(product => product.status === 'publish'   && product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','') == 'Salon  Spa') 
+          //   return cat
+          // }
 
-          function catSlug() {
-            var slug =  salonProducts?.products.data.map( product => product.slug) 
-            return slug
-          }
+          // function catSlug() {
+          //   var slug =  salonProducts?.products.data.map( product => product.slug) 
+          //   return slug
+          // }
 
-          console.log('salon category', shopCategory());
+          // console.log('salon category', shopCategory());
 
           //handleCategory arrow function
           function  handleCategory(img: any) {
@@ -285,24 +288,39 @@ export default function SalonPage() {
          <h3 className='text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 font-medium text-2xl lg:text-3xl text-gray-900 font-serif ml-4 lg:ml-8 mt-10 lg:mt-10 tracking-normal'>Featured Products</h3>
 
             <div className={`${data?.offers.data?.length  ? 'block' : 'hidden'} grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-50 mt-3 p-2 lg:p-6 gap-2`}>
-              {fetching && !data?.pages?.length ? (
+              {/* {fetching && !data?.pages?.length ? (
                         <ProductFeedLoader limit={5} />
-                      ) : (
+                      ) : ( */}
                 <>
                     {
-                      //filter products with status publish and whose shop category is Salon & Spa
-                      salonProducts?.products.data.filter(product => product.status === 'publish' && product.is_featured === 1 && product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','') =='Salon  Spa' ) .map(product => (
-                              <motion.div key={product.id}>
-                                <Helium product={product}/>
-                              </motion.div>
-                              ))
+                      // salonProducts?.products.data.filter  // function shopCategory(){
+          //   var cat =  salonProducts?.products.data.filter(product => product.status === 'publish'   && product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','') == 'Salon  Spa') 
+          //   return cat
+          // }
+
+          // function catSlug() {
+          //   var slug =  salonProducts?.products.data.map( product => product.slug) 
+          //   return slug
+          // }product => product.status === 'publish' && product.is_featured === 1 && product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','') =='Salon  Spa' ) .map(product => (
+                      //         <motion.div key={product.id}>
+                      //           <Helium product={product}/>
+                      //         </motion.div>
+                      //         ))
+
+                      data?.offers.data.filter(product => product.status === 'publish' && product.is_featured === 1 && product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','') ==='Salon  Spa' ).map(offer => (
+                      
+                        <motion.div key={offer.id}>
+                          <Helium product={offer}/>
+                        </motion.div>
+                        ))
+
                     }
                 </>
-                      )}
+                      {/* )} */}
             </div>
 
 
-        <h3 className='font-medium text-2xl lg:text-3xl text-gray-900 font-serif  ml-4 lg:ml-8  mt-3 tracking-normal'>Offer of the day</h3>
+        {/* <h3 className='font-medium text-2xl lg:text-3xl text-gray-900 font-serif  ml-4 lg:ml-8  mt-3 tracking-normal'>Offer of the day</h3>
 
             <div className={`${data?.offers.data?.length  ? 'block' : 'hidden'} grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-50 mt-3 p-2 lg:p-6 gap-2`}>
                {fetching && !data?.pages?.length ? (
@@ -311,7 +329,9 @@ export default function SalonPage() {
                  <>
                       {
                           // filter products with price high to low
-                          salonProducts?.products.data.filter(product => product.status === 'publish' && product.is_offer === 1 && product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','') =='Salon  Spa' ) .sort((a, b) => b.price - a.price).map(product => (
+                          data?.offers?.data
+                          // .map(product => (
+                          .filter(product => product.status === 'publish' && product.is_offer === 1 && product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','') =='Salon  Spa' ).map(product => (
                           // salonProducts?.products.data.filter(product => product.status === 'publish' && product.is_offer === 1 && product.is_featured === 1 && product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','') =='Salon  Spa' ) .map(product => (
                                   <motion.div key={product.id}>
                                   <Helium product={product}/>
@@ -320,44 +340,9 @@ export default function SalonPage() {
                       }
                  </>
                     )}
-            </div>
-
-            {/* <div className={`${data?.offers.data?.length  ? 'block' : 'hidden'} grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-50 mt-10 p-4 gap-2`}>
-               {fetching && !data?.pages?.length ? (
-                      <ProductFeedLoader limit={5} />
-                    ) : (
-                 <>
-                    {
-                      //filterm
-                        //filter products whose categories array contain category hair spa
-                        salonProducts?.products.data.filter(product => product.status === 'publish' && product.is_offer === 1 && product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','') =='Hair Spa' ) .map(product => (
-                                <motion.div key={product.id}>
-                                 <Helium product={product}/>
-                                </motion.div>
-                                ))
-                    }
-                 </>
-                    )}
             </div> */}
 
-        {/* <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 gap-1">
-            {loading && !data?.pages?.length ? (
-            <ProductFeedLoader limit={3} />
-            ) : (
-            <>
-                {
-                    //filter products with status publish and whose shop category is Salon & Spa
-                    salonProducts?.products.data.filter(product => product?.status === 'publish' && product.is_offer === 1 && product?.shop?.shop_categories.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','') === 'Salon  Spa'  ).map(product => (
-                        <motion.div key={product.id}>
-                        {renderProductCard(product)}
-                        </motion.div>
-                        ))
-
-                }
-            </>
-            )}
-        </div> */}
-        
+            
 
     </div>
 

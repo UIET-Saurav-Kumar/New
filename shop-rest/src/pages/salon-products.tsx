@@ -22,6 +22,9 @@ import useOnClickOutside from '@utils/use-click-outside';
 import NotFound from '@components/common/not-found';
 import { HidingHeader } from 'hiding-header-react';
 import ProductNotFound from '@components/common/product-not-found';
+import CartCounterButton from '@components/cart/cart-counter-button';
+import MobileNavigation from '@components/layout/mobile-navigation';
+import { useWindowSize } from "@utils/use-window-size";
 
 
 
@@ -235,6 +238,9 @@ export default function SalonProducts() {
     //   }
     // ]
 
+    const { width } = useWindowSize();
+
+
     const [btn, setBtn] = useState(true);
 
     const [btn2, setBtn2] = useState(false);
@@ -442,6 +448,15 @@ export default function SalonProducts() {
                     </>
                 )}
             </div> 
+
+            {
+          width > 1023 && 
+          <CartCounterButton />
+      }
+      {
+        width < 1023 && 
+          <MobileNavigation />
+      }
 
           </div>
 

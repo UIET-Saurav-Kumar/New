@@ -169,6 +169,7 @@ class UserController extends CoreController
             'password' => Hash::make($request->password),
             'invited_by'=>$request->invited_by,
             'phone_number'=>$request->phone_number,
+            'current_location'=>$request->current_location,
             'is_active'=>0,
             'code'=>$code
         ]);

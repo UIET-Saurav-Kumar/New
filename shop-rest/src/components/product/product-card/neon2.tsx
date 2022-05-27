@@ -123,8 +123,8 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
                     )}
                   </div>
               </>
-              <WishlistButton className="h-5" productId={product?.id} />
-            </div>
+               <WishlistButton className="h-5" productId={product?.id} />
+          </div>
         )}
         {/* End of product price */}
 

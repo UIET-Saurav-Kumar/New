@@ -129,7 +129,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
               {name}
             </h1>
             <div className="">
-              <WishlistButton productId={product?.id}/>
+              <WishlistButton product={product} productId={product?.id}/>
             
                 <div className="inline-flex shrink-0 mt-2 text-white items-center rounded border border-accent bg-accent px-3 py-1 text-sm ">
                   {ratings}

@@ -35,7 +35,8 @@ class UserRepository extends BaseRepository
         'name',
         'email',
         'shop_id',
-        "phone_number"
+        "phone_number",
+        'current_location',
     ];
 
     /**
@@ -61,6 +62,9 @@ class UserRepository extends BaseRepository
                 'name'     => $request->name,
                 'email'    => $request->email,
                 'password' => Hash::make($request->password),
+                //user current_location
+                'current_location' => $request->current_location,
+
             ]);
             $user->givePermissionTo(UserPermission::CUSTOMER);
             if (isset($request['address']) && count($request['address'])) {

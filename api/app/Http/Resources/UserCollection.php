@@ -22,6 +22,7 @@ class UserCollection extends ResourceCollection
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
+            'current_location' => $this->current_location,
             'role' => $this->role(),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

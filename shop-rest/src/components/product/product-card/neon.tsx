@@ -123,7 +123,7 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
                 </del>
                 } 
 
-                </div>
+            </div>
             </>
           <WishlistButton className="h-5" productId={product?.id} />
         </div>
