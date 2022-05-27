@@ -44,7 +44,7 @@ export default function GetCurrentLocation({
             lat:position?.coords?.latitude,
             lng:position?.coords?.longitude
         })
-        alert(address);
+        // alert(address);
 
         console.log('address',address)
 
@@ -54,7 +54,7 @@ export default function GetCurrentLocation({
             formattedAddress: address,
           };
 
-        alert(location);
+        // alert(location);
         addLocation(location)
 
         onChange(location);
