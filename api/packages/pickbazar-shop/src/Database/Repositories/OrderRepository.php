@@ -185,9 +185,9 @@ class OrderRepository extends BaseRepository
                     // enable msg to vendor
                     if(isset($shop)){
                         $user=$shop->owner;
-                        if($user && env('APP_ENV')=='production'){
+                        
                             SMS::purchaseToVendor('9056147024', $user->name);    
-                        }
+                        
                     }
                 }    
             }
