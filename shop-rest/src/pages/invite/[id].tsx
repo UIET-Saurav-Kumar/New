@@ -16,6 +16,7 @@ import * as yup from "yup";
 import { useModalAction } from "@components/ui/modal/modal.context";
 import { GetServerSideProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useLocation } from "@contexts/location/location.context";
 
 import { maskPhoneNumber } from "@utils/mask-phone-number";
 
@@ -26,7 +27,8 @@ type FormValues = {
   email: string;
   password: string;
   id:number;
-  phone_number:number
+  phone_number:number;
+  current_location:string;
 };
 
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
@@ -52,11 +54,14 @@ const defaultValues = {
   name: "",
   email: "",
   password: "",
-  phone_number:""
+  phone_number:"",
+  current_location:'',
 };
 
 
 const RegisterForm = () => {
+  const {getLocation} =useLocation()
+
   const { t } = useTranslation("common");
   const { mutate, isLoading: loading } = useRegisterMutation();
   const [errorMsg, setErrorMsg] = useState("");
@@ -81,14 +86,15 @@ const RegisterForm = () => {
   function getPhoneNumber(value:any){
     return value;
   }
-  function onSubmit({ name, email, password ,phone_number}: FormValues) {
+  function onSubmit({ name, email, password ,phone_number, current_location}: FormValues) {
     mutate(
       {
         name,
         email,
         password,
         invited_by:query.id,
-        phone_number
+        phone_number,
+        current_location
       },
       {
         onSuccess: (data) => {
@@ -196,6 +202,15 @@ const RegisterForm = () => {
                   onChange={(e) => setValue("phone_number", getPhoneNumber(e.target.value))}
                   error={t(errors.phone_number?.message!)}
                 />
+                <Input
+                    value={getLocation?.formattedAddress}
+                    label={"Current Location"} 
+                    {...register("current_location")} 
+                    type="text" 
+                    variant="outline" 
+                    className="mb-5 " 
+                
+                    error={t(errors.current_location?.message!)} />
                 <div className="mt-8">
                   <Button className="w-full h-12" loading={loading} disabled={loading}>
                       {t("text-register")}
