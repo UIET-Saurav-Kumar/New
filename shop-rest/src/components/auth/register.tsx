@@ -55,6 +55,14 @@ const RegisterForm = () => {
   const { t } = useTranslation("common");
   const { mutate, isLoading: loading } = useRegisterMutation();
   const [errorMsg, setErrorMsg] = useState("");
+  
+  const userLoc = [{
+    formattedAddress: getLocation.formattedAddress,
+    lat: getLocation.lat,
+    lng: getLocation.lng,
+  }];
+  const [userLocation, setUserLocation] = useState(userLoc);
+
   const {
     register,
     handleSubmit,
@@ -62,16 +70,26 @@ const RegisterForm = () => {
     setValue,
     formState: { errors },
   } = useForm<FormValues>({
-    defaultValues,
+    defaultValues: {
+      current_location:getLocation.formattedAddress
+    },
+
     resolver: yupResolver(registerFormSchema),
   });
+
+
+
   const router = useRouter();
+
   const { authorize } = useUI();
+
   const { closeModal, openModal } = useModalAction();
+
   function handleNavigate(path: string) {
     router.push(`/${path}`);
     closeModal();
   }
+
   function getPhoneNumber(value:any){
     return value;
   }
@@ -80,8 +98,38 @@ const RegisterForm = () => {
     return value;
   }
 
-  
-  function onSubmit({ name, email, password,phone_number,current_location }: FormValues) {
+  function changeLocation(data:any){
+
+    // data.length ? setLocation(false) : setLocation(false)
+
+    console.log('address data',data)
+    var location=JSON.stringify(data);
+    console.log(data?.formattedAddress);
+    // document.getElementById("location_id").value = data?.formattedAddress;
+    // setLocation(data?.formattedAddress);
+
+    // if(location){
+    //     setHasLoction(true);
+        
+    // }
+
+    var { query ,pathname} = router;
+    var pathname="/"+router.locale+pathname
+    
+    router.push(
+    {
+        pathname,
+        query: query,
+    },
+    {
+        pathname,
+        query: query,
+    },
+    );
+    // handleLocation()
+}
+
+  function onSubmit({ name, email, password, phone_number, current_location }: FormValues) {
     mutate(
       {
         name,
@@ -130,7 +178,9 @@ const RegisterForm = () => {
   }
 
   return (
-    <div className="py-6 px-5 sm:p-8 bg-light w-screen md:max-w-md h-screen md:h-auto flex flex-col justify-center">
+    
+    <div className="flex items-center h-screen  justify-center bg-white sm:bg-gray-100 " >
+    <div className="py-6 px-5 bg-light w-screen  h-screen  flex flex-col justify-center">
       <div className="flex justify-center">
         <Logo />
       </div>
@@ -193,7 +243,7 @@ const RegisterForm = () => {
           onChange={(e) => setValue("phone_number", getPhoneNumber(e.target.value))}
           error={t(errors.phone_number?.message!)}
         />
-
+      
         <Input
             value={getLocation?.formattedAddress}
             label={"Current Location"} 
@@ -206,7 +256,7 @@ const RegisterForm = () => {
           {/* {getLocation?.formattedAddress} */}
          
 
-      {/* <GetCurrentLocation onChange={onChange} />   */}
+      {/* <GetCurrentLocation onChange={changeLocation} />   */}
 
 
         <div className="mt-8">
@@ -217,7 +267,7 @@ const RegisterForm = () => {
       </form>
       {/* End of forgot register form */}
 
-      <div className="flex flex-col items-center justify-center relative text-sm text-heading mt-8 sm:mt-11 mb-6 sm:mb-8">
+      <div className="flex flex-col items-center justify-center relative text-sm text-heading  sm:mt-11 mb-6 sm:mb-8">
         <hr className="w-full" />
         <span className="absolute start-2/4 -top-2.5 px-2 -ms-4 bg-light">
           {t("text-or")}
@@ -233,6 +283,8 @@ const RegisterForm = () => {
         </button>
       </div>
     </div>
+    </div>
+    
   );
 };
 
