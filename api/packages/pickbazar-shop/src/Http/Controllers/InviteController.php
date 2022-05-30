@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\ReferralEarning;
 use PickBazar\Database\Models\Bill;
 use PickBazar\Database\Models\Invite;
+use PickBazar\Database\Models\Balance;
+
 
 class InviteController extends CoreController
 {
@@ -111,7 +113,7 @@ class InviteController extends CoreController
     {
         $user = User::find($id);
         
-        $balance = $user->balance;
+        $balance = Balance::where('user_id', $user->id)->first();
         
         $name = $user->name;
         $customer_level = ReferralEarning::where('user_id', $user->id)->where('level', "0")->get();
