@@ -21,6 +21,7 @@ import { useLocation } from "@contexts/location/location.context";
 import { maskPhoneNumber } from "@utils/mask-phone-number";
 
 import LoginForm from "./loginform";
+import GetCurrentLocation from "@components/geoCode/get-current-location";
 
 type FormValues = {
   name: string;
@@ -60,7 +61,10 @@ const defaultValues = {
 
 
 const RegisterForm = () => {
+
   const {getLocation} =useLocation()
+
+  console.log('getLoc', getLocation)
 
   const { t } = useTranslation("common");
   const { mutate, isLoading: loading } = useRegisterMutation();
@@ -128,11 +132,42 @@ const RegisterForm = () => {
     );
   }
 
+  function changeLocation(data:any){
+
+    // data.length ? setLocation(false) : setLocation(false)
+
+    console.log('address data',data)
+    var location=JSON.stringify(data);
+    console.log(data?.formattedAddress);
+    // document.getElementById("location_id").value = data?.formattedAddress;
+    // setLocation(data?.formattedAddress);
+
+    // if(location){
+    //     setHasLoction(true);
+        
+    // }
+
+    var { query ,pathname} = router;
+    var pathname="/"+router.locale+pathname
+    
+    router.push(
+    {
+        pathname,
+        query: query,
+    },
+    {
+        pathname,
+        query: query,
+    },
+    );
+    // handleLocation()
+}
+
   const [click, setClick] = useState(false);
 
   return (
 
-    <div className="flex items-center justify-center bg-white sm:bg-gray-100 " >
+    <div className="flex items-center h-screen  justify-center bg-white sm:bg-gray-100 " >
         
         { !click ? <div className="py-6 px-5 sm:p-8 bg-light md:max-w-md h-screen md:h-auto flex flex-col justify-center m-auto max-w-md w-full bg-white sm:shadow p-5 sm:p-8 rounded mt-5 mb-5">
             
@@ -161,11 +196,11 @@ const RegisterForm = () => {
               
             {errorMsg && (
                 <Alert
-                variant="error"
-                message={t(errorMsg)}
-                className="mb-6"
-                closeable={true}
-                onClose={() => setErrorMsg("")}
+                  variant="error"
+                  message={t(errorMsg)}
+                  className="mb-6"
+                  closeable={true}
+                  onClose={() => setErrorMsg("")}
                 />
             )}
 
@@ -202,15 +237,23 @@ const RegisterForm = () => {
                   onChange={(e) => setValue("phone_number", getPhoneNumber(e.target.value))}
                   error={t(errors.phone_number?.message!)}
                 />
+               <div className="flex-1 items-center"> 
+
                 <Input
-                    value={getLocation?.formattedAddress}
-                    label={"Current Location"} 
-                    {...register("current_location")} 
-                    type="text" 
-                    variant="outline" 
-                    className="mb-5 " 
-                
-                    error={t(errors.current_location?.message!)} />
+                      value={!!getLocation ? getLocation?.formattedAddress : 'null'}
+                      label={"Current Location"} 
+                      {...register("current_location")} 
+                  
+                      type="text" 
+                      variant="outline" 
+                      className="mb-5 " 
+                      error={t(errors.current_location?.message!)} />
+
+                      <GetCurrentLocation onChange={changeLocation} />
+
+                </div>
+                    
+
                 <div className="mt-8">
                   <Button className="w-full h-12" loading={loading} disabled={loading}>
                       {t("text-register")}
@@ -219,7 +262,7 @@ const RegisterForm = () => {
             </form>
             {/* End of forgot register form */}
 
-            <div className="flex flex-col items-center justify-center relative text-sm text-heading mt-8 sm:mt-11 mb-6 sm:mb-8">
+            <div className="flex flex-col items-center justify-center relative text-sm text-heading  sm:mt-11 mb-6 sm:mb-8">
                 <hr className="w-full" />
                 <span className="absolute start-2/4 -top-2.5 px-2 -ms-4 bg-light">
                 {t("text-or")}
