@@ -169,7 +169,7 @@ const RegisterForm = () => {
 
     <div className="flex items-center h-screen  justify-center bg-white sm:bg-gray-100 " >
         
-        { !click ? <div className="py-6 px-5 sm:p-8 bg-light md:max-w-md h-screen md:h-auto flex flex-col justify-center m-auto max-w-md w-full bg-white sm:shadow p-5 sm:p-8 rounded mt-5 mb-5">
+        { !click ? <div className="py-6 px-5 sm:p-8 bg-light w-screen  h-screen  flex flex-col justify-center">
             
             <div className="flex justify-center">
                 <Logo />
@@ -249,7 +249,7 @@ const RegisterForm = () => {
                       className="mb-5 " 
                       error={t(errors.current_location?.message!)} />
 
-                      <GetCurrentLocation onChange={changeLocation} />
+                      {/* <GetCurrentLocation onChange={changeLocation} /> */}
 
                 </div>
                     
