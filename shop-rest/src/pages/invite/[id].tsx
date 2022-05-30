@@ -249,7 +249,7 @@ const RegisterForm = () => {
                       className="mb-5 " 
                       error={t(errors.current_location?.message!)} />
 
-                      {/* <GetCurrentLocation onChange={changeLocation} /> */}
+                      <GetCurrentLocation onChange={changeLocation} />
 
                 </div>
                     
