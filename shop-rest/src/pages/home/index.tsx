@@ -29,6 +29,7 @@ import { useLocation } from "@contexts/location/location.context";
 import Tandoor from "@components/home-page-product-section/tandoor";
 import InvoiceBanner from "@components/home-page-product-section/invoice-banner";
 import HeaterBanner from "@components/home-page-product-section/heater-banner";
+import RedBullBanner from "@components/home-page-product-section/red-bull-banner";
 
 
 
@@ -120,6 +121,8 @@ const {
     return (
         <div className=" h-full">
 
+          
+
     {loading ? (
          <div className="absolute top-0 left-0  h-screen bg-black opacity-80   z-50 w-full">
            {/* <img src='/preloader/cir.gif' className='sticky top-1/2 left-1/2 right- object-contain '/> */}
@@ -139,9 +142,10 @@ const {
                 {/* <div className="absolute top-0 left-0 w-full h-full bg-black opacity-75" /> */}
                 
                 <ImageSlider/>
-               
+                <RedBullBanner/>
                 <AllCategories/>
                 {/* <InvoiceBanner/> */}
+                
                 <Tandoor/>
                 <ProductGrid/>
                 <HeaterBanner/>
