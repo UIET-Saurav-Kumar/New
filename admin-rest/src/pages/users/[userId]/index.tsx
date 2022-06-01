@@ -13,6 +13,7 @@ import { DollarIcon } from "@components/icons/dollar";
 import { useMeQuery } from '@data/user/use-me.query';
 import { string } from 'yup/lib/locale';
 import { useRouter } from "next/router";
+import { useUsersQuery } from "@data/user/use-users.query";
 
 
 const UserWallet = () => {
@@ -21,11 +22,33 @@ const UserWallet = () => {
 
     const { query } = useRouter();
 
+    const {
+        data: usersData,
+        isLoading: loadingUsers,
+        error: usersError,
+      } = useUsersQuery({
+        // limit: 20,
+        // page,
+        // text: searchTerm,
+      });
+
+    //   // filter users whose last_month_purchase is greater than 5999
+    //     const filteredUsers = usersData?.users?.filter((user:any) => user.last_month_purchase > 5999);
+         
+
     //use walletcommission query
     const { data, loading, error } = useWalletCommissionQuery(query.userId as string);
     
     console.log('query user id', query.userId)
     console.log('wallet data',data)
+
+    const newUsers = [];
+
+    // if last_month_purchase is greater than 5999 push the user to the newUsers array
+    if(leader_last_month_purchase > 1){
+        newUsers.push(query.userId);
+    }
+    console.log('mewUsers',newUsers);
 
     const { price: totalEarnings } = usePrice(
         data && {
@@ -99,6 +122,9 @@ const UserWallet = () => {
         var relevantYear = currYear;
         // console.log('lastMonth',lastMonth);
         // console.log('current month',currMonth);
+        
+        
+
 
         var total = data?.customer_level?.filter((i:any) => {
             
@@ -118,12 +144,12 @@ const UserWallet = () => {
             
             var date = new Date(i.created_at);
             // console.log(data.customer_level);
-            console.log('created at',date);
-            console.log('curr month',currMonth);
-            console.log('year',date.getFullYear());
-            console.log('order month',date.getMonth());
+            // console.log('created at',date);
+            // console.log('curr month',currMonth);
+            // console.log('year',date.getFullYear());
+            // console.log('order month',date.getMonth());
             
-            console.log('last month',lastMonth);
+            // console.log('last month',lastMonth);
         
             return date.getMonth() === currMonth && date.getFullYear() === relevantYear;
         }).reduce((prev, curr) => prev +  parseFloat(curr.commission_value),0);
@@ -133,15 +159,26 @@ const UserWallet = () => {
             
             var date = new Date(i.created_at);
             // console.log(data.customer_level);
-            console.log('created at',date);
-            console.log('curr month',currMonth);
-            console.log('year',date.getFullYear());
-            console.log('order month',date.getMonth());
+            // console.log('created at',date);
+            // console.log('curr month',currMonth);
+            // console.log('year',date.getFullYear());
+            // console.log('order month',date.getMonth());
             
-            console.log('last month',lastMonth);
+            // console.log('last month',lastMonth);
         
             return date.getMonth() === currMonth && date.getFullYear() === relevantYear;
         }).reduce((prev, curr) => prev +  parseFloat(curr.earning),0);
+
+
+        //leader_last_month_purchase
+        var leader_last_month_purchase = data?.customer_level?.filter((i:any) => {
+
+            var date = new Date(i.created_at);
+
+            return date.getMonth() === lastMonth && date.getFullYear() === relevantYear;
+        }).reduce((prev, curr) => prev +  parseFloat(curr.commission_value),0);
+
+
 
         var level_1 = data?.level1?.filter((i:any) => {
             
@@ -309,14 +346,14 @@ const UserWallet = () => {
                                                     ₹{Math.abs(data?.customer_level?.map( item => item.earning).reduce((prev,next) => (prev + parseFloat(next)) ,0)).toFixed(2)}
                                                     </p>
                                                     <p className="text-sm text-gray-700 mt-0">
-                                                        {("Leader earning")}
+                                                        {("My earning")}
                                                     </p>
                                                 </div>
                                             </div>  
                                         </div>
                                     </div>
 
-                                    <div className="space-y-3 shadow-lg border  w-full" style={{maxWidth:"450px",maxHeight:'200px'}}>
+                                    <div className="space-y-3 shadow-lg border w-full" style={{maxWidth:"450px",maxHeight:'200px'}}>
                                         <div className="">
 
                                             <div className="flex items-center py-3 px-4 border-b border-gray-100">
@@ -330,7 +367,7 @@ const UserWallet = () => {
                                                     ₹{leader_this_month_purchase?.toFixed(2)}
                                                     </p>
                                                     <p className="text-sm text-gray-700 mt-0">
-                                                        {("Leader This Month Purchase")}
+                                                        {("My This Month Purchase")}
                                                     </p>
                                                 </div>
 
@@ -350,10 +387,33 @@ const UserWallet = () => {
 
                                                 <div className="ml-3">
                                                     <p className="text-md lg:text-lg font-semibold text-sub-heading mb-0.5">
-                                                    ₹{leader_this_month_earning?.toFixed(2)}
+                                                    ₹{leader_last_month_purchase?.toFixed(2)}
                                                     </p>
                                                     <p className="text-sm text-gray-700 mt-0">
-                                                        {("Leader This Month Earning")}
+                                                        {("My Last Month Purchase")}
+                                                    </p>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-3 shadow-lg border  w-full" style={{maxWidth:"450px",maxHeight:'200px'}}>
+                                        <div className="">
+
+                                            <div className="flex items-center py-3 px-4 border-b border-gray-100">
+
+                                                <div className="p-3 rounded-full w-11 h-11 flex items-center justify-center bg-[#C7AF99] text-light">
+                                                        <PriceWalletIcon width={16} />
+                                                </div>
+
+                                                <div className="ml-3">
+                                                    <p className="text-md lg:text-lg font-semibold text-sub-heading mb-0.5">
+                                                      ₹{leader_this_month_earning?.toFixed(2)}
+                                                    </p>
+                                                    <p className="text-sm text-gray-700 mt-0">
+                                                        {("My This Month Earning")}
                                                     </p>
                                                 </div>
 
@@ -376,7 +436,7 @@ const UserWallet = () => {
                                                     ₹{total?.toFixed(2)}
                                                     </p>
                                                     <p className="text-sm text-gray-700 mt-0">
-                                                        {("Leader last month earning")}
+                                                        {("My last month earning")}
                                                     </p>
                                                 </div>
 
@@ -569,6 +629,7 @@ const UserWallet = () => {
                                 <thead className=' font-normal text-10px md:text-md lg:text-lg p-10'>
                                     <tr className='p-10  font-normal text-10px md:text-md lg:text-sm '>
                                         <th className=" p-1  border-b-2  lg:px-4 lg:py-4">Date</th>
+                                        {/* <th className=" p-1  border-b-2  lg:px-4 lg:py-4">User </th> */}
                                         <th className=" p-1  border-b-2  lg:px-4 lg:py-4">Shop name</th>
                                         <th className=" p-1  border-b-2  lg:px-4 lg:py-4">Order Id</th>
                                         <th className=" p-1  border-b-2  lg:px-4 lg:py-4">Order Value</th>
@@ -593,6 +654,8 @@ const UserWallet = () => {
                                     
                                      <tr className='bg-white overflow-x-scroll' key={commission?.id}>
                                         <td className=' p-1  border-b-2  lg:px-4 lg:py-4 text:10px sm:text-xs lg:text-lg font-lg text-gray-600'>{formateDate(commission?.created_at)}</td>
+                                        
+                                        {/* <td className=' p-1  border-b-2  lg:px-4 lg:py-4 text:10px sm:text-xs lg:text-lg font-lg text-gray-600'>{commission?.customer_name}</td> */}
                                         <td className='p-1 border-b-2  lg:px-4 lg:py-4 text:10px sm:text-xs  lg:text-lg font-lg text-gray-600' >{commission?.shop_name}</td>
                                         <td className='p-1 border-b-2  lg:px-4 lg:py-4 text:10px sm:text-xs  lg:text-lg font-lg text-gray-600' >{commission?.order_track_number}</td>
                                         <td className='p-1 border-b-2  lg:px-4 lg:py-4 sm:text-10px  text:xs lg:text-lg font-lg text-gray-600' >₹{commission?.commission_value}</td>
@@ -616,6 +679,7 @@ const UserWallet = () => {
                                 <thead className=' font-normal text-10px md:text-md lg:text-lg p-10'>
                                     <tr className='p-10  font-normal text-10px md:text-md lg:text-sm '>
                                         <th className=" p-1  border-b-2  lg:px-4 lg:py-4">Date</th>
+                                        <th className=" p-1  border-b-2  lg:px-4 lg:py-4">Name</th>
                                         <th className=" p-1  border-b-2  lg:px-4 lg:py-4">Order Id</th>
                                         <th className=" p-1  border-b-2  lg:px-4 lg:py-4">Order Value</th>
                                         <th className=" p-1  border-b-2  lg:px-4 lg:py-4">Earning</th>
@@ -638,6 +702,7 @@ const UserWallet = () => {
                                     (data?.level1).map((commission) => (
                                         <tr className='bg-white' key={commission?.id}>
                                             <td className=' p-1  border-b-2 lg:px-4 lg:py-4 text:10px sm:text-xs lg:text-lg font-md text-gray-600'>{formateDate(commission?.created_at)}</td>
+                                            <td className=' p-1  border-b-2 lg:px-4 lg:py-4 text:10px sm:text-xs lg:text-lg font-md text-gray-600'>{commission?.customer_name}</td>
                                             <td className='p-1 border-b-2  lg:px-4 lg:py-4 text:10px sm:text-xs  lg:text-lg font-md text-gray-600' >{commission?.order_track_number}</td>
                                             <td className='p-1 border-b-2  lg:px-4 lg:py-4 text:10px sm:text-xs  lg:text-lg font-md text-gray-600' >₹{commission?.commission_value}</td>
                                             <td className='p-1 border-b-2  lg:px-4 lg:py-4 sm:text-10px  text:xs lg:text-lg font-bold text-green-600' >₹{commission?.earning}</td>
@@ -656,6 +721,7 @@ const UserWallet = () => {
                                     <thead className=' font-normal text-10px md:text-md lg:text-lg p-10'>
                                         <tr className='p-10  font-normal text-10px md:text-md lg:text-sm '>
                                             <th className=" p-1  border-b-2  lg:px-4 lg:py-4">Date</th>
+                                            <th className=" p-1  border-b-2  lg:px-4 lg:py-4">Name</th>
                                             <th className=" p-1  border-b-2  lg:px-4 lg:py-4">Order Id</th>
                                             <th className=" p-1  border-b-2  lg:px-4 lg:py-4">Order Value</th>
                                             <th className=" p-1  border-b-2  lg:px-4 lg:py-4">Earning</th>
@@ -676,6 +742,7 @@ const UserWallet = () => {
                                         ( data?.level2).map((commission) => (
                                             <tr className='bg-white' key={commission.id}>
                                                 <td className=' p-1  border-b-2  lg:px-4 lg:py-4 text:10px sm:text-xs lg:text-lg font-md text-gray-600'>{formateDate(commission.created_at)}</td>
+                                                <td className=' p-1  border-b-2  lg:px-4 lg:py-4 text:10px sm:text-xs lg:text-lg font-md text-gray-600'>{commission.customer_name}</td>
                                                 <td className='p-1 border-b-2  lg:px-4 lg:py-4 text:10px sm:text-xs  lg:text-lg font-md text-gray-600' >{commission.order_track_number}</td>
                                                 <td className='p-1 border-b-2  lg:px-4 lg:py-4 text:10px sm:text-xs  lg:text-lg font-md text-gray-600' >₹{commission.commission_value}</td>
                                                 <td className='p-1 border-b-2  lg:px-4 lg:py-4 sm:text-10px  text:xs lg:text-lg font-md text-green-600' >₹{commission.earning}</td>
@@ -694,6 +761,7 @@ const UserWallet = () => {
                                 <thead className=' font-normal text-10px md:text-md lg:text-lg p-10'>
                                     <tr className='p-10  font-normal text-10px md:text-md lg:text-sm '>
                                         <th className=" p-1  border-b-2  lg:px-4 lg:py-4">Date</th>
+                                        <th className=" p-1  border-b-2  lg:px-4 lg:py-4">Name</th>
                                         <th className=" p-1  border-b-2  lg:px-4 lg:py-4">Order Name</th>
                                         <th className=" p-1  border-b-2  lg:px-4 lg:py-4">Order Value</th>
                                         <th className=" p-1  border-b-2  lg:px-4 lg:py-4">Earning</th>
@@ -714,6 +782,7 @@ const UserWallet = () => {
                                     ( data?.level3).map((commission) => (
                                         <tr className='bg-white' key={commission.id}>
                                             <td className=' p-1  border-b-2  lg:px-4 lg:py-4 text:10px sm:text-xs lg:text-xl font-md text-gray-600'>{formateDate(commission.created_at)}</td>
+                                            <td className=' p-1  border-b-2  lg:px-4 lg:py-4 text:10px sm:text-xs lg:text-xl font-md text-gray-600'>{commission.customer_name}</td>
                                             <td className='p-1 border-b-2  lg:px-4 lg:py-4 text:10px sm:text-xs  lg:text-xl font-md text-gray-600' >{commission.order_track_number}</td>
                                             <td className='p-1 border-b-2  lg:px-4 lg:py-4 text:10px sm:text-xs  lg:text-xl font-md text-gray-600' >₹{commission.commission_value}</td>
                                             <td className='p-1 border-b-2  lg:px-4 lg:py-4 sm:text-10px  text:xs lg:text-xl font-md text-gray-600' >₹{commission.earning}</td>
