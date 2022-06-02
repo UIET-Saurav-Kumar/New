@@ -36,9 +36,9 @@ export default function GetCurrentLocation({
     }
 
 //    call get loc when page loads
-    useEffect(() => {
-        !!localStorage.getItem('location')  && getLoc()
-    }, []);
+  //  useEffect(() => {
+       // !!localStorage.getItem('location')  && getLoc()
+   // }, []);
 
 
     async function showPosition(position:any) {
