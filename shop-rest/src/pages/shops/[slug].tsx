@@ -253,9 +253,10 @@ const ShopPage = ({ data }: any) => {
                                   
                                 </div> 
                               </> : ' '  }
-                                <div id='product-feed' className="static  z-10 top-10 w-full">{data && 
+                                <div id='product-feed' className="static  z-10 top-10 w-full">
+                                  {data && 
                                 // <ShopProductFeed shopId={data.id} />
-                                    <Feed  shopId={data.id} />
+                                    <Feed shopData={data} shopId={data.id} />
                                 }</div>
                            </div> 
 
@@ -283,9 +284,9 @@ const ShopPage = ({ data }: any) => {
       {width > 1023 && <CartCounterButton />}
 
     </div>
-      <div className='block lg:hidden w-screen'>
+      <div className='block lg:hidden w-full'>
 
-          <ShopMobileView data={data}/>
+          <ShopMobileView shopData={data} data={data}/>
 
       </div>
     </>
