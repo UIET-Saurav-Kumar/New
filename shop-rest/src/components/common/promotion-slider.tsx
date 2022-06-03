@@ -4,6 +4,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { useTranslation } from "next-i18next";
 import "swiper/swiper-bundle.css";
 // dummy data
+import { fetchShops, useShopsQuery } from "@data/shop/use-search-shop-query";
+import { useLocation } from "@contexts/location/location.context";
+import { useRouter } from "next/router";
+import { Fragment, useRef } from "react";
+import { ROUTES } from "@utils/routes";
+import Link from 'next/link';
 
 
 const data = [
@@ -103,7 +109,30 @@ const offerSliderBreakpoints = {
 SwiperCore.use([Navigation]);
 
 export default function PromotionSlider() {
+  const router = useRouter();
   const { t } = useTranslation();
+  const {getLocation} = useLocation()
+
+
+  const { data: shopData } = useShopsQuery({
+    category:'Salon+-+Spa',
+    limit:3000000,
+    location:((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any,
+    is_active:1,
+    // page:1,
+    search:getSearch()
+  });
+  function getSearch():string{
+    
+    const { query } = useRouter();
+    
+    if(query.text){
+      return query.text as string
+    }
+    return "";
+  }
+
+  console.log(shopData)
 
   return (
 
@@ -118,16 +147,34 @@ export default function PromotionSlider() {
             prevEl: ".prev",
           }}
         >
-          {data?.map((d) => (
-            <SwiperSlide key={d.id}>
-              <img
-                className="w-20 object-fit rounded h-20 lg:h-32 border-3 border-gold lg:w-32  "
-                src={d.bannerUrl}
+          {shopData?.pages?.map((page, idx) => {
+                      return (
+                        <Fragment key={idx}>
+                          {page.data.filter((shop) => shop.is_active === 1).map((shop: any) => (
+            <SwiperSlide key={idx}>
+                
+                <Link href={`${ROUTES.SHOPS}/${shop.slug}`}>
+                  <div className="flex flex-col items-center ">
+                <img
+                className="w-20 object-contain rounded h-20 lg:h-36 border-3 border-gold lg:w-36 "
+                src={shop?.logo?.thumbnail}
                 // alt={t(d.title)}
               
               />
+              <p className = "text-xs  mt-2 text-center font-semibold">
+                {shop?.address?.street_address?.split(",")[0] + '' + shop?.address?.street_address?.split(",")[1] }
+              </p>
+              <p className = "text-xs text-center font-light">
+                {shop?.address?.city}
+              </p>
+              </div>
+              </Link>
             </SwiperSlide>
-          ))}
+             ))}
+             </Fragment>
+           );
+           })}
+         
         </Swiper>
         <div
           className="prev cursor-pointer bg-gold absolute text-white top-2/4 -start-2 md:-start-5 z-10 -mt-4 md:-mt-5 w-8 h-8 md:w-9 md:h-9 rounded-full bg-light shadow-xl border border-border-200  flex items-center justify-center text-heading transition-all duration-200 hover:bg-accent hover:text-light hover:border-accent"
