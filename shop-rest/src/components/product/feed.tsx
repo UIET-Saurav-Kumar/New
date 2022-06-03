@@ -12,12 +12,13 @@ import { useTranslation } from "next-i18next";
 import useIntersectionObserver from "./useIntersectionObserver";
 import RelatedProducts from "./product-details/related-products";
 
-
+import Link from 'next/link';
+import ProductNotFoundInfo from "./product-not-found-info";
 const ProductFeedLoader = dynamic(
   () => import("@components/ui/loaders/product-feed-loader")
 );
 
-const Feed = ({ shopId }: { shopId: string }) => {
+const Feed = ({ shopId, shopData }: { shopId: string }) => {
 
   const { t } = useTranslation("common");
   const { query } = useRouter();
@@ -45,6 +46,7 @@ const Feed = ({ shopId }: { shopId: string }) => {
   });
 
    console.log('feed ',data)
+   console.log('shopData ',shopData)
 
   useIntersectionObserver({
     target: loadMoreRef,
@@ -59,11 +61,11 @@ const Feed = ({ shopId }: { shopId: string }) => {
   }
 
   if (!loading && !data?.pages?.[0]?.data?.length) {
+
     return (
-      <div className="bg-gray-100 min-h-full pt-6 pb-8 px-4 lg:p-8">
-        <ProductNotFound text="text-not-found" className="w-1/3 mx-auto" />
-        {/* <img src='/not-found.png'
-        className="object-contain mx-auto"/> */}
+
+      <div className="w-full text-center mx-auto ml-8">
+        <ProductNotFoundInfo shopData={shopData} />
       </div>
     );
   }
