@@ -23,6 +23,8 @@ import { useEffect } from "react";
 import Helium from '@components/product/product-card/helium';
 import CartCounterButton from '@components/cart/cart-counter-button';
 import { useWindowDimensions } from '@components/common/search';
+import { fetchShops, useShopsQuery } from "@data/shop/use-search-shop-query";
+import ShopCard2 from '@components/ui/shop-card2';
 
   const ProductFeedLoader = dynamic(
     () => import("@components/ui/loaders/product-feed-loader")
@@ -230,6 +232,31 @@ export default function SalonPage() {
               setBtn2(true);
           }
 
+          const { data: shopData } = useShopsQuery({
+            category:'Salon+-+Spa',
+            limit:3000000,
+            location:((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any,
+            is_active:1,
+            // page:1,
+            search:getSearch()
+          });
+
+          function getCategory():string{
+              return 'Salon & Spa' as string; 
+          }
+
+          function getSearch():string{
+    
+            const { query } = useRouter();
+            
+            if(query.text){
+              return query.text as string
+            }
+            return "";
+          }
+
+          console.log('shop-data', shopData);
+
           // console.log('salon category products',salonProducts?.products.data.filter(product => product?.categories.map( cat => cat.name === 'Services')   )  )
             
           // console.log('salonProduct',salonProducts?.products.data.filter(product => product?.status === 'publish' && product?.categories?.name === 'Hair Spa'  )  )
@@ -249,18 +276,37 @@ export default function SalonPage() {
 
     <div className='bg-gradient-to-r from-indigo-50 via-purple-50 to-pink-50 h-full border bg-white w-full'>
       
-        <div className='w-full h-full'>
+        {/* <div className='w-full h-full'>
             <picture className="w-full h-full" >
                   <source media="(max-width: 1023px)" style={{objectFit:'cover'}} srcset="/mob-salon-banner.jpeg"/>
                   <source media="(min-width: 1024px)" style={{objectFit:'contain'}} srcset="/salon-banner.jpg"/>
                   <img src="/ad-banner.jpg" style={{height:'100%', width:'100%'}} alt="Top Salon Services on Buylowcal"/>
               </picture>
-        </div>
+        </div> */}
 
-        <div className='flex flex-col lg:px-4 py-4'>
-            <h4 className='text-2xl lg:text-3xl font-serif text-gray-900 font-medium ml-2 lg:ml-4 py-4 tracking-normal'>Top Salons of Tricity</h4>
+        {/* <div className='flex items-center overflow-y-scroll w-full h-auto'>
+                    {shopData?.pages?.map((page, idx) => {
+                      return (
+                        <Fragment key={idx}>
+                          {page.data.filter((shop) => shop.is_active === 1).map((shop: any) => (
+                            <ShopCard2 shop={shop} key={shop.id} />
+                          ))}
+                        </Fragment>
+                      );
+                      })}
+          </div> */}
+
+        
+
+        <div className='flex flex-col lg:px-4 mt-0 lg:mt-10 py-4'>
+
+            <h4 className='text-xl flex items-center justify-between lg:text-3xl font-serif text-gray-900 font-medium ml-2 lg:ml-4 py-4 tracking-normal'>
+              Top Salons Near You <Link href='/shops?category=Salon+-+Spa'><span className='text-blue-800 cursor-pointer hover-underline text-sm '>view all</span></Link>
+            </h4>
             <PromotionSlider/>
         </div>
+
+
 
         <h3 className='font-medium text-2xl font-serif lg:text-3xl text-gray-900 py-4 ml-2 lg:ml-8  lg:mt-10 tracking-normal'>Women</h3>
 
