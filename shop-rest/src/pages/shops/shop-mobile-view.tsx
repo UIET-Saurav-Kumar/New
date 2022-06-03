@@ -24,7 +24,7 @@ import Layout from "@components/layout/layout";
 
 
 
-export default function ShopMobileView({data}: any) {
+export default function ShopMobileView({data, shopData}: any) {
 
     const { query } = useRouter();
     const { type } = query;
@@ -166,18 +166,19 @@ export default function ShopMobileView({data}: any) {
 
                </>  :
                 <div className='relative mt-2 flex'> 
-                <div className='flex  border bg-white h-screen top-14 sticky  flex-col w-auto'>   
-                            <CategoryDropdownSidebar />
-                          
-                </div>   
-             <div className="flex flex-col w-5/6">
-             <h1 id='category-heading' style={{top:'56px'}} id='product-heading' 
-             className=" sticky border-t bg-white  py-3 px-2 z-50 font-semibold text-gray-600 font-mono  text-sm sm:text-lg transition-transform duration-75">  
-                            { query?.category?.replace(/\b\w/g, (l :any) => l.toUpperCase())   } Products
-                          </h1>
-               {data && <Feed shopId={data.id} />}
-               </div>
-           </div> 
+                  {categoryData?.categories?.data?.length ? 
+                    <div className='flex  border bg-white h-screen top-14 sticky  flex-col w-auto'>   
+                                <CategoryDropdownSidebar />
+                              
+                    </div>  :'' } 
+                  <div className="flex flex-col w-5/6">
+                      {categoryData?.categories?.data?.length  ? <h1 id='category-heading' style={{top:'56px'}} id='product-heading' 
+                          className=" sticky border-t bg-white  py-3 px-2 z-50 font-semibold text-gray-600 font-mono  text-sm sm:text-lg transition-transform duration-75">  
+                          { query?.category?.replace(/\b\w/g, (l :any) => l.toUpperCase())   } Products
+                      </h1> : '' }
+                      {data && <Feed shopData={data} shopId={data.id} />}
+                  </div>
+               </div> 
 
 
                }
