@@ -64,7 +64,7 @@ const Feed = ({ shopId, shopData }: { shopId: string }) => {
 
     return (
 
-      <div className="w-full text-center mx-auto ml-8">
+      <div className="w-full mx-2 mt-5">
         <ProductNotFoundInfo shopData={shopData} />
       </div>
     );
