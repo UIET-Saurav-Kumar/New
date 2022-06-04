@@ -274,6 +274,7 @@ class OrderRepository extends BaseRepository
                         "productDetail"=> json_encode($request->products),
                         "price"=> $request->amount,
                         "orderId"=> $request->tracking_number,
+                        "delivery_time"=> $request->delivery_time,
                         "payment_gateway"=> $request->payment_gateway,
                         "currency"=>"INR"
                     ],
