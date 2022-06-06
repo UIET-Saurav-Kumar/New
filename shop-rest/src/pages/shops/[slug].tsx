@@ -105,6 +105,31 @@ const ShopPage = ({ data }: any) => {
     pageURL.includes('chandigarhgrocerystore') ? window.scrollTo(0, 670) : window.scrollTo(0, 0)
   }, []);
 
+  function useScrollDirection() {
+    const [scrollDirection, setScrollDirection] = useState(null);
+  
+    useEffect(() => {
+      let lastScrollY = typeof window !== "undefined" ?  window.pageYOffset : '';
+  
+      const updateScrollDirection = () => {
+        const scrollY = window.pageYOffset;
+        const direction = scrollY > lastScrollY ? "down" : "up";
+        if (direction !== scrollDirection && (scrollY - lastScrollY > 5 || scrollY - lastScrollY < -5)) {
+          setScrollDirection(direction);
+        }
+        lastScrollY = scrollY > 0 ? scrollY : 0;
+      };
+      window.addEventListener("scroll", updateScrollDirection); // add event listener
+      return () => {
+        window.removeEventListener("scroll", updateScrollDirection); // clean up
+      }
+    }, [scrollDirection]);
+  
+    return scrollDirection;
+  };
+
+  const scrollDirection = useScrollDirection();
+
   // var ProductFeed = document.getElementById("product-feed");
 
   // console.log('offset value', ProductFeed?.offsetTop)
@@ -235,11 +260,11 @@ const ShopPage = ({ data }: any) => {
                                     <img src='/kosmetics.jpg' className="object-contain" />
                              </div> ) : null }
 
-                          <HidingHeader>
-                                                                               
+                          {/* <HidingHeader> */}
+                          <div className={` sticky ${ scrollDirection === "down" ? "-top-32" : "top-0"}   transition-all duration-300 sticky z-50 bg-white top-0`}>                                              
                               <CategoryDropdownSidebar data={data} />
-                                         
-                          </HidingHeader> 
+                          </div>
+                          {/* </HidingHeader>  */}
 
                           <div className='relative top-0 flex flex-col'> 
                               { categoryData?.categories?.data?.length ? 
