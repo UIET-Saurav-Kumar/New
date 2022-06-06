@@ -37,7 +37,7 @@ const CartCounterButton = () => {
   );
 
   const { price: totalPrice } = usePrice({
-    amount: available_items_total - delivery_charges,
+    amount: available_items_total ,
   });
 
 
