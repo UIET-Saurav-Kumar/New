@@ -13,6 +13,7 @@ import { DollarIcon } from "@components/icons/dollar";
 import { useCustomerQuery } from "@data/customer/use-customer.query";
 
 
+
 const ReferralActivity = () => {
 
     const { data:customerData } = useCustomerQuery();

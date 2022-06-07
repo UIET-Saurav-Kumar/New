@@ -32,7 +32,7 @@ const ReviewImageModal = () => {
           initialSlide={data?.initSlide ?? 0}
           onSwiper={(swiper) => {
             setTimeout(() => {
-              swiper.navigation.init();
+              swiper?.navigation?.init();
             }, 100);
           }}
           loop={data?.images?.length > 1}

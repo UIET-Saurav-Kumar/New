@@ -30,6 +30,7 @@ import Tandoor from "@components/home-page-product-section/tandoor";
 import InvoiceBanner from "@components/home-page-product-section/invoice-banner";
 import HeaterBanner from "@components/home-page-product-section/heater-banner";
 import RedBullBanner from "@components/home-page-product-section/red-bull-banner";
+import UserDashboard from "@components/home-page-product-section/UserDashboard";
 
 
 
@@ -141,7 +142,9 @@ const {
                 {/* // animation on component load */}
                 {/* <div className="absolute top-0 left-0 w-full h-full bg-black opacity-75" /> */}
                 
-                <ImageSlider/>
+                {/* <ImageSlider/> */}
+                {/* <img src='/user-dashboard.jpeg' className=" w-full h-full object-cover" /> */}
+                <UserDashboard/>
                 <RedBullBanner/>
                 <AllCategories/>
                 {/* <InvoiceBanner/> */}
