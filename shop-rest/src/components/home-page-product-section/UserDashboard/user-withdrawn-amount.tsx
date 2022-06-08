@@ -15,7 +15,7 @@ export default function UserWithdrawnAmount({withdrawnAmount,isAuthorize}:any) {
 }
   return (
 
-    <div className='relative flex-1 flex-col hover:drop-shadow-2xl  lg:py-8  bg-white h-44 lg:h-full  justify-center rounded-xl p-2 px-3'>
+    <div className='relative flex-1 flex-col  hover:drop-shadow-2xl  lg:py-8  bg-white h-44 lg:h-full  justify-center rounded-xl p-2 px-3'>
        
         <div className='flex items-start h-full  align-center space-x-4 justify-evenly'>
 
@@ -24,7 +24,7 @@ export default function UserWithdrawnAmount({withdrawnAmount,isAuthorize}:any) {
         </div>
             
             <div className='text-xl w-auto  md:w-36 xl:w-40 2xl:w-48  font-light text-gray-500'>
-                <h4 className='font-semibold text-lg sm:text-sm  2xl:text-xl text-gray-800 '>
+                <h4 className='font-semibold text-lg sm:text-sm xl:text-lg 2xl:text-xl text-gray-800 '>
                         Withdrawn Amount
                 </h4>
                 <p className='text-lg sm:text-sm  lg:text-xl xl:text-2xl mt-4 font-light text-gray-600'>
@@ -40,9 +40,9 @@ export default function UserWithdrawnAmount({withdrawnAmount,isAuthorize}:any) {
                         
                   </span>
                   <div className=''>
-                 <button onClick={getLink} className=' font-semibold left-12 lg:left-6 xl:left-12 bottom-2 absolute
+                 <button onClick={getLink} className=' font-semibold  bottom-2 absolute
                             bg-gradient-to-r from-gray-600 to-blue-500 hover:from-gray-500 hover:to-blue-700
-                             text-white text-lg px-3 lg:px-4 xl:px-7 py-1 lg:py-1 xl:py-2 rounded-lg'>
+                             text-white text-lg px-5 lg:px-4 xl:px-7 py-1 lg:py-1 xl:py-2 rounded-lg'>
                       Check
                   </button> 
                 </div>

@@ -19,7 +19,7 @@ export default function UserUploadInvoiceCard() {
 
   return (
       
-    <div className=' flex-1 flex-col border hover:drop-shadow-2xl lg:py-8 bg-white h-44 lg:h-full  rounded-lg p-2 px-3'>
+    <div className=' flex-1 flex-col border hover:drop-shadow-2xl  lg:py-8 bg-white h-44 lg:h-full  rounded-lg p-2 px-3'>
         
         <div className='flex items-start space-x-4 h-full justify-evenly'>
         
@@ -28,7 +28,7 @@ export default function UserUploadInvoiceCard() {
           </div>
             <div className='flex flex-col text-lg w-auto md:w-36 xl:w-40 2xl:w-44 lg:text-2xl space-y-2 font-light text-gray-500'>
               <div className='flex flex-col h-28 space-y-2 '>
-                  <h4 className='font-semibold text-lg sm:text-sm   2xl:text-xl text-gray-800 '>
+                  <h4 className='font-semibold text-lg sm:text-sm xl:text-lg  2xl:text-xl text-gray-800 '>
                           Upload Invoice
                   </h4>
                   <span className='text-xs h-28  w-44 md:w-auto text-gray-400'>
@@ -39,7 +39,7 @@ export default function UserUploadInvoiceCard() {
               <div className=''>
                   <button onClick={getLink} className=' font-semibold text-lg lg:mt-8
                             bg-gradient-to-r from-green-500 to-blue-800 hover:from-green-700 hover:to-blue-900
-                             text-white  px-3 lg:px-3 xl:px-7 py-1 lg:py-1 xl:py-2 rounded-xl'>
+                             text-white  px-5 lg:px-3 xl:px-7 py-1 lg:py-1 xl:py-2 rounded-lg'>
                       Upload
                   </button>
                 </div>

@@ -18,7 +18,7 @@ export default function UserWithdrawCard({currentBalance}:any) {
 }
   return (
 
-    <div className='flex-1 flex-col h-44 lg:h-full lg:py-8 hover:drop-shadow-2xl  
+    <div className='flex-1 flex-col h-44 lg:h-full lg:py-8  hover:drop-shadow-2xl  
                     bg-white rounded-lg p-2 px-3'>
         
         <div className='flex items-start  space-x-4 justify-evenly'>
@@ -29,9 +29,9 @@ export default function UserWithdrawCard({currentBalance}:any) {
                </div>
             {/* </div> */}
             
-            <div className=' flex flex-col text-xl md:w-36 2xl:w-48 font-light text-gray-500'>
+            <div className=' flex flex-col text-xl md:w-36 xl:w-44 2xl:w-48 font-light text-gray-500'>
                 <div className='flex flex-col  h-28 w-44 md:w-auto space-y-1 '>
-                      <h4 className='font-semibold text-lg sm:text-sm   2xl:text-xl text-gray-800 '>
+                      <h4 className='font-semibold text-lg sm:text-sm xl:text-lg  2xl:text-xl text-gray-800 '>
                             Request Withdraw
                       </h4>
                       <span className='text-xs py-2 h-28  text-gray-400'>
