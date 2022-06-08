@@ -48,18 +48,20 @@ export default function UserTotalEarning({totalEarnings}:any) {
                     </p>
                     
                 {/* </div> */}
-                <div className='flex flex-col h-28 space-y-1'>
+                <div className=' flex flex-col text-xl md:w-36 xl:w-44 2xl:w-48 font-light text-gray-500'>
+                <div className='flex flex-col  h-28 lg:h-auto w-44 md:w-auto space-y-1 '>
 
                   <p className=' items-center space-x-2 text-sm w-44 lg:w-auto font-light text-gray-500'>
                     <span className='text-2xl mr-'>🎉</span>Get<span className=' font-semibold text- '>FLAT 5%</span> <br/>
                     <span className='pl-1'>on every order</span>
                   </p>
+                </div>
 
                   <div className=''>
   
-                  <button onClick={getLink} className='  bottom-2 absolute bg-gradient-to-r from-green-500 to-magenta px-5 
+                  <button onClick={getLink} className=' bottom-2 lg:bottom-6 absolute bg-gradient-to-r from-green-500 to-magenta px-5 
                   hover:from-green-600 hover:to-yellow-600
-                            text-white font-semibold lg:px-5 xl:px-9 py-1 lg:py-2 xl:py-2 rounded-lg shadow-md'>
+                            text-white font-semibold lg:px-4 xl:px-9 py-1 lg:py-1 xl:py-2 rounded-lg shadow-md'>
                     View
                   </button>
              

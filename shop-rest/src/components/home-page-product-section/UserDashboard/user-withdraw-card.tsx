@@ -26,7 +26,7 @@ export default function UserWithdrawCard({currentBalance}:any) {
             {/* <div className='w-20'> */}
             <div className='relative rounded-full px-2 pt-2 bg-green-200 w-16 h-16 '>
                <img src='/dashboard/money-withdrawal.png' className='w-12 h-12' alt='money' />
-               </div>
+            </div>
             {/* </div> */}
             
             <div className=' flex flex-col text-xl md:w-36 xl:w-44 2xl:w-48 font-light text-gray-500'>
@@ -34,7 +34,7 @@ export default function UserWithdrawCard({currentBalance}:any) {
                       <h4 className='font-semibold text-lg sm:text-sm xl:text-lg  2xl:text-xl text-gray-800 '>
                             Request Withdraw
                       </h4>
-                      <span className='text-xs py-2 h-28  text-gray-400'>
+                      <span className='text-xs py-2 h-28 lg:h-auto text-gray-400'>
                           Get instant cash in bank <br/>
                            <span className='font-semibold'>zero commission</span> charges<br/>
                           Available : <span className='font-semibold text-lg '>{isAuthorize ? currentBalance : '₹' + ' ' + '0.00'}</span>

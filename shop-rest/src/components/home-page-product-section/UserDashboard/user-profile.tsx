@@ -22,7 +22,7 @@ export default function UserProfile({data}:any) {
 
   return (
 
-        <div className='flex flex-col rounded-xl xl:h-100 xl:space-y-6 2xl:py-9 shadow-3xl w-full  bg-gradient-to-r from-red-50   to-blue-50 drop-shadow-2xl p-3'>
+        <div className='flex flex-col justify-evenly rounded-xl lg:h-110 xl:space-y-4 2xl:py-5 shadow-3xl w-full  bg-gradient-to-r from-red-50   to-blue-50 drop-shadow-2xl p-6  sm:p-3'>
         
             {/* <div className=''> */}
             <div className='flex space-x-3 items-center border-b pb-3 '>
