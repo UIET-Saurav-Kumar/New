@@ -1,6 +1,21 @@
 import React from 'react'
+import { useRouter } from "next/router";
+import { useModalAction } from "@components/ui/modal/modal.context";
+import { useUI } from "@contexts/ui.context";
 
 export default function UserUploadInvoiceCard() {
+
+  const { openModal } = useModalAction();
+  const router = useRouter();
+
+  const { isAuthorize, displayHeaderSearch, displayMobileSearch } = useUI();
+
+  function getLink() {
+		
+    isAuthorize ? router.push('/user/upload-invoice/upload-form') :
+     openModal("REGISTER")
+
+}
 
   return (
       
@@ -12,19 +27,19 @@ export default function UserUploadInvoiceCard() {
             <img src='/dashboard/photo.png' className='w-16 h-16' alt='money' />
           </div>
             <div className='flex flex-col text-lg lg:text-2xl space-y-2 font-light text-gray-500'>
-              <div className='flex flex-col h-28 space-y-1 '>
-                  <h4 className='font-semibold text-lg lg:text-xl xl:text-2xl text-gray-800 '>
+              <div className='flex flex-col h-28 space-y-2 '>
+                  <h4 className='font-semibold text-lg sm:text-sm   xl:text-2xl text-gray-800 '>
                           Upload Invoice
                   </h4>
-                  <span className='text-sm h-28 text-gray-400'>
-                      Upload Invoice/Bill and get <br/> <span className='font-semibold'>5% </span>  
+                  <span className='text-xs h-28  w-44 md:w-auto text-gray-400'>
+                      Upload Invoice/Bill and get  <span className='font-semibold'>5% </span>  
                       cashback <br/> upto ₹50 per bill 
                   </span>
               </div> 
               <div className=''>
-                  <button className=' font-semibold 
-                            bg-gradient-to-r from-green-500 to-blue-800
-                             text-white  px-5 lg:px-7 py-1 lg:py-3 rounded-xl'>
+                  <button onClick={getLink} className=' font-semibold text-lg
+                            bg-gradient-to-r from-green-500 to-blue-800 hover:from-green-700 hover:to-blue-900
+                             text-white  px-3 lg:px-3 xl:px-7 py-1 lg:py-1 xl:py-2 rounded-xl'>
                       Upload
                   </button>
                 </div>

@@ -1,6 +1,20 @@
 import React from 'react'
+import { useRouter } from "next/router";
+import { useModalAction } from "@components/ui/modal/modal.context";
+import { useUI } from "@contexts/ui.context";
 
 export default function UserInviteCard() {
+  const { openModal } = useModalAction();
+  const router = useRouter();
+
+  const { isAuthorize, displayHeaderSearch, displayMobileSearch } = useUI();
+
+  function getLink() {
+		
+    isAuthorize ? router.push('/user/invite') :
+     openModal("REGISTER")
+
+}
 
   return (
 
@@ -14,20 +28,20 @@ export default function UserInviteCard() {
 
             <div className='flex flex-col text-lg space-y-2 font-light text-gray-500'>
                 <div className='flex flex-col h-28 space-y-1 '>
-                    <h4 className='font-semibold text-lg lg:text-xl xl:text-2xl text-gray-800 '>
+                    <h4 className='font-semibold text-lg sm:text-sm  xl:text-2xl text-gray-800 '>
                           Invite Friends
                   </h4>
-                  <span className='text-sm py-2 h-28 w-44 lg:w-auto text-gray-400'>
+                  <span className='text-xs py-2 h-28 w-44 lg:w-auto text-gray-400'>
                       Get   <span className='font-semibold'>₹10 cashback </span>  
-                        per user <br/> registered with you and <br/>
+                        per user <br/> registered with you  <br/>
                         
                   </span>
                 </div>
 
                 <div className=''>
-                  <button className=' font-semibold 
-                            bg-gradient-to-r from-red-500 to-yellow-500
-                             text-white  px-5 lg:px-7 py-1 lg:py-3 rounded-xl'>
+                  <button onClick={getLink} className=' font-semibold 
+                            bg-gradient-to-r from-yellow-400 to-red-500 hover:from-yellow-600 hover:to-red-600
+                             text-white text-lg px-3 lg:px-5 xl:px-7 py-1 lg:py-1 xl:py-2 rounded-lg'>
                       Invite
                   </button>
                 </div>

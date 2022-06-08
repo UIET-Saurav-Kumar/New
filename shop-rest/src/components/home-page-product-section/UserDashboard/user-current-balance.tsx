@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function UserCurrentBalance() {
+export default function UserCurrentBalance({currentBalance,isAuthorize}:any) {
 
   return (
 
@@ -9,13 +9,18 @@ export default function UserCurrentBalance() {
            
             <img src='/dashboard/wallet.png' className='w-16 h-16' alt='money' />
             
-            <div className='text-sm lg:text-xl  font-light text-gray-500'>
-                <h4 className='font-semibold text-lg lg:text-xl xl:text-2xl text-gray-800 '>
+            <div className='flex flex-col text-sm lg:text-xl  font-light text-gray-500'>
+                <h4 className='font-semibold text-lg sm:text-sm xl:text-2xl text-gray-800 '>
                     Current Balance
                 </h4>
                 <p className='text-lg lg:text-xl xl:text-2xl text-gray-700 mt-4 font-light'>
-                    ₹4000.00
+                {isAuthorize ? currentBalance : '₹' + ' ' + '0.00'} 
                 </p>
+                <span className='text-xs py-2 h-28  text-gray-400'>
+                          Available amount that you can    <br/>
+                            can withdraw any time. <br/>
+                          With <span className='font-semibold'> No service charges.</span> 
+                </span>
             </div> 
                 
         </div>

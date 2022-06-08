@@ -11,6 +11,7 @@ import usePrice from "@utils/use-price";
 import { PriceWalletIcon } from "@components/icons/price-wallet";
 import { DollarIcon } from "@components/icons/dollar";
 import { useCustomerQuery } from "@data/customer/use-customer.query";
+import Props from '@components/home-page-product-section/UserDashboard/props';
 
 
 
@@ -18,7 +19,7 @@ const ReferralActivity = () => {
 
     const { data:customerData } = useCustomerQuery();
     
-    const { data,isLoading:loading } = useWalletCommissionQuery({
+    const { data , isLoading:loading } = useWalletCommissionQuery({
         limit: 10 as number,
         search:"",
     });
@@ -44,6 +45,8 @@ const ReferralActivity = () => {
             amount: data?.bill_transfered_amount!,
         }
     );
+
+
 
     function formateDate(date:string):string{
         var temp=date.substring(0,10).split('-');
@@ -228,6 +231,17 @@ const ReferralActivity = () => {
         console.log('total',total);
         console.log('data',data)
 
+            function relDiff(a, b){
+                return  100 * Math.abs( ( a - b ) / ( (a+b)/2 ) );
+            }
+
+           function percentage(num, per){
+                return 100*num/per
+            }
+           // example
+        //   console.log('difference',relDiff(100, 20).toFixed(1)+'%')
+        //   console.log('percentage',percentage(leader_this_month_earning, total).toFixed(1)+'%' + 'difference' + '' +relDiff(20, 100).toFixed(1)+'%') // returns 0.5
+        
 	return (
         <> 
               {/* <div className=''>
@@ -238,6 +252,8 @@ const ReferralActivity = () => {
 		<div className='invitation-status-page bg-white lg:bg-gray-100 flex flex-col'>  
 
             <Navbar label=''/>
+
+            {/* <Props lastMonthEarning={total} thisMonthEarning={leader_this_month_earning}/> */}
 
             <div className='flex mx-0 md:mx-8 -space-x-4 lg:mx-auto lg:space-x-0 '>
                 
@@ -259,23 +275,23 @@ const ReferralActivity = () => {
 
                                             <div className="flex items-center py-3 px-4 border-b border-gray-100">
 
-                                                <div className="p-3 rounded-full w-11 h-11 flex items-center justify-center bg-[#C7AF99] text-light">
-                                                        <PriceWalletIcon width={16} />
-                                                </div>
+                                                    <div className="p-3 rounded-full w-11 h-11 flex items-center justify-center bg-[#C7AF99] text-light">
+                                                            <PriceWalletIcon width={16} />
+                                                    </div>
 
-                                                <div className="ml-3">
-                                                    <p className="text-md lg:text-lg font-semibold text-sub-heading mb-0.5">
-                                                    {totalEarnings}
-                                                    </p>
-                                                    <p className="text-sm text-gray-700 mt-0">
-                                                        {("Total Earning")}
-                                                    </p>
-                                                </div>
+                                                    <div className="ml-3">
+                                                        <p className="text-md lg:text-lg font-semibold text-sub-heading mb-0.5">
+                                                        {totalEarnings}
+                                                        </p>
+                                                        <p className="text-sm text-gray-700 mt-0">
+                                                            {("Total Earning")}
+                                                        </p>
+                                                    </div>
 
                                             </div>
 
                                         </div>
-                                    </div>
+                                </div>
 
 
                                     

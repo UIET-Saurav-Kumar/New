@@ -173,7 +173,7 @@ export default function HeaderMiddle() {
       return  txt.length > 10 ? txt.substring(0, n) : txt
     }
 
-    const {getLocation} =useLocation()
+    const {getLocation} =useLocation();
     
     const { isAuthorize, displayHeaderSearch, displayMobileSearch } = useUI();
     

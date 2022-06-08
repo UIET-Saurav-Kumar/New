@@ -74,7 +74,7 @@ class UserController extends CoreController
     public function show($id)
     {
         try {
-            $user = $this->repository->with(['profile', 'address', 'shop', 'managed_shop'])->findOrFail($id);
+            $user = $this->repository->with(['profile', 'address', 'shop','balance', 'managed_shop'])->findOrFail($id);
             return $user;
         } catch (Exception $e) {
             throw new PickbazarException('PICKBAZAR_ERROR.NOT_FOUND');
@@ -119,7 +119,7 @@ class UserController extends CoreController
         $user = $request->user();
         
         if (isset($user)) {
-            return $this->repository->with(['profile', 'address', 'shops.balance', 'managed_shop.balance'])->find($user->id);
+            return $this->repository->with(['profile', 'address', 'shops.balance','balance', 'managed_shop.balance'])->find($user->id);
         }
         throw new PickbazarException('PICKBAZAR_ERROR.NOT_AUTHORIZED');
     }
