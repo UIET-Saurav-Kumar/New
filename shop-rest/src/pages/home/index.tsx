@@ -28,7 +28,7 @@ import { useShopAvailabilityQuery } from "@data/home/use-shop-availability-query
 import { useLocation } from "@contexts/location/location.context";
 import Tandoor from "@components/home-page-product-section/tandoor";
 import InvoiceBanner from "@components/home-page-product-section/invoice-banner";
-import HeaterBanner from "@components/home-page-product-section/heater-banner";
+import HomePageBanner from "@components/home-page-product-section/heater-banner";
 import RedBullBanner from "@components/home-page-product-section/red-bull-banner";
 import UserDashboard from "@components/home-page-product-section/UserDashboard";
 
@@ -151,7 +151,7 @@ const {
                 
                 <Tandoor/>
                 <ProductGrid/>
-                <HeaterBanner/>
+                <HomePageBanner />
                 <FeaturedShops />
                 <FeaturedProducts/>
               </div>
