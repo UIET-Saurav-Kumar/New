@@ -23,30 +23,36 @@ export default function UserProfile({data}:any) {
 
   //setInterval to increment the value by 2 every minute
     const [value, setValue] = useState(102166);
+
     //useEffect
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setValue(value + 2);
-        }, 10000);
-        return () => clearInterval(interval);
-    }, [value]);
+    // useEffect(() => {
+    //     const interval = setInterval(() => {
+    //         setValue(value + 2);
+    //     }, 10000);
+    //     return () => clearInterval(interval);
+    // }, [value]);
 
     // setInterval(() => {
     //   setValue(value + 2);
     // }, 60000);
+
+    
 
     const { data:analytics, isLoading: loading } = useAnalyticsQuery()
 
     console.log('analytics', analytics)
 
     const users = (analytics?.totalUsers + 100000)
-    //format the number to have comma seperated values
-    const formattedNumber = new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(users)
     
-
-
-
-
+    var x=users;
+    x=x.toString();
+    var lastThree = x.substring(x.length-3);
+    var otherNumbers = x.substring(0,x.length-3);
+    if(otherNumbers != '')
+        lastThree = ',' + lastThree;
+    var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+    
+    
 
   return (
 
@@ -71,7 +77,7 @@ export default function UserProfile({data}:any) {
                         <p className='text-lg  font-semibold'>{!!data ? data?.name : 'Guest'}</p>
                     </div>
                     <div className='font-semibold text-xl'><span>Buylowcal Community Count</span> 
-                      <p className='font-bold text-gray-600 mt-3 text-3xl'>{users}</p>
+                      <p className='font-bold text-gray-600 mt-3 text-3xl'>{res}</p>
                     </div>
                 </div>
 
