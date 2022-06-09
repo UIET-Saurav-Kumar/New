@@ -58,7 +58,7 @@ export default function UserProfile({data}:any) {
                         <p className='text-lg  font-semibold'>{!!data ? data?.name : 'Guest'}</p>
                     </div>
                     <div className='font-semibold text-xl'><span>Buylowcal Community Count</span> 
-                    <p className='font-bold text-gray-600 mt-3 text-3xl'>{value +'+'}</p>
+                        <p className='font-bold text-gray-600 mt-3 text-3xl'>{value +'+'}</p>
                     </div>
                 </div>
 
