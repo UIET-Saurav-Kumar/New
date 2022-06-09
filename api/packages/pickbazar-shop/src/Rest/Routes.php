@@ -89,6 +89,9 @@ Route::post('wishlists/toggle', [WishlistController::class, 'toggle']);
 Route::apiResource('wishlists', WishlistController::class, [
     'only' => ['index', 'store', 'destroy'],
 ]);
+
+//total users
+Route::get('total-users', 'PickBazar\Http\Controllers\AnalyticsController@totalUsers');
 Route::get('wishlists/in_wishlist/{product_id}', [WishlistController::class, 'in_wishlist']);
 Route::get('my-wishlists', [ProductController::class, 'myWishlists']);
 

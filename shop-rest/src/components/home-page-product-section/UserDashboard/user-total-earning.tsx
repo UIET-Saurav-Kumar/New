@@ -49,13 +49,12 @@ export default function UserTotalEarning({totalEarnings}:any) {
                     
                 {/* </div> */}
                 <div className=' flex flex-col text-xl md:w-36 xl:w-44 2xl:w-48 font-light text-gray-500'>
-                <div className='flex flex-col  h-28 lg:h-auto w-44 md:w-auto space-y-1 '>
-
-                  <p className=' items-center space-x-2 text-sm w-44 lg:w-auto font-light text-gray-500'>
-                    <span className='text-2xl mr-'></span>Get<span className=' font-semibold text- '>FLAT 4%</span> <br/>
-                    <span className='pl-1'>on every order</span>
-                  </p>
-                </div>
+                  <div className='flex flex-col  h-28 lg:h-auto w-44 md:w-auto space-y-1'>
+                    <p className=' items-center space-x-2 text-sm w-44 lg:w-auto font-light text-gray-500'>
+                      <span className='text-2xl '></span>Get<span className=' font-semibold text- '>FLAT 4%</span> <br/>
+                      <span className=''>on every order</span>
+                    </p>
+                  </div>
 
                   <div className=''>
   

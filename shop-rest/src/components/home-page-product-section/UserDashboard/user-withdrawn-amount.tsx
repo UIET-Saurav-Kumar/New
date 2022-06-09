@@ -37,13 +37,13 @@ export default function UserWithdrawnAmount({withdrawnAmount,isAuthorize}:any) {
                   <span className='tracking-wide text-xs py-2 h-28 lg:h-20 w-44 lg:w-auto text-gray-400'>
                        Amount transfered to your bank account                         
                   </span>
-                  <div className=''>
-                    <button onClick={getLink} className=' font-semibold  bottom-2 lg:bottom-6 absolute
-                                bg-gradient-to-r from-gray-600 to-blue-500 hover:from-gray-500 hover:to-blue-700
-                                text-white text-lg px-5 lg:px-4 xl:px-7 py-1 lg:py-1 xl:py-2 rounded-lg'>
-                          Check
-                      </button> 
-                </div>
+                    <div className=''>
+                        <button onClick={getLink} className=' font-semibold  bottom-2 lg:bottom-6 absolute
+                                    bg-gradient-to-r from-gray-600 to-blue-500 hover:from-gray-500 hover:to-blue-700
+                                    text-white text-lg px-5 lg:px-4 xl:px-7 py-1 lg:py-1 xl:py-2 rounded-lg'>
+                              Check
+                        </button> 
+                    </div>
                 </div>
                 
             </div> 

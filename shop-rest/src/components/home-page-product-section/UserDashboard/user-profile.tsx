@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { useModalAction } from "@components/ui/modal/modal.context";
 import { useUI } from "@contexts/ui.context";
 import { useState, useEffect } from 'react';
+import { useAnalyticsQuery } from '@data/analytics/use-analytics.query';
 
 export default function UserProfile({data}:any) {
 
@@ -34,6 +35,18 @@ export default function UserProfile({data}:any) {
     //   setValue(value + 2);
     // }, 60000);
 
+    const { data:analytics, isLoading: loading } = useAnalyticsQuery()
+
+    console.log('analytics', analytics)
+
+    const users = (analytics?.totalUsers + 100000)
+    //format the number to have comma seperated values
+    const formattedNumber = new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(users)
+    
+
+
+
+
 
   return (
 
@@ -58,15 +71,17 @@ export default function UserProfile({data}:any) {
                         <p className='text-lg  font-semibold'>{!!data ? data?.name : 'Guest'}</p>
                     </div>
                     <div className='font-semibold text-xl'><span>Buylowcal Community Count</span> 
-                        <p className='font-bold text-gray-600 mt-3 text-3xl'>{value +'+'}</p>
+                      <p className='font-bold text-gray-600 mt-3 text-3xl'>{users}</p>
                     </div>
                 </div>
 
                 <div className='flex space-y-8 flex-col'>
-                        <div onClick={getLink}  className='flex flex-col bg-gradient-to-l from-magenta to-blue-500  text-white text-center rounded-lg p-3'>
+                        <button onClick={getLink}  
+                                className='flex flex-col bg-gradient-to-l  transition duration-500 from-magenta to-blue-500 
+                                         text-white text-center rounded-lg p-3'>
                             <span className='font-bold text-3xl'> Explore </span>
                             <p className='text-xl font-semibold'>Your Community</p>
-                        </div>
+                        </button>
                         {/* <span onClick={getLink}  className='cursor-pointer flex items-center'>
                             <p className='text-sm hover:text-indigo-600 font-light'>Explore Your Community</p>
                             <ArrowCircleRightIcon className='h-7 w-7 ml-1 '/>

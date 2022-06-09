@@ -105,7 +105,7 @@ export default function UserDashboard() {
             //    console.log(relDiff(this_month, last_month_earning))
   return (
 
-        <div className='grid grid-cols-1 lg:flex items-center w-full mt-8 py-1 lg:py-3
+        <div className='grid grid-cols-1 lg:flex items-center w-full mt-0 py-1 lg:py-3
                         px-1 lg:px-3 space-x-2 lg:space-x-5 bg-gray-100'>
 
             <div className=' w-auto xl:w-100  '>

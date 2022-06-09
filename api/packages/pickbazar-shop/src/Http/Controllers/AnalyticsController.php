@@ -28,7 +28,7 @@ class AnalyticsController extends CoreController
     {
         $user = $request->user();
 
-        if ($user && ($user->hasPermissionTo(Permission::SUPER_ADMIN) || $user->hasPermissionTo(Permission::STORE_OWNER))) {
+        if ($user && ($user->hasPermissionTo(Permission::SUPER_ADMIN) || $user->hasPermissionTo(Permission::STORE_OWNER) || $user->hasPermissionTo(Permission::CUSTOMER))) {
             // $totalRevenueQuery = DB::table('orders')->whereDate('created_at', '>', Carbon::now()->subDays(30));
             $totalRevenueQuery = DB::table('orders');
 
@@ -122,6 +122,32 @@ class AnalyticsController extends CoreController
                 'bill_transfered_amount' =>$bill_transfered_amount
             ];
         }
+        throw new PickbazarException('PICKBAZAR_ERROR.NOT_AUTHORIZED');
+    }
+
+
+    // total users
+    public function totalUsers(Request $request)
+    {
+        // $user = $request->user();
+
+        // if (isset($user)) {
+            $totalUsersQuery = DB::table('users');
+
+            // if ($user) {
+                $totalUsers = $totalUsersQuery->count();
+                //totalshops
+                $totalShops = Shop::count();
+
+                //total shops minus total users
+                $users =   $totalUsers - $totalShops;
+            // } else {
+                // $totalUsers = $totalUsersQuery->where('shop_id', '=', $user->id)->count();
+            // }
+            return [
+                'totalUsers' => $users,
+            ];
+        // }
         throw new PickbazarException('PICKBAZAR_ERROR.NOT_AUTHORIZED');
     }
 

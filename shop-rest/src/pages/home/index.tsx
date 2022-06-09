@@ -31,6 +31,7 @@ import InvoiceBanner from "@components/home-page-product-section/invoice-banner"
 import HomePageBanner from "@components/home-page-product-section/heater-banner";
 import RedBullBanner from "@components/home-page-product-section/red-bull-banner";
 import UserDashboard from "@components/home-page-product-section/UserDashboard";
+import Tagline from "@components/home-page-product-section/tagline";
 
 
 
@@ -122,15 +123,13 @@ const {
     return (
         <div className=" h-full">
 
-          
-
     {loading ? (
          <div className="absolute top-0 left-0  h-screen bg-black opacity-80   z-50 w-full">
            {/* <img src='/preloader/cir.gif' className='sticky top-1/2 left-1/2 right- object-contain '/> */}
            {/* <iframe className="mx-auto mt-1/2 h-full " src="https://giphy.com/embed/3ohs7TrCSp7c8ZrxBe" width="80" height="80" frameBorder="0" class="giphy-embed" allowFullScreen>
              </iframe> */}
              
-           </div>
+          </div>
         ) : (
         <div className='lg:px-10 md:px-7 h-full '>
           {
@@ -144,6 +143,7 @@ const {
                 
                 {/* <ImageSlider/> */}
                 {/* <img src='/user-dashboard.jpeg' className=" w-full h-full object-cover" /> */}
+                <Tagline/>
                 <UserDashboard/>
                 <RedBullBanner/>
                 <AllCategories/>
@@ -154,6 +154,7 @@ const {
                 <HomePageBanner />
                 <FeaturedShops />
                 <FeaturedProducts/>
+                
               </div>
             )
           } 
@@ -164,11 +165,11 @@ const {
        {
           width > 1023 && 
           <CartCounterButton />
-      }
-      {
-        width < 1023 && 
-          <MobileNavigation />
-      }
+       }
+        {
+          width < 1023 && 
+            <MobileNavigation />
+        } 
         </div>
     )
     
