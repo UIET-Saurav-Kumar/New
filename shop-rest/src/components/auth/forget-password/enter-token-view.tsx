@@ -4,10 +4,12 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useTranslation } from "next-i18next";
 import * as yup from "yup";
+
 interface Props {
   onSubmit: (values: { token: string }) => void;
   loading: boolean;
 }
+
 const schema = yup.object().shape({
   token: yup.string().required("error-password-required"),
 });

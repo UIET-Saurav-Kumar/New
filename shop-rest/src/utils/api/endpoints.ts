@@ -16,6 +16,9 @@ export const API_ENDPOINTS: Record<string, string> = {
   ORDER_STATUS: "order_status",
   LOGIN: "token",
   SOCIAL_LOGIN: "social-login-token",
+  OTP_LOGIN: "otp-token",
+  VERIFY_OTP_TOKEN: "verify-otp-token",
+
   
   REGISTER: "register",
   FORGET_PASSWORD: "forget-password",

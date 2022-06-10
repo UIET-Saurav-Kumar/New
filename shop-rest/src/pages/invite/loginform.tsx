@@ -128,6 +128,7 @@ const LoginForm = () => {
           >
             {t("text-login")}
           </Button>
+          
         </div>
       </form>
       {/* End of forgot login form */}

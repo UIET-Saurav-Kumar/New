@@ -5,6 +5,13 @@ export type LoginInputType = {
 	email: string;
 	password: string;
 };
+
+//otp login
+export type OtpLoginInputType = {
+	phone_number: number;
+	// otp: string;
+};
+
 export type RegisterUserInputType = {
 	name: string;
 	email: string;
@@ -13,20 +20,28 @@ export type RegisterUserInputType = {
 	phone_number:number;
 	current_location: string;
 };
+
+
 export type VerifyUserInputType = {
 	id: string;
 	code: string;
 };
+
 export type ChangePasswordInputType = {
 	oldPassword: string;
 	newPassword: string;
 };
+
 export type ForgetPasswordInputType = {
 	email: string;
 };
+
 export type CodeInputType = {
 	id: string;
 };
+
+///verifyOtpInputType
+
 export type ResetPasswordInputType = {
 	email: string;
 	token: string;
@@ -60,6 +75,12 @@ class Auth extends CoreApi {
 			.post(API_ENDPOINTS.USER_VERIFY, input)
 			.then((res) => res.data);
 	}
+	//otpLogin
+	otpLogin(input: OtpLoginInputType) {
+		return this.http
+			.post(API_ENDPOINTS.OTP_LOGIN, input)
+			.then((res) => res.data);
+	}
 	logout() {
 		return this.http.post(API_ENDPOINTS.LOGOUT);
 	}
@@ -76,6 +97,13 @@ class Auth extends CoreApi {
 	resetPassword(input: ResetPasswordInputType) {
 		return this.http
 			.post(API_ENDPOINTS.RESET_PASSWORD, input)
+			.then((res) => res.data);
+	}
+
+	//verifyOtpToken
+	verifyOtpToken(input: CodeInputType) {
+		return this.http
+			.post(API_ENDPOINTS.VERIFY_OTP_TOKEN, input)
 			.then((res) => res.data);
 	}
 	verifyForgetPassword(input: VerifyPasswordInputType) {

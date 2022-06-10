@@ -16,6 +16,7 @@ import * as yup from "yup";
 import { FacebookIcon } from "@components/icons/facebook";
 import { GoogleIcon } from "@components/icons/google";
 import { useModalAction } from "@components/ui/modal/modal.context";
+import { MobileIcon } from "@components/icons/mobile-icon";
 
 
 
@@ -80,6 +81,7 @@ const LoginForm = () => {
       }
     );
   }
+
   return (
     <div className="py-6 px-5 sm:p-8 bg-light w-screen md:max-w-md h-screen md:h-auto flex flex-col justify-center">
         <div className="flex justify-center">
@@ -114,7 +116,7 @@ const LoginForm = () => {
           className="mb-5"
           forgotPageRouteOnClick={() => openModal("FORGOT_VIEW")}
         />
-        <div className="mt-8">
+        <div className="mt-8 space-y-4 ">
           <Button
             className="w-full bg-btn hover:bg-gradient-to-tl  from-magenta to-gold h-11 sm:h-12"
             loading={loading}
@@ -122,6 +124,14 @@ const LoginForm = () => {
           >
             {t("text-login")}
           </Button>
+          <Button
+          className="h-11 w-full bg-gradient-to-l from-gray-900 to-gray-500 hover:from-gray-800 hover:to-gray-800 !text-light hover:!bg-gray-600 sm:h-12"
+          disabled={loading}
+          onClick={() => openModal('OTP_LOGIN')}
+        >
+          <MobileIcon className="h-5 text-light ltr:mr-2 rtl:ml-2" />
+          {t('Login with Phone Number')}
+        </Button>
         </div>
       </form>
       {/* End of forgot login form */}

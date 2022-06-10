@@ -7,6 +7,7 @@ import { useResetPasswordMutation } from "@data/auth/use-reset-password.mutation
 import { useTranslation } from "next-i18next";
 import dynamic from "next/dynamic";
 import { useModalAction } from "@components/ui/modal/modal.context";
+import AuthorizedMenu from "@components/layout/navbar/authorized-menu";
 
 const EnterEmailView = dynamic(() => import("./enter-email-view"));
 const EnterTokenView = dynamic(() => import("./enter-token-view"));
@@ -25,6 +26,7 @@ const ForgotPassword = () => {
   const [verifiedEmail, setVerifiedEmail] = useState("");
   const [verifiedToken, setVerifiedToken] = useState("");
   const [phone_number,setPhoneNumber]=useState("")
+
   function handleEmailSubmit({ email }: { email: string }) {
     forgetPassword(
       {
@@ -52,6 +54,7 @@ const ForgotPassword = () => {
         onSuccess: (data) => {
           if (data.success) {
             setVerifiedToken(token);
+           
             
           } else {
             setErrorMsg(data?.message);

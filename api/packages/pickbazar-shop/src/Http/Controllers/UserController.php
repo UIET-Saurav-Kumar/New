@@ -32,6 +32,7 @@ use PickBazar\Database\Models\Permission as ModelsPermission;
 use PickBazar\Database\Models\SignupOffer;
 use PickBazar\Helpers\InteraktHelper;
 
+
 class UserController extends CoreController
 {
     public $repository;
@@ -138,6 +139,8 @@ class UserController extends CoreController
         }
         return ["token" => $user->createToken('auth_token')->plainTextToken, "permissions" => $user->getPermissionNames()];
     }
+
+    
 
     public function logout(Request $request)
     {
@@ -296,6 +299,53 @@ class UserController extends CoreController
         }
     }
 
+    public function otpToken(Request $request)
+    {
+        $request->validate([
+            'phone_number'    => 'required',
+
+        ]);
+
+        $user = User::where('phone_number', $request->phone_number)->where('is_active', true)->first();
+
+        
+        
+        $code=SMS::sendOTP($user->phone_number); 
+        $user->update([
+            "code"=>$code
+        ]);
+        if (!$user) {
+            return ['message' => 'PICKBAZAR_MESSAGE.NOT_FOUND', 'success' => false];
+        }
+        
+        $p=$user->phone_number;
+        $stars=$this->getStars(strlen($p)-3-2);
+        $phone_number=substr($p,0,3,).$stars.substr($p,strlen($p)-2,2);
+        return [
+            'message' => 'PICKBAZAR_MESSAGE.CHECK_INBOX_FOR_PASSWORD_RESET_EMAIL', 
+            'success' => true,
+            'phone_number'=>$phone_number
+        ];
+    }
+
+    // verifyOtpToken
+    public function verifyOtpToken(Request $request)
+    {
+        
+
+        $user = User::where('phone_number', $request->phone_number)->where('code',$request->token)->first();
+
+        if (!$user ) {
+            return ["token" => null, "permissions" => []];
+        }
+
+        if ($user) {
+            return ["token" => $user->createToken('auth_token')->plainTextToken, "permissions" => $user->getPermissionNames()];
+        } else {
+            return ["token" => null, "permissions" => []];
+        }
+    }
+
     public function forgetPassword(Request $request)
     {
         $user = User::where('email', $request->email)->first();
@@ -321,6 +371,7 @@ class UserController extends CoreController
         $user->update([
             "code"=>$code
         ]);
+
         $p=$user->phone_number;
         $stars=$this->getStars(strlen($p)-3-2);
         $phone_number=substr($p,0,3,).$stars.substr($p,strlen($p)-2,2);

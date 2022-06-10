@@ -11,6 +11,8 @@ const Register = dynamic(() => import("@components/auth/register"));
 const ForgotPassword = dynamic(
   () => import("@components/auth/forget-password/forget-password")
 );
+const OtpLoginView = dynamic(() => import('@components/auth/otp-login'));
+
 
 const ProductDetailsModalView = dynamic(
   () => import("@components/product/product-details-modal-view")
@@ -44,6 +46,7 @@ const ManagedModal = () => {
       {view === "FORGOT_VIEW" && <ForgotPassword />}
       {view === "ADD_OR_UPDATE_ADDRESS" && <CreateOrUpdateAddressForm />}
       {view === "DELETE_ADDRESS" && <AddressDeleteView />}
+      {view === 'OTP_LOGIN' && <OtpLoginView />}
       {view === "SHOP_MOBILE_CATEGORIES" && <CategoryDropdownSidebar />}
       {view === "SHOP_PAYMENT_FORM" && <ShopPaymentForm />}
       {view === 'REVIEW_RATING' && <ReviewRating />}

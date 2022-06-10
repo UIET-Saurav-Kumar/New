@@ -6,41 +6,42 @@ import * as yup from "yup";
 import { useTranslation } from "next-i18next";
 
 interface Props {
-  onSubmit: (values: { email: string }) => void;
+  onSubmit: (values: { phone_number: string }) => void;
   loading: boolean;
 }
 const schema = yup.object().shape({
-  email: yup
+  phone_number: yup
     .string()
-    .email("error-email-format")
-    .required("error-email-required"),
+    .matches(/^[0-9]{10}$/, "Invalid phone number")
+    .required("Please enter your phone number"),
+
 });
 
-const EnterEmailView = ({ onSubmit, loading }: Props) => {
+const EnterPhoneNumberView = ({ onSubmit, loading }: Props) => {
   const { t } = useTranslation("common");
   const {
     register,
     handleSubmit,
 
     formState: { errors },
-  } = useForm<{ email: string }>({ resolver: yupResolver(schema) });
+  } = useForm<{ phone_number: number }>({ resolver: yupResolver(schema) });
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <Input
-        label={t("text-email")}
-        {...register("email")}
-        type="email"
+        label={t("Mobile Number")}
+        {...register("phone_number")}
+        type="phone_number"
         variant="outline"
         className="mb-5"
-        placeholder="Enter your email id"
-        error={t(errors.email?.message!)}
+        placeholder="Enter your registered mobile number"
+        error={t(errors.phone_number?.message!)}
       />
       <Button className="w-full h-11" loading={loading} disabled={loading}>
-        {t("text-submit-email")}
+        {t("Submit")}
       </Button>
     </form>
   );
 };
 
-export default EnterEmailView;
+export default EnterPhoneNumberView;

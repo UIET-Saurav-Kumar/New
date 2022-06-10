@@ -44,6 +44,10 @@ Route::post('/forget-password', 'PickBazar\Http\Controllers\UserController@forge
 Route::post('/stored-licenses', 'PickBazar\Http\Controllers\UserController@licenseStore');
 Route::get('/resend-code/{id}', 'PickBazar\Http\Controllers\UserController@resendCode');
 Route::post('/user-verify', 'PickBazar\Http\Controllers\UserController@userVerify');
+  
+Route::post('/otp-token', 'PickBazar\Http\Controllers\UserController@otpToken');
+Route::post('/verify-otp-token', 'PickBazar\Http\Controllers\UserController@verifyOtpToken');
+
 
 Route::post('/verify-forget-password-token', 'PickBazar\Http\Controllers\UserController@verifyForgetPasswordToken');
 Route::post('/reset-password', 'PickBazar\Http\Controllers\UserController@resetPassword');
