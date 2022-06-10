@@ -9,7 +9,7 @@ export default function JoinButton() {
   const { openModal } = useModalAction();
 
   function handleJoin() {
-    return openModal("LOGIN_VIEW");
+    return openModal("OTP_LOGIN");
   }
   
   return (

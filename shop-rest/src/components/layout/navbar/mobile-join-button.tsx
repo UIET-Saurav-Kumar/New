@@ -8,7 +8,7 @@ export default function MobileJoinButton() {
   const { openModal } = useModalAction();
   
   function handleJoin() {
-    return openModal("LOGIN_VIEW");
+    return openModal("OTP_LOGIN");
   }
   return (
     <Button className="font-semibold  " size="small" onClick={handleJoin}>

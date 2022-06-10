@@ -10,7 +10,7 @@ export interface State {
 const initialState = {
   displaySidebar: false,
   displayModal: false,
-  modalView: "LOGIN_VIEW",
+  modalView: "OTP_LOGIN",
   modalData: null,
 };
 
@@ -39,6 +39,7 @@ type Action =
 type MODAL_VIEWS =
   | "SIGNUP_VIEW"
   | "LOGIN_VIEW"
+  | 'OTP_LOGIN'
   | "FORGOT_VIEW"
   | "DELETE_PRODUCT"
   | "BAN_CUSTOMER";
