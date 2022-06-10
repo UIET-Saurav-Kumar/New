@@ -71,7 +71,7 @@ const OtpLogin = () => {
           if (data?.token && data?.permissions?.length) {
             Cookies.set("auth_token", data.token, { expires: 10 });
             Cookies.set("auth_permissions", data.permissions, { expires: 10 });
-            alert("Login Successful");
+           
             authorize();
             closeModal();
             return;
