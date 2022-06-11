@@ -21,7 +21,7 @@ const EnterTokenView = ({ onSubmit, loading }: Props) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<{ token: number }>({ resolver: yupResolver(schema) });
+  } = useForm<{ token: string }>({ resolver: yupResolver(schema) });
 
   const [otp, setOtp] = useState("");
 
@@ -38,7 +38,9 @@ const EnterTokenView = ({ onSubmit, loading }: Props) => {
           signal: ac.signal,
         })
         .then((otp) => {
-          setOtp(otp?.code );
+          if (otp) {
+            setOtp(otp.otp);
+          }
           // console.log(otp?.code);
           // handleSubmit(onSubmit)
           ac.abort();
