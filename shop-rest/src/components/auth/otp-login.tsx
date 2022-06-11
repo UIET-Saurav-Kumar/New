@@ -1,6 +1,6 @@
 
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Logo from "@components/ui/logo";
 import Alert from "@components/ui/alert";
 import { useForgetPasswordMutation } from "@data/auth/use-forget-password.mutation";
@@ -86,6 +86,14 @@ const OtpLogin = () => {
       }
     );
   }
+
+  // <input type="text" autocomplete="one-time-code" inputmode="numeric" />
+{/* <script> */}
+
+
+// </script>
+
+  
  
 
   return (
@@ -102,6 +110,10 @@ const OtpLogin = () => {
           Verfication code has been sent to you on {phone_number}
         </p>)
       }
+
+<input type="text" autocomplete="one-time-code" inputmode="numeric" />
+
+      
       {errorMsg && (
         <Alert
           variant="error"

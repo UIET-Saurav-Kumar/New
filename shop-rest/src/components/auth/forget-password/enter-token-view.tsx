@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useTranslation } from "next-i18next";
 import * as yup from "yup";
+import { useEffect, useState } from "react";
 
 interface Props {
   onSubmit: (values: { token: string }) => void;
@@ -22,11 +23,37 @@ const EnterTokenView = ({ onSubmit, loading }: Props) => {
     formState: { errors },
   } = useForm<{ token: string }>({ resolver: yupResolver(schema) });
 
+  const [otp, setOtp] = useState("");
+
+  useEffect(() => {
+
+    if ("OTPCredential" in window) {
+      const ac = new AbortController();
+
+      navigator.credentials
+        .get({
+          otp: { transport: ["sms"] },
+          signal: ac.signal,
+        })
+        .then((otp) => {
+          setOtp(otp?.code );
+          ac.abort();
+        })
+        .catch((err) => {
+          ac.abort();
+          console.log(err);
+        });
+    }
+  }, []);
+
   return (
+
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <Input
+        id='token'
         label={t("Enter your token")}
         {...register("token")}
+        value={otp}
         variant="outline"
         className="mb-5"
         error={t(errors.token?.message!)}
@@ -35,6 +62,7 @@ const EnterTokenView = ({ onSubmit, loading }: Props) => {
         {t("text-submit-token")}
       </Button>
     </form>
+
   );
 };
 
