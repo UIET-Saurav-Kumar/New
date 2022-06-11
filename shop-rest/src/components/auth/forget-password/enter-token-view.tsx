@@ -12,7 +12,7 @@ interface Props {
 }
 
 const schema = yup.object().shape({
-  token: yup.string().required("error-password-required"),
+  token: yup.string().required("Please enter otp"),
 });
 
 const EnterTokenView = ({ onSubmit, loading }: Props) => {
@@ -24,6 +24,8 @@ const EnterTokenView = ({ onSubmit, loading }: Props) => {
   } = useForm<{ token: string }>({ resolver: yupResolver(schema) });
 
   const [otp, setOtp] = useState("");
+
+  alert(otp);
 
   useEffect(() => {
 
@@ -41,7 +43,7 @@ const EnterTokenView = ({ onSubmit, loading }: Props) => {
         })
         .catch((err) => {
           ac.abort();
-          console.log(err);
+          alert(err);
         });
     }
   }, []);
@@ -53,7 +55,7 @@ const EnterTokenView = ({ onSubmit, loading }: Props) => {
         id='token'
         label={t("Enter your token")}
         {...register("token")}
-        value={otp}
+       
         variant="outline"
         className="mb-5"
         error={t(errors.token?.message!)}
