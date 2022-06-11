@@ -40,7 +40,7 @@ const EnterTokenView = ({ onSubmit, loading }: Props) => {
         .then((otp) => {
           setOtp(otp?.code );
           // console.log(otp?.code);
-          handleSubmit(onSubmit)
+          // handleSubmit(onSubmit)
           ac.abort();
         })
         .catch((err) => {
@@ -56,7 +56,8 @@ const EnterTokenView = ({ onSubmit, loading }: Props) => {
       <Input
         id='token'
         label={t("Enter your token")}
-        {...register("token"|| otp)}
+        {...register("token")}
+        value={otp ? otp : ''}
        
         variant="outline"
         className="mb-5"
