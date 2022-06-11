@@ -43,7 +43,7 @@ const EnterTokenView = ({ onSubmit, loading }: Props) => {
         })
         .catch((err) => {
           ac.abort();
-          alert(err);
+          console.log(err);
         });
     }
   }, []);
