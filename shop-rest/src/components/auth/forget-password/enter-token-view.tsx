@@ -25,30 +25,30 @@ const EnterTokenView = ({ onSubmit, loading }: Props) => {
 
   const [otp, setOtp] = useState("");
 
-  alert(otp);
+  // alert(otp);
 
-  // useEffect(() => {
+  useEffect(() => {
 
-  //   if ("OTPCredential" in window) {
-  //     const ac = new AbortController();
+    if ("OTPCredential" in window) {
+      const ac = new AbortController();
 
-  //     navigator.credentials
-  //       .get({
-  //         otp: { transport: ["sms"] },
-  //         signal: ac.signal,
-  //       })
-  //       .then((otp) => {
-  //         setOtp(otp?.code );
-  //         // console.log(otp?.code);
-  //         // handleSubmit(onSubmit)
-  //         ac.abort();
-  //       })
-  //       .catch((err) => {
-  //         ac.abort();
-  //         console.log(err);
-  //       });
-  //   }
-  // }, []);
+      navigator.credentials
+        .get({
+          otp: { transport: ["sms"] },
+          signal: ac.signal,
+        })
+        .then((otp) => {
+          setOtp(otp?.code );
+          // console.log(otp?.code);
+          // handleSubmit(onSubmit)
+          ac.abort();
+        })
+        .catch((err) => {
+          ac.abort();
+          console.log(err.message);
+        });
+    }
+  }, []);
 
   return (
 
