@@ -21,7 +21,7 @@ const EnterTokenView = ({ onSubmit, loading }: Props) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<{ token: string }>({ resolver: yupResolver(schema) });
+  } = useForm<{ token: number }>({ resolver: yupResolver(schema) });
 
   const [otp, setOtp] = useState("");
 
@@ -57,7 +57,7 @@ const EnterTokenView = ({ onSubmit, loading }: Props) => {
         id='token'
         label={t("Enter your token")}
         {...register("token")}
-        value={otp ? otp : ''}
+       
        
         variant="outline"
         className="mb-5"
