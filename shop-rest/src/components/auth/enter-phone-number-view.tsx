@@ -34,6 +34,7 @@ const EnterPhoneNumberView = ({ onSubmit, loading }: Props) => {
         label={t("Mobile Number")}
         {...register("phone_number")}
         type="phone_number"
+        inputMode="numeric"
         variant="outline"
         className="mb-5"
         placeholder="Enter your registered mobile number"
@@ -52,7 +53,7 @@ const EnterPhoneNumberView = ({ onSubmit, loading }: Props) => {
        
 
       <button
-            className="w-full bg-gray-500  h-10 text-white border rounded h-8  sm:h-10"
+            className="w-full bg-gray-500  h-10 text-white border rounded  sm:h-10"
             loading={loading}
             disabled={loading}
             onClick={() => openModal("LOGIN_VIEW")}

@@ -60,6 +60,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
           id={name}
           name={name}
           type={type}
+          inputMode={type === "number" ? "numeric" : 'text'}
           ref={ref}
           className={cn(
             "px-2 lg:px-4 flex items-center w-full appearance-none transition duration-300 ease-in-out text-heading text-xs sm:text-sm focus:outline-none focus:ring-0",
