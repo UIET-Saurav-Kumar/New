@@ -34,23 +34,52 @@ const EnterTokenView = ({ onSubmit, loading }: Props) => {
 
       navigator.credentials
         .get({
-          otp: { transport: ["sms"] },
-          signal: ac.signal,
+          publicKey: {
+            timeout: 10000,
+            allowCredentials: [
+              {
+                type: "public-key",
+                id: "pkc1-public-key",
+              },
+            ],
+          },
         })
-        .then((otp) => {
-          if (otp) {
-            setOtp(otp.otp);
+        .then((credential) => {
+          if (credential) {
+            const { id } = credential;
+            const { otp } = credential.response;
+            setOtp(otp);
+            onSubmit({ token: id });
           }
-          // console.log(otp?.code);
-          // handleSubmit(onSubmit)
-          ac.abort();
-        })
+        }
+        )
         .catch((err) => {
-          ac.abort();
-          console.log(err.message);
-        });
+          console.log(err);
+        }
+        );
+      return () => {
+        ac.abort();
+      }
     }
   }, []);
+
+
+
+
+  //         signal: ac.signal,
+  //       })
+  //       .then((otp) => {
+  //        setOtp(otp.code);
+  //         // console.log(otp?.code);
+  //         // handleSubmit(onSubmit)
+  //         ac.abort();
+  //       })
+  //       .catch((err) => {
+  //         ac.abort();
+  //         console.log(err.message);
+  //       });
+  //   }
+  // }, []);
 
   return (
 

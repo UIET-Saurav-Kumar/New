@@ -200,6 +200,7 @@ const RegisterForm = () => {
           {t("text-policy")}
         </span>
       </p>
+      <p className="text-gray-600 font-semibold text-xl text-center w-full">Register Form</p>
       {errorMsg && (
         <Alert
           variant="error"
@@ -209,13 +210,13 @@ const RegisterForm = () => {
           onClose={() => setErrorMsg("")}
         />
       )}
-      <form onSubmit={handleSubmit(onSubmit)} noValidate>
+      <form className="grid grid-cols-2 text-xs gap-3 place-content-center" onSubmit={handleSubmit(onSubmit)} noValidate>
         <Input
           label={t("text-name")}
           {...register("name")}
           type="text"
           variant="outline"
-          className="mb-5"
+          className="mb-2 lg:mb-5"
           error={t(errors.name?.message!)}
         />
         <Input
@@ -224,7 +225,7 @@ const RegisterForm = () => {
           {...register("email")}
           type="email"
           variant="outline"
-          className="mb-5"
+          className="mb-2 lg:mb-5"
           error={t(errors.email?.message!)}
         />
         <PasswordInput
@@ -232,14 +233,14 @@ const RegisterForm = () => {
           {...register("password")}
           error={t(errors.password?.message!)}
           variant="outline"
-          className="mb-5"
+          className="mb-2 lg:mb-5"
         />
         <Input
           label={"Phone Number"}
           {...register("phone_number")}
           type="text"
           variant="outline"
-          className="mb-5"
+          className="mb-2 lg:mb-5 text-xs"
           onChange={(e) => setValue("phone_number", getPhoneNumber(e.target.value))}
           error={t(errors.phone_number?.message!)}
         />
@@ -250,7 +251,7 @@ const RegisterForm = () => {
             {...register("current_location")} 
             type="text" 
             variant="outline" 
-            className="mb-5 " 
+            className="col-span-2 text-xs " 
          
             error={t(errors.current_location?.message!)} />
           {/* {getLocation?.formattedAddress} */}
@@ -259,19 +260,21 @@ const RegisterForm = () => {
       {/* <GetCurrentLocation onChange={changeLocation} />   */}
 
 
-        <div className="mt-8">
+       
+      </form>
+
+      <div className="-mt-10">
           <Button className="w-full h-12" loading={loading} disabled={loading}>
             {t("text-register")}
           </Button>
         </div>
-      </form>
       {/* End of forgot register form */}
 
-      <div className="flex flex-col items-center justify-center relative text-sm text-heading  sm:mt-11 mb-6 sm:mb-8">
-        <hr className="w-full" />
-        <span className="absolute start-2/4 -top-2.5 px-2 -ms-4 bg-light">
+      <div className="flex flex-col items-center justify-center relative text-sm text-heading  sm:mt-11 lg:mt-0 mb-6 sm:mb-8">
+        {/* <hr className="w-full" /> */}
+        {/* <span className="absolute start-2/4 -top-2.5 px-2 -ms-4 bg-light">
           {t("text-or")}
-        </span>
+        </span> */}
       </div>
       <div className="text-sm sm:text-base text-body text-center">
         {t("text-already-account")}{" "}

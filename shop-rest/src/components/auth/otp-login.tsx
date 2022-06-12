@@ -97,7 +97,7 @@ const OtpLogin = () => {
  
 
   return (
-    <div className="py-6 px-5 sm:p-8 bg-light w-screen md:max-w-md h-screen md:h-auto flex flex-col justify-center">
+    <div className="py-6 px-5 sm:p-4 bg-light w-screen md:max-w-md h-full md:h-auto flex flex-col justify-center">
       <div className="flex justify-center">
         <Logo />
       </div>
@@ -111,7 +111,7 @@ const OtpLogin = () => {
         </p>)
       }
 
-<input type="text" autocomplete="one-time-code" inputmode="numeric" />
+{/* <input type="text" autocomplete="one-time-code" inputmode="numeric" /> */}
 
       
       {errorMsg && (
@@ -136,19 +136,19 @@ const OtpLogin = () => {
         />
       )} */}
 
-      <div className="flex flex-col items-center justify-center relative text-sm text-heading mt-9 sm:mt-11 mb-7 sm:mb-8">
-        <hr className="w-full" />
+      <div className="flex flex-col items-center justify-center relative text-sm text-heading mt-0 sm:mt-11 mb-7 sm:mb-8">
+        <hr className="w-full text-gray-500" />
         <span className="absolute start-2/4 -top-2.5 px-2 -ms-4 bg-light">
           {t("text-or")}
         </span>
       </div>
       <div className="text-sm sm:text-base text-body text-center">
-        {t("text-back-to")}{" "}
+        {t("text-no-account")}{" "}
         <button
-          onClick={() => openModal("LOGIN_VIEW")}
+          onClick={() => openModal("REGISTER")}
           className="ms-1 underline text-accent font-semibold transition-colors duration-200 focus:outline-none hover:text-accent-hover focus:text-accent-hover hover:no-underline focus:no-underline"
         >
-          {t("text-login")}
+          {t("Register here")}
         </button>
       </div>
     </div>
