@@ -20,6 +20,7 @@ export default function GetCurrentLocation({
         // session time
         
       };
+       const [btn, setBtn] = useState('Detect');
 
       function error(err) {
         console.warn(`ERROR(${err.code}): ${err.message}`);
@@ -28,6 +29,7 @@ export default function GetCurrentLocation({
 
     function getLoc() {
         // setSpin((setSpin) => !setSpin);
+        setBtn('Detecting...')
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition, error, options);
         } else { 
@@ -42,6 +44,8 @@ export default function GetCurrentLocation({
 
 
     async function showPosition(position:any) {
+
+      
    
         var address = await getAddress({
             lat:position?.coords?.latitude,
@@ -57,10 +61,12 @@ export default function GetCurrentLocation({
             formattedAddress: address,
           };
 
+
           console.log('lat lng',location)
 
         // alert(location);
         addLocation(location)
+        setBtn('Detect')
 
         onChange(location);
     }
@@ -82,9 +88,12 @@ export default function GetCurrentLocation({
                 Get current location     
             </button>
             :
-             <button onClick = {getLoc} className='rounded font-semibold bg-blue-700 p-2 px-3 text-white mb-3 flex float-left mx-4  sm:mx-0 items-center  text-sm sm:text-sm md:text-md'>
-                Detect
+             <button onClick = {getLoc} className='animate- rounded font-semibold bg-blue-700 p-2 px-3 text-white mb-3 flex float-left mx-4  sm:mx-0 items-center  text-sm sm:text-sm md:text-md'>
+               
+             {btn} 
             </button>
+
+            
   }
         </>
     )
