@@ -44,8 +44,6 @@ export default function GetCurrentLocation({
 
 
     async function showPosition(position:any) {
-
-      
    
         var address = await getAddress({
             lat:position?.coords?.latitude,
@@ -61,13 +59,11 @@ export default function GetCurrentLocation({
             formattedAddress: address,
           };
 
-
           console.log('lat lng',location)
 
         // alert(location);
         addLocation(location)
         setBtn('Detect')
-
         onChange(location);
     }
 
@@ -93,8 +89,7 @@ export default function GetCurrentLocation({
              {btn} 
             </button>
 
-            
-  }
+        }
         </>
     )
     // <button onClick={handleCurrentLocation} className = {` ${ active ? 'block' : 'hidden'}  absolute flex items-center shadow-2xl font-semibold placeholder:text-gray-50 rounded w-60 top-22 ml-1 bg-gray-50 text-accent  py-4`}>
