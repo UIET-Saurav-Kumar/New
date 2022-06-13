@@ -27,41 +27,41 @@ const EnterTokenView = ({ onSubmit, loading }: Props) => {
 
   // alert(otp);
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    if ("OTPCredential" in window) {
-      const ac = new AbortController();
+  //   if ("OTPCredential" in window) {
+  //     const ac = new AbortController();
 
-      navigator.credentials
-        .get({
-          publicKey: {
-            timeout: 10000,
-            allowCredentials: [
-              {
-                type: "public-key",
-                id: "pkc1-public-key",
-              },
-            ],
-          },
-        })
-        .then((credential) => {
-          if (credential) {
-            const { id } = credential;
-            const { otp } = credential.response;
-            setOtp(otp);
-            onSubmit({ token: id });
-          }
-        }
-        )
-        .catch((err) => {
-          console.log(err);
-        }
-        );
-      return () => {
-        ac.abort();
-      }
-    }
-  }, []);
+  //     navigator.credentials
+  //       .get({
+  //         publicKey: {
+  //           timeout: 10000,
+  //           allowCredentials: [
+  //             {
+  //               type: "public-key",
+  //               id: "pkc1-public-key",
+  //             },
+  //           ],
+  //         },
+  //       })
+  //       .then((credential) => {
+  //         if (credential) {
+  //           const { id } = credential;
+  //           const { otp } = credential.response;
+  //           setOtp(otp);
+  //           onSubmit({ token: id });
+  //         }
+  //       }
+  //       )
+  //       .catch((err) => {
+  //         console.log(err);
+  //       }
+  //       );
+  //     return () => {
+  //       ac.abort();
+  //     }
+  //   }
+  // }, []);
 
 
 
@@ -88,6 +88,7 @@ const EnterTokenView = ({ onSubmit, loading }: Props) => {
         id='token'
         label={t("Enter your token")}
         {...register("token")}
+        inputMode="numeric"
        
        
         variant="outline"

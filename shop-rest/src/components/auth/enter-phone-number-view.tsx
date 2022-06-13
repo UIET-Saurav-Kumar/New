@@ -29,7 +29,9 @@ const EnterPhoneNumberView = ({ onSubmit, loading }: Props) => {
   } = useForm<{ phone_number: number }>({ resolver: yupResolver(schema) });
 
   return (
+
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
+      
       <Input
         label={t("Mobile Number")}
         {...register("phone_number")}

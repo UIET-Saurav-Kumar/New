@@ -257,26 +257,31 @@ const RegisterForm = () => {
           {/* {getLocation?.formattedAddress} */}
          
 
-      {/* <GetCurrentLocation onChange={changeLocation} />   */}
-
+      <div className=""> 
+         <GetCurrentLocation onChange={changeLocation} />  
+         <div className="mt-15">
+          <Button className="w-full h-12" 
+          variant="outline"
+          loading={loading} disabled={loading}>
+            {t("text-register")}
+          </Button>
+        </div>
+      </div>
+      
 
        
       </form>
 
-      <div className="-mt-10">
-          <Button className="w-full h-12" loading={loading} disabled={loading}>
-            {t("text-register")}
-          </Button>
-        </div>
+      
       {/* End of forgot register form */}
 
-      <div className="flex flex-col items-center justify-center relative text-sm text-heading  sm:mt-11 lg:mt-0 mb-6 sm:mb-8">
+      <div className="flex flex-col items-center justify-center relative text-sm text-heading mt-0 sm:mt-4 lg:mt-0 mb-6 sm:mb-8">
         {/* <hr className="w-full" /> */}
         {/* <span className="absolute start-2/4 -top-2.5 px-2 -ms-4 bg-light">
           {t("text-or")}
         </span> */}
       </div>
-      <div className="text-sm sm:text-base text-body text-center">
+      <div className="text-sm sm:text-base text-body -mt-5 text-center">
         {t("text-already-account")}{" "}
         <button
           onClick={() => openModal("LOGIN_VIEW")}

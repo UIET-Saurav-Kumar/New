@@ -15,7 +15,7 @@ const classes = {
     "bg-accent text-light border border-transparent hover:bg-accent-hover",
   custom: "border border-transparent",
   outline:
-    "border border-border-400 bg-transparent text-body hover:text-light hover:bg-accent hover:border-accent",
+    "border border-border-400 bg-transparent text-lg  hover:text-light bg-magenta text-white hover:bg-red-600 hover:border-accent",
   loading:
     "h-4 w-4 ms-2 rounded-full border-2 border-transparent border-t-2 animate-spin",
   disabled:
