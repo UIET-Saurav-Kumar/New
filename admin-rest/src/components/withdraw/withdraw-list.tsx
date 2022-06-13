@@ -28,7 +28,7 @@ const WithdrawList = ({ withdraws, onPagination }: IProps) => {
   const router = useRouter();
 
   const renderStatusBadge = (status: string) => {
-    switch (status.toUpperCase()) {
+    switch (status?.toUpperCase()) {
       case "APPROVED":
         return <Badge text={t("text-approved")} color="bg-accent" />;
       case "PENDING":

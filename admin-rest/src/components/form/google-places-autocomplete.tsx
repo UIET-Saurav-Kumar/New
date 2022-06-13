@@ -87,16 +87,18 @@ export default function GooglePlacesAutocomplete({
   }
   return isLoaded ? (
     <Autocomplete
-      onLoad={onLoad}
-      onPlaceChanged={onPlaceChanged}
-      onUnmount={onUnmount}
-      fields={["address_components", "geometry.location", "formatted_address"]}
-      types={["'establishment', 'geocode'"]}
+    onLoad={onLoad}
+     
+    onPlaceChanged={onPlaceChanged}
+    onUnmount={onUnmount}
+    fields={["address_components", "geometry.location", "formatted_address"]}
+    types={["establishment", "geocode"]}
+    className="flex"
     >
       <input
         type="text"
         placeholder={t("form:placeholder-search-location")}
-        defaultValue={data?.formattedAddress!}
+        defaultValue={data?.formattedAddress}
         className="px-4 h-12 flex items-center w-full rounded appearance-none transition duration-300 ease-in-out text-heading text-sm focus:outline-none focus:ring-0 border border-border-base focus:border-accent"
       />
     </Autocomplete>
@@ -104,3 +106,7 @@ export default function GooglePlacesAutocomplete({
     <Loader simple={true} className="w-6 h-6" />
   );
 }
+
+
+
+

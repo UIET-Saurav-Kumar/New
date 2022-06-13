@@ -104,7 +104,7 @@ export default function GooglePlacesAutocomplete({address,
         onPlaceChanged={onPlaceChanged}
         onUnmount={onUnmount}
         fields={["address_components", "geometry.location", "formatted_address"]}
-        types={["address"]}
+        types={["establishment", "geocode"]}
         className="flex"
       >
 

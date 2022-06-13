@@ -209,6 +209,8 @@ const RegisterForm = () => {
           closeable={true}
           onClose={() => setErrorMsg("")}
         />
+        
+        
       )}
       <form className="grid grid-cols-2 text-xs gap-3 place-content-center" onSubmit={handleSubmit(onSubmit)} noValidate>
         <Input
@@ -244,6 +246,7 @@ const RegisterForm = () => {
           onChange={(e) => setValue("phone_number", getPhoneNumber(e.target.value))}
           error={t(errors.phone_number?.message!)}
         />
+        
       
         <Input
             value={getLocation?.formattedAddress}

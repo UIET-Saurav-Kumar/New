@@ -135,7 +135,8 @@ export default function GooglePlacesAutocomplete({address,closeLocation,
                                 rounded-r-none border-r-0 border-2'/>
           </div>  
           
-         <div style={{zIndex:8}} className='flex w-full'><input
+         <div style={{zIndex:8}} className='flex w-full'>
+           <input
           type = "text"
           // placeholder={t("common:placeholder-search-location")}
           placeholder='Enter your location'
