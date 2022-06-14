@@ -53,7 +53,23 @@ const OtpLogin = () => {
           }
         },
         onError: (error: any) => {
-          console.log(error.message);
+          const {
+            response: { data },
+          }: any = error ?? {};
+          Object.keys(data).forEach((field: any) => {
+            const errorMessage = 'Number does not exist. Please Register first';
+            // hide error message after 4 seconds
+            setErrorMsg(errorMessage);
+            setTimeout(() => {
+              setErrorMsg(null);
+            }
+              , 4000);
+
+              
+
+
+            
+          });
         },
       }
     );
