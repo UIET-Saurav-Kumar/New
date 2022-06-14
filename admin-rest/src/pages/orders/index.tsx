@@ -30,7 +30,7 @@ export default function Orders() {
     isLoading: loading,
     error,
   } = useOrdersQuery({
-    limit: 70,
+    limit: 15,
     page,
     text: searchTerm,
   });
