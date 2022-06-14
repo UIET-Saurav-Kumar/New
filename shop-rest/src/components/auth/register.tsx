@@ -36,7 +36,7 @@ const registerFormSchema = yup.object().shape({
     .email("error-email-format")
     .required("error-email-required"),
   password: yup.string().required("error-password-required"),
-  phone_number:yup.string().max(10, "Phone number should be of 10 digits only").min(10, 'Phone number should be of 10 digits only').required("error-contact-required"),
+  phone_number:yup.string().max(10, "Phone number should be of 10 digits only").min(10, 'Phone number should be of 10 digits only').required("error-contact-required").matches(/^[0-9]{10}$/, "Invalid phone number"),
   // current_location:yup.string().required("error-location-required"),
 });
 
@@ -241,6 +241,7 @@ const RegisterForm = () => {
           label={"Phone Number"}
           {...register("phone_number")}
           type="text"
+          inputMode="numeric"
           variant="outline"
           className="mb-2 lg:mb-5 text-xs"
           onChange={(e) => setValue("phone_number", getPhoneNumber(e.target.value))}
