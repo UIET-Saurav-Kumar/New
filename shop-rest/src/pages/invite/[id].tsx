@@ -48,7 +48,11 @@ const registerFormSchema = yup.object().shape({
     .email("error-email-format")
     .required("error-email-required"),
   password: yup.string().required("error-password-required"),
-  phone_number:yup.string().min(8, "error-min-contact").required("error-contact-required")
+  phone_number:yup.string()
+                .max(10, "Phone number should be of 10 digits only")
+                .min(10, 'Phone number should be of 10 digits only')
+                .required("error-contact-required")
+                .matches(/^[0-9]{10}$/, "Invalid phone number"),
 });
 
 const defaultValues = {
