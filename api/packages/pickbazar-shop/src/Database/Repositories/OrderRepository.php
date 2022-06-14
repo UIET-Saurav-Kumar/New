@@ -275,6 +275,7 @@ class OrderRepository extends BaseRepository
                         "price"=> $request->amount,
                         "orderId"=> $request->tracking_number,
                         "delivery_time"=> $request->delivery_time,
+                        'time'=>$request->description,
                         "payment_gateway"=> $request->payment_gateway,
                         "currency"=>"INR"
                     ],
