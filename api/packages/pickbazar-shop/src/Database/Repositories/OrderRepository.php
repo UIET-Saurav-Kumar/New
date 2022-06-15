@@ -49,6 +49,7 @@ class OrderRepository extends BaseRepository
         'paid_total',
         'total',
         'delivery_time',
+        'description',
         'payment_gateway',
         'discount',
         'coupon_id',
@@ -186,7 +187,7 @@ class OrderRepository extends BaseRepository
                     if(isset($shop)){
                         $user=$shop->owner;
                         
-                            SMS::purchaseToVendor('9056147024', $user->name);    
+                            SMS::purchaseToVendor('7018265262', $user->name);    
                         
                     }
                 }    
@@ -275,12 +276,13 @@ class OrderRepository extends BaseRepository
                         "price"=> $request->amount,
                         "orderId"=> $request->tracking_number,
                         "delivery_time"=> $request->delivery_time,
-                      
+                        'description'=> $request->description,
                         "payment_gateway"=> $request->payment_gateway,
                         "currency"=>"INR"
                     ],
                     "createdAt"=> date('Y-m-d H:i:s')
                 );
+                
                 $interkt_response = $this->createWhatsappOrderEvent($payload);
                 #---------------------creating whatsapp message-----------------#
             }
@@ -366,6 +368,7 @@ class OrderRepository extends BaseRepository
     private function createReferralEarning($order, $commission_value, $request, $level, $customer, $commission, $commission_level)
     {
         $commission_value=round(floatval($commission_value),2);
+
         ReferralEarning::create([
             "user_id" => $level->id,
             "customer_id" => $customer->id,
