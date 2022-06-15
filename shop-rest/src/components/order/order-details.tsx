@@ -9,6 +9,9 @@ import { ROUTES } from "@utils/routes";
 import { Eye } from "@components/icons/eye-icon";
 import { OrderItems } from "./order-items-table";
 import isEmpty from "lodash/isEmpty";
+import { DownloadIcon } from "@heroicons/react/outline";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import InvoicePdf from "./invoice-pdf";
 
 interface Props {
   order: any;
@@ -41,8 +44,14 @@ const OrderDetails = ({ order }: Props) => {
     amount: order?.sales_tax,
   });
 
+
+
+
+  console.log('single order',order)
+
   return (
     <div className="flex flex-col w-full lg:w-2/3 border border-border-200">
+      
       {!isEmpty(order) ? (
         <>
           <div className="flex flex-col md:flex-row items-center md:justify-between p-5 border-b border-border-200">
@@ -130,6 +139,34 @@ const OrderDetails = ({ order }: Props) => {
               <OrderStatus status={status?.serial} />
             </div>
             <OrderItems orderStatus={status?.serial}  products={products} orderId={id} />
+            <div className="flex items-center mx-auto mt-4 ">
+        <PDFDownloadLink
+          className="inline-flex items-center justify-center flex-shrink-0 font-semibold leading-none rounded outline-none transition duration-300 ease-in-out focus:outline-none focus:shadow focus:ring-1 focus:ring-accent-700 text-light border border-transparent px-5 py-0 h-12 ms-auto mb-5 bg-blue-500 hover:bg-blue-600"
+          document={
+            <InvoicePdf
+              subtotal={order?.amount}
+              total={order?.total}
+              discount={order?.discount}
+              delivery_fee={order?.delivery_fee}
+              sales_tax={order?.sales_tax}
+              settings={siteSettings}
+              order={order}
+            />
+          }
+          fileName="invoice.pdf"
+        >
+          {({ loading }: any) =>
+            loading ? (
+              t("common:text-loading")
+            ) : (
+              <>
+                <DownloadIcon className="h-4 w-4 me-3" />
+                {t("Download Invoice")}
+              </>
+            )
+          }
+        </PDFDownloadLink>
+      </div>
           </div>
         </>
       ) : (
