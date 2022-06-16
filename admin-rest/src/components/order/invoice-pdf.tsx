@@ -54,7 +54,7 @@ export default function InvoicePdf({ order }: { order: Order }) {
             <Logo className='h-10 w-10' />
             
               <Text style={[styles.addressText, { marginBottom: 20 }]}>
-                Invoice No:
+                Tracking No:
                 <Text style={{ color: "#374151", fontFamily: "Lato Bold" }}>
                   {order?.tracking_number}
                 </Text>
@@ -74,7 +74,8 @@ export default function InvoicePdf({ order }: { order: Order }) {
               </Text>
             </View>
 
-            {/* <View style={[styles.section]}>
+
+            <View style={[styles.section]}>
               <Text style={[styles.addressTextRight, { marginBottom: 20 }]}>
                 Date: {order?.created_at?.split('T')[0].split("-").reverse().join("-")}
               </Text>
@@ -92,16 +93,32 @@ export default function InvoicePdf({ order }: { order: Order }) {
               <Text style={styles.addressTextRight}>
               {order?.shipping_address}
               </Text>
-            </View> */}
+            </View>
           </View>
 
           {/* Table */}
           <View style={styles.orderTable}>
-            {order.products.map((product, index) => {
-              const { price } = usePrice({
-                // @ts-ignore
-                amount: parseFloat(product?.pivot?.subtotal),
-              });
+          <View style={styles.tbody}>
+          <View style={styles.tr}>
+                <Text style={[styles.td, { width: 50, textAlign: "center" }]}>
+                  S.No
+                </Text>
+                <Text style={[styles.td, { flex: 1,textAlign: "center" }]}>Product Name</Text>
+                <Text style={[styles.td, { flex: 1,textAlign: "center" }]}>Shop Name</Text>
+                <Text style={[styles.td, { flex: 1, textAlign: "center" }]}>
+                  Quantity
+                </Text>
+                {/* <Text style={[styles.td, { flex: 1, textAlign: "center" }]}>
+                  Variations
+                </Text> */}
+                <Text style={[styles.td, { flex: 1, textAlign: "center" }]}>
+                  Total
+                </Text>
+              </View>
+
+
+            {order?.products?.map((product, index) => {
+             const price = parseFloat(product?.pivot?.subtotal) + '.00'
               return (
                 <View style={styles.tbody} key={index}>
                   <View style={styles.tr}>
@@ -110,10 +127,15 @@ export default function InvoicePdf({ order }: { order: Order }) {
                     >
                       {index + 1}
                     </Text>
-                    <Text style={[styles.td, { flex: 1 }]}>{product?.name}</Text>
-                    <Text style={[styles.td, { flex: 1 }]}>{product?.shop?.name}</Text>
+                    <Text style={[styles.td, { flex: 1,textAlign: "center"  }]}>{product?.name}</Text>
+                    <Text style={[styles.td, { flex: 1,textAlign: "center"  }]}>{product?.shop?.name}</Text>
                     <Text
-                      style={[styles.td, { width: 100, textAlign: "right" }]}
+                      style={[styles.td, { flex: 1, textAlign: "center" }]}
+                    >
+                      {product?.pivot?.order_quantity}
+                    </Text>
+                    <Text
+                      style={[styles.td, {flex: 1, textAlign: "center" }]}
                     >
                       {price}
                     </Text>
@@ -121,6 +143,7 @@ export default function InvoicePdf({ order }: { order: Order }) {
                 </View>
               );
             })}
+            </View>
           </View>
 
           {/* Border */}
@@ -252,7 +275,7 @@ const styles = StyleSheet.create({
   },
 
   td: {
-    fontSize: 11,
+    fontSize: 9,
     color: "#6B7280",
     padding: "12pt 16pt",
     borderTopWidth: 1,
