@@ -75,12 +75,8 @@ const OrderList = ({ orders, onPagination }: IProps) => {
             padding: "0.5rem",
           }}
         >
-          {({ blob, url, loading, error }) =>
-            loading ? (
-              <span className="">Loading....</span>
-            ) : (
-              <a className='hover:underline cursor-pointer' href={url} target='_blank'>{t("Invoice")}</a>
-            )
+          {
+              t("Download")
           }
 
         </PDFDownloadLink>
