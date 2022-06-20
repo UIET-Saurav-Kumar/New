@@ -273,7 +273,9 @@ class OrderRepository extends BaseRepository
                     "event"=> "Order Placed Successfully",
                     "traits"=> [
                         "productDetail"=> json_encode($request->products),
-                        // 'shop_name'=> $product->shop->name,
+                         'shop_name'=> $product->shop->name,
+                    
+                        'product_name'=> $product->name,
                         "price"=> $request->amount,
                         "orderId"=> $request->tracking_number,
                         "delivery_time"=> $request->delivery_time,
