@@ -274,7 +274,7 @@ class OrderRepository extends BaseRepository
                     "traits"=> [
                         "productDetail"=> json_encode($request->products),
                          'shop_name'=> $product->shop->name,
-                    
+                         'product_name'=> $product->name,
                         'product_name'=> $product->name,
                         "price"=> $request->amount,
                         "orderId"=> $request->tracking_number,
