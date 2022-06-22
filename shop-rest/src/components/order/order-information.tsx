@@ -19,6 +19,7 @@ const OrderInformation = (props: Props) => {
 
   const { t } = useTranslation("common");
 
+
   const { items, isEmpty } = useCart();
 
   const { checkoutData, discount, removeCoupon, coupon } = useCheckout();
@@ -40,18 +41,32 @@ const OrderInformation = (props: Props) => {
     }
   );
 
+  const { price:delivery_charges } = usePrice({
+    amount: items.map((item: any) => item?.shop?.delivery_charge).reduce((acc: number, item: any) => acc + item, 0),
+   
+  });
+
+  console.log('delivery charges',delivery_charges)
+
   const { price: shipping } = usePrice(
     checkoutData && {
       amount: checkoutData.shipping_charge ?? 0,
     }
   );
 
-  const base_amount = calculateTotal(available_items).total;
+  const base_amount =  available_items?.reduce(
+    (acc: number, item: any) => acc + item.itemTotal,
+    0);
+    const total_amount = calculateTotal(available_items).total;
   const { price: sub_total } = usePrice(
     checkoutData && {
-      amount: base_amount,
+      amount: base_amount ,
     }
   );
+
+  const total_tax = '';
+
+ 
 
   const { price: discountPrice } = usePrice(
     discount && {
@@ -63,8 +78,11 @@ const OrderInformation = (props: Props) => {
     checkoutData && {
       amount: calculatePaidTotal(
         {
-          totalAmount: base_amount,
-          tax: checkoutData?.total_tax,
+          totalAmount: total_amount,
+          tax: 
+          // total_amount - base_amount
+          checkoutData?.total_tax
+          ,
           shipping_charge: checkoutData?.shipping_charge,
         },
         Number(discount)
@@ -111,7 +129,7 @@ const OrderInformation = (props: Props) => {
         </div>
         <div className="flex justify-between mb-3">
           <p className="text-sm text-body">{t("text-shipping")}</p>
-          <span className="text-sm text-body">{shipping}</span>
+          <span className="text-sm text-body">₹{total_amount - base_amount + '.00'}</span>
         </div>
         {discount ? (
 

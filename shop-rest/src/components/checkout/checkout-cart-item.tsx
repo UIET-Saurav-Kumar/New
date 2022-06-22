@@ -13,6 +13,7 @@ interface Props {
 }
 
 const CheckoutCartItem = ({ item, notAvailable }: Props) => {
+  
   const { t } = useTranslation("common");
   const router = useRouter();
 
@@ -140,23 +141,23 @@ const CheckoutCartItem = ({ item, notAvailable }: Props) => {
 
 
     {
-      isWithDelivery()&&(
+      isWithDelivery()?(
         <>
           <div className={cn("flex justify-between py-2")} key={item?.id}>
             <p className="flex items-center justify-between text-base">
               <span
                 className={cn("text-sm", notAvailable ? "text-red-500" : "text-body")}
               >
-                <span className="text-gray-800 ">Delivery Charges</span>
+                <span className="text-gray-800 ">Delivery </span>
               </span>
             </p>
             <span
-              className={cn("text-sm", notAvailable ? "text-red-500" : "text-green-500")}
+              className={cn("text-sm ", notAvailable ? "text-red-500" : "text-gray-500")}
             >
             {
               shopOrderPrice>item?.shop?.free_delivery_order_value
               ?
-              <span className="font-semibold">Free Delivery</span>
+              <span className="font-semibold text-green-600">Free Delivery</span>
               :
               delivery_charges
             } 
@@ -183,7 +184,20 @@ const CheckoutCartItem = ({ item, notAvailable }: Props) => {
             } 
           </div>
         </>
-      )
+      ) :<div className="flex items-center justify-between"> 
+      <span className="text-sm text-gray-700">Delivery </span>
+        <span
+        className={cn("text-sm ", notAvailable ? "text-red-500" : "text-gray-500")}
+      >
+      {
+        shopOrderPrice>item?.shop?.free_delivery_order_value
+        ?
+        <span className="font-semibold text-green-600">Free Delivery</span>
+        :
+        delivery_charges
+      } 
+      </span>
+    </div>
     }
     <hr style={{color:"#a1a7af",marginBottom:"10px"}}/>
     

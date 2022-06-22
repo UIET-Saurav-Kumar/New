@@ -246,6 +246,7 @@ class OrderRepository extends BaseRepository
             $this->sendSMS($order); 
             $id=isset($order["id"])?$order["id"]:$order->id;
             $order=Order::findOrFail($id);
+            
 
             $order->products()->attach($products);
             $this->createChildOrder($order->id, $request);
@@ -274,7 +275,6 @@ class OrderRepository extends BaseRepository
                     "traits"=> [
                         "productDetail"=> json_encode($request->products),
                          'shop_name'=> $product->shop->name,
-                         'product_name'=> $product->name,
                         'product_name'=> $product->name,
                         "price"=> $request->amount,
                         "orderId"=> $request->tracking_number,
