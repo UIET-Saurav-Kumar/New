@@ -1,4 +1,6 @@
+
 import dynamic from "next/dynamic";
+
 const Helium = dynamic(() => import("@components/product/product-card/helium"));
 const Neon = dynamic(() => import("@components/product/product-card/neon")); // grocery-two
 const Argon = dynamic(() => import("@components/product/product-card/argon")); // bakery

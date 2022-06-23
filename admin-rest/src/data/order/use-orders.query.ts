@@ -14,9 +14,11 @@ const fetchOrders = async ({ queryKey }: QueryParamsType) => {
     orderBy = "created_at",
     sortedBy = "DESC",
   } = params as QueryOptionsType;
+
   const searchString = stringifySearchQuery({
     tracking_number: text,
   });
+  
   const url = `${API_ENDPOINTS.ORDERS}?search=${searchString}&shop_id=${shop_id}&page=${page}&limit=${limit}&orderBy=${orderBy}&sortedBy=${sortedBy}`;
   const {
     data: { data, ...rest },

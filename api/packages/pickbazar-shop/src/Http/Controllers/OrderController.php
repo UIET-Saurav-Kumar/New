@@ -117,6 +117,22 @@ class OrderController extends CoreController
         }
     }
 
+    // find by date range
+    public function findByDateRange(Request $request, $start_date, $end_date)
+    {
+        $user = $request->user();
+        try {
+            $order = $this->repository->with(['products', 'status', 'children.shop'])->findByFieldOrFail('created_at', '>=', $start_date)->findByFieldOrFail('created_at', '<=', $end_date);
+            if ($user->id === $order->customer_id || $user->can('super_admin')) {
+                return $order;
+            } else {
+                throw new PickbazarException('PICKBAZAR_ERROR.NOT_AUTHORIZED');
+            }
+        } catch (\Exception $e) {
+            throw new PickbazarException('PICKBAZAR_ERROR.NOT_FOUND');
+        }
+    }
+
    
 
     /**

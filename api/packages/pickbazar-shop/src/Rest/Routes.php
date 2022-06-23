@@ -48,6 +48,7 @@ Route::post('/user-verify', 'PickBazar\Http\Controllers\UserController@userVerif
 Route::post('/otp-token', 'PickBazar\Http\Controllers\UserController@otpToken');
 Route::post('/verify-otp-token', 'PickBazar\Http\Controllers\UserController@verifyOtpToken');
 
+Route::get('/orders', 'PickBazar\Http\Controllers\OrderController@findByDateRange');
 
 Route::post('/verify-forget-password-token', 'PickBazar\Http\Controllers\UserController@verifyForgetPasswordToken');
 Route::post('/reset-password', 'PickBazar\Http\Controllers\UserController@resetPassword');

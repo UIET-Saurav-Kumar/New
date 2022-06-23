@@ -3,7 +3,7 @@ import Card from "@components/common/card";
 import Layout from "@components/layouts/admin";
 import Search from "@components/common/search";
 import OrderList from "@components/order/order-list";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ErrorMessage from "@components/ui/error-message";
 import Loader from "@components/ui/loader/loader";
 import { useOrdersQuery } from "@data/order/use-orders.query";
@@ -34,6 +34,19 @@ export default function Orders() {
     page,
     text: searchTerm,
   });
+
+  // fetch api 127.0.0.1:3000/api/v1/orders?limit=15&page=1&text=&order_by=created_at&sorted_by=desc
+  // useEffect
+  // useEffect(() => {
+  //   fetch(`http://127.0.0.1:8000/orders`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log('range orders',data);
+  //     }
+  //     )
+  //     .catch((err) => alert(err));
+  // }, []);
+
 
   if (loading) return <Loader text={t("common:text-loading")} />;
 
