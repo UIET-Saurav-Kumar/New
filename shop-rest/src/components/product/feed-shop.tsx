@@ -106,7 +106,7 @@ const ShopProductFeed = ({ shopId }: { shopId: string }) => {
                 &&
                 (
                   <>
-                    <span>Loading </span>
+                    <span>Loading</span>
                     <img src="/preloader/cir.gif" style={{width:"30px",height:"30px"}}/>
                   </>
                 ) 

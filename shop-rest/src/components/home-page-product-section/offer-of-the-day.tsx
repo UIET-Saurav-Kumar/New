@@ -10,8 +10,9 @@ import { siteSettings } from "@settings/site.settings";
 import { motion } from "framer-motion";
 import { useLocation } from "@contexts/location/location.context";
 import renderProductCard from "@components/product/home-product-card";
+import Neon from '@components/product/product-card/neon';
 
-export default function ProductGrid() {
+export default function OfferOfTheDay() {
     const { query } = useRouter();
     const { type } = query;
     const {getLocation} =useLocation()
@@ -44,7 +45,7 @@ export default function ProductGrid() {
            {/* // filter products with status publish */}
               {data?.offers.data.filter(product => product?.status === 'publish').map(product => (
                 <motion.div key={product.id}>
-                {renderProductCard(product)}
+                <Neon product={product} />
                 </motion.div>
                 ))}
 

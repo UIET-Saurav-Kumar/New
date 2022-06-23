@@ -120,15 +120,15 @@ const OrderInformation = (props: Props) => {
 
       <div className="-mt-2  bg-white p-5">
         <div className="flex justify-between mb-3">
-          <p className="text-sm font-semibold">{t("text-sub-total")}</p>
-          <span className="text-sm font-bold">{sub_total}</span>
+          <p className="text-sm text-body">{t("text-sub-total")}</p>
+          <span className="text-sm text-body font-light">{sub_total}</span>
         </div>
-        <div className="flex justify-between mb-3">
+        {/* <div className="flex justify-between mb-3">
           <p className="text-sm text-body">{t("text-tax")}</p>
           <span className="text-sm text-body">{tax}</span>
-        </div>
+        </div> */}
         <div className="flex justify-between mb-3">
-          <p className="text-sm text-body">{t("text-shipping")}</p>
+          <p className="text-sm text-body">{t("Delivery")}</p>
           <span className="text-sm text-body">₹{total_amount - base_amount + '.00'}</span>
         </div>
         {discount ? (

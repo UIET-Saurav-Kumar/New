@@ -84,7 +84,7 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
 
         {discount && (
           <div className="absolute top-3 end-3 md:top-4 md:end-4 rounded text-xs leading-6 
-                          shadow-md font-semibold px-1.5 sm:px-2 md:px-2.5  bg-gold text-white">
+                          shadow-md font-semibold px-1.5 sm:px-2 md:px-2.5  bg-gradient-to-r from-gold to-yellow-500 text-white ">
             {discount}
           </div>
         )}
@@ -96,7 +96,7 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
 
         {product_type.toLowerCase() === 'variable' ? (
           <div className="flex items-center  mb-2">
-            <span className="text-xs md:text-base text-product-price font-bold">
+            <span className="text-xs md:text-base text-gold font-bold">
               {minPrice}
             </span>
             <span className="text-magenta font-bold"> {!minPrice ? `Starting ${basePrice}` : '-'} </span>
@@ -115,7 +115,7 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
                       <RatingsBadge rating={product?.ratings} variant="xs" boxed />
                   </span> */}
                   {discount ? (
-                    <del className="text-xs md:text-sm text-discount ms-2">
+                    <del className="text-xs md:text-sm text-gold ms-2">
                       {price}
                     </del>
                   ) : <del className="text-xs md:text-sm h-4 text-discount ms-2">

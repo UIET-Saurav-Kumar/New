@@ -10,7 +10,7 @@ import ImageSlider from '@components/home-page-image-slider/ImageSlider';
 import AllCategories from '@components/home-page-product-section/AllCategories';
 import FeaturedShops from '@components/home-page-product-section/FeaturedShops';
 import FeaturedProducts from '@components/home-page-product-section/FeaturedProducts';
-import ProductGrid from '@components/home-page-product-section/ProductGrid';
+import ProductGrid from '@components/home-page-product-section/offer-of-the-day';
 import AmazonShops  from '@components/home-page-product-section/AmazonShops'
 import dynamic from "next/dynamic";
 import { GetStaticProps } from "next";
