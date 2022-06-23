@@ -57,7 +57,7 @@ export const AddToCart = ({
   ) => {
     e.stopPropagation();
     onClick && onClick(e);
-    addItemToCart(item, 1);
+    addItemToCart(item, 1) 
     if (!isInCart(item.id)) {
       cartAnimation(e);
     }
@@ -94,7 +94,7 @@ export const AddToCart = ({
 
     <>
       <AddToCartBtn
-        disabled={disabled || outOfStock}
+        disabled={disabled || outOfStock }
         variant={variant}
         onClick={handleAddClick}
       />
@@ -104,7 +104,7 @@ export const AddToCart = ({
       <Counter
         value={getItemFromCart(item.id).quantity}
         onDecrement={handleRemoveClick}
-        onIncrement={handleAddClick}
+        onIncrement={getItemFromCart(item.id).quantity !== data.quantity ? handleAddClick : null}
         variant={counterVariant ? counterVariant : variant}
         className={counterClass}
         disabled={outOfStock}

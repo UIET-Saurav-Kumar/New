@@ -57,6 +57,8 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
     return openModal("PRODUCT_DETAILS", product.slug);
   }
 
+  console.log('quantity', product.quantity)
+
   return (
 
     <article
@@ -166,12 +168,20 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
             {Number(quantity) > 0 && (
              <div className="md:pt-3">
                 <AddToCart  variant="organesson" data={product} />
-                </div>
+             </div>
             )}
           </>
         )}
 
-        {Number(quantity) <= 0 && (
+
+
+        {/* {Number(quantity) <= 0 && (
+          <div className="bg-red-500 rounded text-xs text-center text-light px-2 py-1.5 sm:py-2.5">
+            {t('text-out-stock')}
+          </div>
+        )} */}
+
+         {Number(quantity) !== product.quantity && (
           <div className="bg-red-500 rounded text-xs text-center text-light px-2 py-1.5 sm:py-2.5">
             {t('text-out-stock')}
           </div>
