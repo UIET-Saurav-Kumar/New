@@ -110,7 +110,7 @@ const VerifyCheckout = () => {
 
           {
             onSuccess: (data) => {
-              router.reload();
+              // router.reload();
               setCheckoutData(data);
               router.push("/order");
             },
