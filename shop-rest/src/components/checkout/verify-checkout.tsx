@@ -193,8 +193,6 @@ const VerifyCheckout = () => {
                 <CheckoutCartItem
                   key={item.id}
                   item={item}
-                 
-                  
                 />
               );
             }

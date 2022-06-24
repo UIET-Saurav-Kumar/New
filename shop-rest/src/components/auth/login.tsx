@@ -76,7 +76,7 @@ const LoginForm = () => {
             Cookies.set("auth_permissions", data.permissions, { expires: 10 });
             authorize();
             closeModal();
-            router.reload()
+            // router.reload()
             return;
           }
           if (!data.token) {
