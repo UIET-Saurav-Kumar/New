@@ -259,9 +259,6 @@ class OrderRepository extends BaseRepository
                 $product=Product::find($product_id);
                 $user=$request->user();     
                 //map over products and get product name 
-                $products_name=collect($request->products)->map(function($product){
-                    return $product["product_name"];
-                });
                            
                 Log::create([
                     "user_id"=>($user)?$user->id:"",
