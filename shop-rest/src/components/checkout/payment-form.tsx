@@ -199,7 +199,7 @@ const PaymentForm = () => {
         label={t("text-enter-contact-number")}
         variant="outline"
         className="flex-1"
-        value={data?.customer?.contact}
+        value={data?.me?.phone_number}
         onChange={(e) => setValue("contact", maskPhoneNumber(e.target.value))}
         error={t(errors?.contact?.message!)}
       />
