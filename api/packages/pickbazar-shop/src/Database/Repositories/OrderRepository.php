@@ -257,7 +257,12 @@ class OrderRepository extends BaseRepository
             {
                 $product_id=$request->products[0]["product_id"];
                 $product=Product::find($product_id);
-                $user=$request->user();                
+                $user=$request->user();     
+                //map over products and get product name 
+                $products_name=collect($request->products)->map(function($product){
+                    return $product["product_name"];
+                });
+
                 Log::create([
                     "user_id"=>($user)?$user->id:"",
                     "ip_address"=>$request->ip(),
@@ -275,7 +280,7 @@ class OrderRepository extends BaseRepository
                     "traits"=> [
                         "productDetail"=> json_encode($request->products),
                         'shop_name'=> $product->shop->name,
-                        'product_name'=> $product->name,
+                        'product_name'=> $products_name,
                         "price"=> $request->amount,
                         "orderId"=> $request->tracking_number,
                         "delivery_time"=> $request->delivery_time,
