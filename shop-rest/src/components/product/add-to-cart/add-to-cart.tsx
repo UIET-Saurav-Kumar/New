@@ -6,6 +6,7 @@ import { useCart } from "@contexts/quick-cart/cart.context";
 import { generateCartItem } from "@contexts/quick-cart/generate-cart-item";
 import { useCreateLogMutation } from "@data/log/use-create-log.mutation";
 import { useLocation } from "@contexts/location/location.context";
+import { useOrdersQuery } from "@data/order/use-orders.query";
 
 interface Props {
   data: any;
@@ -51,6 +52,21 @@ export const AddToCart = ({
   const { mutate: createLog} = useCreateLogMutation();
   const {getLocation} =useLocation()
 
+  const {
+    data:ordersData,
+   
+  } = useOrdersQuery({});
+
+  function containsProduct(ordersData: any[], productId: number) {
+    return ordersData?.some((order: any) => {
+      return order?.products.some((product: any) => {
+        return product?.id === productId;
+      });
+    });
+  }
+
+  console.log('ear phone', containsProduct(ordersData?.pages?.[0].data, 14110));
+
   
   const handleAddClick = (
     e: React.MouseEvent<HTMLButtonElement | MouseEvent>
@@ -89,12 +105,14 @@ export const AddToCart = ({
     });
 
   };
-  const outOfStock = isInCart(item?.id) && !isInStock(item.id) && !isProductAvailable(item.id);
+
+  console.log('item id',item)
+  const outOfStock = isInCart(item?.id) && !isInStock(item.id) && !isProductAvailable(item.id) ;
   return !isInCart(item?.id) ? (
 
     <>
       <AddToCartBtn
-        disabled={disabled || outOfStock }
+        disabled={disabled || outOfStock || item.id === 14110 ? containsProduct(ordersData?.pages?.[0].data, 14110) : false}
         variant={variant}
         onClick={handleAddClick}
       />
@@ -104,10 +122,10 @@ export const AddToCart = ({
       <Counter
         value={getItemFromCart(item.id).quantity}
         onDecrement={handleRemoveClick}
-        onIncrement={getItemFromCart(item.id).quantity !== data.quantity ? handleAddClick : null}
+        onIncrement={(getItemFromCart(item.id).quantity !== data.quantity ? handleAddClick : null)}
         variant={counterVariant ? counterVariant : variant}
         className={counterClass}
-        disabled={outOfStock}
+        disabled={outOfStock || (item.id === 14110 ? (containsProduct(ordersData?.pages?.[0].data, 14110) ? disabled : null) : null)}
       />
     </>
   );

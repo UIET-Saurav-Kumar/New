@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { formatOrderedProduct } from "@utils/format-ordered-product";
 import EmptyCartIcon from "@components/icons/empty-cart";
 import { loggedIn } from "@utils/is-loggedin";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ValidationError from "@components/ui/validation-error";
 import { useVerifyCheckoutMutation } from "@data/order/use-checkout-verify.mutation";
 import { useTranslation } from "next-i18next";
@@ -16,6 +16,7 @@ import { useModalAction } from "@components/ui/modal/modal.context";
 import { useWindowSize } from "@utils/use-window-size";
 import dynamic from "next/dynamic";
 import Scrollbar from "@components/ui/scrollbar";
+import { useOrdersQuery } from "@data/order/use-orders.query";
 
 
 const CartCounterButton = dynamic(
@@ -33,6 +34,37 @@ const VerifyCheckout = () => {
   const { billing_address, setCheckoutData, checkoutData } = useCheckout();
   const { items, total, isEmpty } = useCart();
   const { openModal } = useModalAction();
+
+  // reload the page once when user logs in 
+  // useEffect(() => {
+  //   if (loggedIn()) {
+  //     router.reload();
+  //   }
+  // }
+  // , [loggedIn]);
+  
+
+  
+  
+  
+
+
+  const {
+    data:ordersData,
+   
+  } = useOrdersQuery({});
+
+  function containsProduct(ordersData: any[], productId: number) {
+    return ordersData?.some((order: any) => {
+      return order?.products.some((product: any) => {
+        return product?.id === productId;
+      });
+    });
+  }
+
+
+ 
+
 
   const available_items = items?.filter(
     (item: any) => 
@@ -77,8 +109,8 @@ const VerifyCheckout = () => {
           },
 
           {
-
             onSuccess: (data) => {
+              router.reload();
               setCheckoutData(data);
               router.push("/order");
             },
@@ -96,6 +128,17 @@ const VerifyCheckout = () => {
       openModal("LOGIN_VIEW");
     }
   }
+
+  const {
+  
+    removeItemFromCart,
+   
+  } = useCart();
+
+  
+
+  // check if available_items have product with id 14110
+  
 
   return (
 
@@ -128,22 +171,36 @@ const VerifyCheckout = () => {
                 // style={{ height: "calc(100% - 80px)" }}
               >  
         <div className="flex flex-col py-3 border-b border-border-200">
-        {isEmpty ? (
-          <div className="h-full flex flex-col items-center justify-center mb-4">
-            <EmptyCartIcon width={140} height={176} />
-            <h4 className="mt-6 text-base font-semibold">
-              {t("text-no-products")}
-            </h4>
-          </div>
-          
-        ) : (
-          available_items?.map((item) =>(
-              <>
-                <CheckoutCartItem item={item} key={item.id} />
-              </>
-            ) 
-          )
-        )}
+          {isEmpty ? (
+            <div className="h-full flex flex-col items-center justify-center mb-4">
+              <EmptyCartIcon width={140} height={176} />
+              <h4 className="mt-6 text-base font-semibold">
+                {t("text-no-products")}
+              </h4>
+            </div>
+            
+          ) : (
+            // map over available_items and check if it includes product with id 14110 if true then check if that product is also present in orders list if true then push that item in notAvailable
+
+
+            available_items?.map((item: any) => {
+              if (item.id === 14110) {
+                if (containsProduct(ordersData?.pages?.[0].data, 14110)) {
+                  removeItemFromCart(14110);
+                }
+              }
+              return (
+                <CheckoutCartItem
+                  key={item.id}
+                  item={item}
+                 
+                  
+                />
+              );
+            }
+
+            )
+          )}
 
       </div>
       </Scrollbar>
@@ -165,7 +222,7 @@ const VerifyCheckout = () => {
         loading={loading}
         className="w-full -mt-4 sticky bottom-14  md:bottom-2"
         onClick={handleVerifyCheckout}
-        disabled={isEmpty}
+        disabled={isEmpty }
       >
         {  subtotal + '  |' + '  '+  'Proceed to Checkout'}
       </Button>

@@ -13,7 +13,11 @@ import { min } from "lodash";
 import router from "next/router";
 import WishlistButton from "../product-details/wishlist-button";
 import RatingsBadge from "@components/ui/rating-badge";
+import { useOrdersQuery } from "@data/order/use-orders.query";
+ // dynamically import containProduct function from pages/orders
+ 
 
+ 
 
 type NeonProps = {
   product: any;
@@ -55,6 +59,19 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
 
   function handleProductQuickView() {
     return openModal("PRODUCT_DETAILS", product.slug);
+  }
+
+  const {
+    data:ordersData,
+   
+  } = useOrdersQuery({});
+
+  function containsProduct(ordersData: any[], productId: number) {
+    return ordersData?.some((order: any) => {
+      return order?.products.some((product: any) => {
+        return product?.id === productId;
+      });
+    });
   }
 
   console.log('quantity', product.quantity)
@@ -166,8 +183,12 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
         ) : (
           <>
             {Number(quantity) > 0 && (
-             <div className="md:pt-3">
+             <div className="  md:pt-3 ">
                 <AddToCart  variant="organesson" data={product} />
+               { product.id === 14110 ? containsProduct(ordersData?.pages?.[0].data, 14110) ?
+                <span className='text-xs mt-2 lg:text-sm text-red-600'>Offer expired</span>
+                : '' : ''}
+               
              </div>
             )}
           </>

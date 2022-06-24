@@ -17,6 +17,7 @@ import { FacebookIcon } from "@components/icons/facebook";
 import { GoogleIcon } from "@components/icons/google";
 import { useModalAction } from "@components/ui/modal/modal.context";
 import { MobileIcon } from "@components/icons/mobile-icon";
+import router from "next/router";
 
 
 
@@ -46,6 +47,8 @@ const LoginForm = () => {
   const { authorize } = useUI();
   const { openModal, closeModal } = useModalAction();
 
+  
+
 
   const {
     register,
@@ -64,11 +67,16 @@ const LoginForm = () => {
       },
       {
         onSuccess: (data) => {
+          
+         
+
+
           if (data?.token && data?.permissions?.length) {
             Cookies.set("auth_token", data.token, { expires: 10 });
             Cookies.set("auth_permissions", data.permissions, { expires: 10 });
             authorize();
             closeModal();
+            router.reload()
             return;
           }
           if (!data.token) {
@@ -76,6 +84,7 @@ const LoginForm = () => {
           }
         },
         onError: (error: any) => {
+          alert('Something went wrong!!')
           console.log(error.message);
         },
       }
@@ -83,6 +92,7 @@ const LoginForm = () => {
   }
 
   return (
+   
     <div className="py-6 px-5 sm:p-8 bg-light w-screen md:max-w-md h-screen md:h-auto flex flex-col justify-center">
         <div className="flex justify-center">
           <Logo />
@@ -183,6 +193,7 @@ const LoginForm = () => {
         </button>
       </div>
     </div>
+    
   );
 };
 

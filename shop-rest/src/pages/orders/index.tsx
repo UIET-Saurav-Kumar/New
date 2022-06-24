@@ -51,6 +51,18 @@ export default function OrdersPage() {
 
   console.log('order',data);
 
+  //return true if orders list contains product with id = 14110
+   function containsProduct(orders: any[], productId: number) {
+    return orders?.some((order: any) => {
+      return order?.products.some((product: any) => {
+        return product?.id === productId;
+      });
+    });
+  }
+
+  console.log('ear phone', containsProduct(data?.pages?.[0].data, 14110));
+
+
 
   if (error) return <ErrorMessage message={error.message} />;
 
