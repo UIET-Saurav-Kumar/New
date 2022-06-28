@@ -32,7 +32,7 @@ const OrderList = ({ orders, onPagination }: IProps) => {
   
   const { data, paginatorInfo } = orders! ?? {};
   const { t } = useTranslation();
-  const rowExpandable = (record: any) => record?.children?.length ;
+  const rowExpandable = (record: any) => record?.children?.length > 1 ? record?.children?.length : '';
   const router = useRouter();
   const { alignLeft } = useIsRTL();
 

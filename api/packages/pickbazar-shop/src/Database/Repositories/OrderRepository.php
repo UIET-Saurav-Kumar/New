@@ -484,7 +484,7 @@ class OrderRepository extends BaseRepository
                 'amount' => $amount,
                 'total' => $amount+$delivery_fee,
                 'paid_total' => $amount+$delivery_fee,
-                'order_date' => Carbon::now(),
+                // 'order_date' => Carbon::now(),
                 // 'created_at' => Carbon::now(),
             ];
 
