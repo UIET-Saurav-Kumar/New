@@ -457,11 +457,11 @@ class OrderRepository extends BaseRepository
         }
 
         // child order shop name
-        $shop_name = '';
-        $shop_name = rtrim($shop_name, ",");
-        foreach ($productsByShop as $shop_id => $products) {
-            $shop_name = $shop_name . $products[0]['shop_name'] . ",";
-        }
+        // $shop_name = '';
+        // $shop_name = rtrim($shop_name, ",");
+        // foreach ($productsByShop as $shop_id => $products) {
+        //     $shop_name = $shop_name . $products[0]['shop_name'] . ",";
+        // }
         //undefined array key shop_name
         
         // $shop_name = rtrim($shop_name, ",");
@@ -472,7 +472,7 @@ class OrderRepository extends BaseRepository
                 'tracking_number' => Str::random(12),
                 'shop_id' => $shop_id,
                 'status' => $request->status,
-                'shop_name' => $shop_name,
+                // 'shop_name' => $shop_name,
                 'customer_id' => $request->customer_id,
                 'shipping_address' => $request->shipping_address,
                 'customer_contact' => $request->customer_contact,
