@@ -35,8 +35,9 @@ use PickBazar\Http\Controllers\AbusiveReportController;
 use PickBazar\Http\Controllers\FeedbackController;
 
 
-
-
+//route for findByDateRange in order controller
+Route::get('/find-by-date-range/{start_date}/{end_date}', 'PickBazar\Http\Controllers\OrderController@findByDateRange');
+// Route::get('/find-by-date-range', 'PickBazar\Http\Controllers\OrderController@findByDateRange');
 
 Route::post('/register', 'PickBazar\Http\Controllers\UserController@register');
 Route::post('/token', 'PickBazar\Http\Controllers\UserController@token');
@@ -48,7 +49,7 @@ Route::post('/user-verify', 'PickBazar\Http\Controllers\UserController@userVerif
 Route::post('/otp-token', 'PickBazar\Http\Controllers\UserController@otpToken');
 Route::post('/verify-otp-token', 'PickBazar\Http\Controllers\UserController@verifyOtpToken');
 
-Route::get('/orders', 'PickBazar\Http\Controllers\OrderController@findByDateRange');
+ 
 
 Route::post('/verify-forget-password-token', 'PickBazar\Http\Controllers\UserController@verifyForgetPasswordToken');
 Route::post('/reset-password', 'PickBazar\Http\Controllers\UserController@resetPassword');
@@ -121,8 +122,6 @@ Route::apiResource('abusive_reports', AbusiveReportController::class, [
 ]);
 Route::post('abusive_reports/accept', [AbusiveReportController::class, 'accept']);
 Route::post('abusive_reports/reject', [AbusiveReportController::class, 'reject']);
-
-
 
 Route::apiResource('master-products', MasterProductController::class, [
     'only' => ['index', 'show']

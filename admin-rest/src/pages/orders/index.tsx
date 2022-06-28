@@ -14,26 +14,88 @@ import SortForm from "@components/common/sort-form";
 import Button from "@components/ui/button";
 import { useModalAction } from "@components/ui/modal/modal.context";
 import { MoreIcon } from "@components/icons/more-icon";
+import DatePicker from "react-datepicker";
 
+import "react-datepicker/dist/react-datepicker.css";
+import CategoryTypeFilter from "@components/master-products/category-type-filter";
+import { ArrowUp } from "@components/icons/arrow-up";
+import { ArrowDown } from "@components/icons/arrow-down";
+import cn from "classnames";
+import ShopNameFilter from "@components/order/shop-name-filter";
+import { useDateRangeQuery } from "@data/order/use-date-range.query";
 
 export default function Orders() {
 
-  const [searchTerm, setSearchTerm] = useState("");
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+
+  const [searchTerm, setSearchTerm] = useState();
   const [page, setPage] = useState(1);
   const { t } = useTranslation();
   const [orderBy, setOrder] = useState("created_at");
   const [sortedBy, setColumn] = useState<SortOrder>(SortOrder.Desc);
   const { openModal } = useModalAction();
+  const [visible, setVisible] = useState(false);
+
+  const[shopNameFilter, setShopNameFilter] = useState(false);
+
+  const [shopName, setShopName] = useState("");
+  const [shopCategory, setShopCategory] = useState(""); 
+  const [searchType, setSearchType] = useState<"name" | "email" | "phone" | "address">("name");
+
+  const convertStartDate = () => {
+    const d = new Date(startDate);
+    const month = `0${d.getMonth() + 1}`.slice(-2);
+    const day = `0${d.getDate()}`.slice(-2);
+    const year = d.getFullYear();
+    return `${year}-${month}-${day}`;
+  }
+
+  const convertEndDate = () =>{
+    const d = new Date(endDate);
+    const month = `0${d.getMonth() + 1}`.slice(-2);
+    const day = `0${d.getDate()}`.slice(-2);
+    const year = d.getFullYear();
+    return `${year}-${month}-${day}`;
+  }
 
   const {
     data,
+    isLoading: loadingProducts,
+    error: err,
+  } = useDateRangeQuery(
+      // {page,limit:15},
+    convertStartDate(),
+    convertEndDate(),
+    // shopName,
+  
+  );
+
+  console.log('startDAte',endDate)
+
+  console.log('date Range',data);
+  
+  console.log('converted date', convertStartDate(), convertEndDate());
+  
+
+  const {
+    data: allOrders,
     isLoading: loading,
     error,
   } = useOrdersQuery({
     limit: 15,
     page,
     text: searchTerm,
+    orderBy,
+    sortedBy,
+    searchType,
+    // shopName,
+    // shopCategory,
   });
+  console.log('data',allOrders);
+
+
+// const[setDate, datevalue] = useState(new Date());
 
   // fetch api 127.0.0.1:3000/api/v1/orders?limit=15&page=1&text=&order_by=created_at&sorted_by=desc
   // useEffect
@@ -49,6 +111,7 @@ export default function Orders() {
 
 
   if (loading) return <Loader text={t("common:text-loading")} />;
+  // if (loadingProducts) return <Loader text={t("common:text-loading")} />;
 
   if (error) return <ErrorMessage message={error.message} />;
 
@@ -56,6 +119,7 @@ export default function Orders() {
     setSearchTerm(searchText);
     setPage(1);
   }
+  
   function handlePagination(current: any) {
     setPage(current);
   }
@@ -63,29 +127,122 @@ export default function Orders() {
   function handleImportModal() {
     openModal("EXPORT_IMPORT_ORDERS");
   }
+
+  const toggleVisible = () => {
+    setVisible((v) => !v);
+  };
+
+//  alert(startDate) 
+ console.log('startDate',startDate)
+
+ // convert this Thu Jun 23 2022 00:00:00 GMT+0530 (India Standard Time) to yyyy-mm-dd
   
+  // function handleStartDate(date: Date) {
+  //   setStartDate(date);
+  // }
+  // function handleEndDate(date: Date) {
+  //   setEndDate(date);
+  // }
+
+  //  alert(convertStartDate(startDate))
+
+  // console.log('date range orders', data.orders.data);
+  // console.log('allOrders', allOrders);
 
   return (
     <>
-      <Card className="flex flex-col md:flex-row items-center justify-between mb-8">
-       
-        <div className="md:w-1/4 mb-4 md:mb-0">
-          <h1 className="text-lg font-semibold text-heading">
-            {t("form:input-label-orders")}
-          </h1>
-        </div>
-
-        <div className="w-full md:w-3/4 flex flex-col md:flex-row items-center ms-auto">
-          <Search onSearch={handleSearch} />
+      <Card className="flex flex-col mb-8">
+        <div className="w-full flex flex-col md:flex-row items-center">
+          
+          <div className="md:w-1/4 mb-4 md:mb-0">
+            <h1 className="text-lg font-semibold text-heading">
+              {t("form:input-label-orders")}
+            </h1>
+          </div>
+          
+          <div className="w-full md:w-full flex  items-center ms-auto">
+            <select
+                  className="  text-gray-600 p-4 text-sm items-center mr-4 bg-white border rounded flex "
+                  onChange={(e) => setSearchType(e.target.value)}
+                  value={searchType}
+                  defaultValue="Search by"
+                >
+                  <option value="name">{t("form:input-label-name")}</option>
+                  {/* <option value="email">{t("form:input-label-email")}</option> */}
+                  <option value="phone_number">{t("Phone Number")}</option>
+                  <option value='tracking_number'>Tracking number</option>
+                  <option value='email_id'>Email</option>
+                  <option value='shop_name'>Shop Name</option>
+                  <option value='status'>Status</option>
+                  
+              </select> <Search onSearch={handleSearch} />
+          </div>
           <Button
               onClick={handleImportModal}
               className="mt-5 w-full md:hidden"
             >
               {t("common:text-export-import")}
           </Button>
+
+          <button
+            className="text-accent text-base font-semibold flex items-center md:ms-5 mt-5 md:mt-0"
+            onClick={toggleVisible}
+          >
+            {t("common:text-filter")}{" "}
+            {visible ? (
+              <ArrowUp className="ms-2" />
+            ) : (
+              <ArrowDown className="ms-2" />
+            )}
+          </button>
+          <button
+              onClick={handleImportModal}
+              className="hidden md:flex w-8 h-8 rounded-full bg-gray-50 hover:bg-gray-100 items-center justify-center flex-shrink-0 ms-5 transition duration-300"
+            >
+             <MoreIcon className="w-3.5 text-body" />
+          </button>
+          </div>
+         
+
+          <div
+          className={cn("w-full flex transition", {
+            "h-auto visible": visible,
+            "h-0 invisible": !visible,
+          })}
+        >
+         <div className="flex flex-col md:flex-row md:space-x-4 md:items-center mt-5 md:mt-8 border-t border-gray-200 pt-5 md:pt-8 w-full">
+           <div className="flex items-center "> <span className="text-gray-700 font-light mx-4">From</span> 
+            <div className=""> <DatePicker clearButtonTitle="clear"
+             selected={startDate} onChange={(date:Date ) => setStartDate(date)} 
+             dateFormat= "dd/MM/yyyy"
+            //  clearIcon={null}
+              />
+
+            </div>
+            <span className="text-gray-700 font-light mx-4">to</span> 
+            <div className="w-60"><DatePicker
+            // clearIcon={null}
+             selected={endDate} onChange={(date:Date) => setEndDate(date)} 
+             dateFormat= "dd/MM/yyyy"
+            />
+            </div>
+           </div>
+           
+          <ShopNameFilter
+              className="w-full md:w-full md:mr-5"
+              onShopCategoryFilter={({ slug }: { slug: string }) => {
+                setShopCategory(slug);
+              }}
+              onShopNameFilter={({ slug }: { slug: string }) => {
+                setShopName(slug);
+              }}
+              shopCategory={shopCategory}
+              shopName={shopName}
+             
+            />
           <SortForm
             showLabel={false}
-            className="w-full md:w-1/2 md:ms-5 mt-5 md:mt-0 flex-shrink-0"
+            className="w-full md:w- md:ms-5 mt-5 md:mt-0"
             onSortChange={({ value }: { value: SortOrder }) => {
               setColumn(value);
             }}
@@ -98,16 +255,16 @@ export default function Orders() {
               { value: "updated_at", label: "Updated At" },
             ]}
           />
-           <button
-              onClick={handleImportModal}
-              className="hidden md:flex w-8 h-8 rounded-full bg-gray-50 hover:bg-gray-100 items-center justify-center flex-shrink-0 ms-5 transition duration-300"
-            >
-             <MoreIcon className="w-3.5 text-body" />
-          </button>
+          </div>
+          
         </div>
       </Card>
 
-      <OrderList orders={data?.orders} onPagination={handlePagination} />
+      <OrderList orders={
+         endDate === null ?
+          allOrders?.orders
+          : data?.orders
+           } onPagination={handlePagination} />
     </>
   );
 }
@@ -119,3 +276,5 @@ export const getStaticProps = async ({ locale }: any) => ({
     ...(await serverSideTranslations(locale, ["table", "common", "form"])),
   },
 });
+
+

@@ -19,7 +19,7 @@ use PickBazar\Http\Requests\OrderCreateRequest;
 use PickBazar\Http\Requests\OrderUpdateRequest;
 use PickBazar\Database\Repositories\OrderRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-
+use Carbon\Carbon;
 
 class OrderController extends CoreController
 {
@@ -59,11 +59,6 @@ class OrderController extends CoreController
     }
 
     
-
-
-    
-
-
     /**
      * Store a newly created resource in storage.
      *
@@ -120,18 +115,86 @@ class OrderController extends CoreController
     // find by date range
     public function findByDateRange(Request $request, $start_date, $end_date)
     {
-        $user = $request->user();
-        try {
-            $order = $this->repository->with(['products', 'status', 'children.shop'])->findByFieldOrFail('created_at', '>=', $start_date)->findByFieldOrFail('created_at', '<=', $end_date);
-            if ($user->id === $order->customer_id || $user->can('super_admin')) {
-                return $order;
-            } else {
-                throw new PickbazarException('PICKBAZAR_ERROR.NOT_AUTHORIZED');
-            }
-        } catch (\Exception $e) {
-            throw new PickbazarException('PICKBAZAR_ERROR.NOT_FOUND');
-        }
+               $start_date =
+            //    Carbon::now()->
+               $request->start_date;
+                                    //  ->toDateTimeString();
+                                     //format
+        
+               $end_date =
+            //    Carbon::now()->
+               $request->end_date;
+                                    //  ->toDateTimeString();
+        
+            // return Order::whereBetween('created_at',['2022-06-01','2022-06-20'])->get();
+            // return Order::whereBetween('created_at',[$start_date,$end_date])->get();
+            //order repository with children.shop product.shop 
+            return $this->repository->with(['children','children.shop','products.shop'])->whereBetween('created_at',[$start_date,$end_date])->where('id', '!=', null)->where('parent_id', '=', null)->get();
+            // sort as from high to low
+            // return $orders->sortByDesc('created_at');
+
+            // return $this->repository->with(['children','children.shop','products.shop'])->whereBetween('created_at',[$start_date,$end_date])->get();
+            //   return Order::whereBetween('created_at',['Wed,Jun 01, 2022 12AM','Mon,Jun 20, 2022 12AM'])->get();
+            //return Order::whereBetween('created_at',['24-06-2022','25-06-2022'])->get();
+               
     }
+
+    //find by date range and shop name
+    public function findByDateRangeAndShopName(Request $request, $start_date, $end_date, $shop_name)
+    {
+        $start_date =
+            //    Carbon::now()->
+               $request->start_date;
+                                    //  ->toDateTimeString();
+                                     //format
+        
+               $end_date =
+            //    Carbon::now()->
+               $request->end_date;
+                                    //  ->toDateTimeString();
+        
+            // return Order::whereBetween('created_at',['2022-06-01','2022-06-20'])->get();
+            // return Order::whereBetween('created_at',[$start_date,$end_date])->get();
+            //order list without child orders
+            // return $this->repository->with(['products','products.shop'])->whereBetween('created_at',[$start_date,$end_date])->where('shop_id', '=', $shop_name)->get();
+
+        // return order without child orders
+        return $this->repository->with(['products','products.shop'])->whereBetween('created_at',[$start_date,$end_date])->where('shop_id', 'like', '%'.$shop_name.'%')->where('id', '!=', null)->where('parent_id', '=', null)->get();
+
+            // return $this->repository->with(['children','children.shop','products.shop'])->whereBetween('created_at',[$start_date,$end_date])->where('shop_id', '=', $shop_name)->get();
+            //   return Order::whereBetween('created_at',['Wed,Jun 01, 2022 12AM','Mon,Jun 20, 2022 12AM'])->get();
+            //return Order::whereBetween('created_at',['24-06-2022','25-06-2022'])->get();
+               
+    }
+
+    //search by date range and shop name like %shop_name%
+    public function searchByDateRangeAndShopName(Request $request, $start_date, $end_date, $shop_name)
+    {
+        $start_date =
+            //    Carbon::now()->
+               $request->start_date;
+                                    //  ->toDateTimeString();
+                                     //format
+        
+               $end_date =
+            //    Carbon::now()->
+               $request->end_date;
+                                    //  ->toDateTimeString();
+        
+            // return Order::whereBetween('created_at',['2022-06-01','2022-06-20'])->get();
+            // return Order::whereBetween('created_at',[$start_date,$end_date])->get();
+            //order list without child orders
+            // return $this->repository->with(['products','products.shop'])->whereBetween('created_at',[$start_date,$end_date])->where('shop_id', '=', $shop_name)->get();
+
+        // return order without child orders
+        return $this->repository->with(['products','products.shop'])->whereBetween('created_at',[$start_date,$end_date])->where('shop_id', 'like', '%'.$shop_name.'%')->where('id', '!=', null)->where('parent_id', '=', null)->get();
+
+            // return $this->repository->with(['children','children.shop','products.shop'])->whereBetween('created_at',[$start_date,$end_date])->where('shop_id', '=', $shop_name)->get();
+            //   return Order::whereBetween('created_at',['Wed,Jun 01, 2022 12AM','Mon,Jun 20, 2022 12AM'])->get();
+            //return Order::whereBetween('created_at',['24-06-2022','25-06-2022'])->get();
+               
+    }
+    
 
    
 

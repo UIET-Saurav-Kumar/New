@@ -32,7 +32,7 @@ const OrderList = ({ orders, onPagination }: IProps) => {
   
   const { data, paginatorInfo } = orders! ?? {};
   const { t } = useTranslation();
-  const rowExpandable = (record: any) => record?.children?.length > 1 ? record?.children?.length : '';
+  const rowExpandable = (record: any) => record?.children?.length ;
   const router = useRouter();
   const { alignLeft } = useIsRTL();
 
@@ -49,7 +49,7 @@ const OrderList = ({ orders, onPagination }: IProps) => {
   console.log('date',today.getDate() + ' ' + monthNames[month] );
 
 
-  console.log('orders list', data);
+  console.log('orders list', orders);
  
 
   const columns = [
@@ -284,9 +284,23 @@ const OrderList = ({ orders, onPagination }: IProps) => {
 
   ];
 
+  console.log('pagination', paginatorInfo?.total)
+  // clg
+
   return (
     <>
+    
       <div className="rounded overflow-hidden shadow mb-6">
+      {!!paginatorInfo?.total && (
+        <div className="flex justify-end items-center">
+          <Pagination
+            total={paginatorInfo?.total}
+            current={paginatorInfo?.currentPage}
+            pageSize={paginatorInfo?.perPage}
+            onChange={onPagination}
+          />
+        </div>
+      )}
         <Table
           //@ts-ignore
           columns={columns}
@@ -301,16 +315,7 @@ const OrderList = ({ orders, onPagination }: IProps) => {
         />
       </div>
 
-      {!!paginatorInfo?.total && (
-        <div className="flex justify-end items-center">
-          <Pagination
-            total={paginatorInfo?.total}
-            current={paginatorInfo?.currentPage}
-            pageSize={paginatorInfo?.perPage}
-            onChange={onPagination}
-          />
-        </div>
-      )}
+      
     </>
   );
 };

@@ -20,6 +20,8 @@ export const API_ENDPOINTS = {
   CATEGORIES: "categories",
   SHOP_CATEGORIES: "shop-categories",
 
+  FIND_BY_DATE_RANGE: "find-by-date-range",
+
   SELECT_SHOP_CATEGORIES:"select-shop-categories",
   TAGS: "tags",
   PARENT_CATEGORIES: "fetch-parent-category",

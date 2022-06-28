@@ -26,6 +26,7 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Ignited\LaravelOmnipay\Facades\OmnipayFacade as Omnipay;
 use LoveyCom\CashFree\PaymentGateway\Order as CashFreeOrder;
 use PickBazar\Helpers\InteraktHelper;
+use Carbon\Carbon;
 
 class OrderRepository extends BaseRepository
 {
@@ -34,6 +35,11 @@ class OrderRepository extends BaseRepository
      */
     protected $fieldSearchable = [
         'tracking_number' => 'like',
+        'customer_contact' => 'like',
+        'shop_name'=>'like',
+        'email_id'=>'like',
+        'status'=>'like',
+        'name' => 'like',
         'shop_id',
     ];
     /**
@@ -41,8 +47,11 @@ class OrderRepository extends BaseRepository
      */
     protected $dataArray = [
         'tracking_number',
+        'name',
         'customer_id',
         'shop_id',
+        'shop_name',
+        'email_id',
         'status',
         'amount',
         'sales_tax',
@@ -99,6 +108,12 @@ class OrderRepository extends BaseRepository
         $user = $request->user();
         $request['tracking_number'] = Str::random(12);
         $request['customer_id'] = $request->user()->id;
+        $request['name'] = $request->user()->name;
+        $request['email_id'] = $request->user()->email;
+        $request['shop_name'] = $request->shop_name;
+        //status
+        $request['status'] = $request->status;
+        $request['customer_contact'] = $request->user()->phone_number;
         $discount = $this->calculateDiscount($request);
         if ($discount) {
 
@@ -131,13 +146,10 @@ class OrderRepository extends BaseRepository
         if($payment_gateway=='cod'){
             $order=$this->createOrder($request);
             $this->sendSMS($order); 
-
             return $order;
-
         }
         
         // $response = $this->capturePayment($request);
-        
         
         $payment_method = 'cc';
         if($payment_method == 'cashfree')
@@ -291,6 +303,7 @@ class OrderRepository extends BaseRepository
                 $interkt_response = $this->createWhatsappOrderEvent($payload);
                 #---------------------creating whatsapp message-----------------#
             }
+
             $order->interakt_response = $interkt_response;
             return $order;
         } catch (ValidatorException $e) {
@@ -442,6 +455,16 @@ class OrderRepository extends BaseRepository
             $product = Product::findOrFail($cartProduct['product_id']);
             $productsByShop[$product->shop_id][] = $cartProduct;
         }
+
+        // child order shop name
+        $shop_name = '';
+        $shop_name = rtrim($shop_name, ",");
+        foreach ($productsByShop as $shop_id => $products) {
+            $shop_name = $shop_name . $products[0]['shop_name'] . ",";
+        }
+        //undefined array key shop_name
+        
+        // $shop_name = rtrim($shop_name, ",");
         foreach ($productsByShop as $shop_id => $cartProduct) {
             $amount = array_sum(array_column($cartProduct, 'subtotal'));
             $delivery_fee=$this->getDeliveryCharges($request,$shop_id);
@@ -449,6 +472,7 @@ class OrderRepository extends BaseRepository
                 'tracking_number' => Str::random(12),
                 'shop_id' => $shop_id,
                 'status' => $request->status,
+                'shop_name' => $shop_name,
                 'customer_id' => $request->customer_id,
                 'shipping_address' => $request->shipping_address,
                 'customer_contact' => $request->customer_contact,
@@ -460,6 +484,7 @@ class OrderRepository extends BaseRepository
                 'amount' => $amount,
                 'total' => $amount+$delivery_fee,
                 'paid_total' => $amount+$delivery_fee,
+                'order_date' => Carbon::now(),
                 // 'created_at' => Carbon::now(),
             ];
 

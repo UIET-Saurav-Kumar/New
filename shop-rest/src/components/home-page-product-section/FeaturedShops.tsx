@@ -79,7 +79,7 @@ export default function FeaturesShops({ }) {
                                         {imageCheck(shop.logo?.thumbnail, shop, '130', false,'group-hover:-translate-y-1 hover:scale-110 duration-200 w-20 h-20 xs++:w-20 xs++:h-20 xs+++:w-20 xs+++:h-20 sm:w-20 sm:h-20 md:w-16 md:h-16  lg:w-28 lg:h-28 lg+:w-28 lg+:h-28 xl+:w-32 xl+:h-32 xl++:w-48 xl++:h-48 2xl:w-44 2xl:h-44 object-contain')}
         
                                     <div className='flex flex-col text-center justify-center w-full space-y-1 px-2 md:px-3 lg:px-4 2xl:px-4'>
-                                        <h3 className='font-semibold text-10px  md:text-md lg:text-sm 2xl:text-lg text-gray-700 font-serif  '> {shop.name}</h3>
+                                        <h3 className='font-semibold text-10px  md:text-md lg:text-sm 2xl:text-lg text-gray-700 font-serif  '> {shop?.name}</h3>
                                         <h3 className='font-light text-10px sm:text-xs md:text-md lg:text-md 2xl:text-md text-gray-700'>   {shop?.address?.city} </h3>
                                     </div>
     

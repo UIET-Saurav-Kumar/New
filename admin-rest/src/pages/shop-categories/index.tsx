@@ -18,6 +18,7 @@ import { ArrowDown } from "@components/icons/arrow-down";
 import { ArrowUp } from "@components/icons/arrow-up";
 
 export default function Categories() {
+
   const [searchTerm, setSearchTerm] = useState("");
   const [type, setType] = useState("");
   const [page, setPage] = useState(1);
@@ -36,12 +37,14 @@ export default function Categories() {
     error,
   } = useParentCategoriesQuery({
     limit: 20,
-    page,
-    type,
-    text: searchTerm,
-    orderBy,
-    sortedBy,
+    // page,
+    // type,
+    // text: searchTerm,
+    // orderBy,
+    // sortedBy,
   });
+
+  console.log('data',data)
 
   if (loading) return <Loader text={t("common:text-loading")} />;
   if (error) return <ErrorMessage message={error.message} />;
