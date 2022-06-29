@@ -265,8 +265,11 @@ class OrderRepository extends BaseRepository
             $this->calculateShopIncome($order, $request);
             $order->children = $order->children;
 
-            if($order)
+          
+
+            if($order || $order->shop_id)
             {
+                $shop=Shop::find($order->shop_id);
                 $product_id=$request->products[0]["product_id"];
                 $product=Product::find($product_id);
                 $user=$request->user();     
@@ -284,6 +287,7 @@ class OrderRepository extends BaseRepository
                 $payload = array(
                     "userId"=> $user->id,
                     "phoneNumber"=> $user->phone_number,
+                    'shop_owner_phone_number'=>$shop->owner->phone_number,
                     "countryCode"=> "+91",
                     "event"=> "Order Placed Successfully",
                     "traits"=> [
