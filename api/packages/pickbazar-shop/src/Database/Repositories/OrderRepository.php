@@ -287,7 +287,7 @@ class OrderRepository extends BaseRepository
                 $payload = array(
                     "userId"=> $user->id,
                     "phoneNumber"=> $user->phone_number,
-                    'shop_owner_phone_number'=>$shop->owner->phone_number,
+                    // 'shop_owner_phone_number'=>$shop->owner->phone_number,
                     'shop_owner_name'=>$shop->owner->name,
                     "countryCode"=> "+91",
                     "event"=> "Order Placed Successfully",
