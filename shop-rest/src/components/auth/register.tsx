@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useRegisterMutation } from "@data/auth/use-register.mutation";
 import Logo from "@components/ui/logo";
 import Alert from "@components/ui/alert";
@@ -17,6 +17,9 @@ import { maskPhoneNumber } from "@utils/mask-phone-number";
 import { route } from "next/dist/next-server/server/router";
 import GetCurrentLocation from "@components/geoCode/get-current-location";
 import { useLocation } from "@contexts/location/location.context";
+import Radio from "@components/ui/radio/radio";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 
 type FormValues = {
@@ -25,6 +28,8 @@ type FormValues = {
   password: string;
   phone_number:number;
   current_location:string;
+  date_of_birth:Date;
+  gender: 'male' | 'female';
 };
 
 
@@ -46,6 +51,8 @@ const defaultValues = {
   password: "",
   phone_number:"",
   current_location:'',
+  date_of_birth:'',
+  gender:'male'
 };
 
 // console.log('loc',getLocation.formattedAddress)
@@ -55,6 +62,8 @@ const RegisterForm = () => {
   const { t } = useTranslation("common");
   const { mutate, isLoading: loading } = useRegisterMutation();
   const [errorMsg, setErrorMsg] = useState("");
+
+  const [birthDate, setBirthDate] = useState(null);
   
   const userLoc = [{
     formattedAddress: getLocation.formattedAddress,
@@ -67,6 +76,7 @@ const RegisterForm = () => {
     register,
     handleSubmit,
     setError,
+    control,
     setValue,
     formState: { errors },
   } = useForm<FormValues>({
@@ -129,7 +139,7 @@ const RegisterForm = () => {
     // handleLocation()
 }
 
-  function onSubmit({ name, email, password, phone_number, current_location }: FormValues) {
+  function onSubmit({ name, email, password, phone_number, current_location, date_of_birth, gender }: FormValues) {
     mutate(
       {
         name,
@@ -138,6 +148,8 @@ const RegisterForm = () => {
         phone_number,
         invited_by:'',
         current_location,
+        date_of_birth,
+        gender,
       },
       {
         onSuccess: (data) => {
@@ -169,6 +181,9 @@ const RegisterForm = () => {
       }
     );
   }
+
+  console.log('birthday',birthDate?.toISOString().split('T')[0].split('-').reverse().join('/'))
+  console.log('birthday',birthDate)
 
 
 
@@ -212,7 +227,10 @@ const RegisterForm = () => {
         
         
       )}
-      <form className="grid grid-cols-2 text-xs gap-3 place-content-center" onSubmit={handleSubmit(onSubmit)} noValidate>
+      <form className="grid grid-cols-2 text-xs gap-3 place-content-center" 
+            onSubmit={handleSubmit(onSubmit)} noValidate>
+
+        {/* name */}
         <Input
           label={t("text-name")}
           {...register("name")}
@@ -221,6 +239,8 @@ const RegisterForm = () => {
           className="mb-2 lg:mb-5"
           error={t(errors.name?.message!)}
         />
+
+        {/* email */}
         <Input
     
           label={t("text-email")}
@@ -230,6 +250,8 @@ const RegisterForm = () => {
           className="mb-2 lg:mb-5"
           error={t(errors.email?.message!)}
         />
+
+        {/* password */}
         <PasswordInput
           label={t("text-password")}
           {...register("password")}
@@ -237,6 +259,36 @@ const RegisterForm = () => {
           variant="outline"
           className="mb-2 lg:mb-5"
         />
+
+        {/* Date of birth */}
+        <div className="col-span-2 sm:col-span-1">
+        
+            <div className="flex  text-body-dark h-3  font-semibold text-xs leading-none mb-3">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-yellow-600 to-blue-600">
+                  🎉Your Birthday present is awaiting  </span> 🥳</div>
+              <Controller
+                      control={control}
+                      name="date_of_birth"
+                      render={({ field: { onChange, onBlur, value } }) => (
+                        //@ts-ignore
+                <DatePicker 
+                          selected={birthDate} onChange={(date) => {
+                          setBirthDate(date);
+                          // calender ?  openCalenderOnFocus(true) : ''
+                            
+                            setValue("date_of_birth", date);
+                          }
+                          } 
+                          dateFormat= "dd/MM/yyyy"
+                          placeholderText='eg..23/12/1996'
+                          // {...register("date_of_birth")}
+                          className="text-sm h-12 w-60 px-4 border border-border-base rounded focus:border-accent"
+                          />
+                      )}
+                />
+        </div>
+
+        {/* phone number */}
         <Input
           label={"Phone Number"}
           {...register("phone_number")}
@@ -247,8 +299,34 @@ const RegisterForm = () => {
           onChange={(e) => setValue("phone_number", getPhoneNumber(e.target.value))}
           error={t(errors.phone_number?.message!)}
         />
+
+       {/* Gender */}
+      <div className="flex flex-col ">
+          <div className="flex   text-body-dark h-3  font-semibold text-xs leading-none mb-3">
+            Gender
+          </div>
+          <div className="flex items-center space-x-4 lg:space-x-8  ">
+            <Radio
+              id="male"
+              type="radio"
+              {...register("gender")}
+              value="male"
+              label={t("Male")}
+              className=""
+            />
+
+            <Radio
+              id="female"
+              type="radio"
+              {...register("gender")}
+              value="female"
+              label={t("Female")}
+              className=""
+            />
+            </div>
+          </div>
         
-      
+        {/* current location */}
         <Input
             value={getLocation?.formattedAddress}
             label={"Current Location"} 
@@ -256,7 +334,6 @@ const RegisterForm = () => {
             type="text" 
             variant="outline" 
             className="col-span-2 text-xs " 
-         
             error={t(errors.current_location?.message!)} />
           {/* {getLocation?.formattedAddress} */}
          

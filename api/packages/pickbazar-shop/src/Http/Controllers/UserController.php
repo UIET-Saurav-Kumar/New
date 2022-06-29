@@ -172,6 +172,8 @@ class UserController extends CoreController
             'password' => Hash::make($request->password),
             'invited_by'=>$request->invited_by,
             'phone_number'=>$request->phone_number,
+            'gender'=> $request->gender,
+            'date_of_birth'=> $request->date_of_birth,
             'current_location'=>$request->current_location,
             'is_active'=>0,
             'code'=>$code
@@ -225,6 +227,8 @@ class UserController extends CoreController
         $payload = array(
             "userId"=> $user->id,
             "phoneNumber"=> $user->phone_number,
+            'gender'=> $user->gender,
+            'date_of_birth'=> $user->date_of_birth,
             "countryCode"=> "+91",
             "event"=> "User Registered",
             "traits"=> [

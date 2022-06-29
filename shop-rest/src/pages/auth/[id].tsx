@@ -146,7 +146,7 @@ const RegisterForm = () => {
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
 
                 <Input
-                label={t("text-code")}
+                label={t("Enter OTP")}
                 {...register("code")}
                 type="code"
                 variant="outline"

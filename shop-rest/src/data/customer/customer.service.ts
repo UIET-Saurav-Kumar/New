@@ -13,6 +13,8 @@ export type ContactType = {
   subject: string;
   description: string;
   current_location: string;
+  gender:string;
+	date_of_birth:Date;
 };
 
 class Customer extends CoreApi {

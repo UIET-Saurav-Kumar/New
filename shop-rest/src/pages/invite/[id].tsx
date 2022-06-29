@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useRegisterMutation } from "@data/auth/use-register.mutation";
 import Logo from "@components/ui/logo";
 import Alert from "@components/ui/alert";
@@ -23,6 +23,12 @@ import { maskPhoneNumber } from "@utils/mask-phone-number";
 import LoginForm from "./loginform";
 import GetCurrentLocation from "@components/geoCode/get-current-location";
 
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { Label } from "@headlessui/react/dist/components/label/label";
+import Radio from "@components/ui/radio/radio";
+
+
 type FormValues = {
   name: string;
   email: string;
@@ -30,6 +36,8 @@ type FormValues = {
   id:number;
   phone_number:number;
   current_location:string;
+  date_of_birth:Date;
+  gender: 'male' | 'female';
 };
 
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
@@ -53,7 +61,18 @@ const registerFormSchema = yup.object().shape({
                 .min(10, 'Phone number should be of 10 digits only')
                 .required("error-contact-required")
                 .matches(/^[0-9]{10}$/, "Invalid phone number"),
+                // based on date of birth calculate age and if age is less than 18 then show error
+
+
+
+
+                
 });
+
+
+
+
+
 
 const defaultValues = {
   name: "",
@@ -61,6 +80,8 @@ const defaultValues = {
   password: "",
   phone_number:"",
   current_location:'',
+  date_of_birth:'',
+  gender:'male'
 };
 
 
@@ -74,10 +95,13 @@ const RegisterForm = () => {
   const { mutate, isLoading: loading } = useRegisterMutation();
   const [errorMsg, setErrorMsg] = useState("");
   const { query } = useRouter();
+
+  const [birthDate, setBirthDate] = useState(null);
   const {
     register,
     handleSubmit,
     setError,
+    control,
     setValue,
     formState: { errors },
   } = useForm<FormValues>({
@@ -94,7 +118,7 @@ const RegisterForm = () => {
   function getPhoneNumber(value:any){
     return value;
   }
-  function onSubmit({ name, email, password ,phone_number, current_location}: FormValues) {
+  function onSubmit({ name, email, password ,phone_number, current_location, date_of_birth, gender}: FormValues) {
     mutate(
       {
         name,
@@ -102,7 +126,9 @@ const RegisterForm = () => {
         password,
         invited_by:query.id,
         phone_number,
-        current_location
+        current_location,
+        date_of_birth,
+        gender,
       },
       {
         onSuccess: (data) => {
@@ -171,7 +197,7 @@ const RegisterForm = () => {
 
   return (
 
-    <div className="flex items-center h-full  justify-center bg-white sm:bg-gray-100 " >
+    <div className="flex items-center h-full w-screen/2  justify-center bg-white sm:bg-gray-100 " >
         
         { !click ? <div className="py-6 px-5 sm:p-8 bg-light  flex flex-col justify-center">
             
@@ -208,62 +234,125 @@ const RegisterForm = () => {
                 />
             )}
 
-            <form onSubmit={handleSubmit(onSubmit)} noValidate>
-                <Input
-                label={t("text-name")}
-                {...register("name")}
-                type="text"
-                variant="outline"
-                className="mb-5"
-                error={t(errors.name?.message!)}
-                />
-                <Input
-                label={t("text-email")}
-                {...register("email")}
-                type="email"
-                variant="outline"
-                className="mb-5"
-                error={t(errors.email?.message!)}
-                />
-                <PasswordInput
-                label={t("text-password")}
-                {...register("password")}
-                error={t(errors.password?.message!)}
-                variant="outline"
-                className="mb-5"
-                />
-                <Input
-                  label={"Phone Number"}
-                  {...register("phone_number")}
-                  type="text"
-                  variant="outline"
-                  className="mb-5"
-                  onChange={(e) => setValue("phone_number", getPhoneNumber(e.target.value))}
-                  error={t(errors.phone_number?.message!)}
-                />
-               <div className="flex-1 items-center"> 
+    <form className="grid grid-cols-2 text-xs gap-3  place-content-center" 
+            onSubmit={handleSubmit(onSubmit)} noValidate>
+        <Input
+          label={t("text-name")}
+          {...register("name")}
+          type="text"
+          variant="outline"
+          className="mb-2 lg:mb-5"
+          error={t(errors.name?.message!)}
+        />
+        <Input
+    
+          label={t("text-email")}
+          {...register("email")}
+          type="email"
+          variant="outline"
+          className="mb-2 lg:mb-5"
+          error={t(errors.email?.message!)}
+        />
+        <PasswordInput
+          label={t("text-password")}
+          {...register("password")}
+          error={t(errors.password?.message!)}
+          variant="outline"
+          className="mb-2 col-span-2 sm:col-span-1 lg:mb-5"
+        />
 
-                <Input
-                      value={!!getLocation ? getLocation?.formattedAddress : 'null'}
-                      label={"Current Location"} 
-                      {...register("current_location")} 
-                  
-                      type="text" 
-                      variant="outline" 
-                      className="mb-5 " 
-                      error={t(errors.current_location?.message!)} />
 
-                      <GetCurrentLocation onChange={changeLocation} />
+        <div className="col-span-2 sm:col-span-1">
+        
+        <div className="flex  text-body-dark h-3  font-semibold text-xs leading-none mb-3">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-yellow-600 to-blue-600">
+              🎉Your Birthday present is awaiting  </span> 🥳</div>
+          <Controller
+                  control={control}
+                  name="date_of_birth"
+                  render={({ field: { onChange, onBlur, value } }) => (
+                    //@ts-ignore
+            <DatePicker 
+                      selected={birthDate} onChange={(date) => {
+                      setBirthDate(date);
+                      // calender ?  openCalenderOnFocus(true) : ''
+                        
+                        setValue("date_of_birth", date);
+                      }
+                      } 
+                      dateFormat= "dd/MM/yyyy"
+                      placeholderText='eg..23/12/1996'
+                      // {...register("date_of_birth")}
+                      className="text-sm h-12 w-60 px-4 border border-border-base rounded focus:border-accent"
+                      />
+                  )}
+            />
+        </div>
 
-                </div>
-                    
 
-                <div className="mt-8">
-                  <Button className="w-full h-12" loading={loading} disabled={loading}>
-                      {t("text-register")}
-                  </Button>
-                </div>
-            </form>
+        <Input
+          label={"Phone Number"}
+          {...register("phone_number")}
+          type="text"
+          inputMode="numeric"
+          variant="outline"
+          className="mb-2 lg:mb-5 text-xs"
+          onChange={(e) => setValue("phone_number", getPhoneNumber(e.target.value))}
+          error={t(errors.phone_number?.message!)}
+        />
+
+        <div className="flex flex-col ">
+        <div className="flex   text-body-dark h-3  font-semibold text-xs leading-none mb-3">Gender
+        </div>
+        <div className="flex items-center space-x-4 lg:space-x-8  ">
+           <Radio
+            id="male"
+            type="radio"
+            {...register("gender")}
+            value="male"
+            label={t("Male")}
+            className=""
+          />
+
+          <Radio
+            id="female"
+            type="radio"
+            {...register("gender")}
+            value="female"
+            label={t("Female")}
+            className=""
+          />
+          </div>
+          </div>
+        
+        
+      
+        <Input
+              value={!!getLocation ? getLocation?.formattedAddress : 'null'}
+            label={"Current Location"} 
+            {...register("current_location")} 
+            type="text" 
+            variant="outline" 
+            className="col-span-2 text-xs " 
+          
+            error={t(errors.current_location?.message!)} />
+          {/* {getLocation?.formattedAddress} */}
+         
+
+      <div className=""> 
+         <GetCurrentLocation onChange={changeLocation} />  
+         <div className="mt-15">
+          <Button className="w-full h-12" 
+          variant="outline"
+          loading={loading} disabled={loading}>
+            {t("text-register")}
+          </Button>
+        </div>
+      </div>
+      
+
+       
+    </form>
             {/* End of forgot register form */}
 
             <div className="flex flex-col items-center justify-center relative text-sm text-heading  sm:mt-11 mb-6 sm:mb-8">

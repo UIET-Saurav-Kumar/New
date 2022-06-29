@@ -37,6 +37,8 @@ class UserRepository extends BaseRepository
         'shop_id',
         "phone_number",
         'current_location',
+        'gender',
+        'date_of_birth',
     ];
 
     /**
@@ -64,6 +66,8 @@ class UserRepository extends BaseRepository
                 'password' => Hash::make($request->password),
                 //user current_location
                 'current_location' => $request->current_location,
+                'gender'=> $request->gender,
+                'date_of_birth'=> $request->date_of_birth,
 
             ]);
             $user->givePermissionTo(UserPermission::CUSTOMER);

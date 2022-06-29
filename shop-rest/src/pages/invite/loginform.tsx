@@ -130,6 +130,7 @@ const LoginForm = () => {
           </Button>
           
         </div>
+        
       </form>
       {/* End of forgot login form */}
 
