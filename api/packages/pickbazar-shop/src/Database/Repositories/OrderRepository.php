@@ -199,7 +199,7 @@ class OrderRepository extends BaseRepository
                     if(isset($shop)){
                         $user=$shop->owner;
                         
-                            SMS::purchaseToVendor('9056147024', $user->name);    
+                            SMS::purchaseToVendor('7018265262', $user->name);    
                         
                     }
                 }    
@@ -267,13 +267,21 @@ class OrderRepository extends BaseRepository
 
           
 
-            if($order || $order->shop_id)
+            if($order)
             {
-                $shop=Shop::find($order->shop_id);
+               
+              
                 $product_id=$request->products[0]["product_id"];
                 $product=Product::find($product_id);
                 $user=$request->user();     
                 //map over products and get product name 
+
+                // find the user name if he has shop 
+                // if($user->shop){
+                //     $user_name=$user->shop->owner->name;
+                // }else{
+                //     $user_name=$user->name;
+                // }
                            
                 Log::create([
                     "user_id"=>($user)?$user->id:"",
@@ -287,8 +295,8 @@ class OrderRepository extends BaseRepository
                 $payload = array(
                     "userId"=> $user->id,
                     "phoneNumber"=> $user->phone_number,
-                    // 'shop_owner_phone_number'=>$shop->owner->phone_number,
-                    // 'shop_owner_name'=>$shop->owner->name,
+                    'shop_owner_phone_number'=>$product->shop->settings["contact"],
+                    'shop_owner_name'=>$product->shop->name,
                     "countryCode"=> "+91",
                     "event"=> "Order Placed Successfully",
                     "traits"=> [
