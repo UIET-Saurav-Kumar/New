@@ -184,7 +184,7 @@ class OrderRepository extends BaseRepository
 
     }
 
-   private function sendSMS($order){
+   private function sendSMS( $order){
 
         try{
             
@@ -199,8 +199,8 @@ class OrderRepository extends BaseRepository
                     if(isset($shop)){
                         $user=$shop->owner;
                         
-                            SMS::purchaseToVendor('9056147024', $user->name);
-                            // SMS::purchaseToVendor('7018265262', $user->name);   
+                            // SMS::purchaseToVendor('9056147024', $user->name);
+                            SMS::purchaseToVendor('7018265262', $user->name);   
                             $payload = array(
                                 "userId"=> $product->shop->owner_id,
                                 "phoneNumber"=> $product->shop->settings['contact'],
@@ -217,11 +217,11 @@ class OrderRepository extends BaseRepository
                                     'product_name'=> $product->name,
                                     'shop_owner_phone_number'=>$product->shop->settings['contact'],
                                     'shop_owner_name'=>$product->shop->name,
-                                    "price"=> $request->amount,
-                                    "orderId"=> $request->tracking_number,
-                                    "delivery_time"=> $request->delivery_time,
-                                    'description'=> $request->description,
-                                    "payment_gateway"=> $request->payment_gateway,
+                                    // "price"=> $request->amount,
+                                    // "orderId"=> $request->tracking_number,
+                                    // "delivery_time"=> $request->delivery_time,
+                                    // 'description'=> $request->description,
+                                    // "payment_gateway"=> $request->payment_gateway,
                                     "currency"=>"INR"
                                 ],
                                 "createdAt"=> date('Y-m-d H:i:s')
@@ -232,6 +232,8 @@ class OrderRepository extends BaseRepository
                     }
                 }    
             }
+            $order->interakt_response = $interkt_response;
+            return $order;
         }catch(Exception $e) {
 
         }
