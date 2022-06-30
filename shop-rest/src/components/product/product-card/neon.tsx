@@ -150,15 +150,21 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
         {/* End of product price */}
 
         <h3
-          className="text-xs font-semibold flex-normal md:text-sm flex flex-col   text-gray-700  truncate mb-2 cursor-pointer"
+          className="text-xs font-bold flex-normal md:text-sm flex flex-col   text-gray-900  truncate mb-2 cursor-pointer"
         >
            <span className=''>
              {name}
            </span>
            <span className="flex items-center justify-between">
              <p>{unit}</p>
+             
              {/* <p className="font-light  text-gray-500">{orders_count + ' ' + 'sold'}</p> */}
            </span>
+           <div className='flex flex-col sm:flex-row justify-between text-xs  md:text-sm text-gray-900  mt-2 font-light'>
+            <span className="text-10 font-semibold  text-gray-800"> {product?.shop?.name} </span>
+            <span className="font-light text-gray-500">{product?.shop?.address?.city}</span>
+            {/* <span className="font-light text-gray-800">{'sold' + ' ' + orders_count}</span> */}
+          </div>
         </h3>
         
         {/* End of product title */}
