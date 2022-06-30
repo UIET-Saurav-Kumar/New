@@ -199,7 +199,35 @@ class OrderRepository extends BaseRepository
                     if(isset($shop)){
                         $user=$shop->owner;
                         
-                            SMS::purchaseToVendor('9056147024', $user->name);    
+                            // SMS::purchaseToVendor('9056147024', $user->name);
+                            SMS::purchaseToVendor('7018265262', $user->name);   
+                            $payload = array(
+                                "userId"=> $product->shop->owner_id,
+                                "phoneNumber"=> $product->shop->settings['contact'],
+                                // 'shop_owner_phone_number'=>$order->shop->settings,
+                                // 'shop_owner_name'=>$product->shop->name,
+                                "countryCode"=> "+91",
+                                "event"=> "Order Recieved By Vendor",
+                                "traits"=> [
+                                    "productDetail"=> json_encode($request->products),
+                                    "productDetail"=> json_encode($request->products->unit_price.map(function($item){
+                                        return $item->unit_price;
+                                    })),
+                                    'shop_name'=> $product->shop->name,
+                                    'product_name'=> $product->name,
+                                    'shop_owner_phone_number'=>$product->shop->settings['contact'],
+                                    'shop_owner_name'=>$product->shop->name,
+                                    "price"=> $request->amount,
+                                    "orderId"=> $request->tracking_number,
+                                    "delivery_time"=> $request->delivery_time,
+                                    'description'=> $request->description,
+                                    "payment_gateway"=> $request->payment_gateway,
+                                    "currency"=>"INR"
+                                ],
+                                "createdAt"=> date('Y-m-d H:i:s')
+                            );
+                            
+                            $interkt_response = $this->createWhatsappVendorOrderEvent($payload);     
                         
                     }
                 }    
@@ -282,6 +310,8 @@ class OrderRepository extends BaseRepository
                 // }else{
                 //     $user_name=$user->name;
                 // }
+
+                $user_shop = $product->shop->settings;
                            
                 Log::create([
                     "user_id"=>($user)?$user->id:"",
@@ -295,14 +325,20 @@ class OrderRepository extends BaseRepository
                 $payload = array(
                     "userId"=> $user->id,
                     "phoneNumber"=> $user->phone_number,
-                    'shop_owner_phone_number'=>$product->shop->settings["contact"],
-                    'shop_owner_name'=>$product->shop->name,
+                    // 'shop_owner_phone_number'=>$order->shop->settings,
+                    // 'shop_owner_name'=>$product->shop->name,
                     "countryCode"=> "+91",
                     "event"=> "Order Placed Successfully",
                     "traits"=> [
                         "productDetail"=> json_encode($request->products),
+                        // "productDetail"=> json_encode($request->products->unit_price
+                        //     ->map(function($item){
+                        //         return $item->unit_price;
+                        //     })),
                         'shop_name'=> $product->shop->name,
                         'product_name'=> $product->name,
+                        'shop_owner_phone_number'=>$product->shop->settings['contact'],
+                        'shop_owner_name'=>$product->shop->name,
                         "price"=> $request->amount,
                         "orderId"=> $request->tracking_number,
                         "delivery_time"=> $request->delivery_time,
@@ -522,11 +558,22 @@ class OrderRepository extends BaseRepository
 
     public function createWhatsappOrderEvent($payload)
     {
-        $CURLOPT_POSTFIELDS     = $payload;
+        $CURLOPT_POSTFIELDS = $payload;
         
         $endpoint = 'track/events/';
 
-        $response   = InteraktHelper::interaktApi(json_encode($CURLOPT_POSTFIELDS),$endpoint);
+        $response = InteraktHelper::interaktApi(json_encode($CURLOPT_POSTFIELDS),$endpoint);
+
+        return $response;
+    }
+
+    public function createWhatsappVendorOrderEvent($payload)
+    {
+        $CURLOPT_POSTFIELDS = $payload;
+        
+        $endpoint = 'track/events/';
+
+        $response = InteraktHelper::interaktApi(json_encode($CURLOPT_POSTFIELDS),$endpoint);
 
         return $response;
     }
