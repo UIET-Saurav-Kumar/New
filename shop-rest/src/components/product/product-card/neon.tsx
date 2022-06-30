@@ -14,6 +14,7 @@ import router from "next/router";
 import WishlistButton from "../product-details/wishlist-button";
 import RatingsBadge from "@components/ui/rating-badge";
 import { useOrdersQuery } from "@data/order/use-orders.query";
+import { useEffect, useState } from "react";
  // dynamically import containProduct function from pages/orders
  
 
@@ -75,6 +76,12 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
   }
 
   console.log('quantity', product.quantity)
+
+  const [pageURL, setPageUrl] = useState('');
+
+  useEffect(() => {
+    setPageUrl(window.location.href)
+  }, []);
 
   return (
 
@@ -160,11 +167,14 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
              
              {/* <p className="font-light  text-gray-500">{orders_count + ' ' + 'sold'}</p> */}
            </span>
+           { pageURL.includes('home') ? (
            <div className='flex flex-col sm:flex-row justify-between text-xs  md:text-sm text-gray-900  mt-2 font-light'>
             <span className="text-10 font-semibold  text-gray-800"> {product?.shop?.name} </span>
             <span className="font-light text-gray-500">{product?.shop?.address?.city}</span>
             {/* <span className="font-light text-gray-800">{'sold' + ' ' + orders_count}</span> */}
-          </div>
+          </div>) :
+            null
+        }
         </h3>
         
         {/* End of product title */}
@@ -191,7 +201,7 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
             {Number(quantity) > 0 && (
              <div className="md:pt-3 ">
                 <AddToCart  variant="organesson" data={product} />
-               { product.id === 14110 ? containsProduct(ordersData?.pages?.[0].data, 14110) ?
+               { product?.id === 14110 ? containsProduct(ordersData?.pages?.[0].data, 14110) ?
                 <span className='text-xs mt-2 lg:text-sm text-red-600'>Offer expired</span>
                 : '' : ''}
                
