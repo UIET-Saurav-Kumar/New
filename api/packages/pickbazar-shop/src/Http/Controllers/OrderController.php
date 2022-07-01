@@ -115,6 +115,9 @@ class OrderController extends CoreController
     // find by date range
     public function findByDateRange(Request $request, $start_date, $end_date)
     {
+
+        $limit = $request->limit ?   $request->limit : 10;
+
                $start_date =
             //    Carbon::now()->
                $request->start_date;
@@ -265,7 +268,7 @@ class OrderController extends CoreController
     }
 
 
-    public function exportOrder(Request $request)
+    public function exportOrder(Request $request, $start_date, $end_date)
     {
         $filename = 'Orders'.'.csv';
 
@@ -276,8 +279,20 @@ class OrderController extends CoreController
             'Expires'             => '0',
             'Pragma'              => 'public'
         ];
+        //get start date and end date from findByDateRange function
 
-        $list = $this->repository->with(['products','products.shop', 'status', 'children.shop'])->get()->toArray();
+        $start_date = $request->start_date;
+        $end_date = $request->end_date;
+          // find by date range list
+          // if start date and end date is not empty then find by date range else find by shop name
+        if ($start_date && $end_date) {
+            $list = $this->repository->with(['children','children.shop','status','products','products.shop'])->whereBetween('created_at',[$start_date,$end_date])->where('id', '!=', null)->where('parent_id', '=', null)->get()->toArray();
+        } else {
+            // $list = $this->repository->with(['products','products.shop', 'status', 'children.shop'])->get()->toArray();
+            $list = $this->repository->with(['children','children.shop','status','products','products.shop'])->whereBetween('created_at',['2021-01-01',Carbon::now()->toDateTimeString()])->where('id', '!=', null)->where('parent_id', '=', null)->get()->toArray();
+        }
+
+        
         if (!count($list)) {
             return response()->stream(function () {
             }, 200, $headers);

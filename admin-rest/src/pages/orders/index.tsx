@@ -23,6 +23,7 @@ import { ArrowDown } from "@components/icons/arrow-down";
 import cn from "classnames";
 import ShopNameFilter from "@components/order/shop-name-filter";
 import { useDateRangeQuery } from "@data/order/use-date-range.query";
+import { CloseIcon } from "@components/icons/close-icon";
 
 
 export default function Orders() {
@@ -213,20 +214,24 @@ export default function Orders() {
         >
          <div className="flex flex-col md:flex-row md:space-x-4 md:items-center mt-5 md:mt-8 border-t border-gray-200 pt-5 md:pt-8 w-full">
            <div className="flex items-center "> <span className="text-gray-700 font-light mx-4">From</span> 
-            <div className=""> <DatePicker clearButtonTitle="clear"
+            <div className="relative flex items-center"> <DatePicker clearButtonTitle="clear"
              selected={startDate} onChange={(date:Date ) => setStartDate(date)} 
              dateFormat= "dd/MM/yyyy"
+             className=""
             //  clearIcon={null}
-              />
+              /><span className={` ${startDate !== null ? 'block' : 'hidden'} cursor-pointer absolute right-2 text-gray-600  rounded-full `} onClick={()=>setStartDate(null)}><CloseIcon className="w-4 h-4"/></span>
+              
 
             </div>
             <span className="text-gray-700 font-light mx-4">to</span> 
-            <div className="w-60"><DatePicker
+            <div className="relative items-center w-60"><DatePicker
             // clearIcon={null}
              selected={endDate} onChange={(date:Date) => setEndDate(date)} 
              dateFormat= "dd/MM/yyyy"
             />
+            <span className={` ${endDate !== null ? 'block' : 'hidden'} cursor-pointer absolute right-2 text-gray-600 top-4 rounded-full `} onClick={()=>setEndDate(null)}><CloseIcon className="w-4 h-4"/></span>
             </div>
+             
            </div>
            
           <ShopNameFilter

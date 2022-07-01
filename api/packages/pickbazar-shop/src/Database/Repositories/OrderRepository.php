@@ -199,8 +199,8 @@ class OrderRepository extends BaseRepository
                     if(isset($shop)){
                         $user=$shop->owner;
                         
-                            SMS::purchaseToVendor('9056147024', $user->name);
-                            // SMS::purchaseToVendor('7018265262', $user->name);   
+                            // SMS::purchaseToVendor('9056147024', $user->name);
+                            SMS::purchaseToVendor('7018265262', $user->name);   
                             $payload = array(
                                 "userId"=> $product->shop->owner_id,
                                 "phoneNumber"=> $product->shop->settings['contact'],
@@ -227,10 +227,9 @@ class OrderRepository extends BaseRepository
                                 "createdAt"=> date('Y-m-d H:i:s')
                             );
                             
-                            $interkt_response = $this->createWhatsappVendorOrderEvent($payload);     
-                        
                     }
                 }    
+                $interkt_response = $this->createWhatsappVendorOrderEvent($payload);     
             }
             $order->interakt_response = $interkt_response;
             return $order;
@@ -299,8 +298,6 @@ class OrderRepository extends BaseRepository
 
             if($order)
             {
-               
-              
                 $product_id=$request->products[0]["product_id"];
                 $product=Product::find($product_id);
                 $user=$request->user();     
@@ -338,7 +335,9 @@ class OrderRepository extends BaseRepository
                         //         return $item->unit_price;
                         //     })),
                         'shop_name'=> $product->shop->name,
+                        // get all the product names in array
                         'product_name'=> $product->name,
+                        // 'product_name'=> $product->name,
                         'shop_owner_phone_number'=>$product->shop->settings['contact'],
                         'shop_owner_name'=>$product->shop->name,
                         "price"=> $request->amount,
@@ -350,12 +349,43 @@ class OrderRepository extends BaseRepository
                     ],
                     "createdAt"=> date('Y-m-d H:i:s')
                 );
+
+                //vendor order event
+                $payload2 = array(
+                    "userId"=> $product->shop->owner_id,
+                    "phoneNumber"=> $product->shop->settings['contact'],
+                    // 'shop_owner_phone_number'=>$order->shop->settings,
+                    // 'shop_owner_name'=>$product->shop->name,
+                    "countryCode"=> "+91",
+                    "event"=> "Order Recieved By Vendor",
+                    "traits"=> [
+                        "productDetail"=> json_encode($request->products),
+                        // "productDetail"=> json_encode($request->products->unit_price.map(function($item){
+                        //     return $item->unit_price;
+                        // })),
+                        'shop_name'=> $product->shop->name,
+                        'product_name'=> $product->name,
+                        'shop_owner_phone_number'=>$product->shop->settings['contact'],
+                        'shop_owner_name'=>$product->shop->name,
+                        // "price"=> $request->amount,
+                        // "orderId"=> $request->tracking_number,
+                        // "delivery_time"=> $request->delivery_time,
+                        // 'description'=> $request->description,
+                        // "payment_gateway"=> $request->payment_gateway,
+                        "currency"=>"INR"
+                    ],
+                    "createdAt"=> date('Y-m-d H:i:s')
+                );
+
+                $interkt_response2 = $this->createWhatsappVendorOrderEvent($payload2);
+
                 
                 $interkt_response = $this->createWhatsappOrderEvent($payload);
                 #---------------------creating whatsapp message-----------------#
             }
 
             $order->interakt_response = $interkt_response;
+            $order->interakt_response = $interkt_response2;
             return $order;
         } catch (ValidatorException $e) {
             throw new PickbazarException('PICKBAZAR_ERROR.SOMETHING_WENT_WRONG');
@@ -569,9 +599,9 @@ class OrderRepository extends BaseRepository
         return $response;
     }
 
-    public function createWhatsappVendorOrderEvent($payload)
+    public function createWhatsappVendorOrderEvent($payload2)
     {
-        $CURLOPT_POSTFIELDS = $payload;
+        $CURLOPT_POSTFIELDS = $payload2;
         
         $endpoint = 'track/events/';
 
