@@ -275,11 +275,11 @@ export const siteSettings = {
       description: "Open 10AM to 7PM",
     },
     
-    // {
-    //   id: "1",
-    //   title: "express-delivery",
-    //   description: "90 min express delivery",
-    // },
+    {
+      id: "1",
+      title: "express-delivery",
+      description: "90 min express delivery",
+    },
 
     {
       id: "6",
