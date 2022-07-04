@@ -83,6 +83,9 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
     setPageUrl(window.location.href)
   }, []);
 
+  // date in am and pm format
+  
+
   return (
 
     <article
@@ -202,7 +205,6 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
                { product?.id === 14110 ? containsProduct(ordersData?.pages?.[0].data, 14110) ?
                 <span className='text-xs mt-2 lg:text-sm text-red-600'>Offer expired</span>
                 : '' : ''}
-               
              </div>
             )}
           </>

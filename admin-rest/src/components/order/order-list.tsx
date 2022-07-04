@@ -50,6 +50,17 @@ const OrderList = ({ orders, onPagination }: IProps) => {
 
 
   console.log('orders list', orders);
+
+  const date = new Date();
+  const ampm = date.getHours() >= 12 ? "PM" : "AM";
+  const hours = date.getHours() % 12;
+  const minutes = date.getMinutes();
+  const formattedTime = `${hours}:${minutes} ${ampm}`;
+  const formattedDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+  const formattedDateTime = `${formattedDate} ${formattedTime}`;
+
+  console.log('time', formattedDateTime);
+  console.log('date',date);
  
 
   const columns = [
@@ -95,7 +106,7 @@ const OrderList = ({ orders, onPagination }: IProps) => {
       ),
     },
 
-        
+    
     {
       title: t("table:Customer Name"),
       dataIndex: "customer",
@@ -139,6 +150,7 @@ const OrderList = ({ orders, onPagination }: IProps) => {
                   </h1>
       },
     },
+    
 
 
     // {
@@ -202,6 +214,17 @@ const OrderList = ({ orders, onPagination }: IProps) => {
         });
         return <span className="whitespace-nowrap font-semibold">{price}</span>;
       },
+    },
+    
+    {
+      title: t("Time"),
+      dataIndex: "created_at",
+      key: "created_at",
+      align: alignLeft,
+      render: (created_at: string) => {
+        return dayjs(created_at).format("h:mm a");
+      }
+    
     },
 
     {
