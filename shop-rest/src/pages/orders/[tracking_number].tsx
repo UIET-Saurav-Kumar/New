@@ -76,7 +76,9 @@ export default function OrderPage() {
   console.log('order data',data);
 
   const { price: total } = usePrice(data && { amount: data.order.paid_total });
+
   const { price: sub_total } = usePrice(data && { amount: data.order.amount });
+
   const { price: shipping_charge } = usePrice(
     data && { amount: data?.order?.delivery_fee ?? 0 }
   );
@@ -158,7 +160,9 @@ export default function OrderPage() {
       render: (tracking_number: string) => (
         <Link
           href={`${ROUTES.ORDERS}/${tracking_number}`}
-          className="inline-flex items-center justify-center flex-shrink-0 font-semibold leading-none rounded outline-none transition duration-300 ease-in-out focus:outline-none focus:shadow bg-gray-700 text-light border border-transparent hover:bg-gray-900 px-4 py-0 h-10 text-sm"
+          className="inline-flex items-center justify-center flex-shrink-0 font-semibold 
+                     leading-none rounded outline-none transition duration-300 ease-in-out focus:outline-none 
+                     focus:shadow bg-gray-700 text-light border border-transparent hover:bg-gray-900 px-4 py-0 h-10 text-sm"
         >
           {t("Invoice")}
         </Link>

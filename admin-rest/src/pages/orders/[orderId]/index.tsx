@@ -22,6 +22,7 @@ import SelectInput from "@components/ui/select-input";
 import { useIsRTL } from "@utils/locals";
 import {Children, useRef} from 'react';
 import {  PDFExport, savePDF} from '@progress/kendo-react-pdf'
+import { features } from "process";
 
 
 
@@ -75,20 +76,15 @@ export default function OrderDetailsPage() {
     });
   };
 
+ 
+  
+ 
+  console.log('order', data?.order)
+
 
   const { price: subtotal } = usePrice(
     data && {
-      amount: data?.order?.amount!,
-    }
-  );
-  const { price: total } = usePrice(
-    data && {
-      amount: data?.order?.paid_total!,
-    }
-  );
-  const { price: discount } = usePrice(
-    data && {
-      amount: data?.order?.discount!,
+      amount: data?.order?.amount - data?.order?.delivery_fee,
     }
   );
   const { price: delivery_fee } = usePrice(
@@ -96,6 +92,19 @@ export default function OrderDetailsPage() {
       amount: data?.order?.delivery_fee!,
     }
   );
+  const { price: total } = usePrice(
+    data && {
+      // amount: data?.order?.paid_total,
+      // /add delivery fee to total
+      amount: data?.order?.paid_total + data?.order?.delivery_fee,
+    }
+  );
+  const { price: discount } = usePrice(
+    data && {
+      amount: data?.order?.discount!,
+    }
+  );
+  
   const { price: sales_tax } = usePrice(
     data && {
       amount: data?.order?.sales_tax!,
@@ -254,17 +263,17 @@ export default function OrderDetailsPage() {
         )}
 
         <div className="border-t-4 border-double border-border-200 flex flex-col w-full sm:w-1/2 md:w-1/3 ms-auto px-4 py-4 space-y-2">
-          <div className="flex items-center justify-between text-sm text-body">
+          <div className="flex font-semibold items-center justify-between text-sm text-body">
             <span>{t("common:order-sub-total")}</span>
-            <span>{subtotal}</span>
+            <span className="font-semibold">{subtotal}</span>
           </div>
           <div className="flex items-center justify-between text-sm text-body">
             <span>{t("common:order-tax")}</span>
             <span>{sales_tax}</span>
           </div>
-          <div className="flex items-center justify-between text-sm text-body">
+          <div className="flex items-center justify-between text-sm text-body font-semibold">
             <span>{t("common:order-delivery-fee")}</span>
-            <span>{delivery_fee}</span>
+            <span className='font-semibold'>{delivery_fee }</span>
           </div>
           <div className="flex items-center justify-between text-sm text-body">
             <span>{t("common:order-discount")}</span>

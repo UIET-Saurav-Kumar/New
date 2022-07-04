@@ -195,7 +195,6 @@ const OrderList = ({ orders, onPagination }: IProps) => {
       key: "delivery_time",
       align: "center",
       render: (delivery_time: any) => {
-       
         return <span>{ delivery_time.includes('Today') ? delivery_time.replace('Today', '') : delivery_time.includes('Tomorrow') ? delivery_time.replace('Tomorrow', '') : delivery_time } </span>
       },
     },
@@ -212,7 +211,7 @@ const OrderList = ({ orders, onPagination }: IProps) => {
         const { price } = usePrice({
           amount: value,
         });
-        return <span className="whitespace-nowrap font-semibold">{price}</span>;
+        return <span className="whitespace-nowrap  font-semibold">{price}</span>;
       },
     },
 
@@ -222,7 +221,7 @@ const OrderList = ({ orders, onPagination }: IProps) => {
       key: "created_at",
       align: alignLeft,
       render: (created_at: string) => {
-        return <span className="whitespace-nowrap">{dayjs(created_at).format("h:mm a")}</span>
+        return <span className="whitespace-nowrap font-semibold bg-clip-text text-transparent bg-gradient-to-r from-blue-700 via-purple-600 to-blue-600">{dayjs(created_at).format("h:mm a")}</span>
       }
     
     },
