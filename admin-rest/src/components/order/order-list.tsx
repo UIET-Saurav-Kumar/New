@@ -215,14 +215,14 @@ const OrderList = ({ orders, onPagination }: IProps) => {
         return <span className="whitespace-nowrap font-semibold">{price}</span>;
       },
     },
-    
+
     {
       title: t("Time"),
       dataIndex: "created_at",
       key: "created_at",
       align: alignLeft,
       render: (created_at: string) => {
-        return dayjs(created_at).format("h:mm a");
+        return <span className="whitespace-nowrap">{dayjs(created_at).format("h:mm a")}</span>
       }
     
     },
