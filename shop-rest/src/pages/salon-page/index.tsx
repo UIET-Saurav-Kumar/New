@@ -296,6 +296,26 @@ export default function SalonPage() {
                       })}
           </div> */}
 
+          <h3 className='text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 font-medium text-2xl lg:text-3xl text-gray-900 font-serif ml-4 lg:ml-8 mt-10 lg:mt-10 tracking-normal'>Featured Products</h3>
+
+            <div className={`${data?.offers.data?.length  ? 'block' : 'hidden'} text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500
+               grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-5 bg-gray-50 mt-3 p-2 lg:p-6 gap-2`}>
+              {/* {fetching && !data?.pages?.length ? (
+                        <ProductFeedLoader limit={5} />
+                      ) : ( */}
+                
+                    {
+                      data?.offers.data.filter(product => product.status === 'publish' && product.is_featured === 1 && product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','') ==='Salon  Spa' ).map(offer => (
+                      
+                        <motion.div key={offer.id}>
+                          <Helium product={offer}/>
+                        </motion.div>
+                        ))
+                    }
+               
+                      {/* )} */}
+            </div>
+
         
 
         <div className='flex flex-col lg:px-4 mt-0 lg:mt-10 py-4'>
@@ -331,39 +351,7 @@ export default function SalonPage() {
                 ))}
             </div> 
 
-         <h3 className='text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 font-medium text-2xl lg:text-3xl text-gray-900 font-serif ml-4 lg:ml-8 mt-10 lg:mt-10 tracking-normal'>Featured Products</h3>
-
-            <div className={`${data?.offers.data?.length  ? 'block' : 'hidden'} grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-50 mt-3 p-2 lg:p-6 gap-2`}>
-              {/* {fetching && !data?.pages?.length ? (
-                        <ProductFeedLoader limit={5} />
-                      ) : ( */}
-                <>
-                    {
-                      // salonProducts?.products.data.filter  // function shopCategory(){
-          //   var cat =  salonProducts?.products.data.filter(product => product.status === 'publish'   && product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','') == 'Salon  Spa') 
-          //   return cat
-          // }
-
-          // function catSlug() {
-          //   var slug =  salonProducts?.products.data.map( product => product.slug) 
-          //   return slug
-          // }product => product.status === 'publish' && product.is_featured === 1 && product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','') =='Salon  Spa' ) .map(product => (
-                      //         <motion.div key={product.id}>
-                      //           <Helium product={product}/>
-                      //         </motion.div>
-                      //         ))
-
-                      data?.offers.data.filter(product => product.status === 'publish' && product.is_featured === 1 && product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','') ==='Salon  Spa' ).map(offer => (
-                      
-                        <motion.div key={offer.id}>
-                          <Helium product={offer}/>
-                        </motion.div>
-                        ))
-
-                    }
-                </>
-                      {/* )} */}
-            </div>
+          
 
 
         {/* <h3 className='font-medium text-2xl lg:text-3xl text-gray-900 font-serif  ml-4 lg:ml-8  mt-3 tracking-normal'>Offer of the day</h3>

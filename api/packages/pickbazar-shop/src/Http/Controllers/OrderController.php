@@ -97,6 +97,7 @@ class OrderController extends CoreController
             throw new PickbazarException('PICKBAZAR_ERROR.NOT_AUTHORIZED');
         }
     }
+    
     public function findByTrackingNumber(Request $request, $tracking_number)
     {
         $user = $request->user();

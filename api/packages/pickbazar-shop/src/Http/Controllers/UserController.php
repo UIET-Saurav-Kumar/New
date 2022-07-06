@@ -220,7 +220,7 @@ class UserController extends CoreController
     
         $endpoint = 'track/users/';
 
-        $response   = InteraktHelper::interaktApi(json_encode($CURLOPT_POSTFIELDS),$endpoint);
+        $response = InteraktHelper::interaktApi(json_encode($CURLOPT_POSTFIELDS),$endpoint);
         #--------------creating whatapp user-----------------#
         
         #---------------------creating Register Event-----------------#
@@ -238,6 +238,7 @@ class UserController extends CoreController
             ],
             "createdAt"=> date('Y-m-d H:i:s')
         );
+        
         $endpoint_event = 'track/events/';
 
         $response_event   = InteraktHelper::interaktApi(json_encode($payload),$endpoint_event);

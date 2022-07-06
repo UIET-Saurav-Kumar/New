@@ -29,7 +29,7 @@ import { useLocation } from "@contexts/location/location.context";
 import Tandoor from "@components/home-page-product-section/tandoor";
 import InvoiceBanner from "@components/home-page-product-section/invoice-banner";
 import HomePageBanner from "@components/home-page-product-section/heater-banner";
-import RedBullBanner from "@components/home-page-product-section/red-bull-banner";
+import RedBullBanner from "@components/home-page-product-section/home-page-banner";
 import UserDashboard from "@components/home-page-product-section/UserDashboard";
 import Tagline from "@components/home-page-product-section/tagline";
 

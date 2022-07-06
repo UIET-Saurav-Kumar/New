@@ -199,24 +199,41 @@ class OrderRepository extends BaseRepository
                     if(isset($shop)){
                         $user=$shop->owner;
                         
-                            SMS::purchaseToVendor('9056147024', $user->name);
-                            // SMS::purchaseToVendor('7018265262', $user->name);   
+                            // SMS::purchaseToVendor('9056147024', $user->name);
+                            SMS::purchaseToVendor('7018265262', $user->name); 
+                            $products = $order->products;
+
+                            foreach($order->childrens as $child){
+                                $product_name = $child->name;
+                                $product_price = $child->price;
+                                $shop_name = $child->shop->name;
+                                $price = $child->price;
+                                $phone_number =$child->shop->settings['contact'];
+                                $delivery_time = $child->delivery_time;
+                            }
+                            // foreach($products as $product){
+                            //    $product_name = $product->name;
+                            //      $product_price = $product->price;
+                            //      $shop_name = $product->shop->name;
+                            //      $price = $product->price;
+                            //      $phone_number = $this->clearStr($product->shop->owner->phone_number);
+                            // }
                             $payload = array(
                                 "userId"=> $product->shop->owner_id,
-                                "phoneNumber"=> $product->shop->settings['contact'],
-                                // 'shop_owner_phone_number'=>$order->shop->settings,
-                                // 'shop_owner_name'=>$product->shop->name,
+                                "phoneNumber"=> $phone_number,
+                               
                                 "countryCode"=> "+91",
                                 "event"=> "Order Recieved By Vendor",
                                 "traits"=> [
                                     "productDetail"=> json_encode($request->products),
-                                    "productDetail"=> json_encode($request->products->unit_price.map(function($item){
-                                        return $item->unit_price;
-                                    })),
-                                    'shop_name'=> $product->shop->name,
-                                    'product_name'=> $product->name,
-                                    'shop_owner_phone_number'=>$product->shop->settings['contact'],
-                                    'shop_owner_name'=>$product->shop->name,
+                                   
+                                    'shop_name'=> $shop_name,
+                                    'product_name'=> $product_name,
+                                    'shop_owner_phone_number'=>$phone_number,
+                                    'shop_owner_name'=>$shop_name,
+                                    'delivery_time'=> $delivery_time,
+                                    
+                                    'order_id'=> $order->tracking_number,
                                     // "price"=> $request->amount,
                                     // "orderId"=> $request->tracking_number,
                                     // "delivery_time"=> $request->delivery_time,

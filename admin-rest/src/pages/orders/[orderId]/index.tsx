@@ -96,7 +96,7 @@ export default function OrderDetailsPage() {
     data && {
       // amount: data?.order?.paid_total,
       // /add delivery fee to total
-      amount: data?.order?.paid_total + data?.order?.delivery_fee,
+      amount: data?.order?.paid_total + data?.order?.delivery_fee - data?.order?.discount!,
     }
   );
   const { price: discount } = usePrice(

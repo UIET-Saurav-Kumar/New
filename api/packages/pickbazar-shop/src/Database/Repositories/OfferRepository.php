@@ -17,6 +17,7 @@ class OfferRepository extends BaseRepository
      */
     protected $fieldSearchable = [
         'name'        => 'like',
+        'tags'        => 'like',
     ];
 
     public function boot()
@@ -35,4 +36,14 @@ class OfferRepository extends BaseRepository
     {
         return Offer::class;
     }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function find($id)
+    {
+        return $this->model->with(['type', 'shop', 'categories', 'tags', 'variations.attribute'])->find($id);
+    }
+    
 }

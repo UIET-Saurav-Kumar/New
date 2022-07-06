@@ -106,9 +106,11 @@ const offerSliderBreakpoints = {
   },
 };
 
+
 SwiperCore.use([Navigation]);
 
 export default function PromotionSlider() {
+
   const router = useRouter();
   const { t } = useTranslation();
   const {getLocation} = useLocation()
@@ -122,6 +124,7 @@ export default function PromotionSlider() {
     // page:1,
     search:getSearch()
   });
+  
   function getSearch():string{
     
     const { query } = useRouter();

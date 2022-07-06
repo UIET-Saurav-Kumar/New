@@ -2,26 +2,64 @@ import Address from "@components/address/address";
 import Schedule from "@components/checkout/schedule";
 import Layout from "@components/layout/layout";
 import VerifyCheckout from "@components/checkout/verify-checkout";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useUI } from "@contexts/ui.context";
 import { useCustomerQuery } from "@data/customer/use-customer.query";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useModalAction } from "@components/ui/modal/modal.context";
 import BackButton from "@components/ui/back-button";
+import { useCart } from "@contexts/quick-cart/cart.context";
 
 export default function CheckoutPage() {
   const { data, refetch } = useCustomerQuery();
   const { isAuthorize } = useUI();
   const { openModal } = useModalAction();
+  const { items, total, isEmpty } = useCart();
+  const[schedule,setSchedule] = useState(true);
+
 
   useEffect(() => {
+    scrollTo(0, 0);
+    getShopCategory()
     if (!isAuthorize) {
       return openModal("LOGIN_VIEW");
     }
     if (isAuthorize) {
       refetch();
     }
-  }, [isAuthorize]);
+  }, [isAuthorize,schedule]);
+
+  const  getShopCategory = () => {
+
+    var shopCategory = items[0]?.shop?.shop_categories?.replace(/[{":,0123456789}]/g,'').slice(5,-3)
+    shopCategory === 'Groceries' ||  shopCategory === 'Cosmetics' ||  shopCategory === 'Takeaways'  ? setSchedule(false) : setSchedule(true);
+    //  alert(shopCategory);
+    return shopCategory;
+  }
+
+   
+
+  
+
+  // check if item shop category is groceries
+  const isGroceries = () => {
+    // var isGroceries = false;
+    items.forEach(element=>{
+      let shop_category = element?.shop?.shop_categories?.replace(/[{":,0123456789}]/g,'').slice(5,-3)
+      console.log(shop_category);
+      
+      if(shop_category == "Cosmetics") {
+        // isGroceries = true;
+        setSchedule(false)
+        console.log('schedule',schedule)
+      }
+    }
+    )
+    
+  }
+
+  // console.log('items',isGroceries());
+
 
   return (
 
@@ -53,9 +91,11 @@ export default function CheckoutPage() {
               type="shipping"
             />
           </div> */}
+          {schedule ?
           <div className="shadow-700 bg-light p-5 md:p-8">
-            <Schedule count={2} />
+               <Schedule count={2} />  
           </div>
+          : null}
 
         </div>
         

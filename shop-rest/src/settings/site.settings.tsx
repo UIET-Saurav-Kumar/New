@@ -275,26 +275,26 @@ export const siteSettings = {
       description: "Open 10AM to 7PM",
     },
     
-    {
-      id: "1",
-      title: "express-delivery",
-      description: "90 min express delivery",
-    },
+    // {
+    //   id: "1",
+    //   title: "express-delivery",
+    //   description: "90 min express delivery",
+    // },
 
-    {
-      id: "6",
-      title: "  Today  " + '('  + date + ' ' +  monthNames[month ] + ')',
-      is_delivery:true,
-      description: "Applicable if order is placed before 4PM",
-    },
+    // {
+    //   id: "6",
+    //   title: "  Today  " + '('  + date + ' ' +  monthNames[month ] + ')',
+    //   is_delivery:true,
+    //   description: "Applicable if order is placed before 4PM",
+    // },
     
-    {
-      id: "6",
-      title:  'Tomorrow' + ' ' +  '('  + (month % 2 === 0 ? (date + 1 > 31 ? date + 1 - 31  : date + 1 ) : (date + 1 > 30 ? date + 1 - 30  : date + 1 )) + ' ' + 
-               monthNames[date + 1 > 31 ? (month + 1 > 12 ? month + 1 - 12 : month + 1 ) : month] + ')',
-      is_delivery:true,
-      description: "Delivery between 11AM and 4PM",
-    },
+    // {
+    //   id: "6",
+    //   title:  'Tomorrow' + ' ' +  '('  + (month % 2 === 0 ? (date + 1 > 31 ? date + 1 - 31  : date + 1 ) : (date + 1 > 30 ? date + 1 - 30  : date + 1 )) + ' ' + 
+    //            monthNames[date + 1 > 31 ? (month + 1 > 12 ? month + 1 - 12 : month + 1 ) : month] + ')',
+    //   is_delivery:true,
+    //   description: "Delivery between 11AM and 4PM",
+    // },
   ],
   
   homePageSidenav: [

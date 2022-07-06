@@ -18,7 +18,7 @@ export default function RedBullBanner() {
 
     function getLink() {
 		
-           isAuthorize ? router.push('/user/invite') :
+           isAuthorize ? router.push('/salon-page') :
             openModal("REGISTER")
 
 	}
@@ -27,7 +27,7 @@ export default function RedBullBanner() {
 
    
    <div onClick={getLink} className='flex w-full mt-8 md:mt-10 h-auto '>   
-            <img src='/red-bull.jpg' 
+            <img src='/pick-5.jpg' 
                 className=' md:h-auto object-contain cursor-pointer pt-0 lg:w-full -sm-pt-60 
                             lg:object-contain lg:mt-8 xl:object-cover'/>
             

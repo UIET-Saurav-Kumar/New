@@ -35,7 +35,7 @@ class OfferController extends CoreController
     public function fetchOffers(Request $request)
     {
         $limit = $request->limit ?   $request->limit : 15;
-        return $this->repository->paginate($limit);
+        return $this->repository->with(['type', 'shop', 'categories', 'tags', 'variations.attribute'])->paginate($limit);
     }
     /**
      * Display a listing of the resource.
@@ -46,7 +46,7 @@ class OfferController extends CoreController
     public function index(Request $request)
     {
         $limit = $request->limit ?   $request->limit : 15;
-        return $this->repository->paginate($limit);
+        return $this->repository->with(['type', 'shop', 'categories', 'tags', 'variations.attribute'])->paginate($limit);
     }
 
     /**
@@ -71,7 +71,7 @@ class OfferController extends CoreController
     public function show($id)
     {
         try {
-            return $this->repository->findOrFail($id);
+            return $this->repository->with(['type', 'shop', 'categories', 'tags', 'variations.attribute'])->findOrFail($id);
         } catch (\Exception $e) {
             throw new PickbazarException('PICKBAZAR_ERROR.NOT_FOUND');
         }
@@ -112,7 +112,8 @@ class OfferController extends CoreController
     public function fetchHomeOffers(Request $request)
     {
         $limit = isset($request->limit) ? $request->limit : 10;
-        return $this->repository->orderByRaw("RAND()")->limit($limit)->get();
+        // repository with tags types 
+        return $this->repository->with(['type', 'shop', 'categories', 'tags', 'variations.attribute'])->paginate($limit);
     }
 
     public function selectOffer(Request $request)

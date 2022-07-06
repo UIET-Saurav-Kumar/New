@@ -77,6 +77,7 @@ import url from './server_url';
 import { OTPVerifyResponse } from '@ts-types/custom.types';
 
 class Client {
+  
   products = {
     all: ({
       type,
