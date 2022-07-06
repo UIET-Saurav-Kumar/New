@@ -90,8 +90,8 @@ const Helium: React.FC<HeliumProps> = ({ product, className }) => {
 
         { pageURL.includes('salon-products') || pageURL.includes('salon-page') ? (
           <div className=' flex justify-between text-xs text-gray-600 mb-4 h-4 mt-2 font-light'>
-            {product?.shop?.name} 
-            <span>{product?.shop?.address?.city}</span>
+            <span className='font-semibold bg-clip-text text-transparent bg-gradient-to-r from-blue-700 via-purple-600 to-blue-600'> {product?.shop?.name} </span>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-700 via-red-600 to-yellow-600">{product?.shop?.address?.city}</span>
             {/* <span className="font-light text-gray-800">{'sold' + ' ' + orders_count}</span> */}
           </div> ) :
             null
@@ -103,7 +103,7 @@ const Helium: React.FC<HeliumProps> = ({ product, className }) => {
          
           <div className="relative">
             {discount && (
-              <del className="text-xs text-muted text-opacity-75 absolute -top-4 md:-top-5 italic">
+              <del className="text-xs md:text-md text-yellow-800 font-semibold text-opacity-75 absolute -top-4 md:-top-5 italic">
                 {price}
               </del>
             )}

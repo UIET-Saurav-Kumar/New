@@ -37,6 +37,8 @@ import { scroller, Element } from "react-scroll";
 import { HidingHeader } from 'hiding-header-react'
 import { useState } from "react";
 import { getReview } from '@utils/get-review';
+// import DocumentMeta from 'react-document-meta';
+import Seo from "@components/ui/seo";
 
 
 const CartCounterButton = dynamic(
@@ -104,11 +106,14 @@ const ShopPage = ({ data }: any) => {
   useEffect(() => {
     pageURL.includes('chandigarhgrocerystore') ? window.scrollTo(0, 670) : window.scrollTo(0, 0)
   }, []);
+  const[shopCategory, setShopCategory] = useState('');
 
   function useScrollDirection() {
     const [scrollDirection, setScrollDirection] = useState(null);
+     
   
     useEffect(() => {
+      getShopCategory()
       let lastScrollY = typeof window !== "undefined" ?  window.pageYOffset : '';
   
       const updateScrollDirection = () => {
@@ -156,12 +161,35 @@ const ShopPage = ({ data }: any) => {
     }
   };
 
-  console.log('shop data',data)
+  
 
-  console.log('shop slug is', data?.slug?.includes('chandigarhgrocerystore' ,'kosmetics-india'))
+  // console.log('shop slug is', data?.slug?.includes('chandigarhgrocerystore' ,'kosmetics-india'))
   seoFunction(data);
 
   const slug = ['chandigarhgrocerystore', 'kosmetics-india'];
+
+ 
+
+  const  getShopCategory = () => {
+
+     setShopCategory(data?.shop_categories?.replace(/[{":,0123456789}]/g,'').slice(5,-3))
+
+    
+  }
+
+  // const metaData = {
+  //   title: data?.slug,
+  //   description: data?.description,
+  //   canonical: pageURL,
+  //   meta: {
+  //     charset: 'utf-8',
+  //     name: {
+  //       keywords: shopCategory
+  //     }
+  //   }
+  // };
+
+  // console.log('shop data',metaData)
 
   
   
@@ -169,6 +197,9 @@ const ShopPage = ({ data }: any) => {
   return (
 
     <>
+     {/* <DocumentMeta {...metaData}>  */}
+            <Seo shopData={data} />
+    
 
               <div className="relative bg-white lg:bg-gray-100 hidden lg:flex flex-col
                               md:flex-row md:justify-between md:items-start">
@@ -314,6 +345,7 @@ const ShopPage = ({ data }: any) => {
           <ShopMobileView shopData={data} data={data}/>
 
       </div>
+      {/* </DocumentMeta> */}
     </>
   );
 };

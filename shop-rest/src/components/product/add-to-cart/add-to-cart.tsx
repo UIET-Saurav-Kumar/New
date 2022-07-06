@@ -65,7 +65,7 @@ export const AddToCart = ({
     });
   }
 
-  console.log('ear phone', containsProduct(ordersData?.pages?.[0].data, 14110));
+  // console.log('ear phone', containsProduct(ordersData?.pages?.[0].data, 14110));
 
   
   const handleAddClick = (

@@ -113,15 +113,16 @@ export default function Appointment({user} : Props) {
         <div className="w-full">
             <div className="flex p-2  items-center ">
                {/* <Logo/> */}
+               {/* <p className="font-extrabold  mx-auto text-gray-800 mt-4 text-xl lg:text-3xl">Become Community Consultant</p> */}
                <img src='/ad-banner.jpg' className=" block w-full object-contain lg:object-cover" />
                {/* <img onClick={handleClick} src='/salon-chd.jpg' className="w-full cursor-pointer flex object-contain -mr-72 lg:object-contain  lg:h-100" /> */}
             </div>
         </div>
 
-        <div className=" border-b space-y-4 mt-5 py-5">
+        {/* <div className=" border-b space-y-4 mt-5 py-5">
               <p className="font-sans text-xl  pl-2 lg:pl-10 ">Top Salon Brands </p>
               <PromotionSlider/>
-        </div>
+        </div> */}
 
       <div className="flex flex-col md:flex-row max-w-7xl w-full mx-auto   xl:py-14 xl:px-8 2xl:px-14">
 
@@ -136,7 +137,9 @@ export default function Appointment({user} : Props) {
                 
                     <p className="text-gray-700 flex  mx-auto items-center ">
                     {/* <img src='/hurry-up.png' className="w-24 h-24"/> */}
-                        <p className="flex flex-col"><span><span className="text-red-600">Free</span>, Book your slot now</span>
+                        <p className="flex flex-col"><span>
+                          {/* <span className="text-red-600">Free</span>, */}
+                           Please submit your details</span>
                         <span className="text-red-600 rounded-full text-sm  animate-pulse">Only 10 slots left</span></p>
                     </p> 
 
@@ -189,9 +192,9 @@ export default function Appointment({user} : Props) {
 
           </form>
 
-          <div className="text-center mt-10 font-sans text-lg">
+          {/* <div className="text-center mt-10 font-sans text-lg">
               <img src='/salon-ad.jpeg' className="h-full object-cover"/>
-          </div>
+          </div> */}
 
         </div>
       </div>

@@ -24,6 +24,8 @@ use PickBazar\Database\Models\ReferralCommission;
 use PickBazar\Database\Repositories\ShopRepository;
 use PickBazar\Database\Repositories\ProductRepository;
 use PickBazar\Database\Models\Attachment;
+use PickBazar\Helpers\InteraktHelper;
+
 
 class ShopController extends CoreController
 {
@@ -141,11 +143,56 @@ class ShopController extends CoreController
      */
     public function store(ShopCreateRequest $request)
     {
+
+        $user = $this->getUser();
         if ($request->user()->hasPermissionTo(Permission::STORE_OWNER)) {
             return $this->repository->storeShop($request);
         } else {
             throw new PickbazarException('PICKBAZAR_ERROR.NOT_AUTHORIZED');
         }
+
+        $user->givePermissionTo($permissions);
+
+         $CURLOPT_POSTFIELDS = array(
+                                        "userId"=> $user->id,
+                                        "phoneNumber"=> $user->phone_number,
+                                        "countryCode"=> $country_code,
+                                        "traits"=> [
+                                            "name"=> $user->name,
+                                            "email"=> $user->email,
+                                            "user_role"=> $user->permissions[1]->name,
+                                        ],
+                                        "createdAt"=> date('Y-m-d H:i:s')
+                                    );
+    
+        $endpoint = 'track/users/';
+
+        $response = InteraktHelper::interaktApi(json_encode($CURLOPT_POSTFIELDS),$endpoint);
+        #--------------creating whatapp user-----------------#
+        
+        #---------------------creating Register Event-----------------#
+        $payload = array(
+            "userId"=> $user->id,
+            "phoneNumber"=> $user->phone_number,
+            // 'gender'=> $user->gender,
+            // 'date_of_birth'=> $user->date_of_birth,
+            "countryCode"=> "+91",
+            "event"=> "User Registered",
+            "traits"=> [
+                "name"=> $user->name,
+                "email"=> $user->email,
+                "user_role"=> $user->permissions[0]->name,
+            ],
+            "createdAt"=> date('Y-m-d H:i:s')
+        );
+        
+        $endpoint_event = 'track/events/';
+
+        $response_event   = InteraktHelper::interaktApi(json_encode($payload),$endpoint_event);
+
+        return ["user"=>$user, 'interakt_response' => $response, 'interakt_event_response' => $response_event];
+
+        return ["token" => $user->createToken('auth_token')->plainTextToken,"permissions" => $user->getPermissionNames(), 'interakt_response' => $response];
     }
 
     /**

@@ -221,7 +221,9 @@ const OrderList = ({ orders, onPagination }: IProps) => {
       key: "created_at",
       align: alignLeft,
       render: (created_at: string) => {
-        return <span className="whitespace-nowrap font-semibold bg-clip-text text-transparent bg-gradient-to-r from-blue-700 via-purple-600 to-blue-600">{dayjs(created_at).format("h:mm a")}</span>
+        return <span className="whitespace-nowrap font-semibold bg-clip-text text-transparent bg-gradient-to-r from-blue-700 via-purple-600 to-blue-600">
+          {dayjs(created_at).format("h:mm a")}
+          </span>
       }
     
     },

@@ -18,7 +18,7 @@ export default function RedBullBanner() {
 
     function getLink() {
 		
-           isAuthorize ? router.push('/salon-page') :
+           isAuthorize ? router.push('/salon-products?text=pick+any&category=') :
             openModal("REGISTER")
 
 	}

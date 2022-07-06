@@ -11,6 +11,7 @@ import { useIsRTL } from "@utils/locals";
 // import { useCustomerQuery } from "@data/customer/use-customer.query";
 import { useRouter } from "next/router";
 import {useWalletCommissionQuery} from '@data/user/use-wallet-commission-query'
+import dayjs from "dayjs";
 
 
 
@@ -19,6 +20,7 @@ type IProps = {
   onPagination: (current: number) => void;
 };
 const CustomerList = ({ customers, onPagination }: IProps) => {
+
   const router = useRouter();
 
   const { data, paginatorInfo } = customers!;
@@ -32,6 +34,7 @@ const CustomerList = ({ customers, onPagination }: IProps) => {
   // const { data:customerData } = useCustomerQuery();
   console.log(' customer data',data)
 
+  
   const columns = [
     {
       title: t("table:table-item-avatar"),
@@ -74,6 +77,17 @@ const CustomerList = ({ customers, onPagination }: IProps) => {
       key: "phone_number",
       align: alignLeft,
     },
+    
+    {
+      title: 'Created on',
+      dataIndex: 'created_at',
+      key: 'created_at',
+      align: alignLeft,
+      render: (created_at:any) => {
+       return   <span className="font-semibold">{dayjs(created_at).format("DD-MM-YYYY") + ' | ' + dayjs(created_at).format("h:mm a")}</span>
+      }
+    },
+   
     {
       title: t("table:table-item-status"),
       dataIndex: "is_active",

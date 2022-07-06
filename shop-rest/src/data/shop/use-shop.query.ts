@@ -28,13 +28,13 @@ export const fetchShopSeo = async (slug: string) => {
     eltitle.innerText = `BuyLowcal | ${data?.options?.seo?.metaTitle}`;
 
     const eldesc = document.querySelector("meta[name='description']");
-    eldesc.setAttribute('content',data?.options?.seo?.metaDescription);
+    eldesc?.setAttribute('content',data?.options?.seo?.metaDescription);
 
     const ogTitle = document.querySelector("meta[property='og:title']");
-    ogTitle.setAttribute('content', `BuyLowcal | ${data?.options?.seo?.ogTitle}`);
+    ogTitle?.setAttribute('content', `BuyLowcal | ${data?.options?.seo?.ogTitle}`);
 
     const ogDesc = document.querySelector("meta[property='og:description']");
-    ogDesc.setAttribute('content',data?.options?.seo?.ogDescription);
+    ogDesc?.setAttribute('content',data?.options?.seo?.ogDescription);
   }
     return data;
 };

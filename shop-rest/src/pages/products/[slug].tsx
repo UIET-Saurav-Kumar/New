@@ -13,6 +13,7 @@ import { dehydrate } from "react-query/hydration";
 import ProductQuestions from '@components/questions/product-questions';
 import AverageRatings from '@components/reviews/average-ratings';
 import ProductReviews from '@components/reviews/product-reviews';
+import Seo from "@components/ui/seo";
 
 const CartCounterButton = dynamic(
   () => import("@components/cart/cart-counter-button"),
@@ -57,14 +58,18 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 
 
 
+
+
 export default function ProductSinglePage({ product }: any) {
 
-  console.log('product rating',product)
+  // console.log('product rating',product)
 
   return (
 
     <>
       <div className="bg-light min-h-screen">
+
+        <Seo productData={product} />
 
         <ProductDetails product={product} />
 
