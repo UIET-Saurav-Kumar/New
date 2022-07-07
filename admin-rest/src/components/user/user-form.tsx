@@ -14,12 +14,14 @@ type FormValues = {
   email: string;
   password: string;
   phone_number: number;
+  current_location: string;
 };
 
 const defaultValues = {
   email: "",
   password: "",
   phone_number: '',
+  current_location: '',
 };
 
 const CustomerCreateForm = () => {
@@ -37,7 +39,7 @@ const CustomerCreateForm = () => {
     resolver: yupResolver(customerValidationSchema),
   });
 
-  async function onSubmit({ name, email, password,phone_number }: FormValues) {
+  async function onSubmit({ name, email, password,phone_number,current_location }: FormValues) {
     registerUser(
       {
         variables: {
@@ -45,6 +47,7 @@ const CustomerCreateForm = () => {
           email,
           password,
           phone_number,
+          current_location,
         },
       },
       {
@@ -94,6 +97,17 @@ const CustomerCreateForm = () => {
             className="mb-4"
             error={t(errors.phone_number?.message!)}
           />
+
+           <Input
+            value='Chandigarh'
+            label={"Current Location"} 
+            {...register("current_location")} 
+            type="text" 
+            variant="outline" 
+            className="col-span-2 text-xs " 
+            error={t(errors.current_location?.message!)} />
+
+
           <PasswordInput
             label={t("form:input-label-password")}
             {...register("password")}

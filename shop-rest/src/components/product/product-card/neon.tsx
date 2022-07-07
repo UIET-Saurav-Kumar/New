@@ -102,8 +102,8 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
         <span className="sr-only">{t("text-product-image")}</span>
 
           <Image
-            src={product.image?.thumbnail?? siteSettings?.product?.placeholderImage}
-            alt={product.name}
+            src={product?.image?.thumbnail?? siteSettings?.product?.placeholderImage}
+            alt={product?.name}
             layout="fill"
             objectFit="contain"
             className="product-image"
