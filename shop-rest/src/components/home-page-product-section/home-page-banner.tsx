@@ -18,7 +18,7 @@ export default function RedBullBanner() {
 
     function getLink() {
 		
-           router.push('/salon-products?text=pick+any&category=') :
+           router.push('/salon-products?text=pick+any&category=') 
            
 
 	}
