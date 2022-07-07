@@ -170,7 +170,7 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
            </span>
            { pageURL.includes('home') ? (
            <div className='flex flex-col sm:flex-row justify-between text-xs  md:text-sm text-gray-900  mt-2 font-light'>
-            <span className="text-10 font-semibold  bg-clip-text text-transparent bg-gradient-to-r from-blue-700 via-purple-600 to-blue-600"> {product?.shop?.name} </span>
+           <Link href={`/shops/${product?.shop?.slug}`}><span className="text-10 hover:text-indigo-700 font-semibold  bg-clip-text text-transparent bg-gradient-to-r from-blue-700 via-purple-600 to-blue-600"> {product?.shop?.name} </span></Link>
             <span className="font-light  bg-clip-text text-transparent bg-gradient-to-r from-yellow-700 via-red-600 to-yellow-600">{product?.shop?.address?.city}</span>
             {/* <span className="font-light text-gray-800">{'sold' + ' ' + orders_count}</span> */}
           </div>) :

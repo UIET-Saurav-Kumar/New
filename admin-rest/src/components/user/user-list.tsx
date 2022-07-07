@@ -65,12 +65,20 @@ const CustomerList = ({ customers, onPagination }: IProps) => {
       key: "email",
       align: alignLeft,
     },
+
     {
-      title: ("Role"),
-      dataIndex: "role",
-      key: "role",
+      //current_location
+      title: t("City"),
+      dataIndex: "current_location",
+      key: "current_location",
       align: alignLeft,
     },
+    // {
+    //   title: ("Role"),
+    //   dataIndex: "role",
+    //   key: "role",
+    //   align: alignLeft,
+    // },
     {
       title: ("Phone no."),
       dataIndex: "phone_number",

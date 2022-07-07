@@ -49,14 +49,14 @@ const ProfileForm = ({ user }: Props) => {
   function onSubmit(values: any) {
     updateProfile(
       {
-        id: user.id,
-        name: values.name,
-        date_of_birth: values.date_of_birth,
-        gender: values.gender,
+        id: user?.id,
+        name: values?.name,
+        date_of_birth: values?.date_of_birth,
+        gender: values?.gender,
         profile: {
           id: user?.profile?.id,
           ...values.profile,
-          avatar: values.profile.avatar?.[0],
+          avatar: values?.profile.avatar?.[0],
         },
       },
       {

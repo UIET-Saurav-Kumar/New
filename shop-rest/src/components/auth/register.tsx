@@ -153,19 +153,19 @@ const RegisterForm = () => {
       },
       {
         onSuccess: (data) => {
-          router.push('/auth/'+data.user.id);
+          router.push('/auth/'+data?.user.id);
           closeModal();
           return ;
-          if (data?.token && data?.permissions?.length) {
-            Cookies.set("auth_token", data.token);
-            Cookies.set("auth_permissions", data.permissions);
-            authorize();
-            closeModal();
-            return;
-          }
-          if (!data.token) {
-            setErrorMsg(t("error-credential-wrong"));
-          }
+          // if (data?.token && data?.permissions?.length) {
+          //   Cookies.set("auth_token", data.token);
+          //   Cookies.set("auth_permissions", data.permissions);
+          //   authorize();
+          //   closeModal();
+          //   return;
+          // }
+          // if (!data.token) {
+          //   setErrorMsg(t("error-credential-wrong"));
+          // }
         },
         onError: (error) => {
           const {

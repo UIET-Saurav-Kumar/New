@@ -42,7 +42,7 @@ export default function UserProfile({data}:any) {
 
     console.log('analytics', analytics)
 
-    const users = (analytics?.totalUsers + 100000)
+    const users = (analytics?.totalUsers + 200000)
     
     var x=users;
     x=x.toString();

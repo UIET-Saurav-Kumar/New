@@ -113,6 +113,7 @@ const ShopPage = ({ data }: any) => {
      
   
     useEffect(() => {
+      
       getShopCategory()
       let lastScrollY = typeof window !== "undefined" ?  window.pageYOffset : '';
   
@@ -197,17 +198,13 @@ const ShopPage = ({ data }: any) => {
   return (
 
     <>
-     {/* <DocumentMeta {...metaData}>  */}
-            <Seo shopData={data} />
-    
-
+            
               <div className="relative bg-white lg:bg-gray-100 hidden lg:flex flex-col
                               md:flex-row md:justify-between md:items-start">
 
                                   {/* // button to scroll to the top of the page when user has scrolled way down */}
                                   <div className="fixed z-50 bottom-10 right-10 flex justify-center items-center">
-                                    <img src='/up-arrow.png' className="w-12 h-12" onClick={() => window.scrollTo(0, 0)} />
-                                      
+                                    <img src='/up-arrow.png' className="w-12 h-12" onClick={() => window.scrollTo(0, 0)} /> 
                                   </div>
 
 
