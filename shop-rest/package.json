@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "next dev -p 3003",
     "build": "next build",
-    "start": "next start -p 3003",
-    "postbuild": "next-sitemap"
+    "start": "next start -p 3003"
   },
   "dependencies": {
     "@fontsource/open-sans": "^4.4.5",
@@ -35,7 +34,6 @@
     "next-auth": "^3.27.1",
     "next-pwa": "^5.2.22",
     "next-seo": "^4.26.0",
-    "next-sitemap": "^3.1.10",
     "overlayscrollbars": "^1.13.1",
     "overlayscrollbars-react": "^0.2.3",
     "pdf-viewer-reactjs": "^2.2.3",
