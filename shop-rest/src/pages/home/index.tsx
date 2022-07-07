@@ -1,6 +1,6 @@
 
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import DefaultLayout from "@components/layout/default-layout";
 import { useWindowSize } from "@utils/use-window-size";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -106,12 +106,22 @@ const {getLocation} =useLocation()
 
 
 
-  
 
-useEffect(() => {
-  
-  window.scrollTo(0, 0);
-}, []);
+
+const [scrollPosition, setScrollPosition] = useState(0);
+  const handleScroll = () => {
+    const position = window.pageYOffset;
+    setScrollPosition(position);
+  };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
 
 const {
@@ -124,8 +134,22 @@ const {
   location : ((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any
 });
 
+//make rocket.png visible when scroll y is 200
+
+// calculate the scroll position
+
+ 
+
+
+
+
     return (
         <div className=" h-full">
+
+            <div className="fixed z-50 bottom-16 right-10 lg:bottom-10 lg:right-10 flex justify-center items-center">
+                    {/* <img src='/up-arrow.png' className="w-12 h-12" onClick={() => window.scrollTo(0, 0)} />  */}
+                    <img src='/rocket.png' className={` ${scrollPosition > 250 ? 'visible transition-transform duration-150' : 'hidden'} w-12 h-12`} onClick={() => window.scrollTo(0, 0)} /> 
+              </div>
 
     {loading ? (
          <div className="absolute top-0 left-0  h-screen bg-black opacity-80   z-50 w-full">

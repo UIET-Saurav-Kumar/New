@@ -14,6 +14,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
 import Radio from "@components/ui/radio/radio";
+import { Label } from "@headlessui/react/dist/components/label/label";
 
 interface Props {
   user: User;
@@ -27,6 +28,7 @@ type UserFormValues = {
 const ProfileForm = ({ user }: Props) => {
 
   const [birthDate, setBirthDate] = useState(null);
+  const[occupation, setOccupation] = useState("");
   console.log('user',user)
   const { t } = useTranslation("common");
   const { register, handleSubmit, setValue, control } = useForm<UserFormValues>(
@@ -37,6 +39,7 @@ const ProfileForm = ({ user }: Props) => {
             "name",
             'date_of_birth',
             'gender',
+            'occupation',
             "profile.bio",
             "profile.contact",
             "profile.avatar",
@@ -53,6 +56,7 @@ const ProfileForm = ({ user }: Props) => {
         name: values?.name,
         date_of_birth: values?.date_of_birth,
         gender: values?.gender,
+        occupation: values?.occupation,
         profile: {
           id: user?.profile?.id,
           ...values.profile,
@@ -80,7 +84,7 @@ const ProfileForm = ({ user }: Props) => {
             <FileInput control={control} name="profile.avatar" />
           </div>
 
-          <div className="flex flex-col sm:flex-row sm:space-s-4 mb-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:space-s-4 mb-6">
             <Input
               className="flex-1"
               label={t("text-name")}
@@ -90,7 +94,7 @@ const ProfileForm = ({ user }: Props) => {
             <Input
               {...register("profile.contact")}
               label={t("text-contact-number")}
-              className="flex-1"
+              className="flex-1 mt-3 lg:mt-0"
               onChange={(e) => {
                 const value = maskPhoneNumber(e.target.value);
                 //@ts-ignore
@@ -102,37 +106,41 @@ const ProfileForm = ({ user }: Props) => {
 
           <div className="space-y-4  col-span-1 sm:col-span-2">
 
-            <div className=""> 
+            <div className=" flex flex-col space-y-2"> 
 
-            <div className="flex  text-body-dark h-3  font-semibold text-xs leading-none mb-3">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-yellow-600 to-blue-600">
-                  🎉Your Birthday present is awaiting  </span> 🥳</div>
-              <Controller
-                      control={control}
-                      name="date_of_birth"
-                      render={({ field: { onChange, onBlur, value } }) => (
-                        //@ts-ignore
-                <DatePicker 
-                          selected={birthDate} onChange={(date) => {
-                          setBirthDate(date);
-                          // calender ?  openCalenderOnFocus(true) : ''
-                            
-                            setValue("date_of_birth", date);
-                          }
-                          } 
-                          dateFormat= "dd/MM/yyyy"
-                          placeholderText='eg..23/12/1996'
-                          // {...register("date_of_birth")}
-                          className="text-sm h-12 w-60 px-4 border border-border-base rounded focus:border-accent"
-                          />
-                      )}
-                />
 
-            </div>
+              <span className="text-xs text-gray-600   font-semibold">Date of birth</span>
+                  {/* <div className="flex  text-body-dark h-3  font-semibold text-xs leading-none mb-3">
+                      <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-yellow-600 to-blue-600">
+                        🎉Your Birthday present is awaiting  </span> 🥳
+                  </div> */}
+       
+                <Controller
+                        control={control}
+                        name="date_of_birth"
+                        render={({ field: { onChange, onBlur, value } }) => (
+                          //@ts-ignore
+                  <DatePicker 
+                            selected={birthDate} onChange={(date) => {
+                            setBirthDate(date);
+                            // calender ?  openCalenderOnFocus(true) : ''
+                              
+                              setValue("date_of_birth", date);
+                            }
+                            } 
+                            dateFormat= "dd/MM/yyyy"
+                            placeholderText='eg..23/12/1996'
+                            // {...register("date_of_birth")}
+                            className="text-sm h-12 w-60 px-4 border border-border-base rounded focus:border-accent"
+                            />
+                        )}
+                  />
+
+              </div>
         
 
-          <div className="flex flex-col ">
-            <div className="flex   text-body-dark h-3  font-semibold text-xs leading-none mb-3">
+          <div className="flex flex-col  ">
+            <div className="flex  text-body-dark h-3  font-semibold text-xs leading-none mb-3">
               Gender
             </div>
             <div className="flex items-center space-x-4 lg:space-x-8  ">
@@ -156,6 +164,24 @@ const ProfileForm = ({ user }: Props) => {
               </div>
           </div>
 
+          </div>
+
+          <div className="flex flex-col  items-start my-4 ">
+            <span className="text-xs text-gray-600 my-2 font-semibold">Occupation</span>
+              <select
+                    className="  text-gray-600 p-4 text-sm items-center mr-4 bg-white border rounded flex "
+                    onChange={(e) => setOccupation(e.target.value)}
+                    value={occupation}
+                    defaultValue="Search by"
+                    // {...register("occupation")}
+                  >
+                    
+                    <option value="name">{t("Student")}</option>
+                    {/* <option value="email">{t("form:input-label-email")}</option> */}
+                    <option value="phone_number">{t("Employed")}</option>
+                    <option value='tracking_number'>Self employed</option>
+                    <option value='email_id'>Home Maker</option>
+              </select> 
           </div>
 
           <TextArea

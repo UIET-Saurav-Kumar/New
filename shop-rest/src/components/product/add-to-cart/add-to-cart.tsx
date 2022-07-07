@@ -84,7 +84,7 @@ export const AddToCart = ({
       type:'item-added'
     }, {
       onSuccess: (data: any) => {
-        console.log(data)
+        // console.log(data)
       },
     });
     
