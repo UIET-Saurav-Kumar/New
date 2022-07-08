@@ -73,6 +73,39 @@ const CustomerList = ({ customers, onPagination }: IProps) => {
       key: "current_location",
       align: alignLeft,
     },
+
+    {
+      //date_of_birth
+      title: t("Date of Birth"),
+      dataIndex: "date_of_birth",
+      key: "date_of_birth",
+      align: alignLeft,
+      render: (date_of_birth: any) => {
+        return date_of_birth && dayjs(date_of_birth).format("DD/MM/YYYY");
+      }
+    },
+
+    //calculate age from date_of_birth
+    {
+      title: t("Age"),
+      dataIndex: "date_of_birth",
+      key: "date_of_birth",
+      align: alignLeft,
+      render: (date_of_birth: any) => {
+        return date_of_birth && dayjs().diff(date_of_birth, "year");
+      }
+    
+    },
+
+    
+    {
+       
+      title:'Gender',
+      dataIndex:'gender',
+      key:'gender',
+      align:alignLeft,
+      
+    },
     // {
     //   title: ("Role"),
     //   dataIndex: "role",
