@@ -144,7 +144,7 @@ class ShopController extends CoreController
     public function store(ShopCreateRequest $request)
     {
 
-        $user = $this->getUser();
+        
         if ($request->user()->hasPermissionTo(Permission::STORE_OWNER)) {
             return $this->repository->storeShop($request);
         } else {
