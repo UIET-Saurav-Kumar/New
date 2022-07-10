@@ -1,5 +1,6 @@
 
 import Image from "next/image";
+import Head from 'next/head'
 import ShopProductFeed from "@components/product/feed-shop";
 import { fetchShop } from "@data/shop/use-shop.query";
 import { useTranslation } from "next-i18next";
@@ -198,7 +199,11 @@ const ShopPage = ({ data }: any) => {
   return (
 
     <>
-            
+    <Head>
+      <title>{(data.name?data.name:'')+' '+(data.address.city?data.address.city+" "+data.address.street_address:'')+', Best Discounts and Offers Only Through BuyLowcal.com'}</title>
+      <meta name="description" content={(data.name?data.name:'')+' '+(data.address.city?data.address.city+" "+data.address.street_address:'')+' Best '+shopCategory+' deals, offers, discounts and cash backs only through buylowcal.com'} />
+      <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    </Head>
               <div className="relative bg-white lg:bg-gray-100 hidden lg:flex flex-col
                               md:flex-row md:justify-between md:items-start">
 
@@ -392,3 +397,19 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 
 ShopPage.Layout = Layout;
 export default ShopPage;
+
+
+
+
+
+// {
+//   "id":3,
+//   "owner_id":1,
+//   "name":"Bags Shop",
+//   "slug":"bags-shop",
+//   "description":"The Bag shop is the best shop around the city. This is being run under the store owner and our aim is to provide quality product and hassle free customer service.",
+//   "cover_image":{"id":"889","original":"https://pickbazarlaravel.s3.ap-southeast-1.amazonaws.com/887/Untitled-1-%281%29.jpg","thumbnail":"https://pickbazarlaravel.s3.ap-southeast-1.amazonaws.com/887/conversions/Untitled-1-%281%29-thumbnail.jpg"},
+//   "logo":{"id":"888","original":"https://pickbazarlaravel.s3.ap-southeast-1.amazonaws.com/886/Backpack.png","thumbnail":"https://pickbazarlaravel.s3.ap-southeast-1.amazonaws.com/886/conversions/Backpack-thumbnail.jpg"},
+//   "is_active":1,
+//   "address":{"zip":"35203","city":"Michigan","state":"Alabama","country":"USA","street_address":"1740 Bedford Street"},
+//   "settings":{"contact":"01920192102","socials":[{"url":"https://www.facebook.com/","icon":"FacebookIcon"},{"url":"https://www.instagram.com/","icon":"InstagramIcon"}],"website":"https://redq.io/","location":{"lat":28.6673631,"lng":77.2973812,"zip":"110032","city":"Delhi","state":"DL","country":"India","formattedAddress":"Bazaar St, Vishwas Nagar, Shahdara, Delhi, 110032, India"}},"shop_categories":"[{\"name\":\"salon & spa\",\"id\":5},{\"name\":\"Groceries\",\"id\":3},{\"name\":\"Fruits\",\"id\":2},{\"name\":\"Pharmacy\",\"id\":4}]","is_featured":1,"commission":null,"commission_type":null,"gst_number":null,"fssai_number":null,"tan_number":null,"pan_number":null,"gst_certificate":null,"fssai_certificate":null,"cancelled_cheque":null,"delivery_status":1,"free_delivery_order_value":"50","delivery_charges":"100","created_at":"2021-06-27T03:47:23.000000Z","updated_at":"2022-01-09T10:20:40.000000Z","orders_count":43,"products_count":57,"categories":[],"owner":{"id":1,"name":"Store Owner","email":"store_owner@demo.com","phone_number":"917436874843","email_verified_at":null,"created_at":"2021-06-27T04:13:00.000000Z","updated_at":"2021-06-27T04:13:00.000000Z","is_active":1,"shop_id":null,"invited_by":null,"code":null},"shop_category":null}
