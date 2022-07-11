@@ -14,6 +14,7 @@ import ProductQuestions from '@components/questions/product-questions';
 import AverageRatings from '@components/reviews/average-ratings';
 import ProductReviews from '@components/reviews/product-reviews';
 import Seo from "@components/ui/seo";
+import Head from 'next/head'
 
 const CartCounterButton = dynamic(
   () => import("@components/cart/cart-counter-button"),
@@ -67,9 +68,14 @@ export default function ProductSinglePage({ product }: any) {
   return (
 
     <>
+    <Head>
+      <title>{(product.name?product.name:'')+' at lowest price'}</title>
+      <meta name="description" content={(product.name?product.name:'')+' at lowest price only on BuyLowcal.com'} />
+      <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    </Head>
       <div className="bg-light min-h-screen">
-
-        <Seo productData={product} />
+        
+        {/* <Seo productData={product} /> */}
 
         <ProductDetails product={product} />
 
