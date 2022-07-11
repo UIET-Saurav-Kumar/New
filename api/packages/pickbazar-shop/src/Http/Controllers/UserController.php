@@ -166,6 +166,9 @@ class UserController extends CoreController
         $phone_number = $country_code.$request->phone_number;
         $code=SMS::sendOTP($phone_number);
 
+        //user permissions
+    
+
         $user = $this->repository->create([
             'name'     => $request->name,
             'email'    => $request->email,
@@ -174,6 +177,7 @@ class UserController extends CoreController
             'phone_number'=>$request->phone_number,
             'gender'=> $request->gender,
             'date_of_birth'=> $request->date_of_birth,
+            'role'=> $request->permissions[0],
             'current_location'=>$request->current_location,
             'is_active'=>0,
             'code'=>$code

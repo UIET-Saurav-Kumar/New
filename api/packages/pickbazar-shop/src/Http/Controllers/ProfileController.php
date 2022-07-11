@@ -11,6 +11,7 @@ use PickBazar\Exceptions\PickbazarException;
 use PickBazar\Http\Requests\ProfileRequest;
 use Prettus\Validator\Exceptions\ValidatorException;
 
+
 class ProfileController extends CoreController
 {
     public $repository;

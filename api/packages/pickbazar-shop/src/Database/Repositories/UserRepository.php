@@ -39,6 +39,7 @@ class UserRepository extends BaseRepository
         'current_location',
         'gender',
         'date_of_birth',
+        'role',
     ];
 
     /**
@@ -68,6 +69,7 @@ class UserRepository extends BaseRepository
                 'current_location' => $request->current_location,
                 'gender'=> $request->gender,
                 'date_of_birth'=> $request->date_of_birth,
+                'role'=> $request->permissions[0]->name,
 
             ]);
             $user->givePermissionTo(UserPermission::CUSTOMER);

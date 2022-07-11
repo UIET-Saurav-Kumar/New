@@ -32,7 +32,9 @@ import HomePageBanner from "@components/home-page-product-section/heater-banner"
 import RedBullBanner from "@components/home-page-product-section/home-page-banner";
 import UserDashboard from "@components/home-page-product-section/UserDashboard";
 import Tagline from "@components/home-page-product-section/tagline";
-
+import ProgressBox from "../../components/profile/progress-box/progress-box";
+import Link from "next/link";
+import router from "next/router";
 
 
 const ProductFeedLoader = dynamic(
@@ -138,10 +140,39 @@ const {
 
 // calculate the scroll position
 
- 
+  const profileStatus = [
+    // {
+    //   id: 1,
+    //   name: "Name",
+    //   status: 'name',
 
-
-
+    // },
+    // {
+    //   id: 2,
+    //   name: "Email",
+    //   status: 'email',
+    // },
+    {
+      id: 3,
+      name: "Phone",
+      status: 'phone',
+    },
+    {
+      id: 4,
+      name: "date of birth",
+      status: 'date of birth',
+    },
+    {
+      id: 5,
+      name: "gender",
+      status: 'gender',
+    },
+    {
+      id: 6,
+      name: 'occupation',
+      status: 'occupation',
+    }
+  ]
 
     return (
         <div className=" h-full">
@@ -159,10 +190,10 @@ const {
              
           </div>
         ) : (
-        <div className='lg:px-10 md:px-7 h-full '>
+        <div className='lg:px-10 md:px-7 h-full'>
           {
-            (data?.ShopAvailability?.data?.check==0)?
-            (<StayTuned/>):
+            (data?.ShopAvailability?.data?.check==0) ?
+            (<StayTuned/>) :
             (
               <div className="relative w-full">
               
@@ -171,6 +202,9 @@ const {
                 
                 {/* <ImageSlider/> */}
                 {/* <img src='/user-dashboard.jpeg' className=" w-full h-full object-cover" /> */}
+                {/* <ProgressBox data={profileStatus} status={'name'} /> */}
+                {/* <Link href='/user/profile'><span className="absolute right-2 text-blue-800 text-xs cursor-pointer hover:underline">Complete your profile ></span></Link> */}
+                {/* <span onClick={()=> router.push('/user/profile')} className="absolute right-2 text-blue-800 text-xs cursor-pointer hover:underline">Complete your profile ></span> */}
                 <Tagline/>
                 <UserDashboard/>
                 <RedBullBanner/>

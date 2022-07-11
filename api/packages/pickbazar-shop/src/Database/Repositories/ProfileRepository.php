@@ -16,6 +16,9 @@ class ProfileRepository extends BaseRepository
         'contact'        => 'like',
         'customer.email' => 'like',
         'customer.name'  => 'like',
+        'gender' => 'like',
+        'occupation'=> 'like',
+        'date_of_birth' => 'like',
     ];
 
     public function boot()

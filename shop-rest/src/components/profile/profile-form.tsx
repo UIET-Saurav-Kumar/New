@@ -28,7 +28,7 @@ type UserFormValues = {
 const ProfileForm = ({ user }: Props) => {
 
   const [birthDate, setBirthDate] = useState(null);
-  const[occupation, setOccupation] = useState("");
+  const[occupation, setOccupation] = useState(null);
   console.log('user',user)
   const { t } = useTranslation("common");
   const { register, handleSubmit, setValue, control } = useForm<UserFormValues>(
@@ -37,9 +37,10 @@ const ProfileForm = ({ user }: Props) => {
         ...(user &&
           pick(user, [
             "name",
-            'date_of_birth',
-            'gender',
-            'occupation',
+            
+            'profile.date_of_birth',
+            'profile.gender',
+            'profile.occupation',
             "profile.bio",
             "profile.contact",
             "profile.avatar",
@@ -49,6 +50,7 @@ const ProfileForm = ({ user }: Props) => {
   );
   const { mutate: updateProfile, isLoading: loading } =
     useUpdateCustomerMutation();
+
   function onSubmit(values: any) {
     updateProfile(
       {
@@ -123,9 +125,11 @@ const ProfileForm = ({ user }: Props) => {
                   <DatePicker 
                             selected={birthDate} onChange={(date) => {
                             setBirthDate(date);
+                            // onChange(date);
                             // calender ?  openCalenderOnFocus(true) : ''
                               
-                              setValue("date_of_birth", date);
+                              // setValue("profile.date_of_birth", date)
+                              register("profile.date_of_birth")
                             }
                             } 
                             dateFormat= "dd/MM/yyyy"
@@ -139,15 +143,15 @@ const ProfileForm = ({ user }: Props) => {
               </div>
         
 
-          <div className="flex flex-col  ">
+          <div className="flex flex-col">
             <div className="flex  text-body-dark h-3  font-semibold text-xs leading-none mb-3">
               Gender
             </div>
-            <div className="flex items-center space-x-4 lg:space-x-8  ">
+            <div className="flex items-center space-x-4 lg:space-x-8 ">
               <Radio
                 id="male"
                 type="radio"
-                {...register("gender")}
+                {...register("profile.gender")}
                 value="male"
                 label={t("Male")}
                 className=""
@@ -156,7 +160,7 @@ const ProfileForm = ({ user }: Props) => {
               <Radio
                 id="female"
                 type="radio"
-                {...register("gender")}
+                {...register("profile.gender")}
                 value="female"
                 label={t("Female")}
                 className=""
@@ -171,16 +175,17 @@ const ProfileForm = ({ user }: Props) => {
               <select
                     className="  text-gray-600 p-4 text-sm items-center mr-4 bg-white border rounded flex "
                     onChange={(e) => setOccupation(e.target.value)}
-                    value={occupation}
+                    // value={occupation}
                     defaultValue="Search by"
-                    // {...register("occupation")}
+                    // setValue={setValue}
+                    {...register("profile.occupation")}
                   >
                     
-                    <option value="name">{t("Student")}</option>
+                    <option value="Student">{t("Student")}</option>
                     {/* <option value="email">{t("form:input-label-email")}</option> */}
-                    <option value="phone_number">{t("Employed")}</option>
-                    <option value='tracking_number'>Self employed</option>
-                    <option value='email_id'>Home Maker</option>
+                    <option value="Employed">{t("Employed")}</option>
+                    <option value='Self employed'>Self employed</option>
+                    <option value='Home Maker'>Home Maker</option>
               </select> 
           </div>
 
