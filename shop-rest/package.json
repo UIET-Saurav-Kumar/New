@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "next dev -p 3003",
     "build": "next build",
-    "start": "next start -p 3003",
-    "postbuild": "next-sitemap"
+    "start": "next start -p 3003"
+    
     
   },
   "dependencies": {
