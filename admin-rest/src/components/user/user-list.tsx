@@ -65,6 +65,19 @@ const CustomerList = ({ customers, onPagination }: IProps) => {
       key: "email",
       align: alignLeft,
     },
+    {
+      title: t("table:table-item-permissions"),
+      dataIndex: "permissions",
+      key: "permissions",
+      align: "center",
+      render: (permissions: any, record: any) => {
+        return (
+          <div>
+            {permissions?.map(({ name }: { name: string }) => name).join(", ")}
+          </div>
+        );
+      },
+    },
 
     {
       //current_location
