@@ -26,6 +26,7 @@ class UserRepository extends BaseRepository
     protected $fieldSearchable = [
         'name' => 'like',
         'email' => 'like',
+        'phone_number'=> 'like',
     ];
 
     /**
@@ -65,6 +66,7 @@ class UserRepository extends BaseRepository
                 'name'     => $request->name,
                 'email'    => $request->email,
                 'password' => Hash::make($request->password),
+                'phone_number' => $request->phone_number,
                 //user current_location
                 'current_location' => $request->current_location,
                 'gender'=> $request->gender,

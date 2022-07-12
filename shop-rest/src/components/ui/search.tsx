@@ -2,7 +2,7 @@ import SearchBox from '@components/ui/search-box';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { useSearch } from '@contexts/search.context';
-import  ga from '.../lib/ga';
+import * as ga from '.../lib/ga';
 
 
 interface Props {
