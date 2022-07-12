@@ -29,7 +29,7 @@ class UserCreateRequest extends FormRequest
     {
         return [
             'name'     => ['required', 'string', 'max:255'],
-            'email'    => ['required', 'email', 'unique:users'],
+            // 'email'    => ['required', 'email', 'unique:users'],
             'password' => ['required', 'string'],
             // 'current_location' => ['required', 'string'],
             'shop_id' => ['nullable', 'exists:PickBazar\Database\Models\Shop,id'],
@@ -51,10 +51,10 @@ class UserCreateRequest extends FormRequest
             'name.required'      => 'Name is required',
             'name.string'        => 'Name is not a valid string',
             'name.max:255'       => 'Name can not be more than 255 character',
-            'email.required'     => 'email is required',
+            // 'email.required'     => 'email is required',
            // 'current_location.string'     => 'current_location is required',
-            'email.email'        => 'email is not a valid email address',
-            'email.unique:users' => 'email must be unique',
+            // 'email.email'        => 'email is not a valid email address',
+            // 'email.unique:users' => 'email must be unique',
             'password.required'  => 'password is required',
             'password.string'    => 'password is not a valid string',
             'address.array'      => 'address is not a valid json',

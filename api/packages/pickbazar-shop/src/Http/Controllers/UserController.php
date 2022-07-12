@@ -177,7 +177,7 @@ class UserController extends CoreController
             'phone_number'=>$request->phone_number,
             'gender'=> $request->gender,
             'date_of_birth'=> $request->date_of_birth,
-            'role'=> $request->permissions[0],
+            // 'role'=> $request->permissions[0],
             'current_location'=>$request->current_location,
             'is_active'=>0,
             'code'=>$code
