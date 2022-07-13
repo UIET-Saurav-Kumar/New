@@ -210,7 +210,7 @@ class ProductController extends CoreController
         $data=[];
         $slug=str_replace("-","&",$slug);
 
-         $location=($request->location)?json_decode($request->location):"";
+        $location=($request->location)?json_decode($request->location):"";
 
         $names=//active prpducts only
         Product::where("status",1)->limit(6)
@@ -256,9 +256,6 @@ class ProductController extends CoreController
         // }
 
         
-       
-        
-
         $names=Shop::where("is_active",1)->where('name', 'like', $slug.'%')->limit(6)->pluck('name');
         foreach($names as $name){
             array_push($data,[
@@ -278,7 +275,6 @@ class ProductController extends CoreController
         if($location){
             $shops=ShopRepository::getSortedShops($location);
             return Product::whereIn("shop_id",$shops)->with(['shop'])->where('is_offer',1)->where("is_featured",1)->get();
-
         }
         return Product::where("is_featured",1)->where('is_offer',1)->limit($limit)->get();
     }

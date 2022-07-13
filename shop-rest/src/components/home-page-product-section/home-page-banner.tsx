@@ -60,28 +60,11 @@ export default function RedbullBanner() {
 
       dots: true,
       infinite: true,
-      speed: 500,
+      speed: 200,
        slidesToShow: screenWidth > 768 ? 2 : 1,
       autoplay: true,
       slidesToScroll: 1,
       arrows: false,
-     
-     
-
-      // responsive: [
-      //   {
-      //     breakpoint: 320,
-      //     settings: { slidesToShow: 1, slidesToScroll: 1, infinite: false }
-      //   },
-      //   {
-      //     breakpoint: 768,
-      //     settings: { slidesToShow: 1, slidesToScroll: 1, infinite: false }
-      //   },
-      //   {
-      //     breakpoint: 1024,
-      //     settings: { slidesToShow: 1, slidesToScroll: 1, infinite: false }
-      //   }
-      // ]
     };
 
    
@@ -90,14 +73,16 @@ export default function RedbullBanner() {
     return (
 
 
-      <div className='space-x-2 mx-3'>
+      <div className=' '>
       
       <Slider {...settings}>
-
+       
        <Link href='salon-products?text=pick+any&category='><div className="card flex relative w-full  ">
 
-            <img className="object-contain  rounded-lg h-full w-full"
-            //  className='rounded-md w-full opacity-90  h-40 lg:w-full lg:h-72 xl+:h-80 md:h-64  2xl:h-72 2xl:w-full space-x-9 object-fill object '  
+            <img 
+            className="object-contain px-1 rounded-lg cursor-pointer h-full w-full"
+
+           
                   src={'/pick-5.jpeg'} 
                   />
 
@@ -107,7 +92,7 @@ export default function RedbullBanner() {
 
           <Link href='/user/upload-invoice/upload-form'><div className="card flex relative w-full  ">
 
-            <img className="object-contain rounded-lg  h-full w-full"
+            <img className="object-contain cursor-pointer rounded-lg px-1 h-full w-full"
             //  className='rounded-md w-full opacity-90  h-40 lg:w-full lg:h-72 xl+:h-80 md:h-64  2xl:h-72 2xl:w-full space-x-9 object-fill object '  
                   src={'/invoice-upload.jpeg'} 
                   />
