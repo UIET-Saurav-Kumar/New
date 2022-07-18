@@ -174,6 +174,8 @@ export default function HeaderMiddle() {
     }
 
     const {getLocation} =useLocation();
+
+    console.log('getlocation',getLocation)
     
     const { isAuthorize, displayHeaderSearch, displayMobileSearch } = useUI();
     

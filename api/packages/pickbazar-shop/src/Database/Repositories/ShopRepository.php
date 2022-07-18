@@ -34,6 +34,7 @@ class ShopRepository extends BaseRepository
         'cover_image',
         'logo',
         'is_active',
+        'sector',
         'address',
         'settings',
         "is_featured",

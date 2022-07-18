@@ -87,24 +87,24 @@ export default function PromotionSlider({shopId, data,text,category}) {
           }}
         >
           {data?.data?.filter(product => product?.status === 'publish').map((product, idx) => (
-                        <Fragment key={idx}>
-                          
-            <SwiperSlide key={idx}>
-            {/* <motion.div key={product.id}> */}
-                        <div className="w-auto lg:w-full">   
-                <Argon shop={data.shop} product={product} /> 
-                </div>
-                {/* </motion.div> */}
-            </SwiperSlide>
-            
-             </Fragment>
+              <Fragment key={idx}>
+                              
+                <SwiperSlide key={idx}>
+                  {/* <motion.div key={product.id}> */}
+                    <div className="w-auto lg:w-full">   
+                     <Argon shop={data?.shop} product={product} /> 
+                    </div>
+                  {/* </motion.div> */}
+                </SwiperSlide>
+                
+              </Fragment>
           ))}
          
         </Swiper>
         <div
          ref={(node) => setPrevEl(node)}
-          className="offer cursor-pointer   absolute   top-2/4 -start-2 md:-start-5 z-10 -mt-4 md:-mt-5 w-8 h-8 md:w-16 md:h-16 rounded-full bg-light shadow-xl border border-border-200  flex items-center justify-center text-heading transition-all duration-200 hover:bg-accent hover:text-light hover:border-accent"
-          role="button"
+         className="offer cursor-pointer   absolute   top-2/4 -start-2 md:-start-5 z-10 -mt-4 md:-mt-5 w-8 h-8 md:w-16 md:h-16 rounded-full bg-light shadow-xl border border-border-200  flex items-center justify-center text-heading transition-all duration-200 hover:bg-accent hover:text-light hover:border-accent"
+         role="button"
         >
           <span className="sr-only">{t("common:text-previous")}</span>
           <ArrowPrev width={24} height={24} />

@@ -232,7 +232,7 @@ class ProductController extends CoreController
 
         foreach($names as $name){
             array_push($data,[
-                "label"=>$name,
+                "label"=>$name ,
                 "value"=>$name
             ]);
         }

@@ -314,9 +314,7 @@ width: 100%;
   font-weight: 190;
   margin-bottom: 0.2em;
 }
-
-
-
+ 
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -334,8 +332,8 @@ width: 100%;
 
 .pac-logo:after{
   background-image:url('/search.png');
-background-color: #000;
-display: none;
+  background-color: #000;
+  display: none;
 }
 
 .css-tlfecz-indicatorContainer{
@@ -351,15 +349,14 @@ display: none;
 .css-1pahdxg-control{
   border-color: white!important;
   border-radius: 1px!important;
-  border-style: solid!important;
-  border-width: 2px!important;
-  box-shadow: 1 2 2 1px #449E7D!important;
-  height: 47px!important;
+  border-style: solid!important;  
+  /* border-width: 2px!important; */
+  /* box-shadow: 1 2 2 1px #449E7D!important; */
+  height: 46.8px!important;
   border-radius: 0px!important;
   border-left: none;
   background-color: #000;
 }
-
 
 
 .css-yk16xz-control{
@@ -370,8 +367,7 @@ display: none;
   border-top-right-radius: 8px!important;
   border-bottom-right-radius: 8px!important;
   border-width: 2px!important;
-  border-style:dotted ;
-  
+  /* border-style:dotted ; */
   background-color: gray;
   border-color: #41645ea2!important;
 }
@@ -383,8 +379,8 @@ display: none;
 }
 
   .css-26l3qy-menu{
-    position: fixed;
-    z-index: 1000;
+    position: sticky;
+    z-index: 50;
     /* background-color: #000; */
     
   }
@@ -447,7 +443,6 @@ div.custom-container {
 	background-color: #242424;
 }
 
-
 svg.custom{
   width: 100% !important;
   height: 100% !important;
@@ -481,8 +476,6 @@ svg.custom path.link {
 /* END TREE */
 
 
-
-
 .rc-pagination .rc-pagination-item.rc-pagination-item-active {
   --tw-border-opacity: 1;
   border-color: rgba(var(--color-accent), var(--tw-border-opacity));
@@ -493,11 +486,9 @@ svg.custom path.link {
   border-radius: 5px;
 }
 
-
 .rc-pagination .rc-pagination-item.rc-pagination-item-active a{
   color: white;
 }
-
 
   @media (min-width: 1024px) {
     .css-yk16xz-control{
@@ -532,7 +523,6 @@ svg.custom path.link {
         } 
       }
 
-
   /* @media screen and (max-width: 240px){   
      #salon-banner{      
       src: 'ad-banner.jpg';
@@ -544,7 +534,6 @@ svg.custom path.link {
       src: '/banner/salon-ad.jpg';
       } 
     }
-      
 
     @media screen and (max-width: 1620px){   
       #location-input{      
@@ -556,7 +545,7 @@ svg.custom path.link {
         #location-input{      
             margin-top: 16%;
         } 
-        }
+      }
 
       @media screen and (max-width: 1030px){   
         #cities{      

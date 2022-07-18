@@ -29,6 +29,7 @@ export declare type Address = {
   customer?: Maybe<User>;
 };
 export declare type UserAddress = {
+  sector?:Maybe<Scalars['String']>;
   country?: Maybe<Scalars["String"]>;
   city?: Maybe<Scalars["String"]>;
   state?: Maybe<Scalars["String"]>;
@@ -405,6 +406,7 @@ export declare type AddressInput = {
   customer?: Maybe<ConnectBelongsTo>;
 };
 export declare type UserAddressInput = {
+  sector?: Maybe<Scalars["String"]>;
   country?: Maybe<Scalars["String"]>;
   city?: Maybe<Scalars["String"]>;
   state?: Maybe<Scalars["String"]>;

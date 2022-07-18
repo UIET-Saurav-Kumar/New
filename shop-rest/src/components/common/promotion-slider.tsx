@@ -135,7 +135,7 @@ export default function PromotionSlider() {
     return "";
   }
 
-  console.log(shopData)
+  console.log('slider shops',shopData)
 
   return (
 
@@ -165,10 +165,10 @@ export default function PromotionSlider() {
               
               />
               <p className = "text-xs  mt-2 text-center font-semibold">
-                {shop?.address?.street_address?.split(",")[0] + '' + shop?.address?.street_address?.split(",")[1] }
+                {shop?.settings?.location?.sector}
               </p>
               <p className = "text-xs text-center font-light">
-                {shop?.address?.city}
+                {shop?.settings?.location?.city}
               </p>
               </div>
               </Link>

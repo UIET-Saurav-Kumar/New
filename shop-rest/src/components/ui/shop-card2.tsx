@@ -49,7 +49,6 @@ const ShopCard2: React.FC<ShopCardProps> = ({ shop,text,key,category, shopId }) 
   }
     , [width]);
   
-
   const isNew = false;
 
   const {
@@ -68,7 +67,6 @@ const ShopCard2: React.FC<ShopCardProps> = ({ shop,text,key,category, shopId }) 
   },
   {
     enabled: Boolean(shopId),
-
   });
 
   const shopLat = shop?.settings?.location?.lat
@@ -77,14 +75,8 @@ const ShopCard2: React.FC<ShopCardProps> = ({ shop,text,key,category, shopId }) 
   const userLat = myLocation?.lat
   const userLng = myLocation?.lng
 
+  alert(text)
 
- 
-
- 
-  
-
-
-  
 
   return (
 
@@ -105,11 +97,12 @@ const ShopCard2: React.FC<ShopCardProps> = ({ shop,text,key,category, shopId }) 
                    </h4>
                 </span>
                 {/* <h4 className='text-green-600 text-xs font-semibold'> Open </h4> */}
-                <Link href={`/shops/${shop?.slug}?slug=${shop?.slug}&text=${text}`}>
-                  <span className={` cursor-pointer absolute right-10 whitespace-nowrap  text-green-600 hover:text-green-800 text-sm font-semibold`}>
+                <Link href={`/shops/${shop?.slug}?slug=${shop?.slug}`}>  
+                  <span className={` cursor-pointer absolute right-10 whitespace-nowrap text-green-600 hover:text-green-800 text-sm font-semibold`}>
                     See All
-                  </span>
+                  </span>         
                 </Link>
+                
               </div>
  
               <div className=' '> 
@@ -135,9 +128,9 @@ const ShopCard2: React.FC<ShopCardProps> = ({ shop,text,key,category, shopId }) 
                 {products.data.filter(product => product?.status === 'publish').map(product => (
                     <motion.div key={product.id}>
                     <div className="w-44 md:w-60 "> 
-                    {/* <PromotionSlider text={text} category={category} data={products} shopId={shop.id} /> */}
-                    {/* <Neon shop={shop} product={product} /> */}
-                    <Argon shop={shop} product={product} />
+                       {/* <PromotionSlider text={text} category={category} data={products} shopId={shop.id} /> */}
+                       {/* <Neon shop={shop} product={product} /> */}
+                       <Argon shop={shop} product={product} />
                     </div>
                   </motion.div>
                 ))}

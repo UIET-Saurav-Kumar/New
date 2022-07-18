@@ -43,7 +43,6 @@ const ShopsPage = () => {
 
   const { data } = useShopsQuery({
     category:getCategory(),
-   
     limit:3000000,
     location:((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any,
     is_active:1,
@@ -118,11 +117,7 @@ const ShopsPage = () => {
   const closeSort = () => {
       setSort(false);
   }
-
-   
-
-  
-
+ 
   // console.log('shops',data?.pages?.filter((shop: any) => shop?.is_active === 1))
   // console.log('shops name',data?.pages?.data?.map((shop: any) => shop))
 
@@ -131,10 +126,9 @@ const ShopsPage = () => {
   return (
 
     <div className="w-full">
-        <div className='flex justify-between mx-5 border-b p-3 bg-gray-100 mt-2 '>
-          
+
+        <div className='flex justify-between mx-5 border-b p-3 bg-gray-100 mt-2'>
           <h3 className='font-semibold text-xs sm:text-sm md:text-sm lg:text-md 2xl:text-md'> Local shops near you </h3> 
-            
         </div>
        
         {/* <div className='    xl+:mx-0 mt-0 sm:flex lg:flex md:flex xl:flex 2xl:flex'> */}
@@ -142,44 +136,29 @@ const ShopsPage = () => {
           {/* <div className='py-4 px-4 grid w-full grid-cols-1 xs+:grid-cols-1 xs++:grid-cols-2 gap-4 sm:grid-cols-2 
                           md:grid-cols-2 md++:grid-cols-2 lg:grid-cols-3 lg+:grid-cols-3 xl:grid-cols-4 xl+:grid-cols-4
                           xl++:grid-cols-5 2xl:grid-cols-5  3xl:grid-cols-6 border-2 overflow-y-scroll h-screen overflow-x-hidden  bg-gray-100'> */}
-                          <div className=" lg:px-10  h-full w-full flex flex-col">
-                              
-                   {/* { data?.pages?.filter((shop: any) => shop.is_active === 1).map((shop: any) => {
-                                    console.log('active shops',shop.is_active);
-              
-                     return  <ShopCard2 shop={shop} key={shop.id} />
-                    
-                  // </Fragment>
-                
-                   })} */}
-
-                        
-             {data?.pages?.map((page, idx) => {
-                      return (
-                        <Fragment key={idx}>
-                          {page.data.filter((shop) => shop?.is_active === 1).map((shop: any) => (
-                            <ShopCard2 text={getText()} category={getCategory()} shop={shop} shopId={shop?.id} key={shop.id} />
-                          ))}
-                        </Fragment>
-                      );
-             })}
-
-          </div>
+            <div className=" lg:px-10  h-full w-full flex flex-col">
+              {data?.pages?.map((page, idx) => {
+                    return (
+                      <Fragment key={idx}>
+                        {page.data.filter((shop) => shop?.is_active === 1).map((shop: any) => (
+                          <ShopCard2 text={getText()} category={getCategory()} shop={shop} shopId={shop?.id} key={shop.id} />
+                        ))}
+                      </Fragment>
+                    );
+              })}
+            </div>
           
-  {/* </div> */}
+            {/* </div> */}
 
-  {
-  width < 1023 && 
-  
-    <MobileNavigation />
-}
-{
-  width > 1023 &&
-  <CartCounterButton/>
-}
+            {
+            width < 1023 && 
+              <MobileNavigation />
+           }
+          {
+            width > 1023 &&
+            <CartCounterButton/>
+          }
 
-  
-        
     </div>
     
   );

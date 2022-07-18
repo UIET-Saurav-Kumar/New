@@ -18,6 +18,8 @@ export default function DropDown({getLoc}:{getLoc:any}) {
   //   setInputValue(getSearch())
   // },[])
 
+  console.log('inputvalue',inputValue)
+
   const filterColors = (inputValue: string) => {
     return colourOptions.filter(i =>
       i.label.toLowerCase().includes(inputValue.toLowerCase())
@@ -27,7 +29,6 @@ export default function DropDown({getLoc}:{getLoc:any}) {
   const loadOptions = async (inputValue:any, callback:any) => {
 
       var data = await fetchSearch(inputValue);      
-
 
       console.log('search data',data)
       
@@ -61,7 +62,8 @@ export default function DropDown({getLoc}:{getLoc:any}) {
     const { type, ...rest } = router.query;
     
     var text =e?.value
-
+    setInputValue(e?.value)
+    
     createLog({
       location:getLocation?.formattedAddress,
       search:text
@@ -111,7 +113,7 @@ export default function DropDown({getLoc}:{getLoc:any}) {
   
   function optionSelected(e:any){
     // clear()
-    // setInputValue(e);
+    setInputValue(e);
     changeRoute(e)
   }
 
@@ -134,7 +136,8 @@ export default function DropDown({getLoc}:{getLoc:any}) {
     
 
   ];
-  
+
+   
 
     return (
 
@@ -145,19 +148,18 @@ export default function DropDown({getLoc}:{getLoc:any}) {
               <AsyncSelect
                   cacheOptions
                   // style={customStyles}
-                  // defaultValue={inputValue.value}
+                  defaultValue={inputValue.value}
                   loadOptions={loadOptions} 
-                  value={inputValue}
+                  value={ inputValue }
                   defaultOptions={defaultOptions}
                   // onInputChange={handleInputChange}
                   placeholder={ <div className='text-xs sm:text-sm md:text:md  lg:text-sm'> Restaurants | Salons | Groceries </div>}
                   onChange={optionSelected}
-                 
                 />
                   <SearchIcon className=" absolute right-3 top-3 lg:top-4  text-gray-400 w-4 h-4 me-2.5" />
           {/* </div> */}
           
-          <div>
+        <div>
               {/* <button onClick={clear} className="h-10 px-4 lg:h-12 xl:h-12 xl:px-8 flex items-center rounded-lg rounded-ts-none rounded-bs-none bg-accent 
                                                 text-light font-semibold transition-colors duration-200 focus:outline-none hover:bg-accent-hover focus:bg-accent-hover">
                                                   
