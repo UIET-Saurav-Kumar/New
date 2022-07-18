@@ -75,7 +75,7 @@ const ShopCard2: React.FC<ShopCardProps> = ({ shop,text,key,category, shopId }) 
   const userLat = myLocation?.lat
   const userLng = myLocation?.lng
 
-  alert(text)
+ 
 
 
   return (

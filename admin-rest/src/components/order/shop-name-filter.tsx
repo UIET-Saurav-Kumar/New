@@ -85,7 +85,7 @@ export default function ShopNameFilter({
 
   // filter shops based on type selected
 
-  // alert(onCategoryFilter)
+   
 
 
 
