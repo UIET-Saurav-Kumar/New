@@ -746,6 +746,9 @@ export enum Permission {
 export type UpdateUser = {
   name?: Maybe<Scalars["String"]>;
   phone_number:number;
+  occupation?: Maybe<Scalars["String"]>;
+  gender?:Maybe<Scalars['String']>;
+  date_of_birth:Maybe<Scalars['String']>;
   profile?: Maybe<UserProfileInput>;
   address?: Maybe<Array<Maybe<UserAddressUpsertInput>>>;
 };
@@ -765,6 +768,9 @@ export type SocialInput = {
 export type UserProfileInput = {
   id: Scalars["ID"];
   avatar?: Maybe<AttachmentInput>;
+  date_of_birth?: Maybe<Scalars["String"]>;
+  occupation?: Maybe<Scalars["String"]>;
+  gender?: Maybe<Scalars['String']>;
   bio?: Maybe<Scalars["String"]>;
   socials?: Maybe<Array<Maybe<SocialInput>>>;
   contact?: Maybe<Scalars["String"]>;

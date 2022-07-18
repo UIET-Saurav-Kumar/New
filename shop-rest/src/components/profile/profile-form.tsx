@@ -15,6 +15,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
 import Radio from "@components/ui/radio/radio";
 import { Label } from "@headlessui/react/dist/components/label/label";
+import {useUpdateUserMutation} from "@data/customer/use-update-user.mutation";
 
 interface Props {
   user: User;
@@ -32,12 +33,15 @@ const ProfileForm = ({ user }: Props) => {
   console.log('user',user)
   const { t } = useTranslation("common");
   const { register, handleSubmit, setValue, control } = useForm<UserFormValues>(
+    
     {
       defaultValues: {
         ...(user &&
           pick(user, [
             "name",
-            
+            'date_of_birth',
+            'occupation',
+            'gender',
             'profile.date_of_birth',
             'profile.gender',
             'profile.occupation',
@@ -50,6 +54,9 @@ const ProfileForm = ({ user }: Props) => {
   );
   const { mutate: updateProfile, isLoading: loading } =
     useUpdateCustomerMutation();
+
+    const { mutate: updateUser, isLoading: loadingUser } =
+    useUpdateUserMutation();
 
   function onSubmit(values: any) {
     updateProfile(
@@ -71,21 +78,29 @@ const ProfileForm = ({ user }: Props) => {
         },
       }
     );
-  }
 
-  //calculate the percentage og how much profile has been completed
-  const profilePercentage = (user && user.profile)
+    updateUser(
+      {
+        id: user?.id,
+        date_of_birth: values?.date_of_birth,
+        gender: values?.gender,
+        occupation: values?.occupation,
+      }
+    )
+}
+
+   const profilePercentage = (user && user.profile)
     ? (Object.keys(user.profile).length / 7) * 100
     : 0;
     
   return (
+
     <form noValidate onSubmit={handleSubmit(onSubmit)}>
       <div className="flex mb-8">
         <Card className="w-full">
-          <div className="mb-8">
+          <div className="mb-8"> 
             <FileInput control={control} name="profile.avatar" />
           </div>
-
           <div className="flex flex-col sm:flex-row sm:items-center sm:space-s-4 mb-6">
             <Input
               className="flex-1"
@@ -165,7 +180,7 @@ const ProfileForm = ({ user }: Props) => {
                 label={t("Female")}
                 className=""
               />
-              </div>
+            </div>
           </div>
 
           </div>
