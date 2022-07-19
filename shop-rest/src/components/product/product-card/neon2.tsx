@@ -12,6 +12,7 @@ import { PlusIcon } from "@heroicons/react/outline";
 import router from "next/router";
 import WishlistButton from "../product-details/wishlist-button";
 import { HeartFillIcon } from "@components/icons/heart-fill";
+import { useEffect, useState } from "react";
 
 
 type NeonProps = {
@@ -43,6 +44,11 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
   const { price: maxPrice } = usePrice({
     amount: max_price,
   });
+  const [pageURL, setPageUrl] = useState('');
+
+  useEffect(() => {
+    setPageUrl(window.location.href)
+  }, []);
 
   const { openModal } = useModalAction();
 
@@ -131,11 +137,24 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
         
 
         <h3
-          className="text-xs md:text-sm font-semibold text-gray-700 truncate mb-4 cursor-pointer"
+          className="text-xs font-bold flex-normal md:text-sm flex flex-col   text-gray-900  truncate mb-2 cursor-pointer"
         >
-           <div className='flex flex-col'>{name}<h3>{unit}</h3>
-           
-           </div>
+           <span className=''>
+             {name}
+           </span>
+           <span className="flex items-center justify-between">
+             <p>{unit}</p>
+             
+             {/* <p className="font-light  text-gray-500">{orders_count + ' ' + 'sold'}</p> */}
+           </span>
+           { pageURL.includes('home') ? (
+           <div className='flex flex-col sm:flex-row justify-between text-xs  md:text-sm text-gray-900  mt-2 font-light'>
+           <Link href={`/shops/${product?.shop?.slug}`}><span className="text-10 hover:text-indigo-700 font-semibold  bg-clip-text text-transparent bg-gradient-to-r from-blue-700 via-purple-600 to-blue-600"> {product?.shop?.name} </span></Link>
+            <span className="font-light  bg-clip-text text-transparent bg-gradient-to-r from-yellow-700 via-red-600 to-yellow-600">{product?.shop?.address?.city}</span>
+            {/* <span className="font-light text-gray-800">{'sold' + ' ' + orders_count}</span> */}
+          </div>) :
+            null
+        }
         </h3>
         {/* End of product title */}
         {product_type.toLowerCase() === 'variable' ? (

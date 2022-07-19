@@ -7,6 +7,7 @@ import { useLocation } from "@contexts/location/location.context";
 import renderProductCard from "@components/product/home-product-card";
 import { useEffect } from "react";
 import Neon from "@components/product/product-card/neon";
+import Neon2 from "@components/product/product-card/neon2";
 
 export default function featuredProducts({}) {
 
@@ -267,7 +268,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                     { salonspaArray?.filter(product => product?.status === 'publish').map((product :any) => (
                         <>    
                             <motion.div key={product.id}>
-                                 <Neon product={product} />
+                                 <Neon2 product={product} />
                             </motion.div>
                         </> 
                     ))}
@@ -285,7 +286,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                         {groceryArray?.filter(product=> product?.status === 'publish').map((product :any) => (
                             <>    
                                 <motion.div key={product.id}>
-                                     <Neon product={product} />
+                                     <Neon2 product={product} />
                                 </motion.div>
                             </> 
                         ))}
@@ -303,7 +304,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                         {fruitsvegetablesArray?.filter(product=> product?.status === 'publish').map((product :any) => (
                             <>    
                                 <motion.div key={product.id}>
-                                     <Neon product={product} />
+                                     <Neon2 product={product} />
                                 </motion.div>
                             </> 
                         ))}
@@ -320,7 +321,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                     {beveragesArray?.filter(product=> product?.status === 'publish').map((product :any) => (
                         <>    
                             <motion.div key={product.id}>
-                                 <Neon product={product} />
+                                 <Neon2 product={product} />
                             </motion.div>
                         </> 
                     ))}
@@ -341,7 +342,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                     {fashionlifestyleArray?.filter(product=> product?.status === 'publish').map((product :any) => (
                         <>    
                             <motion.div key={product.id}>
-                                 <Neon product={product} />
+                                 <Neon2 product={product} />
                             </motion.div>
                         </> 
                     ))}
@@ -361,7 +362,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                         {electronicsArray?.filter(product=> product?.status === 'publish').map((product :any) => (
                             <>    
                                 <motion.div key={product.id}>
-                                     <Neon product={product} />
+                                     <Neon2 product={product} />
                                 </motion.div>
                             </> 
                         ))}
@@ -379,7 +380,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                         {meatArray?.filter(product=> product?.status === 'publish').map((product :any) => (
                             <>    
                                 <motion.div key={product.id}>
-                                     <Neon product={product} />
+                                     <Neon2 product={product} />
                                 </motion.div>
                             </> 
                         ))}
@@ -397,7 +398,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                         {dairyfarmArray?.filter(product=> product?.status === 'publish').map((product :any) => (
                             <>    
                                 <motion.div key={product.id}>
-                                     <Neon product={product} />
+                                     <Neon2 product={product} />
                                 </motion.div>
                             </> 
                         ))}
@@ -415,7 +416,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                         {healthproductsArray?.filter(product=> product?.status === 'publish').map((product :any) => (
                             <>    
                                 <motion.div key={product.id}>
-                                     <Neon product={product} />
+                                     <Neon2 product={product} />
                                 </motion.div>
                             </> 
                         ))}
@@ -433,7 +434,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                         {pharmacyArray?.filter(product=> product?.status === 'publish').map((product :any) => (
                             <>    
                                 <motion.div key={product.id}>
-                                     <Neon product={product} />
+                                     <Neon2 product={product} />
                                 </motion.div>
                             </> 
                         ))}
@@ -453,7 +454,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                         {hotelsresortsArray?.filter(product=> product?.status === 'publish').map((product :any) => (
                             <>    
                                 <motion.div key={product.id}>
-                                     <Neon product={product} />
+                                     <Neon2 product={product} />
                                 </motion.div>
                             </> 
                         ))}
@@ -476,7 +477,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                     {bakeryArray?.filter(product=> product?.status === 'publish').map((product :any) => (
                         <>    
                             <motion.div key={product.id}>
-                                 <Neon product={product} />
+                                 <Neon2 product={product} />
                             </motion.div>
                         </> 
                     ))}
@@ -498,7 +499,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                     {groceryoffersArray?.filter(product=> product?.status === 'publish').map((product :any) => (
                         <>    
                             <motion.div key={product.id}>
-                                 <Neon product={product} />
+                                 <Neon2 product={product} />
                             </motion.div>
                         </> 
                     ))}
@@ -517,7 +518,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                     {clothingArray?.filter(product=> product?.status === 'publish').map((product :any) => (
                         <>    
                             <motion.div key={product.id}>
-                                 <Neon product={product} />
+                                 <Neon2 product={product} />
                             </motion.div>
                         </> 
                     ))}
@@ -538,7 +539,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                     {furnitureArray?.filter(product=> product?.status === 'publish').map((product :any) => (
                         <>    
                             <motion.div key={product.id}>
-                                 <Neon product={product} />
+                                 <Neon2 product={product} />
                             </motion.div>
                         </> 
                     ))}
@@ -555,7 +556,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                     {buffetArray?.filter(product=> product?.status === 'publish').map((product :any) => (
                         <>    
                             <motion.div key={product.id}>
-                                 <Neon product={product} />
+                                 <Neon2 product={product} />
                             </motion.div>
                         </> 
                     ))}
@@ -574,7 +575,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                     {restrauntsArray?.filter(product=> product?.status === 'publish').map((product :any) => (
                         <>    
                             <motion.div key={product.id}>
-                                 <Neon product={product} />
+                                 <Neon2 product={product} />
                             </motion.div>
                         </> 
                     ))}
