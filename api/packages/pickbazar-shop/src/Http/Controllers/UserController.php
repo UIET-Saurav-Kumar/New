@@ -355,7 +355,7 @@ class UserController extends CoreController
         }
 
         if ($user) {
-            return ["token" => $user->createToken('auth_token')->plainTextToken, "permissions" => $user->givePermissionTo(Permission::CUSTOMER)];
+            return ["token" => $user->createToken('auth_token')->plainTextToken, "permissions" =>$user->getPermissionNames()];
         } else {
             return ["token" => null, "permissions" => []];
         }

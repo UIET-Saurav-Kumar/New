@@ -131,7 +131,7 @@ const ShopsPage = () => {
           <h3 className='font-semibold text-xs sm:text-sm md:text-sm lg:text-md 2xl:text-md'> Local shops near you </h3> 
         </div>
        
-        {/* <div className='    xl+:mx-0 mt-0 sm:flex lg:flex md:flex xl:flex 2xl:flex'> */}
+        {/* <div className='xl+:mx-0 mt-0 sm:flex lg:flex md:flex xl:flex 2xl:flex'> */}
 
           {/* <div className='py-4 px-4 grid w-full grid-cols-1 xs+:grid-cols-1 xs++:grid-cols-2 gap-4 sm:grid-cols-2 
                           md:grid-cols-2 md++:grid-cols-2 lg:grid-cols-3 lg+:grid-cols-3 xl:grid-cols-4 xl+:grid-cols-4
@@ -150,7 +150,7 @@ const ShopsPage = () => {
           
             {/* </div> */}
 
-            {
+           {
             width < 1023 && 
               <MobileNavigation />
            }
@@ -183,7 +183,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     },
   };
 };
-
 
 export default ShopsPage;
 

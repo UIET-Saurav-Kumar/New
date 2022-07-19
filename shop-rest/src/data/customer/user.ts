@@ -12,9 +12,9 @@ export type ContactType = {
   email: string;
   subject: string;
   description: string;
-  date_of_birth: Date;
-  occupation: string;
-  gender:string;
+  // date_of_birth: Date;
+  // occupation: string;
+  // gender:string;
   current_location: string;
 };
 

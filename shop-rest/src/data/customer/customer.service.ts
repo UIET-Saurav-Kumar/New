@@ -30,7 +30,7 @@ class Customer extends CoreApi {
 
   updateUser(id:any,input:any) {
     return this.http
-      .post(`${API_ENDPOINTS.USERS}/${id}`, input)
+      .put(`${API_ENDPOINTS.USERS}/${id}`, input)
       .then((res) => res.data);
   }
 
