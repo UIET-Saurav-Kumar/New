@@ -24,8 +24,9 @@ const WithdrawList = ({ withdraws, onPagination }: IProps) => {
 
   const router = useRouter();
 
+
   const renderStatusBadge = (status: string) => {
-    switch (status.toUpperCase()) {
+    switch (status?.toUpperCase()) {
       case "APPROVED":
         return <Badge text={("Approved")} color="bg-accent" />;
       case "PENDING":
@@ -38,6 +39,7 @@ const WithdrawList = ({ withdraws, onPagination }: IProps) => {
         return <Badge text={("Processing")} color="bg-yellow-500" />;
     }
   };
+
   function formateDate(date){
     var d=date.split('T')[0].split('-');
     return d[2]+"/"+d[1]+"/"+d[0]
@@ -79,6 +81,7 @@ const WithdrawList = ({ withdraws, onPagination }: IProps) => {
         );
       },
     },
+
     {
       title: ("Date"),
       dataIndex: "created_at",
@@ -95,6 +98,7 @@ const WithdrawList = ({ withdraws, onPagination }: IProps) => {
   ];
 
   return (
+
     <>
       <div className="rounded overflow-hidden shadow mb-6">
         <Table
@@ -118,6 +122,7 @@ const WithdrawList = ({ withdraws, onPagination }: IProps) => {
         </div>
       )}
     </>
+    
   );
 };
 

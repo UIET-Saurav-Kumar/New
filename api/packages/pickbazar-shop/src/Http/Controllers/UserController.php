@@ -181,6 +181,7 @@ class UserController extends CoreController
             'phone_number'=>$request->phone_number,
             'gender'=> $request->gender,
             'date_of_birth'=> $request->date_of_birth,
+            'occupation'=> $request->occupation,
             // 'role'=> $request->permissions[0],
             'current_location'=>$request->current_location,
             'is_active'=>0,
@@ -237,6 +238,7 @@ class UserController extends CoreController
             "phoneNumber"=> $user->phone_number,
             'gender'=> $user->gender,
             'date_of_birth'=> $user->date_of_birth,
+            'occupation' => $user->occupation,
             "countryCode"=> "+91",
             "event"=> "User Registered",
             "traits"=> [

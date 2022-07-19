@@ -27,6 +27,8 @@ class UserRepository extends BaseRepository
         'name' => 'like',
         'email' => 'like',
         'phone_number'=> 'like',
+        'occupation' => 'like',
+        'created_at' => 'like',
     ];
 
     /**
@@ -40,6 +42,7 @@ class UserRepository extends BaseRepository
         'current_location',
         'gender',
         'date_of_birth',
+        'occupation',
         'role',
     ];
 
@@ -71,6 +74,7 @@ class UserRepository extends BaseRepository
                 'current_location' => $request->current_location,
                 'gender'=> $request->gender,
                 'date_of_birth'=> $request->date_of_birth,
+                'occupation'=> $request->occupation,
                 'role'=> $request->permissions[0]->name,
 
             ]);

@@ -213,7 +213,7 @@ export default function Orders() {
           })}
         >
          <div className="flex flex-col md:flex-row md:space-x-4 md:items-center mt-5 md:mt-8 border-t border-gray-200 pt-5 md:pt-8 w-full">
-           <div className="flex items-center "> <span className="text-gray-700 font-light mx-4">From</span> 
+          <div className="flex items-center "> <span className="text-gray-700 font-light mx-4">From</span> 
             <div className="relative flex items-center"> <DatePicker clearButtonTitle="clear"
              selected={startDate} onChange={(date:Date ) => setStartDate(date)} 
              dateFormat= "dd/MM/yyyy"
@@ -225,14 +225,14 @@ export default function Orders() {
             </div>
             <span className="text-gray-700 font-light mx-4">to</span> 
             <div className="relative items-center w-60"><DatePicker
-            // clearIcon={null}
-             selected={endDate} onChange={(date:Date) => setEndDate(date)} 
-             dateFormat= "dd/MM/yyyy"
-            />
-            <span className={` ${endDate !== null ? 'block' : 'hidden'} cursor-pointer absolute right-2 text-gray-600 top-4 rounded-full `} onClick={()=>setEndDate(null)}><CloseIcon className="w-4 h-4"/></span>
+              // clearIcon={null}
+              selected={endDate} onChange={(date:Date) => setEndDate(date)} 
+              dateFormat= "dd/MM/yyyy"
+              />
+              <span className={` ${endDate !== null ? 'block' : 'hidden'} cursor-pointer absolute right-2 text-gray-600 top-4 rounded-full `} onClick={()=>setEndDate(null)}><CloseIcon className="w-4 h-4"/></span>
             </div>
              
-           </div>
+          </div>
            
           <ShopNameFilter
               className="w-full md:w-full md:mr-5"

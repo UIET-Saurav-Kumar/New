@@ -15,6 +15,7 @@ export type ContactType = {
   current_location: string;
   gender:string;
 	date_of_birth:Date;
+  occupation:string;
 };
 
 class Customer extends CoreApi {

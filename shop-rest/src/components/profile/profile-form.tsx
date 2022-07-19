@@ -149,7 +149,7 @@ const ProfileForm = ({ user }: Props) => {
                           setValue("date_of_birth", date);
                         }}
                         dateFormat="dd-MM-yyyy"
-                        className="w-full"
+                        className="text-sm h-12 w-full px-4 border border-border-base rounded focus:border-accent"
                         showYearDropdown
                         showMonthDropdown
                         dropdownMode="select"
