@@ -487,15 +487,13 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
 
             
           
-             <div className={`${groceryoffersArray?.length ? 'block' : 'hidden'} flex flex-col`}>
+            <div className={`${groceryoffersArray?.length ? 'block' : 'hidden'} flex flex-col`}>
 
                 <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
                     Grocery Offers
                 </h3>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
             
-
-
                     {groceryoffersArray?.filter(product=> product?.status === 'publish').map((product :any) => (
                         <>    
                             <motion.div key={product.id}>
@@ -503,7 +501,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                             </motion.div>
                         </> 
                     ))}
-
+enoeo
                 </div>
             </div> 
              

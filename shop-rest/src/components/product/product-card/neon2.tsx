@@ -34,10 +34,12 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
 
   const { name,unit,slug, image,orders_count, quantity, min_price, max_price, product_type } =
     product ?? {};
-  const { price, basePrice, discount } = usePrice({
-    amount: product.sale_price ? product.sale_price : product.price!,
-    baseAmount: product.price,
-  });
+
+    const { price, basePrice, discount } = usePrice({
+      amount: product.price ? product.price : product.price!,
+      baseAmount: product.sale_price,
+    });
+
   const { price: minPrice } = usePrice({
     amount: min_price,
   });
@@ -87,9 +89,9 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
             className="product-image"
           />
 
-        {discount && (
+         {discount && (
           <div className="absolute top-3 end-3 md:top-4 md:end-4 rounded text-xs leading-6 
-                          shadow-md font-semibold px-1.5 sm:px-2 md:px-2.5  bg-gold text-white">
+                          shadow-md font-semibold px-1.5 sm:px-2 md:px-2.5  bg-gradient-to-r from-gold to-yellow-500 text-white ">
             {discount}
           </div>
         )}
@@ -124,9 +126,14 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
                     <span>
                         {/* <RatingsBadge rating={product?.ratings} variant="xs" boxed /> */}
                     </span>
-                    {discount && (
-                      <del className="text-xs md:text-sm text-discount ms-2">{price}</del>
-                    )}
+                     {discount ? (
+                    <del className="text-xs md:text-sm text-gold ms-2">
+                      {price}
+                    </del>
+                  ) : <del className="text-xs md:text-sm h-4 text-discount ms-2">
+                  
+                </del>
+                } 
                   </div>
               </>
                <WishlistButton className="h-5" productId={product?.id} />
