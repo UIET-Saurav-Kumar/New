@@ -123,7 +123,7 @@ const ShopCard2: React.FC<ShopCardProps> = ({ shop,text,key,category, shopId }) 
                   </Fragment>
                 ))}
         </div> : 
-         <div className="flex items-center w-full   scrollbar-hide  overflow-x-scroll"> {data?.pages.map((products, _idx) => (
+         <div className="flex items-center w-full space-x-2   scrollbar-hide  overflow-x-scroll"> {data?.pages.map((products, _idx) => (
             <Fragment key={_idx}>
                 {products.data.filter(product => product?.status === 'publish').map(product => (
                     <motion.div key={product.id}>

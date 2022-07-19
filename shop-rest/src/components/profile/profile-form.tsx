@@ -30,7 +30,7 @@ const ProfileForm = ({ user }: Props) => {
 
   const [birthDate, setBirthDate] = useState(null);
   const[occupation, setOccupation] = useState(null);
-  console.log('user',user)
+  // console.log('user',user)
   const { t } = useTranslation("common");
   const { register, handleSubmit, setValue, control } = useForm<UserFormValues>(
     
@@ -85,6 +85,11 @@ const ProfileForm = ({ user }: Props) => {
         date_of_birth: values?.date_of_birth,
         gender: values?.gender,
         occupation: values?.occupation,
+      },
+      {
+        onSuccess: () => {
+          toast.success(t("User Updated"));
+        },
       }
     )
 }
@@ -123,64 +128,65 @@ const ProfileForm = ({ user }: Props) => {
 
           <div className="space-y-4  col-span-1 sm:col-span-2">
 
-            <div className=" flex flex-col space-y-2"> 
+            <div className="flex flex-col space-y-2"> 
 
 
-              <span className="text-xs text-gray-600   font-semibold">Date of birth</span>
-                  {/* <div className="flex  text-body-dark h-3  font-semibold text-xs leading-none mb-3">
-                      <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-yellow-600 to-blue-600">
-                        🎉Your Birthday present is awaiting  </span> 🥳
-                  </div> */}
-       
-                <Controller
-                        control={control}
-                        name="date_of_birth"
-                        render={({ field: { onChange, onBlur, value } }) => (
-                          //@ts-ignore
-                  <DatePicker 
-                            selected={birthDate} onChange={(date) => {
-                            setBirthDate(date);
-                            // onChange(date);
-                            // calender ?  openCalenderOnFocus(true) : ''
-                              
-                              // setValue("profile.date_of_birth", date)
-                              register("profile.date_of_birth")
-                            }
-                            } 
-                            dateFormat= "dd/MM/yyyy"
-                            placeholderText='eg..23/12/1996'
-                            // {...register("date_of_birth")}
-                            className="text-sm h-12 w-60 px-4 border border-border-base rounded focus:border-accent"
-                            />
-                        )}
-                  />
+                <span className="text-xs text-gray-600   font-semibold">Date of birth</span>
+                    {/* <div className="flex  text-body-dark h-3  font-semibold text-xs leading-none mb-3">
+                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-yellow-600 to-blue-600">
+                          🎉Your Birthday present is awaiting  </span> 🥳
+                    </div> */}
+                  {/*        
+                      <Controller
+                          control={control}
+                          name="date_of_birth"
+                          render={({ field: { onChange, onBlur, value } }) => ( */}
+                          
+                  <DatePicker
+                        selected={birthDate}
+                        onChange={(date) => {
+                          setBirthDate((date));
+                          setValue("date_of_birth", date);
+                        }}
+                        dateFormat="dd-MM-yyyy"
+                        className="w-full"
+                        showYearDropdown
+                        showMonthDropdown
+                        dropdownMode="select"
+                        peekNextMonth
+                        showWeekNumbers
+                        minDate={new Date(1900, 1, 1)}
+                        maxDate={new Date()}
+                        placeholderText={t("dd-mm-yyyy")}
+                        // className="w-full"
+                  />                         
 
               </div>
         
 
           <div className="flex flex-col">
-            <div className="flex  text-body-dark h-3  font-semibold text-xs leading-none mb-3">
-              Gender
-            </div>
-            <div className="flex items-center space-x-4 lg:space-x-8 ">
-              <Radio
-                id="male"
-                type="radio"
-                {...register("profile.gender")}
-                value="male"
-                label={t("Male")}
-                className=""
-              />
+              <div className="flex  text-body-dark h-3  font-semibold text-xs leading-none mb-3">
+                Gender
+              </div>
+              <div className="flex items-center space-x-4 lg:space-x-8 ">
+                <Radio
+                  id="male"
+                  type="radio"
+                  {...register("profile.gender")}
+                  value="male"
+                  label={t("Male")}
+                  className=""
+                />
 
-              <Radio
-                id="female"
-                type="radio"
-                {...register("profile.gender")}
-                value="female"
-                label={t("Female")}
-                className=""
-              />
-            </div>
+                <Radio
+                  id="female"
+                  type="radio"
+                  {...register("profile.gender")}
+                  value="female"
+                  label={t("Female")}
+                  className=""
+                />
+              </div>
           </div>
 
           </div>

@@ -12,14 +12,17 @@ export type ContactType = {
   email: string;
   subject: string;
   description: string;
+  date_of_birth: Date;
+  occupation: string;
+  gender:string;
   current_location: string;
 };
 
 class Customer extends CoreApi {
+
   constructor(_base_path: string) {
     super(_base_path);
   }
-
   updateCustomer(input: CustomerType) {
     return this.http
       .put(this._base_path + "/" + input.id, input)
@@ -33,6 +36,7 @@ class Customer extends CoreApi {
       .delete(`${API_ENDPOINTS.ADDRESS}/${id}`)
       .then((res) => res.data);
   }
+
 }
 
 export const CustomerService = new Customer("users");

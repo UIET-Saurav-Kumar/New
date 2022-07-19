@@ -26,7 +26,7 @@ const Argon: React.FC<ArgonProps> = ({ product, className }) => {
   return (
     <article
       className={cn(
-        "product-card cart-type-argon rounded bg-light overflow-hidden shadow-sm transition-all duration-200 hover:shadow transform hover:-translate-y-0.5 h-full",
+        "product-card cart-type-argon border rounded bg-light overflow-hidden shadow-sm transition-all duration-200 hover:shadow transform hover:-translate-y-0.5 h-full",
         className
       )}
       onClick={handleProductQuickView}

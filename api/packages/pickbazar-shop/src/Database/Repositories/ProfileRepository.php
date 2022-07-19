@@ -21,8 +21,6 @@ class ProfileRepository extends BaseRepository
         'date_of_birth' => 'like',
     ];
 
-    
-
     public function boot()
     {
         try {
