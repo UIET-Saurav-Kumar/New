@@ -79,7 +79,7 @@ export default function ShopMobileView({data, shopData}: any) {
 
             <div className='px-2 w-full grid grid-cols-1 sm:flex'>
 
-            { slug?.some(el => data.slug.includes(el)) ? null :
+              { slug?.some(el => data.slug.includes(el)) ? null :
                 (   <div className='hidden sm:block w-48 h-38 sm:h-72 sm:w-80 md:h-72 lg:w-96'> 
                     <ShopProfileCard data={data} /> 
                    </div>)  }
@@ -140,29 +140,25 @@ export default function ShopMobileView({data, shopData}: any) {
                                   
                     </HidingHeader>
               
-              <div className='relative mt-2 flex flex-col'> 
-                                  
-                        <div className='relative top-0 flex flex-col'> 
-                                {categoryData?.categories?.data?.length ? 
-                                <> 
-                                <div id='category-dropdown-sidebar'  
-                                    className='flex border bg-white  flex-col w-full'>  
-                                {/* <CategoryDropdownSidebar/> */}
-
-                                          {/* <CategoryDropdownSidebar/> */}
-
-                                          
-                                    <h1 style={{top:'155px'}} id='product-heading' className="text-lg sticky  bg-gray-100  py-3 px-2  font-semibold text-gray-600 font-mono mt-5 transition-transform duration-75">  
-                                      { query?.category?.replace(/\b\w/g, (l :any) => l.toUpperCase())   } Products
-                                    </h1> 
-                                </div> </> : ' '  }
-                                    <div id='product-feed' className="static  z-10 top-10 w-full">{data && 
-                                    // <ShopProductFeed shopId={data.id} />
-                                        <Feed shopId={data.id}/>
-                                    }</div>
-                          </div>
-
-                </div>
+              <div className='relative mt-2 flex flex-col'>                                   
+                    <div className='relative top-0 flex flex-col'> 
+                            {categoryData?.categories?.data?.length ? 
+                            <> 
+                            <div id='category-dropdown-sidebar'  
+                                className='flex border bg-white  flex-col w-full'>  
+                            {/* <CategoryDropdownSidebar/> */}
+                                      {/* <CategoryDropdownSidebar/> */}
+  
+                                <h1 style={{top:'155px'}} id='product-heading' className="text-lg sticky  bg-gray-100  py-3 px-2  font-semibold text-gray-600 font-mono mt-5 transition-transform duration-75">  
+                                  { query?.category?.replace(/\b\w/g, (l :any) => l.toUpperCase())   } Products
+                                </h1> 
+                            </div> </> : ' '  }
+                                <div id='product-feed' className="static  z-10 top-10 w-full">{data && 
+                                // <ShopProductFeed shopId={data.id} />
+                                    <Feed shopId={data.id}/>
+                                }</div>
+                      </div>
+              </div>
 
                </>  :
                 <div className='relative mt-2 flex'> 
@@ -180,28 +176,20 @@ export default function ShopMobileView({data, shopData}: any) {
                   </div> : <Feed shopData={data} shopId={data.id} /> }
                </div> 
 
-
-               }
-
-
-               
-
+          }
 
             {/* menu button */}
-
-                {/* <span onClick={handleCategories} 
-                      className ='fixed  z-1000 lg:hidden bottom-16 -right-2 sm:right-2
-                                  px-3 p-2 rounded-lg  text-white  
-                                  items-center space-x-2'> 
-
-                   
-                    <span className='flex flex-col items-center'>
-                         <img src='/menu.png' 
-                          className='h-14 w-14 opacity-80 active:opacity-100' /> 
-                          <button className='text-gray-800 font-bold'>Categories</button>
-                     </span>  <
-                        
-                </span> */}
+            {/* <span onClick={handleCategories} 
+                  className ='fixed  z-1000 lg:hidden bottom-16 -right-2 sm:right-2
+                              px-3 p-2 rounded-lg  text-white  
+                              items-center space-x-2'> 
+                <span className='flex flex-col items-center'>
+                      <img src='/menu.png' 
+                      className='h-14 w-14 opacity-80 active:opacity-100' /> 
+                      <button className='text-gray-800 font-bold'>Categories</button>
+                </span>  <
+                    
+            </span> */}
                     
             
         </div>

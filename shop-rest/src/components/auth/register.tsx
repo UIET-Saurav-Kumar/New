@@ -282,7 +282,7 @@ const RegisterForm = () => {
                           setValue("date_of_birth", date);
                         }}
                         dateFormat="dd-MM-yyyy"
-                        className="w-full"
+                        className="text-sm h-12 w-full px-4 border border-border-base rounded focus:border-accent"
                         showYearDropdown
                         showMonthDropdown
                         dropdownMode="select"
@@ -290,7 +290,7 @@ const RegisterForm = () => {
                         showWeekNumbers
                         minDate={new Date(1900, 1, 1)}
                         maxDate={new Date()}
-                        placeholderText={t("dd-mm-yyyy")}
+                        placeholderText={t("eg..23/12/1996")}
                         // className="w-full"
                   />          
                       )}
