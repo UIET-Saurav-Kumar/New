@@ -6,6 +6,7 @@ import React from 'react'
 import { useRouter } from "next/router";
 import { useModalAction } from "@components/ui/modal/modal.context";
 import { useUI } from "@contexts/ui.context";
+import Image from 'next/image'
 
 export default function UserTotalEarning({totalEarnings}:any) {
 
@@ -32,7 +33,7 @@ export default function UserTotalEarning({totalEarnings}:any) {
 <div className='flex items-start h-full  align-center space-x-4 justify-evenly'>
             
             <div className='relative rounded-full px-2  bg-magenta w-16 h-16 '>
-              <img src='/dashboard/rupees.png' 
+              <Image src='/dashboard/rupees.png' layout='fill'
                    className='absolute m-auto  h-12 w-12 ' 
                    alt='money' />
             </div>

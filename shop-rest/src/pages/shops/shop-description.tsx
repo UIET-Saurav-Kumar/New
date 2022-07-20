@@ -38,12 +38,13 @@ export default function ShopDescription({data} :any) {
 
               {/* Address */}
               <div className="  mb-7 h-auto last:mb-0 flex flex-col  w-full text-left">
+                 
                   <span className="text-sm lg:text-lg text-heading font-semibold mb-2">
                     {t("text-address")}
                   </span>
 
                   <span className=" justify-between text-xs sm:text-sm font-light tracking-wide  text-gray-600 ">
-                      {data?.address?.street_address}
+                      { data?.settings?.location?.formattedAddress }
                   </span>
 
                   <div className="sm:hidden mt-5 mb-0 last:mb-0 flex flex-col  w-full text-left">
@@ -55,6 +56,7 @@ export default function ShopDescription({data} :any) {
                             {data?.settings?.contact}
                           </span>
                   </div>
+
               </div>
               
               {/* Contact number */}
@@ -66,7 +68,6 @@ export default function ShopDescription({data} :any) {
                   <span className=" text-sm font-light tracking-wide text-body">
                     {data?.settings?.contact}
                   </span>
-                 
               </div>
 
  {/* {data?.settings?.website && (

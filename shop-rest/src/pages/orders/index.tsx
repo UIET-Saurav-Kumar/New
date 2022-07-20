@@ -15,6 +15,10 @@ import { useTranslation } from "next-i18next";
 import { useOrdersQuery } from "@data/order/use-orders.query";
 import Button from "@components/ui/button";
 import NotFound from "@components/common/not-found";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import OrderDataPdf from "@components/order/orders-data-pdf";
+import { Order, SettingsOptions, UserAddress } from "@ts-types/generated";
+import { DownloadIcon } from "@heroicons/react/outline";
 
 
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
@@ -33,6 +37,11 @@ export default function OrdersPage() {
 
   const { t } = useTranslation("common");
   const [order, setOrder] = useState<any>({});
+
+  const[itemsSumTotal, setItemsSumTotal] = useState(0);
+  const[uniqueItems, setUniqueItems] = useState([]);
+
+
   const {
     data,
     isFetching: loading,
@@ -41,6 +50,7 @@ export default function OrdersPage() {
     hasNextPage,
     isFetchingNextPage: loadingMore,
   } = useOrdersQuery({});
+
 
   useEffect(() => {
     if (data?.pages?.[0].data.length) {
@@ -60,10 +70,65 @@ export default function OrdersPage() {
     });
   }
 
-  console.log('ear phone', containsProduct(data?.pages?.[0].data, 14110));
 
+  // get list of orders placed previous month 
+  function getLastMonthOrders(orders: any[]) {
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth();
+    const currentYear = currentDate.getFullYear();
+    const previousMonth = currentMonth - 1;
+    const previousYear = currentYear;
+    if (previousMonth < 0) {
+      previousMonth = 11;
+      previousYear = previousYear - 1;
+    }
+    return orders?.filter((order: any) => {
+      const orderDate = new Date(order?.created_at);
+      return orderDate.getMonth() === previousMonth && orderDate.getFullYear() === previousYear;
+    }
+    );
+  }
 
+  // now get previousmonthorders unique products and add the quantity and price of duplicate products
+  function lastMonthItems(orders: any[]) {
+    const previousMonthOrders = getLastMonthOrders(orders);
+    const previousMonthOrdersUniqueProducts = previousMonthOrders?.reduce((acc: any, order: any) => {
+      // items sum total
+      const itemsSum = order?.products.reduce((acc: any, product: any) => {
+        return acc + product?.quantity;
+      }, 0);
 
+      // setItemsSumTotal(itemsSum);
+
+      order?.products?.forEach((product: any) => {
+        if (!acc[product?.id]) {
+          acc[product?.id] = {
+            id: product?.id,
+            name: product?.name,
+            price: product?.price,
+            quantity: 1,
+          };
+        } else {
+          acc[product?.id].quantity += 1;
+          acc[product?.id].price += product?.price;
+        }
+      }
+      );
+      return acc;
+    }
+    , {});
+    // setUniqueItems(previousMonthOrdersUniqueProducts)
+    return previousMonthOrdersUniqueProducts;
+  }
+
+  //last month items sum total
+
+  console.log('lastMonthProducts',lastMonthItems(data?.pages?.[0].data));
+  // console.log('month orders',  getLastMonthOrders(data?.pages?.[0].data));
+  // get all the products with quantity  ordered in month
+
+  console.log('ear phone',containsProduct(data?.pages?.[0].data, 14110));
+  
   if (error) return <ErrorMessage message={error.message} />;
 
   return (
@@ -74,6 +139,38 @@ export default function OrdersPage() {
         {/* End of sidebar navigation */}
 
         <div className="w-full hidden overflow-hidden lg:flex">
+
+        {/* <PDFDownloadLink
+          className="inline-flex items-center justify-center flex-shrink-0 font-semibold leading-none rounded outline-none transition duration-300 ease-in-out focus:outline-none focus:shadow focus:ring-1 focus:ring-accent-700 text-light border border-transparent px-5 py-0 h-12 ms-auto mb-5 bg-blue-500 hover:bg-blue-600"
+          document = {
+            <OrderDataPdf
+              order={order}
+              // itemsSumTotal={itemsSumTotal}
+              // uniqueItems={uniqueItems}
+            
+              // subtotal={lastMonthItems(data?.pages?.[0].data)?.subtotal}
+              // total={itemsSumTotal}
+              // discount={order?.discount}
+              // delivery_fee={order?.delivery_fee}
+              // sales_tax={order?.sales_tax}
+              // settings={siteSettings}
+              order={order}
+            />
+          }
+          fileName="invoice.pdf"
+        >
+          {({ loading }: any) =>
+            loading ? (
+              t("common:text-loading")
+            ) : (
+              <>
+                <DownloadIcon className="h-4 w-4 me-3" />
+                {t("Download Invoice")}
+              </>
+            )
+          }
+        </PDFDownloadLink> */}
+
           <div
             className="pe-5 lg:pe-8 w-full md:w-1/3"
             style={{ height: "calc(100vh - 60px)" }}

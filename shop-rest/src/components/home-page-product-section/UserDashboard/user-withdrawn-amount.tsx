@@ -1,6 +1,7 @@
 import React from 'react'
 import { useRouter } from "next/router";
 import { useModalAction } from "@components/ui/modal/modal.context";
+import Image from 'next/image';
 
 export default function UserWithdrawnAmount({withdrawnAmount,isAuthorize}:any) {
  
@@ -20,7 +21,7 @@ export default function UserWithdrawnAmount({withdrawnAmount,isAuthorize}:any) {
         <div className='flex items-start h-full  align-center space-x-4 justify-evenly'>
 
         <div className='relative rounded-full px-2  bg-blue-200 w-16 h-16 '>
-           <img src='/dashboard/withdrawal.png' className='w-12 h-12' alt='money' />
+           <Image layout='fill' src='/dashboard/withdrawal.png' className='w-12 h-12' alt='money' />
         </div>
             
             <div className='text-xl w-auto  md:w-36 xl:w-40 2xl:w-48  font-light text-gray-500'>

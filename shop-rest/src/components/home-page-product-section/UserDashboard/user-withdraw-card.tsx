@@ -2,6 +2,7 @@ import React from 'react'
 import { useRouter } from "next/router";
 import { useModalAction } from "@components/ui/modal/modal.context";
 import { useUI } from "@contexts/ui.context";
+import Image from 'next/image';
 
 
 export default function UserWithdrawCard({currentBalance}:any) {
@@ -25,7 +26,7 @@ export default function UserWithdrawCard({currentBalance}:any) {
             
             {/* <div className='w-20'> */}
             <div className='relative rounded-full px-2 pt-2 bg-green-200 w-16 h-16 '>
-               <img src='/dashboard/money-withdrawal.png' className='w-12 h-12' alt='money' />
+               <Image src='/dashboard/money-withdrawal.png' layout='fill' className='w-12 h-12' alt='money' />
             </div>
             {/* </div> */}
             

@@ -71,7 +71,8 @@ export default function FeaturesShops({ }) {
                         {data?.featureShops.data?.map((shop, _idx) => (
                             <Link href={`${ROUTES.SHOPS}/${shop.slug}`} key={_idx}>
                                 <div  className='flex flex-col justify-evenly lg:justify-evenly items-center h-44 w-full  md:h-44  lg:h-64 2xl:h-96  xl:justify-evenly 
-                                        hover:-translate-y-1 hover:scale-95 duration-200   2xl:items-center border-2   p-4 md:p-2 shadow-lg  bg-white rounded-sm px-0 cursor-pointer transition duration-800 hover:ease-out hover:border-magenta'>
+                                        hover:-translate-y-1 hover:scale-95 duration-200 2xl:items-center border-2   p-4 md:p-2 shadow-lg  bg-white rounded-sm px-0 
+                                        cursor-pointer transition duration-800 hover:ease-out hover:border-magenta'>
                                    
                                           {/* <img className='rounded-0 w-10 h-10 xs+:w-16 xs+:h-16 xs++:w-20 xs++:h-20 sm:w-28 
                                                           sm:h-24 md:w-20 lg:w-28 lg:h-32 2xl:w-38 2xl:h-38'  */}
