@@ -127,7 +127,7 @@ export default function OrdersPage() {
   // console.log('month orders',  getLastMonthOrders(data?.pages?.[0].data));
   // get all the products with quantity  ordered in month
 
-  console.log('ear phone',containsProduct(data?.pages?.[0].data, 14110));
+  console.log('ear phone',containsProduct(data?.pages?.[0].data, 14110 || 14358));
   
   if (error) return <ErrorMessage message={error.message} />;
 

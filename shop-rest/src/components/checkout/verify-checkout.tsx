@@ -184,8 +184,8 @@ const VerifyCheckout = () => {
 
 
             available_items?.map((item: any) => {
-              if (item.id === 14110) {
-                if (containsProduct(ordersData?.pages?.[0].data, 14110)) {
+              if (item.id === 14110 || item.id === 14358) {
+                if (containsProduct(ordersData?.pages?.[0].data, 14110 || 14358)) {
                   removeItemFromCart(14110);
                 }
               }

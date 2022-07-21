@@ -112,7 +112,7 @@ export const AddToCart = ({
 
     <>
       <AddToCartBtn
-        disabled={disabled || outOfStock || item.id === 14110 ? containsProduct(ordersData?.pages?.[0].data, 14110) : false}
+        disabled={disabled || outOfStock ||  ( (item.id === 14110 || item.id === 14358) ? containsProduct(ordersData?.pages?.[0].data, item.id) : false )}
         variant={variant}
         onClick={handleAddClick}
       />
@@ -125,7 +125,7 @@ export const AddToCart = ({
         onIncrement={(getItemFromCart(item.id).quantity !== data.quantity ? handleAddClick : null)}
         variant={counterVariant ? counterVariant : variant}
         className={counterClass}
-        disabled={outOfStock || (item.id === 14110 ? (containsProduct(ordersData?.pages?.[0].data, 14110) ? disabled : null) : null)}
+        disabled={outOfStock || ( (item.id === 14110  || item.id === 14358) ? (containsProduct(ordersData?.pages?.[0].data, item.id) ? disabled : null) : null)}
       />
     </>
   );
