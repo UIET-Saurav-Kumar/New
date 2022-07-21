@@ -117,6 +117,8 @@ import ShopCard2 from '@components/ui/shop-card2';
         };
       };
 
+      <CartCounterButton />
+
     
 export default function SalonPage() {
 
