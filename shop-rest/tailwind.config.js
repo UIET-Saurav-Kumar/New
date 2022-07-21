@@ -316,6 +316,8 @@ module.exports = {
         500: "rgba(0, 0, 0, 0.17) 0px 0px 12px",
         700: "rgba(0, 0, 0, 0.08) 0px 2px 16px",
         900: "rgba(0, 0, 0, 0.05) 0px 21px 36px",
+        // red boxShadow
+        red: "rgba(255, 0, 0, 0.16) 0px 3px 6px",
       },
 
     },

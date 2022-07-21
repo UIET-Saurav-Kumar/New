@@ -13,6 +13,7 @@ import router from "next/router";
 import WishlistButton from "../product-details/wishlist-button";
 import { HeartFillIcon } from "@components/icons/heart-fill";
 import { useEffect, useState } from "react";
+import { useOrdersQuery } from "@data/order/use-orders.query";
 
 
 type NeonProps = {
@@ -54,6 +55,12 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
 
   const { openModal } = useModalAction();
 
+
+  const {
+    data:ordersData,
+   
+  } = useOrdersQuery({});
+
   // const isSelected = !isEmpty(variations)
   //   ? !isEmpty(attributes) &&
   //     Object.keys(variations).every((variation) =>
@@ -64,13 +71,20 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
   function handleProductQuickView() {
     return openModal("PRODUCT_DETAILS", product.slug);
   }
+  function containsProduct(ordersData: any[], productId: number) {
+    return ordersData?.some((order: any) => {
+      return order?.products.some((product: any) => {
+        return product?.id === productId;
+      });
+    });
+  }
 
   return (
 
     <article
       // style={{maxWidth:"330px"}}
       className={cn(
-        "product-card cart-type-neon rounded h-full bg-light overflow-hidden shadow-sm transition-all duration-200 hover:shadow ",
+        " relative product-card cart-type-neon rounded h-full bg-light overflow-hidden shadow-sm transition-all duration-200 hover:shadow ",
         className
       )}
     >
@@ -181,7 +195,16 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
         ) : (
           <>
             {Number(quantity) > 0 && (
-             <div className="relative w-full"> <AddToCart className='border absolute z-50' variant="organesson" data={product} /></div>
+              <div className="flex  items-start  justify-between md:pt-3 ">
+              <AddToCart  variant="organesson" data={product} />
+             { product?.id ===  ( 14358 || 14110) ? containsProduct(ordersData?.pages?.[0].data, product?.id) ?
+              <span className='text-xs mt-2   lg:text-sm text-red-600'>
+               
+                    {/* <img src='/sold-out.png' className="absolute top-5  lg:top-25 lg:left-10  z-40  "/> */}
+                    <span className="font-bold shadow-2xl bg-red-600 p-1 rounded px-1 text-white">Sold out</span>
+                </span>
+              : '' : ''}
+           </div>
             )}
           </>
         )}
