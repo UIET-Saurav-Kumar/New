@@ -112,20 +112,20 @@ Offers.Layout = DefaultLayout;
 
 
 // fast loading using ssr 
-export async function getStaticProps() {
-    const {getLocation} =useLocation()
-    const data = await useOfferQuery({
+// export async function getStaticProps() {
+//     const {getLocation} =useLocation()
+//     const data = await useOfferQuery({
         
-        limit: 10 as number,
-        search:"",
-        location : ((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any
-    });
-    return {
-        props: {
-            data
-        },
-        refresh: 1
-    }
-}
+//         limit: 10 as number,
+//         search:"",
+//         location : ((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any
+//     });
+//     return {
+//         props: {
+//             data
+//         },
+//         refresh: 1
+//     }
+// }
 
 
