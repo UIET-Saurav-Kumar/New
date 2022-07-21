@@ -17,6 +17,7 @@ export interface IUserUpdateVariables {
 export const useUpdateUserMutation = () => {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
+
   return useMutation(
     ({ variables: { id, input } }: IUserUpdateVariables) =>
     CustomerService.updateUser(id,input),
@@ -31,4 +32,5 @@ export const useUpdateUserMutation = () => {
       },
     }
   );
+  
 };

@@ -33,8 +33,6 @@ type FormValues = {
   gender: 'male' | 'female';
 };
 
-
-
 const registerFormSchema = yup.object().shape({
   name: yup.string().required("error-name-required"),
   email: yup
@@ -85,10 +83,7 @@ const RegisterForm = () => {
     setValue,
     formState: { errors },
   } = useForm<FormValues>({
-    defaultValues: {
-      current_location:getLocation.formattedAddress
-    },
-
+    defaultValues,
     resolver: yupResolver(registerFormSchema),
   });
 
@@ -322,8 +317,9 @@ const RegisterForm = () => {
                     defaultValue="Search by"
                     // setValue={setValue}
                     {...register("occupation")}
+                    placeholder="Search by"
                   >
-                    
+                    <option value="" disabled selected>Select your option</option>
                     <option value="Student">{t("Student")}</option>
                     {/* <option value="email">{t("form:input-label-email")}</option> */}
                     <option value="Employed">{t("Employed")}</option>
@@ -331,6 +327,31 @@ const RegisterForm = () => {
                     <option value='Home Maker'>Home Maker</option>
               </select> 
         </div>
+
+        <div className="flex flex-col">
+              <div className="flex  text-body-dark h-3  font-semibold text-xs leading-none mb-3">
+                Gender
+              </div>
+              <div className="flex   p-4 rounded items-center space-x-4 lg:space-x-8 ">
+                <Radio
+                  id="male"
+                  type="radio"
+                  {...register("gender")}
+                  value="male"
+                  label={t("Male")}
+                  className=""
+                />
+
+                <Radio
+                  id="female"
+                  type="radio"
+                  {...register("gender")}
+                  value="female"
+                  label={t("Female")}
+                  className=""
+                />
+              </div>
+          </div>
         
         {/* current location */}
         <Input

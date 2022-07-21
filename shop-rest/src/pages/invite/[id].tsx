@@ -309,29 +309,29 @@ const RegisterForm = () => {
           error={t(errors.phone_number?.message!)}
         />
 
-        <div className="flex flex-col ">
+        <div className="flex flex-col">
         <div className="flex   text-body-dark h-3  font-semibold text-xs leading-none mb-3">Gender
         </div>
-        <div className="flex items-center space-x-4 lg:space-x-8  ">
-           <Radio
-            id="male"
-            type="radio"
-            {...register("gender")}
-            value="male"
-            label={t("Male")}
-            className=""
-          />
+          <div className="flex items-center space-x-4 lg:space-x-8  ">
+            <Radio
+              id="male"
+              type="radio"
+              {...register("gender")}
+              value="male"
+              label={t("Male")}
+              className=""
+            />
 
-          <Radio
-            id="female"
-            type="radio"
-            {...register("gender")}
-            value="female"
-            label={t("Female")}
-            className=""
-          />
+            <Radio
+              id="female"
+              type="radio"
+              {...register("gender")}
+              value="female"
+              label={t("Female")}
+              className=""
+            />
           </div>
-          </div>
+        </div>
 
 
           <Input
@@ -355,7 +355,7 @@ const RegisterForm = () => {
                     {...register("occupation")}
                   
                   >
-                    
+                    <option value="" disabled selected>Select your option</option>
                     <option value="Student">{t("Student")}</option>
                     {/* <option value="email">{t("form:input-label-email")}</option> */}
                     <option value="Employed">{t("Employed")}</option>

@@ -17,6 +17,8 @@ import Radio from "@components/ui/radio/radio";
 import { Label } from "@headlessui/react/dist/components/label/label";
 import {useUpdateUserMutation} from "@data/customer/use-update-user.mutation";
 
+
+
 interface Props {
   user: User;
 }
@@ -201,7 +203,7 @@ const ProfileForm = ({ user }: Props) => {
                     // setValue={setValue}
                     {...register("profile.occupation")}
                   >
-                    
+                    <option value='' disabled selected >Select your option</option>
                     <option value="Student">{t("Student")}</option>
                     {/* <option value="email">{t("form:input-label-email")}</option> */}
                     <option value="Employed">{t("Employed")}</option>

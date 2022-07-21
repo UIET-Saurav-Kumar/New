@@ -37,4 +37,5 @@ class ProfileRepository extends BaseRepository
     {
         return Profile::class;
     }
+    
 }
