@@ -15,11 +15,15 @@ import Neon2 from '@components/product/product-card/neon2';
 import Link from 'next/link';
 import DefaultLayout from '@components/layout/default-layout';
 import Head from 'next/head';
+import CartCounterButton from '@components/cart/cart-counter-button';
+import MobileNavigation from '@components/layout/mobile-navigation';
+import { useWindowSize } from 'react-use';
 
 export default function Offers() {
     const { query } = useRouter();
     const { type } = query;
     const {getLocation} =useLocation()
+    const { width } = useWindowSize();
 
     const {
         data,
@@ -91,6 +95,15 @@ export default function Offers() {
                 ))}
 
         </div>
+
+        {
+          width > 1023 && 
+          <CartCounterButton />
+       }
+        {
+          width < 1023 && 
+            <MobileNavigation />
+        } 
    </>
 
         

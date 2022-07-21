@@ -203,16 +203,10 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
              <div className="md:pt-3 ">
                 <AddToCart  variant="organesson" data={product} />
                { product?.id === (14110 || 14358) ? containsProduct(ordersData?.pages?.[0].data, product?.id) ?
-                <span className='text-xs mt-2 lg:text-sm text-red-600'>
-                  // triangle shape icon
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </span>
+                // <span className='text-xs mt-2 lg:text-sm text-red-600'>
+                   <span className="font-bold shadow-2xl bg-red-600 p-1 rounded px-1 text-white">Sold out</span>
+                  
+                // </span>
                 : '' : ''}
              </div>
             )}

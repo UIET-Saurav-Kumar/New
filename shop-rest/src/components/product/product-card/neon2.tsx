@@ -196,14 +196,14 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
           <>
             {Number(quantity) > 0 && (
               <div className="flex  items-start  justify-between md:pt-3 ">
-              <AddToCart  variant="organesson" data={product} />
+              <AddToCart  variant="argon" data={product} />
              { product?.id ===  ( 14358 || 14110) ? containsProduct(ordersData?.pages?.[0].data, product?.id) ?
-              <span className='text-xs mt-2   lg:text-sm text-red-600'>
+              // <span className='text-xs mt-2   lg:text-sm text-red-600'>
                
-                    {/* <img src='/sold-out.png' className="absolute top-5  lg:top-25 lg:left-10  z-40  "/> */}
-                    <span className="font-bold shadow-2xl bg-red-600 p-1 rounded px-1 text-white">Sold out</span>
-                </span>
-              : '' : ''}
+                    
+                    <span className="text-xs mt-2   lg:text-sm   font-bold shadow-2xl bg-red-600 p-1 rounded px-1 text-white">Sold out</span>
+                // </span>
+              : null : ''}
            </div>
             )}
           </>
