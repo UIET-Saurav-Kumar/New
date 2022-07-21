@@ -18,6 +18,16 @@ import Head from 'next/head';
 import CartCounterButton from '@components/cart/cart-counter-button';
 import MobileNavigation from '@components/layout/mobile-navigation';
 import { useWindowSize } from 'react-use';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
+
+export const getStaticProps = async ({ locale }: any) => {
+    return {
+      props: {
+        ...(await serverSideTranslations(locale, ["common"])),
+      },
+    };
+  };
 
 export default function Offers() {
     const { query } = useRouter();
