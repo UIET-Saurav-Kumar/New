@@ -15,6 +15,7 @@ import AverageRatings from '@components/reviews/average-ratings';
 import ProductReviews from '@components/reviews/product-reviews';
 import Seo from "@components/ui/seo";
 import Head from 'next/head'
+import GlobalSearchLayout from "@components/layout/global-search-layout";
 
 const CartCounterButton = dynamic(
   () => import("@components/cart/cart-counter-button"),
@@ -115,4 +116,4 @@ export default function ProductSinglePage({ product }: any) {
     </>
   );
 }
-ProductSinglePage.Layout = Layout;
+ProductSinglePage.Layout = GlobalSearchLayout;
