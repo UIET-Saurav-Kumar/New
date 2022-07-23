@@ -8,6 +8,7 @@ export default function useIntersectionObserver({
     target,
     threshold = 0.1,
 }:any) {
+    
     useEffect(() => {
         if (!enabled) {
             return
