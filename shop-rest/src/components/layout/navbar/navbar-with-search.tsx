@@ -218,7 +218,7 @@ const NavbarWithSearch = () => {
   }, [getLocation]);
 
   const [click, setClick ] = useState(false);
-    const [hasLocation, setHasLoction] = useState(false);
+  const [hasLocation, setHasLoction] = useState(false);
     
     const truncate = (txt:any, n:number) => {
       return  txt.length > 10 ? txt.substring(0, n) : txt
@@ -277,38 +277,31 @@ const NavbarWithSearch = () => {
   return (
 
     <header
-      ref={navbarRef}
-      className=" flex flex-col site-header-with-search h-14 md:h-16 lg:h-auto"
+      // ref={navbarRef}
+      className="flex flex-col bg-white    h-14 md:h-16 lg:h-auto"
     >
       <nav
-        className={cn(
-          "w-full h-14 md:h-16 lg:h-22 py-5 px-4 lg:px-8 flex justify-between items-center  top-0 end-0 z-20 transition-transform duration-300",
-          {
-            "fixed bg-light lg:bg-transparent lg:absolute":
-              !displayHeaderSearch && hasType,
-            "is-sticky fixed bg-light shadow-sm":
-              displayHeaderSearch || !hasType,
-          }
-        )}
+        className=
+          "w-full h-14 md:h-16 bg-white lg:h-22 py-5 px-4 lg:px-8 flex justify-evenly items-center  top-0 end-0 z-50 transition-transform duration-300 fixed   lg:bg-transparent lg:absolute"
+        
       >
-        {!displayMobileSearch ? (
-          <div className="w-full flex space-x-6 items-center  justify-between">
+        {/* {!displayMobileSearch ? ( */}
+          <div className="fixed top-0 w-full  flex space-x-6 items-center bg-white py-5 px-4 justify-evenly">
            <div className="w-28" > <Logo className="" /></div>
             {/* <Search label={t("text-search-label")} variant="minimal" /> */}
-                <div className='hidden lg:flex items-center focus-ring-2 justify-center
-                                      lg:w-3/4 2xl:mx-auto lg:mx-auto 
-                                      2xl:flex-1'>
+                <div className='hidden lg:flex items-center focus-ring-2 justify-evenly
+                                lg:w-3/4 2xl:mx-auto lg:mx-auto 2xl:flex-1'>
 
                         <input onClick = {handleLocation} 
-                                defaultValue = {getLocation?.formattedAddress}  
-                                className ='hidden  lg:inline-flex shadow-md text-gray-500 bg-gray-50 lg:w-32 lg+:w-38 2xl:w-52 md:w-32 placeholder:text-gray-500  
-                                            lg:w-42 rounded-lg text-sm rounded-l-lg rounded-r-none h-12 outline-none active:border-gray-400
-                                            border-2 border-e-0  focus:border-accent pr-4  border-gray-400 pl-2 ' 
-                                placeholder = 'Enter location' id='location_id' />
+                               defaultValue = {getLocation?.formattedAddress}  
+                               className =' shadow-md text-gray-500 bg-gray-50  placeholder:text-gray-500  
+                                             rounded-lg text-sm rounded-l-lg rounded-r-none h-12 outline-none active:border-gray-400
+                                           border-2 border-e-0  focus:border-accent   border-gray-400 pl-2 ' 
+                               placeholder = 'Enter location' id='location_id' />
                         
                             {/* <div className='hidden  lg:flex lg:items-center lg:w-3/5'> */}
                             {/* <div style={{width:'450px'}} className="  w-full ">   */}
-                                <Search label={t("text-search-label")} variant="minimal"  />
+                                 <DropDown   />
                                       {/* </div> */}
                             {/* </div> */}
 
@@ -317,20 +310,21 @@ const NavbarWithSearch = () => {
                       <div 
                       // onClick = {handleLocation}  
                       className='flex items-center w-full lg:hidden'>
-
-                          {/* <CaretDown className='w-4 cursor-pointer mr-2 text-gray-400 h-4 '/> 
-                          <input 
-                                      defaultValue = {getLocation?.formattedAddress}  
-                                      className ='lg:hidden  block w-full text-gray-500 placeholder:text-gray-500  
-                                                  rounded-lg  border rounded-l-lg pl-4 h-6 sm:h-8 outline-none text-xs sm:text-sm
-                                                  border-e-0  focus:border-accent border-gray-300 pr-2 cursor-pointer hover:border-gray-400' 
-                                      placeholder = 'Enter location' id='location_id' /> */}
-                                      <Search  variant='minimal'/>
+                                      <input onClick = {handleLocation} 
+                               defaultValue = {getLocation?.formattedAddress}  
+                               className ='hidden lg:inline-flex shadow-md text-gray-500 bg-gray-50   placeholder:text-gray-500  
+                                           rounded-lg text-sm rounded-l-lg rounded-r-none h-12 outline-none active:border-gray-400
+                                           border-2 border-e-0  focus:border-accent    border-gray-400   ' 
+                               placeholder = 'Enter location' id='location_id' />
+                        
+                            {/* <div className='hidden  lg:flex lg:items-center lg:w-3/5'> */}
+                            {/* <div style={{width:'450px'}} className="  w-full ">   */}
+                                 <DropDown   />
 
                       </div>
 
                     <div className={` ${location ? 'fixed inset-0 bg-gray-900 bg-opacity-60 scroll-y-none w-auto  h-full' : ' '} `}></div>
-                    <div   className={`absolute flex flex-col   z-50 inset-0 shadow-lg transform -pl-10 duration-200 ease-in 
+                    <div className={`absolute flex flex-col   z-50 inset-0 shadow-lg transform -pl-10 duration-200 ease-in 
                                     ${location ? ' translate-y-0 ' : '-translate-y-full' }  transform border-5 bg-gray-100 h-screen lg:h-screen  overflow-y-hidden overflow-hidden `}>
                                       
                                        <div className='border-red-400 flex w-full'>
@@ -367,11 +361,18 @@ const NavbarWithSearch = () => {
                                                               address  = {getLocation?.formattedAddress} /> 
                                 </div>
         
-                                <div   className='z-50 w-full'> 
-                                     <GetCurrentLocation onChange = {changeLocation} />  
+                                <div   className='z-50 justify-evenly w-full  '> 
+                                     <div className=""><GetCurrentLocation onChange = {changeLocation} /></div>  
+                                     <span className="text-xl mx-4"> | </span>
+                                     <span className="text-center w-28 rounded text-lg z-40 font-semibold text-gray-900
+                                      w-full mx-auto">  Select city  </span>
                                 </div>
+
+                                
                                 
                             </div>
+
+                             
 
                             <div className='hidden lg:grid lg:grid-cols-6 xl:grid-cols-7 gap-2 lg:justify-between items-center -mt-12 xl:-mt-22 2xl:-mt-24'>
                                 
@@ -419,73 +420,24 @@ const NavbarWithSearch = () => {
               
             </ul>
 
-            {/* <h1>gfd</h1> */}
-          <div className=' flex justify-end  ml-10 space-x-4'>  
-             {isAuthorize ? (
-                
-                  <AuthorizedMenu />
-                
-              ) : (
-               
-                  <> <div className='block lg:hidden'><MobileJoinButton /></div>
-                  <div className='hidden lg:block'><JoinButton /></div></>
-                
-              )} </div>
-          </div>
-        ) : (
-          <>
-            <Logo className="mx-auto border bg-black lg:mx-0" />
-            {/* <ProductTypeMenu className="ms-10 me-auto hidden xl:block" /> */}
-            <div className="block w-full">
-              <div
-                className={cn(
-                  "w-full xl:w-11/12 2xl:w-10/12 mx-auto px-10 overflow-hidden",
-                  {
-                    hidden: !displayHeaderSearch && hasType,
-                    flex: displayHeaderSearch || !hasType,
-                  }
-                )}
-              >
-                {/* <Search label={t("text-search-label")} variant="minimal" /> */}
-                {/* <DropDown/> */}
-              </div>
+        
+            <div className=' flex justify-end  ml-10 space-x-4'>  
+              {
+                  isAuthorize ? (
+                      <AuthorizedMenu />
+                  ) : (
+                  <>
+                    <div className='block lg:hidden'><MobileJoinButton /></div>
+                    <div className='hidden lg:block'><JoinButton /></div>
+                  </>
+                    
+                  )
+                } 
             </div>
-            <ul className="flex items-center flex-shrink-0 space-s-10">
-              {isAuthorize ? (
-                <li key="track-orders">
-                  <Link
-                    href={ROUTES.ORDERS}
-                    className="font-semibold text-heading flex items-center transition duration-200 no-underline hover:text-accent focus:text-accent"
-                  >
-                    {t("nav-menu-track-order")}
-                  </Link>
-                </li>
-              ) : null}
-              {siteSettings.headerLinks.map(({ href, label, icon }) => (
-                <li key={`${href}${label}`}>
-                  <Link
-                    href={href}
-                    className="font-semibold text-heading flex items-center transition duration-200 no-underline hover:text-accent focus:text-accent"
-                  >
-                    {icon && <span className="me-2">{icon}</span>}
-                    {t(label)}
-                  </Link>
-                </li>
-              ))}
-              {isAuthorize ? (
-                <li>
-                  <AuthorizedMenu />
-                </li>
-              ) : (
-                <li>
-                  <JoinButton />
-                </li>
-              )}
-            </ul>
-          </>
-        )}
+          </div>
+        
       </nav>
-      <DropDown/>
+      {/* <DropDown/> */}
     </header>
     
     

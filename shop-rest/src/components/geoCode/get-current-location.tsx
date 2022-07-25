@@ -8,6 +8,7 @@ export default function GetCurrentLocation({
     onChange
   }:{
     onChange: any;
+    
   }){
     const {addLocation} =useLocation()
 
@@ -25,6 +26,20 @@ export default function GetCurrentLocation({
       function error(err) {
         console.warn(`ERROR(${err.code}): ${err.message}`);
       }
+
+      const {getLocation} =useLocation();
+      console.log('getLocation is',getLocation.length)
+
+      const[address,setAddress] = useState('');
+
+      // call getLoc if location is null
+      useEffect(() => {
+       
+        if(getLocation?.length === 0){
+          getLoc();
+        }
+      
+      }, [ addLocation])
       
 
     function getLoc() {
@@ -33,6 +48,8 @@ export default function GetCurrentLocation({
       
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition, error, options);
+            //reload page
+             
         } else { 
             setBtn('Detect')
             alert(error);
@@ -48,7 +65,7 @@ export default function GetCurrentLocation({
 
 
     async function showPosition(position:any) {
-        
+
         var address = await getAddress({
             lat:position?.coords?.latitude,
             lng:position?.coords?.longitude
@@ -63,12 +80,14 @@ export default function GetCurrentLocation({
             formattedAddress: address,
           };
 
-          console.log('lat lng',location)
+          window.location.reload();
+
+        console.log('lat lng',location)
 
         // alert(location);
         addLocation(location)
         setBtn('Detect')
-        onChange(location);
+        onChange(getLoc);
     }
 
     const url = typeof window !== 'undefined' && window?.location?.href

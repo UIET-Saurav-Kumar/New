@@ -31,6 +31,7 @@ const Argon: React.FC<ArgonProps> = ({ product, className }) => {
 
 
   return (
+    
     <Link href={(`${ROUTES.PRODUCT}/${slug}`)}><article
       className={cn(
         "product-card cart-type-argon border rounded bg-light overflow-hidden shadow-sm transition-all duration-200  h-full",

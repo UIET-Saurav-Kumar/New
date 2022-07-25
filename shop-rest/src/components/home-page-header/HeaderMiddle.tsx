@@ -183,20 +183,24 @@ export default function HeaderMiddle() {
 
     const [click, setClick ] = useState(false);
     const [hasLocation, setHasLoction] = useState(false);
+
     const handleLocation = () => {
         setLocation(!location);
     }
+
     const { openModal } = useModalAction();
 
     function handleSearchModal() {
         return openModal("SEARCH_BAR_MODAL");
-      }
+    }
 
     const [location, setLocation] = useState(false);
    
     const closeNav = () => {
         setClick(!click)
     }
+
+    const [address, setAddress] = useState('');
 
     //outside click close location
     // useEffect(() => {
@@ -223,7 +227,9 @@ export default function HeaderMiddle() {
         if(!getLocation?.formattedAddress){
             setLocation(true);
             setHasLoction(false);
+        //  
         }else{
+            setAddress(getLocation?.formattedAddress);
             setHasLoction(true);
         }
     },[])
@@ -237,7 +243,7 @@ export default function HeaderMiddle() {
 
         if(location){
             setHasLoction(true);
-            // closeLocation(); 
+            closeLocation(); 
         }
 
         var { query ,pathname} = router;
@@ -257,6 +263,7 @@ export default function HeaderMiddle() {
     }
 
     console.log('Login', isAuthorize);
+    console.log('getlocation',getLocation);
 
     
     return (
@@ -280,19 +287,19 @@ export default function HeaderMiddle() {
                   {/* Search Bar */}
                 <div className='flex flex-col  w-full space-y-2'>
                    <div className=' flex focus-ring-2 justify-center
-                                     lg:w-3/4 2xl:mx-auto lg:mx-auto 
+                                    lg:w-3/4 2xl:mx-auto lg:mx-auto 
                                     2xl:flex-1'>
 
                        <input onClick = {handleLocation} 
-                              defaultValue = {getLocation?.formattedAddress}  
+                              defaultValue = {address}  
                               className ='hidden  lg:inline-flex shadow-md text-gray-500 lg:w-32 lg+:w-38 2xl:w-52 md:w-32 placeholder:text-gray-500  
                                           lg:w-42 rounded-lg text-sm rounded-l-lg rounded-r-none h-12 outline-none active:border-gray-400
                                           border-2 border-e-0  focus:border-accent pr-4  border-gray-400 pl-2 ' 
                               placeholder = 'Enter location' id='location_id' />
                        
-                           <div className='hidden  lg:flex lg:w-3/5'>
-                                <DropDown  getLoc={handleLocation} />
-                           </div>
+                        <div className='hidden  lg:flex lg:w-3/5'>
+                            <DropDown  getLoc = {handleLocation} />
+                        </div>
 
                     </div>
 
@@ -469,13 +476,15 @@ export default function HeaderMiddle() {
            <DropDown getLoc={handleLocation}/>
            {/* <SearchIcon onClick={handleSearchModal} className='text-gray-500 h-10 w-10 cursor-pointer'/> */}
        </div>
+     {
+        router.pathname.includes('/home') ?
        <div className='z-10 bg-white flex items-center mx-auto space-x-4 text-12px w-full justify-evenly text-gray-500 '>
                         <span className=' text-blue-600'>बायलोकल</span>
                         <span className='  text-red-600'>Buylowcal</span>
                         <span className='text-yellow-600'>ਬਾਏਲੋਕਲ </span>
                         <span className='text-green-600'> বাইলোকাল </span>
                     
-        </div>
+        </div>  : null}
        </div>
    </div>
 

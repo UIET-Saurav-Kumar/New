@@ -102,9 +102,9 @@ const CartItem = ({ item }: CartItemProps) => {
 
   };
 
-  console.log('cart item status', item)
+  // console.log('cart item status', item)
 
-  console.log('json shop categories', JSON.parse(item?.shop?.shop_categories).map((category: any) => category?.name)[0])
+  // console.log('json shop categories', JSON.parse(item?.shop?.shop_categories).map((category: any) => category?.name)[0])
 
   const outOfStock = !isInStock(item?.id) && !isProductAvailable(item,item?.id);
 
@@ -165,7 +165,7 @@ const CartItem = ({ item }: CartItemProps) => {
           'Sorry, this product is not available' : 
           null ||  item?.stock <= item?.quantity ?
           `Sorry, only ${item?.stock} item available` : 
-          JSON.parse(item?.shop?.shop_categories).map((category: any) => category?.name)[0] !== 'Salon & Spa' ? (item?.stock + ' ' + 'Available') : ''  }
+          JSON.parse(item?.shop?.shop_categories)?.map((category: any) => category?.name)[0] !== 'Salon & Spa' ? (item?.stock + ' ' + 'Available') : ''  }
        </span>
 
       </div>

@@ -1,7 +1,7 @@
 import getAddress from "@components/geoCode/geo-code"
 import { MapPin } from '@components/icons/map-pin';
 import { useLocation } from "@contexts/location/location.context";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function CityButton({lat, lng, city,
     onChange
@@ -11,7 +11,17 @@ export default function CityButton({lat, lng, city,
     lng: any;
     city: any;
   }){
-    const {addLocation} =useLocation()
+
+    
+    const {addLocation, getLocation} =useLocation()
+
+    useEffect(() => {
+        // call getLoc once till the session is not expired 
+         if(getLocation?.formattedAddress === null){
+           getLoc();
+         }
+       
+       }, [addLocation])
 
     const [spin, setSpin] = useState(false);
 
@@ -36,7 +46,7 @@ export default function CityButton({lat, lng, city,
           };
 
         console.log(location);
-        addLocation(location)
+        addLocation(location);
 
         onChange(location);
     }

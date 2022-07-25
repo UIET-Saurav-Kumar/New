@@ -21,6 +21,7 @@ import { useWindowSize } from 'react-use';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import useIntersectionObserver from '@components/product/useIntersectionObserver';
 import GlobalSearchLayout from '@components/layout/global-search-layout';
+import Layout from '@components/layout/layout';
   
 
 export const getStaticProps = async ({ locale }: any) => {
@@ -109,12 +110,12 @@ export default function Offers() {
       </Head>
 
        {/* <div id='offer-of-the-day' className={`${data?.offers.data?.length  ? 'block' : 'hidden'} flex flex-col mt-8 border-b rounded-t shadow-lg  p-4 `}> */}
-        <div className='fixed z-40 top-0 shadow-xl bg-white flex justify-between px-2 items-center py-2 w-full'>
+        <div className='  shadow-xl bg-white flex justify-between px-2 items-center py-2 w-full'>
             <h3 className='text-md sm:text-lg p-4 whitespace-nowrap md:text-lg xl:text-2xl font-semibold '> 
                 Offers of the Day
             </h3>
            
-            <div className='flex  items-center'>
+            <div className='flex items-center'>
                 <select className='relative block appearance-none p-2 lg:p-3 text-xs bg-white border text-gray-500 border-gray-300 hover:border-gray-500  rounded shadow leading-tight focus:outline-none focus:shadow-outline'>
                     <option disabled selected value="">Filter</option>
                     {/* <option  onClick={() => setCategory("All")} value="All">All</option> */}
@@ -163,7 +164,9 @@ export default function Offers() {
     )
 }
 
-Offers.Layout = GlobalSearchLayout;
+//Offers.Layout = Layout;
+
+Offers.Layout = DefaultLayout;
 
 // Offers.Layout = GlobalSearchLayout;
 

@@ -1,6 +1,7 @@
 import getAddress from "@components/geoCode/geo-code"
 import { MapPin } from '@components/icons/map-pin';
 import { useLocation } from "@contexts/location/location.context";
+import { useEffect } from "react";
 
 export default function GetCurrentLocation({
     onChange
@@ -8,6 +9,12 @@ export default function GetCurrentLocation({
     onChange: any;
   }){
     const {addLocation} =useLocation()
+
+    useEffect(() => {
+      if(addLocation?.formattedAddress === null){
+        getLoc();
+      }
+    }, [addLocation])
 
     function getLoc() {
         if (navigator.geolocation) {
