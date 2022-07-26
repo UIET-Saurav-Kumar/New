@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { useLocation } from "@contexts/location/location.context";
 import { useEffect, useState } from "react";
 
-export default function RedbullBanner() {
+export default function ElanteBanner() {
 
   const router = useRouter();
   const { query } = useRouter();
@@ -75,24 +75,32 @@ export default function RedbullBanner() {
 
       <div className=' '>
       
-      <Slider {...settings}>
-
-        
+      {/* <Slider {...settings}> */}
        
-       <Link href='salon-products?text=pick+any&category='><div className="card flex relative w-full  ">
+     { location() && <Link href='/shops?text=Elante'><div className="card flex relative w-full  ">
 
-            <img 
-            className="object-contain px-1 rounded-lg cursor-pointer h-full w-full"
+           { screenWidth > 768 ? <img 
+
+                  className="object-contain px-1 rounded-lg cursor-pointer h-full w-full"
 
            
-                  src={'/pick-5.jpeg'} 
+                  src={'/elante/elante-web.jpg'} 
+                  /> :
+                  <img 
+                  className="object-contain px-1 rounded-lg cursor-pointer h-full w-full"
+
+           
+                  src={'/elante/elante-mobile.jpg'} 
                   />
+
+           }
 
           </div>
           </Link>
+}
 
 
-          <Link href='/user/upload-invoice/upload-form'><div className="card flex relative w-full  ">
+          {/* <Link href='/user/upload-invoice/upload-form'><div className="card flex relative w-full  ">
 
             <img className="object-contain cursor-pointer rounded-lg px-1 h-full w-full"
             //  className='rounded-md w-full opacity-90  h-40 lg:w-full lg:h-72 xl+:h-80 md:h-64  2xl:h-72 2xl:w-full space-x-9 object-fill object '  
@@ -100,9 +108,9 @@ export default function RedbullBanner() {
                   />
 
           </div>
-          </Link>
+          </Link> */}
 
-      </Slider>
+      {/* </Slider> */}
       </div>
     )
 }

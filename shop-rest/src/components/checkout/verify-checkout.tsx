@@ -182,7 +182,6 @@ const VerifyCheckout = () => {
           ) : (
             // map over available_items and check if it includes product with id 14110 if true then check if that product is also present in orders list if true then push that item in notAvailable
 
-
             available_items?.map((item: any) => {
               if (item.id === 14110 || item.id === 14358) {
                 if (containsProduct(ordersData?.pages?.[0].data, 14110 || 14358)) {

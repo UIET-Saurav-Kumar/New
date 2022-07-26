@@ -40,6 +40,7 @@ import { useState } from "react";
 import { getReview } from '@utils/get-review';
 // import DocumentMeta from 'react-document-meta';
 import Seo from "@components/ui/seo";
+import ShopLayout from "@components/layout/shop-layout";
 
 
 const CartCounterButton = dynamic(
@@ -163,14 +164,10 @@ const ShopPage = ({ data }: any) => {
     }
   };
 
-  
-
   // console.log('shop slug is', data?.slug?.includes('chandigarhgrocerystore' ,'kosmetics-india'))
   seoFunction(data);
 
   const slug = ['chandigarhgrocerystore', 'kosmetics-india'];
-
- 
 
   const  getShopCategory = () => {
 
@@ -198,11 +195,11 @@ const ShopPage = ({ data }: any) => {
 
     <>
 
-    <Head>
-      <title>{(data.name?data.name:'')+' '+(data.address.city?data.address.city+" "+data.address.street_address:'')+', Best Discounts and Offers Only Through BuyLowcal.com'}</title>
-      <meta name="description" content={(data.name?data.name:'')+' '+(data.address.city?data.address.city+" "+data.address.street_address:'')+' Best '+shopCategory+' deals, offers, discounts and cash backs only through buylowcal.com'} />
-      <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-    </Head>
+        <Head>
+          <title>{(data.name?data.name:'')+' '+(data.address.city?data.address.city+" "+data.address.street_address:'')+', Best Discounts and Offers Only Through BuyLowcal.com'}</title>
+          <meta name="description" content={(data.name?data.name:'')+' '+(data.address.city?data.address.city+" "+data.address.street_address:'')+' Best '+shopCategory+' deals, offers, discounts and cash backs only through buylowcal.com'} />
+          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        </Head>
 
             <div className="relative bg-white lg:bg-gray-100 hidden lg:flex flex-col
                             md:flex-row md:justify-between md:items-start">
@@ -395,7 +392,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   }
 };
 
-ShopPage.Layout = Layout;
+ShopPage.Layout = ShopLayout;
 export default ShopPage;
 
 

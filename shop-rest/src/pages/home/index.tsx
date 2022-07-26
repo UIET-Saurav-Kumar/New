@@ -35,6 +35,7 @@ import Tagline from "@components/home-page-product-section/tagline";
 import ProgressBox from "../../components/profile/progress-box/progress-box";
 import Link from "next/link";
 import router from "next/router";
+import ElanteBanner from "@components/home-page-product-section/elante-banner";
 
 
 const ProductFeedLoader = dynamic(
@@ -207,6 +208,7 @@ const {
                 {/* <span onClick={()=> router.push('/user/profile')} className="absolute right-2 text-blue-800 text-xs cursor-pointer hover:underline">Complete your profile ></span> */}
                 <Tagline/>
                 <UserDashboard/>
+                <ElanteBanner/>
                 <RedBullBanner/>
                 <AllCategories/>
                 {/* <InvoiceBanner/> */}

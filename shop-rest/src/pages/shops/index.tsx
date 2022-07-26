@@ -23,6 +23,8 @@ import { useLocation } from "@contexts/location/location.context";
 import MobileNavigation from "@components/layout/mobile-navigation";
 import { useWindowSize } from "@utils/use-window-size";
 import CartCounterButton from "@components/cart/cart-counter-button";
+import ShopLayout from "@components/layout/shop-layout";
+import Layout from "@components/layout/layout";
 
 
 
@@ -41,7 +43,12 @@ const ShopsPage = () => {
     router.asPath.includes(type.slug)
   );
 
-  const { data } = useShopsQuery({
+  const { data,
+    isLoading,
+    isError,
+    isFetched,
+    r
+   } = useShopsQuery({
     category:getCategory(),
     limit:3000000,
     location:((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any,
@@ -164,6 +171,7 @@ const ShopsPage = () => {
   );
 };
 
+// ShopsPage.Layout = ShopLayout;
 ShopsPage.Layout = DefaultLayout;
 // ShopsPage.Layout = ShopPageLayout;
 
