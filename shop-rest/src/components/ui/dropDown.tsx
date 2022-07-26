@@ -37,29 +37,6 @@ export default function DropDown({getLoc}:{getLoc:any}) {
       return data;
   };
 
-  const customStyles = {
-    menu: (provided, state) => ({
-      ...provided,
-      width: state.selectProps.width,
-      borderBottom: '1px dotted pink',
-      color: state.selectProps.menuColor,
-      padding: 20,
-    }),
-  
-    control: (_, { selectProps: { width }}) => ({
-      width: width
-    }),
-  
-    singleValue: (provided, state) => {
-      const opacity = state.isDisabled ? 0.5 : 1;
-      const transition = 'opacity 300ms';
-  
-      return { ...provided, opacity, transition };
-    }
-  }
-
-
-
 
   function getSearch(){
     var value;
@@ -129,7 +106,7 @@ export default function DropDown({getLoc}:{getLoc:any}) {
     if(!hasLocation()){
       getLoc();
     }else{
-      getSearch(e);
+      route(e);
     }
   }
 
@@ -151,6 +128,7 @@ export default function DropDown({getLoc}:{getLoc:any}) {
 
   // some default options object with image
   const defaultOptions = [
+    { value: 'Chandigarh+Home+Salon', label: 'Chandigarh Home Salon' },
     { value: 'Kosmetic+India', label: 'Kosmetic India', image: { avatar: true, src: 'https://placeimg.com/64/64/1' } },
     { value: 'Chandigarh+Grocery+Store', label: 'Chandigarh grocery store', image: { avatar: true, src: 'https://placeimg.com/64/64/2' } },
     { value: 'Beauzo+Salon', label: 'Beauzo Salon', image: { avatar: true, src: 'https://placeimg.com/64/64/3' } },
@@ -170,7 +148,7 @@ export default function DropDown({getLoc}:{getLoc:any}) {
             
               <AsyncSelect
                   cacheOptions
-                  style={customStyles}
+                  // style={customStyles}
                   defaultValue={inputValue.value}
                   loadOptions={loadOptions} 
                   value={ inputValue }

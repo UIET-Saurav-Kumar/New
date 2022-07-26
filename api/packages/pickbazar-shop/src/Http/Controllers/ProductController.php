@@ -225,12 +225,13 @@ class ProductController extends CoreController
        
         foreach($names as $name){
             array_push($data,[
-                "label"=>$name->name." - ".$name->shop->name 
+                // "label"=>$name->name." - ".$name->shop->name 
+                'label'=>$name->name,
                 //add city
                 
                  
                 // ,"value"=>$name->name." - ".$name->shop->name
-                ,
+               
                 "value"=>$name->name,
                 'item'=>$name
             ]);
