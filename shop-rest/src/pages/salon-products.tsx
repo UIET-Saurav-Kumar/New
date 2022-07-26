@@ -25,6 +25,7 @@ import ProductNotFound from '@components/common/product-not-found';
 import CartCounterButton from '@components/cart/cart-counter-button';
 import MobileNavigation from '@components/layout/mobile-navigation';
 import { useWindowSize } from "@utils/use-window-size";
+import ShopLayout from '@components/layout/shop-layout';
 
 
 
@@ -476,4 +477,4 @@ export default function SalonProducts() {
    
 
 
-SalonProducts.Layout = Layout;
+SalonProducts.Layout = ShopLayout;

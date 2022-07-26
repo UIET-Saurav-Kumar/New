@@ -25,6 +25,7 @@ import CartCounterButton from '@components/cart/cart-counter-button';
 import { useWindowDimensions } from '@components/common/search';
 import { fetchShops, useShopsQuery } from "@data/shop/use-search-shop-query";
 import ShopCard2 from '@components/ui/shop-card2';
+import ShopLayout from '@components/layout/shop-layout';
 
   const ProductFeedLoader = dynamic(
     () => import("@components/ui/loaders/product-feed-loader")
@@ -399,4 +400,4 @@ export default function SalonPage() {
 
 }
 
-SalonPage.Layout = Layout;
+SalonPage.Layout = ShopLayout;
