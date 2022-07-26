@@ -215,7 +215,9 @@ class ProductController extends CoreController
         $names=//active prpducts only
         Product::where("status",1)->limit(6)
         ->where('name', 'like', $slug.'%')
-        ->pluck('name');
+        // with shop
+        ->with(['shop'])
+        ->get();
         // corresponding shop name of the product
         // render products and shop name present in selected location
         // $shops=ShopRepository::getSortedShops();
@@ -223,27 +225,33 @@ class ProductController extends CoreController
        
         foreach($names as $name){
             array_push($data,[
-                "label"=>$name,
-                "value"=>$name
+                "label"=>$name->name." - ".$name->shop->name 
+                //add city
+                
+                 
+                // ,"value"=>$name->name." - ".$name->shop->name
+                ,
+                "value"=>$name->name,
+                'item'=>$name
             ]);
         }
 
-        $names=Category::where('name', 'like', $slug.'%')->limit(6)->pluck('name');
+        // $names=Category::where('name', 'like', $slug.'%')->limit(6)->pluck('name');
 
-        foreach($names as $name){
-            array_push($data,[
-                "label"=>$name ,
-                "value"=>$name
-            ]);
-        }
+        // foreach($names as $name){
+        //     array_push($data,[
+        //         "label"=>$name ,
+        //         "value"=>$name
+        //     ]);
+        // }
 
-        $names=ShopCategory::where('name', 'like', $slug.'%')->limit(6)->pluck('name');
-        foreach($names as $name){
-            array_push($data,[
-                "label"=>$name,
-                "value"=>$name
-            ]);
-        }
+        // $names=ShopCategory::where('name', 'like', $slug.'%')->limit(6)->pluck('name');
+        // foreach($names as $name){
+        //     array_push($data,[
+        //         "label"=>$name,
+        //         "value"=>$name
+        //     ]);
+        // }
 
         // push sorted shops name that present in the current location
         // $shops=ShopRepository::getSortedShops($location);

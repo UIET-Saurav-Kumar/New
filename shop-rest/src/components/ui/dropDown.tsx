@@ -37,6 +37,29 @@ export default function DropDown({getLoc}:{getLoc:any}) {
       return data;
   };
 
+  const customStyles = {
+    menu: (provided, state) => ({
+      ...provided,
+      width: state.selectProps.width,
+      borderBottom: '1px dotted pink',
+      color: state.selectProps.menuColor,
+      padding: 20,
+    }),
+  
+    control: (_, { selectProps: { width }}) => ({
+      width: width
+    }),
+  
+    singleValue: (provided, state) => {
+      const opacity = state.isDisabled ? 0.5 : 1;
+      const transition = 'opacity 300ms';
+  
+      return { ...provided, opacity, transition };
+    }
+  }
+
+
+
 
   function getSearch(){
     var value;
@@ -106,7 +129,7 @@ export default function DropDown({getLoc}:{getLoc:any}) {
     if(!hasLocation()){
       getLoc();
     }else{
-      route(e);
+      getSearch(e);
     }
   }
 
@@ -147,7 +170,7 @@ export default function DropDown({getLoc}:{getLoc:any}) {
             
               <AsyncSelect
                   cacheOptions
-                  // style={customStyles}
+                  style={customStyles}
                   defaultValue={inputValue.value}
                   loadOptions={loadOptions} 
                   value={ inputValue }

@@ -444,7 +444,7 @@ export default function SalonProducts() {
                               {/* <img src='/not-found.png'
                               className="object-contain w-full mx-auto"/> */}
                   
-                        </div>
+                          </div>
                         }
                     </>
                 )}
