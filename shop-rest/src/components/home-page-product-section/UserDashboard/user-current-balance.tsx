@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import React from 'react'
 
 export default function UserCurrentBalance({currentBalance,isAuthorize}:any) {
@@ -8,7 +9,7 @@ export default function UserCurrentBalance({currentBalance,isAuthorize}:any) {
         <div className='flex items-start space-x-4 justify-evenly'>
            
         <div className='relative rounded-full px-2 pt-1 bg-yellow-200 w-16 h-16 '>
-            <img src='/dashboard/wallet.png' className='w-12 h-12' alt='money' />
+            <Image src='/dashboard/wallet.png' layout='fill' className='w-12 h-12' alt='money' />
         </div>
             
             <div className='flex flex-col text-sm lg:text-xl w-auto md:w-36 xl:w-44 2xl:w-48 font-light text-gray-500'>

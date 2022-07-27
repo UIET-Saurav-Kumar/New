@@ -28,7 +28,7 @@ export default class CustomDocument extends Document {
       <Html>
         
         <Head>
-        <meta name="facebook-domain-verification" content="8mvkzpangtng356xvg4hqubj4mbuyq" />
+         
             {/* Global Site Tag (gtag.js) - Google Analytics */}
             <script
               async
@@ -49,6 +49,8 @@ export default class CustomDocument extends Document {
             `,
               }}
             />
+
+<meta name="facebook-domain-verification" content="8mvkzpangtng356xvg4hqubj4mbuyq" />
 
            {/* interakt */}
           <script

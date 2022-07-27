@@ -240,7 +240,6 @@ class OrderController extends CoreController
     }
 
     public function changeOrderStatus($order, $status)
-    
     {
         $order->status = $status;
         $order->save();

@@ -8,8 +8,6 @@ import Truncate from "@components/ui/truncate-scroll";
 import { scroller, Element } from "react-scroll";
 
 
-
-
 export default function ShopDescription({data} :any) {
 
 
@@ -17,7 +15,7 @@ export default function ShopDescription({data} :any) {
 
     return (
       
-        <div className='  inline-flex  bg-white space-x-6 justify-between xl:space-x-8 px-2 xl:px-16 mt-4 md:mt-1  ;
+        <div className=' inline-flex  bg-white space-x-6 justify-between xl:space-x-8 px-2 xl:px-16 mt-4 md:mt-1  ;
                          text-10px lg:text-sm pt-4 '>
 
              {/* Description */}
@@ -26,7 +24,7 @@ export default function ShopDescription({data} :any) {
                       Description
                 </span>
 
-                { data?.description && (
+                {data?.description && (
                   
                         <p className="text-xs sm:text-sm font-md  font-light tracking-wide text-gray-600  mb-2 leading-relaxed">
                           <ReadMore character={70}>{data?.description}</ReadMore>
@@ -38,12 +36,13 @@ export default function ShopDescription({data} :any) {
 
               {/* Address */}
               <div className="  mb-7 h-auto last:mb-0 flex flex-col  w-full text-left">
+                 
                   <span className="text-sm lg:text-lg text-heading font-semibold mb-2">
                     {t("text-address")}
                   </span>
 
                   <span className=" justify-between text-xs sm:text-sm font-light tracking-wide  text-gray-600 ">
-                      {data?.address?.street_address}
+                      { data?.settings?.location?.formattedAddress }
                   </span>
 
                   <div className="sm:hidden mt-5 mb-0 last:mb-0 flex flex-col  w-full text-left">
@@ -52,9 +51,11 @@ export default function ShopDescription({data} :any) {
                           </span>
 
                           <span className=" text-xs md:text-lg font-light tracking-wide text-body">
-                            {data?.settings?.contact}
+                            {/* {data?.settings?.contact} */}
+                            77430-42380
                           </span>
                   </div>
+
               </div>
               
               {/* Contact number */}
@@ -66,7 +67,6 @@ export default function ShopDescription({data} :any) {
                   <span className=" text-sm font-light tracking-wide text-body">
                     {data?.settings?.contact}
                   </span>
-                 
               </div>
 
  {/* {data?.settings?.website && (

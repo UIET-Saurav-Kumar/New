@@ -17,7 +17,8 @@ const Oganesson: React.FC<OganessonProps> = ({ product, className }) => {
     amount: product.price,
     baseAmount: product.sale_price,
   });
-
+ 
+ 
   return (
     <article
       className={cn("product-card cart-type-oganesson group h-full", className)}

@@ -40,6 +40,7 @@ import { useState } from "react";
 import { getReview } from '@utils/get-review';
 // import DocumentMeta from 'react-document-meta';
 import Seo from "@components/ui/seo";
+import ShopLayout from "@components/layout/shop-layout";
 
 
 const CartCounterButton = dynamic(
@@ -163,20 +164,14 @@ const ShopPage = ({ data }: any) => {
     }
   };
 
-  
-
   // console.log('shop slug is', data?.slug?.includes('chandigarhgrocerystore' ,'kosmetics-india'))
   seoFunction(data);
 
   const slug = ['chandigarhgrocerystore', 'kosmetics-india'];
 
- 
-
   const  getShopCategory = () => {
 
      setShopCategory(data?.shop_categories?.replace(/[{":,0123456789}]/g,'').slice(5,-3))
-
-    
   }
 
   // const metaData = {
@@ -193,19 +188,21 @@ const ShopPage = ({ data }: any) => {
 
   // console.log('shop data',metaData)
 
-  
+  console.log('data',data);
   
 
   return (
 
     <>
-    <Head>
-      <title>{(data.name?data.name:'')+' '+(data.address.city?data.address.city+" "+data.address.street_address:'')+', Best Discounts and Offers Only Through BuyLowcal.com'}</title>
-      <meta name="description" content={(data.name?data.name:'')+' '+(data.address.city?data.address.city+" "+data.address.street_address:'')+' Best '+shopCategory+' deals, offers, discounts and cash backs only through buylowcal.com'} />
-      <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-    </Head>
-              <div className="relative bg-white lg:bg-gray-100 hidden lg:flex flex-col
-                              md:flex-row md:justify-between md:items-start">
+
+        <Head>
+          <title>{(data.name?data.name:'')+' '+(data.address.city?data.address.city+" "+data.address.street_address:'')+', Best Discounts and Offers Only Through BuyLowcal.com'}</title>
+          <meta name="description" content={(data.name?data.name:'')+' '+(data.address.city?data.address.city+" "+data.address.street_address:'')+' Best '+shopCategory+' deals, offers, discounts and cash backs only through buylowcal.com'} />
+          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        </Head>
+
+            <div className="relative bg-white lg:bg-gray-100 hidden lg:flex flex-col
+                            md:flex-row md:justify-between md:items-start">
 
                                   {/* // button to scroll to the top of the page when user has scrolled way down */}
                                   <div className="fixed z-50 bottom-10 right-10 flex justify-center items-center">
@@ -264,9 +261,7 @@ const ShopPage = ({ data }: any) => {
                                  null : ( <div className='hidden sm:block w-48 h-38 sm:h-72 sm:w-80 md:h-72 lg:w-96'> 
                                           <ShopProfileCard data={data} /> 
                                       </div>)  }
-
-                                     
-                                  
+                  
                                   {/* <div className='w-full flex-grow'>
                                     <img alt={t("heading")} 
                                           className='object-cover h-38 sm:h-72 rounded-lg xs+++:rounded-l-none md:h-72 lg:w-2/3 w-full'
@@ -299,17 +294,19 @@ const ShopPage = ({ data }: any) => {
                           {/* </HidingHeader>  */}
 
                           <div className='relative top-0 flex flex-col'> 
+
                               { categoryData?.categories?.data?.length ? 
-                              <> 
-                                <div id='category-dropdown-sidebar'  
-                                    className='flex border bg-white flex-col w-full'>
-   
-                                    <h1 style={{top:'155px'}} id='product-heading' className="text-lg sticky  bg-gray-100  py-3 px-2  font-semibold text-gray-600 font-mono mt-5 transition-transform duration-75">  
-                                      { query?.category?.replace(/\b\w/g, (l :any) => l.toUpperCase())   } Products
-                                    </h1> 
-                                  
-                                </div> 
-                              </> : ' '  }
+                                <> 
+                                  <div id='category-dropdown-sidebar'  
+                                      className='flex border bg-white flex-col w-full'>
+    
+                                      <h1 style={{top:'155px'}} id='product-heading' className="text-lg sticky  bg-gray-100  py-3 px-2  font-semibold text-gray-600 font-mono mt-5 transition-transform duration-75">  
+                                        { query?.category?.replace(/\b\w/g, (l :any) => l.toUpperCase())   } Products
+                                      </h1> 
+                                    
+                                  </div> 
+                                </> : ' '  
+                              }
                                 <div id='product-feed' className="static  z-10 top-10 w-full">
                                   {data && 
                                 // <ShopProductFeed shopId={data.id} />
@@ -395,7 +392,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   }
 };
 
-ShopPage.Layout = Layout;
+ShopPage.Layout = ShopLayout;
 export default ShopPage;
 
 

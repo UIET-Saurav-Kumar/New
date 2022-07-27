@@ -15,6 +15,7 @@ export type ContactType = {
   current_location: string;
   gender:string;
 	date_of_birth:Date;
+  occupation:string;
 };
 
 class Customer extends CoreApi {
@@ -27,9 +28,17 @@ class Customer extends CoreApi {
       .put(this._base_path + "/" + input.id, input)
       .then((res) => res.data);
   }
+
+  updateUser(id:any,input:any) {
+    return this.http
+      .put(`${API_ENDPOINTS.USERS}/${id}`, input)
+      .then((res) => res.data);
+  }
+
   contact(input: ContactType) {
     return this.http.post(API_ENDPOINTS.CONTACT, input).then((res) => res.data);
   }
+
   deleteAddress({ id }: { id: string }) {
     return this.http
       .delete(`${API_ENDPOINTS.ADDRESS}/${id}`)

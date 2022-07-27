@@ -2,6 +2,7 @@ import React from 'react'
 import { useRouter } from "next/router";
 import { useModalAction } from "@components/ui/modal/modal.context";
 import { useUI } from "@contexts/ui.context";
+import Image from 'next/image';
 
 export default function UserInviteCard() {
   const { openModal } = useModalAction();
@@ -23,8 +24,14 @@ export default function UserInviteCard() {
         <div className='flex items-start space-x-4  justify-evenly'>
           
           {/* <div className='w-20'> */}
-          <div className='relative rounded-full px-2 pt-1 bg--800  '>
-            <img src='/dashboard/add-friend.png' className='w-16 h-16 ' alt='money' />
+          {/* <div className='relative rounded-full px-2 pt-1 bg--800  '>
+            <Image src='/dashboard/add-friend.png' layout='fill' className=' ' alt='money' />
+          </div> */}
+
+          <div className='relative rounded-full px-2  bg-magenta w-16 h-16 '>
+              <Image src='/dashboard/add-friend.png' layout='fill'
+                   className='absolute m-auto  h-12 w-12 ' 
+                   alt='money' />
             </div>
           {/* </div> */}
 

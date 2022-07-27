@@ -45,7 +45,7 @@ Route::post('/forget-password', 'PickBazar\Http\Controllers\UserController@forge
 Route::post('/stored-licenses', 'PickBazar\Http\Controllers\UserController@licenseStore');
 Route::get('/resend-code/{id}', 'PickBazar\Http\Controllers\UserController@resendCode');
 Route::post('/user-verify', 'PickBazar\Http\Controllers\UserController@userVerify');
-  
+Route::put('users/{id}', 'PickBazar\Http\Controllers\UserController@update');
 Route::post('/otp-token', 'PickBazar\Http\Controllers\UserController@otpToken');
 Route::post('/verify-otp-token', 'PickBazar\Http\Controllers\UserController@verifyOtpToken');
 
@@ -66,6 +66,9 @@ Route::post('/track/event', 'PickBazar\Http\Controllers\WhatsappController@track
 Route::apiResource('products', ProductController::class, [
     'only' => ['index', 'show']
 ]);
+
+ 
+
 
 Route::apiResource('reviews', ReviewController::class, [
     'only' => ['index', 'show'],

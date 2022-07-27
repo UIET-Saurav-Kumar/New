@@ -19,7 +19,9 @@ import { useModalAction } from "@components/ui/modal/modal.context";
 import { MoreIcon } from "@components/icons/more-icon";
 import Button from "@components/ui/button";
 
+
 export default function ProductsPage() {
+
   const [searchTerm, setSearchTerm] = useState("");
   const [type, setType] = useState("");
   const [category, setCategory] = useState("");
@@ -33,6 +35,7 @@ export default function ProductsPage() {
   const toggleVisible = () => {
     setVisible((v) => !v);
   };
+
   function handleImportModal() {
     openModal("EXPORT_IMPORT_ADMIN_PRODUCT");
   }
@@ -61,6 +64,7 @@ export default function ProductsPage() {
   function handlePagination(current: any) {
     setPage(current);
   }
+
   return (
     <>
       <Card className="flex flex-col mb-8">
@@ -142,6 +146,7 @@ export default function ProductsPage() {
     </>
   );
 }
+
 ProductsPage.Layout = Layout;
 
 export const getStaticProps = async ({ locale }: any) => ({

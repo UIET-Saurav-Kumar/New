@@ -16,6 +16,10 @@ class ProfileRepository extends BaseRepository
         'contact'        => 'like',
         'customer.email' => 'like',
         'customer.name'  => 'like',
+        'gender' => 'like',
+        'occupation'=> 'like',
+        'date_of_birth' => 'like',
+        'occupation'=> 'like',
     ];
 
     public function boot()
@@ -33,4 +37,5 @@ class ProfileRepository extends BaseRepository
     {
         return Profile::class;
     }
+    
 }

@@ -35,6 +35,8 @@ import {
   useModalAction,
 } from "@components/ui/modal/modal.context";
 
+import * as ga from '../lib/ga'
+import { useRouter } from "next/router";
 
 const Noop: React.FC = ({ children }) => <>{children}</>;
 
@@ -109,10 +111,24 @@ const SocialLoginProvider: React.FC = () => {
 };
 
 function CustomApp({ Component, pageProps }: AppProps) {
+  const router = useRouter();
   const queryClientRef = useRef<any>(null);
   if (!queryClientRef.current) {
     queryClientRef.current = new QueryClient();
   }
+
+  useEffect(() => {
+    const handleRouteChange = (url: string) => {
+      ga.pageview(url);
+    }
+    router.events.on('routeChangeComplete', handleRouteChange);
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    }
+  }, [router]);
+  
+
+    
   const Layout = (Component as any).Layout || Noop;
   return (
     <QueryClientProvider client={queryClientRef.current}>

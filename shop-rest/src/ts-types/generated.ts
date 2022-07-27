@@ -1214,9 +1214,14 @@ export declare type ProductsQueryVariables = Exact<{
 
 export type UpdateUser = {
   name?: Maybe<Scalars["String"]>;
+  phone_number:number;
+  occupation?: Maybe<Scalars["String"]>;
+  gender?:Maybe<Scalars['String']>;
+  date_of_birth:Maybe<Scalars['String']>;
   profile?: Maybe<UserProfileInput>;
   address?: Maybe<Array<Maybe<UserAddressUpsertInput>>>;
 };
+
 
 export type CreateUser = {
   name?: Maybe<Scalars["String"]>;

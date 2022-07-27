@@ -37,6 +37,7 @@ type FormValues = {
   phone_number:number;
   current_location:string;
   date_of_birth:Date;
+  occupation: string;
   gender: 'male' | 'female';
 };
 
@@ -81,6 +82,7 @@ const defaultValues = {
   phone_number:"",
   current_location:'',
   date_of_birth:'',
+  occupation:'',
   gender:'male'
 };
 
@@ -118,7 +120,7 @@ const RegisterForm = () => {
   function getPhoneNumber(value:any){
     return value;
   }
-  function onSubmit({ name, email, password ,phone_number, current_location, date_of_birth, gender}: FormValues) {
+  function onSubmit({ name, email, password ,phone_number, current_location, date_of_birth, gender, occupation}: FormValues) {
     mutate(
       {
         name,
@@ -128,6 +130,7 @@ const RegisterForm = () => {
         phone_number,
         current_location,
         date_of_birth,
+        occupation,
         gender,
       },
       {
@@ -197,7 +200,7 @@ const RegisterForm = () => {
 
   return (
 
-    <div className="flex items-center h-full w-screen/2  justify-center bg-white sm:bg-gray-100 " >
+    <div className="flex items-center h-full justify-center bg-white sm:bg-gray-100 " >
         
         { !click ? <div className="py-6 px-5 sm:p-8 bg-light  flex flex-col justify-center">
             
@@ -234,7 +237,7 @@ const RegisterForm = () => {
                 />
             )}
 
-    <form className="grid grid-cols-2 text-xs gap-3  place-content-center" 
+    <form className="grid grid-cols-2 text-xs gap-2 lg:gap-4 -mt-16 place-content-center" 
             onSubmit={handleSubmit(onSubmit)} noValidate>
         <Input
           label={t("text-name")}
@@ -258,11 +261,11 @@ const RegisterForm = () => {
           {...register("password")}
           error={t(errors.password?.message!)}
           variant="outline"
-          className="mb-2 col-span-2 sm:col-span-1 lg:mb-5"
+          className="mb-2 col-span-1 sm:col-span-1 lg:mb-5"
         />
 
 
-        <div className="col-span-2 sm:col-span-1">
+        <div className="col-span-1 sm:col-span-1">
         
         <div className="flex  text-body-dark h-3  font-semibold text-xs leading-none mb-3">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-yellow-600 to-blue-600">
@@ -272,19 +275,24 @@ const RegisterForm = () => {
                   name="date_of_birth"
                   render={({ field: { onChange, onBlur, value } }) => (
                     //@ts-ignore
-            <DatePicker 
-                      selected={birthDate} onChange={(date) => {
-                      setBirthDate(date);
-                      // calender ?  openCalenderOnFocus(true) : ''
-                        
-                        setValue("date_of_birth", date);
-                      }
-                      } 
-                      dateFormat= "dd/MM/yyyy"
-                      placeholderText='eg..23/12/1996'
-                      // {...register("date_of_birth")}
-                      className="text-sm h-12 w-60 px-4 border border-border-base rounded focus:border-accent"
-                      />
+             <DatePicker
+                        selected={birthDate}
+                        onChange={(date) => {
+                          setBirthDate((date));
+                          setValue("date_of_birth", date);
+                        }}
+                        dateFormat="dd-MM-yyyy"
+                        className="text-sm h-12 w-full px-4 border border-border-base rounded focus:border-accent"
+                        showYearDropdown
+                        showMonthDropdown
+                        dropdownMode="select"
+                        peekNextMonth
+                        showWeekNumbers
+                        minDate={new Date(1900, 1, 1)}
+                        maxDate={new Date()}
+                        placeholderText={t("your date of birth")}
+                        // className="w-full"
+                  />          
                   )}
             />
         </div>
@@ -301,42 +309,60 @@ const RegisterForm = () => {
           error={t(errors.phone_number?.message!)}
         />
 
-        <div className="flex flex-col ">
+        <div className="flex flex-col">
         <div className="flex   text-body-dark h-3  font-semibold text-xs leading-none mb-3">Gender
         </div>
-        <div className="flex items-center space-x-4 lg:space-x-8  ">
-           <Radio
-            id="male"
-            type="radio"
-            {...register("gender")}
-            value="male"
-            label={t("Male")}
-            className=""
-          />
+          <div className="flex items-center space-x-4 lg:space-x-8  ">
+            <Radio
+              id="male"
+              type="radio"
+              {...register("gender")}
+              value="male"
+              label={t("Male")}
+              className=""
+            />
 
-          <Radio
-            id="female"
-            type="radio"
-            {...register("gender")}
-            value="female"
-            label={t("Female")}
-            className=""
-          />
+            <Radio
+              id="female"
+              type="radio"
+              {...register("gender")}
+              value="female"
+              label={t("Female")}
+              className=""
+            />
           </div>
-          </div>
-        
-        
-      
-        <Input
+        </div>
+
+
+          <Input
               value={!!getLocation ? getLocation?.formattedAddress : 'null'}
             label={"Current Location"} 
             {...register("current_location")} 
             type="text" 
             variant="outline" 
-            className="col-span-2 text-xs " 
+            className="col-span-1 text-xs " 
           
             error={t(errors.current_location?.message!)} />
-          {/* {getLocation?.formattedAddress} */}
+
+          <div className="flex flex-col  items-start ">
+            <span className="text-xs text-gray-600 mb-2 font-semibold">Occupation</span>
+              <select
+                    className="  text-gray-600 py-3.5 w-full text-sm items-center mr-4 bg-white border border-gray-200 rounded flex "
+                    // onChange={(e) => setOccupation(e.target.value)}
+                    // value={occupation}
+                    defaultValue="Search by"
+                    // setValue={setValue}
+                    {...register("occupation")}
+                  
+                  >
+                    <option value="" disabled selected>Select your option</option>
+                    <option value="Student">{t("Student")}</option>
+                    {/* <option value="email">{t("form:input-label-email")}</option> */}
+                    <option value="Employed">{t("Employed")}</option>
+                    <option value='Self employed'>Self employed</option>
+                    <option value='Home Maker'>Home Maker</option>
+              </select> 
+        </div>
          
 
       <div className=""> 
@@ -355,7 +381,7 @@ const RegisterForm = () => {
     </form>
             {/* End of forgot register form */}
 
-            <div className="flex flex-col items-center justify-center relative text-sm text-heading  sm:mt-11 mb-6 sm:mb-8">
+            <div className="flex flex-col items-center justify-center  relative text-sm text-heading  sm:mt-11 mb-6 sm:mb-8">
                 <hr className="w-full" />
                 <span className="absolute start-2/4 -top-2.5 px-2 -ms-4 bg-light">
                 {t("text-or")}

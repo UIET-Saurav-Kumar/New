@@ -28,7 +28,7 @@ const Logo: React.FC<React.AnchorHTMLAttributes<{}>> = ({
           height: siteSettings.logo.height,
         }}
       > */}
-      <img src='/only-logo.png' className='lg:w-20 w-12 sm:w-16' />
+     <div className=" h-9 w-9 lg:w-12 lg:h-12"><img src='/buylowcal-old.png' className='' /></div> 
 
         {/* <img src={ siteSettings.logo.url} className='h-10 w-10' /> */}
       {/* </span> */}

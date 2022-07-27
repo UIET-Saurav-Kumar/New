@@ -23,8 +23,7 @@ const Feed = ({ shopId, shopData }: { shopId: string }) => {
   const { t } = useTranslation("common");
   const { query } = useRouter();
 
-  const loadMoreRef = useRef()
-
+  const loadMoreRef = useRef();
 
   const {
     isFetching: loading,

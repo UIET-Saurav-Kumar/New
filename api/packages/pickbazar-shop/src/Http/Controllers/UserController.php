@@ -157,6 +157,10 @@ class UserController extends CoreController
         //     "phone_number"=>"required|unique:users"
         // ]);
 
+        $notAllowedPermissions = [Permission::SUPER_ADMIN];
+        if ((isset($request->permission->value) && in_array($request->permission->value, $notAllowedPermissions)) || (isset($request->permission) && in_array($request->permission, $notAllowedPermissions))) {
+            throw new PickbazarException('NOT_AUTHORIZED');
+        }
         $permissions = [Permission::CUSTOMER];
         if (isset($request->permission)) {
             $permissions[] = isset($request->permission->value) ? $request->permission->value : $request->permission;
@@ -166,6 +170,9 @@ class UserController extends CoreController
         $phone_number = $country_code.$request->phone_number;
         $code=SMS::sendOTP($phone_number);
 
+        //user permissions
+    
+
         $user = $this->repository->create([
             'name'     => $request->name,
             'email'    => $request->email,
@@ -174,6 +181,8 @@ class UserController extends CoreController
             'phone_number'=>$request->phone_number,
             'gender'=> $request->gender,
             'date_of_birth'=> $request->date_of_birth,
+            'occupation'=> $request->occupation,
+            // 'role'=> $request->permissions[0],
             'current_location'=>$request->current_location,
             'is_active'=>0,
             'code'=>$code
@@ -229,12 +238,13 @@ class UserController extends CoreController
             "phoneNumber"=> $user->phone_number,
             'gender'=> $user->gender,
             'date_of_birth'=> $user->date_of_birth,
+            'occupation' => $user->occupation,
             "countryCode"=> "+91",
             "event"=> "User Registered",
             "traits"=> [
                 "name"=> $user->name,
                 "email"=> $user->email,
-                "user_role"=> $user->permissions[0]->name,
+                "user_role" => $user->permissions[0]->name,
             ],
             "createdAt"=> date('Y-m-d H:i:s')
         );
@@ -260,6 +270,8 @@ class UserController extends CoreController
             $user->update([
                 "is_active"=>1
             ]);
+
+            $user->givePermissionTo(Permission::CUSTOMER);
             
             return ["token" => $user->createToken('auth_token')->plainTextToken,"permissions" => $user->getPermissionNames()];
         }
@@ -345,7 +357,7 @@ class UserController extends CoreController
         }
 
         if ($user) {
-            return ["token" => $user->createToken('auth_token')->plainTextToken, "permissions" => $user->getPermissionNames()];
+            return ["token" => $user->createToken('auth_token')->plainTextToken, "permissions" =>$user->getPermissionNames()];
         } else {
             return ["token" => null, "permissions" => []];
         }

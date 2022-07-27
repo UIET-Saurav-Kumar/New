@@ -19,6 +19,7 @@ export type RegisterUserInputType = {
 	invited_by:number;
 	phone_number:number;
 	current_location: string;
+	occupation: string;
 	gender:string;
 	date_of_birth:Date;
 };

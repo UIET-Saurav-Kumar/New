@@ -12,6 +12,8 @@ import { PlusIcon } from "@heroicons/react/outline";
 import router from "next/router";
 import WishlistButton from "../product-details/wishlist-button";
 import { HeartFillIcon } from "@components/icons/heart-fill";
+import { useEffect, useState } from "react";
+import { useOrdersQuery } from "@data/order/use-orders.query";
 
 
 type NeonProps = {
@@ -33,18 +35,31 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
 
   const { name,unit,slug, image,orders_count, quantity, min_price, max_price, product_type } =
     product ?? {};
-  const { price, basePrice, discount } = usePrice({
-    amount: product.sale_price ? product.sale_price : product.price!,
-    baseAmount: product.price,
-  });
+
+    const { price, basePrice, discount } = usePrice({
+      amount: product.price ? product.price : product.price!,
+      baseAmount: product.sale_price,
+    });
+
   const { price: minPrice } = usePrice({
     amount: min_price,
   });
   const { price: maxPrice } = usePrice({
     amount: max_price,
   });
+  const [pageURL, setPageUrl] = useState('');
+
+  useEffect(() => {
+    setPageUrl(window.location.href)
+  }, []);
 
   const { openModal } = useModalAction();
+
+
+  const {
+    data:ordersData,
+   
+  } = useOrdersQuery({});
 
   // const isSelected = !isEmpty(variations)
   //   ? !isEmpty(attributes) &&
@@ -56,13 +71,20 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
   function handleProductQuickView() {
     return openModal("PRODUCT_DETAILS", product.slug);
   }
+  function containsProduct(ordersData: any[], productId: number) {
+    return ordersData?.some((order: any) => {
+      return order?.products.some((product: any) => {
+        return product?.id === productId;
+      });
+    });
+  }
 
   return (
 
     <article
       // style={{maxWidth:"330px"}}
       className={cn(
-        "product-card cart-type-neon rounded h-full bg-light overflow-hidden shadow-sm transition-all duration-200 hover:shadow ",
+        " relative product-card cart-type-neon rounded h-full bg-light overflow-hidden shadow-sm transition-all duration-200 hover:shadow ",
         className
       )}
     >
@@ -81,9 +103,9 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
             className="product-image"
           />
 
-        {discount && (
+         {discount && (
           <div className="absolute top-3 end-3 md:top-4 md:end-4 rounded text-xs leading-6 
-                          shadow-md font-semibold px-1.5 sm:px-2 md:px-2.5  bg-gold text-white">
+                          shadow-md font-semibold px-1.5 sm:px-2 md:px-2.5  bg-gradient-to-r from-gold to-yellow-500 text-white ">
             {discount}
           </div>
         )}
@@ -118,9 +140,14 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
                     <span>
                         {/* <RatingsBadge rating={product?.ratings} variant="xs" boxed /> */}
                     </span>
-                    {discount && (
-                      <del className="text-xs md:text-sm text-discount ms-2">{price}</del>
-                    )}
+                     {discount ? (
+                    <del className="text-xs md:text-sm text-gold ms-2">
+                      {price}
+                    </del>
+                  ) : <del className="text-xs md:text-sm h-4 text-discount ms-2">
+                  
+                </del>
+                } 
                   </div>
               </>
                <WishlistButton className="h-5" productId={product?.id} />
@@ -131,11 +158,24 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
         
 
         <h3
-          className="text-xs md:text-sm font-semibold text-gray-700 truncate mb-4 cursor-pointer"
+          className="text-xs font-bold flex-normal md:text-sm flex flex-col   text-gray-900  truncate mb-2 cursor-pointer"
         >
-           <div className='flex flex-col'>{name}<h3>{unit}</h3>
-           
-           </div>
+           <span className=''>
+             {name}
+           </span>
+           <span className="flex items-center justify-between">
+             <p>{unit}</p>
+             
+             {/* <p className="font-light  text-gray-500">{orders_count + ' ' + 'sold'}</p> */}
+           </span>
+           { pageURL.includes('home') ? (
+           <div className='flex flex-col sm:flex-row justify-between text-xs  md:text-sm text-gray-900  mt-2 font-light'>
+           <Link href={`/shops/${product?.shop?.slug}`}><span className="text-10 hover:text-indigo-700 font-semibold  bg-clip-text text-transparent bg-gradient-to-r from-blue-700 via-purple-600 to-blue-600"> {product?.shop?.name} </span></Link>
+            <span className="font-light  bg-clip-text text-transparent bg-gradient-to-r from-yellow-700 via-red-600 to-yellow-600">{product?.shop?.address?.city}</span>
+            {/* <span className="font-light text-gray-800">{'sold' + ' ' + orders_count}</span> */}
+          </div>) :
+            null
+        }
         </h3>
         {/* End of product title */}
         {product_type.toLowerCase() === 'variable' ? (
@@ -155,7 +195,16 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
         ) : (
           <>
             {Number(quantity) > 0 && (
-             <div className="relative w-full"> <AddToCart className='border absolute z-50' variant="organesson" data={product} /></div>
+              <div className="flex  items-start  justify-between md:pt-3 ">
+              <AddToCart  variant="argon" data={product} />
+             { product?.id ===  ( 14358 || 14110) ? containsProduct(ordersData?.pages?.[0].data, product?.id) ?
+              // <span className='text-xs mt-2   lg:text-sm text-red-600'>
+               
+                    
+                    <span className="text-xs mt-2   lg:text-sm   font-bold shadow-2xl bg-red-600 p-1 rounded px-1 text-white">Sold out</span>
+                // </span>
+              : null : ''}
+           </div>
             )}
           </>
         )}

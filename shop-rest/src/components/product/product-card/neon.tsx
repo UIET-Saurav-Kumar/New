@@ -202,8 +202,11 @@ const Neon: React.FC<NeonProps> = ({ product, className, productSlug }) => {
             {Number(quantity) > 0 && (
              <div className="md:pt-3 ">
                 <AddToCart  variant="organesson" data={product} />
-               { product?.id === 14110 ? containsProduct(ordersData?.pages?.[0].data, 14110) ?
-                <span className='text-xs mt-2 lg:text-sm text-red-600'>Offer expired</span>
+               { product?.id === (14110 || 14358) ? containsProduct(ordersData?.pages?.[0].data, product?.id) ?
+                // <span className='text-xs mt-2 lg:text-sm text-red-600'>
+                   <span className="font-bold shadow-2xl bg-red-600 p-1 rounded px-1 text-white">Sold out</span>
+                  
+                // </span>
                 : '' : ''}
              </div>
             )}

@@ -2,6 +2,7 @@ import React from 'react'
 import { useRouter } from "next/router";
 import { useModalAction } from "@components/ui/modal/modal.context";
 import { useUI } from "@contexts/ui.context";
+import Image from 'next/image';
 
 export default function UserUploadInvoiceCard() {
 
@@ -24,7 +25,7 @@ export default function UserUploadInvoiceCard() {
         <div className='flex items-start space-x-4 h-full justify-evenly'>
         
         <div className='relative rounded-full pl-2 pt-2 bg-indigo-100 w-16 h-16 '>
-            <img src='/dashboard/photo.png' className='w-12 h-12' alt='money' />
+            <Image src='/dashboard/photo.png' layout='fill' className='w-12 h-12' alt='money' />
           </div>
             <div className='flex flex-col text-lg w-auto md:w-36 xl:w-40 2xl:w-44 lg:text-2xl space-y-2 font-light text-gray-500'>
               <div className='flex flex-col h-28 space-y-2 '>

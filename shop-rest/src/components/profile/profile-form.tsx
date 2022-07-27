@@ -15,6 +15,9 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
 import Radio from "@components/ui/radio/radio";
 import { Label } from "@headlessui/react/dist/components/label/label";
+import {useUpdateUserMutation} from "@data/customer/use-update-user.mutation";
+
+
 
 interface Props {
   user: User;
@@ -28,18 +31,22 @@ type UserFormValues = {
 const ProfileForm = ({ user }: Props) => {
 
   const [birthDate, setBirthDate] = useState(null);
-  const[occupation, setOccupation] = useState("");
-  console.log('user',user)
+  const[occupation, setOccupation] = useState(null);
+  // console.log('user',user)
   const { t } = useTranslation("common");
   const { register, handleSubmit, setValue, control } = useForm<UserFormValues>(
+    
     {
       defaultValues: {
         ...(user &&
           pick(user, [
             "name",
             'date_of_birth',
-            'gender',
             'occupation',
+            'gender',
+            'profile.date_of_birth',
+            'profile.gender',
+            'profile.occupation',
             "profile.bio",
             "profile.contact",
             "profile.avatar",
@@ -49,6 +56,10 @@ const ProfileForm = ({ user }: Props) => {
   );
   const { mutate: updateProfile, isLoading: loading } =
     useUpdateCustomerMutation();
+
+    const { mutate: updateUser, isLoading: loadingUser } =
+    useUpdateUserMutation();
+
   function onSubmit(values: any) {
     updateProfile(
       {
@@ -69,21 +80,34 @@ const ProfileForm = ({ user }: Props) => {
         },
       }
     );
-  }
 
-  //calculate the percentage og how much profile has been completed
-  const profilePercentage = (user && user.profile)
+    updateUser(
+      {
+        id: user?.id,
+        date_of_birth: values?.date_of_birth,
+        gender: values?.gender,
+        occupation: values?.occupation,
+      },
+      {
+        onSuccess: () => {
+          toast.success(t("User Updated"));
+        },
+      }
+    )
+}
+
+   const profilePercentage = (user && user.profile)
     ? (Object.keys(user.profile).length / 7) * 100
     : 0;
     
   return (
+
     <form noValidate onSubmit={handleSubmit(onSubmit)}>
       <div className="flex mb-8">
         <Card className="w-full">
-          <div className="mb-8">
+          <div className="mb-8"> 
             <FileInput control={control} name="profile.avatar" />
           </div>
-
           <div className="flex flex-col sm:flex-row sm:items-center sm:space-s-4 mb-6">
             <Input
               className="flex-1"
@@ -106,61 +130,64 @@ const ProfileForm = ({ user }: Props) => {
 
           <div className="space-y-4  col-span-1 sm:col-span-2">
 
-            <div className=" flex flex-col space-y-2"> 
+            <div className="flex flex-col space-y-2"> 
 
 
-              <span className="text-xs text-gray-600   font-semibold">Date of birth</span>
-                  {/* <div className="flex  text-body-dark h-3  font-semibold text-xs leading-none mb-3">
-                      <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-yellow-600 to-blue-600">
-                        🎉Your Birthday present is awaiting  </span> 🥳
-                  </div> */}
-       
-                <Controller
-                        control={control}
-                        name="date_of_birth"
-                        render={({ field: { onChange, onBlur, value } }) => (
-                          //@ts-ignore
-                  <DatePicker 
-                            selected={birthDate} onChange={(date) => {
-                            setBirthDate(date);
-                            // calender ?  openCalenderOnFocus(true) : ''
-                              
-                              setValue("date_of_birth", date);
-                            }
-                            } 
-                            dateFormat= "dd/MM/yyyy"
-                            placeholderText='eg..23/12/1996'
-                            // {...register("date_of_birth")}
-                            className="text-sm h-12 w-60 px-4 border border-border-base rounded focus:border-accent"
-                            />
-                        )}
-                  />
+                <span className="text-xs text-gray-600   font-semibold">Date of birth</span>
+                    {/* <div className="flex  text-body-dark h-3  font-semibold text-xs leading-none mb-3">
+                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-yellow-600 to-blue-600">
+                          🎉Your Birthday present is awaiting  </span> 🥳
+                    </div> */}
+                  {/*        
+                      <Controller
+                          control={control}
+                          name="date_of_birth"
+                          render={({ field: { onChange, onBlur, value } }) => ( */}
+                          
+                  <DatePicker
+                        selected={birthDate}
+                        onChange={(date) => {
+                          setBirthDate((date));
+                          setValue("date_of_birth", date);
+                        }}
+                        dateFormat="dd-MM-yyyy"
+                        className="text-sm h-12 w-full px-4 border border-border-base rounded focus:border-accent"
+                        showYearDropdown
+                        showMonthDropdown
+                        dropdownMode="select"
+                        peekNextMonth
+                        showWeekNumbers
+                        minDate={new Date(1900, 1, 1)}
+                        maxDate={new Date()}
+                        placeholderText={t("dd-mm-yyyy")}
+                        // className="w-full"
+                  />                         
 
               </div>
         
 
-          <div className="flex flex-col  ">
-            <div className="flex  text-body-dark h-3  font-semibold text-xs leading-none mb-3">
-              Gender
-            </div>
-            <div className="flex items-center space-x-4 lg:space-x-8  ">
-              <Radio
-                id="male"
-                type="radio"
-                {...register("gender")}
-                value="male"
-                label={t("Male")}
-                className=""
-              />
+          <div className="flex flex-col">
+              <div className="flex  text-body-dark h-3  font-semibold text-xs leading-none mb-3">
+                Gender
+              </div>
+              <div className="flex items-center space-x-4 lg:space-x-8 ">
+                <Radio
+                  id="male"
+                  type="radio"
+                  {...register("profile.gender")}
+                  value="male"
+                  label={t("Male")}
+                  className=""
+                />
 
-              <Radio
-                id="female"
-                type="radio"
-                {...register("gender")}
-                value="female"
-                label={t("Female")}
-                className=""
-              />
+                <Radio
+                  id="female"
+                  type="radio"
+                  {...register("profile.gender")}
+                  value="female"
+                  label={t("Female")}
+                  className=""
+                />
               </div>
           </div>
 
@@ -171,16 +198,17 @@ const ProfileForm = ({ user }: Props) => {
               <select
                     className="  text-gray-600 p-4 text-sm items-center mr-4 bg-white border rounded flex "
                     onChange={(e) => setOccupation(e.target.value)}
-                    value={occupation}
+                    // value={occupation}
                     defaultValue="Search by"
-                    // {...register("occupation")}
+                    // setValue={setValue}
+                    {...register("profile.occupation")}
                   >
-                    
-                    <option value="name">{t("Student")}</option>
+                    <option value='' disabled selected >Select your option</option>
+                    <option value="Student">{t("Student")}</option>
                     {/* <option value="email">{t("form:input-label-email")}</option> */}
-                    <option value="phone_number">{t("Employed")}</option>
-                    <option value='tracking_number'>Self employed</option>
-                    <option value='email_id'>Home Maker</option>
+                    <option value="Employed">{t("Employed")}</option>
+                    <option value='Self employed'>Self employed</option>
+                    <option value='Home Maker'>Home Maker</option>
               </select> 
           </div>
 

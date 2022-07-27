@@ -34,7 +34,7 @@ import { useShopCategoryQuery } from "@data/shop-categories/use-categories.query
 import ValidationError from "@components/ui/form-validation-error";
 import Multiselect from 'multiselect-react-dropdown';
 import { useEffect, useState } from "react";
-
+import * as geoLocation from '@components/form/google-places-autocomplete'
 
 
 const socialIcon = [
@@ -55,6 +55,8 @@ const socialIcon = [
     label: "Youtube",
   },
 ];
+
+
 
 
 
@@ -102,8 +104,8 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
   const [options,selectOption] = useState([])
   const { t } = useTranslation();
   const { data, isLoading } = useShopCategoryQuery();
-
-
+  
+  
   useEffect(()=>{
     console.log(initialValues,"initialValues");
     if(initialValues){
@@ -113,6 +115,8 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
     }
     // console.log(initialValues);
   },[])
+
+  
 
   const {
     register,
@@ -208,6 +212,7 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
       });
     }
   }
+  console.log('geoLocation',getValues("settings.location.sector"))
 
   const coverImageInformation = (
     <span>
@@ -446,50 +451,7 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
             />
           </Card>
         </div>
-        <div className="flex flex-wrap pb-8 border-b border-dashed border-gray-300 my-5 sm:my-8">
-          <Description
-            title={t("form:shop-address")}
-            details={t("form:shop-address-helper-text")}
-            className="w-full px-0 sm:pe-4 md:pe-5 pb-5 sm:w-4/12 md:w-1/3 sm:py-8"
-          />
-
-          <Card className="w-full sm:w-8/12 md:w-2/3">
-            <Input
-              label={t("form:input-label-country")}
-              {...register("address.country")}
-              variant="outline"
-              className="mb-5"
-              error={t(errors.address?.country?.message!)}
-            />
-            <Input
-              label={t("form:input-label-city")}
-              {...register("address.city")}
-              variant="outline"
-              className="mb-5"
-              error={t(errors.address?.city?.message!)}
-            />
-            <Input
-              label={t("form:input-label-state")}
-              {...register("address.state")}
-              variant="outline"
-              className="mb-5"
-              error={t(errors.address?.state?.message!)}
-            />
-            <Input
-              label={t("form:input-label-zip")}
-              {...register("address.zip")}
-              variant="outline"
-              className="mb-5"
-              error={t(errors.address?.zip?.message!)}
-            />
-            <TextArea
-              label={t("form:input-label-street-address")}
-              {...register("address.street_address")}
-              variant="outline"
-              error={t(errors.address?.street_address?.message!)}
-            />
-          </Card>
-        </div>
+         
         <div className="flex flex-wrap pb-8 border-b border-dashed border-gray-300 my-5 sm:my-8">
           <Description
             title={t("form:shop-settings")}
@@ -505,7 +467,7 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
                 name="settings.location"
                 render={({ field: { onChange } }) => (
                   <GooglePlacesAutocomplete
-                    onChange={onChange}
+                    onChange={onChange }
                     data={getValues("settings.location")!}
                   />
                 )}
@@ -578,6 +540,72 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
             >
               {t("form:button-label-add-social")}
             </Button>
+          </Card>
+        </div>
+
+        <div className="flex flex-wrap pb-8 border-b border-dashed border-gray-300 my-5 sm:my-8">
+          <Description
+           
+            title={t("form:shop-address")}
+            details={t("form:shop-address-helper-text")}
+            className="w-full px-0 sm:pe-4 md:pe-5 pb-5 sm:w-4/12 md:w-1/3 sm:py-8"
+          />
+
+          <Card className="w-full sm:w-8/12 md:w-2/3">
+            <Input
+              // defaultValue={getValues("settings.location.country")}
+              value={getValues("settings.location.country")}
+              label={t("form:input-label-country")}
+              {...register("address.country")}
+              variant="outline"
+              className="mb-5"
+              error={t(errors.address?.country?.message!)}
+            />
+             <Input
+              // defaultValue={getValues("settings.location.state")}
+              value={getValues("settings.location.state")}
+              label={t("form:input-label-state")}
+              {...register("address.state")}
+              
+              variant="outline"
+              className="mb-5"
+              error={t(errors.address?.state?.message!)}
+            />
+            <Input
+            //  defaultValue={getValues("settings.location.city")}
+               value={getValues("settings.location.city")}
+              label={t("form:input-label-city")}
+              {...register("address.city")}
+              variant="outline"
+              className="mb-5"
+              error={t(errors.address?.city?.message!)}
+            />
+             <Input
+              // defaultValue={getValues("settings.location.sector")}
+              value={   getValues("settings.location.sector")  }
+              label={t("Area / Sector / Locality")}
+              {...register("address.sector")}
+              variant="outline"
+              className="mb-5"
+              error={t(errors.address?.sector?.message!)}
+            />
+            <Input
+            //  defaultValue={getValues("settings.location.zip")}
+              value={getValues("settings.location.zip")}
+              label={t("form:input-label-zip")}
+              {...register("address.zip")}
+              variant="outline"
+              className="mb-5"
+              error={t(errors.address?.zip?.message!)}
+            />
+            <TextArea
+            //  defaultValue={getValues("settings.location.formattedAddress")}
+             value={getValues("settings.location.formattedAddress")}
+              label={t("form:input-label-street-address")}
+              {...register("address.street_address")}
+              variant="outline"
+              error={t(errors.address?.street_address?.message!)}
+            />
           </Card>
         </div>
 

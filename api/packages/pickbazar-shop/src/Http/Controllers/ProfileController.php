@@ -11,6 +11,7 @@ use PickBazar\Exceptions\PickbazarException;
 use PickBazar\Http\Requests\ProfileRequest;
 use Prettus\Validator\Exceptions\ValidatorException;
 
+
 class ProfileController extends CoreController
 {
     public $repository;
@@ -19,7 +20,6 @@ class ProfileController extends CoreController
     {
         $this->repository = $repository;
     }
-
 
     /**
      * Display a listing of the resource.

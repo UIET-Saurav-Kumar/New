@@ -24,6 +24,7 @@ class UserResource extends JsonResource
             'current_location' => $this->current_location,
             'gender'=> $this->gender,
             'date_of-birth'=> $this->date_of_birth,
+            'occupation' => $this->occupation,
             "is_active"=>$this->is_active,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
