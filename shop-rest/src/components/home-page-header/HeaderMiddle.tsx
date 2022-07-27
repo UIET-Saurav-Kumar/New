@@ -294,7 +294,7 @@ export default function HeaderMiddle() {
 
                     </div>
 
-                    <div className=' z-10 flex items-center mx-auto space-x-10  text-gray-500 '>
+                    <div className=' z-10 flex items-center mx-auto space-x-10  text-gray-500 ' style={{zIndex:0}}>
                         <span className=' text-blue-600'>बायलोकल</span>
                         <span className='  text-red-600'>Buylowcal</span>
                         <span className='text-yellow-600'>ਬਾਏਲੋਕਲ </span>
