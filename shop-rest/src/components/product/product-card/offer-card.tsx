@@ -9,12 +9,16 @@ import { useProductQuery } from "@data/product/use-product.query";
 import Link from "@components/ui/link";
 import { ROUTES } from "@utils/routes";
 import { PlusIcon } from "@heroicons/react/outline";
+import { min } from "lodash";
 import router from "next/router";
 import WishlistButton from "../product-details/wishlist-button";
-import { HeartFillIcon } from "@components/icons/heart-fill";
-import { useEffect, useState } from "react";
+import RatingsBadge from "@components/ui/rating-badge";
 import { useOrdersQuery } from "@data/order/use-orders.query";
+import { useEffect, useState } from "react";
+ // dynamically import containProduct function from pages/orders
+ 
 
+ 
 
 type NeonProps = {
   product: any;
@@ -23,43 +27,29 @@ type NeonProps = {
 };
 
 
-
-
-const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
+const OfferCard: React.FC<NeonProps> = ({ product, className, productSlug }) => {
 
   const { data, isLoading: loading } = useProductQuery(productSlug);
-
-
 
   const { t } = useTranslation("common");
 
   const { name,unit,slug, image,orders_count, quantity, min_price, max_price, product_type } =
     product ?? {};
-
-    const { price, basePrice, discount } = usePrice({
-      amount: product.price ? product.price : product.price!,
-      baseAmount: product.sale_price,
-    });
-
+    
+  const { price, basePrice, discount } = usePrice({
+    amount: product.price ? product.price : product.price!,
+    baseAmount: product.sale_price,
+  });
+  
   const { price: minPrice } = usePrice({
     amount: min_price,
   });
+
   const { price: maxPrice } = usePrice({
     amount: max_price,
   });
-  const [pageURL, setPageUrl] = useState('');
-
-  useEffect(() => {
-    setPageUrl(window.location.href)
-  }, []);
 
   const { openModal } = useModalAction();
-
-
-  const {
-    data:ordersData,
-   
-  } = useOrdersQuery({});
 
   // const isSelected = !isEmpty(variations)
   //   ? !isEmpty(attributes) &&
@@ -71,6 +61,12 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
   function handleProductQuickView() {
     return openModal("PRODUCT_DETAILS", product.slug);
   }
+
+  const {
+    data:ordersData,
+   
+  } = useOrdersQuery({});
+
   function containsProduct(ordersData: any[], productId: number) {
     return ordersData?.some((order: any) => {
       return order?.products.some((product: any) => {
@@ -79,86 +75,90 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
     });
   }
 
+  // console.log('quantity', product.quantity)
+
+  const [pageURL, setPageUrl] = useState('');
+
+  useEffect(() => {
+    setPageUrl(window.location.href)
+  }, []);
+
+  // date in am and pm format
+  
+
   return (
 
     <article
       // style={{maxWidth:"330px"}}
       className={cn(
-        " relative product-card cart-type-neon rounded h-full bg-light overflow-hidden shadow-sm transition-all duration-200 hover:shadow ",
+        "product-card cart-type-neon rounded h-auto p-2 bg-light overflow-hidden shadow-sm transition-all duration-200 hover:shadow ",
         className
       )}
     >
        <Link href={`${ROUTES.PRODUCT}/${slug}`}>
-         
       <div
-        className="relative flex items-center justify-center cursor-pointer w-auto h-48 p-4 xl:p-12 sm:h-64"
+        className="relative flex items-center justify-center cursor-pointer w-auto h-20 lg:h-48 p-4 xl:p-12 sm:h-64"
       >
         <span className="sr-only">{t("text-product-image")}</span>
-        
+
           <Image
-            src={product.image?.thumbnail?? siteSettings?.product?.placeholderImage}
-            alt={product.name}
+            src={product?.image?.thumbnail?? siteSettings?.product?.placeholderImage}
+            alt={product?.name}
             layout="fill"
             objectFit="contain"
             className="product-image"
           />
 
-         {discount && (
+        {discount && (
           <div className="absolute top-3 end-3 md:top-4 md:end-4 rounded text-xs leading-6 
                           shadow-md font-semibold px-1.5 sm:px-2 md:px-2.5  bg-gradient-to-r from-gold to-yellow-500 text-white ">
             {discount}
           </div>
         )}
       </div>
-
-      {/* <span className="absolute bottom-0 bg-gray-50 w-full py-1 px-3 lg:px-6 text-gray-500 lg:text-gray-600 text-xs lg:text-sm ">
-        { orders_count !== 0  ?  orders_count + ' ' + 'bought' : null}
-      </span> */}
-
       </Link>
       {/* End of product image */}
 
-      <header className="p-3 md:p-6">
+      <header className="py-1 md:p-6">
 
         {product_type.toLowerCase() === 'variable' ? (
-          <div className="mb-2">
-            <span className="text-sm md:text-base text-heading font-semibold">
+          <div className="flex items-center  mb-2">
+            <span className="text-xs md:text-base text-gold font-bold">
               {minPrice}
             </span>
-            <span> - </span>
-            <span className="text-sm md:text-base text-heading font-semibold">
+            <span className="text-magenta font-bold"> {!minPrice ? `Starting ${basePrice}` : '-'} </span>
+            <span className="text-xs md:text-base text-magenta font-bold">
               {maxPrice}
             </span>
           </div>
         ) : (
-          <div className="flex items-center justify-between  mb-2">
-              <>
-                  <div className=""> 
-                    <span className="text-sm md:text-base text-product-price font-bold">
-                        {basePrice ? basePrice : price}
-                    </span>
-                    <span>
-                        {/* <RatingsBadge rating={product?.ratings} variant="xs" boxed /> */}
-                    </span>
-                     {discount ? (
+          <div className="flex items- justify-between  mb-2">
+             <>
+              <div className="grid grid-cols-1 md:flex  md:items-center  place-items-"> 
+                  <span className="text-sm md:text-base text-product-price font-bold">
+                      {basePrice ? basePrice : price}
+                  </span>
+                  {/* <span>
+                      <RatingsBadge rating={product?.ratings} variant="xs" boxed />
+                  </span> */}
+                  {discount ? (
                     <del className="text-xs md:text-sm text-gold ms-2">
                       {price}
                     </del>
-                   ) : <del className="text-xs md:text-sm h-4 text-discount ms-2">
+                  ) : <del className="text-xs md:text-sm h-4 text-discount ms-2">
                   
-                   </del>
-                   } 
-                  </div>
-              </>
-               <WishlistButton className="h-5" productId={product?.id} />
-          </div>
+                </del>
+                } 
+
+            </div>
+            </>
+          <WishlistButton className="h-5" productId={product?.id} />
+        </div>
         )}
         {/* End of product price */}
 
-        
-
         <h3
-          className="text-xs font-bold flex-normal md:text-sm flex flex-col text-gray-900  truncate mb-2 cursor-pointer"
+          className="text-xs font-bold flex-normal md:text-sm flex flex-col   text-gray-900  truncate mb-2 cursor-pointer"
         >
            <span className=''>
              {name}
@@ -177,38 +177,51 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
             null
         }
         </h3>
+        
         {/* End of product title */}
         {product_type.toLowerCase() === 'variable' ? (
           <>
             {Number(quantity) > 0 && (
-              <button
+
+             <Link href={(`${ROUTES.PRODUCT}/${slug}`)}> 
+             <AddToCart  variant="organesson" data={product} />
+              {/* <button
                 onClick={()=>router.push(`${ROUTES.PRODUCT}/${slug}`)}
-                className="group w-full h-7 md:h-9 flex items-center justify-between text-xs md:text-sm text-body-dark rounded bg-gray-100 transition-colors hover:bg-accent hover:border-accent hover:text-light focus:outline-none focus:bg-accent focus:border-accent focus:text-light"
+                className="group w-full h-7 md:h-9 flex items-center justify-between text-xs md:text-sm text-white rounded bg-magenta transition-colors hover:bg-gold hover:border-gold hover:text-light focus:outline-none focus:bg-gold focus:border-accent focus:text-light"
               >
                 <span className="flex-1">{t('text-add')}</span>
-                <span className="w-7 h-7 md:w-9 md:h-9 bg-gray-200 grid place-items-center rounded-te rounded-be transition-colors duration-200 group-hover:bg-accent-600 group-focus:bg-accent-600">
+                <span className="w-7 h-7 md:w-9 md:h-9 bg-gold grid place-items-center rounded-te rounded-be transition-colors duration-200 group-hover:bg-magenta group-focus:bg-magenta">
                   <PlusIcon className="w-4 h-4 stroke-2" />
                 </span>
-              </button>
+              </button> */}
+              </Link>
             )}
           </>
         ) : (
           <>
             {Number(quantity) > 0 && (
-              <div className="flex  items-start  justify-between md:pt-3 ">
-              <AddToCart  variant="argon" data={product} />
-             { product?.id ===  (14358 || 14110) ? containsProduct(ordersData?.pages?.[0].data, product?.id) ?
-              // <span className='text-xs mt-2   lg:text-sm text-red-600'>
-               
-                    <span className="text-xs mt-2 lg:text-sm font-bold shadow-2xl bg-red-600 p-1 rounded px-1 text-white">Sold out</span>
+             <div className="md:pt-3 ">
+                <AddToCart  variant="organesson" data={product} />
+               { product?.id === (14110 || 14358) ? containsProduct(ordersData?.pages?.[0].data, product?.id) ?
+                // <span className='text-xs mt-2 lg:text-sm text-red-600'>
+                   <span className="font-bold shadow-2xl bg-red-600 p-1 rounded px-1 text-white">Sold out</span>
+                  
                 // </span>
-              : null : ''}
-           </div>
+                : '' : ''}
+             </div>
             )}
           </>
         )}
 
-        {Number(quantity) <= 0 && (
+
+
+        {/* {Number(quantity) <= 0 && (
+          <div className="bg-red-500 rounded text-xs text-center text-light px-2 py-1.5 sm:py-2.5">
+            {t('text-out-stock')}
+          </div>
+        )} */}
+
+         {Number(quantity) !== product.quantity && (
           <div className="bg-red-500 rounded text-xs text-center text-light px-2 py-1.5 sm:py-2.5">
             {t('text-out-stock')}
           </div>
@@ -220,4 +233,4 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
   );
 };
 
-export default Neon2;
+export default OfferCard;
