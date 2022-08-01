@@ -6,7 +6,7 @@ import { useFeatureShopQuery } from "@data/home/use-feature-shop-query";
 import { useLocation } from "@contexts/location/location.context";
 import Avatar from 'react-avatar';
 
-export default function FeaturesShops({ }) {
+export default function FeaturedShops({ }) {
 
 
     const { query } = useRouter();

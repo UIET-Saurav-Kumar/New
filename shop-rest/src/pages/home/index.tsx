@@ -8,9 +8,9 @@ import { useRouter } from "next/router";
 import { scroller, Element } from "react-scroll";
 import ImageSlider from '@components/home-page-image-slider/ImageSlider';
 import AllCategories from '@components/home-page-product-section/AllCategories';
-import FeaturedShops from '@components/home-page-product-section/FeaturedShops';
-import FeaturedProducts from '@components/home-page-product-section/FeaturedProducts';
-import ProductGrid from '@components/home-page-product-section/offer-of-the-day';
+import FeaturedShops from '@components/home-page-product-section/featured-shops';
+import FeaturedProducts from '@components/home-page-product-section/featured-products';
+import OfferOfTheDay from '@components/home-page-product-section/offer-of-the-day';
 import AmazonShops  from '@components/home-page-product-section/AmazonShops'
 import dynamic from "next/dynamic";
 import { GetStaticProps } from "next";
@@ -22,6 +22,7 @@ import { fetchCategories } from "@data/home/use-categories-query";
 import { fetchFeatureShop } from "@data/home/use-feature-shop-query";
 import { fetchFeatureStore } from "@data/home/use-feature-e-store";
 import { fetchOfferQuery } from "@data/home/use-offer-query";
+import { fetchBrandOfferQuery } from "@data/home/use-brand-offer-query";
 import MobileNavigation from "@components/layout/mobile-navigation";
 import StayTuned from '@components/no-shop-msg/stay-tuned'
 import { useShopAvailabilityQuery } from "@data/home/use-shop-availability-query";
@@ -36,6 +37,7 @@ import ProgressBox from "../../components/profile/progress-box/progress-box";
 import Link from "next/link";
 import router from "next/router";
 import ElanteBanner from "@components/home-page-product-section/elante-banner";
+import BrandOffers from "@components/home-page-product-section/brand-offers";
 
 
 const ProductFeedLoader = dynamic(
@@ -86,6 +88,14 @@ export const getStaticProps: GetStaticProps = async ({ locale, params }) => {
           staleTime: 60 * 1000,
         }
     );
+
+    await queryClient.prefetchQuery(
+      ["brand-offers", { type: params?.type }],
+      fetchBrandOfferQuery,
+      {
+        staleTime: 60 * 1000,
+      }
+  );
   
     return {
       props: {
@@ -211,10 +221,16 @@ const {
                 <ElanteBanner/>
                 <RedBullBanner/>
                 <AllCategories/>
+
+                {/* <div className="w-full h-96 "> */}
+                <BrandOffers/>
+                {/* </div> */}
+                
+                {/* <InvoiceBanner/> */}
                 {/* <InvoiceBanner/> */}
                 
                 <Tandoor/>
-                <ProductGrid/>
+                <OfferOfTheDay/>
                 <HomePageBanner />
                 <FeaturedShops />
                 <FeaturedProducts/>

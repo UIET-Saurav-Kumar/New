@@ -34,6 +34,7 @@ export const API_ENDPOINTS: Record<string, string> = {
   HOME_FEATURE_STORES:"fetch-feature-stores",
   HOME_FEATURE_PRODUCTS:"fetch-feature-products",
   HOME_OFFERS:"fetch-offers",
+  HOME_BRAND_OFFERS:"product-brand-offers",
   HOME_CATEGORIES:"fetch-home-categories",
   SEARCH:"search",
   REFERRAL_NETWORK:"referral-network",

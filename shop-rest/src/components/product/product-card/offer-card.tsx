@@ -95,7 +95,7 @@ const OfferCard: React.FC<NeonProps> = ({ product, className, productSlug }) => 
         className
       )}
     >
-       <Link href={`${ROUTES.PRODUCT}/${slug}`}>
+       <Link href={`${ROUTES.SHOPS}/${product?.shop?.name?.slug}`}>
       <div
         className="relative flex items-center justify-center cursor-pointer w-auto h-20 lg:h-48 p-4 xl:p-12 sm:h-64"
       >
@@ -109,19 +109,19 @@ const OfferCard: React.FC<NeonProps> = ({ product, className, productSlug }) => 
             className="product-image"
           />
 
-        {discount && (
+        {/* {discount && (
           <div className="absolute top-3 end-3 md:top-4 md:end-4 rounded text-xs leading-6 
                           shadow-md font-semibold px-1.5 sm:px-2 md:px-2.5  bg-gradient-to-r from-gold to-yellow-500 text-white ">
             {discount}
           </div>
-        )}
+        )} */}
       </div>
       </Link>
       {/* End of product image */}
 
       <header className="py-1 md:p-6">
 
-        {product_type.toLowerCase() === 'variable' ? (
+        {/* {product_type.toLowerCase() === 'variable' ? (
           <div className="flex items-center  mb-2">
             <span className="text-xs md:text-base text-gold font-bold">
               {minPrice}
@@ -138,9 +138,9 @@ const OfferCard: React.FC<NeonProps> = ({ product, className, productSlug }) => 
                   <span className="text-sm md:text-base text-product-price font-bold">
                       {basePrice ? basePrice : price}
                   </span>
-                  {/* <span>
+                  <span>
                       <RatingsBadge rating={product?.ratings} variant="xs" boxed />
-                  </span> */}
+                  </span>
                   {discount ? (
                     <del className="text-xs md:text-sm text-gold ms-2">
                       {price}
@@ -154,7 +154,7 @@ const OfferCard: React.FC<NeonProps> = ({ product, className, productSlug }) => 
             </>
           <WishlistButton className="h-5" productId={product?.id} />
         </div>
-        )}
+        )} */}
         {/* End of product price */}
 
         <h3
@@ -163,11 +163,11 @@ const OfferCard: React.FC<NeonProps> = ({ product, className, productSlug }) => 
            <span className=''>
              {name}
            </span>
-           <span className="flex items-center justify-between">
+           {/* <span className="flex items-center justify-between">
              <p>{unit}</p>
              
-             {/* <p className="font-light  text-gray-500">{orders_count + ' ' + 'sold'}</p> */}
-           </span>
+             <p className="font-light  text-gray-500">{orders_count + ' ' + 'sold'}</p>
+           </span> */}
            { pageURL.includes('home') ? (
            <div className='flex flex-col sm:flex-row justify-between text-xs  md:text-sm text-gray-900  mt-2 font-light'>
            <Link href={`/shops/${product?.shop?.slug}`}><span className="text-10 hover:text-indigo-700 font-semibold  bg-clip-text text-transparent bg-gradient-to-r from-blue-700 via-purple-600 to-blue-600"> {product?.shop?.name} </span></Link>
@@ -179,21 +179,13 @@ const OfferCard: React.FC<NeonProps> = ({ product, className, productSlug }) => 
         </h3>
         
         {/* End of product title */}
-        {product_type.toLowerCase() === 'variable' ? (
+        {/* {product_type.toLowerCase() === 'variable' ? (
           <>
             {Number(quantity) > 0 && (
 
              <Link href={(`${ROUTES.PRODUCT}/${slug}`)}> 
              <AddToCart  variant="organesson" data={product} />
-              {/* <button
-                onClick={()=>router.push(`${ROUTES.PRODUCT}/${slug}`)}
-                className="group w-full h-7 md:h-9 flex items-center justify-between text-xs md:text-sm text-white rounded bg-magenta transition-colors hover:bg-gold hover:border-gold hover:text-light focus:outline-none focus:bg-gold focus:border-accent focus:text-light"
-              >
-                <span className="flex-1">{t('text-add')}</span>
-                <span className="w-7 h-7 md:w-9 md:h-9 bg-gold grid place-items-center rounded-te rounded-be transition-colors duration-200 group-hover:bg-magenta group-focus:bg-magenta">
-                  <PlusIcon className="w-4 h-4 stroke-2" />
-                </span>
-              </button> */}
+             
               </Link>
             )}
           </>
@@ -203,15 +195,13 @@ const OfferCard: React.FC<NeonProps> = ({ product, className, productSlug }) => 
              <div className="md:pt-3 ">
                 <AddToCart  variant="organesson" data={product} />
                { product?.id === (14110 || 14358) ? containsProduct(ordersData?.pages?.[0].data, product?.id) ?
-                // <span className='text-xs mt-2 lg:text-sm text-red-600'>
                    <span className="font-bold shadow-2xl bg-red-600 p-1 rounded px-1 text-white">Sold out</span>
                   
-                // </span>
                 : '' : ''}
              </div>
             )}
           </>
-        )}
+        )} */}
 
 
 
@@ -221,11 +211,11 @@ const OfferCard: React.FC<NeonProps> = ({ product, className, productSlug }) => 
           </div>
         )} */}
 
-         {Number(quantity) !== product.quantity && (
+         {/* {Number(quantity) !== product.quantity && (
           <div className="bg-red-500 rounded text-xs text-center text-light px-2 py-1.5 sm:py-2.5">
             {t('text-out-stock')}
           </div>
-        )}
+        )} */}
         
         {/* End of add to cart */}
       </header>

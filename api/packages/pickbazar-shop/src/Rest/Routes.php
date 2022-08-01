@@ -107,6 +107,7 @@ Route::get('my-wishlists', [ProductController::class, 'myWishlists']);
 Route::apiResource('questions', QuestionController::class, [
     'only' => ['update'],
 ]);
+
 Route::get('ip','PickBazar\Http\Controllers\LogController@ip_AddressLocation');
 
 Route::apiResource('reviews', ReviewController::class, [
@@ -158,6 +159,8 @@ Route::get('fetch-home-categories', 'PickBazar\Http\Controllers\ShopCategoryCont
 
 Route::get('fetch-offers', 'PickBazar\Http\Controllers\ProductController@fetchOffers');
 
+Route::get('fetch-brand-offers', 'PickBazar\Http\Controllers\ProductController@fetchBrandOffers');
+
 // Route::get('fetch-offers', 'PickBazar\Http\Controllers\OfferController@fetchHomeOffers');
 
 Route::get('shop-availability', 'PickBazar\Http\Controllers\ShopController@shopAvailability');
@@ -184,6 +187,8 @@ Route::get('/customer/getfeedApi/{app_id}','PickBazar\Http\Controllers\SettingsC
 
 Route::get('product-offers','PickBazar\Http\Controllers\ProductController@product_offers');
 
+Route::get('product-brand-offers','PickBazar\Http\Controllers\ProductController@product_brand_offers');
+
 Route::put('products-commission/{shop_id}','PickBazar\Http\Controllers\ProductController@product_commission');
 
 Route::put('shop-commission/{shop_id}','PickBazar\Http\Controllers\ShopController@shop_commission');
@@ -199,6 +204,7 @@ Route::post('shop-delivery-status','PickBazar\Http\Controllers\ShopController@sh
 Route::post('shop-delivery-config','PickBazar\Http\Controllers\ShopController@shopDeliveryConfig');
 
 Route::get('get-wallet-commission','PickBazar\Http\Controllers\InviteController@getWalletCommission');
+
 Route::get('get-user-wallet-details/{id}','PickBazar\Http\Controllers\InviteController@getUserWalletDetails');
 
 Route::get('referral-network','PickBazar\Http\Controllers\InviteController@refferral_network');
@@ -363,6 +369,9 @@ Route::group(['middleware' => ['permission:' . Permission::SUPER_ADMIN, 'auth:sa
         'only' => ['store', 'update', 'destroy']
     ]);
     Route::apiResource('offers', OfferController::class, [
+        'only' => ['store', 'update', 'destroy']
+    ]);
+    Route::apiResource('brand-offers', BrandOfferController::class, [
         'only' => ['store', 'update', 'destroy']
     ]);
     Route::apiResource('tags', TagController::class, [

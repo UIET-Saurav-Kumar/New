@@ -37,11 +37,12 @@ import ProductTagInput from "./product-tag-input";
 import Alert from "@components/ui/alert";
 import { useState } from "react";
 import { animateScroll } from "react-scroll";
+import { brandOfferValidationSchema } from "./brand-offer-validation-schema";
 
 
 type Variation = {
   formName: number;
-};
+}; 
 
 type FormValues = {
   sku: string;
@@ -65,7 +66,8 @@ type FormValues = {
   width: string;
   height: string;
   length: string;
-  is_ofer: number;
+  // is_offer: number;
+  is_brand_offer: number;
   isVariation: boolean;
   variations: Variation[];
   variation_options: Product["variation_options"];
@@ -93,7 +95,8 @@ const defaultValues = {
   status: ProductStatus.Publish,
   width: "",
   height: "",
-  is_offer:1,
+  is_brand_offer:1,
+  // is_offer:0,
   length: "",
   isVariation: false,
   variations: [],
@@ -108,6 +111,7 @@ const productType = [
   { name: "Simple Product", value: ProductType.Simple },
   { name: "Variable Product", value: ProductType.Variable },
 ];
+
 function getFormattedVariations(variations: any) {
   const variationGroup = groupBy(variations, "attribute.slug");
   return Object.values(variationGroup)?.map((vg) => {
@@ -126,33 +130,35 @@ function processOptions(options: any) {
   }
 }
 
-function calculateMaxMinPrice(variationOptions: any) {
-  if (!variationOptions || !variationOptions.length) {
-    return {
-      min_price: null,
-      max_price: null,
-    };
-  }
-  const sortedVariationsByPrice = orderBy(variationOptions, ["price"]);
-  const sortedVariationsBySalePrice = orderBy(variationOptions, ["sale_price"]);
-  return {
-    min_price:
-      sortedVariationsBySalePrice?.[0].sale_price <
-      sortedVariationsByPrice?.[0]?.price
-        ? Number(sortedVariationsBySalePrice?.[0].sale_price)
-        : Number(sortedVariationsByPrice?.[0]?.price),
-    max_price: Number(
-      sortedVariationsByPrice?.[sortedVariationsByPrice?.length - 1]?.price
-    ),
-  };
-}
+// function calculateMaxMinPrice(variationOptions: any) {
+//   if (!variationOptions || !variationOptions.length) {
+//     return {
+//       min_price: null,
+//       max_price: null,
+//     };
+//   }
+//   const sortedVariationsByPrice = orderBy(variationOptions, ["price"]);
+//   const sortedVariationsBySalePrice = orderBy(variationOptions, ["sale_price"]);
+//   return {
+//     min_price:
+//       sortedVariationsBySalePrice?.[0].sale_price <
+//       sortedVariationsByPrice?.[0]?.price
+//         ? Number(sortedVariationsBySalePrice?.[0].sale_price)
+//         : Number(sortedVariationsByPrice?.[0]?.price),
+//     max_price: Number(
+//       sortedVariationsByPrice?.[sortedVariationsByPrice?.length - 1]?.price
+//     ),
+//   };
+// }
 
 function calculateQuantity(variationOptions: any) {
   return sum(
     variationOptions?.map(({ quantity }: { quantity: number }) => quantity)
   );
 }
+
 export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
+
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -162,7 +168,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
   });
   const shopId = shopData?.shop?.id!;
   const methods = useForm<FormValues>({
-    resolver: yupResolver(productValidationSchema),
+    resolver: yupResolver(brandOfferValidationSchema),
     shouldUnregister: true,
     //@ts-ignore
     defaultValues: initialValues
@@ -199,6 +205,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
 
   const onSubmit = async (values: FormValues) => {
     const { type } = values;
+    
     const inputValues: any = {
       description: values.description,
       height: values.height,
@@ -208,7 +215,8 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
       status: values.status,
       unit: values.unit,
       width: values.width,
-      is_offer:1,
+      // is_offer:0,
+      is_brand_offer: 1,
       // quantity:
       //   values?.productTypeValue?.value === ProductType.Simple
       //     ? values?.quantity
@@ -218,10 +226,10 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
       ...(initialValues
         ? { shop_id: initialValues?.shop_id }
         : { shop_id: Number(shopId) }),
-      // price: Number(values.price),
-      // sale_price: values.sale_price ? Number(values.sale_price) : null,
-      // categories: values?.categories?.map(({ id }: any) => id),
-      // tags: values?.tags?.map(({ id }: any) => id),
+      price: Number(values.price),
+      sale_price: values.sale_price ? Number(values.sale_price) : null,
+      categories: values?.categories?.map(({ id }: any) => id),
+      tags: values?.tags?.map(({ id }: any) => id),
       image: {
         thumbnail: values?.image?.thumbnail,
         original: values?.image?.original,
@@ -273,7 +281,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
               ),
             },
           }),
-      ...calculateMaxMinPrice(values?.variation_options),
+      // ...calculateMaxMinPrice(values?.variation_options),
     };
 
     if (initialValues) {
@@ -318,8 +326,9 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
       );
     }
   };
+
   const productTypeValue = watch("productTypeValue");
-  
+
   return (
     <>
       {errorMessage ? (
@@ -375,7 +384,6 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
           </div>
 
           <div className="flex flex-wrap my-5 sm:my-8">
-            
             <Description
               title={t("form:item-description")}
               details={`${

@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import Neon from "@components/product/product-card/neon";
 import Neon2 from "@components/product/product-card/neon2";
 
-export default function featuredProducts({}) {
+export default function FeaturedProducts({}) {
 
     const { query } = useRouter();
     const { type } = query;

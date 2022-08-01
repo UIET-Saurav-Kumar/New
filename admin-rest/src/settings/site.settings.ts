@@ -62,41 +62,18 @@ export const siteSettings = {
         label: " Contact Queries",
         icon: "CategoriesIcon",
       },
-      {
-        href: ROUTES.INVOICES_REWARD,
-        label: "Invoice Rewards",
-        icon: "Offers",
-      },
-      {
-        href: ROUTES.INVOICES_REWARD_DATA,
-        label: "Invoice Rewards Data",
-        icon: "UsersIcon",
-      },
+       
       {
         href: ROUTES.MASTER_PRODUCT,
         label: "Master Products",
         icon: "MasterProductsIcon",
       },
       {
-        href: ROUTES.QUESTIONS,
-        label: "Questions",
-        icon: "QuestionIcon",
+        href: ROUTES.ORDERS,
+        label: "sidebar-nav-item-orders",
+        icon: "OrdersIcon",
       },
-      {
-        href: ROUTES.REVIEWS,
-        label: "Reviews",
-        icon: "ReviewIcon",
-      },
-      {
-        href: ROUTES.ATTRIBUTES,
-        label: "sidebar-nav-item-attributes",
-        icon: "AttributeIcon",
-      },
-      {
-        href: ROUTES.GROUPS,
-        label: "sidebar-nav-item-groups",
-        icon: "TypesIcon",
-      },
+   
       {
         href: ROUTES.CATEGORIES,
         label: "sidebar-nav-item-categories",
@@ -113,19 +90,54 @@ export const siteSettings = {
         icon: "Offers",
       },
       {
+        href: ROUTES.BRAND_OFFERS,
+        label: " Brand Offers",
+        icon: "Offers",
+      },
+      {
+        href: ROUTES.USERS,
+        label: "sidebar-nav-item-users",
+        icon: "UsersIcon",
+      },
+      {
+        href: ROUTES.ATTRIBUTES,
+        label: "sidebar-nav-item-attributes",
+        icon: "AttributeIcon",
+      },
+      {
+        href: ROUTES.GROUPS,
+        label: "sidebar-nav-item-groups",
+        icon: "TypesIcon",
+      },
+      {
         href: ROUTES.TAGS,
         label: "sidebar-nav-item-tags",
         icon: "TagIcon",
       },
       {
-        href: ROUTES.ORDERS,
-        label: "sidebar-nav-item-orders",
-        icon: "OrdersIcon",
-      },
-      {
         href: ROUTES.DELIVERY,
         label: "Delivery",
         icon: "Delivery",
+      },
+      {
+        href: ROUTES.QUESTIONS,
+        label: "Questions",
+        icon: "QuestionIcon",
+      },
+      {
+        href: ROUTES.REVIEWS,
+        label: "Reviews",
+        icon: "ReviewIcon",
+      },
+      {
+        href: ROUTES.INVOICES_REWARD,
+        label: "Invoice Rewards",
+        icon: "Offers",
+      },
+      {
+        href: ROUTES.INVOICES_REWARD_DATA,
+        label: "Invoice Rewards Data",
+        icon: "UsersIcon",
       },
       {
         href: ROUTES.DELIVERY_COST,
@@ -136,11 +148,6 @@ export const siteSettings = {
         href: ROUTES.ORDER_STATUS,
         label: "sidebar-nav-item-order-status",
         icon: "OrdersStatusIcon",
-      },
-      {
-        href: ROUTES.USERS,
-        label: "sidebar-nav-item-users",
-        icon: "UsersIcon",
       },
       {
         href: ROUTES.COUPONS,
@@ -211,6 +218,12 @@ export const siteSettings = {
       {
         href: (shop: string) => `/${shop}${ROUTES.OFFERS}`,
         label: "Special Offers",
+        icon: "Offers",
+        permissions: adminOwnerAndStaffOnly,
+      },
+      {
+        href: (shop: string) => `/${shop}${ROUTES.BRAND_OFFERS}`,
+        label: "Brand Offers",
         icon: "Offers",
         permissions: adminOwnerAndStaffOnly,
       },

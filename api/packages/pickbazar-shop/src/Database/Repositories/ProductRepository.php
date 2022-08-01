@@ -51,6 +51,7 @@ class ProductRepository extends BaseRepository
         'in_stock',
         'is_taxable',
         "is_offer",
+        'is_brand_offer',
         'shop_id',
     ];
 
