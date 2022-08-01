@@ -95,7 +95,7 @@ const OfferCard: React.FC<NeonProps> = ({ product, className, productSlug }) => 
         className
       )}
     >
-       <Link href={`${ROUTES.SHOPS}/${product?.shop?.name?.slug}`}>
+       <Link href={`${ROUTES.SHOPS}/${product?.shop?.slug}`}>
       <div
         className="relative flex items-center justify-center cursor-pointer w-auto h-20 lg:h-48 p-4 xl:p-12 sm:h-64"
       >

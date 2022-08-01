@@ -35,7 +35,7 @@ export default function BrandOffers() {
 
     console.log('brand_offers', data)
 
-    console.log('filter brand offers', data?.brand_offers?.data?.data?.filter(item => item.is_brand_offer))
+    console.log('filter brand offers', data?.brand_offers?.data?.data?.map(item => item.shop.name))
 
  
     return (
