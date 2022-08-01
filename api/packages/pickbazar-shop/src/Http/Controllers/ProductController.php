@@ -93,11 +93,11 @@ class ProductController extends CoreController
         
     }
 
-    // public function product_offers(Request $request)
-    // {
-    //     $limit = $request->limit ?   $request->limit : 15;
-    //     return $this->repository->where("is_offer",1)->with(['type', 'shop', 'categories', 'tags', 'variations.attribute'])->paginate($limit);
-    // }
+    public function product_offers(Request $request)
+    {
+        $limit = $request->limit ?   $request->limit : 15;
+        return $this->repository->where("is_offer",1)->with(['type', 'shop', 'categories', 'tags', 'variations.attribute'])->paginate($limit);
+    }
 
     public function product_brand_offers(Request $request)
     {
