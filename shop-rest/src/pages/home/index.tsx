@@ -7,10 +7,10 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
 import { scroller, Element } from "react-scroll";
 import ImageSlider from '@components/home-page-image-slider/ImageSlider';
-// import AllCategories from '@components/home-page-product-section/AllCategories';
-// import FeaturedShops from '@components/home-page-product-section/featured-shops';
-// import FeaturedProducts from '@components/home-page-product-section/featured-products';
-// import OfferOfTheDay from '@components/home-page-product-section/offer-of-the-day';
+import AllCategories from '@components/home-page-product-section/AllCategories';
+import FeaturedShops from '@components/home-page-product-section/featured-shops';
+import FeaturedProducts from '@components/home-page-product-section/featured-products';
+import OfferOfTheDay from '@components/home-page-product-section/offer-of-the-day';
 import AmazonShops  from '@components/home-page-product-section/AmazonShops'
 import dynamic from "next/dynamic";
 import { GetStaticProps } from "next";
@@ -27,17 +27,17 @@ import MobileNavigation from "@components/layout/mobile-navigation";
 import StayTuned from '@components/no-shop-msg/stay-tuned'
 import { useShopAvailabilityQuery } from "@data/home/use-shop-availability-query";
 import { useLocation } from "@contexts/location/location.context";
-// import Tandoor from "@components/home-page-product-section/tandoor";
-// import InvoiceBanner from "@components/home-page-product-section/invoice-banner";
-// import HomePageBanner from "@components/home-page-product-section/heater-banner";
-// import RedBullBanner from "@components/home-page-product-section/home-page-banner";
-// import UserDashboard from "@components/home-page-product-section/UserDashboard";
-// import Tagline from "@components/home-page-product-section/tagline";
+import Tandoor from "@components/home-page-product-section/tandoor";
+import InvoiceBanner from "@components/home-page-product-section/invoice-banner";
+import HomePageBanner from "@components/home-page-product-section/heater-banner";
+import RedBullBanner from "@components/home-page-product-section/home-page-banner";
+import UserDashboard from "@components/home-page-product-section/UserDashboard";
+import Tagline from "@components/home-page-product-section/tagline";
 import ProgressBox from "../../components/profile/progress-box/progress-box";
 import Link from "next/link";
 import router from "next/router";
-// import ElanteBanner from "@components/home-page-product-section/elante-banner";
-// import BrandOffers from "@components/home-page-product-section/brand-offers";
+import ElanteBanner from "@components/home-page-product-section/elante-banner";
+import BrandOffers from "@components/home-page-product-section/brand-offers";
 
 
 const ProductFeedLoader = dynamic(
@@ -110,78 +110,6 @@ const CartCounterButton = dynamic(
     () => import("@components/cart/cart-counter-button"),
     { ssr: false }
   );
-
-  // allcategories 
-  const AllCategories = dynamic(
-    () => import("@components/home-page-product-section/AllCategories"),
-    { ssr: false }
-  );
-  // featured shops
-  const FeaturedShops = dynamic(
-    () => import("@components/home-page-product-section/featured-shops"),
-    { ssr: false }
-  );
-
-  // featured products
-  const FeaturedProducts = dynamic(
-    () => import("@components/home-page-product-section/featured-products"),
-    { ssr: false }
-  );
-
-  // offer of the day
-  const OfferOfTheDay = dynamic(
-    () => import("@components/home-page-product-section/offer-of-the-day"),
-    { ssr: false }
-  );
-
-  //red bull banner 
-  const RedBullBanner = dynamic(
-    () => import("@components/home-page-product-section/home-page-banner"),
-    { ssr: false }
-  );
-
-  // brand offers
-  const BrandOffers = dynamic(
-    () => import("@components/home-page-product-section/brand-offers"),
-    { ssr: false }
-  );
-
-  // tandoor
-  const Tandoor = dynamic(
-    () => import("@components/home-page-product-section/tandoor"),
-    { ssr: false }
-  );
-
-  // invoice banner
-  const InvoiceBanner = dynamic(
-    () => import("@components/home-page-product-section/invoice-banner"),
-    { ssr: false }
-  );
-
-  // heater banner
-  const HomePageBanner = dynamic(
-    () => import("@components/home-page-product-section/heater-banner"),
-    { ssr: false }
-  );
-
-  // red bull banner
-  const ElanteBanner = dynamic(
-    () => import("@components/home-page-product-section/elante-banner"),
-    { ssr: false }
-  );
-
-  // user dashboard
-  const UserDashboard = dynamic(
-    () => import("@components/home-page-product-section/UserDashboard"),
-    { ssr: false }
-  );
-
-  // tagline
-  const Tagline = dynamic(
-    () => import("@components/home-page-product-section/tagline"),
-    { ssr: false }
-  );
-
 
 export default function home() {
 
