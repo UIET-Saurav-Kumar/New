@@ -1,6 +1,6 @@
 import Input from "@components/ui/input";
 import TextArea from "@components/ui/text-area";
-import { useForm, FormProvider } from "react-hook-form";
+import { useForm, FormProvider, Controller } from "react-hook-form";
 import Button from "@components/ui/button";
 import Description from "@components/ui/description";
 import Card from "@components/common/card";
@@ -38,6 +38,8 @@ import Alert from "@components/ui/alert";
 import { useState } from "react";
 import { animateScroll } from "react-scroll";
 import { brandOfferValidationSchema } from "./brand-offer-validation-schema";
+import { ValidationError } from "yup";
+import { DatePicker } from "@components/ui/date-picker";
 
 
 type Variation = {
@@ -66,6 +68,9 @@ type FormValues = {
   width: string;
   height: string;
   length: string;
+  active_from: string;
+  expire_at: string;
+
   // is_offer: number;
   is_brand_offer: number;
   isVariation: boolean;
@@ -73,6 +78,11 @@ type FormValues = {
   variation_options: Product["variation_options"];
   [key: string]: any;
 };
+
+
+function dateIsValid(date) {
+  return !Number.isNaN(new Date(date).getTime());
+}
 
 const defaultValues = {
   sku: "",
@@ -96,6 +106,8 @@ const defaultValues = {
   width: "",
   height: "",
   is_brand_offer:1,
+  active_from: dateIsValid(new Date()) ? new Date().toISOString() : "",
+  expire_at: dateIsValid(new Date()) ? new Date().toISOString() : "",
   // is_offer:0,
   length: "",
   isVariation: false,
@@ -157,6 +169,8 @@ function calculateQuantity(variationOptions: any) {
   );
 }
 
+console.log('date',new Date().toISOString().split('T')[0].split('-').reverse().join('-') )
+
 export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
 
   const router = useRouter();
@@ -174,6 +188,8 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
     defaultValues: initialValues
       ? cloneDeep({
           ...initialValues,
+          active_from: new Date(initialValues.active_from!),
+          expire_at: new Date(initialValues.expire_at!),
           isVariation:
             initialValues.variations?.length &&
             initialValues.variation_options?.length
@@ -188,6 +204,8 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
         })
       : defaultValues,
   });
+
+  
   const {
     register,
     handleSubmit,
@@ -198,10 +216,17 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
     formState: { errors },
   } = methods;
 
+  const [active_from, expire_at] = watch(["active_from", "expire_at"]);
+  
+
   const { mutate: createProduct, isLoading: creating } =
     useCreateProductMutation();
   const { mutate: updateProduct, isLoading: updating } =
     useUpdateProductMutation();
+
+    function dateIsValid(date) {
+      return !Number.isNaN(new Date(date).getTime());
+    }
 
   const onSubmit = async (values: FormValues) => {
     const { type } = values;
@@ -209,6 +234,8 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
     const inputValues: any = {
       description: values.description,
       height: values.height,
+      // active_from:dateIsValid(values.active_from).toISOString(),
+      // expire_at:dateIsValid(values.expire_at).toISOString(),
       length: values.length,
       name: values.name,
       sku: values.sku,
@@ -437,6 +464,54 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
               </div>
             </Card>
           </div>
+
+          {/* <div className="flex flex-col sm:flex-row">
+            <div className="w-full sm:w-1/2 p-0 sm:pe-2 mb-5 sm:mb-0">
+              <Label>{t("form:coupon-active-from")}</Label>
+
+              <Controller
+                control={control}
+                name="active_from"
+                render={({ field: { onChange, onBlur, value } }) => (
+                  //@ts-ignore
+                  <DatePicker
+                    dateFormat="dd/MM/yyyy"
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    selected={value}
+                    selectsStart
+                    minDate={new Date()}
+                    maxDate={expire_at}
+                    startDate={active_from}
+                    endDate={expire_at}
+                    className="border border-border-base"
+                  />
+                )}
+              />
+            </div>
+            <div className="w-full sm:w-1/2 p-0 sm:ps-2">
+              <Label>{t("form:coupon-expire-at")}</Label>
+
+              <Controller
+                control={control}
+                name="expire_at"
+                render={({ field: { onChange, onBlur, value } }) => (
+                  //@ts-ignore
+                  <DatePicker
+                    dateFormat="dd/MM/yyyy"
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    selected={value}
+                    selectsEnd
+                    startDate={active_from}
+                    endDate={expire_at}
+                    minDate={active_from}
+                    className="border border-border-base"
+                  />
+                )}
+              />
+            </div>
+          </div> */}
 
           <div className="flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
             <Description

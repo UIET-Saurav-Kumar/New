@@ -14,6 +14,7 @@ import RelatedProducts from "./product-details/related-products";
 
 import Link from 'next/link';
 import ProductNotFoundInfo from "./product-not-found-info";
+import OfferCard from "./product-card/offer-card";
 const ProductFeedLoader = dynamic(
   () => import("@components/ui/loaders/product-feed-loader")
 );
@@ -80,9 +81,11 @@ const Feed = ({ shopId, shopData }: { shopId: string }) => {
             {data?.pages.map((products, _idx) => (
               <Fragment key={_idx}>
                 {products.data.filter(product => product?.status === 'publish').map(product => (
-                  <motion.div key={product.id}>
+                 product.is_brand_offer !== 1 ? <motion.div key={product.id}>
                     {renderProductCard(product)}
                   </motion.div>
+                  :
+                  <OfferCard product={product} productSlug={product.slug} />
                 ))}
                 
               </Fragment>

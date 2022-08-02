@@ -294,7 +294,6 @@ const ShopPage = ({ data }: any) => {
                           {/* </HidingHeader>  */}
 
                           <div className='relative top-0 flex flex-col'> 
-
                               { categoryData?.categories?.data?.length ? 
                                 <> 
                                   <div id='category-dropdown-sidebar'  
@@ -312,7 +311,7 @@ const ShopPage = ({ data }: any) => {
                                 // <ShopProductFeed shopId={data.id} />
                                     <Feed shopData={data} shopId={data.id} />
                                 }</div>
-                           </div> 
+                          </div> 
 
 
                        {/* </div> */}
