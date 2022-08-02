@@ -106,8 +106,8 @@ const defaultValues = {
   width: "",
   height: "",
   is_brand_offer:1,
-  active_from: dateIsValid(new Date()) ? new Date().toISOString() : "",
-  expire_at: dateIsValid(new Date()) ? new Date().toISOString() : "",
+  active_from:new Date(),
+  expire_at: new Date(),
   // is_offer:0,
   length: "",
   isVariation: false,
@@ -169,10 +169,12 @@ function calculateQuantity(variationOptions: any) {
   );
 }
 
+console.log('date', new Date());
+
 console.log('date',new Date().toISOString().split('T')[0].split('-').reverse().join('-') )
 
 export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
-
+   console.log('initialValues', initialValues);
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -181,11 +183,13 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
     enabled: !!router.query.shop,
   });
   const shopId = shopData?.shop?.id!;
+
   const methods = useForm<FormValues>({
     resolver: yupResolver(brandOfferValidationSchema),
     shouldUnregister: true,
     //@ts-ignore
     defaultValues: initialValues
+     
       ? cloneDeep({
           ...initialValues,
           active_from: new Date(initialValues.active_from!),
@@ -205,7 +209,6 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
       : defaultValues,
   });
 
-  
   const {
     register,
     handleSubmit,
@@ -216,8 +219,6 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
     formState: { errors },
   } = methods;
 
-  const [active_from, expire_at] = watch(["active_from", "expire_at"]);
-  
 
   const { mutate: createProduct, isLoading: creating } =
     useCreateProductMutation();
@@ -228,14 +229,18 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
       return !Number.isNaN(new Date(date).getTime());
     }
 
-  const onSubmit = async (values: FormValues) => {
+    const [active_from, expire_at] = watch(["active_from", "expire_at"]);
+
+    const onSubmit = async (values: FormValues) => {
     const { type } = values;
+
+    console.log('values', values)
     
     const inputValues: any = {
       description: values.description,
       height: values.height,
-      // active_from:dateIsValid(values.active_from).toISOString(),
-      // expire_at:dateIsValid(values.expire_at).toISOString(),
+      active_from: new Date(values.active_from),
+      expire_at: new Date(values.expire_at),
       length: values.length,
       name: values.name,
       sku: values.sku,
@@ -357,6 +362,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
   const productTypeValue = watch("productTypeValue");
 
   return (
+    
     <>
       {errorMessage ? (
         <Alert
@@ -465,7 +471,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
             </Card>
           </div>
 
-          {/* <div className="flex flex-col sm:flex-row">
+          <div className="flex flex-col sm:flex-row w-1/2 justify-start">
             <div className="w-full sm:w-1/2 p-0 sm:pe-2 mb-5 sm:mb-0">
               <Label>{t("form:coupon-active-from")}</Label>
 
@@ -489,6 +495,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
                 )}
               />
             </div>
+            
             <div className="w-full sm:w-1/2 p-0 sm:ps-2">
               <Label>{t("form:coupon-expire-at")}</Label>
 
@@ -511,7 +518,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
                 )}
               />
             </div>
-          </div> */}
+          </div>
 
           <div className="flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
             <Description

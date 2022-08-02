@@ -33,7 +33,7 @@ export default function BrandOffers() {
         location : ((getLocation?.formattedAddress) ? JSON.stringify(getLocation) : null ) as any
     });
 
-    console.log('brand_offers', data)
+    console.log('brand_offers', data);
 
     console.log('filter brand offers', data?.brand_offers?.data?.data?.map(item => item.shop.name))
 
@@ -41,9 +41,9 @@ export default function BrandOffers() {
     return (
 
         <>
-            <div id='brand-offer' className={`${data?.brand_offers?.data?.data?.length  ? 'block' : 'hidden'} flex flex-col mt-8 border-b rounded-t shadow-lg  p-4 `}>
+            <div id='brand-offer' className={`${data?.brand_offers?.data?.data?.length  ? 'block' : 'hidden'} flex flex-col  border-b rounded-t shadow-lg  p-4 `}>
                 <div className='flex justify-between items-center'>
-                    <h3 className='text-lg sm:text-lg md:text-lg xl:text-2xl  font-semibold  p-2  '> 
+                    <h3 className='text-lg sm:text-lg md:text-lg xl:text-2xl  font-semibold    '> 
                         Brands Offer
                     </h3>
                     {/* <Link href='/brand-offers'><span className='text-sm lg:text-lg font-semibold text-green-700 hover:underline cursor-pointer'>

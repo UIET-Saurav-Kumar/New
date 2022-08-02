@@ -81,7 +81,8 @@ const Feed = ({ shopId, shopData }: { shopId: string }) => {
             {data?.pages.map((products, _idx) => (
               <Fragment key={_idx}>
                 {products.data.filter(product => product?.status === 'publish').map(product => (
-                 product.is_brand_offer !== 1 ? <motion.div key={product.id}>
+                 product.is_brand_offer !== 1 ? 
+                 <motion.div key={product.id}>
                     {renderProductCard(product)}
                   </motion.div>
                   :

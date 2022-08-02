@@ -265,7 +265,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
             
 
 
-                    { salonspaArray?.filter(product => product?.status === 'publish').map((product :any) => (
+                    { salonspaArray?.filter(product => product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                         <>    
                             <motion.div key={product.id}>
                                  <Neon2 product={product} />
@@ -283,7 +283,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                   </h3>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
                     
-                        {groceryArray?.filter(product=> product?.status === 'publish').map((product :any) => (
+                        {groceryArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                             <>    
                                 <motion.div key={product.id}>
                                      <Neon2 product={product} />
@@ -301,7 +301,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                   </h3>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
                     
-                        {fruitsvegetablesArray?.filter(product=> product?.status === 'publish').map((product :any) => (
+                        {fruitsvegetablesArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                             <>    
                                 <motion.div key={product.id}>
                                      <Neon2 product={product} />
@@ -318,7 +318,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                 </h3>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
 
-                    {beveragesArray?.filter(product=> product?.status === 'publish').map((product :any) => (
+                    {beveragesArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                         <>    
                             <motion.div key={product.id}>
                                  <Neon2 product={product} />
@@ -339,7 +339,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
             
 
 
-                    {fashionlifestyleArray?.filter(product=> product?.status === 'publish').map((product :any) => (
+                    {fashionlifestyleArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                         <>    
                             <motion.div key={product.id}>
                                  <Neon2 product={product} />
@@ -359,7 +359,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                   </h3>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
                     
-                        {electronicsArray?.filter(product=> product?.status === 'publish').map((product :any) => (
+                        {electronicsArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                             <>    
                                 <motion.div key={product.id}>
                                      <Neon2 product={product} />
@@ -377,7 +377,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                   </h3>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
                     
-                        {meatArray?.filter(product=> product?.status === 'publish').map((product :any) => (
+                        {meatArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                             <>    
                                 <motion.div key={product.id}>
                                      <Neon2 product={product} />
@@ -395,7 +395,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                   </h3>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
                     
-                        {dairyfarmArray?.filter(product=> product?.status === 'publish').map((product :any) => (
+                        {dairyfarmArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                             <>    
                                 <motion.div key={product.id}>
                                      <Neon2 product={product} />
@@ -413,7 +413,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                   </h3>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
                     
-                        {healthproductsArray?.filter(product=> product?.status === 'publish').map((product :any) => (
+                        {healthproductsArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                             <>    
                                 <motion.div key={product.id}>
                                      <Neon2 product={product} />
@@ -431,7 +431,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                   </h3>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
                     
-                        {pharmacyArray?.filter(product=> product?.status === 'publish').map((product :any) => (
+                        {pharmacyArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                             <>    
                                 <motion.div key={product.id}>
                                      <Neon2 product={product} />
@@ -451,7 +451,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                   </h3>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
                     
-                        {hotelsresortsArray?.filter(product=> product?.status === 'publish').map((product :any) => (
+                        {hotelsresortsArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                             <>    
                                 <motion.div key={product.id}>
                                      <Neon2 product={product} />
@@ -474,7 +474,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
             
 
-                    {bakeryArray?.filter(product=> product?.status === 'publish').map((product :any) => (
+                    {bakeryArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                         <>    
                             <motion.div key={product.id}>
                                  <Neon2 product={product} />
@@ -494,7 +494,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                 </h3>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
             
-                    {groceryoffersArray?.filter(product=> product?.status === 'publish').map((product :any) => (
+                    {groceryoffersArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                         <>    
                             <motion.div key={product.id}>
                                  <Neon2 product={product} />
@@ -513,7 +513,7 @@ enoeo
                 </h3>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
             
-                    {clothingArray?.filter(product=> product?.status === 'publish').map((product :any) => (
+                    {clothingArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                         <>    
                             <motion.div key={product.id}>
                                  <Neon2 product={product} />
@@ -534,7 +534,7 @@ enoeo
             
 
 
-                    {furnitureArray?.filter(product=> product?.status === 'publish').map((product :any) => (
+                    {furnitureArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                         <>    
                             <motion.div key={product.id}>
                                  <Neon2 product={product} />
@@ -551,7 +551,7 @@ enoeo
                 </h3>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
 
-                    {buffetArray?.filter(product=> product?.status === 'publish').map((product :any) => (
+                    {buffetArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                         <>    
                             <motion.div key={product.id}>
                                  <Neon2 product={product} />
@@ -570,7 +570,7 @@ enoeo
                 </h3>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
 
-                    {restrauntsArray?.filter(product=> product?.status === 'publish').map((product :any) => (
+                    {restrauntsArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                         <>    
                             <motion.div key={product.id}>
                                  <Neon2 product={product} />

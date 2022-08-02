@@ -91,7 +91,7 @@ const OfferCard: React.FC<NeonProps> = ({ product, className, productSlug }) => 
     <article
       // style={{maxWidth:"330px"}}
       className={cn(
-        "product-card cart-type-neon rounded h-auto p-2 bg-light overflow-hidden shadow-sm transition-all duration-200 hover:shadow ",
+        "product-card cart-type-neon w-auto md:w-60 lg:w-full rounded h-auto p-2 bg-light overflow-hidden shadow-sm transition-all duration-200 hover:shadow ",
         className
       )}
     >

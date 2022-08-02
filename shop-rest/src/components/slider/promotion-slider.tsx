@@ -17,6 +17,7 @@ import { MotionConfig } from "framer-motion";
 import { motion } from "framer-motion";
 import Neon2 from "@components/product/product-card/neon2";
 import Neon from "@components/product/product-card/neon";
+import OfferCard from "@components/product/product-card/offer-card";
 
 
  
@@ -87,7 +88,8 @@ export default function PromotionSlider({shopId, data,text,category}) {
           }}
         >
           {data?.data?.filter(product => product?.status === 'publish').map((product, idx) => (
-              <Fragment key={idx}>
+              product?.is_brand_offer !== 1 ? 
+             <Fragment key={idx}>
                               
                 <SwiperSlide key={idx}>
                   {/* <motion.div key={product.id}> */}
@@ -97,7 +99,8 @@ export default function PromotionSlider({shopId, data,text,category}) {
                   {/* </motion.div> */}
                 </SwiperSlide>
                 
-              </Fragment>
+              </Fragment> : 
+              <OfferCard product={product} productSlug={product.slug} />
           ))}
          
         </Swiper>

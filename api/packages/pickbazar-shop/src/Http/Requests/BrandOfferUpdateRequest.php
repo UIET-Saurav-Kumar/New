@@ -30,6 +30,8 @@ class BrandOfferUpdateRequest extends FormRequest
         return [
             'name'        => ['string', 'max:255'],
             'image'       => ['array'],
+            'active_from' => ['date'],
+            'expire_at'   => ['date'],
         ];
     }
 
@@ -45,6 +47,8 @@ class BrandOfferUpdateRequest extends FormRequest
             'name.max:255'          => 'Name can not be more than 255 character',
             'image.string'          => 'image is not a valid string',
             'parent.integer'        => 'Parent is not a valid integer',
+            'active_from.required' => 'Active from field is required',
+            'expire_at.required'   => 'Expire at field is required',
         ];
     }
 
