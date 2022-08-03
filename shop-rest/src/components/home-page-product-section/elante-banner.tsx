@@ -75,42 +75,42 @@ export default function ElanteBanner() {
 
       <div className=' '>
       
-      {/* <Slider {...settings}> */}
+      <Slider {...settings}>
        
-     { location() && <Link href='/shops?text=Elante'><div className="card flex relative w-full  ">
+      { location() && <Link href='/shops?text=Elante'>
+      {/* <div className="card flex relative w-full  "> */}
 
-           { screenWidth > 768 ? <img 
+           {/* { screenWidth > 768 ?  */}
+            <img 
 
                   className="object-contain px-1 rounded-lg cursor-pointer h-full w-full"
 
-           
-                  src={'/elante/elante-web.jpg'} 
-                  /> :
+                  src={'/elante/elante-mobile.jpg'} 
+                  /> 
+                  {/* :
                   <img 
                   className="object-contain px-1 rounded-lg cursor-pointer h-full w-full"
 
            
                   src={'/elante/elante-mobile.jpg'} 
-                  />
+                  /> */}
 
-           }
-
-          </div>
+          {/* </div> */}
           </Link>
 }
 
 
-          {/* <Link href='/user/upload-invoice/upload-form'><div className="card flex relative w-full  ">
+          { location() &&  <Link href='/shops?text=VR+Punjab'><div className="card flex relative w-full  ">
 
             <img className="object-contain cursor-pointer rounded-lg px-1 h-full w-full"
-            //  className='rounded-md w-full opacity-90  h-40 lg:w-full lg:h-72 xl+:h-80 md:h-64  2xl:h-72 2xl:w-full space-x-9 object-fill object '  
-                  src={'/invoice-upload.jpeg'} 
+              //  className='rounded-md w-full opacity-90  h-40 lg:w-full lg:h-72 xl+:h-80 md:h-64  2xl:h-72 2xl:w-full space-x-9 object-fill object '  
+                  src={'/vr-punjab.jpg'} 
                   />
 
-          </div>
-          </Link> */}
+            </div>
+          </Link> }
 
-      {/* </Slider> */}
+      </Slider>
       </div>
     )
 }

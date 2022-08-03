@@ -118,10 +118,8 @@ const { query } = useRouter();
 const {getLocation} =useLocation()
 
 
+  const [scrollPosition, setScrollPosition] = useState(0);
 
-
-
-const [scrollPosition, setScrollPosition] = useState(0);
   const handleScroll = () => {
     const position = window.pageYOffset;
     setScrollPosition(position);
@@ -186,12 +184,13 @@ const {
   ]
 
     return (
+
         <div className=" h-full">
 
             <div className="fixed z-50 bottom-16 right-10 lg:bottom-10 lg:right-10 flex justify-center items-center">
                     {/* <img src='/up-arrow.png' className="w-12 h-12" onClick={() => window.scrollTo(0, 0)} />  */}
                     <img src='/rocket.png' className={` ${scrollPosition > 250 ? 'visible transition-transform duration-150' : 'hidden'} w-12 h-12`} onClick={() => window.scrollTo(0, 0)} /> 
-              </div>
+            </div>
 
     {loading ? (
          <div className="absolute top-0 left-0  h-screen bg-black opacity-80   z-50 w-full">
@@ -208,14 +207,6 @@ const {
             (
               <div className="relative w-full">
               
-                {/* // animation on component load */}
-                {/* <div className="absolute top-0 left-0 w-full h-full bg-black opacity-75" /> */}
-                
-                {/* <ImageSlider/> */}
-                {/* <img src='/user-dashboard.jpeg' className=" w-full h-full object-cover" /> */}
-                {/* <ProgressBox data={profileStatus} status={'name'} /> */}
-                {/* <Link href='/user/profile'><span className="absolute right-2 text-blue-800 text-xs cursor-pointer hover:underline">Complete your profile ></span></Link> */}
-                {/* <span onClick={()=> router.push('/user/profile')} className="absolute right-2 text-blue-800 text-xs cursor-pointer hover:underline">Complete your profile ></span> */}
                 <Tagline/>
                 <UserDashboard/>
                 <ElanteBanner/>

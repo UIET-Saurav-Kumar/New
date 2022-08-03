@@ -30,7 +30,7 @@ export default function BrandOffers() {
         limit: 10 as number,
         // is_brand_offer: 1,
         search:"",
-        location : ((getLocation?.formattedAddress) ? JSON.stringify(getLocation) : null ) as any
+        location : ((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any
     });
 
     console.log('brand_offers', data);

@@ -102,7 +102,16 @@ class ProductController extends CoreController
     public function product_brand_offers(Request $request)
     {
         $limit = $request->limit ?   $request->limit : 15;
-        return $this->repository->where("is_brand_offer", 1)->with(['type', 'shop', 'categories', 'tags', 'variations.attribute'])->paginate($limit);
+        $location=($request->location)?json_decode($request->location):"";
+
+        if($location){
+            $shops = ShopRepository::getSortedShops($location);
+            return $this->repository->where("is_brand_offer",1)->whereIn('shop_id',$shops)->with(['type', 'shop', 'categories', 'tags', 'variations.attribute'])->paginate($limit);
+
+        }
+
+        return $this->repository->where("is_brand_offer",1)->with(['type', 'shop', 'categories', 'tags', 'variations.attribute'])->paginate($limit);
+        
     }
  
     /**
