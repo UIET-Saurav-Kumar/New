@@ -123,7 +123,16 @@ const ShopsPage = () => {
 
   const closeSort = () => {
       setSort(false);
-  }
+  } 
+
+  //push shops with no products to the end of the list
+  const ShopsWithProducts = data?.shops?.filter((shop: any) => shop?.products?.length > 0);
+  const ShopsWithNoProducts = data?.shops?.filter((shop: any) => shop?.products?.length === 0);
+
+  // push both in seperate array starting with the first shop with products and ending with the last shop with no products
+  
+  
+  
  
   // console.log('shops',data?.pages?.filter((shop: any) => shop?.is_active === 1))
   // console.log('shops name',data?.pages?.data?.map((shop: any) => shop))
@@ -143,11 +152,14 @@ const ShopsPage = () => {
           {/* <div className='py-4 px-4 grid w-full grid-cols-1 xs+:grid-cols-1 xs++:grid-cols-2 gap-4 sm:grid-cols-2 
                           md:grid-cols-2 md++:grid-cols-2 lg:grid-cols-3 lg+:grid-cols-3 xl:grid-cols-4 xl+:grid-cols-4
                           xl++:grid-cols-5 2xl:grid-cols-5  3xl:grid-cols-6 border-2 overflow-y-scroll h-screen overflow-x-hidden  bg-gray-100'> */}
-            <div className=" lg:px-10  h-full w-full flex flex-col">
-              {data?.pages?.map((page, idx) => {
+            <div className="lg:px-10  h-full w-full flex flex-col">
+              { data?.pages?.map((page, idx) => {
                     return (
                       <Fragment key={idx}>
-                        {page.data.filter((shop) => shop?.is_active === 1).map((shop: any) => (
+                        {/* {page.data.filter((shop) => shop?.is_active === 1 && shop?.products?.length == 0 ).map((shop: any) => (
+                          <ShopCard2 text={getText()} category={getCategory()} shop={shop} shopId={shop?.id} key={shop.id} />
+                        ))} */}
+                        {page.data.filter((shop) => shop?.is_active === 1 ).map((shop: any) => (
                           <ShopCard2 text={getText()} category={getCategory()} shop={shop} shopId={shop?.id} key={shop.id} />
                         ))}
                       </Fragment>
