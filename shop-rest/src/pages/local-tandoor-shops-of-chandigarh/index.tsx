@@ -99,7 +99,6 @@ const TandoorsPage = () => {
 		return pathname;
 		// +"?text="+text;
 	}
-
   
   const { query } = useRouter();
   const { type } = query;
@@ -114,13 +113,14 @@ const TandoorsPage = () => {
       location : ((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any
   });
 
+
   const type_id = [1,2,3,4,5,6,7,8,9,10,11,14,15,16,18,19,20,21,22]
 
-  const tandoorArray =  featureData?.featureProducts.data.filter(function(product){
+  const tandoorArray =  data?.pages[0].data.filter(function(product){
     return product.type_id == 20 ? product : '';
- })
+  })
 
- console.log('feature tandooor data',featureData?.featureProducts.data)
+ console.log('feature tandooor data',featureData?.featureProducts.data);
 
  console.log('tandoorArray',tandoorArray);
 
@@ -232,7 +232,7 @@ const TandoorsPage = () => {
                       {data?.pages?.map((page, idx) => {
                           return (
                           <Fragment key={idx}>
-                              {page.data.map((shop) => (
+                              {page?.data?.filter((itm) => itm?.slug?.includes('tandoor') ).map((shop) => (
                               <TandoorShopCard shop={shop} key={shop.id} />
                               ))}
                           </Fragment>
