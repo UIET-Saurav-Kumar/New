@@ -14,7 +14,7 @@ import Helium from '@components/product/product-card/helium';
 import dynamic from "next/dynamic";
 import CategoryDropdownSidebar from '@components/category/category-dropdown-sidebar';
 import Neon from '@components/product/product-card/neon';
-import SalonProductsCategories from './salon-page/salon-products-categories';
+import SalonProductsCategories from './salon/salon-products-categories';
 import { ArrowDownIcon } from '@heroicons/react/outline';
 import { ExpandLessIcon } from '@components/icons/expand-less-icon';
 import { ExpandMoreIcon } from '@components/icons/expand-more-icon';

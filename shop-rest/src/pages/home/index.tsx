@@ -212,16 +212,9 @@ const {
                 <ElanteBanner/>
                 <RedBullBanner/>
                 <AllCategories/>
-
-                {/* <div className="w-full h-96 "> */}
-                <BrandOffers/>
-                {/* </div> */}
-                
-                {/* <InvoiceBanner/> */}
-                {/* <InvoiceBanner/> */}
-                
                 <Tandoor/>
                 <OfferOfTheDay/>
+                <BrandOffers/>
                 <HomePageBanner />
                 <FeaturedShops />
                 <FeaturedProducts/>

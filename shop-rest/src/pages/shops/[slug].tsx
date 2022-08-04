@@ -106,7 +106,7 @@ const ShopPage = ({ data }: any) => {
 
   // useeffect  window.scrollTo(0, 1000)
   useEffect(() => {
-    pageURL.includes('chandigarhgrocerystore') ? window.scrollTo(0, 670) : window.scrollTo(0, 0)
+    pageURL.includes('chandigarh-grocery-store') ? window.scrollTo(0, 670) : window.scrollTo(0, 0)
   }, []);
   const[shopCategory, setShopCategory] = useState('');
 
@@ -164,10 +164,10 @@ const ShopPage = ({ data }: any) => {
     }
   };
 
-  // console.log('shop slug is', data?.slug?.includes('chandigarhgrocerystore' ,'kosmetics-india'))
+  // console.log('shop slug is', data?.slug?.includes('chandigarh-grocery-store' ,'kosmetics-india'))
   seoFunction(data);
 
-  const slug = ['chandigarhgrocerystore', 'kosmetics-india'];
+  const slug = ['chandigarh-grocery-store', 'kosmetics-india'];
 
   const  getShopCategory = () => {
 
@@ -237,7 +237,7 @@ const ShopPage = ({ data }: any) => {
            
                             
                               {/*                                 
-                                { data.slug !== 'chandigarhgrocerystore' ? 
+                                { data.slug !== 'chandigarh-grocery-store' ? 
                                 ( <div className='flex w-full'> 
                                       <WebShopBanner/>
                                   </div>)
@@ -277,7 +277,7 @@ const ShopPage = ({ data }: any) => {
                                           
                             </div>
 
-                            { data?.slug == 'chandigarhgrocerystore' ? ( 
+                            { data?.slug == 'chandigarh-grocery-store' ? ( 
                              <div className="w-full -mt-80 object-contain">
                                     <img src='/grocery-web.jpg' className="object-contain" />
                              </div> ) : null }

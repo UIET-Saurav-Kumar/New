@@ -31,7 +31,7 @@ export default function ElanteBanner() {
 
     function getLinkGrocery(){
 
-      var pathname="/shops/chandigarhgrocerystore";
+      var pathname="/shops/chandigarh-grocery-store";
       return pathname;
     }
 

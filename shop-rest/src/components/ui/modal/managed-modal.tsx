@@ -45,6 +45,7 @@ const ManagedModal = () => {
   const { closeModal } = useModalAction();
 
   return (
+    
     <Modal open={isOpen} onClose={closeModal}>
       {view === "LOGIN_VIEW" && <Login />}
       {view === "REGISTER" && <Register />}

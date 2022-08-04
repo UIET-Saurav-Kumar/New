@@ -52,7 +52,7 @@ export default function BrandOffers() {
         isLoading: loading,
         error,
     } = useBrandOfferQuery({
-        limit: 10 as number,
+        limit: 200 as number,
         search:"",
         location : ((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any
     });
@@ -88,12 +88,18 @@ export default function BrandOffers() {
 
   console.log('offer', data)
 
+  //scroll to top on first render 
+  useEffect(() => {
+    scrollTo(0, 0);
+  }
+, [])
+
     return (
 
       <div className='h-full'>
 
       <Head>
-        <title>Brand Offers</title>
+        <title>Top Brands Walk In store offers</title>
         <meta name="description" content="Get Best Offers today 2022" />
         <meta name="keywords" content="Best deals today, Best salon deals in tricity, Best Offers, Offers of the Day, Offers of the Day 2022" />
         <meta name="robots" content="index, follow" />
@@ -105,11 +111,7 @@ export default function BrandOffers() {
         <meta name="expires" content="never" />
         <meta name="distribution" content="global" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="HandheldFriendly" content="true" />
-        <meta name="MobileOptimized" content="320" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style " content="black" />
-        <meta name="apple-mobile-web-app-title" content="Salon" />
+
       </Head>
 
        {/* <div id='offer-of-the-day' className={`${data?.offers.data?.length  ? 'block' : 'hidden'} flex flex-col mt-8 border-b rounded-t shadow-lg  p-4 `}> */}
@@ -118,10 +120,9 @@ export default function BrandOffers() {
                 Brand Offers
             </h3>
            
-            <div className='flex items-center'>
+            {/* <div className='flex items-center'>
                 <select className='relative block appearance-none p-2 lg:p-3 text-xs bg-white border text-gray-500 border-gray-300 hover:border-gray-500  rounded shadow leading-tight focus:outline-none focus:shadow-outline'>
                     <option disabled selected value="">Filter</option>
-                    {/* <option  onClick={() => setCategory("All")} value="All">All</option> */}
                     {shopCategories?.map((category, index) => (
                         <option className='bg-white text-gray-500 text-sm'
                          onClick={() => setCategory(category)}
@@ -133,7 +134,7 @@ export default function BrandOffers() {
                         <path d='M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z' />
                     </svg>
                 </div>
-            </div>
+            </div> */}
         </div>
         {/* // make the header stick to the top while the section is in view  */}
        
@@ -141,10 +142,12 @@ export default function BrandOffers() {
         {/* </div> */}
         
 
-        <div className={`${data?.offers?.data?.data?.length  ? 'block' : 'hidden'} grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 mt-2 gap-2`}>             
+      { loading ? 
+      <span>Loading...</span> :
+       <div className={`${data?.brand_offers?.data?.data?.length  ? 'block' : 'hidden'} grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 mt-2 gap-2`}>             
            {/* // filter products with status publish */}
               {
-              data?.offers?.data?.data?.filter(product => product?.status === 'publish')
+              data?.brand_offers?.data?.data?.filter(product => product?.status === 'publish')
               // .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
               //also filter the data based on offer type selected 
               .filter(product => product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','').replace(/Restrauntsname|Takeawaysid/g, '') ===  category  || category == 'All')
@@ -154,6 +157,7 @@ export default function BrandOffers() {
                 </motion.div>
                 ))}
         </div>
+        }
 
         {
             width > 1023 && 

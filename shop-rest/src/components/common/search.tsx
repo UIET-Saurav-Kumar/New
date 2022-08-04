@@ -51,7 +51,7 @@ export  function useWindowDimensions() {
 
 const Search: React.FC<Props> = ({ label, ...props }) => {
 
-  const slug = ['chandigarhgrocerystore', 'kosmetics-india'];
+  const slug = ['chandigarh-grocery-store', 'kosmetics-india'];
   const slug2 = ['salon-page', 'salon-products']
 
   const { height, width } = useWindowDimensions();

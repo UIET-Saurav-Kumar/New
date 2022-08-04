@@ -13,7 +13,7 @@ export default function SalonProductsCategories({btn, btn2}) {
 
       const { pathname , query } = router;
 
-      // const slug = ['chandigarhgrocerystore', 'kosmetics-india'];
+      // const slug = ['chandigarh-grocery-store', 'kosmetics-india'];
   
       const navigate = () =>
       window.scrollTo(0, img.offsetTop - 100);

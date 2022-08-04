@@ -44,11 +44,11 @@ export default function BrandOffers() {
             <div id='brand-offer' className={`${data?.brand_offers?.data?.data?.length  ? 'block' : 'hidden'} flex flex-col  border-b rounded-t shadow-lg  p-4 `}>
                 <div className='flex justify-between items-center'>
                     <h3 className='text-lg sm:text-lg md:text-lg xl:text-2xl  font-semibold    '> 
-                        Brands Offer
+                        In store offers
                     </h3>
-                    {/* <Link href='/brand-offers'><span className='text-sm lg:text-lg font-semibold text-green-700 hover:underline cursor-pointer'>
+                    <Link href='/top-brands-walkin-store-offers'><span className='text-sm lg:text-lg font-semibold text-green-700 hover:underline cursor-pointer'>
                         See all
-                    </span></Link> */}
+                    </span></Link>
                 </div>
             </div>
 
@@ -56,14 +56,14 @@ export default function BrandOffers() {
                  {data?.brand_offers.data?.data?.filter((product:any) => product?.status === 'publish' 
                 //  && product?.is_featured === 1
                  )
-                    // .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+                    .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
                     // .slice(0, 30)
                     .map(product => (
                     <motion.div key={product.id}>
                       <OfferCard product={product} productSlug={product.slug} />
                     </motion.div>
                     ))}
-                {/* <Link href='/brand-offers'><span className='absolute right-0 bottom-0 h-10  font-semibold text-blue-600 cursor-pointer hover:text-blue-700'>see more>> </span></Link>  */}
+                {/* <Link href='/top-brands-walkin-store-offers'><span className='absolute right-0 bottom-0 h-10  font-semibold text-blue-600 cursor-pointer hover:text-blue-700'>see more>> </span></Link>  */}
             </div>
         </>
     )

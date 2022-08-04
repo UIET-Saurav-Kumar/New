@@ -61,7 +61,7 @@ export function SidebarMenuItem({ className, item, depth = 0 }: any) {
 
   const { closeModal } = useModalAction();
 
-  const shop_slug = ['chandigarhgrocerystore', 'kosmetics-india'];
+  const shop_slug = ['chandigarh-grocery-store', 'kosmetics-india'];
   
 
   function onClick() {

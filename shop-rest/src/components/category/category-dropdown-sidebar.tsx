@@ -27,7 +27,7 @@ const CategoryDropdownSidebar = ({data}) => {
   const { height, width } = useWindowDimensions();
 
   const [pageURL, setPageUrl] = useState('');
-  const slug = ['chandigarhgrocerystore', 'kosmetics-india'];
+  const slug = ['chandigarh-grocery-store', 'kosmetics-india'];
 
 
   function allCategories() {
