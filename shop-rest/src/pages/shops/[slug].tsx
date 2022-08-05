@@ -189,6 +189,8 @@ const ShopPage = ({ data }: any) => {
   // console.log('shop data',metaData)
 
   const shopCat = data?.shop_categories?.replace(/[{":,0123456789}]/g,'').slice(5,-3);
+
+  // const shopName = data?.name;
   
 
   console.log('shopsdata',shopCat);
@@ -199,13 +201,14 @@ const ShopPage = ({ data }: any) => {
     <>
 
         <Head>
-          <title>{shopCat == 'Cosmetics' && 'Get Best Deals on Cosmetic Products | #1 Cosmetic store in Chandigarh' }</title>
-          <title>{shopCat == 'Groceries' && 'Best Grocery Store in Tricity | Get exclusive Offer Now' }</title>
-          <title>{shopCat == 'Pharmacy' && 'Get Upto 30% off on Pharmacy With Buylowcal | Shop Now ' }</title>
-          <title>{shopCat == ' Vegetables & Fruits' && ' Save Your Time & Money | Buy Veggies Fruits  with Buylowcal ' }</title>
-          <title>{shopCat == 'Restaurants' && 'Get Best Deals on Restaurants Now | Connect your local restaurant with Buylowcal' }</title>
-          <title>{shopCat == 'Fashion, Lifestyle & Furnishings' && ' Buylowcal | shop Now Lifestyle & Home Items & Get 20% off' }</title>
-          <title>{shopCat == 'Gym & Health Products' && 'Get 100% pure Gym & Health product & Get A chance to win exciting offers'}</title>
+          
+        {shopCat == 'Cosmetics' &&  <title>Get Best Deals on Cosmetic Products | #1 Cosmetic store in Chandigarh </title> }
+        {shopCat == 'Groceries' && <title>  Best Grocery Store in Tricity | Get exclusive Offer Now</title> }
+        {shopCat == 'Pharmacy' &&   <title> Get Upto 30% off on Pharmacy With Buylowcal | Shop Now  </title> }
+        {shopCat == ' Vegetables & Fruits' &&  <title>  Save Your Time & Money | Buy Veggies Fruits  with Buylowcal  </title> }
+        {shopCat == 'Restaurants' &&  <title> Get Best Deals on Restaurants Now | Connect your local restaurant with Buylowcal </title> }
+        {shopCat == 'Fashion, Lifestyle & Furnishings' &&   <title>  Buylowcal | shop Now Lifestyle & Home Items & Get 20% off </title> }
+        {shopCat == 'Gym & Health Products' && <title>  Get 100% pure Gym & Health product & Get A chance to win exciting offers</title> }
           {/* <title>{shopCat == 'Groceries' && ' ' }</title>
           <title>{shopCat == 'Groceries' && ' ' }</title>
           <title>{shopCat == 'Groceries' && ' ' }</title> */}
