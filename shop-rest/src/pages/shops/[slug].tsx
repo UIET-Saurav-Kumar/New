@@ -188,16 +188,37 @@ const ShopPage = ({ data }: any) => {
 
   // console.log('shop data',metaData)
 
-  console.log('data',data);
+  const shopCat = data?.shop_categories?.replace(/[{":,0123456789}]/g,'').slice(5,-3);
   
+
+  console.log('shopsdata',shopCat);
+ 
 
   return (
 
     <>
 
         <Head>
-          <title>{(data.name?data.name:'')+' '+(data.address.city?data.address.city+" "+data.address.street_address:'')+', Best Discounts and Offers Only Through BuyLowcal.com'}</title>
-          <meta name="description" content={(data.name?data.name:'')+' '+(data.address.city?data.address.city+" "+data.address.street_address:'')+' Best '+shopCategory+' deals, offers, discounts and cash backs only through buylowcal.com'} />
+          <title>{shopCat == 'Cosmetics' && 'Get Best Deals on Cosmetic Products | #1 Cosmetic store in Chandigarh' }</title>
+          <title>{shopCat == 'Groceries' && 'Best Grocery Store in Tricity | Get exclusive Offer Now' }</title>
+          <title>{shopCat == 'Pharmacy' && 'Get Upto 30% off on Pharmacy With Buylowcal | Shop Now ' }</title>
+          <title>{shopCat == ' Vegetables & Fruits' && ' Save Your Time & Money | Buy Veggies Fruits  with Buylowcal ' }</title>
+          <title>{shopCat == 'Restaurants' && 'Get Best Deals on Restaurants Now | Connect your local restaurant with Buylowcal' }</title>
+          <title>{shopCat == 'Fashion, Lifestyle & Furnishings' && ' Buylowcal | shop Now Lifestyle & Home Items & Get 20% off' }</title>
+          <title>{shopCat == 'Gym & Health Products' && 'Get 100% pure Gym & Health product & Get A chance to win exciting offers'}</title>
+          {/* <title>{shopCat == 'Groceries' && ' ' }</title>
+          <title>{shopCat == 'Groceries' && ' ' }</title>
+          <title>{shopCat == 'Groceries' && ' ' }</title> */}
+
+
+         {shopCat == 'Cosmetics' &&  <meta name="description" content= 'Get Amazing deals on ladies cosmetic products in Chandigarh tricity| Buy Now with Buylowcal '  /> }
+         { shopCat == 'Groceries' && <meta name="description" content= 'Grab The Best deal and  Offers on Grocery items | Buy Now With Buylowcal' /> }
+         {shopCat == 'Pharmacy' &&  <meta name="description" content='Prescriptions may be refilled and transferred online, or you can find a CVS Pharmacy near you with Buylowcal  Online shopping, Extra Care offers, Clinic locations, and more.' /> }
+         { shopCat == ' Vegetables & Fruits' && <meta name="description" content= 'Acquire the best deal on purchasing Veggies & Fruits with Buylowcal And Get 20 % off On purchasing'  /> }
+         { shopCat == 'Restaurants' &&  <meta name="description" content='Find the best restaurants near you with buylowcal & Get exclusive offer on every restaurant'  /> }
+          { shopCat == 'Fashion, Lifestyle & Furnishings' &&  <meta name="description" content='Get Amazing Deals on Lifestyle & home Items & get 20 % off on every item '  /> }
+         { shopCat == 'Gym & Health Products' &&  <meta name="description" content='Get 100% pure Gym &Health product & Get A chance to win exciting offers' /> }
+
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         </Head>
 
