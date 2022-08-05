@@ -50,7 +50,7 @@ const AllCategories = () => {
 	//getLinkSalonSpa
 	function getLinkSalonSpa(){
 
-		var pathname="/salon-page";
+		var pathname="/salon";
 
 		return pathname;
 	}
