@@ -209,19 +209,19 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
       unit: values.unit,
       width: values.width,
       is_offer:1,
-      // quantity:
-      //   values?.productTypeValue?.value === ProductType.Simple
-      //     ? values?.quantity
-      //     : calculateQuantity(values?.variation_options),
+      quantity:
+        values?.productTypeValue?.value === ProductType.Simple
+          ? values?.quantity
+          : calculateQuantity(values?.variation_options),
       product_type: values.productTypeValue?.value,
       type_id: type?.id,
       ...(initialValues
         ? { shop_id: initialValues?.shop_id }
         : { shop_id: Number(shopId) }),
-      // price: Number(values.price),
-      // sale_price: values.sale_price ? Number(values.sale_price) : null,
-      // categories: values?.categories?.map(({ id }: any) => id),
-      // tags: values?.tags?.map(({ id }: any) => id),
+      price: Number(values.price),
+      sale_price: values.sale_price ? Number(values.sale_price) : null,
+      categories: values?.categories?.map(({ id }: any) => id),
+      tags: values?.tags?.map(({ id }: any) => id),
       image: {
         thumbnail: values?.image?.thumbnail,
         original: values?.image?.original,
