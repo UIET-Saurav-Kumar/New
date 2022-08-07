@@ -38,6 +38,7 @@ import Link from "next/link";
 import router from "next/router";
 import ElanteBanner from "@components/home-page-product-section/elante-banner";
 import BrandOffers from "@components/home-page-product-section/brand-offers";
+import Head from "next/head";
 
 
 const ProductFeedLoader = dynamic(
@@ -185,6 +186,12 @@ const {
 
     return (
 
+      <> 
+      
+      <Head>
+      <meta name="msvalidate.01" content="1A1026D1B7AF52339B69AA95E6DFE95C" />
+      </Head>
+
         <div className=" h-full">
 
             <div className="fixed z-50 bottom-16 right-10 lg:bottom-10 lg:right-10 flex justify-center items-center">
@@ -235,6 +242,7 @@ const {
             <MobileNavigation />
         } 
         </div>
+        </>
     )
     
 }
