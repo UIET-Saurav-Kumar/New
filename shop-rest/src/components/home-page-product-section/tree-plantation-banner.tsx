@@ -6,7 +6,7 @@ import { useUI } from "@contexts/ui.context";
 import { useModalAction } from "@components/ui/modal/modal.context";
 
 
-export default function HomePageBanner() {
+export default function TreePlantationBanner() {
 
     const router = useRouter();
 	const { query } = useRouter();
@@ -15,10 +15,10 @@ export default function HomePageBanner() {
 
     const { type } = query;
 
-    function getLink() {
+    // function getLink() {
 		
-            router.push("/appointment")
-	}
+    //         router.push("/appointment")
+	// }
 
     return (
 

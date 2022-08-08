@@ -117,19 +117,13 @@ function location2(){
             </div>
           </Link> }
 
+           
+
           
 
       </Slider>
 
-       { location2() &&  <Link href='/shops?text=Ambience+Mall'><div className="card flex relative w-full  ">
-
-            <img className="object-contain cursor-pointer rounded-lg px-1  "
-              //  className='rounded-md w-full opacity-90  h-40 lg:w-full lg:h-72 xl+:h-80 md:h-64  2xl:h-72 2xl:w-full space-x-9 object-fill object '  
-                  src={'/delhi/delhi-mall-banner.jpg'} 
-                  />
-      
-         </div>
-</Link> }
+        
       </div>
 
       </>

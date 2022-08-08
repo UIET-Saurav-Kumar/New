@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { useOfferQuery } from "@data/home/use-offer-query";
 
 
-
 import { useRouter } from "next/router";
 import { useFeatureProductQuery } from "@data/home/use-feature-product-query";
 import { siteSettings } from "@settings/site.settings";
@@ -52,7 +51,7 @@ export default function Offers() {
     } = useOfferQuery({
         limit: 10 as number,
         search:"",
-        location : ((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any
+        location : ((getLocation?.formattedAddress)?JSON.stringify(getLocation) : null ) as any
     });
 
     const offer_of_the_day = useRef();
@@ -89,25 +88,25 @@ export default function Offers() {
 
       <div className='h-full'>
 
-      <Head>
-        <title>Offers of the Day</title>
-        <meta name="description" content="Get Best Offers today 2022" />
-        <meta name="keywords" content="Best deals today, Best salon deals in tricity, Best Offers, Offers of the Day, Offers of the Day 2022" />
-        <meta name="robots" content="index, follow" />
-        <meta name="author" content="Salon" />
-        <meta name="revised" content="Salon" />
-        <meta name="generator" content="Salon" />
-        <meta name="copyright" content="Salon" />
-        <meta name="rating" content="General" />
-        <meta name="expires" content="never" />
-        <meta name="distribution" content="global" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="HandheldFriendly" content="true" />
-        <meta name="MobileOptimized" content="320" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style " content="black" />
-        <meta name="apple-mobile-web-app-title" content="Salon" />
-      </Head>
+        <Head>
+          <title>Offers of the Day</title>
+          <meta name="description" content="Get Best Offers today 2022" />
+          <meta name="keywords" content="Best deals today, Best salon deals in tricity, Best Offers, Offers of the Day, Offers of the Day 2022" />
+          <meta name="robots" content="index, follow" />
+          <meta name="author" content="Salon" />
+          <meta name="revised" content="Salon" />
+          <meta name="generator" content="Salon" />
+          <meta name="copyright" content="Salon" />
+          <meta name="rating" content="General" />
+          <meta name="expires" content="never" />
+          <meta name="distribution" content="global" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <meta name="HandheldFriendly" content="true" />
+          <meta name="MobileOptimized" content="320" />
+          <meta name="apple-mobile-web-app-capable" content="yes" />
+          <meta name="apple-mobile-web-app-status-bar-style " content="black" />
+          <meta name="apple-mobile-web-app-title" content="Salon" />
+        </Head>
 
        {/* <div id='offer-of-the-day' className={`${data?.offers.data?.length  ? 'block' : 'hidden'} flex flex-col mt-8 border-b rounded-t shadow-lg  p-4 `}> */}
         <div className='  shadow-xl bg-white flex justify-between px-2 items-center py-2 w-full'>
@@ -141,15 +140,15 @@ export default function Offers() {
         <div className={`${data?.offers.data?.length  ? 'block' : 'hidden'} grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 mt-2 gap-2`}>             
            {/* // filter products with status publish */}
               {
-              data?.offers.data.filter(product => product?.status === 'publish')
-              .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
-              //also filter the data based on offer type selected 
-              .filter(product => product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','').replace(/Restrauntsname|Takeawaysid/g, '') ===  category  || category == 'All')
-              .map(product => (
-                <motion.div key={product.id}>
-                 <Neon2 product={product} productSlug={product.slug} />
-                </motion.div>
-                ))}
+                data?.offers.data.filter(product => product?.status === 'publish')
+                .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+                //also filter the data based on offer type selected 
+                .filter(product => product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','').replace(/Restrauntsname|Takeawaysid/g, '') ===  category  || category == 'All')
+                .map(product => (
+                  <motion.div key={product.id}>
+                  <Neon2 product={product} productSlug={product.slug} />
+                  </motion.div>
+              ))}
         </div>
 
         {

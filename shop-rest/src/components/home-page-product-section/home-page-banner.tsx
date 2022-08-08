@@ -19,6 +19,15 @@ export default function RedbullBanner() {
     return address?.includes('Mohali') || address?.includes('Chandigarh') || address.includes('Panchkula') ;
 }
 
+function location2(){
+  return address?.includes('Delhi')   ;
+}
+
+function location3(){
+  return address?.includes('Gurgaon')   ;
+}
+
+
 
     function getLink(category:String){
 
@@ -73,26 +82,26 @@ export default function RedbullBanner() {
     return (
 
 
-      <div className=' '>
+      <div className='w-full '>
       
       <Slider {...settings}>
 
         
        
-       <Link href='salon-products?text=pick+any&category='><div className="card flex relative w-full  ">
+      { location() && <Link href='salon-products?text=pick+any&category='><div className="card flex relative w-full  ">
 
             <img 
-            className="object-contain px-1 rounded-lg cursor-pointer h-full w-full"
-
-           
-                  src={'/pick-5.jpeg'} 
+              className="object-contain px-1 rounded-lg cursor-pointer h-full w-full"
+              src={'/pick-5.jpeg'} 
                   />
 
           </div>
-          </Link>
+          </Link> }
+          
+           
 
 
-          <Link href='/user/upload-invoice/upload-form'><div className="card flex relative w-full  ">
+            { location() && <Link href='/user/upload-invoice/upload-form'><div className="card flex relative w-full  ">
 
             <img className="object-contain cursor-pointer rounded-lg px-1 h-full w-full"
             //  className='rounded-md w-full opacity-90  h-40 lg:w-full lg:h-72 xl+:h-80 md:h-64  2xl:h-72 2xl:w-full space-x-9 object-fill object '  
@@ -100,9 +109,28 @@ export default function RedbullBanner() {
                   />
 
           </div>
-          </Link>
+          </Link>}
 
       </Slider>
+      { location3() &&  <Link href='/shops?text=Ambience+Mall'><div className="card flex relative w-full">
+
+            <img className="object-contain cursor-pointer rounded-lg px-1  "
+              //  className='rounded-md w-full opacity-90  h-40 lg:w-full lg:h-72 xl+:h-80 md:h-64  2xl:h-72 2xl:w-full space-x-9 object-fill object '  
+                  src={'/delhi/ambience-mall-banner.jpg'} 
+                  />
+
+            </div>
+            </Link> }
+
+            { location2() &&  <Link href='/shops?text=Select+Citywalk'><div className="card flex relative w-full  ">
+
+            <img className="object-cover cursor-pointer rounded-lg px-1 w-full  "
+              //  className='rounded-md w-full opacity-90  h-40 lg:w-full lg:h-72 xl+:h-80 md:h-64  2xl:h-72 2xl:w-full space-x-9 object-fill object '  
+                  src={'/delhi/city-walk-mall.jpg'} 
+                  />
+
+            </div>
+            </Link> }
       </div>
     )
 }

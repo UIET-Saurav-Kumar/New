@@ -92,7 +92,7 @@ export default function Tandoor() {
       
             <Slider {...settings}>
 
-                <Link href='/appointment'><div className=" ">
+            {location() &&  <Link href='/appointment'><div className=" ">
 
                     <img 
                     className="object-contain px-1 rounded-lg cursor-pointer "
@@ -101,9 +101,10 @@ export default function Tandoor() {
                         />
                 </div>
             </Link>
+           }
 
 
-          <Link href='/shops?text=barista'><div className=" ">
+          {location() && <Link href='/shops?text=barista'><div className=" ">
 
             <img className="object-contain cursor-pointer rounded-lg px-1  "
             //  className='rounded-md w-full opacity-90  h-40 lg:w-full lg:h-72 xl+:h-80 md:h-64  2xl:h-72 2xl:w-full space-x-9 object-fill object '  
@@ -111,7 +112,7 @@ export default function Tandoor() {
                   />
 
           </div>
-          </Link>
+          </Link>}
 
             </Slider>
 

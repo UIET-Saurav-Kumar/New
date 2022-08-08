@@ -39,7 +39,7 @@ export default function OfferOfTheDay() {
                     <h3 className='text-lg sm:text-lg md:text-lg xl:text-2xl  font-semibold  p-2  '> 
                         Offers of the Day
                     </h3>
-                    <Link href='/offer-of-the-day'><span className='text-sm lg:text-lg font-semibold text-green-700 hover:underline cursor-pointer'>
+                    <Link href='/offers-of-the-day'><span className='text-sm lg:text-lg font-semibold text-green-700 hover:underline cursor-pointer'>
                         See all
                     </span></Link>
                 </div>
