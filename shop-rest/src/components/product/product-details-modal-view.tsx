@@ -20,20 +20,24 @@ import VariationPrice from "./product-details/product-variant-price";
 import { useTranslation } from "next-i18next";
 import { useModalAction } from "@components/ui/modal/modal.context";
 import { ROUTES } from "@utils/routes";
+
 const RelatedProducts = dynamic(
   () => import("./product-details/related-products")
 );
+
 import ReadMore from "@components/ui/truncate";
 import BackButton from "@components/ui/back-button";
 import Link from "next/link";
 
 
 const ProductDetailsModalView = ({ productSlug }: { productSlug: string }) => {
+
   const router = useRouter();
   const { t } = useTranslation("common");
 
   const { showModalStickyBar, hideModalStickyBar, displayModalStickyBar } =
     useUI();
+    
   const { closeModal } = useModalAction();
   const { data, isLoading: loading } = useProductQuery(productSlug);
 

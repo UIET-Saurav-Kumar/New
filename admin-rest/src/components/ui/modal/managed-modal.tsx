@@ -53,18 +53,23 @@ const ExportImportView = dynamic(
 const AttributeExportImport = dynamic(
   () => import("@components/attribute/attribute-import-export")
 );
+
 const AllProductsExportImport = dynamic(
   () => import("@components/product/import-export-modal-all-products")
 );
+
 const MasterProductsExportImport = dynamic(
   () => import("@components/product/import-export-modal-master-products")
 );
+
 const ShopsExportImport = dynamic(
   () => import("@components/product/import-export-modal-shop")
 );
+
 const OrdersExportImport = dynamic(
   () => import("@components/product/import-export-modal-orders")
 );
+
 const LogDeleteView = dynamic(
   () => import("@components/logs/log-delete-view")
 );
@@ -72,12 +77,15 @@ const LogDeleteView = dynamic(
 const ReviewImageModal = dynamic(
   () => import("@components/reviews/review-image-modal")
 );
+
 const QuestionReplyView = dynamic(
   () => import("@components/question/question-reply-view")
 );
+
 const QuestionDeleteView = dynamic(
   () => import("@components/question/question-delete-view")
 );
+
 const ReviewDeleteView = dynamic(
   () => import("@components/reviews/review-delete-view")
 );
@@ -115,9 +123,9 @@ const ManagedModal = () => {
       {view === "BAN_CUSTOMER" && <BanCustomerView />}
       {view === "SHOP_APPROVE_VIEW" && <ApproveShopView />}
       {view === "SHOP_DISAPPROVE_VIEW" && <DisApproveShopView />}
-      {view===  'REPLY_QUESTION' && <QuestionReplyView />}
-      {view===  'DELETE_QUESTION' && <QuestionDeleteView />}
-      {view===  'DELETE_REVIEW' && <ReviewDeleteView />}
+      {view ===  'REPLY_QUESTION' && <QuestionReplyView />}
+      {view ===  'DELETE_QUESTION' && <QuestionDeleteView />}
+      {view ===  'DELETE_REVIEW' && <ReviewDeleteView />}
       {view ===  'ACCEPT_ABUSE_REPORT' && <AcceptAbuseReportView />}
       {view ===  'DECLINE_ABUSE_REPORT' && <DeclineAbuseReportView />}
       {view ===  'ABUSE_REPORT' && <AbuseReport data={data}/>}

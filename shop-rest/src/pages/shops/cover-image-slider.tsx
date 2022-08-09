@@ -109,7 +109,7 @@ const offerSliderBreakpoints = {
 
 SwiperCore.use([Navigation]);
 
-export default function PromotionSlider() {
+export default function CoverImageSlider({data}) {
 
   const router = useRouter();
   const { t } = useTranslation();
@@ -139,10 +139,11 @@ export default function PromotionSlider() {
 
   return (
 
-    <div className=" px-2 md:px-5 xl:px-4">
-      <div className="relative">
+    <div className="  w-full border-3 border-green-500 h-full">
+      <div className=" relative w-full border-3 border-red-900 h-full">
         <Swiper
           id="offer"
+          className="border-3 border-blue-900 h-full w-full"
           // loop={true}
           breakpoints={offerSliderBreakpoints}
           navigation={{
@@ -150,44 +151,24 @@ export default function PromotionSlider() {
             prevEl: ".prev",
           }}
         >
-          {shopData?.pages?.map((page, idx) => {
-                      return (
-                        <Fragment key={idx}>
-                          {page.data.filter((shop) => shop.is_active === 1).map((shop: any) => (
-            <SwiperSlide key={idx}>
-                
-              <Link href={`${ROUTES.SHOPS}/${shop.slug}`}>
-                <div className="flex flex-col items-center ">
-              <img
-              className="w-20 object-contain rounded h-20 lg:h-36 border-3 border-gold lg:w-36 "
-              src={shop?.logo?.thumbnail}
-              // alt={t(d.title)}
-              
-              />
-              <p className = "text-xs  mt-2 text-center font-semibold">
-                {shop?.settings?.location?.sector}
-              </p>
-              <p className = "text-xs text-center font-light">
-                {shop?.settings?.location?.city}
-              </p>
-              </div>
-              </Link>
+          {data.map((item) => (
+            <SwiperSlide key={item.id} className='absolute w-full h-full'>
+              {/* <div className="w-full h-full border-2  border-red-400 "> */}
+                <img className="  object-contain w-full h-full border-2" src={item.thumbnail} alt={item.title} />
+                {/* </div> */}
             </SwiperSlide>
-             ))}
-             </Fragment>
-           );
-           })}
+          ))}
          
         </Swiper>
         <div
-          className="prev cursor-pointer bg-gold absolute text-white top-2/4 -start-2 md:-start-5 z-10 -mt-4 md:-mt-5 w-8 h-8 md:w-9 md:h-9 rounded-full bg-light shadow-xl border border-border-200  flex items-center justify-center text-heading transition-all duration-200 hover:bg-accent hover:text-light hover:border-accent"
+          className="prev cursor-pointer bg-white absolute z-40 text-gray-600 top-2/4 -start-2 md:-start-5   -mt-4 md:-mt-5 w-8 h-8 md:w-9 md:h-9 rounded-full bg-light shadow-xl border border-border-200  flex items-center justify-center text-heading transition-all duration-200 hover:bg-accent hover:text-light hover:border-accent"
           role="button"
         >
           <span className="sr-only">{t("common:text-previous")}</span>
-          <ArrowPrev width={24} height={24} />
+          <ArrowPrev width={96} height={96} />
         </div>
         <div
-          className="next cursor-pointer bg-gold  text-white absolute top-2/4 -end-2 md:-end-5 z-10 -mt-4 md:-mt-5 w-8 h-8 md:w-9 md:h-9 rounded-full bg-light shadow-xl border border-border-200  flex items-center justify-center text-heading transition-all duration-200 hover:bg-accent hover:text-light hover:border-accent"
+          className="next cursor-pointer    text-gray-600 absolute top-2/4 -end-2 md:-end-5 z-40 -mt-4 md:-mt-5 w-8 h-8 md:w-9 md:h-9 rounded-full bg-light shadow-xl border border-border-200  flex items-center justify-center transition-all duration-200 hover:bg-accent hover:text-light hover:border-accent"
           role="button"
         >
           <span className="sr-only">{t("common:text-next")}</span>

@@ -41,6 +41,8 @@ import { getReview } from '@utils/get-review';
 // import DocumentMeta from 'react-document-meta';
 import Seo from "@components/ui/seo";
 import ShopLayout from "@components/layout/shop-layout";
+import PromotionSlider from "@components/slider/promotion-slider";
+import CoverImageSlider from "./cover-image-slider";
 
 
 const CartCounterButton = dynamic(
@@ -71,6 +73,8 @@ const ShopPage = ({ data }: any) => {
       shop_review: data?.review,
     });
   }
+
+  const {cover_image} = data;
 
 
   // useEffect(() => {
@@ -191,13 +195,10 @@ const ShopPage = ({ data }: any) => {
   const shopCat = data?.shop_categories?.replace(/[{":,0123456789}]/g,'').slice(5,-3);
 
   // const shopName = data?.name;
-  
 
   console.log('shopsdata',shopCat);
  
-
   return (
-
     <>
 
         <Head>
@@ -215,29 +216,29 @@ const ShopPage = ({ data }: any) => {
 
 
          {shopCat == 'Cosmetics' &&  <meta name="description" content= 'Get Amazing deals on ladies cosmetic products in Chandigarh tricity| Buy Now with Buylowcal '  /> }
-         { shopCat == 'Groceries' && <meta name="description" content= 'Grab The Best deal and  Offers on Grocery items | Buy Now With Buylowcal' /> }
+         {shopCat == 'Groceries' && <meta name="description" content= 'Grab The Best deal and  Offers on Grocery items | Buy Now With Buylowcal' /> }
          {shopCat == 'Pharmacy' &&  <meta name="description" content='Prescriptions may be refilled and transferred online, or you can find a CVS Pharmacy near you with Buylowcal  Online shopping, Extra Care offers, Clinic locations, and more.' /> }
-         { shopCat == ' Vegetables & Fruits' && <meta name="description" content= 'Acquire the best deal on purchasing Veggies & Fruits with Buylowcal And Get 20 % off On purchasing'  /> }
-         { shopCat == 'Restaurants' &&  <meta name="description" content='Find the best restaurants near you with buylowcal & Get exclusive offer on every restaurant'  /> }
-          { shopCat == 'Fashion, Lifestyle & Furnishings' &&  <meta name="description" content='Get Amazing Deals on Lifestyle & home Items & get 20 % off on every item '  /> }
-         { shopCat == 'Gym & Health Products' &&  <meta name="description" content='Get 100% pure Gym &Health product & Get A chance to win exciting offers' /> }
+         {shopCat == ' Vegetables & Fruits' && <meta name="description" content= 'Acquire the best deal on purchasing Veggies & Fruits with Buylowcal And Get 20 % off On purchasing'  /> }
+         {shopCat == 'Restaurants' &&  <meta name="description" content='Find the best restaurants near you with buylowcal & Get exclusive offer on every restaurant'  /> }
+         {shopCat == 'Fashion, Lifestyle & Furnishings' &&  <meta name="description" content='Get Amazing Deals on Lifestyle & home Items & get 20 % off on every item '  /> }
+         {shopCat == 'Gym & Health Products' &&  <meta name="description" content='Get 100% pure Gym &Health product & Get A chance to win exciting offers' /> }
 
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         </Head>
 
-            <div className="relative bg-white lg:bg-gray-100 hidden lg:flex flex-col
+            <div className="relative bg-white lg:bg-gray-100 hidden   lg:flex flex-col
                             md:flex-row md:justify-between md:items-start">
 
-                                  {/* // button to scroll to the top of the page when user has scrolled way down */}
-                                  <div className="fixed z-50 bottom-10 right-10 flex justify-center items-center">
-                                    <img src='/up-arrow.png' className="w-12 h-12" onClick={() => window.scrollTo(0, 0)} /> 
-                                  </div>
+                      {/* // button to scroll to the top of the page when user has scrolled way down */}
+                      <div className="fixed z-50 bottom-10 right-10 flex justify-center items-center">
+                        <img src='/up-arrow.png' className="w-12 h-12" onClick={() => window.scrollTo(0, 0)} /> 
+                      </div>
 
-                                  {/* <div className="fixed z-50 bottom-10 right-10 flex justify-center items-center">
-                                    <button onClick={() => scrollToProduct()} className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-full">
-                                      <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.914 9.914L10 7.828V16H8V7.828l-2.086 2.086L4.586 9.914l8.486-8.486z"/></svg>
-                                    </button>
-                                  </div> */}
+                      {/* <div className="fixed z-50 bottom-10 right-10 flex justify-center items-center">
+                        <button onClick={() => scrollToProduct()} className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-full">
+                          <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.914 9.914L10 7.828V16H8V7.828l-2.086 2.086L4.586 9.914l8.486-8.486z"/></svg>
+                        </button>
+                      </div> */}
 
                     <div className='flex w-full  lg:flex flex-col'>
 
@@ -245,7 +246,7 @@ const ShopPage = ({ data }: any) => {
 
                           <div className = 'hidden lg:flex flex-col overflow-y-scroll space-y-4  w-full'>  
 
-                              <div className='flex w-full mt-10 h-80 border'> 
+                              <div className='flex w-full mt-10 h-80 px-3 border'> 
 
                                 { slug?.some(el => data?.slug?.includes(el)) ? null :
                                     ( <div className='h-full w-96'>  
@@ -253,8 +254,15 @@ const ShopPage = ({ data }: any) => {
                                       </div> )  }
                                     
                                     { slug?.some(el => data?.slug?.includes(el)) ? null :
-                                    ( <div className='flex w-full  '>
-                                      {imageCheck(data?.cover_image?.original, data, '317', false,'h-full w-full object-fill')}
+                                    ( <div className='flex w-full h-full '>
+                                      {cover_image?.length > 1 ?
+                                        // <div className=' '>
+                                            <CoverImageSlider key={cover_image} data={cover_image} />
+                                        // </div>
+                                         :
+                                      imageCheck(data?.cover_image?.thumbnail, data, '317', false,'h-full w-full object-fill') 
+                                      
+                                      }
                                     </div> )  }
                    
                               </div> 
@@ -293,10 +301,10 @@ const ShopPage = ({ data }: any) => {
                                     />
                                   </div> */}
 
-                                  { slug?.some(el => data?.slug?.includes(el)) ? null
-                                 : ( <div className='block sm:hidden'> 
-                                      <ShopProfileCard data={data}/> 
-                                  </div> )  }
+                              { slug?.some(el => data?.slug?.includes(el)) ? null
+                              : ( <div className='block sm:hidden'> 
+                                  <ShopProfileCard data={data}/> 
+                              </div> )  }
 
                                           
                             </div>

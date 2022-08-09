@@ -128,7 +128,6 @@ export default class CustomDocument extends Document {
         </Head>
        
         <body dir={dir}>
-         
           <Main />
           <NextScript />
         </body>

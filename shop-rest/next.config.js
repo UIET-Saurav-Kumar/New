@@ -9,11 +9,14 @@ module.exports = withPWA({
     dest: "public",
     runtimeCaching,
   },
+  
+   
+  
   async redirects() {
     return [
       {
         source: "/",
-        destination: "/home",
+        destination: "/",
         permanent: false,
       },
     ];

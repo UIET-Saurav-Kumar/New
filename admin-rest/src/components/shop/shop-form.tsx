@@ -17,6 +17,7 @@ import { useCreateShopMutation } from "@data/shop/use-shop-create.mutation";
 import { useUpdateShopMutation } from "@data/shop/use-shop-update.mutation";
 
 import {
+  AttachmentInput,
   BalanceInput,
   ShopSettings,
   ShopSocialInput,
@@ -80,7 +81,7 @@ export const updatedIcons = socialIcon.map((item: any) => {
 type FormValues = {
   name: string;
   description: string;
-  cover_image: any;
+  cover_image: AttachmentInput[];
   gst_certificate: any;
   cancelled_cheque: any;
   // pan_card_image: any;
@@ -96,6 +97,11 @@ type FormValues = {
   balance: BalanceInput;
   address: UserAddressInput;
   settings: ShopSettings;
+
+};
+
+const defaultValues = {
+  cover_image: [],
 };
 
 const ShopForm = ({ initialValues }: { initialValues?: any }) => {
@@ -132,7 +138,11 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
           defaultValues: {
             ...initialValues,
             logo: getFormattedImage(initialValues.logo),
-            cover_image: getFormattedImage(initialValues.cover_image),
+            // cover_image:[ initialValues.cover_image.map(({ thumbnail, original, id }: any) => ({
+            //   thumbnail,
+            //   original,
+            //   id,
+            // }))],
             fssai_certificate:getFormattedImage(JSON.parse(initialValues.fssai_certificate)),
             gst_certificate:getFormattedImage(JSON.parse(initialValues.gst_certificate)),
             cancelled_cheque:getFormattedImage(JSON.parse(initialValues.cancelled_cheque)),
@@ -172,7 +182,11 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
   function onSubmit(values: FormValues) {
     const settings = {
       ...values?.settings,
-      
+      cover_image: values?.cover_image?.map(({ thumbnail, original, id }: any) => ({
+        thumbnail,
+        original,
+        id,
+      })),
       location: { ...omit(values?.settings?.location, "__typename") },
       socials: values?.settings?.socials
         ? values?.settings?.socials?.map((social: any) => ({
@@ -247,7 +261,7 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
           />
 
           <Card className="w-full sm:w-8/12 md:w-2/3">
-            <FileInput name="cover_image" control={control} multiple={false} />
+            <FileInput name="cover_image" control={control}   />
           </Card>
         </div>
 
