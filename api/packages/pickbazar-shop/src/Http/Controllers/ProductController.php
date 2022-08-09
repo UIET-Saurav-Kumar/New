@@ -213,7 +213,7 @@ class ProductController extends CoreController
          $location=($request->location)?json_decode($request->location):"";
 
         $names=//active prpducts only
-        Product::where("status",1)->limit(6)
+        Product::where("status",1)->limit(50)
                 ->where('name', 'like', $slug.'%')
                 ->distinct('name') 
                 ->pluck('name');
@@ -267,7 +267,7 @@ class ProductController extends CoreController
 
         $names=Shop::where("is_active",1)->where('name', 'like', $slug.'%')
                     ->distinct('name')
-                    ->limit(6)->pluck('name');
+                    ->limit(50)->pluck('name');
         foreach($names as $name){
             array_push($data,[
                 "label"=>$name,
