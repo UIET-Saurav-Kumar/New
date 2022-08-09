@@ -155,6 +155,9 @@ const ShopsPage = () => {
         {shopCat == 'Restaurants' &&  <title> Get Best Deals on Restaurants Now | Connect your local restaurant with Buylowcal </title> }
         {shopCat == 'Fashion, Lifestyle & Furnishings' &&   <title>  Buylowcal | shop Now Lifestyle & Home Items & Get 20% off </title> }
         {shopCat == 'Gym & Health Products' && <title>  Get 100% pure Gym & Health product & Get A chance to win exciting offers</title> }
+        {shopCat == 'Salon & Spa' && <title> Top 5 star Salon services in Chandigarh | Get Services Now with Buylowcal</title> }
+        {shopCat == 'Takeaways' && <title> Order Food Online with takeaways services | Buylowcal.com </title> }
+        {shopCat == 'Restraunts' && <title> Get Top Rated Restraunts List in Tricity with Buylowcal.com </title> }'}
           {/* <title>{shopCat == 'Groceries' && ' ' }</title>
           <title>{shopCat == 'Groceries' && ' ' }</title>
           <title>{shopCat == 'Groceries' && ' ' }</title> */}
@@ -168,6 +171,9 @@ const ShopsPage = () => {
          { shopCat == 'Restaurants' &&  <meta name="description" content='Find the best restaurants near you with buylowcal & Get exclusive offer on every restaurant'  /> }
           { shopCat == 'Fashion, Lifestyle & Furnishings' &&  <meta name="description" content='Get Amazing Deals on Lifestyle & home Items & get 20 % off on every item '  /> }
          { shopCat == 'Gym & Health Products' &&  <meta name="description" content='Get 100% pure Gym &Health product & Get A chance to win exciting offers' /> }
+         {shopCat == 'Salon & Spa' &&  <meta name="description" content='Change your looks in couple of mins with choosing the right Salon with Buylowcal' /> }
+         {shopCat == 'Takeaways' &&  <meta name="description" content='Lets change the era with takeaways services in chandigarh with Buylowcal.com' /> }
+          {shopCat == 'Restraunts' &&  <meta name="description" content='Top 5 star Rating restraunt list in your smartphone | We provides you 100+ restraunt in one Click' /> }
 
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         </Head>
