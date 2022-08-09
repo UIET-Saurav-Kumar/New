@@ -14,6 +14,7 @@ export const fetchFeatureProduct = async ({ queryKey }: QueryParamsType) => {
 
   return { featureProducts: { data } };
 };
+
 export const useFeatureProductQuery = (options: FetureProductOptionsType) => {
   return useQuery<{ featureProducts: { data: FeatureProduct[] } }, Error>(
     [API_ENDPOINTS.HOME_FEATURE_PRODUCTS, options],

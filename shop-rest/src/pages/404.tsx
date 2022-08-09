@@ -38,6 +38,9 @@ export default function NotFoundPage() {
 export const getStaticProps = async ({ locale }: any) => {
   return {
     props: {
+      redirect:{
+        destinations: '/home',
+      },
       ...(await serverSideTranslations(locale, ["common"])),
     },
   };

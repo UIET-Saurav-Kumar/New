@@ -52,7 +52,7 @@ export default function ShopDescription({data} :any) {
 
                           <span className=" text-xs md:text-lg font-light tracking-wide text-body">
                             {/* {data?.settings?.contact} */}
-                            77430-42380
+                             84279-90450
                           </span>
                   </div>
 
@@ -65,7 +65,8 @@ export default function ShopDescription({data} :any) {
                   </span>
 
                   <span className=" text-sm font-light tracking-wide text-body">
-                    {data?.settings?.contact}
+                    {/* {data?.settings?.contact} */}
+                    84279-90450
                   </span>
               </div>
 

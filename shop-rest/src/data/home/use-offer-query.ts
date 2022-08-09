@@ -13,7 +13,6 @@ export const fetchOfferQuery = async ({ queryKey }: QueryParamsType) => {
   const {
     data
   } = await OfferService.search(params as OfferOptionsType);
-
   return { offers: { data } };
 };
 

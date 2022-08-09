@@ -144,10 +144,10 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
                     <del className="text-xs md:text-sm text-gold ms-2">
                       {price}
                     </del>
-                  ) : <del className="text-xs md:text-sm h-4 text-discount ms-2">
+                   ) : <del className="text-xs md:text-sm h-4 text-discount ms-2">
                   
-                </del>
-                } 
+                   </del>
+                   } 
                   </div>
               </>
                <WishlistButton className="h-5" productId={product?.id} />
@@ -158,7 +158,7 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
         
 
         <h3
-          className="text-xs font-bold flex-normal md:text-sm flex flex-col   text-gray-900  truncate mb-2 cursor-pointer"
+          className="text-xs font-bold flex-normal md:text-sm flex flex-col text-gray-900  truncate mb-2 cursor-pointer"
         >
            <span className=''>
              {name}
@@ -197,11 +197,10 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
             {Number(quantity) > 0 && (
               <div className="flex  items-start  justify-between md:pt-3 ">
               <AddToCart  variant="argon" data={product} />
-             { product?.id ===  ( 14358 || 14110) ? containsProduct(ordersData?.pages?.[0].data, product?.id) ?
+             { product?.id ===  (14358 || 14110) ? containsProduct(ordersData?.pages?.[0].data, product?.id) ?
               // <span className='text-xs mt-2   lg:text-sm text-red-600'>
                
-                    
-                    <span className="text-xs mt-2   lg:text-sm   font-bold shadow-2xl bg-red-600 p-1 rounded px-1 text-white">Sold out</span>
+                    <span className="text-xs mt-2 lg:text-sm font-bold shadow-2xl bg-red-600 p-1 rounded px-1 text-white">Sold out</span>
                 // </span>
               : null : ''}
            </div>

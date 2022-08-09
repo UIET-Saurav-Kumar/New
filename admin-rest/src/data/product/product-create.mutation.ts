@@ -14,9 +14,10 @@ export const useCreateProductMutation = () => {
     {
       onSuccess: () => {
         if(process.browser){
-          var pathname=(window.location.href.includes("offers"))?ROUTES.OFFERS:ROUTES.PRODUCTS;
-        }else{
-          var pathname=ROUTES.PRODUCTS;
+          var pathname = ( window.location.href.includes("/brand-offers") && ROUTES.BRAND_OFFERS)
+          || (window.location.href.includes("products") && ROUTES.PRODUCTS) || window.location.href.includes('/offers') && ROUTES.OFFERS;
+        } else {
+          var pathname = ROUTES.PRODUCTS;
         }
         router.push(`/${router?.query?.shop}${pathname}`);
       },

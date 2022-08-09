@@ -38,4 +38,5 @@ export const ROUTES = {
 
   REVIEWS: "/reviews",
   QUESTIONS: "/questions",
+  BRAND_OFFERS: "/brand-offers",
 };

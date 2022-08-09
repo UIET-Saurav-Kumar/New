@@ -18,6 +18,7 @@ import PromotionSlider from "@components/slider/promotion-slider";
 import Krypton from "@components/product/product-card/krypton";
 import Helium from "@components/product/product-card/helium";
 import Argon from "@components/product/product-card/argon";
+import OfferCard from "@components/product/product-card/offer-card";
 
 type ShopCardProps = {
   shop: any;
@@ -125,14 +126,16 @@ const ShopCard2: React.FC<ShopCardProps> = ({ shop,text,key,category, shopId }) 
         </div> : 
          <div className="flex items-center w-full space-x-2   scrollbar-hide  overflow-x-scroll"> {data?.pages.map((products, _idx) => (
             <Fragment key={_idx}>
-                {products.data.filter(product => product?.status === 'publish').map(product => (
-                    <motion.div key={product.id}>
+                {products?.data?.filter(product => product?.status === 'publish').map(product => (
+                  product?.is_brand_offer !== 1 ? 
+                    <motion.div key={product?.id}>
                     <div className="w-44 md:w-60 "> 
                        {/* <PromotionSlider text={text} category={category} data={products} shopId={shop.id} /> */}
                        {/* <Neon shop={shop} product={product} /> */}
                        <Argon shop={shop} product={product} />
                     </div>
-                  </motion.div>
+                  </motion.div> :
+                   <OfferCard product={product} productSlug={product.slug} />
                 ))}
                 
             </Fragment>

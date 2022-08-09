@@ -90,6 +90,7 @@ type FormValues = {
   pan_number: any;
   tan_number: any;
   fssai_number: number;
+  is_empty: number;
 
   logo: any;
   balance: BalanceInput;
@@ -171,6 +172,7 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
   function onSubmit(values: FormValues) {
     const settings = {
       ...values?.settings,
+      
       location: { ...omit(values?.settings?.location, "__typename") },
       socials: values?.settings?.socials
         ? values?.settings?.socials?.map((social: any) => ({
@@ -188,7 +190,7 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
           input: {
             ...values,
             address: restAddress,
-            shop_categories:options,
+            shop_categories: options,
             settings,
             balance: {
               id: initialValues.balance?.id,

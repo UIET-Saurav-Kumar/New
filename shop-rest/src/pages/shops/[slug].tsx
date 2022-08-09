@@ -106,7 +106,7 @@ const ShopPage = ({ data }: any) => {
 
   // useeffect  window.scrollTo(0, 1000)
   useEffect(() => {
-    pageURL.includes('chandigarhgrocerystore') ? window.scrollTo(0, 670) : window.scrollTo(0, 0)
+    pageURL.includes('chandigarh-grocery-store') ? window.scrollTo(0, 670) : window.scrollTo(0, 0)
   }, []);
   const[shopCategory, setShopCategory] = useState('');
 
@@ -164,10 +164,10 @@ const ShopPage = ({ data }: any) => {
     }
   };
 
-  // console.log('shop slug is', data?.slug?.includes('chandigarhgrocerystore' ,'kosmetics-india'))
+  // console.log('shop slug is', data?.slug?.includes('chandigarh-grocery-store' ,'kosmetics-india'))
   seoFunction(data);
 
-  const slug = ['chandigarhgrocerystore', 'kosmetics-india'];
+  const slug = ['chandigarh-grocery-store', 'kosmetics-india'];
 
   const  getShopCategory = () => {
 
@@ -188,16 +188,40 @@ const ShopPage = ({ data }: any) => {
 
   // console.log('shop data',metaData)
 
-  console.log('data',data);
+  const shopCat = data?.shop_categories?.replace(/[{":,0123456789}]/g,'').slice(5,-3);
+
+  // const shopName = data?.name;
   
+
+  console.log('shopsdata',shopCat);
+ 
 
   return (
 
     <>
 
         <Head>
-          <title>{(data.name?data.name:'')+' '+(data.address.city?data.address.city+" "+data.address.street_address:'')+', Best Discounts and Offers Only Through BuyLowcal.com'}</title>
-          <meta name="description" content={(data.name?data.name:'')+' '+(data.address.city?data.address.city+" "+data.address.street_address:'')+' Best '+shopCategory+' deals, offers, discounts and cash backs only through buylowcal.com'} />
+          
+        {shopCat == 'Cosmetics' &&  <title>Get Best Deals on Cosmetic Products | #1 Cosmetic store in Chandigarh </title> }
+        {shopCat == 'Groceries' && <title>  Best Grocery Store in Tricity | Get exclusive Offer Now</title> }
+        {shopCat == 'Pharmacy' &&   <title> Get Upto 30% off on Pharmacy With Buylowcal | Shop Now  </title> }
+        {shopCat == ' Vegetables & Fruits' &&  <title>  Save Your Time & Money | Buy Veggies Fruits  with Buylowcal  </title> }
+        {shopCat == 'Restaurants' &&  <title> Get Best Deals on Restaurants Now | Connect your local restaurant with Buylowcal </title> }
+        {shopCat == 'Fashion, Lifestyle & Furnishings' &&   <title>  Buylowcal | shop Now Lifestyle & Home Items & Get 20% off </title> }
+        {shopCat == 'Gym & Health Products' && <title>  Get 100% pure Gym & Health product & Get A chance to win exciting offers</title> }
+          {/* <title>{shopCat == 'Groceries' && ' ' }</title>
+          <title>{shopCat == 'Groceries' && ' ' }</title>
+          <title>{shopCat == 'Groceries' && ' ' }</title> */}
+
+
+         {shopCat == 'Cosmetics' &&  <meta name="description" content= 'Get Amazing deals on ladies cosmetic products in Chandigarh tricity| Buy Now with Buylowcal '  /> }
+         { shopCat == 'Groceries' && <meta name="description" content= 'Grab The Best deal and  Offers on Grocery items | Buy Now With Buylowcal' /> }
+         {shopCat == 'Pharmacy' &&  <meta name="description" content='Prescriptions may be refilled and transferred online, or you can find a CVS Pharmacy near you with Buylowcal  Online shopping, Extra Care offers, Clinic locations, and more.' /> }
+         { shopCat == ' Vegetables & Fruits' && <meta name="description" content= 'Acquire the best deal on purchasing Veggies & Fruits with Buylowcal And Get 20 % off On purchasing'  /> }
+         { shopCat == 'Restaurants' &&  <meta name="description" content='Find the best restaurants near you with buylowcal & Get exclusive offer on every restaurant'  /> }
+          { shopCat == 'Fashion, Lifestyle & Furnishings' &&  <meta name="description" content='Get Amazing Deals on Lifestyle & home Items & get 20 % off on every item '  /> }
+         { shopCat == 'Gym & Health Products' &&  <meta name="description" content='Get 100% pure Gym &Health product & Get A chance to win exciting offers' /> }
+
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         </Head>
 
@@ -237,7 +261,7 @@ const ShopPage = ({ data }: any) => {
            
                             
                               {/*                                 
-                                { data.slug !== 'chandigarhgrocerystore' ? 
+                                { data.slug !== 'chandigarh-grocery-store' ? 
                                 ( <div className='flex w-full'> 
                                       <WebShopBanner/>
                                   </div>)
@@ -277,7 +301,7 @@ const ShopPage = ({ data }: any) => {
                                           
                             </div>
 
-                            { data?.slug == 'chandigarhgrocerystore' ? ( 
+                            { data?.slug == 'chandigarh-grocery-store' ? ( 
                              <div className="w-full -mt-80 object-contain">
                                     <img src='/grocery-web.jpg' className="object-contain" />
                              </div> ) : null }
@@ -294,7 +318,6 @@ const ShopPage = ({ data }: any) => {
                           {/* </HidingHeader>  */}
 
                           <div className='relative top-0 flex flex-col'> 
-
                               { categoryData?.categories?.data?.length ? 
                                 <> 
                                   <div id='category-dropdown-sidebar'  
@@ -312,7 +335,7 @@ const ShopPage = ({ data }: any) => {
                                 // <ShopProductFeed shopId={data.id} />
                                     <Feed shopData={data} shopId={data.id} />
                                 }</div>
-                           </div> 
+                          </div> 
 
 
                        {/* </div> */}

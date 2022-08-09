@@ -25,6 +25,7 @@ import { useWindowSize } from "@utils/use-window-size";
 import CartCounterButton from "@components/cart/cart-counter-button";
 import ShopLayout from "@components/layout/shop-layout";
 import Layout from "@components/layout/layout";
+import Head from "next/head";
 
 
 
@@ -123,14 +124,54 @@ const ShopsPage = () => {
 
   const closeSort = () => {
       setSort(false);
-  }
+  } 
+
+  //push shops with no products to the end of the list
+  const ShopsWithProducts = data?.shops?.filter((shop: any) => shop?.products?.length > 0);
+  const ShopsWithNoProducts = data?.shops?.filter((shop: any) => shop?.products?.length === 0);
+
+  // push both in seperate array starting with the first shop with products and ending with the last shop with no products
+  
+  
+  
  
   // console.log('shops',data?.pages?.filter((shop: any) => shop?.is_active === 1))
   // console.log('shops name',data?.pages?.data?.map((shop: any) => shop))
 
-  console.log('shop page data',data)
+  const shopCat =getCategory();
+
+  console.log('shop page data',getCategory())
 
   return (
+
+    <>
+
+<Head>
+          
+        {shopCat == 'Cosmetics' &&  <title>Get Best Deals on Cosmetic Products | #1 Cosmetic stores in Chandigarh </title> }
+        {shopCat == 'Groceries' && <title>  Best Grocery Store in Tricity | Get exclusive Offer Now</title> }
+        {shopCat == 'Pharmacy' &&   <title> Get Upto 30% off on Pharmacy With Buylowcal | Shop Now  </title> }
+        {shopCat == ' Vegetables & Fruits' &&  <title>  Save Your Time & Money | Buy Veggies Fruits  with Buylowcal  </title> }
+        {shopCat == 'Restaurants' &&  <title> Get Best Deals on Restaurants Now | Connect your local restaurant with Buylowcal </title> }
+        {shopCat == 'Fashion, Lifestyle & Furnishings' &&   <title>  Buylowcal | shop Now Lifestyle & Home Items & Get 20% off </title> }
+        {shopCat == 'Gym & Health Products' && <title>  Get 100% pure Gym & Health product & Get A chance to win exciting offers</title> }
+          {/* <title>{shopCat == 'Groceries' && ' ' }</title>
+          <title>{shopCat == 'Groceries' && ' ' }</title>
+          <title>{shopCat == 'Groceries' && ' ' }</title> */}
+
+
+         {shopCat == 'Cosmetics' &&  <meta name="description" content= 'Get Amazing deals on ladies cosmetic products in Chandigarh tricity| Buy Now with Buylowcal '  /> }
+         //
+         { shopCat == 'Groceries' && <meta name="description" content= 'Grab The Best deal and  Offers on Grocery items | Buy Now With Buylowcal' /> }
+         {shopCat == 'Pharmacy' &&  <meta name="description" content='Prescriptions may be refilled and transferred online, or you can find a CVS Pharmacy near you with Buylowcal  Online shopping, Extra Care offers, Clinic locations, and more.' /> }
+         { shopCat == ' Vegetables & Fruits' && <meta name="description" content= 'Acquire the best deal on purchasing Veggies & Fruits with Buylowcal And Get 20 % off On purchasing'  /> }
+         { shopCat == 'Restaurants' &&  <meta name="description" content='Find the best restaurants near you with buylowcal & Get exclusive offer on every restaurant'  /> }
+          { shopCat == 'Fashion, Lifestyle & Furnishings' &&  <meta name="description" content='Get Amazing Deals on Lifestyle & home Items & get 20 % off on every item '  /> }
+         { shopCat == 'Gym & Health Products' &&  <meta name="description" content='Get 100% pure Gym &Health product & Get A chance to win exciting offers' /> }
+
+          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        </Head>
+     
 
     <div className="w-full">
 
@@ -143,11 +184,14 @@ const ShopsPage = () => {
           {/* <div className='py-4 px-4 grid w-full grid-cols-1 xs+:grid-cols-1 xs++:grid-cols-2 gap-4 sm:grid-cols-2 
                           md:grid-cols-2 md++:grid-cols-2 lg:grid-cols-3 lg+:grid-cols-3 xl:grid-cols-4 xl+:grid-cols-4
                           xl++:grid-cols-5 2xl:grid-cols-5  3xl:grid-cols-6 border-2 overflow-y-scroll h-screen overflow-x-hidden  bg-gray-100'> */}
-            <div className=" lg:px-10  h-full w-full flex flex-col">
-              {data?.pages?.map((page, idx) => {
+            <div className="lg:px-10  h-full w-full flex flex-col">
+              { data?.pages?.map((page, idx) => {
                     return (
                       <Fragment key={idx}>
-                        {page.data.filter((shop) => shop?.is_active === 1).map((shop: any) => (
+                        {/* {page.data.filter((shop) => shop?.is_active === 1 && shop?.products?.length == 0 ).map((shop: any) => (
+                          <ShopCard2 text={getText()} category={getCategory()} shop={shop} shopId={shop?.id} key={shop.id} />
+                        ))} */}
+                        {page.data.filter((shop) => shop?.is_active === 1 ).map((shop: any) => (
                           <ShopCard2 text={getText()} category={getCategory()} shop={shop} shopId={shop?.id} key={shop.id} />
                         ))}
                       </Fragment>
@@ -167,6 +211,7 @@ const ShopsPage = () => {
           }
 
     </div>
+    </>
     
   );
 };

@@ -151,6 +151,8 @@ export declare type Coupon = {
   updated_at: Scalars["DateTime"];
 };
 export declare type Product = {
+  expire_at: string | number | Date;
+  active_from: string | number | Date;
   id: Scalars["ID"];
   shop_id: Scalars["ID"];
   name: Scalars["String"];

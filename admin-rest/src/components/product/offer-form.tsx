@@ -38,6 +38,7 @@ import Alert from "@components/ui/alert";
 import { useState } from "react";
 import { animateScroll } from "react-scroll";
 
+
 type Variation = {
   formName: number;
 };
@@ -70,6 +71,7 @@ type FormValues = {
   variation_options: Product["variation_options"];
   [key: string]: any;
 };
+
 const defaultValues = {
   sku: "",
   name: "",
@@ -317,6 +319,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
     }
   };
   const productTypeValue = watch("productTypeValue");
+  
   return (
     <>
       {errorMessage ? (
@@ -372,6 +375,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
           </div>
 
           <div className="flex flex-wrap my-5 sm:my-8">
+            
             <Description
               title={t("form:item-description")}
               details={`${

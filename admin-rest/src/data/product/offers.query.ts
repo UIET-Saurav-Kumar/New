@@ -7,8 +7,11 @@ import { useQuery } from "react-query";
 import Product from "@repositories/product";
 import { API_ENDPOINTS } from "@utils/api/endpoints";
 
+
 const fetchProducts = async ({ queryKey }: QueryParamsType) => {
+
   const [_key, params] = queryKey;
+  
   const {
     page,
     text,
@@ -20,6 +23,7 @@ const fetchProducts = async ({ queryKey }: QueryParamsType) => {
     orderBy = "updated_at",
     sortedBy = "DESC",
   } = params as ProductsQueryOptionsType;
+
   const searchString = stringifySearchQuery({
     name: text,
     type,

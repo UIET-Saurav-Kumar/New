@@ -14,6 +14,8 @@ import RelatedProducts from "./product-details/related-products";
 
 import Link from 'next/link';
 import ProductNotFoundInfo from "./product-not-found-info";
+import OfferCard from "./product-card/offer-card";
+import { useModalAction } from "@components/ui/modal/modal.context";
 const ProductFeedLoader = dynamic(
   () => import("@components/ui/loaders/product-feed-loader")
 );
@@ -22,6 +24,12 @@ const Feed = ({ shopId, shopData }: { shopId: string }) => {
 
   const { t } = useTranslation("common");
   const { query } = useRouter();
+
+  const { openModal } = useModalAction();
+
+  function openMessage() {
+    return openModal("IN_STORE_OFFER");
+  }
 
   const loadMoreRef = useRef();
 
@@ -41,7 +49,6 @@ const Feed = ({ shopId, shopData }: { shopId: string }) => {
   },
   {
     enabled: Boolean(shopId),
-
   });
 
    console.log('feed ',data)
@@ -72,6 +79,7 @@ const Feed = ({ shopId, shopData }: { shopId: string }) => {
   return (
 
     <div className="bg-gray-100 min-h-full pt-1 pb-8 px-1 lg:p-8">
+
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 gap-1">
         {loading && !data?.pages?.length ? (
           <ProductFeedLoader limit={3} />
@@ -80,17 +88,19 @@ const Feed = ({ shopId, shopData }: { shopId: string }) => {
             {data?.pages.map((products, _idx) => (
               <Fragment key={_idx}>
                 {products.data.filter(product => product?.status === 'publish').map(product => (
-                  <motion.div key={product.id}>
+                 product?.is_brand_offer !== 1 ? 
+                 <motion.div key={product.id}>
                     {renderProductCard(product)}
                   </motion.div>
+                  :
+                  // ''
+                  <OfferCard onClick={openMessage()} product={product} productSlug={product.slug} />
                 ))}
                 
               </Fragment>
             ))}
           </>
-        )}
-
-        
+        )} 
       </div>
 
       {/* <RelatedProducts products={products}/> */}

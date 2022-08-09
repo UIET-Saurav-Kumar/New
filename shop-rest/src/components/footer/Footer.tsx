@@ -62,7 +62,7 @@ const Footer = () => {
 						<a className='light-text cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline font-light mt-' href='/home#ecommerce-store'><h5 className='light-text mt-4 font-light'> E-Stores</h5></a>	
 						<a className='light-text cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline font-light mt-' href='/home#offer-of-the-day'><h5  className='light-text mt-4 font-light'> Offer of the Day</h5></a>
 						<a className='light-text cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline font-light' href='/home#featured-products'><h5  className='light-text mt-4 font-light'> Featured Products</h5></a>
-						<a className='light-text cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline font-light' href='/buylowcal-magazines'><h5  className='light-text mt-4 font-light'> Buylowcal Magazines</h5></a>
+						<a className='light-text cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline font-light' href='/buylowcal-monthly-leaderboard-magazines'><h5  className='light-text mt-4 font-light'> Buylowcal Magazines</h5></a>
 						</div> 
 			  	 </div>
 

@@ -8,9 +8,9 @@ import { useRouter } from "next/router";
 import { scroller, Element } from "react-scroll";
 import ImageSlider from '@components/home-page-image-slider/ImageSlider';
 import AllCategories from '@components/home-page-product-section/AllCategories';
-import FeaturedShops from '@components/home-page-product-section/FeaturedShops';
-import FeaturedProducts from '@components/home-page-product-section/FeaturedProducts';
-import ProductGrid from '@components/home-page-product-section/offer-of-the-day';
+import FeaturedShops from '@components/home-page-product-section/featured-shops';
+import FeaturedProducts from '@components/home-page-product-section/featured-products';
+import OfferOfTheDay from '@components/home-page-product-section/offer-of-the-day';
 import AmazonShops  from '@components/home-page-product-section/AmazonShops'
 import dynamic from "next/dynamic";
 import { GetStaticProps } from "next";
@@ -22,13 +22,14 @@ import { fetchCategories } from "@data/home/use-categories-query";
 import { fetchFeatureShop } from "@data/home/use-feature-shop-query";
 import { fetchFeatureStore } from "@data/home/use-feature-e-store";
 import { fetchOfferQuery } from "@data/home/use-offer-query";
+import { fetchBrandOfferQuery } from "@data/home/use-brand-offer-query";
 import MobileNavigation from "@components/layout/mobile-navigation";
 import StayTuned from '@components/no-shop-msg/stay-tuned'
 import { useShopAvailabilityQuery } from "@data/home/use-shop-availability-query";
 import { useLocation } from "@contexts/location/location.context";
 import Tandoor from "@components/home-page-product-section/tandoor";
 import InvoiceBanner from "@components/home-page-product-section/invoice-banner";
-import HomePageBanner from "@components/home-page-product-section/heater-banner";
+import HomePageBanner from "@components/home-page-product-section/tree-plantation-banner";
 import RedBullBanner from "@components/home-page-product-section/home-page-banner";
 import UserDashboard from "@components/home-page-product-section/UserDashboard";
 import Tagline from "@components/home-page-product-section/tagline";
@@ -36,6 +37,8 @@ import ProgressBox from "../../components/profile/progress-box/progress-box";
 import Link from "next/link";
 import router from "next/router";
 import ElanteBanner from "@components/home-page-product-section/elante-banner";
+import BrandOffers from "@components/home-page-product-section/brand-offers";
+import Head from "next/head";
 
 
 const ProductFeedLoader = dynamic(
@@ -86,6 +89,14 @@ export const getStaticProps: GetStaticProps = async ({ locale, params }) => {
           staleTime: 60 * 1000,
         }
     );
+
+    await queryClient.prefetchQuery(
+      ["brand-offers", { type: params?.type }],
+      fetchBrandOfferQuery,
+      {
+        staleTime: 60 * 1000,
+      }
+  );
   
     return {
       props: {
@@ -108,10 +119,8 @@ const { query } = useRouter();
 const {getLocation} =useLocation()
 
 
+  const [scrollPosition, setScrollPosition] = useState(0);
 
-
-
-const [scrollPosition, setScrollPosition] = useState(0);
   const handleScroll = () => {
     const position = window.pageYOffset;
     setScrollPosition(position);
@@ -176,12 +185,19 @@ const {
   ]
 
     return (
+
+      <> 
+      
+      <Head>
+      <meta name="msvalidate.01" content="1A1026D1B7AF52339B69AA95E6DFE95C" />
+      </Head>
+
         <div className=" h-full">
 
             <div className="fixed z-50 bottom-16 right-10 lg:bottom-10 lg:right-10 flex justify-center items-center">
                     {/* <img src='/up-arrow.png' className="w-12 h-12" onClick={() => window.scrollTo(0, 0)} />  */}
                     <img src='/rocket.png' className={` ${scrollPosition > 250 ? 'visible transition-transform duration-150' : 'hidden'} w-12 h-12`} onClick={() => window.scrollTo(0, 0)} /> 
-              </div>
+            </div>
 
     {loading ? (
          <div className="absolute top-0 left-0  h-screen bg-black opacity-80   z-50 w-full">
@@ -198,23 +214,14 @@ const {
             (
               <div className="relative w-full">
               
-                {/* // animation on component load */}
-                {/* <div className="absolute top-0 left-0 w-full h-full bg-black opacity-75" /> */}
-                
-                {/* <ImageSlider/> */}
-                {/* <img src='/user-dashboard.jpeg' className=" w-full h-full object-cover" /> */}
-                {/* <ProgressBox data={profileStatus} status={'name'} /> */}
-                {/* <Link href='/user/profile'><span className="absolute right-2 text-blue-800 text-xs cursor-pointer hover:underline">Complete your profile ></span></Link> */}
-                {/* <span onClick={()=> router.push('/user/profile')} className="absolute right-2 text-blue-800 text-xs cursor-pointer hover:underline">Complete your profile ></span> */}
                 <Tagline/>
                 <UserDashboard/>
                 <ElanteBanner/>
                 <RedBullBanner/>
                 <AllCategories/>
-                {/* <InvoiceBanner/> */}
-                
                 <Tandoor/>
-                <ProductGrid/>
+                <OfferOfTheDay/>
+                <BrandOffers/>
                 <HomePageBanner />
                 <FeaturedShops />
                 <FeaturedProducts/>
@@ -235,6 +242,7 @@ const {
             <MobileNavigation />
         } 
         </div>
+        </>
     )
     
 }

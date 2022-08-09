@@ -99,6 +99,21 @@ class ProductController extends CoreController
         return $this->repository->where("is_offer",1)->with(['type', 'shop', 'categories', 'tags', 'variations.attribute'])->paginate($limit);
     }
 
+    public function product_brand_offers(Request $request)
+    {
+        $limit = $request->limit ?   $request->limit : 15;
+        $location=($request->location)?json_decode($request->location):"";
+
+        if($location){
+            $shops = ShopRepository::getSortedShops($location);
+            return $this->repository->where("is_brand_offer",1)->whereIn('shop_id',$shops)->with(['type', 'shop', 'categories', 'tags', 'variations.attribute'])->paginate($limit);
+
+        }
+
+        return $this->repository->where("is_brand_offer",1)->with(['type', 'shop', 'categories', 'tags', 'variations.attribute'])->paginate($limit);
+        
+    }
+ 
     /**
      * Store a newly created resource in storage.
      *
@@ -289,6 +304,19 @@ class ProductController extends CoreController
 
         }
         return Product::where("is_featured",1)->where('is_offer',1)->limit($limit)->get();
+    }
+
+    // fetch brandoffers
+    public function fetchBrandOffers(Request $request)
+    {
+        $limit = isset($request->limit) ? $request->limit : 10;
+        $location=($request->location)?json_decode($request->location):"";
+        if($location){
+            $shops=ShopRepository::getSortedShops($location);
+            return Product::whereIn("shop_id",$shops)->with(['shop'])->where('is_brand_offer',1)->where("is_featured",1)->get();
+
+        }
+        return Product::where("is_featured",1)->where('is_brand_offer',1)->limit($limit)->get();
     }
 
 

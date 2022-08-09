@@ -160,21 +160,22 @@ export default function Appointment({user} : Props) {
                 variant="outline"
                 error={t(errors.email?.message!)}
               />
-            <Input
-              label={t("Mobile Number")}
-              {...register("subject")}
-              variant="outline"
-              className=""
-              error={t(errors.subject?.message!)}
-            />
+              
+              <Input
+                label={t("Mobile Number")}
+                {...register("subject")}
+                variant="outline"
+                className=""
+                error={t(errors.subject?.message!)}
+              />
 
-            <Input
-              label={t("City")}
-              {...register("description")}
-              variant="outline"
-              className=""
-              error={t(errors.description?.message!)}
-            />
+              <Input
+                label={t("City")}
+                {...register("description")}
+                variant="outline"
+                className=""
+                error={t(errors.description?.message!)}
+              />
             
             <Button className="mt-4">
               {t("Submit")}
@@ -182,8 +183,8 @@ export default function Appointment({user} : Props) {
 
             <span className="font-sans flex w-full 
                              items-end text-green-600"> 
-                <p className=" text-center  font-normal text-gray-700 text-sm mt-4 lg:text-right w-full"> 
-                    Any queries?<p className=" text-center text-sm  text-gray-800 mt-4 lg:text-right w-full">
+                <p className=" text-center font-normal text-gray-700 text-sm mt-4 lg:text-right w-full"> 
+                    Any queries?<p className=" text-center text-sm text-gray-800 mt-4 lg:text-right w-full">
                     Call us/Whatsapp - <a href='tel:84279-90450' className="hover:underline text-blue-800"> 84279-90450</a>
                 </p>
                </p>

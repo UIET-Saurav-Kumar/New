@@ -21,6 +21,11 @@ const ProductDetailsModalView = dynamic(
 const CreateOrUpdateAddressForm = dynamic(
   () => import("@components/address/address-form")
 );
+
+const InStoreOfferMessage = dynamic(
+  () => import("@components/ui/in-store-offer-msg")
+);
+
 const ReviewRating = dynamic(() => import('@components/reviews/review-form'));
 const QuestionForm = dynamic(
   () => import('@components/questions/question-form')
@@ -40,6 +45,7 @@ const ManagedModal = () => {
   const { closeModal } = useModalAction();
 
   return (
+    
     <Modal open={isOpen} onClose={closeModal}>
       {view === "LOGIN_VIEW" && <Login />}
       {view === "REGISTER" && <Register />}
@@ -47,6 +53,7 @@ const ManagedModal = () => {
       {view === "ADD_OR_UPDATE_ADDRESS" && <CreateOrUpdateAddressForm />}
       {view === "DELETE_ADDRESS" && <AddressDeleteView />}
       {view === 'OTP_LOGIN' && <OtpLoginView />}
+      {view === 'IN_STORE_OFFER' && <InStoreOfferMessage />}
       {view === "SHOP_MOBILE_CATEGORIES" && <CategoryDropdownSidebar />}
       {view === "SHOP_PAYMENT_FORM" && <ShopPaymentForm />}
       {view === 'REVIEW_RATING' && <ReviewRating />}
