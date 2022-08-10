@@ -399,7 +399,7 @@ const ShopNavbar = () => {
                     href={ROUTES.ORDERS}
                     className="font-semibold text-heading flex items-center transition duration-200 no-underline hover:text-accent focus:text-accent"
                   >
-                    {t("nav-menu-track-order")}
+                    { 'Track Order'}
                   </Link>
                 </li>
               ) : null
@@ -457,7 +457,7 @@ const ShopNavbar = () => {
                     href={ROUTES.ORDERS}
                     className="font-semibold text-heading flex items-center transition duration-200 no-underline hover:text-accent focus:text-accent"
                   >
-                    {t("nav-menu-track-order")}
+                    { 'Track Order'}
                   </Link>
                 </li>
               ) : null}

@@ -162,7 +162,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     return {
       props: {
         data: shop,
-        ...(await serverSideTranslations(locale!, ["common"])),
+       // ...(await serverSideTranslations(locale!, ["common"])),
         dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
       },
       revalidate: 120,

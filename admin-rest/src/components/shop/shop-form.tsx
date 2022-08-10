@@ -81,7 +81,7 @@ export const updatedIcons = socialIcon.map((item: any) => {
 type FormValues = {
   name: string;
   description: string;
-  cover_image: AttachmentInput[];
+  cover_image: AttachmentInput;
   gst_certificate: any;
   cancelled_cheque: any;
   // pan_card_image: any;

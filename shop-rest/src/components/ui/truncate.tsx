@@ -38,7 +38,7 @@ const ReadMore: React.FC<ReadMoreProps> = ({
               onClick={toggleLines}
               style={{ color: "#009e7f", fontWeight: 700 }}
             >
-              {more ? more : t("common:text-read-more")}
+              {more ? more : t("  Read more")}
             </a>
           </span>
         </>
@@ -52,7 +52,8 @@ const ReadMore: React.FC<ReadMoreProps> = ({
               onClick={toggleLines}
               style={{ color: "#009e7f", fontWeight: 700 }}
             >
-              {less ? less : t("common:text-less")}
+              {/* {less ? less : t("common:text-less")} */}
+              {less ? less : t("See less")}
             </a>
           </span>
         </>

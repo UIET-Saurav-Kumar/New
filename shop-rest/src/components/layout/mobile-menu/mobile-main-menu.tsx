@@ -23,7 +23,7 @@ export default function MobileMainMenu() {
               onClick={() => handleClick(ROUTES.ORDERS)}
               className="flex items-center py-3 px-5 md:px-8 text-sm font-semibold capitalize text-heading transition duration-200 hover:text-accent"
             >
-              {t("nav-menu-track-order")}
+              { 'Track Order'}
             </span>
           </li>
         ) : null}

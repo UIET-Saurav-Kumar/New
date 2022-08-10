@@ -96,11 +96,11 @@ export const getStaticProps: GetStaticProps = async ({ locale, params }) => {
       {
         staleTime: 60 * 1000,
       }
-  );
+  ) 
   
     return {
       props: {
-        ...(await serverSideTranslations(locale!, ["common"])),
+        // ...(await serverSideTranslations(locale!, ["common"])),
         dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
       },
       revalidate: 120,

@@ -43,6 +43,7 @@ import Seo from "@components/ui/seo";
 import ShopLayout from "@components/layout/shop-layout";
 import PromotionSlider from "@components/slider/promotion-slider";
 import CoverImageSlider from "./cover-image-slider";
+import ImageSlider from "./slider";
 
 
 const CartCounterButton = dynamic(
@@ -244,26 +245,30 @@ const ShopPage = ({ data }: any) => {
 
                       {/* <div className="hidden lg:space-x-5 xl:space-x-10  lg:flex justify-between "> */}
 
-                          <div className = 'hidden lg:flex flex-col overflow-y-scroll space-y-4  w-full'>  
+                          <div className ='hidden lg:flex flex-col overflow-y-scroll space-y-4  w-full'>  
 
-                              <div className='flex w-full mt-10 h-80 px-3 border'> 
+                              <div className='flex w-full  mt-10 h-80 px-3  '> 
 
                                 { slug?.some(el => data?.slug?.includes(el)) ? null :
-                                    ( <div className='h-full w-96'>  
+                                    ( <div className='h-full w-2/5'>  
                                          <ShopProfileCard data={data} />
                                       </div> )  }
                                     
                                     { slug?.some(el => data?.slug?.includes(el)) ? null :
-                                    ( <div className='flex w-full h-full '>
-                                      {cover_image?.length > 1 ?
-                                        // <div className=' '>
+                                    (
+                                    <div className='w-4/5 '>
+                                      {cover_image?.length && cover_image?.length > 1 ?
+                                         <div className='w-full h-full'>  
+                                         {/* <ImageSlider data={cover_image} /> */}
                                             <CoverImageSlider key={cover_image} data={cover_image} />
-                                        // </div>
-                                         :
-                                      imageCheck(data?.cover_image?.thumbnail, data, '317', false,'h-full w-full object-fill') 
+                                        </div>
+                                           :  
+                                       imageCheck(data?.cover_image?.thumbnail, data, '317', false,'h-full w-full object-fill') 
                                       
-                                      }
-                                    </div> )  }
+                                        }  
+                                    </div> 
+                                    )  
+                                    }
                    
                               </div> 
            
@@ -410,7 +415,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     return {
       props: {
         data: shop,
-        ...(await serverSideTranslations(locale!, ["common"])),
+        //...(await serverSideTranslations(locale!, ["common"])),
         dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
       },
       revalidate: 120,

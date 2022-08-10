@@ -59,7 +59,7 @@ const Navbar = ({label}) => {
                             duration-200 w-24 no-underline hover:text-accent focus:text-accent"
               >
 
-                 {t("nav-menu-track-order")}
+                 { 'Track Order'}
 
               </Link>
 

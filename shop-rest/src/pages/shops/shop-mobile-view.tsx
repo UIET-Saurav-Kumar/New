@@ -21,6 +21,8 @@ import Feed from "@components/product/feed";
 import { useEffect } from "react";
 import { HidingHeader } from "hiding-header-react";
 import Layout from "@components/layout/layout";
+import ImageSlider from "./slider";
+import CoverImageSlider from "./cover-image-slider";
 
 
 
@@ -36,6 +38,8 @@ export default function ShopMobileView({data, shopData}: any) {
   } = useCategoriesQuery({
     type: query.slug as string,
   });
+
+  const {cover_image} = data;
 
   useEffect(() => {
     // data.slug !== 'chandigarh-grocery-store' ? window.scrollTo(0, 670) : window.scrollTo(0, 0)
@@ -80,19 +84,26 @@ export default function ShopMobileView({data, shopData}: any) {
             <div className='px-2 w-full grid grid-cols-1 sm:flex'>
 
               { slug?.some(el => data.slug.includes(el)) ? null :
-                (   <div className='hidden sm:block w-48 h-38 sm:h-72 sm:w-80 md:h-72 lg:w-96'> 
+                (   <div className='hidden sm:block w-2/5 h-38 sm:h-72 sm:w-80 md:h-72'> 
                     <ShopProfileCard data={data} /> 
                    </div>)  }
                 
-                <div className='w-full flex-grow'>
+                <div className='w-full sm:w-4/5   '>
+                { cover_image?.length > 1 ?
+                                         <div className='object-fill h-38 sm:h-72 rounded-lg xs+++:rounded-l-none md:h-72 w-full'>  
+                                         {/* <ImageSlider data={cover_image} /> */}
+                                            <CoverImageSlider key={cover_image} data={cover_image} />
+                                        </div>
+                                           :  
                    <img alt={t("heading")} 
-                        className='object-cover h-38 sm:h-72 rounded-lg xs+++:rounded-l-none md:h-72 lg:w-2/3 w-full'
+                        className='object-cover h-38 sm:h-72 rounded-lg xs+++:rounded-l-none md:h-72   w-full'
                         src={query.slug !== 'kosmetics-india' ? data?.cover_image?.original! : '/kosmetics-shop-mob.jpg' ?? "/product-placeholder.svg"}
                    />
+                }
                 </div>
 
                 {  slug.some(el => data.slug.includes(el)) ? null : 
-                ( <div className='block sm:hidden'> 
+                ( <div className='block sm:hidden h-48'> 
                     <ShopProfileCard data={data}/> 
                 </div>)  }
                 

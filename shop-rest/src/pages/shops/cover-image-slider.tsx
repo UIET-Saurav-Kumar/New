@@ -12,99 +12,32 @@ import { ROUTES } from "@utils/routes";
 import Link from 'next/link';
 
 
-const data = [
 
-  {
-    id: 3,
-    title: "banner:promotion-slide-three",
-    bannerUrl: "/ad-banner/sevensky.jpg",
-  },
-  {
-    id: 8,
-    title: "banner:promotion-slide-eight",
-    bannerUrl: "/ad-banner/fly.jpg",
-  },
-  {
-    id: 18,
-    title: "banner:promotion-slide-eight",
-    bannerUrl: "/ad-banner/hanif.jpg",
-  },
-  {
-    id: 48,
-    title: "banner:promotion-slide-eight",
-    bannerUrl: "/ad-banner/ki-ka.jpg",
-  },
-  {
-    id: 9,
-    title: "banner:promotion-slide-nine",
-    bannerUrl: "/ad-banner/2.jpeg",
-  },
-  {
-    id: 10,
-    title: "banner:promotion-slide-ten",
-    bannerUrl: "/ad-banner/4.jpeg",
-  },
-  {
-    id: 11,
-    title: "banner:promotion-slide-eleven",
-    bannerUrl: "/ad-banner/11.jpeg",
-  },
-  {
-    id: 1,
-    title: "banner:promotion-slide-one",
-    bannerUrl: "/ad-banner/1.jpeg",
-  },
-  {
-    id: 2,
-    title: "banner:promotion-slide-two",
-    bannerUrl: "/ad-banner/9.jpeg",
-  },
-  
-  {
-    id: 5,
-    title: "banner:promotion-slide-five",
-    bannerUrl: "/ad-banner/5.jpeg",
-  },
-  {
-    id: 6,
-    title: "banner:promotion-slide-six",
-    bannerUrl: "/ad-banner/6.jpeg",
-  },
-  {
-    id: 7,
-    title: "banner:promotion-slide-seven",
-    bannerUrl: "/ad-banner/7.jpeg",
-  },
-  {
-    id: 4,
-    title: "banner:promotion-slide-four",
-    bannerUrl: "/ad-banner/10.jpeg",
-  },
- 
-];
 
 const offerSliderBreakpoints = {
   240: {
-    slidesPerView: 3,
-    spaceBetween: 16,
+    slidesPerView:1 ,
+    spaceBetween: 0,
   },
   320: {
-    slidesPerView: 4,
-    spaceBetween: 5,
+    slidesPerView: 1,
+    spaceBetween: 0,
   },
   580: {
-    slidesPerView: 6,
-    spaceBetween: 2,
+    slidesPerView: 1,
+    spaceBetween: 0,
   },
   1024: {
-    slidesPerView: 10,
-    spaceBetween: 4,
+    slidesPerView: 1,
+    spaceBetween: 0,
   },
   1920: {
-    slidesPerView: 6,
-    spaceBetween: 10,
+    slidesPerView: 1,
+    spaceBetween: 0,
   },
 };
+
+//auto play
 
 
 SwiperCore.use([Navigation]);
@@ -136,45 +69,57 @@ export default function CoverImageSlider({data}) {
   }
 
   console.log('slider shops',shopData)
+  console.log('data length', data)
 
   return (
 
-    <div className="  w-full border-3 border-green-500 h-full">
-      <div className=" relative w-full border-3 border-red-900 h-full">
+    <div className="flex-1 h-full">
+      <div className="relative w-full h-full  ">
         <Swiper
-          id="offer"
-          className="border-3 border-blue-900 h-full w-full"
-          // loop={true}
+          id="cover-image-slider"
+          className=" border-blue-900 h-full w-full"
+          loop={true}
+          slidesPerView={1}
+          spaceBetween={0}
+          // navigation
+          pagination={{ clickable: true }}
           breakpoints={offerSliderBreakpoints}
           navigation={{
-            nextEl: ".next",
-            prevEl: ".prev",
+            nextEl: ".shop-slider-next",
+            prevEl: ".shop-slider-prev",
           }}
+          autoPlay={true}
+          //auto navigation
+          autoplay={{
+            delay: 500,
+          }}
+           
+
         >
-          {data.map((item) => (
-            <SwiperSlide key={item.id} className='absolute w-full h-full'>
-              {/* <div className="w-full h-full border-2  border-red-400 "> */}
-                <img className="  object-contain w-full h-full border-2" src={item.thumbnail} alt={item.title} />
-                {/* </div> */}
+          {data?.length && data?.slice(1).map((item) => (
+            <SwiperSlide key={item?.id} className='absolute w-full h-full'>
+              <div className="w-full h-full ">
+                <img className=" object-fill lg:object-fill w-full h-full  " src={item?.thumbnail} alt={item?.title} />
+                </div>
             </SwiperSlide>
           ))}
          
         </Swiper>
         <div
-          className="prev cursor-pointer bg-white absolute z-40 text-gray-600 top-2/4 -start-2 md:-start-5   -mt-4 md:-mt-5 w-8 h-8 md:w-9 md:h-9 rounded-full bg-light shadow-xl border border-border-200  flex items-center justify-center text-heading transition-all duration-200 hover:bg-accent hover:text-light hover:border-accent"
+          className="shop-slider-prev cursor-pointer bg-white absolute z-40 text-gray-600 top-2/4 -start-2 md:-start-5   -mt-4 md:-mt-5 w-8 h-8 md:w-9 md:h-9 rounded-full bg-light shadow-xl border border-border-200  flex items-center justify-center text-heading transition-all duration-200 hover:bg-accent hover:text-light hover:border-accent"
           role="button"
         >
           <span className="sr-only">{t("common:text-previous")}</span>
-          <ArrowPrev width={96} height={96} />
+          <ArrowPrev width={24} height={24} />
         </div>
         <div
-          className="next cursor-pointer    text-gray-600 absolute top-2/4 -end-2 md:-end-5 z-40 -mt-4 md:-mt-5 w-8 h-8 md:w-9 md:h-9 rounded-full bg-light shadow-xl border border-border-200  flex items-center justify-center transition-all duration-200 hover:bg-accent hover:text-light hover:border-accent"
+          className="shop-slider-next cursor-pointer    text-gray-600 absolute top-2/4 -end-2 md:-end-3 z-40 -mt-4 md:-mt-5 w-8 h-8 md:w-9 md:h-9 rounded-full bg-light shadow-xl border border-border-200  flex items-center justify-center transition-all duration-200 hover:bg-accent hover:text-light hover:border-accent"
           role="button"
         >
           <span className="sr-only">{t("common:text-next")}</span>
           <ArrowNext width={24} height={24} />
         </div>
       </div>
-    </div>
+     </div>
   );
 }

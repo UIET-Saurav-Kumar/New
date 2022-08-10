@@ -58,7 +58,9 @@ const CartCounterButton = () => {
       <span className="flex pb-0.5">
         <CartCheckBagIcon className="flex-shrink-0" width={14} height={16} />
         <span className="flex ms-2">
-           {formatString(available_items.length, t("common:text-item"))}
+        {formatString(available_items.length, t("Item"))}
+           {/* {formatString(available_items.length, t("common:text-item"))} */}
+
         </span>
       </span>
 
