@@ -113,7 +113,7 @@ const CartSidebarView = () => {
           onClick={() => handleCheckout()}
         >
           <span className="flex flex-1 items-center h-full px-5 text-light">
-            {t("text-checkout")}
+            {t(" Checkout")}
           </span>
           <span className="flex items-center flex-shrink-0 h-full bg-light text-accent rounded-full px-5">
           ₹{available_items_total.toFixed(2) }

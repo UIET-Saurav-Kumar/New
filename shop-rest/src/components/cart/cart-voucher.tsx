@@ -48,7 +48,7 @@ const CartVoucher = () => {
             onClick={() => setToggleVoucher(!toggleVoucher)}
             className="text-sm font-semibold text-accent transition-colors focus:outline-none hover:text-accent-hover focus:text-accent-hover"
           >
-            {t("text-have-coupon")}
+            {t("Do you have coupon?")}
           </motion.button>
         )}
       </AnimatePresence>

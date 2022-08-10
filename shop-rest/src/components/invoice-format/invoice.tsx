@@ -59,7 +59,7 @@ export default function Invoice() {
       //   },
     
       //   {
-      //     title: t("text-total-price"),
+      //     title: t(" Total-price"),
       //     dataIndex: "paid_total",
       //     key: "paid_total",
       //     align: alignRight,

@@ -38,7 +38,7 @@ export default function ShopDescription({data} :any) {
               <div className="  mb-7 h-auto last:mb-0 flex flex-col  w-full text-left">
                  
                   <span className="text-sm lg:text-lg text-heading font-semibold mb-2">
-                    {/* {t("text-address")} */}
+                    {/* {t(" address")} */}
                     Address
                   </span>
 

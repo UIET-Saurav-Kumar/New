@@ -26,7 +26,7 @@ const Coupon = () => {
         className="text-xs font-bold text-body transition duration-200 hover:text-accent"
         onClick={() => setHasCoupon(true)}
       >
-        {t("text-have-coupon")}
+        {t("Do you have coupon?")}
       </p>
     );
   }

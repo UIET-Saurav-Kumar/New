@@ -179,6 +179,18 @@ const ShopPage = ({ data }: any) => {
      setShopCategory(data?.shop_categories?.replace(/[{":,0123456789}]/g,'').slice(5,-3))
   }
 
+  //array of default cover image based on shop category 
+ let Groceries =  'https://cdn2.f-cdn.com/contestentries/1025096/23455837/591a930567cb5_thumb900.jpg';
+ let Salon_Spa = 'https://d19seqargx6mmp.cloudfront.net/product-images/s_5474.jpg';
+ let Cosmetics = 'https://static.vecteezy.com/system/resources/thumbnails/002/607/628/small/3d-realistic-red-lipstick-pencil-golden-ring-on-red-silk-design-template-of-fashion-cosmetics-product-for-ads-flyer-banner-or-magazine-background-iillustration-free-vector.jpg';
+ let Electronics = 'https://static.vecteezy.com/system/resources/thumbnails/004/617/319/small/electronics-word-concepts-banner-manufacture-maintenance-and-repair-of-household-appliances-presentation-website-isolated-lettering-typography-idea-with-linear-icons-outline-illustration-vector.jpg';
+ let Fashion_Lifestyle = 'https://d3jmn01ri1fzgl.cloudfront.net/photoadking/webp_thumbnail/606817aa422ae_json_image_1617434538.webp';
+ let fruits = 'https://t3.ftcdn.net/jpg/01/63/13/30/360_F_163133061_TlMOMqgxAvBuwzLAjxOQ8v1FQ3OexfRG.jpg'
+ let pharmacy = 'https://img.freepik.com/premium-vector/online-pharmacy-banner-with-medication-shelf-smartphone-buying-blue_313242-582.jpg?w=2000';
+ let health = 'https://www.abhinavayu.com/wp-content/uploads/2017/11/banner-inner-5.png';
+      
+
+
   // const metaData = {
   //   title: data?.slug,
   //   description: data?.description,
@@ -198,6 +210,7 @@ const ShopPage = ({ data }: any) => {
   // const shopName = data?.name;
 
   console.log('shopsdata',shopCat);
+  console.log('coverimage',data?.cover_image ? 'true' : 'false');
  
   return (
     <>
@@ -247,29 +260,41 @@ const ShopPage = ({ data }: any) => {
 
                           <div className ='hidden lg:flex flex-col overflow-y-scroll space-y-4  w-full'>  
 
-                              <div className='flex w-full  mt-10 h-80 px-3  '> 
+                              <div className='flex w-full  mt-10 h-80 px-3 border-3 '> 
 
                                 { slug?.some(el => data?.slug?.includes(el)) ? null :
-                                    ( <div className='h-full w-2/5'>  
+                                    ( <div className='h-full w-2/7'>  
                                          <ShopProfileCard data={data} />
                                       </div> )  }
                                     
                                     { slug?.some(el => data?.slug?.includes(el)) ? null :
                                     (
-                                    <div className='w-4/5 '>
+                                    <div className='w-4/5 h-full'>
                                       {cover_image?.length && cover_image?.length > 1 ?
                                          <div className='w-full h-full'>  
                                          {/* <ImageSlider data={cover_image} /> */}
                                             <CoverImageSlider key={cover_image} data={cover_image} />
                                         </div>
                                            :  
-                                       imageCheck(data?.cover_image?.thumbnail, data, '317', false,'h-full w-full object-fill') 
-                                      
+                                       <div className=" w-full h-full"> 
+                                          { !data?.cover_image ? 
+                                          <img src={data?.cover_image?.thumbnail} className='object-fill h-full w-full' />
+                                          : 
+                                          shopCat.includes('Cosmetics') &&  <img src={'/shop_cover_images/coverimage_cosmetics.jpg'} layout='fill' objectFit="fill" className='object-fill h-full w-full' /> ||
+                                          shopCat.includes('Groceries') && <img src={'/shop_cover_images/coverimage_groceries.jpg'} layout='fill' objectFit="fill" className='object-fill h-full w-full' /> ||
+                                          shopCat.includes('Salon & Spa') &&  <img src={'/shop_cover_images/coverimage_salon.webp'} layout='fill' objectFit="fill" className='object-fill h-full w-full' /> ||
+                                          shopCat.includes('Vegetables & Fruits') && <img src={'/shop_cover_images/coverimage_fruits.jpg'} layout='fill' objectFit="fill" className='object-fill h-full w-full' /> ||
+                                          shopCat.includes('Pharmacy') && <img src={'/shop_cover_images/coverimage_pharmacy.jpg'} layout='fill' objectFit="fill" className='object-fill h-full w-full' /> ||
+                                          shopCat.includes('Fashion Lifestyle') && <img src={'/shop_cover_images/coverimage_fashion.webp'} layout='fill' objectFit="fill" className='object-fill h-full w-full' /> ||
+                                          shopCat.includes('Electronics') && <img src={'/shop_cover_images/coverimage_electronics.jpg'} layout='fill' objectFit="fill" className='object-fill h-full w-full' /> ||
+                                          shopCat.includes('Health Products') && <img src={'/shop_cover_images/coverimage_cosmetics'} layout='fill' objectFit="fill" className='object-fill h-full w-full' /> 
+                                          // imageCheck(data?.cover_image?.original, data, '317', false,'h-full w-full object-cover')
+                                          }
+                                       </div>
                                         }  
                                     </div> 
                                     )  
                                     }
-                   
                               </div> 
            
                             

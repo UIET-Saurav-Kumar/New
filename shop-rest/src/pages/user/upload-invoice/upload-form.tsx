@@ -131,7 +131,7 @@ export default function UploadBill({user} : Props) {
 
             <Input
               className="flex-1"
-              label={t("text-address")}
+              label={t(" address")}
               required
               {...register("address")}
               error={errors.address?.message}

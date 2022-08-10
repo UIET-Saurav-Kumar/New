@@ -83,7 +83,7 @@ const CreateOrUpdateAddressForm = () => {
   return (
     <div className="p-5 sm:p-8 bg-light">
       <h1 className="text-heading font-semibold text-lg text-center mb-4 sm:mb-6">
-        {address ? t("text-update") : t("text-add-new")} {t("text-address")}
+        {address ? t("text-update") : t(" add-new")} {t(" address")}
       </h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -157,7 +157,7 @@ const CreateOrUpdateAddressForm = () => {
         />
 
         <Button className="w-full col-span-2">
-          {address ? t("text-update") : t("text-save")} {t("text-address")}
+          {address ? t("text-update") : t("text-save")} {t(" address")}
         </Button>
       </form>
     </div>

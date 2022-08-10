@@ -190,7 +190,7 @@ export default function ShopPage() {
                     {products_count}
                   </p>
                   <p className="text-sm text-muted mt-0">
-                    {t("common:text-total-products")}
+                    {t("common: Total-products")}
                   </p>
                 </div>
               </div>
@@ -205,7 +205,7 @@ export default function ShopPage() {
                     {orders_count}
                   </p>
                   <p className="text-sm text-muted mt-0">
-                    {t("common:text-total-orders")}
+                    {t("common: Total-orders")}
                   </p>
                 </div>
               </div>

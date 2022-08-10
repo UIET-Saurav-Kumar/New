@@ -26,7 +26,7 @@ const UserDetails: React.FC = () => {
       <p className="text-sm text-muted mt-1">{email}</p>
       {!profile ? (
         <p className="text-sm text-muted mt-0.5">
-          {t("text-add-your")}{" "}
+          {t(" add-your")}{" "}
           <Link href={ROUTES.PROFILE_UPDATE}>
             <a className="text-accent underline">
               {t("authorized-nav-item-profile")}

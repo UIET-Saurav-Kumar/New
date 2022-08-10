@@ -140,7 +140,7 @@ export default function OrderPage() {
       },
     },
     {
-      title: t("text-total-price"),
+      title: t(" Total-price"),
       dataIndex: "paid_total",
       key: "paid_total",
       align: alignRight,
@@ -257,7 +257,7 @@ export default function OrderPage() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex space-x-4 gap-0 w-full lg:w-1/3">
                   <h3 className="mb-2 text-sm lg:text-lg  text-heading font-semibold">
-                    {t("text-total")}:
+                    {t(" Total")}:
                   </h3>
                   <p className="text-sm lg:text-lg text-body-dark">{total}</p>
                 </div>
@@ -300,7 +300,7 @@ export default function OrderPage() {
             <div className='grid grid-cols-1 sm:grid-cols-2 w-full '>
               <p className="flex text-body-dark mt-5">
                 <strong className="w-5/12 sm:w-4/12 text-sm  text-heading font-semibold">
-                  {t("text-total-item")}
+                  {t(" Total-item")}
                 </strong>
                 :
                 <span className="w-7/12 sm:w-8/12 ps-4 text-sm">

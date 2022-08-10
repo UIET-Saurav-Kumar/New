@@ -88,18 +88,18 @@ export default function ShopMobileView({data, shopData}: any) {
                     <ShopProfileCard data={data} /> 
                    </div>)  }
                 
-                <div className='w-full sm:w-4/5   '>
-                { cover_image?.length > 1 ?
-                                         <div className='object-fill h-38 sm:h-72 rounded-lg xs+++:rounded-l-none md:h-72 w-full'>  
-                                         {/* <ImageSlider data={cover_image} /> */}
-                                            <CoverImageSlider key={cover_image} data={cover_image} />
-                                        </div>
-                                           :  
-                   <img alt={t("heading")} 
-                        className='object-cover h-38 sm:h-72 rounded-lg xs+++:rounded-l-none md:h-72   w-full'
-                        src={query.slug !== 'kosmetics-india' ? data?.cover_image?.original! : '/kosmetics-shop-mob.jpg' ?? "/product-placeholder.svg"}
-                   />
-                }
+                <div className='w-full sm:w-4/5 '>
+                    { cover_image?.length > 1 ?
+                        <div className='  h-44 sm:h-72 rounded-lg xs+++:rounded-l-none md:h-72 w-full'>  
+                        {/* <ImageSlider data={cover_image} /> */}
+                            <CoverImageSlider key={cover_image} data={cover_image} />
+                        </div>
+                                                :  
+                        <img alt={t("heading")} 
+                              className='object-fill h-full sm:h-72 rounded-lg xs+++:rounded-l-none md:h-72   w-full'
+                              src={query.slug !== 'kosmetics-india' ? data?.cover_image?.original! : '/kosmetics-shop-mob.jpg' ?? "/product-placeholder.svg"}
+                        />
+                    }
                 </div>
 
                 {  slug.some(el => data.slug.includes(el)) ? null : 

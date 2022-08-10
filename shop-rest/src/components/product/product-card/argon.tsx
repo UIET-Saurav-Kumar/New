@@ -52,7 +52,7 @@ const Argon: React.FC<ArgonProps> = ({ product, className }) => {
             className="product-image"
           />
         {discount && (
-          <div className="absolute top-3 start-3 md:top-4 md:start-4 rounded text-xs leading-6 font-semibold px-1.5 sm:px-2 md:px-2.5 bg-accent text-light">
+          <div className="absolute top-0 start-0 md:top-4 md:start-4 rounded text-xs leading-6 font-semibold px-1.5 sm:px-2 md:px-2.5 bg-accent text-light">
             {discount}
           </div>
         )}
@@ -64,7 +64,7 @@ const Argon: React.FC<ArgonProps> = ({ product, className }) => {
                 onClick={()=>router.push(`${ROUTES.PRODUCT}/${slug}`)}
                 className="group w-full h-7 md:h-9 flex items-center justify-between text-xs md:text-sm text-body-dark rounded bg-gray-100 transition-colors hover:bg-accent hover:border-accent hover:text-light focus:outline-none focus:bg-accent focus:border-accent focus:text-light"
               >
-                <span className="flex-1">{t('text-add')}</span>
+                <span className="flex-1">{t(' add')}</span>
                 <span className="w-7 h-7 md:w-9 md:h-9 bg-gray-200 grid place-items-center rounded-te rounded-be transition-colors duration-200 group-hover:bg-accent-600 group-focus:bg-accent-600">
                   <PlusIcon className="w-4 h-4 stroke-2" />
                 </span>
@@ -73,7 +73,7 @@ const Argon: React.FC<ArgonProps> = ({ product, className }) => {
           </>
         ) : (
 
-        <div className="absolute top-3 end-3 md:top-4 md:end-4">
+        <div className="absolute top-0 border-2 rounded border-gray-400 end-0 md:top-4 md:end-4">
             {quantity > 0 ? (
               <AddToCart variant="argon" data={product} />
             ) : (
@@ -88,17 +88,17 @@ const Argon: React.FC<ArgonProps> = ({ product, className }) => {
       {/* End of product image */}
 
       <header className="p-3 md:p-6">
-        <div className="flex items-center mb-2">
-          <span className="text-sm md:text-base text-heading h-4 font-semibold">
+        <div className="flex    mb-2">
+          <span className="text-sm md:text-base text-heading  font-semibold">
             {basePrice ? basePrice : price}
           </span>
           {discount && (
-            <del className="text-xs md:text-sm text-body ms-2">{price}</del>
+            <del className="text-sm md:text-base text-body ms-2">{price}</del>
           )}
         </div>
         {/* End of product price */}
 
-        <h3 className="text-xs whitespace-nowrap md:text-sm text-body">{nameTruncated}</h3>
+        <h3 className="text-xs whitespace-wrap h-4 mb-2 md:text-sm text-body">{nameTruncated}</h3>
         {/* End of product title */}
       </header>
     </article></Link>

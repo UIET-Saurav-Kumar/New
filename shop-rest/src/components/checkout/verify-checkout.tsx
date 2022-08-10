@@ -147,14 +147,14 @@ const VerifyCheckout = () => {
 
         <div className="flex items-center justify-between space-s-4 mb-4">
           <span className="text-base font-bold text-heading">
-            {t("text-your-order")}
+            {t("Your Order")}
           </span>
           <span className="text-md text-gray-800">{available_items.length + ' ' + 'items'} </span>
         </div>
 
         <div className=" ">
             <div className="flex  items-center justify-between">
-              <p className="text-lg font-semibold text-gray-900 ">{t("text-total")}</p>
+              <p className="text-lg font-semibold text-gray-900 ">{t(" Total")}</p>
               <span className="text-md font-semibold text-magenta">{subtotal}</span>
             </div>
             <div className="flex justify-between">

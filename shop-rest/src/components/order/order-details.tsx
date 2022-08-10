@@ -126,7 +126,7 @@ const OrderDetails = ({ order }: Props) => {
 
               <div className="flex justify-between">
                 <span className="text-sm font-bold text-heading">
-                  {t("text-total")}
+                  {t(" Total")}
                 </span>
                 <span className="text-sm font-bold text-heading">{total}</span>
               </div>

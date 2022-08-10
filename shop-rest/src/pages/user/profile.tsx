@@ -40,7 +40,7 @@ export default function ProfilePage() {
             <Address
               id={data?.me?.id!}
               addresses={data?.me?.address!}
-              heading="text-addresses"
+              heading=" addresses"
               type="billing"
             />
           </Card>

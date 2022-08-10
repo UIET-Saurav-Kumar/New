@@ -142,7 +142,7 @@ const SalonCard: React.FC<NeonProps> = ({ product, className, productSlug }) => 
                 onClick = {()=>router.push(`${ROUTES.PRODUCT}/${slug}`)}
                 className = "group w-full h-7 md:h-9 flex items-center justify-between text-xs md:text-sm text-body-dark rounded bg-gray-100 transition-colors hover:bg-accent hover:border-accent hover:text-light focus:outline-none focus:bg-accent focus:border-accent focus:text-light"
               >
-                <span className="flex-1">{t('text-add')}</span>
+                <span className="flex-1">{t(' add')}</span>
                 <span className="w-7 h-7 md:w-9 md:h-9 bg-gray-200 grid place-items-center rounded-te rounded-be transition-colors duration-200 group-hover:bg-accent-600 group-focus:bg-accent-600">
                   <PlusIcon className="w-4 h-4 stroke-2" />
                 </span>

@@ -196,7 +196,7 @@ const PaymentForm = () => {
     >
       <Input
         {...register("contact", { required: "error-contact-required" })}
-        label={t("text-enter-contact-number")}
+        label={t("Enter contact number")}
         variant="outline"
         className="flex-1"
         value={data?.me?.phone_number}
@@ -205,7 +205,8 @@ const PaymentForm = () => {
       />
 
       <div className="my-6">
-        <Label>{t("text-payment-gateway")}</Label>
+        {/* <Label>{t("text-payment-gateway")}</Label> */}
+        <Label>Payment gateway</Label>
 
         <div className="flex items-center space-s-4">
 
@@ -214,7 +215,8 @@ const PaymentForm = () => {
             type="radio"
             {...register("payment_gateway")}
             value="cod"
-            label={t("text-cash-on-delivery")}
+            // label={t("text-cash-on-delivery")}
+            label = 'COD'
             className=""
           />
 

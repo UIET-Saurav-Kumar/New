@@ -122,7 +122,7 @@ export default function ContactPage({user} : Props) {
 
           <div className="flex flex-col mb-8">
             <span className="font-semibold text-heading mb-3">
-              {t("text-address")}
+              {t(" address")}
             </span>
             <span className="text-sm text-body">
               {siteSettings.author.address}
