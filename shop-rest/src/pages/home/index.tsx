@@ -1,6 +1,6 @@
 
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import DefaultLayout from "@components/layout/default-layout";
 import { useWindowSize } from "@utils/use-window-size";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -39,6 +39,7 @@ import router from "next/router";
 import ElanteBanner from "@components/home-page-product-section/elante-banner";
 import BrandOffers from "@components/home-page-product-section/brand-offers";
 import Head from "next/head";
+import useIntersectionObserver from "@components/product/useIntersectionObserver";
 
 
 const ProductFeedLoader = dynamic(
@@ -115,6 +116,7 @@ const CartCounterButton = dynamic(
 export default function home() {
 
 const { width } = useWindowSize();
+const loadMoreRef = useRef();
 const { query } = useRouter();
 const {getLocation} =useLocation()
 
@@ -139,6 +141,9 @@ const {getLocation} =useLocation()
 const {
   data,
   isLoading: loading,
+  isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage,
   error,
 } = useShopAvailabilityQuery({
   limit: 16 as number,
@@ -146,9 +151,16 @@ const {
   location : ((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any
 });
 
+useIntersectionObserver({
+  target: loadMoreRef,
+  onIntersect: fetchNextPage,
+  enabled: hasNextPage,
+})
+
 //make rocket.png visible when scroll y is 200
 
 // calculate the scroll position
+
 
   const profileStatus = [
     // {
@@ -235,10 +247,10 @@ const {
 
             <div className="fixed z-50 bottom-16 right-10 lg:bottom-10 lg:right-10 flex justify-center items-center">
                     {/* <img src='/up-arrow.png' className="w-12 h-12" onClick={() => window.scrollTo(0, 0)} />  */}
-                    <img src='/rocket.png' className={` ${scrollPosition > 250 ? 'visible transition-transform duration-150' : 'hidden'} w-12 h-12`} onClick={() => window.scrollTo(0, 0)} /> 
+                    <img src='/rocket.png' className={`${scrollPosition > 250 ? 'visible transition-transform duration-150' : 'hidden'} w-12 h-12`} onClick={() => window.scrollTo(0, 0)} /> 
             </div>
 
-    {loading ? (
+        {loading ? (
          <div className="absolute top-0 left-0  h-screen bg-black opacity-80   z-50 w-full">
            {/* <img src='/preloader/cir.gif' className='sticky top-1/2 left-1/2 right- object-contain '/> */}
            {/* <iframe className="mx-auto mt-1/2 h-full " src="https://giphy.com/embed/3ohs7TrCSp7c8ZrxBe" width="80" height="80" frameBorder="0" class="giphy-embed" allowFullScreen>
@@ -270,6 +282,8 @@ const {
           } 
             
         </div>
+
+        
     )
        }
        {
@@ -280,6 +294,21 @@ const {
           width < 1023 && 
             <MobileNavigation />
         } 
+         <div ref={loadMoreRef} className={`${!hasNextPage ? "hidden" : ""}`}>
+                  {
+                    (isFetchingNextPage)
+                    &&
+                    (
+                      <>
+                        {/* <span>Loading </span> */}
+                        <img src="/preloader/cir.gif" 
+                            className="w-full mt-10 mx-auto" 
+                            style={{width:"90px",height:"90px"}}/>
+                      </>
+                    ) 
+                  }
+            </div>
+          
         </div>
         </>
     )

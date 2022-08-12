@@ -207,6 +207,7 @@ const ShopPage = ({ data }: any) => {
   // };
 
   // console.log('shop data',metaData)
+  console.log('coverimage',data?.cover_image);
 
   const shopCat = data?.shop_categories?.replace(/[{":,0123456789}]/g,'').slice(5,-3);
 
@@ -333,24 +334,25 @@ const ShopPage = ({ data }: any) => {
                                     { slug?.some(el => data?.slug?.includes(el)) ? null :
                                     (
                                     <div className='w-4/5 h-full'>
-                                      {cover_image?.length && cover_image?.length > 1 ?
+                                      {  cover_image?.length > 1 ?
                                          <div className='w-full h-full'>  
                                          {/* <ImageSlider data={cover_image} /> */}
                                             <CoverImageSlider key={cover_image} data={cover_image} />
                                         </div>
                                            :  
                                        <div className=" w-full h-full"> 
-                                          { !data?.cover_image ? 
-                                          <img src={data?.cover_image?.thumbnail} className='object-fill h-full w-full' />
+                                          { cover_image.length  ? 
+                                          cover_image?.map((img:any)=>
+                                          <img src={img.thumbnail} className='object-fill h-full w-full' />)
                                           : 
-                                          shopCat?.includes('Cosmetics') &&  <img src={'/shop_cover_images/coverimage_cosmetics.jpg'} layout='fill' objectFit="fill" className='object-fill h-full w-full' /> ||
-                                          shopCat?.includes('Groceries') && <img src={'/shop_cover_images/coverimage_groceries.jpg'} layout='fill' objectFit="fill" className='object-fill h-full w-full' /> ||
-                                          shopCat?.includes('Salon & Spa') &&  <img src={'/shop_cover_images/coverimage_salon.webp'} layout='fill' objectFit="fill" className='object-fill h-full w-full' /> ||
-                                          shopCat?.includes('Vegetables & Fruits') && <img src={'/shop_cover_images/coverimage_fruits.jpg'} layout='fill' objectFit="fill" className='object-fill h-full w-full' /> ||
-                                          shopCat?.includes('Pharmacy') && <img src={'/shop_cover_images/coverimage_pharmacy.jpg'} layout='fill' objectFit="fill" className='object-fill h-full w-full' /> ||
-                                          shopCat?.includes('Fashion Lifestyle') && <img src={'/shop_cover_images/coverimage_fashion.webp'} layout='fill' objectFit="fill" className='object-fill h-full w-full' /> ||
-                                          shopCat?.includes('Electronics') && <img src={'/shop_cover_images/coverimage_electronics.jpg'} layout='fill' objectFit="fill" className='object-fill h-full w-full' /> ||
-                                          shopCat?.includes('Health Products') && <img src={'/shop_cover_images/coverimage_cosmetics'} layout='fill' objectFit="fill" className='object-fill h-full w-full' /> 
+                                          shopCat?.includes('Cosmetics') &&  <img src={'/shop_cover_images/coverimage_cosmetics.jpg'}   className='object-fill h-full w-full' /> ||
+                                          shopCat?.includes('Groceries') && <img src={'/shop_cover_images/coverimage_groceries.jpg'}   className='object-fill h-full w-full' /> ||
+                                          shopCat?.includes('Salon & Spa') &&  <img src={'/shop_cover_images/coverimage_salon.webp'}   className='object-fill h-full w-full' /> ||
+                                          shopCat?.includes('Vegetables & Fruits') && <img src={'/shop_cover_images/coverimage_fruits.jpg'}   className='object-fill h-full w-full' /> ||
+                                          shopCat?.includes('Pharmacy') && <img src={'/shop_cover_images/coverimage_pharmacy.jpg'}   className='object-fill h-full w-full' /> ||
+                                          shopCat?.includes('Fashion Lifestyle') && <img src={'/shop_cover_images/coverimage_fashion.webp'}   className='object-fill h-full w-full' /> ||
+                                          shopCat?.includes('Electronics') && <img src={'/shop_cover_images/coverimage_electronics.jpg'}   className='object-fill h-full w-full' /> ||
+                                          shopCat?.includes('Health Products') && <img src={'/shop_cover_images/coverimage_cosmetics'}   className='object-fill h-full w-full' /> 
                                           // imageCheck(data?.cover_image?.original, data, '317', false,'h-full w-full object-cover')
                                           }
                                        </div>

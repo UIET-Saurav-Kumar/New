@@ -96,7 +96,7 @@ export default function CoverImageSlider({data}) {
            
 
         >
-          {data?.length && data?.slice(1).map((item) => (
+          {  data?.map((item) => (
             <SwiperSlide key={item?.id} className='absolute w-full h-full'>
               <div className="w-full h-full ">
                 <img className=" object-fill w-full h-full  " src={item?.thumbnail} alt={item?.title} />
