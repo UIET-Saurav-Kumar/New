@@ -130,7 +130,7 @@ const ForgotPassword = () => {
           onClick={() => openModal("LOGIN_VIEW")}
           className="ms-1 underline text-accent font-semibold transition-colors duration-200 focus:outline-none hover:text-accent-hover focus:text-accent-hover hover:no-underline focus:no-underline"
         >
-          {t("text-login")}
+          {t(" Login")}
         </button>
       </div>
     </div>

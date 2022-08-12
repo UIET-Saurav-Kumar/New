@@ -9,7 +9,7 @@ import RestrauntShopCard from '@components/category/restraunt-shop-card'
 import ShopPageLayout from "@components/layout/shop-layout";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useRef } from "react";
 import { GetStaticProps } from "next";
 import { fetchSettings } from "@data/settings/use-settings.query";
 import { QueryClient } from "react-query";
@@ -26,11 +26,18 @@ import CartCounterButton from "@components/cart/cart-counter-button";
 import ShopLayout from "@components/layout/shop-layout";
 import Layout from "@components/layout/layout";
 import Head from "next/head";
+import dynamic from "next/dynamic";
+import useIntersectionObserver from "@components/product/useIntersectionObserver";
+import ProductNotFoundInfo from "@components/product/product-not-found-info";
 
 
-
+const ProductFeedLoader = dynamic(
+  () => import("@components/ui/loaders/product-feed-loader")
+);
 
 const ShopsPage = () => {
+
+  const loadMoreRef = useRef();
   
   const [filter, setFilter] = useState(false);
   const [sort , setSort] = useState(false);
@@ -48,7 +55,10 @@ const ShopsPage = () => {
     isLoading,
     isError,
     isFetched,
-    r
+    isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage,
+
    } = useShopsQuery({
     category:getCategory(),
     limit:3000000,
@@ -58,6 +68,13 @@ const ShopsPage = () => {
     search:getSearch()
   });
 
+
+  useIntersectionObserver({
+    target: loadMoreRef,
+    onIntersect: fetchNextPage,
+    enabled: hasNextPage,
+  })
+
   function getSearch():string{
     
     const { query } = useRouter();
@@ -66,6 +83,16 @@ const ShopsPage = () => {
       return query.text as string
     }
     return "";
+  }
+
+  if (!isLoading && !data?.pages?.[0]?.data?.length) {
+
+    return (
+
+      <div className="w-full mx-2 mt-5">
+        <ProductNotFoundInfo shopData={!data?.pages?.[0]?.data} />
+      </div>
+    );
   }
 
   function getCategory():string{
@@ -132,9 +159,6 @@ const ShopsPage = () => {
 
   // push both in seperate array starting with the first shop with products and ending with the last shop with no products
   
-  
-  
- 
   // console.log('shops',data?.pages?.filter((shop: any) => shop?.is_active === 1))
   // console.log('shops name',data?.pages?.data?.map((shop: any) => shop))
 
@@ -164,7 +188,7 @@ const ShopsPage = () => {
 
 
          {shopCat == 'Cosmetics' &&  <meta name="description" content= 'Get Amazing deals on ladies cosmetic products in Chandigarh tricity| Buy Now with Buylowcal '  /> }
-         //
+          
          { shopCat == 'Groceries' && <meta name="description" content= 'Grab The Best deal and  Offers on Grocery items | Buy Now With Buylowcal' /> }
          {shopCat == 'Pharmacy' &&  <meta name="description" content='Prescriptions may be refilled and transferred online, or you can find a CVS Pharmacy near you with Buylowcal  Online shopping, Extra Care offers, Clinic locations, and more.' /> }
          { shopCat == ' Vegetables & Fruits' && <meta name="description" content= 'Acquire the best deal on purchasing Veggies & Fruits with Buylowcal And Get 20 % off On purchasing'  /> }
@@ -191,18 +215,39 @@ const ShopsPage = () => {
                           md:grid-cols-2 md++:grid-cols-2 lg:grid-cols-3 lg+:grid-cols-3 xl:grid-cols-4 xl+:grid-cols-4
                           xl++:grid-cols-5 2xl:grid-cols-5  3xl:grid-cols-6 border-2 overflow-y-scroll h-screen overflow-x-hidden  bg-gray-100'> */}
             <div className="lg:px-10  h-full w-full flex flex-col">
-              { data?.pages?.map((page, idx) => {
-                    return (
-                      <Fragment key={idx}>
-                        {/* {page.data.filter((shop) => shop?.is_active === 1 && shop?.products?.length == 0 ).map((shop: any) => (
-                          <ShopCard2 text={getText()} category={getCategory()} shop={shop} shopId={shop?.id} key={shop.id} />
-                        ))} */}
-                        {page.data.filter((shop) => shop?.is_active === 1 ).map((shop: any) => (
-                          <ShopCard2 text={getText()} category={getCategory()} shop={shop} shopId={shop?.id} key={shop.id} />
-                        ))}
-                      </Fragment>
-                    );
-              })}
+                {isLoading && !data?.pages?.length ? (
+              <ProductFeedLoader limit={30} />
+            ) : (
+            <>
+                { data?.pages?.map((page, idx) => {
+                      return (
+                        <Fragment key={idx}>
+                          {/* {page.data.filter((shop) => shop?.is_active === 1 && shop?.products?.length == 0 ).map((shop: any) => (
+                            <ShopCard2 text={getText()} category={getCategory()} shop={shop} shopId={shop?.id} key={shop.id} />
+                          ))} */}
+                          {page.data.filter((shop) => shop?.is_active === 1 ).map((shop: any) => (
+                            <ShopCard2 text={getText()} category={getCategory()} shop={shop} shopId={shop?.id} key={shop.id} />
+                          ))}
+                        </Fragment>
+                      )
+                })}
+            </>
+          )} 
+            </div>
+
+            <div ref={loadMoreRef} className={`${!hasNextPage ? "hidden" : ""}`}>
+                  {
+                    (isFetchingNextPage)
+                    &&
+                    (
+                      <>
+                        {/* <span>Loading </span> */}
+                        <img src="/preloader/cir.gif" 
+                            className="w-full mt-10 mx-auto" 
+                            style={{width:"90px",height:"90px"}}/>
+                      </>
+                    ) 
+                  }
             </div>
           
             {/* </div> */}

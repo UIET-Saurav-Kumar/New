@@ -60,6 +60,8 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   }
 };
 
+ 
+
 
 
 
@@ -67,6 +69,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 export default function ProductSinglePage({ product }: any) {
 
   // console.log('product rating',product)
+  console.log('product ',product);
 
   return (
 
@@ -75,6 +78,59 @@ export default function ProductSinglePage({ product }: any) {
       <title>{(product?.name?product?.name:'')+' at lowest price'}</title>
       <meta name="description" content={(product?.name?product?.name:'')+' at lowest price only on BuyLowcal.com'} />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+
+      <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(
+      {
+        "@context": "http://schema.org",
+        "@type": "Product",
+        "name": product?.name,
+        "image": product?.image?.thumbnail,
+        "description": product?.description,
+        "sku": `${product?.sku}`,
+        // "mpn": "ABC123",
+        "brand": {
+          "@type": "Thing",
+          "name": product?.shop?.name,
+        },
+        "review": {
+          "@type": "Review",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5",
+            "worstRating": "1"
+          },
+          "author": {
+            "@type": "Person",
+            "name": "John Doe"
+          }
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5",
+          "reviewCount": "89"
+        },
+        "offers": {
+          "@type": "Offer",
+          "url": `{http://www.buylowcal.com/products/${product?.slug}}`,
+          "priceCurrency": "INR",
+          "price":  product?.sale_price,
+          // "priceValidUntil": "2020-01-01",
+          // "itemCondition": "http://schema.org/UsedCondition",
+          // "availability": "http://schema.org/InStock",
+          "seller": {
+            "@type": "Organization",
+            "name":  product?.shop?.name
+           }
+         }
+       }
+
+    ) }}
+  />
+       
+
     </Head>
       <div className="bg-light min-h-screen">
         

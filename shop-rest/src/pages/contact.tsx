@@ -190,7 +190,7 @@ export default function ContactPage({user} : Props) {
                 error={t(errors.name?.message!)}
               />
               <Input
-                label={t("text-email")}
+                label={t("Email")}
                 {...register("email")}
                 type="email"
                 variant="outline"

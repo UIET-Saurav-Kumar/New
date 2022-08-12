@@ -77,6 +77,8 @@ const ShopPage = ({ data }: any) => {
 
   const {cover_image} = data;
 
+  console.log('shopdata',data);
+
 
   // useEffect(() => {
   
@@ -96,8 +98,9 @@ const ShopPage = ({ data }: any) => {
     setPageUrl(window.location.href)
   }, []);
   
-  const { t } = useTranslation("common") ;
-  const { width } = useWindowSize() ;
+  const { t } = useTranslation("common");
+
+  const { width } = useWindowSize();
 
   const { openModal } = useModalAction();
 
@@ -209,35 +212,95 @@ const ShopPage = ({ data }: any) => {
 
   // const shopName = data?.name;
 
-  console.log('shopsdata',shopCat);
-  console.log('coverimage',data?.cover_image ? 'true' : 'false');
+  // console.log('shopsdata',shopCat);
+  // console.log('coverimage',data?.cover_image ? 'true' : 'false');
  
   return (
     <>
 
         <Head>
-          
-        {shopCat == 'Cosmetics' &&  <title>Get Best Deals on Cosmetic Products | #1 Cosmetic store in Chandigarh </title> }
-        {shopCat == 'Groceries' && <title>  Best Grocery Store in Tricity | Get exclusive Offer Now</title> }
-        {shopCat == 'Pharmacy' &&   <title> Get Upto 30% off on Pharmacy With Buylowcal | Shop Now  </title> }
-        {shopCat == ' Vegetables & Fruits' &&  <title>  Save Your Time & Money | Buy Veggies Fruits  with Buylowcal  </title> }
-        {shopCat == 'Restaurants' &&  <title> Get Best Deals on Restaurants Now | Connect your local restaurant with Buylowcal </title> }
-        {shopCat == 'Fashion, Lifestyle & Furnishings' &&   <title>  Buylowcal | shop Now Lifestyle & Home Items & Get 20% off </title> }
-        {shopCat == 'Gym & Health Products' && <title>  Get 100% pure Gym & Health product & Get A chance to win exciting offers</title> }
-          {/* <title>{shopCat == 'Groceries' && ' ' }</title>
-          <title>{shopCat == 'Groceries' && ' ' }</title>
-          <title>{shopCat == 'Groceries' && ' ' }</title> */}
+          {shopCat == 'Cosmetics' &&  <title>Get Best Deals on Cosmetic Products | #1 Cosmetic store in Chandigarh </title> }
+          {shopCat == 'Groceries' && <title>  Best Grocery Store in Tricity | Get exclusive Offer Now</title> }
+          {shopCat == 'Pharmacy' &&   <title> Get Upto 30% off on Pharmacy With Buylowcal | Shop Now  </title> }
+          {shopCat == ' Vegetables & Fruits' &&  <title>  Save Your Time & Money | Buy Veggies Fruits  with Buylowcal  </title> }
+          {shopCat == 'Restaurants' &&  <title> Get Best Deals on Restaurants Now | Connect your local restaurant with Buylowcal </title> }
+          {shopCat == 'Fashion, Lifestyle & Furnishings' &&   <title>  Buylowcal | shop Now Lifestyle & Home Items & Get 20% off </title> }
+          {shopCat == 'Gym & Health Products' && <title>  Get 100% pure Gym & Health product & Get A chance to win exciting offers</title> }
+            {/* <title>{shopCat == 'Groceries' && ' ' }</title>
+            <title>{shopCat == 'Groceries' && ' ' }</title>
+            <title>{shopCat == 'Groceries' && ' ' }</title> */}
 
 
-         {shopCat == 'Cosmetics' &&  <meta name="description" content= 'Get Amazing deals on ladies cosmetic products in Chandigarh tricity| Buy Now with Buylowcal '  /> }
-         {shopCat == 'Groceries' && <meta name="description" content= 'Grab The Best deal and  Offers on Grocery items | Buy Now With Buylowcal' /> }
-         {shopCat == 'Pharmacy' &&  <meta name="description" content='Prescriptions may be refilled and transferred online, or you can find a CVS Pharmacy near you with Buylowcal  Online shopping, Extra Care offers, Clinic locations, and more.' /> }
-         {shopCat == ' Vegetables & Fruits' && <meta name="description" content= 'Acquire the best deal on purchasing Veggies & Fruits with Buylowcal And Get 20 % off On purchasing'  /> }
-         {shopCat == 'Restaurants' &&  <meta name="description" content='Find the best restaurants near you with buylowcal & Get exclusive offer on every restaurant'  /> }
-         {shopCat == 'Fashion, Lifestyle & Furnishings' &&  <meta name="description" content='Get Amazing Deals on Lifestyle & home Items & get 20 % off on every item '  /> }
-         {shopCat == 'Gym & Health Products' &&  <meta name="description" content='Get 100% pure Gym &Health product & Get A chance to win exciting offers' /> }
+          {shopCat == 'Cosmetics' &&  <meta name="description" content= 'Get Amazing deals on ladies cosmetic products in Chandigarh tricity| Buy Now with Buylowcal '  /> }
+          {shopCat == 'Groceries' && <meta name="description" content= 'Grab The Best deal and  Offers on Grocery items | Buy Now With Buylowcal' /> }
+          {shopCat == 'Pharmacy' &&  <meta name="description" content='Prescriptions may be refilled and transferred online, or you can find a CVS Pharmacy near you with Buylowcal  Online shopping, Extra Care offers, Clinic locations, and more.' /> }
+          {shopCat == ' Vegetables & Fruits' && <meta name="description" content= 'Acquire the best deal on purchasing Veggies & Fruits with Buylowcal And Get 20 % off On purchasing'  /> }
+          {shopCat == 'Restaurants' &&  <meta name="description" content='Find the best restaurants near you with buylowcal & Get exclusive offer on every restaurant'  /> }
+          {shopCat == 'Fashion, Lifestyle & Furnishings' &&  <meta name="description" content='Get Amazing Deals on Lifestyle & home Items & get 20 % off on every item '  /> }
+          {shopCat == 'Gym & Health Products' &&  <meta name="description" content='Get 100% pure Gym &Health product & Get A chance to win exciting offers' /> }
 
-          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(
+                {
+                  // local business schema 
+                  "@context": "https://schema.org",
+                  "@type": "LocalBusiness",
+                  "name": data?.name,
+                  "image": [
+                    {
+                      "@type": "CoverImage",
+                      "url": data?.cover_image?.thumbnail ? data?.cover_image?.thumbnail : '',
+                      "width": 600,
+                      "height": 600,
+                    },
+                    {
+                      "@type": "Logo",
+                      "url": data?.logo?.thumbnail ? data?.logo?.thumbnail : '',
+                    }
+                  ],
+                  "url": pageURL,
+                  "telephone": data?.settings?.contact,
+                  "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": data?.address?.street_address,
+                    "addressLocality": data?.address?.city,
+                    "addressRegion": data?.address?.city,
+                    "postalCode": data?.address?.street_address.split(',')[data?.address?.street_address.split(',').length -1],
+                    "addressCountry": "addressCountry",
+                  },
+                  "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": data?.settings?.location?.lat,
+                    "longitude": data?.settings?.location?.lng,
+                  },
+                  "openingHoursSpecification": [
+                    {
+                      "@type": "OpeningHoursSpecification",
+                      "dayOfWeek": [
+                        "Monday",
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday",
+                        "Friday",
+                        "Saturday",
+                        "Sunday",
+                      ],
+                      "opens": "09:00",
+                      "closes": "17:00",
+                    },
+                  ],
+                  "sameAs": [
+                    "https://www.facebook.com/buylowcal",
+                    "https://twitter.com/buylowcal",
+                    "https://www.instagram.com/buylowcal",
+                    "https://www.youtube.com/buylowcal",
+                  ],
+                }
+                )}}
+              />
+
         </Head>
 
             <div className="relative bg-white lg:bg-gray-100 hidden   lg:flex flex-col
@@ -280,14 +343,14 @@ const ShopPage = ({ data }: any) => {
                                           { !data?.cover_image ? 
                                           <img src={data?.cover_image?.thumbnail} className='object-fill h-full w-full' />
                                           : 
-                                          shopCat.includes('Cosmetics') &&  <img src={'/shop_cover_images/coverimage_cosmetics.jpg'} layout='fill' objectFit="fill" className='object-fill h-full w-full' /> ||
-                                          shopCat.includes('Groceries') && <img src={'/shop_cover_images/coverimage_groceries.jpg'} layout='fill' objectFit="fill" className='object-fill h-full w-full' /> ||
-                                          shopCat.includes('Salon & Spa') &&  <img src={'/shop_cover_images/coverimage_salon.webp'} layout='fill' objectFit="fill" className='object-fill h-full w-full' /> ||
-                                          shopCat.includes('Vegetables & Fruits') && <img src={'/shop_cover_images/coverimage_fruits.jpg'} layout='fill' objectFit="fill" className='object-fill h-full w-full' /> ||
-                                          shopCat.includes('Pharmacy') && <img src={'/shop_cover_images/coverimage_pharmacy.jpg'} layout='fill' objectFit="fill" className='object-fill h-full w-full' /> ||
-                                          shopCat.includes('Fashion Lifestyle') && <img src={'/shop_cover_images/coverimage_fashion.webp'} layout='fill' objectFit="fill" className='object-fill h-full w-full' /> ||
-                                          shopCat.includes('Electronics') && <img src={'/shop_cover_images/coverimage_electronics.jpg'} layout='fill' objectFit="fill" className='object-fill h-full w-full' /> ||
-                                          shopCat.includes('Health Products') && <img src={'/shop_cover_images/coverimage_cosmetics'} layout='fill' objectFit="fill" className='object-fill h-full w-full' /> 
+                                          shopCat?.includes('Cosmetics') &&  <img src={'/shop_cover_images/coverimage_cosmetics.jpg'} layout='fill' objectFit="fill" className='object-fill h-full w-full' /> ||
+                                          shopCat?.includes('Groceries') && <img src={'/shop_cover_images/coverimage_groceries.jpg'} layout='fill' objectFit="fill" className='object-fill h-full w-full' /> ||
+                                          shopCat?.includes('Salon & Spa') &&  <img src={'/shop_cover_images/coverimage_salon.webp'} layout='fill' objectFit="fill" className='object-fill h-full w-full' /> ||
+                                          shopCat?.includes('Vegetables & Fruits') && <img src={'/shop_cover_images/coverimage_fruits.jpg'} layout='fill' objectFit="fill" className='object-fill h-full w-full' /> ||
+                                          shopCat?.includes('Pharmacy') && <img src={'/shop_cover_images/coverimage_pharmacy.jpg'} layout='fill' objectFit="fill" className='object-fill h-full w-full' /> ||
+                                          shopCat?.includes('Fashion Lifestyle') && <img src={'/shop_cover_images/coverimage_fashion.webp'} layout='fill' objectFit="fill" className='object-fill h-full w-full' /> ||
+                                          shopCat?.includes('Electronics') && <img src={'/shop_cover_images/coverimage_electronics.jpg'} layout='fill' objectFit="fill" className='object-fill h-full w-full' /> ||
+                                          shopCat?.includes('Health Products') && <img src={'/shop_cover_images/coverimage_cosmetics'} layout='fill' objectFit="fill" className='object-fill h-full w-full' /> 
                                           // imageCheck(data?.cover_image?.original, data, '317', false,'h-full w-full object-cover')
                                           }
                                        </div>

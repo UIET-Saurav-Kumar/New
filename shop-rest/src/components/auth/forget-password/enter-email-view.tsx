@@ -28,7 +28,7 @@ const EnterEmailView = ({ onSubmit, loading }: Props) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <Input
-        label={t("text-email")}
+        label={t("Email")}
         {...register("email")}
         type="email"
         variant="outline"

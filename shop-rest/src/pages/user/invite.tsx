@@ -202,7 +202,7 @@ const ShareButton = () => {
               error={t(errors.PhoneNumber?.message!)}
               />
               <Input
-                label={t("text-email")}
+                label={t("Email")}
                 // {...register("email")}
                 type="email"
                 variant="outline"

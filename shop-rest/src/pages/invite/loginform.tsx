@@ -105,7 +105,7 @@ const LoginForm = () => {
       )}
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input
-          label={t("text-email")}
+          label={t("Email")}
           {...register("email")}
           type="email"
           variant="outline"
@@ -113,7 +113,7 @@ const LoginForm = () => {
           error={t(errors.email?.message!)}
         />
         <PasswordInput
-          label={t("text-password")}
+          label={t("Password")}
           {...register("password")}
           error={t(errors.password?.message!)}
           variant="outline"
@@ -126,7 +126,7 @@ const LoginForm = () => {
             loading={loading}
             disabled={loading}
           >
-            {t("text-login")}
+            {t(" Login")}
           </Button>
           
         </div>
@@ -152,7 +152,7 @@ const LoginForm = () => {
           }}
         >
           <FacebookIcon className="w-4 h-4 mr-3" />
-          {t("text-login-facebook")}
+          {t(" Login-facebook")}
         </Button> */}
         {/* <Button
           className="bg-plus hover:bg-gradient-to-tl  from-gold to-magenta"
@@ -163,7 +163,7 @@ const LoginForm = () => {
           }}
         >
           <GoogleIcon className="w-4 h-4 mr-3 " />
-          {t("text-login-google")}
+          {t(" Login-google")}
         </Button> */}
       </div>
 
@@ -172,12 +172,12 @@ const LoginForm = () => {
       </div>
 
       <div className="text-sm sm:text-base text-body text-center">
-        {t("text-no-account")}{" "}
+        {t(" Don't have any account?")}{" "}
         <button
           onClick={() => setClick(!click)}
           className="ms-1 underline text-accent font-semibold transition-colors duration-200 focus:outline-none hover:text-accent-hover focus:text-accent-hover hover:no-underline focus:no-underline"
         >
-          {t("text-register")}
+          {t("Register")}
         </button>
       </div>
     </div> : <RegisterForm /> }

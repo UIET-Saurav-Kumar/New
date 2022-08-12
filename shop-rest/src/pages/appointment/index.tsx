@@ -162,7 +162,7 @@ export default function Appointment({user} : Props) {
               />
               
               <Input
-                label={t("Mobile Number")}
+                label={t("Registered Mobile Number")}
                 {...register("subject")}
                 variant="outline"
                 className=""

@@ -190,6 +190,45 @@ const {
       
       <Head>
       <meta name="msvalidate.01" content="1A1026D1B7AF52339B69AA95E6DFE95C" />
+      <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(
+      {
+        // organization schema 
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Buylowcal",
+        "url": "https://buylowcal.com",
+        "sameAs": [
+          "https://www.facebook.com/buylowcal",
+          "https://twitter.com/buylowcal",
+          "https://www.instagram.com/buylowcal",
+          "https://www.youtube.com/channel/UCs0jYR_99h5GKs0cvRZSg-A",
+          "https://www.linkedin.com/company/buylowcal",
+          // "https://www.pinterest.com/buylowcal",
+          // "https://www.snapchat.com/add/buylowcal",
+          "https://www.google.com/search?q=buylowcal&rlz=1C1CHBF_enIN831IN831&oq=buylowcal&aqs=chrome..69i57j0l7.8981j0j7&sourceid=chrome&ie=UTF-8",
+          
+        ],
+        "logo": "https://buylowcal.com/buylowcal-old.png",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Lowcal Ventures Pvt Ltd Plot No: 130 | Phase-1 | Industrial Area | Chandigarh",
+          "addressLocality": "Phase-1 | Industrial Area | Chandigarh",
+          "addressRegion": "Chandigarh",
+          "postalCode": "	160002",
+          "addressCountry": "India"
+        },
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "telephone": "+91 77430 42380",
+            "contactType": "customer service"
+          }
+        ]
+      }
+      )}} />
+
       </Head>
 
         <div className=" h-full">

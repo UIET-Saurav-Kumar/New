@@ -55,7 +55,7 @@ export const OrderItems = ({ products,orderId,orderStatus }: { products: any }) 
   const orderTableColumns = [
 
     {
-      title: <span className="ps-20">{t("text-item")}</span>,
+      title: <span className="ps-20">{t("Items")}</span>,
       dataIndex: "",
       key: "items",
       width: 250,

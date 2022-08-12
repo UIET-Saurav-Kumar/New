@@ -175,7 +175,7 @@ const VerifyCheckout = () => {
             <div className="h-full flex flex-col items-center justify-center mb-4">
               <EmptyCartIcon width={140} height={176} />
               <h4 className="mt-6 text-base font-semibold">
-                {t("text-no-products")}
+                {t(" No Products")}
               </h4>
             </div>
             

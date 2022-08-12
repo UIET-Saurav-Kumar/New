@@ -133,7 +133,7 @@ const RegisterForm = () => {
           error={t(errors.name?.message!)}
         />
         <Input
-          label={t("text-email")}
+          label={t("Email")}
           {...register("email")}
           type="email"
           variant="outline"
@@ -141,7 +141,7 @@ const RegisterForm = () => {
           error={t(errors.email?.message!)}
         />
         <PasswordInput
-          label={t("text-password")}
+          label={t("Password")}
           {...register("password")}
           error={t(errors.password?.message!)}
           variant="outline"
@@ -149,7 +149,7 @@ const RegisterForm = () => {
         />
         <div className="mt-8">
           <Button className="w-full h-12" loading={loading} disabled={loading}>
-            {t("text-register")}
+            {t("Register")}
           </Button>
         </div>
       </form>
@@ -162,12 +162,12 @@ const RegisterForm = () => {
         </span>
       </div>
       <div className="text-sm sm:text-base text-body text-center">
-        {t("text-already-account")}{" "}
+        {t(" Already have an account?")}{" "}
         <button
           onClick={() => openModal("LOGIN_VIEW")}
           className="ms-1 underline text-accent font-semibold transition-colors duration-200 focus:outline-none hover:text-accent-hover focus:text-accent-hover hover:no-underline focus:no-underline"
         >
-          {t("text-login")}
+          {t(" Login")}
         </button>
       </div>
     </div>

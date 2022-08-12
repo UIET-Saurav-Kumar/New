@@ -185,7 +185,7 @@ const SectionWithCardGroup = ({
           ))
         ) : (
           <div className="relative px-5 py-6 text-body text-center bg-gray-100 rounded border border-border-200">
-            {t("text-no-address")}
+            {t("No Address")}
           </div>
         )}
       </div>

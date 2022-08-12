@@ -47,7 +47,7 @@ const ShopCard: React.FC<ShopCardProps> = ({ shop }) => {
               <MapPin className="w-3.5 h-3.5 me-1 text-muted flex-shrink-0" />
               {!isEmpty(formatAddress(shop?.address))
                 ? formatAddress(shop?.address)
-                : t("common:text-no-address")}
+                : t("common:No Address")}
 
             {/* {!isEmpty(address) && (
               <address className="text-body-dark text-sm">

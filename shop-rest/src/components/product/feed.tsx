@@ -16,6 +16,7 @@ import Link from 'next/link';
 import ProductNotFoundInfo from "./product-not-found-info";
 import OfferCard from "./product-card/offer-card";
 import { useModalAction } from "@components/ui/modal/modal.context";
+
 const ProductFeedLoader = dynamic(
   () => import("@components/ui/loaders/product-feed-loader")
 );

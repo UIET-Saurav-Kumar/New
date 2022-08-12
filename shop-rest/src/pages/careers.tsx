@@ -4,6 +4,7 @@ import { careers } from "@settings/careers.settings";
 import { Link, Element } from "react-scroll";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
+import Head from "next/head";
 
 function makeTitleToDOMId(title: string) {
   return title.toLowerCase().split(" ").join("_");
@@ -14,6 +15,58 @@ export default function AboutUs() {
   const { title, date, content } = careers;
 
   return (
+    <> 
+    <Head>
+      <title>{t('Carrers | Buylowcal')}</title>
+      {/* <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(
+      {
+        
+        "@context": "http://schema.org",
+        "@type": "JobPosting",
+        "title": "Software Engineer",
+        "datePosted": "2019-01-01",
+        "validThrough": "2019-12-31",
+        "employmentType": "FULL_TIME",
+        "hiringOrganization": {
+          "@type": "Organization",
+          "name": "Buylowcal",
+          "sameAs": "https://buylowcal.com",
+        },
+        "jobLocation": {
+          "@type": "Place",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Lowcal Ventures Pvt Ltd Plot No: 130 | Phase-1 | Industrial Area | Chandigarh",
+            "addressLocality": "Phase-1 | Industrial Area | Chandigarh",
+            "addressRegion": "Chandigarh",
+            "postalCode": "	160002",
+            "addressCountry": "India"
+          },
+        },
+        "baseSalary": {
+          "@type": "MonetaryAmount",
+          "currency": "INR",
+          "value": {
+            "@type": "QuantitativeValue",
+            "value": "20000",
+            "unitText": "MONTH",
+          },
+        },
+        "description": "You will be working on a team of talented developers to build a new product.",
+        "identifier": {
+          "@type": "PropertyValue",
+          "name": "job_id",
+          "value": "1",
+        },
+        "experienceRequirements": "Minimum 2 years of experience in software development",
+        "qualifications": "Bachelor's degree in Computer Science or related field",
+      }
+      )}}
+      /> */}
+
+    </Head>
     <section className="max-w-1920 w-full mx-auto py-8 px-4 lg:py-10 lg:px-8 xl:py-14 xl:px-16 2xl:px-20">
       <header className="sm:mt-2 xl:mt-4 mb-10 lg:mb-14">
         <h1 className="text-xl md:text-2xl sm:text-3xl 2xl:text-4xl text-heading font-bold mb-4 sm:mb-5 2xl:mb-7">
@@ -68,6 +121,7 @@ export default function AboutUs() {
         {/* End of content */}
       </div>
     </section>
+    </>
   );
 }
 

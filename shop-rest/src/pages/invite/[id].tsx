@@ -209,19 +209,22 @@ const RegisterForm = () => {
             </div>
 
               <p className="text-center text-sm md:text-base leading-relaxed px-2 sm:px-0 text-body mt-4 sm:mt-5 mb-7 sm:mb-10">
-                  {t("registration-helper")}
+                  {/* {t("registration-helper")} */}
+                  By signing up, you agree to our
                   <span
                     onClick={() => handleNavigate("terms")}
                     className="mx-1 underline cursor-pointer text-accent hover:no-underline"
                     >
-                    {t("text-terms")}
+                    {/* {t("text-terms")} */}
+                    Terms
                   </span>
                   &
                   <span
                     onClick={() => handleNavigate("privacy")}
                     className="ms-1 underline cursor-pointer text-accent hover:no-underline"
                     >
-                    {t("text-policy")}
+                    {/* {t("text-policy")} */}
+                    Policy
                   </span>
                   <h4 className="font-semibold text-magenta text-xl mt-5">Register form</h4>
               </p>
@@ -240,7 +243,8 @@ const RegisterForm = () => {
     <form className="grid grid-cols-2 text-xs gap-2 lg:gap-4 -mt-16 place-content-center" 
             onSubmit={handleSubmit(onSubmit)} noValidate>
         <Input
-          label={t("text-name")}
+          // label={t("text-name")}
+          label={t("Name")}
           {...register("name")}
           type="text"
           variant="outline"
@@ -249,7 +253,8 @@ const RegisterForm = () => {
         />
         <Input
     
-          label={t("text-email")}
+          // label={t("Email")}
+          label={t("Email")}
           {...register("email")}
           type="email"
           variant="outline"
@@ -257,7 +262,7 @@ const RegisterForm = () => {
           error={t(errors.email?.message!)}
         />
         <PasswordInput
-          label={t("text-password")}
+          label={t("Password")}
           {...register("password")}
           error={t(errors.password?.message!)}
           variant="outline"
@@ -371,7 +376,7 @@ const RegisterForm = () => {
           <Button className="w-full h-12" 
           variant="outline"
           loading={loading} disabled={loading}>
-            {t("text-register")}
+            {t("Register")}
           </Button>
         </div>
       </div>
@@ -388,11 +393,11 @@ const RegisterForm = () => {
                 </span>
             </div>
             <div className="text-sm sm:text-base text-body text-center">
-                {t("text-already-account")}{" "}
+                {t(" Already have an account?")}{" "}
                 <button onClick={() => setClick(!click)}
                   className="ms-1 underline text-accent font-semibold transition-colors duration-200 focus:outline-none hover:text-accent-hover focus:text-accent-hover hover:no-underline focus:no-underline"
                   >
-                  {t("text-login")}
+                  {t(" Login")}
                 </button>
             </div>
         </div> : <LoginForm />}

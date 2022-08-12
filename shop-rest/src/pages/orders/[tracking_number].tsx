@@ -122,11 +122,11 @@ export default function OrderPage() {
     },
     
     {
-      title: t("text-item"),
+      title: t("Items"),
       dataIndex: "products",
       key: "products",
       align: "center",
-      render: (products: any) => formatString(products?.length, t("text-item")),
+      render: (products: any) => formatString(products?.length, t("Items")),
     },
     {
       title: t("Delivery Fee"),
@@ -304,7 +304,7 @@ export default function OrderPage() {
                 </strong>
                 :
                 <span className="w-7/12 sm:w-8/12 ps-4 text-sm">
-                  {formatString(data?.order?.products?.length, t("text-item"))}
+                  {formatString(data?.order?.products?.length, t("Items"))}
                 </span>
               </p>
 

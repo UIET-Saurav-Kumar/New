@@ -70,7 +70,7 @@ const CartSidebarView = () => {
         <div className="flex text-accent font-semibold">
           <CartCheckBagIcon className="flex-shrink-0" width={24} height={22} />
           <span className="flex ms-2">
-            {formatString(available_items.length, t("text-item"))}
+            {formatString(available_items.length, t("Items"))}
           </span>
         </div>
         <button
@@ -99,7 +99,7 @@ const CartSidebarView = () => {
             >
               <EmptyCartIcon width={140} height={176} />
               <h4 className="mt-6 text-base font-semibold">
-                {t("text-no-products")}
+                {t(" No Products")}
               </h4>
             </motion.div>
           )}

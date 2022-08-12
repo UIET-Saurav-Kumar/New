@@ -51,11 +51,11 @@ export default function Invoice() {
       //   },
         
       //   {
-      //     title: t("text-item"),
+      //     title: t("Items"),
       //     dataIndex: "products",
       //     key: "products",
       //     align: "center",
-      //     render: (products: any) => formatString(products?.length, t("text-item")),
+      //     render: (products: any) => formatString(products?.length, t("Items")),
       //   },
     
       //   {

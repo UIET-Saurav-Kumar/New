@@ -119,7 +119,8 @@ const RegisterForm = () => {
                 <Logo />
             </div>
             <p className="text-center text-sm md:text-base leading-relaxed px-2 sm:px-0 text-body mt-4 sm:mt-5 mb-7 sm:mb-10">
-                {t("registration-helper")}
+                {/* {t("registration-helper")} */}
+                By signing up, you agree to our
                 <span
                 onClick={() => handleNavigate("terms")}
                 className="mx-1 underline cursor-pointer text-accent hover:no-underline"

@@ -118,7 +118,7 @@ const OtpLogin = () => {
         <Logo />
       </div>
       <p className="text-center text-sm md:text-base leading-relaxed text-body mt-4 sm:mt-5 mb-7 sm:mb-10">
-        {t("Otp Login")}
+        {t("Login with Registered Mobile Number")}
       </p>
       {
         verifiedPhoneNumber && !verifiedToken &&
@@ -159,7 +159,7 @@ const OtpLogin = () => {
         </span>
       </div>
       <div className="text-sm sm:text-base text-body text-center">
-        {t("text-no-account")}{" "}
+        {t(" Don't have any account?")}{" "}
         <button
           onClick={() => openModal("REGISTER")}
           className="ms-1 underline text-accent font-semibold transition-colors duration-200 focus:outline-none hover:text-accent-hover focus:text-accent-hover hover:no-underline focus:no-underline"
@@ -184,7 +184,7 @@ export  function OtpLoginView() {
         <Logo />
       </div>
       <p className="mt-4 text-sm leading-relaxed text-center mb-7 text-body sm:mt-5 sm:mb-10 md:text-base">
-        {t('otp-login-helper')}
+        {t('otp- Login with your email & password')}
       </p>
       <OtpLogin />
       <div className="relative flex flex-col items-center justify-center text-sm mt-9 mb-7 text-heading sm:mt-11 sm:mb-8">
@@ -199,7 +199,7 @@ export  function OtpLoginView() {
           onClick={() => openModal('LOGIN_VIEW')}
           className="font-semibold underline transition-colors duration-200 text-accent hover:text-accent-hover hover:no-underline focus:text-accent-hover focus:no-underline focus:outline-none ltr:ml-1 rtl:mr-1"
         >
-          {t('text-login')}
+          {t(' Login')}
         </button>
       </div>
     </div>

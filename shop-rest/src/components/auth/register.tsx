@@ -199,19 +199,22 @@ const RegisterForm = () => {
         <Logo />
       </div>
       <p className="text-center text-sm md:text-base leading-relaxed px-2 sm:px-0 text-body mt-4 sm:mt-5 mb-7 sm:mb-10">
-        {t("registration-helper")}
+        {/* {t("registration-helper")} */}
+        By signing up, you agree to our
         <span
           onClick={() => handleNavigate("terms")}
           className="mx-1 underline cursor-pointer text-accent hover:no-underline"
         >
-          {t("text-terms")}
+          {/* {t("text-terms")} */}
+          Terms
         </span>
         &
         <span
           onClick={() => handleNavigate("privacy")}
           className="ms-1 underline cursor-pointer text-accent hover:no-underline"
         >
-          {t("text-policy")}
+          {/* {t("text-policy")} */}
+          Policy
         </span>
       </p>
       <p className="text-gray-600 font-semibold text-xl text-center w-full">Register Form</p>
@@ -231,7 +234,8 @@ const RegisterForm = () => {
 
         {/* name */}
         <Input
-          label={t("text-name")}
+          // label={t("text-name")}
+          label={t("Name")}
           {...register("name")}
           type="text"
           variant="outline"
@@ -242,7 +246,8 @@ const RegisterForm = () => {
         {/* email */}
         <Input
     
-          label={t("text-email")}
+          // label={t("Email")}
+          label={t("Email")}
           {...register("email")}
           type="email"
           variant="outline"
@@ -252,7 +257,8 @@ const RegisterForm = () => {
 
         {/* password */}
         <PasswordInput
-          label={t("text-password")}
+          // label={t("Password")}
+          label={t("Password")}
           {...register("password")}
           error={t(errors.password?.message!)}
           variant="outline"
@@ -371,7 +377,7 @@ const RegisterForm = () => {
             <Button className="w-full h-12" 
             variant="outline"
             loading={loading} disabled={loading}>
-              {t("text-register")}
+              {t("Register")}
             </Button>
         </div>
       </div>
@@ -388,12 +394,12 @@ const RegisterForm = () => {
         </span> */}
       </div>
       <div className="text-sm sm:text-base text-body -mt-5 text-center">
-        {t("text-already-account")}{" "}
+        {t(" Already have an account?")}{" "}
         <button
           onClick={() => openModal("LOGIN_VIEW")}
           className="ms-1 underline text-accent font-semibold transition-colors duration-200 focus:outline-none hover:text-accent-hover focus:text-accent-hover hover:no-underline focus:no-underline"
         >
-          {t("text-login")}
+          {t(" Login")}
         </button>
       </div>
     </div>

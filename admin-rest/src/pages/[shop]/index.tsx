@@ -111,7 +111,7 @@ export default function ShopPage() {
             <address className="text-body text-sm not-italic">
               {!isEmpty(formatAddress(address!))
                 ? formatAddress(address!)
-                : t("common:text-no-address")}
+                : t("common:No Address")}
             </address>
           </div>
 
@@ -279,7 +279,7 @@ export default function ShopPage() {
       <div className="order-3 xl:order-4 bg-light rounded col-span-12 sm:col-span-6 xl:col-span-3">
         <div className="flex flex-col p-6 2xl:p-7 border-b border-gray-200">
           <span className="text-muted text-sm mb-2">
-            {t("common:text-registered-since")}
+            {t("common:Registered-since")}
           </span>
           <span className="text-sm font-semibold text-sub-heading">
             {dayjs(created_at).format("MMMM D, YYYY")}
@@ -302,7 +302,7 @@ export default function ShopPage() {
             </p>
             <p className="text-sm text-sub-heading">
               <span className="text-muted block w-full">
-                {t("common:text-email")}:
+                {t("common:Email")}:
               </span>{" "}
               <span className="font-semibold">
                 {balance?.payment_info?.email}

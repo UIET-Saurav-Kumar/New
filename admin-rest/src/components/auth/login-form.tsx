@@ -102,7 +102,7 @@ const LoginForm = () => {
         </div>
 
         <div className="text-sm sm:text-base text-body text-center">
-          {t("form:text-no-account")}{" "}
+          {t("form: Don't have any account?")}{" "}
           <Link
             href="/register"
             className="ms-1 underline text-accent font-semibold transition-colors duration-200 focus:outline-none hover:text-accent-hover focus:text-accent-700 hover:no-underline focus:no-underline"

@@ -137,7 +137,7 @@ const RegistrationForm = () => {
               error={t(errors.phone_number?.message!)}
             />
             <Button className="w-full" loading={loading} disabled={loading}>
-              {t("form:text-register")}
+              {t("form:Register")}
             </Button>
 
             {errorMessage ? (
@@ -157,7 +157,7 @@ const RegistrationForm = () => {
             </span>
           </div>
           <div className="text-sm sm:text-base text-body text-center">
-            {t("form:text-already-account")}{" "}
+            {t("form: Already have an account?")}{" "}
             <Link
               href={ROUTES.LOGIN}
               className="ms-1 underline text-accent font-semibold transition-colors duration-200 focus:outline-none hover:text-accent-hover focus:text-accent-700 hover:no-underline focus:no-underline"
