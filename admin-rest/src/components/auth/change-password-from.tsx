@@ -4,7 +4,7 @@ import Card from "@components/common/card";
 import Description from "@components/ui/description";
 import { toast } from "react-toastify";
 import PasswordInput from "@components/ui/password-input";
-import { useChangePasswordMutation } from "@data/user/use-Change Password.mutation";
+import { useChangePasswordMutation } from "@data/user/use-change-password.mutation";
 import { useTranslation } from "next-i18next";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
