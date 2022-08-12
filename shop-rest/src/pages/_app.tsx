@@ -130,7 +130,9 @@ function CustomApp({ Component, pageProps }: AppProps) {
 
     
   const Layout = (Component as any).Layout || Noop;
+
   return (
+    
     <QueryClientProvider client={queryClientRef.current}>
       <Hydrate state={pageProps.dehydratedState}>
         <AppSettings>
@@ -161,4 +163,4 @@ function CustomApp({ Component, pageProps }: AppProps) {
   );
 }
 
-export default appWithTranslation(CustomApp);
+export default  CustomApp;

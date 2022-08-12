@@ -133,7 +133,7 @@ export default function OrdersPage() {
 
   return (
 
-    <div className="w-full bg-light">
+    <div className="w-full am:mt-0 lg:mt-10 bg-light">
       <div className="flex flex-col xl:flex-row items-start max-w-1920 w-full mx-auto py-10 px-5 xl:py-14 xl:px-8 2xl:px-14  min-h-screen">
         <ProfileSidebar className="flex-shrink-0 hidden xl:block xl:w-80 me-8" />
         {/* End of sidebar navigation */}
@@ -177,7 +177,7 @@ export default function OrdersPage() {
           >
             <div className="flex flex-col h-full pb-5 md:border md:border-border-200">
               <h3 className="text-xl font-semibold py-5 text-heading px-5">
-                {t("profile-sidebar-orders")}
+                {t("My Orders")}
               </h3>
               <Scrollbar
                 className="w-full"
@@ -238,7 +238,7 @@ export default function OrdersPage() {
         <div className="flex flex-col w-full lg:hidden">
           <div className="flex flex-col w-full h-full px-0 pb-5">
             <h3 className="text-xl font-semibold pb-5 text-heading">
-              {t("profile-sidebar-orders")}
+              {t("My Orders")}
             </h3>
             <Collapse
               accordion={true}

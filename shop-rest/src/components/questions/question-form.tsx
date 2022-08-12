@@ -54,7 +54,7 @@ export default function QuestionForm() {
                 loading={isLoading}
                 disabled={isLoading}
               >
-                {t('text-submit')}
+                {t('Submit')}
               </Button>
             </div>
           </>

@@ -235,7 +235,7 @@ export default function OrderPage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 space-x-4 w-auto  lg:w-1/3">
                           <h3 className="mb-2 text-sm lg:text-lg text-heading  font-semibold">
-                            {t("text-order-number")}:
+                            {t("Order details-number")}:
                           </h3>
                           <p className="text-sm lg:text-lg text-body-dark">
                             {data?.order?.tracking_number}
@@ -294,7 +294,7 @@ export default function OrderPage() {
          
           <div className="w-full  lg:ps-3">
             <h2 className="text-xl font-bold text-heading mb-6">
-              {t("text-order-details")}
+              {t("Order details-details")}
             </h2>
 
             <div className='grid grid-cols-1 sm:grid-cols-2 w-full '>
@@ -320,7 +320,7 @@ export default function OrderPage() {
             or
               <p className="flex text-body-dark mt-5">
                 <strong className="w-5/12 sm:w-4/12 text-sm  text-heading font-semibold">
-                  {t("text-shipping-address")}
+                  {t("Shipping Address")}
                 </strong>
                 :
                 <span className="w-7/12 sm:w-8/12 ps-4 text-sm">

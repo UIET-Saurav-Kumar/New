@@ -121,7 +121,7 @@ export default function UploadBill({user} : Props) {
           <Card className="w-full grid grid-cols-1 items-center gap-4 md:grid md:grid-cols-2 space-y-4">
             <Input
               className="flex-1"
-              label={t("text-name")}
+              label={t("Name")}
               {...register("name")}
               error={errors.name?.message}
               required

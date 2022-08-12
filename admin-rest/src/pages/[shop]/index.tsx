@@ -294,7 +294,7 @@ export default function ShopPage() {
           <div className="flex flex-col space-y-3">
             <p className="text-sm text-sub-heading">
               <span className="text-muted block w-full">
-                {t("common:text-name")}:
+                {t("common:Name")}:
               </span>{" "}
               <span className="font-semibold">
                 {balance?.payment_info?.name}

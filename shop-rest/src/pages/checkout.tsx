@@ -83,7 +83,7 @@ export default function CheckoutPage() {
           {/* <div className="shadow-700 bg-light p-5 md:p-8">
             <Address
               id={data?.me?.id!}
-              heading="text-shipping-address"
+              heading="Shipping Address"
               addresses={data?.me?.address?.filter(
                 (address: any) => address.type === "shipping"
               )}

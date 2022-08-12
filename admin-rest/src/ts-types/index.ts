@@ -12,7 +12,7 @@ export enum PATH {
   CHECKOUT = "checkout/verify",
   ADDRESS = "address",
   TYPE = "types",
-  CHANGE_PASSWORD = "change-password",
+  CHANGE_PASSWORD = "Change Password",
   FORGET_PASSWORD = "forget-password",
   VERIFY_FORGET_PASSWORD_TOKEN = "verify-forget-password-token",
   RESET_PASSWORD = "reset-password",

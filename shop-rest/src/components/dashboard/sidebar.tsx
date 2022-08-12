@@ -72,7 +72,7 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({ className }) => {
                 'font-semibold text-heading transition-colors hover:text-accent focus:text-accent'
               )}
             >
-              {t('profile-sidebar-logout')}
+              {t('Logout')}
             </button>
           </li>
         </ul>

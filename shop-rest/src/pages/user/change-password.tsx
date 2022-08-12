@@ -89,12 +89,12 @@ const ChangePasswordPage = () => {
     );
   }
   return (
-    <div className="flex flex-col xl:flex-row items-start max-w-1920 w-full mx-auto py-10 px-8 xl:py-14 xl:px-16 2xl:px-20 bg-gray-100">
+    <div className="flex flex-col xl:flex-row items-start mt-20 max-w-1920 w-full mx-auto py-10 px-8 xl:py-14 xl:px-16 2xl:px-20 bg-gray-100">
       <ProfileSidebar className="flex-shrink-0 hidden xl:block xl:w-80 me-10" />
       {/* End of sidebar navigation */}
       <Card className="w-full">
         <h1 className="mb-5 sm:mb-8 text-lg sm:text-xl text-heading font-semibold">
-          {t("change-password")}
+          {t("Change Password")}
         </h1>
 
         <form
@@ -103,28 +103,28 @@ const ChangePasswordPage = () => {
           className="flex flex-col"
         >
           <PasswordInput
-            label={t("text-old-password")}
+            label={t("Old Password")}
             {...register("oldPassword")}
             error={t(errors.oldPassword?.message!)}
             className="mb-5"
             variant="outline"
           />
           <PasswordInput
-            label={t("text-new-password")}
+            label={t("New Password")}
             {...register("newPassword")}
             error={t(errors.newPassword?.message!)}
             className="mb-5"
             variant="outline"
           />
           <PasswordInput
-            label={t("text-confirm-password")}
+            label={t("Confirm Password")}
             {...register("passwordConfirmation")}
             error={t(errors.passwordConfirmation?.message!)}
             className="mb-5"
             variant="outline"
           />
           <Button loading={loading} disabled={loading} className="ms-auto">
-            {t("text-submit")}
+            {t("Submit")}
           </Button>
         </form>
       </Card>

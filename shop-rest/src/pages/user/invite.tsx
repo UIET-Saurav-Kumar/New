@@ -189,7 +189,7 @@ const ShareButton = () => {
           {/* <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <Input
-                label={t("text-name")}
+                label={t("Name")}
                 // {...register("name")}
                 variant="outline"
                 error={t(errors.name?.message!)}

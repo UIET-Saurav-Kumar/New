@@ -78,7 +78,7 @@ const OrderDetails = ({ order }: Props) => {
 
               <div className="mb-4">
                 <span className="text-sm text-heading font-bold mb-2 block">
-                  {t("text-shipping-address")}
+                  {t("Shipping Address")}
                 </span>
 
                 <span className="text-sm text-body">
@@ -113,7 +113,7 @@ const OrderDetails = ({ order }: Props) => {
 
               <div className="flex justify-between">
                 <span className="text-sm font-bold text-heading">
-                {t("text-delivery-fee")}
+                {t("Delivery Fee")}
                 </span>
                 <span className="text-sm font-bold text-heading">{amount}</span>
               </div>

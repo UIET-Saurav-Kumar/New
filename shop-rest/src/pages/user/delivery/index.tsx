@@ -121,7 +121,7 @@ export default function DeliveriesPage() {
         <div className="flex flex-col w-full lg:hidden">
           <div className="flex flex-col w-full h-full px-0 pb-5">
             <h3 className="text-xl font-semibold pb-5 text-heading">
-              {t("profile-sidebar-orders")}
+              {t("My Orders")}
             </h3>
             <Collapse
               accordion={true}

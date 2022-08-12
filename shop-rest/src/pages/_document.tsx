@@ -15,7 +15,7 @@ export default class CustomDocument extends Document {
   render() {
 
     const { locale } = this.props.__NEXT_DATA__;
-    const dir = locale === "ar" || locale === "he" ? "rtl" : "ltr";
+    const dir =  "ltr";
 
     // if (process.env.NODE_ENV !== "production") {
     //   i18n!.reloadResources(locale);

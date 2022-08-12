@@ -307,7 +307,7 @@ useIntersectionObserver({
                       </>
                     ) 
                   }
-            </div>
+          </div>
           
         </div>
         </>

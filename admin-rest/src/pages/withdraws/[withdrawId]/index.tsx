@@ -126,7 +126,7 @@ const Withdraw = () => {
           <div className="w-full md:w-1/2 md:order-1 md:pe-3">
             <div className="flex items-center justify-start mb-2">
               <div className="w-4/12 me-5 flex justify-between text-body text-sm flex-shrink-0">
-                <span>{t("common:text-amount")}</span>
+                <span>{t("common:Amount")}</span>
                 <span>:</span>
               </div>
               <div className="border border-gray-300 rounded px-4 py-3 w-full xl:w-5/12 items-center flex">

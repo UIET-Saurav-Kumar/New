@@ -268,7 +268,7 @@ const ShopPage = ({ data }: any) => {
                     "streetAddress": data?.address?.street_address,
                     "addressLocality": data?.address?.city,
                     "addressRegion": data?.address?.city,
-                    "postalCode": data?.address?.street_address.split(',')[data?.address?.street_address.split(',').length -1],
+                    "postalCode": data?.address?.street_address?.split(',')[data?.address?.street_address.split(',').length -1],
                     "addressCountry": "addressCountry",
                   },
                   "geo": {

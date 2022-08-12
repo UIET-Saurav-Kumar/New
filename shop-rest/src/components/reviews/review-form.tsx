@@ -115,7 +115,7 @@ export default function ReviewForm() {
                   loading={isLoading || creating}
                   disabled={isLoading || creating}
                 >
-                  {t('text-submit')}
+                  {t('Submit')}
                 </Button>
               </div>
             </>

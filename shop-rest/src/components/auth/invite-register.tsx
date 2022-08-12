@@ -125,7 +125,7 @@ const RegisterForm = () => {
       )}
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <Input
-          label={t("text-name")}
+          label={t("Name")}
           {...register("name")}
           type="text"
           variant="outline"

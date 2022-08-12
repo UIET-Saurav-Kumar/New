@@ -117,9 +117,18 @@ const OtpLogin = () => {
       <div className="flex justify-center">
         <Logo />
       </div>
-      <p className="text-center text-sm md:text-base leading-relaxed text-body mt-4 sm:mt-5 mb-7 sm:mb-10">
+      <p className="text-center text-sm md:text-base font-semibold leading-relaxed text-body mt-4 sm:mt-5 mb-7 sm:mb-10">
         {t("Login with Registered Mobile Number")}
       </p>
+      <div className="  sm:text-sm text-xs text-body text-center">
+        {t("If not registered, please")}{" "}
+        <button
+          onClick={() => openModal("REGISTER")}
+          className="ms-1 underline text-accent font-semibold transition-colors duration-200 focus:outline-none hover:text-accent-hover focus:text-accent-hover hover:no-underline focus:no-underline"
+        >
+          {t("Register here")}
+        </button>
+      </div>
       {
         verifiedPhoneNumber && !verifiedToken &&
         (<p className="text-center text-sm md:text-base leading-relaxed text-body mb-7 sm:mb-10">
@@ -155,11 +164,11 @@ const OtpLogin = () => {
       <div className="flex flex-col items-center justify-center relative text-sm text-heading mt-0 sm:mt-11 mb-7 sm:mb-8">
         <hr className="w-full text-gray-500" />
         <span className="absolute start-2/4 -top-2.5 px-2 -ms-4 bg-light">
-          {t("text-or")}
+          {t("Or")}
         </span>
       </div>
       <div className="text-sm sm:text-base text-body text-center">
-        {t(" Don't have any account?")}{" "}
+        {t("If not registered, please")}{" "}
         <button
           onClick={() => openModal("REGISTER")}
           className="ms-1 underline text-accent font-semibold transition-colors duration-200 focus:outline-none hover:text-accent-hover focus:text-accent-hover hover:no-underline focus:no-underline"
@@ -190,7 +199,7 @@ export  function OtpLoginView() {
       <div className="relative flex flex-col items-center justify-center text-sm mt-9 mb-7 text-heading sm:mt-11 sm:mb-8">
         <hr className="w-full" />
         <span className="absolute -top-2.5 bg-light px-2 ltr:left-2/4 ltr:-ml-4 rtl:right-2/4 rtl:-mr-4">
-          {t('text-or')}
+          {t('OR')}
         </span>
       </div>
       <div className="text-sm text-center text-body sm:text-base">

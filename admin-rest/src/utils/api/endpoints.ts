@@ -35,7 +35,7 @@ export const API_ENDPOINTS = {
   TOKEN: "token",
   BLOCK_USER: "users/ban-user",
   UNBLOCK_USER: "users/active-user",
-  CHANGE_PASSWORD: "change-password",
+  CHANGE_PASSWORD: "Change Password",
   FORGET_PASSWORD: "forget-password",
   VERIFY_FORGET_PASSWORD_TOKEN: "verify-forget-password-token",
   RESET_PASSWORD: "reset-password",

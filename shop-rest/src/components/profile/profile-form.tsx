@@ -111,7 +111,7 @@ const ProfileForm = ({ user }: Props) => {
           <div className="flex flex-col sm:flex-row sm:items-center sm:space-s-4 mb-6">
             <Input
               className="flex-1"
-              label={t("text-name")}
+              label={t("Name")}
               {...register("name")}
               variant="outline"
             />

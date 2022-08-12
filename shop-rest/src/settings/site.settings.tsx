@@ -148,11 +148,11 @@ export const siteSettings = {
 
     {
       href: ROUTES.PROFILE,
-      menulabel: "profile-sidebar-profile",
+      menulabel: " Profile",
     },
     {
       href: ROUTES.CHANGE_PASSWORD,
-      menulabel: "profile-sidebar-password",
+      menulabel: "Change Password",
     },
 
     {
@@ -171,7 +171,7 @@ export const siteSettings = {
     
     {
       href: ROUTES.ORDERS,
-      menulabel: "profile-sidebar-orders",
+      menulabel: "My Orders",
     },
 
     {
@@ -212,11 +212,11 @@ export const siteSettings = {
     },
     {
       href: ROUTES.HELP,
-      menulabel: "profile-sidebar-help",
+      menulabel: "Help",
     },
     {
       href: ROUTES.LOGOUT,
-      menulabel: "profile-sidebar-logout",
+      menulabel: "Logout",
     },
 
   ],

@@ -243,7 +243,7 @@ const RegisterForm = () => {
     <form className="grid grid-cols-2 text-xs gap-2 lg:gap-4 -mt-16 place-content-center" 
             onSubmit={handleSubmit(onSubmit)} noValidate>
         <Input
-          // label={t("text-name")}
+          // label={t("Name")}
           label={t("Name")}
           {...register("name")}
           type="text"

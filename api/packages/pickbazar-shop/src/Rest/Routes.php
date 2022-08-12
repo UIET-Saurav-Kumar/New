@@ -298,7 +298,7 @@ Route::group(['middleware' => ['can:' . Permission::CUSTOMER, 'auth:sanctum']], 
     Route::post('checkout/verify', 'PickBazar\Http\Controllers\CheckoutController@verify');
     Route::get('me', 'PickBazar\Http\Controllers\UserController@me');
     Route::put('users/{id}', 'PickBazar\Http\Controllers\UserController@update');
-    Route::post('/change-password', 'PickBazar\Http\Controllers\UserController@changePassword');
+    Route::post('/Change Password', 'PickBazar\Http\Controllers\UserController@changePassword');
     Route::apiResource('address', AddressController::class, [
         'only' => ['destroy']
     ]);

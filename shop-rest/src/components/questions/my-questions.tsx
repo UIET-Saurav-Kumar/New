@@ -160,7 +160,7 @@ const MyQuestions: React.FC = () => {
       <div className="flex w-full flex-col">
         <div className="mb-8 flex items-center justify-center sm:mb-10">
           <h1 className="text-center text-lg font-semibold text-heading sm:text-xl">
-            {t('profile-sidebar-my-wishlist')}
+            {t('My Wishlist')}
           </h1>
         </div>
         {rangeMap(15, (i) => (
@@ -175,7 +175,7 @@ const MyQuestions: React.FC = () => {
       <div className="flex w-full flex-col">
         <div className="mb-8 flex items-center justify-between sm:mb-10">
           <h1 className="ml-auto text-center text-lg font-semibold text-heading sm:text-xl">
-            {t('profile-sidebar-my-wishlist')}
+            {t('My Wishlist')}
           </h1>
         </div>
         <NotFound

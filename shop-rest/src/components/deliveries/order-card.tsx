@@ -44,7 +44,7 @@ const DeliveryCard: React.FC<DeliveryCardProps> = ({ onClick, order, isActive })
       <div className="flex flex-col p-5 md:p-3 lg:px-4 lg:py-5">
         <p className="text-sm text-heading w-full flex justify-between items-center mb-4 last:mb-0">
           <span className="w-24 overflow-hidden flex-shrink-0">
-            {t("text-order-date")}
+            {t("Order date")}
           </span>
           <span className="me-auto">:</span>
           <span className="ms-1">
@@ -74,7 +74,7 @@ const DeliveryCard: React.FC<DeliveryCardProps> = ({ onClick, order, isActive })
         </p>
         <p className="text-sm font-bold text-heading w-full flex justify-between items-center mb-4 last:mb-0">
           <span className="w-24 overflow-hidden flex-shrink-0">
-            {t("text-amount")}
+            {t("Amount")}
           </span>
           <span className="me-auto">:</span>
           <span className="ms-1">{amount}</span>

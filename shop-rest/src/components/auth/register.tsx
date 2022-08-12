@@ -226,15 +226,23 @@ const RegisterForm = () => {
           closeable={true}
           onClose={() => setErrorMsg("")}
         />
-        
-        
+
       )}
+       <div className="text-sm sm:text-sm text-body  mt-4 text-center">
+        {t(" If already registered, please")}{" "}
+        <button
+          onClick={() => openModal("OTP_LOGIN")}
+          className="ms-1 underline text-accent font-semibold transition-colors duration-200 focus:outline-none hover:text-accent-hover focus:text-accent-hover hover:no-underline focus:no-underline"
+        >
+          {t(" Login")}
+        </button>
+      </div>
       <form className="grid grid-cols-2 text-xs gap-3 place-content-center" 
             onSubmit={handleSubmit(onSubmit)} noValidate>
 
         {/* name */}
         <Input
-          // label={t("text-name")}
+          // label={t("Name")}
           label={t("Name")}
           {...register("name")}
           type="text"
@@ -392,16 +400,17 @@ const RegisterForm = () => {
         {/* <span className="absolute start-2/4 -top-2.5 px-2 -ms-4 bg-light">
           {t("text-or")}
         </span> */}
-      </div>
-      <div className="text-sm sm:text-base text-body -mt-5 text-center">
-        {t(" Already have an account?")}{" "}
+        <div className="text-sm sm:text-base text-body  mt-0 text-center">
+        {t(" If already registered, please")}{" "}
         <button
-          onClick={() => openModal("LOGIN_VIEW")}
+          onClick={() => openModal("OTP_LOGIN")}
           className="ms-1 underline text-accent font-semibold transition-colors duration-200 focus:outline-none hover:text-accent-hover focus:text-accent-hover hover:no-underline focus:no-underline"
         >
           {t(" Login")}
         </button>
       </div>
+      </div>
+      
     </div>
     </div>
     

@@ -97,7 +97,7 @@ const LoginForm = () => {
         <div className="flex justify-center">
           <Logo />
         </div>
-        <p className="text-center text-sm md:text-base text-body mt-4 sm:mt-5 mb-8 sm:mb-10">
+        <p className="text-center text-sm md:text-base font-semibold text-body mt-4 sm:mt-5 mb-8 sm:mb-10">
           {t(" Login with your email & password")}
         </p>
       {errorMsg && (
@@ -109,11 +109,21 @@ const LoginForm = () => {
           onClose={() => setErrorMsg("")}
         />
       )}
+       <div className="text-sm sm:text-gray-500 text-body text-center">
+        {t(" Don't have any account?")}{" "}
+        <button
+          onClick={() => openModal("REGISTER")}
+          className="ms-1 underline text-accent font-semibold transition-colors duration-200 focus:outline-none hover:text-accent-hover focus:text-accent-hover hover:no-underline focus:no-underline"
+        >
+          {t("Register")}
+        </button>
+      </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input
           label={t("Email")}
           {...register("email")}
           type="email"
+          placeholder="Enter your Registered email id"
           variant="outline"
           className="mb-5"
           error={t(errors.email?.message!)}
@@ -183,15 +193,7 @@ const LoginForm = () => {
         <hr className="w-full" />
       </div>
 
-      <div className="text-sm sm:text-base text-body text-center">
-        {t(" Don't have any account?")}{" "}
-        <button
-          onClick={() => openModal("REGISTER")}
-          className="ms-1 underline text-accent font-semibold transition-colors duration-200 focus:outline-none hover:text-accent-hover focus:text-accent-hover hover:no-underline focus:no-underline"
-        >
-          {t("Register")}
-        </button>
-      </div>
+      
     </div>
     
   );

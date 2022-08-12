@@ -56,7 +56,7 @@ const OrderDetails = ({ order }: Props) => {
         <>
           <div className="flex flex-col md:flex-row items-center md:justify-between p-5 border-b border-border-200">
             <h2 className="flex font-semibold text-sm md:text-xl text-heading mb-2">
-              {t("text-order-details")} <span className="px-2">-</span>{" "}
+              {t("Order details-details")} <span className="px-2">-</span>{" "}
               {tracking_number}
             </h2>
 
@@ -65,7 +65,7 @@ const OrderDetails = ({ order }: Props) => {
               className="font-semibold text-sm text-accent flex items-center transition duration-200 no-underline hover:text-accent-hover focus:text-accent-hover"
             >
               <Eye width={20} className="me-2" />
-              {t("text-sub-orders")}
+              {t("Sub Orders")}
             </Link>
           </div>
 
@@ -73,7 +73,7 @@ const OrderDetails = ({ order }: Props) => {
             <div className="w-full md:w-3/5 flex flex-col px-5 py-4 border-b sm:border-b-0 sm:border-r border-border-200">
               <div className="mb-4">
                 <span className="text-sm text-heading font-bold mb-2 block">
-                  {t("text-shipping-address")}
+                  {t("Shipping Address")}
                 </span>
 
                 <span className="text-sm text-body">
@@ -83,7 +83,7 @@ const OrderDetails = ({ order }: Props) => {
               
               <div className="mb-4">
                 <span className="text-sm text-heading font-bold mb-2 block">
-                  {t("text-billing-address")}
+                  {t("Billing Address")}
                 </span>
 
                 <span className="text-sm text-body">
@@ -104,23 +104,23 @@ const OrderDetails = ({ order }: Props) => {
 
             <div className="w-full md:w-2/5 flex flex-col px-5 py-4">
               <div className="flex justify-between mb-3">
-                <span className="text-sm text-body">{t("text-sub-total")}</span>
+                <span className="text-sm text-body">{t("Sub Total")}</span>
                 <span className="text-sm text-heading">{amount}</span>
               </div>
 
               <div className="flex justify-between mb-3">
-                <span className="text-sm text-body">{t("text-discount")}</span>
+                <span className="text-sm text-body">{t("Discount")}</span>
                 <span className="text-sm text-heading">{discount}</span>
               </div>
 
               <div className="flex justify-between mb-3">
                 <span className="text-sm text-body">
-                  {t("text-delivery-fee")}
+                  {t("Delivery Fee")}
                 </span>
                 <span className="text-sm text-heading">{delivery_fee}</span>
               </div>
               <div className="flex justify-between mb-3">
-                <span className="text-sm text-body">{t("text-tax")}</span>
+                <span className="text-sm text-body">{t("Tax")}</span>
                 <span className="text-sm text-heading">{sales_tax}</span>
               </div>
 

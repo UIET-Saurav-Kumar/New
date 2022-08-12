@@ -23,7 +23,7 @@ export const API_ENDPOINTS: Record<string, string> = {
   REGISTER: "register",
   FORGET_PASSWORD: "forget-password",
   LOGOUT: "logout",
-  CHANGE_PASSWORD: "change-password",
+  CHANGE_PASSWORD: "Change Password",
   RESET_PASSWORD: "reset-password",
   VERIFY_FORGET_PASSWORD: "verify-forget-password-token",
   VERIFY_CHECKOUT: "checkout/verify",

@@ -4,7 +4,7 @@ import Card from "@components/common/card";
 import Description from "@components/ui/description";
 import { toast } from "react-toastify";
 import PasswordInput from "@components/ui/password-input";
-import { useChangePasswordMutation } from "@data/user/use-change-password.mutation";
+import { useChangePasswordMutation } from "@data/user/use-Change Password.mutation";
 import { useTranslation } from "next-i18next";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -107,7 +107,7 @@ const ChangePasswordForm = () => {
 
         <div className="w-full text-end">
           <Button loading={loading} disabled={loading}>
-            {t("form:button-label-change-password")}
+            {t("form:button-label-Change Password")}
           </Button>
         </div>
       </div>

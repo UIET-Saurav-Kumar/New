@@ -12,7 +12,7 @@ module.exports = {
     },
     exclude: [
       '*/404',
-      '*/change-password',
+      '*/Change Password',
       '*/downloads',
       '*/logout',
       '*/user',
