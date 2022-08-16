@@ -56,7 +56,7 @@ export default class CustomDocument extends Document {
           <script
             
             dangerouslySetInnerHTML={{
-              __html: `(function(w,d,s,c,r,a,m){
+              __html: `function(w,d,s,c,r,a,m){
                 w['KiwiObject']=r;
                 w[r]=w[r] || function () {
                   (w[r].q=w[r].q||[]).push(arguments)};
@@ -68,7 +68,7 @@ export default class CustomDocument extends Document {
                 m.parentNode.insertBefore(a,m)
               })(window,document,'script',"https://app.interakt.ai/kiwi-sdk/kiwi-sdk-17-prod-min.js?v="+ new Date().getTime(),'kiwi');
               window.onload = function () {
-                kiwi.init('', 'R74PF9xANjTtlgpYCm6WFEpmXvX7ZJ42', {});`,
+                kiwi.init('', 'R74PF9xANjTtlgpYCm6WFEpmXvX7ZJ42', {});`
               }}
             />
 
