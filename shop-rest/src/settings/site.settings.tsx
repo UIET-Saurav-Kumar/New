@@ -106,7 +106,7 @@ export const siteSettings = {
 
   headerLinks: [
     { href: ROUTES.SHOPS, icon: null, label: "Shops" },
-    {href: ROUTES.CREATE_SHOP, icon: null, label: "Create Shop"},
+    {href: ROUTES.CREATE_SHOP, icon: null, label: "Business Access"},
     // { href: ROUTES.WISHLIST, label: "Wishlist" },
     
 
