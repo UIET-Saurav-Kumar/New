@@ -38,7 +38,7 @@ const DefaultLayout: React.FC = ({ children }) => {
 
   return (
        
-    <div className="relative flex flex-col lg:px-24 transition-colors duration-150">
+    <div className="relative flex flex-col  transition-colors duration-150">
         {/* <HeaderTop/>  */}
        <div className={` sticky ${ scrollDirection === "down" ? "-top-44" : "top-0"}   transition-all duration-500 sticky z-50 bg-white top-0`}> 
        <HeaderMiddle/> </div>
