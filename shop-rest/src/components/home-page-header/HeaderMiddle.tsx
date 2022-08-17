@@ -421,7 +421,7 @@ export default function HeaderMiddle() {
                 </div> 
 
 
-               {!!isAuthorize && (
+               {!JoinBtn && (
 
                    <div className='flex justify-between w-full items-center lg:hidden xl:hidden 2xl:hidden'>
 
@@ -457,7 +457,7 @@ export default function HeaderMiddle() {
                    </div>
                        
                        ) } {
-                            !isAuthorize && (
+                            JoinBtn && (
                            <div className='flex justify-between  w-full  items-center  lg:hidden xl:hidden 2xl:hidden'>
 
                                 {/* <div className='block px-0 ml-10 sm:-ml-6  '>  */}
