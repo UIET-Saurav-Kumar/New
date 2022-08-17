@@ -141,7 +141,7 @@ export const siteSettings = {
     { href: ROUTES.WITHDRAWS, label: "Withdraws" },
     { href: ROUTES.UPLOAD_INVOICE, label: "Upload Invoice" },
     { href: ROUTES.DELIVERY, label: "Deliveries" },
-    {href: ROUTES.CREATE_SHOP,  label: "Create Shop"},
+    {href: ROUTES.CREATE_SHOP,  label: "Business Access"},
     { href: ROUTES.LOGOUT, label: "Logout" },
   ],  
 
