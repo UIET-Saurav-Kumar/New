@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useCategoriesQuery } from "@data/home/use-categories-query";
 import { useRouter } from "next/router";
 import { useLocation } from "@contexts/location/location.context";
+import Image from 'next/image';
 
 
 
@@ -56,8 +57,8 @@ const AllCategories = () => {
 	}
 
 
-	// console.log('categories',data?.categories?.data)
-
+	console.log('categories',data?.categories?.data.map((item)=>item.image?.thumbnail));
+    console.log('catist', data?.categories?.data);
 	
 	return (
 
@@ -72,18 +73,21 @@ const AllCategories = () => {
                         2xl:grid-cols-5 mt-0  h-full gap-2 lg:gap-6 p-4  bg-gray-100'>
 
     
-			{data?.categories?.data.map( (category,_idx) => (
+			{data?.categories?.data.filter((cat)=>cat?.image?.length !=0 ).map( (category,_idx) => (
 				
 					<Link className="categories-link" 
-						key={_idx} href={category.name === 'Groceries' && location() ?  getLinkGrocery()    : category?.name === 'Salon & Spa' && location() ? getLinkSalonSpa() :  getLink(category.name)}>
+						key={_idx} href={category?.name === 'Groceries' && location() ?  getLinkGrocery()    : category?.name === 'Salon & Spa' && location() ? getLinkSalonSpa() :  getLink(category.name)}>
 					
 						<div className='rounded flex flex-col w-full  cursor-pointer  border-gray-200 
 										hover:border-gray-400  items-center'
 							key={category.id} >
 
-								<img className=' w-full h-full object-cover'  
-
-									src={category?.image.thumbnail} 
+								<Image  src={category?.image?.thumbnail }
+								 width={351}
+								 height={420}
+								 layout="intrinsic"
+								 objectFit="cover"
+								 className=" "
 								/>   
 						</div>
 					

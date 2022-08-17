@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { useModalAction, useModalState } from "./modal/modal.context";
 import { useCategoriesQuery } from "@data/category/use-categories.query";
 import { useWindowDimensions } from "@components/common/search";
+import Image from "next/image";
 
 
 export function SidebarMenuItem({ className, item, depth = 0 }: any) {
@@ -142,7 +143,14 @@ export function SidebarMenuItem({ className, item, depth = 0 }: any) {
             <div className='relative py-2 flex flex-col mx-auto h-auto  w-auto   px-2  place-items-center lg:grid-cols-2    items-center'>
                   { item?.image.id ? (
                     <span className="flex text-center w-auto h-auto items-center justify-center">
-                      <img src={item?.image?.original} className={` ${pageURL.includes('kosmetics-india') ? 'object-contain' : 'h-16 w-16 object-contain rounded-full'}  `} />
+                      <Image
+                        src={item?.image?.thumbnail}
+                        alt={item?.image?.altText}
+                        width={50}
+                        height={50}
+                        layout="intrinsic"
+                        objectFit="contain" 
+                        className={` ${pageURL.includes('kosmetics-india') ? 'object-contain' : 'h-16 w-16 object-contain rounded-full'}  `} />
                     </span>
                   ) :
                     <span className="flex  text-center  w-full items-center justify-center">

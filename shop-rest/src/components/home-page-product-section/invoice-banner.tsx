@@ -4,6 +4,7 @@ import { useCategoriesQuery } from "@data/home/use-categories-query";
 import { useRouter } from "next/router";
 import { useUI } from "@contexts/ui.context";
 import { useModalAction } from "@components/ui/modal/modal.context";
+import  Image  from 'next/link';
 
 
 export default function InvoiceBanner() {
@@ -33,8 +34,16 @@ export default function InvoiceBanner() {
 
    
    <div onClick={getLink} className='flex w-full mt-8 md:mt-10 h-auto '>   
-        <img src='/invoice.jpg' className=' md:h-auto object-contain cursor-pointer pt-0 
-                                       lg:w-full -sm-pt-60 lg:object-contain lg:mt-8 xl:object-cover'/>
+        <Image
+         width={886}
+         height={356}
+         layout="intrinsic"
+         objectFit="cover"
+         className="rounded-lg "
+         src='/invoice.jpg' 
+        //  className=' md:h-auto object-contain cursor-pointer pt-0 
+        //                                lg:w-full -sm-pt-60 lg:object-contain lg:mt-8 xl:object-cover'
+                                       />
    </div> 
        
     )

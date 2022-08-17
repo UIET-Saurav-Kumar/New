@@ -25,6 +25,7 @@ const DefaultLayout: React.FC = ({ children }) => {
         }
         lastScrollY = scrollY > 0 ? scrollY : 0;
       };
+      
       window.addEventListener("scroll", updateScrollDirection); // add event listener
       return () => {
         window.removeEventListener("scroll", updateScrollDirection); // clean up
@@ -40,11 +41,13 @@ const DefaultLayout: React.FC = ({ children }) => {
        
     <div className="relative flex flex-col  transition-colors duration-150">
         {/* <HeaderTop/>  */}
-       <div className={` sticky ${ scrollDirection === "down" ? "-top-44" : "top-0"}   transition-all duration-500 sticky z-50 bg-white top-0`}> 
-       <HeaderMiddle/> </div>
-            <div>{children}</div>
-            <Footer/>
+      <div className={` sticky ${ scrollDirection === "down" ? "-top-44" : "top-0"}   transition-all duration-500 sticky z-50 bg-white top-0`}> 
+       <HeaderMiddle/> 
+      </div>
+      <div>{children}</div>
+       <Footer/>
     </div>
+
   );
 };
 

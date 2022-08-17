@@ -182,14 +182,14 @@ const ShopPage = ({ data }: any) => {
   }
 
   //array of default cover image based on shop category 
- let Groceries =  'https://cdn2.f-cdn.com/contestentries/1025096/23455837/591a930567cb5_thumb900.jpg';
- let Salon_Spa = 'https://d19seqargx6mmp.cloudfront.net/product-images/s_5474.jpg';
- let Cosmetics = 'https://static.vecteezy.com/system/resources/thumbnails/002/607/628/small/3d-realistic-red-lipstick-pencil-golden-ring-on-red-silk-design-template-of-fashion-cosmetics-product-for-ads-flyer-banner-or-magazine-background-iillustration-free-vector.jpg';
- let Electronics = 'https://static.vecteezy.com/system/resources/thumbnails/004/617/319/small/electronics-word-concepts-banner-manufacture-maintenance-and-repair-of-household-appliances-presentation-website-isolated-lettering-typography-idea-with-linear-icons-outline-illustration-vector.jpg';
- let Fashion_Lifestyle = 'https://d3jmn01ri1fzgl.cloudfront.net/photoadking/webp_thumbnail/606817aa422ae_json_image_1617434538.webp';
- let fruits = 'https://t3.ftcdn.net/jpg/01/63/13/30/360_F_163133061_TlMOMqgxAvBuwzLAjxOQ8v1FQ3OexfRG.jpg'
- let pharmacy = 'https://img.freepik.com/premium-vector/online-pharmacy-banner-with-medication-shelf-smartphone-buying-blue_313242-582.jpg?w=2000';
- let health = 'https://www.abhinavayu.com/wp-content/uploads/2017/11/banner-inner-5.png';
+//  let Groceries =  'https://cdn2.f-cdn.com/contestentries/1025096/23455837/591a930567cb5_thumb900.jpg';
+//  let Salon_Spa = 'https://d19seqargx6mmp.cloudfront.net/product-images/s_5474.jpg';
+//  let Cosmetics = 'https://static.vecteezy.com/system/resources/thumbnails/002/607/628/small/3d-realistic-red-lipstick-pencil-golden-ring-on-red-silk-design-template-of-fashion-cosmetics-product-for-ads-flyer-banner-or-magazine-background-iillustration-free-vector.jpg';
+//  let Electronics = 'https://static.vecteezy.com/system/resources/thumbnails/004/617/319/small/electronics-word-concepts-banner-manufacture-maintenance-and-repair-of-household-appliances-presentation-website-isolated-lettering-typography-idea-with-linear-icons-outline-illustration-vector.jpg';
+//  let Fashion_Lifestyle = 'https://d3jmn01ri1fzgl.cloudfront.net/photoadking/webp_thumbnail/606817aa422ae_json_image_1617434538.webp';
+//  let fruits = 'https://t3.ftcdn.net/jpg/01/63/13/30/360_F_163133061_TlMOMqgxAvBuwzLAjxOQ8v1FQ3OexfRG.jpg'
+//  let pharmacy = 'https://img.freepik.com/premium-vector/online-pharmacy-banner-with-medication-shelf-smartphone-buying-blue_313242-582.jpg?w=2000';
+//  let health = 'https://www.abhinavayu.com/wp-content/uploads/2017/11/banner-inner-5.png';
       
 
 
@@ -308,7 +308,15 @@ const ShopPage = ({ data }: any) => {
 
                       {/* // button to scroll to the top of the page when user has scrolled way down */}
                       <div className="fixed z-50 bottom-10 right-10 flex justify-center items-center">
-                        <img src='/up-arrow.png' className="w-12 h-12" onClick={() => window.scrollTo(0, 0)} /> 
+                        <Image
+                          alt="scroll to top"
+                          width={50}
+                          height={50}
+                          layout="fixed"
+                          objectFit="contain"
+                          src='/up-arrow.png' 
+                        // className="w-12 h-12" 
+                        onClick={() => window.scrollTo(0, 0)} /> 
                       </div>
 
                       {/* <div className="fixed z-50 bottom-10 right-10 flex justify-center items-center">
@@ -342,16 +350,19 @@ const ShopPage = ({ data }: any) => {
                                        <div className=" w-full h-full"> 
                                           { cover_image.length  ? 
                                           cover_image?.map((img:any)=>
-                                          <img src={img.thumbnail} className='object-fill h-full w-full' />)
+                                          <Image 
+                                          src={img.thumbnail} 
+                                          alt="cover image"
+                                          className='object-fill h-full w-full' />)
                                           : 
-                                          shopCat?.includes('Cosmetics') &&  <img src={'/shop_cover_images/coverimage_cosmetics.jpg'}   className='object-fill h-full w-full' /> ||
-                                          shopCat?.includes('Groceries') && <img src={'/shop_cover_images/coverimage_groceries.jpg'}   className='object-fill h-full w-full' /> ||
-                                          shopCat?.includes('Salon & Spa') &&  <img src={'/shop_cover_images/coverimage_salon.webp'}   className='object-fill h-full w-full' /> ||
-                                          shopCat?.includes('Vegetables & Fruits') && <img src={'/shop_cover_images/coverimage_fruits.jpg'}   className='object-fill h-full w-full' /> ||
-                                          shopCat?.includes('Pharmacy') && <img src={'/shop_cover_images/coverimage_pharmacy.jpg'}   className='object-fill h-full w-full' /> ||
-                                          shopCat?.includes('Fashion Lifestyle') && <img src={'/shop_cover_images/coverimage_fashion.webp'}   className='object-fill h-full w-full' /> ||
-                                          shopCat?.includes('Electronics') && <img src={'/shop_cover_images/coverimage_electronics.jpg'}   className='object-fill h-full w-full' /> ||
-                                          shopCat?.includes('Health Products') && <img src={'/shop_cover_images/coverimage_cosmetics'}   className='object-fill h-full w-full' /> 
+                                          shopCat?.includes('Cosmetics') &&  <Image layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_cosmetics.jpg'}   className='object-fill h-full w-full' /> ||
+                                          shopCat?.includes('Groceries') && <Image layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_groceries.jpg'}   className='object-fill h-full w-full' /> ||
+                                          shopCat?.includes('Salon & Spa') &&  <Image layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_salon.webp'}   className='object-fill h-full w-full' /> ||
+                                          shopCat?.includes('Vegetables & Fruits') && <Image layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_fruits.jpg'}   className='object-fill h-full w-full' /> ||
+                                          shopCat?.includes('Pharmacy') && <Image layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_pharmacy.jpg'}   className='object-fill h-full w-full' /> ||
+                                          shopCat?.includes('Fashion Lifestyle') && <Image layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_fashion.webp'}   className='object-fill h-full w-full' /> ||
+                                          shopCat?.includes('Electronics') && <Image layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_electronics.jpg'}   className='object-fill h-full w-full' /> ||
+                                          shopCat?.includes('Health Products') && <Image layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_cosmetics'}   className='object-fill h-full w-full' /> 
                                           // imageCheck(data?.cover_image?.original, data, '317', false,'h-full w-full object-cover')
                                           }
                                        </div>
@@ -405,12 +416,23 @@ const ShopPage = ({ data }: any) => {
 
                             { data?.slug == 'chandigarh-grocery-store' ? ( 
                              <div className="w-full -mt-80 object-contain">
-                                    <img src='/grocery-web.jpg' className="object-contain" />
+                                    <Image
+                                    width={1826}
+                                    height={570}
+                                    layout="intrinsic"
+                                    objectFit="cover"
+                                     src='/grocery-web.jpg' 
+                                     className=" " />
                              </div> ) : null }
 
                              { data?.slug == 'kosmetics-india' ? ( 
                              <div className="w-full -mt-80 object-contain">
-                                    <img src='/kosmetics.jpg' className="object-contain" />
+                                    <Image
+                                    width={1826}
+                                    height={570}
+                                    layout="intrinsic"
+                                    objectFit="cover" 
+                                    src='/kosmetics.jpg' className=" " />
                              </div> ) : null }
 
                           {/* <HidingHeader> */}

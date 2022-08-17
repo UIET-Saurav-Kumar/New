@@ -6,6 +6,7 @@ import { useModalAction } from "@components/ui/modal/modal.context";
 import { useUI } from "@contexts/ui.context";
 import { useState, useEffect } from 'react';
 import { useAnalyticsQuery } from '@data/analytics/use-analytics.query';
+import Image from 'next/image';
 
 export default function UserProfile({data}:any) {
 
@@ -73,7 +74,14 @@ export default function UserProfile({data}:any) {
             <div className='flex flex-col 2xl:space-y-8 w-full space-y-3'>
                 <div className='space-y-8 text-center'>
                     <div className=' flex justify-around items-start mt-2 space-y-3'>
-                        <img src={data ? data?.profile?.avatar?.thumbnail : '/boy.png'} className='h-16 w-16 border rounded-full' alt='profile'/>
+                        <Image 
+                        height={56}
+                        width={56}
+                        src={data ? data?.profile?.avatar?.thumbnail : '/boy.png'} 
+                        alt='profile'
+                        className='rounded-full'
+                        //   className='h-16 w-16 border rounded-full' alt='profile'
+                        />
                         <p className='text-lg  font-semibold'>{!!data ? data?.name : 'Guest'}</p>
                     </div>
                     <div className='font-semibold text-xl'><span>Buylowcal Community Count</span> 

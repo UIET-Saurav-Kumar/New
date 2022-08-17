@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useRouter } from "next/router";
 import { useLocation } from "@contexts/location/location.context";
 import { useEffect, useState } from "react";
+ 
 
 export default function RedbullBanner() {
 
@@ -82,16 +83,22 @@ function location3(){
     return (
 
 
-      <div className='w-full '>
+      <div className='w-full px-2 '>
       
       <Slider {...settings}>
 
         
        
-      { location() && <Link href='salon-products?text=pick+any&category='><div className="card flex relative w-full  ">
+      { location() && <Link href='salon-products?text=pick+any&category='>
+        <div className="card flex relative w-full px-1 ">
 
-            <img 
-              className="object-contain px-1 rounded-lg cursor-pointer h-full w-full"
+            <Image
+             width={886}
+             height={356}
+             layout="intrinsic"
+             objectFit="cover"
+             className="rounded-lg "
+              // className="object-contain px-1 rounded-lg cursor-pointer h-full w-full"
               src={'/pick-5.jpeg'} 
                   />
 
@@ -101,20 +108,34 @@ function location3(){
            
 
 
-            { location() && <Link href='/user/upload-invoice/upload-form'><div className="card flex relative w-full  ">
+            { location() && <Link href='/user/upload-invoice/upload-form'>
+              <div className="card flex relative w-full px-1 ">
 
-            <img className="object-contain cursor-pointer rounded-lg px-1 h-full w-full"
+            <Image 
+            // className="object-contain cursor-pointer rounded-lg px-1 h-full w-full"
             //  className='rounded-md w-full opacity-90  h-40 lg:w-full lg:h-72 xl+:h-80 md:h-64  2xl:h-72 2xl:w-full space-x-9 object-fill object '  
                   src={'/invoice-upload.jpeg'} 
+                  width={886}
+                  height={356}
+                  layout="intrinsic"
+                  objectFit="cover"
+                  className="rounded-lg  "
                   />
 
           </div>
           </Link>}
 
       </Slider>
-      { location3() &&  <Link href='/shops?text=Ambience+Mall'><div className="card flex relative w-full">
+      { location3() &&  <Link href='/shops?text=Ambience+Mall'>
+        <div className="card flex relative w-full ">
 
-            <img className="object-contain cursor-pointer rounded-lg px-1  "
+            <Image 
+             width={1772}
+             height={356}
+             layout="intrinsic"
+             objectFit="cover"
+             className="rounded-lg  "
+            // className="object-contain cursor-pointer rounded-lg px-1  "
               //  className='rounded-md w-full opacity-90  h-40 lg:w-full lg:h-72 xl+:h-80 md:h-64  2xl:h-72 2xl:w-full space-x-9 object-fill object '  
                   src={'/delhi/ambience-mall-banner.jpg'} 
                   />
@@ -124,7 +145,13 @@ function location3(){
 
             { location2() &&  <Link href='/shops?text=Select+Citywalk'><div className="card flex relative w-full  ">
 
-            <img className="object-cover cursor-pointer rounded-lg px-1 w-full  "
+            <Image 
+             width={1772}
+             height={356}
+             layout="intrinsic"
+             objectFit="cover"
+             className="rounded-lg px-1"
+            // className="object-cover cursor-pointer rounded-lg px-1 w-full  "
               //  className='rounded-md w-full opacity-90  h-40 lg:w-full lg:h-72 xl+:h-80 md:h-64  2xl:h-72 2xl:w-full space-x-9 object-fill object '  
                   src={'/delhi/city-walk-mall.jpg'} 
                   />
@@ -135,38 +162,4 @@ function location3(){
     )
 }
 
-{/* <div className='' >
-
-<Slider   className='mt-10' {...settings} >
-     
-        <img className="object-fill"
-        //  className='rounded-md w-48 h-32 md:h-48 md:w-full lg:w-96  lg:h-48 space-x-9'  src={'/images/nearbuy-banner3.jpg'} 
-             style={{objectFit:"fill"}}   />
-
-        <Image layout='fill' objectFit='fill'
-        //  className='rounded-md w-48 h-32 md:h-48 md:w-full lg:w-96 lg:h-48 space-x-9 '   src={'/images/nearbuy-banner1.jpg'} 
-                 style={{objectFit:"fill"}}  />
-
-        <Image layout='fill' objectFit='fill'
-        //  className='rounded-md w-48 h-32 md:h-48 md:w-full lg:w-96 lg:h-48  space-x-9 '   src={'/images/nearbuy-banner1.jpg'} 
-              style={{objectFit:"fill"}}  />
-        
-        <Image layout='fill' objectFit='fill'
-        //  className='rounded-md w-48  h-32 md:h-48 md:w-full lg:w-96 lg:h-48 space-x-9 '    src={'/images/nearbuy-banner3.jpg'} 
-                style={{objectFit:"fill"}}  />
-
-</Slider>
-</div> */}
-
-// var settings = {
-//   dots: true,
-//   infinite: true,
-//   speed: 500,
-//   slidesToShow: 1,
-//   slidesToScroll: 1,
-//   autoplay: true,
-//   centerMode: true,
-//   centerPadding: '200px',
-//   adaptiveHeight: true,
-//   // variableWidth: true,
-// };
+ 

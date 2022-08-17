@@ -23,6 +23,7 @@ import { HidingHeader } from "hiding-header-react";
 import Layout from "@components/layout/layout";
 import ImageSlider from "./slider";
 import CoverImageSlider from "./cover-image-slider";
+import Image from "next/image";
 
 
 
@@ -75,8 +76,13 @@ export default function ShopMobileView({data, shopData}: any) {
         <div className='relative mt-4 flex flex-col'>
 
             <div className="fixed z-50 bottom-16 right-6 flex justify-center items-center">
-                  <img src='/up-arrow.png' 
-                      className="w-8 h-8" 
+                  <Image
+                  width={50}
+                  height={50}
+                  layout='fixed'
+                  objectFit='cover'
+                  src='/up-arrow.png' 
+                      // className="w-8 h-8" 
                       onClick={() => window.scrollTo(0, 0)} />
                             
             </div>
@@ -95,8 +101,13 @@ export default function ShopMobileView({data, shopData}: any) {
                             <CoverImageSlider key={cover_image} data={cover_image} />
                         </div>
                                                 :  
-                        <img alt={t("heading")} 
-                              className='object-fill h-full sm:h-72 rounded-lg xs+++:rounded-l-none md:h-72   w-full'
+                        <Image
+                        width={width}
+                        height={352}
+                        layout='intrinsic'
+                        objectFit='cover'
+                        alt={t("heading")} 
+                              // className='object-fill h-full sm:h-72 rounded-lg xs+++:rounded-l-none md:h-72   w-full'
                               src={query.slug !== 'kosmetics-india' ? data?.cover_image?.original! : '/kosmetics-shop-mob.jpg' ?? "/product-placeholder.svg"}
                         />
                     }

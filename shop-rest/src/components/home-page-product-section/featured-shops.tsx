@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { useFeatureShopQuery } from "@data/home/use-feature-shop-query";
 import { useLocation } from "@contexts/location/location.context";
 import Avatar from 'react-avatar';
+import Image from 'next/image';
 
 export default function FeaturedShops({ }) {
 
@@ -77,7 +78,18 @@ export default function FeaturedShops({ }) {
                                           {/* <img className='rounded-0 w-10 h-10 xs+:w-16 xs+:h-16 xs++:w-20 xs++:h-20 sm:w-28 
                                                           sm:h-24 md:w-20 lg:w-28 lg:h-32 2xl:w-38 2xl:h-38'  */}
                                                      
-                                        {imageCheck(shop.logo?.thumbnail, shop, '130', false,'group-hover:-translate-y-1 hover:scale-110 duration-200 w-20 h-20  sm:w-20 sm:h-20 md:w-16 md:h-16  lg:w-28 lg:h-28 lg+:w-28 lg+:h-28 xl+:w-32 xl+:h-32 xl++:w-48 xl++:h-48 2xl:w-44 2xl:h-44 object-contain')}
+                                        {shop?.logo ? 
+                                        <Image src={shop?.logo?.thumbnail} 
+                                        alt={shop?.name}
+                                        width={200}
+                                        height={200}
+                                        layout="intrinsic"
+                                        objectFit="contain"
+
+                                        //className='w-20 h-20  sm:w-20 sm:h-20 md:w-16 md:h-16  lg:w-28 lg:h-28 lg+:w-28 lg+:h-28 xl+:w-32 xl+:h-32 xl++:w-48 xl++:h-48 2xl:w-44 2xl:h-44 object-contain'
+                                        
+                                        /> : 
+                                        imageCheck(shop.logo?.thumbnail, shop, '130', false,'group-hover:-translate-y-1 hover:scale-110 duration-200 w-20 h-20  sm:w-20 sm:h-20 md:w-16 md:h-16  lg:w-28 lg:h-28 lg+:w-28 lg+:h-28 xl+:w-32 xl+:h-32 xl++:w-48 xl++:h-48 2xl:w-44 2xl:h-44 object-contain')}
         
                                     <div className='flex flex-col text-center justify-center w-full space-y-1 px-2 md:px-3 lg:px-4 2xl:px-4'>
                                         <h3 className='font-semibold text-sm  md:text-md lg:text-sm 2xl:text-lg text-gray-700   '> {shop?.name}</h3>
