@@ -1,9 +1,13 @@
 // import NavbarWithSearch from '@components/layout/navbar/navbar-with-search';
 // import HeaderTop from '@components/home-page-header/HeaderTop';
 import HeaderMiddle from '@components/home-page-header/HeaderMiddle';
-import Footer from '@components/footer/Footer';
-import { useEffect,useState } from 'react';
 // import Footer from '@components/footer/Footer';
+import { useEffect,useState } from 'react';
+import dynamic from 'next/dynamic';
+ 
+
+const Footer = dynamic(() => import('@components/footer/Footer'),
+ { ssr: false });
 
 const DefaultLayout: React.FC = ({ children }) => {
 

@@ -1,6 +1,9 @@
-import MobileNavigation from "./mobile-navigation";
+// import MobileNavigation from "./mobile-navigation";
+import dynamic from "next/dynamic";
 import NavbarWithTypes from "./navbar/navbar-with-types";
 import ShopNavbar from "./navbar/shop-navbar";
+
+const MobileNavigation = dynamic(() => import('./mobile-navigation'), { ssr: false });
 
 const ShopLayout: React.FC = ({ children }) => {
 

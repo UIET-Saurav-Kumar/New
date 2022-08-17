@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { useLocation } from "@contexts/location/location.context";
 import { useEffect, useState } from "react";
 
-export default function ImageSlider({data}) {
+export default function ImageSlider() {
 
   const router = useRouter();
   const { query } = useRouter();

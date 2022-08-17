@@ -31,7 +31,7 @@ export default function MobileMainMenu() {
           <li key={`${href}${label}`}>
             <span
               onClick={() => handleClick(href)}
-              className="flex items-center py-3 px-5 md:px-8 text-sm font-semibold capitalize text-heading transition duration-200 hover:text-accent"
+              className={` ${label === 'Create Shop' ? 'text-gradient-to-r from-red-500 to text-blue-700' : 'text-heading'} cursor-pointer flex items-center py-3 px-5 md:px-8 text-sm font-semibold capitalize   transition duration-200 hover:text-accent`}
             >
               {icon && <span className="me-2">{icon}</span>}
               {t(label)}

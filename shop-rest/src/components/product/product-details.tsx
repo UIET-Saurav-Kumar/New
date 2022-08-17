@@ -197,7 +197,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
                 <>
                   {isEmpty(variations) && (
                     <span className="text-base text-body whitespace-nowrap lg:ms-7">
-                      {quantity} {t("text-pieces-available")}
+                      {quantity} {t("Pieces available")}
                     </span>
                   )}
                   {!isEmpty(selectedVariation) && (
@@ -206,7 +206,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
                       selectedVariation.quantity === 0
                         ? t("text-out-stock")
                         : `${selectedVariation.quantity} ${t(
-                            "text-pieces-available"
+                            "Pieces available"
                           )}`}
                     </span>
                   )}

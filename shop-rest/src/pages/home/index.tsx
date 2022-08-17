@@ -256,7 +256,7 @@ useIntersectionObserver({
            {/* <iframe className="mx-auto mt-1/2 h-full " src="https://giphy.com/embed/3ohs7TrCSp7c8ZrxBe" width="80" height="80" frameBorder="0" class="giphy-embed" allowFullScreen>
              </iframe> */}
              
-          </div>
+         </div>
         ) : (
         <div className='lg:px-10 md:px-7 h-full'>
           {
@@ -279,11 +279,9 @@ useIntersectionObserver({
                 
               </div>
             )
-          } 
-            
+          }
         </div>
 
-        
     )
        }
        {
@@ -294,25 +292,26 @@ useIntersectionObserver({
           width < 1023 && 
             <MobileNavigation />
         } 
-         <div ref={loadMoreRef} className={`${!hasNextPage ? "hidden" : ""}`}>
+         {/* <div ref={loadMoreRef} className={`${!hasNextPage ? "hidden" : ""}`}>
                   {
                     (isFetchingNextPage)
                     &&
                     (
                       <>
-                        {/* <span>Loading </span> */}
+ 
                         <img src="/preloader/cir.gif" 
                             className="w-full mt-10 mx-auto" 
                             style={{width:"90px",height:"90px"}}/>
                       </>
                     ) 
                   }
-          </div>
+          </div> */}
           
         </div>
         </>
     )
     
 }
+ 
 
 home.Layout = DefaultLayout;

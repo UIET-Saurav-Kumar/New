@@ -59,11 +59,11 @@ export default function UserTotalEarning({totalEarnings}:any) {
 
                   <div className=''>
   
-                  <button onClick={getLink} className=' bottom-2 lg:bottom-6 absolute bg-gradient-to-r from-green-500 to-magenta px-5 
-                  hover:from-green-600 hover:to-yellow-600
-                            text-white font-semibold lg:px-4 xl:px-9 py-1 lg:py-1 xl:py-2 rounded-lg shadow-md'>
-                    View
-                  </button>
+                    <button onClick={getLink} className=' bottom-2 lg:bottom-6 absolute bg-gradient-to-r from-green-500 to-magenta px-5 
+                    hover:from-green-600 hover:to-yellow-600
+                              text-white font-semibold lg:px-4 xl:px-9 py-1 lg:py-1 xl:py-2 rounded-lg shadow-md'>
+                      View
+                    </button>
              
                 </div>
 

@@ -1,7 +1,13 @@
 import Navbar from "@components/layout/navbar/navbar";
 import MobileNavigation from "./mobile-navigation";
-import Footer from "@components/footer/Footer";
+// import Footer from "@components/footer/Footer";
 import NavbarWithSearch from "./navbar/navbar-with-search";
+import dynamic from 'next/dynamic';
+ 
+
+const Footer = dynamic(() => import('@components/footer/Footer'),
+ { ssr: false });
+
 
 const Layout: React.FC = ({ children }) => (
 

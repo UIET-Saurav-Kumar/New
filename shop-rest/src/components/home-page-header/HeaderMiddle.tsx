@@ -14,6 +14,7 @@ import MobileJoinButton from '@components/layout/navbar/mobile-join-button';
 import CityButton from '@components/geoCode/city-buttton';
 import { SearchIcon } from '@components/icons/search-icon';
 import { useModalAction } from "@components/ui/modal/modal.context";
+import Link from 'next/link';
 
 
 const cities = //create object of major  indian cities with lat, lng and city name
@@ -313,7 +314,11 @@ export default function HeaderMiddle() {
                     </div>
                 </div>
 
-                          
+                               <div className='hidden  sm:block  items-center mr-24'>
+                                <Link href='https://admin.buylowcal.com/register'><button className='whitespace-nowrap bg-gradient-to-r from-blue-400  to-indigo-500 hover:bg-green-800 hover:shadow-xl font-bold text-white p-3 px-3 rounded-md'>
+                                        Create Shop
+                                    </button></Link>
+                               </div>
                                <div className='hidden lg:inline-flex lg:ml-8 lg+:ml-0  xl:inline-flex'>
                                   { !!isAuthorize &&  <AuthorizedMenu/> || !isAuthorize && <JoinButton/> }
                                </div>

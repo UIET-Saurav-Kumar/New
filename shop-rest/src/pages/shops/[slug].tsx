@@ -178,7 +178,6 @@ const ShopPage = ({ data }: any) => {
   const slug = ['chandigarh-grocery-store', 'kosmetics-india'];
 
   const  getShopCategory = () => {
-
      setShopCategory(data?.shop_categories?.replace(/[{":,0123456789}]/g,'').slice(5,-3))
   }
 

@@ -2,6 +2,8 @@ export const ROUTES = {
 
   HOME: "/home",
   CHECKOUT: "/checkout",
+
+  CREATE_SHOP: 'https://admin.buylowcal.com/register',
   
   ORDERS: "/orders",
   HELP: "/help",

@@ -328,7 +328,7 @@ const ProductDetailsModalView = ({ productSlug }: { productSlug: string }) => {
                     <>
                       {isEmpty(variations) && (
                         <span className="text-base text-body whitespace-nowrap ms-7">
-                          {quantity} {t("text-pieces-available")}
+                          {quantity} {t("Pieces available")}
                         </span>
                       )}
                       {!isEmpty(selectedVariation) && (
@@ -337,7 +337,7 @@ const ProductDetailsModalView = ({ productSlug }: { productSlug: string }) => {
                           selectedVariation.quantity === 0
                             ? "Out Of Stock"
                             : `${selectedVariation.quantity} ${t(
-                                "text-pieces-available"
+                                "Pieces available"
                               )}`}
                         </span>
                       )}

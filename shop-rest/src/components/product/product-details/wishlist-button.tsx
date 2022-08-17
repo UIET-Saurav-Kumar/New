@@ -305,7 +305,7 @@ export default function WishlistButton({
 //                 <>
 //                   {Number(quantity) > 0 ? (
 //                     <span className="whitespace-nowrap text-base text-body ltr:lg:ml-7 rtl:lg:mr-7">
-//                       {quantity} {t('text-pieces-available')}
+//                       {quantity} {t('Pieces available')}
 //                     </span>
 //                   ) : (
 //                     <div className="whitespace-nowrap text-base text-red-500 ltr:lg:ml-7 rtl:lg:mr-7">
@@ -320,7 +320,7 @@ export default function WishlistButton({
 //                   selectedVariation.quantity === 0
 //                     ? t('text-out-stock')
 //                     : `${selectedVariation.quantity} ${t(
-//                         'text-pieces-available'
+//                         'Pieces available'
 //                       )}`}
 //                 </span>
 //               )}
