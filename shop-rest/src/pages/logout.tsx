@@ -23,7 +23,7 @@ export default function SignOut() {
   return (
     <div className="min-h-screen grid place-items-center">
       <div className="text-center">
-        <Spinner text={t("text-signing-out")} />
+        <Spinner text={t(" Sigining out...")} />
       </div>
     </div>
   );

@@ -36,8 +36,11 @@ export default function AuthorizedMenu() {
   }
 
   function url(){
-   return window.location.href.includes('buylowcal-monthly-leaderboard-magazines')
-   }
+      // window is not defined in server side rendering
+      if (typeof window !== 'undefined') {
+
+   return window?.location.href.includes('buylowcal-monthly-leaderboard-magazines')
+   }}
 
   console.log('me data',data)
 

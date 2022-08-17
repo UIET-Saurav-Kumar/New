@@ -168,6 +168,17 @@ const cities = //create object of major  indian cities with lat, lng and city na
 
 
 export default function HeaderMiddle() {
+
+
+    const { isAuthorize, displayHeaderSearch, displayMobileSearch } = useUI();
+
+    const [JoinBtn, setJoinButton] = useState(true);
+
+
+    useEffect(() => {
+        isAuthorize && setJoinButton(false)
+    }, [isAuthorize])
+
     
 
     const truncate = (txt:any, n:number) => {
@@ -178,7 +189,7 @@ export default function HeaderMiddle() {
 
     console.log('getlocation',getLocation)
     
-    const { isAuthorize, displayHeaderSearch, displayMobileSearch } = useUI();
+     
     
     const router = useRouter();
 
@@ -315,12 +326,13 @@ export default function HeaderMiddle() {
                 </div>
 
                                <div className='hidden  sm:block  items-center mr-24'>
-                                <Link href='https://admin.buylowcal.com/register'><button className='whitespace-nowrap bg-gradient-to-r from-blue-400  to-indigo-500 hover:bg-green-800 hover:shadow-xl font-bold text-white p-3 px-3 rounded-md'>
-                                        Create Shop
+                                <Link href='https://admin.buylowcal.com/register'><button className='whitespace-nowrap bg-gradient-to-r from-magenta  to-magenta hover:bg-green-800 hover:shadow-xl font-bold text-white p-3 px-3 rounded-md'>
+                                        Business Access
                                     </button></Link>
                                </div>
                                <div className='hidden lg:inline-flex lg:ml-8 lg+:ml-0  xl:inline-flex'>
-                                  { !!isAuthorize &&  <AuthorizedMenu/> || !isAuthorize && <JoinButton/> }
+                                  { !JoinBtn &&  <AuthorizedMenu/>  }
+                                  { JoinBtn &&  <JoinButton/>  }
                                </div>
                            
                           
