@@ -82,7 +82,11 @@ const AllCategories = () => {
 										hover:border-gray-400  items-center'
 							key={category.id} >
 
-								 <Image   loading='eager' quality='40'  src={category?.image?.thumbnail }
+								  < Image priority={true}   
+								 loading='eager'
+								  
+								  quality='40' 
+								 src={category?.image?.thumbnail }
 								 width={351}
 								 height={420}
 								 layout="intrinsic"

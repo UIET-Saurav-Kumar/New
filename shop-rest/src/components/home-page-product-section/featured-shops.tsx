@@ -79,7 +79,7 @@ export default function FeaturedShops({ }) {
                                                           sm:h-24 md:w-20 lg:w-28 lg:h-32 2xl:w-38 2xl:h-38'  */}
                                                      
                                         {shop?.logo ? 
-                                          <Image     loading='eager' quality='40' src={shop?.logo?.thumbnail} 
+                                           < Image priority={true}     loading='eager' quality='40' src={shop?.logo?.thumbnail} 
                                         alt={shop?.name}
                                         width={200}
                                         height={200}

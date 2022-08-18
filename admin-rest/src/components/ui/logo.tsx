@@ -24,7 +24,7 @@ const Logo: React.FC<React.AnchorHTMLAttributes<{}>> = ({
           height: siteSettings.logo.height,
         }}
       >
-          <Image     loading='eager' quality='40'
+           < Image priority={true}     loading='eager' quality='40'
           src={logo?.thumbnail ?? siteSettings.logo.placeholderImage}
           alt={siteTitle ?? siteSettings.logo.alt}
           layout="fill"

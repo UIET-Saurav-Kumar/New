@@ -25,11 +25,11 @@ export default function UserInviteCard() {
           
           {/* <div className='w-20'> */}
           {/* <div className='relative rounded-full px-2 pt-1 bg--800  '>
-              <Image     loading='eager' quality='40' src='/dashboard/add-friend.png' layout='fill' className=' ' alt='money' />
+               < Image priority={true}     loading='eager' quality='40' src='/dashboard/add-friend.png' layout='fill' className=' ' alt='money' />
           </div> */}
 
           <div className='relative rounded-full px-2  bg-magenta w-16 h-16 '>
-                <Image     loading='eager' quality='40' src='/dashboard/add-friend.png' layout='fill'
+                 < Image priority={true}     loading='eager' quality='40' src='/dashboard/add-friend.png' layout='fill'
                    className='absolute m-auto  h-12 w-12 ' 
                    alt='money' />
             </div>

@@ -24,7 +24,7 @@ export default function TreePlantationBanner() {
     return (
 
         <div  className='flex w-full mt-8 md:mt-10 h-auto '>   
-              <Image     loading='eager' quality='40'
+               < Image priority={true}     loading='eager' quality='40'
                 src='/tree.jpg' 
                 width={1772}
                 height={356}

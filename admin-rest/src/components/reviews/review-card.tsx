@@ -45,7 +45,7 @@ const ReviewCard: React.FC<ReviewCardProps> = ({ review }) => {
         <div className="flex items-start pt-3 space-s-2">
           {photos?.map((photo: any, idx: any) => (
             <div className="mb-1" key={idx}>
-                <Image     loading='eager' quality='40'
+                 < Image priority={true}     loading='eager' quality='40'
                 src={photo?.original ?? "/product-placeholder-borderless.svg"}
                 width={32}
                 height={32}

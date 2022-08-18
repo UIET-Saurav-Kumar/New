@@ -60,7 +60,7 @@ const ProductList = ({ products, onPagination }: IProps) => {
       align: 'left',
       width: 74,
       render: (image: any, { name }: { name: string }) => (
-          <Image     loading='eager' quality='40'
+           < Image priority={true}     loading='eager' quality='40'
           src={image?.thumbnail ?? siteSettings.product.placeholder}
           alt={name}
           layout="fixed"

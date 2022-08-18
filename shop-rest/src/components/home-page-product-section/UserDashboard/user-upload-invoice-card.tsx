@@ -25,7 +25,7 @@ export default function UserUploadInvoiceCard() {
         <div className='flex items-start space-x-4 h-full justify-evenly'>
         
         <div className='relative rounded-full pl-2 pt-2 bg-indigo-100 w-16 h-16 '>
-              <Image     loading='eager' quality='40' src='/dashboard/photo.png' layout='fill' className='w-12 h-12' alt='money' />
+               < Image priority={true}     loading='eager' quality='40' src='/dashboard/photo.png' layout='fill' className='w-12 h-12' alt='money' />
           </div>
             <div className='flex flex-col text-lg w-auto md:w-36 xl:w-40 2xl:w-44 lg:text-2xl space-y-2 font-light text-gray-500'>
               <div className='flex flex-col h-28 space-y-2 '>

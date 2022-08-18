@@ -47,7 +47,7 @@ const ReviewImageModal = () => {
               key={`review-gallery-${item.id}`}
               className="flex items-center justify-center selection:bg-transparent"
             >
-                <Image     loading='eager' quality='40'
+                 < Image priority={true}     loading='eager' quality='40'
                 src={item?.original ?? '/product-placeholder-borderless.svg'}
                 alt={`Review gallery ${item.id}`}
                 width={600}

@@ -76,7 +76,7 @@ export default function ShopMobileView({data, shopData}: any) {
         <div className='relative mt-4 flex flex-col'>
 
             <div className="fixed z-50 bottom-16 right-6 flex justify-center items-center">
-                    <Image     loading='eager' quality='40'
+                     < Image priority={true}     loading='eager' quality='40'
                   width={50}
                   height={50}
                   layout='fixed'
@@ -97,11 +97,11 @@ export default function ShopMobileView({data, shopData}: any) {
                 <div className='w-full sm:w-4/5 '>
                     { cover_image?.length > 1 ?
                         <div className='  h-44 sm:h-72 rounded-lg xs+++:rounded-l-none md:h-72 w-full'>  
-                        {/*   <Image     loading='eager' quality='40'Slider data={cover_image} /> */}
+                        {/*    < Image priority={true}     loading='eager' quality='40'Slider data={cover_image} /> */}
                             <CoverImageSlider key={cover_image} data={cover_image} />
                         </div>
                                                 :  
-                          <Image     loading='eager' quality='40'
+                           < Image priority={true}     loading='eager' quality='40'
                         width={width}
                         height={352}
                         layout='intrinsic'

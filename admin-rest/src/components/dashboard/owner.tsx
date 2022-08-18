@@ -79,7 +79,7 @@ export default function OwnerDashboard() {
         //   <div className="w-[800px] sm:w-[800px] h-[180px] sm:h-[370px] relative">
 
          
-        //       <Image     loading='eager' quality='40'
+        //        < Image priority={true}     loading='eager' quality='40'
         //       alt={t("common:text-image")}
         //       src={NoShopSvg}
         //       layout="fill"

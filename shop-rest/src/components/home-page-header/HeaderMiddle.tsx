@@ -365,7 +365,7 @@ export default function HeaderMiddle() {
                                                </div>
                                            </div>
                                           <div className='hidden lg:block w-auto h-auto'>
-                                                <Image     loading='eager' quality='40' 
+                                                 < Image priority={true}     loading='eager' quality='40' 
                                                 width={1842}
                                                 height={460}
                                                 layout='intrinsic'

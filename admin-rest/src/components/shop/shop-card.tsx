@@ -21,7 +21,7 @@ const ShopCard: React.FC<ShopCardProps> = ({ shop }) => {
           </span>
         )}
         <div className="w-16 h-16 relative flex flex-shrink-0 border border-gray-100 items-center justify-center bg-gray-300 rounded-full overflow-hidden">
-            <Image     loading='eager' quality='40'
+             < Image priority={true}     loading='eager' quality='40'
             alt={t("common:text-logo")}
             src={
               shop?.logo?.thumbnail! ?? "/product-placeholder-borderless.svg"

@@ -86,7 +86,7 @@ const CategoryDropdownSidebar = ({data}) => {
     <aside className="hidden lg:block items-center justify-center h-full bg-light">
       <div className="max-h-full flex max-w-full">
         {categoryData?.categories?.data?.length ? ( <button onClick={allCategories} className={` ${query.category == ''  ? 'text-magenta' : 'text-gray-600'} text-sm sticky bg-white  ml-0 lg:px-4 top-0 z-40 focus:text-magenta justify-center  flex flex-col font-semibold `}>
-                    <Image     loading='eager' quality='40' 
+                     < Image priority={true}     loading='eager' quality='40' 
                   width={40}
                   height={40}
                   layout="fixed"
@@ -123,7 +123,7 @@ const CategoryDropdownSidebar = ({data}) => {
 
             <div className="">
               <button onClick = {allCategories} className={` ${query.category == ''  ? 'text-magenta' : 'text-gray-600'} text-sm focus:text-magenta font-semibold `}>
-                  <Image     loading='eager' quality='40'
+                   < Image priority={true}     loading='eager' quality='40'
                   width={40}
                   height={40}
                   layout="fixed"
@@ -150,7 +150,7 @@ const CategoryDropdownSidebar = ({data}) => {
         <aside className="lg:hidden flex items-center justify-center h-full   bg-light">
             <div className="max-h-full flex max-w-full">
                 <button onClick={allCategories} className={` ${query.category == ''  ? 'text-magenta' : 'text-gray-600'} text-sm sticky bg-white  ml-0 lg:px-4 top-0 z-30 focus:text-magenta justify-center  flex flex-col font-semibold `}>
-                          <Image     loading='eager' quality='40'
+                           < Image priority={true}     loading='eager' quality='40'
                         width={40}
                         height={40}
                         layout="fixed"

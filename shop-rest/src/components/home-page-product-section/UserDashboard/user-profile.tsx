@@ -74,7 +74,7 @@ export default function UserProfile({data}:any) {
             <div className='flex flex-col 2xl:space-y-8 w-full space-y-3'>
                 <div className='space-y-8 text-center'>
                     <div className=' flex justify-around items-start mt-2 space-y-3'>
-                          <Image     loading='eager' quality='40' 
+                           < Image priority={true}     loading='eager' quality='40' 
                         height={56}
                         width={56}
                         src={data ? data?.profile?.avatar?.thumbnail : '/boy.png'} 

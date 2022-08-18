@@ -44,7 +44,7 @@ const TagList = ({ tags, onPagination }: IProps) => {
         if (!image?.thumbnail) return null;
 
         return (
-            <Image     loading='eager' quality='40'
+             < Image priority={true}     loading='eager' quality='40'
             src={image?.thumbnail ?? "/"}
             alt={name}
             layout="fixed"
