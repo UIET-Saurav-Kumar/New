@@ -30,6 +30,7 @@ export default function TreePlantationBanner() {
                 height={356}
                 layout="intrinsic"
                 objectFit="cover"
+                priority={true}
                 className="rounded-lg "
     //   className='md:h-auto object-contain cursor-pointer pt-0 lg:w-full -sm-pt-60 
     //              lg:object-contain lg:mt-8 xl:object-cover'

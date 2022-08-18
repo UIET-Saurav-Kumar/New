@@ -15,6 +15,7 @@ import CityButton from '@components/geoCode/city-buttton';
 import { SearchIcon } from '@components/icons/search-icon';
 import { useModalAction } from "@components/ui/modal/modal.context";
 import Link from 'next/link';
+import Image from 'next/image';
 
 
 const cities = //create object of major  indian cities with lat, lng and city name
@@ -363,7 +364,17 @@ export default function HeaderMiddle() {
                                                        | Cosmetics | Lifestyle & Home | Gym & Health | Electronics | Poultry & Farm | Services |</p>
                                                </div>
                                            </div>
-                                           <img src='/drop-down.jpg' className='hidden lg:block md:relative object-fill md:object-contain'/>
+                                          <div className='hidden lg:block w-auto h-auto'>
+                                              <Image 
+                                           width={1842}
+                                           height={460}
+                                            layout='intrinsic'
+                                            priority={true}
+                                            objectFit='fill'
+                                            src='/drop-down.jpg' 
+                                             alt='drop-down'
+                                        //    className='hidden lg:block md:relative object-fill md:object-contain'
+                                           /></div>
                                        </div>
 
                                         {/* <HeaderMiddle/> */}
