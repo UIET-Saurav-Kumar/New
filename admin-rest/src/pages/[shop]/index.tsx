@@ -80,7 +80,7 @@ export default function ShopPage() {
         <div className="py-8 px-6 bg-white rounded flex flex-col items-center">
           <div className="w-36 h-36 relative rounded-full mb-5">
             <div className="w-full h-full relative overflow-hidden flex items-center justify-center border border-gray-100 rounded-full">
-              <Image
+                <Image  lazyBoundary='50px'  loading='eager' quality='40'
                 src={logo?.thumbnail ?? "/avatar-placeholder.svg"}
                 layout="fill"
                 objectFit="contain"
@@ -152,7 +152,7 @@ export default function ShopPage() {
       {/* Cover Photo */}
       <div className="order-1 xl:order-2 col-span-12 xl:col-span-8 3xl:col-span-9 rounded h-full overflow-hidden relative bg-light min-h-[400px]">
         
-        <Image
+          <Image  lazyBoundary='50px'  loading='eager' quality='40'
           src={cover_image?.thumbnail ?? "/product-placeholder-borderless.svg"}
           layout="fill"
           objectFit="contain"

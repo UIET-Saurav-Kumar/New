@@ -143,7 +143,7 @@ export function SidebarMenuItem({ className, item, depth = 0 }: any) {
             <div className='relative py-2 flex flex-col mx-auto h-auto  w-auto   px-2  place-items-center lg:grid-cols-2    items-center'>
                   { item?.image.id ? (
                     <span className="flex text-center w-auto h-auto items-center justify-center">
-                      <Image
+                        <Image  lazyBoundary='50px'  loading='eager' quality='40'
                         src={item?.image?.thumbnail}
                         alt={item?.image?.altText}
                         width={50}

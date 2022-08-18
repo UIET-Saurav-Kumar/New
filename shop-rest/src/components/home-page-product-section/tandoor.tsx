@@ -95,7 +95,7 @@ export default function Tandoor() {
             {location() &&  <Link href='/appointment'>
               <div className="px-1 ">
 
-                    <Image 
+                      <Image  lazyBoundary='50px'  loading='eager' quality='40' 
                      width={886}
                      height={356}
                      layout="intrinsic"
@@ -114,7 +114,7 @@ export default function Tandoor() {
           {location() && <Link href='/shops?text=barista'>
             <div className=" px-1">
 
-            <Image 
+              <Image  lazyBoundary='50px'  loading='eager' quality='40' 
              width={886}
              height={356}
              layout="intrinsic"

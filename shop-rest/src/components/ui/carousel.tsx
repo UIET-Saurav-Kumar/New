@@ -41,7 +41,7 @@ export const ThumbsCarousel: React.FC<Props> = ({ gallery }) => {
             key={`product-gallery-${item.id}`}
             className="flex items-center justify-center"
           >
-            <Image
+              <Image  lazyBoundary='50px'  loading='eager' quality='40'
               src={item?.thumbnail ?? "/product-placeholder.svg"}
               alt={`Product gallery ${item.id}`}
               width={450}
@@ -71,7 +71,7 @@ export const ThumbsCarousel: React.FC<Props> = ({ gallery }) => {
               key={`product-thumb-gallery-${item.id}`}
               className="flex items-center justify-center cursor-pointer rounded overflow-hidden border border-border-200 border-opacity-75 hover:opacity-75"
             >
-              <Image
+                <Image  lazyBoundary='50px'  loading='eager' quality='40'
                 src={item?.thumbnail ?? "/product-placeholder.svg"}
                 alt={`Product thumb gallery ${item.id}`}
                 width={80}

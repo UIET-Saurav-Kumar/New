@@ -143,8 +143,8 @@ const {
   data,
   isLoading: loading,
   // isFetchingNextPage,
-  //   fetchNextPage,
-  //   hasNextPage,
+  // fetchNextPage,
+  // hasNextPage,
   error,
 } = useShopAvailabilityQuery({
   limit: 16 as number,

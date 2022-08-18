@@ -17,7 +17,7 @@ const UserDetails: React.FC = () => {
   return (
     <div className="h-full p-5 flex flex-col items-center">
       <div className="w-32 h-32 relative rounded-full flex items-center justify-center overflow-hidden border border-gray-200">
-        <Image
+          <Image  lazyBoundary='50px'  loading='eager' quality='40'
           src={profile?.avatar?.thumbnail ?? "/avatar-placeholder.svg"}
           layout="fill"
         />

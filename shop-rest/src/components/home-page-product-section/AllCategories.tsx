@@ -82,7 +82,7 @@ const AllCategories = () => {
 										hover:border-gray-400  items-center'
 							key={category.id} >
 
-								<Image  src={category?.image?.thumbnail }
+								 <Image  lazyBoundary='50px'loading='eager' quality='40'  src={category?.image?.thumbnail }
 								 width={351}
 								 height={420}
 								 layout="intrinsic"

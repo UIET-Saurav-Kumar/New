@@ -25,7 +25,7 @@ const Oganesson: React.FC<OganessonProps> = ({ product, className }) => {
     >
       <div className="rounded bg-light overflow-hidden relative flex items-center justify-center transition-shadow group-hover:shadow-sm w-auto h-48 sm:h-64">
         <span className="sr-only">{t("text-product-image")}</span>
-        <Image
+          <Image  lazyBoundary='50px'  loading='eager' quality='40'
           src={image?.thumbnail ?? siteSettings?.product?.placeholderImage}
           alt={name}
           layout="fill"

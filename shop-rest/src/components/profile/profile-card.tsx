@@ -39,7 +39,7 @@ type ShopProfileCardProps = {
       if (lastSplit != "") {
         check = true;
       }
-      return (check ? <Image src={logo} alt={record?.name} className={classname} width={300} height={300} />:<Avatar name={record?.name} size={imgsize} round={imgDim} maxInitials={2} />);
+      return (check ?   <Image  lazyBoundary='50px'  loading='eager' quality='40' src={logo} alt={record?.name} className={classname} width={300} height={300} />:<Avatar name={record?.name} size={imgsize} round={imgDim} maxInitials={2} />);
     }
 
   return (

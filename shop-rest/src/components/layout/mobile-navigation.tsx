@@ -10,6 +10,7 @@ import { useTranslation } from "next-i18next";
 import { useCart } from "@contexts/quick-cart/cart.context";
 import { useModalAction } from "@components/ui/modal/modal.context";
 import AuthorizedMenu from '@components/layout/navbar/authorized-menu';
+import Image from "next/image";
 
 
 type MobileNavigationProps = {
@@ -45,7 +46,12 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
           className="flex p-2 h-full items-center justify-center focus:outline-none focus:text-accent"
         >
           <span className="sr-only">{t("text-burger-menu")}</span>
-          <img src='/list.png' className='h-8 w-8'/>
+            <Image  lazyBoundary='50px'  loading='eager' quality='40'
+          layout="intrinsic"
+          width={30}
+          height={30}
+          objectFit="contain"
+           src='/list.png' className='h-8 w-8'/>
         </motion.button>
 
         {isAuthorize && (
@@ -59,7 +65,12 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
             className="flex p-2 h-full items-center justify-center focus:outline-none focus:text-accent"
           >
             <span className="sr-only">{t("text-search")}</span>
-            <img src='/wishlist.png' className='h-7 w-7'/>
+              <Image  lazyBoundary='50px'  loading='eager' quality='40'
+              layout="intrinsic"
+              width={30}
+              height={30}
+              objectFit="contain"
+             src='/wishlist.png' className='h-7 w-7'/>
           </motion.button>
         )}
 
@@ -69,7 +80,12 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
           className="flex p-2 h-full items-center justify-center focus:outline-none focus:text-accent"
         >
           <span className="sr-only">{t("text-home")}</span>
-          <img src='/home.png' className='h-7 w-7'/>
+            <Image  lazyBoundary='50px'  loading='eager' quality='40'
+            layout="intrinsic"
+            width={30}
+            height={30}
+            objectFit="contain"
+           src='/home.png' className='h-7 w-7'/>
         </motion.button>
 
         <motion.button
@@ -77,8 +93,13 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
           onClick={() => handleSidebar("CART_VIEW")}
           className="flex p-2 product-cart h-full relative items-center justify-center focus:outline-none focus:text-accent"
         >
-          <span className="sr-only">{t("text-cart")}</span>
-          <img src='/cart.png' className='h-7 w-7'/>
+          <span className="sr-only">{t("Cart")}</span>
+            <Image  lazyBoundary='50px'  loading='eager'  quality='40'
+            layout="intrinsic"
+            width={30}
+            height={30}
+            objectFit="contain"
+           src='/cart.png' className='h-7 w-7'/>
           {totalUniqueItems > 0 && (
             <span className="bg-accent py-1 px-1.5 text-10px leading-none font-semibold text-light rounded-full absolute top-0 end-0 mt-0.5 -me-0.5">
               {totalUniqueItems}
@@ -93,7 +114,14 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
             className="flex p-2 h-full items-center justify-center focus:outline-none focus:text-accent"
           >
             <span className="sr-only">{t("text-user")}</span>
-             <img src='/boy.png' className='h-7 w-7'/>
+               <Image  lazyBoundary='50px'  loading='eager'
+             
+             quality='40'
+              layout="intrinsic"
+              width={30}
+              height={30}
+              objectFit="contain"
+              src='/boy.png' className='h-7 w-7'/>
           </motion.button>
         ) : (
           <motion.button
@@ -102,7 +130,12 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
             className="flex p-2 h-full items-center justify-center focus:outline-none focus:text-accent"
           >
             <span className="sr-only">{t("text-user")}</span>
-             <img src='/boy.png' className='h-7 w-7'/>
+               <Image  lazyBoundary='50px'  loading='eager'  quality='40'
+              layout="intrinsic"
+              width={30}
+              height={30}
+              objectFit="contain"
+              src='/boy.png' className='h-7 w-7'/>
           </motion.button>
         )}
       </nav>

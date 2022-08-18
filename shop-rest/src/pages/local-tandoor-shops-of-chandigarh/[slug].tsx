@@ -57,7 +57,7 @@ const TandoorPage = ({ data }: any) => {
                             <ShopCategoryCard data={data} className="" />
                           </div> */}
 
-                            {/* <Image
+                            {/*   <Image  lazyBoundary='50px'  loading='eager' quality='40'
                               alt={t("heading")}
                               src={data?.cover_image?.original! ?? "/product-placeholder.svg"}
                               height={400}

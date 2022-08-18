@@ -365,14 +365,14 @@ export default function HeaderMiddle() {
                                                </div>
                                            </div>
                                           <div className='hidden lg:block w-auto h-auto'>
-                                              <Image 
-                                           width={1842}
-                                           height={460}
-                                            layout='intrinsic'
-                                            priority={true}
-                                            objectFit='fill'
-                                            src='/drop-down.jpg' 
-                                             alt='drop-down'
+                                                <Image  lazyBoundary='50px'  loading='eager' quality='40' 
+                                                width={1842}
+                                                height={460}
+                                                layout='intrinsic'
+                                                priority={true}
+                                                objectFit='fill'
+                                                src='/drop-down.jpg' 
+                                                alt='drop-down'
                                         //    className='hidden lg:block md:relative object-fill md:object-contain'
                                            /></div>
                                        </div>

@@ -17,7 +17,7 @@ export default function NotFoundPage() {
           {t("404-sub-heading")}
         </h1>
         <div className="mb-11">
-          <Image
+            <Image  lazyBoundary='50px'  loading='eager' quality='40'
             src="/no-result.svg"
             alt={t("404-heading")}
             width={600}

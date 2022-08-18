@@ -68,7 +68,7 @@ const ReviewList = ({ reviews, onPagination, onSort, onOrder }: IProps) => {
       align: alignLeft,
       width: 120,
       render: (product: Product) => (
-        <Image
+          <Image  lazyBoundary='50px'  loading='eager' quality='40'
           src={product?.image?.thumbnail ?? siteSettings.product.placeholder}
           alt={product?.name}
           layout="fixed"

@@ -31,7 +31,7 @@ const ShopList = ({ shops, onPagination }: IProps) => {
     if (lastSplit != "") {
       check = true;
     }
-    return (check ? <Image src={logo?.thumbnail ?? siteSettings.product.placeholder} alt={record?.name} layout="fixed" width={42} height={42} className="rounded overflow-hidden" />:<Avatar name={record?.name} size={42} round={true} maxInitials={2} />);
+    return (check ?   <Image  lazyBoundary='50px'  loading='eager' quality='40' src={logo?.thumbnail ?? siteSettings.product.placeholder} alt={record?.name} layout="fixed" width={42} height={42} className="rounded overflow-hidden" />:<Avatar name={record?.name} size={42} round={true} maxInitials={2} />);
   }
 
   console.log('shop address', shops?.data)

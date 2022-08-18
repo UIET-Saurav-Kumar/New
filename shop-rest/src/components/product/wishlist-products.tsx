@@ -43,7 +43,7 @@ function WishlistItem({ product }: { product: Product }) {
     <div className='flex py-2 w-full'>
     <div className="flex w-full items-start space-x-4 border-b border-gray-200 py-5 first:pt-0 last:border-0 last:pb-0 rtl:space-x-reverse sm:space-x-5 xl:items-center">
       <div className="hidden sm:relative sm:flex h-16 w-16  items-center justify-center border border-gray-200 sm:h-[74px] sm:w-[74px]">
-        <Image
+          <Image  lazyBoundary='50px'  loading='eager' quality='40'
           src={product?.image?.thumbnail ?? '/images/product-placeholder.png'}
           alt={product?.name}
           // layout="fill"
@@ -135,7 +135,7 @@ function WishlistItem({ product }: { product: Product }) {
     </div>
 
      <div className=" sm:hidden    items-start   border-gray-200 ">
-      <Image
+        <Image  lazyBoundary='50px'  loading='eager' quality='40'
         src={product?.image?.thumbnail ?? '/images/product-placeholder.png'}
         alt={product?.name}
         // layout="fill"
