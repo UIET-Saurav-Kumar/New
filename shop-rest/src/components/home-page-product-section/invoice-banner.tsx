@@ -39,6 +39,7 @@ export default function InvoiceBanner() {
          height={356}
          layout="intrinsic"
          objectFit="cover"
+         priority={true}
          className="rounded-lg "
          src='/invoice.jpg' 
         //  className=' md:h-auto object-contain cursor-pointer pt-0 

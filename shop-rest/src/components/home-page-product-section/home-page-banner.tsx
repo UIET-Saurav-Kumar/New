@@ -97,6 +97,7 @@ function location3(){
              height={356}
              layout="intrinsic"
              objectFit="cover"
+             priority={true}
              className="rounded-lg "
               // className="object-contain px-1 rounded-lg cursor-pointer h-full w-full"
               src={'/pick-5.jpeg'} 
@@ -118,6 +119,7 @@ function location3(){
                   width={886}
                   height={356}
                   layout="intrinsic"
+                  priority={true}
                   objectFit="cover"
                   className="rounded-lg  "
                   />
@@ -133,6 +135,7 @@ function location3(){
              width={1772}
              height={356}
              layout="intrinsic"
+             priority={true}
              objectFit="cover"
              className="rounded-lg  "
             // className="object-contain cursor-pointer rounded-lg px-1  "
@@ -149,6 +152,7 @@ function location3(){
              width={1772}
              height={356}
              layout="intrinsic"
+             priority={true}
              objectFit="cover"
              className="rounded-lg px-1"
             // className="object-cover cursor-pointer rounded-lg px-1 w-full  "

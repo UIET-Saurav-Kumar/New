@@ -11,6 +11,7 @@ export default function Tagline() {
         width={731}
         layout='intrinsic'
         objectFit='cover'
+        priority={true}
         src='/tagline.png' 
         className='mx-auto'
         />

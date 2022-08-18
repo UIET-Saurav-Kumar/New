@@ -49,6 +49,7 @@ const Argon: React.FC<ArgonProps> = ({ product, className }) => {
             alt={name}
             layout="fill"
             objectFit="contain"
+            priority={true}
             className="product-image"
           />
         {discount && (

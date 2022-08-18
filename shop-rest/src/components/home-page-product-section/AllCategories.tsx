@@ -86,7 +86,8 @@ const AllCategories = () => {
 								 width={351}
 								 height={420}
 								 layout="intrinsic"
-								 objectFit="cover"
+								 priority={true}
+								//  objectFit="cover"
 								 className=" "
 								/>   
 						</div>

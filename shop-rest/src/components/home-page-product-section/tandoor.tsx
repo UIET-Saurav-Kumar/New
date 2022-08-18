@@ -99,6 +99,7 @@ export default function Tandoor() {
                      width={886}
                      height={356}
                      layout="intrinsic"
+                     priority={true}
                      objectFit="cover"
                      className="rounded-lg  "
                     // className="object-contain px-1 rounded-lg cursor-pointer "
@@ -117,6 +118,7 @@ export default function Tandoor() {
              width={886}
              height={356}
              layout="intrinsic"
+             priority={true}
              objectFit="cover"
              className="rounded-lg  "
             // className="object-contain cursor-pointer rounded-lg px-1  "

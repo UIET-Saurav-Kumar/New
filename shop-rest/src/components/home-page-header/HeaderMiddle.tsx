@@ -378,7 +378,7 @@ export default function HeaderMiddle() {
                             {/* <img src='/drop-down.jpg' className='relative   top-0 object-contain'/> */}
                             
                             <div id='location-input' style={{zIndex: 0}} className='absolute flex flex-col justify-center 
-                                       w-full lg:w-full    items-center  pt-40 sm:pt-20 md:pt-20 lg:pt-0 space-y-6 ml-0 mx-3 sm:mx-16 md:ml-16 lg:ml-6 xl:ml-8 2xl:ml-10 lg:mt-80'> 
+                                     w-full lg:w-full    items-center  pt-40 sm:pt-20 md:pt-20 lg:pt-0 space-y-6 ml-0 mx-3 sm:mx-16 md:ml-16 lg:ml-6 xl:ml-8 2xl:ml-10 lg:mt-80'> 
                                           
                                 <div  style = {{zIndex: 1000}}  
                                       className='w-full'> 

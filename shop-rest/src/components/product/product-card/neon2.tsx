@@ -100,6 +100,7 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
             alt={product.name}
             layout="fill"
             objectFit="contain"
+            priority={true}
             className="product-image"
           />
 
