@@ -93,40 +93,35 @@ function location3(){
         <div className="card flex relative w-full px-1 ">
 
                <Image 
-               priority={true}
-             quality='40'
-             width={886}
-             height={356}
-             layout="intrinsic"
-             objectFit="cover"
-             
-             className="rounded-lg "
-              // className="object-contain px-1 rounded-lg cursor-pointer h-full w-full"
-              src={'/pick-5.jpeg'} 
-                  />
+                priority={true}
+                quality='40'
+                width={886}
+                height={356}
+                layout="intrinsic"
+                objectFit="cover"
+                className="rounded-lg"
+                // className="object-contain px-1 rounded-lg cursor-pointer h-full w-full"
+                src={'/pick-5.jpeg'} 
+               />
 
           </div>
           </Link> }
           
-           
-
-
             { location() && <Link href='/user/upload-invoice/upload-form'>
               <div className="card flex relative w-full px-1 ">
 
                <Image   
                   priority={true} 
                   quality='40' 
-            // className="object-contain cursor-pointer rounded-lg px-1 h-full w-full"
-            //  className='rounded-md w-full opacity-90  h-40 lg:w-full lg:h-72 xl+:h-80 md:h-64  2xl:h-72 2xl:w-full space-x-9 object-fill object '  
+                  // className="object-contain cursor-pointer rounded-lg px-1 h-full w-full"
+                  //  className='rounded-md w-full opacity-90  h-40 lg:w-full lg:h-72 xl+:h-80 md:h-64  2xl:h-72 2xl:w-full space-x-9 object-fill object '  
                   src={'/invoice-upload.jpeg'} 
                   width={886}
                   height={356}
                   layout="intrinsic"
-                  
                   objectFit="cover"
-                  className="rounded-lg  "
-                  />
+                  className="rounded-lg"
+              />
 
           </div>
           </Link>}

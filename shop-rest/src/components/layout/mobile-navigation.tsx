@@ -39,14 +39,15 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
 
   return (
     <div className="visible lg:hidden h-12 md:h-14">
-      <nav className="h-12 md:h-14 w-full py-1.5 px-2 flex justify-between fixed start-0 bottom-0 z-50 bg-light shadow-400">
+      <nav className="h-12 md:h-14 w-full py-1.5 px-2 flex justify-between fixed start-0 bottom-0 z-50 bg-light shadow-10">
         <motion.button
           whileTap={{ scale: 0.88 }}
           onClick={() => handleSidebar("MAIN_MENU_VIEW")}
           className="flex p-2 h-full items-center justify-center focus:outline-none focus:text-accent"
         >
           <span className="sr-only">{t("text-burger-menu")}</span>
-             < Image        quality='40'
+             < Image        quality='1' 
+             priority={true}
           layout="intrinsic"
           width={30}
           height={30}
@@ -65,7 +66,8 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
             className="flex p-2 h-full items-center justify-center focus:outline-none focus:text-accent"
           >
             <span className="sr-only">{t("text-search")}</span>
-               < Image    quality='40'
+               < Image    quality='1' 
+               priority={true}
               layout="intrinsic"
               
               width={30}
@@ -81,7 +83,8 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
           className="flex p-2 h-full items-center justify-center focus:outline-none focus:text-accent"
         >
           <span className="sr-only">{t("text-home")}</span>
-             < Image        quality='40'
+             < Image        quality='1' 
+             priority={true}
             layout="intrinsic"
             width={30}
             height={30}
@@ -95,7 +98,8 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
           className="flex p-2 product-cart h-full relative items-center justify-center focus:outline-none focus:text-accent"
         >
           <span className="sr-only">{t("Cart")}</span>
-             < Image         quality='40'
+             < Image         quality='1' 
+             priority={true}
             layout="intrinsic"
             width={30}
             height={30}
@@ -117,7 +121,8 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
             <span className="sr-only">{t("text-user")}</span>
                 < Image       
              
-             quality='40'
+             quality='1' 
+             priority={true}
               layout="intrinsic"
               width={30}
               height={30}
@@ -131,7 +136,8 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
             className="flex p-2 h-full items-center justify-center focus:outline-none focus:text-accent"
           >
             <span className="sr-only">{t("text-user")}</span>
-                < Image         quality='40'
+                < Image         quality='1' 
+                priority={true}
               layout="intrinsic"
               width={30}
               height={30}

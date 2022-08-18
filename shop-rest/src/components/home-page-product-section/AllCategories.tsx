@@ -83,7 +83,7 @@ const AllCategories = () => {
 							key={category.id} >
 
 							  <Image    
-								quality='40' 
+								quality='50' 
 								priority={true}
 								 src={category?.image?.thumbnail }
 								 width={351}
