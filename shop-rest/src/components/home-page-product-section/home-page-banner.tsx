@@ -92,7 +92,7 @@ function location3(){
       { location() && <Link href='salon-products?text=pick+any&category='>
         <div className="card flex relative w-full px-1 ">
 
-               <Image 
+               {/* <Image 
                 priority={true}
                 quality='40'
                 width={886}
@@ -100,9 +100,9 @@ function location3(){
                 layout="intrinsic"
                 objectFit="cover"
                 className="rounded-lg"
-                // className="object-contain px-1 rounded-lg cursor-pointer h-full w-full"
-                src={'/pick-5.jpeg'} 
-               />
+                 src={'/pick-5.jpeg'} 
+               /> */}
+               <img src="/pick-5.jpeg" className="object-contain px-1 rounded-lg cursor-pointer h-full w-full" />
 
           </div>
           </Link> }
@@ -110,18 +110,18 @@ function location3(){
             { location() && <Link href='/user/upload-invoice/upload-form'>
               <div className="card flex relative w-full px-1 ">
 
-               <Image   
+               {/* <Image   
                   priority={true} 
                   quality='40' 
-                  // className="object-contain cursor-pointer rounded-lg px-1 h-full w-full"
-                  //  className='rounded-md w-full opacity-90  h-40 lg:w-full lg:h-72 xl+:h-80 md:h-64  2xl:h-72 2xl:w-full space-x-9 object-fill object '  
+                   
                   src={'/invoice-upload.jpeg'} 
                   width={886}
                   height={356}
                   layout="intrinsic"
                   objectFit="cover"
                   className="rounded-lg"
-              />
+              /> */}
+              <img src="/invoice-upload.jpeg" className="object-contain cursor-pointer rounded-lg px-1 h-full w-full" />
 
           </div>
           </Link>}
@@ -130,7 +130,7 @@ function location3(){
       { location3() &&  <Link href='/shops?text=Ambience+Mall'>
         <div className="card flex relative w-full ">
 
-               <Image 
+               {/* <Image 
                priority={true}
                quality='40' 
               width={1772}
@@ -139,17 +139,17 @@ function location3(){
               
               objectFit="cover"
               className="rounded-lg  "
-            // className="object-contain cursor-pointer rounded-lg px-1  "
-              //  className='rounded-md w-full opacity-90  h-40 lg:w-full lg:h-72 xl+:h-80 md:h-64  2xl:h-72 2xl:w-full space-x-9 object-fill object '  
+            
                   src={'/delhi/ambience-mall-banner.jpg'} 
-                  />
+                  /> */}
+                  <img className="  w-full h-full object-cover rounded-lg" src={'/delhi/ambience-mall-banner.jpg'} alt="banner" />
 
             </div>
             </Link> }
 
             { location2() &&  <Link href='/shops?text=Select+Citywalk'><div className="card flex relative w-full  ">
 
-               <Image 
+               {/* <Image 
                 quality='40' 
                 priority={true}
                 width={1772}
@@ -157,10 +157,10 @@ function location3(){
                 layout="intrinsic"
                 objectFit="cover"
                 className="rounded-lg px-1"
-            // className="object-cover cursor-pointer rounded-lg px-1 w-full  "
-              //  className='rounded-md w-full opacity-90  h-40 lg:w-full lg:h-72 xl+:h-80 md:h-64  2xl:h-72 2xl:w-full space-x-9 object-fill object '  
+             
                   src={'/delhi/city-walk-mall.jpg'} 
-                  />
+                  /> */}
+                  <img src="/delhi/city-walk-mall.jpg" className="  w-full h-full object-cover rounded-lg" alt="banner" />
 
             </div>
             </Link> }
