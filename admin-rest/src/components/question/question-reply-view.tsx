@@ -49,7 +49,7 @@ const QuestionReplyView = () => {
     <div className="m-auto max-w-lg w-full rounded bg-light sm:w-[32rem]">
       <div className="flex items-center border-b border-border-200 p-7">
         <div className="flex-shrink-0 border rounded border-border-100">
-             < Image priority={true}     loading='eager' quality='40'
+             < Image        quality='40'
             src={
               data?.product?.image?.thumbnail ??
               siteSettings.product.placeholder

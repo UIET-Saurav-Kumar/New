@@ -82,7 +82,7 @@ export default function ReviewCard({ review }: ReviewCardProps) {
             key={photo.id}
             onClick={() => handleImageClick(idx)}
           >
-               < Image priority={true}     loading='eager' quality='40'
+               < Image        quality='40'
               src={photo.thumbnail ?? ''}
               alt={user.name ?? ''}
               width={80}

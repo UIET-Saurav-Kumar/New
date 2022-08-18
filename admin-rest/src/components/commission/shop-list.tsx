@@ -26,7 +26,7 @@ const ShopList = ({ shops, onPagination }: IProps) => {
       align: "center",
       width: 74,
       render: (logo: any, record: any) => (
-           < Image priority={true}     loading='eager' quality='40'
+           < Image        quality='40'
           src={logo?.thumbnail ?? siteSettings.product.placeholder}
           alt={record?.name}
           layout="fixed"

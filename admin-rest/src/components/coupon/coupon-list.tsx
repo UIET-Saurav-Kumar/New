@@ -41,7 +41,7 @@ const CouponList = ({ coupons, onPagination }: IProps) => {
       key: "image",
       width: 74,
       render: (image: Attachment) => (
-           < Image priority={true}     loading='eager' quality='40'
+           < Image        quality='40'
           src={image?.thumbnail ?? siteSettings.product.placeholder}
           alt="coupon banner"
           layout="fixed"

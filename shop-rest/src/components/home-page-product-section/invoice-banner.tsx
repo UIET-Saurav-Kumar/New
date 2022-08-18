@@ -34,13 +34,13 @@ export default function InvoiceBanner() {
 
    
    <div onClick={getLink} className='flex w-full mt-8 md:mt-10 h-auto '>   
-           < Image priority={true}    
-           loading='eager'
+           <Image     
+            priority={true}
             quality='40'
-         width={886}
-         height={356}
-         layout="intrinsic"
-         objectFit="cover"
+            width={886}
+            height={356}
+            layout="intrinsic"
+            objectFit="cover"
           
          
          className="rounded-lg "

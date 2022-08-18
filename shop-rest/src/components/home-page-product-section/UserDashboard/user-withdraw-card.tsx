@@ -26,7 +26,7 @@ export default function UserWithdrawCard({currentBalance}:any) {
             
             {/* <div className='w-20'> */}
             <div className='relative rounded-full px-2 pt-2 bg-green-200 w-16 h-16 '>
-                  < Image priority={true}     loading='eager' quality='40' src='/dashboard/money-withdrawal.png' layout='fill' className='w-12 h-12' alt='money' />
+                  < Image        quality='40' src='/dashboard/money-withdrawal.png' layout='fill' className='w-12 h-12' alt='money' />
             </div>
             {/* </div> */}
             

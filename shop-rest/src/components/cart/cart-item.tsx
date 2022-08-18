@@ -130,7 +130,7 @@ const CartItem = ({ item }: CartItemProps) => {
       </div>
 
       <div className="w-10 sm:w-16 h-10 sm:h-16 flex items-center justify-center overflow-hidden bg-gray-100 mx-4 flex-shrink-0 relative">
-           < Image priority={true}     loading='eager' quality='40'
+           < Image        quality='40'
           src={item?.image ?? siteSettings?.product?.placeholderImage}
           alt={item?.name}
           layout="fill"

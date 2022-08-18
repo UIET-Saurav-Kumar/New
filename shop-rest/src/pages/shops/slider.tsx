@@ -50,7 +50,7 @@ export default function ImageSlider({data}:any) {
           {data.map((item, index) => {
             return (
               <img src={item.thumbnail} alt={item.title} key={index} className='w-full h-full object-fit' />
-              //    < Image priority={true}     loading='eager' quality='40' src={item?.thumbnail} alt={'img'} key={index} className='' layout="fill" />
+              //    < Image        quality='40' src={item?.thumbnail} alt={'img'} key={index} className='' layout="fill" />
             );
           }
           )}
@@ -70,15 +70,15 @@ export default function ImageSlider({data}:any) {
         //  className='rounded-md w-48 h-32 md:h-48 md:w-full lg:w-96  lg:h-48 space-x-9'  src={'/images/nearbuy-banner3.jpg'} 
              style={{objectFit:"fill"}}   />
 
-           < Image priority={true}     loading='eager' quality='40' layout='fill' objectFit='fill'
+           < Image        quality='40' layout='fill' objectFit='fill'
         //  className='rounded-md w-48 h-32 md:h-48 md:w-full lg:w-96 lg:h-48 space-x-9 '   src={'/images/nearbuy-banner1.jpg'} 
                  style={{objectFit:"fill"}}  />
 
-           < Image priority={true}     loading='eager' quality='40' layout='fill' objectFit='fill'
+           < Image        quality='40' layout='fill' objectFit='fill'
         //  className='rounded-md w-48 h-32 md:h-48 md:w-full lg:w-96 lg:h-48  space-x-9 '   src={'/images/nearbuy-banner1.jpg'} 
               style={{objectFit:"fill"}}  />
         
-           < Image priority={true}     loading='eager' quality='40' layout='fill' objectFit='fill'
+           < Image        quality='40' layout='fill' objectFit='fill'
         //  className='rounded-md w-48  h-32 md:h-48 md:w-full lg:w-96 lg:h-48 space-x-9 '    src={'/images/nearbuy-banner3.jpg'} 
                 style={{objectFit:"fill"}}  />
 

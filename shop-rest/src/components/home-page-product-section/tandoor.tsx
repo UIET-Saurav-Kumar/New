@@ -95,10 +95,11 @@ export default function Tandoor() {
             {location() &&  <Link href='/appointment'>
               <div className="px-1 ">
 
-                       < Image priority={true}     loading='eager' quality='40' 
+                       < Image        quality='40' 
                      width={886}
                      height={356}
                      layout="intrinsic"
+                     priority={true}
                       
                      objectFit="cover"
                      className="rounded-lg  "
@@ -114,10 +115,11 @@ export default function Tandoor() {
           {location() && <Link href='/shops?text=barista'>
             <div className=" px-1">
 
-               < Image priority={true}     loading='eager' quality='40' 
+               < Image        quality='40' 
              width={886}
              height={356}
              layout="intrinsic"
+             priority={true}
              
              objectFit="cover"
              className="rounded-lg  "

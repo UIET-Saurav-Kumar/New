@@ -23,7 +23,7 @@ const Banner: React.FC<BannerProps> = ({ banner, className }) => {
   return (
     <div className={cn("hidden lg:block relative", className)}>
       <div className="min-h-140 overflow-hidden -z-1">
-           < Image priority={true}     loading='eager' quality='40'
+           < Image        quality='40'
           alt={banner?.heading}
           src={banner?.image ?? "/banner/grocery.png"}
           layout="fill"

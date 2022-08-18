@@ -136,7 +136,7 @@ export default function OrderDetailsPage() {
       key: "image",
       width: 70,
       render: (image: Attachment) => (
-           < Image priority={true}     loading='eager' quality='40'
+           < Image        quality='40'
           src={image?.thumbnail ?? siteSettings.product.placeholder}
           alt="alt text"
           layout="fixed"

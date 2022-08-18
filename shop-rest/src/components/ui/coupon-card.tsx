@@ -33,7 +33,7 @@ const CouponCard: React.FC<CouponCardProps> = ({ coupon, className }) => {
   return (
     <div className={cn("coupon-card", className)}>
       <div className="flex rounded overflow-hidden bg-gray-200">
-           < Image priority={true}     loading='eager' quality='40'
+           < Image        quality='40'
           src={image?.thumbnail ?? "/coupon-placeholder.svg"}
           alt={code}
           width={572}

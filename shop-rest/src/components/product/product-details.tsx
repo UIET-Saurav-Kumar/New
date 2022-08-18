@@ -109,7 +109,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
               <ThumbsCarousel gallery={gallery} />
             ) : (
               <div className="w-full h-full flex items-center justify-center">
-                   < Image priority={true}     loading='eager' quality='40'
+                   < Image        quality='40'
                   src={image?.thumbnail ?? '' }
                   alt={name}
                   layout="fill"
