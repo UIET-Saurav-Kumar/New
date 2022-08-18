@@ -95,11 +95,11 @@ export default function Tandoor() {
             {location() &&  <Link href='/appointment'>
               <div className="px-1 ">
 
-                      <Image  lazyBoundary='50px'  loading='eager' quality='40' 
+                      <Image     loading='eager' quality='40' 
                      width={886}
                      height={356}
                      layout="intrinsic"
-                     priority={true}
+                     
                      objectFit="cover"
                      className="rounded-lg  "
                     // className="object-contain px-1 rounded-lg cursor-pointer "
@@ -114,11 +114,11 @@ export default function Tandoor() {
           {location() && <Link href='/shops?text=barista'>
             <div className=" px-1">
 
-              <Image  lazyBoundary='50px'  loading='eager' quality='40' 
+              <Image     loading='eager' quality='40' 
              width={886}
              height={356}
              layout="intrinsic"
-             priority={true}
+             
              objectFit="cover"
              className="rounded-lg  "
             // className="object-contain cursor-pointer rounded-lg px-1  "

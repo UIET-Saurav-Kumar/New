@@ -6,12 +6,12 @@ export default function Tagline() {
   return (
 
     <div className='w-full mt-4 flex justify-center'>
-          <Image  lazyBoundary='50px'  loading='eager' quality='40' 
+          <Image     loading='eager' quality='40' 
         height={50}
         width={731}
         layout='intrinsic'
         objectFit='cover'
-        priority={true}
+        
         src='/tagline.png' 
         className='mx-auto'
         />

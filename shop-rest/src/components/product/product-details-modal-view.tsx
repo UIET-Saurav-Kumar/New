@@ -137,7 +137,7 @@ const ProductDetailsModalView = ({ productSlug }: { productSlug: string }) => {
               }
             )}
           >
-              <Image  lazyBoundary='50px'  loading='eager' quality='40'
+              <Image     loading='eager' quality='40'
               src={image?.thumbnail! ?? "/product-placeholder.svg"}
               alt={name}
               layout="fill"
@@ -239,7 +239,7 @@ const ProductDetailsModalView = ({ productSlug }: { productSlug: string }) => {
               <ThumbsCarousel gallery={gallery} />
             ) : (
               <div className="w-full h-[90%] flex items-center justify-center">
-                  <Image  lazyBoundary='50px'  loading='eager' quality='40'
+                  <Image     loading='eager' quality='40'
                   src={image?.thumbnail ?? "/product-placeholder.svg"}
                   alt={name}
                   width={450}

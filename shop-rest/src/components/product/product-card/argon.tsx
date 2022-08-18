@@ -44,12 +44,12 @@ const Argon: React.FC<ArgonProps> = ({ product, className }) => {
       <div className="relative flex items-center justify-center w-auto h-48 sm:h-52">
        
         <span className="sr-only">{t("text-product-image")}</span>
-            <Image  lazyBoundary='50px'  loading='eager' quality='40'
+            <Image     loading='eager' quality='40'
             src={image?.original ?? siteSettings?.product?.placeholderImage}
             alt={name}
             layout="fill"
             objectFit="contain"
-            priority={true}
+            
             className="product-image"
           />
         {discount && (

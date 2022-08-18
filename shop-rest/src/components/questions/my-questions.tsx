@@ -61,7 +61,7 @@ function QuestionItem({ question }: { question: Question }) {
       
       <div className="mb-5 flex items-center space-x-4">
         <div className="relative h-10 w-10 overflow-hidden rounded border border-gray-200">
-            <Image  lazyBoundary='50px'  loading='eager' quality='40'
+            <Image     loading='eager' quality='40'
             src={product?.image?.thumbnail ?? siteSettings?.product?.placeholderImage}
             layout="fill"
             alt="text"

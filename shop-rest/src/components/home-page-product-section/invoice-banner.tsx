@@ -34,12 +34,12 @@ export default function InvoiceBanner() {
 
    
    <div onClick={getLink} className='flex w-full mt-8 md:mt-10 h-auto '>   
-          <Image  lazyBoundary='50px'  loading='eager' quality='40'
+          <Image     loading='eager' quality='40'
          width={886}
          height={356}
          layout="intrinsic"
          objectFit="cover"
-         priority={true}
+         
          className="rounded-lg "
          src='/invoice.jpg' 
         //  className=' md:h-auto object-contain cursor-pointer pt-0 

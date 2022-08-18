@@ -64,7 +64,7 @@ const QuestionList = ({ questions, onPagination, onSort, onOrder }: IProps) => {
       align: alignLeft,
       width: 100,
       render: (product: Product) => (
-          <Image  lazyBoundary='50px'  loading='eager' quality='40'
+          <Image     loading='eager' quality='40'
           src={product?.image?.thumbnail ?? siteSettings.product.placeholder}
           alt={product?.name}
           layout="fixed"

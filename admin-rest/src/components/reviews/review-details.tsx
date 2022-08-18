@@ -131,7 +131,7 @@ const ReviewDetailsView = ({ review }: IProps) => {
       {/* Product details */}
       <div className="flex items-start w-full space-x-4 md:space-x-5 rtl:space-x-reverse mb-10">
         <div className="border border-gray-200 shrink-0 relative w-20 h-20">
-            <Image  lazyBoundary='50px'  loading='eager' quality='40'
+            <Image     loading='eager' quality='40'
             src={image?.thumbnail ?? siteSettings.product.placeholder}
             alt={name}
             layout="responsive"
@@ -222,7 +222,7 @@ const ReviewDetailsView = ({ review }: IProps) => {
           <div className="flex items-start pt-3 space-s-2">
             {photos?.map((photo: any, idx: any) => (
               <div className="mb-1" key={idx}>
-                  <Image  lazyBoundary='50px'  loading='eager' quality='40'
+                  <Image     loading='eager' quality='40'
                   src={photo?.original ?? "/product-placeholder-borderless.svg"}
                   width={32}
                   height={32}

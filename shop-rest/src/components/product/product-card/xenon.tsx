@@ -44,7 +44,7 @@ const Xenon: React.FC<XenonProps> = ({ product, className }) => {
         onClick={handleProductQuickView}
       >
         <span className="sr-only">{t("text-product-image")}</span>
-          <Image  lazyBoundary='50px'  loading='eager' quality='40'
+          <Image     loading='eager' quality='40'
           src={image?.thumbnail ?? siteSettings?.product?.placeholderImage}
           alt={name}
           layout="fill"

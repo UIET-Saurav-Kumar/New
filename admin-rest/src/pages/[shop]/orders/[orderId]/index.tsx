@@ -107,7 +107,7 @@ export default function OrderDetailsPage() {
       key: "image",
       width: 70,
       render: (image: Attachment) => (
-          <Image  lazyBoundary='50px'  loading='eager' quality='40'
+          <Image     loading='eager' quality='40'
           src={image?.thumbnail ?? siteSettings.product.placeholder}
           alt="alt text"
           layout="fixed"

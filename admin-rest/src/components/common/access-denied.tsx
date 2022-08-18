@@ -8,7 +8,7 @@ const AccessDeniedPage = () => {
   return (
     <div className="w-full min-h-screen flex flex-col items-center justify-center p-4 sm:p-8">
       <div className="w-full h-80 sm:h-96 3xl:h-[580px] relative">
-          <Image  lazyBoundary='50px'  loading='eager' quality='40'
+          <Image     loading='eager' quality='40'
           alt={t("text-access-denied")}
           src="/access-denied.svg"
           layout="fill"

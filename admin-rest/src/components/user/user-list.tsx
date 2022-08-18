@@ -43,7 +43,7 @@ const CustomerList = ({ customers, onPagination }: IProps) => {
       align: "center",
       width: 74,
       render: (profile: any, record: any) => (
-          <Image  lazyBoundary='50px'  loading='eager' quality='40'
+          <Image     loading='eager' quality='40'
           src={profile?.avatar?.thumbnail ?? siteSettings?.avatar?.placeholder}
           alt={record?.name}
           layout="fixed"

@@ -79,12 +79,12 @@ export default function FeaturedShops({ }) {
                                                           sm:h-24 md:w-20 lg:w-28 lg:h-32 2xl:w-38 2xl:h-38'  */}
                                                      
                                         {shop?.logo ? 
-                                          <Image  lazyBoundary='50px'  loading='eager' quality='40' src={shop?.logo?.thumbnail} 
+                                          <Image     loading='eager' quality='40' src={shop?.logo?.thumbnail} 
                                         alt={shop?.name}
                                         width={200}
                                         height={200}
                                         layout="intrinsic"
-                                        priority={true}
+                                        
                                         objectFit="contain"
 
                                         //className='w-20 h-20  sm:w-20 sm:h-20 md:w-16 md:h-16  lg:w-28 lg:h-28 lg+:w-28 lg+:h-28 xl+:w-32 xl+:h-32 xl++:w-48 xl++:h-48 2xl:w-44 2xl:h-44 object-contain'

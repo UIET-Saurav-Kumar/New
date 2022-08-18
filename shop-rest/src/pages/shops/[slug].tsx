@@ -59,7 +59,7 @@ const imageCheck = (logo: any , record:any, imgsize:any, imgDim:any, classname: 
   if (lastSplit != "") {
     check = true;
   }
-  return (check ?   <Image  lazyBoundary='50px'  loading='eager' quality='40' src={logo} alt={record?.name}  width={1500} height={200} className={classname} />:<Avatar name={record?.name} size={imgsize} round={imgDim}  />);
+  return (check ?   <Image     loading='eager' quality='40' src={logo} alt={record?.name}  width={1500} height={200} className={classname} />:<Avatar name={record?.name} size={imgsize} round={imgDim}  />);
 }
 
 const ShopPage = ({ data }: any) => {
@@ -308,7 +308,7 @@ const ShopPage = ({ data }: any) => {
 
                       {/* // button to scroll to the top of the page when user has scrolled way down */}
                       <div className="fixed z-50 bottom-10 right-10 flex justify-center items-center">
-                          <Image  lazyBoundary='50px'  loading='eager' quality='40'
+                          <Image     loading='eager' quality='40'
                           alt="scroll to top"
                           width={50}
                           height={50}
@@ -343,26 +343,26 @@ const ShopPage = ({ data }: any) => {
                                     <div className='w-4/5 h-full'>
                                       {  cover_image?.length > 1 ?
                                          <div className='w-full h-full'>  
-                                         {/*   <Image  lazyBoundary='50px'  loading='eager' quality='40'Slider data={cover_image} /> */}
+                                         {/*   <Image     loading='eager' quality='40'Slider data={cover_image} /> */}
                                             <CoverImageSlider key={cover_image} data={cover_image} />
                                         </div>
                                            :  
                                        <div className=" w-full h-full"> 
                                           { cover_image.length  ? 
                                           cover_image?.map((img:any)=>
-                                            <Image  lazyBoundary='50px'  loading='eager' quality='40' 
+                                            <Image     loading='eager' quality='40' 
                                           src={img.thumbnail} 
                                           alt="cover image"
                                           className='object-fill h-full w-full' />)
                                           : 
-                                          shopCat?.includes('Cosmetics') &&    <Image  lazyBoundary='50px'  loading='eager' quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_cosmetics.jpg'}   className='object-fill h-full w-full' /> ||
-                                          shopCat?.includes('Groceries') &&   <Image  lazyBoundary='50px'  loading='eager' quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_groceries.jpg'}   className='object-fill h-full w-full' /> ||
-                                          shopCat?.includes('Salon & Spa') &&    <Image  lazyBoundary='50px'  loading='eager' quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_salon.webp'}   className='object-fill h-full w-full' /> ||
-                                          shopCat?.includes('Vegetables & Fruits') &&   <Image  lazyBoundary='50px'  loading='eager' quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_fruits.jpg'}   className='object-fill h-full w-full' /> ||
-                                          shopCat?.includes('Pharmacy') &&   <Image  lazyBoundary='50px'  loading='eager' quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_pharmacy.jpg'}   className='object-fill h-full w-full' /> ||
-                                          shopCat?.includes('Fashion Lifestyle') &&   <Image  lazyBoundary='50px'  loading='eager' quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_fashion.webp'}   className='object-fill h-full w-full' /> ||
-                                          shopCat?.includes('Electronics') &&   <Image  lazyBoundary='50px'  loading='eager' quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_electronics.jpg'}   className='object-fill h-full w-full' /> ||
-                                          shopCat?.includes('Health Products') &&   <Image  lazyBoundary='50px'  loading='eager' quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_cosmetics'}   className='object-fill h-full w-full' /> 
+                                          shopCat?.includes('Cosmetics') &&    <Image     loading='eager' quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_cosmetics.jpg'}   className='object-fill h-full w-full' /> ||
+                                          shopCat?.includes('Groceries') &&   <Image     loading='eager' quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_groceries.jpg'}   className='object-fill h-full w-full' /> ||
+                                          shopCat?.includes('Salon & Spa') &&    <Image     loading='eager' quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_salon.webp'}   className='object-fill h-full w-full' /> ||
+                                          shopCat?.includes('Vegetables & Fruits') &&   <Image     loading='eager' quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_fruits.jpg'}   className='object-fill h-full w-full' /> ||
+                                          shopCat?.includes('Pharmacy') &&   <Image     loading='eager' quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_pharmacy.jpg'}   className='object-fill h-full w-full' /> ||
+                                          shopCat?.includes('Fashion Lifestyle') &&   <Image     loading='eager' quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_fashion.webp'}   className='object-fill h-full w-full' /> ||
+                                          shopCat?.includes('Electronics') &&   <Image     loading='eager' quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_electronics.jpg'}   className='object-fill h-full w-full' /> ||
+                                          shopCat?.includes('Health Products') &&   <Image     loading='eager' quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_cosmetics'}   className='object-fill h-full w-full' /> 
                                           // imageCheck(data?.cover_image?.original, data, '317', false,'h-full w-full object-cover')
                                           }
                                        </div>
@@ -416,7 +416,7 @@ const ShopPage = ({ data }: any) => {
 
                             { data?.slug == 'chandigarh-grocery-store' ? ( 
                              <div className="w-full -mt-80 object-contain">
-                                      <Image  lazyBoundary='50px'  loading='eager' quality='40'
+                                      <Image     loading='eager' quality='40'
                                     width={1826}
                                     height={570}
                                     layout="intrinsic"
@@ -427,7 +427,7 @@ const ShopPage = ({ data }: any) => {
 
                              { data?.slug == 'kosmetics-india' ? ( 
                              <div className="w-full -mt-80 object-contain">
-                                      <Image  lazyBoundary='50px'  loading='eager' quality='40'
+                                      <Image     loading='eager' quality='40'
                                     width={1826}
                                     height={570}
                                     layout="intrinsic"
