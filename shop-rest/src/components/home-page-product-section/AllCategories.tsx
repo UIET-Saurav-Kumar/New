@@ -82,16 +82,19 @@ const AllCategories = () => {
 										hover:border-gray-400  items-center'
 							key={category.id} >
 
-							  <Image    
+							  {/* <Image    
 								quality='50' 
 								priority={true}
 								 src={category?.image?.thumbnail }
 								 width={351}
 								 height={420}
 								 layout="intrinsic"
-								 // objectFit="cover"
+								 
 								 className=" "
-								/>   
+								/>    */}
+							<img className=' w-full h-full object-cover'  
+							     src={category?.image.thumbnail} 
+							/>   
 						</div>
 					
 					</Link>
