@@ -79,18 +79,20 @@ export default function FeaturedShops({ }) {
                                                           sm:h-24 md:w-20 lg:w-28 lg:h-32 2xl:w-38 2xl:h-38'  */}
                                                      
                                         {shop?.logo ? 
-                                        <Image quality='40' src={shop?.logo?.thumbnail} 
-                                        priority={true} 
-                                        alt={shop?.name}
-                                        width={200}
-                                        height={200}
-                                        layout="intrinsic"
+                                        // <Image quality='40' src={shop?.logo?.thumbnail} 
+                                        // priority={true} 
+                                        // alt={shop?.name}
+                                        // width={200}
+                                        // height={200}
+                                        // layout="intrinsic"
                                         
-                                        objectFit="contain"
+                                        // objectFit="contain"
 
-                                        //className='w-20 h-20  sm:w-20 sm:h-20 md:w-16 md:h-16  lg:w-28 lg:h-28 lg+:w-28 lg+:h-28 xl+:w-32 xl+:h-32 xl++:w-48 xl++:h-48 2xl:w-44 2xl:h-44 object-contain'
+                                         
+                                        // /> 
+                                        <img src={shop?.logo?.thumbnail} className='w-20 h-20  sm:w-20 sm:h-20 md:w-16 md:h-16  lg:w-28 lg:h-28 lg+:w-28 lg+:h-28 xl+:w-32 xl+:h-32 xl++:w-48 xl++:h-48 2xl:w-44 2xl:h-44 object-contain' />
                                         
-                                        /> : 
+                                        : 
                                         imageCheck(shop.logo?.thumbnail, shop, '130', false,'group-hover:-translate-y-1 hover:scale-110 duration-200 w-20 h-20  sm:w-20 sm:h-20 md:w-16 md:h-16  lg:w-28 lg:h-28 lg+:w-28 lg+:h-28 xl+:w-32 xl+:h-32 xl++:w-48 xl++:h-48 2xl:w-44 2xl:h-44 object-contain')}
         
                                     <div className='flex flex-col text-center justify-center w-full space-y-1 px-2 md:px-3 lg:px-4 2xl:px-4'>
