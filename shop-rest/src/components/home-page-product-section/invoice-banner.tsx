@@ -34,7 +34,7 @@ export default function InvoiceBanner() {
 
    
    <div onClick={getLink} className='flex w-full mt-8 md:mt-10 h-auto '>   
-           <Image     
+           {/* <Image     
             priority={true}
             quality='40'
             width={886}
@@ -45,9 +45,10 @@ export default function InvoiceBanner() {
          
          className="rounded-lg "
          src='/invoice.jpg' 
-        //  className=' md:h-auto object-contain cursor-pointer pt-0 
-        //                                lg:w-full -sm-pt-60 lg:object-contain lg:mt-8 xl:object-cover'
-                                       />
+         
+                                       /> */}
+                                       <img src='/invoice.jpg' className=' md:h-auto object-contain cursor-pointer pt-0 
+        //                                lg:w-full -sm-pt-60 lg:object-contain lg:mt-8 xl:object-cover' />
    </div> 
        
     )

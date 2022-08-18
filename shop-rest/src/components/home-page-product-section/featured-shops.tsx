@@ -80,6 +80,7 @@ export default function FeaturedShops({ }) {
                                                      
                                         {shop?.logo ? 
                                         <Image quality='40' src={shop?.logo?.thumbnail} 
+                                        priority={true} 
                                         alt={shop?.name}
                                         width={200}
                                         height={200}

@@ -91,7 +91,7 @@ const OfferCard: React.FC<NeonProps> = ({ product, className, productSlug }) => 
     <article
       // style={{maxWidth:"330px"}}
       className={cn(
-        "product-card cart-type-neon w-auto md:w-60 lg:w-full rounded h-auto p-2 bg-light overflow-hidden shadow-sm transition-all duration-200 hover:shadow ",
+        "product-card cart-type-neon space-y-4 w-auto md:w-60 lg:w-full rounded h-auto p-2 bg-light overflow-hidden shadow-sm transition-all duration-200 hover:shadow ",
         className
       )}
     >
@@ -101,74 +101,31 @@ const OfferCard: React.FC<NeonProps> = ({ product, className, productSlug }) => 
       >
         <span className="sr-only">{t("text-product-image")}</span>
 
-             < Image        quality='40'
-            src={product?.image?.thumbnail?? siteSettings?.product?.placeholderImage}
+             {/* <Image 
+             quality='40'
+            src={product?.image?.thumbnail ?? siteSettings?.product?.placeholderImage}
             alt={product?.name}
             layout="fill"
             objectFit="contain"
-            
             className="product-image"
-          />
+          /> */}
+          <img src={product?.image?.thumbnail ?? siteSettings?.product?.placeholderImage} alt={product?.name} className="product-image object-contain" />
 
-        {/* {discount && (
-          <div className="absolute top-3 end-3 md:top-4 md:end-4 rounded text-xs leading-6 
-                          shadow-md font-semibold px-1.5 sm:px-2 md:px-2.5  bg-gradient-to-r from-gold to-yellow-500 text-white ">
-            {discount}
-          </div>
-        )} */}
+        
       </div>
       </Link>
       {/* End of product image */}
 
       <header className="py-1 md:p-6">
 
-        {/* {product_type.toLowerCase() === 'variable' ? (
-          <div className="flex items-center  mb-2">
-            <span className="text-xs md:text-base text-gold font-bold">
-              {minPrice}
-            </span>
-            <span className="text-magenta font-bold"> {!minPrice ? `Starting ${basePrice}` : '-'} </span>
-            <span className="text-xs md:text-base text-magenta font-bold">
-              {maxPrice}
-            </span>
-          </div>
-        ) : (
-          <div className="flex items- justify-between  mb-2">
-             <>
-              <div className="grid grid-cols-1 md:flex  md:items-center  place-items-"> 
-                  <span className="text-sm md:text-base text-product-price font-bold">
-                      {basePrice ? basePrice : price}
-                  </span>
-                  <span>
-                      <RatingsBadge rating={product?.ratings} variant="xs" boxed />
-                  </span>
-                  {discount ? (
-                    <del className="text-xs md:text-sm text-gold ms-2">
-                      {price}
-                    </del>
-                  ) : <del className="text-xs md:text-sm h-4 text-discount ms-2">
-                  
-                </del>
-                } 
-
-            </div>
-            </>
-          <WishlistButton className="h-5" productId={product?.id} />
-        </div>
-        )} */}
-        {/* End of product price */}
-
+        
         <h3
           className="text-xs font-bold flex-normal md:text-sm flex flex-col   text-gray-900  truncate mb-2 cursor-pointer"
         >
            <span className=''>
              {name}
            </span>
-           {/* <span className="flex items-center justify-between">
-             <p>{unit}</p>
-             
-             <p className="font-light  text-gray-500">{orders_count + ' ' + 'sold'}</p>
-           </span> */}
+           
            { pageURL.includes('home') ? (
            <div className='flex flex-col sm:flex-row justify-between text-xs  md:text-sm text-gray-900  mt-2 font-light'>
            <Link href={`/shops/${product?.shop?.slug}`}><span className="text-10 hover:text-indigo-700 font-semibold  bg-clip-text text-transparent bg-gradient-to-r from-blue-700 via-purple-600 to-blue-600"> {product?.shop?.name} </span></Link>
@@ -179,46 +136,7 @@ const OfferCard: React.FC<NeonProps> = ({ product, className, productSlug }) => 
         }
         </h3>
         
-        {/* End of product title */}
-        {/* {product_type.toLowerCase() === 'variable' ? (
-          <>
-            {Number(quantity) > 0 && (
-
-             <Link href={(`${ROUTES.PRODUCT}/${slug}`)}> 
-             <AddToCart  variant="organesson" data={product} />
-             
-              </Link>
-            )}
-          </>
-        ) : (
-          <>
-            {Number(quantity) > 0 && (
-             <div className="md:pt-3 ">
-                <AddToCart  variant="organesson" data={product} />
-               { product?.id === (14110 || 14358) ? containsProduct(ordersData?.pages?.[0].data, product?.id) ?
-                   <span className="font-bold shadow-2xl bg-red-600 p-1 rounded px-1 text-white">Sold out</span>
-                  
-                : '' : ''}
-             </div>
-            )}
-          </>
-        )} */}
-
-
-
-        {/* {Number(quantity) <= 0 && (
-          <div className="bg-red-500 rounded text-xs text-center text-light px-2 py-1.5 sm:py-2.5">
-            {t('text-out-stock')}
-          </div>
-        )} */}
-
-         {/* {Number(quantity) !== product.quantity && (
-          <div className="bg-red-500 rounded text-xs text-center text-light px-2 py-1.5 sm:py-2.5">
-            {t('text-out-stock')}
-          </div>
-        )} */}
         
-        {/* End of add to cart */}
       </header>
     </article>
   );

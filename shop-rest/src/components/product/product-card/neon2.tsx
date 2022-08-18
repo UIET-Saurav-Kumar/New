@@ -95,15 +95,17 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
       >
         <span className="sr-only">{t("text-product-image")}</span>
         
-             <Image quality='40'
-
+             {/* <Image quality='40'
+            priority={true}
             src={product.image?.thumbnail?? siteSettings?.product?.placeholderImage}
             alt={product.name}
             layout="fill"
             objectFit="contain"
             
             className="product-image"
-          />
+          /> */}
+          <img src={product.image?.thumbnail?? siteSettings?.product?.placeholderImage} alt={product.name} className="product-image object-contain  lg:w-60 lg:h-60" />
+          
 
          {discount && (
           <div className="absolute top-3 end-3 md:top-4 md:end-4 rounded text-xs leading-6 
