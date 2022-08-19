@@ -44,6 +44,7 @@ import ShopLayout from "@components/layout/shop-layout";
 import PromotionSlider from "@components/slider/promotion-slider";
 import CoverImageSlider from "./cover-image-slider";
 import ImageSlider from "./slider";
+import { Logo } from "@components/";
 
 
 const CartCounterButton = dynamic(
@@ -350,17 +351,19 @@ const ShopPage = ({ data }: any) => {
                                          </div>
                                            :  
                                        <div className=" w-full h-full"> 
-                                          { cover_image.length = 1 ?  
+                                          { cover_image.length == 1 &&  
                                           // cover_image?.map((img:any) =>
-                                             <Image quality='40' 
-                                          src={cover_image.thumbnail} 
+                                          <Image quality='40' 
+                                          src={cover_image[0]?.thumbnail} 
                                           alt="cover image"
                                           layout="intrinsic"
                                           width={1457}
                                           height={314}
                                           objectFit="fill"
                                           className='object-fill h-full w-full' />
-                                          : 
+                                          // <img src={data.logo.thumbnail} alt="cover image" className='object-fill h-full w-full' />
+                                           }
+                                          { cover_image.length == 0 && 
                                           shopCat?.includes('Cosmetics') &&           <Image priority={true} quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_cosmetics.jpg'}   className='object-fill h-full w-full' /> ||
                                           shopCat?.includes('Groceries') &&           <Image priority={true} quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_groceries.jpg'}   className='object-fill h-full w-full' /> ||
                                           shopCat?.includes('Salon & Spa') &&         <Image priority={true} quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_salon.webp'}   className='object-fill h-full w-full' /> ||
@@ -370,7 +373,7 @@ const ShopPage = ({ data }: any) => {
                                           shopCat?.includes('Electronics') &&         <Image priority={true} quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_electronics.jpg'}   className='object-fill h-full w-full' /> ||
                                           shopCat?.includes('Health Products') &&     <Image priority={true} quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_cosmetics'}   className='object-fill h-full w-full' /> 
                                           // imageCheck(data?.cover_image?.original, data, '317', false,'h-full w-full object-cover')
-                                          }
+                                           }
                                        </div>
                                         }  
                                     </div> 

@@ -76,14 +76,14 @@ export default function ShopMobileView({data, shopData}: any) {
         <div className='relative   flex flex-col'>
 
             <div className="fixed z-50 bottom-16 right-6 flex justify-center items-center">
-                     < Image quality='40'
+                <Image quality='40'
                   width={50}
                   height={50}
                   layout='fixed'
                   objectFit='cover'
                   src='/up-arrow.png' 
-                      // className="w-8 h-8" 
-                      onClick={() => window.scrollTo(0, 0)} />
+                  // className="w-8 h-8" 
+                  onClick={() => window.scrollTo(0, 0)} />
                             
             </div>
 
@@ -94,25 +94,27 @@ export default function ShopMobileView({data, shopData}: any) {
                     <ShopProfileCard data={data} /> 
                    </div>)  }
                 
-                <div className='  w-full sm:w-4/5 border '>
+                <div className = 'w-full sm:w-4/5 border'>
                     { cover_image?.length > 1 ?
                         <div className='  h-44 sm:h-72 rounded-lg xs+++:rounded-l-none md:h-72 w-full'>  
                         {/*    < Image        quality='40'Slider data={cover_image} /> */}
                             <CoverImageSlider key={cover_image} data={cover_image} />
                         </div>
-                                                :  
+                                 :  
                           <div className="block lg:hidden ">
                             { slug?.some(el => query?.slug.includes(el))  ?
                              <Image quality='20'
                              priority={true}
                              width={640}
                              height={313}
-                             src={data?.cover_image?.original}
                              layout='intrinsic'
-                             objectFit='cover'
-                             alt={t("heading")} /> :
+                             objectFit='contain'
+                             alt={t("heading")} 
+                               // className='object-fill h-full sm:h-72 rounded-lg xs+++:rounded-l-none md:h-72   w-full'
+                             src={query.slug === 'kosmetics-india' ? '/kosmetics-shop-mob.jpg' : '/grocery-mobile.jpg'}
+                           /> :
 
-                            <Image quality='20'
+                          <Image quality='20'
                             priority={true}
                             width={640}
                             height={143}
@@ -120,7 +122,7 @@ export default function ShopMobileView({data, shopData}: any) {
                             objectFit='cover'
                             alt={t("heading")} 
                               // className='object-fill h-full sm:h-72 rounded-lg xs+++:rounded-l-none md:h-72   w-full'
-                            src={data?.cover_image?.original}
+                            src={ data?.logo?.original}
                           />
                            }
                         </div>

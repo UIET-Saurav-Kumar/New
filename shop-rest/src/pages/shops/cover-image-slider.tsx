@@ -93,29 +93,27 @@ export default function CoverImageSlider({data}) {
           autoplay={{
             delay: 500,
           }}
-           
-
         >
-          {  data?.map((item) => (
+          {data?.map((item) => (
             <SwiperSlide key={item?.id} className='absolute w-full h-full'>
-              <div className="w-full h-full ">
-                <img className=" object-fill w-full h-full  " src={item?.thumbnail} alt={item?.title} />
-                </div>
+              <div className="w-full h-full">
+                <img className="object-fill w-full h-full" src={item?.thumbnail} alt={item?.title} />
+              </div>
             </SwiperSlide>
           ))}
          
         </Swiper>
         <div
-          className="shop-slider-prev cursor-pointer bg-white absolute z-40 text-gray-600 top-2/4 -start-2 md:-start-5   -mt-4 md:-mt-5 w-8 h-8 md:w-9 md:h-9 rounded-full bg-light shadow-xl border border-border-200  flex items-center justify-center text-heading transition-all duration-200 hover:bg-accent hover:text-light hover:border-accent"
-          role="button"
-        >
-          <span className="sr-only">{t("common:text-previous")}</span>
-          <ArrowPrev width={24} height={24} />
+            className="shop-slider-prev cursor-pointer bg-white absolute z-40 text-gray-600 top-2/4 -start-2 md:-start-5   -mt-4 md:-mt-5 w-8 h-8 md:w-9 md:h-9 rounded-full bg-light shadow-xl border border-border-200  flex items-center justify-center text-heading transition-all duration-200 hover:bg-accent hover:text-light hover:border-accent"
+            role="button"
+          >
+            <span className="sr-only">{t("common:text-previous")}</span>
+            <ArrowPrev width={24} height={24} />
         </div>
         <div
           className="shop-slider-next cursor-pointer    text-gray-600 absolute top-2/4 -end-2 md:-end-3 z-40 -mt-4 md:-mt-5 w-8 h-8 md:w-9 md:h-9 rounded-full bg-light shadow-xl border border-border-200  flex items-center justify-center transition-all duration-200 hover:bg-accent hover:text-light hover:border-accent"
           role="button"
-        >
+         >
           <span className="sr-only">{t("common:text-next")}</span>
           <ArrowNext width={24} height={24} />
         </div>
