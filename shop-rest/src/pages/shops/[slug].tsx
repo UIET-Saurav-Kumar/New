@@ -363,7 +363,7 @@ const ShopPage = ({ data }: any) => {
                                           className='object-fill h-full w-full' />
                                           // <img src={data.logo.thumbnail} alt="cover image" className='object-fill h-full w-full' />
                                            }
-                                          { cover_image.length == 0 && 
+                                          {/* { cover_image.length == 0 && 
                                           shopCat?.includes('Cosmetics') &&           <Image priority={true} quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_cosmetics.jpg'}   className='object-fill h-full w-full' /> ||
                                           shopCat?.includes('Groceries') &&           <Image priority={true} quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_groceries.jpg'}   className='object-fill h-full w-full' /> ||
                                           shopCat?.includes('Salon & Spa') &&         <Image priority={true} quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_salon.webp'}   className='object-fill h-full w-full' /> ||
@@ -372,8 +372,8 @@ const ShopPage = ({ data }: any) => {
                                           shopCat?.includes('Fashion Lifestyle') &&   <Image priority={true} quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_fashion.webp'}   className='object-fill h-full w-full' /> ||
                                           shopCat?.includes('Electronics') &&         <Image priority={true} quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_electronics.jpg'}   className='object-fill h-full w-full' /> ||
                                           shopCat?.includes('Health Products') &&     <Image priority={true} quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_cosmetics'}   className='object-fill h-full w-full' /> 
-                                          // imageCheck(data?.cover_image?.original, data, '317', false,'h-full w-full object-cover')
-                                           }
+                                          imageCheck(data?.cover_image?.original, data, '317', false,'h-full w-full object-cover')
+                                           } */}
                                        </div>
                                         }  
                                     </div> 
