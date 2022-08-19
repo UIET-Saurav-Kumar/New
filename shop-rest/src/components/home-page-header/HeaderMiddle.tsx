@@ -365,11 +365,12 @@ export default function HeaderMiddle() {
                                                </div>
                                            </div>
                                           <div className='hidden lg:block w-auto h-auto'>
-                                                 < Image        quality='40' 
+                                                 <Image 
+                                                quality='40' 
                                                 width={1842}
                                                 height={460}
                                                 layout='intrinsic'
-                                                
+                                                priority={true}
                                                 objectFit='fill'
                                                 src='/drop-down.jpg' 
                                                 alt='drop-down'

@@ -73,10 +73,10 @@ export default function ShopMobileView({data, shopData}: any) {
     return (
 
       <>
-        <div className='relative mt-4 flex flex-col'>
+        <div className='relative   flex flex-col'>
 
             <div className="fixed z-50 bottom-16 right-6 flex justify-center items-center">
-                     < Image        quality='40'
+                     < Image quality='40'
                   width={50}
                   height={50}
                   layout='fixed'
@@ -94,23 +94,38 @@ export default function ShopMobileView({data, shopData}: any) {
                     <ShopProfileCard data={data} /> 
                    </div>)  }
                 
-                <div className='w-full sm:w-4/5 '>
+                <div className='  w-full sm:w-4/5 border '>
                     { cover_image?.length > 1 ?
                         <div className='  h-44 sm:h-72 rounded-lg xs+++:rounded-l-none md:h-72 w-full'>  
                         {/*    < Image        quality='40'Slider data={cover_image} /> */}
                             <CoverImageSlider key={cover_image} data={cover_image} />
                         </div>
                                                 :  
-                           < Image        quality='40'
-                        width={width}
-                        height={352}
-                        layout='intrinsic'
-                        objectFit='cover'
-                        alt={t("heading")} 
+                          <div className="block lg:hidden ">
+                            { slug?.some(el => query?.slug.includes(el))  ?
+                             <Image quality='20'
+                             priority={true}
+                             width={640}
+                             height={313}
+                             src={data?.cover_image?.original}
+                             layout='intrinsic'
+                             objectFit='cover'
+                             alt={t("heading")} /> :
+
+                            <Image quality='20'
+                            priority={true}
+                            width={640}
+                            height={143}
+                            layout='intrinsic'
+                            objectFit='cover'
+                            alt={t("heading")} 
                               // className='object-fill h-full sm:h-72 rounded-lg xs+++:rounded-l-none md:h-72   w-full'
-                              src={query.slug !== 'kosmetics-india' ? data?.cover_image?.original! : '/kosmetics-shop-mob.jpg' ?? "/product-placeholder.svg"}
-                        />
+                            src={data?.cover_image?.original}
+                          />
+                           }
+                        </div>
                     }
+                  
                 </div>
 
                 {  slug.some(el => data.slug.includes(el)) ? null : 

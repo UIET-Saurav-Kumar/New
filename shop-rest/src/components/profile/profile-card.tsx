@@ -55,7 +55,7 @@ type ShopProfileCardProps = {
 
               <div className="w-full h-52  rounded-lg flex justify-center flex-col space-y-2 mt-0 sm:-mt-6 relative mx-auto 
                               overflow-hidden mb-8">
-                  {imageCheck(data?.logo?.original, data, '250', false,'object-contain sm:object-contain rounded md:object-contain lg:object-contain  ')}              
+                  {imageCheck(data?.logo?.thumbnail, data, '250', false,'object-contain sm:object-contain rounded md:object-contain lg:object-contain  ')}              
                   
                    {/* <span className="text-sm sm:hidden text-center font-light tracking-wide  text-gray-600 ">
 
