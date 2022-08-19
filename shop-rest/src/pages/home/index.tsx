@@ -142,9 +142,9 @@ const {getLocation} =useLocation()
 const {
   data,
   isLoading: loading,
-  // isFetchingNextPage,
-  // fetchNextPage,
-  // hasNextPage,
+   isFetchingNextPage,
+  fetchNextPage,
+ hasNextPage,
   error,
 } = useShopAvailabilityQuery({
   limit: 16 as number,
@@ -152,11 +152,11 @@ const {
   location : ((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any
 });
 
-// useIntersectionObserver({
-//   target: loadMoreRef,
-//   onIntersect: fetchNextPage,
-//   enabled: hasNextPage,
-// })
+useIntersectionObserver({
+  target: loadMoreRef,
+  onIntersect: fetchNextPage,
+  enabled: hasNextPage,
+})
 
 //make rocket.png visible when scroll y is 200
 
@@ -293,7 +293,7 @@ const {
           width < 1023 && 
             <MobileNavigation />
         } 
-         {/* <div ref={loadMoreRef} className={`${!hasNextPage ? "hidden" : ""}`}>
+         <div ref={loadMoreRef} className={`${!hasNextPage ? "hidden" : ""}`}>
                   {
                     (isFetchingNextPage)
                     &&
@@ -306,7 +306,7 @@ const {
                       </>
                     ) 
                   }
-          </div> */}
+          </div>
           
         </div>
         </>
