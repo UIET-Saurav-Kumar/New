@@ -123,10 +123,10 @@ const CategoryDropdownSidebar = ({data}) => {
 
             <div className="">
               <button onClick = {allCategories} className={` ${query.category == ''  ? 'text-magenta' : 'text-gray-600'} text-sm focus:text-magenta font-semibold `}>
-                   < Image        quality='40'
-                  width={40}
-                  height={40}
-                  layout="fixed"
+                   <Image        quality='40'
+                  width={30}
+                  height={20}
+                  layout="intrinsic"
                   objectFit="contain"
                 src='/categories.png'
                 //  src='/grocery-all.png' 
