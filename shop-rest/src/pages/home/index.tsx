@@ -8,8 +8,8 @@ import { useRouter } from "next/router";
 import { scroller, Element } from "react-scroll";
 import ImageSlider from '@components/home-page-image-slider/ImageSlider';
 import AllCategories from '@components/home-page-product-section/AllCategories';
-import FeaturedShops from '@components/home-page-product-section/featured-shops';
-import FeaturedProducts from '@components/home-page-product-section/featured-products';
+// import FeaturedShops from '@components/home-page-product-section/featured-shops';
+// import FeaturedProducts from '@components/home-page-product-section/featured-products';
 import OfferOfTheDay from '@components/home-page-product-section/offer-of-the-day';
 import AmazonShops  from '@components/home-page-product-section/AmazonShops'
 import dynamic from "next/dynamic";
@@ -29,7 +29,7 @@ import { useShopAvailabilityQuery } from "@data/home/use-shop-availability-query
 import { useLocation } from "@contexts/location/location.context";
 import Tandoor from "@components/home-page-product-section/tandoor";
 import InvoiceBanner from "@components/home-page-product-section/invoice-banner";
-import HomePageBanner from "@components/home-page-product-section/tree-plantation-banner";
+// import HomePageBanner from "@components/home-page-product-section/tree-plantation-banner";
 import RedBullBanner from "@components/home-page-product-section/home-page-banner";
 import UserDashboard from "@components/home-page-product-section/UserDashboard";
 import Tagline from "@components/home-page-product-section/tagline";
@@ -46,6 +46,26 @@ const ProductFeedLoader = dynamic(
   () => import("@components/ui/loaders/product-feed-loader"),
   { ssr: false }
 );
+
+ //tagline 
+// const Tagline = dynamic(() => import("@components/home-page-product-section/tagline"), {
+//   ssr: false,
+// });
+
+//tree plantation banner
+const HomePageBanner = dynamic(() => import("@components/home-page-product-section/tree-plantation-banner"), {
+  ssr: false,
+});
+
+//featured products
+const FeaturedProducts = dynamic(() => import("@components/home-page-product-section/featured-products"), {
+  ssr: false,
+});
+
+//featured shops
+const FeaturedShops = dynamic(() => import("@components/home-page-product-section/featured-shops"), {
+  ssr: false,
+});
 
 
 export const getStaticProps: GetStaticProps = async ({ locale, params }) => {
