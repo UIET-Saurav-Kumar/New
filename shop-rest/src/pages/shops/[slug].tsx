@@ -207,6 +207,7 @@ const ShopPage = ({ data }: any) => {
   // };
 
   // console.log('shop data',metaData)
+
   console.log('coverimage',data?.cover_image);
 
   const shopCat = data?.shop_categories?.replace(/[{":,0123456789}]/g,'').slice(5,-3);
@@ -218,7 +219,6 @@ const ShopPage = ({ data }: any) => {
  
   return (
     <>
-
         <Head>
           {shopCat == 'Cosmetics' &&  <title>Get Best Deals on Cosmetic Products | #1 Cosmetic store in Chandigarh </title> }
           {shopCat == 'Groceries' && <title>  Best Grocery Store in Tricity | Get exclusive Offer Now</title> }
@@ -230,7 +230,6 @@ const ShopPage = ({ data }: any) => {
             {/* <title>{shopCat == 'Groceries' && ' ' }</title>
             <title>{shopCat == 'Groceries' && ' ' }</title>
             <title>{shopCat == 'Groceries' && ' ' }</title> */}
-
 
           {shopCat == 'Cosmetics' &&  <meta name="description" content= 'Get Amazing deals on ladies cosmetic products in Chandigarh tricity| Buy Now with Buylowcal '  /> }
           {shopCat == 'Groceries' && <meta name="description" content= 'Grab The Best deal and  Offers on Grocery items | Buy Now With Buylowcal' /> }
@@ -309,17 +308,16 @@ const ShopPage = ({ data }: any) => {
 
                       {/* // button to scroll to the top of the page when user has scrolled way down */}
                       <div className="fixed z-50 bottom-10 right-10 flex justify-center items-center">
-                           <Image 
-
-                           quality='1'
+                        <Image 
+                          quality='1'
                           alt="scroll to top"
                           width={50}
                           height={50}
                           layout="fixed"
                           objectFit="contain"
                           src='/up-arrow.png' 
-                        // className="w-12 h-12" 
-                        onClick={() => window.scrollTo(0, 0)} /> 
+                          // className="w-12 h-12" 
+                          onClick={() => window.scrollTo(0, 0)} /> 
                       </div>
 
                       {/* <div className="fixed z-50 bottom-10 right-10 flex justify-center items-center">
@@ -343,27 +341,31 @@ const ShopPage = ({ data }: any) => {
                                     
                                     { slug?.some(el => data?.slug?.includes(el)) ? null :
                                     (
-                                    <div className='w-4/5 h-full'>
-                                      {  cover_image?.length > 1 ?
+                                    <div className = 'w-4/5 h-full'>
+                                      {cover_image?.length > 1 ?
                                          <div className='w-full h-full'>  
                                          {/*    <Image quality='40'Slider data={cover_image} /> */}
                                             <CoverImageSlider key={cover_image} data={cover_image} />
                                          </div>
                                            :  
-                                       <div className=" w-full h-full"> 
-                                          { cover_image.length == 1 &&  
+                                       <div className="w-full h-full"> 
+                                          { cover_image.length == 1 ?  
                                           // cover_image?.map((img:any) =>
-                                          <Image quality='40' 
+                                          <Image 
+                                          quality='40' 
                                           src={cover_image[0]?.thumbnail} 
                                           alt="cover image"
                                           layout="intrinsic"
                                           width={1457}
                                           height={314}
-                                          objectFit="fill"
-                                          className='object-fill h-full w-full' />
+                                          objectFit="cover"
+                                          // className='object-fill h-full w-full'
+                                           />
+                                          :
+                                          // imageCheck(data?.cover_image?.thumbnail, data, '317', false,'h-full w-full object-cover')
                                           // <img src={data.logo.thumbnail} alt="cover image" className='object-fill h-full w-full' />
-                                           }
-                                          {/* { cover_image.length == 0 && 
+                                           
+                                             cover_image.length == 0 && 
                                           shopCat?.includes('Cosmetics') &&           <Image priority={true} quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_cosmetics.jpg'}   className='object-fill h-full w-full' /> ||
                                           shopCat?.includes('Groceries') &&           <Image priority={true} quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_groceries.jpg'}   className='object-fill h-full w-full' /> ||
                                           shopCat?.includes('Salon & Spa') &&         <Image priority={true} quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_salon.webp'}   className='object-fill h-full w-full' /> ||
@@ -372,8 +374,9 @@ const ShopPage = ({ data }: any) => {
                                           shopCat?.includes('Fashion Lifestyle') &&   <Image priority={true} quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_fashion.webp'}   className='object-fill h-full w-full' /> ||
                                           shopCat?.includes('Electronics') &&         <Image priority={true} quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_electronics.jpg'}   className='object-fill h-full w-full' /> ||
                                           shopCat?.includes('Health Products') &&     <Image priority={true} quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_cosmetics'}   className='object-fill h-full w-full' /> 
-                                          imageCheck(data?.cover_image?.original, data, '317', false,'h-full w-full object-cover')
-                                           } */}
+                                          // imageCheck(data?.cover_image?.original, data, '317', false,'h-full w-full object-cover')
+                                           
+                                      }
                                        </div>
                                         }  
                                     </div> 
@@ -424,19 +427,19 @@ const ShopPage = ({ data }: any) => {
                             </div>
 
                             { data?.slug == 'chandigarh-grocery-store' ? ( 
-                             <div className="hidden lg:block w-full -mt-80 object-contain">
-                                       < Image quality='40'
+                             <div className="hidden lg:block w-full -mt-80 ">
+                                  <Image quality='40'
                                     width={1826}
                                     height={570}
                                     layout="intrinsic"
                                     objectFit="cover"
-                                     src='/grocery-web.jpg' 
-                                     className=" " />
+                                    src='/grocery-web.jpg' 
+                                    className=" " />
                              </div> ) : null }
 
                              { data?.slug == 'kosmetics-india' ? ( 
-                             <div className="hidden lg:block w-full -mt-80 object-contain">
-                                       < Image quality='40'
+                             <div className="hidden lg:block w-full -mt-80 ">
+                                  <Image quality='40'
                                     width={1826}
                                     height={570}
                                     layout="intrinsic"
@@ -448,13 +451,13 @@ const ShopPage = ({ data }: any) => {
                           <div className={` sticky ${ scrollDirection === "down" ? "-top-32" : "top-0"}   transition-all duration-300 sticky z-50 bg-white top-0`}>                                              
                               <CategoryDropdownSidebar data={data} />
                           </div>
-                          {/* </HidingHeader>  */}
 
+                          {/* </HidingHeader>  */}
                           <div className='relative top-0 flex flex-col'> 
                               { categoryData?.categories?.data?.length ? 
                                 <> 
                                   <div id='category-dropdown-sidebar'  
-                                      className='flex border bg-white flex-col w-full'>
+                                       className='flex border bg-white flex-col w-full'>
     
                                       <h1 style={{top:'155px'}} id='product-heading' className="text-lg sticky  bg-gray-100  py-3 px-2  font-semibold text-gray-600 font-mono mt-5 transition-transform duration-75">  
                                         { query?.category?.replace(/\b\w/g, (l :any) => l.toUpperCase())   } Products
@@ -465,7 +468,7 @@ const ShopPage = ({ data }: any) => {
                               }
                                 <div id='product-feed' className="static  z-10 top-10 w-full">
                                   {data && 
-                                // <ShopProductFeed shopId={data.id} />
+                                    // <ShopProductFeed shopId={data.id} />
                                     <Feed shopData={data} shopId={data.id} />
                                 }</div>
                           </div> 
@@ -496,7 +499,7 @@ const ShopPage = ({ data }: any) => {
     </div>
       <div className='block lg:hidden w-full'>
 
-          <ShopMobileView shopData={data} data={data}/>
+          <ShopMobileView shopCat={shopCat} shopData={data} data={data}/>
 
       </div>
       {/* </DocumentMeta> */}

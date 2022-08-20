@@ -27,7 +27,7 @@ import Image from "next/image";
 
 
 
-export default function ShopMobileView({data, shopData}: any) {
+export default function ShopMobileView({data, shopData, shopCat}: any) {
 
     const { query } = useRouter();
     const { type } = query;
@@ -73,7 +73,7 @@ export default function ShopMobileView({data, shopData}: any) {
     return (
 
       <>
-        <div className='relative   flex flex-col'>
+        <div className=' lg:hidden relative flex flex-col'>
 
             <div className="fixed z-50 bottom-16 right-6 flex justify-center items-center">
                 <Image quality='40'
@@ -84,46 +84,59 @@ export default function ShopMobileView({data, shopData}: any) {
                   src='/up-arrow.png' 
                   // className="w-8 h-8" 
                   onClick={() => window.scrollTo(0, 0)} />
-                            
             </div>
 
             <div className='px-2 w-full grid grid-cols-1 sm:flex'>
 
               { slug?.some(el => data.slug.includes(el)) ? null :
                 (   <div className='hidden sm:block w-2/5 h-38 sm:h-72 sm:w-80 md:h-72'> 
-                    <ShopProfileCard data={data} /> 
-                   </div>)  }
+                      <ShopProfileCard data={data} /> 
+                    </div>)  }
                 
-                <div className = 'w-full sm:w-4/5 border'>
+                <div className = 'block lg:hidden w-full   border'>
                     { cover_image?.length > 1 ?
-                        <div className='  h-44 sm:h-72 rounded-lg xs+++:rounded-l-none md:h-72 w-full'>  
-                        {/*    < Image        quality='40'Slider data={cover_image} /> */}
+                        <div className = 'h-44 sm:h-72 rounded-lg xs+++:rounded-l-none md:h-72 w-full'>  
+                        {/*  <Image quality='40'Slider data={cover_image} /> */}
                             <CoverImageSlider key={cover_image} data={cover_image} />
                         </div>
                                  :  
-                          <div className="block lg:hidden ">
+                          <div className="block lg:hidden w-full h-full">
                             { slug?.some(el => query?.slug.includes(el))  ?
                              <Image quality='20'
                              priority={true}
                              width={640}
                              height={313}
                              layout='intrinsic'
-                             objectFit='contain'
+                             objectFit='cover'
                              alt={t("heading")} 
                                // className='object-fill h-full sm:h-72 rounded-lg xs+++:rounded-l-none md:h-72   w-full'
                              src={query.slug === 'kosmetics-india' ? '/kosmetics-shop-mob.jpg' : '/grocery-mobile.jpg'}
                            /> :
 
-                          <Image quality='20'
-                            priority={true}
-                            width={640}
-                            height={143}
-                            layout='intrinsic'
-                            objectFit='cover'
-                            alt={t("heading")} 
+                           cover_image.length == 1 ?  
+                             
+                              <Image quality='20'
+                              priority={true}
+                              width={1280}
+                              height={314}
+                              layout='intrinsic'
+                              objectFit='fill'
+                              alt={t("heading")} 
                               // className='object-fill h-full sm:h-72 rounded-lg xs+++:rounded-l-none md:h-72   w-full'
-                            src={ data?.logo?.original}
-                          />
+                              src={ data?.cover_image[0].thumbnail }
+                          /> 
+                          // <img className='object-fill h-full sm:h-72 rounded-lg xs+++:rounded-l-none md:h-72   w-full' src=' data?.cover_image[0].thumbnail'/>
+                          :
+                          cover_image.length == 0 && 
+                          shopCat?.includes('Cosmetics') &&           <Image priority={true} quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_cosmetics.jpg'}   className='object-fill h-full w-full' /> ||
+                          shopCat?.includes('Groceries') &&           <Image priority={true} quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_groceries.jpg'}   className='object-fill h-full w-full' /> ||
+                          shopCat?.includes('Salon & Spa') &&         <Image priority={true} quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_salon.webp'}   className='object-fill h-full w-full' /> ||
+                          shopCat?.includes('Vegetables & Fruits') && <Image priority={true} quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_fruits.jpg'}   className='object-fill h-full w-full' /> ||
+                          shopCat?.includes('Pharmacy') &&            <Image priority={true} quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_pharmacy.jpg'}   className='object-fill h-full w-full' /> ||
+                          shopCat?.includes('Fashion Lifestyle') &&   <Image priority={true} quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_fashion.webp'}   className='object-fill h-full w-full' /> ||
+                          shopCat?.includes('Electronics') &&         <Image priority={true} quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_electronics.jpg'}   className='object-fill h-full w-full' /> ||
+                          shopCat?.includes('Health Products') &&     <Image priority={true} quality='40' layout="intrinsic" width={1457} height={314} src={'/shop_cover_images/coverimage_cosmetics'}   className='object-fill h-full w-full' /> 
+
                            }
                         </div>
                     }
@@ -143,34 +156,8 @@ export default function ShopMobileView({data, shopData}: any) {
                 
             }
 
-            {/* <div className=' flex flex-col p-3 border bg-white rounded-lg mt-4 w-full text-left'>
-                <span className="text-lg text-heading font-semibold mb-2">
-                      Description
-                </span>
-
-                {data?.description && (
-                  
-                        <p className="text-sm font-md  font-light tracking-wide text-gray-600  mb-2 leading-relaxed">
-                          <ReadMore character={70}>{data?.description}</ReadMore>
-                        </p>
-                )}
-            </div>   */}
-
-            <div className='px-2'>
-                {/* <WebShopBanner/> */}
-                {/* <ShopBanner/> */}
-            </div>
-
-            {/* { data.slug !== 'chandigarh-grocery-store' ? 
-                          ( <div className='flex w-full'> 
-                                <WebShopBanner/>
-                            </div>)
-                            : null
-                          } */}
-
-            {/* <div className='px-2 flex'><OfferCards/></div> */}
-
-              {/* <div className='mt-6 sm:mt-6 border '> <PaymentForm /></div>   */}
+          
+          
           { categoryData?.slug === 'Kosmetics-india'   ?   
              
                 <>  <HidingHeader>
@@ -217,18 +204,7 @@ export default function ShopMobileView({data, shopData}: any) {
 
           }
 
-            {/* menu button */}
-            {/* <span onClick={handleCategories} 
-                  className ='fixed  z-1000 lg:hidden bottom-16 -right-2 sm:right-2
-                              px-3 p-2 rounded-lg  text-white  
-                              items-center space-x-2'> 
-                <span className='flex flex-col items-center'>
-                      <img src='/menu.png' 
-                      className='h-14 w-14 opacity-80 active:opacity-100' /> 
-                      <button className='text-gray-800 font-bold'>Categories</button>
-                </span>  <
-                    
-            </span> */}
+           
                     
             
         </div>
