@@ -193,7 +193,7 @@ const ShopsPage = () => {
          {shopCat == 'Pharmacy' &&  <meta name="description" content='Prescriptions may be refilled and transferred online, or you can find a CVS Pharmacy near you with Buylowcal  Online shopping, Extra Care offers, Clinic locations, and more.' /> }
          { shopCat == ' Vegetables & Fruits' && <meta name="description" content= 'Acquire the best deal on purchasing Veggies & Fruits with Buylowcal And Get 20 % off On purchasing'  /> }
          { shopCat == 'Restaurants' &&  <meta name="description" content='Find the best restaurants near you with buylowcal & Get exclusive offer on every restaurant'  /> }
-          { shopCat == 'Fashion, Lifestyle & Furnishings' &&  <meta name="description" content='Get Amazing Deals on Lifestyle & home Items & get 20 % off on every item '  /> }
+         { shopCat == 'Fashion, Lifestyle & Furnishings' &&  <meta name="description" content='Get Amazing Deals on Lifestyle & home Items & get 20 % off on every item '  /> }
          { shopCat == 'Gym & Health Products' &&  <meta name="description" content='Get 100% pure Gym &Health product & Get A chance to win exciting offers' /> }
          {shopCat == 'Salon & Spa' &&  <meta name="description" content='Change your looks in couple of mins with choosing the right Salon with Buylowcal' /> }
          {shopCat == 'Takeaways' &&  <meta name="description" content='Lets change the era with takeaways services in chandigarh with Buylowcal.com' /> }
@@ -235,7 +235,7 @@ const ShopsPage = () => {
           )} 
             </div>
 
-            <div ref={loadMoreRef} className={`${!hasNextPage ? "hidden" : ""}`}>
+            <div ref = {loadMoreRef} className={`${!hasNextPage ? "hidden" : ""}`}>
                   {
                     (isFetchingNextPage)
                     &&
