@@ -143,17 +143,31 @@ export function SidebarMenuItem({ className, item, depth = 0 }: any) {
             <div className='relative py-2 flex flex-col mx-auto h-auto  w-auto   px-2  place-items-center lg:grid-cols-2    items-center'>
                   { item?.image.id ? (
                     <span className="flex text-center w-auto h-auto items-center justify-center">
-                         <Image 
-                              
-                           
+                        { pageURL.includes('kosmetics-india')  ? 
+                        <Image 
+                          quality='100'
+                          priority={true}
+                          src={item?.image?.thumbnail}
+                          alt={item?.image?.altText}
+                          width={115}
+                          height={115}
+                          layout="intrinsic"
+                          objectFit="cover" 
+                          // className={` ${pageURL.includes('kosmetics-india') ? 'object-contain' : 'h-16 w-16 object-contain rounded-full'}  `}
+                          />
+                        :
+                        <Image 
+                           priority={true} 
                           quality='40'
                           src={item?.image?.thumbnail}
                           alt={item?.image?.altText}
-                          width={130}
-                          height={130}
+                          width={70}
+                          height={70}
                           layout="intrinsic"
                           objectFit="cover" 
-                          className={` ${pageURL.includes('kosmetics-india') ? 'object-contain' : 'h-16 w-16 object-contain rounded-full'}  `} />
+                          // className={` ${pageURL.includes('kosmetics-india') ? 'object-contain' : 'h-16 w-16 object-contain rounded-full'}  `} 
+                          />
+                        }
                     </span>
                   ) :
                     <span className="flex  text-center  w-full items-center justify-center">

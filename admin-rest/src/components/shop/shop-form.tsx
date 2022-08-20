@@ -123,7 +123,6 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
     // console.log(initialValues);
   },[])
 
-  
 
   const {
     register,
