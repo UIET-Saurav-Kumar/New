@@ -123,7 +123,7 @@ const ShopCard2: React.FC<ShopCardProps> = ({ shop,text,key,category, shopId }) 
                         <PromotionSlider text={text} category={category} data={products} shopId={shop.id} />
                   </Fragment>
                 ))}
-        </div> : 
+      </div> : 
          <div className="flex items-center w-full space-x-2   scrollbar-hide  overflow-x-scroll"> {data?.pages.map((products, _idx) => (
             <Fragment key={_idx}>
                 {products?.data?.filter(product => product?.status === 'publish').map(product => (

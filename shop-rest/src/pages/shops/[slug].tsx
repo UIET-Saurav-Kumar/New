@@ -41,8 +41,6 @@ import { getReview } from '@utils/get-review';
 // import DocumentMeta from 'react-document-meta';
 import Seo from "@components/ui/seo";
 import ShopLayout from "@components/layout/shop-layout";
-import { ThumbsCarousel } from "@components/ui/carousel";
-import { useUI } from "@contexts/ui.context";
 
 
 const CartCounterButton = dynamic(
@@ -65,10 +63,6 @@ const ShopPage = ({ data }: any) => {
   const router = useRouter();
   const { pathname, query } = router;
 
-  const {
-   cover_image
-  } = data ?? {};
-
   function openReviewModal() {
     openModal('REVIEW_RATING', {
       shop_id: data.id,
@@ -78,11 +72,6 @@ const ShopPage = ({ data }: any) => {
     });
   }
 
-  const { isAuthorize, displayHeaderSearch, displayMobileSearch } = useUI();
-
-  function handleJoin() {
-    return openModal("REGISTER");
-  }
 
   // useEffect(() => {
   
@@ -117,7 +106,7 @@ const ShopPage = ({ data }: any) => {
 
   // useeffect  window.scrollTo(0, 1000)
   useEffect(() => {
-    pageURL.includes('chandigarh-grocery-store') ? window.scrollTo(0, 670) : window.scrollTo(0, 0)
+    pageURL.includes('chandigarhgrocerystore') ? window.scrollTo(0, 670) : window.scrollTo(0, 0)
   }, []);
   const[shopCategory, setShopCategory] = useState('');
 
@@ -126,8 +115,6 @@ const ShopPage = ({ data }: any) => {
      
   
     useEffect(() => {
-
-      pageURL.includes('&utm_source') ? !isAuthorize ? openModal("REGISTER") : null :  null;
       
       getShopCategory()
       let lastScrollY = typeof window !== "undefined" ?  window.pageYOffset : '';
@@ -177,10 +164,10 @@ const ShopPage = ({ data }: any) => {
     }
   };
 
-  // console.log('shop slug is', data?.slug?.includes('chandigarh-grocery-store' ,'kosmetics-india'))
+  // console.log('shop slug is', data?.slug?.includes('chandigarhgrocerystore' ,'kosmetics-india'))
   seoFunction(data);
 
-  const slug = ['chandigarh-grocery-store', 'kosmetics-india'];
+  const slug = ['chandigarhgrocerystore', 'kosmetics-india'];
 
   const  getShopCategory = () => {
 
@@ -202,11 +189,6 @@ const ShopPage = ({ data }: any) => {
   // console.log('shop data',metaData)
 
   console.log('data',data);
-
-  // title description for shops based on category 
-  const cosmetics = [{
-    title: 'Cosmetics',
-  }]
   
 
   return (
@@ -219,7 +201,7 @@ const ShopPage = ({ data }: any) => {
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         </Head>
 
-        <div className="relative bg-white lg:bg-gray-100 hidden lg:flex flex-col
+            <div className="relative bg-white lg:bg-gray-100 hidden lg:flex flex-col
                             md:flex-row md:justify-between md:items-start">
 
                                   {/* // button to scroll to the top of the page when user has scrolled way down */}
@@ -247,25 +229,15 @@ const ShopPage = ({ data }: any) => {
                                       </div> )  }
                                     
                                     { slug?.some(el => data?.slug?.includes(el)) ? null :
-                                    (!!cover_image.length ? (
-                                    <div className=""> 
-                                     <ThumbsCarousel gallery={cover_image} />
-                                     </div>
-                                    ) : (
-                                      
-                                       <div className='flex w-full  '>
-                                      
+                                    ( <div className='flex w-full  '>
                                       {imageCheck(data?.cover_image?.original, data, '317', false,'h-full w-full object-fill')}
-                                    </div> 
-                                    )  
-                                    )
-                                    }
+                                    </div> )  }
                    
                               </div> 
            
                             
                               {/*                                 
-                                { data.slug !== 'chandigarh-grocery-store' ? 
+                                { data.slug !== 'chandigarhgrocerystore' ? 
                                 ( <div className='flex w-full'> 
                                       <WebShopBanner/>
                                   </div>)
@@ -305,7 +277,7 @@ const ShopPage = ({ data }: any) => {
                                           
                             </div>
 
-                            { data?.slug == 'chandigarh-grocery-store' ? ( 
+                            { data?.slug == 'chandigarhgrocerystore' ? ( 
                              <div className="w-full -mt-80 object-contain">
                                     <img src='/grocery-web.jpg' className="object-contain" />
                              </div> ) : null }
@@ -322,6 +294,7 @@ const ShopPage = ({ data }: any) => {
                           {/* </HidingHeader>  */}
 
                           <div className='relative top-0 flex flex-col'> 
+
                               { categoryData?.categories?.data?.length ? 
                                 <> 
                                   <div id='category-dropdown-sidebar'  
@@ -334,12 +307,12 @@ const ShopPage = ({ data }: any) => {
                                   </div> 
                                 </> : ' '  
                               }
-                                <div id='product-feed' className="static  z-10 top-10 w-full">
+                                <div id='product-feed' className="static z-10 top-10 w-full">
                                   {data && 
                                 // <ShopProductFeed shopId={data.id} />
                                     <Feed shopData={data} shopId={data.id} />
                                 }</div>
-                          </div> 
+                           </div> 
 
 
                        {/* </div> */}
@@ -365,13 +338,11 @@ const ShopPage = ({ data }: any) => {
       {width > 1023 && <CartCounterButton />}
 
     </div>
-
       <div className='block lg:hidden w-full'>
 
           <ShopMobileView shopData={data} data={data}/>
 
       </div>
-
       {/* </DocumentMeta> */}
     </>
   );
