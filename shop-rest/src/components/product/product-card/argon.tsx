@@ -44,14 +44,15 @@ const Argon: React.FC<ArgonProps> = ({ product, className }) => {
       <div className="relative flex items-center justify-center w-auto h-48 sm:h-52">
        
         <span className="sr-only">{t("text-product-image")}</span>
-             < Image        quality='40'
-            src={image?.original ?? siteSettings?.product?.placeholderImage}
-            alt={name}
-            layout="fill"
-            objectFit="contain"
-            
-            className="product-image"
-          />
+             <Image 
+              quality='40'
+              priority={true}
+              src={image?.original ?? siteSettings?.product?.placeholderImage}
+              alt={name}
+              layout="fill"
+              objectFit="contain"
+              className="product-image"
+            />
         {discount && (
           <div className="absolute top-0 start-0 md:top-4 md:start-4 rounded text-xs leading-6 font-semibold px-1.5 sm:px-2 md:px-2.5 bg-accent text-light">
             {discount}
