@@ -150,7 +150,7 @@ export default function ShopPage() {
 
           <div className="grid grid-cols-1 w-full mt-7">
             <a
-              href={`${process.env.NEXT_PUBLIC_SHOP_URL}/${locale}/shops/${slug}&campaign=0`}
+              href={`${process.env.NEXT_PUBLIC_SHOP_URL}/${locale}/shops/${slug}`}
               target="_blank"
               className="inline-flex items-center justify-center flex-shrink-0 leading-none rounded outline-none transition duration-300 ease-in-out focus:outline-none focus:shadow focus:ring-1 focus:ring-accent-700 !bg-gray-100 hover:!bg-accent !text-heading hover:!text-light !font-normal px-5 py-0 h-12"
             >
