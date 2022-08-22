@@ -357,7 +357,7 @@ const ShopPage = ({ data }: any) => {
     </div>
       <div className='block lg:hidden w-full'>
 
-          <ShopMobileView shopData={data} data={data}/>
+          <ShopMobileView pageURL={pageURL} shopData={data} data={data}/>
 
       </div>
       {/* </DocumentMeta> */}

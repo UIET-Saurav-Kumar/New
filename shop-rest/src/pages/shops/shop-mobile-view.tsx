@@ -21,10 +21,11 @@ import Feed from "@components/product/feed";
 import { useEffect } from "react";
 import { HidingHeader } from "hiding-header-react";
 import Layout from "@components/layout/layout";
+import { useUI } from "@contexts/ui.context";
 
 
 
-export default function ShopMobileView({data, shopData}: any) {
+export default function ShopMobileView({data, shopData, pageURL}: any) {
 
     const { query } = useRouter();
     const { type } = query;
@@ -37,7 +38,14 @@ export default function ShopMobileView({data, shopData}: any) {
     type: query.slug as string,
   });
 
+  function handleJoin() {
+    return openModal("REGISTER");
+  }
+
+   
+  const { isAuthorize, displayHeaderSearch, displayMobileSearch } = useUI(); 
   useEffect(() => {
+    pageURL?.includes('utm_source=shop_qr&utm_medium=cpc&utm_campaign=+qrCode&utm_id=+&utm_term=+&utm_content=') ? (!isAuthorize ? handleJoin : null) : null;
     // data.slug !== 'chandigarh-grocery-store' ? window.scrollTo(0, 670) : window.scrollTo(0, 0)
  }, []);
 
