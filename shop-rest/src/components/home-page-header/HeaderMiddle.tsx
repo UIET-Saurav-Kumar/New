@@ -190,8 +190,6 @@ export default function HeaderMiddle() {
 
     console.log('getlocation',getLocation)
     
-     
-    
     const router = useRouter();
 
     const [click, setClick ] = useState(false);

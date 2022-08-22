@@ -41,6 +41,7 @@ import { getReview } from '@utils/get-review';
 // import DocumentMeta from 'react-document-meta';
 import Seo from "@components/ui/seo";
 import ShopLayout from "@components/layout/shop-layout";
+import { useUI } from "@contexts/ui.context";
 
 
 const CartCounterButton = dynamic(
@@ -84,6 +85,8 @@ const ShopPage = ({ data }: any) => {
   //     })
   //   }
   // }, [query.text, query.category]);
+   
+  const { isAuthorize, displayHeaderSearch, displayMobileSearch } = useUI();
 
   const [pageURL, setPageUrl] = useState('');
 
@@ -96,6 +99,10 @@ const ShopPage = ({ data }: any) => {
 
   const { openModal } = useModalAction();
 
+  function handleJoin() {
+    return openModal("REGISTER");
+  }
+
   function handleCategories() {
     return openModal("SHOP_MOBILE_CATEGORIES");
   }
@@ -106,6 +113,9 @@ const ShopPage = ({ data }: any) => {
 
   // useeffect  window.scrollTo(0, 1000)
   useEffect(() => {
+
+    pageURL.includes('?utm_source') ? (!isAuthorize ? handleJoin() : null) : null;
+    
     pageURL.includes('chandigarhgrocerystore') ? window.scrollTo(0, 670) : window.scrollTo(0, 0)
   }, []);
   const[shopCategory, setShopCategory] = useState('');
