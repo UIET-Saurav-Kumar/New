@@ -41,7 +41,6 @@ import { getReview } from '@utils/get-review';
 // import DocumentMeta from 'react-document-meta';
 import Seo from "@components/ui/seo";
 import ShopLayout from "@components/layout/shop-layout";
-import { ThumbsCarousel } from "@components/ui/carousel";
 
 
 const CartCounterButton = dynamic(
@@ -63,10 +62,6 @@ const imageCheck = (logo: any , record:any, imgsize:any, imgDim:any, classname: 
 const ShopPage = ({ data }: any) => {
   const router = useRouter();
   const { pathname, query } = router;
-
-  const {
-   cover_image
-  } = data ?? {};
 
   function openReviewModal() {
     openModal('REVIEW_RATING', {
@@ -111,7 +106,7 @@ const ShopPage = ({ data }: any) => {
 
   // useeffect  window.scrollTo(0, 1000)
   useEffect(() => {
-    pageURL.includes('chandigarh-grocery-store') ? window.scrollTo(0, 670) : window.scrollTo(0, 0)
+    pageURL.includes('chandigarhgrocerystore') ? window.scrollTo(0, 670) : window.scrollTo(0, 0)
   }, []);
   const[shopCategory, setShopCategory] = useState('');
 
@@ -169,10 +164,10 @@ const ShopPage = ({ data }: any) => {
     }
   };
 
-  // console.log('shop slug is', data?.slug?.includes('chandigarh-grocery-store' ,'kosmetics-india'))
+  // console.log('shop slug is', data?.slug?.includes('chandigarhgrocerystore' ,'kosmetics-india'))
   seoFunction(data);
 
-  const slug = ['chandigarh-grocery-store', 'kosmetics-india'];
+  const slug = ['chandigarhgrocerystore', 'kosmetics-india'];
 
   const  getShopCategory = () => {
 
@@ -194,11 +189,6 @@ const ShopPage = ({ data }: any) => {
   // console.log('shop data',metaData)
 
   console.log('data',data);
-
-  // title description for shops based on category 
-  const cosmetics = [{
-    title: 'Cosmetics',
-  }]
   
 
   return (
@@ -239,25 +229,15 @@ const ShopPage = ({ data }: any) => {
                                       </div> )  }
                                     
                                     { slug?.some(el => data?.slug?.includes(el)) ? null :
-                                    (!!cover_image.length ? (
-                                    <div className=""> 
-                                     <ThumbsCarousel gallery={cover_image} />
-                                     </div>
-                                    ) : (
-                                      
-                                       <div className='flex w-full  '>
-                                      
+                                    ( <div className='flex w-full  '>
                                       {imageCheck(data?.cover_image?.original, data, '317', false,'h-full w-full object-fill')}
-                                    </div> 
-                                    )  
-                                    )
-                                    }
+                                    </div> )  }
                    
                               </div> 
            
                             
                               {/*                                 
-                                { data.slug !== 'chandigarh-grocery-store' ? 
+                                { data.slug !== 'chandigarhgrocerystore' ? 
                                 ( <div className='flex w-full'> 
                                       <WebShopBanner/>
                                   </div>)
@@ -297,7 +277,7 @@ const ShopPage = ({ data }: any) => {
                                           
                             </div>
 
-                            { data?.slug == 'chandigarh-grocery-store' ? ( 
+                            { data?.slug == 'chandigarhgrocerystore' ? ( 
                              <div className="w-full -mt-80 object-contain">
                                     <img src='/grocery-web.jpg' className="object-contain" />
                              </div> ) : null }
@@ -314,6 +294,7 @@ const ShopPage = ({ data }: any) => {
                           {/* </HidingHeader>  */}
 
                           <div className='relative top-0 flex flex-col'> 
+
                               { categoryData?.categories?.data?.length ? 
                                 <> 
                                   <div id='category-dropdown-sidebar'  
@@ -326,12 +307,12 @@ const ShopPage = ({ data }: any) => {
                                   </div> 
                                 </> : ' '  
                               }
-                                <div id='product-feed' className="static  z-10 top-10 w-full">
+                                <div id='product-feed' className="static z-10 top-10 w-full">
                                   {data && 
                                 // <ShopProductFeed shopId={data.id} />
                                     <Feed shopData={data} shopId={data.id} />
                                 }</div>
-                          </div> 
+                           </div> 
 
 
                        {/* </div> */}
@@ -418,7 +399,23 @@ export default ShopPage;
 
 
 
-// old code 
+// {
+//   "id":3,
+//   "owner_id":1,
+//   "name":"Bags Shop",
+//   "slug":"bags-shop",
+//   "description":"The Bag shop is the best shop around the city. This is being run under the store owner and our aim is to provide quality product and hassle free customer service.",
+//   "cover_image":{"id":"889","original":"https://pickbazarlaravel.s3.ap-southeast-1.amazonaws.com/887/Untitled-1-%281%29.jpg","thumbnail":"https://pickbazarlaravel.s3.ap-southeast-1.amazonaws.com/887/conversions/Untitled-1-%281%29-thumbnail.jpg"},
+//   "logo":{"id":"888","original":"https://pickbazarlaravel.s3.ap-southeast-1.amazonaws.com/886/Backpack.png","thumbnail":"https://pickbazarlaravel.s3.ap-southeast-1.amazonaws.com/886/conversions/Backpack-thumbnail.jpg"},
+//   "is_active":1,
+//   "address":{"zip":"35203","city":"Michigan","state":"Alabama","country":"USA","street_address":"1740 Bedford Street"},
+//   "settings":{"contact":"01920192102","socials":[{"url":"https://www.facebook.com/","icon":"FacebookIcon"},{"url":"https://www.instagram.com/","icon":"InstagramIcon"}],"website":"https://redq.io/","location":{"lat":28.6673631,"lng":77.2973812,"zip":"110032","city":"Delhi","state":"DL","country":"India","formattedAddress":"Bazaar St, Vishwas Nagar, Shahdara, Delhi, 110032, India"}},"shop_categories":"[{\"name\":\"salon & spa\",\"id\":5},{\"name\":\"Groceries\",\"id\":3},{\"name\":\"Fruits\",\"id\":2},{\"name\":\"Pharmacy\",\"id\":4}]","is_featured":1,"commission":null,"commission_type":null,"gst_number":null,"fssai_number":null,"tan_number":null,"pan_number":null,"gst_certificate":null,"fssai_certificate":null,"cancelled_cheque":null,"delivery_status":1,"free_delivery_order_value":"50","delivery_charges":"100","created_at":"2021-06-27T03:47:23.000000Z","updated_at":"2022-01-09T10:20:40.000000Z","orders_count":43,"products_count":57,"categories":[],"owner":{"id":1,"name":"Store Owner","email":"store_owner@demo.com","phone_number":"917436874843","email_verified_at":null,"created_at":"2021-06-27T04:13:00.000000Z","updated_at":"2021-06-27T04:13:00.000000Z","is_active":1,"shop_id":null,"invited_by":null,"code":null},"shop_category":null}
+
+
+
+
+
+// old code
 // import Image from "next/image";
 // import Head from 'next/head'
 // import ShopProductFeed from "@components/product/feed-shop";

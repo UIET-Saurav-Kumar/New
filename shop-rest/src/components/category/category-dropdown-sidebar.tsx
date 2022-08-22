@@ -5,25 +5,25 @@ import SidebarMenu from "@components/ui/sidebar-menu";
 import Scrollbar from "@components/ui/scrollbar";
 import CategoryListLoader from "@components/ui/loaders/category-loader";
 import NotFound from "@components/common/not-found";
-import { useCategoriesQuery } from "@data/category/use-categories.query";
+import { fetchCategories, useCategoriesQuery } from "@data/category/use-categories.query";
 import CategorySlider from "./category-slider";
 import { useWindowDimensions } from "@components/common/search";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
 
-const CategoryDropdownSidebar = ({data}) => {
-
+const CategoryDropdownSidebar = ({data,categoriesData}:any) => {
+  console.log('categoriesData',categoriesData);
   const { query } = useRouter();
   const { type } = query;
 
-  const {
-    data :categoryData,
-    isLoading: loading,
-    error,
-  } = useCategoriesQuery({
-    type: query.slug as string,
-  });
+  // const {
+  //   data :categoriesData,
+  //   isLoading: loading,
+  //   error,
+  // } = useCategoriesQuery({
+  //   type: query.slug as string,
+  // });
 
   const { height, width } = useWindowDimensions();
 
@@ -55,27 +55,27 @@ const CategoryDropdownSidebar = ({data}) => {
         }
       );
 
-    if (Array.isArray(categoryData?.categories?.data) && !!categoryData?.categories?.data.length) {
+    if (Array.isArray(categoriesData) && !!categoriesData.length) {
       navigate();
     } else {
       navigate();
     }
   }
 
-  if (loading) {
-    return (
-      <div className=" hidden lg:block">
-        <div className="w-60 mt-8 px-2">
-            <CategoryListLoader />
-        </div>
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div className=" hidden lg:block">
+  //       <div className="w-60 mt-8 px-2">
+  //           <CategoryListLoader />
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   console.log('shop slug name', data?.slug)
   // const { slug, name, children: items, icon } = item;
 
-  if (error) return <ErrorMessage message={error.message} />;
+  // if (error) return <ErrorMessage message={error.message} />;
 
   
   return (
@@ -85,8 +85,8 @@ const CategoryDropdownSidebar = ({data}) => {
     
     <aside className="hidden lg:block items-center justify-center h-full bg-light">
       <div className="max-h-full flex max-w-full">
-        {categoryData?.categories?.data?.length ? ( <button onClick={allCategories} className={` ${query.category == ''  ? 'text-magenta' : 'text-gray-600'} text-sm sticky bg-white  ml-0 lg:px-4 top-0 z-40 focus:text-magenta justify-center  flex flex-col font-semibold `}>
-                     < Image        quality='40' 
+        {categoriesData?.length ? ( <button onClick={allCategories} className={` ${query.category == ''  ? 'text-magenta' : 'text-gray-600'} text-sm sticky bg-white  ml-0 lg:px-4 top-0 z-40 focus:text-magenta justify-center  flex flex-col font-semibold `}>
+                     <Image        quality='40' 
                   width={40}
                   height={40}
                   layout="fixed"
@@ -98,9 +98,9 @@ const CategoryDropdownSidebar = ({data}) => {
               ' '
             )}  
           {/* <Scrollbar className="w-full h-full max-h-screen"> */}
-          {categoryData?.categories?.data?.length ? (
+          {categoriesData?.length ? (
               <div className=" flex lg:overflow-x-scroll scrollbar-hide relative justify-evenly w-full">
-                <CategorySlider items={categoryData?.categories?.data} />
+                <CategorySlider items={categoriesData} />
                 {/* <SidebarMenu items={data?.categories?.data} className="whitespace-nowrap overflow-x-scroll sticky py-2" /> */}
               </div>
             ) : (
@@ -119,7 +119,7 @@ const CategoryDropdownSidebar = ({data}) => {
       <div className=" h-screen top-0 sticky flex-col flex overflow-y-scroll scrollbar-hide justify-between  space-y-8 text-center">
         {/* <Scrollbar className="w-full h-full max-h-screen"> */}
       
-          {categoryData?.categories?.data?.length ? (
+          {categoriesData?.length ? (
 
             <div className="">
               <button onClick = {allCategories} className={` ${query.category == ''  ? 'text-magenta' : 'text-gray-600'} text-sm focus:text-magenta font-semibold `}>
@@ -133,7 +133,7 @@ const CategoryDropdownSidebar = ({data}) => {
                 className='  tracking-widest ' 
                 /> ALL
               </button>
-              <SidebarMenu items={categoryData?.categories?.data} 
+              <SidebarMenu items={categoriesData} 
                            className="whitespace-nowrap w-full py-8" />
             </div>
           ) : (
@@ -160,14 +160,13 @@ const CategoryDropdownSidebar = ({data}) => {
                         className='w-2 h-2 lg:w-6 tracking-widest lg:h-6 mr-2'/> ALL
                 </button>
                 {/* <Scrollbar className="w-full h-full max-h-screen"> */}
-                {categoryData?.categories?.data?.length ? (
+                {categoriesData?.length ? (
                   <div className=" flex overflow-x-scroll relative justify-evenly w-full">
-                    <CategorySlider items={categoryData?.categories?.data} />
+                    <CategorySlider items={categoriesData} />
                     {/* <SidebarMenu items={data?.categories?.data} className="whitespace-nowrap overflow-x-scroll sticky py-2" /> */}
                   </div>
-                ) : (
-                  ' '
-                )}   
+                ) :null
+                }   
               {/* </Scrollbar> */}
             </div>
         </aside>
@@ -176,10 +175,34 @@ const CategoryDropdownSidebar = ({data}) => {
       {/* </div> */}
     </>
 
+    
+
 
   );
 };
 
+ 
+export async function getStaticProps() {
+  const { query } = useRouter();
+  const { type } = query;
+  const {
+    data :categoryData,
+    // isLoading: loading,
+    // error,
+  } = useCategoriesQuery({
+    type: query.type as string
+  });
+  const categoriesData = categoryData?.categories?.data;
+  return {
+    props: {
+      categoriesData,
+    },
+  };
+}
+
 export default CategoryDropdownSidebar;
 
+ 
 
+
+ 
