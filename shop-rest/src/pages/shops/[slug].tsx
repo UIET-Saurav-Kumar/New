@@ -89,16 +89,16 @@ const ShopPage = ({ data }: any) => {
    
   const { isAuthorize, displayHeaderSearch, displayMobileSearch } = useUI();
   
-  function handleJoin() {
-    return openModal("REGISTER");
-  }
+  // function handleJoin() {
+  //   return openModal("REGISTER");
+  // }
 
   const [pageURL, setPageUrl] = useState('');
 
   useEffect(() => {
     setPageUrl(window.location.href);
-    query.utm_source == 'qr' ? (!isAuthorize ? handleJoin : null) : null;
-  }, []);
+    query.utm_source == 'shop_qr' ? (!isAuthorize ? openModal("REGISTER") : null) : null;
+  },  [ ]);
   
   const { t } = useTranslation("common") ;
   const { width } = useWindowSize() ;
