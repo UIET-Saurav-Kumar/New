@@ -38,7 +38,7 @@ export default function ShopMobileView({data, shopData}: any) {
   });
 
   useEffect(() => {
-    // data.slug !== 'chandigarh-grocery-store' ? window.scrollTo(0, 670) : window.scrollTo(0, 0)
+    // data.slug !== 'chandigarhgrocerystore' ? window.scrollTo(0, 670) : window.scrollTo(0, 0)
  }, []);
 
   const categoryItem = () => {
@@ -63,7 +63,7 @@ export default function ShopMobileView({data, shopData}: any) {
     return openModal("SHOP_PAYMENT_FORM");
    }
 
-   const slug = ['chandigarh-grocery-store', 'kosmetics-india'];
+   const slug = ['chandigarhgrocerystore', 'kosmetics-india'];
   
     return (
 
@@ -122,7 +122,7 @@ export default function ShopMobileView({data, shopData}: any) {
                 {/* <ShopBanner/> */}
             </div>
 
-            {/* { data.slug !== 'chandigarh-grocery-store' ? 
+            {/* { data.slug !== 'chandigarhgrocerystore' ? 
                           ( <div className='flex w-full'> 
                                 <WebShopBanner/>
                             </div>)
