@@ -42,6 +42,7 @@ import { getReview } from '@utils/get-review';
 import Seo from "@components/ui/seo";
 import ShopLayout from "@components/layout/shop-layout";
 import { useUI } from "@contexts/ui.context";
+import { parseContextCookie } from "@utils/parse-cookie";
 
 
 const CartCounterButton = dynamic(
@@ -87,11 +88,16 @@ const ShopPage = ({ data }: any) => {
   // }, [query.text, query.category]);
    
   const { isAuthorize, displayHeaderSearch, displayMobileSearch } = useUI();
+  
+  function handleJoin() {
+    return openModal("REGISTER");
+  }
 
   const [pageURL, setPageUrl] = useState('');
 
   useEffect(() => {
-    setPageUrl(window.location.href)
+    setPageUrl(window.location.href);
+    pageURL?.includes('?utm_source') ? (!isAuthorize ? handleJoin() : null) : null;
   }, []);
   
   const { t } = useTranslation("common") ;
@@ -99,9 +105,7 @@ const ShopPage = ({ data }: any) => {
 
   const { openModal } = useModalAction();
 
-  function handleJoin() {
-    return openModal("REGISTER");
-  }
+  
 
   function handleCategories() {
     return openModal("SHOP_MOBILE_CATEGORIES");
@@ -114,10 +118,13 @@ const ShopPage = ({ data }: any) => {
   // useeffect  window.scrollTo(0, 1000)
   useEffect(() => {
 
-    pageURL.includes('?utm_source') ? (!isAuthorize ? handleJoin() : null) : null;
-    
+    // pageURL.includes('?utm_source') ? (!isAuthorize ? handleJoin() : null) : null;
+
     pageURL.includes('chandigarhgrocerystore') ? window.scrollTo(0, 670) : window.scrollTo(0, 0)
+
   }, []);
+
+
   const[shopCategory, setShopCategory] = useState('');
 
   function useScrollDirection() {
@@ -125,8 +132,8 @@ const ShopPage = ({ data }: any) => {
      
   
     useEffect(() => {
-      
-      getShopCategory()
+
+      getShopCategory();
       let lastScrollY = typeof window !== "undefined" ?  window.pageYOffset : '';
   
       const updateScrollDirection = () => {
@@ -401,6 +408,18 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     };
   }
 };
+
+// export const getServerSideProps: GetServerSideProps = async (context: any) => {
+//   const cookies = parseContextCookie(context?.req?.headers?.cookie);
+//   if (!cookies?.auth_token) {
+//     return { redirect: { destination: "/", permanent: false } };
+//   }
+//   return {
+//     props: {
+//       ...(await serverSideTranslations(context.locale, ["common", "forms"])),
+//     },
+//   };
+// };
 
 ShopPage.Layout = ShopLayout;
 export default ShopPage;
