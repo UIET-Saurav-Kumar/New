@@ -97,7 +97,7 @@ const ShopPage = ({ data }: any) => {
 
   useEffect(() => {
     setPageUrl(window.location.href);
-    pageURL?.includes('utm_source=shop_qr&utm_medium=cpc&utm_campaign=+qrCode&utm_id=+&utm_term=+&utm_content=') ? (!isAuthorize ? handleJoin : null) : null;
+    query.utm_source == 'qr' ? (!isAuthorize ? handleJoin : null) : null;
   }, []);
   
   const { t } = useTranslation("common") ;

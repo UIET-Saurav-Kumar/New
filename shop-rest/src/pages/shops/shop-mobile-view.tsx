@@ -45,9 +45,11 @@ export default function ShopMobileView({data, shopData, pageURL}: any) {
    
   const { isAuthorize, displayHeaderSearch, displayMobileSearch } = useUI(); 
   useEffect(() => {
-    pageURL?.includes('utm_source=shop_qr&utm_medium=cpc&utm_campaign=+qrCode&utm_id=+&utm_term=+&utm_content=') ? (!isAuthorize ? handleJoin : null) : null;
+   query.utm_source == 'qr' ? (!isAuthorize ? handleJoin() : null) : null;
     // data.slug !== 'chandigarh-grocery-store' ? window.scrollTo(0, 670) : window.scrollTo(0, 0)
  }, []);
+
+ console.log('utm',query.utm_source);
 
   const categoryItem = () => {
     if (categoryData?.categories?.length) {
