@@ -8,7 +8,7 @@ import { useQuery } from "react-query";
 
 export const fetchShop = async (slug: string) => {
   // console.log(' before fetchShop')
-  const { data } = await http.get(`${url}/${API_ENDPOINTS.SHOPS}/${slug}&campaign=qr`);
+  const { data } = await http.get(`${url}/${API_ENDPOINTS.SHOPS}/${slug}`);
   // console.log(' after fetchShop')
   return data;
 };
@@ -24,7 +24,7 @@ export const fetchShop = async (slug: string) => {
 export const fetchShopSeo = async (slug: string) => {
   // const { data } = await http.get(`${url}/${API_ENDPOINTS.SETTINGS}?shop_slug=${slug}`);
 
-  const { data  } = await http.get(`${url}/${API_ENDPOINTS.SHOPS}/${slug}&campaign=qr`);
+  const { data  } = await http.get(`${url}/${API_ENDPOINTS.SHOPS}/${slug}`);
   
   if (typeof window !== "undefined") {
     const eltitle = document.querySelector('title');
