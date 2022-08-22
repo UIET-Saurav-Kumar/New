@@ -67,9 +67,6 @@ Route::apiResource('products', ProductController::class, [
     'only' => ['index', 'show']
 ]);
 
- 
-
-
 Route::apiResource('reviews', ReviewController::class, [
     'only' => ['index', 'show'],
 ]);
@@ -302,13 +299,13 @@ Route::group(['middleware' => ['can:' . Permission::CUSTOMER, 'auth:sanctum']], 
     Route::apiResource('address', AddressController::class, [
         'only' => ['destroy']
     ]);
-});
+    });
 
-Route::resource('bill',BillController::class);
-Route::resource('contact',ContactController::class);
-Route::post('approve-bill','PickBazar\Http\Controllers\BillController@approveBill');
-Route::post('bill-reward','PickBazar\Http\Controllers\BillController@billReward');
-Route::get('bill-reward','PickBazar\Http\Controllers\BillController@getbillReward');
+    Route::resource('bill',BillController::class);
+    Route::resource('contact',ContactController::class);
+    Route::post('approve-bill','PickBazar\Http\Controllers\BillController@approveBill');
+    Route::post('bill-reward','PickBazar\Http\Controllers\BillController@billReward');
+    Route::get('bill-reward','PickBazar\Http\Controllers\BillController@getbillReward');
 
 
 Route::group(
@@ -334,8 +331,8 @@ Route::group(
     }
 );
 
-Route::put('status-product/{id}',"PickBazar\Http\Controllers\ProductController@updateProductStatus");
-Route::group(
+    Route::put('status-product/{id}',"PickBazar\Http\Controllers\ProductController@updateProductStatus");
+    Route::group(
     ['middleware' => ['permission:' . Permission::STORE_OWNER, 'auth:sanctum']],
     function () {
         Route::apiResource('all-shop', ShopController::class, [
@@ -344,7 +341,6 @@ Route::group(
         Route::apiResource('withdraws', WithdrawController::class, [
             'only' => ['store', 'index', 'show']
         ]);
-        
 
         Route::post('users/add-staff', 'PickBazar\Http\Controllers\ShopController@addStaff');
         Route::post('users/remove-staff', 'PickBazar\Http\Controllers\ShopController@removeStaff');
@@ -387,6 +383,7 @@ Route::group(['middleware' => ['permission:' . Permission::SUPER_ADMIN, 'auth:sa
     Route::apiResource('settings', SettingsController::class, [
         'only' => ['store']
     ]);
+
     Route::apiResource('users', UserController::class);
     Route::post('users/ban-user', 'PickBazar\Http\Controllers\UserController@banUser');
     Route::post('users/active-user', 'PickBazar\Http\Controllers\UserController@activeUser');
@@ -395,15 +392,15 @@ Route::group(['middleware' => ['permission:' . Permission::SUPER_ADMIN, 'auth:sa
     Route::post('approve-shop', 'PickBazar\Http\Controllers\ShopController@approveShop');
     Route::post('disapprove-shop', 'PickBazar\Http\Controllers\ShopController@disApproveShop');
     Route::post('approve-withdraw', 'PickBazar\Http\Controllers\WithdrawController@approveWithdraw');
-});
+    });
 
-Route::get('all-taxes', 'PickBazar\Http\Controllers\TaxController@all_taxes');
-Route::get('user-withdraws', 'PickBazar\Http\Controllers\WithdrawController@fetchUserWithdraws');
-Route::post('user-withdraws', 'PickBazar\Http\Controllers\WithdrawController@storeUserWithdraws');
-Route::get('sluggify','PickBazar\Http\Controllers\LogController@sluggify');
+    Route::get('all-taxes', 'PickBazar\Http\Controllers\TaxController@all_taxes');
+    Route::get('user-withdraws', 'PickBazar\Http\Controllers\WithdrawController@fetchUserWithdraws');
+    Route::post('user-withdraws', 'PickBazar\Http\Controllers\WithdrawController@storeUserWithdraws');
+    Route::get('sluggify','PickBazar\Http\Controllers\LogController@sluggify');
 
 
-Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::apiResource('delivery', DeliveryController::class, [
         'only' => ['store', 'index', 'show']

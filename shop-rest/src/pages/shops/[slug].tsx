@@ -42,6 +42,7 @@ import { getReview } from '@utils/get-review';
 import Seo from "@components/ui/seo";
 import ShopLayout from "@components/layout/shop-layout";
 import { ThumbsCarousel } from "@components/ui/carousel";
+import { useUI } from "@contexts/ui.context";
 
 
 const CartCounterButton = dynamic(
@@ -77,6 +78,11 @@ const ShopPage = ({ data }: any) => {
     });
   }
 
+  const { isAuthorize, displayHeaderSearch, displayMobileSearch } = useUI();
+
+  function handleJoin() {
+    return openModal("REGISTER");
+  }
 
   // useEffect(() => {
   
@@ -120,6 +126,8 @@ const ShopPage = ({ data }: any) => {
      
   
     useEffect(() => {
+
+      pageURL.includes('&utm_source') ? !isAuthorize ? openModal("REGISTER") : null :  null;
       
       getShopCategory()
       let lastScrollY = typeof window !== "undefined" ?  window.pageYOffset : '';
@@ -211,7 +219,7 @@ const ShopPage = ({ data }: any) => {
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         </Head>
 
-            <div className="relative bg-white lg:bg-gray-100 hidden lg:flex flex-col
+        <div className="relative bg-white lg:bg-gray-100 hidden lg:flex flex-col
                             md:flex-row md:justify-between md:items-start">
 
                                   {/* // button to scroll to the top of the page when user has scrolled way down */}
@@ -357,11 +365,13 @@ const ShopPage = ({ data }: any) => {
       {width > 1023 && <CartCounterButton />}
 
     </div>
+
       <div className='block lg:hidden w-full'>
 
           <ShopMobileView shopData={data} data={data}/>
 
       </div>
+
       {/* </DocumentMeta> */}
     </>
   );

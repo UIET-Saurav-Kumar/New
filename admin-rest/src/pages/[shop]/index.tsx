@@ -31,6 +31,7 @@ import { PercentageIcon } from "@components/icons/shops/percentage";
 import { DollarIcon } from "@components/icons/shops/dollar";
 import ReadMore from "@components/ui/truncate";
 import QrCode from "@components/shop/shop-qr-code";
+import ShopQrCode from "@components/shop/shop-qr-code";
 
 export default function ShopPage() {
 
@@ -70,6 +71,7 @@ export default function ShopPage() {
     settings,
     slug,
   } = data?.shop! ?? {};
+
 
   return (
     <div className="grid grid-cols-12 gap-6">
@@ -148,7 +150,7 @@ export default function ShopPage() {
 
           <div className="grid grid-cols-1 w-full mt-7">
             <a
-              href={`${process.env.NEXT_PUBLIC_SHOP_URL}/${locale}/shops/${slug}`}
+              href={`${process.env.NEXT_PUBLIC_SHOP_URL}/${locale}/shops/${slug}&campaign=0`}
               target="_blank"
               className="inline-flex items-center justify-center flex-shrink-0 leading-none rounded outline-none transition duration-300 ease-in-out focus:outline-none focus:shadow focus:ring-1 focus:ring-accent-700 !bg-gray-100 hover:!bg-accent !text-heading hover:!text-light !font-normal px-5 py-0 h-12"
             >
@@ -183,8 +185,14 @@ export default function ShopPage() {
           </LinkButton>
         )}
       </div>
-      <div className="order-4 border-2">
-                 <QrCode qrCode={`${process.env.NEXT_PUBLIC_SHOP_URL}/${locale}/shops/${slug}`} />
+
+      <div className="flex relative order-4 border-2 z-30 w-auto my-60 -mt-0">
+          <ShopQrCode
+          size={150}
+          title='Scan to visit'
+          url={`https://www.buylowcal.com/shops/${slug}?utm_source=shop_qr&utm_medium=cpc&utm_campaign=+qrCode&utm_id=+&utm_term=+&utm_content=`}
+          // url={`https:www.buylowcal.com/shops/${slug}&campaign=0`} 
+          />
       </div>
 
       {/* Mini Dashboard */}
