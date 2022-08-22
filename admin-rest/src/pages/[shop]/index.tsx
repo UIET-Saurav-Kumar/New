@@ -30,8 +30,10 @@ import { PriceWalletIcon } from "@components/icons/shops/price-wallet";
 import { PercentageIcon } from "@components/icons/shops/percentage";
 import { DollarIcon } from "@components/icons/shops/dollar";
 import ReadMore from "@components/ui/truncate";
+import QrCode from "@components/shop/shop-qr-code";
 
 export default function ShopPage() {
+
   const { t } = useTranslation();
   const { permissions } = getAuthCredentials();
   const {
@@ -52,6 +54,7 @@ export default function ShopPage() {
   );
   if (loading) return <Loader text={t("common:text-loading")} />;
   if (error) return <ErrorMessage message={error.message} />;
+
   const {
     name,
     is_active,
@@ -79,13 +82,19 @@ export default function ShopPage() {
       <div className="order-2 xl:order-1 col-span-12 sm:col-span-6 xl:col-span-4 3xl:col-span-3">
         <div className="py-8 px-6 bg-white rounded flex flex-col items-center">
           <div className="w-36 h-36 relative rounded-full mb-5">
-            <div className="w-full h-full relative overflow-hidden flex items-center justify-center border border-gray-100 rounded-full">
-                 < Image        quality='40'
+            <div className="w-full h-full relative  flex items-center justify-center border border-gray-100 rounded-full">
+              <Image quality='40'
                 src={logo?.thumbnail ?? "/avatar-placeholder.svg"}
                 layout="fill"
                 objectFit="contain"
               />
+               
+               
             </div>
+
+            
+            
+             
 
             {is_active ? (
               <div className="w-5 h-5 rounded-full overflow-hidden bg-light absolute bottom-4 end-2">
@@ -149,14 +158,18 @@ export default function ShopPage() {
         </div>
       </div>
 
+       
+
       {/* Cover Photo */}
       <div className="order-1 xl:order-2 col-span-12 xl:col-span-8 3xl:col-span-9 rounded h-full overflow-hidden relative bg-light min-h-[400px]">
-        
-           < Image        quality='40'
+       
+        <Image quality='40'
           src={cover_image?.thumbnail ?? "/product-placeholder-borderless.svg"}
           layout="fill"
           objectFit="contain"
         />
+
+     
 
         {hasAccess(adminAndOwnerOnly, permissions) && (
           <LinkButton
@@ -169,6 +182,9 @@ export default function ShopPage() {
             
           </LinkButton>
         )}
+      </div>
+      <div className="order-4 border-2">
+                 <QrCode qrCode={`${process.env.NEXT_PUBLIC_SHOP_URL}/${locale}/shops/${slug}`} />
       </div>
 
       {/* Mini Dashboard */}
