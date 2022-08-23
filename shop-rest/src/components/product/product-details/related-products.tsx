@@ -25,10 +25,10 @@ const RelatedProducts = ({
       <div
         className={cn(
           "grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4",
-          gridClassName
+           gridClassName
         )}
       >
-        {products?.map((item: any, idx: number) => {
+        {products?.filter((itm:any)=>itm?.status == 'publish')?.map((item: any, idx: number) => {
           if (currentProductId === item.id) {
             return null;
           }

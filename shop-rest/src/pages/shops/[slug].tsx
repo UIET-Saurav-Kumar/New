@@ -98,14 +98,13 @@ const ShopPage = ({ data }: any) => {
   useEffect(() => {
     setPageUrl(window.location.href);
     query.utm_source == 'shop_qr' ? (!isAuthorize ? openModal("REGISTER") : null) : null;
-  },  [ ]);
+  },  [isAuthorize ]);
   
-  const { t } = useTranslation("common") ;
-  const { width } = useWindowSize() ;
+  const { t } = useTranslation("common");
+
+  const { width } = useWindowSize();
 
   const { openModal } = useModalAction();
-
-  
 
   function handleCategories() {
     return openModal("SHOP_MOBILE_CATEGORIES");

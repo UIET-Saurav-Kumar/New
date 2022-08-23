@@ -47,7 +47,7 @@ export default function ShopMobileView({data, shopData, pageURL}: any) {
   useEffect(() => {
    query.utm_source == 'shop_qr' ? (!isAuthorize ? openModal("REGISTER") : null) : null;
     // data.slug !== 'chandigarh-grocery-store' ? window.scrollTo(0, 670) : window.scrollTo(0, 0)
- }, []);
+ }, [isAuthorize]);
 
  console.log('utm',query.utm_source);
 
