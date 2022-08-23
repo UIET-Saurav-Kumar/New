@@ -35,7 +35,7 @@ export function SidebarMenuItem({ className, item, depth = 0 }: any) {
   }, [isActive]);
 
 
-  console.log('url',pageURL)
+  // console.log('url',pageURL)
 
   
   const { pathname, query } = router;
@@ -57,7 +57,7 @@ export function SidebarMenuItem({ className, item, depth = 0 }: any) {
     setOpen((prevValue) => !prevValue);
   }
 
-  // console.log(' product item', item)
+  // // console.log(' product item', item)
   
 
   const { closeModal } = useModalAction();
@@ -119,7 +119,7 @@ export function SidebarMenuItem({ className, item, depth = 0 }: any) {
 
     
 
-    // console.log('sidebar menu data', categoryData)
+    // // console.log('sidebar menu data', categoryData)
 
   return (
 

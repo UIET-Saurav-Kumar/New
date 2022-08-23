@@ -68,8 +68,8 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 
 export default function ProductSinglePage({ product }: any) {
 
-  // console.log('product rating',product)
-  console.log('product ',product);
+  // // console.log('product rating',product)
+  // console.log('product ',product);
 
   return (
 

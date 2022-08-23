@@ -56,11 +56,11 @@ export function useCreateReview() {
     client?.reviews?.create,
     {
       onSuccess: (res) => {
-        console.log('onSuccess',res)
+        // console.log('onSuccess',res)
         toast.success(t('Review Submitted Successfully'));
       },
       onSettled: (res) => {
-        console.log('onSettled',res)
+        // console.log('onSettled',res)
         // toast.success(t('text-review-request-submitted'));
         
         queryClient.invalidateQueries([API_ENDPOINTS.ORDERS]);

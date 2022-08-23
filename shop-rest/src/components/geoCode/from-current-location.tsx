@@ -27,14 +27,14 @@ export default function GetCurrentLocation({
     async function showPosition(position:any) {
        
         var address=await getAddress({lat:position.coords.latitude,lng:position?.coords.longitude})
-        console.log(address);
+        // console.log(address);
 
         const location: any = {
             lat: position.coords.latitude,
             lng: position?.coords.longitude,
             formattedAddress: address,
           };
-        console.log(location);
+        // console.log(location);
         addLocation(location)
 
         onChange(location);

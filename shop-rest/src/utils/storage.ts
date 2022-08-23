@@ -5,7 +5,7 @@ class Storage {
         typeof window !== "undefined" && window.localStorage.getItem(key);
       return item ? JSON.parse(item) : item;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       return null;
     }
   };
@@ -14,7 +14,7 @@ class Storage {
     try {
       window.localStorage.setItem(key, JSON.stringify(value));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -22,7 +22,7 @@ class Storage {
     try {
       window.localStorage.removeItem(key);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -30,7 +30,7 @@ class Storage {
     try {
       window.localStorage.clear();
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 }

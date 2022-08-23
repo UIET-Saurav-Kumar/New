@@ -57,8 +57,8 @@ const AllCategories = () => {
 	}
 
 
-	console.log('categories',data?.categories?.data.map((item)=>item.image?.thumbnail));
-    console.log('catist', data?.categories?.data);
+	// console.log('categories',data?.categories?.data.map((item)=>item.image?.thumbnail));
+    // console.log('catist', data?.categories?.data);
 	
 	return (
 

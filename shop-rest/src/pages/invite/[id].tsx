@@ -91,7 +91,7 @@ const RegisterForm = () => {
 
   const {getLocation} =useLocation()
 
-  console.log('getLoc', getLocation)
+  // console.log('getLoc', getLocation)
 
   const { t } = useTranslation("common");
   const { mutate, isLoading: loading } = useRegisterMutation();
@@ -169,9 +169,9 @@ const RegisterForm = () => {
 
     // data.length ? setLocation(false) : setLocation(false)
 
-    console.log('address data',data)
+    // console.log('address data',data)
     var location=JSON.stringify(data);
-    console.log(data?.formattedAddress);
+    // console.log(data?.formattedAddress);
     // document.getElementById("location_id").value = data?.formattedAddress;
     // setLocation(data?.formattedAddress);
 

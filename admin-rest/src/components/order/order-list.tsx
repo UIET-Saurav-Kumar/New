@@ -46,10 +46,10 @@ const OrderList = ({ orders, onPagination }: IProps) => {
 
   var currDate = today.getDate() + ' ' + monthNames[month]
 
-  console.log('date',today.getDate() + ' ' + monthNames[month] );
+  // console.log('date',today.getDate() + ' ' + monthNames[month] );
 
 
-  console.log('orders list', orders);
+  // console.log('orders list', orders);
 
   const date = new Date();
   const ampm = date.getHours() >= 12 ? "PM" : "AM";
@@ -59,8 +59,8 @@ const OrderList = ({ orders, onPagination }: IProps) => {
   const formattedDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
   const formattedDateTime = `${formattedDate} ${formattedTime}`;
 
-  console.log('time', formattedDateTime);
-  console.log('date',date);
+  // console.log('time', formattedDateTime);
+  // console.log('date',date);
  
 
   const columns = [
@@ -144,7 +144,7 @@ const OrderList = ({ orders, onPagination }: IProps) => {
         
          <h1>⊛ {child?.shop?.name}</h1>
         )
-        console.log('children', children)
+        // console.log('children', children)
           return  <h1 className="whitespace-wrap w-48 font-light">
                       {shopName}
                   </h1>
@@ -308,7 +308,7 @@ const OrderList = ({ orders, onPagination }: IProps) => {
 
   ];
 
-  console.log('pagination', paginatorInfo?.total)
+  // console.log('pagination', paginatorInfo?.total)
   // clg
 
   return (

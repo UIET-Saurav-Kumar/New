@@ -135,7 +135,7 @@ export default function PromotionSlider() {
     return "";
   }
 
-  console.log('slider shops',shopData)
+  // console.log('slider shops',shopData)
 
   return (
 

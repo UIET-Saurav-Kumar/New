@@ -59,7 +59,7 @@ export default function OrdersPage() {
   }, [data?.pages?.length]);
 
 
-  console.log('order',data);
+  // console.log('order',data);
 
   //return true if orders list contains product with id = 14110
    function containsProduct(orders: any[], productId: number) {
@@ -123,11 +123,11 @@ export default function OrdersPage() {
 
   //last month items sum total
 
-  console.log('lastMonthProducts',lastMonthItems(data?.pages?.[0].data));
-  // console.log('month orders',  getLastMonthOrders(data?.pages?.[0].data));
+  // console.log('lastMonthProducts',lastMonthItems(data?.pages?.[0].data));
+  // // console.log('month orders',  getLastMonthOrders(data?.pages?.[0].data));
   // get all the products with quantity  ordered in month
 
-  console.log('ear phone',containsProduct(data?.pages?.[0].data, 14110 || 14358));
+  // console.log('ear phone',containsProduct(data?.pages?.[0].data, 14110 || 14358));
   
   if (error) return <ErrorMessage message={error.message} />;
 

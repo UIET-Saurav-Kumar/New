@@ -46,19 +46,19 @@ export default function CheckoutPage() {
     // var isGroceries = false;
     items.forEach(element=>{
       let shop_category = element?.shop?.shop_categories?.replace(/[{":,0123456789}]/g,'').slice(5,-3)
-      console.log(shop_category);
+      // console.log(shop_category);
       
       if(shop_category == "Cosmetics") {
         // isGroceries = true;
         setSchedule(false)
-        console.log('schedule',schedule)
+        // console.log('schedule',schedule)
       }
     }
     )
     
   }
 
-  // console.log('items',isGroceries());
+  // // console.log('items',isGroceries());
 
 
   return (

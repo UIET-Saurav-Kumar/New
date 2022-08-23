@@ -43,7 +43,7 @@ const CartItem = ({ item }: CartItemProps) => {
      !checkoutData?.unavailable_products.map((item: any) => item?.name).includes(item?.name) 
   );
 
-  console.log('item', item)
+  // console.log('item', item)
 
 
   const {isProductAvailable, isInStock, clearItemFromCart, addItemToCart, removeItemFromCart } =
@@ -79,7 +79,7 @@ const CartItem = ({ item }: CartItemProps) => {
       type:'item-added'
     }, {
       onSuccess: (data: any) => {
-        console.log(data)
+        // console.log(data)
       },
     });
 
@@ -96,15 +96,15 @@ const CartItem = ({ item }: CartItemProps) => {
       type:'item-removed'
     }, {
       onSuccess: (data: any) => {
-        console.log(data)
+        // console.log(data)
       },
     });
 
   };
 
-  // console.log('cart item status', item)
+  // // console.log('cart item status', item)
 
-  // console.log('json shop categories', JSON.parse(item?.shop?.shop_categories).map((category: any) => category?.name)[0])
+  // // console.log('json shop categories', JSON.parse(item?.shop?.shop_categories).map((category: any) => category?.name)[0])
 
   const outOfStock = !isInStock(item?.id) && !isProductAvailable(item,item?.id);
 

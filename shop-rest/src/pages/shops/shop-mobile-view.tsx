@@ -49,7 +49,7 @@ export default function ShopMobileView({data, shopData, pageURL}: any) {
     // data.slug !== 'chandigarh-grocery-store' ? window.scrollTo(0, 670) : window.scrollTo(0, 0)
  }, [isAuthorize]);
 
- console.log('utm',query.utm_source);
+ // console.log('utm',query.utm_source);
 
   const categoryItem = () => {
     if (categoryData?.categories?.length) {
@@ -58,7 +58,7 @@ export default function ShopMobileView({data, shopData, pageURL}: any) {
     return null;
   }
 
-  console.log('category data', categoryData?.categories.data.map(item => item.name))
+  // console.log('category data', categoryData?.categories.data.map(item => item.name))
 
     const { width } = useWindowSize() ;
     const { t } = useTranslation("common") ;
@@ -269,7 +269,7 @@ ShopMobileView.Layout = Layout;
 //     return null;
 //   }
 
-//   console.log('category data', categoryData?.categories.data.map(item => item.name))
+//   // console.log('category data', categoryData?.categories.data.map(item => item.name))
 
 //     const { width } = useWindowSize() ;
 //     const { t } = useTranslation("common") ;

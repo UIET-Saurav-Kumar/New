@@ -188,7 +188,7 @@ export default function HeaderMiddle() {
 
     const {getLocation} =useLocation();
 
-    console.log('getlocation',getLocation)
+    // console.log('getlocation',getLocation)
     
     const router = useRouter();
 
@@ -248,7 +248,7 @@ export default function HeaderMiddle() {
     function changeLocation(data:any){
        
         var location=JSON.stringify(data);
-        console.log(data?.formattedAddress);
+        // console.log(data?.formattedAddress);
         document.getElementById("location_id").value=data?.formattedAddress;
         setLocation(data?.formattedAddress);
         setAddress(data?.formattedAddress);
@@ -274,8 +274,8 @@ export default function HeaderMiddle() {
         handleLocation()
     }
 
-    console.log('Login', isAuthorize);
-    console.log('getlocation',getLocation);
+    // console.log('Login', isAuthorize);
+    // console.log('getlocation',getLocation);
 
     
     return (

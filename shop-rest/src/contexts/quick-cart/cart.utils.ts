@@ -77,7 +77,7 @@ export function inStock(items: Item[], id: Item["id"]) {
   return false;
 }
 
-console.log('inStock', inStock)
+// console.log('inStock', inStock)
 
 //status
 export function isStatus(items: Item[], id: Item["id"]) {
@@ -86,7 +86,7 @@ export function isStatus(items: Item[], id: Item["id"]) {
   return false;
 }
 
-console.log('isStatus', isStatus)
+// console.log('isStatus', isStatus)
 
 
 
@@ -148,8 +148,8 @@ export const calculatePaidTotal = (
   const {  coupon } = useCheckout();
 
   let paidTotal = totalAmount + tax + shipping_charge;
-  console.log('Coupon type',coupon?.type)
-  console.log('discount',discount)
+  // console.log('Coupon type',coupon?.type)
+  // console.log('discount',discount)
   
   if (discount) {
     // if coupon type is fixed then subtract discount from total amount

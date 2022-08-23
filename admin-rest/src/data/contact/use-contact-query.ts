@@ -7,7 +7,7 @@ import { API_ENDPOINTS } from "@utils/api/endpoints";
 
 export const fetchContact = async (id: string) => {
   const { data } = await Contact.find(`${API_ENDPOINTS.CONTACT}/${id}`);
-  console.log('contact query', data);
+  // console.log('contact query', data);
 
   return data;
 

@@ -15,7 +15,7 @@ const LogList = ({ logs, onPagination }: IProps) => {
   const { data, paginatorInfo } = logs!;
   const rowExpandable = (record: any) => record?.children?.length;
   
-  console.log('logs', logs)
+  // console.log('logs', logs)
   const { alignLeft } = useIsRTL();
 
   function generateData(data:any){
@@ -56,7 +56,7 @@ const LogList = ({ logs, onPagination }: IProps) => {
 //           Lat / Long: (${json.latitude}, ${json.longitude})
 //           ---------------------
 //           `;
-//       console.log(output);
+//       // console.log(output);
 //       return output;
 //     })
 //   );

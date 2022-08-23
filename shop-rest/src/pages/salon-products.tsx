@@ -293,7 +293,7 @@ export default function SalonProducts() {
       }
     };
 
-    console.log('scrolly', window.scrollY);
+    // console.log('scrolly', window.scrollY);
 
     useEffect(() => {
       window.scrollTo(0, 0);
@@ -315,9 +315,9 @@ export default function SalonProducts() {
     // const category = query?.category as string;
 
 
-    console.log('btn', btn);
-    console.log('genderlist',sortGenderList)
-    console.log('sortList',sortList)
+    // console.log('btn', btn);
+    // console.log('genderlist',sortGenderList)
+    // console.log('sortList',sortList)
 
   return (
 

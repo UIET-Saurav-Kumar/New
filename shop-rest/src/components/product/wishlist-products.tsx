@@ -37,7 +37,7 @@ function WishlistItem({ product }: { product: Product }) {
     return openModal('PRODUCT_DETAILS', product?.slug);
   }
 
-  console.log('wishlist item', product);
+  // console.log('wishlist item', product);
 
   return (
     <div className='flex py-2 w-full'>
@@ -154,7 +154,7 @@ const WishlistProducts: React.FC = () => {
   const { wishlists, isLoading, isLoadingMore, error, hasMore, loadMore } =
     useWishlist();
 
-    console.log('wishlists',wishlists)
+    // console.log('wishlists',wishlists)
 
   if (error) return <ErrorMessage message={error.message} />;
 

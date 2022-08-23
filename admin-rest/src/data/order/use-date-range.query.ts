@@ -12,7 +12,7 @@ import { start } from "repl";
     const api = new CoreApi(API_ENDPOINTS.FIND_BY_DATE_RANGE);
     const fetchDateRangeOrders = async (startDate: Date,endDate: Date) => {
         const response = await api.fetchUrl(`${API_ENDPOINTS.FIND_BY_DATE_RANGE}/${startDate}/${endDate}` );
-        // console.log('order response', response.data)
+        // // console.log('order response', response.data)
         // return response.data
         const {
           data: { data  },

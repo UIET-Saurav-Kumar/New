@@ -52,7 +52,7 @@ const LicenseFrom = ({user}:any) => {
     cancelled_cheque,
     tan_number,
     pan_number,  }: FormValues) {
-      console.log(gst_certificate[0],"gst_certificate");
+      // console.log(gst_certificate[0],"gst_certificate");
       let formData = new FormData();
       formData.append("gst_number", gst_number);
       formData.append("gst_certificate", gst_certificate[0]);

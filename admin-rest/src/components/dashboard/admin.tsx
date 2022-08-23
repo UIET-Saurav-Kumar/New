@@ -53,8 +53,8 @@ export default function Dashboard() {
     return d.role === 'Customer';
 });
 
-  console.log('filtered', filtered)
-  console.log('user list', usersData?.users?.data);
+  // console.log('filtered', filtered)
+  // console.log('user list', usersData?.users?.data);
 
   const {
     data: orderData,
@@ -65,11 +65,11 @@ export default function Dashboard() {
     page: 1,
   });
 
-  console.log(usersData?.data?.map( (user:any) => user.data.filter( (usr:any) => usr.filter( usr => usr.role = 'customer'))));
+  // console.log(usersData?.data?.map( (user:any) => user.data.filter( (usr:any) => usr.filter( usr => usr.role = 'customer'))));
 
-  // console.log(usersData?.users?.data?.map(( user:any ) => user.map( (usr) => usr.map(usr.role))) );
+  // // console.log(usersData?.users?.data?.map(( user:any ) => user.map( (usr) => usr.map(usr.role))) );
 
-  console.log('order query  data', data)
+  // console.log('order query  data', data)
 
   const {
     data: popularProductData,
@@ -81,7 +81,7 @@ export default function Dashboard() {
     { limit: 10 }
   );
 
-  console.log('popular product data', popularProductData)
+  // console.log('popular product data', popularProductData)
 
   if (loading || orderLoading || popularProductLoading || withdrawLoading) {
     return <Loader text={t("common:text-loading")} />;
@@ -103,7 +103,7 @@ export default function Dashboard() {
   }
 
 
-  console.log('dashboard',data)
+  // console.log('dashboard',data)
   return (
     <>
       <div className="w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2 mb-6">

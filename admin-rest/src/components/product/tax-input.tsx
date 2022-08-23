@@ -23,7 +23,7 @@ const ProductTypeInput = () => {
   const { t } = useTranslation();
 
   useEffect(()=>{
-    console.log(data,'data');
+    // console.log(data,'data');
   },[])
   return (
       <div className="mt-5 mb-5">

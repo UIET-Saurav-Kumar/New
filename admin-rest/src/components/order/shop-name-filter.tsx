@@ -51,17 +51,17 @@ export default function ShopNameFilter({
   // and capitalise the first letter
   const categorySlugCapitalised = categorySlug.charAt(0).toUpperCase() + categorySlug.slice(1);
 
-  console.log('cartegorySlugCapitalised', categorySlugCapitalised);
+  // console.log('cartegorySlugCapitalised', categorySlugCapitalised);
 
   const filteredShops = shopData?.shops?.data?.filter((shop) => shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','').includes(categorySlugCapitalised[0]?.toUpperCase()));
-  console.log('filteredshops', filteredShops);
+  // console.log('filteredshops', filteredShops);
 
-  console.log('shop data',shopData);
+  // console.log('shop data',shopData);
   
   // renderShopNames('chandigarh-home-salon')
 
-  console.log('on category filter',shopCategory);
-  console.log('on shop filter',shopName);
+  // console.log('on category filter',shopCategory);
+  // console.log('on shop filter',shopName);
 
 
   const {
@@ -80,8 +80,8 @@ export default function ShopNameFilter({
 
 
 
-  console.log(shopData?.shops?.data)
-  console.log(shopCategoryData)
+  // console.log(shopData?.shops?.data)
+  // console.log(shopCategoryData)
 
   // filter shops based on type selected
 

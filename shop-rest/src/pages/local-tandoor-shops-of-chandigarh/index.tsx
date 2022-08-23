@@ -86,7 +86,7 @@ const TandoorsPage = () => {
   //     try{
   //       value=JSON.parse(value).value.replaceAll("&","-");
   //     }catch(e){
-  //       console.log(e)
+  //       // console.log(e)
   //     }
   //   }
   //   return value;
@@ -120,9 +120,9 @@ const TandoorsPage = () => {
     return product.type_id == 20 ? product : '';
   })
 
- console.log('feature tandooor data',featureData?.featureProducts.data);
+ // console.log('feature tandooor data',featureData?.featureProducts.data);
 
- console.log('tandoorArray',tandoorArray);
+ // console.log('tandoorArray',tandoorArray);
 
   return (
   <>

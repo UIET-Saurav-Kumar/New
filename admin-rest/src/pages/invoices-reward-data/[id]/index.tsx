@@ -98,7 +98,7 @@ const Withdraw = () => {
     });
   }
 
-  console.log('withdraw',data?.withdraw)
+  // console.log('withdraw',data?.withdraw)
 
   if (loading) return <Loader text={t("common:text-loading")} />;
   if (error) return <ErrorMessage message={error.message} />;

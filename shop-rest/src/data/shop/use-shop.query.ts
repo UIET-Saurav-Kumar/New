@@ -7,16 +7,16 @@ import { useQuery } from "react-query";
 
 
 export const fetchShop = async (slug: string) => {
-  // console.log(' before fetchShop')
+  // // console.log(' before fetchShop')
   const { data } = await http.get(`${url}/${API_ENDPOINTS.SHOPS}/${slug}`);
-  // console.log(' after fetchShop')
+  // // console.log(' after fetchShop')
   return data;
 };
 
 // export const test = () => {
 //   const a = 'test';
-//   console.log('%c test function','color:blue', a)
-//   console.log(' %c test function','color:blue', a)
+//   // console.log('%c test function','color:blue', a)
+//   // console.log(' %c test function','color:blue', a)
 //   return  a;
 // }
 
@@ -50,7 +50,7 @@ function getTitle(data:any){
   return (data.name?data.name:'')+' '+(data.address.city?data.address.city+" "+data.address.street_address:'')+', Best Discounts and Offers Only Through BuyLowcal.com';
 }
 export const useShopQuery = (slug: string) => {
-  // console.log('shopQuery');
+  // // console.log('shopQuery');
   return useQuery<Shop, Error>([API_ENDPOINTS.SHOPS, slug], () =>
     fetchShop(slug)
   );

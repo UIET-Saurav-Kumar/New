@@ -134,9 +134,9 @@ export default function SalonPage() {
 
 
 
-    // console.log('offer data', data)
+    // // console.log('offer data', data)
 
-    // console.log( 'category',data?.offers.data.map(product => {
+    // // console.log( 'category',data?.offers.data.map(product => {
     //     return product?.shop?.shop_categories.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','')}
     // ));
 
@@ -188,7 +188,7 @@ export default function SalonPage() {
           //   return slug
           // }
 
-          // console.log('salon category', shopCategory());
+          // // console.log('salon category', shopCategory());
 
           //handleCategory arrow function
           function  handleCategory(img: any) {
@@ -258,11 +258,11 @@ export default function SalonPage() {
             return "";
           }
 
-          console.log('shop-data', shopData);
+          // console.log('shop-data', shopData);
 
-          // console.log('salon category products',salonProducts?.products.data.filter(product => product?.categories.map( cat => cat.name === 'Services')   )  )
+          // // console.log('salon category products',salonProducts?.products.data.filter(product => product?.categories.map( cat => cat.name === 'Services')   )  )
             
-          // console.log('salonProduct',salonProducts?.products.data.filter(product => product?.status === 'publish' && product?.categories?.name === 'Hair Spa'  )  )
+          // // console.log('salonProduct',salonProducts?.products.data.filter(product => product?.status === 'publish' && product?.categories?.name === 'Hair Spa'  )  )
 
 
   return (

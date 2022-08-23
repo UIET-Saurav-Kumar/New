@@ -68,8 +68,8 @@ export default function CoverImageSlider({data}) {
     return "";
   }
 
-  console.log('slider shops',shopData)
-  console.log('data length', data)
+  // console.log('slider shops',shopData)
+  // console.log('data length', data)
 
   return (
 

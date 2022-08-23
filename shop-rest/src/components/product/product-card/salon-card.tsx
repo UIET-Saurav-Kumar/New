@@ -59,7 +59,7 @@ const SalonCard: React.FC<NeonProps> = ({ product, className, productSlug }) => 
     return openModal("PRODUCT_DETAILS", product.slug);
   }
 
-  console.log('product shop name', product)
+  // console.log('product shop name', product)
 
   return (
 

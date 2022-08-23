@@ -85,7 +85,7 @@ const LoginForm = () => {
         },
         onError: (error: any) => {
           alert('Something went wrong!!')
-          console.log(error.message);
+          // console.log(error.message);
         },
       }
     );

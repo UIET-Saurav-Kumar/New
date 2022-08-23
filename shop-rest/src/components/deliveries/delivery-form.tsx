@@ -69,7 +69,7 @@ export default function CreateOrUpdateDeliveryForm({ initialValues }: IProps) {
 
   function changePickupLocation(data:any){
       var location=JSON.stringify(data);
-      console.log(data);
+      // console.log(data);
       document.getElementById("pickup_location_id").value=data;
       setPickupLocation(data)
   }
@@ -97,7 +97,7 @@ export default function CreateOrUpdateDeliveryForm({ initialValues }: IProps) {
     );
   };
   useEffect(()=>{
-    console.log(errors,'errors')
+    // console.log(errors,'errors')
   },[errors])
   return (
     <>

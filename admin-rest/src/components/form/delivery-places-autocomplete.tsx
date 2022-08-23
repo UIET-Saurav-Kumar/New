@@ -37,7 +37,7 @@ export default function DeliveryPlacesAutocomplete({address,
     const place = autocomplete.getPlace();
 
     if (!place.geometry || !place.geometry.location) {
-      console.log("Returned place contains no geometry");
+      // console.log("Returned place contains no geometry");
       return;
     }
 
@@ -93,8 +93,8 @@ export default function DeliveryPlacesAutocomplete({address,
                                             enablePoweredbyContainer={false}
                                             minLength={2}
                                             onPress={(data, details = null)=> {
-                                                console.log(data);
-                                                console.log(details);
+                                                // console.log(data);
+                                                // console.log(details);
                                             }}
                                             fetchDetails={true}
                                             query= {{

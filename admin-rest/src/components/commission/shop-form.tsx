@@ -125,12 +125,12 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
   });
 
   function onSelect(selectedList:any, selectedItem:any) {
-    console.log(selectedList);
+    // console.log(selectedList);
     selectOption(selectedList);
   }
 
   function onRemove(selectedList:any, removedItem:any) {
-    console.log(selectedList);
+    // console.log(selectedList);
     selectOption(selectedList);
   }
 

@@ -33,9 +33,9 @@ export default function BrandOffers() {
         location : ((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any
     });
 
-    console.log('brand_offers', data);
+    // console.log('brand_offers', data);
 
-    console.log('filter brand offers', data?.brand_offers?.data?.data?.map(item => item.shop.name))
+    // console.log('filter brand offers', data?.brand_offers?.data?.data?.map(item => item.shop.name))
 
  
     return (

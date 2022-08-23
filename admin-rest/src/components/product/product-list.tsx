@@ -50,7 +50,7 @@ const ProductList = ({ products, onPagination }: IProps) => {
   const router = useRouter();
   const { t } = useTranslation();
   const { alignLeft, alignRight } = useIsRTL();
-   console.log('category', products)
+   // console.log('category', products)
 
   let columns = [
     {
@@ -99,7 +99,7 @@ const ProductList = ({ products, onPagination }: IProps) => {
       align: "left",
       ellipsis: true,
       render: (categories: any) => (
-        console.log('product category',categories),
+        // console.log('product category',categories),
         <span className="whitespace-normal truncate">
           {categories?.map((category: any) => (
            <p>{'•' + ' ' + category?.name }</p>

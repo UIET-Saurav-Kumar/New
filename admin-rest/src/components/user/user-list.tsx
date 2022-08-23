@@ -32,7 +32,7 @@ const CustomerList = ({ customers, onPagination }: IProps) => {
     search:"",
 });
   // const { data:customerData } = useCustomerQuery();
-  console.log(' customer data',data)
+  // console.log(' customer data',data)
 
   
   const columns = [

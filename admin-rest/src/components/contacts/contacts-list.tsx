@@ -29,7 +29,7 @@ const ContactsList = ({ contacts, onPagination }: IProps) => {
 
   const { alignLeft } = useIsRTL();
   
-  console.log('contact prop', contacts);
+  // console.log('contact prop', contacts);
 
   const router = useRouter();
 

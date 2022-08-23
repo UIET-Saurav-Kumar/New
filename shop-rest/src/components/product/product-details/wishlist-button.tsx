@@ -66,7 +66,7 @@ export default function WishlistButton({
       type:'item-added-to-wishlist',
     }, {
       onSuccess: (data: any) => {
-        console.log(data)
+        // console.log(data)
       },
     }) 
     

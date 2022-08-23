@@ -64,7 +64,7 @@ const PaymentForm = () => {
         router.push(`/${router?.query?.shop}${ROUTES.DELIVERY}`);
       },
       onError: (error: any) => {
-        console.log(error?.response?.data?.message);
+        // console.log(error?.response?.data?.message);
       },
     });
   }

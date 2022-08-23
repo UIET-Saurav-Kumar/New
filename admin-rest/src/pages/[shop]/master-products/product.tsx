@@ -21,10 +21,10 @@ export default function Product({product,shopId,masterIds,taxes}:any) {
 
     
 
-    console.log('shop master product',product);
+    // console.log('shop master product',product);
 
     function addProduct():any{
-        console.log(product?.id);
+        // console.log(product?.id);
         const price = document.getElementById("price_"+product?.id)?.value as any;
         const sale_price = document.getElementById("sale_price_"+product?.id)?.value as any;
         const quantity = document.getElementById("quantity_"+product?.id)?.value as any;
@@ -45,7 +45,7 @@ export default function Product({product,shopId,masterIds,taxes}:any) {
                         setAlreadyMade(true);
                     },
                     onError: (error: any) => {
-                        console.log(error);
+                        // console.log(error);
                     },
                 }
             );

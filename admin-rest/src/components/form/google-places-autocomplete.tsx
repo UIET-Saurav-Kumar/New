@@ -39,7 +39,7 @@ export default function GooglePlacesAutocomplete({
     const place = autocomplete.getPlace();
 
     if (!place.geometry || !place.geometry.location) {
-      console.log("Returned place contains no geometry");
+      // console.log("Returned place contains no geometry");
       return;
     }
 
@@ -60,7 +60,7 @@ export default function GooglePlacesAutocomplete({
 
     setGeoLocation(location);
 
-    console.log('location',location)
+    // console.log('location',location)
 
     for (const component of place.address_components) {
       // @ts-ignore remove once typings fixed

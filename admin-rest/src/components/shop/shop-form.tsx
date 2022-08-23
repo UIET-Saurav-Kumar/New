@@ -107,13 +107,13 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
   
   
   useEffect(()=>{
-    console.log(initialValues,"initialValues");
+    // console.log(initialValues,"initialValues");
     if(initialValues){
       if(initialValues.shop_categories){
         selectOption(JSON.parse(initialValues.shop_categories))
       }
     }
-    // console.log(initialValues);
+    // // console.log(initialValues);
   },[])
 
   
@@ -159,12 +159,12 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
   });
 
   function onSelect(selectedList:any, selectedItem:any) {
-    console.log(selectedList);
+    // console.log(selectedList);
     selectOption(selectedList);
   }
 
   function onRemove(selectedList:any, removedItem:any) {
-    console.log(selectedList);
+    // console.log(selectedList);
     selectOption(selectedList);
   }
 
@@ -212,7 +212,7 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
       });
     }
   }
-  console.log('geoLocation',getValues("settings.location.sector"))
+  // console.log('geoLocation',getValues("settings.location.sector"))
 
   const coverImageInformation = (
     <span>
@@ -744,13 +744,13 @@ export default ShopForm;
   
   
 //   useEffect(()=>{
-//     console.log(initialValues,"initialValues");
+//     // console.log(initialValues,"initialValues");
 //     if(initialValues){
 //       if(initialValues.shop_categories){
 //         selectOption(JSON.parse(initialValues.shop_categories))
 //       }
 //     }
-//     // console.log(initialValues);
+//     // // console.log(initialValues);
 //   },[])
 
 
@@ -799,12 +799,12 @@ export default ShopForm;
 //   });
 
 //   function onSelect(selectedList:any, selectedItem:any) {
-//     console.log(selectedList);
+//     // console.log(selectedList);
 //     selectOption(selectedList);
 //   }
 
 //   function onRemove(selectedList:any, removedItem:any) {
-//     console.log(selectedList);
+//     // console.log(selectedList);
 //     selectOption(selectedList);
 //   }
 
@@ -857,7 +857,7 @@ export default ShopForm;
 //       });
 //     }
 //   }
-//   console.log('geoLocation',getValues("settings.location.sector"))
+//   // console.log('geoLocation',getValues("settings.location.sector"))
 
 //   const coverImageInformation = (
 //     <span>

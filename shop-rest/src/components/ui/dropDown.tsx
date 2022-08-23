@@ -18,7 +18,7 @@ export default function DropDown({getLoc}:{getLoc:any}) {
   //   setInputValue(getSearch())
   // },[])
 
-  console.log('inputvalue',inputValue)
+  // console.log('inputvalue',inputValue)
 
   const filterColors = (inputValue: string) => {
     return colourOptions.filter(i =>
@@ -30,7 +30,7 @@ export default function DropDown({getLoc}:{getLoc:any}) {
 
       var data = await fetchSearch(inputValue);      
 
-      console.log('search data',data)
+      // console.log('search data',data)
       
       callback(data);
      
@@ -69,7 +69,7 @@ export default function DropDown({getLoc}:{getLoc:any}) {
       search:text
     }, {
       onSuccess: (data: any) => {
-        console.log(data)
+        // console.log(data)
       },
     });
 

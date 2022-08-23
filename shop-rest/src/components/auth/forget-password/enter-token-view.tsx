@@ -54,7 +54,7 @@ const EnterTokenView = ({ onSubmit, loading }: Props) => {
   //       }
   //       )
   //       .catch((err) => {
-  //         console.log(err);
+  //         // console.log(err);
   //       }
   //       );
   //     return () => {
@@ -70,13 +70,13 @@ const EnterTokenView = ({ onSubmit, loading }: Props) => {
   //       })
   //       .then((otp) => {
   //        setOtp(otp.code);
-  //         // console.log(otp?.code);
+  //         // // console.log(otp?.code);
   //         // handleSubmit(onSubmit)
   //         ac.abort();
   //       })
   //       .catch((err) => {
   //         ac.abort();
-  //         console.log(err.message);
+  //         // console.log(err.message);
   //       });
   //   }
   // }, []);

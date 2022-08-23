@@ -25,7 +25,7 @@ const ShopProductFeed = ({ shopId }: { shopId: string }) => {
   if(router.query.category)
   {
     cat = router.query.category;
-    console.log(router.query.category)
+    // console.log(router.query.category)
   }
   const {
     data,
@@ -45,7 +45,7 @@ const ShopProductFeed = ({ shopId }: { shopId: string }) => {
     }
   );
 
-  console.log('feed shop',data)
+  // console.log('feed shop',data)
 
   const loadMoreRef = useRef()
 

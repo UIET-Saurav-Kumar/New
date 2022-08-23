@@ -18,7 +18,7 @@ export default function UpdateShopPage() {
   const { t } = useTranslation();
   const { mutate: updateShop, isLoading: updating } = useUpdateShopMutation();
   useEffect(()=>{
-    // console.log(data);
+    // // console.log(data);
   })
   function change(e:any) {
     var value=e.target.value
@@ -32,14 +32,14 @@ export default function UpdateShopPage() {
       },
       {
         onError: (error: any) => {
-          console.log(error);
+          // console.log(error);
         },
       }
     );
   }
   function isChecked(value:string)
   {
-    console.log(value);
+    // console.log(value);
     if(data?.shop?.commission_type){
 
       if(data?.shop?.commission_type == value){

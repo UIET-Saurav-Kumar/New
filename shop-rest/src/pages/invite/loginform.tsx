@@ -77,7 +77,7 @@ const LoginForm = () => {
           }
         },
         onError: (error: any) => {
-          console.log(error.message);
+          // console.log(error.message);
         },
       }
     );

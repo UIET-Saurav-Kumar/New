@@ -23,7 +23,7 @@ export async function getStaticPaths({ locales }: GetStaticPathsContext) {
     // const paths=data.map((category:any)=>{
     //     return {params:{slug:category.id.split(" ").join("-")}}
     // })
-    // console.log(data);
+    // // console.log(data);
     
     // then((res) => res.json());
     const paths = data?.flatMap((category: any) =>

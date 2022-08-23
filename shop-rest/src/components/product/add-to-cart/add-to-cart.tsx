@@ -65,7 +65,7 @@ export const AddToCart = ({
     });
   }
 
-  // console.log('ear phone', containsProduct(ordersData?.pages?.[0].data, 14110));
+  // // console.log('ear phone', containsProduct(ordersData?.pages?.[0].data, 14110));
 
   
   const handleAddClick = (
@@ -84,7 +84,7 @@ export const AddToCart = ({
       type:'item-added'
     }, {
       onSuccess: (data: any) => {
-        // console.log(data)
+        // // console.log(data)
       },
     });
     
@@ -100,13 +100,13 @@ export const AddToCart = ({
       type:'item-removed'
     }, {
       onSuccess: (data: any) => {
-        console.log(data)
+        // console.log(data)
       },
     });
 
   };
 
-  console.log('item id',item)
+  // console.log('item id',item)
   const outOfStock = isInCart(item?.id) && !isInStock(item.id) && !isProductAvailable(item.id) ;
   return !isInCart(item?.id) ? (
 

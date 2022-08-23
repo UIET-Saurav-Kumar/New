@@ -43,7 +43,7 @@ export default function Customers() {
     setPage(current);
   }
 
-  console.log('users',data);
+  // console.log('users',data);
 
 
   return (

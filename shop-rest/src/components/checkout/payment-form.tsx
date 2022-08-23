@@ -78,7 +78,7 @@ const PaymentForm = () => {
     },
   });
   
-  console.log('phone number',data?.me?.phone_number)
+  // console.log('phone number',data?.me?.phone_number)
   const {
     billing_address,
     shipping_address,
@@ -98,8 +98,8 @@ const PaymentForm = () => {
   return avItems
 }
   
-  console.log('notAvailableItems',notAvailableItems)
-  console.log('notAvailableItemsName',allItems())
+  // console.log('notAvailableItems',notAvailableItems)
+  // console.log('notAvailableItemsName',allItems())
 
 
   const { items, delivery_charges} = useCart();
@@ -116,9 +116,9 @@ const PaymentForm = () => {
     checkoutData?.unavailable_products.includes(item.id) 
   );
 
-    console.log('cart items',items)
-    console.log('available products', available_items)
-    console.log('draft products', draftProducts)
+    // console.log('cart items',items)
+    // console.log('available products', available_items)
+    // console.log('draft products', draftProducts)
 
 
   const subtotal = calculateTotal(available_items).total;
@@ -179,7 +179,7 @@ const PaymentForm = () => {
         }
       },
       onError: (error: any) => {
-        console.log(error?.response?.data?.message);
+        // console.log(error?.response?.data?.message);
       },
     });
   }

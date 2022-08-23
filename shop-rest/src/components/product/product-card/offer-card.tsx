@@ -75,7 +75,7 @@ const OfferCard: React.FC<NeonProps> = ({ product, className, productSlug }) => 
     });
   }
 
-  // console.log('quantity', product.quantity)
+  // // console.log('quantity', product.quantity)
 
   const [pageURL, setPageUrl] = useState('');
 

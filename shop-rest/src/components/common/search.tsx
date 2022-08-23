@@ -125,7 +125,7 @@ const Search: React.FC<Props> = ({ label, ...props }) => {
        window.scrollTo(0, 560) )
     };
 
-    console.log('pathname', pathname)
+    // console.log('pathname', pathname)
 
   { pathname !== '/salon-page' ? router.push(
       {
@@ -165,9 +165,9 @@ const Search: React.FC<Props> = ({ label, ...props }) => {
        window.scrollTo(0, 560) )
     };
 
-    console.log('pathname',pathname);
-    console.log('query',query);
-    console.log('url',query.slug)
+    // console.log('pathname',pathname);
+    // console.log('query',query);
+    // console.log('url',query.slug)
 
     if (text) {
       router.push(
@@ -190,7 +190,7 @@ const Search: React.FC<Props> = ({ label, ...props }) => {
     }
   }
 
-  console.log('width',width);
+  // console.log('width',width);
 
   return (
 

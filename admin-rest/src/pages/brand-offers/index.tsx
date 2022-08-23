@@ -49,7 +49,7 @@ export default function ProductsPage() {
     }
   );
  
-  console.log('brand-offers', data);
+  // console.log('brand-offers', data);
 
   if (loading)
     return <Loader text={t("common:text-loading")} />;

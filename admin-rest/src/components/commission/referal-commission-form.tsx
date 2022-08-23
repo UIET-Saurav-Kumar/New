@@ -38,7 +38,7 @@ const ReferalCommissionForm = ({ initialValues }: { initialValues?: any }) => {
     resolver: yupResolver(ReferalValidationSchema),
   });
   useEffect(()=>{
-    console.log(initialValues,"initialValues")
+    // console.log(initialValues,"initialValues")
   },[initialValues])
   function onSubmit(values: FormValues) {
     

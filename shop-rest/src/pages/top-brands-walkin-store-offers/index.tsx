@@ -68,7 +68,7 @@ export default function BrandOffers() {
   //       enabled: header,
   // })
 
-  console.log('offers',data)
+  // console.log('offers',data)
   // filter and get shop categories of offers 
   
   const variable = 'Restrauntsname Takeawaysid';
@@ -82,11 +82,11 @@ export default function BrandOffers() {
     return variable.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','').replace(/Restrauntsname|Takeawaysid/g, '')
   }
     // return  variable.replace(/Restrauntsname|Takeawaysid/g, '');}
-  console.log('variable2',variable2());
+  // console.log('variable2',variable2());
 
-  console.log('shopCategories',(shopCategories))
+  // console.log('shopCategories',(shopCategories))
 
-  console.log('offer', data)
+  // console.log('offer', data)
 
   //scroll to top on first render 
   useEffect(() => {

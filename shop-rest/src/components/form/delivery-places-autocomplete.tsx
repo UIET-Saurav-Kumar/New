@@ -94,8 +94,8 @@ export default function DeliveryPlacesAutocomplete({address,
                                             enablePoweredbyContainer={false}
                                             minLength={2}
                                             onPress={(data, details = null)=> {
-                                                console.log(data);
-                                                console.log(details);
+                                                // console.log(data);
+                                                // console.log(details);
                                             }}
                                             fetchDetails={true}
                                             query= {{

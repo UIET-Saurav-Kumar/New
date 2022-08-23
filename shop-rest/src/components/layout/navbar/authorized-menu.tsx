@@ -42,7 +42,7 @@ export default function AuthorizedMenu() {
    return window?.location.href.includes('buylowcal-monthly-leaderboard-magazines')
    }}
 
-  console.log('me data',data)
+  // console.log('me data',data)
 
   return (
 

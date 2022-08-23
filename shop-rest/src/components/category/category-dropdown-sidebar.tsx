@@ -71,7 +71,7 @@ const CategoryDropdownSidebar = ({data}) => {
     );
   }
 
-  console.log('shop slug name', data?.slug)
+  // console.log('shop slug name', data?.slug)
   // const { slug, name, children: items, icon } = item;
 
   if (error) return <ErrorMessage message={error.message} />;

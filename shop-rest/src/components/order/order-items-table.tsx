@@ -36,7 +36,7 @@ export const OrderItems = ({ products,orderId,orderStatus }: { products: any }) 
   );
 
 
-  console.log('orderStatus',orderStatus);
+  // console.log('orderStatus',orderStatus);
 
 
   // var converter = require('number-to-words');

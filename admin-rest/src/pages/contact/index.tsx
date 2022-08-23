@@ -39,7 +39,7 @@ export default function ContactsPage() {
     setPage(current);
   }
 
-  console.log('contact data',data?.contacts.paginatorInfo);
+  // console.log('contact data',data?.contacts.paginatorInfo);
   
   return (
     <>

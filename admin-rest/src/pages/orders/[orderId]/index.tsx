@@ -54,7 +54,7 @@ export default function OrderDetailsPage() {
     error,
   } = useOrderQuery(query.orderId as string);
 
-  console.log('order data',data)
+  // console.log('order data',data)
 
   const {
     handleSubmit,
@@ -79,7 +79,7 @@ export default function OrderDetailsPage() {
  
   
  
-  console.log('order', data?.order)
+  // console.log('order', data?.order)
 
 
   const { price: subtotal } = usePrice(

@@ -39,8 +39,8 @@ const UserWallet = () => {
     //use walletcommission query
     const { data, loading, error } = useWalletCommissionQuery(query.userId as string);
     
-    console.log('query user id', query.userId)
-    console.log('wallet data',data)
+    // console.log('query user id', query.userId)
+    // console.log('wallet data',data)
 
     const newUsers = [];
 
@@ -48,7 +48,7 @@ const UserWallet = () => {
     if(leader_last_month_purchase > 1){
         newUsers.push(query.userId);
     }
-    console.log('mewUsers',newUsers);
+    // console.log('mewUsers',newUsers);
 
     const { price: totalEarnings } = usePrice(
         data && {
@@ -86,7 +86,7 @@ const UserWallet = () => {
         }
     }
 
-    console.log('wallet data', data);
+    // console.log('wallet data', data);
 
     Array.prototype.sum = function (prop) {
     var total = 0
@@ -120,8 +120,8 @@ const UserWallet = () => {
         
         // let lastMonth = today.getMonth();
         var relevantYear = currYear;
-        // console.log('lastMonth',lastMonth);
-        // console.log('current month',currMonth);
+        // // console.log('lastMonth',lastMonth);
+        // // console.log('current month',currMonth);
         
         
 
@@ -129,13 +129,13 @@ const UserWallet = () => {
         var total = data?.customer_level?.filter((i:any) => {
             
             var date = new Date(i.created_at);
-            // console.log(data.customer_level);
-            // console.log('created at',date);
-            // console.log('curr month',currMonth);
-            // console.log('year',date.getFullYear());
-            // console.log('order month',date.getMonth());
+            // // console.log(data.customer_level);
+            // // console.log('created at',date);
+            // // console.log('curr month',currMonth);
+            // // console.log('year',date.getFullYear());
+            // // console.log('order month',date.getMonth());
             
-            // console.log('last month',lastMonth);
+            // // console.log('last month',lastMonth);
         
             return date.getMonth() === lastMonth && date.getFullYear() === relevantYear;
         }).reduce((prev, curr) => prev +  parseFloat(curr.earning),0);
@@ -143,13 +143,13 @@ const UserWallet = () => {
         var leader_this_month_purchase = data?.customer_level?.filter((i:any) => {
             
             var date = new Date(i.created_at);
-            // console.log(data.customer_level);
-            // console.log('created at',date);
-            // console.log('curr month',currMonth);
-            // console.log('year',date.getFullYear());
-            // console.log('order month',date.getMonth());
+            // // console.log(data.customer_level);
+            // // console.log('created at',date);
+            // // console.log('curr month',currMonth);
+            // // console.log('year',date.getFullYear());
+            // // console.log('order month',date.getMonth());
             
-            // console.log('last month',lastMonth);
+            // // console.log('last month',lastMonth);
         
             return date.getMonth() === currMonth && date.getFullYear() === relevantYear;
         }).reduce((prev, curr) => prev +  parseFloat(curr.commission_value),0);
@@ -158,13 +158,13 @@ const UserWallet = () => {
         var leader_this_month_earning= data?.customer_level?.filter((i:any) => {
             
             var date = new Date(i.created_at);
-            // console.log(data.customer_level);
-            // console.log('created at',date);
-            // console.log('curr month',currMonth);
-            // console.log('year',date.getFullYear());
-            // console.log('order month',date.getMonth());
+            // // console.log(data.customer_level);
+            // // console.log('created at',date);
+            // // console.log('curr month',currMonth);
+            // // console.log('year',date.getFullYear());
+            // // console.log('order month',date.getMonth());
             
-            // console.log('last month',lastMonth);
+            // // console.log('last month',lastMonth);
         
             return date.getMonth() === currMonth && date.getFullYear() === relevantYear;
         }).reduce((prev, curr) => prev +  parseFloat(curr.earning),0);
@@ -183,13 +183,13 @@ const UserWallet = () => {
         var level_1 = data?.level1?.filter((i:any) => {
             
             var date = new Date(i.created_at);
-            // console.log(data.customer_level);
-            // console.log('created at',date);
-            // console.log('curr month',currMonth);
-            // console.log('year',date.getFullYear());
-            // console.log('order month',date.getMonth());
+            // // console.log(data.customer_level);
+            // // console.log('created at',date);
+            // // console.log('curr month',currMonth);
+            // // console.log('year',date.getFullYear());
+            // // console.log('order month',date.getMonth());
             
-            // console.log('last month',lastMonth);
+            // // console.log('last month',lastMonth);
         
             return date.getMonth() === lastMonth && date.getFullYear() === relevantYear;
         }).reduce((prev, curr) => prev +  parseFloat(curr.earning),0);
@@ -197,13 +197,13 @@ const UserWallet = () => {
         var level_1_purchase = data?.level1?.filter((i:any) => {
             
             var date = new Date(i.created_at);
-            // console.log(data.customer_level);
-            // console.log('created at',date);
-            // console.log('curr month',currMonth);
-            // console.log('year',date.getFullYear());
-            // console.log('order month',date.getMonth());
+            // // console.log(data.customer_level);
+            // // console.log('created at',date);
+            // // console.log('curr month',currMonth);
+            // // console.log('year',date.getFullYear());
+            // // console.log('order month',date.getMonth());
             
-            // console.log('last month',lastMonth);
+            // // console.log('last month',lastMonth);
         
             return date.getMonth() === lastMonth && date.getFullYear() === relevantYear;
         }).reduce((prev, curr) => prev +  parseFloat(curr.commission_value),0);
@@ -211,13 +211,13 @@ const UserWallet = () => {
         var level_2 = data?.level2?.filter((i:any) => {
             
             var date = new Date(i.created_at);
-            // console.log(data.customer_level);
-            // console.log('created at',date);
-            // console.log('curr month',currMonth);
-            // console.log('year',date.getFullYear());
-            // console.log('order month',date.getMonth());
+            // // console.log(data.customer_level);
+            // // console.log('created at',date);
+            // // console.log('curr month',currMonth);
+            // // console.log('year',date.getFullYear());
+            // // console.log('order month',date.getMonth());
             
-            // console.log('last month',lastMonth);
+            // // console.log('last month',lastMonth);
         
             return date.getMonth() === lastMonth && date.getFullYear() === relevantYear;
         }).reduce((prev, curr) => prev +  parseFloat(curr.earning),0);
@@ -225,13 +225,13 @@ const UserWallet = () => {
         var level_2_purchase = data?.level2?.filter((i:any) => {
             
             var date = new Date(i.created_at);
-            // console.log(data.customer_level);
-            // console.log('created at',date);
-            // console.log('curr month',currMonth);
-            // console.log('year',date.getFullYear());
-            // console.log('order month',date.getMonth());
+            // // console.log(data.customer_level);
+            // // console.log('created at',date);
+            // // console.log('curr month',currMonth);
+            // // console.log('year',date.getFullYear());
+            // // console.log('order month',date.getMonth());
             
-            // console.log('last month',lastMonth);
+            // // console.log('last month',lastMonth);
         
             return date.getMonth() === lastMonth && date.getFullYear() === relevantYear;
         }).reduce((prev, curr) => prev +  parseFloat(curr.commission_value),0);
@@ -239,13 +239,13 @@ const UserWallet = () => {
         var level_3 = data?.level3?.filter((i:any) => {
             
             var date = new Date(i.created_at);
-            // console.log(data.customer_level);
-            // console.log('created at',date);
-            // console.log('curr month',currMonth);
-            // console.log('year',date.getFullYear());
-            // console.log('order month',date.getMonth());
+            // // console.log(data.customer_level);
+            // // console.log('created at',date);
+            // // console.log('curr month',currMonth);
+            // // console.log('year',date.getFullYear());
+            // // console.log('order month',date.getMonth());
             
-            // console.log('last month',lastMonth);
+            // // console.log('last month',lastMonth);
         
             return date.getMonth() === lastMonth && date.getFullYear() === relevantYear;
         }).reduce((prev, curr) => prev +  parseFloat(curr.earning),0);
@@ -253,18 +253,18 @@ const UserWallet = () => {
         var level_3_purchase = data?.level3?.filter((i:any) => {
             
             var date = new Date(i.created_at);
-            // console.log(data.customer_level);
-            // console.log('created at',date);
-            // console.log('curr month',currMonth);
-            // console.log('year',date.getFullYear());
-            // console.log('order month',date.getMonth());
+            // // console.log(data.customer_level);
+            // // console.log('created at',date);
+            // // console.log('curr month',currMonth);
+            // // console.log('year',date.getFullYear());
+            // // console.log('order month',date.getMonth());
             
-            // console.log('last month',lastMonth);
+            // // console.log('last month',lastMonth);
         
             return date.getMonth() === lastMonth && date.getFullYear() === relevantYear;
         }).reduce((prev, curr) => prev +  parseFloat(curr.commission_value),0);
 
-        console.log('total',total);
+        // console.log('total',total);
 
 	return (
         <> 

@@ -69,7 +69,7 @@ const PaymentForm = () => {
         }
       },
       onError: (error: any) => {
-        console.log(error?.response?.data?.message);
+        // console.log(error?.response?.data?.message);
       },
     });
   }

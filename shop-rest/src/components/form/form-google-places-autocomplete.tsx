@@ -42,7 +42,7 @@ export default function GooglePlacesAutocomplete({address,
     const place = autocomplete.getPlace();
 
     if (!place.geometry || !place.geometry.location) {
-      console.log("Returned place contains no geometry");
+      // console.log("Returned place contains no geometry");
       return;
     }
 
@@ -88,7 +88,7 @@ export default function GooglePlacesAutocomplete({address,
 
       createLog({location:location.formattedAddress}, {
         onSuccess: (data: any) => {
-          console.log(data)
+          // console.log(data)
         },
         onError: (error: any) => {
           

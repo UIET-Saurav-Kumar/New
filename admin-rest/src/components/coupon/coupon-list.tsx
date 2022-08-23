@@ -83,7 +83,7 @@ const CouponList = ({ coupons, onPagination }: IProps) => {
           amount: amount,
         });
         if (record.type === "percentage") {
-          console.log('type', record.type)
+          // console.log('type', record.type)
           return <span>{amount}%</span>;
         }
         return <span>{price}</span>;

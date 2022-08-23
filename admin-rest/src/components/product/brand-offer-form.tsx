@@ -169,12 +169,12 @@ function calculateQuantity(variationOptions: any) {
   );
 }
 
-console.log('date', new Date());
+// console.log('date', new Date());
 
-console.log('date',new Date().toISOString().split('T')[0].split('-').reverse().join('-') )
+// console.log('date',new Date().toISOString().split('T')[0].split('-').reverse().join('-') )
 
 export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
-   console.log('initialValues', initialValues);
+   // console.log('initialValues', initialValues);
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -234,7 +234,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
     const onSubmit = async (values: FormValues) => {
     const { type } = values;
 
-    console.log('values', values)
+    // console.log('values', values)
     
     const inputValues: any = {
       description: values.description,

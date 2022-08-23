@@ -60,7 +60,7 @@ const ReferralActivity = () => {
         }
     }
 
-    console.log('wallet data', data);
+    // console.log('wallet data', data);
 
     Array.prototype.sum = function (prop) {
     var total = 0
@@ -94,19 +94,19 @@ const ReferralActivity = () => {
         
         // let lastMonth = today.getMonth();
         var relevantYear = currYear;
-        console.log('lastMonth',lastMonth);
-        console.log('current month',currMonth);
+        // console.log('lastMonth',lastMonth);
+        // console.log('current month',currMonth);
 
         var total = data?.customer_level?.filter((i:any) => {
             
             var date = new Date(i.created_at);
-            // console.log(data.customer_level);
-            console.log('created at',date);
-            console.log('curr month',currMonth);
-            console.log('year',date.getFullYear());
-            console.log('order month',date.getMonth());
+            // // console.log(data.customer_level);
+            // console.log('created at',date);
+            // console.log('curr month',currMonth);
+            // console.log('year',date.getFullYear());
+            // console.log('order month',date.getMonth());
             
-            console.log('last month',lastMonth);
+            // console.log('last month',lastMonth);
         
             return date.getMonth() === lastMonth && date.getFullYear() === relevantYear;
         }).reduce((prev, curr) => prev +  parseFloat(curr.earning),0);
@@ -116,13 +116,13 @@ const ReferralActivity = () => {
         var leader_this_month_purchase = data?.customer_level?.filter((i:any) => {
             
             var date = new Date(i.created_at);
-            // console.log(data.customer_level);
-            console.log('created at',date);
-            console.log('curr month',currMonth);
-            console.log('year',date.getFullYear());
-            console.log('order month',date.getMonth());
+            // // console.log(data.customer_level);
+            // console.log('created at',date);
+            // console.log('curr month',currMonth);
+            // console.log('year',date.getFullYear());
+            // console.log('order month',date.getMonth());
             
-            console.log('last month',lastMonth);
+            // console.log('last month',lastMonth);
         
             return date.getMonth() === currMonth && date.getFullYear() === relevantYear;
         }).reduce((prev, curr) => prev +  parseFloat(curr.commission_value),0);
@@ -131,13 +131,13 @@ const ReferralActivity = () => {
         var leader_this_month_earning= data?.customer_level?.filter((i:any) => {
             
             var date = new Date(i.created_at);
-            // console.log(data.customer_level);
-            console.log('created at',date);
-            console.log('curr month',currMonth);
-            console.log('year',date.getFullYear());
-            console.log('order month',date.getMonth());
+            // // console.log(data.customer_level);
+            // console.log('created at',date);
+            // console.log('curr month',currMonth);
+            // console.log('year',date.getFullYear());
+            // console.log('order month',date.getMonth());
             
-            console.log('last month',lastMonth);
+            // console.log('last month',lastMonth);
         
             return date.getMonth() === currMonth && date.getFullYear() === relevantYear;
         }).reduce((prev, curr) => prev +  parseFloat(curr.earning),0);
@@ -147,13 +147,13 @@ const ReferralActivity = () => {
         var level_1 = data?.level1?.filter((i:any) => {
             
             var date = new Date(i.created_at);
-            // console.log(data.customer_level);
-            console.log('created at',date);
-            console.log('curr month',currMonth);
-            console.log('year',date.getFullYear());
-            console.log('order month',date.getMonth());
+            // // console.log(data.customer_level);
+            // console.log('created at',date);
+            // console.log('curr month',currMonth);
+            // console.log('year',date.getFullYear());
+            // console.log('order month',date.getMonth());
             
-            console.log('last month',lastMonth);
+            // console.log('last month',lastMonth);
         
             return date.getMonth() === lastMonth && date.getFullYear() === relevantYear;
         }).reduce((prev, curr) => prev +  parseFloat(curr.earning),0);
@@ -161,13 +161,13 @@ const ReferralActivity = () => {
         var level_1_purchase = data?.level1?.filter((i:any) => {
             
             var date = new Date(i.created_at);
-            // console.log(data.customer_level);
-            console.log('created at',date);
-            console.log('curr month',currMonth);
-            console.log('year',date.getFullYear());
-            console.log('order month',date.getMonth());
+            // // console.log(data.customer_level);
+            // console.log('created at',date);
+            // console.log('curr month',currMonth);
+            // console.log('year',date.getFullYear());
+            // console.log('order month',date.getMonth());
             
-            console.log('last month',lastMonth);
+            // console.log('last month',lastMonth);
         
             return date.getMonth() === lastMonth && date.getFullYear() === relevantYear;
         }).reduce((prev, curr) => prev +  parseFloat(curr.commission_value),0);
@@ -175,13 +175,13 @@ const ReferralActivity = () => {
         var level_2 = data?.level2?.filter((i:any) => {
             
             var date = new Date(i.created_at);
-            // console.log(data.customer_level);
-            console.log('created at',date);
-            console.log('curr month',currMonth);
-            console.log('year',date.getFullYear());
-            console.log('order month',date.getMonth());
+            // // console.log(data.customer_level);
+            // console.log('created at',date);
+            // console.log('curr month',currMonth);
+            // console.log('year',date.getFullYear());
+            // console.log('order month',date.getMonth());
             
-            console.log('last month',lastMonth);
+            // console.log('last month',lastMonth);
         
             return date.getMonth() === lastMonth && date.getFullYear() === relevantYear;
         }).reduce((prev, curr) => prev +  parseFloat(curr.earning),0);
@@ -189,13 +189,13 @@ const ReferralActivity = () => {
         var level_2_purchase = data?.level2?.filter((i:any) => {
             
             var date = new Date(i.created_at);
-            // console.log(data.customer_level);
-            console.log('created at',date);
-            console.log('curr month',currMonth);
-            console.log('year',date.getFullYear());
-            console.log('order month',date.getMonth());
+            // // console.log(data.customer_level);
+            // console.log('created at',date);
+            // console.log('curr month',currMonth);
+            // console.log('year',date.getFullYear());
+            // console.log('order month',date.getMonth());
             
-            console.log('last month',lastMonth);
+            // console.log('last month',lastMonth);
         
             return date.getMonth() === lastMonth && date.getFullYear() === relevantYear;
         }).reduce((prev, curr) => prev +  parseFloat(curr.commission_value),0);
@@ -203,13 +203,13 @@ const ReferralActivity = () => {
         var level_3 = data?.level3?.filter((i:any) => {
             
             var date = new Date(i.created_at);
-            // console.log(data.customer_level);
-            console.log('created at',date);
-            console.log('curr month',currMonth);
-            console.log('year',date.getFullYear());
-            console.log('order month',date.getMonth());
+            // // console.log(data.customer_level);
+            // console.log('created at',date);
+            // console.log('curr month',currMonth);
+            // console.log('year',date.getFullYear());
+            // console.log('order month',date.getMonth());
             
-            console.log('last month',lastMonth);
+            // console.log('last month',lastMonth);
         
             return date.getMonth() === lastMonth && date.getFullYear() === relevantYear;
         }).reduce((prev, curr) => prev +  parseFloat(curr.earning),0);
@@ -217,19 +217,19 @@ const ReferralActivity = () => {
         var level_3_purchase = data?.level3?.filter((i:any) => {
             
             var date = new Date(i.created_at);
-            // console.log(data.customer_level);
-            console.log('created at',date);
-            console.log('curr month',currMonth);
-            console.log('year',date.getFullYear());
-            console.log('order month',date.getMonth());
+            // // console.log(data.customer_level);
+            // console.log('created at',date);
+            // console.log('curr month',currMonth);
+            // console.log('year',date.getFullYear());
+            // console.log('order month',date.getMonth());
             
-            console.log('last month',lastMonth);
+            // console.log('last month',lastMonth);
         
             return date.getMonth() === lastMonth && date.getFullYear() === relevantYear;
         }).reduce((prev, curr) => prev +  parseFloat(curr.commission_value),0);
 
-        console.log('total',total);
-        console.log('data',data)
+        // console.log('total',total);
+        // console.log('data',data)
 
             function relDiff(a, b){
                 return  100 * Math.abs( ( a - b ) / ( (a+b)/2 ) );
@@ -239,8 +239,8 @@ const ReferralActivity = () => {
                 return 100*num/per
             }
            // example
-        //   console.log('difference',relDiff(100, 20).toFixed(1)+'%')
-        //   console.log('percentage',percentage(leader_this_month_earning, total).toFixed(1)+'%' + 'difference' + '' +relDiff(20, 100).toFixed(1)+'%') // returns 0.5
+        //   // console.log('difference',relDiff(100, 20).toFixed(1)+'%')
+        //   // console.log('percentage',percentage(leader_this_month_earning, total).toFixed(1)+'%' + 'difference' + '' +relDiff(20, 100).toFixed(1)+'%') // returns 0.5
         
 	return (
         <> 

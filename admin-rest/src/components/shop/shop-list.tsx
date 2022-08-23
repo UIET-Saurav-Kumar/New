@@ -34,13 +34,13 @@ const ShopList = ({ shops, onPagination }: IProps) => {
     return (check ?    < Image        quality='40' src={logo?.thumbnail ?? siteSettings.product.placeholder} alt={record?.name} layout="fixed" width={42} height={42} className="rounded overflow-hidden" />:<Avatar name={record?.name} size={42} round={true} maxInitials={2} />);
   }
 
-  console.log('shop address', shops?.data)
+  // console.log('shop address', shops?.data)
 
   function checkboxChanged(e:any){
     var id=e.target.id.split('_')[1];
     var value=(e.target.checked)?1:0;
-    console.log(id)
-    console.log(value);
+    // console.log(id)
+    // console.log(value);
     updateShop({
       variables: {
         id:id,

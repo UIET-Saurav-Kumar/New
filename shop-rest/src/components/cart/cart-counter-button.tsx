@@ -47,7 +47,7 @@ const CartCounterButton = () => {
     return openSidebar();
   }
 
-  console.log('total price',totalPrice);
+  // console.log('total price',totalPrice);
 
   return (
 

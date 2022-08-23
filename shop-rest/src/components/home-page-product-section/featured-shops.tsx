@@ -16,7 +16,7 @@ export default function FeaturedShops({ }) {
     const {getLocation} =useLocation()
 
     const imageCheck = (logo: any , record:any, imgsize:any, imgDim:any, classname: string) => {
-        console.log(logo)
+        // console.log(logo)
         let check = false;
         let splitLength = logo?.split("/").length;
         let lastSplit = logo?.split("/")[splitLength - 1];
@@ -44,7 +44,7 @@ export default function FeaturedShops({ }) {
 		return pathname+"?text="+text;
 	}
 
-    console.log('logo',data?.featureShops?.data[0]?.logo?.thumbnail);
+    // console.log('logo',data?.featureShops?.data[0]?.logo?.thumbnail);
 
         return (
 

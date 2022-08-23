@@ -53,7 +53,7 @@ function QuestionItem({ question }: { question: Question }) {
     amount: product?.max_price,
   });
 
-  console.log('questions', myQuestion);
+  // console.log('questions', myQuestion);
 
   return (
 
@@ -150,7 +150,7 @@ const MyQuestions: React.FC = () => {
   const { questions, isLoading, isLoadingMore, error, hasMore, loadMore } =
     useMyQuestions();
 
-    console.log('questions', questions);
+    // console.log('questions', questions);
 
   if (error) return <ErrorMessage message={error.message} />;
 

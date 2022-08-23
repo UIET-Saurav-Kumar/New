@@ -33,7 +33,7 @@ const Helium: React.FC<HeliumProps> = ({ product, className }) => {
     setPageUrl(window.location.href)
   }, []);
 
-  console.log('helium product',product)
+  // console.log('helium product',product)
 
 
   return (

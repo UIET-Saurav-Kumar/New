@@ -31,8 +31,8 @@ const Schedule = ({ count }: Props) => {
     return shopCategory;
   }
 
-  console.log('items',items);
-  console.log('shop category',getShopCategory());
+  // console.log('items',items);
+  // console.log('shop category',getShopCategory());
 
 
   useEffect(() => {

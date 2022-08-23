@@ -92,7 +92,7 @@ export default function Invoice() {
 
       }
 
-      console.log('delivery time',data?.order.delivery_time);
+      // console.log('delivery time',data?.order.delivery_time);
 
     
     return (

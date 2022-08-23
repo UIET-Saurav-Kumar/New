@@ -32,7 +32,7 @@ const ProfileForm = ({ user }: Props) => {
 
   const [birthDate, setBirthDate] = useState(null);
   const[occupation, setOccupation] = useState(null);
-  // console.log('user',user)
+  // // console.log('user',user)
   const { t } = useTranslation("common");
   const { register, handleSubmit, setValue, control } = useForm<UserFormValues>(
     

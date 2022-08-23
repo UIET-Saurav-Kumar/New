@@ -65,7 +65,7 @@ export const InvitePage = () => {
 
   // const supportsContacts = ('contacts' in navigator && 'ContactsManager' in window)
 
-  //   console.log('contacts',supportsContacts);
+  //   // console.log('contacts',supportsContacts);
 
   //   let windowNav : any;
   //   let nav : any;

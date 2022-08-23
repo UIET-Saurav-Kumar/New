@@ -73,7 +73,7 @@ export default function OrderPage() {
     tracking_number: query.tracking_number as string,
   });
 
-  console.log('order data',data);
+  // console.log('order data',data);
 
   const { price: total } = usePrice(data && { amount: data.order.paid_total });
 
@@ -92,7 +92,7 @@ export default function OrderPage() {
   );
 
 
-  // console.log(data?.order)  
+  // // console.log(data?.order)  
 
   const orderTableColumns = [
 
@@ -174,7 +174,7 @@ export default function OrderPage() {
     return <Spinner showText={false} />;
   }
 
-  console.log('delivery time',data?.order?.delivery_time);
+  // console.log('delivery time',data?.order?.delivery_time);
 
   const getShop=()=>{
     if(data?.order?.products){

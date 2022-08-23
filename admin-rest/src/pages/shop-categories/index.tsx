@@ -44,7 +44,7 @@ export default function Categories() {
     // sortedBy,
   });
 
-  console.log('data',data)
+  // console.log('data',data)
 
   if (loading) return <Loader text={t("common:text-loading")} />;
   if (error) return <ErrorMessage message={error.message} />;

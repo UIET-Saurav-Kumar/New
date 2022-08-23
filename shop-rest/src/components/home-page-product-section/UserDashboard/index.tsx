@@ -59,50 +59,50 @@ export default function UserDashboard() {
 
         // let lastMonth = today.getMonth();
         var relevantYear = currYear;
-        console.log('lastMonth',lastMonth);
-        console.log('current month',currMonth);
+        // console.log('lastMonth',lastMonth);
+        // console.log('current month',currMonth);
 
         var this_month= data?.customer_level?.filter((i:any) => {
                     
         var date = new Date(i.created_at);
-        // console.log(data.customer_level);
-        console.log('created at',date);
-        console.log('curr month',currMonth);
-        console.log('year',date.getFullYear());
-        console.log('order month',date.getMonth());
+        // // console.log(data.customer_level);
+        // console.log('created at',date);
+        // console.log('curr month',currMonth);
+        // console.log('year',date.getFullYear());
+        // console.log('order month',date.getMonth());
         
-        console.log('last month',lastMonth);
+        // console.log('last month',lastMonth);
 
         return date.getMonth() === currMonth && date.getFullYear() === relevantYear;
         }).reduce((prev, curr) => prev +  parseFloat(curr.earning),0);
 
-            console.log('customerData',data)
+            // console.log('customerData',data)
 
             var last_month_earning = data?.customer_level?.filter((i:any) => {
             
                 var date = new Date(i.created_at);
-                // console.log(data.customer_level);
-                console.log('created at',date);
-                console.log('curr month',currMonth);
-                console.log('year',date.getFullYear());
-                console.log('order month',date.getMonth());
+                // // console.log(data.customer_level);
+                // console.log('created at',date);
+                // console.log('curr month',currMonth);
+                // console.log('year',date.getFullYear());
+                // console.log('order month',date.getMonth());
                 
-                // console.log('last month',this_month.toFixed(2));
+                // // console.log('last month',this_month.toFixed(2));
             
                 return date.getMonth() === lastMonth && date.getFullYear() === relevantYear;
             }).reduce((prev, curr) => prev +  parseFloat(curr.earning),0);
               
 
-            console.log('earning',this_month)
+            // console.log('earning',this_month)
 
             const [props, setProps] = useState();
 
-            console.log('data',data)
+            // console.log('data',data)
             // function relDiff(a, b) {
             //     return  100 * Math.abs( ( a - b ) / ( (a+b)/2 ) );
             //    }
             //    // example
-            //    console.log(relDiff(this_month, last_month_earning))
+            //    // console.log(relDiff(this_month, last_month_earning))
   return (
 
         <div className='grid grid-cols-1 lg:flex items-center w-full mt-0 py-1 lg:py-3

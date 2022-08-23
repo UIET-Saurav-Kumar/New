@@ -51,7 +51,7 @@ const CartCounterButton = dynamic(
 );
 
 const imageCheck = (logo: any , record:any, imgsize:any, imgDim:any, classname: string) => {
-  console.log('logo',logo)
+  // console.log('logo',logo)
   let check = false;
   let splitLength = logo?.split("/").length;
   let lastSplit = logo?.split("/")[splitLength - 1];
@@ -115,7 +115,7 @@ const ShopPage = ({ data }: any) => {
     return openModal("SHOP_PAYMENT_FORM");
   }
 
-  const slug = ['chandigarhgrocerystore', 'kosmetics-india'];
+  const slug = ['chandigarh-grocery-store', 'kosmetics-india'];
 
   function checkElement(){
     return slug?.some(el => data?.slug?.includes(el))
@@ -163,7 +163,7 @@ const ShopPage = ({ data }: any) => {
 
   // var ProductFeed = document.getElementById("product-feed");
 
-  // console.log('offset value', ProductFeed?.offsetTop)
+  // // console.log('offset value', ProductFeed?.offsetTop)
 
 
   const {
@@ -187,7 +187,7 @@ const ShopPage = ({ data }: any) => {
     }
   };
 
-  // console.log('shop slug is', data?.slug?.includes('chandigarhgrocerystore' ,'kosmetics-india'))
+  // // console.log('shop slug is', data?.slug?.includes('chandigarhgrocerystore' ,'kosmetics-india'))
   seoFunction(data);
 
    
@@ -209,9 +209,9 @@ const ShopPage = ({ data }: any) => {
   //   }
   // };
 
-  // console.log('shop data',metaData)
+  // // console.log('shop data',metaData)
 
-  console.log('data',data);
+  // // console.log('data',data);
   
 
   return (
@@ -244,26 +244,38 @@ const ShopPage = ({ data }: any) => {
 
                           <div className = 'hidden lg:flex flex-col overflow-y-scroll space-y-4  w-full'>  
 
-                              <div className={`${!checkElement() ? 'h-0' : 'h-80'} flex w-full mt-10 border`}> 
+                          <div className={`${checkElement() ? 'h-0' : 'h-80'} flex w-full mt-10 border`}> 
 
-                                { slug?.some(el => !data?.slug?.includes(el)) ? null :
-                                    ( <div className='h-full w-96'>  
-                                         <ShopProfileCard data={data} />
-                                      </div> )  }
-                                    
-                                    { slug?.some(el => !data?.slug?.includes(el)) ?
-                                    <Image src='/grocery.jpg' objectFit='cover' layout='intrinsic' 
-                                    width={1851} height={320} />
-                                     :
-                                    ( <div className='flex w-full  '>
-                                      {imageCheck(data?.cover_image?.original, data, '317', false,'h-full w-full object-fill')}
-                                    </div> )  }
-                   
-                              </div> 
+                          { checkElement() ? null 
+                            :
+                              ( <div className='h-full w-96'>  
+                                  <ShopProfileCard data={data} />
+                                </div> )  }
+                              
+                              { slug?.some(el => data?.slug?.includes(el)) ? (
+                                data?.slug == 'chandigarh-grocery-store' ?
+                              <Image src='/grocery.jpg' objectFit='cover' layout='intrinsic' 
+                              width={1851} height={320} />
+                              : data?.slug == 'kosmetics-india' ?
+                              <Image src='/kosmetics.jpg' objectFit='cover' layout='intrinsic' 
+                              width={1851} height={320} /> : null
+                              )
+                              :
+                              ( <div className='flex w-full  '>
+                                {imageCheck(data?.cover_image?.original, data, '317', false,'h-full w-full object-fill')}
+                              </div> )  }
 
-                              <div className={`${checkElement() ? 'hidden' : 'w-full h-full border'}`}>
-                                <Image src='/grocery-web.jpg' className="" priority={true} layout="intrinsic" height={570} width={1826} objectFit="fill"  />
-                              </div>
+                          </div> 
+
+                          <div className={`${!checkElement() ? 'hidden' : 'w-full h-full border'}`}>
+                          {
+                          data?.slug == 'chandigarh-grocery-store' ?
+                            <Image src='/grocery-web.jpg' className="" priority={true} layout="intrinsic" height={570} width={1826} objectFit="fill"  />
+                          : data?.slug == 'kosmetics-india' ?
+                          <Image src='/kosmetics.jpg' objectFit='fill' layout='intrinsic' 
+                                width={1826} height={570} /> : null
+                          }
+                          </div>
 
            
                             
@@ -308,7 +320,7 @@ const ShopPage = ({ data }: any) => {
                                           
                             </div>
 
-                            { data?.slug == 'chandigarhgrocerystore' ? ( 
+                            {/* { data?.slug == 'chandigarhgrocerystore' ? ( 
                              <div className="w-full -mt-80 object-contain">
                                     <img src='/grocery-web.jpg' className="object-contain" />
                              </div> ) : null }
@@ -316,7 +328,7 @@ const ShopPage = ({ data }: any) => {
                              { data?.slug == 'kosmetics-india' ? ( 
                              <div className="w-full -mt-80 object-contain">
                                     <img src='/kosmetics.jpg' className="object-contain" />
-                             </div> ) : null }
+                             </div> ) : null } */}
 
                           {/* <HidingHeader> */}
                           <div className={` sticky ${ scrollDirection === "down" ? "-top-32" : "top-0"}   transition-all duration-300 sticky z-30 bg-white top-0`}>                                              
@@ -513,7 +525,7 @@ export default ShopPage;
 // );
 
 // const imageCheck = (logo: any , record:any, imgsize:any, imgDim:any, classname: string) => {
-//   console.log('logo',logo)
+//   // console.log('logo',logo)
 //   let check = false;
 //   let splitLength = logo?.split("/").length;
 //   let lastSplit = logo?.split("/")[splitLength - 1];
@@ -538,7 +550,7 @@ export default ShopPage;
 
 //   const {cover_image} = data;
 
-//   console.log('shopdata',data);
+//   // console.log('shopdata',data);
 
 
 //   // useEffect(() => {
@@ -609,7 +621,7 @@ export default ShopPage;
 
 //   // var ProductFeed = document.getElementById("product-feed");
 
-//   // console.log('offset value', ProductFeed?.offsetTop)
+//   // // console.log('offset value', ProductFeed?.offsetTop)
 
 
 //   const {
@@ -633,7 +645,7 @@ export default ShopPage;
 //     }
 //   };
 
-//   // console.log('shop slug is', data?.slug?.includes('chandigarh-grocery-store' ,'kosmetics-india'))
+//   // // console.log('shop slug is', data?.slug?.includes('chandigarh-grocery-store' ,'kosmetics-india'))
 //   seoFunction(data);
 
 //   const slug = ['chandigarh-grocery-store', 'kosmetics-india'];
@@ -666,16 +678,16 @@ export default ShopPage;
 //   //   }
 //   // };
 
-//   // console.log('shop data',metaData)
+//   // // console.log('shop data',metaData)
 
-//   console.log('coverimage',data?.cover_image);
+//   // console.log('coverimage',data?.cover_image);
 
 //   const shopCat = data?.shop_categories?.replace(/[{":,0123456789}]/g,'').slice(5,-3);
 
 //   // const shopName = data?.name;
 
-//   // console.log('shopsdata',shopCat);
-//   // console.log('coverimage',data?.cover_image ? 'true' : 'false');
+//   // // console.log('shopsdata',shopCat);
+//   // // console.log('coverimage',data?.cover_image ? 'true' : 'false');
  
 //   return (
 //     <>

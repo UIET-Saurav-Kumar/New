@@ -37,7 +37,7 @@ export default function CityButton({lat, lng, city,
     async function showPosition(position:any) {
        
         var address = await getAddress({lat:lat,lng:lng})
-        console.log('address',address);
+        // console.log('address',address);
 
         const location: any = {
             lat:  lat,
@@ -45,7 +45,7 @@ export default function CityButton({lat, lng, city,
             formattedAddress: city,
           };
 
-        console.log(location);
+        // console.log(location);
         addLocation(location);
 
         onChange(location);

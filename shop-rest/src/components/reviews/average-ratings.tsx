@@ -21,8 +21,8 @@ const AverageRatings: React.FC<AverageRatingsProps> = ({
   //TODO: need to check
   if (!ratings) return null;
 
-  console.log('totalReviews', totalReviews);
-  console.log('ratings', ratings);
+  // console.log('totalReviews', totalReviews);
+  // console.log('ratings', ratings);
 
   return (
     <div className="p-5 md:py-12 lg:px-16">

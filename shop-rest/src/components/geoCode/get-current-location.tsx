@@ -28,7 +28,7 @@ export default function GetCurrentLocation({
       }
 
       const {getLocation} =useLocation();
-      console.log('getLocation is',getLocation.length)
+      // console.log('getLocation is',getLocation.length)
 
       const[address,setAddress] = useState('');
 
@@ -72,7 +72,7 @@ export default function GetCurrentLocation({
         })
         // alert(address);
 
-        console.log('address',address)
+        // console.log('address',address)
         
         const location: any = {
             lat: position.coords?.latitude,
@@ -82,7 +82,7 @@ export default function GetCurrentLocation({
 
           window.location.reload();
 
-        console.log('lat lng',location)
+        // console.log('lat lng',location)
 
         // alert(location);
         addLocation(location)

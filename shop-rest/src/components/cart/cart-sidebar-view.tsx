@@ -59,8 +59,8 @@ const CartSidebarView = () => {
 
   //available items sum total
  
-  console.log('available_items_total', totalPrice);
-  console.log('cart sidebar items', allItems)
+  // console.log('available_items_total', totalPrice);
+  // console.log('cart sidebar items', allItems)
 
   return (
 

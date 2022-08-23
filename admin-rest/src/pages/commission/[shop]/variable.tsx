@@ -57,7 +57,7 @@ export default function UpdateShopPage() {
       },
       {
         onError: (error: any) => {
-          console.log(error);
+          // console.log(error);
         },
       }
     );

@@ -28,7 +28,7 @@ export default function Uploader({ onChange, value, multiple }: any) {
           acceptedFiles, // it will be an array of uploaded attachments
           {
             onSuccess: (data) => {
-              console.log(data,"data");
+              // console.log(data,"data");
               let mergedData;
               if (multiple) {
                 mergedData = files.concat(data);

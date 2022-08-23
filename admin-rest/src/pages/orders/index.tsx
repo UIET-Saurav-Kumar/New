@@ -73,11 +73,11 @@ export default function Orders() {
   
   );
 
-  console.log('startDAte',endDate)
+  // console.log('startDAte',endDate)
 
-  console.log('date Range',data);
+  // console.log('date Range',data);
   
-  console.log('converted date', convertStartDate(), convertEndDate());
+  // console.log('converted date', convertStartDate(), convertEndDate());
   
 
   const {
@@ -94,7 +94,7 @@ export default function Orders() {
     // shopName,
     // shopCategory,
   });
-  console.log('data',allOrders);
+  // console.log('data',allOrders);
 
 
 // const[setDate, datevalue] = useState(new Date());
@@ -105,7 +105,7 @@ export default function Orders() {
   //   fetch(`http://127.0.0.1:8000/orders`)
   //     .then((res) => res.json())
   //     .then((data) => {
-  //       console.log('range orders',data);
+  //       // console.log('range orders',data);
   //     }
   //     )
   //     .catch((err) => alert(err));
@@ -135,7 +135,7 @@ export default function Orders() {
   };
 
 //  alert(startDate) 
- console.log('startDate',startDate)
+ // console.log('startDate',startDate)
 
  // convert this Thu Jun 23 2022 00:00:00 GMT+0530 (India Standard Time) to yyyy-mm-dd
   
@@ -148,8 +148,8 @@ export default function Orders() {
 
   //  alert(convertStartDate(startDate))
 
-  // console.log('date range orders', data.orders.data);
-  // console.log('allOrders', allOrders);
+  // // console.log('date range orders', data.orders.data);
+  // // console.log('allOrders', allOrders);
 
   return (
     <>

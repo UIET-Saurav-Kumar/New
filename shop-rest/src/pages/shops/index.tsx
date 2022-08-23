@@ -126,7 +126,7 @@ const ShopsPage = () => {
   //     try{
   //       value=JSON.parse(value).value.replaceAll("&","-");
   //     }catch(e){
-  //       console.log(e)
+  //       // console.log(e)
   //     }
   //   }
   //   return value;
@@ -159,12 +159,12 @@ const ShopsPage = () => {
 
   // push both in seperate array starting with the first shop with products and ending with the last shop with no products
   
-  // console.log('shops',data?.pages?.filter((shop: any) => shop?.is_active === 1))
-  // console.log('shops name',data?.pages?.data?.map((shop: any) => shop))
+  // // console.log('shops',data?.pages?.filter((shop: any) => shop?.is_active === 1))
+  // // console.log('shops name',data?.pages?.data?.map((shop: any) => shop))
 
   const shopCat =getCategory();
 
-  console.log('shop page data',getCategory())
+  // console.log('shop page data',getCategory())
 
   return (
 

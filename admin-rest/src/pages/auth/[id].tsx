@@ -67,7 +67,7 @@ const RegisterForm = () => {
   async function resendCode(){
     if(query.id){
       var data=await useCodeMutation(query.id as string);
-      console.log(data);
+      // console.log(data);
     }
   }
 

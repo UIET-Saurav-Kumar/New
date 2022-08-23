@@ -51,7 +51,7 @@ export default function GooglePlacesAutocomplete({address,closeLocation,
 
     if (!place.geometry || !place.geometry.location) {
       
-      console.log("Returned place contains no geometry");
+      // console.log("Returned place contains no geometry");
       return;
     }
 
@@ -101,7 +101,7 @@ export default function GooglePlacesAutocomplete({address,closeLocation,
       createLog({location:location.formattedAddress}, {
         onSuccess: (data: any) => {
          
-          console.log(data)
+          // console.log(data)
         },
         onError: (error: any) => {
           

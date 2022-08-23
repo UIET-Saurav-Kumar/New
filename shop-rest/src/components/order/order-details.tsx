@@ -47,7 +47,7 @@ const OrderDetails = ({ order }: Props) => {
 
 
 
-  console.log('single order',order)
+  // console.log('single order',order)
 
   return (
     <div className="flex flex-col w-full lg:w-2/3 border border-border-200">

@@ -32,7 +32,7 @@ export default function UpdateShopPage() {
     shouldUnregister: true,
   });
   useEffect(()=>{
-    console.log(data);
+    // console.log(data);
   })
   function onSubmit(values: any) {
     updateShop(
@@ -44,14 +44,14 @@ export default function UpdateShopPage() {
       },
       {
         onError: (error: any) => {
-          console.log(error);
+          // console.log(error);
         },
       }
     );
   }
 
   function getCommission():string{
-    console.log(data);
+    // console.log(data);
     if(data?.shop){
       return data?.shop?.commission as string;
     }

@@ -52,28 +52,28 @@ export default function ProductsFeed({shopId,searchTerm,type,category,orderBy,so
     }
   );
   useEffect(()=>{
-    console.log(master,'master');
+    // console.log(master,'master');
     
   },[])
 
   function addProduct(id:number):any{
     const price = document.getElementById("price_"+id)?.nodeValue;
     const quantity = document.getElementById("quantity_"+id)?.nodeValue;
-    console.log(price,quantity)
+    // console.log(price,quantity)
     if(!(price&&quantity)){
       return ;
     }
-    console.log(price,quantity);
-    console.log(id);
+    // console.log(price,quantity);
+    // console.log(id);
   }
 
-  console.log('product', data?.pages.map((products, _idx) => (
+  // console.log('product', data?.pages.map((products, _idx) => (
     products
   )))
     
 
   function handleLoadMore() {    
-    console.log("handleLoadMore");
+    // console.log("handleLoadMore");
     fetchNextPage();
   }
   const loadMoreRef = useRef()

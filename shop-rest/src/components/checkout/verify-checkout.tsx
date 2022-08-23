@@ -83,7 +83,7 @@ const VerifyCheckout = () => {
     }
   );
 
-  console.log('item',items)
+  // console.log('item',items)
 
   const { mutate: verifyCheckout, isLoading: loading } =
         useVerifyCheckoutMutation();
@@ -115,7 +115,7 @@ const VerifyCheckout = () => {
               router.push("/order");
             },
             onError: (error) => {
-              console.log(error, "error");
+              // console.log(error, "error");
             },
 
           }

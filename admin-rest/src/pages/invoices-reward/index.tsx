@@ -52,7 +52,7 @@ export default function InvoicesReward() {
 
   useEffect(()=>{
     if(data){
-      console.log(data.reward,'data')
+      // console.log(data.reward,'data')
       document.getElementById('cashback_percentage').value=data.reward?.cashback_percentage
       document.getElementById('max_cashback').value=data.reward?.max_cashback
     }

@@ -83,7 +83,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
     });
   };
 
-  console.log('rating',ratings)
+  // console.log('rating',ratings)
 
   /**
    *

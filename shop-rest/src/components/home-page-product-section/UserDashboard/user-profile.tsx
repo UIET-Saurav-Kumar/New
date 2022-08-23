@@ -41,7 +41,7 @@ export default function UserProfile({data}:any) {
 
     const { data:analytics, isLoading: loading } = useAnalyticsQuery()
 
-    console.log('analytics', analytics)
+    // console.log('analytics', analytics)
 
     const users = (analytics?.totalUsers + 200000)
     

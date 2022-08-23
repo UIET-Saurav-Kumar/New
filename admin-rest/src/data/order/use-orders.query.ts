@@ -19,7 +19,7 @@ const fetchOrders = async ({ queryKey }: QueryParamsType) => {
     sortedBy = "DESC",
   } = params as QueryOptionsType;
 
-  console.log('searchtype in query', searchType);
+  // console.log('searchtype in query', searchType);
 
   const searchString = searchType === 'name' ? stringifySearchQuery({
     name: text,

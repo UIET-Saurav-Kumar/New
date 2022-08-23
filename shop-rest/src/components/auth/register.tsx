@@ -55,7 +55,7 @@ const defaultValues = {
   gender:'male'
 };
 
-// console.log('loc',getLocation.formattedAddress)
+// // console.log('loc',getLocation.formattedAddress)
 
 const RegisterForm = () => {
 
@@ -112,9 +112,9 @@ const RegisterForm = () => {
 
     // data.length ? setLocation(false) : setLocation(false)
 
-    console.log('address data',data)
+    // console.log('address data',data)
     var location=JSON.stringify(data);
-    console.log(data?.formattedAddress);
+    // console.log(data?.formattedAddress);
     // document.getElementById("location_id").value = data?.formattedAddress;
     // setLocation(data?.formattedAddress);
 
@@ -183,8 +183,8 @@ const RegisterForm = () => {
     );
   }
 
-  // console.log('birthday',birthDate?.toISOString().split('T')[0].split('-').reverse().join('/'))
-  // console.log('birthday',birthDate)
+  // // console.log('birthday',birthDate?.toISOString().split('T')[0].split('-').reverse().join('/'))
+  // // console.log('birthday',birthDate)
 
   function onChange(e: any) {
     const { name, value } = e.target;
