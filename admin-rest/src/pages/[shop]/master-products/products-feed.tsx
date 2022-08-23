@@ -68,8 +68,8 @@ export default function ProductsFeed({shopId,searchTerm,type,category,orderBy,so
   }
 
   // console.log('product', data?.pages.map((products, _idx) => (
-    products
-  )))
+  //   products
+  // )))
     
 
   function handleLoadMore() {    
