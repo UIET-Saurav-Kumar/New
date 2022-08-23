@@ -74,6 +74,7 @@ const ShopPage = ({ data }: any) => {
     });
   }
 
+  const[element, setElement] = useState(false);
 
   // useEffect(() => {
   
@@ -113,6 +114,12 @@ const ShopPage = ({ data }: any) => {
   function handlePayment() {
     return openModal("SHOP_PAYMENT_FORM");
   }
+
+  const slug = ['chandigarhgrocerystore', 'kosmetics-india'];
+
+  function checkElement(){
+    return slug?.some(el => data?.slug?.includes(el))
+ }
 
   // useeffect  window.scrollTo(0, 1000)
   useEffect(() => {
@@ -183,7 +190,7 @@ const ShopPage = ({ data }: any) => {
   // console.log('shop slug is', data?.slug?.includes('chandigarhgrocerystore' ,'kosmetics-india'))
   seoFunction(data);
 
-  const slug = ['chandigarhgrocerystore', 'kosmetics-india'];
+   
 
   const  getShopCategory = () => {
 
@@ -237,19 +244,27 @@ const ShopPage = ({ data }: any) => {
 
                           <div className = 'hidden lg:flex flex-col overflow-y-scroll space-y-4  w-full'>  
 
-                              <div className='flex w-full mt-10 h-80 border'> 
+                              <div className={`${!checkElement() ? 'h-0' : 'h-80'} flex w-full mt-10 border`}> 
 
-                                { slug?.some(el => data?.slug?.includes(el)) ? null :
+                                { slug?.some(el => !data?.slug?.includes(el)) ? null :
                                     ( <div className='h-full w-96'>  
                                          <ShopProfileCard data={data} />
                                       </div> )  }
                                     
-                                    { slug?.some(el => data?.slug?.includes(el)) ? null :
+                                    { slug?.some(el => !data?.slug?.includes(el)) ?
+                                    <Image src='/grocery.jpg' objectFit='cover' layout='intrinsic' 
+                                    width={1851} height={320} />
+                                     :
                                     ( <div className='flex w-full  '>
                                       {imageCheck(data?.cover_image?.original, data, '317', false,'h-full w-full object-fill')}
                                     </div> )  }
                    
                               </div> 
+
+                              <div className={`${checkElement() ? 'hidden' : 'w-full h-full border'}`}>
+                                <Image src='/grocery-web.jpg' className="" priority={true} layout="intrinsic" height={570} width={1826} objectFit="fill"  />
+                              </div>
+
            
                             
                               {/*                                 
@@ -304,7 +319,7 @@ const ShopPage = ({ data }: any) => {
                              </div> ) : null }
 
                           {/* <HidingHeader> */}
-                          <div className={` sticky ${ scrollDirection === "down" ? "-top-32" : "top-0"}   transition-all duration-300 sticky z-50 bg-white top-0`}>                                              
+                          <div className={` sticky ${ scrollDirection === "down" ? "-top-32" : "top-0"}   transition-all duration-300 sticky z-30 bg-white top-0`}>                                              
                               <CategoryDropdownSidebar data={data} />
                           </div>
                           {/* </HidingHeader>  */}

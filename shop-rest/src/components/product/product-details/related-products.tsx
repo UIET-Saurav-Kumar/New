@@ -18,6 +18,7 @@ const RelatedProducts = ({
   const { t } = useTranslation("common");
   
   return (
+
     <>
       <h2 className="text-lg text-heading tracking-tight font-semibold mb-6">
         {t("Related Products")}
@@ -28,7 +29,7 @@ const RelatedProducts = ({
            gridClassName
         )}
       >
-        {products?.filter((itm:any)=>itm?.status == 'publish')?.map((item: any, idx: number) => {
+        {products?.filter((itm:any) => itm?.status == 'publish')?.map((item: any, idx: number) => {
           if (currentProductId === item.id) {
             return null;
           }
