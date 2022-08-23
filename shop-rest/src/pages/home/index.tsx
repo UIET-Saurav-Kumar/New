@@ -242,6 +242,8 @@ useIntersectionObserver({
       }
       )}} />
 
+      <link rel="canonical" href='https://www/buylowcal.com'/>
+
       </Head>
 
         <div className=" h-full">
