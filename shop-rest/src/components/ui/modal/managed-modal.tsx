@@ -3,7 +3,7 @@ import Modal from "@components/ui/modal/modal";
 import { useModalAction, useModalState } from "./modal.context";
 import ShopProfileCard from "@components/profile/profile-card";
 import CategoryDropdownSidebar from "@components/category/category-dropdown-sidebar";
-import ShopPaymentForm from "src/pages/shops/shop-payment-form";
+import ShopPaymentForm from "@components/shop/shop-payment-form";
 
 
 const Login = dynamic(() => import("@components/auth/login"));

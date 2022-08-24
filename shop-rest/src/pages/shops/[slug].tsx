@@ -16,17 +16,17 @@ import { fetchSettings } from "@data/settings/use-settings.query";
 import { dehydrate } from "react-query/hydration";
 import ShopCategoryCard from "@components/category/shop-category-card";
 import Navbar from "@components/layout/navbar/navbar";
-import ShopPaymentForm from "./shop-payment-form";
-import ShopDescription from "./shop-description";
-import ShopMobileView from "./shop-mobile-view";
-import ShopBanner from "./shop-banner";
-import WebShopBanner from "./web-shop-banner";
+import ShopPaymentForm from "@components/shop/shop-payment-form";
+import ShopDescription from "@components/shop/shop-description";
+import ShopMobileView from "@components/shop/shop-mobile-view";
+// import ShopBanner from "./shop-banner";
+import WebShopBanner from "@components/shop/web-shop-banner";
 import { useModalAction } from "@components/ui/modal/modal.context"
 import CategoryCard from "@components/ui/category-card";
 import AllCategories from "@components/home-page-product-section/AllCategories";
 import Layout from "@components/layout/layout";
 import Avatar from 'react-avatar';
-import OfferCards from "./offer-cards";
+import OfferCards from "@components/shop/offer-cards";
 import CategoryDropdownSidebar from "@components/category/category-dropdown-sidebar";
 import { useRouter } from "next/router";
 import RelatedProducts from "@components/product/product-details/related-products";
@@ -222,7 +222,7 @@ const ShopPage = ({ data }: any) => {
           <title>{(data.name?data.name:'')+' '+(data.address.city?data.address.city+" "+data.address.street_address:'')+', Best Discounts and Offers Only Through BuyLowcal.com'}</title>
           <meta name="description" content={(data.name?data.name:'')+' '+(data.address.city?data.address.city+" "+data.address.street_address:'')+' Best '+shopCategory+' deals, offers, discounts and cash backs only through buylowcal.com'} />
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-          <link rel="canonical" href='https://buylowcal.com'/>
+          {/* <link rel="canonical" href='https://buylowcal.com'/> */}
 
         </Head>
 

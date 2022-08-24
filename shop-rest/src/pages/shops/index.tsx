@@ -200,8 +200,8 @@ const ShopsPage = () => {
           {shopCat == 'Restraunts' &&  <meta name="description" content='Top 5 star Rating restraunt list in your smartphone | We provides you 100+ restraunt in one Click' /> }
 
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-          <link rel="canonical" href=' https://buylowcal.com'/>
-          
+          {/* <link rel="canonical" href=' https://buylowcal.com'/> */}
+
         </Head>
      
 
