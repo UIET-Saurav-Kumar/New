@@ -40,7 +40,6 @@ const EnterPhoneNumberView = ({ onSubmit, loading }: Props) => {
         type="phone_number"
         //restrict to numbers only
         pattern="[0-9]*"
-        
         inputMode="numeric"
         variant="outline"
         className="mb-5"

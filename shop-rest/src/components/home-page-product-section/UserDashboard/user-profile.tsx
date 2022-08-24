@@ -74,10 +74,11 @@ export default function UserProfile({data}:any) {
             <div className='flex flex-col 2xl:space-y-8 w-full space-y-3'>
                 <div className='space-y-8 text-center'>
                     <div className=' flex justify-around items-start mt-2 space-y-3'>
-                           < Image        quality='40' 
+                           <Image quality='40' 
                         height={56}
                         width={56}
-                        src={data ? data?.profile?.avatar?.thumbnail : '/boy.png'} 
+                        src='/boy.png'
+                        // src={data ? data?.profile?.avatar?.thumbnail : '/boy.png'} 
                         alt='profile'
                         className='rounded-full'
                         //   className='h-16 w-16 border rounded-full' alt='profile'

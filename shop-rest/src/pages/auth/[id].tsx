@@ -70,6 +70,8 @@ const RegisterForm = () => {
     }
   }
 
+  console.log('query', query.utm_source + ' ' + query.utm_campaign);
+
 
 
   function onSubmit({code}: FormValues) {
@@ -90,7 +92,9 @@ const RegisterForm = () => {
             Cookies.set("auth_token", data.token);
             Cookies.set("auth_permissions", data.permissions);
             authorize();
-            router.push('/');
+            query?.utm_source == 'shop_qr' ? 
+            router.push('/shops/'+ query?.utm_campaign) :  router.push('/')  ;
+          
             return;
           }
           if (!data.token) {

@@ -320,7 +320,6 @@ class UserController extends CoreController
     {
         $request->validate([
             'phone_number'    => 'required',
-
         ]);
 
         $user = User::where('phone_number', $request->phone_number)->where('is_active', true)->first();
@@ -348,8 +347,6 @@ class UserController extends CoreController
     // verifyOtpToken
     public function verifyOtpToken(Request $request)
     {
-        
-
         $user = User::where('phone_number', $request->phone_number)->where('code',$request->token)->first();
 
         if (!$user ) {

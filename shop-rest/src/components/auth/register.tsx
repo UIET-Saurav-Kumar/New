@@ -157,8 +157,10 @@ const RegisterForm = () => {
       },
       {
         onSuccess: (data) => {
-          // query?.utm_source == 'shop_qr' ? 
-          // router.push('/shops/'+ query?.campaign):
+          query?.utm_source == 'shop_qr' ? 
+          // router.push('/shops/'+ query?.campaign)
+          router.push('/auth/'+data?.user.id+'?utm_source=shop_qr&utm_campaign='+query?.campaign)
+          :
           router.push('/auth/'+data?.user.id);
           closeModal();
           return ;
