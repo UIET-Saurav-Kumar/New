@@ -222,7 +222,7 @@ const ShopPage = ({ data }: any) => {
           <title>{(data.name?data.name:'')+' '+(data.address.city?data.address.city+" "+data.address.street_address:'')+', Best Discounts and Offers Only Through BuyLowcal.com'}</title>
           <meta name="description" content={(data.name?data.name:'')+' '+(data.address.city?data.address.city+" "+data.address.street_address:'')+' Best '+shopCategory+' deals, offers, discounts and cash backs only through buylowcal.com'} />
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-          <link rel="canonical" href={pageURL}/>
+          <link rel="canonical" href='https://buylowcal.com'/>
 
         </Head>
 
