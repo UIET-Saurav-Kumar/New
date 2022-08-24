@@ -28,6 +28,8 @@ export default class CustomDocument extends Document {
       <Html>
         
         <Head>
+
+        <link rel="canonical" href=' https://buylowcal.com'/>
          
             {/* Global Site Tag (gtag.js) - Google Analytics */}
             <script

@@ -242,7 +242,7 @@ useIntersectionObserver({
       }
       )}} />
 
-      <link rel="canonical" href=' https://buylowcal.com'/>
+       
 
       </Head>
 
