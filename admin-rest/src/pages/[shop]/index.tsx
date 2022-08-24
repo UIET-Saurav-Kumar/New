@@ -190,8 +190,8 @@ export default function ShopPage() {
         <ShopQrCode
           size={150}
           title='Scan to visit'
-          url={` https://buylowcal.com/shops/${slug}?utm_source=shop_qr&utm_medium=cpc&utm_campaign=+qrCode&utm_id=+&utm_term=+&utm_content=`}
-          // url={`https:www.buylowcal.com/shops/${slug}&campaign=0`} 
+          // url={` https://buylowcal.com/shops/${slug}?utm_source=shop_qr&utm_medium=cpc&utm_campaign=+qrCode&utm_id=+&utm_term=+&utm_content=`}
+          url={`https://buylowcal.com/register?utm_source='shop_qr'&campaign=${slug}`} 
         />
       </div>
 

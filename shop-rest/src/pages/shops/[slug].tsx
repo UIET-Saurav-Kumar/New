@@ -64,6 +64,7 @@ const imageCheck = (logo: any , record:any, imgsize:any, imgDim:any, classname: 
 const ShopPage = ({ data }: any) => {
   const router = useRouter();
   const { pathname, query } = router;
+  const { openModal } = useModalAction();
 
   function openReviewModal() {
     openModal('REVIEW_RATING', {
@@ -97,15 +98,16 @@ const ShopPage = ({ data }: any) => {
   const [pageURL, setPageUrl] = useState('');
 
   useEffect(() => {
+    query.utm_source == 'shop_qr' && openModal('REGISTER'); 
     setPageUrl(window.location.href);
-    query.utm_source == 'shop_qr' ? (!isAuthorize ? openModal("REGISTER") : null) : null;
+    // query.utm_source == 'shop_qr' ? (!isAuthorize ? openModal("REGISTER") : null) : null;
   },  [isAuthorize ]);
   
   const { t } = useTranslation("common");
 
   const { width } = useWindowSize();
 
-  const { openModal } = useModalAction();
+   
 
   function handleCategories() {
     return openModal("SHOP_MOBILE_CATEGORIES");
@@ -138,7 +140,7 @@ const ShopPage = ({ data }: any) => {
      
   
     useEffect(() => {
-
+       
       getShopCategory();
       let lastScrollY = typeof window !== "undefined" ?  window.pageYOffset : '';
   

@@ -26,10 +26,13 @@ const InStoreOfferMessage = dynamic(
   () => import("@components/ui/in-store-offer-msg")
 );
 
+
 const ReviewRating = dynamic(() => import('@components/reviews/review-form'));
+
 const QuestionForm = dynamic(
   () => import('@components/questions/question-form')
 );
+
 const AbuseReport = dynamic(() => import('@components/reviews/abuse-report'));
 const ReviewImageModal = dynamic(
   () => import('@components/reviews/review-image-modal')

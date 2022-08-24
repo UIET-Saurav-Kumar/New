@@ -52,9 +52,8 @@ export default class CustomDocument extends Document {
               }}
             />
 
-             
+             {/* Microsoft clarity */}
            <script
-            
             dangerouslySetInnerHTML={{
               __html: `(function(c,l,a,r,i,t,y){
                     c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -127,7 +126,6 @@ export default class CustomDocument extends Document {
 
         {/* hotjar */}
          <script
-         
           dangerouslySetInnerHTML={{
               __html:`(function(h,o,t,j,a,r){
                   h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};

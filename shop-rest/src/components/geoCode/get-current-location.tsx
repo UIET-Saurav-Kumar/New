@@ -96,9 +96,9 @@ export default function GetCurrentLocation({
 
         <> 
           { url && url?.includes('/register' || '/invite') ?
-              <button onClick = {getLoc} className=' flex float-left mx-4  sm:mx-0 items-center  text-sm sm:text-sm md:text-md 
-                                text-white relative bg-magenta transition duration-500 ease-in-out  transform active:-translate-y-1 active:scale-95 
-                                  px-6 p-2 sm:p-3 sm:px-4 md:px-4 2xl:px-8 2xl:p-3  rounded-full   shadow-md font-md '> 
+              <button onClick = {getLoc} className=' flex float-left  sm:mx-0 items-center  text-sm sm:text-sm md:text-md 
+                                text-white relative bg-blue-600 transition duration-500 ease-in-out  transform active:-translate-y-1 active:scale-95 
+                                rounded   p-2 mb-3 whitespace-nowrap   shadow-md font-md '> 
                       <span className='mr-1 md:mr-1.5 md:w-4'>
                           <img src='/gps-white.png' 
                               className={`${spin ? 'animate-pulse' : 'animate-none'}

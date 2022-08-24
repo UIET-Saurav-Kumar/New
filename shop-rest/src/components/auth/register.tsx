@@ -20,6 +20,7 @@ import { useLocation } from "@contexts/location/location.context";
 import Radio from "@components/ui/radio/radio";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { Query } from "react-query";
 
 
 type FormValues = {
@@ -108,6 +109,8 @@ const RegisterForm = () => {
     return value;
   }
 
+  var { query ,pathname} = router;
+
   function changeLocation(data:any){
 
     // data.length ? setLocation(false) : setLocation(false)
@@ -154,6 +157,8 @@ const RegisterForm = () => {
       },
       {
         onSuccess: (data) => {
+          query?.utm_source == 'shop_qr' ? 
+          router.push('/shops/'+ query?.campaign):
           router.push('/auth/'+data?.user.id);
           closeModal();
           return ;
