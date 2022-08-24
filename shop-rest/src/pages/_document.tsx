@@ -29,7 +29,7 @@ export default class CustomDocument extends Document {
         
         <Head>
 
-        <link rel="canonical" href=' https://buylowcal.com'/>
+        {/* <link rel="canonical" href=' https://buylowcal.com'/> */}
          
             {/* Global Site Tag (gtag.js) - Google Analytics */}
             <script

@@ -203,6 +203,7 @@ useIntersectionObserver({
       
       <Head>
       <meta name="msvalidate.01" content="1A1026D1B7AF52339B69AA95E6DFE95C" />
+      <link rel="canonical" href=' https://buylowcal.com'/>
       <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(
