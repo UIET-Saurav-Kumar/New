@@ -127,7 +127,7 @@ const RegisterForm = () => {
     // }
 
     var { query ,pathname} = router;
-    var pathname="/"+router.locale+pathname
+    var pathname="/"+pathname
     
     router.push(
     {
@@ -157,8 +157,8 @@ const RegisterForm = () => {
       },
       {
         onSuccess: (data) => {
-          query?.utm_source == 'shop_qr' ? 
-          router.push('/shops/'+ query?.campaign):
+          // query?.utm_source == 'shop_qr' ? 
+          // router.push('/shops/'+ query?.campaign):
           router.push('/auth/'+data?.user.id);
           closeModal();
           return ;
