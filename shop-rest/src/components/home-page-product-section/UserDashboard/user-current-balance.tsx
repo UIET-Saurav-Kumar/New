@@ -19,10 +19,10 @@ export default function UserCurrentBalance({currentBalance,isAuthorize}:any) {
                 <p className='text-lg lg:text-xl xl:text-2xl text-gray-700 mt-4 font-light'>
                 {isAuthorize ? currentBalance : '₹' + ' ' + '0.00'} 
                 </p>
-                <span className='text-xs py-2 h-28  text-gray-400'>
-                          Available amount that you can    <br/>
+                <span className='text-xs lg:text-sm py-2 h-28  text-gray-500'>
+                          Available amount that you     <br/>
                             can withdraw any time. <br/>
-                          With <span className='font-semibold'> No service charges.</span> 
+                           <span className='font-semibold'> No service charges.</span> 
                 </span>
             </div> 
                 

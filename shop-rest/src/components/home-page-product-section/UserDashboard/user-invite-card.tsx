@@ -40,7 +40,7 @@ export default function UserInviteCard() {
                     <h4 className='font-semibold text-lg sm:text-sm xl:text-lg 2xl:text-xl text-gray-800 '>
                           Invite Friends
                   </h4>
-                  <span className='text-xs py-2 h-28 w-44  lg:w-auto text-gray-400'>
+                  <span className='text-xs lg:text-sm py-2 h-28 w-44  lg:w-auto text-gray-500'>
                       Get   <span className='font-semibold'>₹10 cashback </span>  
                         per user  registered with you  
                         and see your network

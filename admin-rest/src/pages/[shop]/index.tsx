@@ -32,6 +32,7 @@ import { DollarIcon } from "@components/icons/shops/dollar";
 import ReadMore from "@components/ui/truncate";
 import QrCode from "@components/shop/shop-qr-code";
 import ShopQrCode from "@components/shop/shop-qr-code";
+import { useUI } from "@contexts/ui.context";
 
 export default function ShopPage() {
 
@@ -41,6 +42,8 @@ export default function ShopPage() {
     query: { shop },
     locale,
   } = useRouter();
+
+  const {isAuthorize} = useUI();
   
   const { data, isLoading: loading, error } = useShopQuery(shop!.toString());
   const { price: totalEarnings } = usePrice(
@@ -187,12 +190,21 @@ export default function ShopPage() {
       </div>
 
       <div className="flex relative order-4 border-2 z-30 w-auto my-60 -mt-0">
-        <ShopQrCode
+       {/* { isAuthorize ?  */}
+       <ShopQrCode
+          size={150}
+          title='Scan to visit'
+          url={`https://buylowcal.com/shops/${slug}?utm_source=shop_qr&utm_campaign=${slug}`} 
+        /> 
+        {/* : */}
+        {/* <ShopQrCode
           size={150}
           title='Scan to visit'
           // url={` https://buylowcal.com/shops/${slug}?utm_source=shop_qr&utm_medium=cpc&utm_campaign=+qrCode&utm_id=+&utm_term=+&utm_content=`}
           url={`https://buylowcal.com/register?utm_source=shop_qr&utm_campaign=${slug}`} 
-        />
+          // url={`https://buylowcal.com/shops/${slug}?utm_source=shop_qr&utm_campaign=${slug}`} 
+        />  */}
+       {/* } */}
       </div>
 
       {/* Mini Dashboard */}

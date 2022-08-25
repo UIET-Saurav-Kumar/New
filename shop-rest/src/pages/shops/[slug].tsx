@@ -75,6 +75,8 @@ const ShopPage = ({ data }: any) => {
     });
   }
 
+  console.log('utm', query.utm_campaign);
+
   const[element, setElement] = useState(false);
 
   // useEffect(() => {
@@ -95,19 +97,30 @@ const ShopPage = ({ data }: any) => {
   //   return openModal("REGISTER");
   // }
 
+  const utmquery = query?.utm_campaign;
+
+  
+
   const [pageURL, setPageUrl] = useState('');
 
+  function checkUtm(utm_source,utm_campaign) {
+    
+     utm_source == 'shop_qr' ? isAuthorize ?
+    router.push('/shops/'+  utm_campaign) :
+    router.push('/register?utm_source=shop_qr&utm_campaign='+utm_campaign) 
+    : null
+  }
+
   useEffect(() => {
-    query.utm_source == 'shop_qr' && openModal('REGISTER'); 
+   
+    checkUtm(query.utm_source, query.utm_campaign)
     setPageUrl(window.location.href);
     // query.utm_source == 'shop_qr' ? (!isAuthorize ? openModal("REGISTER") : null) : null;
-  },  [isAuthorize ]);
+  },  [query.utm_campaign ]);
   
   const { t } = useTranslation("common");
 
   const { width } = useWindowSize();
-
-   
 
   function handleCategories() {
     return openModal("SHOP_MOBILE_CATEGORIES");

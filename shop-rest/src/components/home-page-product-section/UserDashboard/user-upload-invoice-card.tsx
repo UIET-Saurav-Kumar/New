@@ -32,7 +32,7 @@ export default function UserUploadInvoiceCard() {
                   <h4 className='font-semibold text-lg sm:text-sm xl:text-lg  2xl:text-xl text-gray-800 '>
                           Upload Invoice
                   </h4>
-                  <span className='text-xs h-28  w-44 md:w-auto text-gray-400'>
+                  <span className='text-xs lg:text-sm h-28  w-44 md:w-auto text-gray-500'>
                       Upload Invoice/Bill and get  <span className='font-semibold'>5% </span>  
                       cashback <br/> upto ₹50 per bill 
                   </span>

@@ -35,9 +35,9 @@ export default function UserWithdrawCard({currentBalance}:any) {
                       <h4 className='font-semibold text-lg sm:text-sm xl:text-lg  2xl:text-xl text-gray-800 '>
                             Request Withdraw
                       </h4>
-                      <span className='text-xs py-2 h-28 lg:h-auto text-gray-400'>
+                      <span className='text-xs lg:text-sm py-2 h-28 lg:h-auto text-gray-500'>
                           Get instant cash in bank <br/>
-                           <span className='font-semibold'>zero commission</span> charges<br/>
+                           <span className='font-semibold'>zero service</span> charges.<br/>
                           Available : <span className='font-semibold text-lg '>{isAuthorize ? currentBalance : '₹' + ' ' + '0.00'}</span>
                       </span>
                   </div>

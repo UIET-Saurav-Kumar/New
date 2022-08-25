@@ -137,7 +137,7 @@ const PaymentForm = () => {
         loading={loading}
         className="w-full mt-5 lg:w-auto lg:ms-auto"
       >
-        {t("text-place-order")}
+        {t("Place Order")}
       </Button>
     </form>
   );

@@ -35,7 +35,7 @@ export default function UserWithdrawnAmount({withdrawnAmount,isAuthorize}:any) {
                     {/* <h4 className='font-semibold text-lg sm:text-sm  xl:text-2xl text-gray-800 '>
                           Invite Friends
                   </h4> */}
-                  <span className='tracking-wide text-xs py-2 h-28 lg:h-20 w-44 lg:w-auto text-gray-400'>
+                  <span className='tracking-wide text-xs lg:text-sm py-2 h-28 lg:h-20 w-44 lg:w-auto text-gray-500'>
                        Amount transfered to your bank account                         
                   </span>
                     <div className=''>
