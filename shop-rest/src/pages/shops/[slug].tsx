@@ -43,6 +43,8 @@ import Seo from "@components/ui/seo";
 import ShopLayout from "@components/layout/shop-layout";
 import { useUI } from "@contexts/ui.context";
 import { parseContextCookie } from "@utils/parse-cookie";
+import { useCreateLogMutation } from "@data/log/use-create-log.mutation";
+import { useLocation } from "react-use";
 
 
 const CartCounterButton = dynamic(
@@ -99,6 +101,8 @@ const ShopPage = ({ data }: any) => {
 
   const utmquery = query?.utm_campaign;
 
+  const { mutate: createLog} = useCreateLogMutation();
+
   
 
   const [pageURL, setPageUrl] = useState('');
@@ -111,8 +115,20 @@ const ShopPage = ({ data }: any) => {
     : null
   }
 
+  const { getLocation } = useLocation();
+
   useEffect(() => {
-   
+    query.utm_source == 'shop_qr' && 
+    createLog({
+      location:getLocation?.formattedAddress,
+      shop:data,
+      type:'shop-visited'
+    }, {
+      onSuccess: (data: any) => {
+        console.log(data)
+      },
+    });
+
     checkUtm(query.utm_source, query.utm_campaign)
     setPageUrl(window.location.href);
     // query.utm_source == 'shop_qr' ? (!isAuthorize ? openModal("REGISTER") : null) : null;

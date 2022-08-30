@@ -30,7 +30,11 @@ export const ROUTES = {
   STAFFS: "/staffs",
   MASTER_PRODUCT:"/master-products",
   COMMISSION:"/commission",
+
   LOGS:'/logs',
+  ALL_SHOP_VISITORS: '/all-shop-visitors',
+  SHOP_VISITORS: '/shop-visitors',
+
   SIGNUP_OFFERS:"/signup-offers",
   INVOICES_REWARD: '/invoices-reward',
   INVOICES_REWARD_DATA: '/invoices-reward-data',

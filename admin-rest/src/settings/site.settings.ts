@@ -47,6 +47,11 @@ export const siteSettings = {
         icon: "ShopIcon",
       },
       {
+        href: ROUTES.ALL_SHOP_VISITORS,
+        label: "Shop visitors",
+        icon: "ShopIcon",
+      },
+      {
         href: ROUTES.ADMIN_MY_SHOPS,
         label: "sidebar-nav-item-my-shops",
         icon: "MyShopIcon",
@@ -195,6 +200,12 @@ export const siteSettings = {
         href: (shop: string) => `${ROUTES.DASHBOARD}${shop}`,
         label: "sidebar-nav-item-dashboard",
         icon: "DashboardIcon",
+        permissions: adminOwnerAndStaffOnly,
+      },
+      {
+        href: (shop: string) => `/${shop}${ROUTES.SHOP_VISITORS}`,
+        label: "Shop Visitors",
+        icon: "AttributeIcon",
         permissions: adminOwnerAndStaffOnly,
       },
       {

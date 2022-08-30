@@ -73,7 +73,9 @@ export const API_ENDPOINTS = {
   IMPORT_MASTER_VARIATION_OPTIONS: "import-master-variation-options/",
   IMPORT_MASTER_PRODUCTS: "import-master-products/",
   IMPORT_SHOPS: "import-shops/",
+
   LOGS:"logs",
+  SHOP_VISITORS: 'shop-visitors',
   SIGNUP_OFFER: "signup-offer",
   STORE_LICENSES:"stored-licenses",
   STORE_LICENSE_ATTACHMENT:"store-license-attachment",

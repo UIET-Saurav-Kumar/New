@@ -5,6 +5,7 @@ namespace PickBazar\Http\Controllers;
 use Illuminate\Http\Request;
 use PickBazar\Database\Models\Log;
 use PickBazar\Database\Models\Product;
+use PickBazar\Database\Models\Shop;
 use PickBazar\Database\Repositories\LogRepository;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 
@@ -43,7 +44,8 @@ class LogController extends CoreController
         $search=$request->search;
         $user=$request->user();
         $product=$request->product;
-        $ip_location=$this->ip_AddressLocation($request);
+        $shop=$request->shop;
+        // $ip_location=$this->ip_AddressLocation($request);
      
 
         if($request->type=="item-removed"){
@@ -68,6 +70,20 @@ class LogController extends CoreController
                 "products"=>$product['name'],
                 "shop_id"=>$product->shop_id,
                 "type"=>"item-added"
+            ]);
+        }
+
+
+        else if($request->type=="shop-visited"){
+            $shop=Shop::find($shop["id"]);
+            Log::create([
+                "user_id"=>($user)?$user->id:NULL,
+                "ip_address"=>$request->ip(),
+                // 'ip_location'=>$ip_location,
+                "location"=>$location,
+                // "shop_name"=>$shop['name'],
+                "shop_id"=>$shop->id,
+                "type"=>"shop-visited"
             ]);
         }
 
