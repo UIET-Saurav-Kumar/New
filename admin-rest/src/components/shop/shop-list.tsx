@@ -119,7 +119,7 @@ const ShopList = ({ shops, onPagination }: IProps) => {
       align: "center",
       render: (is_active: boolean) => (
         <Badge
-          textKey={is_active ? "common:text-active" : "common:text-inactive"}
+          textKey={is_active ? "Active" : "Inactive"}
           color={is_active ? "bg-accent" : "bg-red-500"}
         />
       ),

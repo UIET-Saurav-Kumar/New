@@ -108,7 +108,7 @@ export const OrderItems = ({ products }: { products: any }) => {
 
 
     {
-      title: t("text-quantity"),
+      title: t("Quantity"),
       dataIndex: "pivot",
       key: "pivot",
       align: "center",

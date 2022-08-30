@@ -96,7 +96,7 @@ export default function ReviewCard({ review }: ReviewCardProps) {
 
       <div className="flex items-center justify-between">
         <div className="mt-3.5 text-xs text-gray-400">
-          {t('text-date')}: {dayjs(created_at).format('MMMM D, YYYY')}
+          {t('Date')}: {dayjs(created_at).format('MMMM D, YYYY')}
         </div>
         <div className="flex items-center space-x-6 rtl:space-x-reverse">
           <button

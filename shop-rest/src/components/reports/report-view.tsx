@@ -40,7 +40,7 @@ const MyReports: React.FC = () => {
       // width: 300,
     },
     {
-      title: t('text-date'),
+      title: t('Date'),
       dataIndex: 'created_at',
       key: 'created_at',
       align: 'center' as AlignType,

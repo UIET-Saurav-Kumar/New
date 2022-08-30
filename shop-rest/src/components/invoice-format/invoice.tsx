@@ -26,14 +26,14 @@ export default function Invoice() {
       // const orderTableColumns = [
 
       //   {
-      //     title: t("text-tracking-number"),
+      //     title: t("Tracking Number"),
       //     dataIndex: "tracking_number",
       //     key: "tracking_number",
       //     align: alignLeft,
       //   },
     
       //   {
-      //     title: t("text-date"),
+      //     title: t("Date"),
       //     dataIndex: "date",
       //     key: "date",
       //     align: alignLeft,
@@ -41,7 +41,7 @@ export default function Invoice() {
       //   },
     
       //   {
-      //     title: t("text-status"),
+      //     title: t("Status"),
       //     dataIndex: "status",
       //     key: "status",
       //     align: "center",

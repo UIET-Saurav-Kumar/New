@@ -192,7 +192,7 @@ const Withdraw = () => {
 
             <div className="flex items-center">
               <div className="w-4/12 me-5 flex justify-between text-body text-sm flex-shrink-0">
-                <span>{t("common:text-status")}</span>
+                <span>{t("common:Status")}</span>
                 <span>:</span>
               </div>
               <span className="text-heading text-sm font-semibold w-full">

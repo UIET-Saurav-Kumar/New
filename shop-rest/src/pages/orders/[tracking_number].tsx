@@ -97,14 +97,14 @@ export default function OrderPage() {
   const orderTableColumns = [
 
     {
-      title: t("text-tracking-number"),
+      title: t("Tracking Number"),
       dataIndex: "tracking_number",
       key: "tracking_number",
       align: alignLeft,
     },
 
     {
-      title: t("text-date"),
+      title: t("Date"),
       dataIndex: "date",
       key: "date",
       align: alignLeft,
@@ -112,7 +112,7 @@ export default function OrderPage() {
     },
 
     {
-      title: t("text-status"),
+      title: t("Status"),
       dataIndex: "status",
       key: "status",
       align: "center",
@@ -206,7 +206,7 @@ export default function OrderPage() {
                              text-base font-bold text-heading mb-9 sm:mb-12">
 
           <span className="mb-5 sm:mb-0 me-auto">
-            <span className="me-4">{t("text-status")} :</span>
+            <span className="me-4">{t("Status")} :</span>
             <Badge
               text={data?.order?.status?.name!}
               className="font-normal text-sm whitespace-nowrap"
@@ -218,7 +218,7 @@ export default function OrderPage() {
             className="inline-flex items-center text-accent text-base font-normal
                        underline hover:no-underline hover:text-accent-hover"
           >
-            {t("text-back-to-home")}
+            {t("Back to Home")}
           </Link>
           
                </h2> 
@@ -244,7 +244,7 @@ export default function OrderPage() {
                     
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex space-x-2  w-auto lg:w-1/3">
                           <h3 className="mb-2 text-sm lg:text-lg text-heading  font-semibold">
-                            {t("text-date")}:
+                            {t("Date")}:
                           </h3>
                           <p className="text-sm lg:text-lg text-body-dark">
                             {dayjs(data?.order?.created_at).format("MMMM D, YYYY")}
@@ -402,7 +402,7 @@ export default function OrderPage() {
         {data?.order?.children?.length ? (
           <div>
             <h2 className="text-xl font-bold text-heading mt-12 mb-6">
-              {t("text-sub-orders")}
+              {t("Sub Orders")}
             </h2>
             <div>
               {/* <div className="flex items-start border border-gray-700 rounded p-4 mb-12">

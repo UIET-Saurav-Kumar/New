@@ -34,7 +34,7 @@ const StaffList = ({ staffs, onPagination }: IProps) => {
       key: "is_active",
       align: "center",
       render: (is_active: boolean) =>
-        is_active ? t("common:text-active") : t("common:text-inactive"),
+        is_active ? t("Active") : t("Inactive"),
     },
     {
       title: t("table:table-item-actions"),

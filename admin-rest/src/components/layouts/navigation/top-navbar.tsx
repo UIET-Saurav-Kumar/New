@@ -42,7 +42,7 @@ const Navbar = () => {
               className="ms-4 md:ms-6"
               size="small"
             >
-              {t("common:text-create-shop")}
+              {t("Create Shop")}
             </LinkButton>
           )}
           <AuthorizedMenu />

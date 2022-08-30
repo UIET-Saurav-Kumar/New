@@ -60,7 +60,7 @@ export default function QuestionCard({ question }: QuestionCardProps) {
 
       <div className="flex items-center justify-between">
         <div className="mt-5 text-xs text-gray-400">
-          {t('text-date')}: {dayjs(created_at).format('D MMMM, YYYY')}
+          {t('Date')}: {dayjs(created_at).format('D MMMM, YYYY')}
         </div>
 
         <div className="flex items-center space-x-6 rtl:space-x-reverse">

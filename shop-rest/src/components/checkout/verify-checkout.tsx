@@ -203,7 +203,7 @@ const VerifyCheckout = () => {
       </Scrollbar>
       {/* <div className="space-y-2 mt-4">
         <div className="flex justify-between">
-          <p className="text-sm text-body">{t("text-sub-total")}</p>
+          <p className="text-sm text-body">{t("Sub Total")}</p>
           <span className="text-sm text-body">{subtotal}</span>
         </div>
         <div className="flex justify-between">

@@ -26,7 +26,7 @@ const OrderInformation = (props: Props) => {
 
       <div className="mt-4">
         <div className="flex justify-between mb-3">
-          <p className="text-sm text-body">{t("text-sub-total")}</p>
+          <p className="text-sm text-body">{t("Sub Total")}</p>
           <span className="text-sm text-body">{amount}</span>
         </div>
         {/* <div className="flex justify-between mb-3">

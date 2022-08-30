@@ -19,7 +19,7 @@ export default function OwnerDashboard() {
     <>
       <div className="border-b border-dashed border-border-base mb-5 sm:mb-8 pb-8">
         <h1 className="text-lg font-semibold text-heading">
-          {t("common:sidebar-nav-item-my-shops")}
+          {t("My Shops")}
         </h1>
       </div>
 

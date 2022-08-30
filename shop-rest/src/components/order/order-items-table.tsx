@@ -113,7 +113,7 @@ export const OrderItems = ({ products,orderId,orderStatus }: { products: any }) 
 
 
     {
-      title: t("text-quantity"),
+      title: t("Quantity"),
       dataIndex: "pivot",
       key: "pivot",
       align: "center",

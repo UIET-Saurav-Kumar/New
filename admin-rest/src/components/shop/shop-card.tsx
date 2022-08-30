@@ -38,7 +38,7 @@ const ShopCard: React.FC<ShopCardProps> = ({ shop }) => {
           <span>
             <Badge
               textKey={
-                shop?.is_active ? "common:text-active" : "common:text-inactive"
+                shop?.is_active ? "Active" : "Inactive"
               }
               color={shop?.is_active ? "bg-accent" : "bg-red-500"}
             />

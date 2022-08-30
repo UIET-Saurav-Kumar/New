@@ -38,12 +38,12 @@ export const siteSettings = {
     admin: [
       {
         href: ROUTES.DASHBOARD,
-        label: "sidebar-nav-item-dashboard",
+        label: "Dashboard",
         icon: "DashboardIcon",
       },
       {
         href: ROUTES.SHOPS,
-        label: "sidebar-nav-item-shops",
+        label: "Shops",
         icon: "ShopIcon",
       },
       {
@@ -53,12 +53,12 @@ export const siteSettings = {
       },
       {
         href: ROUTES.ADMIN_MY_SHOPS,
-        label: "sidebar-nav-item-my-shops",
+        label: "My shops",
         icon: "MyShopIcon",
       },
       {
         href: ROUTES.PRODUCTS,
-        label: "sidebar-nav-item-products",
+        label: "Products",
         icon: "ProductsIcon",
       },
 
@@ -75,13 +75,13 @@ export const siteSettings = {
       },
       {
         href: ROUTES.ORDERS,
-        label: "sidebar-nav-item-orders",
+        label: "Orders",
         icon: "OrdersIcon",
       },
    
       {
         href: ROUTES.CATEGORIES,
-        label: "sidebar-nav-item-categories",
+        label: "Categories",
         icon: "CategoriesIcon",
       },
       {
@@ -101,22 +101,22 @@ export const siteSettings = {
       },
       {
         href: ROUTES.USERS,
-        label: "sidebar-nav-item-users",
+        label: "Users",
         icon: "UsersIcon",
       },
       {
         href: ROUTES.ATTRIBUTES,
-        label: "sidebar-nav-item-attributes",
+        label: "Attributes",
         icon: "AttributeIcon",
       },
       {
         href: ROUTES.GROUPS,
-        label: "sidebar-nav-item-groups",
+        label: "Groups",
         icon: "TypesIcon",
       },
       {
         href: ROUTES.TAGS,
-        label: "sidebar-nav-item-tags",
+        label: "Tags",
         icon: "TagIcon",
       },
       {
@@ -151,22 +151,22 @@ export const siteSettings = {
       },
       {
         href: ROUTES.ORDER_STATUS,
-        label: "sidebar-nav-item-order-status",
+        label: "Order Status",
         icon: "OrdersStatusIcon",
       },
       {
         href: ROUTES.COUPONS,
-        label: "sidebar-nav-item-coupons",
+        label: "Coupons",
         icon: "CouponsIcon",
       },
       {
         href: ROUTES.TAXES,
-        label: "sidebar-nav-item-taxes",
+        label: "Taxes",
         icon: "TaxesIcon",
       },
       {
         href: ROUTES.SHIPPINGS,
-        label: "sidebar-nav-item-shippings",
+        label: "Shippings",
         icon: "ShippingsIcon",
       },
       {
@@ -181,12 +181,12 @@ export const siteSettings = {
       },
       {
         href: ROUTES.WITHDRAWS,
-        label: "sidebar-nav-item-withdraws",
+        label: "Withdraws",
         icon: "WithdrawIcon",
       },
       {
         href: ROUTES.SETTINGS,
-        label: "sidebar-nav-item-settings",
+        label: "Settings",
         icon: "SettingsIcon",
       },
       {
@@ -198,7 +198,7 @@ export const siteSettings = {
     shop: [
       {
         href: (shop: string) => `${ROUTES.DASHBOARD}${shop}`,
-        label: "sidebar-nav-item-dashboard",
+        label: "Dashboard",
         icon: "DashboardIcon",
         permissions: adminOwnerAndStaffOnly,
       },
@@ -210,13 +210,13 @@ export const siteSettings = {
       },
       {
         href: (shop: string) => `/${shop}${ROUTES.ATTRIBUTES}`,
-        label: "sidebar-nav-item-attributes",
+        label: "attributes",
         icon: "AttributeIcon",
         permissions: adminOwnerAndStaffOnly,
       },
       {
         href: (shop: string) => `/${shop}${ROUTES.PRODUCTS}`,
-        label: "sidebar-nav-item-products",
+        label: "products",
         icon: "ProductsIcon",
         permissions: adminOwnerAndStaffOnly,
       },
@@ -253,7 +253,7 @@ export const siteSettings = {
       },
       {
         href: (shop: string) => `/${shop}${ROUTES.ORDERS}`,
-        label: "sidebar-nav-item-orders",
+        label: "orders",
         icon: "OrdersIcon",
         permissions: adminOwnerAndStaffOnly,
       },
@@ -271,20 +271,20 @@ export const siteSettings = {
       },
       // {
       //   href: (shop: string) => `/${shop}${ROUTES.DELIVERY}`,
-      //   label: "sidebar-nav-item-delivery",
+      //   label: "delivery",
       //   icon: "ShippingIcon",
       //   permissions: adminOwnerAndStaffOnly,
       // },
       {
         href: (shop: string) => `/${shop}${ROUTES.STAFFS}`,
-        label: "sidebar-nav-item-staffs",
+        label: "staffs",
         icon: "UsersIcon",
         permissions: adminAndOwnerOnly,
       },
 
       {
         href: (shop: string) => `/${shop}${ROUTES.WITHDRAWS}`,
-        label: "sidebar-nav-item-withdraws",
+        label: "withdraws",
         icon: "AttributeIcon",
         permissions: adminAndOwnerOnly,
       },
