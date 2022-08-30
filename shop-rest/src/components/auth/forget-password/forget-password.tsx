@@ -121,11 +121,11 @@ const ForgotPassword = () => {
       <div className="flex flex-col items-center justify-center relative text-sm text-heading mt-9 sm:mt-11 mb-7 sm:mb-8">
         <hr className="w-full" />
         <span className="absolute start-2/4 -top-2.5 px-2 -ms-4 bg-light">
-          {t("text-or")}
+          {t("or")}
         </span>
       </div>
       <div className="text-sm sm:text-base text-body text-center">
-        {t("text-back-to")}{" "}
+        {t("back to")}{" "}
         <button
           onClick={() => openModal("LOGIN_VIEW")}
           className="ms-1 underline text-accent font-semibold transition-colors duration-200 focus:outline-none hover:text-accent-hover focus:text-accent-hover hover:no-underline focus:no-underline"

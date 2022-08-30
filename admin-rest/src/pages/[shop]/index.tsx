@@ -73,6 +73,7 @@ export default function ShopPage() {
     created_at,
     settings,
     slug,
+    id,
   } = data?.shop! ?? {};
 
 
@@ -194,7 +195,7 @@ export default function ShopPage() {
        <ShopQrCode
           size={150}
           title='Scan to visit'
-          url={`https://buylowcal.com/shops/${slug}?utm_source=shop_qr&utm_campaign=${slug}`} 
+          url={`https://buylowcal.com/shops/${slug}?utm_source=shop_qr&utm_campaign=${slug}&shop_id=${id}`} 
         /> 
         {/* : */}
         {/* <ShopQrCode

@@ -17,7 +17,7 @@ interface FormValues {
 
 const changePasswordSchema = yup.object().shape({
   oldPassword: yup.string().required("form:error-old-password-required"),
-  newPassword: yup.string().required("form:error-password-required"),
+  newPassword: yup.string().required("form: Password required"),
   passwordConfirmation: yup
     .string()
     .oneOf([yup.ref("newPassword")], "form:error-match-passwords")

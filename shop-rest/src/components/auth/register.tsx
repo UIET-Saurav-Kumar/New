@@ -35,12 +35,12 @@ type FormValues = {
 };
 
 const registerFormSchema = yup.object().shape({
-  name: yup.string().required("error-name-required"),
+  name: yup.string().required(" Name required"),
   email: yup
     .string()
     .email("error-email-format")
-    .required("error-email-required"),
-  password: yup.string().required("error-password-required"),
+    .required(" Email required"),
+  password: yup.string().required(" Password required"),
   phone_number:yup.string().max(10, "Phone number should be of 10 digits only").min(10, 'Phone number should be of 10 digits only').required("error-contact-required").matches(/^[0-9]{10}$/, "Invalid phone number"),
   // current_location:yup.string().required("error-location-required"),
 });
@@ -142,6 +142,12 @@ const RegisterForm = () => {
     // handleLocation()
 }
 
+function handleClick(){
+  query?.utm_source == 'shop_qr' ? 
+  router.push('/login?utm_source=shop_qr&utm_campaign='+query?.utm_campaign+'&shop_id='+query?.shop_id) : 
+    openModal("OTP_LOGIN")
+}
+
   function onSubmit({ name, email, password, phone_number, current_location, date_of_birth, gender, occupation }: FormValues) {
     mutate(
       {
@@ -159,7 +165,7 @@ const RegisterForm = () => {
         onSuccess: (data) => {
           query?.utm_source == 'shop_qr' ? 
           // router.push('/shops/'+ query?.campaign)
-          router.push('/auth/'+data?.user.id+'?utm_source=shop_qr&utm_campaign='+query?.utm_campaign)
+          router.push('/auth/'+data?.user.id+'?utm_source=shop_qr&utm_campaign='+query?.utm_campaign+'shop_id='+query?.shop_id)
           :
           router.push('/auth/'+data?.user.id);
           closeModal();
@@ -202,29 +208,15 @@ const RegisterForm = () => {
     
     <div className="flex items-center h-full  justify-center bg-white sm:bg-gray-100 " >
     <div className="py-6 px-5 bg-light flex flex-col justify-center">
-      <div className="flex justify-center">
+      {/* <div className="flex justify-center">
         <Logo />
-      </div>
-      <p className="text-center text-sm md:text-base leading-relaxed px-2 sm:px-0 text-body mt-4 sm:mt-5 mb-7 sm:mb-10">
-        {/* {t("registration-helper")} */}
-        By signing up, you agree to our
-        <span
-          onClick={() => handleNavigate("terms")}
-          className="mx-1 underline cursor-pointer text-accent hover:no-underline"
-        >
-          {/* {t("text-terms")} */}
-          Terms
-        </span>
-        &
-        <span
-          onClick={() => handleNavigate("privacy")}
-          className="ms-1 underline cursor-pointer text-accent hover:no-underline"
-        >
-          {/* {t("text-policy")} */}
-          Policy
-        </span>
-      </p>
-      <p className="text-gray-600 font-semibold text-xl text-center w-full">Register Form</p>
+      </div> */}
+       
+   <div className="flex items-start">
+   {/* <div className="flex w-1/4 justify-center ">
+        <Logo />
+      </div>  */}
+     <div className="">   
       {errorMsg && (
         <Alert
           variant="error"
@@ -238,13 +230,18 @@ const RegisterForm = () => {
        <div className="text-sm sm:text-sm text-body  mt-4 text-center">
         {t(" If already registered, please")}{" "}
         <button
-          onClick={() => openModal("OTP_LOGIN")}
+          onClick={handleClick}
           className="ms-1 underline text-accent font-semibold transition-colors duration-200 focus:outline-none hover:text-accent-hover focus:text-accent-hover hover:no-underline focus:no-underline"
         >
           {t(" Login")}
         </button>
       </div>
-      <form className="grid grid-cols-2 text-xs gap-3 place-content-center" 
+      <p className="text-gray-700 font-semibold text-xl text-left mt-2 w-full">
+        Register Form
+      </p>
+      </div>
+      </div>
+      <form className="grid grid-cols-2   gap-2 -mt-6 gap-x-1 place-content-center" 
             onSubmit={handleSubmit(onSubmit)} noValidate>
 
         {/* name */}
@@ -253,8 +250,9 @@ const RegisterForm = () => {
           label={t("Name")}
           {...register("name")}
           type="text"
-          variant="outline"
-          className="mb-2 lg:mb-5"
+          shadow={true}
+          variant="rounded"
+          className="mb-2 lg:mb-5 col-span-2 "
           error={t(errors.name?.message!)}
         />
 
@@ -265,27 +263,22 @@ const RegisterForm = () => {
           label={t("Email")}
           {...register("email")}
           type="email"
-          variant="outline"
-          className="mb-2 lg:mb-5"
+          shadow={true}
+          variant="rounded"
+          className="mb-2 lg:mb-5 col-span-2"
           error={t(errors.email?.message!)}
         />
 
         {/* password */}
-        <PasswordInput
-          // label={t("Password")}
-          label={t("Password")}
-          {...register("password")}
-          error={t(errors.password?.message!)}
-          variant="outline"
-          className="mb-2 lg:mb-5"
-        />
+        
 
         {/* Date of birth */}
         <div className="col-span-1 sm:col-span-1">
         
             <div className="flex  text-body-dark h-3  font-semibold text-xs leading-none mb-3">
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-yellow-600 to-blue-600">
-                  🎉Your Birthday present is awaiting  </span> 🥳</div>
+                  🎉 Date of Birth  </span>  🥳
+                  </div>
               <Controller
                       control={control}
                       name="date_of_birth"
@@ -298,7 +291,7 @@ const RegisterForm = () => {
                           setValue("date_of_birth", date);
                         }}
                         dateFormat="dd-MM-yyyy"
-                        className="text-sm h-12 w-full px-4 border border-border-base rounded focus:border-accent"
+                        className="text-sm h-12 w-full px-4  bg-gray-100   border-border-base rounded-full focus:border-gray-400 no-underline "
                         showYearDropdown
                         showMonthDropdown
                         dropdownMode="select"
@@ -321,8 +314,8 @@ const RegisterForm = () => {
           {...register("phone_number")}
           type="text"
           inputMode="numeric"
-          variant="outline"
-          className="mb-2 lg:mb-5 text-xs"
+          variant="rounded"
+          className="mb-2 lg:mb-5 "
           onChange={(e) => setValue("phone_number", getPhoneNumber(e.target.value))}
           error={t(errors.phone_number?.message!)}
         />
@@ -332,7 +325,7 @@ const RegisterForm = () => {
         <div className="flex flex-col  items-start ">
             <span className="text-xs text-gray-600 mb-2 font-semibold">Occupation</span>
               <select
-                    className="  text-gray-600 py-3.5 w-full text-sm items-center mr-4 bg-white border border-gray-200 rounded flex "
+                    className="px-3 rounded-full text-gray-600 py-3.5 w-full text-sm items-center mr-4 bg-gray-100   focus:border-gray-400   flex "
                     // onChange={(e) => setOccupation(e.target.value)}
                     // value={occupation}
                     defaultValue="Search by"
@@ -353,7 +346,7 @@ const RegisterForm = () => {
               <div className="flex  text-body-dark h-3  font-semibold text-xs leading-none mb-3">
                 Gender
               </div>
-              <div className="flex   p-4 rounded items-center space-x-4 lg:space-x-8 ">
+              <div className="flex p-4 rounded-full bg-gray-100 focus:border-gray-400 items-center space-x-4 lg:space-x-8 ">
                 <Radio
                   id="male"
                   type="radio"
@@ -375,27 +368,44 @@ const RegisterForm = () => {
           </div>
         
         {/* current location */}
-        <Input
+       <div className="w-full flex items-end space-x-3">  <Input
             value={getLocation?.formattedAddress}
             label={"Current Location"} 
             {...register("current_location")} 
             type="text" 
-            variant="outline" 
+            variant="rounded" 
             className="col-span-2 text-xs " 
             error={t(errors.current_location?.message!)} />
           {/* {getLocation?.formattedAddress} */}
+          <div className="w-0 mt-2"> 
+         <GetCurrentLocation onChange = {changeLocation} />  
+          
+      </div> 
+
+          </div>
          
 
-      <div className=""> 
+      {/* <div className=""> 
          <GetCurrentLocation onChange = {changeLocation} />  
-         <div className="mt-15">
-            <Button className="w-full h-12" 
-            variant="outline"
+          
+      </div> */}
+
+      <PasswordInput
+          // label={t("Password")}
+          label={t("Password")}
+          {...register("password")}
+          error={t(errors.password?.message!)}
+          variant="rounded"
+          className="mb-2 lg:mb-5 col-span-2"
+        />
+
+        <div className="w-full mx-20   flex mt-15">
+            <Button className=" flex justify-center w-full rounded-full " 
+            // variant="rounded"
             loading={loading} disabled={loading}>
               {t("Register")}
             </Button>
         </div>
-      </div>
       
       </form>
 
@@ -405,17 +415,36 @@ const RegisterForm = () => {
       <div className="flex flex-col items-center justify-center relative text-sm text-heading mt-0 sm:mt-4 lg:mt-0 mb-6 sm:mb-8">
         {/* <hr className="w-full" /> */}
         {/* <span className="absolute start-2/4 -top-2.5 px-2 -ms-4 bg-light">
-          {t("text-or")}
+          {t("or")}
         </span> */}
         <div className="text-sm sm:text-base text-body  mt-0 text-center">
         {t(" If already registered, please")}{" "}
         <button
-          onClick={() => openModal("OTP_LOGIN")}
+          onClick={handleClick}
           className="ms-1 underline text-accent font-semibold transition-colors duration-200 focus:outline-none hover:text-accent-hover focus:text-accent-hover hover:no-underline focus:no-underline"
         >
           {t(" Login")}
         </button>
       </div>
+      <p className="text-center text-sm md:text-base leading-relaxed px-2 sm:px-0 text-body mt-4 sm:mt-5 mb-7 sm:mb-10">
+         
+        By signing up, you agree to our
+        <span
+          onClick={() => handleNavigate("terms")}
+          className="mx-1 underline cursor-pointer text-accent hover:no-underline"
+        >
+      
+          Terms
+        </span>
+        &
+        <span
+          onClick={() => handleNavigate("privacy")}
+          className="ms-1 underline cursor-pointer text-accent hover:no-underline"
+        >
+          
+          Policy
+        </span>
+      </p>
       </div>
       
     </div>

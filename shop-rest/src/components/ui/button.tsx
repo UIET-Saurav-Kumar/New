@@ -24,6 +24,8 @@ const classes = {
   small: "px-3 py-0 h-9 text-sm h-10",
   medium: "px-5 py-0 h-12",
   big: "px-10 py-0 h-14",
+  rounded: 'bg-red-500 focus:shadow focus:bg-accent focus:border-gray-400 rounded-full'
+
 };
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(

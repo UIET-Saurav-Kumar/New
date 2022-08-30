@@ -30,8 +30,8 @@ const loginFormSchema = yup.object().shape({
   email: yup
     .string()
     .email("error-email-format")
-    .required("error-email-required"),
-  password: yup.string().required("error-password-required"),
+    .required(" Email required"),
+  password: yup.string().required(" Password required"),
 });
 
 const defaultValues = {
@@ -137,7 +137,7 @@ const LoginForm = () => {
       {/* <div className="flex flex-col items-center justify-center relative text-sm text-heading mt-8 sm:mt-11 mb-6 sm:mb-8">
           <hr className="w-full" />
           <span className="absolute start-2/4 -top-2.5 px-2 -ms-4 bg-light">
-            {t("text-or")}
+            {t("or")}
           </span>
       </div> */}
 

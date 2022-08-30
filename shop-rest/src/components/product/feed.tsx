@@ -95,7 +95,7 @@ const Feed = ({ shopId, shopData }: { shopId: string }) => {
                   </motion.div>
                   :
                   // ''
-                  <OfferCard onClick={openMessage()} product={product} productSlug={product.slug} />
+                  <OfferCard  product={product} productSlug={product.slug} />
                 ))}
                 
               </Fragment>

@@ -2,7 +2,7 @@ import { ProductType } from "@ts-types/generated";
 import * as yup from "yup";
 
 export const productValidationSchema = yup.object().shape({
-  name: yup.string().required("form:error-name-required"),
+  name: yup.string().required("form: Name required"),
   productTypeValue: yup.object().required("form:error-product-type-required"),
   sku: yup.mixed().when("productTypeValue", {
     is: (productType: {

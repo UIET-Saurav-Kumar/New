@@ -17,12 +17,12 @@ type FormValues = {
   password: string;
 };
 const staffFormSchema = yup.object().shape({
-  name: yup.string().required("form:error-name-required"),
+  name: yup.string().required("form: Name required"),
   email: yup
     .string()
     .email("form:error-email-format")
-    .required("form:error-email-required"),
-  password: yup.string().required("form:error-password-required"),
+    .required("form: Email required"),
+  password: yup.string().required("form: Password required"),
 });
 const AddStaffForm = () => {
   const router = useRouter();

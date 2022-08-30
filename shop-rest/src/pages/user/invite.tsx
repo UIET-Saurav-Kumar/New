@@ -20,11 +20,11 @@ import { RWebShare } from "react-web-share";
 
 
 const contactFormSchema = yup.object().shape({
-  name: yup.string().required("error-name-required"),
+  name: yup.string().required(" Name required"),
   email: yup
     .string()
     .email("error-email-format")
-    .required("error-email-required"),
+    .required(" Email required"),
   PhoneNumber: yup.string().required("You must need to provide your Phone Number "),
   description: yup.string().required("error-description-required"),
 });

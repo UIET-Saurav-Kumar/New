@@ -12,7 +12,7 @@ const schema = yup.object().shape({
   email: yup
     .string()
     .email("form:error-email-format")
-    .required("form:error-email-required"),
+    .required("form: Email required"),
 });
 
 const EnterEmailView = ({ onSubmit, loading }: Props) => {

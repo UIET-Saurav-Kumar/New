@@ -30,8 +30,8 @@ const loginFormSchema = yup.object().shape({
   email: yup
     .string()
     .email("error-email-format")
-    .required("error-email-required"),
-  password: yup.string().required("error-password-required"),
+    .required(" Email required"),
+  password: yup.string().required(" Password required"),
 });
 
 const defaultValues = {
@@ -46,6 +46,7 @@ const LoginForm = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const { authorize } = useUI();
   const { openModal, closeModal } = useModalAction();
+  var { query ,pathname} = router;
 
   
 
@@ -58,6 +59,19 @@ const LoginForm = () => {
     resolver: yupResolver(loginFormSchema),
     defaultValues,
   });
+
+  function handleClick(){
+    query?.utm_source == 'shop_qr' ? 
+    router.push('/register?utm_source=shop_qr&utm_campaign='+query?.utm_campaign+'&shop_id='+query?.shop_id) : 
+      openModal("REGISTER")
+  }
+
+
+  function handleOtpLoginClick(){
+    query?.utm_source == 'shop_qr' ? 
+    router.push('/otp-login?utm_source=shop_qr&utm_campaign='+query?.utm_campaign+'&shop_id='+query?.shop_id) : 
+      openModal("OTP_LOGIN")
+  }
 
   function onSubmit({ email, password }: FormValues) {
     login(
@@ -75,6 +89,8 @@ const LoginForm = () => {
             Cookies.set("auth_token", data.token, { expires: 10 });
             Cookies.set("auth_permissions", data.permissions, { expires: 10 });
             authorize();
+            query?.utm_source == 'shop_qr' ? 
+            router.push('/shops/'+query.utm_campaign+'?utm_source=shop_qr&utm_campaign='+query.utm_campaign+'&shop_id='+query.shop_id) : ''
             closeModal();
             router.reload()
             return;
@@ -112,7 +128,7 @@ const LoginForm = () => {
        <div className="text-sm sm:text-gray-500 text-body text-center">
         {t(" Don't have any account?")}{" "}
         <button
-          onClick={() => openModal("REGISTER")}
+          onClick={handleClick}
           className="ms-1 underline text-accent font-semibold transition-colors duration-200 focus:outline-none hover:text-accent-hover focus:text-accent-hover hover:no-underline focus:no-underline"
         >
           {t("Register")}
@@ -124,7 +140,7 @@ const LoginForm = () => {
           {...register("email")}
           type="email"
           placeholder="Enter your Registered email id"
-          variant="outline"
+          variant="rounded"
           className="mb-5"
           error={t(errors.email?.message!)}
         />
@@ -132,22 +148,22 @@ const LoginForm = () => {
           label={t("Password")}
           {...register("password")}
           error={t(errors.password?.message!)}
-          variant="outline"
+          variant="rounded"
           className="mb-5"
           forgotPageRouteOnClick={() => openModal("FORGOT_VIEW")}
         />
         <div className="mt-8 space-y-4 ">
           <Button
-            className="w-full bg-btn hover:bg-gradient-to-tl  from-magenta to-gold h-11 sm:h-12"
+            className="w-full rounded-full bg-btn hover:bg-gradient-to-tl  from-magenta to-gold h-11 sm:h-12"
             loading={loading}
             disabled={loading}
           >
             {t(" Login")}
           </Button>
           <Button
-          className="h-11 w-full bg-gradient-to-l from-gray-900 to-gray-500 hover:from-gray-800 hover:to-gray-800 !text-light hover:!bg-gray-600 sm:h-12"
+          className="h-11 w-full rounded-full bg-gradient-to-l from-gray-900 to-gray-500 hover:from-gray-800 hover:to-gray-800 !text-light hover:!bg-gray-600 sm:h-12"
           disabled={loading}
-          onClick={() => openModal('OTP_LOGIN')}
+          onClick={handleOtpLoginClick}
         >
           <MobileIcon className="h-5 text-light ltr:mr-2 rtl:ml-2" />
           {t('Login with Phone Number')}
@@ -159,7 +175,7 @@ const LoginForm = () => {
       {/* <div className="flex flex-col items-center justify-center relative text-sm text-heading mt-8 sm:mt-11 mb-6 sm:mb-8">
           <hr className="w-full" />
           <span className="absolute start-2/4 -top-2.5 px-2 -ms-4 bg-light">
-            {t("text-or")}
+            {t("or")}
           </span>
       </div> */}
 

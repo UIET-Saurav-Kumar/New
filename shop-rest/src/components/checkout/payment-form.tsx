@@ -48,7 +48,7 @@ const paymentSchema = Yup.object().shape({
   //     number: Yup.string().required("error-card-required"),
   //     expiry: Yup.string().required("error-expiry-date"),
   //     cvc: Yup.string().required("error-cvc"),
-  //     email: Yup.string().email().required("error-email-required"),
+  //     email: Yup.string().email().required(" Email required"),
   //   }),
   // }),
 });

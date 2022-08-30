@@ -107,11 +107,11 @@ const ShopPage = ({ data }: any) => {
 
   const [pageURL, setPageUrl] = useState('');
 
-  function checkUtm(utm_source,utm_campaign) {
+  function checkUtm(utm_source,utm_campaign,shop_id) {
     
      utm_source == 'shop_qr' ? isAuthorize ?
     router.push('/shops/'+  utm_campaign) :
-    router.push('/register?utm_source=shop_qr&utm_campaign='+utm_campaign) 
+    router.push('/register?utm_source=shop_qr&utm_campaign='+utm_campaign+'&shop_id='+shop_id) 
     : null
   }
 
@@ -129,7 +129,7 @@ const ShopPage = ({ data }: any) => {
       },
     });
 
-    checkUtm(query.utm_source, query.utm_campaign)
+    checkUtm(query.utm_source, query.utm_campaign,query.shop_id)
     setPageUrl(window.location.href);
     // query.utm_source == 'shop_qr' ? (!isAuthorize ? openModal("REGISTER") : null) : null;
   },  [query.utm_campaign ]);

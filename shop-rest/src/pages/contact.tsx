@@ -35,11 +35,11 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
 
 
 const contactFormSchema = yup.object().shape({
-  name: yup.string().required("error-name-required"),
+  name: yup.string().required(" Name required"),
   email: yup
     .string()
     .email("error-email-format")
-    .required("error-email-required"),
+    .required(" Email required"),
   subject: yup.string().required("error-subject-required"),
   description: yup.string().required("error-description-required"),
 });

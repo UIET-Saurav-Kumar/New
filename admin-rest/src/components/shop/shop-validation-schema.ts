@@ -2,7 +2,7 @@ import * as yup from "yup";
 
 export const shopValidationSchema = yup.object().shape({
 
-  name: yup.string().required("form:error-name-required")
+  name: yup.string().required("form: Name required")
   .matches(/^[a-zA-Z0-9() ]+$/, "Can only contain letters, numbers and brackets"),
   balance: yup.object().shape({
     payment_info: yup.object().shape({

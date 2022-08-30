@@ -20,6 +20,7 @@ const variantClasses = {
     "bg-gray-100 border border-border-100 rounded focus:bg-light focus:border-accent",
   outline: "border border-border-base rounded focus:border-accent",
   line: "ps-0 border-b border-border-base rounded-none focus:border-accent",
+  rounded: ' bg-gray-100 focus:shadow focus:bg-light focus:border-gray-400 rounded-full'
 };
 
 const sizeClasses = {
@@ -63,7 +64,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
           inputMode={type === "number" ? "numeric" : 'text'}
           ref={ref}
           className={cn(
-            "px-2 lg:px-4 flex items-center w-full appearance-none transition duration-300 ease-in-out text-heading text-xs sm:text-sm focus:outline-none focus:ring-0",
+            "px-2 lg:px-4 flex items-center w-full appearance-none transition duration-300 ease-in-out text-heading text-sm sm:text-sm focus:outline-none focus:ring-0",
             shadow && "focus:shadow",
             variantClasses[variant],
             sizeClasses[dimension],

@@ -1,6 +1,6 @@
 import * as yup from "yup";
 export const ValidationSchema = yup.object().shape({
-  name: yup.string().required("form:error-name-required"),
+  name: yup.string().required("form: Name required"),
   balance: yup.object().shape({
     payment_info: yup.object().shape({
       email: yup

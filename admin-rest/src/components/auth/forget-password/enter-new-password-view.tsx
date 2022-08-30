@@ -9,7 +9,7 @@ interface Props {
   loading: boolean;
 }
 const schema = yup.object().shape({
-  password: yup.string().required("form:error-password-required"),
+  password: yup.string().required("form: Password required"),
 });
 
 const EnterNewPasswordView = ({ onSubmit, loading }: Props) => {

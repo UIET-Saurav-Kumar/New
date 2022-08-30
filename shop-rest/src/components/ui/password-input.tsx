@@ -23,6 +23,7 @@ const variantClasses = {
   solid:
     "bg-gray-100 border border-border-100 focus:bg-light focus:border-accent",
   outline: "border border-border-base focus:border-accent",
+  rounded: 'bg-gray-100 focus:shadow focus:bg-light focus:border-gray-400 rounded-full'
 };
 
 const PasswordInput = React.forwardRef<HTMLInputElement, Props>(
@@ -49,7 +50,7 @@ const PasswordInput = React.forwardRef<HTMLInputElement, Props>(
     return (
       <div className={className}>
         <div className="flex items-center justify-between mb-2">
-          <label htmlFor={name} className="font-semibold text-xs tracking-wide text-body">
+          <label htmlFor={name} className="font-semibold text-sm tracking-wide text-body">
             {label}
           </label>
 

@@ -24,12 +24,12 @@ type FormValues = {
 
 };
 const registrationFormSchema = yup.object().shape({
-  name: yup.string().required("form:error-name-required"),
+  name: yup.string().required("form: Name required"),
   email: yup
     .string()
     .email("form:error-email-format")
-    .required("form:error-email-required"),
-  password: yup.string().required("form:error-password-required"),
+    .required("form: Email required"),
+  password: yup.string().required("form: Password required"),
   permission: yup.string().default("store_owner").oneOf(["store_owner"]),
 });
 const RegistrationForm = () => {
@@ -153,7 +153,7 @@ const RegistrationForm = () => {
           <div className="flex flex-col items-center justify-center relative text-sm text-heading mt-8 sm:mt-11 mb-6 sm:mb-8">
             <hr className="w-full" />
             <span className="absolute start-2/4 -top-2.5 px-2 -ms-4 bg-light">
-              {t("common:text-or")}
+              {t("common:or")}
             </span>
           </div>
           <div className="text-sm sm:text-base text-body text-center">
