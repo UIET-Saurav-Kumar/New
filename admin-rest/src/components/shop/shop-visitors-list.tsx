@@ -104,11 +104,11 @@ const ShopVisitorList = ({ logs,shopSlug, onPagination }: IProps) => {
 
   }
 
-  console.log('shop log', data.created_at)
+  console.log('shop log', data?.created_at)
 
-  const filteredShop = data.filter((itm)=> itm.type == 'shop-visited');
+  const filteredShop = data?.filter((itm:any)=> itm.type == 'shop-visited');
 
-  const shopLogs = filteredShop.filter((itm)=>itm.shop?.slug == shopSlug)
+  const shopLogs = filteredShop?.filter((itm:any)=>itm.shop?.slug == shopSlug)
 
   console.log('shoplogs',shopLogs)
 
