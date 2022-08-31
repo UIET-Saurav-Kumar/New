@@ -104,13 +104,13 @@ const ShopVisitorList = ({ logs,shopSlug, onPagination }: IProps) => {
 
   }
 
-  console.log('shop log', data?.created_at)
+  // console.log('shop log', data?.created_at)
 
   const filteredShop = data?.filter((itm:any)=> itm.type == 'shop-visited');
 
   const shopLogs = filteredShop?.filter((itm:any)=>itm.shop?.slug == shopSlug)
 
-  console.log('shoplogs',shopLogs)
+  console.log('shoplogs',shopLogs);
 
   const columns = [
 
@@ -150,16 +150,16 @@ const ShopVisitorList = ({ logs,shopSlug, onPagination }: IProps) => {
       align: alignLeft,
       render: (data:any) => (data?.user)?data?.user?.email:"---",
     },
-    {
-      title: ("Date of Birth"),
-      align: alignLeft,
-      render: (data:any) => (data?.user)?data?.user?.date_of_birth.replace(/T.*/,'').split('-').reverse().join('-')   : "---",
-    },
-    {
-      title: ("Occupation"),
-      align: alignLeft,
-      render: (data:any) => (data?.user)?data?.user?.profile?.occupation : "---",
-    },
+    // {
+    //   title: ("Date of Birth"),
+    //   align: alignLeft,
+    //   render: (data:any) => (data?.user)?data?.user?.date_of_birth.replace(/T.*/,'').split('-').reverse().join('-')   : "---",
+    // },
+    // {
+    //   title: ("Occupation"),
+    //   align: alignLeft,
+    //   render: (data:any) => (data?.user)?data?.user?.profile?.occupation : "---",
+    // },
 
     // {
     //   title: ("Data"),
