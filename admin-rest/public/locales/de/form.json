@@ -256,7 +256,7 @@
   "error-unit-required": "Einheit ist erforderlich",
   "error-status-required": "Status ist erforderlich",
   "error-currency-required": "Währung ist erforderlich",
-  "Submit-email": "E-Mail senden",
+  " Reset": "E-Mail senden",
   "Submit-token": "Token senden",
   "text-reset-password": "Passwort zurücksetzen",
   "token-label": "Token aus E-Mail einfügen",

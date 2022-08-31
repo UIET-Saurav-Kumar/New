@@ -257,7 +257,7 @@
   "error-unit-required": "الوحدة مطلوبة",
   "error-status-required": "الحالة مطلوبة",
   "error-currency-required": "العملة مطلوبة",
-  "Submit-email": "إرسال بريد إلكتروني",
+  " Reset": "إرسال بريد إلكتروني",
   "Submit-token": "إرسال رمز",
   "text-reset-password": "إعادة تعيين كلمة المرور",
   "token-label": "ضع الرمز المميز الذي حصلت عليه من البريد الإلكتروني",

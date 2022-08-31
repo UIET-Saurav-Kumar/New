@@ -6,6 +6,8 @@ import * as yup from "yup";
 import { useTranslation } from "next-i18next";
 import { useModalAction } from "@components/ui/modal/modal.context";
 import router from "next/router";
+import { MobileIcon } from "@components/icons/mobile-icon";
+import { MailIcon } from "@heroicons/react/outline";
 
 interface Props {
   onSubmit: (values: { phone_number: string }) => void;
@@ -45,19 +47,19 @@ const EnterPhoneNumberView = ({ onSubmit, loading }: Props) => {
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       
       <Input
-        label={t("Mobile Number")}
+        label={t("Enter Mobile Number")}
         {...register("phone_number")}
         type="phone_number"
         //restrict to numbers only
         pattern="[0-9]*"
         inputMode="numeric"
         variant="rounded"
-        className="mb-50"
+        className="mb-50 "
         
         placeholder="Enter your registered mobile number"
         error={t(errors.phone_number?.message!)}
       />
-      <div className="mt-4 space-y-8 ">
+      <div className="mt-6 space-y-8 ">
       <Button className="w-full h-11 rounded-full" loading={loading} disabled={loading}>
         {t("Submit")}
       </Button>
@@ -69,14 +71,23 @@ const EnterPhoneNumberView = ({ onSubmit, loading }: Props) => {
       </div> */}
        
 
-      <button
+      {/* <button
             className="w-full bg-gray-500 rounded-full  h-12 text-white border    sm:h-10"
             loading={loading}
             disabled={loading}
             onClick={handleClick}
           >
             {t("Login with Email ")}
-      </button>
+      </button> */}
+      <Button
+          className="h-11 w-full rounded-full bg-gradient-to-l from-gray-900 to-gray-500 hover:from-gray-800 hover:to-gray-800 !text-light hover:!bg-gray-600 sm:h-12"
+          disabled={loading}
+          onClick={handleClick}
+        >
+          <MailIcon className="h-5 text-light ltr:mr-2 rtl:ml-2" />
+          {t('Login with Email')}
+          
+        </Button>
     </div>
 
     </form>

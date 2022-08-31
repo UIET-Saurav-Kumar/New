@@ -36,7 +36,7 @@ const EnterEmailView = ({ onSubmit, loading }: Props) => {
         error={t(errors.email?.message!)}
       />
       <Button className="w-full h-11" loading={loading} disabled={loading}>
-        {t("form:Submit-email")}
+        {t("form: Reset")}
       </Button>
     </form>
   );

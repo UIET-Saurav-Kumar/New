@@ -8,6 +8,8 @@ use PickBazar\Database\Models\Product;
 use PickBazar\Database\Models\Shop;
 use PickBazar\Database\Repositories\LogRepository;
 use Cviebrock\EloquentSluggable\Services\SlugService;
+use PickBazar\Helpers\InteraktHelper;
+
 
 class LogController extends CoreController
 {
@@ -38,6 +40,17 @@ class LogController extends CoreController
     
     }
 
+    public function createWhatsappShopVisitorEvent($payload)
+    {
+        $CURLOPT_POSTFIELDS = $payload;
+        
+        $endpoint = 'track/events/';
+
+        $response = InteraktHelper::interaktApi(json_encode($CURLOPT_POSTFIELDS),$endpoint);
+
+        return $response;
+    }
+
     public function store(Request $request)
     {
         $location=$request->location;
@@ -46,6 +59,8 @@ class LogController extends CoreController
         $product=$request->product;
         $shop=$request->shop;
         // $ip_location=$this->ip_AddressLocation($request);
+
+
      
 
         if($request->type=="item-removed"){
@@ -136,6 +151,46 @@ class LogController extends CoreController
                 "type"=>"location"
             ]);
         }
+
+        $dob = date('d-m-Y', strtotime($user->date_of_birth));
+
+        $payload = array(
+            "userId"=> $user->id,
+            "phoneNumber"=> $shop->settings['contact'],
+            'userName'=> $user->name,
+            // 'shop_owner_phone_number'=>$order->shop->settings,
+            // 'shop_owner_name'=>$product->shop->name,
+            "countryCode"=> "+91",
+            "event"=> "Shop Visitor",
+            "traits"=> [
+                // "productDetail"=> json_encode($request->products),
+                // "productDetail"=> json_encode($request->products->unit_price
+                //     ->map(function($item){
+                //         return $item->unit_price;
+                //     })),
+                'userName'=> $user->name,
+                'email'=>$user->email,
+                'phone_number'=>$user->phone_number,
+                'date_of_birth'=>$dob,
+                 
+                'shop_name'=> $shop->name,
+                // get all the product names in array
+                // 'product_name'=> $product->name,
+                // 'product_name'=> $product->name,
+                'shop_owner_phone_number'=>$shop->settings['contact'],
+                'shop_owner_name'=>$shop->name,
+                // "price"=> $request->amount,
+                // "orderId"=> $request->tracking_number,
+                // "delivery_time"=> $request->delivery_time,
+                // 'description'=> $request->description,
+                // "payment_gateway"=> $request->payment_gateway,
+                // "currency"=>"INR"
+            ],
+            "createdAt"=> date('Y-m-d H:i:s')
+        );
+
+        $interkt_response = $this->createWhatsappShopVisitorEvent($payload);
+
         return 1;
     }
 

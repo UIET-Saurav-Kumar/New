@@ -476,7 +476,7 @@ export default function HeaderMiddle() {
 
                                 <div className='flex items-center '>
 
-                                        <span className='flex f'>  
+                                        <span className='flex '>  
                                             <h3 onClick={handleLocation}  
                                                 className='flex  text-gray-600 items-center text-xs sm:text-sm md:text-md lg:hidden  
                                                             md:text-gray-600 mr-0 md:mr-0 md:text-md'>
@@ -500,19 +500,19 @@ export default function HeaderMiddle() {
                )}
        </div>
        <div className='w-full flex flex-col lg:hidden -mb-3  '>
-       <div className='flex md:flex w-full lg:hidden px-4 mb-2 mt-0' >
-           <DropDown getLoc={handleLocation}/>
-           {/* <SearchIcon onClick={handleSearchModal} className='text-gray-500 h-10 w-10 cursor-pointer'/> */}
-       </div>
-     {
-        router.pathname.includes('/home') ?
-       <div className='z-10 bg-white flex items-center mx-auto space-x-4 text-12px w-full justify-evenly text-gray-500 '>
-                        <span className=' text-blue-600'>बायलोकल</span>
-                        <span className='  text-red-600'>Buylowcal</span>
-                        <span className='text-yellow-600'>ਬਾਏਲੋਕਲ </span>
-                        <span className='text-green-600'> বাইলোকাল </span>
-                    
-        </div>  : null}
+        <div className='flex md:flex w-full lg:hidden px-4 mb-2 mt-0' >
+            <DropDown getLoc={handleLocation}/>
+            {/* <SearchIcon onClick={handleSearchModal} className='text-gray-500 h-10 w-10 cursor-pointer'/> */}
+        </div>
+        {
+            router.pathname.includes('/home') ?
+        <div className='z-0 bg-white flex items-center mx-auto space-x-4 text-12px w-full justify-evenly text-gray-500 '>
+                            <span className=' text-blue-600'>बायलोकल</span>
+                            <span className='  text-red-600'>Buylowcal</span>
+                            <span className='text-yellow-600'>ਬਾਏਲੋਕਲ </span>
+                            <span className='text-green-600'> বাইলোকাল </span>
+                        
+            </div>  : null}
        </div>
    </div>
 

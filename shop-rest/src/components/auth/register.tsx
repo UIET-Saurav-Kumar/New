@@ -275,8 +275,10 @@ function handleClick(){
         {/* Date of birth */}
         <div className="col-span-1 sm:col-span-1">
         
-            <div className="flex  text-body-dark h-3  font-semibold text-xs leading-none mb-3">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-yellow-600 to-blue-600">
+            <div className="flex  text-gray-700 h-3  font-semibold text-sm lg:text-md leading-none mb-3">
+                {/* <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-yellow-600 to-blue-600">
+                  🎉 Date of Birth  </span>  🥳 */}
+                  <span className="">
                   🎉 Date of Birth  </span>  🥳
                   </div>
               <Controller
@@ -291,7 +293,7 @@ function handleClick(){
                           setValue("date_of_birth", date);
                         }}
                         dateFormat="dd-MM-yyyy"
-                        className="text-sm h-12 w-full px-4  bg-gray-100   border-border-base rounded-full focus:border-gray-400 no-underline "
+                        className="text-sm lg:text-md h-12 w-full px-4  bg-gray-100   border-border-base rounded-full focus:border-gray-400 no-underline "
                         showYearDropdown
                         showMonthDropdown
                         dropdownMode="select"
@@ -323,9 +325,9 @@ function handleClick(){
          
 
         <div className="flex flex-col  items-start ">
-            <span className="text-xs text-gray-600 mb-2 font-semibold">Occupation</span>
+            <span className="text-sm lg:text-md text-gray-700 mb-2 font-semibold">Occupation</span>
               <select
-                    className="px-3 rounded-full text-gray-600 py-3.5 w-full text-sm items-center mr-4 bg-gray-100   focus:border-gray-400   flex "
+                    className="px-3 rounded-full text-gray-700 py-3.5 w-full text-sm items-center mr-4 bg-gray-100   focus:border-gray-400   flex "
                     // onChange={(e) => setOccupation(e.target.value)}
                     // value={occupation}
                     defaultValue="Search by"
@@ -343,7 +345,7 @@ function handleClick(){
         </div>
 
         <div className="flex flex-col">
-              <div className="flex  text-body-dark h-3  font-semibold text-xs leading-none mb-3">
+              <div className="flex  text-gray-700 h-3  font-semibold text-sm lg:text-md leading-none mb-3">
                 Gender
               </div>
               <div className="flex p-4 rounded-full bg-gray-100 focus:border-gray-400 items-center space-x-4 lg:space-x-8 ">
@@ -368,21 +370,23 @@ function handleClick(){
           </div>
         
         {/* current location */}
-       <div className="w-full flex items-end space-x-3">  <Input
-            value={getLocation?.formattedAddress}
+       {/* <div className="w-full flex  "> */}
+          <Input
+            defaultValue={getLocation?.formattedAddress}
             label={"Current Location"} 
             {...register("current_location")} 
             type="text" 
             variant="rounded" 
+            placeholder="Enter your city"
             className="col-span-2 text-xs " 
             error={t(errors.current_location?.message!)} />
           {/* {getLocation?.formattedAddress} */}
-          <div className="w-0 mt-2"> 
-         <GetCurrentLocation onChange = {changeLocation} />  
+          {/* <div className="w-0 mt-2">  */}
+         {/* <GetCurrentLocation onChange = {changeLocation} />   */}
           
-      </div> 
+      {/* </div>  */}
 
-          </div>
+          {/* </div> */}
          
 
       {/* <div className=""> 
@@ -399,10 +403,12 @@ function handleClick(){
           className="mb-2 lg:mb-5 col-span-2"
         />
 
-        <div className="w-full mx-20   flex mt-15">
+        <div className="w-full    flex mt-15">
             <Button className=" flex justify-center w-full rounded-full " 
             // variant="rounded"
+            size="big"
             loading={loading} disabled={loading}>
+              
               {t("Register")}
             </Button>
         </div>

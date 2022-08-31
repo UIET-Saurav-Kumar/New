@@ -205,9 +205,9 @@ const LoginForm = () => {
         </Button> */}
       </div>
 
-      <div className="flex flex-col items-center justify-center relative text-sm text-heading mt-8 sm:mt-11 mb-6 sm:mb-8">
+      {/* <div className="flex flex-col items-center justify-center relative text-sm text-heading mt-8 sm:mt-11 mb-6 sm:mb-8">
         <hr className="w-full" />
-      </div>
+      </div> */}
 
       
     </div>

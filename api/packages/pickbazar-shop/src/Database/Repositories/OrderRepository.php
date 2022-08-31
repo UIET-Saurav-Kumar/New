@@ -312,7 +312,6 @@ class OrderRepository extends BaseRepository
             $order->children = $order->children;
 
           
-
             if($order)
             {
                 $product_id=$request->products[0]["product_id"];

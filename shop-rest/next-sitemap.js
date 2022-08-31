@@ -6,7 +6,7 @@ module.exports = {
         {
           userAgent: '*',
           // allow: '/',
-          disallow: ['*/logout', '*/checkout*', '*/404', '*/profile'],
+          disallow: ['*/logout', '*/checkout*', '*/404', '*/profile','*/login','*/register', '*/otp-login', '*/invite'],
         },
       ],
     },
@@ -20,6 +20,11 @@ module.exports = {
       '*/profile',
       '*/checkout*',
       '*/orders*',
+      '*/login*',
+      '*/register*',
+      '*/invite',
+      '*/otp-login',
+
     ],
   };
   

@@ -262,7 +262,7 @@
   "error-status-required": "Status is required",
   "error-email-string": "Email must be string",
   "error-currency-required": "Currency is required",
-  "Submit-email": "Submit Email",
+  " Reset": "Submit Email",
   "Submit-token": "Submit Token",
   "text-reset-password": "Reset Password",
   "token-label": "Put your token you got from email",
