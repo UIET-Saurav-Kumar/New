@@ -16,6 +16,7 @@ const schema = yup.object().shape({
 });
 
 const EnterTokenView = ({ onSubmit, loading }: Props) => {
+  
   const { t } = useTranslation("common");
   const {
     register,
@@ -83,20 +84,21 @@ const EnterTokenView = ({ onSubmit, loading }: Props) => {
 
   return (
 
-    <form onSubmit={handleSubmit(onSubmit)} noValidate>
+    <div className="w-screen md:max-w-md h-full md:h-auto p-4"> <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <Input
         id='token'
-        label={t("Enter your token")}
+        label={t("Enter  OTP")}
         {...register("token")}
         inputMode="numeric"
-        variant="outline"
+        variant="rounded"
         className="mb-5"
         error={t(errors.token?.message!)}
       />
-      <Button className="w-full h-11" loading={loading} disabled={loading}>
-        {t("Submit-token")}
+      <Button className="w-full h-11 rounded-full" loading={loading} disabled={loading}>
+        {t("Submit OTP")}
       </Button>
     </form>
+    </div>
 
   );
 };

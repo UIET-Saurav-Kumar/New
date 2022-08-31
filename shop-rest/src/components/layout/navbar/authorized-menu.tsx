@@ -7,6 +7,7 @@ import { zoomInBottom } from "@utils/motion/zoom-in-bottom";
 import { useCustomerQuery } from "@data/customer/use-customer.query";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
+import { useUI } from "@contexts/ui.context";
 
 export default function AuthorizedMenu() {
 
@@ -30,9 +31,14 @@ export default function AuthorizedMenu() {
     triggerOffset: 10, // keep some distance to the trigger
     containerOffset: 16, // give the menu some room to breath relative to the container
   });
+
+  const { closeSidebar, isAuthorize, setSidebarView, openSidebar } = useUI();
+
+
   function handleClick(path: string) {
-    close();
+    // close();
     router.push(path);
+    return closeSidebar();
   }
 
   function url(){
@@ -41,6 +47,13 @@ export default function AuthorizedMenu() {
 
    return window?.location.href.includes('buylowcal-monthly-leaderboard-magazines')
    }}
+
+   function handleSidebar(view: string) {
+    setSidebarView(view);
+    return openSidebar();
+  }
+
+  
 
   // console.log('me data',data)
 
@@ -52,7 +65,10 @@ export default function AuthorizedMenu() {
           type="button"
           className="flex flex-col items-center  md:mr-16 lg:mr-10 lg+:pl-12 focus:outline-none"
           aria-label="toggle profile dropdown"
-          onClick={() => setOpen(!isOpen)}
+          onClick={
+            () => handleSidebar("AUTH_MENU_VIEW")
+            // () => setOpen(!isOpen)
+          }
           {...triggerProps}
         >
           <Avatar
@@ -74,7 +90,7 @@ export default function AuthorizedMenu() {
               animate="to"
               exit="from"
               variants={zoomInBottom()}
-              className="py-4 w-48 bg-light rounded shadow-700 z-50"
+              className="py-4 w-48 bg-light rounded  shadow-700 z-50 h-100 overflow-y-scroll"
             >
               {siteSettings.authorizedLinks.map(({ href, label }) => (
                 <li key={`${href}${label}`}>

@@ -9,6 +9,7 @@ export default function MobileMainMenu() {
   const { t } = useTranslation("common");
   const router = useRouter();
   const { closeSidebar, isAuthorize } = useUI();
+  
   function handleClick(path: string) {
     router.push(path);
     return closeSidebar();

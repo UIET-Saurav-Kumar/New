@@ -420,8 +420,11 @@ const ShopPage = ({ data }: any) => {
 
       </div>
       {/* </DocumentMeta> */}
+     
     </>
+    
   );
+   
 };
 
 export async function getStaticPaths({ locales }: GetStaticPathsContext) {
@@ -480,7 +483,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 //   };
 // };
 
-ShopPage.Layout = ShopLayout;
+ShopPage.Layout =  ShopLayout
 export default ShopPage;
 
 

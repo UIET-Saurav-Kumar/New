@@ -36,15 +36,18 @@ const EnterPhoneNumberView = ({ onSubmit, loading }: Props) => {
 
   var { query ,pathname} = router;
 
-  function handleClick(){
+  function handleClick() {
     query?.utm_source == 'shop_qr' ? 
     router.push('/login?utm_source=shop_qr&utm_campaign='+query?.utm_campaign+'&shop_id='+query?.shop_id) : 
-      openModal("LOGIN_VIEW")
+    openModal("LOGIN_VIEW")
   }
 
   return (
 
-    <form onSubmit={handleSubmit(onSubmit)} noValidate>
+    <div className="w-screen md:max-w-md h-auto md:h-auto p-4"> 
+    {/* <div className="py-6 px-5 sm:p-8 bg-light w-screen md:max-w-md h-screen md:h-auto flex flex-col justify-center"> */}
+
+     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       
       <Input
         label={t("Enter Mobile Number")}
@@ -89,8 +92,10 @@ const EnterPhoneNumberView = ({ onSubmit, loading }: Props) => {
           
         </Button>
     </div>
+    
 
     </form>
+    </div>
   );
 };
 

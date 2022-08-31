@@ -67,9 +67,6 @@ const OtpLogin = () => {
               , 4000);
 
               
-
-
-            
           });
         },
       }
@@ -90,6 +87,8 @@ const OtpLogin = () => {
             Cookies.set("auth_permissions", data.permissions, { expires: 10 });
            
             authorize();
+            query?.utm_source == 'shop_qr' ? 
+            router.push('/shops/'+query.utm_campaign+'?utm_source=shop_qr&utm_campaign='+query.utm_campaign+'&shop_id='+query.shop_id) : null
             closeModal();
             return;
           }
@@ -122,7 +121,7 @@ function handleRegisterClick(){
  
 
   return (
-    <div className="py-6   sm:p-4 bg-light   h-full md:h-auto flex flex-col justify-center">
+    <div className="py-6   sm:p-4 bg-light   h-screen md:h-auto flex flex-col justify-center">
       <div className="flex justify-center">
         <Logo />
       </div>
@@ -170,7 +169,7 @@ function handleRegisterClick(){
         />
       )} */}
 
-      <div className=" mt-0 lg:-mt-10 flex flex-col items-center justify-center relative text-sm text-heading  sm:mt-7 mb-7 sm:mb-8">
+      <div className="   flex flex-col items-center justify-center relative text-sm text-heading  sm:mt-7 mb-7 sm:mb-8">
         <hr className="w-full text-gray-500" />
         <span className="absolute start-2/4   px-2 -ms-4 bg-light">
           {t("Or")}
@@ -197,7 +196,7 @@ export  function OtpLoginView() {
   const { openModal } = useModalAction();
 
   return (
-    <div className="flex   flex-col justify-center w-screen h-screen px-5 py-6 bg-light sm:p-8 md:h-auto md:max-w-md md:rounded-xl">
+    <div className="flex  flex-col justify-center items-center w-screen h-screen px-5 py-6 bg-light sm:p-8 md:h-auto md:max-w-md md:rounded-xl">
       {/* <div className="flex justify-center">
         <Logo />
       </div> */}

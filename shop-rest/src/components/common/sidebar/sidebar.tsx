@@ -56,7 +56,7 @@ const Sidebar: FC<SidebarProps> = ({
             variants={variant === "right" ? fadeInRight() : fadeInLeft()}
             className="fixed inset-0 overflow-hidden h-full z-50"
           >
-            <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute inset-0  overflow-hidden">
               <motion.div
                 initial="from"
                 animate="to"
@@ -74,7 +74,7 @@ const Sidebar: FC<SidebarProps> = ({
                   variant === "right" ? "end-0" : "start-0"
                 )}
               >
-                <div className="h-full w-screen max-w-md">
+                <div className="h-full w-52 max-w-md">
                   <div className="h-full flex flex-col text-body bg-light shadow-xl">
                     <Scrollbar className="w-full h-full">{children}</Scrollbar>
                   </div>

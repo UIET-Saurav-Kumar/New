@@ -134,16 +134,33 @@ const ShopVisitorList = ({ logs,shopSlug, onPagination }: IProps) => {
     //   align: "center",
     //   width: 60,
     // },
+    
     {
       title: ("User"),
       align: alignLeft,
-      render: (data:any) => (data?.user)?data?.user?.name:"---",
+      render: (data:any) => (data?.user)?data?.user?.name:"Guest user",
     },
     {
       title: ("Phone no."),
       align: alignLeft,
       render: (data:any) => (data?.user)?data?.user?.phone_number:"---",
     },
+    {
+      title: ("Email id"),
+      align: alignLeft,
+      render: (data:any) => (data?.user)?data?.user?.email:"---",
+    },
+    {
+      title: ("Date of Birth"),
+      align: alignLeft,
+      render: (data:any) => (data?.user)?data?.user?.date_of_birth.replace(/T.*/,'').split('-').reverse().join('-')   : "---",
+    },
+    {
+      title: ("Occupation"),
+      align: alignLeft,
+      render: (data:any) => (data?.user)?data?.user?.profile?.occupation : "---",
+    },
+
     // {
     //   title: ("Data"),
     //   align: alignLeft,
@@ -155,15 +172,15 @@ const ShopVisitorList = ({ logs,shopSlug, onPagination }: IProps) => {
     //   dataIndex: "location",
     //   key: "location",
     // },
-    {
-      title: ("Shop"),
-      align: alignLeft,
-      render: (data:any) => (data?.shop)?data?.shop?.name:"---",
-    },
+    // {
+    //   title: ("Shop"),
+    //   align: alignLeft,
+    //   render: (data:any) => (data?.shop)?data?.shop?.name:"---",
+    // },
     {
       title: ("Visited On"),
       align: alignLeft,
-      render: (data:any) => formateDate(data),
+      render: (data:any) => formateDate(data) ,
     },
     {
       title: t("table:table-item-actions"),
