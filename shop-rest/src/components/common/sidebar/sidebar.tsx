@@ -17,6 +17,7 @@ interface SidebarProps {
   open: boolean;
   variant?: "left" | "right";
   useBlurBackdrop?: boolean;
+  view: any;
   onClose: () => void;
 }
 type DivElementRef = React.MutableRefObject<HTMLDivElement>;
@@ -26,6 +27,7 @@ const Sidebar: FC<SidebarProps> = ({
   open = false,
   variant = "right",
   useBlurBackdrop,
+  view,
   onClose,
 }) => {
   const ref = useRef() as DivElementRef;
@@ -74,7 +76,7 @@ const Sidebar: FC<SidebarProps> = ({
                   variant === "right" ? "end-0" : "start-0"
                 )}
               >
-                <div className="h-full w-72 max-w-md">
+                <div className={`h-full ${view == 'CART_VIEW' ? 'w-full' : 'w-72'}  max-w-md`}>
                   <div className="h-full flex flex-col text-body bg-light shadow-xl">
                     <Scrollbar className="w-full h-full">{children}</Scrollbar>
                   </div>

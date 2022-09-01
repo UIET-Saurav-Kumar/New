@@ -39,7 +39,7 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
 
   return (
     
-    <div className="visible lg:hidden h-12 md:h-14">
+    <div className="visible lg:hidden h-12 md:h-14 z-50">
       <nav className="h-12 md:h-14 w-full py-1.5 px-2 flex justify-between fixed start-0 bottom-0 z-50 bg-light shadow-10">
         <motion.button
           whileTap={{ scale: 0 }}
@@ -94,8 +94,7 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
             width={30}
             height={30}
             objectFit="contain"
-           src='/home.png' 
-         
+            src='/home.png' 
            /> */}
             <img src="/home.png" className='h-7 w-7'/>
         </motion.button>

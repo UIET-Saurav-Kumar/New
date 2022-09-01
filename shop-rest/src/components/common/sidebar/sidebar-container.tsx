@@ -30,6 +30,7 @@ export default function SidebarContainer() {
           ? "left"
           : "right"
       }
+      view={sidebarView}
       // useBlurBackdrop={true}
     >
       {sidebarView === "CART_VIEW" && <CartSidebarView />}

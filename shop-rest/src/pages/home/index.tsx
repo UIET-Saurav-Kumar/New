@@ -142,15 +142,16 @@ const {getLocation} =useLocation()
 const {
   data,
   isLoading: loading,
-   isFetchingNextPage,
+  isFetchingNextPage,
   fetchNextPage,
- hasNextPage,
+  hasNextPage,
   error,
 } = useShopAvailabilityQuery({
   limit: 16 as number,
   search:"",
   location : ((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any
 });
+
 
 useIntersectionObserver({
   target: loadMoreRef,
