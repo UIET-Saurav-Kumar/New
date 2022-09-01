@@ -83,7 +83,7 @@ const RegisterForm = () => {
       {
         onSuccess: (data) => {
           if(data.message=="incorrect"){
-            setErrorMsg("Code is incorrect");
+            setErrorMsg("Invalid OTP");
             return ;
           }else{
             setErrorMsg("");
@@ -130,14 +130,14 @@ const RegisterForm = () => {
                 onClick={() => handleNavigate("terms")}
                 className="mx-1 underline cursor-pointer text-accent hover:no-underline"
                 >
-                {t("text-terms")}
+                {t("Terms")}
                 </span>
                 &
                 <span
                 onClick={() => handleNavigate("privacy")}
                 className="ms-1 underline cursor-pointer text-accent hover:no-underline"
                 >
-                {t("text-policy")}
+                {t("Policy")}
                 </span>
             </p>
             {errorMsg && (

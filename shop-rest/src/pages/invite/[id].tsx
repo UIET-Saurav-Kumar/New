@@ -215,7 +215,7 @@ const RegisterForm = () => {
                     onClick={() => handleNavigate("terms")}
                     className="mx-1 underline cursor-pointer text-accent hover:no-underline"
                     >
-                    {/* {t("text-terms")} */}
+                    {/* {t("Terms")} */}
                     Terms
                   </span>
                   &
@@ -223,7 +223,7 @@ const RegisterForm = () => {
                     onClick={() => handleNavigate("privacy")}
                     className="ms-1 underline cursor-pointer text-accent hover:no-underline"
                     >
-                    {/* {t("text-policy")} */}
+                    {/* {t("Policy")} */}
                     Policy
                   </span>
                   <h4 className="font-semibold text-magenta text-xl mt-5">Register form</h4>

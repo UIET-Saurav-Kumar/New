@@ -60,9 +60,6 @@ class LogController extends CoreController
         $shop=$request->shop;
         // $ip_location=$this->ip_AddressLocation($request);
 
-
-     
-
         if($request->type=="item-removed"){
             $product=Product::find($product["id"]);
             Log::create([
@@ -158,6 +155,7 @@ class LogController extends CoreController
         $payload = array(
             "userId"=> $user->id,
             "phoneNumber"=> $shop->settings['contact'],
+            // 'phone_number'=>$user->phone_number,
             'userName'=> $user->name,
             // 'shop_owner_phone_number'=>$order->shop->settings,
             // 'shop_owner_name'=>$product->shop->name,
@@ -171,7 +169,7 @@ class LogController extends CoreController
                 //     })),
                 'userName'=> $user->name,
                 'email'=>$user->email,
-                'phone_number'=>$user->phone_number,
+                // 'phone_number'=>$user->phone_number,
                 'date_of_birth'=>$dob,
                  
                 'shop_name'=> $shop->name,
@@ -191,8 +189,10 @@ class LogController extends CoreController
         );
 
         $interkt_response = $this->createWhatsappShopVisitorEvent($payload);
+        // $logs->interakt_response = $interkt_response;
+        return $interkt_response;
 
-        return 1;
+        // return 1;
     }
 
     public function destory($id){
