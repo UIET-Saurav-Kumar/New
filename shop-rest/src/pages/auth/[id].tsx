@@ -93,7 +93,8 @@ const RegisterForm = () => {
             Cookies.set("auth_permissions", data.permissions);
             authorize();
             query?.utm_source == 'shop_qr' ? 
-            router.push('/shops/'+ query?.utm_campaign+'?utm_source=shop_qr&utm_campaign='+query?.utm_campaign+'&shop_id='+query?.shop_id) :  router.push('/')  ;
+            router.push('/shops/'+ query?.utm_campaign+'?utm_source=shop_qr&utm_campaign='+query.utm_campaign+'&shop_id='+query.shop_id) 
+            : router.push('/') ;
           
             return;
           }
