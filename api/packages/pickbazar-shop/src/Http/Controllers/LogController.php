@@ -58,6 +58,15 @@ class LogController extends CoreController
         $user=$request->user();
         $product=$request->product;
         $shop=$request->shop;
+
+        date_default_timezone_set('Asia/Kolkata'); 
+
+        $date = date('d-m-Y H:i:s');
+
+        $newDate = date('d-m-Y H:i a', strtotime($date));
+    
+        // $date= new Date();
+        // $dt2=date("Y-m-d H:i a");
         // $ip_location=$this->ip_AddressLocation($request);
 
         if($request->type=="item-removed"){
@@ -72,6 +81,7 @@ class LogController extends CoreController
                 "type"=>"item-removed"
             ]);
         }
+        
         else if($request->type=="item-added"){
             $product=Product::find($product["id"]);
             Log::create([
@@ -96,7 +106,8 @@ class LogController extends CoreController
                 "location"=>$location,
                 // "shop_name"=>$shop['name'],
                 "shop_id"=>$shop->id,
-                "type"=>"shop-visited"
+                "type"=>"shop-visited",
+                'visited_on'=> $newDate
             ]);
         }
 
@@ -171,6 +182,7 @@ class LogController extends CoreController
                 'email'=>$user->email,
                 // 'phone_number'=>$user->phone_number,
                 'date_of_birth'=>$dob,
+                'visited_on'=>date('Y-m-d H:i:s'),
                  
                 'shop_name'=> $shop->name,
                 // get all the product names in array

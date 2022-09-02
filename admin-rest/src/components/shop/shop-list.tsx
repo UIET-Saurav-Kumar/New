@@ -20,6 +20,7 @@ type IProps = {
 
 
 const ShopList = ({ shops, onPagination }: IProps) => {
+  
   const { data, paginatorInfo } = shops! ?? {};
   const { t } = useTranslation();
   const { alignLeft, alignRight } = useIsRTL();

@@ -159,7 +159,12 @@ const AllShopVisitorList = ({ logs, onPagination }: IProps) => {
     {
       title: ("Visited On"),
       align: alignLeft,
-      render: (data:any) => formateDate(data),
+      render: (data:any) => data?.visited_on ? data?.visited_on : formateDate(data),
+    },
+    {
+      title: ("Time"),
+      align: alignLeft,
+      render: (data:any) => data?.visited_on.split(' ')[1] ? data?.visited_on : formateDate(data),
     },
     {
       title: t("table:table-item-actions"),

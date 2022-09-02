@@ -22,7 +22,9 @@ export default function InvoicePdf({
   delivery_fee: string;
   sales_tax: string;
 }) {
+
   return (
+    
     <Document>
       <Page size="A4" style={{ paddingVertical: 40 }} wrap>
         <View style={styles.container}>

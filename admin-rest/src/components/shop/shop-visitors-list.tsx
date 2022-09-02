@@ -6,10 +6,12 @@ import { CategoryPaginator } from "@ts-types/generated";
 import { useTranslation } from "next-i18next";
 import { useIsRTL } from "@utils/locals";
 import { useEffect,useState } from "react";
+
 export type IProps = {
   logs: CategoryPaginator | undefined | null;
   onPagination: (key: number) => void;
 };
+
 const ShopVisitorList = ({ logs,shopSlug, onPagination }: IProps) => {
   const { t } = useTranslation();
   const { data, paginatorInfo } = logs!;
@@ -61,6 +63,8 @@ const ShopVisitorList = ({ logs,shopSlug, onPagination }: IProps) => {
 //     })
 //   );
 // };
+
+// console.log('datalogs',logs)
 
 
   function formateDate(data:any)
@@ -180,8 +184,19 @@ const ShopVisitorList = ({ logs,shopSlug, onPagination }: IProps) => {
     {
       title: ("Visited On"),
       align: alignLeft,
-      render: (data:any) => formateDate(data) ,
+      render: (data:any) => (
+       <div className="text-gray-500 font-semibold"> {data?.visited_on ? data?.visited_on.split(' ')[0]  : formateDate(data)}</div>
+       )
     },
+
+    {
+      title: ("Time"),
+      align: alignLeft,
+      render: (data:any) => (
+        <div className="text-blue-700 font-semibold"> { data?.visited_on != null ? data?.visited_on.split(' ')[1] + ' ' + data?.visited_on.split(' ')[2] : formateDate(data)}</div>
+      )
+    },
+
     {
       title: t("table:table-item-actions"),
       dataIndex: "id",
@@ -195,6 +210,7 @@ const ShopVisitorList = ({ logs,shopSlug, onPagination }: IProps) => {
         />
       ),
     },
+    
   ];
 
   return (
@@ -204,7 +220,7 @@ const ShopVisitorList = ({ logs,shopSlug, onPagination }: IProps) => {
           //@ts-ignore
           columns={columns}
           emptyText={t("table:empty-table-data")}
-          data={shopLogs}
+          data={logs}
           rowKey="id"
           scroll={{ x: 1000 }}
           expandable={{

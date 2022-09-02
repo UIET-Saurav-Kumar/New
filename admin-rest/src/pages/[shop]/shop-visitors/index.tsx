@@ -58,9 +58,10 @@ export default function ShopVisitors() {
 
   // const shopVisitorLogs = data?.logs?.data?.filter((imt)=> imt.shop.slug == shop)
   // console.log(shopVisitorLogs); 
-  console.log(data?.logs?.data)
+  console.log(data?.logs?.data);
 
   if (loading) return <Loader text={t("common:text-loading")} />;
+
   if (error) return <ErrorMessage message={error.message} />;
 
   console.log('logs', data?.logs?.data.filter((imt)=>imt.type === 'shop-visited'))
@@ -115,7 +116,7 @@ export default function ShopVisitors() {
             <SortForm
               className="w-full md:w-1/2 mt-5 md:mt-0"
               onSortChange={({ value }: { value: SortOrder }) => {
-                setColumn(value);
+              setColumn(value);
               }}
               onOrderChange={({ value }: { value: string }) => {
                 setOrder(value);
@@ -127,6 +128,7 @@ export default function ShopVisitors() {
               ]}
             />
           </div>
+          
         </div>
       </Card>
       {/* <LogList
@@ -134,7 +136,7 @@ export default function ShopVisitors() {
         onPagination={handlePagination}
       /> */}
        <VisitorList
-        logs={data?.logs}
+        logs={filteredLogs}
         onPagination={handlePagination}
         shopSlug = {shop}
       />
