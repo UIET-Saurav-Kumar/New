@@ -100,6 +100,8 @@ const DeclineAbuseReportView = dynamic(
 
 const AbuseReport = dynamic(() => import("@components/reviews/abuse-report"));
 
+const ShopQRDownload = dynamic(() => import('@components/shop/shop-qr-download'));
+
 const ManagedModal = () => {
   const { isOpen, view,data } = useModalState();
   const { closeModal } = useModalAction();
@@ -130,6 +132,10 @@ const ManagedModal = () => {
       {view ===  'DECLINE_ABUSE_REPORT' && <DeclineAbuseReportView />}
       {view ===  'ABUSE_REPORT' && <AbuseReport data={data}/>}
       {view === 'REVIEW_IMAGE_POPOVER' && <ReviewImageModal />}
+      
+      {view === 'SHOP_QR' && <ShopQRDownload />}
+
+
       
       {view === "DELIVERY_STATUS_VIEW" && <DeliveryStatusView />}
 

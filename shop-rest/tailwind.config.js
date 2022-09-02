@@ -136,7 +136,6 @@ module.exports = {
         'pink-footer': "url('/footer.jpg')",
         'india': "url('/india.jpg')",
         'drop-down': "url('/drop-down1.jpg')",
-
         'dark-bg': "url('/dark-bg.jpg')",
         'collage': "url('/collage.jpeg')",
 

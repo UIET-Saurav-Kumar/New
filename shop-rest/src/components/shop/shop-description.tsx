@@ -6,6 +6,7 @@ import * as socialIcons from "@components/icons/social";
 import ReadMore from "@components/ui/truncate";
 import Truncate from "@components/ui/truncate-scroll";
 import { scroller, Element } from "react-scroll";
+import { PhoneIcon } from "@heroicons/react/outline";
 
 
 export default function ShopDescription({data} :any) {
@@ -48,12 +49,14 @@ export default function ShopDescription({data} :any) {
 
                   <div className="sm:hidden mt-5 mb-0 last:mb-0 flex flex-col  w-full text-left">
                           <span className="text-sm md:text-lg text-heading font-semibold mb-2">
-                            {t("Whatsapp/Call to order")}
+                            {t("Whatsapp/Call ")}
                           </span>
 
-                          <span className=" text-xs md:text-lg font-light tracking-wide text-body">
+                          <span className=" flex items-end space-x-1 text-xs underline md:text-lg font-light tracking-wide text-body">
                             {/* {data?.settings?.contact} */}
-                             84279-90450
+                            <PhoneIcon scale={0.88} className="h-4 w-4 scale-75 text-blue-900 "/> <a className="underline text-indigo-800 font-semibold cursor-pointer" href={`tel:${' 84279-90450'}`}>
+                           84279-90450
+                              </a>  
                           </span>
                   </div>
 
@@ -65,10 +68,12 @@ export default function ShopDescription({data} :any) {
                     {t("Whatsapp/Call to order")}
                   </span>
 
-                  <span className=" text-sm font-light tracking-wide text-body">
-                    {/* {data?.settings?.contact} */}
-                    84279-90450
-                  </span>
+                  <span className=" flex items-end space-x-1 text-xs underline md:text-lg font-light tracking-wide text-body">
+                            {/* {data?.settings?.contact} */}
+                            <PhoneIcon scale={0.88} className="h-4 w-4 scale-75 text-blue-900 "/> <a className="underline text-indigo-800 font-semibold cursor-pointer" href={`tel:${' 84279-90450'}`}>
+                           84279-90450
+                              </a>  
+                          </span>
               </div>
 
  {/* {data?.settings?.website && (

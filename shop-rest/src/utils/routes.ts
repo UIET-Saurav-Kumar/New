@@ -36,7 +36,7 @@ export const ROUTES = {
   NOTIFICATONS: './notifications',
 
   PROFILE: "/user/profile",
-  CHANGE_PASSWORD: "/user/Change Password",
+  CHANGE_PASSWORD: "/user/change-password",
   INVITE_FRIENDS: '/user/invite',
   REFERRAL_ACTIVITY: '/user/referral-activity',
   REFERRAL_NETWORK: '/user/referral-network',

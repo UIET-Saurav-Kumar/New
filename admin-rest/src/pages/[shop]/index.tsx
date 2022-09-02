@@ -33,6 +33,13 @@ import ReadMore from "@components/ui/truncate";
 import QrCode from "@components/shop/shop-qr-code";
 import ShopQrCode from "@components/shop/shop-qr-code";
 import { useUI } from "@contexts/ui.context";
+import InvoicePdf from "@components/order/invoice-pdf";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import ShopQr from "@components/shop/shop-qr-download";
+import { useState } from "react";
+import {QRCodeCanvas} from "qrcode.react";
+import Button from "@components/ui/button";
+import { useModalAction } from "@components/ui/modal/modal.context";
 
 export default function ShopPage() {
 
@@ -59,6 +66,12 @@ export default function ShopPage() {
   if (loading) return <Loader text={t("common:text-loading")} />;
   if (error) return <ErrorMessage message={error.message} />;
 
+  const { openModal } = useModalAction();
+
+  function openShopQR() {
+    return openModal("SHOP_QR");
+  }
+
   const {
     name,
     is_active,
@@ -75,6 +88,23 @@ export default function ShopPage() {
     slug,
     id,
   } = data?.shop! ?? {};
+
+ 
+   const qrValue = `https://buylowcal.com/shops/${slug}?utm_source=shop_qr&utm_campaign=${slug}&shop_id=${id}`
+
+  const downloadQRCode = () => {
+    
+    const canvas = document.getElementById("qr-gen");
+    const pngUrl = canvas
+      .toDataURL("image/png")
+      .replace("image/png", "image/octet-stream");
+    let downloadLink = document.createElement("a");
+    downloadLink.href = pngUrl;
+    downloadLink.download = `${slug}-QRCode.png`;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  };
 
 
   return (
@@ -98,9 +128,6 @@ export default function ShopPage() {
                
             </div>
 
-            
-            
-             
 
             {is_active ? (
               <div className="w-5 h-5 rounded-full overflow-hidden bg-light absolute bottom-4 end-2">
@@ -190,18 +217,56 @@ export default function ShopPage() {
         )}
       </div>
 
-      <div className="flex relative order-4 border-2 z-30 w-auto my-60 -mt-0">
+      <div className="bg-qr flex flex-col relative order-4 border-2 z-30 w-auto my-60 -mt-0">
+       
        {/* { isAuthorize ?  */}
-       <ShopQrCode
+
+       {/* <ShopQrCode
+          id='qr-gen'
           size={150}
           title='Scan to visit'
+          level='H'
+          // value= {qrValue}
           url={`https://buylowcal.com/shops/${slug}?utm_source=shop_qr&utm_campaign=${slug}&shop_id=${id}`} 
-        /> 
+        />  */}
+
+            <QRCodeCanvas
+              id="qr-gen"
+              value={qrValue}
+              size={290}
+              level={"H"}
+              includeMargin={true}
+           
+            />
+            <p className="">
+              <Button type="normal" className="whitespace-nowrap " onClick={openShopQR}>
+                Download 
+              </Button>
+            </p>
+
+        {/* 
+        <PDFDownloadLink
+        
+          document={ <ShopQr slug={slug} url={`https://buylowcal.com/shops/${slug}?utm_source=shop_qr&utm_campaign=${slug}&shop_id=${id}`}/> }
+          fileName={`${slug}-QR-code.pdf`}
+          style={{
+            textDecoration: "none",
+            color: "blue",
+            padding: "0.5rem",
+            fontSize:'20px',
+           }}
+        >
+          {
+             <div className='mt-44 cursor-pointer hover:text-green-800 hover:font-bold hover:underline'> Download</div>
+          }
+
+        </PDFDownloadLink> */}
+        
         {/* : */}
         {/* <ShopQrCode
           size={150}
           title='Scan to visit'
-          // url={` https://buylowcal.com/shops/${slug}?utm_source=shop_qr&utm_medium=cpc&utm_campaign=+qrCode&utm_id=+&utm_term=+&utm_content=`}
+          // url={`https://buylowcal.com/shops/${slug}?utm_source=shop_qr&utm_medium=cpc&utm_campaign=+qrCode&utm_id=+&utm_term=+&utm_content=`}
           url={`https://buylowcal.com/register?utm_source=shop_qr&utm_campaign=${slug}`} 
           // url={`https://buylowcal.com/shops/${slug}?utm_source=shop_qr&utm_campaign=${slug}`} 
         />  */}

@@ -76,7 +76,7 @@ const Sidebar: FC<SidebarProps> = ({
                   variant === "right" ? "end-0" : "start-0"
                 )}
               >
-                <div className={`h-full ${view == 'CART_VIEW' ? 'w-full' : 'w-72'}  max-w-md`}>
+                <div className={`h-full ${view == 'CART_VIEW' ? 'w-full' : 'w-52 lg:w-80'}  max-w-md`}>
                   <div className="h-full flex flex-col text-body bg-light shadow-xl">
                     <Scrollbar className="w-full h-full">{children}</Scrollbar>
                   </div>

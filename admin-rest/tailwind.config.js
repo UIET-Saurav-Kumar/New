@@ -56,6 +56,7 @@ module.exports = {
       backgroundImage: {
         // 'hero-pattern': "url('/shops-frame.jpg')",
         'pink-footer': "url('/footer.jpg')",
+        'qr':"url('/qr.jpeg')",
         // 'india': "url('/india.jpg')",
         // 'drop-down': "url('/drop-down.jpg')",
        },
