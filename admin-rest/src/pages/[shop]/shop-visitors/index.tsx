@@ -136,7 +136,7 @@ export default function ShopVisitors() {
         onPagination={handlePagination}
       /> */}
        <VisitorList
-        logs={filteredLogs}
+        logs={data?.logs}
         onPagination={handlePagination}
         shopSlug = {shop}
       />

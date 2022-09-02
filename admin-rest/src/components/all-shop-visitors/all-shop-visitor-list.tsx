@@ -159,12 +159,17 @@ const AllShopVisitorList = ({ logs, onPagination }: IProps) => {
     {
       title: ("Visited On"),
       align: alignLeft,
-      render: (data:any) => data?.visited_on ? data?.visited_on : formateDate(data),
+      render: (data:any) => (
+       <div className="text-gray-500 font-semibold"> {data?.visited_on ? data?.visited_on.split(' ')[0]  : formateDate(data)}</div>
+       )
     },
+
     {
       title: ("Time"),
       align: alignLeft,
-      render: (data:any) => data?.visited_on.split(' ')[1] ? data?.visited_on : formateDate(data),
+      render: (data:any) => (
+        <div className="text-blue-700 font-semibold"> {data?.visited_on != null ? data?.visited_on.split(' ')[1] + ' ' + data?.visited_on.split(' ')[2] : formateDate(data)}</div>
+      )
     },
     {
       title: t("table:table-item-actions"),

@@ -13,6 +13,7 @@ export type IProps = {
 };
 
 const ShopVisitorList = ({ logs,shopSlug, onPagination }: IProps) => {
+
   const { t } = useTranslation();
   const { data, paginatorInfo } = logs!;
   const rowExpandable = (record: any) => record?.children?.length;
@@ -220,7 +221,7 @@ const ShopVisitorList = ({ logs,shopSlug, onPagination }: IProps) => {
           //@ts-ignore
           columns={columns}
           emptyText={t("table:empty-table-data")}
-          data={logs}
+          data={shopLogs}
           rowKey="id"
           scroll={{ x: 1000 }}
           expandable={{
