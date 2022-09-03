@@ -106,6 +106,8 @@ const ManagedModal = () => {
   const { isOpen, view,data } = useModalState();
   const { closeModal } = useModalAction();
 
+  console.log('modaldata',data)
+
   return (
     
     <Modal open={isOpen} onClose={closeModal}>
@@ -133,7 +135,7 @@ const ManagedModal = () => {
       {view ===  'ABUSE_REPORT' && <AbuseReport data={data}/>}
       {view === 'REVIEW_IMAGE_POPOVER' && <ReviewImageModal />}
       
-      {view === 'SHOP_QR' && <ShopQRDownload />}
+      {view === 'SHOP_QR' && <ShopQRDownload data={data}  />}
 
 
       

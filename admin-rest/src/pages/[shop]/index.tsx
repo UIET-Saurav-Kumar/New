@@ -68,8 +68,10 @@ export default function ShopPage() {
 
   const { openModal } = useModalAction();
 
-  function openShopQR() {
-    return openModal("SHOP_QR");
+  function openShopQR(value: any) {
+    return openModal("SHOP_QR",{
+      value: value,
+    });
   }
 
   const {
@@ -239,7 +241,7 @@ export default function ShopPage() {
            
             />
             <p className="">
-              <Button type="normal" className="whitespace-nowrap " onClick={openShopQR}>
+              <Button type="normal" className="whitespace-nowrap " onClick={() => openShopQR(qrValue)}>
                 Download 
               </Button>
             </p>

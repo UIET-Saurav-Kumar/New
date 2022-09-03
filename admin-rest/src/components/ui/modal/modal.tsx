@@ -8,6 +8,7 @@ export default function Modal({ open, onClose, children }: any) {
   const { t } = useTranslation("common");
 
   return (
+    
     <Transition show={open} as={Fragment}>
       <Dialog
         as="div"
