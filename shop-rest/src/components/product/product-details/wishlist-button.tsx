@@ -49,11 +49,13 @@ export default function WishlistButton({
     enabled: isAuthorize,
     product_id: productId,
   });
+
   const { mutate: createLog} = useCreateLogMutation();
   const {getLocation} =useLocation();
 
 
   const { openModal } = useModalAction();
+
   function toggle() {
     if (!isAuthorize) {
       openModal('LOGIN_VIEW');
@@ -69,7 +71,6 @@ export default function WishlistButton({
         // console.log(data)
       },
     }) 
-    
   }
 
   const isLoading = adding || checking;

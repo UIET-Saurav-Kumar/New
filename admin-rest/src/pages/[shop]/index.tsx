@@ -40,6 +40,7 @@ import { useState } from "react";
 import {QRCodeCanvas} from "qrcode.react";
 import Button from "@components/ui/button";
 import { useModalAction } from "@components/ui/modal/modal.context";
+import { Maybe } from "@ts-types/generated";
 
 export default function ShopPage() {
 
@@ -63,16 +64,11 @@ export default function ShopPage() {
       amount: data?.shop?.balance?.current_balance!,
     }
   );
+  
   if (loading) return <Loader text={t("common:text-loading")} />;
   if (error) return <ErrorMessage message={error.message} />;
 
-  const { openModal } = useModalAction();
-
-  function openShopQR(value: any) {
-    return openModal("SHOP_QR",{
-      value: value,
-    });
-  }
+  
 
   const {
     name,
@@ -90,6 +86,18 @@ export default function ShopPage() {
     slug,
     id,
   } = data?.shop! ?? {};
+
+  const logoImg = logo?.original;
+  console.log('logoimg',logoImg)
+
+  const { openModal } = useModalAction();
+
+  function openShopQR(value: string, logoImg: Maybe<string> | undefined) {
+    return openModal("SHOP_QR",{
+      value: value,
+      img : logoImg,
+    });
+  }
 
  
    const qrValue = `https://buylowcal.com/shops/${slug}?utm_source=shop_qr&utm_campaign=${slug}&shop_id=${id}`
@@ -241,7 +249,7 @@ export default function ShopPage() {
            
             />
             <p className="">
-              <Button type="normal" className="whitespace-nowrap " onClick={() => openShopQR(qrValue)}>
+              <Button type="normal" className="whitespace-nowrap " onClick={() => openShopQR(qrValue,logoImg)}>
                 Download 
               </Button>
             </p>

@@ -17,7 +17,7 @@ export default function ShopQRDownload( data:any) {
 
 
   const handleExportWithMethod = (event) =>{
-    savePDF(contentArea.current, {paperSize:'A4'});
+    savePDF(contentArea.current, {paperSize:'A6'});
   }
 
 
@@ -29,7 +29,7 @@ export default function ShopQRDownload( data:any) {
 
         <PDFExport ref={pdfExportComponent}  paperSize='A4'>
 
-          <div className="p-4 font-serif  " ref={contentArea}>
+          <div className="p-4 font-serif py-3 " ref={contentArea}>
 {/* 
               <div className='  '>
                 
@@ -54,19 +54,23 @@ export default function ShopQRDownload( data:any) {
                   {/* <Image src='/qr.jpeg' className='relative z-30 border-2' layout='intrinsic' 
                     objectFit='contain' height={740} width={906} /> */}
 
-                   <div className=' align-center my-auto z-50 h-full w-96 lg:w-auto  space-y-16 bg-white rounded-3xl'> 
+                   <div className=' align-center my-auto z-50 h-full w-96 lg:w-auto  space-y-7 bg-white rounded-3xl'> 
 
                    <div className='space-y-4 mt-5'>  <hr className=' bg-black w-96 text-black h-1  mx-auto '/>
 
                     <div className='flex flex-col '>
                       <p className='font-md text-3xl font-sans'>CHECK OUT OUR LATEST</p>
-                      <p className='font-bold text-4xl font-sans'>DISCOUNTS & OFFERS</p>
+                      <p className='font-bold text-4xl whitespace-nowrap font-sans'>DISCOUNTS & OFFERS</p>
                     </div>
 
                     <hr className=' h-1 bg-black w-96 mx-auto'/>
                     </div>
 
-                    <div className='w-60 h-60 border-2 mx-auto'>
+                    <div className='text-center rounded-full w-20 h-20 mx-auto'>
+                      <img src={data?.data?.img} className='w-full h-full object-fill' />
+                    </div>
+
+                    <div className='w-60 h-60 border-2 mx-auto '>
 
                      
                       <QRCodeCanvas
@@ -79,15 +83,16 @@ export default function ShopQRDownload( data:any) {
 
                     </div>
 
-                    <div className='text-2xl font-sans'>
+                    <div className='text-2xl  font-sans'>
                       <p className='font-md '>SCAN WITH</p>
                       <p className='font-bold text-2xl'>MOBILE / PAYTM / GOOGLE LENS</p>
                     </div>
                     
-                    <div className='flex items-center mx-  justify-center '>
-                          <p className='text-2xl text-gray-900 font-light whitespace-nowrap'>Powered By:</p>
-                          <div className='flex items-center  '>
-                            <div className=' '> <Logo/> </div>
+                    <div className='flex items-center mx-  justify-center'>
+                          <p className='text-2xl text-gray-900 font-light pr-3 whitespace-nowrap'>Powered By:</p>
+                          <div className='flex items-center space-x-3 '>
+                            {/* <div className=' '> <Logo/> </div> */}
+                           <div className='space-x-3'>  <img src='/transparent-logo.png' className='w-10 h-10'/></div>
                           <div className='font-sans text-xl  font-bold flex items-center'>
                             <p className=' text-blue-400'> B </p>
                             <p className=' text-blue-400'> U </p>
@@ -114,7 +119,7 @@ export default function ShopQRDownload( data:any) {
           </div>
 
         </PDFExport>
-        <div className='absolute bottom-24 w-full z-50 text-center'> 
+        <div className='absolute -bottom-1 w-full z-50 text-center'> 
             <button className='  bg-blue-700 px-2 rounded text-white  text-lg hover:underline   h-9  w-38' 
               onClick={handleExportWithComponent}>Download 
               </button>
