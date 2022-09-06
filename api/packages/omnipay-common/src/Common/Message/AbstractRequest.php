@@ -22,6 +22,7 @@ use Omnipay\Common\ParametersTrait;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 
+
 /**
  * Abstract Request
  *
@@ -63,6 +64,7 @@ use Symfony\Component\HttpFoundation\Request as HttpRequest;
  * </code>
  *
  */
+
 abstract class AbstractRequest implements RequestInterface
 {
     use ParametersTrait {
@@ -111,6 +113,7 @@ abstract class AbstractRequest implements RequestInterface
      * @param ClientInterface $httpClient  A HTTP client to make API calls with
      * @param HttpRequest     $httpRequest A Symfony HTTP request object
      */
+
     public function __construct(ClientInterface $httpClient, HttpRequest $httpRequest)
     {
         $this->httpClient = $httpClient;
@@ -128,6 +131,7 @@ abstract class AbstractRequest implements RequestInterface
      * @return $this
      * @throws RuntimeException
      */
+    
     public function initialize(array $parameters = array())
     {
         if (null !== $this->response) {

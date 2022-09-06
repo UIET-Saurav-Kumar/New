@@ -239,6 +239,7 @@ Route::post('logs', 'PickBazar\Http\Controllers\LogController@store');
 Route::get('logs', 'PickBazar\Http\Controllers\LogController@fetchLogs');
 Route::delete('logs/{id}', 'PickBazar\Http\Controllers\LogController@destory');
 
+
 // busineesId, mobile, ParentBusinees Id
 Route::apiResource('coupons', CouponController::class, [
     'only' => ['index', 'show']
