@@ -33,6 +33,7 @@ import { useFeatureProductQuery } from "@data/home/use-feature-product-query";
 import { motion } from "framer-motion";
 import renderProductCard from "@components/product/home-product-card";
 import Layout from "@components/layout/layout";
+import Head from "next/head";
 
 
 const TandoorsPage = () => {
@@ -126,6 +127,11 @@ const TandoorsPage = () => {
 
   return (
   <>
+
+  <Head>
+  <link rel="canonical" href={`https://buylowcal.com/local-tabdoor-shops-of-chandigarh`}/>
+
+  </Head>
 
        
     <div className='bg-gray-50'>

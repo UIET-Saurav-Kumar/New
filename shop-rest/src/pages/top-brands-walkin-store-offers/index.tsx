@@ -112,6 +112,9 @@ export default function BrandOffers() {
         <meta name="distribution" content="global" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+        <link rel="canonical" href={`https://buylowcal.com/top-brands-walkin-store-offers`}/>
+
+
       </Head>
 
        {/* <div id='offer-of-the-day' className={`${data?.offers.data?.length  ? 'block' : 'hidden'} flex flex-col mt-8 border-b rounded-t shadow-lg  p-4 `}> */}

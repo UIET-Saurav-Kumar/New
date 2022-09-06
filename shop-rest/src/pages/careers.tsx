@@ -18,6 +18,7 @@ export default function AboutUs() {
     <> 
     <Head>
       <title>{t('Carrers | Buylowcal')}</title>
+      <link rel="canonical" href={`https://buylowcal.com/careers`}/>
       {/* <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(

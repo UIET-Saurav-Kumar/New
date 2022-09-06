@@ -18,6 +18,7 @@ import { GetServerSideProps } from "next";
 import { ContactUpload, User } from "@ts-types/generated";
 import { toast } from "react-toastify";
 import { useContactUploadMutation } from "@data/contact/use-contact-upload.query";
+import Head from "next/head";
 
 
 
@@ -107,6 +108,12 @@ export default function ContactPage({user} : Props) {
   }
   
   return (
+
+    <> 
+
+    <Head>
+    <link rel="canonical" href={`https://buylowcal.com/contact`}/>
+    </Head>
     
     <div className="w-full bg-gray-100">
       <div className="flex flex-col md:flex-row max-w-7xl w-full mx-auto py-10 px-5 xl:py-14 xl:px-8 2xl:px-14">
@@ -222,6 +229,7 @@ export default function ContactPage({user} : Props) {
         </div>
       </div>
     </div>
+    </>
   );
 };
 ContactPage.Layout = Layout;

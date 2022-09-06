@@ -26,6 +26,7 @@ import { useWindowDimensions } from '@components/common/search';
 import { fetchShops, useShopsQuery } from "@data/shop/use-search-shop-query";
 import ShopCard2 from '@components/ui/shop-card2';
 import ShopLayout from '@components/layout/shop-layout';
+import Head from 'next/head';
 
   const ProductFeedLoader = dynamic(
     () => import("@components/ui/loaders/product-feed-loader")
@@ -276,6 +277,11 @@ export default function SalonPage() {
   // ) : (
 
       <>
+
+      <Head>
+      <link rel="canonical" href={`https://buylowcal.com/salon`}/>
+
+      </Head>
 
     <div className='bg-gradient-to-r from-indigo-50 via-purple-50 to-pink-50 h-full border bg-white w-full'>
       

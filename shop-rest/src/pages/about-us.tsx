@@ -4,6 +4,7 @@ import { aboutUs } from "@settings/about-us.settings";
 import { Link, Element } from "react-scroll";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
+import Head from "next/head";
 
 function makeTitleToDOMId(title: string) {
   return title.toLowerCase().split(" ").join("_");
@@ -14,6 +15,11 @@ export default function AboutUs() {
   const { title, date, content } = aboutUs;
 
   return (
+    <>
+    <Head>
+    <link rel="canonical" href={`https://buylowcal.com/about-us`}/>
+
+    </Head>
     <section className="max-w-1920 w-full mx-auto py-8 px-4 lg:py-10 lg:px-8 xl:py-14 xl:px-16 2xl:px-20">
       <header className="sm:mt-2 xl:mt-4 mb-10 lg:mb-14">
         <h1 className="text-xl md:text-2xl sm:text-3xl 2xl:text-4xl text-heading font-bold mb-4 sm:mb-5 2xl:mb-7">
@@ -68,6 +74,7 @@ export default function AboutUs() {
         {/* End of content */}
       </div>
     </section>
+    </>
   );
 }
 

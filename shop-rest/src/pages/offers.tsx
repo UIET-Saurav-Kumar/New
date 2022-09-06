@@ -9,6 +9,7 @@ import NotFound from "@components/common/not-found";
 import { Fragment } from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
+import Head from "next/head";
 
 export default function OfferPage() {
   const { t } = useTranslation("common");
@@ -36,6 +37,9 @@ export default function OfferPage() {
 
   return (
     <>
+    <Head>
+    <link rel="canonical" href={`https://buylowcal.com/offers`}/>
+    </Head>
       <div className="max-w-1920 w-full mx-auto py-8 px-4 lg:py-10 lg:px-8 xl:py-14 xl:px-16 2xl:px-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-5 xl:gap-8">
           {loading ? (

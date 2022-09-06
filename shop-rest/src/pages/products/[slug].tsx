@@ -78,7 +78,7 @@ export default function ProductSinglePage({ product }: any) {
       <title>{(product?.name?product?.name:'')+' at lowest price'}</title>
       <meta name="description" content={(product?.name?product?.name:'')+' at lowest price only on BuyLowcal.com'} />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      {/* <link rel="canonical" href=' https://buylowcal.com'/> */}
+      <link rel="canonical" href={`https://buylowcal.com/products/${product?.slug}`}/>
 
       <script
       type="application/ld+json"

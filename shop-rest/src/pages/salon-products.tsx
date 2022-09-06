@@ -26,6 +26,7 @@ import CartCounterButton from '@components/cart/cart-counter-button';
 import MobileNavigation from '@components/layout/mobile-navigation';
 import { useWindowSize } from "@utils/use-window-size";
 import ShopLayout from '@components/layout/shop-layout';
+import Head from 'next/head';
 
 
 
@@ -321,6 +322,12 @@ export default function SalonProducts() {
 
   return (
 
+    <>
+
+        <Head>
+           <link rel="canonical" href={`https://buylowcal.com/salon-products`}/>
+        </Head>
+
           <div className ='flex flex-col relative'>
           
                 {/* <div className='mt-10 bg-red-100'>
@@ -460,6 +467,7 @@ export default function SalonProducts() {
       }
 
           </div>
+          </>
 
      )
 

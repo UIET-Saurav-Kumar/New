@@ -7,6 +7,7 @@ import ProfileSidebar from '@components/layout/_dashboard';
 import DashboardSidebar from '@components/profile/profile-sidebar';
 import DefaultLayout from '@components/layout/default-layout';
 import Layout from '@components/layout/layout';
+import Head from 'next/head';
 
 export { getStaticProps } from '@utils/general.ssr';
 const CartCounterButton = dynamic(
@@ -17,6 +18,10 @@ const CartCounterButton = dynamic(
 const MyWishlistPage = () => {
   const { width } = useWindowSize();
   return (
+    <>
+    <Head>
+    <link rel="canonical" href={`https://buylowcal.com/wishlists`}/>
+    </Head>
     <div className='flex lg:p-10  lg:mt-10'>
       <Seo noindex={true} nofollow={true} />
      <div className='hidden lg:block w-1/3'><DashboardSidebar/></div> 
@@ -25,6 +30,7 @@ const MyWishlistPage = () => {
       </Card>
       {width > 1023 && <CartCounterButton />}
     </div>
+    </>
   );
 };
 
