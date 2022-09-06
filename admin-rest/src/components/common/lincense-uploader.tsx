@@ -101,7 +101,7 @@ export default function Uploader({ onChange, value, multiple }: any) {
           <span className="text-accent font-semibold">
             {t("upload file")}
           </span>{" "}
-          {t("text-upload-message")} <br />
+          {t(" or drag & drop")} <br />
           <span className="text-xs text-body">{t("text-img-format")}</span>
         </p>
       </div>

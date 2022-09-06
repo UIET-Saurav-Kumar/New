@@ -99,9 +99,9 @@ export default function Uploader({ onChange, value, multiple }: any) {
         <UploadIcon className="text-muted-light" />
         <p className="text-body text-sm mt-4 text-center">
           <span className="text-accent font-semibold">
-            {t("text-upload-highlight")}
+            {t(" Upload an image")}
           </span>{" "}
-          {t("text-upload-message")} <br />
+          {t(" or drag & drop")} <br />
           <span className="text-xs text-body">{t("text-img-format")}</span>
         </p>
       </div>

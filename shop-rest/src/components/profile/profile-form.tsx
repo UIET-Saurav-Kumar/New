@@ -117,7 +117,7 @@ const ProfileForm = ({ user }: Props) => {
             />
             <Input
               {...register("profile.contact")}
-              label={t("text-contact-number")}
+              label={t("Contact Number")}
               className="flex-1 mt-3 lg:mt-0"
               onChange={(e) => {
                 const value = maskPhoneNumber(e.target.value);
@@ -213,7 +213,7 @@ const ProfileForm = ({ user }: Props) => {
           </div>
 
           <TextArea
-            label={t("text-bio")}
+            label={t("Bio")}
             //@ts-ignore
             {...register("profile.bio")}
             variant="outline"
