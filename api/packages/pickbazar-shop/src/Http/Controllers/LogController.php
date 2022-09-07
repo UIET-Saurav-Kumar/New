@@ -63,7 +63,7 @@ class LogController extends CoreController
 
         $date = date('d-m-Y H:i:s');
 
-        // $newDate = date('d-m-Y H:i a', strtotime($date));
+        $newDate = date('d-m-Y H:i a', strtotime($date));
     
         // $date= new Date();
         // $dt2=date("Y-m-d H:i a");
@@ -106,9 +106,8 @@ class LogController extends CoreController
                 "location"=>$location,
                 // "shop_name"=>$shop['name'],
                 "shop_id"=>$shop->id,
-                'visited_on'=> $date,
                 "type"=>"shop-visited",
-               
+                'visited_on'=> $newDate
             ]);
         }
 
