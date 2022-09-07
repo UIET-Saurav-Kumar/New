@@ -107,7 +107,7 @@ const ShopPage = ({ data }: any) => {
 
   const [pageURL, setPageUrl] = useState('');
 
-  function checkUtm(utm_source,utm_campaign,shop_id) {
+  function checkUtm(utm_source: string | string[] | undefined,utm_campaign: string | string[] | undefined,shop_id: string | string[] | undefined) {
     
      utm_source == 'shop_qr' ? isAuthorize ?
     router.push('/shops/'+  utm_campaign) :
@@ -118,7 +118,7 @@ const ShopPage = ({ data }: any) => {
   const { getLocation } = useLocation();
 
   useEffect(() => {
-    query.utm_source == 'shop_qr' && 
+    query?.utm_source == 'shop_qr' && 
     createLog({
       location:getLocation?.formattedAddress,
       shop:data,
