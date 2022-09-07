@@ -24,6 +24,7 @@ const data = [
     title: "banner:promotion-slide-eight",
     bannerUrl: "/ad-banner/8.jpeg",
   },
+  
   {
     id: 9,
     title: "banner:promotion-slide-nine",

@@ -63,7 +63,7 @@ const imageCheck = (logo: any , record:any, imgsize:any, imgDim:any, classname: 
   return (check ? <Image src={logo} alt={record?.name}  width={1500} height={200} className={classname} />:<Avatar name={record?.name} size={imgsize} round={imgDim}  />);
 }
 
-const ShopPage = ({ data }: any) => {
+const ShopPage = ({ data,categoryData }: any) => {
   const router = useRouter();
   const { pathname, query } = router;
   const { openModal } = useModalAction();
@@ -107,7 +107,7 @@ const ShopPage = ({ data }: any) => {
 
   const [pageURL, setPageUrl] = useState('');
 
-  function checkUtm(utm_source: string | string[] | undefined,utm_campaign: string | string[] | undefined,shop_id: string | string[] | undefined) {
+  function checkUtm(utm_source,utm_campaign,shop_id) {
     
      utm_source == 'shop_qr' ? isAuthorize ?
     router.push('/shops/'+  utm_campaign) :
@@ -118,7 +118,7 @@ const ShopPage = ({ data }: any) => {
   const { getLocation } = useLocation();
 
   useEffect(() => {
-    query?.utm_source == 'shop_qr' && 
+    query.utm_source == 'shop_qr' && 
     createLog({
       location:getLocation?.formattedAddress,
       shop:data,
@@ -197,13 +197,13 @@ const ShopPage = ({ data }: any) => {
   // // console.log('offset value', ProductFeed?.offsetTop)
 
 
-  const {
-    data : categoryData,
-    isLoading: loading,
-    error,
-  } = useCategoriesQuery({
-    type: query.slug as string,
-  });
+  // const {
+  //   data : categoryData,
+  //   isLoading: loading,
+  //   error,
+  // } = useCategoriesQuery({
+  //   type: query.slug as string,
+  // });
 
   const seoFunction = async(data:any) => {
 
@@ -449,6 +449,8 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   await queryClient.prefetchQuery("settings", fetchSettings);
 
   try {
+    const res = await fetch('https://api.buylowcal.com/fetch-parent-category')
+    const categories = await res.json();
     const shop = await fetchShop(params!.slug as string);
     await queryClient.prefetchInfiniteQuery(
       ["products", { shop_id: shop?.id }],
@@ -457,6 +459,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 
     return {
       props: {
+        categoryData: categories,
         data: shop,
         ...(await serverSideTranslations(locale!, ["common"])),
         dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),

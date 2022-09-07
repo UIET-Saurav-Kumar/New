@@ -11,7 +11,7 @@ import { useWindowDimensions } from "@components/common/search";
 import { useEffect, useState } from "react";
 
 
-const CategoryDropdownSidebar = ({data}) => {
+const CategoryDropdownSidebar = ({data}:any) => {
 
   const { query } = useRouter();
   const { type } = query;
