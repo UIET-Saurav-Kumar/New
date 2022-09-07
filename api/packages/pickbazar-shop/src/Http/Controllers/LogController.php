@@ -59,11 +59,11 @@ class LogController extends CoreController
         $product=$request->product;
         $shop=$request->shop;
 
-        date_default_timezone_set('Asia/Kolkata'); 
+        // date_default_timezone_set('Asia/Kolkata'); 
 
-        $date = date('d-m-Y H:i:s');
+        // $date = date('d-m-Y H:i:s');
 
-        $newDate = date('d-m-Y H:i a', strtotime($date));
+        // $newDate = date('d-m-Y H:i a', strtotime($date));
     
         // $date= new Date();
         // $dt2=date("Y-m-d H:i a");
@@ -107,7 +107,7 @@ class LogController extends CoreController
                 // "shop_name"=>$shop['name'],
                 "shop_id"=>$shop->id,
                 "type"=>"shop-visited",
-                'visited_on'=> $newDate
+                'visited_on'=> date('d-m-Y H:i:s');
             ]);
         }
 
