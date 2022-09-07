@@ -61,9 +61,9 @@ class LogController extends CoreController
 
         date_default_timezone_set('Asia/Kolkata'); 
 
-        $date = date('d-m-Y H:i:s');
+        $date = date('d-m-Y g:i:s');
 
-        $newDate = date('d-m-Y H:i a', strtotime($date));
+        $newDate = date('d-m-Y g:i a', strtotime($date));
     
         // $date= new Date();
         // $dt2=date("Y-m-d H:i a");
@@ -180,7 +180,7 @@ class LogController extends CoreController
                 //     })),
                 'userName'=> $user->name,
                 'email'=>$user->email,
-                // 'phone_number'=>$user->phone_number,
+                'user_phone_number'=>$user->phone_number,
                 'date_of_birth'=>$dob,
                 'visited_on'=>date('Y-m-d H:i:s'),
                  
