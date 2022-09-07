@@ -107,7 +107,7 @@ class LogController extends CoreController
                 // "shop_name"=>$shop['name'],
                 "shop_id"=>$shop->id,
                 "type"=>"shop-visited",
-                'visited_on'=> date('d-m-Y H:i:s');
+                'visited_on'=> date('d-m-Y H:i:s')
             ]);
         }
 
