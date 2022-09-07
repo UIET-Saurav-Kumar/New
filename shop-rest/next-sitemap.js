@@ -10,7 +10,8 @@ module.exports = {
           '*/he',
           '*/zh',
           '*/es',
-          '*/de'
+          '*/de',
+          '*/questions',
         ],
         },
       ],
@@ -31,6 +32,7 @@ module.exports = {
       '*/otp-login',
       '*/wishlists',
       '*/reports',
+      '*/questions',
       '*/ar',
       '*/he',
       '*/zh',
