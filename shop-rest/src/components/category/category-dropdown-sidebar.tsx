@@ -10,8 +10,12 @@ import CategorySlider from "./category-slider";
 import { useWindowDimensions } from "@components/common/search";
 import { useEffect, useState } from "react";
 
+// export async function getStaticProps() {
+//   const posts = await getPosts()
+//   return { props: { posts } }
+// }
 
-const CategoryDropdownSidebar = ({data}:any) => {
+const CategoryDropdownSidebar = ({data}) => {
 
   const { query } = useRouter();
   const { type } = query;
@@ -23,6 +27,10 @@ const CategoryDropdownSidebar = ({data}:any) => {
   } = useCategoriesQuery({
     type: query.slug as string,
   });
+
+
+
+  console.log('categoryData');
 
   const { height, width } = useWindowDimensions();
 
@@ -37,9 +45,9 @@ const CategoryDropdownSidebar = ({data}:any) => {
     const navigate = () =>
     
       { width < 976 ?
-        ( slug?.some(el => pageURL.includes(el)) ?   window.scrollTo(0, 150) : 
+        ( slug?.some(el => pageURL.includes(el)) ?  window.scrollTo(0, 150) : 
         window.scrollTo(0, 620) ) : 
-        ( slug?.some(el => pageURL.includes(el)) ?   window.scrollTo(0, 570) :
+        ( slug?.some(el => pageURL.includes(el)) ?  window.scrollTo(0, 570) :
         window.scrollTo(0, 550) )
       };
 

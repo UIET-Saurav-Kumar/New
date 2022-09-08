@@ -63,7 +63,7 @@ const imageCheck = (logo: any , record:any, imgsize:any, imgDim:any, classname: 
   return (check ? <Image src={logo} alt={record?.name}  width={1500} height={200} className={classname} />:<Avatar name={record?.name} size={imgsize} round={imgDim}  />);
 }
 
-const ShopPage = ({ data,categoryData }: any) => {
+const ShopPage = ({ data }: any) => {
   const router = useRouter();
   const { pathname, query } = router;
   const { openModal } = useModalAction();
@@ -197,13 +197,13 @@ const ShopPage = ({ data,categoryData }: any) => {
   // // console.log('offset value', ProductFeed?.offsetTop)
 
 
-  // const {
-  //   data : categoryData,
-  //   isLoading: loading,
-  //   error,
-  // } = useCategoriesQuery({
-  //   type: query.slug as string,
-  // });
+  const {
+    data : categoryData,
+    isLoading: loading,
+    error,
+  } = useCategoriesQuery({
+    type: query.slug as string,
+  });
 
   const seoFunction = async(data:any) => {
 
@@ -449,8 +449,6 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   await queryClient.prefetchQuery("settings", fetchSettings);
 
   try {
-    const res = await fetch('https://api.buylowcal.com/fetch-parent-category')
-    const categories = await res.json();
     const shop = await fetchShop(params!.slug as string);
     await queryClient.prefetchInfiniteQuery(
       ["products", { shop_id: shop?.id }],
@@ -459,7 +457,6 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 
     return {
       props: {
-        categoryData: categories,
         data: shop,
         ...(await serverSideTranslations(locale!, ["common"])),
         dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),

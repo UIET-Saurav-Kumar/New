@@ -32,6 +32,7 @@ export default class CustomDocument extends Document {
         {/* <link rel="canonical" href='https://buylowcal.com'/> */}
          
             {/* Global Site Tag (gtag.js) - Google Analytics */}
+            {/* <script id="chat-init" src="https://cloud.board.support/account/js/init.js?id=156619822"></script> */}
             <script
               async
               src={`https://www.googletagmanager.com/gtag/js?id=UA-190495171-1`}

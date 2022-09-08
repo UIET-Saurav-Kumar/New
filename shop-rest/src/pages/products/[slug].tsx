@@ -91,41 +91,41 @@ export default function ProductSinglePage({ product }: any) {
         "description": product?.description,
         "sku": `${product?.sku}`,
         // "mpn": "ABC123",
-        "brand": {
-          "@type": "Thing",
-          "name": product?.shop?.name,
-        },
+        // "brand": {
+        //   "@type": "Thing",
+        //   "name": product?.shop?.name,
+        // },
         "review": {
           "@type": "Review",
           "reviewRating": {
             "@type": "Rating",
             "ratingValue": "5",
             "bestRating": "5",
-            "worstRating": "1"
+            "worstRating": "2"
           },
-          "author": {
-            "@type": "Person",
-            "name": "John Doe"
-          }
+          // "author": {
+          //   "@type": "Person",
+          //   "name": "John Doe"
+          // }
         },
         "aggregateRating": {
           "@type": "AggregateRating",
           "ratingValue": "5",
           "reviewCount": "89"
         },
-        "offers": {
-          "@type": "Offer",
-          "url": `{http://www.buylowcal.com/products/${product?.slug}}`,
-          "priceCurrency": "INR",
-          "price":  product?.sale_price,
-          // "priceValidUntil": "2020-01-01",
-          // "itemCondition": "http://schema.org/UsedCondition",
-          // "availability": "http://schema.org/InStock",
-          "seller": {
-            "@type": "Organization",
-            "name":  product?.shop?.name
-           }
-         }
+        // "offers": {
+        //   "@type": "Offer",
+        //   "url": `{http://www.buylowcal.com/products/${product?.slug}}`,
+        //   "priceCurrency": "INR",
+        //   "price":  product?.sale_price,
+        //   "priceValidUntil": "2020-01-01",
+        //   "itemCondition": "http://schema.org/UsedCondition",
+        //   "availability": "http://schema.org/InStock",
+        //   "seller": {
+        //     "@type": "Organization",
+        //     "name":  product?.shop?.name
+        //    }
+        //  }
        }
 
     ) }}
