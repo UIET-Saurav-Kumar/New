@@ -52,6 +52,17 @@ export default class CustomDocument extends Document {
             `,
               }}
             />
+              
+              {/* Fastbase */}
+              <script
+               dangerouslySetInnerHTML={{
+                __html: `
+              (function () {
+                var e,i=["https://fastbase.com/fscript.js","1ThKCRsVmr","script"],a=document,s=a.createElement(i[2]);
+                s.async=!0,s.id=i[1],s.src=i[0],(e=a.getElementsByTagName(i[2])[0]).parentNode.insertBefore(s,e)
+              })();`
+            }}
+              /> 
 
              {/* Microsoft clarity */}
            <script
