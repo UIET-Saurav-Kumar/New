@@ -15,10 +15,26 @@ import { useEffect, useState } from "react";
 //   return { props: { posts } }
 // }
 
-const CategoryDropdownSidebar = ({data}) => {
+export async function getStaticProps() {
+  // Call an external API endpoint to get posts
+  const res = await fetch('https://api.buylowcal.com/fetch-parent-category')
+  const category = await res.json()
+
+  // By returning { props: { posts } }, the Blog component
+  // will receive `posts` as a prop at build time
+  return {
+    props: {
+      category,
+    },
+  }
+}
+
+const CategoryDropdownSidebar = ({data,category}:any) => {
 
   const { query } = useRouter();
   const { type } = query;
+
+  console.log('category',category)
 
   const {
     data :categoryData,
@@ -30,7 +46,7 @@ const CategoryDropdownSidebar = ({data}) => {
 
 
 
-  console.log('categoryData');
+  // console.log('categoryData', categoryData);
 
   const { height, width } = useWindowDimensions();
 

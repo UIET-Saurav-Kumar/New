@@ -100,6 +100,7 @@ const offerSliderBreakpoints = {
   },
 
 };
+
 SwiperCore.use([Navigation]);
 
 export default function CategorySlider({items}:any) {
