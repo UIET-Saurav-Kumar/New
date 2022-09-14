@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import React from 'react'
+import { CrossIcon } from 'react-select/src/components/indicators';
 
 export default function FacebookLogin() {
 
@@ -22,13 +23,13 @@ export default function FacebookLogin() {
             });
         } else {
             // The person is not logged into your app or we are unable to tell.
-            document.getElementById('status').innerHTML = '  you are not logged in';
+            document.getElementById('status').innerHTML = 'Something went wrong, Unable to log in';
         }
     }
 
     function checkLoginState() {
         FB.getLoginStatus(function(response) {
-        //   statusChangeCallback(response);
+          statusChangeCallback(response);
         console.log(response)
         });
       }
@@ -39,8 +40,8 @@ export default function FacebookLogin() {
     
    <>
 
-   <div className='w-full' id='status'>
-
+   <div className='w-full text-center pt-7  text-gray-900 font-light' id='status'>
+          
    </div>
 
 
