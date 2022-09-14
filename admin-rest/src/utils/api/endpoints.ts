@@ -101,5 +101,7 @@ export const API_ENDPOINTS = {
   ABUSIVE_REPORTS_DECLINE: "abusive_reports/reject",
   ABUSIVE_REPORTS: "abusive_reports",
 
+  WHATSAPP_CAMPAIGN:'webhook',
+
 };
 

@@ -288,6 +288,12 @@ export const siteSettings = {
         icon: "AttributeIcon",
         permissions: adminAndOwnerOnly,
       },
+      {
+        href: (shop: string) => `/${shop}${ROUTES.WHATSAPP_CAMPAIGN}`,
+        label: "Whatsapp Campaign",
+        icon: "AttributeIcon",
+        permissions: adminAndOwnerOnly,
+      },
     ],
   },
   product: {

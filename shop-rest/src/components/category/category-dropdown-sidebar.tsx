@@ -17,7 +17,7 @@ import { useEffect, useState } from "react";
 
 export async function getStaticProps() {
   // Call an external API endpoint to get posts
-  const res = await fetch('https://api.buylowcal.com/fetch-parent-category')
+  const res = await fetch('https://api.github.com/users/xiaotian/repos')
   const category = await res.json()
 
   // By returning { props: { posts } }, the Blog component
@@ -45,12 +45,12 @@ const CategoryDropdownSidebar = ({data,category}:any) => {
   });
 
 
-
   // console.log('categoryData', categoryData);
 
   const { height, width } = useWindowDimensions();
 
   const [pageURL, setPageUrl] = useState('');
+
   const slug = ['chandigarh-grocery-store', 'kosmetics-india'];
 
 

@@ -43,4 +43,5 @@ export const ROUTES = {
   REVIEWS: "/reviews",
   QUESTIONS: "/questions",
   BRAND_OFFERS: "/brand-offers",
+  WHATSAPP_CAMPAIGN: '/whatsapp-campaign',
 };

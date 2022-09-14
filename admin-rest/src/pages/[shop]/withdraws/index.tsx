@@ -15,13 +15,16 @@ import { SortOrder } from "@ts-types/generated";
 import SortForm from "@components/common/sort-form";
 
 export default function WithdrawsPage() {
+
   const { t } = useTranslation();
   const [page, setPage] = useState(1);
   const [orderBy, setOrder] = useState("created_at");
   const [sortedBy, setColumn] = useState<SortOrder>(SortOrder.Desc);
+  
   const {
     query: { shop },
   } = useRouter();
+
   const { data: shopData } = useShopQuery(shop as string);
   const shopId = shopData?.shop?.id!;
 
@@ -45,9 +48,12 @@ export default function WithdrawsPage() {
   if (loading) return <Loader text={t("common:text-loading")} />;
   if (error) return <ErrorMessage message={error.message} />;
 
+
   function handlePagination(current: any) {
     setPage(current);
   }
+
+
   return (
     <>
       <Card className="flex flex-col md:flex-row items-center justify-between mb-8">
