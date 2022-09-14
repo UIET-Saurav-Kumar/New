@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import React from 'react'
-import { ToastContainer } from 'react-toastify';
 
 export default function FacebookLogin() {
 
@@ -23,13 +22,13 @@ export default function FacebookLogin() {
             });
         } else {
             // The person is not logged into your app or we are unable to tell.
-            document.getElementById('status').innerHTML = '  You are not logged in';
+            document.getElementById('status').innerHTML = '  you are not logged in';
         }
     }
 
     function checkLoginState() {
         FB.getLoginStatus(function(response) {
-          statusChangeCallback(response);
+        //   statusChangeCallback(response);
         console.log(response)
         });
       }
@@ -40,8 +39,8 @@ export default function FacebookLogin() {
     
    <>
 
-   <div className='w-full text-center my-auto text-red-800' id='status'>
-         
+   <div className='w-full' id='status'>
+
    </div>
 
 
@@ -90,15 +89,15 @@ export default function FacebookLogin() {
 
         <div className='w-full h-screen'>
        
-            <button scope="public_profile,email" onLogin={checkLoginState}
+            <button  
             onClick={checkLoginState} className='rounded p-2 px-4 bg-blue-700  mt-20 mx-auto text-center flex justify-center my-auto items-center text-white font-semibold '>Facebook Login</button>
         </div>
 
-        <div className="fb-login-button" data-width=" " data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="true" data-use-continue-as="true">
+        {/* <div className="fb-login-button" data-width=" " data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="true" data-use-continue-as="true">
         
             
 
-        </div> 
+        </div> */}
 
         {/* <fb:login-button scope="public_profile,email"
                      onlogin="checkLoginState();">
