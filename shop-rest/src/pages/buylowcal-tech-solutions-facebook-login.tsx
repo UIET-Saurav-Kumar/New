@@ -45,7 +45,7 @@ export default function FacebookLogin() {
    </div>
 
 
-<Head>
+    <Head>
         <script
             dangerouslySetInnerHTML={{
             __html: `
@@ -81,7 +81,7 @@ export default function FacebookLogin() {
                 
         />
         
-        </Head>
+    </Head>
 
 
 

@@ -22,6 +22,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { useRegisterMutation } from "@data/auth/use-register.mutation";
+import { Head } from "next/document";
 
  
  
@@ -71,161 +72,133 @@ export default function WhatsappCampaign() {
     // defaultValues,
     resolver: yupResolver(registerFormSchema),
   });
+
+  function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    console.log(response);
+    // The response object is returned with a status field that lets the
+    // app know the current login status of the person.
+    // Full docs on the response object can be found in the documentation
+    // for FB.getLoginStatus().
+    if (response.status === 'connected') {
+        // Logged into your app and Facebook.
+        console.log('Welcome!  Fetching your information.... ');
+        FB.api('/me', function (response) {
+            console.log('Successful login for: ' + response.name);
+            document.getElementById('status').innerHTML =
+              'Thanks for logging in, ' + response.name + '!';
+        });
+    } else {
+        // The person is not logged into your app or we are unable to tell.
+        document.getElementById('status').innerHTML = 'Something went wrong, Unable to log in';
+    }
+}
+
+function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    console.log(response)
+    });
+  }
  
 
   return (
 
-    <div className="bg">
-        <h1 className="font-semibold text-3xl text-gray-700 tracking-normal font-sans text-center">
-            Re-target your shop visitors with exciting offers using whatsapp platform
+    <div className="bg-white w-full h-full py-4">
+        
+        <h1 className="  text-xl lg:text-3xl text-gray-900 tracking-normal font-serif font-bold my-2 lg:my-5 text-center">
+            Re-target your shop visitors with exciting offers and campaigns
         </h1>
-      {/* <Card className="flex flex-col md:flex-row items-center justify-between mb-8">
-
-        <form className="grid grid-cols-2   gap-2 -mt-6 gap-x-1 place-content-center" 
-            onSubmit={handleSubmit(onSubmit)} noValidate>
-
-        {/* name */}
-        <form className="grid grid-cols-2 w-1/2 mt-10 h-1/2 mx-auto  gap-3  gap-x-1 place-content-center" 
-             noValidate>
-
-        <Input 
-          // label={t("Name")}
-          label={t("Name")}
-          {...register("name")}
-          type="text"
-          shadow={true}
-          variant="rounded"
-          className="mb-2 lg:mb-5 col-span-2 "
-          error={t(errors.name?.message!)}
-        />
-
-        {/* email */}
-        <Input
-    
-          // label={t("Email")}
-          label={t("Email")}
-          {...register("email")}
-          type="email"
-          shadow={true}
-          variant="rounded"
-          className="mb-2 lg:mb-5 col-span-2"
-          error={t(errors.email?.message!)}
-        />
-
-        {/* password */}
-        
-
-        {/* Date of birth */}
-       
-
-        {/* phone number */}
-        <Input
-          label={"Phone Number"}
-          {...register("phone_number")}
-          type="text"
-          inputMode="numeric"
-          variant="rounded"
-          className="mb-2 lg:mb-5 "
-          onChange={(e) => setValue("phone_number", getPhoneNumber(e.target.value))}
-          error={t(errors.phone_number?.message!)}
-        />
-
-         
-
-        <div className="flex flex-col  items-start ">
-            <span className="text-sm lg:text-md text-gray-700 mb-2 font-semibold">Occupation</span>
-              <select
-                    className="px-3 rounded-full text-gray-700 py-3.5 w-full text-sm items-center mr-4 bg-gray-100   focus:border-gray-400   flex "
-                    // onChange={(e) => setOccupation(e.target.value)}
-                    // value={occupation}
-                    defaultValue="Search by"
-                    // setValue={setValue}
-                    {...register("occupation")}
-                    placeholder="Search by"
-                  >
-                    <option value="" disabled selected>Select your option</option>
-                    <option value="Student">{t("Student")}</option>
-                    {/* <option value="email">{t("form:input-label-email")}</option> */}
-                    <option value="Employed">{t("Employed")}</option>
-                    <option value='Self employed'>Self employed</option>
-                    <option value='Home Maker'>Home Maker</option>
-              </select> 
-        </div>
-
-        <div className="flex flex-col">
-              <div className="flex  text-gray-700 h-3  font-semibold text-sm lg:text-md leading-none mb-3">
-                Gender
-              </div>
-              <div className="flex p-4 rounded-full bg-gray-100 focus:border-gray-400 items-center space-x-4 lg:space-x-8 ">
-                <Radio
-                  id="male"
-                  type="radio"
-                  {...register("gender")}
-                  value="male"
-                  label={t("Male")}
-                  className=""
-                />
-
-                <Radio
-                  id="female"
-                  type="radio"
-                  {...register("gender")}
-                  value="female"
-                  label={t("Female")}
-                  className=""
-                />
-              </div>
-          </div>
-        
-        {/* current location */}
-       {/* <div className="w-full flex  "> */}
-         
-      {/* </div>  */}
-
-          {/* </div> */}
-         
-
-      {/* <div className=""> 
-         <GetCurrentLocation onChange = {changeLocation} />  
           
-      </div> */}
+       
+           <div className='w-full flex flex-col space-y-12 justify-evenly '>
+        
+       
+            <div className="flex flex-col items-center"> 
+            {/* <img src='https://about.fb.com/wp-content/uploads/2020/07/image-48.png?w=2690' 
+            className="object-contain   h-96"/> */}
+              <div className=' w-full h-full'>
 
-      <PasswordInput
-          // label={t("Password")}
-          label={t("Password")}
-          {...register("password")}
-          error={t(errors.password?.message!)}
-          variant="rounded"
-          className="mb-2 lg:mb-5 col-span-2"
-        />
+                  <div className="flex flex-col text-center space-y-6">
+                        <h3 className="text-xl lg:text-2xl text-gray-700 ">
+                          Activate your WhatsApp Business Number with us
+                        </h3>
+                        <div className="flex flex-col items-center justify-center space-y-10 ">
+                          <p className="font-semibold text-2xl  text-green-500">Requirements</p>
+                          <ul className="text-gray-900 space-y-4 flex flex-col items-start text-lg">
+                            <li className="">~ Access to your Facebook Business Manager</li>
+                            <li>~ Your company or brand legal name and business</li>
+                            <li>~ A Phone number where you can revieve OTP on</li>
+                            <li>~ A valid Business website</li>
+                          </ul>
+                        </div>
+                  </div>
 
-        <div className="w-full    flex mt-15">
-            <Button className=" flex justify-center w-full rounded-full " 
-            // variant="rounded"
-            size="big"
-            // loading={loading} disabled={loading}
-            >
-              
-              {t("Register")}
-            </Button>
-        </div>
-      
-      </form>
-      
 
+                    <button  
+                    onClick={checkLoginState} className='rounded p-2 px-4 bg-blue-700  mt-20 mx-auto text-center flex justify-center my-auto items-center text-white font-semibold '>
+                      Join with Facebook
+                    </button>
+                    <p className='w-full text-center  h-7  text-gray-900 font-light' id='status'>
+          
+                    </p>
+                     
+                </div>
+               </div>  
+
+
+            <div className="flex flex-col space-y-10 bg-gray-50 p-3">   
+              <p className="text-center text-gray-800 text-4xl">What you'll get</p> 
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4   text-gray-800 items-center place-content-center">
+                     
+                      <div className="flex flex-col  text-center space-y-3 items-center  ">
+                            <img className="w-20 h-20" src='/whatsapp.png'/>
+                            <p className="text-sm lg:text-sm text-gray-700 tracking-wide font-sans">Have a dedicated number for your brand to communicate</p>
+                      </div>
+                      <div className="flex flex-col  text-center items-center space-y-3">
+                            <img className="w-20 h-20 " src='/chat.png'/>
+                            <p className="text-sm lg:text-sm text-gray-700 tracking-wide font-sans">Respond to unlimited customer-initiated conversations</p>
+                      </div>
+                      <div className="flex flex-col  text-center space-y-3 items-center">
+                            <img className="w-20 h-20" src='/conversation.png'/>
+                            <p className="text-sm lg:text-sm text-gray-700 tracking-wide font-sans">Send business-initiated conversations to up to 50 customers per day
+                             </p>
+                      </div>
+                      <div className="flex flex-col  text-center space-y-3 items-center" >
+                            <img className="w-20 h-20" src='/facebook.png'/>
+                            <p className="text-sm lg:text-sm text-gray-700 tracking-wide font-sans">Complete Facebook business verification to remove messaging restrictions</p>
+                      </div>
+
+                </div>
+               </div>
+       
+               {/* <div className="fb-login-button" data-width=" " data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="true" data-use-continue-as="true">
+               
+                   
+       
+               </div> */}
+       
+               {/* <fb:login-button scope="public_profile,email"
+                            onlogin="checkLoginState();">
+           </fb:login-button>  */}
+       
+       
+               
+           </div>
+        
     </div>
-  );
-}
+    );
+  }
 
-WhatsappCampaign.authenticate = {
-  permissions: adminAndOwnerOnly,
-};
-WhatsappCampaign.Layout = ShopLayout;
+  WhatsappCampaign.authenticate = {
+    permissions: adminAndOwnerOnly,
+  };
+  WhatsappCampaign.Layout = ShopLayout;
 
-export const getServerSideProps = async ({ locale }: any) => ({
-  props: {
-    ...(await serverSideTranslations(locale, ["table", "common", "form"])),
-  },
-});
+  export const getServerSideProps = async ({ locale }: any) => ({
+    props: {
+      ...(await serverSideTranslations(locale, ["table", "common", "form"])),
+    },
+  });
  
 

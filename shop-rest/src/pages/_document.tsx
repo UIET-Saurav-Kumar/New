@@ -97,6 +97,46 @@ export default class CustomDocument extends Document {
               }}
             />
 
+              {/* Facebook login SDK */}
+               <script
+                   dangerouslySetInnerHTML={{
+                   __html: `
+                       window.fbAsyncInit = function() {
+                           FB.init({
+                           appId      : 381786777315073,
+                           cookie     : true,
+                           xfbml      : true,
+                           version    : v14.0,
+                           });
+                           
+                           FB.AppEvents.logPageView();   
+                           
+                       };
+       
+                       `}} 
+               />
+
+               {/* Facebook Login SDK */}
+       
+               <script
+       
+                   dangerouslySetInnerHTML = {{
+                   __html: `
+                           (function(d, s, id){
+                               var js, fjs = d.getElementsByTagName(s)[0];
+                               if (d.getElementById(id)) {return;}
+                               js = d.createElement(s); js.id = id;
+                               js.src = "https://connect.facebook.net/en_US/sdk.js";
+                               fjs.parentNode.insertBefore(js, fjs);
+                           }(document, 'script', 'facebook-jssdk'));
+       
+                       `}}
+       
+                       
+               />
+               
+              
+
              {/* Google tag manager */}
           <script
             dangerouslySetInnerHTML={{
