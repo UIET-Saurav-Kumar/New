@@ -24,7 +24,8 @@ import * as yup from "yup";
 import { useRegisterMutation } from "@data/auth/use-register.mutation";
 import { Head } from "next/document";
 
- 
+
+import FacebookLogin from 'react-facebook-login'; 
  
 
 export default function WhatsappCampaign() {
@@ -48,63 +49,100 @@ export default function WhatsappCampaign() {
     return value;
   }
 
+  const [login, setLogin] = useState(false);
+  const [data, setData] = useState({});
+  const [picture, setPicture] = useState('');
 
-  const registerFormSchema = yup.object().shape({
-    name: yup.string().required(" Name required"),
-    email: yup
-      .string()
-      .email("error-email-format")
-      .required(" Email required"),
-    password: yup.string().required(" Password required"),
-    phone_number:yup.string().max(10, "Phone number should be of 10 digits only").min(10, 'Phone number should be of 10 digits only').required("error-contact-required").matches(/^[0-9]{10}$/, "Invalid phone number"),
-    // current_location:yup.string().required("error-location-required"),
-  });
-
-  
-  const {
-    register,
-    handleSubmit,
-    setError,
-    control,
-    setValue,
-    formState: { errors },
-  } = useForm<FormValues>({
-    // defaultValues,
-    resolver: yupResolver(registerFormSchema),
-  });
-
-  function statusChangeCallback(response) {
-    console.log('statusChangeCallback');
+  const responseFacebook = (response:any) => {
     console.log(response);
-    // The response object is returned with a status field that lets the
-    // app know the current login status of the person.
-    // Full docs on the response object can be found in the documentation
-    // for FB.getLoginStatus().
-    if (response.status === 'connected') {
-        // Logged into your app and Facebook.
-        console.log('Welcome!  Fetching your information.... ');
-        FB.api('/me', function (response) {
-            console.log('Successful login for: ' + response.name);
-            document.getElementById('status').innerHTML =
-              'Thanks for logging in, ' + response.name + '!';
-        });
+    setData(response);
+    setPicture(response.picture.data.url);
+    if (response.accessToken) {
+      setLogin(true);
     } else {
-        // The person is not logged into your app or we are unable to tell.
-        document.getElementById('status').innerHTML = 'Something went wrong, Unable to log in';
+      setLogin(false);
     }
-}
-
-function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    console.log(response)
-    });
   }
+
+  const fb_login = () => {
+    window.FB.login((response)=> {
+      if(response.status === 'connected') {
+        console.log(response.authResponse.accessToken);
+      }
+    },
+    {
+      scope: 'business_management,whatsapp_business_management',
+   
+    }
+    );
+  };
  
 
   return (
 
+    <>
+
+    {/* <div id="fb-root"></div>
+
+    <body>
+
+     
+        <script
+            dangerouslySetInnerHTML={{
+            __html: `
+                window.fbAsyncInit = function() {
+                    FB.init({
+                    appId      : 381786777315073,
+                    cookie     : true,
+                    xfbml      : true,
+                    version    : v14.0,
+                    });
+                    
+                    FB.AppEvents.logPageView();   
+                    
+                };
+
+                `}} 
+        />
+
+          <script
+            dangerouslySetInnerHTML={{
+            __html: `
+
+            function checkLoginState() {
+              FB.getLoginStatus(function(response) {
+                statusChangeCallback(response);
+              console.log(response)
+              });
+            }
+
+
+            `}} 
+          />
+
+        
+
+        <script
+
+            dangerouslySetInnerHTML = {{
+            __html: `
+                    (function(d, s, id){
+                        var js, fjs = d.getElementsByTagName(s)[0];
+                        if (d.getElementById(id)) {return;}
+                        js = d.createElement(s); js.id = id;
+                        js.src = "https://connect.facebook.net/en_US/sdk.js";
+                        fjs.parentNode.insertBefore(js, fjs);
+                    }(document, 'script', 'facebook-jssdk'));
+
+                `}}
+        />
+        
+    
+    </body> */}
+
     <div className="bg-white w-full h-full py-4">
+
+     
         
         <h1 className="  text-xl lg:text-3xl text-gray-900 tracking-normal font-serif font-bold my-2 lg:my-5 text-center">
             Re-target your shop visitors with exciting offers and campaigns
@@ -135,14 +173,25 @@ function checkLoginState() {
                   </div>
 
 
-                    <button  
-                    onClick={checkLoginState} className='rounded p-2 px-4 bg-blue-700  mt-20 mx-auto text-center flex justify-center my-auto items-center text-white font-semibold '>
+                    <button  onClick={fb_login}
+                      className='rounded p-2 px-4 mt-20 mx-auto text-center bg-blue-700 flex justify-center my-auto items-center text-white font-semibold '>
                       Join with Facebook
+
+                      {/* <FacebookLogin
+                        appId="381786777315073"
+                        autoLoad={true}
+                        fields="name,email,picture"
+                        scope="public_profile,user_friends"
+                        version='14.0'
+                        callback={responseFacebook}
+                        icon="fa-facebook" /> */}
+                      
                     </button>
+
                     <p className='w-full text-center  h-7  text-gray-900 font-light' id='status'>
           
                     </p>
-                     
+ 
                 </div>
                </div>  
 
@@ -170,7 +219,7 @@ function checkLoginState() {
                       </div>
 
                 </div>
-               </div>
+              </div>
        
                {/* <div className="fb-login-button" data-width=" " data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="true" data-use-continue-as="true">
                
@@ -187,6 +236,8 @@ function checkLoginState() {
            </div>
         
     </div>
+
+    </>
     );
   }
 
@@ -201,4 +252,8 @@ function checkLoginState() {
     },
   });
  
+
+function fbq(arg0: string, arg1: string, arg2: { appId: string; feature: string; }) {
+  throw new Error("Function not implemented.");
+}
 

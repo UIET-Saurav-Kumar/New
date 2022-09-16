@@ -98,7 +98,7 @@ export default class CustomDocument extends Document {
             />
 
               {/* Facebook login SDK */}
-               <script
+               {/* <script
                    dangerouslySetInnerHTML={{
                    __html: `
                        window.fbAsyncInit = function() {
@@ -114,11 +114,11 @@ export default class CustomDocument extends Document {
                        };
        
                        `}} 
-               />
+               /> */}
 
                {/* Facebook Login SDK */}
        
-               <script
+               {/* <script
        
                    dangerouslySetInnerHTML = {{
                    __html: `
@@ -133,7 +133,7 @@ export default class CustomDocument extends Document {
                        `}}
        
                        
-               />
+               /> */}
                
               
 

@@ -12,7 +12,7 @@ import PageLoader from "@components/ui/page-loader/page-loader";
 
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Hydrate } from "react-query/hydration";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useSettingsQuery } from "@data/settings/use-settings.query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { appWithTranslation } from "next-i18next";
@@ -20,6 +20,8 @@ import { ModalProvider } from "@components/ui/modal/modal.context";
 import DefaultSeo from "@components/ui/default-seo";
 import PrivateRoute from "@utils/private-route";
 import ManagedModal from "@components/ui/modal/managed-modal";
+
+import  Script  from "next/script";
 
 const Noop: React.FC = ({ children }) => <>{children}</>;
 
@@ -37,6 +39,18 @@ const CustomApp = ({ Component, pageProps }: AppProps) => {
   }
   const Layout = (Component as any).Layout || Noop;
   const authProps = (Component as any).authenticate;
+
+  useEffect( ()=> {
+    window.fbAsyncInit = function () {
+      window.FB.init({
+        appId: '381786777315073',
+        autoLogAppEvents: true,
+        xfbml: true, 
+        version: 'v14.0',
+
+      });
+    };
+  },[]);
 
   return (
     <QueryClientProvider client={queryClientRef.current}>
