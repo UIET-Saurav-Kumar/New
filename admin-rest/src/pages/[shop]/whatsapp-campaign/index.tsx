@@ -67,7 +67,8 @@ export default function WhatsappCampaign() {
   const fb_login = () => {
     window.FB.login((response)=> {
       if(response.status === 'connected') {
-        console.log(response.authResponse.accessToken);
+        // console.log(response.authResponse.accessToken);
+        console.log(response);
       }
     },
     {
