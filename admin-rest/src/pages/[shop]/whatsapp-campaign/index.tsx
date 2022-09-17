@@ -64,6 +64,7 @@ export default function WhatsappCampaign() {
     }
   }
 
+
   const fb_login = () => {
     window.FB.login((response)=> {
       if(response.status === 'connected') {
@@ -72,12 +73,11 @@ export default function WhatsappCampaign() {
       }
     },
     {
-      scope: 'business_management,whatsapp_business_management',
-   
+      scope: 'business_management,whatsapp_business_management,whatsapp_business_messaging',
     }
     );
   };
- 
+
 
   return (
 
