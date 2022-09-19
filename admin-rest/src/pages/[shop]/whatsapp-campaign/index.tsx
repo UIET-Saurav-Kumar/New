@@ -49,9 +49,11 @@ export default function WhatsappCampaign() {
     return value;
   }
 
+
   const [login, setLogin] = useState(false);
   const [data, setData] = useState({});
   const [picture, setPicture] = useState('');
+
 
   const responseFacebook = (response:any) => {
     console.log(response);
@@ -68,6 +70,10 @@ export default function WhatsappCampaign() {
   const fb_login = () => {
     window.FB.login((response)=> {
       if(response.status === 'connected') {
+        // alert('SUCESSFUL')
+        FB.api('/me', function(response){
+          console.log(response)
+        })
         // console.log(response.authResponse.accessToken);
         console.log(response);
       }
@@ -143,8 +149,6 @@ export default function WhatsappCampaign() {
 
     <div className="bg-white w-full h-full py-4">
 
-     
-        
         <h1 className="  text-xl lg:text-3xl text-gray-900 tracking-normal font-serif font-bold my-2 lg:my-5 text-center">
             Re-target your shop visitors with exciting offers and campaigns
         </h1>
@@ -156,36 +160,37 @@ export default function WhatsappCampaign() {
             <div className="flex flex-col items-center"> 
             {/* <img src='https://about.fb.com/wp-content/uploads/2020/07/image-48.png?w=2690' 
             className="object-contain   h-96"/> */}
-              <div className=' w-full h-full'>
+              <div className='w-full h-full'>
 
                   <div className="flex flex-col text-center space-y-6">
                         <h3 className="text-xl lg:text-2xl text-gray-700 ">
                           Activate your WhatsApp Business Number with us
                         </h3>
                         <div className="flex flex-col items-center justify-center space-y-10 ">
-                          <p className="font-semibold text-2xl  text-green-500">Requirements</p>
+                          <p className="font-semibold text-2xl text-green-500">Requirements</p>
                           <ul className="text-gray-900 space-y-4 flex flex-col items-start text-lg">
-                            <li className="">~ Access to your Facebook Business Manager</li>
-                            <li>~ Your company or brand legal name and business</li>
-                            <li>~ A Phone number where you can revieve OTP on</li>
-                            <li>~ A valid Business website</li>
+                            <li className=""> ~ Access to your Facebook Business Manager</li>
+                            <li> ~ Your company or brand legal name and business</li>
+                            <li> ~ A Phone number where you can revieve OTP on</li>
+                            <li> ~ A valid Business website</li>
                           </ul>
                         </div>
                   </div>
 
 
                     <button  onClick={fb_login}
-                      className='rounded p-2 px-4 mt-20 mx-auto text-center bg-blue-700 flex justify-center my-auto items-center text-white font-semibold '>
-                      Join with Facebook
+                        className='rounded p-2 px-4 mt-20 mx-auto text-center bg-blue-700 flex justify-center my-auto items-center text-white font-semibold '>
+                        
+                        Join with Facebook
 
-                      {/* <FacebookLogin
-                        appId="381786777315073"
-                        autoLoad={true}
-                        fields="name,email,picture"
-                        scope="public_profile,user_friends"
-                        version='14.0'
-                        callback={responseFacebook}
-                        icon="fa-facebook" /> */}
+                        {/* <FacebookLogin
+                          appId="381786777315073"
+                          autoLoad={true}
+                          fields="name,email,picture"
+                          scope="public_profile,user_friends"
+                          version='14.0'
+                          callback={responseFacebook}
+                          icon="fa-facebook" /> */}
                       
                     </button>
 
@@ -194,12 +199,13 @@ export default function WhatsappCampaign() {
                     </p>
  
                 </div>
-               </div>  
+
+              </div>  
 
 
             <div className="flex flex-col space-y-10 bg-gray-50 p-3">   
-              <p className="text-center text-gray-800 text-4xl">What you'll get</p> 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4   text-gray-800 items-center place-content-center">
+                <p className="text-center text-gray-800 text-4xl">What you'll get</p> 
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 text-gray-800 items-center place-content-center">
                      
                       <div className="flex flex-col  text-center space-y-3 items-center  ">
                             <img className="w-20 h-20" src='/whatsapp.png'/>
@@ -212,7 +218,7 @@ export default function WhatsappCampaign() {
                       <div className="flex flex-col  text-center space-y-3 items-center">
                             <img className="w-20 h-20" src='/conversation.png'/>
                             <p className="text-sm lg:text-sm text-gray-700 tracking-wide font-sans">Send business-initiated conversations to up to 50 customers per day
-                             </p>
+                            </p>
                       </div>
                       <div className="flex flex-col  text-center space-y-3 items-center" >
                             <img className="w-20 h-20" src='/facebook.png'/>
@@ -220,7 +226,7 @@ export default function WhatsappCampaign() {
                       </div>
 
                 </div>
-              </div>
+            </div>
        
                {/* <div className="fb-login-button" data-width=" " data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="true" data-use-continue-as="true">
                
@@ -253,8 +259,5 @@ export default function WhatsappCampaign() {
     },
   });
  
-
-function fbq(arg0: string, arg1: string, arg2: { appId: string; feature: string; }) {
-  throw new Error("Function not implemented.");
-}
+ 
 
