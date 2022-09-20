@@ -71,9 +71,9 @@ export default function WhatsappCampaign() {
     window.FB.login((response)=> {
       if(response.status === 'connected') {
         // alert('SUCESSFUL')
-        FB.api('/me', function(response){
-          // console.log(response)
-        })
+        // FB.api('/me', function(response){
+        //   console.log(response)
+        // })
         // console.log(response.authResponse.accessToken);
         // console.log(response);
         console.log('Connected successfully with access token XXXXXXXXX...')
