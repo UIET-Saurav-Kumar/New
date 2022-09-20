@@ -215,7 +215,7 @@ class UserController extends CoreController
         $user->givePermissionTo($permissions);
 
         #--------------creating whatapp user-----------------#
-        $CURLOPT_POSTFIELDS   = array(
+        $CURLOPT_POSTFIELDS     = array(
                                         "userId"=> $user->id,
                                         "phoneNumber"=> $user->phone_number,
                                         "countryCode"=> $country_code,
