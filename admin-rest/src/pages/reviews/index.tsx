@@ -9,11 +9,15 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useReviewsQuery } from "@data/review/use-reviews.query";
 
+
 export default function Reviews() {
+  
   const [page, setPage] = useState(1);
   const { t } = useTranslation();
   const [orderBy, setOrder] = useState("created_at");
   const [sortedBy, setColumn] = useState<SortOrder>(SortOrder.Desc);
+
+  
   const {
     data,
     isLoading: loading,
@@ -25,12 +29,14 @@ export default function Reviews() {
     sortedBy,
   });
 
+
   if (loading) return <Loader text={t("common:text-loading")} />;
   if (error) return <ErrorMessage message={error.message} />;
 
   function handlePagination(current: any) {
     setPage(current);
   }
+
   return (
     <>
       <Card className="flex flex-col mb-8">
@@ -49,6 +55,7 @@ export default function Reviews() {
     </>
   );
 }
+
 Reviews.Layout = Layout;
 
 export const getStaticProps = async ({ locale }: any) => ({

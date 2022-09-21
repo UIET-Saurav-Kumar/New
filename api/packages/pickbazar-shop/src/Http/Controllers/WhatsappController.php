@@ -36,7 +36,7 @@ class WhatsappController extends CoreController
 
     public function trackUser(Request $request)
     {
-        $CURLOPT_POSTFIELDS     = $request->api_fields;
+        $CURLOPT_POSTFIELDS  = $request->api_fields;
         
         $endpoint = 'track/users/';
 
@@ -47,13 +47,12 @@ class WhatsappController extends CoreController
 
     public function trackEvent(Request $request)
     {
-        $CURLOPT_POSTFIELDS     = $request->api_fields;
+        $CURLOPT_POSTFIELDS  = $request->api_fields;
         
         $endpoint = 'track/events/';
 
         $response   = InteraktHelper::interaktApi(json_encode($CURLOPT_POSTFIELDS),$endpoint);
 
         return $response;
-
     }
 }

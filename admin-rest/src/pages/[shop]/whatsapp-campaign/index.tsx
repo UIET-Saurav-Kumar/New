@@ -76,6 +76,7 @@ export default function WhatsappCampaign() {
         // })
         // console.log(response.authResponse.accessToken);
         // console.log(response);
+        router.push('/whatsapp-campaign/dashboard')
         console.log('Connected successfully with access token XXXXXXXXX...')
       }
     },

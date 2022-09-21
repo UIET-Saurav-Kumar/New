@@ -42,6 +42,11 @@ export const siteSettings = {
         icon: "DashboardIcon",
       },
       {
+        href: ROUTES.WHATSAPP_CAMPAIGN,
+        label: 'Whatsapp Campaign',
+        icon: 'DashboardIcon',
+      },
+      {
         href: ROUTES.SHOPS,
         label: "Shops",
         icon: "ShopIcon",
