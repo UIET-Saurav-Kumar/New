@@ -81,7 +81,7 @@ export default function WhatsappCampaign() {
         // })
         // console.log(response.authResponse.accessToken);
         console.log('response',response);
-        router.push(`https://admin.buylowcal.com/${shop}/whatsapp-campaign/dashboard`)
+        router.push(`https://admin.buylowcal.com/${shop}/whatsapp-campaign/dashboard?id=${response?.authResponse.userID}`)
         // console.log('new')
         // console.log('Connected successfully with access token XXXXXXXXX...')
       }
