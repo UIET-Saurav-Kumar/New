@@ -27,6 +27,7 @@ import { Head } from "next/document";
 
 import FacebookLogin from 'react-facebook-login'; 
  
+ 
 
 export default function WhatsappCampaign() {
 
@@ -66,6 +67,10 @@ export default function WhatsappCampaign() {
     }
   }
 
+  function callBackRedirect() {
+        router.push(`${shop}/dashboard/`)
+  }
+
 
   const fb_login = () => {
     window.FB.login((response)=> {
@@ -75,9 +80,10 @@ export default function WhatsappCampaign() {
         //   console.log(response)
         // })
         // console.log(response.authResponse.accessToken);
-        // console.log(response);
-        router.push(`${shop}/whatsapp-campaign/dashboard`)
-        console.log('Connected successfully with access token XXXXXXXXX...')
+        console.log('response',response);
+        router.push(`https://admin.buylowcal.com/${shop}/whatsapp-campaign/dashboard`)
+        // console.log('new')
+        // console.log('Connected successfully with access token XXXXXXXXX...')
       }
     },
     {
@@ -178,7 +184,6 @@ export default function WhatsappCampaign() {
                           </ul>
                         </div>
                   </div>
-
 
                     <button  onClick={fb_login}
                         className='rounded p-2 px-4 mt-20 mx-auto text-center bg-blue-700 flex justify-center my-auto items-center text-white font-semibold '>
