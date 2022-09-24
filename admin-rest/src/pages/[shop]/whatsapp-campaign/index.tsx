@@ -1,3 +1,4 @@
+
 import Card from "@components/common/card";
 import ErrorMessage from "@components/ui/error-message";
 import Loader from "@components/ui/loader/loader";
@@ -10,7 +11,7 @@ import router, { useRouter } from "next/router";
 import { adminAndOwnerOnly } from "@utils/auth-utils";
 import { useShopQuery } from "@data/shop/use-shop.query";
 import { useWithdrawsQuery } from "@data/withdraw/use-withdraws.query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SortOrder } from "@ts-types/generated";
 import SortForm from "@components/common/sort-form";
 import Button from "@components/ui/button";
@@ -28,6 +29,7 @@ import { Head } from "next/document";
 import FacebookLogin from 'react-facebook-login'; 
  
  
+
 
 export default function WhatsappCampaign() {
 
@@ -67,21 +69,25 @@ export default function WhatsappCampaign() {
     }
   }
 
+
+
+
   function callBackRedirect() {
         router.push(`${shop}/dashboard/`)
   }
 
-
+ 
   const fb_login = () => {
     window.FB.login((response)=> {
       if(response.status === 'connected') {
         // alert('SUCESSFUL')
-        // FB.api('/me', function(response){
-        //   console.log(response)
-        // })
+        FB.api('/me', function(response){
+          console.log(response)
+        })
         // console.log(response.authResponse.accessToken);
         console.log('response',response);
-        router.push(`https://admin.buylowcal.com/${shop}/whatsapp-campaign/dashboard?id=${response?.authResponse.userID}`)
+        // router.push(`https://admin.buylowcal.com/${shop}/whatsapp-campaign/${response?.authResponse.userID}`)
+        router.push(`https://localhost:3002/${shop}/whatsapp-campaign/${response?.authResponse.userID}`)
         // console.log('new')
         // console.log('Connected successfully with access token XXXXXXXXX...')
       }
@@ -91,6 +97,8 @@ export default function WhatsappCampaign() {
     }
     );
   };
+
+
 
 
   return (
@@ -160,10 +168,8 @@ export default function WhatsappCampaign() {
         <h1 className="  text-xl lg:text-3xl text-gray-900 tracking-normal font-serif font-bold my-2 lg:my-5 text-center">
             Re-target your shop visitors with exciting offers and campaigns
         </h1>
-          
        
-           <div className='w-full flex flex-col space-y-12 justify-evenly '>
-        
+           <div className='w-full flex flex-col space-y-12 justify-evenly'>
        
             <div className="flex flex-col items-center"> 
             {/* <img src='https://about.fb.com/wp-content/uploads/2020/07/image-48.png?w=2690' 
