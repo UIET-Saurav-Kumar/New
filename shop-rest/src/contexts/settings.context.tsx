@@ -42,6 +42,7 @@ export const SettingsContext = React.createContext<State | any>(initialState);
 
 SettingsContext.displayName = "SettingsContext";
 
+
 export const SettingsProvider: React.FC<{ initialValue: any }> = ({
   initialValue,
   ...props
@@ -49,6 +50,7 @@ export const SettingsProvider: React.FC<{ initialValue: any }> = ({
   const [state] = React.useState(initialValue ?? initialState);
   return <SettingsContext.Provider value={state} {...props} />;
 };
+
 
 export const useSettings = () => {
   const context = React.useContext(SettingsContext);

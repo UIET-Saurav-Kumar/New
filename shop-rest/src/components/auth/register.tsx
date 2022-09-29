@@ -23,6 +23,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Query } from "react-query";
 
 
+
 type FormValues = {
   name: string;
   email: string;
@@ -44,6 +45,7 @@ const registerFormSchema = yup.object().shape({
   phone_number:yup.string().max(10, "Phone number should be of 10 digits only").min(10, 'Phone number should be of 10 digits only').required("error-contact-required").matches(/^[0-9]{10}$/, "Invalid phone number"),
   // current_location:yup.string().required("error-location-required"),
 });
+
 
 const defaultValues = {
   name: "",

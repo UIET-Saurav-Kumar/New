@@ -98,9 +98,7 @@ export default function WhatsappCampaign() {
     );
   };
 
-
-
-
+  
   return (
 
     <>
@@ -191,27 +189,27 @@ export default function WhatsappCampaign() {
                         </div>
                   </div>
 
-                    <button  onClick={fb_login}
-                        className='rounded p-2 px-4 mt-20 mx-auto text-center bg-blue-700 flex justify-center my-auto items-center text-white font-semibold '>
-                        
-                        Join with Facebook
-
-                        {/* <FacebookLogin
-                          appId="381786777315073"
-                          autoLoad={true}
-                          fields="name,email,picture"
-                          scope="public_profile,user_friends"
-                          version='14.0'
-                          callback={responseFacebook}
-                          icon="fa-facebook" /> */}
+                  <button  onClick={fb_login}
+                      className='rounded p-2 px-4 mt-20 mx-auto text-center bg-blue-700 flex justify-center my-auto items-center text-white font-semibold '>
                       
-                    </button>
+                      Join with Facebook
+
+                      {/* <FacebookLogin
+                        appId="381786777315073"
+                        autoLoad={true}
+                        fields="name,email,picture"
+                        scope="public_profile,user_friends"
+                        version='14.0'
+                        callback={responseFacebook}
+                        icon="fa-facebook" /> */}
+                    
+                  </button>
 
                     <p className='w-full text-center  h-7  text-gray-900 font-light' id='status'>
           
                     </p>
  
-                </div>
+              </div>
 
               </div>  
 

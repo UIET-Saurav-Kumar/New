@@ -40,6 +40,7 @@ import ElanteBanner from "@components/home-page-product-section/elante-banner";
 import BrandOffers from "@components/home-page-product-section/brand-offers";
 import Head from "next/head";
 import useIntersectionObserver from "@components/product/useIntersectionObserver";
+import BillPayment from "@components/home-page-product-section/bill-payments";
 
 
 const ProductFeedLoader = dynamic(
@@ -102,7 +103,7 @@ export const getStaticProps: GetStaticProps = async ({ locale, params }) => {
   
     return {
       props: {
-        // ...(await serverSideTranslations(locale!, ["common"])),
+        ...(await serverSideTranslations(locale!, ["common"])),
         dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
       },
       revalidate: 120,
@@ -272,6 +273,7 @@ useIntersectionObserver({
               
                 <Tagline/>
                 <UserDashboard/>
+                {/* <BillPayment/> */}
                 <ElanteBanner/>
                 <RedBullBanner/>
                 <AllCategories/>
@@ -281,6 +283,7 @@ useIntersectionObserver({
                 <HomePageBanner />
                 <FeaturedShops />
                 <FeaturedProducts/>
+                
                 
               </div>
             )

@@ -29,6 +29,7 @@ import Head from "next/head";
 import dynamic from "next/dynamic";
 import useIntersectionObserver from "@components/product/useIntersectionObserver";
 import ProductNotFoundInfo from "@components/product/product-not-found-info";
+import ShopNotFoundInfo from "@components/shop/shop-not-found-info";
 
 
 const ProductFeedLoader = dynamic(
@@ -38,6 +39,10 @@ const ProductFeedLoader = dynamic(
 const ShopsPage = () => {
 
   const loadMoreRef = useRef();
+
+  const shopCat =getCategory();
+
+  const { width } = useWindowSize();
   
   const [filter, setFilter] = useState(false);
   const [sort , setSort] = useState(false);
@@ -90,33 +95,30 @@ const ShopsPage = () => {
     return (
 
       <div className="w-full mx-2 mt-5">
-        <ProductNotFoundInfo shopData={!data?.pages?.[0]?.data} />
+        {/* <ProductNotFoundInfo shopData={!data?.pages?.[0]?.data} /> */}
+        <ShopNotFoundInfo/>
       </div>
     );
   }
 
-  function getCategory():string{
+  function getCategory(){
     const { query } = useRouter();
     if(query.category){
       return query.category as string
     }
-    return "";
   }
 
-  const [searchString, setSearchString] = useState(null);
 
-  function getText():string{
+  function getText(){
     const { query } = useRouter();
-    // setSearchString(query.text) as string;
     if(query.text){
-       
       return query.text as string
     }
-    return "";
+     
   }
 
 
-  const { width } = useWindowSize();
+   
 
   // function getSearch(){
   //   var value:any=(window.localStorage.getItem('search'))?window.localStorage.getItem('search'):"";
@@ -162,7 +164,7 @@ const ShopsPage = () => {
   // // console.log('shops',data?.pages?.filter((shop: any) => shop?.is_active === 1))
   // // console.log('shops name',data?.pages?.data?.map((shop: any) => shop))
 
-  const shopCat =getCategory();
+   
 
   // console.log('shop page data',getCategory())
 

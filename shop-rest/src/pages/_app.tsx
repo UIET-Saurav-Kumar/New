@@ -30,6 +30,7 @@ import Cookies from "js-cookie";
 import { fetchShop } from "@data/shop/use-shop.query";
 import ManagedModal from "@components/ui/modal/managed-modal";
 import { fetchShopSeo } from "@data/shop/use-shop.query";
+
 import {
   ModalProvider,
   useModalAction,
@@ -37,6 +38,8 @@ import {
 
 import * as ga from '../lib/ga'
 import { useRouter } from "next/router";
+
+import { PaymentProvider } from "@contexts/payment.context";
 
 const Noop: React.FC = ({ children }) => <>{children}</>;
 
@@ -47,6 +50,7 @@ const AppSettings: React.FC = (props: any) => {
   
 
   if(slugname !== undefined && routname == 'shops')
+
   {
     const { data, isLoading: loading, error } = useSettingsQuery();
 
@@ -55,6 +59,7 @@ const AppSettings: React.FC = (props: any) => {
     if (error) return <ErrorMessage message={error.message} />;
     return <SettingsProvider initialValue={data?.settings?.options} {...props} />;
   }
+
   else
   {
     const { data, isLoading: loading, error } = useSettingsQuery();
@@ -66,6 +71,7 @@ const AppSettings: React.FC = (props: any) => {
 };
 
 const SocialLoginProvider: React.FC = () => {
+
   const [session, loading] = useSession();
   const { mutate: socialLogin } = useSocialLoginMutation();
   const { closeModal } = useModalAction();
@@ -89,13 +95,16 @@ const SocialLoginProvider: React.FC = () => {
               authorize();
               closeModal();
             }
+
             if (!data.token) {
               setErrorMsg("The credentials was wrong!");
             }
+
             if (!data.permissions.includes(CUSTOMER)) {
               setErrorMsg("Doesn't have enough permission");
             }
           },
+
           onError: (error: any) => {
             // console.log(error.message);
           },
@@ -144,7 +153,12 @@ function CustomApp({ Component, pageProps }: AppProps) {
                     <SearchProvider>
                       <Layout {...pageProps}>
                         <Seo />
-                        <Component {...pageProps} />
+                         <PaymentProvider> 
+                          
+                          
+                            <Component {...pageProps} />
+
+                         </PaymentProvider>
                       </Layout>
                       <ToastContainer autoClose={2000} />
                       <ManagedModal />

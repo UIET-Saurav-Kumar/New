@@ -2,6 +2,7 @@
 import { loggedIn } from "@utils/is-loggedin";
 import React, { FC, useMemo } from "react";
 
+
 export interface State {
   isAuthorize: boolean;
   sidebarView: any;
@@ -19,6 +20,7 @@ const initialState = {
   displayMobileSearch: false,
   displayModalStickyBar: false,
 };
+
 
 type Action =
   | {
@@ -133,14 +135,17 @@ export const UIProvider: FC = (props) => {
       ? dispatch({ type: "CLOSE_SIDEBAR" })
       : dispatch({ type: "OPEN_SIDEBAR" });
 
+      
   const closeSidebarIfPresent = () =>
     state.displaySidebar && dispatch({ type: "CLOSE_SIDEBAR" });
+
 
   const setSidebarView = (view: SIDEBAR_VIEW) =>
     dispatch({ type: "SET_SIDEBAR_VIEW", view });
 
-  const showHeaderSearch = () => dispatch({ type: "SHOW_HEADER_SEARCH" });
-  const hideHeaderSearch = () => dispatch({ type: "HIDE_HEADER_SEARCH" });
+
+  const showHeaderSearch   = () => dispatch({ type: "SHOW_HEADER_SEARCH" });
+  const hideHeaderSearch   = () => dispatch({ type: "HIDE_HEADER_SEARCH" });
   const showModalStickyBar = () => dispatch({ type: "SHOW_MODAL_STICKY_BAR" });
   const hideModalStickyBar = () => dispatch({ type: "HIDE_MODAL_STICKY_BAR" });
   const toggleMobileSearch = () => dispatch({ type: "TOGGLE_MOBILE_SEARCH" });
@@ -166,6 +171,8 @@ export const UIProvider: FC = (props) => {
 
   return <UIContext.Provider value={value} {...props} />;
 };
+
+
 
 export const useUI = () => {
   const context = React.useContext(UIContext);
