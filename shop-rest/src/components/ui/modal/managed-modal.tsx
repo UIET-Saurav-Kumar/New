@@ -34,14 +34,23 @@ const QuestionForm = dynamic(
 );
 
 const AbuseReport = dynamic(() => import('@components/reviews/abuse-report'));
+
 const ReviewImageModal = dynamic(
   () => import('@components/reviews/review-image-modal')
 );
+
 const AddressDeleteView = dynamic(
   () => import("@components/address/address-delete-view")
 );
 
+
+const PaymentModal = dynamic(
+  ()=> import('@components/home-page-product-section/bill-payments/bill-payment-modal/modal')
+)
+
+
 const SearchBarModal = dynamic(() => import("@components/common/search-bar-modal"));
+
 
 const ManagedModal = () => {
   const { isOpen, view, data } = useModalState();
@@ -63,6 +72,7 @@ const ManagedModal = () => {
       {view === 'ABUSE_REPORT' && <AbuseReport data={data} />}
       {view === 'QUESTION_FORM' && <QuestionForm />}
       {view === 'REVIEW_IMAGE_POPOVER' && <ReviewImageModal />}
+      {view === 'BILL_PAYMENT' && <PaymentModal />}
       {/* { view=== 'SEARCH_BAR_MODAL' && <SearchBarModal />} */}
       {view === "PRODUCT_DETAILS" && (
         <ProductDetailsModalView productSlug={data} />

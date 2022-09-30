@@ -9,7 +9,7 @@ export default function MobileRecharge({view, width,height,label,click}:any) {
 
   return (
 
-    <div  onClick={view}  className ='w-full cursor-pointer   text-center'>
+    <div  onClick={view}  className ='w-full cursor-pointer  border rounded-lg text-center'>
         
           <Image
            

@@ -272,8 +272,9 @@ useIntersectionObserver({
               <div className="relative w-full">
               
                 <Tagline/>
+                
                 <UserDashboard/>
-                {/* <BillPayment/> */}
+                <BillPayment/>
                 <ElanteBanner/>
                 <RedBullBanner/>
                 <AllCategories/>

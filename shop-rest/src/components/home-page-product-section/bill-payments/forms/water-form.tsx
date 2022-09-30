@@ -1,28 +1,25 @@
 import Input from '@components/ui/input'
 import Label from '@components/ui/label'
-import { useModalAction } from '@components/ui/modal/modal.context';
+import { useModalAction } from '@components/ui/modal/modal.context'
 import Select from '@components/ui/select/select'
-import React from 'react'
+ import React from 'react'
 
-export default function DthForm({click} :any) {
+export default function WaterForm({click} :any) {
 
+console.log('form water',click)
 
-    const { openModal } = useModalAction();
-
-
-    function handleClick()  {
-        return   openModal('BILL_PAYMENT')
-    }
+const { openModal } = useModalAction();
 
 
-
-    console.log(' form dth ',click)
+function handleClick()  {
+    return   openModal('BILL_PAYMENT')
+}
 
   return (
 
-    <div className={`${click ? 'block' : 'hidden'}`}>
+        <div className={`${click ? 'block' : 'hidden'}`}>
 
-            <div className='grid grid-cols-1 lg:flex space-y-3 lg:space-y-0 lg:space-x-20 px-6 justify-evenly w-full py-3 lg:py-4 items-center bg-gray-200'>
+<div className='grid grid-cols-1 lg:flex space-y-3 lg:space-y-0 lg:space-x-20 px-6 justify-evenly w-full py-3 items-center bg-gray-200'>
 
             {/* <Input label='Phone number'
                 variant=''
@@ -39,12 +36,12 @@ export default function DthForm({click} :any) {
             </div>
 
             <div className='flex-1'> 
-                <Input label='Mobile Number/Consumer Id'
+                <Input label='RR Number'
                     variant=''
-                    type='number'
-                    className='rounded '
+                    type='text'
+                    className='rounded'
                 />
-            </div>
+             </div>
 
             {/* <div className='flex flex-col'> 
                 <Label> Circle </Label>
@@ -54,17 +51,19 @@ export default function DthForm({click} :any) {
                 />
             </div> */}
 
-            <div className='flex-1 items-center'> 
+            {/* <div className='flex-1 items-center'> 
                 
                 <Input label = 'Amount'
                         variant = ' '
                         type = 'number'
                 />
-            </div>
+            </div> */}
 
             {/* <Button className='' size='big'>
                 Register
             </Button> */}
+
+
                 <div className='hidden lg:block lg:pt-3'>
                     <Label className=''></Label>
                     <button onClick={ handleClick} className='    bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>
@@ -76,7 +75,7 @@ export default function DthForm({click} :any) {
                             Proceed
                 </button>
 
-            </div>
+        </div>
 
     </div>
   )

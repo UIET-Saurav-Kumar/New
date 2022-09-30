@@ -6,6 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { Controller, useForm } from 'react-hook-form'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useModalAction } from '@components/ui/modal/modal.context'
 
 
 type FormValues = {
@@ -21,6 +22,13 @@ export default function InsuranceForm({click} :any) {
 
 
     console.log(' form insurance ',click)
+
+    const { openModal } = useModalAction();
+
+
+    function handleClick()  {
+        return   openModal('BILL_PAYMENT')
+    }
 
 const [birthDate, setBirthDate] = useState(null);
 
@@ -41,7 +49,7 @@ const {
 
     <div className={`${click ? 'block' : 'hidden'}`}>
 
-            <div className='flex  space-x-20 px-6 justify-evenly w-full py-3 items-center bg-gray-200'>
+<div className='grid grid-cols-1 lg:flex space-y-3 lg:space-y-0 lg:space-x-20 px-6 justify-evenly w-full py-3 items-center bg-gray-200'>
 
             {/* <Input label='Phone number'
                 variant=''
@@ -86,7 +94,7 @@ const {
                       setValue("date_of_birth", date);
                     }}
                     dateFormat="dd-MM-yyyy"
-                    className="text-sm lg:text-md h-12 w-full px-4  bg-gray-100   border-border-base rounded-full focus:border-gray-400 no-underline "
+                    className="text-sm lg:text-md h-12 w-full px-4  bg-gray-   border-border-base rounded-sm focus:border-gray-400 no-underline "
                     showYearDropdown
                     showMonthDropdown
                     dropdownMode="select"
@@ -123,9 +131,16 @@ const {
                 Register
             </Button> */}
 
-            <button className='bg-blue-700 p-3  rounded text-white'>
-                Go
-            </button>
+            <div className='hidden lg:block lg:pt-3'>
+                    <Label className=''></Label>
+                    <button onClick={ handleClick} className='    bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>
+                                Proceed
+                    </button>
+                </div> 
+
+                <button onClick={ handleClick} className='  lg:hidden  bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>
+                            Proceed
+                </button>
 
             </div>
 

@@ -1,13 +1,13 @@
 import React from 'react';
 import Image from 'next/image';
 
-export default function Landline({view,click,width,height,label}:any) {
+export default function LpgBooking({view,click,width,height,label}:any) {
 
   return (
 
     <div   onClick={view}  className = 'w-full cursor-pointer border rounded-lg text-center'>
         
-           <Image     src='/bill-payment/phone.jpeg' 
+           <Image     src='/bill-payment/lpg.jpeg' 
             layout='intrinsic'
             objectFit='contain'
             width={width}

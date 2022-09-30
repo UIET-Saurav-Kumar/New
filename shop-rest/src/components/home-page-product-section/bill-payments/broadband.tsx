@@ -5,14 +5,15 @@ export default function Broadband({view,click,width,height,label}:any) {
 
   return (
 
-    <div  onClick={view}  className = 'w-full cursor-pointer text-center'>
+    <div  onClick={view}  className = 'w-full cursor-pointer  border rounded-lg text-center'>
         
            <Image   
-            src='/bill-payment/wireless.png' 
+            src='/bill-payment/wifi.jpeg' 
             layout='intrinsic'
             objectFit='contain'
             width={width}
             height={height}
+            // className='shadow-2xl'
            />
 
         <br></br>

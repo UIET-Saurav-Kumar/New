@@ -56,8 +56,8 @@ export default function MobileRechargeForm({click} :any) {
 
         <div className = 'mt-3 flex-1'> 
             <Label></Label>
-            <button className='bg-blue-700 p-3  px-10 rounded text-white'>
-                Go
+            <button className='bg-clip-text text-transparent bg-gradient-to-r from-blue-700 via-purple-600 to-blue-600   px-10 rounded text-white'>
+                Proceed
             </button>
         </div>
 

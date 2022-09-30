@@ -14,8 +14,10 @@ type MODAL_VIEWS =
   | 'SHOP_MOBILE_CATEGORIES'
   | 'SHOP_PAYMENT_FORM'
   | 'IN_STORE_OFFER'
-  | 'REVIEW_IMAGE_POPOVER';
+  | 'REVIEW_IMAGE_POPOVER'
+  | 'BILL_PAYMENT';
   // | 'SEARCH_BAR_MODAL';
+
 
 interface State {
   view?: MODAL_VIEWS;
@@ -27,11 +29,13 @@ type Action =
   | { type: "open"; view?: MODAL_VIEWS; payload?: any }
   | { type: "close" };
 
+
 const initialState: State = {
   view: undefined,
   isOpen: false,
   data: null,
 };
+
 
 function modalReducer(state: State, action: Action): State {
 
@@ -106,6 +110,7 @@ export function useModalAction() {
     closeModal() {
       dispatch({ type: "close" });
     },
+    
   };
 
 }

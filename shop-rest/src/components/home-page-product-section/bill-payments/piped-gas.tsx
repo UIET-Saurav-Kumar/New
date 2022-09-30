@@ -6,9 +6,9 @@ export default function PipedGas({view,click,width,height,label}:any) {
   return (
 
  
-        <div   onClick={view}  className = 'w-full cursor-pointer text-center'>
+        <div   onClick={view}  className = 'w-full cursor-pointer border rounded-lg text-center'>
                 
-                <Image     src='/bill-payment/valve.png' 
+                <Image     src='/bill-payment/valve.jpeg' 
                 layout='intrinsic'
                 objectFit='contain'
                 width={width}
