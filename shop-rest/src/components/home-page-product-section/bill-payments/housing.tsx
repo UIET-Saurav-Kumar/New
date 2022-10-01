@@ -3,15 +3,15 @@ import React from 'react';
 import Image from 'next/image';
 
 
-export default function Dth({click,view,width,height,label}:any) {
+export default function Housing({click,view,width,height,label}:any) {
 
-  console.log('dth view',view)
+  console.log('dth view',view);
 
   return (
 
-        <div onClick={view}  className = 'w-full cursor-pointer border rounded-lg text-center'>
+        <div onClick={view}  className ='w-full cursor-pointer border rounded-lg text-center'>
             
-            <Image  src='/bill-payment/dth.png' 
+            <Image  src='/bill-payment/housing.jpeg' 
               layout='intrinsic'
               objectFit='contain'
               width={width}
@@ -26,5 +26,6 @@ export default function Dth({click,view,width,height,label}:any) {
             </span>
 
         </div>
+
   )
 }

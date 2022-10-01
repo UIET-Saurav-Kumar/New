@@ -1,4 +1,6 @@
+
 export const selectStyles = {
+
   option: (provided: any, state: any) => ({
     ...provided,
     // fontSize: '1rem',
@@ -16,6 +18,7 @@ export const selectStyles = {
       ? "#F9FAFB"
       : "#ffffff",
   }),
+
   control: (_: any, state: any) => ({
     display: "flex",
     alignItems: "center",
@@ -29,9 +32,11 @@ export const selectStyles = {
       state.menuIsOpen &&
       "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
   }),
+
   indicatorSeparator: () => ({
     display: "none",
   }),
+
   dropdownIndicator: (provided: any, state: any) => ({
     ...provided,
     color: state.isFocused ? "#9CA3AF" : "#cccccc",
@@ -39,6 +44,7 @@ export const selectStyles = {
       color: "#9CA3AF",
     },
   }),
+
   clearIndicator: (provided: any, state: any) => ({
     ...provided,
     color: state.isFocused ? "#9CA3AF" : "#cccccc",
@@ -49,6 +55,7 @@ export const selectStyles = {
       color: "#9CA3AF",
     },
   }),
+
   menu: (provided: any) => ({
     ...provided,
     borderRadius: 5,
@@ -56,6 +63,7 @@ export const selectStyles = {
     boxShadow:
       "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
   }),
+  
   valueContainer: (provided: any, _: any) => ({
     ...provided,
     width: 155,

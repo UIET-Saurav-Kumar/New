@@ -4,6 +4,7 @@ import { useModalAction } from '@components/ui/modal/modal.context';
 import Select from '@components/ui/select/select'
 import React from 'react'
 
+
 export default function DthForm({click} :any) {
 
 
@@ -14,9 +15,7 @@ export default function DthForm({click} :any) {
         return   openModal('BILL_PAYMENT')
     }
 
-
-
-    console.log(' form dth ',click)
+    console.log(' form dth ',click);
 
   return (
 
@@ -34,13 +33,15 @@ export default function DthForm({click} :any) {
                 <Label> Operator </Label>
                 <Select label='Operator'
                         variant=''
-                        type='number'
+                        border='10px'
+                     // styles={customStyles}
+                        
                 />
             </div>
 
             <div className='flex-1'> 
                 <Input label='Mobile Number/Consumer Id'
-                    variant=''
+                    variant='border'
                     type='number'
                     className='rounded '
                 />
@@ -56,10 +57,11 @@ export default function DthForm({click} :any) {
 
             <div className='flex-1 items-center'> 
                 
-                <Input label = 'Amount'
-                        variant = ' '
+                <Input  label = 'Amount'
+                        variant = 'border'
                         type = 'number'
                 />
+
             </div>
 
             {/* <Button className='' size='big'>
@@ -69,10 +71,10 @@ export default function DthForm({click} :any) {
                     <Label className=''></Label>
                     <button onClick={ handleClick} className='    bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>
                                 Proceed
-                            </button>
+                    </button>
                 </div> 
 
-                <button onClick={ handleClick} className='  lg:hidden  bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>
+                <button onClick={ handleClick} className=' lg:hidden  bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>
                             Proceed
                 </button>
 

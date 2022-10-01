@@ -20,7 +20,8 @@ const variantClasses = {
     "bg-gray-100 border border-border-100 rounded focus:bg-light focus:border-accent",
   outline: "border border-border-base rounded focus:border-accent",
   line: "ps-0 border-b border-border-base rounded-none focus:border-accent",
-  rounded: ' bg-gray-100 focus:shadow focus:bg-light focus:border-gray-400 rounded-full'
+  rounded: ' bg-gray-100 focus:shadow focus:bg-light focus:border-gray-400 rounded-full',
+  border: 'border-2 border-gray-400 rounded',
 };
 
 const sizeClasses = {

@@ -4,16 +4,16 @@ import { useModalAction } from '@components/ui/modal/modal.context'
 import Select from '@components/ui/select/select'
  import React from 'react'
 
-export default function WaterForm({click} :any) {
+export default function CreditCardForm({click} :any) {
 
-console.log('form water',click)
+    console.log('form broadband',click)
 
-const { openModal } = useModalAction();
+    const { openModal } = useModalAction();
 
 
-function handleClick()  {
-    return   openModal('BILL_PAYMENT')
-}
+    function handleClick()  {
+        return   openModal('BILL_PAYMENT')
+    }
 
   return (
 
@@ -36,12 +36,12 @@ function handleClick()  {
             </div>
 
             <div className='flex-1'> 
-                <Input label='RR Number'
+                <Input label='Account Number/ User Name'
                     variant=''
                     type='text'
                     className='rounded'
                 />
-            </div>
+             </div>
 
             {/* <div className='flex flex-col'> 
                 <Label> Circle </Label>
@@ -62,9 +62,7 @@ function handleClick()  {
             {/* <Button className='' size='big'>
                 Register
             </Button> */}
-
-
-                <div className='hidden lg:block lg:pt-3'>
+                 <div className='hidden lg:block lg:pt-3'>
                     <Label className=''></Label>
                     <button onClick={ handleClick} className='    bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>
                                 Proceed
@@ -74,9 +72,10 @@ function handleClick()  {
                 <button onClick={ handleClick} className='  lg:hidden  bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>
                             Proceed
                 </button>
-
         </div>
 
     </div>
   )
 }
+ 
+

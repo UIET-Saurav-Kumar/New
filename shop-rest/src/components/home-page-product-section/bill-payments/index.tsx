@@ -1,3 +1,5 @@
+
+
 import React, { useState } from 'react';
 import Electricity from './electricity';
 import Dth from './dth';
@@ -13,6 +15,7 @@ import Landline from './landline';
 import PipedGas from './piped-gas';
 import DthForm from './forms/dth-form';
 
+
 import { usePayment } from '@contexts/payment.context';
 import ElectricityForm from './forms/electricity-form';
 import InsuranceForm from './forms/insurance-form';
@@ -25,6 +28,14 @@ import LpgBooking from './lpg-booking';
 import WaterForm from './forms/water-form';
 import EmiForm from './forms/emi-form';
 import LpgBookingForm from './forms/lpg-booking-form';
+import Datacard from './datacard';
+import Challan from './challan';
+import Cable from './cable';
+import CreditCard from './creditcard';
+import GooglePlay from './googleplay';
+import Housing from './housing';
+import GooglePlayForm from './forms/googlplay-fom';
+import CableForm from './forms/cable-form';
 
 
 export default function BillPayment() {
@@ -41,8 +52,14 @@ export default function BillPayment() {
               emi,
               water,
               lpgbooking,
+              googleplay,
+              cable,
+              datacard,
+              housing,
+              challan,
+              minicipality,
       
-              mobileRechargeView,
+              // mobileRechargeView,
               electricityView,
               insuranceView,
               broadbandView,
@@ -52,6 +69,11 @@ export default function BillPayment() {
               waterView,
               emiView,
               lpgbookingView,
+              datacardView,
+              challanView,
+              housingView,
+              cableView,
+              googleplayView,
               
             } = usePayment();
 
@@ -60,21 +82,26 @@ export default function BillPayment() {
 
        <div className='mx-2'> 
 
-              <Label className='text-xl font-semibold text-gray-700 mt-4 px-4 '> Pay your bills </Label>
+              <Label className='text-xl font-semibold text-gray-500 mt-4 px-4'> Pay your bills </Label>
 
-              <div className='grid grid-cols-3 md-grid-cols-9 items-center overflow-x-scroll gap-3  lg:grid-cols-9 w-full bg-gradient-to-l from-gray-0 lg:gap-4 to p-3 bg-gray-0  mt-4 place-content-center rounded shadow-xl'>
+              <div className='grid grid-cols-3 md-grid-cols-14 items-center overflow-x-scroll gap-3  lg:grid-cols-12 w-full bg-gradient-to-l from-gray-0 lg:gap-2 to p-3 bg-gray-0  mt-4 place-content-center rounded shadow-xl'>
 
                      {/* <MobileRecharge  view={mobileRechargeView} click={mobileRecharge}  width={60}  height={60}   label={'Mobile'}      /> */}
-                     <Dth             view={dthView}            click={dth}             width={100}  height={90}   label={'Dth'}         />
-                     <Electricity     view={electricityView}    click={electricity}     width={100}  height={90}   label={'Electricity'} />
-                     <Insurance       view={insuranceView}      click={insurance}       width={100}  height={90}   label={'Insurance'}   />
-                     <Broadband       view={broadbandView}      click={broadband}       width={100}  height={90}   label={'Broadband'}   />
-                     <Landline        view={landlineView}       click={landline}        width={100}  height={90}   label={'Landline'}    />
-                     <PipedGas        view={pipedGasView}       click={pipedgas}        width={100}  height={90}   label={'Piped Gas'}   />
-                     <Water           view={waterView}          click={water}           width={100}  height={90}   label={'Water'}       />
-                     <Emi             view={emiView}            click={emi}             width={100}  height={90}   label={'EMI'}         />
-                     <LpgBooking      view={lpgbookingView}     click={lpgbooking}      width={100}  height={90}   label={'Lpg Booking'} />
-                     
+                     <Dth             view={dthView}            click={dth}             width={50}  height={50}   label={'Dth'}         />
+                     <Electricity     view={electricityView}    click={electricity}     width={50}  height={50}   label={'Electricity'} />
+                     <Insurance       view={insuranceView}      click={insurance}       width={50}  height={50}   label={'Insurance'}   />
+                     <Broadband       view={broadbandView}      click={broadband}       width={50}  height={50}   label={'Broadband'}   />
+                     <Landline        view={landlineView}       click={landline}        width={50}  height={50}   label={'Landline'}    />
+                     <PipedGas        view={pipedGasView}       click={pipedgas}        width={50}  height={50}   label={'Piped Gas'}   />
+                     <Water           view={waterView}          click={water}           width={50}  height={50}   label={'Water'}       />
+                     <Emi             view={emiView}            click={emi}             width={50}  height={50}   label={'EMI'}         />
+                     <LpgBooking      view={lpgbookingView}     click={lpgbooking}      width={50}  height={50}   label={'LPG Booking'} />
+                     <Datacard        view={datacardView}     click={datacard}      width={50}  height={50}   label={'Datacard'}    />
+                     <Challan         view={challanView}     click={challan}      width={50}  height={50}   label={'Challan'}     />
+                     <Housing         view={housingView}     click={housing}      width={50}  height={50}   label={'Housing'}     />
+                     {/* <Cable           view={cableView}     click={cable}      width={50}  height={50}   label={'Cable'}       />
+                     <GooglePlay      view={googleplayView}     click={googleplay}      width={50}  height={50}   label={'GooglePlay'}  /> */}
+
               </div>
 
                      <MobileRechargeForm click={mobileRecharge} />
@@ -87,6 +114,8 @@ export default function BillPayment() {
                      <WaterForm          click={water}          />
                      <EmiForm            click={emi}            />
                      <LpgBookingForm     click={lpgbooking}     />
+                     <GooglePlayForm     click={googleplay}     />  
+                     <CableForm          click={cable}          />
 
        </div>
 

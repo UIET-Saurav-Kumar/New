@@ -39,7 +39,7 @@ export default function ElectricityForm({click} :any) {
                         />
                     </div>
 
-                    <div className='flex-1 '> 
+                    <div className='flex-1'> 
                         <Input label='Consumer Number'
                             variant=''
                             type='number'
@@ -68,16 +68,16 @@ export default function ElectricityForm({click} :any) {
                         Register
                     </Button> */}
 
-                <div className='hidden lg:block lg:pt-3'>
-                    <Label className=''></Label>
-                    <button onClick={ handleClick} className='    bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>
+                    <div className='hidden lg:block lg:pt-3'>
+                        <Label className=''></Label>
+                        <button onClick={ handleClick} className='bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>
                                 Proceed
-                            </button>
-                </div> 
+                        </button>
+                    </div> 
 
-                <button onClick={handleClick} className='  lg:hidden  bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>
-                            Proceed
-                </button>
+                    <button onClick={handleClick} className='  lg:hidden  bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>
+                                Proceed
+                    </button>
 
                 </div>
 

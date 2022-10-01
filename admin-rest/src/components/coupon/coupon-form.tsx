@@ -129,7 +129,9 @@ export default function CreateOrUpdateCouponForm({ initialValues }: IProps) {
   };
 
   return (
+    
     <form onSubmit={handleSubmit(onSubmit)}>
+
       <div className="flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
         <Description
           title={t("form:input-label-image")}
