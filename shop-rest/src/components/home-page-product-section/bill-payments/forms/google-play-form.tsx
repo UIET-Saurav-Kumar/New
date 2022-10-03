@@ -4,7 +4,7 @@ import { useModalAction } from '@components/ui/modal/modal.context'
 import Select from '@components/ui/select/select'
  import React from 'react'
 
-export default function GooglePlayForm({click} :any) {
+export default function GooglePlayForm({click,variant} :any) {
 
     console.log('form broadband',click)
 
@@ -27,21 +27,25 @@ export default function GooglePlayForm({click} :any) {
                 className='rounded'
             /> */}
 
-            <div className='flex-1 flex-col'> 
+<div className='flex-1 flex-col'> 
                 <Label> Operator </Label>
                 <Select label='Operator'
                         variant=''
-                        type='number'
+                        value='Google Play Recharge Code'
+                        type='text'
+                        // placeholder='Google Play Recharge Code'
                 />
             </div>
 
             <div className='flex-1'> 
-                <Input label='Account Number/ User Name'
-                    variant=''
+                <Input label='Amount (₹10-₹5000)'
+                     variant={variant}
                     type='text'
                     className='rounded'
+                    placeholder='Amount (₹10-₹5000)'
                 />
              </div>
+
 
             {/* <div className='flex flex-col'> 
                 <Label> Circle </Label>

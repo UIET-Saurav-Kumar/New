@@ -4,7 +4,7 @@ import { useModalAction } from '@components/ui/modal/modal.context'
 import Select from '@components/ui/select/select'
  import React from 'react'
 
-export default function WaterForm({click} :any) {
+export default function WaterForm({click,variant} :any) {
 
 console.log('form water',click)
 
@@ -37,7 +37,7 @@ function handleClick()  {
 
             <div className='flex-1'> 
                 <Input label='RR Number'
-                    variant=''
+                    variant={variant}
                     type='text'
                     className='rounded'
                 />

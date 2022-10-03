@@ -19,7 +19,7 @@ export default function UserInviteCard() {
 
   return (
 
-    <div className=' flex-1 flex-col hover:drop-shadow-2xl  lg:py-8 bg-white h-44 lg:h-full rounded-lg p-2 px-3'>
+    <div className='z flex-1 flex-col hover:drop-shadow-2xl  lg:py-8 bg-white h-44 lg:h-full rounded-sm lg:rounded-lg p-2 px-3'>
         
         <div className='flex items-start space-x-4  justify-evenly'>
           
@@ -28,7 +28,7 @@ export default function UserInviteCard() {
                < Image        quality='40' src='/dashboard/add-friend.png' layout='fill' className=' ' alt='money' />
           </div> */}
 
-          <div className='relative rounded-full px-2  bg-magenta w-16 h-16 '>
+          <div className='hidden sm:flex relative rounded-full px-2  bg-magenta w-16 h-16 '>
                  < Image        quality='40' src='/dashboard/add-friend.png' layout='fill'
                    className='absolute m-auto  h-12 w-12 ' 
                    alt='money' />
@@ -50,8 +50,8 @@ export default function UserInviteCard() {
 
                 <div className=''>
                   <button onClick={getLink} className=' font-semibold lg:mt-8
-                            bg-gradient-to-r from-yellow-400 to-red-500 hover:from-yellow-600 hover:to-red-600
-                             text-white text-lg px-5 lg:px-5 xl:px-7 py-1 lg:py-1 xl:py-2 rounded-lg'>
+                          text-sm  bg-gradient-to-r from-yellow-400 to-red-500 hover:from-yellow-600 hover:to-red-600
+                             text-white  px-5 lg:px-5 xl:px-7 py-1 lg:py-1 xl:py-2 rounded-lg'>
                       Invite
                   </button>
                 </div>

@@ -4,7 +4,7 @@ import { useModalAction } from '@components/ui/modal/modal.context'
 import Select from '@components/ui/select/select'
  import React from 'react'
 
-export default function BroadbandForm({click} :any) {
+export default function BroadbandForm({click,variant } :any) {
 
     console.log('form broadband',click)
 
@@ -37,7 +37,7 @@ export default function BroadbandForm({click} :any) {
 
             <div className='flex-1'> 
                 <Input label='Account Number/ User Name'
-                    variant=''
+                    variant={variant}
                     type='text'
                     className='rounded'
                 />
@@ -62,11 +62,11 @@ export default function BroadbandForm({click} :any) {
             {/* <Button className='' size='big'>
                 Register
             </Button> */}
-                 <div className='hidden lg:block lg:pt-3'>
+                <div className='hidden lg:block lg:pt-3'>
                     <Label className=''></Label>
                     <button onClick={ handleClick} className='    bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>
-                                Proceed
-                            </button>
+                            Proceed
+                    </button>
                 </div> 
 
                 <button onClick={ handleClick} className='  lg:hidden  bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>

@@ -106,13 +106,13 @@ export default function UserDashboard() {
   return (
 
         <div className='grid grid-cols-1 lg:flex items-center w-full mt-0 py-1 lg:py-3
-                        px-1 lg:px-3 space-x-2 lg:space-x-5 bg-gray-100'>
+                        px-0 lg:px-3 space-x-2 lg:space-x-5 bg-gray-100'>
 
-            <div className=' w-auto xl:w-100  '>
+            <div className='w-auto xl:w-100'>
                 <UserProfile data={data?.me}/>
             </div>
 
-            <div className='grid grid-cols-1 w-auto pr-1 sm:grid-cols-2 lg:grid-cols-3 grid-rows-2 grid-flow-row gap-3 h-full mt-2  lg:w-full'>
+            <div className='grid grid-cols-2 py-1 w-auto pr-1 sm:grid-cols-2 lg:grid-cols-3 grid-rows-2 grid-flow-row gap-1 lg:gap-3 h-full mt-2  lg:w-full'>
 
                 {/* <div className='grid grid-cols-2 lg:flex gap-3 h-48 items-center'> */}
                     {/* <div className='col-span-2'> */}
@@ -122,14 +122,15 @@ export default function UserDashboard() {
                                          withdrawnAmount={withdrawnAmount}
                                          />
                     {/* </div> */}
-                    <UserCurrentBalance isAuthorize={isAuthorize} 
-                                        currentBalance={currentBalance}/>
+                     
                      
                 {/* </div> */}
                 {/* <div className='grid grid-cols-2 lg:grid lg:grid-cols-2 xl:flex gap-3 h-48 items-center'> */}
-                    <UserWithdrawCard currentBalance={currentBalance}/>
-                    <UserInviteCard/>
-                    <UserUploadInvoiceCard/>
+                    <UserWithdrawCard currentBalance={currentBalance} />
+                    <UserInviteCard />
+                    <UserUploadInvoiceCard />
+                    <UserCurrentBalance isAuthorize={isAuthorize} 
+                                        currentBalance={currentBalance}/>
                 {/* </div> */}
 
             </div>

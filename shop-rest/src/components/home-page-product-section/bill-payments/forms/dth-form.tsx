@@ -5,7 +5,7 @@ import Select from '@components/ui/select/select'
 import React from 'react'
 
 
-export default function DthForm({click} :any) {
+export default function DthForm({click,variant} :any) {
 
 
     const { openModal } = useModalAction();
@@ -41,7 +41,7 @@ export default function DthForm({click} :any) {
 
             <div className='flex-1'> 
                 <Input label='Mobile Number/Consumer Id'
-                    variant='border'
+                     variant={variant}
                     type='number'
                     className='rounded '
                 />
@@ -58,7 +58,7 @@ export default function DthForm({click} :any) {
             <div className='flex-1 items-center'> 
                 
                 <Input  label = 'Amount'
-                        variant = 'border'
+                         variant={variant}
                         type = 'number'
                 />
 

@@ -28,11 +28,11 @@ export default function UserTotalEarning({totalEarnings}:any) {
 
   return (
 
-    <div className='relative flex-1 flex-col hover:drop-shadow-2xl  lg:py-8  bg-white h-44 lg:h-full  justify-center rounded-xl p-2 px-3'>
+    <div className='relative flex-1 flex-col hover:drop-shadow-2xl  lg:py-8  bg-white h-44 lg:h-full  justify-center rounded-sm lg:rounded-xl p-2 px-3'>
 
     <div className='flex items-start h-full  align-center space-x-4 justify-evenly'>
             
-            <div className='relative rounded-full px-2 bg-magenta w-16 h-16 '>
+            <div className='hidden sm:flex relative rounded-full px-2 bg-magenta w-16 h-16 '>
                  <Image quality='40' src='/dashboard/rupees.png' layout='fill'
                    className='absolute m-auto  h-12 w-12 ' 
                    alt='money' />
@@ -59,7 +59,7 @@ export default function UserTotalEarning({totalEarnings}:any) {
 
                   <div className=''>
                     <button onClick={getLink} className=' bottom-2 lg:bottom-6 absolute bg-gradient-to-r from-green-500 to-magenta px-5 
-                    hover:from-green-600 hover:to-yellow-600
+                    hover:from-green-600 hover:to-yellow-600 text-sm
                               text-white font-semibold lg:px-4 xl:px-9 py-1 lg:py-1 xl:py-2 rounded-lg shadow-md'>
                       View
                     </button>

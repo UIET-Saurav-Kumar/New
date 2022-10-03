@@ -4,7 +4,7 @@ import { useModalAction } from '@components/ui/modal/modal.context'
 import Select from '@components/ui/select/select'
  import React from 'react'
 
-export default function LandlineForm({click} :any) {
+export default function LandlineForm({click,variant} :any) {
 
 console.log('dth form',click)
 
@@ -37,7 +37,7 @@ const { openModal } = useModalAction();
 
             <div className='flex-1 '> 
                 <Input label='Landline Number (with STD Code)'
-                    variant=''
+                     variant={variant}
                     type='text'
                     className='rounded'
                 />

@@ -5,7 +5,7 @@ import Select from '@components/ui/select/select'
 import React from 'react'
 
 
-export default function CableForm({click} :any) {
+export default function CableForm({click,variant} :any) {
 
     console.log('form broadband', click)
 
@@ -37,7 +37,7 @@ export default function CableForm({click} :any) {
 
                 <div className='flex-1'> 
                     <Input label='Account Number/ User Name'
-                        variant=''
+                         variant={variant}
                         type='text'
                         className='rounded'
                     />
@@ -65,12 +65,12 @@ export default function CableForm({click} :any) {
 
                 <div className='hidden lg:block lg:pt-3'>
                     <Label className=''></Label>
-                    <button onClick={ handleClick} className='    bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>
-                                Proceed
+                    <button onClick={ handleClick} className='bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>
+                            Proceed
                     </button>
                 </div> 
 
-                <button onClick={ handleClick} className='  lg:hidden  bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>
+                <button onClick={ handleClick} className='lg:hidden  bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>
                             Proceed
                 </button>
             </div>

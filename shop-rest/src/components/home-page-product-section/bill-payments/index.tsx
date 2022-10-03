@@ -34,8 +34,11 @@ import Cable from './cable';
 import CreditCard from './creditcard';
 import GooglePlay from './googleplay';
 import Housing from './housing';
-import GooglePlayForm from './forms/googlplay-fom';
+import GooglePlayForm from './forms/google-play-form';
 import CableForm from './forms/cable-form';
+import ChallanForm from './forms/challan-form';
+import HousingForm from './forms/housing-form';
+import DataCardForm from './forms/datacard-form';
 
 
 export default function BillPayment() {
@@ -59,7 +62,7 @@ export default function BillPayment() {
               challan,
               minicipality,
       
-              // mobileRechargeView,
+              mobileRechargeView,
               electricityView,
               insuranceView,
               broadbandView,
@@ -73,51 +76,52 @@ export default function BillPayment() {
               challanView,
               housingView,
               cableView,
-              googleplayView,
+              googlePlayView,
               
             } = usePayment();
 
 
   return (
 
-       <div className='mx-2'> 
+              <div className='mx-2'> 
 
-              <Label className='text-xl font-semibold text-gray-500 mt-4 px-4'> Pay your bills </Label>
+                     <Label className='text-xl font-semibold text-gray-500 mt-4 px-4'> Pay your bills </Label>
 
-              <div className='grid grid-cols-3 md-grid-cols-14 items-center overflow-x-scroll gap-3  lg:grid-cols-12 w-full bg-gradient-to-l from-gray-0 lg:gap-2 to p-3 bg-gray-0  mt-4 place-content-center rounded shadow-xl'>
+                     <div className='grid grid-cols-3 md-grid-cols-7 items-center overflow-x-scroll gap-3  lg:grid-cols-7 w-full bg-gradient-to-l from-gray-0 lg:gap-2 to p-3 bg-gray-0  mt-4 place-content-center rounded shadow-xl'>
 
-                     {/* <MobileRecharge  view={mobileRechargeView} click={mobileRecharge}  width={60}  height={60}   label={'Mobile'}      /> */}
-                     <Dth             view={dthView}            click={dth}             width={50}  height={50}   label={'Dth'}         />
-                     <Electricity     view={electricityView}    click={electricity}     width={50}  height={50}   label={'Electricity'} />
-                     <Insurance       view={insuranceView}      click={insurance}       width={50}  height={50}   label={'Insurance'}   />
-                     <Broadband       view={broadbandView}      click={broadband}       width={50}  height={50}   label={'Broadband'}   />
-                     <Landline        view={landlineView}       click={landline}        width={50}  height={50}   label={'Landline'}    />
-                     <PipedGas        view={pipedGasView}       click={pipedgas}        width={50}  height={50}   label={'Piped Gas'}   />
-                     <Water           view={waterView}          click={water}           width={50}  height={50}   label={'Water'}       />
-                     <Emi             view={emiView}            click={emi}             width={50}  height={50}   label={'EMI'}         />
-                     <LpgBooking      view={lpgbookingView}     click={lpgbooking}      width={50}  height={50}   label={'LPG Booking'} />
-                     <Datacard        view={datacardView}     click={datacard}      width={50}  height={50}   label={'Datacard'}    />
-                     <Challan         view={challanView}     click={challan}      width={50}  height={50}   label={'Challan'}     />
-                     <Housing         view={housingView}     click={housing}      width={50}  height={50}   label={'Housing'}     />
-                     {/* <Cable           view={cableView}     click={cable}      width={50}  height={50}   label={'Cable'}       />
-                     <GooglePlay      view={googleplayView}     click={googleplay}      width={50}  height={50}   label={'GooglePlay'}  /> */}
+                            <MobileRecharge  view={mobileRechargeView} click={mobileRecharge}  width={90}   height={90}     label={'Mobile'}      />
+                            <Dth             view={dthView}            click={dth}             width={90}   height={90}    label={'Dth'}         />
+                            <Electricity     view={electricityView}    click={electricity}     width={90}   height={90}    label={'Electricity'} />
+                            <Insurance       view={insuranceView}      click={insurance}       width={90}   height={90}    label={'Insurance'}   />
+                            <Broadband       view={broadbandView}      click={broadband}       width={90}   height={90}    label={'Broadband'}   />
+                            <Landline        view={landlineView}       click={landline}        width={90}   height={90}    label={'Landline'}    />
+                            <PipedGas        view={pipedGasView}       click={pipedgas}        width={90}   height={90}    label={'Piped Gas'}   />
+                            <Water           view={waterView}          click={water}           width={90}   height={90}    label={'Water'}       />
+                            <Emi             view={emiView}            click={emi}             width={90}   height={90}    label={'EMI'}         />
+                            <LpgBooking      view={lpgbookingView}     click={lpgbooking}      width={90}   height={90}    label={'LPG Booking'} />
+                            <Datacard        view={datacardView}       click={datacard}        width={90}   height={90}    label={'Datacard'}    />
+                            <Challan         view={challanView}        click={challan}         width={90}   height={90}    label={'Challan'}     />
+                            <Housing         view={housingView}        click={housing}         width={90}   height={90}    label={'Housing'}     />
+                            <Cable           view={cableView}          click={cable}           width={90}   height={90}    label={'Cable'}       />
+                            <GooglePlay      view={googlePlayView}     click={googleplay}      width={90}   height={90}    label={'GooglePlay'}  />
 
-              </div>
+                     </div>
 
-                     <MobileRechargeForm click={mobileRecharge} />
-                     <DthForm            click={dth}            />
-                     <ElectricityForm    click={electricity}    />
-                     <InsuranceForm      click={insurance}      />
-                     <LandlineForm       click={landline}       />
-                     <PipedgasForm       click={pipedgas}       />
-                     <BroadbandForm      click={broadband}      />
-                     <WaterForm          click={water}          />
-                     <EmiForm            click={emi}            />
-                     <LpgBookingForm     click={lpgbooking}     />
-                     <GooglePlayForm     click={googleplay}     />  
-                     <CableForm          click={cable}          />
-
-       </div>
-
+                            <MobileRechargeForm  variant={'border'}   click={mobileRecharge} />
+                            <DthForm             variant={'border'}   click={dth}            />
+                            <ElectricityForm     variant={'border'}   click={electricity}    />
+                            <InsuranceForm       variant={'border'}   click={insurance}      />
+                            <LandlineForm        variant={'border'}   click={landline}       />
+                            <PipedgasForm        variant={'border'}   click={pipedgas}       />
+                            <BroadbandForm       variant={'border'}   click={broadband}      />
+                            <WaterForm           variant={'border'}   click={water}          />
+                            <EmiForm             variant={'border'}   click={emi}            />
+                            <LpgBookingForm      variant={'border'}   click={lpgbooking}     />
+                            <GooglePlayForm      variant={'border'}   click={googleplay}     />  
+                            <CableForm           variant={'border'}   click={cable}          />
+                            <ChallanForm         variant={'border'}   click={challan}        />
+                            <HousingForm         variant={'border'}   click={housing}        />
+                            <DataCardForm        variant={'border'}   click={datacard}       />
+              </div>        
   )
 }

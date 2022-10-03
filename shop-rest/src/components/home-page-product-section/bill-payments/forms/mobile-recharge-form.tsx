@@ -5,7 +5,7 @@ import Select from '@components/ui/select/select'
  import React from 'react'
 
 
-export default function MobileRechargeForm({click} :any) {
+export default function MobileRechargeForm({click,variant} :any) {
 
 
     console.log(' form recharge ',click)
@@ -18,7 +18,7 @@ export default function MobileRechargeForm({click} :any) {
 
             <div className='flex-1 flex-col'> 
                 <Input label='Phone number'
-                    variant=''
+                    variant={variant}
                     type='number'
                     className='rounded'
                 />
@@ -43,7 +43,7 @@ export default function MobileRechargeForm({click} :any) {
             <div className='flex-1 items-center'> 
                 
                 <Input label = 'Amount'
-                        variant = ' '
+                        variant={variant}
                         type = 'number'
                 />
             </div>

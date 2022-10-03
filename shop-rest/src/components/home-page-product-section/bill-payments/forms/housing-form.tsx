@@ -2,9 +2,10 @@ import Input from '@components/ui/input'
 import Label from '@components/ui/label'
 import { useModalAction } from '@components/ui/modal/modal.context'
 import Select from '@components/ui/select/select'
- import React from 'react'
+import React from 'react'
 
-export default function HousingForm({click} :any) {
+
+export default function HousingForm({click,variant} :any) {
 
     console.log('form broadband',click)
 
@@ -29,19 +30,38 @@ export default function HousingForm({click} :any) {
 
             <div className='flex-1 flex-col'> 
                 <Label> Operator </Label>
-                <Select label='Operator'
+                <Select label='City'
                         variant=''
                         type='number'
                 />
             </div>
 
-            <div className='flex-1'> 
-                <Input label='Account Number/ User Name'
-                    variant=''
-                    type='text'
-                    className='rounded'
+            <div className='flex-1 flex-col'> 
+                <Label> Society Name </Label>
+                <Select label='Society Name'
+                        variant=''
+                        type='text'
+                        placeholder='Society Name'
                 />
-             </div>
+            </div>
+
+            <div className='flex-1 flex-col'> 
+                <Label> Service Type </Label>
+                <Select label='Service Type'
+                        variant=''
+                        type='text'
+                        placeholder='Service Type'
+                />
+            </div>
+
+            <div className='flex-1'> 
+                <Input label='Amount'
+                       variant={variant}
+                       type='text'
+                       className='rounded'
+                />
+            </div>
+
 
             {/* <div className='flex flex-col'> 
                 <Label> Circle </Label>
@@ -62,11 +82,11 @@ export default function HousingForm({click} :any) {
             {/* <Button className='' size='big'>
                 Register
             </Button> */}
-                 <div className='hidden lg:block lg:pt-3'>
+                <div className='hidden lg:block lg:pt-3'>
                     <Label className=''></Label>
                     <button onClick={ handleClick} className='    bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>
                                 Proceed
-                            </button>
+                    </button>
                 </div> 
 
                 <button onClick={ handleClick} className='  lg:hidden  bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>

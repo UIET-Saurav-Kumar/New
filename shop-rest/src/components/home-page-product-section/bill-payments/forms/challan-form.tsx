@@ -4,7 +4,7 @@ import { useModalAction } from '@components/ui/modal/modal.context'
 import Select from '@components/ui/select/select'
  import React from 'react'
 
-export default function ChallanForm({click} :any) {
+export default function ChallanForm({click,variant} :any) {
 
     console.log('form broadband',click)
 
@@ -36,8 +36,8 @@ export default function ChallanForm({click} :any) {
             </div>
 
             <div className='flex-1'> 
-                <Input label='Account Number/ User Name'
-                    variant=''
+                <Input label='RC/DL/Challan Number'
+                     variant={variant}
                     type='text'
                     className='rounded'
                 />

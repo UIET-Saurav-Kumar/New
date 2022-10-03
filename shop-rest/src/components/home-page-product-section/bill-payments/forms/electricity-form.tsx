@@ -4,7 +4,7 @@ import { useModalAction } from '@components/ui/modal/modal.context';
 import Select from '@components/ui/select/select'
  import React from 'react'
 
-export default function ElectricityForm({click} :any) {
+export default function ElectricityForm({click,variant} :any) {
 
 
     const { openModal } = useModalAction();
@@ -41,7 +41,7 @@ export default function ElectricityForm({click} :any) {
 
                     <div className='flex-1'> 
                         <Input label='Consumer Number'
-                            variant=''
+                            variant={variant}
                             type='number'
                             inputMode="numeric"
                             className='rounded'

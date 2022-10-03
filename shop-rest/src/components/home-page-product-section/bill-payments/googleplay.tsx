@@ -5,11 +5,11 @@ import Image from 'next/image';
 
 export default function GooglePlay({click,view,width,height,label}:any) {
 
-  console.log('dth view',view);
+  console.log('googleplay',view);
 
   return (
 
-        <div onClick={view}  className ='w-full cursor-pointer border rounded-lg text-center'>
+        <div onClick={view}  className ={`${click ? 'border border-indigo-700 w-full cursor-pointer  shadow-lg rounded-lg text-center' : 'w-full cursor-pointer border rounded-lg text-center' }`}>
             
             <Image  src='/bill-payment/googleplay.jpeg' 
               layout='intrinsic'

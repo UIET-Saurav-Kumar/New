@@ -4,7 +4,7 @@ import { useModalAction } from '@components/ui/modal/modal.context'
 import Select from '@components/ui/select/select'
  import React from 'react'
 
-export default function PipedgasForm({click} :any) {
+export default function PipedgasForm({click,variant} :any) {
 
 console.log('piped form',click)
 
@@ -37,7 +37,7 @@ function handleClick()  {
 
             <div className='flex-1 '> 
                 <Input label='Consumer Id'
-                    variant=''
+                     variant={variant}
                     type='number'
                     className='rounded'
                 />

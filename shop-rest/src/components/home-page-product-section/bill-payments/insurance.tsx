@@ -5,7 +5,7 @@ export default function Insurance({view,click,width,height,label}:any) {
 
   return (
 
-    <div   onClick={view} className = 'w-full cursor-pointer border rounded-lg text-center'>
+    <div onClick={view}  className ={`${click ? 'border border-indigo-700 w-full cursor-pointer  shadow-lg rounded-lg text-center' : 'w-full cursor-pointer border rounded-lg text-center' }`}>
         
            <Image     src='/bill-payment/insurance.jpeg' 
             layout='intrinsic'

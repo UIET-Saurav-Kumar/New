@@ -18,7 +18,7 @@ const defaultValues = {
 }
 
 
-export default function InsuranceForm({click} :any) {
+export default function InsuranceForm({click,variant} :any) {
 
 
     console.log(' form insurance ',click)
@@ -68,7 +68,7 @@ const {
 
             <div className='flex-1 '> 
                 <Input label='POLICY NO'
-                    variant=''
+                     variant={variant}
                     type='text'
                     className='rounded'
                 />
@@ -120,7 +120,7 @@ const {
             <div className='flex-1 items-center'> 
                 
                 <Input label = 'Mobile Number'
-                        variant = ' '
+                        variant={variant}
                         type = 'number'
 
                         inputMode="numeric"

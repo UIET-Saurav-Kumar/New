@@ -4,7 +4,7 @@ import { useModalAction } from '@components/ui/modal/modal.context'
 import Select from '@components/ui/select/select'
  import React from 'react'
 
-export default function CreditCardForm({click} :any) {
+export default function CreditCardForm({click,variant} :any) {
 
     console.log('form broadband',click)
 
@@ -37,7 +37,7 @@ export default function CreditCardForm({click} :any) {
 
             <div className='flex-1'> 
                 <Input label='Account Number/ User Name'
-                    variant=''
+                     variant={variant}
                     type='text'
                     className='rounded'
                 />

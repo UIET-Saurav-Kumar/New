@@ -5,15 +5,15 @@ export default function UserCurrentBalance({currentBalance,isAuthorize}:any) {
 
   return (
 
-    <div className='flex-1 flex-col hover:drop-shadow-2xl  lg:py-8 bg-white h-44 lg:h-full rounded-lg p-2 px-3'>
+    <div className='flex-1 flex-col hover:drop-shadow-2xl  lg:py-8 bg-white h-44 lg:h-full rounded-sm lg:rounded-lg p-2 px-3'>
         <div className='flex items-start space-x-4 justify-evenly'>
            
-        <div className='relative rounded-full px-2 pt-1 bg-yellow-200 w-16 h-16 '>
+        <div className='hidden sm:flex relative rounded-full px-2 pt-1 bg-yellow-200 w-16 h-16 '>
                < Image        quality='40' src='/dashboard/wallet.png' layout='fill' className='w-12 h-12' alt='money' />
         </div>
             
             <div className='flex flex-col text-sm lg:text-xl w-auto md:w-36 xl:w-44 2xl:w-48 font-light text-gray-500'>
-                <h4 className='font-semibold text-lg sm:text-sm xl:text-lg 2xl:text-xl text-gray-800 '>
+                <h4 className='font-semibold whitespace-nowrap text-lg sm:text-sm xl:text-lg 2xl:text-xl text-gray-800 '>
                     Current Balance
                 </h4>
                 <p className='text-lg lg:text-xl xl:text-2xl text-gray-700 mt-4 font-light'>

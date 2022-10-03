@@ -6,7 +6,7 @@ import { createContext } from "vm";
 
 type paymentContextType = {
 
-    // mobileRecharge: boolean;
+    mobileRecharge: boolean;
     dth: boolean;
     electricity: boolean;
     insurance: boolean;
@@ -22,7 +22,7 @@ type paymentContextType = {
     cable: boolean;
     googleplay: boolean;
 
-    // mobileRechargeView: () => void;
+    mobileRechargeView: () => void;
     landlineView: () => void;
     dthView: () => void;
     insuranceView: () => void;
@@ -42,7 +42,7 @@ type paymentContextType = {
 }
 
 const paymentContextDefaultValues : paymentContextType = {
-    // mobileRecharge: false,
+    mobileRecharge: false,
     dth: true,
     electricity: false,
     insurance: false,
@@ -57,23 +57,24 @@ const paymentContextDefaultValues : paymentContextType = {
     housing: false,
     cable: false,
     googleplay: false,
+    // minicipality
     
 
 
-    // mobileRechargeView: () => {},
-    landlineView: () => {},
-    dthView: () => {},
+    mobileRechargeView: () => {},
+    landlineView:  () => {},
+    dthView:       () => {},
     insuranceView: () => {},
     broadbandView: () => {},
-    pipedgasView: () => {},
+    pipedgasView:  () => {},
     electricityView: () => {},
-    waterView: () => {},
-    emiView: () => {},
-    lpgbookingView: () => {},
-    datacardView: () => {},
-    challanView:  () => {},
-    housingView:  () => {},
-    cableView:    () => {},
+    waterView:       () => {},
+    emiView:         () => {},
+    lpgbookingView:  () => {},
+    datacardView:   () => {},
+    challanView:    () => {},
+    housingView:    () => {},
+    cableView:      () => {},
     googleplayView: () => {},
 }
 
@@ -92,8 +93,8 @@ type Props = {
 
 export function PaymentProvider({children}:Props){
 
-    // const[mobileRecharge, setMobileRecharge] = useState(true)
-    const[dth, setDth] = useState(true)
+    const[mobileRecharge, setMobileRecharge] = useState(true)
+    const[dth, setDth] = useState(false)
     const[electricity, setElectricity] = useState(false)
     const[insurance, setInsurance] = useState(false);
     const[landline,setLandline] = useState(false);
@@ -112,25 +113,29 @@ export function PaymentProvider({children}:Props){
 
     const  mobileRechargeView= () => {
 
-        // setMobileRecharge(true      
+      
+        setMobileRecharge(true)
+        setWater(false);
+        setLpgBooking(false);
+        setEmi(false);
         setElectricity(false);
         setInsurance(false);
         setLandline(false);
-        setPipedGas(false);
         setBroadband(false);
+        setPipedGas(false);
         setDth(false)
         setDataCard(false);
         setChallan(false);
         setGooglePlay(false);
         setHousing(false);
-        setGooglePlay(false);
         setCable(false);
 
      }
 
      const  dthView = () => {
 
-        // setMobileRecharge(false);
+        
+        setMobileRecharge(false)
         setWater(false);
         setLpgBooking(false);
         setEmi(false);
@@ -144,15 +149,13 @@ export function PaymentProvider({children}:Props){
         setChallan(false);
         setGooglePlay(false);
         setHousing(false);
-        setGooglePlay(false);
         setCable(false);
-            
      }
 
 
      const  landlineView= () => {
 
-        // setMobileRecharge(false)
+        setMobileRecharge(false)
         setWater(false);
         setLpgBooking(false);
         setEmi(false);
@@ -166,7 +169,6 @@ export function PaymentProvider({children}:Props){
         setChallan(false);
         setGooglePlay(false);
         setHousing(false);
-        setGooglePlay(false);
         setCable(false);
         
       }
@@ -174,7 +176,7 @@ export function PaymentProvider({children}:Props){
 
         const  pipedGasView= () => {
 
-            // setMobileRecharge(false);
+            setMobileRecharge(false);
             setWater(false);
             setLpgBooking(false);
             setEmi(false);
@@ -188,7 +190,6 @@ export function PaymentProvider({children}:Props){
             setChallan(false);
             setGooglePlay(false);
             setHousing(false);
-            setGooglePlay(false);
             setCable(false);
             
         }
@@ -196,7 +197,7 @@ export function PaymentProvider({children}:Props){
 
         const  electricityView= () => {
 
-            // setMobileRecharge(false);
+            setMobileRecharge(false);
             setWater(false);
             setLpgBooking(false);
             setEmi(false);
@@ -210,7 +211,6 @@ export function PaymentProvider({children}:Props){
             setChallan(false);
             setGooglePlay(false);
             setHousing(false);
-            setGooglePlay(false);
             setCable(false);
             
         }
@@ -218,7 +218,7 @@ export function PaymentProvider({children}:Props){
 
         const  insuranceView= () => {
 
-            // setMobileRecharge(false);
+            setMobileRecharge(false);
             setWater(false);
             setLpgBooking(false);
             setEmi(false);
@@ -230,7 +230,6 @@ export function PaymentProvider({children}:Props){
             setDth(false)
             setDataCard(false);
             setChallan(false);
-            setGooglePlay(false);
             setHousing(false);
             setGooglePlay(false);
             setCable(false);
@@ -240,7 +239,7 @@ export function PaymentProvider({children}:Props){
 
         const  broadbandView = () => {
 
-            // setMobileRecharge(false);
+            setMobileRecharge(false);
             setWater(false);
             setLpgBooking(false);
             setEmi(false);
@@ -254,7 +253,6 @@ export function PaymentProvider({children}:Props){
             setChallan(false);
             setGooglePlay(false);
             setHousing(false);
-            setGooglePlay(false);
             setCable(false);
             
         }
@@ -262,7 +260,7 @@ export function PaymentProvider({children}:Props){
 
         const  waterView= () => {
 
-            // setMobileRecharge(false);
+            setMobileRecharge(false);
             setWater(true);
             setLpgBooking(false);
             setEmi(false);
@@ -276,7 +274,6 @@ export function PaymentProvider({children}:Props){
             setChallan(false);
             setGooglePlay(false);
             setHousing(false);
-            setGooglePlay(false);
             setCable(false);
             
         }
@@ -284,7 +281,7 @@ export function PaymentProvider({children}:Props){
 
         const  emiView= () => {
 
-            // setMobileRecharge(false);
+            setMobileRecharge(false);
             setWater(false);
             setLpgBooking(false);
             setEmi(true);
@@ -298,14 +295,13 @@ export function PaymentProvider({children}:Props){
             setChallan(false);
             setGooglePlay(false);
             setHousing(false);
-            setGooglePlay(false);
             setCable(false);
             
         }
 
         const  lpgbookingView= () => {
 
-            // setMobileRecharge(false);
+            setMobileRecharge(false);
             setWater(false);
             setLpgBooking(true);
             setEmi(false);
@@ -320,103 +316,118 @@ export function PaymentProvider({children}:Props){
             setChallan(false);
             setGooglePlay(false);
             setHousing(false);
-            setGooglePlay(false);
             setCable(false);
             
         }
 
         const  cableView= () => {
 
-            // setMobileRecharge(true      
-            setElectricity(false);
-            setInsurance(false);
-            setLandline(false);
-            setPipedGas(false);
-            setBroadband(false);
-            setDth(false);
-            setDataCard(false);
-            setChallan(false);
-            setGooglePlay(false);
-            setHousing(false);
-            setGooglePlay(false);
-            setCable(true);
+            
+        setMobileRecharge(false)
+        setWater(false);
+        setLpgBooking(false);
+        setEmi(false);
+        setElectricity(false);
+        setInsurance(false);
+        setLandline(false);
+        setBroadband(false);
+        setPipedGas(false);
+        setDth(false)
+        setDataCard(false);
+        setChallan(false);
+        setGooglePlay(false);
+        setHousing(false);
+        setCable(true);
     
          }
 
          const  challanView= () => {
 
-            // setMobileRecharge(true      
-            setElectricity(false);
-            setInsurance(false);
-            setLandline(false);
-            setPipedGas(false);
-            setBroadband(false);
-            setDth(false);
-            setDataCard(false);
-            setChallan(true);
-            setGooglePlay(false);
-            setHousing(false);
-            setGooglePlay(false);
-            setCable(false);
+            
+        setMobileRecharge(false)
+        setWater(false);
+        setLpgBooking(false);
+        setEmi(false);
+        setElectricity(false);
+        setInsurance(false);
+        setLandline(false);
+        setBroadband(false);
+        setPipedGas(false);
+        setDth(false)
+        setDataCard(false);
+        setChallan(true);
+        setGooglePlay(false);
+        setHousing(false);
+        setCable(false);
     
          }
 
          const  housingView= () => {
 
-            // setMobileRecharge(true      
-            setElectricity(false);
-            setInsurance(false);
-            setLandline(false);
-            setPipedGas(false);
-            setBroadband(false);
-            setDth(false);
-            setDataCard(false);
-            setChallan(false);
-            setGooglePlay(false);
-            setHousing(false);
-            setGooglePlay(false);
-            setCable(true);
+          
+        setMobileRecharge(false)
+        setWater(false);
+        setLpgBooking(false);
+        setEmi(false);
+        setElectricity(false);
+        setInsurance(false);
+        setLandline(false);
+        setBroadband(false);
+        setPipedGas(false);
+        setDth(false)
+        setDataCard(false);
+        setChallan(false);
+        setGooglePlay(false);
+        setHousing(true);
+        setCable(false);
     
          }
 
          const  googlePlayView= () => {
 
-            // setMobileRecharge(true      
-            setElectricity(false);
-            setInsurance(false);
-            setLandline(false);
-            setPipedGas(false);
-            setBroadband(false);
-            setDth(false)
-            setDataCard(false);
-            setChallan(false);
-            setGooglePlay(false);
-            setHousing(false);
-            setGooglePlay(true);
-            setCable(false);
+            
+        setMobileRecharge(false)
+        setWater(false);
+        setLpgBooking(false);
+        setEmi(false);
+        setElectricity(false);
+        setInsurance(false);
+        setLandline(false);
+        setBroadband(false);
+        setPipedGas(false);
+        setDth(false)
+        setDataCard(false);
+        setChallan(false);
+        setGooglePlay(true);
+        setHousing(false);
+        setCable(false);
     
          }
 
          const  datacardView= () => {
 
-            // setMobileRecharge(true      
-            setElectricity(false);
-            setInsurance(false);
-            setLandline(false);
-            setPipedGas(false);
-            setBroadband(false);
-            setDth(false);
-            setDataCard(true);
-            setChallan(false);
-            setGooglePlay(false);
-            setHousing(false);
-            setGooglePlay(false);
-            setCable(false);
+           
+        setMobileRecharge(false)
+        setWater(false);
+        setLpgBooking(false);
+        setEmi(false);
+        setElectricity(false);
+        setInsurance(false);
+        setLandline(false);
+        setBroadband(false);
+        setPipedGas(false);
+        setDth(false)
+        setDataCard(true);
+        setChallan(false);
+        setGooglePlay(false);
+        setHousing(false);
+        setCable(false);
     
          }
 
       const value = {
-        // mobileRecharge,
+
+        mobileRecharge,
         electricity,
         insurance,
         landline,
@@ -431,7 +442,6 @@ export function PaymentProvider({children}:Props){
         housing,
         cable,
         googleplay,
-
 
         mobileRechargeView,
         electricityView,
@@ -448,6 +458,7 @@ export function PaymentProvider({children}:Props){
         housingView,
         cableView,
         googlePlayView,
+
       }
 
     return (
