@@ -3,13 +3,14 @@ import React from 'react'
 
 export default function UserCurrentBalance({currentBalance,isAuthorize}:any) {
 
+
   return (
 
     <div className='flex-1 flex-col hover:drop-shadow-2xl  lg:py-8 bg-white h-44 lg:h-full rounded-sm lg:rounded-lg p-2 px-3'>
         <div className='flex items-start space-x-4 justify-evenly'>
            
         <div className='hidden sm:flex relative rounded-full px-2 pt-1 bg-yellow-200 w-16 h-16 '>
-               < Image        quality='40' src='/dashboard/wallet.png' layout='fill' className='w-12 h-12' alt='money' />
+               <Image  quality='40' src='/dashboard/wallet.png' layout='fill' className='w-12 h-12' alt='money' />
         </div>
             
             <div className='flex flex-col text-sm lg:text-xl w-auto md:w-36 xl:w-44 2xl:w-48 font-light text-gray-500'>
@@ -21,12 +22,13 @@ export default function UserCurrentBalance({currentBalance,isAuthorize}:any) {
                 </p>
                 <span className='text-xs lg:text-sm py-2 h-28  text-gray-500'>
                           Available amount that you     <br/>
-                            can withdraw any time. <br/>
-                           <span className='font-semibold'> No service charges.</span> 
+                          can withdraw any time. <br/>
+                      <span className='font-semibold'> No service charges.</span> 
                 </span>
             </div> 
                 
         </div>
     </div>
+
   )
 }

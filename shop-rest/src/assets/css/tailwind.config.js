@@ -53,6 +53,7 @@ module.exports = {
           900: '#234E52',
         },
       },
+
       boxShadow: {
         xs: '0 0 0 1px rgba(0, 0, 0, 0.16)',
         sm: '0 1px 2px 0 rgba(0, 0, 0, 0.16)',
@@ -65,6 +66,7 @@ module.exports = {
         outline: '0 0 0 3px rgba(66, 153, 225, 0.5)',
         none: 'none',
       },
+      
       spacing: {
         '9/16': '56.25%',
         '3/4': '75%',
@@ -138,6 +140,7 @@ module.exports = {
       },
     },
   },
+
   variants: {
     backgroundColor: ['responsive', 'hover', 'focus', 'group-hover'],
     textColor: ['responsive', 'hover', 'focus', 'group-hover'],
@@ -145,6 +148,7 @@ module.exports = {
     boxShadow: ['responsive', 'hover', 'focus', 'focus-within'],
     opacity: ['responsive', 'hover', 'focus', 'group-hover'],
   },
+
   plugins: [
     require('@tailwindcss/forms'),
   ],
