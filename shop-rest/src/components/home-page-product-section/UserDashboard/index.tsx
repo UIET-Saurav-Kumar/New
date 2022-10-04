@@ -105,14 +105,14 @@ export default function UserDashboard() {
             //    // console.log(relDiff(this_month, last_month_earning))
   return (
 
-        <div className='grid grid-cols-1 lg:flex items-center w-full mt-0 py-1 lg:py-3
-                        px-0 lg:px-3 space-x-2 lg:space-x-5 bg-gray-100'>
+        <div className='grid grid-cols-1 lg:flex items-center w-full mt-0  lg:py-3
+                        px-0 lg:px-3 lg:space-x-5 bg-gray-100'>
 
             <div className='w-auto xl:w-100'>
                 <UserProfile data={data?.me}/>
             </div>
 
-            <div className='grid grid-cols-2 py-1 w-auto pr-1 sm:grid-cols-2 lg:grid-cols-3 grid-rows-2 grid-flow-row gap-1 lg:gap-3 h-full mt-2  lg:w-full'>
+            <div className='grid grid-cols-2  border-b lg:border-b-0  place-content-center mt-1 sm:grid-cols-2 lg:grid-cols-3 grid-rows-2   gap- lg:gap-3 h-full   lg:w-full'>
 
                 {/* <div className='grid grid-cols-2 lg:flex gap-3 h-48 items-center'> */}
                     {/* <div className='col-span-2'> */}

@@ -20,8 +20,8 @@ export default function UserUploadInvoiceCard() {
 
   return (
       
-    <div className=' flex-1 flex-col border hover:drop-shadow-2xl  lg:py-8 bg-white h-44 lg:h-full  rounded-sm lg:rounded-lg p-2 px-3'>
-        
+    <div className='flex-1 flex-col h-44 border-r sm:border-r-0 lg:h-full lg:py-8  lg:hover:drop-shadow-2xl  
+    bg-white rounded-sm lg:rounded-lg p-2 px-3'>        
         <div className='flex items-start space-x-4 h-full justify-evenly'>
         
         <div className='hidden sm:flex relative rounded-full pl-2 pt-2 bg-indigo-100 w-16 h-16 '>

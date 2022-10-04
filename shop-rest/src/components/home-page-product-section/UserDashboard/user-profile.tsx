@@ -60,7 +60,7 @@ export default function UserProfile({data}:any) {
         <div className='flex flex-col justify-evenly rounded-xl lg:h-110 xl:space-y-4 2xl:py-5 shadow-3xl w-full  bg-gradient-to-r from-red-50   to-blue-50 drop-shadow-2xl p-6  sm:p-3'>
         
             {/* <div className=''> */}
-            <div className='flex space-x-3 items-center border-b pb-3 '>
+            <div className='flex space-x-3 justify-between items-center border-b pb-3 '>
                 {/* <span className='rounded-full w-10 h-10 border bg-red-400'></span> */}
                 <div className=''>
                     <h3 className='text-gray-600 text-xl font-light'>Hey, <span className='text-gray-800 font-semibold'>
@@ -68,12 +68,25 @@ export default function UserProfile({data}:any) {
                     </span></h3>
                     <p className='text-md text-gray-400 font-light'>Welcome to Buylowcal Community</p>
                 </div>
+                <div className=' flex lg:hidden justify-around items-start mt-2 space-y-3'>
+                           <Image quality='40' 
+                        height={56}
+                        width={56}
+                        src='/boy.png'
+                        // src={data ? data?.profile?.avatar?.thumbnail : '/boy.png'} 
+                        alt='profile'
+                        className='rounded-full'
+                        //   className='h-16 w-16 border rounded-full' alt='profile'
+                        />
+                        {/* <p className='text-lg  font-semibold'>{!!data ? data?.name : 'Guest'}</p> */}
+                    </div>
             </div>
             {/* </div> */}
 
             <div className='flex flex-col 2xl:space-y-8 w-full space-y-3'>
                 <div className='space-y-8 text-center'>
-                    <div className=' flex justify-around items-start mt-2 space-y-3'>
+                    
+                <div className='hidden lg:flex justify-around items-start mt-2 space-y-3'>
                            <Image quality='40' 
                         height={56}
                         width={56}
@@ -85,6 +98,8 @@ export default function UserProfile({data}:any) {
                         />
                         <p className='text-lg  font-semibold'>{!!data ? data?.name : 'Guest'}</p>
                     </div>
+
+
                     <div className='font-semibold text-xl'><span>Buylowcal Community Count</span> 
                       <p className='font-bold text-gray-600 mt-3 text-3xl'>{res}</p>
                     </div>

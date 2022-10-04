@@ -21,7 +21,7 @@ export default function Datacard({click,view,width,height,label}:any) {
 
             <br></br>
 
-            <span className={`${click ? 'underline border font-sans font-semibold bg-clip-text text-transparent bg-gradient-to-r from-blue-700 via-purple-600 to-blue-600 ' : null} text-sm text-gray-900 `}>
+            <span className={`${click ? 'underline  font-sans font-semibold bg-clip-text text-transparent bg-gradient-to-r from-blue-700 via-purple-600 to-blue-600 ' : null} text-sm text-gray-900 `}>
               {label}
             </span>
 

@@ -47,7 +47,6 @@ const AppSettings: React.FC = (props: any) => {
   const routname  = props?.children?._owner?.pendingProps?.router?.route.split('/')[1];
   const slugname  = props?.children?._owner?.pendingProps?.router?.query?.slug;
 
-  
 
   if(slugname !== undefined && routname == 'shops')
 
@@ -154,7 +153,6 @@ function CustomApp({ Component, pageProps }: AppProps) {
                       <Layout {...pageProps}>
                         <Seo />
                          <PaymentProvider> 
-                          
                           
                             <Component {...pageProps} />
 

@@ -24,9 +24,9 @@ export default function MobileRechargeForm({click,variant} :any) {
 
             <div className='flex-1 flex-col'> 
                 <Input label='Phone number'
-                    variant={variant}
-                    type='number'
-                    className='rounded'
+                        variant={variant}
+                        type='number'
+                        className='rounded'
                 />
             </div>
 

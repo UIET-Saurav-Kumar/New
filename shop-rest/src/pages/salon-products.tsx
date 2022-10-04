@@ -288,7 +288,6 @@ export default function SalonProducts() {
         } else { // if scroll up show the navbar
           setShow(true);  
         }
-  
         // remember current page location to use in the next move
         setLastScrollY(window.scrollY); 
       }
@@ -338,7 +337,7 @@ export default function SalonProducts() {
                     
                   {/* <CategoryDropdownSidebar data={data}/> */}
                   {/* <HidingHeader>   */}
-                     <div className='sticky flex shadow-2xl flex-col top-14 lg:top-12 z-10'><SalonProductsCategories  btn2={btn2} btn={btn} />
+          <div className='sticky flex shadow-2xl flex-col top-14 lg:top-12 z-10'><SalonProductsCategories  btn2={btn2} btn={btn} />
                       {/* </HidingHeader>  */}
 
                   
@@ -348,61 +347,64 @@ export default function SalonProducts() {
             {/* <div className={`  flex sticky z-20 top-45 pb-2  lg:top-59 items-center bg-white justify-between w-full`}>   */}
                <div className='flex items-center pb-2 justify-between w-full bg-white'>
 
-               <div className='relative mt-3 w-24 lg:w-28 bg-white flex justify-end ml-2 lg:ml-4 rounded'>
+                <div className='relative mt-3 w-24 lg:w-28 bg-white flex justify-end ml-2 lg:ml-4 rounded'>
 
-                    <button onClick={() => setSortGenderList(!sortGenderList) } 
-                            className=' flex  justify-between border pl-4 border-gray-200 text-10px lg:text-sm font-semibold  w-full items-center left-4 bg-white text-gray-600 p-2' >
-                               {sortGenderBtn} { !sortGenderList ? 
-                                           <ExpandLessIcon className='w-4 h-4 mr-1'/> : 
-                                           <ExpandMoreIcon className='w-4 h-4 mr-1'/>
-                                          }
-                    </button>
+                      <button onClick={() => setSortGenderList(!sortGenderList) } 
+                              className=' flex justify-between border pl-4 border-gray-200 text-10px lg:text-sm font-semibold  w-full items-center left-4 bg-white text-gray-600 p-2' >
+                                {sortGenderBtn} { !sortGenderList ? 
+                                            <ExpandLessIcon className='w-4 h-4 mr-1'/> : 
+                                            <ExpandMoreIcon className='w-4 h-4 mr-1'/>
+                                            }
+                      </button>
 
-                    <div ref={sortGenderRef}
-                        //  style={{ transition: 'all 4s ease-in-out', width: sortList ? '100px' : '0' }} 
-                        className={` ${sortGenderList ? 'block ' : 'hidden'} bg-white absolute border text-10px lg:text-sm top-11 right-0 space-y-3 p-2 z-40 w-full`}>
-                        <li className={`${sortGenderBtn === 'Men' ? 'bg-gray-100' : null} cursor-pointer list-none text-gray-600 `} onClick={() => { showMen(); setSortGenderList(!sortGenderList); setSortGenderBtn('Men')}}>
-                          Men
-                        </li>
-                        <li className={`${sortBtn === 'Women' ? 'bg-gray-100' : null} cursor-pointer list-none text-gray-800 `} onClick={() => {  showWomen(); setSortGenderList(!sortGenderList); setSortGenderBtn('Women')}}>
-                          Women
-                        </li>
-                          {/* <li className='cursor-pointer list-none text-gray-700  ' onClick={ () =>{ setSortList(!sortList); setSortBtn('Sort by: Low to High')}}>
-                          Sort by: Low to High
-                          </li> */}
-                    </div>
-                </div>
+                      <div ref={sortGenderRef}
+                          //  style={{ transition: 'all 4s ease-in-out', width: sortList ? '100px' : '0' }} 
+                          className={` ${sortGenderList ? 'block ' : 'hidden'} bg-white absolute border text-10px lg:text-sm top-11 right-0 space-y-3 p-2 z-40 w-full`}>
+                          <li className={`${sortGenderBtn === 'Men' ? 'bg-gray-100' : null} cursor-pointer list-none text-gray-600 `} onClick={() => { showMen(); setSortGenderList(!sortGenderList); setSortGenderBtn('Men')}}>
+                            Men
+                          </li>
+                          <li className={`${sortBtn === 'Women' ? 'bg-gray-100' : null} cursor-pointer list-none text-gray-800 `} onClick={() => {  showWomen(); setSortGenderList(!sortGenderList); setSortGenderBtn('Women')}}>
+                            Women
+                          </li>
+                            {/* <li className='cursor-pointer list-none text-gray-700  ' onClick={ () =>{ setSortList(!sortList); setSortBtn('Sort by: Low to High')}}>
+                            Sort by: Low to High
+                            </li> */}
+                      </div>
+                  </div>
 
                 {/* <div className='flex w-full text-center mx-auto text-gray-800'>
                                 <p>{query.category}</p>
                   </div> */}
 
 
-                  <div className='relative mt-3 flex justify-end w-38 mr-2 lg:mr-4 rounded'>
-                        <button className=' flex items-center border border-gray-200 text-10px lg:text-sm font-semibold right-4 w-full bg-white text-gray-600 p-2' 
-                                onClick={()=> setSortList(!sortList)}>
-                                  {sortBtn} { !sortList ? 
-                                              <ExpandLessIcon className='w-4 h-4 ml-2'/> : 
-                                              <ExpandMoreIcon className='w-4 h-4 ml-2'/>
-                                              }
-                        </button>
-                        <div ref= {sortRef}
-                              // style={{ transition: 'all 4s ease-in-out', width: sortList ? '100px' : '0' }} 
-                            className={` ${sortList ? 'block  ' : 'hidden '} bg-white text-10px lg:text-sm absolute top-11  left-0   z-40 w-full`}>
-                              <li className={`${sortBtn === 'Sort by: Latest' ? 'bg-gray-100' : null} cursor-pointer w-full h-full p-3 border hover:text-gray-900 list-none text-gray-600 `} 
-                                  onClick={() => {  setSortList(!sortList); setSortBtn('Sort by: Latest')}}>
-                                Sort by: Latest
-                              </li>
-                              <li className={` ${sortBtn === 'Sort by: High to Low' ? 'bg-gray-100' : null} cursor-pointer w-full h-full p-3 border hover:text-gray-900 list-none text-gray-800 `} 
-                                  onClick={() => {   setSortList(!sortList); setSortBtn('Sort by: High to Low')}}>
-                                Sort by: High to Low
-                              </li>
-                              <li className={`  ${sortBtn === 'Sort by: Low to High' ? 'bg-gray-100' : null} cursor-pointer w-full h-full p-3 border hover:text-gray-900 list-none text-gray-800  `} 
-                                  onClick={ () =>{ setSortList(!sortList); setSortBtn('Sort by: Low to High')}}>
-                                Sort by: Low to High
-                              </li>
-                        </div>
-                  </div>
+                    <div className='relative mt-3 flex justify-end w-38 mr-2 lg:mr-4 rounded'>
+                         
+                          <button className=' flex items-center border border-gray-200 text-10px lg:text-sm font-semibold right-4 w-full bg-white text-gray-600 p-2' 
+                                  onClick={()=> setSortList(!sortList)}>
+                                    {sortBtn} { !sortList ? 
+                                                <ExpandLessIcon className='w-4 h-4 ml-2'/> : 
+                                                <ExpandMoreIcon className='w-4 h-4 ml-2'/>
+                                                }
+                          </button>
+                          
+                          <div ref= {sortRef}
+                                // style={{ transition: 'all 4s ease-in-out', width: sortList ? '100px' : '0' }} 
+                              className={` ${sortList ? 'block  ' : 'hidden '} bg-white text-10px lg:text-sm absolute top-11  left-0   z-40 w-full`}>
+                                <li className={`${sortBtn === 'Sort by: Latest' ? 'bg-gray-100' : null} cursor-pointer w-full h-full p-3 border hover:text-gray-900 list-none text-gray-600 `} 
+                                    onClick={() => {  setSortList(!sortList); setSortBtn('Sort by: Latest')}}>
+                                  Sort by: Latest
+                                </li>
+                                <li className={` ${sortBtn === 'Sort by: High to Low' ? 'bg-gray-100' : null} cursor-pointer w-full h-full p-3 border hover:text-gray-900 list-none text-gray-800 `} 
+                                    onClick={() => {   setSortList(!sortList); setSortBtn('Sort by: High to Low')}}>
+                                  Sort by: High to Low
+                                </li>
+                                <li className={`  ${sortBtn === 'Sort by: Low to High' ? 'bg-gray-100' : null} cursor-pointer w-full h-full p-3 border hover:text-gray-900 list-none text-gray-800  `} 
+                                    onClick={ () =>{ setSortList(!sortList); setSortBtn('Sort by: Low to High')}}>
+                                  Sort by: Low to High
+                                </li>
+                          </div>
+                    </div>
+
                   </div>
 
               </div> 
