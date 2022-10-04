@@ -16,7 +16,7 @@ export default function UserWithdrawnAmount({withdrawnAmount,isAuthorize}:any) {
 }
   return (
 
-    <div className='relative flex-1 flex-col  lg:hover:drop-shadow-2xl  lg:py-8  bg-white h-44 lg:h-full  justify-center rounded-sm lg:rounded-xl p-2 px-3'>
+    <div className='relative flex-1 flex-col  lg:hover:drop-shadow-2xl  lg:py-8  bg-white h-44 lg:h-full  justify-center rounded-lg lg:rounded-xl p-2 px-3'>
        
         <div className='flex items-start h-full  align-center space-x-4 justify-evenly'>
 

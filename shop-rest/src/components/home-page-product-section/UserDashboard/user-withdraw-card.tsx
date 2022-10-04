@@ -20,7 +20,7 @@ export default function UserWithdrawCard({currentBalance}:any) {
   return (
 
     <div className='flex-1 flex-col h-44 lg:h-full lg:py-8 border-r sm:border-r-0 lg:hover:drop-shadow-2xl  
-                    bg-white rounded-sm lg:rounded-lg p-2 px-3'>
+                    bg-white rounded-lg lg:rounded-lg p-2 px-3'>
         
         <div className='flex items-start  space-x-4 justify-evenly'>
             

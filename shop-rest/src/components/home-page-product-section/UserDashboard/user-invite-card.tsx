@@ -19,7 +19,7 @@ export default function UserInviteCard() {
 
   return (
 
-    <div className='z flex-1 flex-col lg:hover:drop-shadow-2xl  lg:py-8 bg-white h-44 lg:h-full rounded-sm lg:rounded-lg p-2 px-3'>
+    <div className='z flex-1 flex-col lg:hover:drop-shadow-2xl  lg:py-8 bg-white h-44 lg:h-full rounded-lg lg:rounded-lg p-2 px-3'>
         
         <div className='flex items-start space-x-4  justify-evenly'>
           

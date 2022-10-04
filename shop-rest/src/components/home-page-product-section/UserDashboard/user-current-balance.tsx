@@ -6,7 +6,7 @@ export default function UserCurrentBalance({currentBalance,isAuthorize}:any) {
 
   return (
 
-    <div className='flex-1 flex-col lg:hover:drop-shadow-2xl  lg:py-8 bg-white h-44 lg:h-full rounded-sm lg:rounded-lg p-2 px-3'>
+    <div className='flex-1 flex-col lg:hover:drop-shadow-2xl  lg:py-8 bg-white h-44 lg:h-full rounded-lg lg:rounded-lg p-2 px-3'>
         <div className='flex items-start space-x-4 justify-evenly'>
            
         <div className='hidden sm:flex relative rounded-full px-2 pt-1 bg-yellow-200 w-16 h-16 '>
