@@ -2,18 +2,19 @@ import Input from '@components/ui/input'
 import Label from '@components/ui/label'
 import { useModalAction } from '@components/ui/modal/modal.context'
 import Select from '@components/ui/select/select'
- import React from 'react'
+import React from 'react'
+
 
 export default function LpgBookingForm({click,variant} :any) {
 
-console.log('form broadband',click)
+    console.log('form broadband',click)
 
-const { openModal } = useModalAction();
+    const { openModal } = useModalAction();
 
 
-function handleClick()  {
-    return   openModal('BILL_PAYMENT')
-}
+    function handleClick()  {
+        return   openModal('BILL_PAYMENT')
+    }
 
   return (
 
