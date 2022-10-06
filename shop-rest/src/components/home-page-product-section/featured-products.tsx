@@ -261,7 +261,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                 <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
                     Salon & Spa
                 </h3>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 px-1 gap-1 lg:p-4 lg:gap-2">
             
 
 
@@ -281,7 +281,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                   <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
                        Grocery
                   </h3>
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 gap-1 p-1 lg:p-4 lg:gap-2">
                     
                         {groceryArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                             <>    
@@ -299,7 +299,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                   <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
                        Fruits & Vegetables
                   </h3>
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 gap-1 p-1 lg:p-4 lg:gap-2">
                     
                         {fruitsvegetablesArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                             <>    
@@ -316,7 +316,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                 <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
                    Beverages
                 </h3>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 gap-1 p-1 lg:p-4 lg:gap-2">
 
                     {beveragesArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                         <>    
@@ -335,7 +335,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                 <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
                     Fashion & Lifestyle
                 </h3>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 gap-1 p-1 lg:p-4 lg:gap-2">
             
 
 
@@ -357,7 +357,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                   <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
                        Electrical Appliances
                   </h3>
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 gap-1 p-1 lg:p-4 lg:gap-2">
                     
                         {electronicsArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                             <>    
@@ -375,7 +375,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                   <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
                        Fresh Meat
                   </h3>
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 gap-1 p-1 lg:p-4 lg:gap-2">
                     
                         {meatArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                             <>    
@@ -393,7 +393,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                   <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
                        Dairy & Farm
                   </h3>
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 gap-1 p-1 lg:p-4 lg:gap-2">
                     
                         {dairyfarmArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                             <>    
@@ -411,7 +411,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                   <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
                        Health Products
                   </h3>
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 gap-1 p-1 lg:p-4 lg:gap-2">
                     
                         {healthproductsArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                             <>    
@@ -429,7 +429,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                   <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
                        Pharmacy & Medicines
                   </h3>
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 gap-1 p-1 lg:p-4 lg:gap-2">
                     
                         {pharmacyArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                             <>    
@@ -449,7 +449,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                   <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
                        Hotel & Resorts
                   </h3>
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 gap-1 p-1 lg:p-4 lg:gap-2">
                     
                         {hotelsresortsArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                             <>    
@@ -471,7 +471,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                 <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
                     Bakery
                 </h3>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 gap-1 p-1 lg:p-4 lg:gap-2">
             
 
                     {bakeryArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
@@ -492,7 +492,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                 <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
                     Grocery Offers
                 </h3>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 gap-1 p-1 lg:p-4 lg:gap-2">
             
                     {groceryoffersArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                         <>    
@@ -511,7 +511,7 @@ enoeo
                 <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
                     Clothing
                 </h3>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 gap-1 p-1 lg:p-4 lg:gap-2">
             
                     {clothingArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                         <>    
@@ -530,7 +530,7 @@ enoeo
                 <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
                     Furniture
                 </h3>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 gap-1 p-1 lg:p-4 lg:gap-2">
             
 
 
@@ -549,7 +549,7 @@ enoeo
                 <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
                    Buffets
                 </h3>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 gap-1 p-1 lg:p-4 lg:gap-2">
 
                     {buffetArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                         <>    
@@ -568,7 +568,7 @@ enoeo
                 <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl text-gray-800 font-semibold  p-2'> 
                    Restraunts & Takeaways
                 </h3>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 gap-1 p-1 lg:p-4 lg:gap-2">
 
                     {restrauntsArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                         <>    

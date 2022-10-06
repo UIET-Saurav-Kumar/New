@@ -45,7 +45,7 @@ export default function OfferOfTheDay() {
                 </div>
             </div>
 
-            <div className={`${data?.offers.data?.length  ? 'block' : 'hidden'} relative grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2`}>
+            <div className={`${data?.offers.data?.length  ? 'block' : 'hidden'} relative grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 px-1 gap-1 lg:p-4 lg:gap-2`}>
                  {data?.offers.data.filter(product => product?.status === 'publish')
                     .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
                     .slice(0, 30)
