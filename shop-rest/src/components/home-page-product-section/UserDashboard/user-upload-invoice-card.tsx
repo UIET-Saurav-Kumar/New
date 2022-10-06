@@ -25,24 +25,24 @@ export default function UserUploadInvoiceCard() {
         <div className='flex items-start space-x-4 h-full justify-evenly'>
         
         <div className='hidden sm:flex relative rounded-full pl-2 pt-2 bg-indigo-100 w-16 h-16 '>
-               < Image        quality='40' src='/dashboard/photo.png' layout='fill' className='w-12 h-12' alt='money' />
-          </div>
+               <Image  quality='40' src='/dashboard/photo.png' layout='fill' className='w-12 h-12' alt='money' />
+        </div>
             <div className='flex flex-col text-lg w-auto md:w-36 xl:w-40 2xl:w-44 lg:text-2xl space-y-2 font-light text-gray-500'>
-              <div className='flex flex-col h-28 space-y-2 '>
-                  <h4 className='font-semibold text-lg sm:text-sm xl:text-lg  2xl:text-xl text-gray-800 '>
-                          Upload Invoice
-                  </h4>
-                  <span className='text-xs lg:text-sm h-28  w-44 md:w-auto text-gray-500'>
-                      Upload Invoice/Bill and get  <span className='font-semibold'>5% </span>  
-                      cashback <br/> upto ₹50 per bill 
-                  </span>
-              </div> 
-              <div className=''>
-                  <button onClick={getLink} className=' font-semibold text-sm lg:mt-8
-                            bg-gradient-to-r from-green-500 to-blue-800 hover:from-green-700 hover:to-blue-900
-                             text-white  px-5 lg:px-3 xl:px-7 py-1 lg:py-1 xl:py-2 rounded-lg'>
-                      Upload
-                  </button>
+                <div className='flex flex-col h-28 space-y-2 '>
+                    <h4 className='font-semibold text-lg sm:text-sm xl:text-lg  2xl:text-xl text-gray-800 '>
+                            Upload Invoice
+                    </h4>
+                    <p className='text-xs lg:text-sm h-28 whitespace-normal  w-44 md:w-auto text-gray-500'>
+                        Upload Invoice/Bill and <br/> get  <span className='font-semibold'>5% </span>  
+                        cashback <br/> upto ₹50 per bill 
+                    </p>
+                </div> 
+                <div className=''>
+                    <button onClick={getLink} className=' font-semibold text-sm lg:mt-8
+                              bg-gradient-to-r from-green-500 to-blue-800 hover:from-green-700 hover:to-blue-900
+                              text-white  px-5 lg:px-3 xl:px-7 py-1 lg:py-1 xl:py-2 rounded-lg'>
+                        Upload
+                    </button>
                 </div>
             </div>
                
