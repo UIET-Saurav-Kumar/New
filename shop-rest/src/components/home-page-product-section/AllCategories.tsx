@@ -51,7 +51,7 @@ const AllCategories = () => {
 	//getLinkSalonSpa
 	function getLinkSalonSpa(){
 
-		var pathname="/salon";
+		var pathname="/salon-products";
 
 		return pathname;
 	}
@@ -65,7 +65,7 @@ const AllCategories = () => {
         <div className='mt-0 md:mt-8 lg:mt-10'>
 
           <div id='all-categories' className='categories-page mt-8 xs+:mt-8 sm:mt-8 xl:mt-10 2xl:mt-96 border-b bg-gray-50 rounded-t'>
-	    	<h3 className='text-lg sm:text-lg md:text-lg xl:text-2xl  font-semibold  p-2' > Shop by Category  </h3>
+	    	<h3 className='text-lg sm:text-lg md:text-lg xl:text-2xl font-semibold  p-2' > Shop by Category  </h3>
 		  </div>
 
 	    <div className='all-categories grid grid-cols-3 sm+:grid-cols-3 

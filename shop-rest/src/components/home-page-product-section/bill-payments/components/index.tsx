@@ -9,36 +9,36 @@ import Input from '@components/ui/input';
 import Select from '@components/ui/select/select';
 import { Button } from 'react-scroll';
 import Label from '@components/ui/label';
-import MobileRechargeForm from './forms/mobile-recharge-form';
+import MobileRechargeForm from '../forms/mobile-recharge-form';
 import Broadband from './broadband';
 import Landline from './landline';
 import PipedGas from './piped-gas';
-import DthForm from './forms/dth-form';
+import DthForm from '../forms/dth-form';
 
 
 import { usePayment } from '@contexts/payment.context';
-import ElectricityForm from './forms/electricity-form';
-import InsuranceForm from './forms/insurance-form';
-import LandlineForm from './forms/landline-form';
-import PipedgasForm from './forms/pipedgas-form ';
-import BroadbandForm from './forms/broadband-form';
+import ElectricityForm from '../forms/electricity-form';
+import InsuranceForm from '../forms/insurance-form';
+import LandlineForm from '../forms/landline-form';
+import PipedgasForm from '../forms/pipedgas-form ';
+import BroadbandForm from '../forms/broadband-form';
 import Water from './water';
 import Emi from './emi';
 import LpgBooking from './lpg-booking';
-import WaterForm from './forms/water-form';
-import EmiForm from './forms/emi-form';
-import LpgBookingForm from './forms/lpg-booking-form';
+import WaterForm from '../forms/water-form';
+import EmiForm from '../forms/emi-form';
+import LpgBookingForm from '../forms/lpg-booking-form';
 import Datacard from './datacard';
 import Challan from './challan';
 import Cable from './cable';
 import CreditCard from './creditcard';
 import GooglePlay from './googleplay';
 import Housing from './housing';
-import GooglePlayForm from './forms/google-play-form';
-import CableForm from './forms/cable-form';
-import ChallanForm from './forms/challan-form';
-import HousingForm from './forms/housing-form';
-import DataCardForm from './forms/datacard-form';
+import GooglePlayForm from '../forms/google-play-form';
+import CableForm from '../forms/cable-form';
+import ChallanForm from '../forms/challan-form';
+import HousingForm from '../forms/housing-form';
+import DataCardForm from '../forms/datacard-form';
 
 
 export default function BillPayment() {

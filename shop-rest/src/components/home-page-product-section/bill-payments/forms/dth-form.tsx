@@ -3,6 +3,7 @@ import Label from '@components/ui/label'
 import { useModalAction } from '@components/ui/modal/modal.context';
 import Select from '@components/ui/select/select'
 import React from 'react'
+import { operators } from './mobile-recharge-form';
 
 
 export default function DthForm({click,variant} :any) {
@@ -34,6 +35,7 @@ export default function DthForm({click,variant} :any) {
                 <Select label='Operator'
                         variant=''
                         border='10px'
+                        options= {operators?.filter((opr)=> opr.ServiceType=='DTH')}
                      // styles={customStyles}
                         
                 />

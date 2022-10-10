@@ -40,7 +40,7 @@ import ElanteBanner from "@components/home-page-product-section/elante-banner";
 import BrandOffers from "@components/home-page-product-section/brand-offers";
 import Head from "next/head";
 import useIntersectionObserver from "@components/product/useIntersectionObserver";
-import BillPayment from "@components/home-page-product-section/bill-payments";
+import BillPayment from "@components/home-page-product-section/bill-payments/components";
 
 
 const ProductFeedLoader = dynamic(

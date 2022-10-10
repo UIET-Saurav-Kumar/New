@@ -39,7 +39,7 @@ const Helium: React.FC<HeliumProps> = ({ product, className }) => {
   return (
 
     <article
-    onClick={handleProductQuickView}
+    // onClick={handleProductQuickView}
       className={cn(
         "relative product-card cart-type-helium border rounded h-full bg-light overflow-hidden transition-shadow duration-200 hover:shadow-sm",
         className
@@ -79,19 +79,22 @@ const Helium: React.FC<HeliumProps> = ({ product, className }) => {
       <header className="p-3 md:p-6 relative">
 
         <h3
-          onClick={handleProductQuickView}
+          // onClick={handleProductQuickView}
           role="button"
-          className="text-heading text-sm font-semibold truncate mb-2"
+          className=" text-md font- font-sans  truncate mb-2"
         >
           {name}
         </h3>
 
         <p className="text-muted text-xs">{unit}</p>
 
-        { pageURL.includes('salon-products') || pageURL.includes('salon-page') ? (
+        {
+         pageURL.includes('salon-products') || pageURL.includes('salon-page') ? (
           <div className=' flex justify-between text-xs text-gray-600 mb-4 h-4 mt-2 font-light'>
-            <span className='font-semibold bg-clip-text text-transparent bg-gradient-to-r from-blue-700 via-purple-600 to-blue-600'> {product?.shop?.name} </span>
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-700 via-red-600 to-yellow-600">{product?.shop?.address?.city}</span>
+            <span className='font-semibold bg-clip-text text-transparent bg-gradient-to-r from-blue-700 via-purple-600 to-blue-600'>
+               {product?.shop?.name} </span>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-700 via-red-600 to-yellow-600">
+              {product?.shop?.address?.city}</span>
             {/* <span className="font-light text-gray-800">{'sold' + ' ' + orders_count}</span> */}
           </div> ) :
             null

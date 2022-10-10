@@ -2,7 +2,8 @@ import Input from '@components/ui/input'
 import Label from '@components/ui/label'
 import { useModalAction } from '@components/ui/modal/modal.context'
 import Select from '@components/ui/select/select'
- import React from 'react'
+ import React from 'react';
+ import { operators } from './mobile-recharge-form';
 
 export default function LandlineForm({click,variant} :any) {
 
@@ -32,6 +33,7 @@ const { openModal } = useModalAction();
                 <Select label='Operator'
                         variant=''
                         type='number'
+                        options= {operators?.filter((opr)=> opr.ServiceType=='Landline')}
                 />
             </div>
 

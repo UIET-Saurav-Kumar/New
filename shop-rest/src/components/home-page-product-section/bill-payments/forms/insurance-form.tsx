@@ -7,7 +7,7 @@ import { Controller, useForm } from 'react-hook-form'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useModalAction } from '@components/ui/modal/modal.context'
-
+import {operators} from './mobile-recharge-form'
 
 type FormValues = {
     date_of_birth:Date;
@@ -63,6 +63,7 @@ const {
                         variant=''
                         inputMode="numeric"
                         type='number'
+                        options= {operators?.filter((opr)=> opr.ServiceType=='Insurence')}
                 />
             </div>
 

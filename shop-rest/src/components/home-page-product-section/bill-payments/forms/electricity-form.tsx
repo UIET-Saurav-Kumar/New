@@ -3,6 +3,7 @@ import Label from '@components/ui/label'
 import { useModalAction } from '@components/ui/modal/modal.context';
 import Select from '@components/ui/select/select'
  import React from 'react'
+ import { operators } from './mobile-recharge-form';
 
 export default function ElectricityForm({click,variant} :any) {
 
@@ -36,6 +37,7 @@ export default function ElectricityForm({click,variant} :any) {
                         <Select label='Operator'
                                 variant=''
                                 type='number'
+                                options={operators.filter((opr)=> opr?.ServiceType=='Electricity')}
                         />
                     </div>
 

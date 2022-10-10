@@ -28,12 +28,20 @@ import ShopCard2 from '@components/ui/shop-card2';
 import ShopLayout from '@components/layout/shop-layout';
 import Head from 'next/head';
 
+
+
   const ProductFeedLoader = dynamic(
     () => import("@components/ui/loaders/product-feed-loader")
   );
 
 
+
  export  const womenImg = [
+        // {
+        //     id : "11",
+        //     src : '/salon/1.jpg',
+        //     slug: 'menicure-pedicure'
+        // },
         {
             id : "1",
             src : '/salon/1.jpg',
@@ -148,7 +156,7 @@ export default function SalonPage() {
         const [orderBy, setOrder] = useState("created_at");
         const [type, setType] = useState("");
 
-//   const [sortedBy, setColumn] = useState<SortOrder>(SortOrder.Desc);
+        //   const [sortedBy, setColumn] = useState<SortOrder>(SortOrder.Desc);
 
         // const {
         //     data: salonProducts,
@@ -245,7 +253,7 @@ export default function SalonPage() {
             search:getSearch()
           });
 
-          function getCategory():string{
+          function getCategory():string {
               return 'Salon & Spa' as string; 
           }
 
@@ -278,10 +286,9 @@ export default function SalonPage() {
 
       <>
 
-      <Head>
+    <Head>
       <link rel="canonical" href={`https://buylowcal.com/salon`}/>
-
-      </Head>
+    </Head>
 
     <div className='bg-gradient-to-r from-indigo-50 via-purple-50 to-pink-50 h-full border bg-white w-full'>
       
@@ -307,7 +314,7 @@ export default function SalonPage() {
 
           <h3 className='text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 font-medium text-2xl lg:text-3xl text-gray-900 font-serif ml-4 lg:ml-8 mt-10 lg:mt-10 tracking-normal'>Featured Products</h3>
 
-            <div className={`${data?.offers.data?.length  ? 'block' : 'hidden'} text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500
+            <div className = {`${data?.offers.data?.length  ? 'block' : 'hidden'} text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500
                grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-5 bg-gray-50 mt-3 p-2 lg:p-6 gap-2`}>
               {/* {fetching && !data?.pages?.length ? (
                         <ProductFeedLoader limit={5} />
@@ -324,7 +331,6 @@ export default function SalonPage() {
                
                       {/* )} */}
             </div>
-
         
 
         <div className='flex flex-col lg:px-4 mt-0 lg:mt-10 py-4'>
@@ -333,6 +339,7 @@ export default function SalonPage() {
               Top Salons Near You <Link href='/shops?category=Salon+-+Spa'><span className='text-blue-800 cursor-pointer hover-underline text-sm '>view all</span></Link>
             </h4>
             <PromotionSlider/>
+            
         </div>
 
 
@@ -393,17 +400,8 @@ export default function SalonPage() {
       <CartCounterButton/>)
       : null
       }
-
     </>
-        //             )}
-        // </>
-     
-
-    
-    
-
   )
-
 }
 
 SalonPage.Layout = ShopLayout;

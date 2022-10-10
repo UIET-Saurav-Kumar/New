@@ -84,161 +84,181 @@ export default function FeaturedProducts({}) {
     // const typeId = [1,2,3,4,5,6,7,8,9,10,11,14,15,16,18,19,20,21,22]
 
        
-   const groceryArray =  data?.featureProducts.data.filter(function(product){
-      return product.type_id == 1 ? product : null;
-   })
+    const groceryArray =  data?.featureProducts.data.filter(function(product){
+        return product.type_id == 1 ? product : null;
+    })
 
-   const bakeryArray =  data?.featureProducts.data.filter(function(product){
+    const bakeryArray =  data?.featureProducts.data.filter(function(product){
     return product.type_id == 2 ? product : null;
-})
+    })
 
-const makeupArray =  data?.featureProducts.data.filter(function(product){
-   return product.type_id == 3 ? product : null;
-})
+    const makeupArray =  data?.featureProducts.data.filter(function(product){
+    return product.type_id == 3 ? product : null;
+    })
 
-const bagsArray =  data?.featureProducts.data.filter(function(product){
-   return product.type_id == 4 ? product : null;
-})
+    const bagsArray =  data?.featureProducts.data.filter(function(product){
+    return product.type_id == 4 ? product : null;
+    })
 
-const clothingArray =  data?.featureProducts.data.filter(function(product){
-    return product.type_id == 5 ? product : null;
- })
+    const clothingArray =  data?.featureProducts.data.filter(function(product){
+        return product.type_id == 5 ? product : null;
+    })
 
- const furnitureArray =  data?.featureProducts.data.filter(function(product){
-    return product.type_id == 6 ? product : null;
- })
+    const furnitureArray =  data?.featureProducts.data.filter(function(product){
+        return product.type_id == 6 ? product : null;
+    })
 
- const salonspaArray =  data?.featureProducts.data.filter(function(product){
-    return product.type_id == 7 ? product : null;
- })
+    const salonspaArray =  data?.featureProducts.data.filter(function(product){
+        return product.type_id == 7 ? product : null;
+    })
 
- const restrauntsArray =  data?.featureProducts.data.filter(function(product){
-    return product.type_id == 8 ? product : null;
- })
+    const restrauntsArray =  data?.featureProducts.data.filter(function(product){
+        return product.type_id == 8 ? product : null;
+    })
 
- const buffetArray =  data?.featureProducts.data.filter(function(product){
-    return product.type_id == 9 ? product : null;
- })
+    const buffetArray =  data?.featureProducts.data.filter(function(product){
+        return product.type_id == 9 ? product : null;
+    })
 
- const groceryoffersArray =  data?.featureProducts.data.filter(function(product){
-    return product.type_id == 10 ? product : null;
- })
+    const groceryoffersArray =  data?.featureProducts.data.filter(function(product){
+        return product.type_id == 10 ? product : null;
+    })
 
- const fashionlifestyleArray =  data?.featureProducts.data.filter(function(product){
-    return product.type_id == 11 ? product : null;
- })
+    const fashionlifestyleArray =  data?.featureProducts.data.filter(function(product){
+        return product.type_id == 11 ? product : null;
+    })
 
- const hotelsresortsArray =  data?.featureProducts.data.filter(function(product){
-    return product.type_id == 14 ? product : null;
- })
+    const hotelsresortsArray =  data?.featureProducts.data.filter(function(product){
+        return product.type_id == 14 ? product : null;
+    })
 
- const fruitsvegetablesArray =  data?.featureProducts.data.filter(function(product){
-    return product.type_id == 15 ? product : null;
- })
+    const fruitsvegetablesArray =  data?.featureProducts.data.filter(function(product){
+        return product.type_id == 15 ? product : null;
+    })
 
- const pharmacyArray =  data?.featureProducts.data.filter(function(product){
-    return product.type_id == 16 ? product : null;
- })
+    const pharmacyArray =  data?.featureProducts.data.filter(function(product){
+        return product.type_id == 16 ? product : null;
+    })
 
- const beveragesArray =  data?.featureProducts.data.filter(function(product){
-    return product.type_id == 18 ? product : null;
- })
+    const beveragesArray =  data?.featureProducts.data.filter(function(product){
+        return product.type_id == 18 ? product : null;
+    })
 
- const healthproductsArray =  data?.featureProducts.data.filter(function(product){
-    return product.type_id == 19 ? product : null;
- })
+    const healthproductsArray =  data?.featureProducts.data.filter(function(product){
+        return product.type_id == 19 ? product : null;
+    })
 
- const dairyfarmArray =  data?.featureProducts.data.filter(function(product){
-    return product.type_id == 20 ? product : null;
- })
+    const dairyfarmArray =  data?.featureProducts.data.filter(function(product){
+        return product.type_id == 20 ? product : null;
+    })
 
- const meatArray =  data?.featureProducts.data.filter(function(product){
-    return product.type_id == 21 ? product : null;
- })
+    const meatArray =  data?.featureProducts.data.filter(function(product){
+        return product.type_id == 21 ? product : null;
+    })
 
- const electronicsArray =  data?.featureProducts.data.filter(function(product){
-    return product.type_id == 22 ? product : null;
- })
+    const electronicsArray =  data?.featureProducts.data.filter(function(product){
+        return product.type_id == 22 ? product : null;
+    })
 
  const arrays = [
     {
-        name:'groceryArray',
+        name:groceryArray,
         title:'Grocery',
+        id:1
     },
     {
-        name:'bakeryArray',
+        name:bakeryArray,
         title:'Bakery',
+        id:2
     },
     {
-        name:'makeupArray',
+        name:makeupArray,
         title:'Makeup',
+        id:3
     },
     {
-        name:'bagsArray',
+        name:bagsArray,
         title:'Bags',
+        id:4
     },
     {
-        name:'clothingArray',
+        name:clothingArray,
         title:'Clothing',
+        id:5
     },
     {
-        name:'furnitureArray',
+        name:furnitureArray,
         title:'Furniture',
+        id:6
     },
     {
-        name:'salonspaArray',
+        name:salonspaArray,
         title:'Salon & Spa',
+        id:7
     },
     {
-        name:'restrauntsArray',
+        name:restrauntsArray,
         title:'Restaurants',
+        id:8
     },
     {
-        name:'buffetArray',
+        name:buffetArray,
         title:'Buffet',
+        id:9
     },
     {
-        name:'groceryoffersArray',
+        name:groceryoffersArray,
         title:'Grocery Offers',
+        id:10
     },
     {
-        name:'fashionlifestyleArray',
+        name:fashionlifestyleArray,
         title:'Fashion & Lifestyle',
+        id:11
     },
     {
-        name:'hotelsresortsArray',
+        name:hotelsresortsArray,
         title:'Hotels & Resorts',
+        id:14
     },
     {
-        name:'fruitsvegetablesArray',
+        name:fruitsvegetablesArray,
         title:'Fruits & Vegetables',
+        id:15
     },
     {
-        name:'pharmacyArray',
+        name:pharmacyArray,
         title:'Pharmacy',
+        id:16
     },
     {
-        name:'beveragesArray',
+        name:beveragesArray,
         title:'Beverages',
+        id:18
     },
     {
-        name:'healthproductsArray',
+        name:healthproductsArray,
         title:'Health Products',
+        id:19
     },
     {
-        name:'dairyfarmArray',
+        name:dairyfarmArray,
         title:'Dairy & Farm',
+        id:20
     },
     {
-        name:'meatArray',
+        name:meatArray,
         title:'Meat',
+        id:21
     },
     {
-        name:'electronicsArray',
+        name:electronicsArray,
         title:'Electronics',
+        id:22,
+        
     },
-    
-]
+        
+    ]
 
 
 
@@ -251,20 +271,16 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                     <h3 className='text-lg sm:text-lg md:text-lg xl:text-2xl font-semibold  p-2'> 
                         Featured Products 
                     </h3>
-
                     
                 </div>
             </div>
             
-             <div className={`${salonspaArray?.length  ? 'block' : 'hidden'} flex flex-col`}>
+            <div className={`${salonspaArray?.length  ? 'block' : 'hidden'} flex flex-col`}>
 
                 <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
                     Salon & Spa
                 </h3>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 px-1 gap-1 lg:p-4 lg:gap-2">
-            
-
-
                     { salonspaArray?.filter(product => product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                         <>    
                             <motion.div key={product.id}>
@@ -272,8 +288,8 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                             </motion.div>
                         </> 
                     ))}
-
                 </div>
+
             </div> 
             
             <div className={`${groceryArray?.length  ? 'block' : 'hidden'} flex flex-col`}>
@@ -286,7 +302,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                         {groceryArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                             <>    
                                 <motion.div key={product.id}>
-                                     <Neon2 product={product} />
+                                        <Neon2 product={product} />
                                 </motion.div>
                             </> 
                         ))}
@@ -294,12 +310,12 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                     </div>
             </div> 
             
-             <div className={`${fruitsvegetablesArray?.length  ? 'block' : 'hidden'} flex flex-col`}>
+            <div className={`${fruitsvegetablesArray?.length  ? 'block' : 'hidden'} flex flex-col`}>
 
                   <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
                        Fruits & Vegetables
                   </h3>
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 gap-1 p-1 lg:p-4 lg:gap-2">
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 gap-1 p-1 lg:p-4 lg:gap-2">
                     
                         {fruitsvegetablesArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                             <>    
@@ -309,7 +325,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                             </> 
                         ))}
 
-                    </div>
+                  </div>
             </div> 
             
              <div className={`${beveragesArray?.length  ? 'block' : 'hidden'} flex flex-col`}>
@@ -330,7 +346,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
             </div>
             
             
-             <div className={`${fashionlifestyleArray?.length  ? 'block' : 'hidden'} flex flex-col`}>
+            <div className={`${fashionlifestyleArray?.length  ? 'block' : 'hidden'} flex flex-col`}>
 
                 <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
                     Fashion & Lifestyle
@@ -357,7 +373,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                   <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
                        Electrical Appliances
                   </h3>
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 gap-1 p-1 lg:p-4 lg:gap-2">
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 gap-1 p-1 lg:p-4 lg:gap-2">
                     
                         {electronicsArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                             <>    
@@ -367,7 +383,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                             </> 
                         ))}
 
-                    </div>
+                   </div>
             </div> 
 
             <div className={`${meatArray?.length  ? 'block' : 'hidden'} flex flex-col`}>
@@ -375,7 +391,7 @@ const clothingArray =  data?.featureProducts.data.filter(function(product){
                   <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
                        Fresh Meat
                   </h3>
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 gap-1 p-1 lg:p-4 lg:gap-2">
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 gap-1 p-1 lg:p-4 lg:gap-2">
                     
                         {meatArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                             <>    

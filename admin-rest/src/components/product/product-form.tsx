@@ -187,6 +187,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
         })
       : defaultValues,
   });
+
   const {
     register,
     handleSubmit,
@@ -369,6 +370,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
           </div>
 
           <div className="flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
+            
             <Description
               title={t("form:type-and-category")}
               details={t("form:type-and-category-help-text")}
@@ -381,13 +383,10 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
                 error={t((errors?.type as any)?.message)}
               />
               <ProductCategoryInput control={control} setValue={setValue} />
-
-
-              
-              
               
               <ProductTagInput control={control} setValue={setValue} />
             </Card>
+
           </div>
 
           <div className="flex flex-wrap my-5 sm:my-8">
