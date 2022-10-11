@@ -35,7 +35,7 @@ export default function DthForm({click,variant} :any) {
                 <Select label='Operator'
                         variant=''
                         border='10px'
-                        options= {operators?.filter((opr)=> opr.ServiceType=='DTH')}
+                        options= {operators?.filter((opr)=> opr.Category=='DTH')}
                      // styles={customStyles}
                         
                 />

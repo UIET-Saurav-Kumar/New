@@ -34,7 +34,7 @@ export default function DataCardForm({click,variant} :any) {
                             variant=''
                             type='number'
                             className='col-span-2'
-                        options= {operators?.filter((opr)=> opr.ServiceType=='Datacard')}
+                        options= {operators?.filter((opr)=> opr?.Category=='Datacard')}
                     />
                 </div>
 

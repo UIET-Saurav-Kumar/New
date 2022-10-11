@@ -37,7 +37,7 @@ export default function ElectricityForm({click,variant} :any) {
                         <Select label='Operator'
                                 variant=''
                                 type='number'
-                                options={operators.filter((opr)=> opr?.ServiceType=='Electricity')}
+                                options={operators.filter((opr)=> opr?.Category=='Electricity')}
                         />
                     </div>
 

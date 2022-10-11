@@ -63,7 +63,7 @@ const {
                         variant=''
                         inputMode="numeric"
                         type='number'
-                        options= {operators?.filter((opr)=> opr.ServiceType=='Insurence')}
+                        options= {operators?.filter((opr)=> opr.Category=='Insurance')}
                 />
             </div>
 

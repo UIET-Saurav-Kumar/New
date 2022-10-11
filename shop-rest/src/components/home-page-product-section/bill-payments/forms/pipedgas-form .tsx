@@ -33,7 +33,7 @@ function handleClick()  {
                 <Select label='Operator'
                         variant=''
                         type='number'
-                        options= {operators?.filter((opr)=> opr.ServiceType=='GAS')}
+                        options= {operators?.filter((opr)=> opr.Category=='GAS')}
                 />
             </div>
 

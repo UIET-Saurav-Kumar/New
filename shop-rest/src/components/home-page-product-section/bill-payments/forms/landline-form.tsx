@@ -33,7 +33,7 @@ const { openModal } = useModalAction();
                 <Select label='Operator'
                         variant=''
                         type='number'
-                        options= {operators?.filter((opr)=> opr.ServiceType=='Landline')}
+                        options= {operators?.filter((opr)=> opr.Category=='Landline')}
                 />
             </div>
 

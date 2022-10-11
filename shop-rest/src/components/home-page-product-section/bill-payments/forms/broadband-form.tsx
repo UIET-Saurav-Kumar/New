@@ -2,7 +2,8 @@ import Input from '@components/ui/input'
 import Label from '@components/ui/label'
 import { useModalAction } from '@components/ui/modal/modal.context'
 import Select from '@components/ui/select/select'
- import React from 'react'
+ import React from 'react';
+ import { operators } from './mobile-recharge-form';
 
 export default function BroadbandForm({click,variant } :any) {
 
@@ -14,6 +15,8 @@ export default function BroadbandForm({click,variant } :any) {
     function handleClick()  {
         return   openModal('BILL_PAYMENT')
     }
+
+
 
   return (
 
@@ -32,14 +35,15 @@ export default function BroadbandForm({click,variant } :any) {
                 <Select label='Operator'
                         variant=''
                         type='number'
+                        options= {operators?.filter((opr)=> opr.Category=='BroadBand')}
                 />
             </div>
 
             <div className='flex-1'> 
                 <Input label='Account Number/ User Name'
-                    variant={variant}
-                    type='text'
-                    className='rounded'
+                       variant={variant}
+                       type='text'
+                       className='rounded'
                 />
              </div>
 

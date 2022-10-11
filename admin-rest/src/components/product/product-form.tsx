@@ -74,6 +74,7 @@ type FormValues = {
   variation_options: Product["variation_options"];
   [key: string]: any;
 };
+
 const defaultValues = {
   sku: "",
   name: "",
