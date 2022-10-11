@@ -7,7 +7,7 @@ export default function Broadband({view,click,width,height,label}:any) {
 
     <div onClick={view}  className ={`${click ? 'border border-indigo-700 w-full cursor-pointer  shadow-lg rounded-lg text-center' : 'w-full cursor-pointer border rounded-lg text-center' }`}>
         
-           <Image   
+           <Image priority={true}   
             src='/bill-payment/wifi.jpeg' 
             layout='intrinsic'
             objectFit='contain'

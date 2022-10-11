@@ -11,7 +11,7 @@ export default function Muncipality({click,view,width,height,label}:any) {
 
         <div onClick={view}  className ={`${click ? 'border border-indigo-700 w-full cursor-pointer  shadow-lg rounded-lg text-center' : 'w-full cursor-pointer border rounded-lg text-center' }`}>
             
-            <Image  src='/bill-payment/municipality.jpeg' 
+            <Image priority={true} src='/bill-payment/municipality.jpeg' 
               layout='intrinsic'
               objectFit='contain'
               width={width}
