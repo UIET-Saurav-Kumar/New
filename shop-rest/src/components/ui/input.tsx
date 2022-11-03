@@ -76,11 +76,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
             inputClassName
           )}
           
-<<<<<<< HEAD
           maxlength={maxLength}
-=======
-          maxlength={10}
->>>>>>> origin/main
           disabled={disabled}
           autoComplete="off"
           autoCorrect="off"
