@@ -111,7 +111,7 @@ class OrderRepository extends BaseRepository
         $request['customer_id'] = $request->user()->id;
         $request['name'] = $request->user()->name;
         $request['email_id'] = $request->user()->email;
-        $request['shop_name'] = $request->shop_nareturn_urlme;
+        $request['shop_name'] = $request->shop_name;
         //status
         $request['status'] = $request->status;
         $request['customer_contact'] = $request->user()->phone_number;

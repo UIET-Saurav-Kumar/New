@@ -61,6 +61,8 @@ class OperatorDetailsController extends CoreController
         
         $response = curl_exec($curl);
 
+        curl_getinfo($ch);
+
         curl_close($curl);
 
         return $response;
