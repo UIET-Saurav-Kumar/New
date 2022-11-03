@@ -5,28 +5,79 @@ import Label from '@components/ui/label'
 import { useModalAction } from '@components/ui/modal/modal.context'
 import SelectInput from '@components/ui/select-input'
 import Select from '@components/ui/select/select'
+import http from '@utils/api/http'
 import React from 'react'
-import { useEffect } from 'react'
-
-export async function getServerSideProps(context) {
-  const res = await fetch(`https://ezulix.in/api/BBPSV2/Electricity/getBillerInfo.aspx?memberid=EZ929952&apikey=C019FB28E2&biller_id=VASA00000THAE9&category=Water`)
-  const data = await res.json()
-  console.log('data',data)
-
-  if (!data) {
-    return {
-      notFound: true,
-    }
-  }
-
-  return {
-    props: { data
-    }, // will be passed to the page component as props
-  }
-}
+import { useEffect,useState } from 'react'
+import { useMutation, useQueryClient } from 'react-query';
+import { API_ENDPOINTS } from "@utils/api/endpoints";
+import ProductFeedLoader from '@components/ui/loaders/product-feed-loader'
+import { useQuery } from "react-query";
+import AsyncSelect from 'react-select/async';
 
 
- export const operators =[
+ export const mobileOperator = [
+  {
+    'id': 1,
+    'name': 'Airtel',
+    "OperatorCode": "AT",
+    "label": "Airtel"
+  },
+  {
+    'id': 2,
+    'name': 'BSNL',
+    "OperatorCode": "BS",
+    "label": "BSNL"
+  },
+  {
+    'id': 3,
+    'name': 'Jio',
+    "OperatorCode": "AT",
+    "label": "Jio"
+  },
+  {
+    'id': 4,
+    'name': 'Vodafone Idea',
+    "OperatorCode": "VI",
+    "label": "Vi"
+  },
+  {
+    'id': 5,
+    'name': 'MTNL',
+    "OperatorCode": "MT",
+    "label": "MTNL"
+  },
+ ]
+
+ export const operatorCircle= [
+  "Andhra Pradesh",
+  "Assam",
+  "Bihar Jharkhand",
+  "Chennai",
+  "Delhi NCR",
+  "Goa",
+  "Gujarat",
+  "Haryana",
+  "Himachal Pradesh",
+  "Jammu Kashmir",
+  "Karnataka",
+  "Kerala",
+  "Kolkata",
+  "Madhya Pradesh Chhattisgarh",
+  "Maharashtra",
+  "Mumbai",
+  "North East",
+  "Orissa",
+  "Punjab",
+  "Rajasthan",
+  "Tamil Nadu",
+  "Telangana",
+  "UP East",
+  "UP West",
+  "Uttarakhand",
+  "West Bengal"
+]
+
+ export const operators = [
     {
      "S No": 1,
      "OperatorName": "Airtel",
@@ -36,7 +87,7 @@ export async function getServerSideProps(context) {
     },
     {
      "S No": 2,
-     "OperatorName": "BSNL Recharge\/Validity (RCV)",
+     "OperatorName": "BSNL",
      "OperatorCode": "BVR",
      "Category": "Prepaid-Mobile",
      "label": "BSNL Recharge\/Validity (RCV)"
@@ -92,7 +143,7 @@ export async function getServerSideProps(context) {
     },
     {
      "S No": 10,
-     "OperatorName": "Reliance JIO",
+     "OperatorName": "Jio",
      "OperatorCode": "JIO",
      "Category": "Prepaid-Mobile",
      "label": "Reliance JIO"
@@ -2987,7 +3038,7 @@ export async function getServerSideProps(context) {
    }
  ]
 
-const cirleCode = [
+export const circleCode = [
   {
    "id": 1,
    "value": "Andhra Pradesh",
@@ -3002,9 +3053,9 @@ const cirleCode = [
   },
   {
    "id": 3,
-   "value": "Bihar",
+   "value": "Bihar Jharkhand",
    "Circle Code": 3,
-   "label": "Bihar"
+   "label": "Bihar Jharkhand"
   },
   {
    "id": 4,
@@ -3014,9 +3065,9 @@ const cirleCode = [
   },
   {
    "id": 5,
-   "value": "Delhi",
+   "value": "Delhi NCR",
    "Circle Code": 5,
-   "label": "Delhi"
+   "label": "Delhi NCR"
   },
   {
    "id": 6,
@@ -3038,10 +3089,10 @@ const cirleCode = [
   },
   {
    "id": 9,
-   "value": "Jammu &amp;",
+   "value": "Jammu Kashmir",
    "Circle Code": "Kashmir",
    "Column4": 9,
-   "label": "Jammu &amp;"
+   "label": "Jammu Kashmir"
   },
   {
    "id": 10,
@@ -3063,17 +3114,17 @@ const cirleCode = [
   },
   {
    "id": 13,
-   "value": "Maharashtra &amp;",
+   "value": "Maharashtra",
    "Circle Code": "Goa (except Mumbai)",
    "Column4": 13,
-   "label": "Maharashtra &amp;"
+   "label": "Maharashtra"
   },
   {
    "id": 14,
-   "value": "Madhya Pradesh &amp;",
+   "value": "Madhya Pradesh Chhattisgarh",
    "Circle Code": "Chhattisgarh",
    "Column4": 14,
-   "label": "Madhya Pradesh &amp;"
+   "label": "Madhya Pradesh Chhattisgarh"
   },
   {
    "id": 15,
@@ -3113,15 +3164,15 @@ const cirleCode = [
   },
   {
    "id": 21,
-   "value": "Uttar Pradesh - East",
+   "value": "UP East",
    "Circle Code": 21,
-   "label": "Uttar Pradesh - East"
+   "label": "UP East"
   },
   {
    "id": 22,
-   "value": "Uttar Pradesh - West",
+   "value": "UP West",
    "Circle Code": 22,
-   "label": "Uttar Pradesh - West"
+   "label": "UP West"
   },
   {
    "id": 23,
@@ -3166,81 +3217,269 @@ const cirleCode = [
                   ]
       }
 
+    // interface MobileNumber {
+    //   mobile_no: number;
+    // };
 
-    export const updatedIcons = operators.map((item: any) => {
      
-      <div className="flex space-s-4 items-center text-body">
-        <span className="flex w-4 h-4 items-center justify-center">
-          {item.value}
-        </span>
-        <span>{item.label}</span>
-      </div>
- 
-    return item;
 
-});
+    // export const useOperatorQuery = (data:any) => {
+    //   return useQuery<Error>( [API_ENDPOINTS.RECHARGE_PLANS], (data) =>
+    //   getOperatorDetails(data)
+    //   );
+    // };
 
 
-export default function MobileRechargeForm({click,variant} :any) {
+  export default function MobileRechargeForm({click,variant} :any) {
+      
+    const loadOptions = async (inputValue:any, callback:any) => {
 
-    console.log(' form recharge ',click)
+      // var data = await fetchSearch(inputValue);      
 
+      // console.log('search data',data)
+      
+      callback(data);
+    
+      return data;
+
+  };
+
+    // const{data, isLoading} = useOperatorQuery( 
+    //   data
+    // );
+
+    const[phoneNumber, setPhoneNumber] = useState<Number>(0)  ;
+    const[plans,setPlans] = useState(null);
+    const[addOnPlans,setAddOnPlans] = useState(null);
+    const[operator, setOperator]=useState(null);
+    const[operatorName, setOperatorName]=useState(null);
+    // const[specialRechargeList,setSpecialRechargeList] = useState(null)
+    const[circleName,setCircleName] = useState(null);
+    const [loading,setLoading] = useState(false);
     const { openModal } = useModalAction();
+
+
+    function handleModal(plans,operator,circle):any {
+      return openModal("RECHARGE_PLANS",{
+        plans: plans,
+        operator: operator,
+        circle: circle,
+      });
+    }
+
+    function handlePlanDetails(operatorName,circleName):any {
+      return openModal("RECHARGE_PLAN_DETAILS"
+      ,{
+        // plan: plan,
+        operatorName: operatorName,
+        circleName: circleName,
+      }
+      );
+    }
+
+    console.log('allplansdata',plans)
+
+    console.log('number', phoneNumber.length)
+
+    console.log('loading',loading)
+
+     
+    const queryClient = useQueryClient();
+
+    const getOperatorDetails = async (data:any) => {
+
+      const { data: response } = await http.post(API_ENDPOINTS.OPERATOR, data);
+      
+      return response;
+    };
+
+    const getRechargePlans = async (data:any) => {
+      const { data: plans } = await http.post(API_ENDPOINTS.RECHARGE_PLANS, data);
+      // plans?.length && setLoading(false);
+      setPlans(plans)
+      return plans;
+    };
 
     function handleClick()  {
         return   openModal('BILL_PAYMENT')
     }
 
+    console.log('operator',plans)
+
+    const { mutate: mutatePlan } = useMutation(getRechargePlans, {
+      onSuccess: data => {
+        setPlans(data);
+        addOnPlansList();
+        setLoading(false);
+        // setAddOnPlans(data);
+        // console.log('operator',data);
+      },
+
+      onError: () => {
+        alert("error")
+        setLoading(false)
+      },
+
+      // onSettled: () => {
+      //   queryClient.invalidateQueries(API_ENDPOINTS.RECHARGE_PLANS);
+      // }
+    });
+
+    const { mutate: mutateOperator } = useMutation(getOperatorDetails, {
+
+      onSuccess: (data) => {
+        setOperator(data)
+        setOperatorName(data?.operator)
+        setCircleName(data?.circle)
+        console.log('operator plans',data);
+      },
+
+      onError: (error:any) => {
+        alert(error?.msg)
+      },
+
+      // onSettled: () => {
+      //   queryClient.invalidateQueries(API_ENDPOINTS.OPERATOR);
+      // }
+    });
+
+    const onSubmit = async  (value:any) => {
+      const opr = {
+        'mobile_no': value,
+      }
+      const plan =  {
+        'operator' :  operatorName,
+        'circle'   :  circleName,
+      };
+      mutateOperator(opr);
+      mutatePlan(plan);
+    };
+
+    // console.log('operator', operator?.operator,operator?.circle)
+
+     function callApi(value:any) {
+      plans == null ? setLoading(true) : setLoading(false)
+      setPhoneNumber(value);
+      // console.log('operator',value.length);
+      onSubmit(value);
+     }
+
+    const handleOnChange = (e: any) => {
+      setPlans(null);
+    //  e.preventDefault();
+      // setPopularPlans('')
+      setPhoneNumber(e.target.value);
+      const value = e.target.value;
+      value.toString().length === 10 && callApi(value);
+    };
+
     useEffect(()=>{
-       fetch('https://ezulix.in/api/BBPSV2/Electricity/getBillerInfo.aspx?memberid=EZ929952&apikey=C019FB28E2&biller_id=VASA00000THAE9&category=Water')
-      .then(response => console.log(response.json())  )
-      // console.log('fetch',fetchResponse)
-      
-
+         searchPlan();
     },[])
- 
+
+    const AddOnPlans =  plans?.plans?.length &&  plans?.plans?.filter(function(el:any){
+      return el?.group_name === '2G/3G/4G Data' ?  el.plans?.filter((ell)=>ell.circle === operator?.circle)  
+      : el.plans?.filter((ell)=>ell.circle === 'All Circles') ;
+    });
+
+    const popularPlans =  plans?.plans?.length &&  plans?.plans?.filter(function(el:any){
+      return  el?.group_name == 'Special Recharge' ? el  : null ;
+    });
+
+    const specialRechargeList = popularPlans?.map((i:any)=> i?.plans) ;
+
+    console.log('allPlans',  AddOnPlans);
+
+    console.log('allPlans',  popularPlans);
 
 
+    function addOnPlansList() {
+       phoneNumber?.length === 0 
+       ? setAddOnPlans(null) 
+       : setAddOnPlans(popularPlans)
+    }
+
+     const searchedPlan: any[] = [];
+
+     function searchPlan(){
+     searchedPlan.push(plans?.plans)
+     }
+
+     console.log('operator',operatorName,circleName)
+    
+     
+     
   return (
+
+    <>
 
     <div className={`${click ? 'grid grid-cols-1 lg:flex lg:items-center place-content-center bg-gray-200 lg:px-6 space-x-4' : 'hidden'}`}>
 
         <div className = 'grid grid-cols-1 space-y-2 lg:grid-cols-4 place-content-center px-4  flex-col transition duration-500  lg:space-x-10  lg:space-y-0  lg:flex-row justify-between w-full py-3 items-center '>
+        
 
             <div className='flex-1 flex-col'> 
-                <Input label='Phone number'
-                        variant={variant}
-                        type='number'
-                        className='rounded'
-                />
-            </div>
-
-            <div className='flex-1 flex-col'> 
-                <Label> Operator </Label>
-                <Select name='Operator'
+                <Input  label='Phone number'
                         variant=''
-                        type='number'
-                        // getOptionLabel={(option: any) => option?.name}
-                        // getOptionValue={(option: any) => option?.id}
-                        options={operators.filter((opr)=> opr.Category=='Prepaid-Mobile')}
+                        type='text'
+                        className='rounded-lg'
+                     
+                        pattern="[0-9]*"
+                        inputMode="numeric"
+                        // value={(e)=>e.target.value}
+                        onChange={(e)=>handleOnChange(e)}
+                        maxLength={10}
+                        // value={(e:any)=>setPhoneNumber(e.target.value)}
                 />
             </div>
 
-            <div className='flex-1 flex-col'> 
-                <Label> Circle </Label>
-                <Select label='circle'
-                        variant=''
-                        type='number'
-                        options={cirleCode}
-                />
-            </div>
+        {/* { isLoading ? <ProductFeedLoader className='h-10' limit={3}/> 
+          :
+           <> */}
+           
+          <div className='flex-1 flex-col'>
+            <Label> Operator </Label>
+            <Select name='Operator'
+              variant=''
+              type='number'
+              value={mobileOperator?.filter((opt)=>
+                opt?.name == operator?.operator )}
+              // value={operator.msg == 'Success'? operator.operator}
+              options={mobileOperator} />
+          </div>
+          <div className='flex-1 flex-col'>
+            <Label> Circle </Label>
+            <Select label='circle'
+              variant=''
+              type='number'
+              value={circleCode?.filter((opt)=>
+                opt?.value === operator?.circle)}
+              // value={operator?.circle}
+              // value={operator?.msg === 'Success' && operator?.circle}
+              options={circleCode} />
+          </div>
+          <div className='relative flex-1 items-center'>
+            <Input label='Amount'
+              variant={''}
+              type='number' />
+              {/* <Label>Price</Label> */}
+              <div className='  '>
+              {/* <AsyncSelect
+                  cacheOptions
+                  // style={customStyles}
+                  defaultValue={''}
+                  loadOptions={loadOptions} 
+                  value={ '' }
+                  defaultOptions={plans?.plans}
+                  // onInputChange={handleInputChange}
+                  placeholder={ <div className='text-lg sm:text-lg md:text:md   text-blue-700 font-bold lg:text-lg  '> </div>}
+                  onChange={''}
+                /> */}
+              </div>
 
-            <div className = 'flex-1 items-center'> 
-                <Input label = 'Amount'
-                       variant={variant}
-                       type = 'number'
-                />
-            </div>
+          </div>
+            {/* </>
+            } */}
 
             {/* <Button className='' size='big'>
                 Register
@@ -3251,19 +3490,80 @@ export default function MobileRechargeForm({click,variant} :any) {
         <div className='hidden lg:block lg:pt-3'>
                 <Label className=''></Label>
                 <button onClick={handleClick} 
-                        className='bg-gradient-to-r from-blue-600 to-blue-800  p-3 flex text-center 
-                                   rounded text-white'>
+                        className='bg-gradient-to-r from-blue-600 to-blue-800 p-3 
+                                   flex text-center rounded text-white'>
                         Proceed
                 </button>
         </div> 
 
-        <button onClick={ handleClick} 
+        <button onClick={()=>handlePlanDetails(operatorName,circleName)} 
                 className='lg:hidden  bg-gradient-to-r from-blue-600 to-blue-800  
                            p-3 flex text-center  rounded text-white'>
                 Proceed
         </button>
-
+         
 
     </div>
+
+    <div className={`${plans?.plans?.length  && phoneNumber.length === 10 ? 'flex flex-col ' : 'hidden' } space-y-3 bg-gray-50 p-4 w-full `}>
+
+    <div className='flex items-center'>
+      <h1 className='p-2 text-gray-800 font-semibold'>
+          Special Recharge
+      </h1>
+      <p onClick={()=>handleModal(plans,operator,circleName)} 
+         className='font-semibold text-blue-700 p-2 border border-blue-600 rounded 
+                    cursor-pointer active:bg-blue-100 hover:bg-blue-50 '>
+         All Plans
+      </p>
+    </div>
+
+    <div   className='flex overflow-x-scroll w-full'>
+    {/* <div className='grid grid-cols-2 lg:grid-cols-6'> */}
+            {
+               plans == null   ? <ProductFeedLoader  limit={5} /> :  
+              // plans?.plans?.length  && 
+              specialRechargeList && specialRechargeList[0]?.slice(0,6).map
+              ( 
+                (plan:any,index:any) => {
+                  return(
+                  // plans?.plans?.length &&
+                  
+                <div
+                     onClick={()=>handlePlanDetails(operatorName,circleName)}  
+                     key={index}
+                     className = 'cursor-pointer flex flex-col tracking-wide bg-white shadow-lg border mx-2 rounded space-y-2    p-3'>
+                    <span  className='font- text-sm  text-gray-900 whitespace-nowrap'>
+                      {'₹'+ plan?.price}
+                    </span>
+                    <span   className='font- h-20 text-xs text-gray-800 whitespace-wrap'>
+                      {plan?.description.substring(0,50)+'...'}  
+                    </span>
+                    <span className='font- text-xs text-gray-800 whitespace-nowrap'>
+                      
+                    </span>
+                    <span   className='font- text-xs text-gray-800 whitespace-nowrap'>
+                      {plan?.data}
+                    </span>
+                    <span   className='font- text-xs text-gray-800 whitespace-nowrap'>
+                      {plan?.validity}
+                    </span>
+                    <span   className='font-md text-sm text-blue-700 whitespace-nowrap'>
+                      {plan?.circle}
+                    </span>
+
+                </div>
+                  )
+                }
+                  
+              )
+            }
+            
+             </div>
+    </div>
+      {/* </div>  */}
+    {/* </div> */}
+
+    </>
   )
 }

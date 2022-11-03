@@ -17,9 +17,11 @@ import { ROUTES } from "@utils/routes";
 
 
 export default function Customers() {
+
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(1);
   const { t } = useTranslation();
+  
   const {
     data,
     isLoading: loading,

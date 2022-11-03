@@ -33,11 +33,20 @@ use PickBazar\Http\Controllers\ReviewController;
 use PickBazar\Http\Controllers\WishlistController;
 use PickBazar\Http\Controllers\AbusiveReportController;
 use PickBazar\Http\Controllers\FeedbackController;
+use PickBazar\Http\Controllers\BillPaymentController;
+use PickBazar\Http\Controllers\BillDetailsController;
 
 
+ 
 //route for findByDateRange in order controller
 Route::get('/find-by-date-range/{start_date}/{end_date}', 'PickBazar\Http\Controllers\OrderController@findByDateRange');
 // Route::get('/find-by-date-range', 'PickBazar\Http\Controllers\OrderController@findByDateRange');
+Route::get('/biller-info','PickBazar\Http\Controllers\BillDetailsController@getBillDetails');
+// Route::get('/biller-info','PickBazar\Http\Controllers\BillPaymentController@getBillerInfo');
+Route::post('/get-operator','PickBazar\Http\Controllers\OperatorDetailsController@getOperator');
+Route::post('/recharge-plans','PickBazar\Http\Controllers\RechargePlansController@getPlans');
+Route::get('/operators-list','PickBazar\Http\Controllers\OperatorListController@getOperatorList');
+
 
 Route::post('/register', 'PickBazar\Http\Controllers\UserController@register');
 Route::post('/token', 'PickBazar\Http\Controllers\UserController@token');
@@ -49,18 +58,19 @@ Route::put('users/{id}', 'PickBazar\Http\Controllers\UserController@update');
 Route::post('/otp-token', 'PickBazar\Http\Controllers\UserController@otpToken');
 Route::post('/verify-otp-token', 'PickBazar\Http\Controllers\UserController@verifyOtpToken');
 
- 
-
 Route::post('/verify-forget-password-token', 'PickBazar\Http\Controllers\UserController@verifyForgetPasswordToken');
+
 Route::post('/reset-password', 'PickBazar\Http\Controllers\UserController@resetPassword');
 // Route::post('/contact', 'PickBazar\Http\Controllers\UserController@contactAdmin');
 Route::post('/social-login-token', 'PickBazar\Http\Controllers\UserController@socialLogin');
 
 Route::get('/signup-offer','PickBazar\Http\Controllers\SignupOfferController@show');
+
 Route::post('/signup-offer','PickBazar\Http\Controllers\SignupOfferController@store');
 #---------------------whatsapp api  start----------------------------#
 
 Route::post('/track/user', 'PickBazar\Http\Controllers\WhatsappController@trackUser');
+
 Route::post('/track/event', 'PickBazar\Http\Controllers\WhatsappController@trackEvent');
 
 Route::apiResource('products', ProductController::class, [
@@ -89,6 +99,7 @@ Route::apiResource('feedbacks', FeedbackController::class, [
 Route::apiResource('abusive_reports', AbusiveReportController::class, [
     'only' => ['store'],
 ]);
+
 Route::get('my-questions', [QuestionController::class, 'myQuestions']);
 Route::get('my-reports', [AbusiveReportController::class, 'myReports']);
 Route::post('wishlists/toggle', [WishlistController::class, 'toggle']);

@@ -33,7 +33,9 @@ const sizeClasses = {
 const Input = React.forwardRef<HTMLInputElement, Props>(
   (
     {
+      pattern,
       className,
+      maxLength,
       label,
       name,
       error,
@@ -64,6 +66,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
           type={type}
           inputMode={type === "number" ? "numeric" : 'text'}
           ref={ref}
+          pattern={pattern}
           className={cn(
             "px-2 lg:px-4 flex items-center w-full appearance-none transition duration-300 ease-in-out text-heading text-sm sm:text-sm focus:outline-none focus:ring-0",
             shadow && "focus:shadow",
@@ -72,6 +75,8 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
             disabled && "bg-gray-100 cursor-not-allowed",
             inputClassName
           )}
+          
+          maxlength={10}
           disabled={disabled}
           autoComplete="off"
           autoCorrect="off"

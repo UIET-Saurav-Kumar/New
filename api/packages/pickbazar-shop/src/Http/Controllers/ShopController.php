@@ -500,7 +500,7 @@ class ShopController extends CoreController
                 unset($row['slug']);
                 unset($row['cover_image']);
                 unset($row['logo']);
-               // unset($row['shop_categories']);
+                // unset($row['shop_categories']);
                 unset($row['address']);
                 unset($row['settings']);
                 unset($row['owner']);

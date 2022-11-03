@@ -40,7 +40,8 @@ const UserWallet = () => {
     const { data, loading, error } = useWalletCommissionQuery(query.userId as string);
     
     // console.log('query user id', query.userId)
-    // console.log('wallet data',data)
+    console.log('wallet data',data)
+
 
     const newUsers = [];
 
@@ -48,6 +49,7 @@ const UserWallet = () => {
     if(leader_last_month_purchase > 1){
         newUsers.push(query.userId);
     }
+    
     // console.log('mewUsers',newUsers);
 
     const { price: totalEarnings } = usePrice(

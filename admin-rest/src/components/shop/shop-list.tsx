@@ -35,7 +35,7 @@ const ShopList = ({ shops, onPagination }: IProps) => {
     return (check ?    < Image        quality='40' src={logo?.thumbnail ?? siteSettings.product.placeholder} alt={record?.name} layout="fixed" width={42} height={42} className="rounded overflow-hidden" />:<Avatar name={record?.name} size={42} round={true} maxInitials={2} />);
   }
 
-  // console.log('shop address', shops?.data)
+  console.log('shops', shops)
 
   function checkboxChanged(e:any){
     var id=e.target.id.split('_')[1];
@@ -68,6 +68,21 @@ const ShopList = ({ shops, onPagination }: IProps) => {
       align: alignLeft,
       render: (name: any) => <span className="whitespace-nowrap">{name}</span>,
     },
+    
+    {
+      title: t("Category"),
+      dataIndex: "shop_categories",
+      key: "shop_categories",
+      align: alignLeft,
+      render: (shop_categories: any) =>{
+        
+       return <span className="whitespace-nowrap">
+                    {shop_categories?.replaceAll('"','').replaceAll('name','').replaceAll('/','').
+                    replaceAll('id','').replaceAll(',','').replaceAll('[{','').replaceAll('}]','').replaceAll(':','').replaceAll('4','').replace(/[0-9]/g, '')}
+              </span>
+      }
+    },
+
     {
       title: t("Category"),
       dataIndex: "shop_categories",

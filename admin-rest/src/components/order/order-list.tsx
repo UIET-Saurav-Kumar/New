@@ -23,10 +23,12 @@ import { useIsRTL } from "@utils/locals";
 import { Children } from "react";
 import product from "@repositories/product";
 
+
 type IProps = {
   orders: OrderPaginator | null | undefined;
   onPagination: (current: number) => void;
 };
+
 
 const OrderList = ({ orders, onPagination }: IProps) => {
   
@@ -35,6 +37,8 @@ const OrderList = ({ orders, onPagination }: IProps) => {
   const rowExpandable = (record: any) => record?.children?.length > 1 ? record?.children?.length : '';
   const router = useRouter();
   const { alignLeft } = useIsRTL();
+
+  console.log('orders',orders);
 
   var today = new Date();
 
@@ -170,8 +174,8 @@ const OrderList = ({ orders, onPagination }: IProps) => {
       dataIndex: "customer",
       key: "customer",
       align: alignLeft,
-      render: (order: any) => (
-        <div>{order?.phone_number}</div>
+      render: (customer: any) => (
+        <div>{customer?.phone_number}</div>
       ),
     },
 

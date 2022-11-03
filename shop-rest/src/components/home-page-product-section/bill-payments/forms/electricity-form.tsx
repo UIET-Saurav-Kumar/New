@@ -2,25 +2,53 @@ import Input from '@components/ui/input'
 import Label from '@components/ui/label'
 import { useModalAction } from '@components/ui/modal/modal.context';
 import Select from '@components/ui/select/select'
- import React from 'react'
- import { operators } from './mobile-recharge-form';
+import React, { useEffect } from 'react'
+import { operators } from './mobile-recharge-form';
+import { useBillerInfoQuery } from '@data/biller-info/use-bill-payment.query';
 
-export default function ElectricityForm({click,variant} :any) {
+
+export default function ElectricityForm({click,variant,props} :any) {
 
 
     const { openModal } = useModalAction();
-
 
     function handleClick()  {
         return   openModal('BILL_PAYMENT')
     }
 
+    const {
+        data:billerInfo
+    } = useBillerInfoQuery();
 
+    // console.log('billerInfo',billerInfo)
+
+    // useEffect( ()=> {
+    //     const getData = async () => {
+    //     const res = await fetch('https://localhost/hrms/Plans/getOperator')
+    //     .then((response)=>response.json)
+
+    //     return res;
+    //     }
+    //     console.log('res',getData())
+    // })
+
+   
+
+    
+
+    function openBillDetails(value: string, logoImg: Maybe<string> | undefined) {
+
+        return openModal("BILL_PAYMENT_DETAILS",{
+          value: value,
+          img : logoImg,
+        });
+      }
+
+    console.log(props)
 
     console.log(' form electricity ',click)
 
   return (
-
 
         <div className={`${click ? 'block' : 'hidden'}`}>
 
@@ -72,12 +100,12 @@ export default function ElectricityForm({click,variant} :any) {
 
                     <div className='hidden lg:block lg:pt-3'>
                         <Label className=''></Label>
-                        <button onClick={ handleClick} className='bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>
+                        <button onClick={()=>openBillDetails()} className='bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>
                                 Proceed
                         </button>
                     </div> 
 
-                    <button onClick={handleClick} className='  lg:hidden  bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>
+                    <button onClick={()=>openBillDetails()} className='  lg:hidden  bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>
                                 Proceed
                     </button>
 

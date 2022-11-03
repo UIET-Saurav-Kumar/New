@@ -2,10 +2,13 @@ import Input from '@components/ui/input'
 import Label from '@components/ui/label'
 import { useModalAction } from '@components/ui/modal/modal.context'
 import Select from '@components/ui/select/select'
- import React from 'react';
- import { operators } from './mobile-recharge-form';
+import React from 'react';
+import { operators } from './mobile-recharge-form';
+
+
 
 export default function BroadbandForm({click,variant } :any) {
+
 
     console.log('form broadband',click)
 
@@ -15,7 +18,6 @@ export default function BroadbandForm({click,variant } :any) {
     function handleClick()  {
         return   openModal('BILL_PAYMENT')
     }
-
 
 
   return (
@@ -45,7 +47,7 @@ export default function BroadbandForm({click,variant } :any) {
                        type='text'
                        className='rounded'
                 />
-             </div>
+            </div>
 
             {/* <div className='flex flex-col'> 
                 <Label> Circle </Label>
@@ -66,16 +68,16 @@ export default function BroadbandForm({click,variant } :any) {
             {/* <Button className='' size='big'>
                 Register
             </Button> */}
-                <div className='hidden lg:block lg:pt-3'>
-                    <Label className=''></Label>
-                    <button onClick={ handleClick} className='    bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>
-                            Proceed
-                    </button>
-                </div> 
-
-                <button onClick={ handleClick} className='  lg:hidden  bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>
-                            Proceed
+            <div className='hidden lg:block lg:pt-3'>
+                <Label className=''></Label>
+                <button onClick={ handleClick} className=' bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>
+                        Proceed
                 </button>
+            </div> 
+
+            <button onClick={ handleClick} className=' lg:hidden  bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>
+                        Proceed
+            </button>
         </div>
 
     </div>

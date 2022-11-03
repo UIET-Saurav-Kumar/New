@@ -6,6 +6,7 @@ import Document, {
   DocumentContext,
 } from "next/document";
 import { i18n } from "next-i18next";
+import  Script  from "next/script";
 
 export default class CustomDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -40,7 +41,9 @@ export default class CustomDocument extends Document {
             
 
             {/* google analytics */}
-            <script
+            <Script
+              id="google-analytics"
+              strategy="afterInteractive"
               dangerouslySetInnerHTML={{
                 __html: `
               window.dataLayer = window.dataLayer || [];
@@ -49,7 +52,7 @@ export default class CustomDocument extends Document {
               gtag('config', 'UA-190495171-1', {
                 page_path: window.location.pathname,
               });
-            `,
+              `,
               }}
             />
               
@@ -64,7 +67,7 @@ export default class CustomDocument extends Document {
               /> 
 
             {/* Microsoft clarity */}
-           <script
+           {/* <script
             dangerouslySetInnerHTML={{
               __html: `(function(c,l,a,r,i,t,y){
                     c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -72,13 +75,13 @@ export default class CustomDocument extends Document {
                     y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
                 })(window, document, "clarity", "script", "daka9pmxye");`,
               }}
-          />
+          /> */}
             
 
           <meta name="facebook-domain-verification" content="8mvkzpangtng356xvg4hqubj4mbuyq" />
 
            {/* interakt */}
-          <script
+          {/* <script
             dangerouslySetInnerHTML={{
               __html: `(function(w,d,s,c,r,a,m){
                 w['KiwiObject']=r;
@@ -95,7 +98,7 @@ export default class CustomDocument extends Document {
                 kiwi.init('', 'R74PF9xANjTtlgpYCm6WFEpmXvX7ZJ42', {});
               });`
               }}
-            />
+            /> */}
 
               {/* Facebook login SDK */}
                {/* <script

@@ -60,6 +60,11 @@ export const API_ENDPOINTS: Record<string, string> = {
   PRODUCTS_QUESTIONS: '/questions',
   FEEDBACK: '/feedbacks',
 
+  BILLER_INFO: 'biller-info',
+  RECHARGE_PLANS:'recharge-plans',
+  OPERATOR: 'get-operator',
+  OPERATORS_LIST: 'operators-list',
+
 
   LOGS:'logs'
 };

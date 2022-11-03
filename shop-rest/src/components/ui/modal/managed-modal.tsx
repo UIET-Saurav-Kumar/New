@@ -4,6 +4,8 @@ import { useModalAction, useModalState } from "./modal.context";
 import ShopProfileCard from "@components/profile/profile-card";
 import CategoryDropdownSidebar from "@components/category/category-dropdown-sidebar";
 import ShopPaymentForm from "@components/shop/shop-payment-form";
+import RechargePlans from "@components/home-page-product-section/bill-payments/recharge-plans-modal/recharge-plans";
+import RechargePlanDetails from "@components/home-page-product-section/bill-payments/recharge-plan-details-modal";
 
 
 const Login = dynamic(() => import("@components/auth/login"));
@@ -50,7 +52,7 @@ const PaymentModal = dynamic(
 
 
 const SearchBarModal = dynamic(() => import("@components/common/search-bar-modal"));
-
+const PaymentDetailsModal = dynamic( ()=> import('@components/home-page-product-section/bill-payments/bill-payment-modal/payment-details-modal'))
 
 const ManagedModal = () => {
   const { isOpen, view, data } = useModalState();
@@ -74,9 +76,14 @@ const ManagedModal = () => {
       {view === 'REVIEW_IMAGE_POPOVER' && <ReviewImageModal />}
       {view === 'BILL_PAYMENT' && <PaymentModal />}
       {/* { view=== 'SEARCH_BAR_MODAL' && <SearchBarModal />} */}
+      {view === 'RECHARGE_PLANS' && <RechargePlans data={data} />}
       {view === "PRODUCT_DETAILS" && (
         <ProductDetailsModalView productSlug={data} />
       )}
+
+      {view === 'RECHARGE_PLAN_DETAILS' && <RechargePlanDetails data={data}/> }
+
+       { view === 'BILL_PAYMENT_DETAILS' && <PaymentDetailsModal data={data} />}
        
       {view === "SHOP_INFO" && (
         <ShopProfileCard

@@ -111,18 +111,18 @@ class OrderRepository extends BaseRepository
         $request['customer_id'] = $request->user()->id;
         $request['name'] = $request->user()->name;
         $request['email_id'] = $request->user()->email;
-        $request['shop_name'] = $request->shop_name;
+        $request['shop_name'] = $request->shop_nareturn_urlme;
         //status
         $request['status'] = $request->status;
         $request['customer_contact'] = $request->user()->phone_number;
         $discount = $this->calculateDiscount($request);
+
         if ($discount) {
 
             $request['paid_total'] = $request['amount'] + $request['sales_tax']  - $discount;
             // + $request['delivery_fee']
             $request['total'] = $request['amount'] + $request['sales_tax']  - $discount;
             // + $request['delivery_fee']
-
 
             $request['discount'] =  $discount;
         } else {

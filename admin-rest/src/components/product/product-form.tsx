@@ -111,6 +111,7 @@ const productType = [
   { name: "Simple Product", value: ProductType.Simple },
   { name: "Variable Product", value: ProductType.Variable },
 ];
+
 function getFormattedVariations(variations: any) {
   const variationGroup = groupBy(variations, "attribute.slug");
   return Object.values(variationGroup)?.map((vg) => {
@@ -139,6 +140,7 @@ function calculateMaxMinPrice(variationOptions: any) {
   
   const sortedVariationsByPrice = orderBy(variationOptions, ["price"]);
   const sortedVariationsBySalePrice = orderBy(variationOptions, ["sale_price"]);
+
   return {
     min_price:
       sortedVariationsBySalePrice?.[0].sale_price <
@@ -325,6 +327,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
       );
     }
   };
+
   function isSelected(id:any){
     if((initialValues?.tax)){
       var tax =JSON.parse(initialValues.tax);
@@ -332,7 +335,9 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
     }
     return false;
   }
+
   const productTypeValue = watch("productTypeValue");
+  
   return (
     <>
       {errorMessage ? (

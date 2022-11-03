@@ -53,6 +53,7 @@ class LogController extends CoreController
 
     public function store(Request $request)
     {
+        
         $location=$request->location;
         $search=$request->search;
         $user=$request->user();
@@ -78,7 +79,7 @@ class LogController extends CoreController
                 "location"=>$location,
                 "products"=>$product['name'],
                 "shop_id"=>$product->shop_id,
-                "type"=>"item-removed"
+                "type"=>"item-removed",
             ]);
         }
         
@@ -91,7 +92,7 @@ class LogController extends CoreController
                 "location"=>$location,
                 "products"=>$product['name'],
                 "shop_id"=>$product->shop_id,
-                "type"=>"item-added"
+                "type"=>"item-added",
             ]);
         }
 
@@ -107,7 +108,7 @@ class LogController extends CoreController
                 // "shop_name"=>$shop['name'],
                 "shop_id"=>$shop->id,
                 "type"=>"shop-visited",
-                'visited_on'=> $newDate
+                'visited_on'=> $newDate,
             ]);
         }
 
@@ -121,7 +122,7 @@ class LogController extends CoreController
                 "location"=>$location,
                 "products"=>$product['name'],
                 "shop_id"=>$product->shop_id,
-                "type"=>"item-added-to-wishlist"
+                "type"=>"item-added-to-wishlist",
             ]);
         }
 
