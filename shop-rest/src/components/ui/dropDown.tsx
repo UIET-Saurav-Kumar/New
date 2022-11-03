@@ -1,3 +1,4 @@
+
 import React, { useEffect,useState } from 'react';
 import { SearchIcon } from "@components/icons/search-icon";
 import AsyncSelect from 'react-select/async';
@@ -6,6 +7,7 @@ import {fetchSearch} from '@data/search/use-search.query';
 import { useRouter } from "next/router";
 import { useLocation } from "@contexts/location/location.context";
 import { useCreateLogMutation } from "@data/log/use-create-log.mutation";
+
 
 export default function DropDown({getLoc}:{getLoc:any}) {
 
@@ -26,6 +28,7 @@ export default function DropDown({getLoc}:{getLoc:any}) {
     );
   };
   
+  
   const loadOptions = async (inputValue:any, callback:any) => {
 
       var data = await fetchSearch(inputValue);      
@@ -35,6 +38,7 @@ export default function DropDown({getLoc}:{getLoc:any}) {
       callback(data);
      
       return data;
+
   };
 
 

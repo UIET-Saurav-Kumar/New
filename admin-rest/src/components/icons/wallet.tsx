@@ -83,6 +83,8 @@ const ReferralActivity = () => {
                      "July", "Aug", "Sep", "Oct", "Nov", "Dec"
         ];
 
+        
+
         var today = new Date();
         var currMonth = today.getMonth();
         var currYear = today.getFullYear();

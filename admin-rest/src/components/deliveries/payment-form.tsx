@@ -10,6 +10,7 @@ import * as Yup from "yup";
 import { useEffect, useState } from "react";
 import { ROUTES } from "@utils/routes";
 
+
 interface FormValues {
   payment_gateway: "cod" | "cashfree" | "upi" | "wallet";
   contact: string;
@@ -24,6 +25,7 @@ interface FormValues {
 const paymentSchema = Yup.object().shape({
     payment_gateway: Yup.string().default("cashfree").oneOf(["cod", "cashfree", "upi", "wallet"]),
 });
+
 
 const PaymentForm = () => {
   const { t } = useTranslation("common");
@@ -43,12 +45,14 @@ const PaymentForm = () => {
 
   
   const [delivery,setData] = useState([])
+  
   function getDelivery(){
     if(localStorage.getItem('delivery')){
       var delivery=JSON.parse(localStorage.getItem('delivery'))
       setData(delivery)
     }
   }
+
   useEffect(()=>{
     getDelivery()
   },[])

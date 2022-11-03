@@ -8,7 +8,9 @@ export type VerifyCheckoutInputType = {
   // shipping_address: any;
 };
 
+
 class Order extends CoreApi {
+
   constructor(_base_path: string) {
     super(_base_path);
   }
@@ -19,8 +21,8 @@ class Order extends CoreApi {
       .post(API_ENDPOINTS.VERIFY_CHECKOUT, input)
       .then((res) => res.data);
       
-      
   }
   
 }
+
 export const OrderService = new Order(API_ENDPOINTS.ORDER);

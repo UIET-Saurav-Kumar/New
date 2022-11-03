@@ -1,4 +1,5 @@
 <?php 
+
 namespace PickBazar\Helpers;
 
 use Exception;
@@ -6,9 +7,15 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Http;
+
+
+
 
 class InteraktHelper
+
 {
+
     public static function interaktApi($CURLOPT_POSTFIELDS, $endpoint)
     {
         $api_key    = 'ejBmYUl2RktGTWtBVHJPcGxDa0k4X1BqWndRdjVFSW81X2JIZmdKdlRXazo=';
@@ -17,7 +24,7 @@ class InteraktHelper
                             'Authorization: Basic ejBmYUl2RktGTWtBVHJPcGxDa0k4X1BqWndRdjVFSW81X2JIZmdKdlRXazo=',
                             'Cookie: ApplicationGatewayAffinity=a8f6ae06c0b3046487ae2c0ab287e175; ApplicationGatewayAffinityCORS=a8f6ae06c0b3046487ae2c0ab287e175'
                         );
-        $api_url                = 'https://api.interakt.ai/v1/public/'.$endpoint;
+        $api_url    = 'https://api.interakt.ai/v1/public/'.$endpoint;
         
         $curl = curl_init();
 

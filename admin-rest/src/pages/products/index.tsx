@@ -61,6 +61,7 @@ export default function ProductsPage() {
     setSearchTerm(searchText);
     setPage(1);
   }
+  
   function handlePagination(current: any) {
     setPage(current);
   }

@@ -137,6 +137,8 @@ const ManagedModal = () => {
       
       {view === 'SHOP_QR' && <ShopQRDownload data={data}  />}
 
+      { view === 'PaymentDetailsModal' && <PaymentDetails/>}
+
 
       
       {view === "DELIVERY_STATUS_VIEW" && <DeliveryStatusView />}

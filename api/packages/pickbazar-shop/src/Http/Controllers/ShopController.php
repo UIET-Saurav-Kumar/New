@@ -470,6 +470,7 @@ class ShopController extends CoreController
             $list[$key]['password'] = 'password';
             $list[$key]['owner_phone'] = $value['owner']['phone_number'] ?? '';
             $list[$key]['categories'] = '1,2';
+            $list[$key]['shop_categories'] = str_replace(['[{','}]','name',':', '"','id',':',',','0','1','2','3','4','5','6','7','8','9','{','}', '\\','[{', '/', '*','}]'],'',$value['shop_categories']) ;
             $list[$key]['phone_number'] = $value['settings']['contact'] ?? '';
             $list[$key]['street_address'] = $value['address']['street_address'] ?? '';
             $list[$key]['city'] = $value['address']['city'] ?? '';
@@ -487,7 +488,7 @@ class ShopController extends CoreController
             $FH = fopen('php://output', 'w');
             foreach ($list as $key => $row) {
                 if ($key === 0) {
-                    $exclude = ['owner_id','id','slug','created_at', 'updated_at','cover_image','logo','shop_categories','address','settings','owner'];
+                    $exclude = ['owner_id','id','slug','created_at', 'updated_at','cover_image','logo','address','settings','owner'];
 
                     $row = array_diff($row, $exclude);
    
@@ -499,7 +500,7 @@ class ShopController extends CoreController
                 unset($row['slug']);
                 unset($row['cover_image']);
                 unset($row['logo']);
-                unset($row['shop_categories']);
+                // unset($row['shop_categories']);
                 unset($row['address']);
                 unset($row['settings']);
                 unset($row['owner']);

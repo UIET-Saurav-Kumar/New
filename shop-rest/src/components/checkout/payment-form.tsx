@@ -157,6 +157,7 @@ const PaymentForm = () => {
         ...(shipping_address?.address && shipping_address.address),
       },
     };
+    
     // if (values.payment_gateway !== "cod") {
     //   // @ts-ignore
     //   input.card = {

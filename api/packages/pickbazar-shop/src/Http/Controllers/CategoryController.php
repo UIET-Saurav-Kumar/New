@@ -42,22 +42,22 @@ class CategoryController extends CoreController
                 $searchItem = $checkslug[1];
                 $limit = $request->limit ? $request->limit : 15;
                 return Category::with(['type','parent','children.type'])->where(function($query) use ($searchItem)
-                                {
-                                    $query->where('slug', $searchItem);
-                                })
-                                ->orWhere(function($query) use ($searchItem)
-                                {
-                                    $query->where('name', $searchItem);
-                                    
-                                })->orWhere(function($query) use ($searchItem)
-                                {
-                                    $query->where('details', $searchItem);
-                                    
-                                })->orWhere(function($query) use ($searchItem)
-                                {
-                                    $query->where('id', $searchItem);
-                                    
-                                })->paginate($limit);
+                        {
+                            $query->where('slug', $searchItem);
+                        })
+                        ->orWhere(function($query) use ($searchItem)
+                        {
+                            $query->where('name', $searchItem);
+                            
+                        })->orWhere(function($query) use ($searchItem)
+                        {
+                            $query->where('details', $searchItem);
+                            
+                        })->orWhere(function($query) use ($searchItem)
+                        {
+                            $query->where('id', $searchItem);
+                            
+                        })->paginate($limit);
             }
             $limit = $request->limit ? $request->limit : 15;
     

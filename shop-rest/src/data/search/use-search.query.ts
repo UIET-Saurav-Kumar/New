@@ -12,6 +12,7 @@ export const fetchSearch = async (slug: string) => {
   return data;
 };
 
+
 export const useSearchQuery = (slug: string) => {
   return useQuery<Search, Error>([API_ENDPOINTS.SEARCH, slug], () =>
     fetchSearch(slug)

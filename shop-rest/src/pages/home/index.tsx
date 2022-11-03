@@ -285,7 +285,6 @@ useIntersectionObserver({
                 <FeaturedShops />
                 <FeaturedProducts/>
                 
-                
               </div>
             )
           }
@@ -301,7 +300,7 @@ useIntersectionObserver({
           width < 1023 && 
             <MobileNavigation />
         } 
-         <div ref={loadMoreRef} className={`${!hasNextPage ? "hidden" : ""}`}>
+        <div ref={loadMoreRef} className={`${!hasNextPage ? "hidden" : ""}`}>
                   {
                     (isFetchingNextPage)
                     &&
@@ -309,12 +308,12 @@ useIntersectionObserver({
                       <>
  
                         <img src="/preloader/cir.gif" 
-                            className="w-full mt-10 mx-auto" 
-                            style={{width:"10px",height:"10px"}}/>
+                             className="w-full mt-10 mx-auto" 
+                             style={{width:"10px",height:"10px"}}/>
                       </>
                     ) 
                   }
-          </div>
+        </div>
           
         </div>
         </>

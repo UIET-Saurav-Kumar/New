@@ -21,12 +21,13 @@ const schema = yup.object().shape({
     .min(10, 'Phone number should be of 10 digits only, (Try without country code)')
     .matches(/^[0-9]{10}$/, "Invalid phone number")
     .required("Please enter your phone number"),
-
 });
 
 const EnterPhoneNumberView = ({ onSubmit, loading }: Props) => {
+ 
   const { t } = useTranslation("common");
   const { openModal, closeModal } = useModalAction();
+
   const {
     register,
     handleSubmit,
