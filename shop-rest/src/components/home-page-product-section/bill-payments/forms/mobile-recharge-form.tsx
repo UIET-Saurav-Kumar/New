@@ -3366,8 +3366,9 @@ export const circleCode = [
 
     const handleOnChange = (e: any) => {
       setPlans(null);
-      setOperator(null)
-      setOperatornam
+      setOperator(null);
+      setOperatorName(null);
+      setCircleName(null;)
       
     //  e.preventDefault();
       // setPopularPlans('')
