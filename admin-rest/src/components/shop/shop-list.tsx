@@ -84,18 +84,6 @@ const ShopList = ({ shops, onPagination }: IProps) => {
     },
 
     {
-      title: t("Category"),
-      dataIndex: "shop_categories",
-      key: "shop_categories",
-      align: alignLeft,
-      render: (shop_categories: any) =>{
-       return <span className="whitespace-nowrap">
-                    {shop_categories?.replaceAll('"','').replaceAll('name','').replaceAll('/','').
-                    replaceAll('id','').replaceAll(',','').replaceAll('[{','').replaceAll('}]','').replaceAll(':','').replaceAll('4','').replace(/[0-9]/g, '')}
-              </span>
-      }
-    },
-    {
       title: t("table:table-item-owner-name"),
       dataIndex: "owner",
       key: "owner",

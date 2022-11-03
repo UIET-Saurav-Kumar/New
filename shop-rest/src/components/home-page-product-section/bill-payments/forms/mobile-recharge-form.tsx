@@ -3347,13 +3347,19 @@ export const circleCode = [
       const opr = {
         'mobile_no': value,
       }
+      
+      mutateOperator(opr);
+
       const plan =  {
         'operator' :  operatorName,
         'circle'   :  circleName,
       };
-      mutateOperator(opr);
       mutatePlan(plan);
     };
+
+    // const submitOperator= async () => {
+    //   const 
+    // }
 
     // console.log('operator', operator?.operator,operator?.circle)
 
@@ -3366,6 +3372,10 @@ export const circleCode = [
 
     const handleOnChange = (e: any) => {
       setPlans(null);
+      setOperator(null);
+      setOperatorName(null);
+      setCircleName(null);
+      
     //  e.preventDefault();
       // setPopularPlans('')
       setPhoneNumber(e.target.value);
