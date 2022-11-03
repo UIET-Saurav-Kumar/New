@@ -3366,6 +3366,9 @@ export const circleCode = [
 
     const handleOnChange = (e: any) => {
       setPlans(null);
+      setOperator(null)
+      setOperatornam
+      
     //  e.preventDefault();
       // setPopularPlans('')
       setPhoneNumber(e.target.value);
