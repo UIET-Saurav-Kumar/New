@@ -3288,8 +3288,8 @@ export const circleCode = [
     const queryClient = useQueryClient();
 
     const getOperatorDetails = async (data:any) => {
-
-     console.log('data before',API_ENDPOINTS.OPERATOR)
+     
+      console.log('data before',`${url}/${API_ENDPOINTS.OPERATOR}`)
       const { data: response } = await http.post(`${url}/${API_ENDPOINTS.OPERATOR}`, data);
       console.log('data after',response)
       
