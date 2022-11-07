@@ -13,6 +13,7 @@ import { API_ENDPOINTS } from "@utils/api/endpoints";
 import ProductFeedLoader from '@components/ui/loaders/product-feed-loader'
 import { useQuery } from "react-query";
 import AsyncSelect from 'react-select/async';
+import url from "@utils/api/server_url";
 
 
  export const mobileOperator = [
@@ -3288,7 +3289,7 @@ export const circleCode = [
 
     const getOperatorDetails = async (data:any) => {
 
-      const { data: response } = await http.post(API_ENDPOINTS.OPERATOR, data);
+      const { data: response } = await http.post(`${url}/${API_ENDPOINTS.OPERATOR}`, data);
       
       return response;
     };
