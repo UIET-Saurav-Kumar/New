@@ -158,13 +158,13 @@ Route::apiResource('tags', TagController::class, [
     'only' => ['index', 'show']
 ]);
 
-Route::get('fetch-parent-category', 'PickBazar\Http\Controllers\CategoryController@fetchOnlyParent');
+Route::get('fetch-parent-category',  'PickBazar\Http\Controllers\CategoryController@fetchOnlyParent');
 
-Route::get('fetch-shop-category', 'PickBazar\Http\Controllers\ShopCategoryController@fetchCategories');
+Route::get('fetch-shop-category',    'PickBazar\Http\Controllers\ShopCategoryController@fetchCategories');
 
 Route::get('select-shop-categories', 'PickBazar\Http\Controllers\ShopCategoryController@selectShopCategories');
 
-Route::get('fetch-home-categories', 'PickBazar\Http\Controllers\ShopCategoryController@fetchHomeCateogries');
+Route::get('fetch-home-categories',  'PickBazar\Http\Controllers\ShopCategoryController@fetchHomeCateogries');
 
 Route::get('fetch-offers', 'PickBazar\Http\Controllers\ProductController@fetchOffers');
 

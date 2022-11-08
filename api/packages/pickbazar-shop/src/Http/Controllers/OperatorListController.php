@@ -15,7 +15,7 @@ use PickBazar\Helpers\RechargeDetailsHelper;
 
 
 
-class OperatorDetailsController extends CoreController
+class OperatorListController extends CoreController
 
 {
    
