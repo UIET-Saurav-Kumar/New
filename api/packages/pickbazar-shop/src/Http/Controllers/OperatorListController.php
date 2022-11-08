@@ -19,7 +19,7 @@ class OperatorDetailsController extends CoreController
 
 {
    
-    public function getOperatorList(Request $request){
+    public function operatorList(Request $request){
       // return $request->mobile_no;
         // $CURLOPT_POSTFIELDS =  $request->api_fields;
 

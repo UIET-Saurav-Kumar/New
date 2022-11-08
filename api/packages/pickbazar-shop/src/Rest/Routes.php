@@ -45,7 +45,8 @@ Route::get('/biller-info','PickBazar\Http\Controllers\BillDetailsController@getB
 // Route::get('/biller-info','PickBazar\Http\Controllers\BillPaymentController@getBillerInfo');
 Route::any('/get-operator','PickBazar\Http\Controllers\OperatorDetailsController@getOperator');
 Route::post('/recharge-plans','PickBazar\Http\Controllers\RechargePlansController@getPlans');
-Route::get('/operators-list','PickBazar\Http\Controllers\OperatorListController@getOperatorList');
+Route::get('/operators-list','PickBazar\Http\Controllers\OperatorListController@operatorList');
+Route::get('/biller-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
 
 
 Route::post('/register', 'PickBazar\Http\Controllers\UserController@register');

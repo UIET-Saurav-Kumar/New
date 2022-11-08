@@ -41,6 +41,7 @@ import BrandOffers from "@components/home-page-product-section/brand-offers";
 import Head from "next/head";
 import useIntersectionObserver from "@components/product/useIntersectionObserver";
 import BillPayment from "@components/home-page-product-section/bill-payments/components";
+import PolicyServices from "@components/home-page-product-section/PolicyServices/components";
 
 
 const ProductFeedLoader = dynamic(
@@ -249,7 +250,7 @@ useIntersectionObserver({
 
       </Head>
 
-        <div className=" h-full">
+        <div className="h-full">
 
             <div className="fixed z-50 bottom-16 right-10 lg:bottom-10 lg:right-10 flex justify-center items-center">
                     {/* <img src='/up-arrow.png' className="w-12 h-12" onClick={() => window.scrollTo(0, 0)} />  */}
@@ -275,6 +276,7 @@ useIntersectionObserver({
                 
                 <UserDashboard/>
                 <BillPayment/>
+                <PolicyServices/>  
                 <ElanteBanner/>
                 <RedBullBanner/>
                 <AllCategories/>
@@ -288,7 +290,7 @@ useIntersectionObserver({
               </div>
             )
           }
-        </div>
+        </div> 
 
     )
        }

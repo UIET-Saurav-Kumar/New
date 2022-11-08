@@ -20,15 +20,8 @@ class OperatorDetailsController extends CoreController
 {
    
     public function getOperator(Request $request){
-      // return $request->mobile_no;
-        // $CURLOPT_POSTFIELDS =  $request->api_fields;
 
-        // $response = RechargeDetailsHelper::getRechargeDetails(json_encode($CURLOPT_POSTFIELDS));
-
-        // return $response;
-
-        // $phone = $request->mobile_no;
-        // $number =  preg_replace("/<!--.*?-->/", "", $request->mobile_no);
+     
         
        $mobile = $request->mobile_no;
         $data = array(
@@ -42,7 +35,7 @@ class OperatorDetailsController extends CoreController
         curl_setopt_array($curl, array(
           CURLOPT_URL => 
           // 'http://localhost/hrms/Plans/getOperator',
-           'https://ezulix.co.in/Plans/getOperator',
+          'https://ezulix.co.in/Plans/getOperator',
           CURLOPT_RETURNTRANSFER => true,
           CURLOPT_ENCODING => '',
           CURLOPT_MAXREDIRS => 10,
@@ -58,7 +51,7 @@ class OperatorDetailsController extends CoreController
             'Cookie: ci_session=cfee5d86a7f76c89d6f3338f2d49fca66152955e'
           ),
         ));
-        
+         
         $response = curl_exec($curl);
 
         curl_close($curl);

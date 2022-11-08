@@ -2,14 +2,9 @@ import Input from '@components/ui/input'
 import Label from '@components/ui/label'
 import { useModalAction } from '@components/ui/modal/modal.context';
 import Select from '@components/ui/select/select'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { operators } from './mobile-recharge-form';
 import { useBillerInfoQuery } from '@data/biller-info/use-bill-payment.query';
-import { handleInputChange } from 'react-select/src/utils';
-import { API_ENDPOINTS } from "@utils/api/endpoints";
-import url from "@utils/api/server_url";
-import http from "@utils/api/http";
-import { useMutation } from 'react-query';
 
 
 export default function ElectricityForm({click,variant,props} :any) {
@@ -20,60 +15,10 @@ export default function ElectricityForm({click,variant,props} :any) {
     function handleClick()  {
         return   openModal('BILL_PAYMENT')
     }
-    const[operator, setOperator] = useState(null);
-    const[category, setCategory] = useState(null)
 
-    // const {
-    //     data:billerInfo
-    // } = useBillerInfoQuery(
-    //     category: 
-    //     biller_id: 
-    // );
-
-      const fetchBillerInfo = async (data:any) => {
-  
-        const { data:response } = await http.get(`${url}/${API_ENDPOINTS.BILLER_INFO}`);
-        console.log('object',url);
-        return response;
-      
-      };
-
-      const { mutate: mutateBiller } = useMutation(fetchBillerInfo, {
-       
-        onSuccess: data => {
-
-          // setPlans(data);
-          // addOnPlansList();
-          // setLoading(false);
-          // setAddOnPlans(data);
-          // console.log('operator',data);
-
-        },
-
-
-        onError: () => {
-          alert("error")
-          // setLoading(false)
-        },
-      
-        // onSettled: () => {
-        //   queryClient.invalidateQueries(API_ENDPOINTS.RECHARGE_PLANS);
-        // }
-
-      });
-
-      const onSubmit = async  (value:any) => {
-        
-        const biller =  {
-          'operator' :  operator ,
-          'category'   :  category,
-        };
-
-        mutateBiller(biller);
-       
-      };
-      
-      console.log('operator',operator)
+    const {
+        data:billerInfo
+    } = useBillerInfoQuery();
 
     // console.log('billerInfo',billerInfo)
 
@@ -89,6 +34,8 @@ export default function ElectricityForm({click,variant,props} :any) {
 
    
 
+    
+
     function openBillDetails(value: string, logoImg: Maybe<string> | undefined) {
 
         return openModal("BILL_PAYMENT_DETAILS",{
@@ -100,10 +47,6 @@ export default function ElectricityForm({click,variant,props} :any) {
     console.log(props)
 
     console.log(' form electricity ',click)
-
-    const  handleChange = (e:any) => {
-        setOperator(e.value);
-    }
 
   return (
 
@@ -122,23 +65,17 @@ export default function ElectricityForm({click,variant,props} :any) {
                         <Select label='Operator'
                                 variant=''
                                 type='number'
-                                value={operators.filter(function(option) {
-                                  return option.value === operator;
-                                })}
-                                onchange={handleChange}
-                                options={operators?.filter((opr)=> opr?.Category=='Electricity')}
+                                options={operators.filter((opr)=> opr?.Category=='Electricity')}
                         />
                     </div>
 
                     <div className='flex-1'> 
-                        <Input 
-                          name='Consumer Number'        
-                          label='Consumer Number'
-                          variant={variant}
-                          type='number'
-                          inputMode="numeric"
-                          className='rounded' 
-                       />
+                        <Input label='Consumer Number'
+                            variant={variant}
+                            type='number'
+                            inputMode="numeric"
+                            className='rounded'
+                        />
                     </div>
 
                     {/* <div className='flex flex-col'> 
@@ -148,7 +85,6 @@ export default function ElectricityForm({click,variant,props} :any) {
                                 type='number'
                         />
                     </div> */}
-
                    {/* 
                     <div className='flex-1 items-center'> 
                         
@@ -164,13 +100,13 @@ export default function ElectricityForm({click,variant,props} :any) {
 
                     <div className='hidden lg:block lg:pt-3'>
                         <Label className=''></Label>
-                        <button onClick={()=> openBillDetails()} className='bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>
+                        <button onClick={()=>openBillDetails()} className='bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>
                                 Proceed
                         </button>
                     </div> 
 
-                    <button onClick={()=> openBillDetails()} className='  lg:hidden  bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>
-                            Proceed
+                    <button onClick={()=>openBillDetails()} className='  lg:hidden  bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>
+                                Proceed
                     </button>
 
                 </div>

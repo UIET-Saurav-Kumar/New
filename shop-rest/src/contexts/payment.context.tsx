@@ -62,20 +62,20 @@ const paymentContextDefaultValues : paymentContextType = {
 
 
     mobileRechargeView: () => {},
-    landlineView:  () => {},
-    dthView:       () => {},
-    insuranceView: () => {},
-    broadbandView: () => {},
-    pipedgasView:  () => {},
+    landlineView:    () => {},
+    dthView:         () => {},
+    insuranceView:   () => {},
+    broadbandView:   () => {},
+    pipedgasView:    () => {},
     electricityView: () => {},
     waterView:       () => {},
     emiView:         () => {},
     lpgbookingView:  () => {},
-    datacardView:   () => {},
-    challanView:    () => {},
-    housingView:    () => {},
-    cableView:      () => {},
-    googleplayView: () => {},
+    datacardView:    () => {},
+    challanView:     () => {},
+    housingView:     () => {},
+    cableView:       () => {},
+    googleplayView:  () => {},
 }
 
 
@@ -113,7 +113,6 @@ export function PaymentProvider({children}:Props){
 
     const  mobileRechargeView= () => {
 
-      
         setMobileRecharge(true)
         setWater(false);
         setLpgBooking(false);

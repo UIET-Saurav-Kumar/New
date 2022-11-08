@@ -894,12 +894,11 @@ export default function RechargePlans(plans: { data: { plans: any; }; },operator
   return (
 
         <div  className='flex bg-white flex-col items-center  justify-between w-full'>
-                
-                <div   className=''>
+             <div   className=''>
                     Browse Plans
                 </div>
-
             <div className='grid grid-cols-1  lg:flex lg:items-center lg:space-x-2 lg:justify-evenly lg:space-y-0 space-y-2 p-4 bg-gray-100 w-full '>
+                
                 
                 
                   <Select name='Operator'
@@ -909,7 +908,7 @@ export default function RechargePlans(plans: { data: { plans: any; }; },operator
                     options={operators} 
                     value={operator}
                     placeholder='Select operator'
-                  />
+                    />
 
                   <Select 
                     variant='solid'
@@ -918,7 +917,7 @@ export default function RechargePlans(plans: { data: { plans: any; }; },operator
                     options={cirleCode}
                     value={circle}
                     placeholder='Select circle'
-                   />
+                     />
                     
 
                   <Input   
@@ -929,7 +928,7 @@ export default function RechargePlans(plans: { data: { plans: any; }; },operator
                     // onChange={(e)=>handleOnChange(e)}
                     maxLength={10}
                     placeholder='amount'
-                  />
+                    />
 
                 </div>
 
@@ -937,39 +936,41 @@ export default function RechargePlans(plans: { data: { plans: any; }; },operator
 
                 <div className=' scrollbar-hide hidden lg:flex  overflow-x-scroll  w-full  text-gray-700 text-xs   sm:text-sm  items-center     font-light    '>
 
-                    {
-                        response?.plans?.map((list:any,key)=>
-                        <div onClick={event=> handlePlan(event,key)} key={key} 
-                            className={` ${index == key ? ' border-b-4 border-blue-400   ' : 'hover:bg-gray-50 border-b-4 border-white '} cursor-pointer p-2 flex  items-center text-center text-black `}>
-                            <li className='list-none' >
-                            <span  className={` ${index == key ? 'text-gray-800 font-semibold' : 'text-gray-600 font-semibold'}   cursor-pointer   flex flex-col  whitespace-nowrap`}>
-                                {list?.group_name}
-                                <span className='   '></span>
-                            </span>
-                            </li>
-                        </div>
-                        )
-                    }
-
-                </div>
-
-                <div className=' scrollbar-hide lg:hidden   overflow-x-scroll    text-gray-700 text-xs   sm:text-sm flex   lg:space-y-8 font-light    '>
-
-                    {
-                        response?.plans?.map((list:any,key)=>
+                        {
+                            response?.plans?.map((list:any,key)=>
                             <div onClick={event=> handlePlan(event,key)} key={key} 
                                 className={` ${index == key ? ' border-b-4 border-blue-400   ' : 'hover:bg-gray-50 border-b-4 border-white '} cursor-pointer p-2 flex  items-center text-center text-black `}>
                                 <li className='list-none' >
-                                    <span  className={` ${index == key ? 'text-gray-800 font-semibold' : 'text-gray-600 font-semibold'}   cursor-pointer   flex flex-col  whitespace-nowrap`}>
-                                        {list?.group_name}
-                                        <span className='   '></span>
-                                    </span>
+                                <span  className={` ${index == key ? 'text-gray-800 font-semibold' : 'text-gray-600 font-semibold'}   cursor-pointer   flex flex-col  whitespace-nowrap`}>
+                                    {list?.group_name}
+                                    <span className='   '></span>
+                                </span>
+                                
                                 </li>
                             </div>
-                        )
-                    }
+                            )
+                        }
 
-                </div>
+                    </div>
+
+                    <div className=' scrollbar-hide lg:hidden   overflow-x-scroll    text-gray-700 text-xs   sm:text-sm flex   lg:space-y-8 font-light    '>
+
+                        {
+                            response?.plans?.map((list:any,key)=>
+                            <div onClick={event=> handlePlan(event,key)} key={key} 
+                                className={` ${index == key ? ' border-b-4 border-blue-400   ' : 'hover:bg-gray-50 border-b-4 border-white '} cursor-pointer p-2 flex  items-center text-center text-black `}>
+                                <li className='list-none' >
+                                <span  className={` ${index == key ? 'text-gray-800 font-semibold' : 'text-gray-600 font-semibold'}   cursor-pointer   flex flex-col  whitespace-nowrap`}>
+                                    {list?.group_name}
+                                    <span className='   '></span>
+                                </span>
+                                
+                                </li>
+                            </div>
+                            )
+                        }
+
+                    </div>
 
                     <div className='flex-1 flex-col mt-10 lg:mt-20'>
 
@@ -985,18 +986,17 @@ export default function RechargePlans(plans: { data: { plans: any; }; },operator
                             data={data}
                             rowKey="id"
                             // scroll={{ x: 1000 }}
+                           
                             /> */}
-
                             <table className='w-full flex items-center justify-between mt-4'>
                                <tr className='flex flex-col items-center cursor-pointer  border-b space-y-3 justify-around w-full '>
                                     <th className=''>Talktime</th>
                                         {
                                             response?.plans[index].plans.map((tk:any)=>{
-                                            return <td className='text-xs leading-loose sm:text-sm h-24 font-light text-gray-700'>{tk?.talktime}</td>
-                                        }
+                                            return <td className='text-xs leading-loose sm:text-sm h-24 font-light text-gray-700'>{tk?.talktime}</td>}
                                             )
                                         }
-                               </tr>
+                                </tr>
 
                                <tr className='flex flex-col items-center cursor-pointer  space-y-3 justify-around w-full  '>
                                  <th className=''>Validity</th>
@@ -1005,7 +1005,7 @@ export default function RechargePlans(plans: { data: { plans: any; }; },operator
                                         return <td className='text-xs leading-loose sm:text-sm h-24 font-light text-gray-700'>{tk?.validity}</td>}
                                         )
                                     }
-                               </tr> 
+                               </tr>
 
                                <tr className='flex flex-col space-y-3 cursor-pointer justify-around w-full  '>
                                   <th className=''>Description</th>

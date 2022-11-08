@@ -13,7 +13,6 @@ import { API_ENDPOINTS } from "@utils/api/endpoints";
 import ProductFeedLoader from '@components/ui/loaders/product-feed-loader'
 import { useQuery } from "react-query";
 import AsyncSelect from 'react-select/async';
-import url from "@utils/api/server_url";
 
 
  export const mobileOperator = [
@@ -84,2885 +83,2885 @@ import url from "@utils/api/server_url";
      "OperatorName": "Airtel",
      "OperatorCode": "AT",
      "Category": "Prepaid-Mobile",
-     "value": "Airtel"
+     "label": "Airtel"
     },
     {
      "S No": 2,
      "OperatorName": "BSNL",
      "OperatorCode": "BVR",
      "Category": "Prepaid-Mobile",
-     "value": "BSNL Recharge\/Validity (RCV)"
+     "label": "BSNL Recharge\/Validity (RCV)"
     },
     {
      "S No": 3,
      "OperatorName": "BSNL Special (STV)",
      "OperatorCode": "BV",
      "Category": "Prepaid-Mobile",
-     "value": "BSNL Special (STV)"
+     "label": "BSNL Special (STV)"
     },
     {
      "S No": 4,
      "OperatorName": "BSNL TopUp",
      "OperatorCode": "BR",
      "Category": "Prepaid-Mobile",
-     "value": "BSNL TopUp"
+     "label": "BSNL TopUp"
     },
     {
      "S No": 5,
      "OperatorName": "Idea",
      "OperatorCode": "IC",
      "Category": "Prepaid-Mobile",
-     "value": "Idea"
+     "label": "Idea"
     },
     {
      "S No": 6,
      "OperatorName": "MTNL DELHI",
      "OperatorCode": "MD",
      "Category": "Prepaid-Mobile",
-     "value": "MTNL DELHI"
+     "label": "MTNL DELHI"
     },
     {
      "S No": 7,
      "OperatorName": "MTNL DELHI Special",
      "OperatorCode": "MDS",
      "Category": "Prepaid-Mobile",
-     "value": "MTNL DELHI Special"
+     "label": "MTNL DELHI Special"
     },
     {
      "S No": 8,
      "OperatorName": "MTNL MUMBAI",
      "OperatorCode": "MM",
      "Category": "Prepaid-Mobile",
-     "value": "MTNL MUMBAI"
+     "label": "MTNL MUMBAI"
     },
     {
      "S No": 9,
      "OperatorName": "MTNL MUMBAI SPECIAL",
      "OperatorCode": "MMS",
      "Category": "Prepaid-Mobile",
-     "value": "MTNL MUMBAI SPECIAL"
+     "label": "MTNL MUMBAI SPECIAL"
     },
     {
      "S No": 10,
      "OperatorName": "Jio",
      "OperatorCode": "JIO",
      "Category": "Prepaid-Mobile",
-     "value": "Reliance JIO"
+     "label": "Reliance JIO"
     },
     {
      "S No": 11,
      "OperatorName": "Tata Docomo GSM",
      "OperatorCode": "TD",
      "Category": "Prepaid-Mobile",
-     "value": "Tata Docomo GSM"
+     "label": "Tata Docomo GSM"
     },
     {
      "S No": 12,
      "OperatorName": "Tata Docomo GSM Special",
      "OperatorCode": "DS",
      "Category": "Prepaid-Mobile",
-     "value": "Tata Docomo GSM Special"
+     "label": "Tata Docomo GSM Special"
     },
     {
      "S No": 13,
      "OperatorName": "Uninor",
      "OperatorCode": "UN",
      "Category": "Prepaid-Mobile",
-     "value": "Uninor"
+     "label": "Uninor"
     },
     {
      "S No": 14,
      "OperatorName": "Uninor Special",
      "OperatorCode": "UNS",
      "Category": "Prepaid-Mobile",
-     "value": "Uninor Special"
+     "label": "Uninor Special"
     },
     {
      "S No": 15,
      "OperatorName": "Vodafone",
      "OperatorCode": "VF",
      "Category": "Prepaid-Mobile",
-     "value": "Vodafone"
+     "label": "Vodafone"
     },
     {
      "S No": 16,
      "OperatorName": "Aircel",
      "OperatorCode": "ACP",
      "Category": "Postpaid-Mobile",
-     "value": "Aircel"
+     "label": "Aircel"
     },
     {
      "S No": 17,
      "OperatorName": "Airtel",
      "OperatorCode": "ATP",
      "Category": "Postpaid-Mobile",
-     "value": "Airtel"
+     "label": "Airtel"
     },
     {
      "S No": 18,
      "OperatorName": "BSNL Mobile",
      "OperatorCode": "BSP",
      "Category": "Postpaid-Mobile",
-     "value": "BSNL Mobile"
+     "label": "BSNL Mobile"
     },
     {
      "S No": 19,
      "OperatorName": "Idea",
      "OperatorCode": "IDP",
      "Category": "Postpaid-Mobile",
-     "value": "Idea"
+     "label": "Idea"
     },
     {
      "S No": 20,
      "OperatorName": "LOOP Mobile",
      "OperatorCode": "LMP",
      "Category": "Postpaid-Mobile",
-     "value": "LOOP Mobile"
+     "label": "LOOP Mobile"
     },
     {
      "S No": 21,
      "OperatorName": "MTS-Postpaid",
      "OperatorCode": "MTSP",
      "Category": "Postpaid-Mobile",
-     "value": "MTS-Postpaid"
+     "label": "MTS-Postpaid"
     },
     {
      "S No": 22,
      "OperatorName": "Reliance CDMA",
      "OperatorCode": "RCP",
      "Category": "Postpaid-Mobile",
-     "value": "Reliance CDMA"
+     "label": "Reliance CDMA"
     },
     {
      "S No": 23,
      "OperatorName": "Reliance GSM",
      "OperatorCode": "RGP",
      "Category": "Postpaid-Mobile",
-     "value": "Reliance GSM"
+     "label": "Reliance GSM"
     },
     {
      "S No": 24,
      "OperatorName": "Tata Docomo GSM",
      "OperatorCode": "TDP",
      "Category": "Postpaid-Mobile",
-     "value": "Tata Docomo GSM"
+     "label": "Tata Docomo GSM"
     },
     {
      "S No": 25,
      "OperatorName": "Tata Indicom",
      "OperatorCode": "TIP",
      "Category": "Postpaid-Mobile",
-     "value": "Tata Indicom"
+     "label": "Tata Indicom"
     },
     {
      "S No": 26,
      "OperatorName": "Vodafone",
      "OperatorCode": "VFP",
      "Category": "Postpaid-Mobile",
-     "value": "Vodafone"
+     "label": "Vodafone"
     },
   {
    "biller_id": "APDCL0000ASM01",
-   "value": "Assam Power Distribution Company Ltd (RAPDR)",
+   "label": "Assam Power Distribution Company Ltd (RAPDR)",
    "value": "APDCL",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "AVVNL0000RAJ01",
-   "value": "Ajmer Vidyut Vitran Nigam Limited (AVVNL)",
+   "label": "Ajmer Vidyut Vitran Nigam Limited (AVVNL)",
    "value": "AVVNL",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "BESCOM000KAR01",
-   "value": "Bangalore Electricity Supply Co. Ltd (BESCOM)",
+   "label": "Bangalore Electricity Supply Co. Ltd (BESCOM)",
    "value": "BESCOM",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "BEST00000MUM01",
-   "value": "B.E.S.T Mumbai",
+   "label": "B.E.S.T Mumbai",
    "value": "BEST",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "BSESRAJPLDEL01",
-   "value": "BSES Rajdhani Power Limited",
+   "label": "BSES Rajdhani Power Limited",
    "value": "BSES RPL",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "BSESYAMPLDEL01",
-   "value": "BSES Yamuna Power Limited",
+   "label": "BSES Yamuna Power Limited",
    "value": "BSES YPL",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "CESC00000KOL01",
-   "value": "CESC Limited",
+   "label": "CESC Limited",
    "value": "CESC",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "CSPDCL000CHH01",
-   "value": "Chhattisgarh State Power Distribution Co. Ltd",
+   "label": "Chhattisgarh State Power Distribution Co. Ltd",
    "value": "CSPDCL",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "DDED00000DAD01",
-   "value": "Daman and Diu Electricity",
+   "label": "Daman and Diu Electricity",
    "value": "DDED",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "DGVCL0000GUJ01",
-   "value": "Dakshin Gujarat Vij Company Limited (DGVCL)",
+   "label": "Dakshin Gujarat Vij Company Limited (DGVCL)",
    "value": "DGVCL",
    "is_fetch": 0,
    "Category": "Electricity"
   },
   {
    "biller_id": "DHBVN0000HAR01",
-   "value": "Dakshin Haryana Bijli Vitran Nigam (DHBVN)",
+   "label": "Dakshin Haryana Bijli Vitran Nigam (DHBVN)",
    "value": "DHBVN",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "DNHPDCL0DNH001",
-   "value": "DNH Power Distribution Company Limited",
+   "label": "DNH Power Distribution Company Limited",
    "value": "DNHPDCL",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "GESCOM000KAR01",
-   "value": "Gulbarga Electricity Supply Company Limited",
+   "label": "Gulbarga Electricity Supply Company Limited",
    "value": "GESCOM",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "JBVNL0000JHA01",
-   "value": "Jharkhand Bijli Vitran Nigam Limited (JBVNL)",
+   "label": "Jharkhand Bijli Vitran Nigam Limited (JBVNL)",
    "value": "JBVNL",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "JDVVNL000RAJ01",
-   "value": "Jodhpur Vidyut Vitran Nigam Limited (JDVVNL)",
+   "label": "Jodhpur Vidyut Vitran Nigam Limited (JDVVNL)",
    "value": "JDVVNL",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "JUSC00000JAM01",
-   "value": "Jamshedpur Utilities",
+   "label": "Jamshedpur Utilities",
    "value": "JUSCO",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "JVVNL0000RAJ01",
-   "value": "Jaipur Vidyut Vitran Nigam (JVVNL)",
+   "label": "Jaipur Vidyut Vitran Nigam (JVVNL)",
    "value": "JVVNL",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "MAHA00000MAH01",
-   "value": "Maharashtra State Electricity Distbn Co Ltd",
+   "label": "Maharashtra State Electricity Distbn Co Ltd",
    "value": "MSEDCL",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "MGVCL0000GUJ01",
-   "value": "Madhya Gujarat Vij Company Limited (MGVCL)",
+   "label": "Madhya Gujarat Vij Company Limited (MGVCL)",
    "value": "MGVCL",
    "is_fetch": 0,
    "Category": "Electricity"
   },
   {
    "biller_id": "MPDC00000MEG01",
-   "value": "Meghalaya Power Dist Corp Ltd",
+   "label": "Meghalaya Power Dist Corp Ltd",
    "value": "MEPDCL",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "MPPK00000MAP01",
-   "value": "M.P. Paschim Kshetra Vidyut Vitaran",
+   "label": "M.P. Paschim Kshetra Vidyut Vitaran",
    "value": "MPPKVVCL",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "NBPDCL000BHI01",
-   "value": "North Bihar Power Distribution Company Ltd.",
+   "label": "North Bihar Power Distribution Company Ltd.",
    "value": "NBPDCL",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "NESCO0000ODI01",
-   "value": "NESCO\t Odisha",
+   "label": "NESCO\t Odisha",
    "value": 0,
    "is_fetch": "Electricity"
   },
   {
    "biller_id": "NPCL00000NOI01",
-   "value": "Noida Power",
+   "label": "Noida Power",
    "value": "NPCL",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "PGVCL0000GUJ01",
-   "value": "Paschim Gujarat Vij Company Limited (PGVCL)",
+   "label": "Paschim Gujarat Vij Company Limited (PGVCL)",
    "value": "PGVCL",
    "is_fetch": 0,
    "Category": "Electricity"
   },
   {
    "biller_id": "PSPCL0000PUN01",
-   "value": "Punjab State Power Corporation Ltd (PSPCL)",
+   "label": "Punjab State Power Corporation Ltd (PSPCL)",
    "value": "PSPCL",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "SBPDCL000BHI01",
-   "value": "South Bihar Power Distribution Company Ltd.",
+   "label": "South Bihar Power Distribution Company Ltd.",
    "value": "SBPDCL",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "SOUTHCO00ODI01",
-   "value": "TP Southern Odisha Distribution Limited",
+   "label": "TP Southern Odisha Distribution Limited",
    "value": "SOUTHCO",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "TATAPWR00DEL01",
-   "value": "Tata Power - Delhi",
+   "label": "Tata Power - Delhi",
    "value": "TATA PWR - DEL",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "TATAPWR00MUM01",
-   "value": "Tata Power - Mumbai",
+   "label": "Tata Power - Mumbai",
    "value": "TATA PWR - MUM",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "TNEB00000TND01",
-   "value": "Tamil Nadu Electricity Board (TNEB)",
+   "label": "Tamil Nadu Electricity Board (TNEB)",
    "value": "TNEB",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "TORR00000AGR01",
-   "value": "Torrent Power - Agra",
+   "label": "Torrent Power - Agra",
    "value": "TOR PWR - AGR",
    "is_fetch": 0,
    "Category": "Electricity"
   },
   {
    "biller_id": "TORR00000AHM02",
-   "value": "Torrent Power - Ahmedabad",
+   "label": "Torrent Power - Ahmedabad",
    "value": "TOR PWR - AHM",
    "is_fetch": 0,
    "Category": "Electricity"
   },
   {
    "biller_id": "TORR00000BHW03",
-   "value": "Torrent Power - Bhiwandi",
+   "label": "Torrent Power - Bhiwandi",
    "value": "TOR PWR - BHI",
    "is_fetch": 0,
    "Category": "Electricity"
   },
   {
    "biller_id": "TORR00000SUR04",
-   "value": "Torrent Power - Surat",
+   "label": "Torrent Power - Surat",
    "value": "TOR PWR - SUR",
    "is_fetch": 0,
    "Category": "Electricity"
   },
   {
    "biller_id": "TSEC00000TRI01",
-   "value": "Tripura Electricity Corp Ltd",
+   "label": "Tripura Electricity Corp Ltd",
    "value": "TSECL",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "UGVCL0000GUJ01",
-   "value": "Uttar Gujarat Vij Company Limited (UGVCL)",
+   "label": "Uttar Gujarat Vij Company Limited (UGVCL)",
    "value": "UGVCL",
    "is_fetch": 0,
    "Category": "Electricity"
   },
   {
    "biller_id": "UHBVN0000HAR01",
-   "value": "Uttar Haryana Bijli Vitran Nigam (UHBVN)",
+   "label": "Uttar Haryana Bijli Vitran Nigam (UHBVN)",
    "value": "UHBVN",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "UPPCL0000UTP01",
-   "value": "Uttar Pradesh Power Corp Ltd (UPPCL) - URBAN",
+   "label": "Uttar Pradesh Power Corp Ltd (UPPCL) - URBAN",
    "value": "UPPCL URBAN",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "UPPCL0000UTP02",
-   "value": "Uttar Pradesh Power Corp Ltd (UPPCL) - RURAL",
+   "label": "Uttar Pradesh Power Corp Ltd (UPPCL) - RURAL",
    "value": "UPPCL RURAL",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "WESCO0000ODI01",
-   "value": "TP Western Odisha Distribution Limited",
+   "label": "TP Western Odisha Distribution Limited",
    "value": "WESCO",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "APDCL0000ASM02",
-   "value": "Assam Power Distribution Company Ltd (NON-RAPDR)",
+   "label": "Assam Power Distribution Company Ltd (NON-RAPDR)",
    "value": "APDCL NON-RAPDR",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "CESCOM000KAR01",
-   "value": "Chamundeshwari Electricity Supply Corp Ltd (CESCOM)",
+   "label": "Chamundeshwari Electricity Supply Corp Ltd (CESCOM)",
    "value": "CESCOM",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "HESCOM000KAR01",
-   "value": "Hubli Electricity Supply Company Ltd (HESCOM)",
+   "label": "Hubli Electricity Supply Company Ltd (HESCOM)",
    "value": "HESCOM",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "MPCZ00000MAP01",
-   "value": "M.P. Madhya Kshetra Vidyut Vitaran - URBAN",
+   "label": "M.P. Madhya Kshetra Vidyut Vitaran - URBAN",
    "value": "MPMKVVCL URBAN",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "MPCZ00000MAP02",
-   "value": "M.P. Madhya Kshetra Vidyut Vitaran - RURAL",
+   "label": "M.P. Madhya Kshetra Vidyut Vitaran - RURAL",
    "value": "MPMKVVCL RURAL",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "NDMC00000DEL02",
-   "value": "New Delhi Municipal Council (NDMC) - Electricity",
+   "label": "New Delhi Municipal Council (NDMC) - Electricity",
    "value": "NDMC ELECTRICITY",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "WBSEDCL00WBL01",
-   "value": "West Bengal State Electricity Distribution Co. Ltd (WBSEDCL)",
+   "label": "West Bengal State Electricity Distribution Co. Ltd (WBSEDCL)",
    "value": "WBSEDCL",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "MPEZ00000MAP02",
-   "value": "M.P. Poorv Kshetra Vidyut Vitaran - RURAL",
+   "label": "M.P. Poorv Kshetra Vidyut Vitaran - RURAL",
    "value": "MPPKVVCL RURAL",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "SKPR00000SIK01",
-   "value": "Sikkim Power - RURAL",
+   "label": "Sikkim Power - RURAL",
    "value": "SKMPWR RURAL",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "BESLOB000RAJ02",
-   "value": "Bharatpur Electricity Services Ltd. (BESL)",
+   "label": "Bharatpur Electricity Services Ltd. (BESL)",
    "value": "BESL",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "BKESL0000RAJ02",
-   "value": "Bikaner Electricity Supply Limited (BkESL)",
+   "label": "Bikaner Electricity Supply Limited (BkESL)",
    "value": "BKESL",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "KEDLOB000RAJ02",
-   "value": "Kota Electricity Distribution Limited (KEDL)",
+   "label": "Kota Electricity Distribution Limited (KEDL)",
    "value": "KEDL",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "RELI00000MUM03",
-   "value": "Adani Electricity Mumbai Limited",
+   "label": "Adani Electricity Mumbai Limited",
    "value": "ADANI",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "TPADL0000AJM02",
-   "value": "TP Ajmer Distribution Ltd (TPADL)",
+   "label": "TP Ajmer Distribution Ltd (TPADL)",
    "value": "TPADL",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "KESCO0000UTP01",
-   "value": "Kanpur Electricity Supply Company",
+   "label": "Kanpur Electricity Supply Company",
    "value": "KESCO",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "GED000000GOA01",
-   "value": "Goa Electricity Department",
+   "label": "Goa Electricity Department",
    "value": "GED",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "DOPN00000NAG01",
-   "value": "Department of Power\t Nagaland",
+   "label": "Department of Power\t Nagaland",
    "value": 0,
    "is_fetch": "Electricity"
   },
   {
    "biller_id": "MESCOM000KAR01",
-   "value": "Mangalore Electricity Supply Co. Ltd (MESCOM) - RAPDR",
+   "label": "Mangalore Electricity Supply Co. Ltd (MESCOM) - RAPDR",
    "value": "MESCOM",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "SKPR00000SIK02",
-   "value": "Sikkim Power - URBAN",
+   "label": "Sikkim Power - URBAN",
    "value": "SKMPWR URBAN",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "CESU00000ODI01",
-   "value": "TP Central Odisha Distribution Ltd.",
+   "label": "TP Central Odisha Distribution Ltd.",
    "value": "CESU",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "KSEBL0000KER01",
-   "value": "Kerala State Electricity Board Ltd. (KSEBL)",
+   "label": "Kerala State Electricity Board Ltd. (KSEBL)",
    "value": "KSEBL",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "PEDM00000MIZ01",
-   "value": "Power & Electricity Department - Mizoram",
+   "label": "Power & Electricity Department - Mizoram",
    "value": "PEDM",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "HPSEB0000HIP02",
-   "value": "Himachal Pradesh State Electricity Board",
+   "label": "Himachal Pradesh State Electricity Board",
    "value": "HPSEB",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "GOVE00000PUDN0",
-   "value": "Government of Puducherry Electricity Department",
+   "label": "Government of Puducherry Electricity Department",
    "value": "PYEB",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "MPPO00000MAP0Y",
-   "value": "MP Poorva Kshetra Vidyut Vitaran Co. Ltd Jabalpur - NGB billing system",
+   "label": "MP Poorva Kshetra Vidyut Vitaran Co. Ltd Jabalpur - NGB billing system",
    "value": "MPJNRAP",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "ELEC00000CHA3L",
-   "value": "Electricity Department Chandigarh",
+   "label": "Electricity Department Chandigarh",
    "value": "CHD",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "TORR00000NATLX",
-   "value": "Torrent Power",
+   "label": "Torrent Power",
    "value": "TOR PWR",
    "is_fetch": 0,
    "Category": "Electricity"
   },
   {
    "biller_id": "DEPA00000NATES",
-   "value": "Department of Power\t Government of Arunachal Pradesh",
+   "label": "Department of Power\t Government of Arunachal Pradesh",
    "value": 0,
    "is_fetch": "Electricity"
   },
   {
    "biller_id": "UTTA00000UTT7M",
-   "value": "Uttarakhand Power Corporation Limited",
+   "label": "Uttarakhand Power Corporation Limited",
    "value": "UPCL",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "JAMM00000JAKCP",
-   "value": "Jammu and Kashmir Power Development Department",
+   "label": "Jammu and Kashmir Power Development Department",
    "value": "JKPDD",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "MANG00000KAR75",
-   "value": "Mangalore Electricity Supply Company LTD (Non RAPDR)",
+   "label": "Mangalore Electricity Supply Company LTD (Non RAPDR)",
    "value": "Mangalore Electricity Supply Company LTD (Non RAPD",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "WEST00000WBL75",
-   "value": "West Bengal Electricity",
+   "label": "West Bengal Electricity",
    "value": "WBSEDCLOB",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "LAKS00000LAKP8",
-   "value": "Lakshadweep Electricity Department",
+   "label": "Lakshadweep Electricity Department",
    "value": "Lakshadweep Electricity Department",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "GIFT00000GUJ6Z",
-   "value": "Gift Power Company Limited",
+   "label": "Gift Power Company Limited",
    "value": "Gift Power Company Limited",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "KANN00000KERXX",
-   "value": "Kannan Devan Hills Plantations Company Private Limited",
+   "label": "Kannan Devan Hills Plantations Company Private Limited",
    "value": "KDHPCPL",
    "is_fetch": 1,
    "Category": "Electricity"
   },
   {
    "biller_id": "DEPA00000ARPD5",
-   "value": "Department of Power\t Government of Arunachal Pradesh - Prepaid",
+   "label": "Department of Power\t Government of Arunachal Pradesh - Prepaid",
    "value": 0,
    "is_fetch": "Electricity"
   },
   {
    "biller_id": "INDI00000NATTR",
-   "value": "Indian Highways Management Company Ltd FASTag",
+   "label": "Indian Highways Management Company Ltd FASTag",
    "value": "IHMCL FASTag",
    "is_fetch": 1,
    "Category": "FastTag"
   },
   {
    "biller_id": "INDU00000NATR2",
-   "value": "IndusInd Bank FASTag",
+   "label": "IndusInd Bank FASTag",
    "value": "IBL FASTag",
    "is_fetch": 1,
    "Category": "FastTag"
   },
   {
    "biller_id": "BANK00000NATDH",
-   "value": "Bank of Baroda - Fastag",
+   "label": "Bank of Baroda - Fastag",
    "value": "BOBFAST",
    "is_fetch": 1,
    "Category": "FastTag"
   },
   {
    "biller_id": "TOLL00000NAT72",
-   "value": "ICICI Bank Fastag",
+   "label": "ICICI Bank Fastag",
    "value": "ICICI Fastag",
    "is_fetch": 1,
    "Category": "FastTag"
   },
   {
    "biller_id": "AXIS00000NATSN",
-   "value": "Axis Bank FASTag",
+   "label": "Axis Bank FASTag",
    "value": "AXISBFTG",
    "is_fetch": 0,
    "Category": "FastTag"
   },
   {
    "biller_id": "IDFC00000NATXM",
-   "value": "IDFC FIRST Bank - FasTag",
+   "label": "IDFC FIRST Bank - FasTag",
    "value": "IDFC",
    "is_fetch": 1,
    "Category": "FastTag"
   },
   {
    "biller_id": "HDFC00000NAT5K",
-   "value": "HDFC Bank - Fastag",
+   "label": "HDFC Bank - Fastag",
    "value": "HDFCFAST",
    "is_fetch": 1,
    "Category": "FastTag"
   },
   {
    "biller_id": "KOTA00000NATJZ",
-   "value": "Kotak Mahindra Bank - Fastag",
+   "label": "Kotak Mahindra Bank - Fastag",
    "value": "KMB",
    "is_fetch": 1,
    "Category": "FastTag"
   },
   {
    "biller_id": "EQUI00000NATNF",
-   "value": "Equitas FASTag Recharge",
+   "label": "Equitas FASTag Recharge",
    "value": "EQTSFT",
    "is_fetch": 1,
    "Category": "FastTag"
   },
   {
    "biller_id": "THEF00000NATZO",
-   "value": "Federal Bank - FASTag",
+   "label": "Federal Bank - FASTag",
    "value": "The Federal Bank Limited",
    "is_fetch": 1,
    "Category": "FastTag"
   },
   {
    "biller_id": "PAYT00000NATTQ",
-   "value": "Paytm Payments Bank FASTag",
+   "label": "Paytm Payments Bank FASTag",
    "value": "PPBLFASTag",
    "is_fetch": 1,
    "Category": "FastTag"
   },
   {
    "biller_id": "TRAN00000NATSE",
-   "value": "Transaction Analyst (T Wallet\t TA Wallet and TAG-ITI Wallet)",
+   "label": "Transaction Analyst (T Wallet\t TA Wallet and TAG-ITI Wallet)",
    "value": 0,
    "is_fetch": "FastTag"
   },
   {
    "biller_id": "PAUL00000NATKI",
-   "value": "Paul Merchants",
+   "label": "Paul Merchants",
    "value": "Paul Merchants",
    "is_fetch": 0,
    "Category": "FastTag"
   },
   {
    "biller_id": "JAMM00000NATWB",
-   "value": "Jammu and Kashmir Bank Fastag",
+   "label": "Jammu and Kashmir Bank Fastag",
    "value": "Jammu and Kashmir Bank FASTag",
    "is_fetch": 1,
    "Category": "FastTag"
   },
   {
    "biller_id": "IDBI00000NATK7",
-   "value": "IDBI Bank Fastag",
+   "label": "IDBI Bank Fastag",
    "value": "IDBI FASTAG",
    "is_fetch": 1,
    "Category": "FastTag"
   },
   {
    "biller_id": "RELIGARENBC001",
-   "value": "Religare Health Insurance Co Ltd.",
+   "label": "Religare Health Insurance Co Ltd.",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "FUTUREGENLIFENBC001",
-   "value": "Future Generali Life Insurance",
+   "label": "Future Generali Life Insurance",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "BALICNBC0001",
-   "value": "Bajaj Allianz Life Insurance",
+   "label": "Bajaj Allianz Life Insurance",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "HDFC00000NATV4",
-   "value": "HDFC Life Insurance Co. Ltd.",
+   "label": "HDFC Life Insurance Co. Ltd.",
    "value": "HDFC Life",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "RELI00000NATQ9",
-   "value": "Care Health Insurance",
+   "label": "Care Health Insurance",
    "value": "Religare",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "EXID00000NAT25",
-   "value": "Exide Life Insurance",
+   "label": "Exide Life Insurance",
    "value": "EXIDLI",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "PRAM00000NATYI",
-   "value": "Pramerica Life Insurance Limited",
+   "label": "Pramerica Life Insurance Limited",
    "value": "DHFLPRL",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "FUTU00000NAT09",
-   "value": "Future Generali India Life Insurance Company Limited",
+   "label": "Future Generali India Life Insurance Company Limited",
    "value": "FG life Insurance",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "TATA00000NATLP",
-   "value": "TATA AIA Life Insurance",
+   "label": "TATA AIA Life Insurance",
    "value": "TATAAIA",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "SHRI00000NATRI",
-   "value": "Shriram Life Insurance Co Ltd",
+   "label": "Shriram Life Insurance Co Ltd",
    "value": "SHRLI",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "ICICILOMNBC0001",
-   "value": "ICICI Lombard Motor Insurance",
+   "label": "ICICI Lombard Motor Insurance",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "FUGEGNNBC001",
-   "value": "Future Generali General Insurance",
+   "label": "Future Generali General Insurance",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "FUTEGENHLNBC0001",
-   "value": "Future Generali Health Insurance",
+   "label": "Future Generali Health Insurance",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "RELI00000NAT3O",
-   "value": "Reliance Nippon Life Insurance",
+   "label": "Reliance Nippon Life Insurance",
    "value": "RNLIC",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "STAR00000NATXZ",
-   "value": "Star Union Dai Ichi Life Insurance",
+   "label": "Star Union Dai Ichi Life Insurance",
    "value": "SUDILI",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "BAJA00000NATP5",
-   "value": "Bajaj Allianz Life Insurance Company Limited",
+   "label": "Bajaj Allianz Life Insurance Company Limited",
    "value": "BJALI",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "RELI00000NATBP",
-   "value": "Reliance General Insurance Company Limited",
+   "label": "Reliance General Insurance Company Limited",
    "value": "RGI",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "BAJA00000NAT58",
-   "value": "Bajaj Allianz General Insurance",
+   "label": "Bajaj Allianz General Insurance",
    "value": "BAGIC",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "AVIV00000NAT5I",
-   "value": "Aviva Life Insurance",
+   "label": "Aviva Life Insurance",
    "value": "AVIVA",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "MAXB00000NAT28",
-   "value": "Max Bupa Health Insurance",
+   "label": "Max Bupa Health Insurance",
    "value": "MAXBUPA",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "SHRI00000NATKR",
-   "value": "Shriram General Insurance (Old)",
+   "label": "Shriram General Insurance (Old)",
    "value": "Shriram General Insurance",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "AEGO00000NATRJ",
-   "value": "Aegon Life Insurance",
+   "label": "Aegon Life Insurance",
    "value": "Aegon",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "ROYA00000NAT2C",
-   "value": "Royal Sundaram General Insurance Co. Limited",
+   "label": "Royal Sundaram General Insurance Co. Limited",
    "value": "Royal Sundaram General Insurance",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "MAGM00000NAT61",
-   "value": "Magma HDI - Motor Insurance",
+   "label": "Magma HDI - Motor Insurance",
    "value": "magmahdi_motor",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "MAGM00000NAT6B",
-   "value": "Magma HDI - Health Insurance",
+   "label": "Magma HDI - Health Insurance",
    "value": "magmahdi_health",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "MAGM00000NATQI",
-   "value": "Magma HDI - Non Motor Insurance",
+   "label": "Magma HDI - Non Motor Insurance",
    "value": "magmahdi life",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "SBIL00000NATT0",
-   "value": "SBI Life Insurance Company Limited",
+   "label": "SBI Life Insurance Company Limited",
    "value": "SBI Life Insurance Company Limited",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "KOTA00000NATDP",
-   "value": "Kotak Life Insurance Company Limited",
+   "label": "Kotak Life Insurance Company Limited",
    "value": "Kotak Life Insurance",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "CANA00000NATPI",
-   "value": "Canara HSBC OBC Life Insurance",
+   "label": "Canara HSBC OBC Life Insurance",
    "value": "Canara HSBC OBC Life Insurance",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "ICIC00000NATGF",
-   "value": "ICICI Prudential Life Insurance - New",
+   "label": "ICICI Prudential Life Insurance - New",
    "value": "IPRU",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "MAXL00000NAT0Q",
-   "value": "Max Life Insurance Company Limited",
+   "label": "Max Life Insurance Company Limited",
    "value": "Max Life Insurance",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "IDBI00000NATRX",
-   "value": "Ageas Federal Life Insurance Company Limited",
+   "label": "Ageas Federal Life Insurance Company Limited",
    "value": "IDBIFEDLI",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "ADIT00000NATVO",
-   "value": "Aditya Birla Health Insurance Co Limited",
+   "label": "Aditya Birla Health Insurance Co Limited",
    "value": "Aditya Birla Health Insurance Co Limited",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "EXID00000NATSX",
-   "value": "Exide Life Insurance",
+   "label": "Exide Life Insurance",
    "value": "EXIDLI",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "PRAM00000NATDP",
-   "value": "Pramerica Life Insurance Limited",
+   "label": "Pramerica Life Insurance Limited",
    "value": "DHFLPRL",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "SHRI00000NAT51",
-   "value": "Shriram General Insurance",
+   "label": "Shriram General Insurance",
    "value": "Shriram General Insurance Co. Ltd.",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "INDI00000NAT3L",
-   "value": "IndiaFirst Life Insurance Company Ltd",
+   "label": "IndiaFirst Life Insurance Company Ltd",
    "value": "IFLI",
    "is_fetch": 1,
    "Category": "Insurance"
   },
   {
    "biller_id": "HOMECRDTNBC001",
-   "value": "Home Credit",
+   "label": "Home Credit",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "MUTHOOTNBC001",
-   "value": "Muthoot",
+   "label": "Muthoot",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "FINTREENBC001",
-   "value": "FinTree Finance",
+   "label": "FinTree Finance",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "ZESTMONEYNBC001",
-   "value": "ZEST Money",
+   "label": "ZEST Money",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "MANAPPURAMNBC001",
-   "value": "Manappuram",
+   "label": "Manappuram",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "BAJAJFINNBC0001",
-   "value": "Bajaj Finserv Loan",
+   "label": "Bajaj Finserv Loan",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "BFL000000NAT01",
-   "value": "Bajaj Finance",
+   "label": "Bajaj Finance",
    "value": "BFL",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "IDFC00000NATCK",
-   "value": "IDFC FIRST Bank Ltd",
+   "label": "IDFC FIRST Bank Ltd",
    "value": "IDFB",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "PAIS00000NATCV",
-   "value": "Paisa Dukan-Borrower EMI",
+   "label": "Paisa Dukan-Borrower EMI",
    "value": "PAISA DUKAN -Borrower EMI",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "LAMP00000NAT7E",
-   "value": "L and T Financial Services",
+   "label": "L and T Financial Services",
    "value": "LTFL",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "FLEX00000NATJL",
-   "value": "Flexsalary",
+   "label": "Flexsalary",
    "value": "FLEX SALARY",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "LOKS00000NATC9",
-   "value": "Loksuvidha",
+   "label": "Loksuvidha",
    "value": "LOKSUVIDHA",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "MOTI00000NATHD",
-   "value": "Motilal Oswal Home Finance",
+   "label": "Motilal Oswal Home Finance",
    "value": "MOTILAL OSWAL HOME FINANCE",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "SNAP00000NAT61",
-   "value": "Snapmint",
+   "label": "Snapmint",
    "value": "SNAP MINT",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "TATA00000NATGS",
-   "value": "Tata Capital Financial Services Limited",
+   "label": "Tata Capital Financial Services Limited",
    "value": "TATA CAPITAL FINANCIAL SERVICES LIMITED",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "ADIT00000NATRA",
-   "value": "Aditya Birla Housing Finance Limited",
+   "label": "Aditya Birla Housing Finance Limited",
    "value": "ABHFL",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "SHRI00000NAT7D",
-   "value": "Shriram City Union Finance Ltd",
+   "label": "Shriram City Union Finance Ltd",
    "value": "SRCUFL",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "INDI00000NAT2P",
-   "value": "Dhani Loan & Services Ltd",
+   "label": "Dhani Loan & Services Ltd",
    "value": "IBCF - National",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "LAND00000NATRD",
-   "value": "L and T Housing Finance",
+   "label": "L and T Housing Finance",
    "value": "LTHF",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "HERO00000NAT7F",
-   "value": "Hero FinCorp Limited - Old",
+   "label": "Hero FinCorp Limited - Old",
    "value": "HFCL",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "AAVA00000NATMF",
-   "value": "AAVAS FINANCIERS LIMITED",
+   "label": "AAVAS FINANCIERS LIMITED",
    "value": "AAVAS FINANCIERS",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "INDI00000NATYG",
-   "value": "Indiabulls Housing Finance Limited",
+   "label": "Indiabulls Housing Finance Limited",
    "value": "IBHF - National",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "AVAI00000NAT7J",
-   "value": "Avail",
+   "label": "Avail",
    "value": "Avail",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "BAJA00000NATV1",
-   "value": "Bajaj Auto Finance",
+   "label": "Bajaj Auto Finance",
    "value": "BAJAJ AUTO FINANCE",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "JANA00000NATO4",
-   "value": "Jana Small Finance Bank",
+   "label": "Jana Small Finance Bank",
    "value": "JSFB",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "CMFINANCENBC0001",
-   "value": "Chaitanya Micro Finance",
+   "label": "Chaitanya Micro Finance",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "DGFINANCENBC0001",
-   "value": "Digamber Finance",
+   "label": "Digamber Finance",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "CLIX00000NATST",
-   "value": "Clix",
+   "label": "Clix",
    "value": "Clix",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "VART00000NATHC",
-   "value": "Varthana",
+   "label": "Varthana",
    "value": "Varthana",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "CAPR00000NATC0",
-   "value": "Capri Global Capital Limited",
+   "label": "Capri Global Capital Limited",
    "value": "Capri Global Capital",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "CAPR00000NATUB",
-   "value": "Capri Global Housing Finance",
+   "label": "Capri Global Housing Finance",
    "value": "Capri Global Housing",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "ESSK00000NATFR",
-   "value": "Ess Kay Fincorp Limited",
+   "label": "Ess Kay Fincorp Limited",
    "value": "ESS KAY FINCORP",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "FAIR00000NAT6Z",
-   "value": "Faircent-Borrower EMI Account",
+   "label": "Faircent-Borrower EMI Account",
    "value": "Faircent-Borrower EMI Account",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "I2IF00000NAT6K",
-   "value": "i2i Funding-Borrower EMI Repayment",
+   "label": "i2i Funding-Borrower EMI Repayment",
    "value": "I2I",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "MANA00000NATWG",
-   "value": "Manappuram Finance Limited-Vehicle Loan",
+   "label": "Manappuram Finance Limited-Vehicle Loan",
    "value": "MFL-Vehicle Loan",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "AROH00000WBL0I",
-   "value": "Arohan Financial Services Ltd",
+   "label": "Arohan Financial Services Ltd",
    "value": "Arohan",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "SHRI00000NAT7E",
-   "value": "Shriram Housing Finance Limited",
+   "label": "Shriram Housing Finance Limited",
    "value": "SHFL",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "CONBB0000PUN01",
-   "value": "Connect Broadband",
+   "label": "Connect Broadband",
    "value": "CONNECT BB",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "HATHWAY00NAT01",
-   "value": "Hathway Broadband",
+   "label": "Hathway Broadband",
    "value": "HATHWAY BB",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "TIKO00000NAT01",
-   "value": "Tikona Infinet Pvt Ltd",
+   "label": "Tikona Infinet Pvt Ltd",
    "value": "TIKONA BB",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "ACT000000NAT01",
-   "value": "ACT Fibernet",
+   "label": "ACT Fibernet",
    "value": "ACTFIBER",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "ATBROAD00NAT01",
-   "value": "Airtel Broadband",
+   "label": "Airtel Broadband",
    "value": "AIRTEL BB",
    "is_fetch": 0,
    "Category": "BroadBand"
   },
   {
    "biller_id": "NEXTRA000NAT01",
-   "value": "Nextra Broadband",
+   "label": "Nextra Broadband",
    "value": "NEXTRA BB",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "SPENET000NAT01",
-   "value": "Spectra",
+   "label": "Spectra",
    "value": "SPECTRA BB",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "TTN000000NAT01",
-   "value": "TTN BroadBand",
+   "label": "TTN BroadBand",
    "value": "TTN BB",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "ATBROAD00NAT02",
-   "value": "Airtel Broadband (Fetch & Pay)",
+   "label": "Airtel Broadband (Fetch & Pay)",
    "value": "AIRTEL BB",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "ASIABB000NAT01",
-   "value": "Asianet Broadband (Old)",
+   "label": "Asianet Broadband (Old)",
    "value": "ASIABB",
    "is_fetch": 0,
    "Category": "BroadBand"
   },
   {
    "biller_id": "COMWBB000NAT01",
-   "value": "Comway Broadband",
+   "label": "Comway Broadband",
    "value": "COMWBB",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "FUSNBB000NAT01",
-   "value": "Fusionnet Web Services Private Limited",
+   "label": "Fusionnet Web Services Private Limited",
    "value": "FUSNBB",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "DVOIS0000NAT02",
-   "value": "ION",
+   "label": "ION",
    "value": "ION BB",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "INST00000CHHZV",
-   "value": "Instalinks",
+   "label": "Instalinks",
    "value": "INTAL BB",
    "is_fetch": 0,
    "Category": "BroadBand"
   },
   {
    "biller_id": "MNET00000ASM5W",
-   "value": "M-NET Fiber Fast",
+   "label": "M-NET Fiber Fast",
    "value": "MNET",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "DENB00000NATIO",
-   "value": "DEN Broadband",
+   "label": "DEN Broadband",
    "value": "DEN",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "TIMB00000NATRQ",
-   "value": "Timbl Broadband",
+   "label": "Timbl Broadband",
    "value": "Timbl",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "INST00000BIHKL",
-   "value": "Instanet Broadband",
+   "label": "Instanet Broadband",
    "value": "INSTANBB",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "VFIB00000NATJJ",
-   "value": "Vfibernet Broadband",
+   "label": "Vfibernet Broadband",
    "value": "VFIB",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "NETP00000PUNS8",
-   "value": "Netplus Broadband",
+   "label": "Netplus Broadband",
    "value": "NETPB",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "FLAS00000NATVZ",
-   "value": "Flash Fibernet",
+   "label": "Flash Fibernet",
    "value": "FLAFBB",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "EXCE00000NATDP",
-   "value": "Excell Broadband",
+   "label": "Excell Broadband",
    "value": "ExcellBB",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "SWIF00000NATVE",
-   "value": "Swifttele Enterprises Private Limited",
+   "label": "Swifttele Enterprises Private Limited",
    "value": "Swift Tele",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "ALLI00000NATHB",
-   "value": "Alliance Broadband Services Pvt. Ltd.",
+   "label": "Alliance Broadband Services Pvt. Ltd.",
    "value": "Alliance Broadband Services Pvt. Ltd.",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "RURA00000NAT9E",
-   "value": "AirJaldi - Rural Broadband",
+   "label": "AirJaldi - Rural Broadband",
    "value": "AirJaldi - Rural Broadband",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "SKYL00000NATJB",
-   "value": "Skylink Fibernet Private Limited",
+   "label": "Skylink Fibernet Private Limited",
    "value": "Skylink Fibernet Private Limited",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "ASIA00000NAT6O",
-   "value": "Asianet Broadband",
+   "label": "Asianet Broadband",
    "value": "Asianet Broadband",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "HATH00000NATRZ",
-   "value": "Hathway Digital Cable TV",
+   "label": "Hathway Digital Cable TV",
    "value": "HATHWAY TV",
    "is_fetch": 1,
    "Category": "Cable"
   },
   {
    "biller_id": "ASIA00000NATA2",
-   "value": "Asianet Digital",
+   "label": "Asianet Digital",
    "value": "ASIADIGI",
    "is_fetch": 1,
    "Category": "Cable"
   },
   {
    "biller_id": "INTE00000NATHP",
-   "value": "Intermedia Cable Communication Pvt Ltd",
+   "label": "Intermedia Cable Communication Pvt Ltd",
    "value": "ICC Network",
    "is_fetch": 1,
    "Category": "Cable"
   },
   {
    "biller_id": "DENHATHWAY001",
-   "value": "Den Hathway Cable",
+   "label": "Den Hathway Cable",
    "is_fetch": 1,
    "Category": "Cable"
   },
   {
    "biller_id": "HATHWAY001",
-   "value": "Den Hathway Cable",
+   "label": "Den Hathway Cable",
    "is_fetch": 1,
    "Category": "Cable"
   },
   {
    "biller_id": "INDI00000NAT78",
-   "value": "INDigital",
+   "label": "INDigital",
    "value": "INDigital",
    "is_fetch": 0,
    "Category": "Cable"
   },
   {
    "biller_id": "BANK00000NATKB",
-   "value": "BoB Credit Card",
+   "label": "BoB Credit Card",
    "value": "BFSL",
    "is_fetch": 1,
    "Category": "CreditCard"
   },
   {
    "biller_id": "DISH00000NAT01",
-   "value": "Dish TV",
+   "label": "Dish TV",
    "value": "DISH TV DTH",
    "is_fetch": 0,
    "Category": "DTH"
   },
   {
    "biller_id": "TATASKY00NAT01",
-   "value": "Tata Sky",
+   "label": "Tata Sky",
    "value": "TATA SKY DTH",
    "is_fetch": 0,
    "Category": "DTH"
   },
   {
    "biller_id": "SUND00000NAT02",
-   "value": "Sun Direct TV",
+   "label": "Sun Direct TV",
    "value": "SUN DIRECT DTH",
    "is_fetch": 0,
    "Category": "DTH"
   },
   {
    "biller_id": "VIDEOCON0NAT01",
-   "value": "Videocon D2H",
+   "label": "Videocon D2H",
    "value": "Videocon DTH",
    "is_fetch": 0,
    "Category": "DTH"
   },
   {
    "biller_id": "AIRT00000NAT87",
-   "value": "Airtel DTH",
+   "label": "Airtel DTH",
    "value": "Airtel DTH",
    "is_fetch": 0,
    "Category": "DTH"
   },
   {
    "biller_id": "VAST00000NATLW",
-   "value": "Vastu Housing Finance Corporation Limited",
+   "label": "Vastu Housing Finance Corporation Limited",
    "value": "VHFCL - National",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "CAMD00000NATAI",
-   "value": "ZestMoney",
+   "label": "ZestMoney",
    "value": "Zest Money",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "DMIF00000NATMN",
-   "value": "DMI Finance Private Limited",
+   "label": "DMI Finance Private Limited",
    "value": "DMI",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "LOAN00000NATVP",
-   "value": "LOANTAP CREDIT PRODUCTS PRIVATE LIMITED",
+   "label": "LOANTAP CREDIT PRODUCTS PRIVATE LIMITED",
    "value": "LoanTap",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "MONE00000NATX1",
-   "value": "RupeeRedee",
+   "label": "RupeeRedee",
    "value": "RupeeRedee",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "SICR00000NATDG",
-   "value": "Kissht",
+   "label": "Kissht",
    "value": "Kissht",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "VISA00000NAT5A",
-   "value": "Kinara Capital",
+   "label": "Kinara Capital",
    "value": "Kinaara Capital",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "EASY00000MAH6N",
-   "value": "Easy Home Finance Limited",
+   "label": "Easy Home Finance Limited",
    "value": "EHFL",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "MUTH00000NAT0I",
-   "value": "Muthoot Microfin Limited",
+   "label": "Muthoot Microfin Limited",
    "value": "Muthoot Microfin Ltd",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "SHRI00000NAT23",
-   "value": "Shriram Transport Finance Company Limited",
+   "label": "Shriram Transport Finance Company Limited",
    "value": "STFC",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "AXIS00000NATN6",
-   "value": "Axis Finance Limited",
+   "label": "Axis Finance Limited",
    "value": "Axis Finance Ltd.",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "CARS00000NAT4G",
-   "value": "Cars24 Financial Services Private Limited",
+   "label": "Cars24 Financial Services Private Limited",
    "value": "Cars24",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "JAIN00000NATVC",
-   "value": "Jain Autofin",
+   "label": "Jain Autofin",
    "value": "Jain Autofin Private Limited",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "AUBA00000NATGM",
-   "value": "AU Bank Loan Repayment",
+   "label": "AU Bank Loan Repayment",
    "value": "AU Bank Loan Repayment",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "OXYZ00000NATSE",
-   "value": "Oxyzo Financial Services Pvt Ltd",
+   "label": "Oxyzo Financial Services Pvt Ltd",
    "value": "Oxyzo Financial Services Pvt Ltd",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "TOYO00000NAT59",
-   "value": "Toyota Financial Services",
+   "label": "Toyota Financial Services",
    "value": "TFS",
    "is_fetch": 0,
    "Category": "Loan"
   },
   {
    "biller_id": "ICIC00000NATKD",
-   "value": "ICICI Bank Ltd - Loans",
+   "label": "ICICI Bank Ltd - Loans",
    "value": "ICICI Bank Ltd",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "MUTH00000NATYF",
-   "value": "Muthoot Capital Services Ltd",
+   "label": "Muthoot Capital Services Ltd",
    "value": "Muthoot Capital Services Ltd",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "ANNA00000NATUO",
-   "value": "Annapurna Finance Private Limited-MFI",
+   "label": "Annapurna Finance Private Limited-MFI",
    "value": "Annapurna Finance Private Limited-MFI",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "FULL00000NAT8X",
-   "value": "Fullerton India Housing Finance Limited",
+   "label": "Fullerton India Housing Finance Limited",
    "value": "Fullerton India Housing Finance Limited",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "FULL00000NATD4",
-   "value": "Fullerton India credit company limited",
+   "label": "Fullerton India credit company limited",
    "value": "Fullerton India credit company limited",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "GUFI00000NATV8",
-   "value": "G U Financial Services Pvt Ltd",
+   "label": "G U Financial Services Pvt Ltd",
    "value": "GU Financial",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "AVAN00000NATHI",
-   "value": "Avanse Financial Services Ltd",
+   "label": "Avanse Financial Services Ltd",
    "value": "AFSL",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "BAID00000NATWG",
-   "value": "Baid Leasing and Finance",
+   "label": "Baid Leasing and Finance",
    "value": "BAID LEASING AND FINANCE",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "BERA00000NATOY",
-   "value": "BERAR Finance Limited",
+   "label": "BERAR Finance Limited",
    "value": "BERAR Finance Limited",
    "is_fetch": 0,
    "Category": "Loan"
   },
   {
    "biller_id": "OHMY00000NATFH",
-   "value": "OHMYLOAN",
+   "label": "OHMYLOAN",
    "value": "OHMY Loan Private Limited",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "OMLP00000NAT0A",
-   "value": "OMLP2P.COM",
+   "label": "OMLP2P.COM",
    "value": "OHMy Technologies Private Limited",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "ADAN00000NATO6",
-   "value": "Adani Capital Pvt Ltd",
+   "label": "Adani Capital Pvt Ltd",
    "value": "Adani Capital",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "ANNA00000NATMR",
-   "value": "Annapurna Finance Private Limited-MSME",
+   "label": "Annapurna Finance Private Limited-MSME",
    "value": "Annapurna Finance Pvt Ltd-MSME",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "FINC00000NAT3E",
-   "value": "Fincare Small Finance Bank",
+   "label": "Fincare Small Finance Bank",
    "value": "Fincare_bank",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "INDI00000NAT12",
-   "value": "India Shelter Finance Corporation Limited",
+   "label": "India Shelter Finance Corporation Limited",
    "value": "India Shelter Finance Corporation Ltd",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "KANA00000NATQV",
-   "value": "Kanakadurga Finance Limited",
+   "label": "Kanakadurga Finance Limited",
    "value": "Kanakadurga Finance Ltd",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "MAHI00000NATIC",
-   "value": "Mahindra Home Finance",
+   "label": "Mahindra Home Finance",
    "value": "Mahindra Rural Housing Finance Ltd",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "ALTU00000NATG5",
-   "value": "Altum Credo Home Finance",
+   "label": "Altum Credo Home Finance",
    "value": "Altum Credo Home Finance Private Limited",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "MAXV00000NAT33",
-   "value": "Maxvalue Credits And Investments Ltd",
+   "label": "Maxvalue Credits And Investments Ltd",
    "value": "Maxvalue Credits And Investments Ltd",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "SVAT00000NATUB",
-   "value": "Svatantra Microfin Private Limited",
+   "label": "Svatantra Microfin Private Limited",
    "value": "SMF - National",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "CRED00000NAT0U",
-   "value": "Credit Wise Capital",
+   "label": "Credit Wise Capital",
    "value": "Credit Wise Capital Private Limited",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "FLEX00000NAT3Z",
-   "value": "FlexiLoans",
+   "label": "FlexiLoans",
    "value": "Epimoney Private Limited",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "INDU00000NATQH",
-   "value": "INDUSIND BANK - CFD",
+   "label": "INDUSIND BANK - CFD",
    "value": "INDUSIND CFD LOANS",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "CHAI00000NATYY",
-   "value": "Chaitanya India Fin Credit Pvt Ltd",
+   "label": "Chaitanya India Fin Credit Pvt Ltd",
    "value": "Chaitanya_Finance",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "DIGA00000NAT3C",
-   "value": "Digamber Capfin Limited",
+   "label": "Digamber Capfin Limited",
    "value": "digamber capfin",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "MIDL00000NATIP",
-   "value": "Midland Microfin Ltd",
+   "label": "Midland Microfin Ltd",
    "value": "Midland",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "HERO00000NATI6",
-   "value": "Hero FinCorp Limited",
+   "label": "Hero FinCorp Limited",
    "value": "Hero FinCorp Limited",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "ASCE00000NATGK",
-   "value": "Ascend Capital",
+   "label": "Ascend Capital",
    "value": "Ascend Capital",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "DCBB00000NAT2K",
-   "value": "DCB Bank Loan Repayment",
+   "label": "DCB Bank Loan Repayment",
    "value": "DCBLOAN",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "EDUV00000NATF1",
-   "value": "Eduvanz Financing Pvt. Ltd.",
+   "label": "Eduvanz Financing Pvt. Ltd.",
    "value": "Eduvanz Financing Pvt. Ltd.",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "INDI00000NATQF",
-   "value": "India Home Loan Limited",
+   "label": "India Home Loan Limited",
    "value": "India Home Loan Limited",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "MINT00000NATUB",
-   "value": "Mintifi Finserve Private Limited",
+   "label": "Mintifi Finserve Private Limited",
    "value": "Mintifi Finserve Private Limited",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "NIDH00000NAT9K",
-   "value": "Nidhilakshmi Finance",
+   "label": "Nidhilakshmi Finance",
    "value": "Nidhilakshmi Finance",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "NMFI00000NATGX",
-   "value": "NM Finance",
+   "label": "NM Finance",
    "value": "NM Finance",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "OROB00000NAT7P",
-   "value": "Oroboro",
+   "label": "Oroboro",
    "value": "Oroboro",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "HIRA00000NATSP",
-   "value": "Hiranandani Financial Services Pvt Ltd",
+   "label": "Hiranandani Financial Services Pvt Ltd",
    "value": "Hiranandani Financial Services",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "HOME00000NATVX",
-   "value": "Home First Finance Company India Limited",
+   "label": "Home First Finance Company India Limited",
    "value": "Home First Finance",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "HOME00000NATWT",
-   "value": "Home Credit India Finance Pvt. Ltd",
+   "label": "Home Credit India Finance Pvt. Ltd",
    "value": "Home Credit",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "UJJI00000NATAW",
-   "value": "Ujjivan Small Finance Bank",
+   "label": "Ujjivan Small Finance Bank",
    "value": "Ujjivan Small Finance Bank",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "IIFL00000NAT5F",
-   "value": "IIFL Finance Limited",
+   "label": "IIFL Finance Limited",
    "value": "IIFL Finance Limited",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "IIFL00000NATMF",
-   "value": "IIFL Home Finance",
+   "label": "IIFL Home Finance",
    "value": "IIFL Home Finance",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "LIGH00000NATKW",
-   "value": "Light Microfinance Private Limited",
+   "label": "Light Microfinance Private Limited",
    "value": "LMF",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "MONE00000NAT7P",
-   "value": "MoneyTap",
+   "label": "MoneyTap",
    "value": "Tapstart Capital Pvt Ltd",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "CRED00000NAT35",
-   "value": "CreditAccess Grameen - Retail Finance",
+   "label": "CreditAccess Grameen - Retail Finance",
    "value": "CreditAccess Grameen - Retail Finance",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "CRED00000NAT8X",
-   "value": "CreditAccess Grameen - Microfinance",
+   "label": "CreditAccess Grameen - Microfinance",
    "value": "CreditAccess Grameen (Microfinance)",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "KHUS00000NAT1L",
-   "value": "Khush Housing Finance Pvt Ltd",
+   "label": "Khush Housing Finance Pvt Ltd",
    "value": "KHFL",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "TVSC00000NAT0T",
-   "value": "TVS Credit",
+   "label": "TVS Credit",
    "value": "TVS Credit",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "AXIS00000NATM1",
-   "value": "Axis Bank Limited - Retail Loan",
+   "label": "Axis Bank Limited - Retail Loan",
    "value": "Axis Bank Ltd - Retail Loan",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "INCR00000NATJG",
-   "value": "InCred",
+   "label": "InCred",
    "value": "InCred",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "POOJ00000NATWO",
-   "value": "Pooja Finelease LTD.",
+   "label": "Pooja Finelease LTD.",
    "value": "Pooja Finlease",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "STAS00000NATX1",
-   "value": "StashFin",
+   "label": "StashFin",
    "value": "EQX Analytics Private Limited",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "MUTHTGLDNBC0001",
-   "value": "Muthoot Gold Bullion Corporation",
+   "label": "Muthoot Gold Bullion Corporation",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "ADAN00000NATI9",
-   "value": "Adani Housing Finance",
+   "label": "Adani Housing Finance",
    "value": "Adani Housing Finance Private",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "BAJA00000NATP2",
-   "value": "Bajaj Auto Finance",
+   "label": "Bajaj Auto Finance",
    "value": "Bajaj Auto Finance",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "AGOR00000NATQL",
-   "value": "Agora Microfinance India Ltd - AMIL",
+   "label": "Agora Microfinance India Ltd - AMIL",
    "value": "Agora Microfinance India Ltd - AMIL",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "JANA00000NATV5",
-   "value": "Janakalyan Financial Services Private Limited",
+   "label": "Janakalyan Financial Services Private Limited",
    "value": "Janakalyan Financial Services Private Limited",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "MAHA00000NATSI",
-   "value": "Mahaveer Finance India Limited",
+   "label": "Mahaveer Finance India Limited",
    "value": "Mahaveer Finance India Limited",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "JAIN00000NATOA",
-   "value": "Jain Motor Finmart",
+   "label": "Jain Motor Finmart",
    "value": "Jain Motor Finmart",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "MUTH00000NATB0",
-   "value": "Muthoot Fincorp Ltd",
+   "label": "Muthoot Fincorp Ltd",
    "value": "Muthoot Fincorp Ltd",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "AXIS00000NATJD",
-   "value": "Axis Bank Limited-Microfinance",
+   "label": "Axis Bank Limited-Microfinance",
    "value": "Axis Bank Limited-Microfinance",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "ORAN00000NATJX",
-   "value": "Orange Retail Finance India Pvt Ltd",
+   "label": "Orange Retail Finance India Pvt Ltd",
    "value": "Orange Retail Finance India Pvt Ltd",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "VIST00000NAT6D",
-   "value": "Vistaar Financial services Private Limited",
+   "label": "Vistaar Financial services Private Limited",
    "value": "Vistaar Financial services Private Limited",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "BHAR00000NAT52",
-   "value": "Bharat Financial Inclusion Ltd",
+   "label": "Bharat Financial Inclusion Ltd",
    "value": "BFIL - NATIONAL",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "KOTA00000NATE1",
-   "value": "Kotak Mahindra Prime Limited",
+   "label": "Kotak Mahindra Prime Limited",
    "value": "Kotak Mahindra Prime Limited",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "MAHI00000NATKR",
-   "value": "Mahindra and Mahindra Financial Services Limited",
+   "label": "Mahindra and Mahindra Financial Services Limited",
    "value": "Mahindra and Mahindra Financial Services Limited",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "JOHN00000NATY9",
-   "value": "John Deere Financial India Private Limited",
+   "label": "John Deere Financial India Private Limited",
    "value": "John Deere Financial India Private Limited",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "MUTH00000NATOI",
-   "value": "Muthoot Finance",
+   "label": "Muthoot Finance",
    "value": "MFL",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "DVAR00000NAT2B",
-   "value": "Dvara Kshetriya Gramin Financials Private Limited",
+   "label": "Dvara Kshetriya Gramin Financials Private Limited",
    "value": "Dvara KGFS",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "TATA00000NATOM",
-   "value": "Tata Capital Housing Finance Limited",
+   "label": "Tata Capital Housing Finance Limited",
    "value": "Tata Capital Housing Finance Limited",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "NETA00000NATEN",
-   "value": "Netafim Agricultural Financing Agency Pvt. Ltd.",
+   "label": "Netafim Agricultural Financing Agency Pvt. Ltd.",
    "value": "NAFA",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "SMEC00000NATPI",
-   "value": "SMEcorner",
+   "label": "SMEcorner",
    "value": "SMEcorner",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "KOTA00000NATTW",
-   "value": "Kotak Mahindra Bank Ltd.-Loans",
+   "label": "Kotak Mahindra Bank Ltd.-Loans",
    "value": "Kotak Mahindra Bank Ltd.-Loans",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "SAMA00000NAT1C",
-   "value": "Samasta Microfinance Limited",
+   "label": "Samasta Microfinance Limited",
    "value": "Samasta Microfinance Limited",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "INDI00000NATZE",
-   "value": "Indiabulls Commercial Credit Ltd",
+   "label": "Indiabulls Commercial Credit Ltd",
    "value": "Indiabulls Commercial Credit Ltd",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "APTU00000NAT2L",
-   "value": "Aptus Value Housing Finance India Limited",
+   "label": "Aptus Value Housing Finance India Limited",
    "value": "APTUS",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "APTU00000NATP0",
-   "value": "Aptus Finance India Private Limited",
+   "label": "Aptus Finance India Private Limited",
    "value": "APTFI",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "NOVE00000NAT6M",
-   "value": "Novelty Finance Ltd",
+   "label": "Novelty Finance Ltd",
    "value": "Novelty Finance Ltd",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "THAZ00000NATR8",
-   "value": "Thazhayil Nidhi Ltd",
+   "label": "Thazhayil Nidhi Ltd",
    "value": "TNL",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "MITR00000NAT6L",
-   "value": "Mitron Capital",
+   "label": "Mitron Capital",
    "value": "MItron",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "X10F00000NATSA",
-   "value": "X10 Financial Services Limited",
+   "label": "X10 Financial Services Limited",
    "value": "X10 Financial Services Limited",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "YOGA00000NATLH",
-   "value": "Yogakshemam Loans Ltd",
+   "label": "Yogakshemam Loans Ltd",
    "value": "YOGLOANS",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "MUTH00000NATJO",
-   "value": "Muthoot Housing Finance Company Limited",
+   "label": "Muthoot Housing Finance Company Limited",
    "value": "MHFCL",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "ESAF00000NAT5J",
-   "value": "ESAF Small Finance Bank (Micro Loans)",
+   "label": "ESAF Small Finance Bank (Micro Loans)",
    "value": "ESAF Small Finance Bank (Micro Loans)",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "RAND00000NAT4D",
-   "value": "Rander Peoples Co Operative Bank Ltd",
+   "label": "Rander Peoples Co Operative Bank Ltd",
    "value": "Rander Peoples Co Operative Bank Ltd",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "SMIL00000NATGH",
-   "value": "SMILE Microfinance Limited",
+   "label": "SMILE Microfinance Limited",
    "value": "SMILE_Finance",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "FINO00000NATVP",
-   "value": "Finova Capital Private Ltd",
+   "label": "Finova Capital Private Ltd",
    "value": "Finova Capital Private Ltd",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "ADIT00000NATZ1",
-   "value": "Aditya Birla Finance Limited",
+   "label": "Aditya Birla Finance Limited",
    "value": "Aditya Birla Finance Limited",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "AYAA00000NAT5Y",
-   "value": "Ayaan Finserve India Private LTD",
+   "label": "Ayaan Finserve India Private LTD",
    "value": "Ayaan Finserve India Private LTD",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "SARV00000NATV8",
-   "value": "Sarvjan India Fintech Private Limited",
+   "label": "Sarvjan India Fintech Private Limited",
    "value": "Sarvjan India Fintech Private Limited",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "AADH00000NATPT",
-   "value": "Aadhar Housing Finance Limited",
+   "label": "Aadhar Housing Finance Limited",
    "value": "Aadhar Housing Finance Limited",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "IDFF00000NAT1B",
-   "value": "IDF Financial Services Private Limited",
+   "label": "IDF Financial Services Private Limited",
    "value": "IDF Financial Services",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "BAJA00000NATDK",
-   "value": "Bajaj Housing Finance Limited",
+   "label": "Bajaj Housing Finance Limited",
    "value": "BHFL - National",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "CENT00000NATSH",
-   "value": "Centrum Microcredit Limited",
+   "label": "Centrum Microcredit Limited",
    "value": "CML - National",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "INDO00000NATGP",
-   "value": "Indostar Capital Finance Limited - CV",
+   "label": "Indostar Capital Finance Limited - CV",
    "value": "ICFL-CV",
    "is_fetch": 1,
    "Category": "Loan"
   },
   {
    "biller_id": "CONBB0000PUN01",
-   "value": "Connect Broadband",
+   "label": "Connect Broadband",
    "value": "CONNECT BB",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "HATHWAY00NAT01",
-   "value": "Hathway Broadband",
+   "label": "Hathway Broadband",
    "value": "HATHWAY BB",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "TIKO00000NAT01",
-   "value": "Tikona Infinet Pvt Ltd",
+   "label": "Tikona Infinet Pvt Ltd",
    "value": "TIKONA BB",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "ACT000000NAT01",
-   "value": "ACT Fibernet",
+   "label": "ACT Fibernet",
    "value": "ACTFIBER",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "ATBROAD00NAT01",
-   "value": "Airtel Broadband",
+   "label": "Airtel Broadband",
    "value": "AIRTEL BB",
    "is_fetch": 0,
    "Category": "BroadBand"
   },
   {
    "biller_id": "NEXTRA000NAT01",
-   "value": "Nextra Broadband",
+   "label": "Nextra Broadband",
    "value": "NEXTRA BB",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "SPENET000NAT01",
-   "value": "Spectra",
+   "label": "Spectra",
    "value": "SPECTRA BB",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "TTN000000NAT01",
-   "value": "TTN BroadBand",
+   "label": "TTN BroadBand",
    "value": "TTN BB",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "ATBROAD00NAT02",
-   "value": "Airtel Broadband (Fetch & Pay)",
+   "label": "Airtel Broadband (Fetch & Pay)",
    "value": "AIRTEL BB",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "ASIABB000NAT01",
-   "value": "Asianet Broadband (Old)",
+   "label": "Asianet Broadband (Old)",
    "value": "ASIABB",
    "is_fetch": 0,
    "Category": "BroadBand"
   },
   {
    "biller_id": "COMWBB000NAT01",
-   "value": "Comway Broadband",
+   "label": "Comway Broadband",
    "value": "COMWBB",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "FUSNBB000NAT01",
-   "value": "Fusionnet Web Services Private Limited",
+   "label": "Fusionnet Web Services Private Limited",
    "value": "FUSNBB",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "DVOIS0000NAT02",
-   "value": "ION",
+   "label": "ION",
    "value": "ION BB",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "INST00000CHHZV",
-   "value": "Instalinks",
+   "label": "Instalinks",
    "value": "INTAL BB",
    "is_fetch": 0,
    "Category": "BroadBand"
   },
   {
    "biller_id": "MNET00000ASM5W",
-   "value": "M-NET Fiber Fast",
+   "label": "M-NET Fiber Fast",
    "value": "MNET",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "DENB00000NATIO",
-   "value": "DEN Broadband",
+   "label": "DEN Broadband",
    "value": "DEN",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "TIMB00000NATRQ",
-   "value": "Timbl Broadband",
+   "label": "Timbl Broadband",
    "value": "Timbl",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "INST00000BIHKL",
-   "value": "Instanet Broadband",
+   "label": "Instanet Broadband",
    "value": "INSTANBB",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "VFIB00000NATJJ",
-   "value": "Vfibernet Broadband",
+   "label": "Vfibernet Broadband",
    "value": "VFIB",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "NETP00000PUNS8",
-   "value": "Netplus Broadband",
+   "label": "Netplus Broadband",
    "value": "NETPB",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "FLAS00000NATVZ",
-   "value": "Flash Fibernet",
+   "label": "Flash Fibernet",
    "value": "FLAFBB",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "EXCE00000NATDP",
-   "value": "Excell Broadband",
+   "label": "Excell Broadband",
    "value": "ExcellBB",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "SWIF00000NATVE",
-   "value": "Swifttele Enterprises Private Limited",
+   "label": "Swifttele Enterprises Private Limited",
    "value": "Swift Tele",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "ALLI00000NATHB",
-   "value": "Alliance Broadband Services Pvt. Ltd.",
+   "label": "Alliance Broadband Services Pvt. Ltd.",
    "value": "Alliance Broadband Services Pvt. Ltd.",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "RURA00000NAT9E",
-   "value": "AirJaldi - Rural Broadband",
+   "label": "AirJaldi - Rural Broadband",
    "value": "AirJaldi - Rural Broadband",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "SKYL00000NATJB",
-   "value": "Skylink Fibernet Private Limited",
+   "label": "Skylink Fibernet Private Limited",
    "value": "Skylink Fibernet Private Limited",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "ASIA00000NAT6O",
-   "value": "Asianet Broadband",
+   "label": "Asianet Broadband",
    "value": "Asianet Broadband",
    "is_fetch": 1,
    "Category": "BroadBand"
   },
   {
    "biller_id": "HPCL00000NAT01",
-   "value": "HP Gas (HPCL)",
+   "label": "HP Gas (HPCL)",
    "value": "HPCL",
    "is_fetch": 1,
    "Category": "LpgGas"
   },
   {
    "biller_id": "BHAR00000NATR4",
-   "value": "Bharat Gas (BPCL)",
+   "label": "Bharat Gas (BPCL)",
    "value": "BPCL",
    "is_fetch": 1,
    "Category": "LpgGas"
   },
   {
    "biller_id": "INDI00000NATT5",
-   "value": "Indane Gas (Indian Oil)",
+   "label": "Indane Gas (Indian Oil)",
    "value": "IOCL",
    "is_fetch": 1,
    "Category": "LpgGas"
   },
   {
    "biller_id": "DLJB00000DEL01",
-   "value": "Delhi Jal Board",
+   "label": "Delhi Jal Board",
    "value": "DJB",
    "is_fetch": 1,
    "Category": "Water"
   },
   {
    "biller_id": "MCG000000GUR01",
-   "value": "Municipal Corporation of Gurugram",
+   "label": "Municipal Corporation of Gurugram",
    "value": "MCG",
    "is_fetch": 1,
    "Category": "Water"
   },
   {
    "biller_id": "UJS000000UTT01",
-   "value": "Uttarakhand Jal Sansthan",
+   "label": "Uttarakhand Jal Sansthan",
    "value": "UJS",
    "is_fetch": 1,
    "Category": "Water"
   },
   {
    "biller_id": "BWSSB0000KAR01",
-   "value": "Bangalore Water Supply and Sewerage Board",
+   "label": "Bangalore Water Supply and Sewerage Board",
    "value": "BWSSB",
    "is_fetch": 1,
    "Category": "Water"
   },
   {
    "biller_id": "HMWSS0000HYD01",
-   "value": "Hyderabad Metropolitan Water Supply and Sewerage Board",
+   "label": "Hyderabad Metropolitan Water Supply and Sewerage Board",
    "value": "HMWSSB",
    "is_fetch": 1,
    "Category": "Water"
   },
   {
    "biller_id": "MCJ000000PUN01",
-   "value": "Municipal Corporation Jalandhar",
+   "label": "Municipal Corporation Jalandhar",
    "value": "MCJ",
    "is_fetch": 1,
    "Category": "Water"
   },
   {
    "biller_id": "MCL000000PUN01",
-   "value": "Municipal Corporation Ludhiana - Water",
+   "label": "Municipal Corporation Ludhiana - Water",
    "value": "MCL",
    "is_fetch": 1,
    "Category": "Water"
   },
   {
    "biller_id": "NDMC00000DEL01",
-   "value": "New Delhi Municipal Council (NDMC) - Water",
+   "label": "New Delhi Municipal Council (NDMC) - Water",
    "value": "NDMC WATER",
    "is_fetch": 1,
    "Category": "Water"
   },
   {
    "biller_id": "SMC000000GUJ01",
-   "value": "Surat Municipal Corporation - Water",
+   "label": "Surat Municipal Corporation - Water",
    "value": "SMC",
    "is_fetch": 1,
    "Category": "Water"
   },
   {
    "biller_id": "UNN000000MAP01",
-   "value": "Ujjain Nagar Nigam - PHED",
+   "label": "Ujjain Nagar Nigam - PHED",
    "value": "PHEDU",
    "is_fetch": 1,
    "Category": "Water"
   },
   {
    "biller_id": "PUNE00000MAHSE",
-   "value": "Pune Municipal Corporation - Water",
+   "label": "Pune Municipal Corporation - Water",
    "value": "PMC",
    "is_fetch": 1,
    "Category": "Water"
   },
   {
    "biller_id": "UITWOB000BHW02",
-   "value": "Urban Improvement Trust (UIT) - Bhiwadi",
+   "label": "Urban Improvement Trust (UIT) - Bhiwadi",
    "value": "UIT BHIWADI",
    "is_fetch": 1,
    "Category": "Water"
   },
   {
    "biller_id": "GWMC00000WGL01",
-   "value": "Greater Warangal Municipal Corporation - Water",
+   "label": "Greater Warangal Municipal Corporation - Water",
    "value": "GWMC",
    "is_fetch": 1,
    "Category": "Water"
   },
   {
    "biller_id": "RMC000000JHA01",
-   "value": "Ranchi Municipal Corporation",
+   "label": "Ranchi Municipal Corporation",
    "value": "RMC",
    "is_fetch": 1,
    "Category": "Water"
   },
   {
    "biller_id": "SMC000000DNH01",
-   "value": "Silvassa Municipal Council",
+   "label": "Silvassa Municipal Council",
    "value": "SMC",
    "is_fetch": 1,
    "Category": "Water"
   },
   {
    "biller_id": "MCA000000PUN01",
-   "value": "Municipal Corporation of Amritsar",
+   "label": "Municipal Corporation of Amritsar",
    "value": "MCA",
    "is_fetch": 1,
    "Category": "Water"
   },
   {
    "biller_id": "HUDA00000HAR01",
-   "value": "Haryana Urban Development Authority",
+   "label": "Haryana Urban Development Authority",
    "value": "HSVP",
    "is_fetch": 1,
    "Category": "Water"
   },
   {
    "biller_id": "MCC000000KAR01",
-   "value": "Mysuru City Corporation",
+   "label": "Mysuru City Corporation",
    "value": "MCC",
    "is_fetch": 1,
    "Category": "Water"
   },
   {
    "biller_id": "PCMC00000MAH01",
-   "value": "Pimpri Chinchwad Municipal Corporation(PCMC)",
+   "label": "Pimpri Chinchwad Municipal Corporation(PCMC)",
    "value": "PCMC",
    "is_fetch": 1,
    "Category": "Water"
   },
   {
    "biller_id": "PMC000000PUN01",
-   "value": "Punjab Municipal Corporations\/Councils",
+   "label": "Punjab Municipal Corporations\/Councils",
    "value": "PMIDC",
    "is_fetch": 1,
    "Category": "Water"
   },
   {
    "biller_id": "DELH00000DEL6Q",
-   "value": "Delhi Development Authority (DDA) - Water",
+   "label": "Delhi Development Authority (DDA) - Water",
    "value": "DDA",
    "is_fetch": 1,
    "Category": "Water"
   },
   {
    "biller_id": "DEPA00000MIZ9U",
-   "value": "Department of Public Health Engineering-Water\t Mizoram",
+   "label": "Department of Public Health Engineering-Water\t Mizoram",
    "value": 0,
    "is_fetch": "Water"
   },
   {
    "biller_id": "KERA00000KERMO",
-   "value": "Kerala Water Authority (KWA)",
+   "label": "Kerala Water Authority (KWA)",
    "value": "KWA",
    "is_fetch": 1,
    "Category": "Water"
   },
   {
    "biller_id": "MUNI00000CHANI",
-   "value": "Municipal Corporation Chandigarh",
+   "label": "Municipal Corporation Chandigarh",
    "value": "MCC",
    "is_fetch": 1,
    "Category": "Water"
   },
   {
    "biller_id": "KALY00000THA3E",
-   "value": "Kalyan Dombivali Municipal Corporation - Water",
+   "label": "Kalyan Dombivali Municipal Corporation - Water",
    "value": "KDMC",
    "is_fetch": 1,
    "Category": "Water"
   },
   {
    "biller_id": "MADH00000MAPJV",
-   "value": "Madhya Pradesh Urban (e-Nagarpalika) - Water",
+   "label": "Madhya Pradesh Urban (e-Nagarpalika) - Water",
    "value": "e NagarPalika Madhya Pradesh Water",
    "is_fetch": 1,
    "Category": "Water"
   },
   {
    "biller_id": "PORT00000ANI1K",
-   "value": "Port Blair Municipal Council - Water",
+   "label": "Port Blair Municipal Council - Water",
    "value": "PBMC - Water",
    "is_fetch": 1,
    "Category": "Water"
   },
   {
    "biller_id": "VASA00000THAE9",
-   "value": "Vasai Virar Municipal Corporation - Water",
+   "label": "Vasai Virar Municipal Corporation - Water",
    "value": "VVCMC WATER",
    "is_fetch": 1,
    "Category": "Water"
   },
   {
    "biller_id": "JALK00000UTP0P",
-   "value": "Jalkal Vibhag Nagar Nigam Prayagraj",
+   "label": "Jalkal Vibhag Nagar Nigam Prayagraj",
    "value": "Prayagraj Nagar Nigam-Water",
    "is_fetch": 1,
    "Category": "Water"
   },
   {
    "biller_id": "NAGA00000ALG45",
-   "value": "Nagar Nigam Aligarh",
+   "label": "Nagar Nigam Aligarh",
    "value": "Nagar Nigam Aligarh",
    "is_fetch": 1,
    "Category": "Water"
   },
   {
    "biller_id": "PUBL00000HARBB",
-   "value": "Public Health Engineering Department\t Haryana",
+   "label": "Public Health Engineering Department\t Haryana",
    "value": 0,
    "is_fetch": "Water"
   },
   {
    "biller_id": "KOLH00000MAHN3",
-   "value": "Kolhapur Municipal Corporation - Water Tax",
+   "label": "Kolhapur Municipal Corporation - Water Tax",
    "value": "KMCWT",
    "is_fetch": 1,
    "Category": "Water"
   },
   {
    "biller_id": "VATV00000GUJ91",
-   "value": "Vatva Industrial Estate Infrastructure Development Ltd",
+   "label": "Vatva Industrial Estate Infrastructure Development Ltd",
    "value": "Vatva Industrial Estate Infrastructure Development",
    "is_fetch": 1,
    "Category": "Water"
   },
   {
    "biller_id": "MUNI00000HARG6",
-   "value": "Municipal Corporation of Gurugram (MCG) - Water",
+   "label": "Municipal Corporation of Gurugram (MCG) - Water",
    "value": "MCG WATER",
    "is_fetch": 1,
    "Category": "Water"
   },
   {
    "biller_id": "MTNL00000DEL01",
-   "value": "MTNL Delhi",
+   "label": "MTNL Delhi",
    "value": "MTNL DEL LL POSTPAID",
    "is_fetch": 1,
    "Category": "Landline"
   },
   {
    "biller_id": "MTNL00000MUM01",
-   "value": "MTNL Mumbai",
+   "label": "MTNL Mumbai",
    "value": "MTNL LL POSTPAID",
    "is_fetch": 1,
    "Category": "Landline"
   },
   {
    "biller_id": "ATLLI0000NAT01",
-   "value": "Airtel Landline",
+   "label": "Airtel Landline",
    "value": "AIRTEL LLI POSTPAID",
    "is_fetch": 0,
    "Category": "Landline"
   },
   {
    "biller_id": "TATADLLI0NAT01",
-   "value": "Tata Teleservices",
+   "label": "Tata Teleservices",
    "value": "TATADLLI",
    "is_fetch": 1,
    "Category": "Landline"
   },
   {
    "biller_id": "ATLLI0000NAT02",
-   "value": "Airtel Landline (Fetch & Pay)",
+   "label": "Airtel Landline (Fetch & Pay)",
    "value": "AIRTEL LLI POSTPAID",
    "is_fetch": 1,
    "Category": "Landline"
   },
   {
    "biller_id": "BSNL00000NAT5C",
-   "value": "BSNL Landline - Individual",
+   "label": "BSNL Landline - Individual",
    "value": "BSNLROB",
    "is_fetch": 1,
    "Category": "Landline"
   },
   {
    "biller_id": "BSNL00000NATPZ",
-   "value": "BSNL Landline - Corporate",
+   "label": "BSNL Landline - Corporate",
    "value": "BSNLCOB",
    "is_fetch": 1,
    "Category": "Landline"
   },
   {
    "biller_id": "APCPDCL0000AP01",
-   "value": "Central Power Distribution Company Ltd. of Andra Pradesh (APCPDCL)",
+   "label": "Central Power Distribution Company Ltd. of Andra Pradesh (APCPDCL)",
    "value": "APCPDCL",
    "is_fetch": 0,
    "Category": "Electricity"
   },
   {
    "biller_id": "APEPDCL0000AP02",
-   "value": "Eastern Power Distribution Co Ltd. of Andra Pradesh (APEPDCL)",
+   "label": "Eastern Power Distribution Co Ltd. of Andra Pradesh (APEPDCL)",
    "value": "APEPDCL",
    "is_fetch": 0,
    "Category": "Electricity"
   },
   {
    "biller_id": "APSPDCL0000AP03",
-   "value": "Southern Power Distribution Co Ltd. of Andra Pradesh (APSPDCL)",
+   "label": "Southern Power Distribution Co Ltd. of Andra Pradesh (APSPDCL)",
    "value": "APSPDCL",
    "is_fetch": 0,
    "Category": "Electricity"
   },
   {
    "biller_id": "TSNPDCL0000T01",
-   "value": "Northern Power Distribution of Telangana Ltd (TSNPDCL)",
+   "label": "Northern Power Distribution of Telangana Ltd (TSNPDCL)",
    "value": "TSNPDCL",
    "is_fetch": 0,
    "Category": "Electricity"
@@ -2972,70 +2971,70 @@ import url from "@utils/api/server_url";
     "OperatorName": "BSNL DC",
     "OperatorCode": "BDC",
     "Category": "Datacard",
-    "value": "BSNL DC",
+    "label": "BSNL DC",
    },
    {
     "S No": 75,
     "OperatorName": "MTNL Delhi DC",
     "OperatorCode": "MDDC",
     "Category": "Datacard",
-    "value": "MTNL Delhi DC"
+    "label": "MTNL Delhi DC"
    },
    {
     "S No": 76,
     "OperatorName": "MTNL Mumbai DC",
     "OperatorCode": "MMDC",
     "Category": "Datacard",
-    "value": "MTNL Mumbai DC"
+    "label": "MTNL Mumbai DC"
    },
    {
     "S No": 77,
     "OperatorName": "MTS Mblaze",
     "OperatorCode": "MTZ",
     "Category": "Datacard",
-    "value": "MTS Mblaze"
+    "label": "MTS Mblaze"
    },
    {
     "S No": 78,
     "OperatorName": "MTS Mbrowse",
     "OperatorCode": "MTW",
     "Category": "Datacard",
-    "value": "MTS Mbrowse"
+    "label": "MTS Mbrowse"
    },
    {
     "S No": 79,
     "OperatorName": "Reliance NetConnect 1X",
     "OperatorCode": "RN",
     "Category": "Datacard",
-    "value": "Reliance NetConnect 1X"
+    "label": "Reliance NetConnect 1X"
    },
    {
     "S No": 80,
     "OperatorName": "Reliance NetConnect 3G",
     "OperatorCode": "RNG",
     "Category": "Datacard",
-    "value": "Reliance NetConnect 3G"
+    "label": "Reliance NetConnect 3G"
    },
    {
     "S No": 81,
     "OperatorName": "Reliance NetConnect+",
     "OperatorCode": "RNC",
     "Category": "Datacard",
-    "value": "Reliance NetConnect+"
+    "label": "Reliance NetConnect+"
    },
    {
     "S No": 82,
     "OperatorName": "Tata Photon Whiz",
     "OperatorCode": "TPW",
     "Category": "Datacard",
-    "value": "Tata Photon Whiz"
+    "label": "Tata Photon Whiz"
    },
    {
     "S No": 83,
     "OperatorName": "Tata Photon+",
     "OperatorCode": "TPP",
     "Category": "Datacard",
-    "value": "Tata Photon+"
+    "label": "Tata Photon+"
    }
  ]
 
@@ -3288,9 +3287,9 @@ export const circleCode = [
     const queryClient = useQueryClient();
 
     const getOperatorDetails = async (data:any) => {
-      console.log('data before',`${url}/${API_ENDPOINTS.OPERATOR}`)
-      const { data: response } = await http.post(`${url}/${API_ENDPOINTS.OPERATOR}`, data);
-      console.log('data after',response)
+
+      const { data: response } = await http.post(API_ENDPOINTS.OPERATOR, data);
+      
       return response;
     };
 
@@ -3306,6 +3305,25 @@ export const circleCode = [
     }
 
     console.log('operator',plans)
+
+    const { mutate: mutatePlan } = useMutation(getRechargePlans, {
+      onSuccess: data => {
+        setPlans(data);
+        addOnPlansList();
+        setLoading(false);
+        // setAddOnPlans(data);
+        // console.log('operator',data);
+      },
+
+      onError: () => {
+        alert("error")
+        setLoading(false)
+      },
+
+      // onSettled: () => {
+      //   queryClient.invalidateQueries(API_ENDPOINTS.RECHARGE_PLANS);
+      // }
+    });
 
     const { mutate: mutateOperator } = useMutation(getOperatorDetails, {
 
@@ -3324,27 +3342,6 @@ export const circleCode = [
       //   queryClient.invalidateQueries(API_ENDPOINTS.OPERATOR);
       // }
     });
-
-    const { mutate: mutatePlan } = useMutation(getRechargePlans, {
-      onSuccess: data => {
-        setPlans(data);
-        addOnPlansList();
-        setLoading(false);
-        // setAddOnPlans(data);
-        // console.log('operator',data);
-      },
-
-      onError: (error) => {
-        alert(error.message)
-        setLoading(false)
-      },
-
-      // onSettled: () => {
-      //   queryClient.invalidateQueries(API_ENDPOINTS.RECHARGE_PLANS);
-      // }
-    });
-
-    
 
     const onSubmit = async  (value:any) => {
       const opr = {
