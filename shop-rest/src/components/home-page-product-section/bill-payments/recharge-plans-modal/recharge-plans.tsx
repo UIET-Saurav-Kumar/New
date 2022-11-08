@@ -935,7 +935,7 @@ export default function RechargePlans(plans: { data: { plans: any; }; },operator
 
                 <div className='h-screen overflow-y-scroll grid grid-cols-1 lg:grid-cols-1  items-start w-full'>
 
-                <div className=' scrollbar-hide hidden lg:flex  overflow-x-scroll  w-full  text-gray-700 text-xs   sm:text-sm  items-center     font-light    '>
+                <div className=' scrollbar-hide hidden lg:flex lg:sticky lg:top-0 lg:z-50 bg-white  overflow-x-scroll  w-full  text-gray-700 text-xs   sm:text-sm  items-center     font-light    '>
 
                     {
                         response?.plans?.map((list:any,key)=>
@@ -958,7 +958,7 @@ export default function RechargePlans(plans: { data: { plans: any; }; },operator
                     {
                         response?.plans?.map((list:any,key)=>
                             <div onClick={event=> handlePlan(event,key)} key={key} 
-                                className={` ${index == key ? ' border-b-4 border-blue-400   ' : 'hover:bg-gray-50 border-b-4 border-white '} cursor-pointer p-2 flex  items-center text-center text-black `}>
+                                className={` ${index == key ? ' border-b-4 border-blue-400   ' : 'hover:bg-gray-50 border-b-4 border-white '} cursor-pointer p-2 flex    items-center text-center text-black `}>
                                 <li className='list-none' >
                                     <span  className={` ${index == key ? 'text-gray-800 font-semibold' : 'text-gray-600 font-semibold'}   cursor-pointer   flex flex-col  whitespace-nowrap`}>
                                         {list?.group_name}
@@ -977,7 +977,7 @@ export default function RechargePlans(plans: { data: { plans: any; }; },operator
 
                         </div> */}
 
-                        <div className=''>
+                        <div className=' '>
                             {/* <Table
                             //@ts-ignore
                             columns={columns}
@@ -987,7 +987,7 @@ export default function RechargePlans(plans: { data: { plans: any; }; },operator
                             // scroll={{ x: 1000 }}
                             /> */}
 
-                            <table className='w-full flex items-center justify-between mt-4'>
+                            <table className='w-full flex overflow-x-scroll items-center justify-between mt-4'>
                                <tr className='flex flex-col items-center cursor-pointer  border-b space-y-3 justify-around w-full '>
                                     <th className=''>Talktime</th>
                                         {

@@ -8,7 +8,7 @@ import Select from '@components/ui/select/select'
 import http from '@utils/api/http'
 import React from 'react'
 import { useEffect,useState } from 'react'
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient,enabled } from 'react-query';
 import { API_ENDPOINTS } from "@utils/api/endpoints";
 import ProductFeedLoader from '@components/ui/loaders/product-feed-loader'
 import { useQuery } from "react-query";
@@ -3294,6 +3294,12 @@ export const circleCode = [
       return response;
     };
 
+      const useOperatorQuery = (data)=> {
+      return useQuery('',(data)=>
+      getOperatorDetails(data)
+      )
+    }
+
     const getRechargePlans = async (data:any) => {
       const { data: plans } = await http.post(API_ENDPOINTS.RECHARGE_PLANS, data);
       // plans?.length && setLoading(false);
@@ -3338,10 +3344,12 @@ export const circleCode = [
         alert(error.message)
         setLoading(false)
       },
+      
+      onSettled: () => {
+        queryClient.invalidateQueries(API_ENDPOINTS.RECHARGE_PLANS);
+      },
 
-      // onSettled: () => {
-      //   queryClient.invalidateQueries(API_ENDPOINTS.RECHARGE_PLANS);
-      // }
+      
     });
 
     
@@ -3461,6 +3469,7 @@ export const circleCode = [
               // value={operator.msg == 'Success'? operator.operator}
               options={mobileOperator} />
           </div>
+
           <div className='flex-1 flex-col'>
             <Label> Circle </Label>
             <Select label='circle'
@@ -3472,6 +3481,7 @@ export const circleCode = [
               // value={operator?.msg === 'Success' && operator?.circle}
               options={circleCode} />
           </div>
+
           <div className='relative flex-1 items-center'>
             <Input label='Amount'
               variant={''}

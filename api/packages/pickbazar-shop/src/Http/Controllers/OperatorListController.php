@@ -20,7 +20,7 @@ class OperatorListController extends CoreController
 {
    
     public function operatorList(Request $request){
-      // return $request->mobile_no;
+         // return $request->mobile_no;
         // $CURLOPT_POSTFIELDS =  $request->api_fields;
 
         // $response = RechargeDetailsHelper::getRechargeDetails(json_encode($CURLOPT_POSTFIELDS));
