@@ -1,15 +1,31 @@
+
 import React from 'react';
 import Image from 'next/image';
+import  Link from 'next/link'
+import { ROUTES } from "@utils/routes";
+
+const inputFields = [
+
+  'Name of Owner:',
+ ' Vehicle Number:',
+  'Date of Expiry of previous insurance:',
+  'Insured Value (IDV):',
+  
+  ]
+
 
 export default function BikeInsurance({view,click,width,height,label,...props } :any) {
 
   return (
 
-    <div onClick={view}  
-         className ={`${click ? 'border border-indigo-700 w-full cursor-pointer  shadow-lg rounded-lg text-center' : 'w-full cursor-pointer border rounded-lg text-center'  }
-                    ${props.cn }`}>
+    <Link href='/bike-insurance'>
+
+       <div onClick={view}  
+            className = {`${click ? 'border border-indigo-700 w-full cursor-pointer  shadow-lg rounded-lg text-center' : 'w-full cursor-pointer border rounded-lg text-center'  }
+                         ${props.cn }`} >
         
-          <Image priority={true}   
+          <Image 
+            priority={true}   
             src='/insurance/biker.png' 
             layout='intrinsic'
             objectFit='contain'
@@ -24,7 +40,8 @@ export default function BikeInsurance({view,click,width,height,label,...props } 
           {label}
         </span>
 
-    </div>
+      </div>
+    </Link>
 
   )
 }

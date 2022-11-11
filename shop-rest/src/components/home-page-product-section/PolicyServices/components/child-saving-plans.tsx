@@ -9,7 +9,8 @@ export default function ChildSavingsPlans({click,view,width,height,label,...prop
 
   return (
 
-        <div onClick={view}  className ={`${click ? 'border border-indigo-700 w-full cursor-pointer  shadow-lg rounded-lg text-center' : 'w-full cursor-pointer border rounded-lg text-center' } ${props?.cn}`}>
+        <div onClick={view}  
+        className ={`text-center active:border-gray-400 w-full cursor-pointer border rounded-lg text-center' } ${props?.cn}`}>
             
             <Image priority={true} src='/insurance/saving.png' 
               layout='intrinsic'

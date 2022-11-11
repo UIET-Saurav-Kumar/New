@@ -3295,10 +3295,12 @@ export const circleCode = [
     };
 
       const useOperatorQuery = (data)=> {
-      return useQuery('',(data)=>
+      return useQuery('operator-details',(data)=>
       getOperatorDetails(data)
       )
     }
+
+    // const {data,isLoading} = useOperatorQuery();
 
     const getRechargePlans = async (data:any) => {
       const { data: plans } = await http.post(API_ENDPOINTS.RECHARGE_PLANS, data);
@@ -3307,14 +3309,29 @@ export const circleCode = [
       return plans;
     };
 
+    const rechargePlanQuery = (data)=>{
+        return useQuery('recharge-plans',(data)=>
+        getRechargePlans(data),
+         )
+        
+    }
+
+    const {data:rechargePlans,fetchStatus} = useQuery({
+      queryKey: ['recharge-plans',rechargePrams],
+      queryFn: rechargePlanQuery,
+    })
+
+    const rechargePrams = {'operator': operatorName,
+                            'circle': circleName}
+
     function handleClick()  {
-        return   openModal('BILL_PAYMENT')
+        return  openModal('BILL_PAYMENT')
     }
 
     console.log('operator',plans)
 
     const { mutate: mutateOperator } = useMutation(getOperatorDetails, {
-
+      
       onSuccess: (data) => {
         setOperator(data)
         setOperatorName(data?.operator)
@@ -3326,9 +3343,10 @@ export const circleCode = [
         alert(error?.msg)
       },
 
-      // onSettled: () => {
-      //   queryClient.invalidateQueries(API_ENDPOINTS.OPERATOR);
-      // }
+      onSettled: () => {
+        queryClient.invalidateQueries(API_ENDPOINTS.OPERATOR);
+      }
+      
     });
 
     const { mutate: mutatePlan } = useMutation(getRechargePlans, {
@@ -3349,23 +3367,24 @@ export const circleCode = [
         queryClient.invalidateQueries(API_ENDPOINTS.RECHARGE_PLANS);
       },
 
-      
     });
 
     
 
-    const onSubmit = async  (value:any) => {
+    const onSubmit = (value:any) => {
       const opr = {
         'mobile_no': value,
       }
-      
+
       mutateOperator(opr);
 
-      const plan =  {
-        'operator' :  operatorName,
-        'circle'   :  circleName,
-      };
+      const plan = {
+        'operator': operatorName,
+        'circle': circleName,
+      }
+
       mutatePlan(plan);
+    //  await getOperatorDetails();
     };
 
     // const submitOperator= async () => {
@@ -3374,24 +3393,23 @@ export const circleCode = [
 
     // console.log('operator', operator?.operator,operator?.circle)
 
-     function callApi(value:any) {
+    function callApi(value:any) {
       plans == null ? setLoading(true) : setLoading(false)
       setPhoneNumber(value);
       // console.log('operator',value.length);
       onSubmit(value);
-     }
+    }
 
     const handleOnChange = (e: any) => {
-      setPlans(null);
-      setOperator(null);
-      setOperatorName(null);
-      setCircleName(null);
-      
-    //  e.preventDefault();
-      // setPopularPlans('')
+       // e.preventDefault();
+      // setPopularPlans('');
       setPhoneNumber(e.target.value);
       const value = e.target.value;
       value.toString().length === 10 && callApi(value);
+      setOperator(null);
+      setOperatorName(null);
+      setCircleName(null);
+      setPlans(null);
     };
 
     useEffect(()=>{
@@ -3407,7 +3425,7 @@ export const circleCode = [
       return  el?.group_name == 'Special Recharge' ? el  : null ;
     });
 
-    const specialRechargeList = popularPlans?.map((i:any)=> i?.plans) ;
+    const specialRechargeList = popularPlans?.length && popularPlans?.map((i:any)=> i?.plans) ;
 
     console.log('allPlans',  AddOnPlans);
 
@@ -3557,6 +3575,9 @@ export const circleCode = [
                      onClick={()=>handlePlanDetails(operatorName,circleName)}  
                      key={index}
                      className = 'cursor-pointer flex flex-col tracking-wide bg-white shadow-lg border mx-2 rounded space-y-2    p-3'>
+                     <span  className='font-bold text-sm  text-gray-900 whitespace-nowrap'>
+                      { plan?.plan_name}
+                    </span>
                     <span  className='font- text-sm  text-gray-900 whitespace-nowrap'>
                       {'₹'+ plan?.price}
                     </span>

@@ -1,8 +1,8 @@
 import Input from '@components/ui/input'
 import Select from '@components/ui/select/select';
 import React, { useState } from 'react';
-import { operators } from '@components/home-page-product-section/bill-payments/forms/mobile-recharge-form';
-import { cirleCode } from '@components/home-page-product-section/bill-payments/forms/mobile-recharge-form';
+import { operators } from '@components/home-page-product-section/bill-payment-services/forms/mobile-recharge-form';
+import { cirleCode } from '@components/home-page-product-section/bill-payment-services/forms/mobile-recharge-form';
 import { ArrowCircleRightIcon } from '@heroicons/react/outline';
 import Table from 'rc-table';
 import { useIsRTL } from "@utils/locals";

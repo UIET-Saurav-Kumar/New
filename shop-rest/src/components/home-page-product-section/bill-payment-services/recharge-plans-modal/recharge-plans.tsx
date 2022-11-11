@@ -1,8 +1,8 @@
 import Input from '@components/ui/input'
 import Select from '@components/ui/select/select';
 import React, { useState } from 'react';
-import { operators } from '@components/home-page-product-section/bill-payments/forms/mobile-recharge-form';
-import { cirleCode } from '@components/home-page-product-section/bill-payments/forms/mobile-recharge-form';
+import { operators } from '@components/home-page-product-section/bill-payment-services/forms/mobile-recharge-form';
+import { cirleCode } from '@components/home-page-product-section/bill-payment-services/forms/mobile-recharge-form';
 import { ArrowCircleRightIcon } from '@heroicons/react/outline';
 import Table from 'rc-table';
 import { useIsRTL } from "@utils/locals";
@@ -935,17 +935,17 @@ export default function RechargePlans(plans: { data: { plans: any; }; },operator
 
                 <div className='h-screen overflow-y-scroll grid grid-cols-1 lg:grid-cols-1  items-start w-full'>
 
-                <div className=' scrollbar-hide hidden lg:flex lg:sticky lg:top-0 lg:z-50 bg-white  overflow-x-scroll  w-full  text-gray-700 text-xs   sm:text-sm  items-center     font-light    '>
+                <div className='scrollbar-hide hidden lg:flex lg:sticky lg:top-0 lg:z-50 bg-white  overflow-x-scroll  w-full  text-gray-700 text-xs   sm:text-sm  items-center     font-light    '>
 
                     {
                         response?.plans?.map((list:any,key)=>
                         <div onClick={event=> handlePlan(event,key)} key={key} 
                             className={` ${index == key ? ' border-b-4 border-blue-400   ' : 'hover:bg-gray-50 border-b-4 border-white '} cursor-pointer p-2 flex  items-center text-center text-black `}>
                             <li className='list-none' >
-                            <span  className={` ${index == key ? 'text-gray-800 font-semibold' : 'text-gray-600 font-semibold'}   cursor-pointer   flex flex-col  whitespace-nowrap`}>
+                             <span  className={` ${index == key ? 'text-gray-800 font-semibold' : 'text-gray-600 font-semibold'}   cursor-pointer   flex flex-col  whitespace-nowrap`}>
                                 {list?.group_name}
                                 <span className='   '></span>
-                            </span>
+                             </span>
                             </li>
                         </div>
                         )
@@ -953,7 +953,7 @@ export default function RechargePlans(plans: { data: { plans: any; }; },operator
 
                 </div>
 
-                <div className=' scrollbar-hide lg:hidden   overflow-x-scroll    text-gray-700 text-xs   sm:text-sm flex   lg:space-y-8 font-light    '>
+                <div className='sticky top-0 bg-white scrollbar-hide lg:hidden   overflow-x-scroll    text-gray-700 text-xs   sm:text-sm flex   lg:space-y-8 font-light    '>
 
                     {
                         response?.plans?.map((list:any,key)=>

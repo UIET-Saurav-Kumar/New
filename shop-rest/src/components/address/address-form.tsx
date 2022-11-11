@@ -121,35 +121,35 @@ const CreateOrUpdateAddressForm = () => {
         />
 
         <Input
-          label={t("text-country")}
+          label={t("Country")}
           {...register("address.country")}
           error={t(errors.address?.country?.message!)}
           variant="outline"
         />
 
         <Input
-          label={t("text-city")}
+          label={t("City")}
           {...register("address.city")}
           error={t(errors.address?.city?.message!)}
           variant="outline"
         />
 
         <Input
-          label={t("text-state")}
+          label={t("State")}
           {...register("address.state")}
           error={t(errors.address?.state?.message!)}
           variant="outline"
         />
 
         <Input
-          label={t("text-zip")}
+          label={t("Zip code")}
           {...register("address.zip")}
           error={t(errors.address?.zip?.message!)}
           variant="outline"
         />
 
         <TextArea
-          label={t("text-street-address")}
+          label={t("Street Address")}
           {...register("address.street_address")}
           error={t(errors.address?.street_address?.message!)}
           variant="outline"
@@ -157,7 +157,7 @@ const CreateOrUpdateAddressForm = () => {
         />
 
         <Button className="w-full col-span-2">
-          {address ? t("text-update") : t("text-save")} {t(" address")}
+          {address ? t("Update") : t("Save")} {t(" address")}
         </Button>
       </form>
     </div>

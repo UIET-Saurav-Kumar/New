@@ -19,6 +19,7 @@ const Checkbox = React.forwardRef<HTMLInputElement, Props>(
     };
 
     return (
+      
       <div className={className}>
         <div className="flex items-center">
           <input
@@ -26,7 +27,7 @@ const Checkbox = React.forwardRef<HTMLInputElement, Props>(
             name={name}
             type="checkbox"
             ref={ref}
-            onChange={handleOnChange}
+            // onChange={handleOnChange}
             className={styles.checkbox}
             {...rest}
           />

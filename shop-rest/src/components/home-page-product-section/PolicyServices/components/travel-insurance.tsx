@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 export default function TravelInsurance({view,click,width,height,label,...props}:any) {
@@ -6,7 +7,11 @@ export default function TravelInsurance({view,click,width,height,label,...props}
   return (
 
 
-    <div onClick={view}  className ={`${click ? 'border border-indigo-700 w-full cursor-pointer  shadow-lg rounded-lg text-center' : 'w-full cursor-pointer border rounded-lg text-center' } ${props?.cn}`}>
+    <Link href='/travel-insurance'>
+      <div 
+      onClick={view}  
+      className ={`text-center active:border-gray-400 w-full cursor-pointer border rounded-lg text-center' } ${props?.cn}`}>
+      
                 
           <Image priority={true} src='/insurance/travel.png' 
               layout='intrinsic'
@@ -21,6 +26,7 @@ export default function TravelInsurance({view,click,width,height,label,...props}
         </span>
 
     </div>
+    </Link>
 
 
    )

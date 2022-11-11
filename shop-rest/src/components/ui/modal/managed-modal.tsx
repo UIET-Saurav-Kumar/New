@@ -4,8 +4,8 @@ import { useModalAction, useModalState } from "./modal.context";
 import ShopProfileCard from "@components/profile/profile-card";
 import CategoryDropdownSidebar from "@components/category/category-dropdown-sidebar";
 import ShopPaymentForm from "@components/shop/shop-payment-form";
-import RechargePlans from "@components/home-page-product-section/bill-payments/recharge-plans-modal/recharge-plans";
-import RechargePlanDetails from "@components/home-page-product-section/bill-payments/recharge-plan-details-modal";
+import RechargePlans from "@components/home-page-product-section/bill-payment-services/recharge-plans-modal/recharge-plans";
+import RechargePlanDetails from "@components/home-page-product-section/bill-payment-services/recharge-plan-details-modal";
 
 
 const Login = dynamic(() => import("@components/auth/login"));
@@ -47,12 +47,12 @@ const AddressDeleteView = dynamic(
 
 
 const PaymentModal = dynamic(
-  ()=> import('@components/home-page-product-section/bill-payments/bill-payment-modal/modal')
+  ()=> import('@components/home-page-product-section/bill-payment-services/bill-payment-modal/modal')
 )
 
 
 const SearchBarModal = dynamic(() => import("@components/common/search-bar-modal"));
-const PaymentDetailsModal = dynamic( ()=> import('@components/home-page-product-section/bill-payments/bill-payment-modal/payment-details-modal'))
+const PaymentDetailsModal = dynamic( ()=> import('@components/home-page-product-section/bill-payment-services/bill-payment-modal/payment-details-modal'))
 
 const ManagedModal = () => {
   const { isOpen, view, data } = useModalState();

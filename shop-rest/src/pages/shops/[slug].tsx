@@ -103,8 +103,6 @@ const ShopPage = ({ data }: any) => {
 
   const { mutate: createLog} = useCreateLogMutation();
 
-  
-
   const [pageURL, setPageUrl] = useState('');
 
   function checkUtm(utm_source,utm_campaign,shop_id) {
@@ -279,7 +277,7 @@ const ShopPage = ({ data }: any) => {
 
                           <div className={`${checkElement() ? 'h-0' : 'h-80'} flex w-full mt-10 border`}> 
 
-                          { checkElement() ? null 
+                            { checkElement() ? null 
                             :
                               ( <div className='h-full w-96'>  
                                   <ShopProfileCard data={data} />

@@ -285,10 +285,6 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
 
 
 
-
-
-
-
           {/* Document and Lincenses form */}
 
         <div className="  flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
@@ -307,17 +303,16 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
             />
 
             <div className="flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">
-            <Description
-              title={t("form:GST Certificate")}
-              details='Upload your clear GST Certificate '
-              className="w-full px-0 sm:pe-4 md:pe-5 pb-5 sm:w-4/12 md:w-1/3 sm:py-8"
-            />
+              <Description
+                title={t("form:GST Certificate")}
+                details='Upload your clear GST Certificate '
+                className="w-full px-0 sm:pe-4 md:pe-5 pb-5 sm:w-4/12 md:w-1/3 sm:py-8"
+              />
 
-            <Card className="w-full sm:w-8/12 md:w-2/3">
-              <LicenseFileInput name="gst_certificate" control={control} multiple={false} />
-            </Card>
-          </div>
-
+              <Card className="w-full sm:w-8/12 md:w-2/3">
+                <LicenseFileInput name="gst_certificate" control={control} multiple={false} />
+              </Card>
+            </div>
         
             <Input
               label={t("form:FSSAI Number")}
@@ -334,7 +329,7 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
                 className="w-full px-0 sm:pe-4 md:pe-5 pb-5 sm:w-4/12 md:w-1/3 sm:py-8"
               />
 
-              <Card className="w-full  sm:w-8/12 md:w-2/3">
+              <Card className="w-full sm:w-8/12 md:w-2/3">
                 <LicenseFileInput name="fssai_certificate" control={control} multiple={false} />
               </Card>
             </div>

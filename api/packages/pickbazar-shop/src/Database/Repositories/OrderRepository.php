@@ -200,7 +200,7 @@ class OrderRepository extends BaseRepository
                     if(isset($shop)){
                         $user=$shop->owner;
                         
-                            SMS::purchaseToVendor('9056147024', $user->name);
+                            SMS::purchaseToVendor('7018265262', $user->name);
                             // SMS::purchaseToVendor('7018265262', $user->name); 
                             $products = $order->products;
 

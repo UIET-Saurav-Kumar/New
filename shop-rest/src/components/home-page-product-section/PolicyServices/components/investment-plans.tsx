@@ -1,11 +1,13 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 export default function InvestmentPlans({ view,click,width,height,label,...props}:any) {
 
   return (
 
-    <div onClick={view}  className ={`${click ? 'border border-indigo-700 w-full cursor-pointer  shadow-lg rounded-lg text-center' : 'w-full cursor-pointer border rounded-lg text-center' } ${props?.cn}`}>
+    <Link href='/investment-plans'>
+       <div onClick={view}  className ={`${click ? 'border border-indigo-700 w-full cursor-pointer  shadow-lg rounded-lg text-center' : 'w-full cursor-pointer border rounded-lg text-center' } ${props?.cn}`}>
 
         <Image priority={true} src='/insurance/investment.png' 
             layout='intrinsic'
@@ -20,5 +22,6 @@ export default function InvestmentPlans({ view,click,width,height,label,...props
         
 
     </div>
+    </Link>
   )
 }
