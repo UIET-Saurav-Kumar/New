@@ -92,8 +92,6 @@ export default function HealthInsurance( props:any) {
         }, [])
 
 
-
-
   const {
     register,
     handleSubmit,
@@ -108,9 +106,7 @@ export default function HealthInsurance( props:any) {
         gender: 'male',
         name: '',
         mobile_no: '',
-
     },
-
   }
     )
 
@@ -469,18 +465,18 @@ export default function HealthInsurance( props:any) {
                         <Label className='text-gray-700 font-semibold '>Gender</Label>
                         <div className='flex  items-center justify-between  '> 
                             <Radio
-                            name='do_you_smoke_or_chew_tobacco'
-                            id='male'
-                            type='radio'
-                            value='ale'
-                            label={'Male'}
+                                name='gender'
+                                id='male'
+                                type='radio'
+                                value='male'
+                                label={'Male'}
                             />
                             <Radio
-                            name='do_you_smoke_or_chew_tobacco'
-                            id='female'
-                            type='radio'
-                            value='female'
-                            label={'Female'}
+                                name='gender'
+                                id='female'
+                                type='radio'
+                                value='female'
+                                label={'Female'}
                             />
                         </div>
                         {errors.gender && (

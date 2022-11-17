@@ -272,11 +272,38 @@ export default function ZeroCostInsurancePlans( props:any) {
               onSubmit={handleSubmit(onSubmit)} noValidate>
 
        {step1 && ( 
-       <div className='flex-1 flex-col space-y-4 w-72 '>
+       <div className='flex-1 flex-col space-y-8 w-72'>
 
             <div onClick={handleBack4} className='mb-2'>
                     {/* <ArrowLeftIcon className='cursor-pointer w-6 text-gray-700'/> */}
             </div>
+
+                <div className='flex flex-col col-span-2 space-y-4'>
+                        <Label className='text-gray-700 font-semibold '>
+                            Gender
+                        </Label>
+                        <div className='flex items-center justify-between'> 
+                            <Radio
+                                name='male'
+                                id='male'
+                                type='radio'
+                                value='male'
+                                label={'Male'}
+                            />
+                            <Radio
+                                name='female'
+                                id='female'
+                                type='radio'
+                                value='female'
+                                label={'Female'}
+                            />
+                        </div>
+                        {errors.gender && (
+                            <span className='text-red-500 text-sm'>
+                                {errors.gender.message}
+                            </span>
+                        )}
+                </div>
            
             <Label className='text-gray-700 whitespace-nowrap font-semibold'>
                  Who would you like to insure?
@@ -340,7 +367,6 @@ export default function ZeroCostInsurancePlans( props:any) {
                 </div>
             )}
 
-            
 
             <button onClick={handleSubmit(handleStep1)} 
                     className='bg-blue-500 text-white p-2 rounded-md'>
@@ -370,6 +396,8 @@ export default function ZeroCostInsurancePlans( props:any) {
              {/* </span>  */}
         </div>
 
+         
+
             <Label className='text-gray-700 font-semibold '>
                 {
                 getValues('name') === 'self' ? 'Your' : 
@@ -393,7 +421,7 @@ export default function ZeroCostInsurancePlans( props:any) {
                 required: 'Age is required',
                 pattern: {
                     value: /^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$/,
-                    message: 'Invalid date format',
+                    message: 'Invalid age',
                 },
             })}
             />
@@ -465,28 +493,7 @@ export default function ZeroCostInsurancePlans( props:any) {
                 <ArrowLeftIcon className='cursor-pointer w-6 text-gray-700'/>
             </div>
             <div className='grid grid-cols-2 gap-10'> 
-                    <div className='flex flex-col col-span-2 space-y-4'>
-                        <Label className='text-gray-700 font-semibold '>Gender</Label>
-                        <div className='flex  items-center justify-between  '> 
-                            <Radio
-                            name='do_you_smoke_or_chew_tobacco'
-                            id='male'
-                            type='radio'
-                            value='ale'
-                            label={'Male'}
-                            />
-                            <Radio
-                            name='do_you_smoke_or_chew_tobacco'
-                            id='female'
-                            type='radio'
-                            value='female'
-                            label={'Female'}
-                            />
-                        </div>
-                        {errors.gender && (
-                            <span className='text-red-500 text-sm'>{errors.gender.message}</span>
-                        )}
-                    </div>
+                    
 
                     <div className='flex flex-col col-span-2 space-y-2'>
                         <Label className='text-gray-700 whitespace-nowrap font-semibold '>

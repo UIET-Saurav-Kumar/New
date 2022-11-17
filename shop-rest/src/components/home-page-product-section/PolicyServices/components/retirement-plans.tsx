@@ -1,6 +1,7 @@
 
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 
 export default function RetirementPlans({click,view,width,height,label,...props}:any) {
@@ -9,7 +10,8 @@ export default function RetirementPlans({click,view,width,height,label,...props}
 
   return (
 
-        <div onClick={view}  
+    <Link href='/retirement-plans'> 
+    <div onClick={view}  
         className ={`text-center active:border-gray-400 w-full cursor-pointer border rounded-lg text-center' } ${props?.cn}`}>
             
             <Image priority={true} src='/insurance/retirement.png' 
@@ -27,6 +29,7 @@ export default function RetirementPlans({click,view,width,height,label,...props}
             </span>
 
         </div>
+        </Link>
 
   )
 }

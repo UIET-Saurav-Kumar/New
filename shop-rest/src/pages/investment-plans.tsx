@@ -50,12 +50,13 @@ export default function InvestmentPlans() {
 
   return (
 
-    <div className='w-1/2 mx-auto h-  mt-20 '>
+    <div className='w-1/2 mx-auto mt-20 '>
 
     <Card className="w-full">
 
     <h1 className='font-semibold text-gray-700 '> 
-            Investment Plans</h1>
+            Investment Plans
+    </h1>
 
         <form className='grid grid-cols-2 gap-8'
          onSubmit={handleSubmit(onSubmit)}>
