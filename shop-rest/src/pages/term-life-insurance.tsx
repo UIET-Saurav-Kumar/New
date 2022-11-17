@@ -33,6 +33,10 @@ export default function TermLifeInsurance( props:any) {
 
   const { width } = useWindowSize();
 
+  React.useEffect(() => {
+    window.scrollTo(0, 0)
+    }, [])
+
   const {
     register,
     handleSubmit,
@@ -98,7 +102,8 @@ export default function TermLifeInsurance( props:any) {
       
       <Card className="w-full">
 
-        <div className=''> 
+        <div className = ' ' > 
+
              {/* <Image
             priority={true}   
             src={props?.src}
@@ -108,9 +113,9 @@ export default function TermLifeInsurance( props:any) {
             height={props?.height}
           /> */}
 
-        <h1 className='font-semibold text-gray-700 '> 
-           Termlife Insurance 
-        </h1>
+            <h1 className='font-semibold text-gray-700 '> 
+                 Termlife Insurance 
+            </h1>
 
         </div>
 
@@ -121,7 +126,7 @@ export default function TermLifeInsurance( props:any) {
             <Input 
             // className='border border-gray-300 rounded-md p-2'
             type='text'
-            variant='outline'
+            variant='outline' 
             placeholder='Enter your name'
             {...register('your_name', {
                 required: 'Name is required',
@@ -169,23 +174,27 @@ export default function TermLifeInsurance( props:any) {
         </div>
 
         <div className='flex flex-col space-y-4'>
-            <Label className='text-gray-700 font-semibold'>Do you smoke or chew tobacco?</Label>
+            <Label className='text-gray-700 font-semibold'>
+                Do you smoke or chew tobacco?
+            </Label>
             <Radio
-            name='do_you_smoke_or_chew_tobacco'
-            id='yes'
-            type='radio'
-            value='yes'
-            label={'Yes'}
+                name='do_you_smoke_or_chew_tobacco'
+                id='yes'
+                type='radio'
+                value='yes'
+                label={'Yes'}
             />
             <Radio
-            name='do_you_smoke_or_chew_tobacco'
-            id='no'
-            type='radio'
-            value='no'
-            label={'No'}
+                name='do_you_smoke_or_chew_tobacco'
+                id='no'
+                type='radio'
+                value='no'
+                label={'No'}
             />
             {errors.do_you_smoke_or_chew_tobacco && (
-                <span className='text-red-500 text-sm'>{errors.do_you_smoke_or_chew_tobacco.message}</span>
+                <span className='text-red-500 text-sm'>
+                    {errors.do_you_smoke_or_chew_tobacco.message}
+                </span>
             )}
         </div>
 

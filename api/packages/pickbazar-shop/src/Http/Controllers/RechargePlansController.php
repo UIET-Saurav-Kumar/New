@@ -21,6 +21,7 @@ class RechargePlansController extends CoreController
    
       public function getPlans(Request $request){
 
+        // get operator details
         $operator = $request->operator;
         $circle = $request->circle;
         

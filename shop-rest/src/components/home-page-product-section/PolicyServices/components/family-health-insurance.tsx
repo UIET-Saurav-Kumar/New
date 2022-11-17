@@ -1,10 +1,12 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function FamilyHealthInsurance({view,click,width,height,label,...props}:any) {
 
   return (
 
+    <Link href='/family-health-insurance'>
     <div onClick={view}  
     className ={`text-center active:border-gray-400 w-full cursor-pointer border rounded-lg text-center' } ${props?.cn}`}>
         
@@ -21,6 +23,7 @@ export default function FamilyHealthInsurance({view,click,width,height,label,...
         </span>
 
     </div>
+    </Link>
 
   )
 }

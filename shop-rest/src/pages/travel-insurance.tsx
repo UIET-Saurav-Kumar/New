@@ -11,6 +11,7 @@ import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 import { CloseIcon } from '@components/icons/close-icon';
+import Select from '@components/ui/select/select';
 
 
 type FormValues = {
@@ -24,11 +25,63 @@ type FormValues = {
     name: string
 }
 
+
+// array of travel destinations cities aorund the world
+const destinations = [
+    { value: 'Mumbai', label: 'Mumbai' },
+    { value: 'Delhi', label: 'Delhi' },
+    { value: 'Bangalore', label: 'Bangalore' },
+    { value: 'Hyderabad', label: 'Hyderabad' },
+    { value: 'Ahmedabad', label: 'Ahmedabad' },
+    { value: 'Chennai', label: 'Chennai' }, 
+    { value: 'Kolkata', label: 'Kolkata' },
+    { value: 'Surat', label: 'Surat' },
+    { value: 'Pune', label: 'Pune' },
+    { value: 'Jaipur', label: 'Jaipur' },
+    { value: 'Lucknow', label: 'Lucknow' },
+    { value: 'Kanpur', label: 'Kanpur' },
+    { value: 'Nagpur', label: 'Nagpur' },
+    { value: 'Indore', label: 'Indore' },
+    { value: 'Thane', label: 'Thane' },
+    { value: 'Bhopal', label: 'Bhopal' },
+    { value: 'Visakhapatnam', label: 'Visakhapatnam' },
+    { value: 'Pimpri-Chinchwad', label: 'Pimpri-Chinchwad' },
+    { value: 'Patna', label: 'Patna' },
+    { value: 'Vadodara', label: 'Vadodara' },
+    { value: 'Ghaziabad', label: 'Ghaziabad' },
+    { value: 'Ludhiana', label: 'Ludhiana' },
+    { value: 'Coimbatore', label: 'Coimbatore' },
+    { value: 'Agra', label: 'Agra' },
+    { value: 'Madurai', label: 'Madurai' },
+    { value: 'Nashik', label: 'Nashik' },
+    { value: 'Faridabad', label: 'Faridabad' },
+    { value: 'Meerut', label: 'Meerut' },
+    { value: 'Rajkot', label: 'Rajkot' },
+    { value: 'Kalyan-Dombivali', label: 'Kalyan-Dombivali' },
+    { value: 'Vasai-Virar', label: 'Vasai-Virar' },
+    { value: 'Varanasi', label: 'Varanasi' },
+    { value: 'Srinagar', label: 'Srinagar' },
+    { value: 'Dhanbad', label: 'Dhanbad' },
+    { value: 'Jodhpur', label: 'Jodhpur' },
+    { value: 'Amritsar', label: 'Amritsar' },
+    { value: 'Raipur', label: 'Raipur' },
+    { value: 'Allahabad', label: 'Allahabad' },
+    { value: 'Howrah', label: 'Howrah' },
+    { value: 'Jabalpur', label: 'Jabalpur' },
+    { value: 'Gwalior', label: 'Gwalior' },
+]
+
+  
+
 export default function TravelInsurance() {
     const { width } = useWindowSize();
 
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
+
+    React.useEffect(() => {
+      window.scrollTo(0, 0)
+      }, [])
 
 
     const {
@@ -76,14 +129,19 @@ export default function TravelInsurance() {
             <Label className='text-gray-700 font-semibold '>
                 Destination
             </Label>
-            <Input
-                {...register('destination', {
-                required: 'Destination is required',
+
+            <Select
+                className="mt-2"
+                onChange={(e) => {
+                    register("destination").onChange(e);
+                }}
+
+                options={destinations}
+                {...register("destination", {
+                    required: "Destination is required",
                 })}
-                type='text'
-                placeholder='Enter your destination'
-                className='mt-1'
             />
+
             {errors.destination && (
                 <p className='text-red-500 text-xs italic'>{errors.destination.message}</p>
             )}
@@ -145,30 +203,31 @@ export default function TravelInsurance() {
             </div>
 
             <div className='flex flex-col'>
-            <Label className='text-gray-700 font-semibold '>
-                Date of Birth
-            </Label>
-            <Input
-
-                {...register('date_of_birth', {
-                required: 'Date of Birth is required',
-                })}
-                type='text'
-                placeholder='Enter your date of birth'
-                className='mt-1'
-            />
-            {errors.date_of_birth && (
-                <p className='text-red-500 text-xs italic'>{errors.date_of_birth.message}</p>
-            )}
+              <Label className='text-gray-700 font-semibold '>
+                  Date of Birth
+              </Label>
+              <Input
+                  {...register('date_of_birth', {
+                  required: 'Date of Birth is required',
+                  })}
+                  type='text'
+                  placeholder='Enter your date of birth'
+                  className='mt-1'
+              />
+              {errors.date_of_birth && (
+                  <p className='text-red-500 text-xs italic'>
+                    {errors.date_of_birth.message}
+                  </p>
+              )}
             </div>
 
             <button
-            type='submit'
-            className='mt-4 bg-gray-800 text-white font-semibold py-2 px-4 rounded hover:bg-gray-700'
-            >
-            Submit
+              type='submit'
+              className='mt-4 bg-gray-800 text-white font-semibold py-2 px-4 rounded hover:bg-gray-700'
+              >
+              Submit
             </button>
-        </form>
+          </form>
 
         {
         width < 1023 && 

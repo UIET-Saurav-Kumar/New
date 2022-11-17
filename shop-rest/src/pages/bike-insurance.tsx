@@ -7,10 +7,10 @@ import CartCounterButton from '@components/cart/cart-counter-button';
 import DefaultLayout from '@components/layout/default-layout';
 import { useForm } from 'react-hook-form';
 import Card from '@components/common/card';
-import async from 'react-select/async';
-import Image from 'next/image';
+
  
 // form values
+
 type FormValues = {
   name_of_owner  : string;
   vehicle_number : string;
@@ -18,39 +18,43 @@ type FormValues = {
   insured_amount : string;
 };
 
-export async function getServerSideProps(context:any) {
-  console.log('context',context.query) 
-  return {
-      props: { 
-         label: context.query //pass it to the page props
-      }
-  }
-}
+
+// export async function getServerSideProps(context:any) {
+//   console.log('context',context.query) 
+//   return {
+//       props: { 
+//          label: context.query  
+//       }
+//   }
+// }
+
 
 
 export default function BikeInsurance( props:any) {
 
-  console.log('context',props)
+  console.log('context',props);
 
   const { width } = useWindowSize();
 
+  React.useEffect(() => {
+    window.scrollTo(0, 0)
+    }, [])
+
 
   const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    getValues,
-    control,
-  } = useForm<FormValues>({
-    defaultValues: {
-     name_of_owner: '',
-      vehicle_number: '',
-      date_of_expiry: '',
-      insured_amount: '',
-    },
-
-  }
-    )
+      register,
+      handleSubmit,
+      formState: { errors },
+      getValues,
+      control,
+    } = useForm<FormValues>({
+      defaultValues: {
+        name_of_owner: '',
+        vehicle_number: '',
+        date_of_expiry: '',
+        insured_amount: '',
+      },
+    });
 
     function onSubmit(data: FormValues) {
       console.log(data)
@@ -59,10 +63,9 @@ export default function BikeInsurance( props:any) {
     var pattern = /[A-Za-z][A-Za-z]\/[0-9][0-9]\/[A-Za-z ][a-z]\/[0-9][0-9][0-9][0-9]$/;
 
     return (
+
     <div className='w-1/2 mx-auto h-screen mt-20 '>
       
-      
-
       <Card className="w-full">
         <div className=''> 
              {/* <Image
@@ -74,7 +77,7 @@ export default function BikeInsurance( props:any) {
             height={props?.height}
           /> */}
              <h1 className='font-semibold text-gray-700 '> 
-               {props.label} 
+               Bike Insurance
              </h1>
         </div>
         <form className='space-y-8' onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -92,8 +95,10 @@ export default function BikeInsurance( props:any) {
                 required: 'Name of Owner is required',
               })}
             />
-            {errors.name_of_owner && (
-              <span className='text-sm text-red-600'>{errors.name_of_owner.message}</span>
+            {errors?.name_of_owner && (
+              <span className='text-sm text-red-600'>
+                {errors?.name_of_owner.message}
+              </span>
             )}
           </div>
 
@@ -115,8 +120,8 @@ export default function BikeInsurance( props:any) {
 
               })}
             />
-            {errors.vehicle_number && (
-              <span className='text-sm text-red-600'>{errors.vehicle_number.message}</span>
+            {errors?.vehicle_number && (
+              <span className='text-sm text-red-600'>{errors?.vehicle_number.message}</span>
             )}
           </div>
 
@@ -132,8 +137,8 @@ export default function BikeInsurance( props:any) {
                 required: 'Date of Expiry is required',
               })}
             />
-            {errors.date_of_expiry && (
-              <span className='text-sm text-red-600'>{errors.date_of_expiry.message}</span>
+            {errors?.date_of_expiry && (
+              <span className='text-sm text-red-600'>{errors?.date_of_expiry.message}</span>
             )}
           </div>
 
@@ -149,8 +154,10 @@ export default function BikeInsurance( props:any) {
                 required: 'Insured Amount is required',
               })}
             />
-            {errors.insured_amount && (
-              <span className='text-sm text-red-600'>{errors.insured_amount.message}</span>
+            {errors?.insured_amount && (
+              <span className='text-sm text-red-600'>
+                {errors?.insured_amount.message}
+              </span>
             )}
           </div>
 

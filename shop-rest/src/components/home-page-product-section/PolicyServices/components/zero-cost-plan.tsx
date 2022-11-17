@@ -1,12 +1,14 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function ZeroCostPlans({view,click,width,height,label,...props}:any) {
 
   return (
 
-    <div onClick={view} 
-    className ={`text-center active:border-gray-400 w-full cursor-pointer border rounded-lg text-center' } ${props?.cn}`}>
+    <Link href='/zero-cost-insurance-plans'> 
+      <div onClick={view} 
+           className ={`text-center active:border-gray-400 w-full cursor-pointer border rounded-lg text-center' } ${props?.cn}`}>
         
            <Image priority={true} src='/insurance/zero.png' 
             layout='intrinsic'
@@ -21,6 +23,7 @@ export default function ZeroCostPlans({view,click,width,height,label,...props}:a
         </span>
 
     </div>
+    </Link>
 
   )
 }

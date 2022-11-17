@@ -22,12 +22,14 @@ import Select from '@components/ui/select/select';
  
 // form values
 type FormValues = {
-    'insured': Array<any>,
-    'age'  : string,
-    'pin_code' : string,
-    'gender' :  'male' | 'female';
-    'name' : string,
-    'mobile_no' : string,
+    'gender': string,
+   'name': string,
+    'date_of_birth': Date,
+    'mobile_no': string,
+    'occupation_type': string,
+    'educational_qualification': string,
+    'annual_income': string,
+    'consume_tobacco': string,
 }
 
 export const ageList =[
@@ -73,7 +75,7 @@ export const ageList =[
 
 
 
-export default function HealthInsurance( props:any) {
+export default function ZeroCostInsurancePlans( props:any) {
 
   console.log('context',props)
 
@@ -86,12 +88,9 @@ export default function HealthInsurance( props:any) {
     const [step5,setStep5] = useState(false)
     const [step6,setStep6] = useState(false)
 
-    //useEffect scroll to top 
     React.useEffect(() => {
         window.scrollTo(0, 0)
         }, [])
-
-
 
 
   const {
@@ -102,17 +101,73 @@ export default function HealthInsurance( props:any) {
     control,
   } = useForm<FormValues>({
      defaultValues: {
-        insured: [],
-        age: '',
-        pin_code: '',
-        gender: 'male',
-        name: '',
-        mobile_no: '',
+       gender: 'male',
+       name:'',
+       date_of_birth:'',
+       mobile_no:'',
+       occupation_type: 'Salaried | Self Employed',
+       annual_income:'',
+       educational_qualification:'',
+       consume_tobacco:'',
+
 
     },
 
   }
     )
+
+    //reducer function to handle state
+    const reducer = (state: any, action: { type: any; }) => {
+        switch (action.type) {
+            case 'step1':
+                return {
+                    ...state,
+                    step1: true,
+                    step2: false,
+                    step3: false,
+                    step4: false,
+                   
+                }
+            case 'step2':
+                return {
+                    ...state,
+                    step1: false,
+                    step2: true,
+                    step3: false,
+                    step4: false,
+                   
+                }
+            case 'step3':
+                return {
+                    ...state,
+                    step1: false,
+                    step2: false,
+                    step3: true,
+                    step4: false,
+                   
+                }
+            case 'step4':
+                return {
+                    ...state,
+                    step1: false,
+                    step2: false,
+                    step3: false,
+                    step4: true,
+                   
+                }
+
+            }
+        }
+
+        //call reducer function
+        const [state, dispatch] = React.useReducer(reducer, {
+            step1: true,
+            step2: false,
+            step3: false,
+            step4: false,
+        })
+         
+
 
     function onSubmit(data: FormValues) {
       console.log(data)
@@ -153,7 +208,8 @@ export default function HealthInsurance( props:any) {
 
    const handleStep1 = (e:any) => {
 
- 
+      e.preventDefault();
+
         setStep1(false)
         setStep2(true)
         // setStep3(false)
@@ -215,10 +271,10 @@ export default function HealthInsurance( props:any) {
 
     return (
 
-    <div className='w-full lg:w-1/2 mx-auto h-  mt-0 lg:mt-20 '>
+    <div className='w-1/2 mx-auto h-  mt-20 '>
       
       <Card className="w-full">
-
+ 
         <div className=''> 
              {/* <Image
             priority={true}   
@@ -230,7 +286,7 @@ export default function HealthInsurance( props:any) {
           /> */}
 
         <h1 className='font-semibold text-gray-700 '> 
-           Health Insurance 
+           Zero Cost Insurance Plans 
         </h1>
 
         </div>
@@ -238,29 +294,29 @@ export default function HealthInsurance( props:any) {
         
         <div className='flex justify-between mt-4'>
             <div className='flex flex-col items-center'>
-                <div className={` ${ step1 || step2 || step3 || step4 ? 'bg-green-700 text-white' : 'bg-gray-200 text-black ' } w-5 h-5 lg:w-10 lg:h-10 rounded-full  flex items-center justify-center`}>
-                    <span className={` ${step1 || step2 || step3 || step4? 'text-white': ''} text-gray-700 font-semibold text-sm lg:text-lg `}>1</span>
+                <div className={` ${ step1 || step2 || step3 || step4 ? 'bg-green-700 text-white' : 'bg-gray-200 text-black ' } w-10 h-10 rounded-full  flex items-center justify-center`}>
+                    <span className={` ${step1 || step2 || step3 || step4? 'text-white': ''} text-gray-700 font-semibold `}>1</span>
                 </div>
                 {/* <span className='text-gray-500 text-sm mt-2'>Personal Details</span> */}
             </div>
-            <hr className={` ${step2 || step3 || step4 ? 'border-green-800': ''} flex w-20 border items-center justify-center my-2 lg:my-6`}></hr>
+            <hr className={` ${step2 || step3 || step4 ? 'border-green-800': ''} flex w-20 border items-center justify-center my-6`}></hr>
             <div className='flex flex-col items-center'>
-            <div className={` ${   step2 || step3 || step4 ? 'bg-green-700 text-white' : 'bg-gray-200 text-black ' } w-5 h-5 lg:w-10 lg:h-10 rounded-full  flex items-center justify-center`}>
-                    <span className={` ${step2 || step3 || step4 ? 'text-white': ''} text-gray-700 font-semibold text-sm lg:text-lg `}>2</span>
+            <div className={` ${   step2 || step3 || step4 ? 'bg-green-700 text-white' : 'bg-gray-200 text-black ' } w-10 h-10 rounded-full  flex items-center justify-center`}>
+                    <span className={` ${step2 || step3 || step4 ? 'text-white': ''} text-gray-700 font-semibold `}>2</span>
                 </div>
                 {/* <span className='text-gray-500 text-sm mt-2'>Family Details</span> */}
             </div>
-            <hr className={` ${step3 || step4 ? 'border-green-800': ''} flex w-20 border items-center justify-center my-2 lg:my-6`}></hr>
+            <hr className={` ${step3 || step4 ? 'border-green-800': ''} flex w-20 border items-center justify-center my-6`}></hr>
             <div className='flex flex-col items-center'>
-            <div className={` ${ step3 || step4   ? 'bg-green-700 text-white' : 'bg-gray-200 text-black ' } w-5 h-5 lg:w-10 lg:h-10 rounded-full  flex items-center justify-center`}>
-                    <span className={` ${step3 || step4 ? 'text-white': ''} text-gray-700 font-semibold text-sm lg:text-lg `}>3</span>
+            <div className={` ${ step3 || step4   ? 'bg-green-700 text-white' : 'bg-gray-200 text-black ' } w-10 h-10 rounded-full  flex items-center justify-center`}>
+                    <span className={` ${step3 || step4 ? 'text-white': ''} text-gray-700 font-semibold `}>3</span>
                 </div>
                 {/* <span className='text-gray-500 text-sm mt-2'>Health Details</span> */}
             </div>
-            <hr className={` ${step4 ? 'border-green-800': ''} flex w-20 border items-center justify-center my-2 lg:my-6`}></hr>
+            <hr className={` ${step4 ? 'border-green-800': ''} flex w-20 border items-center justify-center my-6`}></hr>
             <div className='flex flex-col items-center'>
-                 <div className={` ${ step4 ? 'bg-green-700 text-white' : 'bg-gray-200 text-black ' } w-5 h-5 lg:w-10 lg:h-10 rounded-full  flex items-center justify-center`}>
-                    <span className={` ${step4 ? 'text-white': ''} text-gray-700 font-semibold text-sm lg:text-lg `}>4</span>
+                 <div className={` ${ step4 ? 'bg-green-700 text-white' : 'bg-gray-200 text-black ' } w-10 h-10 rounded-full  flex items-center justify-center`}>
+                    <span className={` ${step4 ? 'text-white': ''} text-gray-700 font-semibold `}>4</span>
                 </div>
                 {/* <span className='text-gray-500 text-sm mt-2'>Policy Details</span> */}
             </div>
@@ -268,29 +324,55 @@ export default function HealthInsurance( props:any) {
         </div>
 
 
-        <form className='grid grid-cols-2 gap-8 w-full' 
+        <form className='grid grid-cols-2 gap-8' 
               onSubmit={handleSubmit(onSubmit)} noValidate>
 
        {step1 && ( 
-       <div className='flex-1 flex-col space-y-4 w-72 '>
 
-            <div onClick={handleBack4} className='mb-2'>
-                    {/* <ArrowLeftIcon className='cursor-pointer w-6 text-gray-700'/> */}
+       <div className='flex flex-col space-y-6'>
+
+            <div onClick = {handleBack4} className='mb-2'>
+            </div>
+
+            <div className='flex flex-col space-y-4'>
+                        <Label className='text-gray-700 font-semibold'>
+                            Gender
+                        </Label>
+                        <Radio
+                        name='gender'
+                        id='male'
+                        type='radio'
+                        value='male'
+                        label={'Male'}
+                        />
+                        <Radio
+                        name='gender'
+                        id='female'
+                        type='radio'
+                        value='female'
+                        label={'Female'}
+                        />
+                        {errors.gender && (
+                            <span className='text-red-500 text-sm'>
+                                {errors.gender.message}</span>
+                        )}
             </div>
            
-            <Label className='text-gray-700 whitespace-nowrap font-semibold'>
+            <Label className='text-gray-700 font-semibold'>
                  Who would you like to insure?
             </Label>
 
-            <div className='grid grid-cols-2 gap-8 w-full'>
+            
+
+            <div className='grid grid-cols-3 gap-6'>
               <Checkbox
-                label='Self'
+                label='Myself'
                 {...register('insured')}
                 id='self'
                 name='self'
                 height={42}
                 width={42}
-              />
+                />
               <Checkbox
                 label='Spouse'
                 {...register('insured')}
@@ -298,7 +380,7 @@ export default function HealthInsurance( props:any) {
                 name='spouse'
                 height={42}
                 width={42}
-              />
+                />
               <Checkbox
                 label='Son'
                 {...register('insured')}
@@ -306,7 +388,7 @@ export default function HealthInsurance( props:any) {
                 name='son'
                 height={42}
                 width={42}
-               />
+                />
               <Checkbox
                 label='Daughter'
                 {...register('insured')}
@@ -322,7 +404,7 @@ export default function HealthInsurance( props:any) {
                 name='father'
                 height={42}
                 width={42}
-              />
+                />
               <Checkbox
                 label='Mother'
                 {...register('insured')}
@@ -330,39 +412,34 @@ export default function HealthInsurance( props:any) {
                 name='mother'
                 height={42}
                 width={42}
-              />
+                />
 
             </div>
               
-             {errors.insured && (
-                <div className='text-red-500 text-sm'>
-                    {errors.insured.message}
-                </div>
+            {errors.name && (
+                <span className='text-red-500 text-sm'>
+                    {errors.name.message}
+                </span>
             )}
 
-            
-
-            <button onClick={handleSubmit(handleStep1)} 
+            <button onClick={handleStep1} 
                     className='bg-blue-500 text-white p-2 rounded-md'>
                 Continue
             </button>
 
-            <div className='flex flex-col space-y-2'>
-                <span className='text-gray-500 text-xs'>
-                    Note: Please select either Self or Spouse to add other members too
-                </span>
-            </div>
-
         </div>
         )}
 
+        
+        
+
         {/* {getValues('name') && ( */}
 
-      { 
-        step2 && (
-            <>
+     { 
+     step2 && (
+        <>
  
-        <div className='flex flex-col space-y-4 w-72'>
+        <div className='flex flex-col space-y-4'>
 
         <div onClick={handleBack2} className=' mb-2'>
             {/* <span className='text-xl w-4 cursor-auto'>  */}
@@ -371,22 +448,20 @@ export default function HealthInsurance( props:any) {
         </div>
 
             <Label className='text-gray-700 font-semibold '>
-                {
-                getValues('name') === 'self' ? 'Your' : 
-                getValues('name') === 'spouse' ? 'Your Spouse' :
-                getValues('name') === 'son' ? 'Your Son' :
-                getValues('name') === 'daughter' ? 'Your Daughter' :
-                getValues('name') === 'father' ? 'Your Father' :
-                getValues('name') === 'mother' ? 'Your Mother' : 'Your'
-                } Age 
-            </Label>
+            {
+            getValues('name') === 'self' ? 'Your' : 
+            getValues('name') === 'spouse' ? 'Your Spouse' :
+            getValues('name') === 'son' ? 'Your Son' :
+            getValues('name') === 'daughter' ? 'Your Daughter' :
+            getValues('name') === 'father' ? 'Your Father' :
+            getValues('name') === 'mother' ? 'Your Mother' : 'Your'
+            } Age </Label>
              
             <Select
             type='text'
             variant='outline'
             options={ageList}
             placeholder='in years'
-            // className='flex-1'
             onChange = {(e)=> 
             setValue('age', e.target.value)}
             {...register('age', {
@@ -408,10 +483,6 @@ export default function HealthInsurance( props:any) {
                 Continue
             </button>
 
-             
-         
-             
-
         </div>
         </>
      )}
@@ -421,15 +492,17 @@ export default function HealthInsurance( props:any) {
 
         <>
 
-        <div className='flex flex-col space-y-4 w-72'>
+        <div className='flex flex-col space-y-4'>
 
             <div onClick={handleBack3} className=' mb-2'>
                 <ArrowLeftIcon className='cursor-pointer w-6 text-gray-700'/>
             </div>
 
             {/* <div className='flex flex-col space-y-4'> */}
-                <Label className='text-gray-700 whitespace-nowrap font-semibold '>
-                    Enter City or Pin Code</Label>
+                <Label className='text-gray-700 font-semibold '>
+                    Enter City or Pin Code
+                </Label>
+
                 <Input
                 // className='border border-gray-300 rounded-md p-2'
                 type='text'
@@ -459,37 +532,16 @@ export default function HealthInsurance( props:any) {
                 
        {step4 && (
 
-        <div className='flex flex-col space-y-4 w-72'>
+        <div className='flex flex-col space-y-4'>
 
              <div onClick={handleBack4} className=' mb-2'>
                 <ArrowLeftIcon className='cursor-pointer w-6 text-gray-700'/>
             </div>
             <div className='grid grid-cols-2 gap-10'> 
-                    <div className='flex flex-col col-span-2 space-y-4'>
-                        <Label className='text-gray-700 font-semibold '>Gender</Label>
-                        <div className='flex  items-center justify-between  '> 
-                            <Radio
-                            name='do_you_smoke_or_chew_tobacco'
-                            id='male'
-                            type='radio'
-                            value='ale'
-                            label={'Male'}
-                            />
-                            <Radio
-                            name='do_you_smoke_or_chew_tobacco'
-                            id='female'
-                            type='radio'
-                            value='female'
-                            label={'Female'}
-                            />
-                        </div>
-                        {errors.gender && (
-                            <span className='text-red-500 text-sm'>{errors.gender.message}</span>
-                        )}
-                    </div>
+                    
 
-                    <div className='flex flex-col col-span-2 space-y-2'>
-                        <Label className='text-gray-700 whitespace-nowrap font-semibold '>
+                    <div className='flex flex-col space-y-4'>
+                        <Label className='text-gray-700 font-semibold '>
                             Enter full name
                         </Label>
                         <Input
@@ -508,8 +560,8 @@ export default function HealthInsurance( props:any) {
                         )}
                     </div>
 
-                    <div className='flex flex-col col-span-2 space-y-2 w-72'>
-                        <Label className='text-gray-700 font-semibold whitespace-nowrap '>Mobile Number</Label>
+                    <div className='flex flex-col space-y-4'>
+                        <Label className='text-gray-700 font-semibold '>Mobile Number</Label>
                         <Input
                         // className='border border-gray-300 rounded-md p-2'
                         type='text'
@@ -565,5 +617,5 @@ export default function HealthInsurance( props:any) {
  
   )
 }
- HealthInsurance.Layout = DefaultLayout;
+ ZeroCostInsurancePlans.Layout = DefaultLayout;
 

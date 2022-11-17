@@ -3259,6 +3259,7 @@ export const circleCode = [
     const { openModal } = useModalAction();
 
 
+
     function handleModal(plans,operator,circle):any {
       return openModal("RECHARGE_PLANS",{
         plans: plans,
@@ -3266,6 +3267,7 @@ export const circleCode = [
         circle: circle,
       });
     }
+
 
     function handlePlanDetails(operatorName,circleName):any {
       return openModal("RECHARGE_PLAN_DETAILS"
@@ -3276,6 +3278,7 @@ export const circleCode = [
       }
       );
     }
+
 
     console.log('allplansdata',plans)
 
@@ -3293,12 +3296,14 @@ export const circleCode = [
       return response;
     };
 
+
     const getRechargePlans = async (data:any) => {
       const { data: plans } = await http.post(API_ENDPOINTS.RECHARGE_PLANS, data);
       // plans?.length && setLoading(false);
       setPlans(plans)
       return plans;
     };
+
 
     function handleClick()  {
         return   openModal('BILL_PAYMENT')
@@ -3309,7 +3314,7 @@ export const circleCode = [
     const { mutate: mutatePlan } = useMutation(getRechargePlans, {
       onSuccess: data => {
         setPlans(data);
-        addOnPlansList();
+        // addOnPlansList();
         setLoading(false);
         // setAddOnPlans(data);
         // console.log('operator',data);
@@ -3323,9 +3328,10 @@ export const circleCode = [
       // onSettled: () => {
       //   queryClient.invalidateQueries(API_ENDPOINTS.RECHARGE_PLANS);
       // }
+
     });
 
-    const { mutate: mutateOperator } = useMutation(getOperatorDetails, {
+    const { mutate: mutateOperator } = useMutation( getOperatorDetails, {
 
       onSuccess: (data) => {
         setOperator(data)
@@ -3344,6 +3350,7 @@ export const circleCode = [
     });
 
     const onSubmit = async  (value:any) => {
+
       const opr = {
         'mobile_no': value,
       }
@@ -3354,7 +3361,9 @@ export const circleCode = [
         'operator' :  operatorName,
         'circle'   :  circleName,
       };
+
       mutatePlan(plan);
+
     };
 
     // const submitOperator= async () => {
@@ -3375,19 +3384,18 @@ export const circleCode = [
       setOperator(null);
       setOperatorName(null);
       setCircleName(null);
-      
-    //  e.preventDefault();
-      // setPopularPlans('')
+      //e.preventDefault();
+      //setPopularPlans('')
       setPhoneNumber(e.target.value);
       const value = e.target.value;
       value.toString().length === 10 && callApi(value);
     };
 
-    useEffect(()=>{
+    useEffect(()=> {
          searchPlan();
-    },[])
+    }, [])
 
-    const AddOnPlans =  plans?.plans?.length &&  plans?.plans?.filter(function(el:any){
+    const AddOnPlans =  plans?.plans?.length && plans?.plans?.filter(function(el:any){
       return el?.group_name === '2G/3G/4G Data' ?  el.plans?.filter((ell)=>ell.circle === operator?.circle)  
       : el.plans?.filter((ell)=>ell.circle === 'All Circles') ;
     });
@@ -3402,23 +3410,22 @@ export const circleCode = [
 
     console.log('allPlans',  popularPlans);
 
-
-    function addOnPlansList() {
-       phoneNumber?.length === 0 
-       ? setAddOnPlans(null) 
-       : setAddOnPlans(popularPlans)
-    }
+    // function addOnPlansList() {
+    //    phoneNumber?.length === 0 
+    //    ? setAddOnPlans(null) 
+    //    : setAddOnPlans(popularPlans)
+    // }
 
      const searchedPlan: any[] = [];
 
      function searchPlan(){
-     searchedPlan.push(plans?.plans)
+      searchedPlan.push(plans?.plans)
      }
 
      console.log('operator',operatorName,circleName)
+
      console.log('')
     
-     
      
   return (
 
@@ -3426,7 +3433,7 @@ export const circleCode = [
 
     <div className={`${click ? 'grid grid-cols-1 lg:flex lg:items-center place-content-center bg-gray-200 lg:px-6 space-x-4' : 'hidden'}`}>
 
-        <div className = 'grid grid-cols-1 space-y-2 lg:grid-cols-4 place-content-center px-4  flex-col transition duration-500  lg:space-x-10  lg:space-y-0  lg:flex-row justify-between w-full py-3 items-center '>
+        <div className='grid grid-cols-1 space-y-2 lg:grid-cols-4 place-content-center px-4  flex-col transition duration-500  lg:space-x-10  lg:space-y-0  lg:flex-row justify-between w-full py-3 items-center '>
         
 
             <div className='flex-1 flex-col'> 
@@ -3444,20 +3451,24 @@ export const circleCode = [
                 />
             </div>
 
-        {/* { isLoading ? <ProductFeedLoader className='h-10' limit={3}/> 
+          {/* { isLoading ? <ProductFeedLoader className='h-10' limit={3} /> 
           :
            <> */}
            
           <div className='flex-1 flex-col'>
+
             <Label> Operator </Label>
             <Select name='Operator'
               variant=''
               type='number'
               value={mobileOperator?.filter((opt)=>
-                opt?.name == operator?.operator )}
+              opt?.name == operator?.operator )}
               // value={operator.msg == 'Success'? operator.operator}
-              options={mobileOperator} />
+              options={mobileOperator}
+            />
+
           </div>
+
           <div className='flex-1 flex-col'>
             <Label> Circle </Label>
             <Select label='circle'
@@ -3469,6 +3480,7 @@ export const circleCode = [
               // value={operator?.msg === 'Success' && operator?.circle}
               options={circleCode} />
           </div>
+
           <div className='relative flex-1 items-center'>
             <Input label='Amount'
               variant={''}
@@ -3483,14 +3495,12 @@ export const circleCode = [
                   value={ '' }
                   defaultOptions={plans?.plans}
                   // onInputChange={handleInputChange}
-                  placeholder={ <div className='text-lg sm:text-lg md:text:md   text-blue-700 font-bold lg:text-lg  '> </div>}
+                  placeholder={ <div className='text-lg sm:text-lg md:text:md text-blue-700 font-bold lg:text-lg  '> </div>}
                   onChange={''}
                 /> */}
               </div>
 
           </div>
-            {/* </>
-            } */}
 
             {/* <Button className='' size='big'>
                 Register

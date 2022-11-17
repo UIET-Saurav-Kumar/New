@@ -21,8 +21,7 @@ class OperatorDetailsController extends CoreController
    
     public function getOperator(Request $request){
 
-     
-        
+
        $mobile = $request->mobile_no;
         $data = array(
            'mobile_no'=> $mobile
@@ -46,6 +45,7 @@ class OperatorDetailsController extends CoreController
           CURLOPT_POSTFIELDS => 
           // '{"mobile_no": 7018265262}',
           json_encode($data),
+          
           CURLOPT_HTTPHEADER => array(
             'Content-Type: application/json',
             'Cookie: ci_session=cfee5d86a7f76c89d6f3338f2d49fca66152955e'
