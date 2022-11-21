@@ -1,6 +1,70 @@
+import { useCreateRechargePaymentMutation } from '@data/mobile-recharge/use-create-recharge-payment.mutation'
 import React from 'react'
+import { useForm } from 'react-hook-form'
 
-export default function RechargePlanDetails({operatorName,circleName})  {
+interface FormValues {
+    payment_gateway: 'cod' | 'cashfree' | 'upi' | 'wallet'
+    contact: string
+    card: {
+        number: string
+        expiry: string
+        cvc: string
+        email: string
+    }
+}
+
+    
+
+export default function RechargePlanDetails(data,operatorName,circleName)  {
+
+    // alert(operatorName)
+    console.log('modal',data?.data)
+    const { mutate: createRechargePayment, isLoading: loading } = useCreateRechargePaymentMutation();
+
+
+    const {
+        register,
+        handleSubmit,
+        setValue,
+        watch,
+    
+        formState: { errors },
+      } = useForm<FormValues>({
+        // resolver: yupResolver(paymentSchema),
+        defaultValues: {
+          payment_gateway: "cashfree",
+          contact: data?.me?.phone_number,
+          
+        },
+      });
+
+      function onSubmit(values: FormValues){
+        let input = {
+            "amount": data?.data?.amount,
+            "operator": operatorName,
+            "circle": circleName,
+            "number": data?.data?.number,
+            "payment_gateway": values.payment_gateway,
+            "customer_contact": values.contact,
+            
+        }
+
+        createRechargePayment(input, {
+            onSuccess: (data) => {
+               if(data?.paymentLink)
+               {
+                window.location.replace(data?.paymentLink)
+
+                }
+        },
+        onError: (error) => {
+            console.log(error)
+        }
+        })
+
+      }
+
+      
 
   return (
 
@@ -17,7 +81,7 @@ export default function RechargePlanDetails({operatorName,circleName})  {
                         Mobile Number
                     </p>
                     <p>
-                       {'phoneNumber'}
+                       {data?.data?.phone}
                     </p>
  
                 </span>
@@ -26,7 +90,7 @@ export default function RechargePlanDetails({operatorName,circleName})  {
                         Operator/Circle
                     </p>
                     <p>
-                       {'operatorName'} | {circleName}
+                       {data?.data?.operatorName} | {data?.data?.circleName}
                     </p>
                 </span>
                 <span className='flex items-center justify-between'>
@@ -34,7 +98,7 @@ export default function RechargePlanDetails({operatorName,circleName})  {
                         Plan
                     </p>
                     <p>
-                       {'operatorName'} | {'plan?.group_name'}
+                         {data?.data?.plan?.plan_name}
                     </p>
                 </span>
                 <span className='flex items-center justify-between'>
@@ -42,7 +106,7 @@ export default function RechargePlanDetails({operatorName,circleName})  {
                         Validity
                     </p>
                     <p>
-                       {'plan?.validity'}
+                       {data?.data?.plan?.validity}
                     </p>
                 </span>
                 <span className='flex flex-col font-light'>
@@ -50,7 +114,7 @@ export default function RechargePlanDetails({operatorName,circleName})  {
                         Plan description
                     </p>
                     <p>
-                       {'plan?.description'}
+                       {data?.data?.plan?.description}
                     </p>
                 </span>
                 <span className='flex items-center justify-between font-light  '>
@@ -58,7 +122,7 @@ export default function RechargePlanDetails({operatorName,circleName})  {
                         Amount
                     </p>
                     <p>
-                    ₹{'plan?.price'}
+                    ₹{data?.data?.plan?.price}
                     </p>
                 </span>
             </div>
@@ -70,7 +134,7 @@ export default function RechargePlanDetails({operatorName,circleName})  {
                     Total Amount
                 </span>
                 <span className=''>
-                ₹{'plan?.price'}
+                ₹{data?.data?.plan?.price}
                 </span>
         </div>
 
@@ -78,7 +142,7 @@ export default function RechargePlanDetails({operatorName,circleName})  {
              Pay Now
         </div> */}
 
-        <button className='bg-blue-500 px-6 rounded p-2 mx-auto text-white'>
+        <button onClick={handleSubmit(onSubmit)} className='bg-blue-500 px-6 rounded p-2 mx-auto text-white'>
                  Pay Now
         </button>
 

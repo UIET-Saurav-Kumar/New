@@ -3235,7 +3235,7 @@ export const circleCode = [
       
     const loadOptions = async (inputValue:any, callback:any) => {
 
-      // var data = await fetchSearch(inputValue);      
+      var data = await getRechargePlans(inputValue);      
 
       // console.log('search data',data)
       
@@ -3259,6 +3259,19 @@ export const circleCode = [
     const [loading,setLoading] = useState(false);
     const { openModal } = useModalAction();
 
+    useEffect(() => {
+      
+      if(operator) {
+
+        const plan = {
+          'operator': operatorName,
+          'circle': circleName,
+        }
+
+        mutatePlan(plan);
+      }
+    }, [operatorName])
+
 
     function handleModal(plans,operator,circle):any {
       return openModal("RECHARGE_PLANS",{
@@ -3268,12 +3281,13 @@ export const circleCode = [
       });
     }
 
-    function handlePlanDetails(operatorName,circleName):any {
+    function handlePlanDetails( plan:any)  {
       return openModal("RECHARGE_PLAN_DETAILS"
       ,{
-        // plan: plan,
+        plan: plan,
         operatorName: operatorName,
         circleName: circleName,
+        phone: phoneNumber
       }
       );
     }
@@ -3288,8 +3302,10 @@ export const circleCode = [
     const queryClient = useQueryClient();
 
     const getOperatorDetails = async (data:any) => {
-      console.log('data before',`${url}/${API_ENDPOINTS.OPERATOR}`)
-      const { data: response } = await http.post(`${url}/${API_ENDPOINTS.OPERATOR}`, data);
+      
+      setPlans(null)
+      console.log('data before',`${url}/${API_ENDPOINTS.OPERATOR}`,data)
+       const { data: response } = await http.post(`${url}/${API_ENDPOINTS.OPERATOR}`, data);
       console.log('data after',response)
       return response;
     };
@@ -3303,6 +3319,8 @@ export const circleCode = [
     // const {data,isLoading} = useOperatorQuery();
 
     const getRechargePlans = async (data:any) => {
+      setPlans(null)
+      console.log('data before plans',data)
       const { data: plans } = await http.post(API_ENDPOINTS.RECHARGE_PLANS, data);
       // plans?.length && setLoading(false);
       setPlans(plans)
@@ -3316,13 +3334,6 @@ export const circleCode = [
         
     }
 
-    const {data:rechargePlans,fetchStatus} = useQuery({
-      queryKey: ['recharge-plans',rechargePrams],
-      queryFn: rechargePlanQuery,
-    })
-
-    const rechargePrams = {'operator': operatorName,
-                            'circle': circleName}
 
     function handleClick()  {
         return  openModal('BILL_PAYMENT')
@@ -3369,29 +3380,14 @@ export const circleCode = [
 
     });
 
-    
 
     const onSubmit = (value:any) => {
       const opr = {
         'mobile_no': value,
       }
-
       mutateOperator(opr);
-
-      const plan = {
-        'operator': operatorName,
-        'circle': circleName,
-      }
-
-      mutatePlan(plan);
-    //  await getOperatorDetails();
     };
 
-    // const submitOperator= async () => {
-    //   const 
-    // }
-
-    // console.log('operator', operator?.operator,operator?.circle)
 
     function callApi(value:any) {
       plans == null ? setLoading(true) : setLoading(false)
@@ -3401,15 +3397,17 @@ export const circleCode = [
     }
 
     const handleOnChange = (e: any) => {
+      setOperatorName(null);
+      setCircleName(null);
        // e.preventDefault();
       // setPopularPlans('');
       setPhoneNumber(e.target.value);
       const value = e.target.value;
       value.toString().length === 10 && callApi(value);
-      setOperator(null);
-      setOperatorName(null);
-      setCircleName(null);
-      setPlans(null);
+      // setOperator(null);
+      // setOperatorName(null);
+      // setCircleName(null);
+      // setPlans(null);
     };
 
     useEffect(()=>{
@@ -3425,7 +3423,7 @@ export const circleCode = [
       return  el?.group_name == 'Special Recharge' ? el  : null ;
     });
 
-    const specialRechargeList = popularPlans?.length && popularPlans?.map((i:any)=> i?.plans) ;
+    const specialRechargeList = popularPlans?.length && popularPlans?.map((i:any)=> i?.plans.filter((pln)=>pln.circle == circleName || pln?.circle == 'All Circles')) ;
 
     console.log('allPlans',  AddOnPlans);
 
@@ -3446,6 +3444,15 @@ export const circleCode = [
 
      console.log('operator',operatorName,circleName)
      console.log('')
+
+     //callback function which filter the plans based on price
+       function handlePrice(price:any) {
+        console.log(price)
+        return plans?.plans?.filter((plan:any)=>plan?.price === price)
+      }
+
+      console.log('price',handlePrice(199))
+
     
      
      
@@ -3503,6 +3510,7 @@ export const circleCode = [
           <div className='relative flex-1 items-center'>
             <Input label='Amount'
               variant={''}
+              onChange={(e)=>handlePrice(e.target.value)}
               type='number' />
               {/* <Label>Price</Label> */}
               <div className='  '>
@@ -3568,34 +3576,36 @@ export const circleCode = [
               specialRechargeList && specialRechargeList[0]?.slice(0,6).map
               ( 
                 (plan:any,index:any) => {
-                  return(
+                  // console.log('modal',plan)
+                  return (
                   // plans?.plans?.length &&
                   
                 <div
-                     onClick={()=>handlePlanDetails(operatorName,circleName)}  
-                     key={index}
-                     className = 'cursor-pointer flex flex-col tracking-wide bg-white shadow-lg border mx-2 rounded space-y-2    p-3'>
-                     <span  className='font-bold text-sm  text-gray-900 whitespace-nowrap'>
-                      { plan?.plan_name}
-                    </span>
-                    <span  className='font- text-sm  text-gray-900 whitespace-nowrap'>
+                    onClick={()=>handlePlanDetails(plan)}  
+                    key={index}
+                    className = 'cursor-pointer flex-1  tracking-wide bg-white shadow-lg border mx-2 rounded space-y-2    p-3'>
+                    <p  className='font-bold text-sm  text-gray-900 whitespace-nowrap'>
+                      {plan?.plan_name}
+                    </p>
+                    <p  className='font- text-sm  text-gray-900 whitespace-nowrap'>
                       {'₹'+ plan?.price}
-                    </span>
-                    <span   className='font- h-20 text-xs text-gray-800 whitespace-wrap'>
+                    </p>
+                    <p   className='block lg:hidden font- h-20 text-xs text-gray-800 whitespace-wrap'>
                       {plan?.description.substring(0,50)+'...'}  
-                    </span>
-                    <span className='font- text-xs text-gray-800 whitespace-nowrap'>
-                      
-                    </span>
-                    <span   className='font- text-xs text-gray-800 whitespace-nowrap'>
+                    </p>
+                    <p   className='hidden lg:block font- h-20 text-xs text-gray-800 whitespace-wrap'>
+                      {plan?.description}  
+                    </p>
+                   
+                    <p   className='font- text-xs text-gray-800 whitespace-nowrap'>
                       {plan?.data}
-                    </span>
-                    <span   className='font- text-xs text-gray-800 whitespace-nowrap'>
+                    </p>
+                    <p   className='font- text-xs text-gray-800 whitespace-nowrap'>
                       {plan?.validity}
-                    </span>
-                    <span   className='font-md text-sm text-blue-700 whitespace-nowrap'>
+                    </p>
+                    <p   className='font-md text-sm text-blue-700 whitespace-nowrap'>
                       {plan?.circle}
-                    </span>
+                    </p>
 
                 </div>
                   )

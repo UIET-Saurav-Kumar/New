@@ -46,6 +46,7 @@ class OrderRepository extends BaseRepository
     /**
      * @var string[]
      */
+    
     protected $dataArray = [
         'tracking_number',
         'name',

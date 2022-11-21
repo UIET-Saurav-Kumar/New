@@ -198,7 +198,9 @@ export default function TravelInsurance() {
                 className='mt-1'
             />
             {errors.phone_number && (
-                <p className='text-red-500 text-xs italic'>{errors.phone_number.message}</p>
+                <p className='text-red-500 text-xs italic'>
+                  {errors.phone_number.message}
+                </p>
             )}
             </div>
 
@@ -232,12 +234,11 @@ export default function TravelInsurance() {
         {
         width < 1023 && 
           <MobileNavigation />
-        
-      }
-      {
-        width > 1023 &&
-        <CartCounterButton/>
-      }
+        }
+        {
+          width > 1023 &&
+          <CartCounterButton/>
+        }
 
     </Card>
 

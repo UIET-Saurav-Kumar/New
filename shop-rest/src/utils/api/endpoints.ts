@@ -64,6 +64,8 @@ export const API_ENDPOINTS: Record<string, string> = {
   RECHARGE_PLANS:'recharge-plans',
   OPERATOR: 'get-operator',
   OPERATORS_LIST: 'operators-list',
+
+  TERM_LIFE_INSURANCE: 'term-life-insurance',
    
 
 

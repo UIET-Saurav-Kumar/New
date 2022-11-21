@@ -112,10 +112,10 @@ export default function ContactPage({user} : Props) {
     <> 
 
     <Head>
-    <link rel="canonical" href={`https://buylowcal.com/contact`}/>
+      <link rel="canonical" href={`https://buylowcal.com/contact`}/>
     </Head>
     
-    <div className="w-full bg-gray-100">
+    <div className="mt-0 lg:mt-16 w-full bg-gray-100">
       <div className="flex flex-col md:flex-row max-w-7xl w-full mx-auto py-10 px-5 xl:py-14 xl:px-8 2xl:px-14">
         {/* sidebar */}
         <div className="w-full md:w-72 lg:w-96 bg-light p-5 flex-shrink-0 order-2 md:order-1">
@@ -138,7 +138,7 @@ export default function ContactPage({user} : Props) {
 
           <div className="flex flex-col mb-8">
             <span className="font-semibold text-heading mb-3">
-              {t("text-phone")}
+              {t("Phone No")}
             </span>
             <span className="text-sm text-body">
               {siteSettings.author.phone}
@@ -147,7 +147,7 @@ export default function ContactPage({user} : Props) {
 
           <div className="flex flex-col mb-8">
             <span className="font-semibold text-heading mb-3">
-              {t("text-website")}
+              {t("Website")}
             </span>
             <div className="flex items-center justify-between">
               <span className="text-sm text-body">
@@ -159,14 +159,14 @@ export default function ContactPage({user} : Props) {
                 target="_blank"
                 className="text-sm text-accent font-semibold hover:text-accent-hover focus:outline-none focus:text-blue-500"
               >
-                {t("text-visit-site")}
+                {t("visit")}
               </a>
             </div>
           </div>
 
           <div className="flex flex-col mb-8">
             <span className="font-semibold text-heading mb-4">
-              {t("text-follow-us")}
+              {t("Follow-us")}
             </span>
             <div className="flex items-center justify-start">
               {siteSettings.author.social?.map((item, index) => (
@@ -186,7 +186,7 @@ export default function ContactPage({user} : Props) {
         {/* Contact form */}
         <div className="w-full order-1 md:order-2 mb-8 md:mb-0 md:ms-7 lg:ms-9 p-5 md:p-8 bg-light">
           <h1 className="mb-7 text-xl md:text-2xl font-body font-bold text-heading">
-            {t("text-questions-comments")}
+            {t("Question,Comments or Concern?")}
           </h1>
           <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -206,7 +206,7 @@ export default function ContactPage({user} : Props) {
             </div>
 
             <Input
-              label={t("text-subject")}
+              label={t("Subject")}
               {...register("subject")}
               variant="outline"
               className="my-6"
@@ -214,7 +214,7 @@ export default function ContactPage({user} : Props) {
             />
 
             <TextArea
-              label={t("text-description")}
+              label={t("Description")}
               {...register("description")}
               variant="outline"
               className="my-6"

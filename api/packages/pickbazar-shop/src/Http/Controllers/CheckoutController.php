@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Log;
 use PickBazar\Exceptions\PickbazarException;
 
 class CheckoutController extends CoreController
+
 {
     public $repository;
 

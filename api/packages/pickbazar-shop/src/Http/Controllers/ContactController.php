@@ -14,6 +14,7 @@ use PickBazar\Exceptions\PickbazarException;
 use Illuminate\Database\Migrations\Migration;
 use PickBazar\Database\Repositories\ContactRepository;
 
+
 class ContactController extends CoreController
 
 {
@@ -23,12 +24,14 @@ class ContactController extends CoreController
     {
         $this->repository = $repository;
     }
+    
     /**
      * Display a listing of the resource.
      *
      * @param Request $request
      * 
      */
+
     public function index(Request $request)
     {
         $limit = $request->limit ?  $request->limit : 25;
@@ -43,6 +46,7 @@ class ContactController extends CoreController
      * @return mixed
      * @throws ValidatorException
      */
+
     public function store(Request $request)
     {
         return $this->repository->create($request->all());
@@ -54,11 +58,14 @@ class ContactController extends CoreController
      * @param int $id
      * @return JsonResponse
      */
+
+
     public function show(Request $request, $id)
     {
         $request->id = $id;
         return $this->fetchSingleContact($request);
     }
+
 
     public function fetchSingleContact(Request $request)
     {
@@ -78,6 +85,7 @@ class ContactController extends CoreController
      * @param int $id
      * @return JsonResponse
      */
+
     public function update(Request $request, $id)
     {
         throw new PickbazarException('PICKBAZAR_ERROR.ACTION_NOT_VALID');
@@ -89,6 +97,7 @@ class ContactController extends CoreController
      * @param int $id
      * @return JsonResponse
      */
+
     public function destroy(Request $request, $id)
     {
         if ($request->user() && $request->user()->hasPermissionTo(Permission::SUPER_ADMIN)) {

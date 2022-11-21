@@ -65,25 +65,25 @@ export default function BikeInsurance( props:any) {
 
     return (
 
-    <div className='w-full lg:w-1/2 mx-auto h-screen mt-4 lg:mt-20 '>
+    <div className='w-full lg:w-1/2 mx-auto h-screen mt-4 lg:mt-20'>
       
       <Card className="w-full">
-        <div className=''> 
-             {/* <Image
-            priority={true}   
-            src={props?.src}
-            layout='intrinsic'
-            objectFit='contain'
-            width={props?.width}
-            height={props?.height}
-          /> */}    
-             <h1 className='font-semibold text-gray-700 '> 
-               Bike Insurance
-             </h1>
-        </div>
+          <div className=''> 
+              {/* <Image
+              priority={true}   
+              src={props?.src}
+              layout='intrinsic'
+              objectFit='contain'
+              width={props?.width}
+              height={props?.height}
+            /> */}    
+              <h1 className='font-semibold text-gray-700 '> 
+                Bike Insurance
+              </h1>
+          </div>
+
         <form className='space-y-8'
          onSubmit={handleSubmit(onSubmit)} noValidate>
-
         {/* <div className='flex flex-col space-y-4'> */}
           <div className='flex flex-col space-y-2'>
             <Label  
@@ -147,7 +147,7 @@ export default function BikeInsurance( props:any) {
           </div>
 
           <div className='flex flex-col space-y-2'>
-            <Label   className='text-sm font-semibold text-gray-600'>
+            <Label className='text-sm font-semibold text-gray-600'>
               Insured Amount
             </Label>
             <Input
@@ -173,8 +173,6 @@ export default function BikeInsurance( props:any) {
               Submit
             </button>
           </div>
-
-
 
         </form>
         </Card>

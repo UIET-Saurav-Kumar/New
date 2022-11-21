@@ -35,6 +35,7 @@ use PickBazar\Http\Controllers\AbusiveReportController;
 use PickBazar\Http\Controllers\FeedbackController;
 use PickBazar\Http\Controllers\BillPaymentController;
 use PickBazar\Http\Controllers\BillDetailsController;
+use PickBazar\Http\Controllers\TermLifeInsuranceController;
 
 
  
@@ -261,6 +262,11 @@ Route::apiResource('contact', ContactController::class, [
     'only' => ['index', 'store']
 ]);
 
+Route::apiResource('term-life-insurance', TermLifeInsuranceController::class, [
+    'only' => ['index', 'store']
+]);
+
+
 Route::post('coupons/verify', 'PickBazar\Http\Controllers\CouponController@verify');
 
 
@@ -316,33 +322,34 @@ Route::group(['middleware' => ['can:' . Permission::CUSTOMER, 'auth:sanctum']], 
 
     Route::resource('bill',BillController::class);
     Route::resource('contact',ContactController::class);
+    Route::resource('term-life-insurance',TermLifeInsuranceController::class);
     Route::post('approve-bill','PickBazar\Http\Controllers\BillController@approveBill');
     Route::post('bill-reward','PickBazar\Http\Controllers\BillController@billReward');
     Route::get('bill-reward','PickBazar\Http\Controllers\BillController@getbillReward');
 
 
-Route::group(
-    ['middleware' => ['permission:' . Permission::STAFF . '|' . Permission::STORE_OWNER, 'auth:sanctum']],
-    function () {
-        Route::get('analytics', 'PickBazar\Http\Controllers\AnalyticsController@analytics');
-        Route::apiResource('products', ProductController::class, [
-            'only' => ['store', 'update', 'destroy']
-        ]);
-        Route::apiResource('master-products', MasterProductController::class, [
-            'only' => ['store', 'update', 'destroy']
-        ]);
-        Route::apiResource('attributes', AttributeController::class, [
-            'only' => ['store', 'update', 'destroy']
-        ]);
-        Route::apiResource('attribute-values', AttributeValueController::class, [
-            'only' => ['store', 'update', 'destroy']
-        ]);
-        Route::apiResource('orders', OrderController::class, [
-            'only' => ['update', 'destroy']
-        ]);
-        Route::get('popular-products', 'PickBazar\Http\Controllers\AnalyticsController@popularProducts');
-    }
-);
+    Route::group(
+        ['middleware' => ['permission:' . Permission::STAFF . '|' . Permission::STORE_OWNER, 'auth:sanctum']],
+        function () {
+            Route::get('analytics', 'PickBazar\Http\Controllers\AnalyticsController@analytics');
+            Route::apiResource('products', ProductController::class, [
+                'only' => ['store', 'update', 'destroy']
+            ]);
+            Route::apiResource('master-products', MasterProductController::class, [
+                'only' => ['store', 'update', 'destroy']
+            ]);
+            Route::apiResource('attributes', AttributeController::class, [
+                'only' => ['store', 'update', 'destroy']
+            ]);
+            Route::apiResource('attribute-values', AttributeValueController::class, [
+                'only' => ['store', 'update', 'destroy']
+            ]);
+            Route::apiResource('orders', OrderController::class, [
+                'only' => ['update', 'destroy']
+            ]);
+            Route::get('popular-products', 'PickBazar\Http\Controllers\AnalyticsController@popularProducts');
+        }
+    );
 
     Route::put('status-product/{id}',"PickBazar\Http\Controllers\ProductController@updateProductStatus");
     Route::group(

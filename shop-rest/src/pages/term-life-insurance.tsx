@@ -12,26 +12,34 @@ import Image from 'next/image';
 import Label from "@components/ui/label";
 import Input from "@components/ui/input";
 import Radio from '@components/ui/radio/radio';
+import { toast } from "react-toastify";
+import { useRouter } from 'next/router';
+import { useTermInsuredFormDataMutation } from '@data/insurance/use-term-insured.query';
 
 
  
 // form values
 type FormValues = {
-   'your_name': string,
+   'name': string,
    'date_of_birth': string,
-    'do_you_smoke_or_chew_tobacco': string,
+    'is_tobacco_user': string,
     'annual_income': string,
-    'educational_qualification': string,
-    'occupation_type': string,
+    'education': string,
+    'occupation': string,
     'pin_code': string,
+    'mobile_number': string,
 };
 
 
 export default function TermLifeInsurance( props:any) {
 
-  console.log('context',props)
+//   console.log('context',props)
+  const router = useRouter();
+
 
   const { width } = useWindowSize();
+  const { mutate: storeInsured } =useTermInsuredFormDataMutation();
+
 
   React.useEffect(() => {
     window.scrollTo(0, 0)
@@ -42,16 +50,18 @@ export default function TermLifeInsurance( props:any) {
     handleSubmit,
     formState: { errors },
     getValues,
+    reset,
     control,
   } = useForm<FormValues>({
     defaultValues: {
-        'your_name': '',
+        'name': '',
         'date_of_birth': '',
-        'do_you_smoke_or_chew_tobacco': '',
+        'is_tobacco_user': '',
         'annual_income': '',
-        'educational_qualification': '',
-        'occupation_type': '',
+        'education': '',
+        'occupation': '',
         'pin_code': '',
+        'mobile_number': '',
 
     },
 
@@ -59,7 +69,28 @@ export default function TermLifeInsurance( props:any) {
     )
 
     function onSubmit(data: FormValues) {
-      console.log(data)
+        
+        storeInsured(
+            {
+                    
+            name: data.name,
+            dob: data.date_of_birth,
+            smoke: data.is_tobacco_user,
+            income: data.annual_income,
+            education: data.education,
+            occupation: data.occupation,
+            pincode: data.pin_code,
+                   
+             },
+            {
+              onSuccess: (data) => {
+                console.log('data',data)
+                toast.success(("Thank You for your Query. Our team will get back to you soon."));
+                reset();
+                
+              },
+            }
+          );
     }
 
     // auto correct the date format
@@ -94,11 +125,9 @@ export default function TermLifeInsurance( props:any) {
     }
 
 
-    
-
     return (
 
-    <div className='w-1/2 mx-auto h-  mt-20 '>
+    <div className='w-full lg:w-1/2 mx-auto h-  mt-4 lg:mt-20 '>
       
       <Card className="w-full">
 
@@ -113,47 +142,53 @@ export default function TermLifeInsurance( props:any) {
             height={props?.height}
           /> */}
 
-            <h1 className='font-semibold text-gray-700 '> 
-                 Termlife Insurance 
+            <h1 className=' text-heading'> 
+                 TermLife Insurance 
             </h1>
 
         </div>
 
-        <form className='grid grid-cols-2 gap-8' onSubmit={handleSubmit(onSubmit)} noValidate>
+        <form className='grid grid-cols-2 gap-8' 
+              onSubmit={handleSubmit(onSubmit)} noValidate>
 
-        <div className='flex flex-col space-y-4'>
-            <Label className='text-gray-700 font-semibold'>Your Name</Label>
+        <div className='flex flex-col '>
+            <Label className='text-gray-700 font-semibold text-xs lg:text-sm'>Your Name</Label>
             <Input 
-            // className='border border-gray-300 rounded-md p-2'
-            type='text'
-            variant='outline' 
-            placeholder='Enter your name'
-            {...register('your_name', {
-                required: 'Name is required',
-                minLength: {
-                    value: 3,
-                    message: 'Name should be at least 3 characters',
-                },
-                maxLength: {
-                    value: 20,
-                    message: 'Name should not exceed 20 characters',
-                },
-            })}
+                // className='border border-gray-300 rounded-md p-2'
+                type='text'
+                variant='outline' 
+                placeholder='Enter your name'
+                {...register('name', {
+                    required: 'Name is required',
+                    minLength: {
+                        value: 3,
+                        message: 'Name should be at least 3 characters',
+                    },
+                    maxLength: {
+                        value: 20,
+                        message: 'Name should not exceed 20 characters',
+                    },
+                })}
             />
-            {errors.your_name && (
+
+            {errors.name && (
                 <span className='text-red-500 text-sm'>
-                    {errors.your_name.message}
+                    {errors.name.message}
                 </span>
-            )}
+            )}                      
         </div>
 
-        <div className='flex flex-col space-y-4'>
-            <Label className='text-gray-700 font-semibold'>Date of Birth</Label>
+        <div className='flex flex-col '>
+            <Label className='text-gray-700 font-semibold text-xs lg:text-sm'>
+                Date of Birth
+            </Label>
             <Input
             type='text'
             variant='outline'
             placeholder='Enter your date of birth'
-            onChange = {(e)=>dateCorrector(e)}
+
+            onChange = { (e) => dateCorrector(e) }
+
             {...register('date_of_birth', {
                 required: 'Date of birth is required',
                 minLength: {
@@ -165,6 +200,7 @@ export default function TermLifeInsurance( props:any) {
                     message: 'Date of birth should not exceed 10 characters',
                 },
             })}
+
             />
             {errors.date_of_birth && (
                 <span className='text-red-500 text-sm'>
@@ -173,81 +209,100 @@ export default function TermLifeInsurance( props:any) {
             )}
         </div>
 
-        <div className='flex flex-col space-y-4'>
-            <Label className='text-gray-700 font-semibold'>
+        <div className='flex flex-col'>
+            
+            <Label className='text-gray-700 font-semibold text-xs lg:text-sm'>
                 Do you smoke or chew tobacco?
             </Label>
+
             <Radio
-                name='do_you_smoke_or_chew_tobacco'
+                name='is_tobacco_user'
                 id='yes'
                 type='radio'
                 value='yes'
                 label={'Yes'}
             />
             <Radio
-                name='do_you_smoke_or_chew_tobacco'
+                name='is_tobacco_user'
                 id='no'
                 type='radio'
                 value='no'
                 label={'No'}
             />
-            {errors.do_you_smoke_or_chew_tobacco && (
+            { errors.is_tobacco_user && (
                 <span className='text-red-500 text-sm'>
-                    {errors.do_you_smoke_or_chew_tobacco.message}
+                    {errors.is_tobacco_user.message}
                 </span>
             )}
+
         </div>
 
-        <div className='flex flex-col space-y-4'>
-            <Label className='text-gray-700 font-semibold'>Annual Income</Label>
+        <div className='flex flex-col'>
+
+            <Label className='text-gray-700 font-semibold text-xs lg:text-sm'>
+                Annual Income
+            </Label>
+
             <Input
-            // className='border border-gray-300 rounded-md p-2'
-            type='text'
-            variant='outline'
-            placeholder='Enter your annual income'
-            {...register('annual_income', {
-                required: 'Annual income is required',
-            })}
+                // className='border border-gray-300 rounded-md p-2'
+                type='text'
+                variant='outline'
+                placeholder='Enter your annual income'
+                {...register('annual_income', {
+                    required: 'Annual income is required',
+                })}
             />
+
             {errors.annual_income && (
-                <span className='text-red-500 text-sm'>{errors.annual_income.message}</span>
+                <span className='text-red-500 text-sm'>
+                    {errors.annual_income.message}
+                </span>
             )}
+            
         </div>
 
-        <div className='flex flex-col space-y-4'>
-            <Label className='text-gray-700 font-semibold'>Educational Qualification</Label>
+        <div className='flex flex-col'>
+            <Label className='text-gray-700 font-semibold text-xs lg:text-sm'>
+                Educational Qualification
+            </Label>
             <Input
             // className='border border-gray-300 rounded-md p-2'
             type='text'
             variant='outline'
             placeholder='Enter your educational qualification'
-            {...register('educational_qualification', {
+            {...register('education', {
                 required: 'Educational qualification is required',
             })}
             />
-            {errors.educational_qualification && (
-                <span className='text-red-500 text-sm'>{errors.educational_qualification.message}</span>
+            {errors.education && (
+                <span className='text-red-500 text-sm'>
+                    {errors.education.message}
+                </span>
             )}
         </div>
 
-        <div className='flex flex-col space-y-4'>
-            <Label className='text-gray-700 font-semibold'>Occupation Type</Label>
+        <div className='flex flex-col '>
+            <Label className='text-gray-700 font-semibold text-xs lg:text-sm'>
+                Occupation Type
+            </Label>
             <Input
             // className='border border-gray-300 rounded-md p-2'
             type='text'
             variant='outline'
             placeholder='Enter your occupation type'
-            {...register('occupation_type', {
+            {...register('occupation', {
                 required: 'Occupation type is required',
             })}
             />
-            {errors.occupation_type && (
-                <span className='text-red-500 text-sm'>{errors.occupation_type.message}</span>
+            {errors.occupation && (
+                <span className='text-red-500 text-sm'>
+                    {errors.occupation.message}
+                </span>
             )}
         </div>
 
-        <div className='flex flex-col space-y-4'>
-            <Label className='text-gray-700 font-semibold'>Pin Code</Label>
+        <div className='flex flex-col '>
+            <Label className='text-gray-700 font-semibold text-xs lg:text-sm'>Pin Code</Label>
             <Input
             // className='border border-gray-300 rounded-md p-2'
             type='text'
@@ -258,12 +313,18 @@ export default function TermLifeInsurance( props:any) {
             })}     
             />
             {errors.pin_code && (
-                <span className='text-red-500 text-sm'>{errors.pin_code.message}</span>
+                <span className='text-red-500 text-sm'>
+                    {
+                      errors.pin_code.message
+                    }
+                </span>
             )}
         </div>
                 
-        <div className='flex flex-col space-y-4'>
-            <Label className='text-gray-700 font-semibold'>Mobile Number</Label>
+        <div className='flex flex-col '>
+            <Label className='text-gray-700 font-semibold text-xs lg:text-sm'>
+                Mobile Number
+            </Label>
             <Input
             // className='border border-gray-300 rounded-md p-2'
             type='text'
@@ -274,22 +335,22 @@ export default function TermLifeInsurance( props:any) {
             })}
             />
             {errors.mobile_number && (
-                <span className='text-red-500 text-sm'>{errors.mobile_number.message}</span>
+                <span className='text-red-500 text-sm'>
+                    {errors.mobile_number.message}
+                </span>
             )}
         </div>
-                
-          
 
           <div className='flex flex-col space-y-2'>
             <button
               type='submit'
-              className='bg-blue-600 text-white rounded-md px-4 py-2 font-semibold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-gray-100'
+              className='bg-blue-600 text-white rounded-md px-4 py-2 font-semibold 
+                         hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600
+                          focus:ring-offset-2 focus:ring-offset-gray-100'
             >
               Submit
             </button>
           </div>
-
-
 
         </form>
         </Card>

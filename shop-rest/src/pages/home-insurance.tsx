@@ -129,7 +129,7 @@ export default function HomeInsurance( props:any) {
         carpet_area: '',
         construction_cost: '',
     },
-  }
+    }
     )
 
     function onSubmit(data: FormValues) {
@@ -185,7 +185,6 @@ export default function HomeInsurance( props:any) {
         setStep1(false)
         setStep2(false)
         setStep3(true)
-
     }
 
     function handleStep3() {
