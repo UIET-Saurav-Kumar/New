@@ -42,12 +42,13 @@ use PickBazar\Http\Controllers\TermLifeInsuranceController;
 //route for findByDateRange in order controller
 Route::get('/find-by-date-range/{start_date}/{end_date}', 'PickBazar\Http\Controllers\OrderController@findByDateRange');
 // Route::get('/find-by-date-range', 'PickBazar\Http\Controllers\OrderController@findByDateRange');
-Route::get('/biller-info','PickBazar\Http\Controllers\BillDetailsController@getBillDetails');
+Route::post('/get-bill-details','PickBazar\Http\Controllers\BillDetailsController@getBillDetails');
 // Route::get('/biller-info','PickBazar\Http\Controllers\BillPaymentController@getBillerInfo');
 Route::any('/get-operator','PickBazar\Http\Controllers\OperatorDetailsController@getOperator');
 Route::post('/recharge-plans','PickBazar\Http\Controllers\RechargePlansController@getPlans');
 Route::get('/operators-list','PickBazar\Http\Controllers\OperatorListController@operatorList');
 Route::get('/biller-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
+Route::get('/get-water-biller-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
 
 
 Route::post('/register', 'PickBazar\Http\Controllers\UserController@register');

@@ -19,16 +19,26 @@ class BillerInfoController extends  CoreController
    
     public static function getBillerInfo(Request $request){
 
-        $curl = curl_init();
+       
 
         $member_id = 'EZ929952';
         $api_key =  'C019FB28E2';
         
-        $biller_id = 'MUNI00000CHANI';
-        $category = 'Water';
+        // $operator = $request->operator;
+        $category = $request->category;
+        $biller_id= $request->biller_id;
 
+        $data = array(
+          'biller_id'=> $biller_id,
+          'category' => $category,
+        );
+
+        $curl = curl_init();
+        
+        
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://ezulix.in/api/BBPSV2/Electricity/getBillerInfo.aspx?memberid='.$EZ929952+'&apikey='.$api_key+'&biller_id='.$biller_id+'&category='.$category,
+          // CURLOPT_URL => 'https://ezulix.in/api/BBPSV2/Electricity/getBillerInfo.aspx?memberid='.$member_id.'&apikey='.$api_key.'&biller_id=MUNI00000CHANI&category=Water',
+            CURLOPT_URL => 'https://ezulix.in/api/BBPSV2/Electricity/getBillerInfo.aspx?memberid='.$member_id.'&apikey='.$api_key.'&biller_id='.$biller_id.'&category='.$category,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -36,7 +46,10 @@ class BillerInfoController extends  CoreController
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
+            // CURLOPT_POSTFIELDS => 
+            //  json_encode($data),
             CURLOPT_HTTPHEADER => array(
+              'Content-Length: 0',
               'Cookie: ASP.NET_SessionId=rinscufbx3ggi0a3ovgotc5x'
             ),
           ));
@@ -47,11 +60,6 @@ class BillerInfoController extends  CoreController
         curl_close($curl);
         return  $response;
 
-        // if (＄err) {
-        //     echo "cURL Error #:" . ＄err;
-        // } else {
-        //     print_r(json_decode(＄response));
-        // }
 
     }
 

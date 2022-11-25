@@ -2,7 +2,7 @@ import Input from '@components/ui/input'
 import Select from '@components/ui/select/select';
 import React, { useState } from 'react';
 import { operators } from '@components/home-page-product-section/bill-payment-services/forms/mobile-recharge-form';
-import { cirleCode } from '@components/home-page-product-section/bill-payment-services/forms/mobile-recharge-form';
+import { circleCode } from '@components/home-page-product-section/bill-payment-services/forms/mobile-recharge-form';
 import { ArrowCircleRightIcon } from '@heroicons/react/outline';
 import Table from 'rc-table';
 import { useIsRTL } from "@utils/locals";
@@ -13,8 +13,18 @@ export default function RechargePlans(plans: { data: { plans: any; }; },operator
 
     const { alignLeft } = useIsRTL();
 
-    console.log('modal plans',operator)
-     
+     let currentCircle = plans?.data?.circle
+
+    const filteredPlans = 
+    
+    plans?.data?.plans?.plans?.filter((plan: any) =>
+    {plan.circle == currentCircle})
+
+    console.log('modal filtered  ',filteredPlans)
+
+    console.log('modal circle',currentCircle)
+
+    console.log('modal plans',plans?.data?.plans)
     // const response = {
     //     'plans': [
     //         {
@@ -915,7 +925,7 @@ export default function RechargePlans(plans: { data: { plans: any; }; },operator
                     variant='solid'
                     type='number'
                     className='flex-1'
-                    options={cirleCode}
+                    options={circleCode}
                     value={circle}
                     placeholder='Select circle'
                    />

@@ -2,18 +2,111 @@ import Input from '@components/ui/input'
 import Label from '@components/ui/label'
 import { useModalAction } from '@components/ui/modal/modal.context'
 import Select from '@components/ui/select/select'
- import React from 'react'
+ import React, { useEffect, useState } from 'react'
+import { operators } from './mobile-recharge-form'
+import { API_ENDPOINTS } from "@utils/api/endpoints";
+import url from "@utils/api/server_url";
+import http from "@utils/api/http";
+import { useMutation } from 'react-query';
 
 export default function WaterForm({click,variant} :any) {
 
 console.log('form water',click)
 
+const[loading,setLoading] = useState(false);
+
+
 const { openModal } = useModalAction();
+
+const[value,setValue] = useState(null);
+const[operator, setOperator] = useState(null);
+const[category, setCategory] = useState(null);
+const[billerId, setBillerId] = useState(null);
+
+const[para1,setPara1] = useState('');
+const[para2, setPara2] =useState('');
+const[para3,setPara3] =useState('');
+const[waterBillDetails,setWaterBillDetails] = useState(null);
+
+const[key1, setKey1] = useState('');
+const[key2,setKey2] = useState('');
+const[key3,setKey3] = useState('')
+
+const[waterBillerInfo,setWaterBillerInfo]= useState(null);
+
+const fetchWaterBillInfo = async (data:any) => {
+    setLoading(true)
+
+    console.log('biller',data)
+
+    const { data:response } = await http.get(`${url}/${API_ENDPOINTS.WATER_BILL}?biller_id=${billerId}&category=${category}`);
+    setLoading(false)
+     setWaterBillerInfo(response)
+     
+    console.log('billerInfo',waterBillerInfo,response);
+    return response;
+
+  };
+
+  const { mutate: mutateWaterBillerInfo } = useMutation(fetchWaterBillInfo, {
+       
+    onSuccess: data => {
+     console.log('biller',data.data.map((m)=>m.paramName))
+    },
+
+
+    onError: (e) => {
+      alert('something went wrong')
+      setLoading(false)
+    },
+  
+    // onSettled: () => {
+    //   queryClient.invalidateQueries(API_ENDPOINTS.RECHARGE_PLANS);
+    // }
+
+  });
+
+  useEffect(() => {
+      
+    if(billerId && category) {
+
+      const biller =  {
+        'biller_id' :  billerId ,
+        'category'   :  category,
+      };
+
+      mutateWaterBillerInfo(biller);
+    }
+  }, [value])
 
 
 function handleClick()  {
     return   openModal('BILL_PAYMENT')
 }
+
+ function onValueChange(option) {
+   setValue(option.label)
+   setBillerId(option?.biller_id)
+   setCategory(option?.Category)
+ }
+
+ const submitBillDetails =  () => {
+        
+    const billDetails =  {
+      'para1':   para1,
+      'para2':   para2,
+      'para3':    para3,
+      'biller_id':billerId,
+      'category': category,
+    };
+
+    console.log(billDetails)
+
+    // mutateBillDetails(billDetails);
+   
+  };
+
+ console.log('value',value,billerId,category)
 
   return (
 
@@ -32,16 +125,37 @@ function handleClick()  {
                 <Select label='Operator'
                         variant=''
                         type='number'
+                        getOptionLabel={(option: any) => option.label}
+                        getOptionValue={(option: any) => option.label}
+                        onChange={onValueChange}
+                        className={` ${loading ? 'w-full lg:w-1/2 flex-1' : 'w-full'}   `}
+                        options={operators.filter((f)=>f.Category =='Water')}
                 />
             </div>
 
-            <div className='flex-1'> 
-                <Input label='RR Number'
-                    variant={variant}
-                    type='text'
-                    className='rounded'
-                />
-            </div>
+            { loading ? 
+                 <img src="/preloader/cir.gif" 
+                 className="w-full mt-10 mx-auto" 
+                 style={{width:"30px",height:"30px"}}/>
+                    : 
+                   waterBillerInfo?.data?.map((field,index)=>
+                    <div className='flex-1 '> 
+                        <Input 
+                          name={field.paramName}        
+                          label={field.paramName} 
+                          variant={variant}
+                          type={field?.datatype.toLowerCase()}
+                          inputMode={field?.datatype.toLowerCase()}
+                          className='rounded ' 
+                          onChange={field?.fieldKey=='para1' ? (e)=>setPara1(e.target.value) : field?.fieldKey=='para2' ? (e)=>setPara2(e.target.value) : 
+                          field?.fieldKey =='para3' ? (e)=>setPara3(e.target.value) : null  }
+
+                       />
+                       <h1 className='text-red-600 text-xs'>{waterBillDetails?.status_code == 500 ? waterBillDetails?.status_msg : null}</h1>
+
+                        
+                    </div>
+                   )}
 
             {/* <div className='flex flex-col'> 
                 <Label> Circle </Label>
@@ -65,17 +179,20 @@ function handleClick()  {
 
 
                 <div className='hidden lg:block lg:pt-3'>
-                    <Label className=''></Label>
-                    <button onClick={ handleClick} className='    bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>
+                        <Label className=''></Label>
+                        <button onClick={submitBillDetails} 
+                                className='bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>
                                 Proceed
-                            </button>
-                </div> 
+                        </button>
+                    </div> 
 
-                <button onClick={ handleClick} className='  lg:hidden  bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>
+                    <button onClick={submitBillDetails} 
+                            className='  lg:hidden  bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>
                             Proceed
-                </button>
+                    </button>
 
-        </div>
+                </div>
+
 
     </div>
   )
