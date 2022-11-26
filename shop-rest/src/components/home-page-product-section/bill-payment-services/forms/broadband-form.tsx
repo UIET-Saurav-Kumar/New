@@ -2,9 +2,12 @@ import Input from '@components/ui/input'
 import Label from '@components/ui/label'
 import { useModalAction } from '@components/ui/modal/modal.context'
 import Select from '@components/ui/select/select'
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { operators } from './mobile-recharge-form';
-
+import { API_ENDPOINTS } from "@utils/api/endpoints";
+import url from "@utils/api/server_url";
+import http from "@utils/api/http";
+import { useMutation } from 'react-query';
 
 
 export default function BroadbandForm({click,variant } :any) {
@@ -18,6 +21,84 @@ export default function BroadbandForm({click,variant } :any) {
     function handleClick()  {
         return   openModal('BILL_PAYMENT')
     }
+
+    const[loading,setLoading] = useState(false);
+    const[broadbandInfo,setBroadbandInfo]= useState(null);
+    const[operator, setOperator] = useState(null);
+    const[category, setCategory] = useState(null);
+    const[billerId, setBillerId] = useState(null);
+
+    const[para1,setPara1] = useState('');
+    const[para2, setPara2] =useState('');
+    const[para3,setPara3] =useState('');
+    const[broadbandDetails,setBroadbandDetails] = useState(null);
+
+    const[key1, setKey1] = useState('');
+    const[key2,setKey2] = useState('');
+    const[key3,setKey3] = useState('')
+
+    const fetchBroadbandInfo = async (data:any) => {
+        setLoading(true)
+
+        console.log('biller',data)
+  
+        const { data:response } = await http.get(`${url}/${API_ENDPOINTS.BROADBAND_INFO}?biller_id=${billerId}&category=${category}`);
+        setLoading(false)
+         setBroadbandInfo(response)
+         
+        console.log('broadbandInfo',broadbandInfo,response);
+        return response;
+
+      };
+
+      const { mutate: mutateBroadband } = useMutation(fetchBroadbandInfo, {
+       
+        onSuccess: data => {
+         console.log('biller',data.data.map((m)=>m.paramName))
+        },
+
+
+        onError: (e) => {
+          alert('something went wrong')
+          setLoading(false)
+        },
+      
+        // onSettled: () => {
+        //   queryClient.invalidateQueries(API_ENDPOINTS.RECHARGE_PLANS);
+        // }
+
+      });
+
+      useEffect(() => {
+      
+        if(billerId && category) {
+  
+          const biller =  {
+            'biller_id' :  billerId ,
+            'category'   :  category,
+          };
+  
+          mutateBroadband(biller);
+        }
+      }, [operator])
+
+      function fieldKeys(){
+        billerInfo?.data?.map((field:any)=>
+          field?.fieldKey=='para1' ? setKey1(field?.paramName) 
+        : field?.fieldKey=='para2' ? setKey2(field?.paramName) 
+        : field?.fieldKey =='para3' ? setKey3(field?.paramName) 
+        : null 
+        )
+      }
+
+      function onValueChange(option:any) {
+        setLoading(true);
+        setOperator(option.label)
+        setOperator(option?.label)
+        setBillerId(option.biller_id)
+        setCategory(option?.Category)
+      }
+
 
 
   return (
@@ -37,17 +118,36 @@ export default function BroadbandForm({click,variant } :any) {
                 <Select label='Operator'
                         variant=''
                         type='number'
+                        getOptionLabel={(option: any) => option.label}
+                          getOptionValue={(option: any) => option.label}
+                          className={` ${loading ? 'w-full lg:w-1/2 flex-1' : 'w-full'}   `}
+                          onChange={onValueChange}
                         options= {operators?.filter((opr)=> opr.Category=='BroadBand')}
                 />
             </div>
 
-            <div className='flex-1'> 
-                <Input label='Account Number/ User Name'
-                       variant={variant}
-                       type='text'
-                       className='rounded'
-                />
-            </div>
+            { loading ? 
+                 <img src="/preloader/cir.gif" 
+                 className="w-full mt-10 mx-auto" 
+                 style={{width:"30px",height:"30px"}}/>
+                    : 
+                   broadbandInfo?.data?.map((field,index)=>
+                    <div className='flex-1 '> 
+                        <Input 
+                          name={field.paramName}        
+                          label={field.paramName} 
+                          variant={variant}
+                          type={field?.datatype.toLowerCase()}
+                          inputMode={field?.datatype.toLowerCase()}
+                          className='rounded ' 
+                          onChange={field?.fieldKey=='para1' ? (e)=>setPara1(e.target.value) : field?.fieldKey=='para2' ? (e)=>setPara2(e.target.value) : 
+                          field?.fieldKey =='para3' ? (e)=>setPara3(e.target.value) : null  }
+
+                       />
+                       <h1 className='text-red-600 text-xs'>{broadbandInfo?.status_code == 500 ? broadbandInfo?.status_msg : null}</h1>
+
+                    </div>
+                   )}
 
             {/* <div className='flex flex-col'> 
                 <Label> Circle </Label>

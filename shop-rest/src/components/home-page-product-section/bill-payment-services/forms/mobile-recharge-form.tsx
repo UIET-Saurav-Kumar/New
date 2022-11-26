@@ -1073,7 +1073,7 @@ import { useForm } from "react-hook-form";
   },
   {
    "biller_id": "ADIT00000NATRA",
-    "label": "Aditya Birla Housing Finance Limited",
+    "label": "Aditya Birla  FastTag Finance Limited",
    "billerAliasName": "ABHFL",
    "is_fetch": 1,
    "Category": "Loan"
@@ -1094,7 +1094,7 @@ import { useForm } from "react-hook-form";
   },
   {
    "biller_id": "LAND00000NATRD",
-    "label": "L and T Housing Finance",
+    "label": "L and T  FastTag Finance",
    "billerAliasName": "LTHF",
    "is_fetch": 1,
    "Category": "Loan"
@@ -1115,7 +1115,7 @@ import { useForm } from "react-hook-form";
   },
   {
    "biller_id": "INDI00000NATYG",
-    "label": "Indiabulls Housing Finance Limited",
+    "label": "Indiabulls  FastTag Finance Limited",
    "billerAliasName": "IBHF - National",
    "is_fetch": 1,
    "Category": "Loan"
@@ -1176,8 +1176,8 @@ import { useForm } from "react-hook-form";
   },
   {
    "biller_id": "CAPR00000NATUB",
-    "label": "Capri Global Housing Finance",
-   "billerAliasName": "Capri Global Housing",
+    "label": "Capri Global  FastTag Finance",
+   "billerAliasName": "Capri Global  FastTag",
    "is_fetch": 1,
    "Category": "Loan"
   },
@@ -1218,7 +1218,7 @@ import { useForm } from "react-hook-form";
   },
   {
    "biller_id": "SHRI00000NAT7E",
-    "label": "Shriram Housing Finance Limited",
+    "label": "Shriram  FastTag Finance Limited",
    "billerAliasName": "SHFL",
    "is_fetch": 1,
    "Category": "Loan"
@@ -1496,7 +1496,7 @@ import { useForm } from "react-hook-form";
   },
   {
    "biller_id": "VAST00000NATLW",
-    "label": "Vastu Housing Finance Corporation Limited",
+    "label": "Vastu  FastTag Finance Corporation Limited",
    "billerAliasName": "VHFCL - National",
    "is_fetch": 1,
    "Category": "Loan"
@@ -1629,8 +1629,8 @@ import { useForm } from "react-hook-form";
   },
   {
    "biller_id": "FULL00000NAT8X",
-    "label": "Fullerton India Housing Finance Limited",
-   "billerAliasName": "Fullerton India Housing Finance Limited",
+    "label": "Fullerton India  FastTag Finance Limited",
+   "billerAliasName": "Fullerton India  FastTag Finance Limited",
    "is_fetch": 1,
    "Category": "Loan"
   },
@@ -1721,7 +1721,7 @@ import { useForm } from "react-hook-form";
   {
    "biller_id": "MAHI00000NATIC",
     "label": "Mahindra Home Finance",
-   "billerAliasName": "Mahindra Rural Housing Finance Ltd",
+   "billerAliasName": "Mahindra Rural  FastTag Finance Ltd",
    "is_fetch": 1,
    "Category": "Loan"
   },
@@ -1923,7 +1923,7 @@ import { useForm } from "react-hook-form";
   },
   {
    "biller_id": "KHUS00000NAT1L",
-    "label": "Khush Housing Finance Pvt Ltd",
+    "label": "Khush  FastTag Finance Pvt Ltd",
    "billerAliasName": "KHFL",
    "is_fetch": 1,
    "Category": "Loan"
@@ -1971,8 +1971,8 @@ import { useForm } from "react-hook-form";
   },
   {
    "biller_id": "ADAN00000NATI9",
-    "label": "Adani Housing Finance",
-   "billerAliasName": "Adani Housing Finance Private",
+    "label": "Adani  FastTag Finance",
+   "billerAliasName": "Adani  FastTag Finance Private",
    "is_fetch": 1,
    "Category": "Loan"
   },
@@ -2083,8 +2083,8 @@ import { useForm } from "react-hook-form";
   },
   {
    "biller_id": "TATA00000NATOM",
-    "label": "Tata Capital Housing Finance Limited",
-   "billerAliasName": "Tata Capital Housing Finance Limited",
+    "label": "Tata Capital  FastTag Finance Limited",
+   "billerAliasName": "Tata Capital  FastTag Finance Limited",
    "is_fetch": 1,
    "Category": "Loan"
   },
@@ -2125,7 +2125,7 @@ import { useForm } from "react-hook-form";
   },
   {
    "biller_id": "APTU00000NAT2L",
-    "label": "Aptus Value Housing Finance India Limited",
+    "label": "Aptus Value  FastTag Finance India Limited",
    "billerAliasName": "APTUS",
    "is_fetch": 1,
    "Category": "Loan"
@@ -2174,7 +2174,7 @@ import { useForm } from "react-hook-form";
   },
   {
    "biller_id": "MUTH00000NATJO",
-    "label": "Muthoot Housing Finance Company Limited",
+    "label": "Muthoot  FastTag Finance Company Limited",
    "billerAliasName": "MHFCL",
    "is_fetch": 1,
    "Category": "Loan"
@@ -2230,8 +2230,8 @@ import { useForm } from "react-hook-form";
   },
   {
    "biller_id": "AADH00000NATPT",
-    "label": "Aadhar Housing Finance Limited",
-   "billerAliasName": "Aadhar Housing Finance Limited",
+    "label": "Aadhar  FastTag Finance Limited",
+   "billerAliasName": "Aadhar  FastTag Finance Limited",
    "is_fetch": 1,
    "Category": "Loan"
   },
@@ -2244,7 +2244,7 @@ import { useForm } from "react-hook-form";
   },
   {
    "biller_id": "BAJA00000NATDK",
-    "label": "Bajaj Housing Finance Limited",
+    "label": "Bajaj  FastTag Finance Limited",
    "billerAliasName": "BHFL - National",
    "is_fetch": 1,
    "Category": "Loan"
@@ -2791,148 +2791,148 @@ import { useForm } from "react-hook-form";
 export const circleCode = [
   {
    "id": 1,
-   "label": "Andhra Pradesh",
+  //  "label": "Andhra Pradesh",
    "Circle Code": 1,
    "label": "Andhra Pradesh"
   },
   {
    "id": 2,
-   "label": "Assam",
+  //  "label": "Assam",
    "Circle Code": 2,
    "label": "Assam"
   },
   {
    "id": 3,
-   "label": "Bihar Jharkhand",
+  //  "label": "Bihar Jharkhand",
    "Circle Code": 3,
    "label": "Bihar Jharkhand"
   },
   {
    "id": 4,
-   "label": "Chennai",
+  //  "label": "Chennai",
    "Circle Code": 4,
    "label": "Chennai"
   },
   {
    "id": 5,
-   "label": "Delhi NCR",
+  //  "label": "Delhi NCR",
    "Circle Code": 5,
    "label": "Delhi NCR"
   },
   {
    "id": 6,
-   "label": "Gujarat",
+  //  "label": "Gujarat",
    "Circle Code": 6,
    "label": "Gujarat"
   },
   {
    "id": 7,
-   "label": "Haryana",
+  //  "label": "Haryana",
    "Circle Code": 7,
    "label": "Haryana"
   },
   {
    "id": 8,
-   "label": "Himachal Pradesh",
+  //  "label": "Himachal Pradesh",
    "Circle Code": 8,
    "label": "Himachal Pradesh"
   },
   {
    "id": 9,
-   "label": "Jammu Kashmir",
+  //  "label": "Jammu Kashmir",
    "Circle Code": "Kashmir",
    "Column4": 9,
    "label": "Jammu Kashmir"
   },
   {
    "id": 10,
-   "label": "Karnataka",
+  //  "label": "Karnataka",
    "Circle Code": 10,
    "label": "Karnataka"
   },
   {
    "id": 11,
-   "label": "Kerala",
+  //  "label": "Kerala",
    "Circle Code": 11,
    "label": "Kerala"
   },
   {
    "id": 12,
-   "label": "Kolkata",
+  //  "label": "Kolkata",
    "Circle Code": 12,
    "label": "Kolkata"
   },
   {
    "id": 13,
-   "label": "Maharashtra",
+  //  "label": "Maharashtra",
    "Circle Code": "Goa (except Mumbai)",
    "Column4": 13,
    "label": "Maharashtra"
   },
   {
    "id": 14,
-   "label": "Madhya Pradesh Chhattisgarh",
+  //  "label": "Madhya Pradesh Chhattisgarh",
    "Circle Code": "Chhattisgarh",
    "Column4": 14,
    "label": "Madhya Pradesh Chhattisgarh"
   },
   {
    "id": 15,
-   "label": "Mumbai",
+  //  "label": "Mumbai",
    "Circle Code": 15,
    "label": "Mumbai"
   },
   {
    "id": 16,
-   "label": "North East",
+  //  "label": "North East",
    "Circle Code": 16,
    "label": "North East"
   },
   {
    "id": 17,
-   "label": "Orissa",
+  //  "label": "Orissa",
    "Circle Code": 17,
    "label": "Orissa"
   },
   {
    "id": 18,
-   "label": "Punjab",
+  //  "label": "Punjab",
    "Circle Code": 18,
    "label": "Punjab"
   },
   {
    "id": 19,
-   "label": "Rajasthan",
+  //  "label": "Rajasthan",
    "Circle Code": 19,
    "label": "Rajasthan"
   },
   {
    "id": 20,
-   "label": "Tamil Nadu",
+  //  "label": "Tamil Nadu",
    "Circle Code": 20,
    "label": "Tamil Nadu"
   },
   {
    "id": 21,
-   "label": "UP East",
+  //  "label": "UP East",
    "Circle Code": 21,
    "label": "UP East"
   },
   {
    "id": 22,
-   "label": "UP West",
+  //  "label": "UP West",
    "Circle Code": 22,
    "label": "UP West"
   },
   {
    "id": 23,
-   "label": "West Bengal",
+  //  "label": "West Bengal",
    "Circle Code": 23,
    "label": "West Bengal"
   },
   {
    "id": 24,
-   "label": "Jharkhand",
+  //  "label": "Jharkhand",
    "Circle Code": 24,
    "label": "Jharkhand"
   },
@@ -3291,8 +3291,8 @@ export const circleCode = [
               type='number'
               {...register('circle', { required: true })}
               value={circleCode?.filter((opt)=>
-              opt?.value === operator?.circle)}
-              onChange={(e:any)=>setValue('circle',e.target.value)}
+              opt.label === operator?.circle)}
+              // onChange={(e:any)=>setValue('circle',e.target.value)}
               // value={operator?.circle}
               // value={operator?.msg === 'Success' && operator?.circle}
               options={circleCode} />

@@ -34,6 +34,17 @@ const[key3,setKey3] = useState('')
 
 const[waterBillerInfo,setWaterBillerInfo]= useState(null);
 
+function openBillDetails(data:any) {
+
+    return openModal("BILL_PAYMENT_DETAILS",{
+        data,
+        operator,
+        para: [{key1,para1},{key2,para2},{key3,para3}],
+       
+      // img : logoImg,
+    });
+  }
+
 const fetchWaterBillInfo = async (data:any) => {
     setLoading(true)
 
@@ -48,10 +59,44 @@ const fetchWaterBillInfo = async (data:any) => {
 
   };
 
+  const fetchWaterBillDetails = async (data:any) => {
+    setLoading(true)
+
+    console.log('biller',data)
+
+    const { data:response } = await http.post(`${url}/${API_ENDPOINTS.WATER_BILL_DETAILS}`,data);
+    setLoading(false)
+    setWaterBillDetails(response);
+    console.log('billDetails',waterBillDetails)
+    fieldKeys()
+    return response;
+
+  };
+
   const { mutate: mutateWaterBillerInfo } = useMutation(fetchWaterBillInfo, {
        
     onSuccess: data => {
      console.log('biller',data.data.map((m)=>m.paramName))
+    },
+
+
+    onError: (e) => {
+      alert('something went wrong')
+      setLoading(false)
+    },
+  
+    // onSettled: () => {
+    //   queryClient.invalidateQueries(API_ENDPOINTS.RECHARGE_PLANS);
+    // }
+
+  });
+
+  const { mutate: mutateWaterBillDetails } = useMutation(fetchWaterBillDetails, {
+       
+    onSuccess: data => {
+      data?.status_msg == 'OK' && openBillDetails(data)
+      
+     console.log(data)
     },
 
 
@@ -102,9 +147,18 @@ function handleClick()  {
 
     console.log(billDetails)
 
-    // mutateBillDetails(billDetails);
+    mutateWaterBillDetails(billDetails);
    
   };
+
+  function fieldKeys(){
+    waterBillerInfo?.data?.map((field:any)=>
+      field?.fieldKey=='para1' ? setKey1(field?.paramName) 
+    : field?.fieldKey=='para2' ? setKey2(field?.paramName) 
+    : field?.fieldKey =='para3' ? setKey3(field?.paramName) 
+    : null 
+    )
+  }
 
  console.log('value',value,billerId,category)
 

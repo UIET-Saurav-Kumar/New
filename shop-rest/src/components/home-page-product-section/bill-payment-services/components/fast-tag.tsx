@@ -3,7 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 
 
-export default function Housing({click,view,width,height,label}:any) {
+export default function  FastTag({click,view,width,height,label}:any) {
 
   console.log('dth view',view);
 
@@ -11,7 +11,7 @@ export default function Housing({click,view,width,height,label}:any) {
 
         <div onClick={view}  className ={`${click ? 'border border-indigo-700 w-full cursor-pointer  shadow-lg rounded-lg text-center' : 'w-full cursor-pointer border rounded-lg text-center' }`}>
             
-            <Image priority={true} src='/bill-payment/housing.jpeg' 
+            <Image priority={true} src='/bill-payment/fast-tag.jpeg' 
               layout='intrinsic'
               objectFit='contain'
               width={width}

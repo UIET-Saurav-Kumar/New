@@ -271,7 +271,6 @@ export default function ElectricityForm({click,variant,props} :any) {
                        />
                        <h1 className='text-red-600 text-xs'>{billDetails?.status_code == 500 ? billDetails?.status_msg : null}</h1>
 
-                        
                     </div>
                    )}
 

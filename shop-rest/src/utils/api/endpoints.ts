@@ -60,14 +60,25 @@ export const API_ENDPOINTS: Record<string, string> = {
   PRODUCTS_QUESTIONS: '/questions',
   FEEDBACK: '/feedbacks',
 
+  
   BILLER_INFO: 'biller-info',
   RECHARGE_PLANS:'recharge-plans',
   OPERATOR: 'get-operator',
   OPERATORS_LIST: 'operators-list',
   BILL_DETAILS: 'get-bill-details',
   WATER_BILL: 'get-water-biller-info',
-
+  WATER_BILL_DETAILS: 'get-water-bill-details',
+  INSURANCE_INFO:'get-insurance-info',
   TERM_LIFE_INSURANCE: 'term-life-insurance',
+  BROADBAND_INFO: 'get-broadband-info',
+  LANDLINE_INFO: 'get-landline-info',
+  LPG_INFO:'get-lpg-info',
+  EMI_INFO:'get-emi-info',
+  EMI_DETAILS:'get-emi-details',
+  CABLE_INFO:'get-cable-info',
+  CABLE_DETAILS:'get-cable-details',
+  FAST_TAG_INFO:'get-fast-tag-info',
+  FAST_TAG_DETAILS:'get-fast-tag-details',
    
 
 

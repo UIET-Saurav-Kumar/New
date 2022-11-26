@@ -18,7 +18,7 @@ type paymentContextType = {
     emi: boolean;
     datacard: boolean;
     challan: boolean;
-    housing: boolean;
+     fastTag: boolean;
     cable: boolean;
     googleplay: boolean;
 
@@ -54,7 +54,7 @@ const paymentContextDefaultValues : paymentContextType = {
     emi: false,
     datacard: false,
     challan: false,
-    housing: false,
+     fastTag: false,
     cable: false,
     googleplay: false,
     // minicipality
@@ -106,7 +106,7 @@ export function PaymentProvider({children}:Props){
 
     const[datacard, setDataCard] = useState(false);
     const[challan, setChallan] = useState(false);
-    const[housing, setHousing] = useState(false);
+    const[ fastTag, setHousing] = useState(false);
     const[cable, setCable] = useState(false);
     const[googleplay, setGooglePlay] = useState(false);
 
@@ -438,7 +438,7 @@ export function PaymentProvider({children}:Props){
         lpgbooking,
         datacard,
         challan,
-        housing,
+         fastTag,
         cable,
         googleplay,
 

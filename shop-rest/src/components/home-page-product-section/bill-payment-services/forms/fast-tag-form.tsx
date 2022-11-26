@@ -22,13 +22,13 @@ const defaultValues = {
 }
 
 
-export default function CableForm({click,variant} :any) {
+export default function FastTagForm({click,variant} :any) {
 
 
     console.log(' form insurance ',click)
 
     const[loading,setLoading] = useState(false);
-    const[cableInfo,setCableInfo]= useState(null);
+    const[fastTagInfo,setFastTagInfo]= useState(null);
     const[operator, setOperator] = useState(null);
     const[category, setCategory] = useState(null);
     const[billerId, setBillerId] = useState(null);
@@ -36,7 +36,7 @@ export default function CableForm({click,variant} :any) {
     const[para1,setPara1] = useState('');
     const[para2, setPara2] =useState('');
     const[para3,setPara3] =useState('');
-    const[cableDetails,setCableDetails] = useState(null);
+    const[fastTagDetails,setFastTagDetails] = useState(null);
 
     const[key1, setKey1] = useState('');
     const[key2,setKey2] = useState('');
@@ -64,37 +64,37 @@ const {
     // resolver: yupResolver(registerFormSchema),
   });
 
-  const fetchCableInfo = async (data:any) => {
+  const fetchFastTagInfo = async (data:any) => {
 
     setLoading(true)
 
     console.log('biller',data)
 
-    const { data:response } = await http.get(`${url}/${API_ENDPOINTS.CABLE_INFO}?biller_id=${billerId}&category=${category}`);
+    const { data:response } = await http.get(`${url}/${API_ENDPOINTS.FAST_TAG_INFO}?biller_id=${billerId}&category=${category}`);
     
     setLoading(false)
-    setCableInfo(response)
+    setFastTagInfo(response)
      
-    console.log('cableInfo',cableInfo,response);
+    console.log('fastTagInfo',fastTagInfo,response);
     return response;
 
   };
 
-  const fetchCableDetails = async (data:any) => {
+  const fetchFastTagDetails = async (data:any) => {
     setLoading(true)
 
     console.log('biller',data)
 
-    const { data:response } = await http.post(`${url}/${API_ENDPOINTS.CABLE_DETAILS}`,data);
+    const { data:response } = await http.post(`${url}/${API_ENDPOINTS.FAST_TAG_DETAILS}`,data);
     setLoading(false)
-    setCableDetails(response);
-    console.log('billDetails',cableDetails)
+    setFastTagDetails(response);
+    console.log('billDetails',fastTagDetails)
     fieldKeys()
     return response;
 
   };
 
-  const { mutate: mutateCableInfo } = useMutation(fetchCableInfo, {
+  const { mutate: mutateFastTagInfo } = useMutation(fetchFastTagInfo, {
        
     onSuccess: data => {
      console.log('biller',data.data.map((m)=>m.paramName))
@@ -112,10 +112,10 @@ const {
 
   });
 
-  const { mutate: mutateCableDetails } = useMutation(fetchCableDetails, {
+  const { mutate: mutateFastTagDetails } = useMutation(fetchFastTagDetails, {
        
     onSuccess: data => {
-      data?.status_msg == 'OK' && openBillDetails(data)
+      data?.status_msg == 'OK' && openFastTagDetails(data)
       
      console.log(data)
     },
@@ -141,13 +141,23 @@ const {
         'category'   :  category,
       };
 
-      mutateCableInfo(biller);
+      mutateFastTagInfo(biller);
     }
   }, [operator])
 
- 
+  const onSubmit = async  () => {
+        
+    const biller =  {
+      // 'operator' :  operator ,
+      'category'   : category,
+      'biller_id' : billerId
+    };
 
-  const submitBillDetails =  () => {
+    mutateFastTagInfo(biller);
+   
+  };
+
+  const submitFastTagDetails =  () => {
     
     const billDetails =  {
       'para1':   para1,
@@ -159,14 +169,11 @@ const {
 
     console.log(billDetails)
 
-    mutateCableDetails(billDetails);
+    mutateFastTagDetails(billDetails);
    
   };
-  
-  console.log('bill operator',operator)
 
-
-function openBillDetails(data:any) {
+  function openFastTagDetails(data:any) {
 
     return openModal("BILL_PAYMENT_DETAILS",{
         data,
@@ -178,7 +185,7 @@ function openBillDetails(data:any) {
   }
 
   function fieldKeys(){
-    cableInfo?.data?.map((field:any)=>
+    fastTagInfo?.data?.map((field:any)=>
       field?.fieldKey=='para1' ? setKey1(field?.paramName) 
     : field?.fieldKey=='para2' ? setKey2(field?.paramName) 
     : field?.fieldKey =='para3' ? setKey3(field?.paramName) 
@@ -196,7 +203,7 @@ function openBillDetails(data:any) {
 
   const keywords = ['dob', 'date of birth','Date Of Birth (DDMMYYYY),date','expiry date','expiry']
 
-  console.log('date', cableInfo?.data?.map((field,index)=>keywords.some((el)=>field?.datatype.toLowerCase().includes(el) ) ? 'date' : field?.datatype.toLowerCase()))
+  console.log('date', fastTagInfo?.data?.map((field,index)=>keywords.some((el)=>field?.datatype.toLowerCase().includes(el) ) ? 'date' : field?.datatype.toLowerCase()))
 
   return (
 
@@ -220,7 +227,7 @@ function openBillDetails(data:any) {
                           getOptionValue={(option: any) => option.label}
                           className={` ${loading ? 'w-full lg:w-1/2 flex-1' : 'w-full'}   `}
                           onChange={onValueChange}
-                        options= {operators?.filter((opr)=> opr.Category=='Cable')}
+                        options= {operators?.filter((opr)=> opr.Category=='FastTag')}
                 />
             </div>
 
@@ -229,7 +236,7 @@ function openBillDetails(data:any) {
                  className="w-full mt-10 mx-auto" 
                  style={{width:"30px",height:"30px"}}/>
                     : 
-                   cableInfo?.data?.map((field,index)=>
+                   fastTagInfo?.data?.map((field,index)=>
 
                   //  field?.paramName !== 'Date Of Birth (DDMMYYYY)' || field?.paramName !== 'DOB' || field?.paramName !== 'DOB(YYYY-MM-DD)' ?  
 
@@ -246,7 +253,7 @@ function openBillDetails(data:any) {
                        />
                        
 
-                       <h1 className='text-red-600 text-xs'>{cableDetails?.status_code == 500 ? cableDetails?.status_msg : null}</h1>
+                       <h1 className='text-red-600 text-xs'>{fastTagDetails?.status_code == 500 ? fastTagDetails?.status_msg : null}</h1>
 
                     </div>
                   
@@ -307,15 +314,15 @@ function openBillDetails(data:any) {
                 Register
             </Button> */}
 
-<div className='hidden lg:block lg:pt-3'>
+                <div className='hidden lg:block lg:pt-3'>
                         <Label className=''></Label>
-                        <button onClick={submitBillDetails} 
+                        <button onClick={submitFastTagDetails} 
                                 className='bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>
                                 Proceed
                         </button>
                     </div> 
 
-                    <button onClick={submitBillDetails} 
+                    <button onClick={submitFastTagDetails} 
                             className='  lg:hidden  bg-gradient-to-r from-blue-600   to-blue-800  p-3 flex text-center   rounded text-white'>
                             Proceed
                     </button>

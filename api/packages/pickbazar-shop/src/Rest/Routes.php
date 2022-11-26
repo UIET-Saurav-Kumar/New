@@ -43,12 +43,33 @@ use PickBazar\Http\Controllers\TermLifeInsuranceController;
 Route::get('/find-by-date-range/{start_date}/{end_date}', 'PickBazar\Http\Controllers\OrderController@findByDateRange');
 // Route::get('/find-by-date-range', 'PickBazar\Http\Controllers\OrderController@findByDateRange');
 Route::post('/get-bill-details','PickBazar\Http\Controllers\BillDetailsController@getBillDetails');
+Route::post('/get-water-bill-details','PickBazar\Http\Controllers\BillDetailsController@getBillDetails');
+Route::post('/get-emi-details','PickBazar\Http\Controllers\BillDetailsController@getBillDetails');
+Route::post('/get-cable-details','PickBazar\Http\Controllers\BillDetailsController@getBillDetails');
+Route::post('/get-fast-tag-details','PickBazar\Http\Controllers\BillDetailsController@getBillDetails');
+
 // Route::get('/biller-info','PickBazar\Http\Controllers\BillPaymentController@getBillerInfo');
 Route::any('/get-operator','PickBazar\Http\Controllers\OperatorDetailsController@getOperator');
 Route::post('/recharge-plans','PickBazar\Http\Controllers\RechargePlansController@getPlans');
 Route::get('/operators-list','PickBazar\Http\Controllers\OperatorListController@operatorList');
 Route::get('/biller-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
 Route::get('/get-water-biller-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
+Route::get('/get-broadband-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
+Route::get('/get-landline-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
+Route::get('/get-lpg-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
+Route::get('/get-emi-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
+Route::get('/get-cable-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
+Route::get('/get-fast-tag-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
+
+Route::get('/get-insurance-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
+
+Route::get('/get-broadband-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
+Route::get('/get-emi-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
+Route::get('/get-lpg-booking-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
+Route::get('/get-datacard-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
+Route::get('/get-piped-gas-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
+Route::get('/get-challan-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
+Route::get('/get-landline-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
 
 
 Route::post('/register', 'PickBazar\Http\Controllers\UserController@register');

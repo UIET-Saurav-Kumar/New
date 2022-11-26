@@ -33,11 +33,11 @@ import Challan from './challan';
 import Cable from './cable';
 import CreditCard from './creditcard';
 import GooglePlay from './googleplay';
-import Housing from './housing';
+import  FastTag from './fast-tag';
 import GooglePlayForm from '../forms/google-play-form';
 import CableForm from '../forms/cable-form';
 import ChallanForm from '../forms/challan-form';
-import HousingForm from '../forms/housing-form';
+import  FastTagForm from '../forms/fast-tag-form';
 import DataCardForm from '../forms/datacard-form';
 
 
@@ -58,7 +58,7 @@ export default function BillPayment() {
               googleplay,
               cable,
               datacard,
-              housing,
+               fastTag,
               challan,
               minicipality,
       
@@ -101,7 +101,7 @@ export default function BillPayment() {
                             <LpgBooking      view={lpgbookingView}     click={lpgbooking}      width={90}   height={90}    label={'LPG Booking'} />
                             <Datacard        view={datacardView}       click={datacard}        width={90}   height={90}    label={'Datacard'}    />
                             <Challan         view={challanView}        click={challan}         width={90}   height={90}    label={'Challan'}     />
-                            <Housing         view={housingView}        click={housing}         width={90}   height={90}    label={'Housing'}     />
+                            < FastTag         view={housingView}        click={ fastTag}         width={90}   height={90}    label={' FastTag'}     />
                             <Cable           view={cableView}          click={cable}           width={90}   height={90}    label={'Cable'}       />
                             <GooglePlay      view={googlePlayView}     click={googleplay}      width={90}   height={90}    label={'GooglePlay'}  />
 
@@ -120,7 +120,7 @@ export default function BillPayment() {
                             <GooglePlayForm      variant={'border'}   click={googleplay}     />  
                             <CableForm           variant={'border'}   click={cable}          />
                             <ChallanForm         variant={'border'}   click={challan}        />
-                            <HousingForm         variant={'border'}   click={housing}        />
+                            < FastTagForm         variant={'border'}   click={ fastTag}        />
                             <DataCardForm        variant={'border'}   click={datacard}       />
               </div>        
   )

@@ -2,12 +2,16 @@ import Input from '@components/ui/input'
 import Label from '@components/ui/label'
 import Select from '@components/ui/select/select'
 import { yupResolver } from '@hookform/resolvers/yup'
- import React, { useState } from 'react'
+ import React, { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useModalAction } from '@components/ui/modal/modal.context'
 import {operators} from './mobile-recharge-form'
+import { API_ENDPOINTS } from '@utils/api/endpoints'
+import url from '@utils/api/server_url'
+import http from '@utils/api/http'
+import { useMutation } from 'react-query'
 
 type FormValues = {
     date_of_birth:Date;
@@ -22,6 +26,21 @@ export default function InsuranceForm({click,variant} :any) {
 
 
     console.log(' form insurance ',click)
+
+    const[loading,setLoading] = useState(false);
+    const[insuranceInfo,setInsuranceInfo]= useState(null);
+    const[operator, setOperator] = useState(null);
+    const[category, setCategory] = useState(null);
+    const[billerId, setBillerId] = useState(null);
+
+    const[para1,setPara1] = useState('');
+    const[para2, setPara2] =useState('');
+    const[para3,setPara3] =useState('');
+    const[insuranceDetails,setinsuranceDetails] = useState(null);
+
+    const[key1, setKey1] = useState('');
+    const[key2,setKey2] = useState('');
+    const[key3,setKey3] = useState('')
 
     const { openModal } = useModalAction();
 
@@ -45,6 +64,65 @@ const {
     // resolver: yupResolver(registerFormSchema),
   });
 
+  const fetchInsuranceInfo = async (data:any) => {
+
+    setLoading(true)
+
+    console.log('biller',data)
+
+    const { data:response } = await http.get(`${url}/${API_ENDPOINTS.INSURANCE_INFO}?biller_id=${billerId}&category=${category}`);
+    
+    setLoading(false)
+    setInsuranceInfo(response)
+     
+    console.log('insuranceInfo',insuranceInfo,response);
+    return response;
+
+  };
+
+  const { mutate: mutateInsuranceInfo } = useMutation(fetchInsuranceInfo, {
+       
+    onSuccess: data => {
+     console.log('biller',data.data.map((m)=>m.paramName))
+    },
+
+
+    onError: (e) => {
+      alert('something went wrong')
+      setLoading(false)
+    },
+  
+    // onSettled: () => {
+    //   queryClient.invalidateQueries(API_ENDPOINTS.RECHARGE_PLANS);
+    // }
+
+  });
+
+  useEffect(() => {
+      
+    if(billerId && category) {
+
+      const biller =  {
+        'biller_id' :  billerId ,
+        'category'   :  category,
+      };
+
+      mutateInsuranceInfo(biller);
+    }
+  }, [operator])
+
+  function onValueChange(option:any) {
+    setLoading(true);
+    setOperator(option.label)
+    setBillerId(option.biller_id)
+    setCategory(option?.Category)
+     
+  }
+
+  const keywords = ['dob', 'date of birth','Date Of Birth (DDMMYYYY),date','expiry date','expiry']
+
+  console.log('date', insuranceInfo?.data?.map((field,index)=>keywords.some((el)=>field?.datatype.toLowerCase().includes(el) ) ? 'date' : field?.datatype.toLowerCase()))
+
   return (
 
     <div className={`${click ? 'block' : 'hidden'}`}>
@@ -63,24 +141,46 @@ const {
                         variant=''
                         inputMode="numeric"
                         type='number'
+                        getOptionLabel={(option: any) => option.label}
+                          getOptionValue={(option: any) => option.label}
+                          className={` ${loading ? 'w-full lg:w-1/2 flex-1' : 'w-full'}   `}
+                          onChange={onValueChange}
                         options= {operators?.filter((opr)=> opr.Category=='Insurance')}
                 />
             </div>
 
-            <div className='flex-1 '> 
-                <Input label='POLICY NO'
-                     variant={variant}
-                    type='text'
-                    className='rounded'
-                />
-             </div>
+            { loading ? 
+                 <img src="/preloader/cir.gif" 
+                 className="w-full mt-10 mx-auto" 
+                 style={{width:"30px",height:"30px"}}/>
+                    : 
+                   insuranceInfo?.data?.map((field,index)=>
 
-             <div className="col-span-1 sm:col-span-1">
+                  //  field?.paramName !== 'Date Of Birth (DDMMYYYY)' || field?.paramName !== 'DOB' || field?.paramName !== 'DOB(YYYY-MM-DD)' ?  
+
+                    <div className='flex-1 '> 
+                        <Input 
+                          name={field.paramName}        
+                          label={field.paramName} 
+                          variant={variant}
+                          type={keywords.some((el)=>field?.paramName.toLowerCase().includes(el) ) ? 'date' : field?.datatype.toLowerCase()}
+                          inputMode={keywords.some((el)=>field?.paramName.toLowerCase().includes(el) ) ? 'date' : field?.datatype.toLowerCase()}
+                          className='rounded ' 
+                          onChange={field?.fieldKey=='para1' ? (e)=>setPara1(e.target.value) : field?.fieldKey=='para2' ? (e)=>setPara2(e.target.value) : 
+                          field?.fieldKey =='para3' ? (e)=>setPara3(e.target.value) : null }
+                       />
+                       
+
+                       <h1 className='text-red-600 text-xs'>{insuranceDetails?.status_code == 500 ? insuranceDetails?.status_msg : null}</h1>
+
+                    </div>
+                  
+                   )}
+
+             {/* <div className="col-span-1 sm:col-span-1"> */}
         
-        <div className="flex  text-gray-700 h-3  font-semibold text-sm lg:text-md leading-none mb-3">
-            {/* <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-yellow-600 to-blue-600">
-              🎉 Date of Birth  </span>  🥳 */}
-              <span className="">
+        {/* <div className="flex  text-gray-700 h-3  font-semibold text-sm lg:text-md leading-none mb-3">
+               <span className="">
               Date of Birth  </span>  
               </div>
           <Controller
@@ -108,7 +208,7 @@ const {
               />          
                   )}
             />
-    </div>
+    </div> */}
 
             {/* <div className='flex flex-col'> 
                 <Label> Circle </Label>
@@ -118,7 +218,7 @@ const {
                 />
             </div> */}
 
-            <div className='flex-1 items-center'> 
+            {/* <div className='flex-1 items-center'> 
                 
                 <Input label = 'Mobile Number'
                         variant={variant}
@@ -126,7 +226,7 @@ const {
 
                         inputMode="numeric"
                 />
-            </div>
+            </div> */}
 
             {/* <Button className='' size='big'>
                 Register
