@@ -95,15 +95,15 @@ export default function BillPayment() {
                             <Insurance       view={insuranceView}      click={insurance}       width={90}   height={90}    label={'Insurance'}   />
                             <Broadband       view={broadbandView}      click={broadband}       width={90}   height={90}    label={'Broadband'}   />
                             <Landline        view={landlineView}       click={landline}        width={90}   height={90}    label={'Landline'}    />
-                            <PipedGas        view={pipedGasView}       click={pipedgas}        width={90}   height={90}    label={'Piped Gas'}   />
+                            {/* <PipedGas        view={pipedGasView}       click={pipedgas}        width={90}   height={90}    label={'Piped Gas'}   /> */}
                             <Water           view={waterView}          click={water}           width={90}   height={90}    label={'Water'}       />
                             <Emi             view={emiView}            click={emi}             width={90}   height={90}    label={'EMI'}         />
                             <LpgBooking      view={lpgbookingView}     click={lpgbooking}      width={90}   height={90}    label={'LPG Booking'} />
-                            <Datacard        view={datacardView}       click={datacard}        width={90}   height={90}    label={'Datacard'}    />
-                            <Challan         view={challanView}        click={challan}         width={90}   height={90}    label={'Challan'}     />
+                            {/* <Datacard        view={datacardView}       click={datacard}        width={90}   height={90}    label={'Datacard'}    /> */}
+                            {/* <Challan         view={challanView}        click={challan}         width={90}   height={90}    label={'Challan'}     /> */}
                             < FastTag         view={housingView}        click={ fastTag}         width={90}   height={90}    label={' FastTag'}     />
                             <Cable           view={cableView}          click={cable}           width={90}   height={90}    label={'Cable'}       />
-                            <GooglePlay      view={googlePlayView}     click={googleplay}      width={90}   height={90}    label={'GooglePlay'}  />
+                            {/* <GooglePlay      view={googlePlayView}     click={googleplay}      width={90}   height={90}    label={'GooglePlay'}  /> */}
 
                      </div>
 
