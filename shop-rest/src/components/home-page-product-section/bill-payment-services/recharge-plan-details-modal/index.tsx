@@ -134,7 +134,7 @@ export default function RechargePlanDetails(data,operatorName,circleName)  {
                     Total Amount
                 </span>
                 <span className=''>
-                ₹{data?.data?.plan?.price}
+                 ₹{data?.data?.plan?.price}
                 </span>
         </div>
 

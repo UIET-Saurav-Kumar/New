@@ -101,7 +101,7 @@ export default function BillPayment() {
                             <LpgBooking      view={lpgbookingView}     click={lpgbooking}      width={90}   height={90}    label={'LPG Booking'} />
                             {/* <Datacard        view={datacardView}       click={datacard}        width={90}   height={90}    label={'Datacard'}    /> */}
                             {/* <Challan         view={challanView}        click={challan}         width={90}   height={90}    label={'Challan'}     /> */}
-                            < FastTag         view={housingView}        click={ fastTag}         width={90}   height={90}    label={' FastTag'}     />
+                            <FastTag         view={housingView}        click={ fastTag}         width={90}   height={90}    label={' FastTag'}     />
                             <Cable           view={cableView}          click={cable}           width={90}   height={90}    label={'Cable'}       />
                             {/* <GooglePlay      view={googlePlayView}     click={googleplay}      width={90}   height={90}    label={'GooglePlay'}  /> */}
 
@@ -120,7 +120,7 @@ export default function BillPayment() {
                             <GooglePlayForm      variant={'border'}   click={googleplay}     />  
                             <CableForm           variant={'border'}   click={cable}          />
                             <ChallanForm         variant={'border'}   click={challan}        />
-                            < FastTagForm         variant={'border'}   click={ fastTag}        />
+                            <FastTagForm         variant={'border'}   click={ fastTag}        />
                             <DataCardForm        variant={'border'}   click={datacard}       />
               </div>        
   )

@@ -3044,7 +3044,7 @@ export const circleCode = [
 
         mutatePlan(plan);
       }
-    }, [operatorName])
+    }, [circleName])
 
 
     function handleModal(plans:any)  {
@@ -3052,6 +3052,7 @@ export const circleCode = [
         plans: plans,
         operator: operatorName,
         circle: circleName,
+        phone: phoneNumber
       });
     }
 
@@ -3076,7 +3077,7 @@ export const circleCode = [
     const queryClient = useQueryClient();
 
     const getOperatorDetails = async (data:any) => {
-      
+      setOperator(null)
       setLoading(true)
       
       setPlans(null)
@@ -3105,11 +3106,10 @@ export const circleCode = [
       return plans;
     };
 
-    const rechargePlanQuery = (data)=>{
+    const rechargePlanQuery = (data)=> {
         return useQuery('recharge-plans',(data)=>
         getRechargePlans(data),
          )
-        
     }
 
     function handleClick()  {
@@ -3140,9 +3140,12 @@ export const circleCode = [
     });
 
     const { mutate: mutatePlan } = useMutation(getRechargePlans, {
+
       onSuccess: data => {
+        // setPlans(null)
+        console.log('fresh',data)
         setPlans(data);
-        addOnPlansList();
+        // addOnPlansList();
         setLoading(false);
         // setAddOnPlans(data);
         // console.log('operator',data);
