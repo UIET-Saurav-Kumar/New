@@ -284,7 +284,7 @@ Route::apiResource('contact', ContactController::class, [
     'only' => ['index', 'store']
 ]);
 
-Route::apiResource('term-life-insurance', TermLifeInsuranceController::class, [
+Route::apiResource('/term-life-insurance', TermLifeInsuranceController::class, [
     'only' => ['index', 'store']
 ]);
 
@@ -303,7 +303,6 @@ Route::apiResource('attributes', AttributeController::class, [
 Route::apiResource('all-shop', ShopController::class, [
     'only' => ['index', 'show']
 ]);
-
 
 Route::apiResource('attribute-values', AttributeValueController::class, [
     'only' => ['index', 'show']
@@ -337,6 +336,7 @@ Route::group(['middleware' => ['can:' . Permission::CUSTOMER, 'auth:sanctum']], 
     Route::get('me', 'PickBazar\Http\Controllers\UserController@me');
     Route::put('users/{id}', 'PickBazar\Http\Controllers\UserController@update');
     Route::post('/Change Password', 'PickBazar\Http\Controllers\UserController@changePassword');
+   
     Route::apiResource('address', AddressController::class, [
         'only' => ['destroy']
     ]);
@@ -344,7 +344,7 @@ Route::group(['middleware' => ['can:' . Permission::CUSTOMER, 'auth:sanctum']], 
 
     Route::resource('bill',BillController::class);
     Route::resource('contact',ContactController::class);
-    Route::resource('term-life-insurance',TermLifeInsuranceController::class);
+    Route::resource('/term-life-insurance',TermLifeInsuranceController::class);
     Route::post('approve-bill','PickBazar\Http\Controllers\BillController@approveBill');
     Route::post('bill-reward','PickBazar\Http\Controllers\BillController@billReward');
     Route::get('bill-reward','PickBazar\Http\Controllers\BillController@getbillReward');

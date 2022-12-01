@@ -60,21 +60,19 @@ const RechargePaymentForm = () => {
   const { mutate: createOrder, isLoading: loading } = useCreateOrderMutation();
   const { data: orderStatusData } = useOrderStatusesQuery();
   const { data } = useCustomerQuery();
-  const {getLocation} =useLocation()
+  const {getLocation} =useLocation();
 
   const {
     register,
     handleSubmit,
     setValue,
     watch,
-
     formState: { errors },
   } = useForm<FormValues>({
     resolver: yupResolver(paymentSchema),
     defaultValues: {
       payment_gateway: "cashfree",
       contact: data?.me?.phone_number,
-      
     },
   });
   

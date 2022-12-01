@@ -111,6 +111,4 @@ class ContactController extends CoreController
         }
     }
 
-   
-
 }

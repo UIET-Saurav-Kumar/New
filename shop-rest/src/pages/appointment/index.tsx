@@ -133,17 +133,16 @@ export default function Appointment({user} : Props) {
           <div className="">
             
           </div>
-                <div className="text-center mb-8 font-sans w-full mx-auto flex items-center  font-normal text-lg lg:text-2xl">
-                
-                    <p className="text-gray-700 flex  mx-auto items-center ">
-                    {/* <img src='/hurry-up.png' className="w-24 h-24"/> */}
-                        <p className="flex flex-col"><span>
-                          {/* <span className="text-red-600">Free</span>, */}
-                           Please submit your details</span>
-                        <span className="text-red-600 rounded-full text-sm  animate-pulse">Only 10 slots left</span></p>
-                    </p> 
 
-                </div>
+            <div className="text-center mb-8 font-sans w-full mx-auto flex items-center  font-normal text-lg lg:text-2xl">
+                <p className="text-gray-700 flex  mx-auto items-center ">
+                  {/* <img src='/hurry-up.png' className="w-24 h-24"/> */}
+                    <p className="flex flex-col"><span>
+                      {/* <span className="text-red-600">Free</span>, */}
+                        Please submit your details</span>
+                    <span className="text-red-600 rounded-full text-sm  animate-pulse">Only 10 slots left</span></p>
+                </p> 
+            </div>
                 
           <form className="grid grid-cols-1 border shadow-xl -mt-6 p-4 sm:grid-cols-2 gap-1 lg:gap-4 lg:mt-3" onSubmit={handleSubmit(onSubmit)} noValidate>
             {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-2"> */}
@@ -160,7 +159,6 @@ export default function Appointment({user} : Props) {
                 variant="outline"
                 error={t(errors.email?.message!)}
               />
-              
               <Input
                 label={t("Registered Mobile Number")}
                 {...register("subject")}
@@ -168,7 +166,6 @@ export default function Appointment({user} : Props) {
                 className=""
                 error={t(errors.subject?.message!)}
               />
-
               <Input
                 label={t("City")}
                 {...register("description")}

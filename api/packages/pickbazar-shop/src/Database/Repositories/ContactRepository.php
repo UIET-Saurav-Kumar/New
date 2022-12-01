@@ -1,6 +1,5 @@
 <?php
 
-
 namespace PickBazar\Database\Repositories;
 
 use PickBazar\Database\Models\Contact;
@@ -12,8 +11,9 @@ class ContactRepository extends BaseRepository
     /**
      * @var array
      */
+
     protected $fieldSearchable = [
-        'name'        => 'like',
+        'name'     => 'like',
         "email",
         "subject",
         "description",
@@ -30,8 +30,10 @@ class ContactRepository extends BaseRepository
     /**
      * Configure the Model
      **/
+
     public function model()
     {
         return Contact::class;
     }
+
 }

@@ -112,7 +112,7 @@ class OrderRepository extends BaseRepository
         $request['customer_id'] = $request->user()->id;
         $request['name'] = $request->user()->name;
         $request['email_id'] = $request->user()->email;
-        $request['shop_name'] = $request->shop_nareturn_urlme;
+        $request['shop_name'] = $request->shop_name;
         //status
         $request['status'] = $request->status;
         $request['customer_contact'] = $request->user()->phone_number;
@@ -126,6 +126,7 @@ class OrderRepository extends BaseRepository
             // + $request['delivery_fee']
 
             $request['discount'] =  $discount;
+
         } else {
             $request['paid_total'] = $request['amount'] + $request['sales_tax'] ;
             // + $request['delivery_fee']
@@ -186,7 +187,7 @@ class OrderRepository extends BaseRepository
 
     }
 
-   private function sendSMS( $order){
+   private function sendSMS($order){
 
         try{
             
@@ -220,6 +221,7 @@ class OrderRepository extends BaseRepository
                             //      $price = $product->price;
                             //      $phone_number = $this->clearStr($product->shop->owner->phone_number);
                             // }
+
                             $payload = array(
                                 "userId"=> $product->shop->owner_id,
                                 "phoneNumber"=> $phone_number,
@@ -245,14 +247,17 @@ class OrderRepository extends BaseRepository
                                 ],
                                 "createdAt"=> date('Y-m-d H:i:s')
                             );
-                            
                     }
                 }    
+
                 $interkt_response = $this->createWhatsappVendorOrderEvent($payload);     
             }
+
             $order->interakt_response = $interkt_response;
+
             return $order;
-        }catch(Exception $e) {
+
+        } catch(Exception $e) {
 
         }
            

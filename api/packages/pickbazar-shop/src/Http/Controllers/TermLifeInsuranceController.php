@@ -10,17 +10,19 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use PickBazar\Exceptions\PickbazarException;
 use Illuminate\Database\Migrations\Migration;
+use PickBazar\Database\Models\TermLifeInsurance;
 use PickBazar\Database\Repositories\TermLifeInsuranceRepository;
+use PickBazar\Database\Repositories\ContactRepository;
+
 
 
 class TermLifeInsuranceController extends CoreController
 
-{
 
-    //index function to get all the data from the database
+{
     public $repository;
 
-    public function __construct(ContactRepository $repository)
+    public function __construct(TermLifeInsuranceRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -35,8 +37,8 @@ class TermLifeInsuranceController extends CoreController
     public function index(Request $request)
     {
         $limit = $request->limit ?  $request->limit : 25;
-        $contact = $this->repository;
-        return $contact->paginate($limit);
+        $insured = $this->repository;
+        return $insured->paginate($limit);
     }
 
     /**
@@ -60,11 +62,5 @@ class TermLifeInsuranceController extends CoreController
      * @return JsonResponse
      */
 
-
-    public function show(Request $request, $id)
-    {
-        $request->id = $id;
-        return $this->fetchSingleContact($request);
-    }
 
 }

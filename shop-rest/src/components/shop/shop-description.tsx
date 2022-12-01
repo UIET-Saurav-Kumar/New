@@ -52,10 +52,11 @@ export default function ShopDescription({data} :any) {
                             {t("Whatsapp/Call ")}
                           </span>
 
-                          <span className=" flex items-end space-x-1 text-xs underline md:text-lg font-light tracking-wide text-body">
+                          <span className=" flex items-end space-x-1 text-xs  md:text-lg font-light tracking-wide text-body">
                             {/* {data?.settings?.contact} */}
-                            <PhoneIcon scale={0.88} className="h-4 w-4 scale-75 text-blue-900 "/> <a className="underline text-indigo-800 font-semibold cursor-pointer" href={`tel:${' 84279-90450'}`}>
-                           84279-90450
+                            <PhoneIcon scale={0.88} className="h-4 w-4 scale-75 text-blue-900 "/> <a className="  text-indigo-800 font-semibold cursor-pointer" href={`tel:${'77430-42380'}`}>
+                           {/* 84279-90450 */}
+                           Call us
                               </a>  
                           </span>
                   </div>
@@ -70,8 +71,9 @@ export default function ShopDescription({data} :any) {
 
                   <span className=" flex items-end space-x-1 text-xs underline md:text-lg font-light tracking-wide text-body">
                             {/* {data?.settings?.contact} */}
-                            <PhoneIcon scale={0.88} className="h-4 w-4 scale-75 text-blue-900 "/> <a className="underline text-indigo-800 font-semibold cursor-pointer" href={`tel:${' 84279-90450'}`}>
-                           84279-90450
+                            <PhoneIcon scale={0.88} className="h-4 w-4 scale-75 text-blue-900 "/> <a className=" text-indigo-800 font-semibold cursor-pointer" href={`tel:${' 77430-42380'}`}>
+                           {/* 84279-90450 */}
+                           Call us
                               </a>  
                           </span>
               </div>

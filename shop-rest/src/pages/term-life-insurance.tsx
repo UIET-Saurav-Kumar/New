@@ -15,8 +15,12 @@ import Radio from '@components/ui/radio/radio';
 import { toast } from "react-toastify";
 import { useRouter } from 'next/router';
 import { useTermInsuredFormDataMutation } from '@data/insurance/use-term-insured.query';
+import pick from "lodash/pick";
 
 
+interface Props {
+    user: FormValues;
+  }
  
 // form values
 type FormValues = {
@@ -31,14 +35,14 @@ type FormValues = {
 };
 
 
-export default function TermLifeInsurance( props:any) {
+export default function TermLifeInsurance({user}: Props) {
 
-//   console.log('context',props)
+  //console.log('context',props);
+
   const router = useRouter();
 
-
   const { width } = useWindowSize();
-  const { mutate: storeInsured } =useTermInsuredFormDataMutation();
+  const { mutate: storeInsured } = useTermInsuredFormDataMutation();
 
 
   React.useEffect(() => {
@@ -54,33 +58,31 @@ export default function TermLifeInsurance( props:any) {
     control,
   } = useForm<FormValues>({
     defaultValues: {
-        'name': '',
-        'date_of_birth': '',
-        'is_tobacco_user': '',
-        'annual_income': '',
-        'education': '',
-        'occupation': '',
-        'pin_code': '',
-        'mobile_number': '',
-
+        ...(user &&
+            pick(user, [
+        'name',
+        'date_of_birth',
+        'is_tobacco_user',
+        'annual_income',
+        'education',
+        'occupation',
+        'pin_code',
+        'mobile_number',
+    ])),
     },
-
-  }
-    )
+    })
 
     function onSubmit(data: FormValues) {
         
         storeInsured(
             {
-                    
-            name: data.name,
-            dob: data.date_of_birth,
-            smoke: data.is_tobacco_user,
-            income: data.annual_income,
-            education: data.education,
-            occupation: data.occupation,
-            pincode: data.pin_code,
-                   
+                name: data.name,
+                dob: data.date_of_birth,
+                smoke: data.is_tobacco_user,
+                income: data.annual_income,
+                education: data.education,
+                occupation: data.occupation,
+                pincode: data.pin_code,
              },
             {
               onSuccess: (data) => {
@@ -131,7 +133,7 @@ export default function TermLifeInsurance( props:any) {
       
       <Card className="w-full">
 
-        <div className = ' ' > 
+        <div className = ''> 
 
              {/* <Image
             priority={true}   

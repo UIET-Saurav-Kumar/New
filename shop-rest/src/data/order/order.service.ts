@@ -19,7 +19,6 @@ class Order extends CoreApi {
       .post(API_ENDPOINTS.VERIFY_CHECKOUT, input)
       .then((res) => res.data);
       
-      
   }
   
 }

@@ -157,7 +157,6 @@ export default function RechargePlans(plans: { data: { plans: any; }; },operator
                     placeholder='Select circle'
                    />
                     
-
                   <Input   
                     variant=''
                     type='number'
@@ -172,7 +171,7 @@ export default function RechargePlans(plans: { data: { plans: any; }; },operator
 
                 <div className='h-screen overflow-y-scroll grid grid-cols-1 lg:grid-cols-1  items-start w-full'>
 
-                <div className='scrollbar-hide hidden lg:flex lg:sticky lg:top-0 lg:z-50 bg-white  overflow-x-scroll  w-full  text-gray-700 text-xs   sm:text-sm  items-center     font-light    '>
+                <div className='scrollbar-hide hidden lg:flex lg:sticky lg:top-0 lg:z-50 bg-white  overflow-x-scroll  w-full  text-gray-700 text-xs   sm:text-sm  items-center font-light'>
 
                     {
                         response?.plans?.map((list:any,key)=>

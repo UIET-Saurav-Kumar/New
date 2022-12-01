@@ -48,6 +48,7 @@ import { useForm } from "react-hook-form";
     "OperatorCode": "MT",
     "label": "MTNL"
   },
+   
  ]
 
  export const operatorCircle= [
@@ -2936,42 +2937,18 @@ export const circleCode = [
    "Circle Code": 24,
    "label": "Jharkhand"
   },
+  {
+    'id': 25,
+    "Circle Code": 25,
+     "label": "All Circles"
+  },
    
  ]
 
 
- const response =
-
-      {
-          "status_code": 200,
-
-          "status_msg": "OK",
-
-          "data": [
-                    {
-                      "fieldKey":"para1",
-                      "paramName":"Zone ID and Ward ID",
-                      "datatype":"ALPHANUMERIC",
-                      "minlength":15,
-                      "maxlength":60,
-                      "optional":0
-                    },
-                    {
-                      "fieldKey":"para2",
-                      "paramName":"ConnectionNo",
-                      "datatype":"ALPHANUMERIC",
-                      "minlength":2,
-                      "maxlength":25,
-                      "optional":0
-                    }
-                  ]
-      }
-
     // interface MobileNumber {
     //   mobile_no: number;
     // };
-
-     
 
     // export const useOperatorQuery = (data:any) => {
     //   return useQuery<Error>( [API_ENDPOINTS.RECHARGE_PLANS], (data) =>
@@ -3000,6 +2977,8 @@ export const circleCode = [
       return data;
 
   };
+
+  
 
     // const{data, isLoading} = useOperatorQuery( 
     //   data
@@ -3188,7 +3167,7 @@ export const circleCode = [
       setPhoneNumber(e.target.value);
       const value = e.target.value;
       e.target.value.length === 10 && e.target.blur();
-        value.toString().length === 10 && callApi(value);
+      value.toString().length === 10 && callApi(value);
       // setOperator(null);
       // setOperatorName(null);
       // setCircleName(null);
@@ -3228,8 +3207,7 @@ export const circleCode = [
      }
 
      console.log('operator',operatorName,circleName)
-     console.log('')
-
+ 
      //callback function which filter the plans based on price
      let filtered: any[] = []
      
@@ -3259,7 +3237,8 @@ export const circleCode = [
                         //catch error
                         error={error} 
                         {...register('mobile_no', {
-                           required: true, minLength: 10, maxLength: 10 })}
+                           required: true, minLength: 10, maxLength: 10 })
+                        }
                         //loading 
                         loading={loading}
                         pattern="[0-9]*"
@@ -3301,7 +3280,7 @@ export const circleCode = [
               options={circleCode} />
           </div>
 
-          <div className='relative flex-1 items-center'>
+          <div className='relative flex-1 items-center'>            
                 <Input label='Amount'
                   variant={''}
                   type='number'
@@ -3309,6 +3288,7 @@ export const circleCode = [
                   className=''
                   onChange={(e)=>handlePrice( e)}
                 />
+
                 {/* <Select label='amount'
                 type='number'
                 {...register('amount', {required: false})}
@@ -3316,16 +3296,13 @@ export const circleCode = [
                 options= {()=>   plans?.plans[0]?.plans?.map( (m:any) => m?.plan_name) }
                 /> */}
 
-               
-
               {/* <Label>Price</Label> */}
               <div className='  '>
                 {/* <AsyncSelect
                     cacheOptions
                     // style={customStyles}
                     defaultValue={''}
-                    loadOptions={loadOp
-tions} 
+                    loadOptions={loadOptions} 
                     value={ '' }
                     defaultOptions={plans?.plans}
                     // onInputChange={handleInputChange}
@@ -3333,9 +3310,8 @@ tions}
                     onChange={''}
                   /> */}
               </div>
+
           </div>
-            {/* </>
-            } */}
 
             {/* <Button className='' size='big'>
                 Register
@@ -3358,7 +3334,6 @@ tions}
                 Proceed
         </button>
          
-
     </div>
 
     <div className={`${ click && plans?.plans?.length  && phoneNumber.length === 10 ? 'flex flex-col ' : 'hidden' } space-y-3 bg-gray-50 p-4 w-full `}>
@@ -3367,19 +3342,19 @@ tions}
       <h1 className='p-2 text-gray-800 font-semibold'>
           Special Recharge
       </h1>
-      <p onClick={()=>handleModal(plans)} 
+      <p onClick = { () => handleModal(plans) } 
          className='font-semibold text-blue-700 p-2 border border-blue-600 rounded 
-                    cursor-pointer active:bg-blue-100 hover:bg-blue-50 '>
+                    cursor-pointer active:bg-blue-100 hover:bg-blue-50'>
          All Plans
       </p>
     </div>
 
-    <div   className='flex overflow-x-scroll w-full'>
+    <div  className='flex overflow-x-scroll w-full'>
     {/* <div className='grid grid-cols-2 lg:grid-cols-6'> */}
             {
-               plans == null   ? <ProductFeedLoader  limit={5} /> :  
+               plans == null ? <ProductFeedLoader  limit={5} /> :  
               // plans?.plans?.length  && 
-             click && specialRechargeList && specialRechargeList[0]?.slice(0,6).map
+              click && specialRechargeList && specialRechargeList[0]?.slice(0,6).map
               ( 
                 (plan:any,index:any) => {
                   // console.log('modal',plan)
@@ -3390,29 +3365,27 @@ tions}
                     onClick={()=>handlePlanDetails(plan)}  
                     key={index}
                     className = 'cursor-pointer flex-1  tracking-wide bg-white shadow-lg border mx-2 rounded space-y-2    p-3'>
-                    <p  className='font-bold text-sm  text-gray-900 whitespace-nowrap'>
+                    <p className='font-bold text-sm  text-gray-900 whitespace-nowrap'>
                       {plan?.plan_name}
                     </p>
-                    <p  className='font- text-sm  text-gray-900 whitespace-nowrap'>
+                    <p className='font- text-sm  text-gray-900 whitespace-nowrap'>
                       {'₹'+ plan?.price}
                     </p>
-                    <p   className='block lg:hidden font- h-20 text-xs text-gray-800 whitespace-wrap'>
+                    <p className='block lg:hidden font- h-20 text-xs text-gray-800 whitespace-wrap'>
                       {plan?.description.substring(0,50)+'...'}  
                     </p>
-                    <p   className='hidden lg:block font- h-20 text-xs text-gray-800 whitespace-wrap'>
+                    <p className='hidden lg:block font- h-20 text-xs text-gray-800 whitespace-wrap'>
                       {plan?.description}  
-                      26    </p>
-                   
-                    <p   className='font- text-xs text-gray-800 whitespace-nowrap'>
+                    </p>
+                    <p className='font- text-xs text-gray-800 whitespace-nowrap'>
                       {plan?.data}
                     </p>
-                    <p   className='font- text-xs text-gray-800 whitespace-nowrap'>
+                    <p className='font- text-xs text-gray-800 whitespace-nowrap'>
                       {plan?.validity}
                     </p>
-                    <p   className='font-md text-sm text-blue-700 whitespace-nowrap'>
+                    <p className='font-md text-sm text-blue-700 whitespace-nowrap'>
                       {plan?.circle}
                     </p>
-
                 </div>
                   )
                 }

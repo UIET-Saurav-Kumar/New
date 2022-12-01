@@ -26,6 +26,7 @@ class CheckoutController extends CoreController
      * @param CheckoutVerifyRequest $request
      * @return array
      */
+    
     public function verify(Request $request)
     {
         $user = $request->user();

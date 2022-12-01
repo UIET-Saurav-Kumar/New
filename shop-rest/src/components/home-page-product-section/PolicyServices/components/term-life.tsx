@@ -26,7 +26,7 @@ export default function TermLifeInsurance({view, width,height,label,click,...pro
 
     <Link href='/term-life-insurance'>
 
-  <div onClick   = {view}  
+  <div onClick = {view}  
         className ={`text-center active:border-gray-400 w-full cursor-pointer border rounded-lg text-center' } ${props?.cn}`}>
         
           <Image priority = {true}

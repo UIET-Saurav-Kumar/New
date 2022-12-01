@@ -1,24 +1,26 @@
+import { useCustomerQuery } from '@data/customer/use-customer.query'
 import { useCreateRechargePaymentMutation } from '@data/mobile-recharge/use-create-recharge-payment.mutation'
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import { string } from 'yup/lib/locale'
 
 interface FormValues {
     payment_gateway: 'cod' | 'cashfree' | 'upi' | 'wallet'
-    contact: string
-    card: {
-        number: string
-        expiry: string
-        cvc: string
-        email: string
-    }
+    customer_contact: string,
+    amount: string,
+    operator: string,
+    circle: string,
+   
 }
 
     
 
-export default function RechargePlanDetails(data,operatorName,circleName)  {
+export default function RechargePlanDetails(data: { data: { amount: any; number: any; phone: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; operatorName: string | number | boolean | {} | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactNodeArray | React.ReactPortal | null | undefined; circleName: string | number | boolean | {} | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactNodeArray | React.ReactPortal | null | undefined; plan: { plan_name: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; validity: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; description: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; price: {} | null | undefined } }; me: { phone_number: any } },operatorName: any,circleName: any)  {
 
     // alert(operatorName)
-    console.log('modal',data?.data)
+    console.log('payment values',data?.data?.plan?.price)
+    const {data:me}=useCustomerQuery();
+    console.log('payment values',me)
     const { mutate: createRechargePayment, isLoading: loading } = useCreateRechargePaymentMutation();
 
 
@@ -33,30 +35,36 @@ export default function RechargePlanDetails(data,operatorName,circleName)  {
         // resolver: yupResolver(paymentSchema),
         defaultValues: {
           payment_gateway: "cashfree",
-          contact: data?.me?.phone_number,
+          customer_contact: me?.me?.phone_number,
+          amount:'',
+          operator:'',
+          circle:'',
+           
           
         },
       });
 
       function onSubmit(values: FormValues){
+        console.log('payment values',values)
         let input = {
-            "amount": data?.data?.amount,
-            "operator": operatorName,
-            "circle": circleName,
-            "number": data?.data?.number,
+            "amount": data?.data?.plan?.price,
+            "operator": data?.data?.operatorName,
+            "circle": data?.data?.circleName,
+            //"number": data?.data?.number,
             "payment_gateway": values.payment_gateway,
-            "customer_contact": values.contact,
+            "customer_contact": values.customer_contact,
             
         }
+        console.log('payment values',input)
 
         createRechargePayment(input, {
             onSuccess: (data) => {
                if(data?.paymentLink)
                {
                 window.location.replace(data?.paymentLink)
-
-                }
+               }
         },
+
         onError: (error) => {
             console.log(error)
         }
@@ -72,7 +80,7 @@ export default function RechargePlanDetails(data,operatorName,circleName)  {
 
         <div className=' space-y-8 flex flex-col w-full'>
             <span className='text-gray-800 font-semibold text-lg'>
-             Confirm Recharge
+               Confirm Recharge
             </span>
 
             <div className='space-y-4 text-xs font-light flex flex-col text-gray-600'>
@@ -80,16 +88,18 @@ export default function RechargePlanDetails(data,operatorName,circleName)  {
                     <p className=''>
                         Mobile Number
                     </p>
-                    <p>
+                     
+                    <p {...register('customer_contact')} >
                        {data?.data?.phone}
                     </p>
  
                 </span>
+                
                 <span className='flex items-center justify-between'>
                     <p className=''>
                         Operator/Circle
                     </p>
-                    <p>
+                    <p {...register('operator')} {...register('circle')}>
                        {data?.data?.operatorName} | {data?.data?.circleName}
                     </p>
                 </span>
@@ -97,7 +107,7 @@ export default function RechargePlanDetails(data,operatorName,circleName)  {
                     <p className=''>
                         Plan
                     </p>
-                    <p>
+                    <p >
                          {data?.data?.plan?.plan_name}
                     </p>
                 </span>
@@ -121,7 +131,7 @@ export default function RechargePlanDetails(data,operatorName,circleName)  {
                     <p className=''>
                         Amount
                     </p>
-                    <p>
+                    <p {...register('amount')}>
                     ₹{data?.data?.plan?.price}
                     </p>
                 </span>
@@ -142,7 +152,8 @@ export default function RechargePlanDetails(data,operatorName,circleName)  {
              Pay Now
         </div> */}
 
-        <button onClick={handleSubmit(onSubmit)} className='bg-blue-500 px-6 rounded p-2 mx-auto text-white'>
+        <button onClick={handleSubmit(onSubmit)} 
+        className='bg-blue-500 px-6 rounded p-2 mx-auto text-white'>
                  Pay Now
         </button>
 

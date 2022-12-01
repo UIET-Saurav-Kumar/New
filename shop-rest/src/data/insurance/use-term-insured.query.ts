@@ -8,6 +8,7 @@ const InsuredData = new CoreApi(API_ENDPOINTS.TERM_LIFE_INSURANCE);
 
 export const useTermInsuredFormDataMutation = () => {
 
+  
   return useMutation((input: any) => {
       
       let formData = new FormData();

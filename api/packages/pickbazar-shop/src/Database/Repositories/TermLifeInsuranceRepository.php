@@ -16,10 +16,10 @@ class TermLifeInsuranceRepository extends BaseRepository
     protected $fieldSearchable = [
         'name'  => 'like',
         "date_of_birth",
-        "is_tobacco",
+        "is_tobacco_user",
         "annual_income",
         "education",
-        "occupaiton",
+        "occupation",
         "pin_code",
         "mobile_number"
     ];
@@ -34,9 +34,11 @@ class TermLifeInsuranceRepository extends BaseRepository
 
     /**
      * Configure the Model
-     **/
+    **/
+
     public function model()
     {
         return TermLifeInsurance::class;
     }
+
 }

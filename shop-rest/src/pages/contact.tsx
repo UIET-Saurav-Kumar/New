@@ -60,7 +60,7 @@ interface Props {
 
 export default function ContactPage({user} : Props) {
 
-    const { register, handleSubmit,formState: { errors },reset,control } = useForm<UserFormValues>(
+    const { register, handleSubmit,formState: { errors }, reset, control } = useForm<UserFormValues>(
         {
             defaultValues: {
               ...(user &&
@@ -93,7 +93,6 @@ export default function ContactPage({user} : Props) {
         email: values.email,
         subject: values.subject,
         description: values.description,
-        
       },
       {
         onSuccess: () => {
@@ -188,6 +187,7 @@ export default function ContactPage({user} : Props) {
           <h1 className="mb-7 text-xl md:text-2xl font-body font-bold text-heading">
             {t("Question,Comments or Concern?")}
           </h1>
+          
           <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <Input
@@ -232,6 +232,7 @@ export default function ContactPage({user} : Props) {
     </>
   );
 };
+
 ContactPage.Layout = Layout;
 
 
