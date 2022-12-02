@@ -12,6 +12,7 @@ import Footer from '@components/footer/Footer';
 
 export default function LoanPage() {
 
+
     const options = [
         { value: 'less than 2 lac', label: 'less than 2 lac' },
         { value: 'less than 5 lac', label: 'less than 5 lac' },
@@ -19,6 +20,7 @@ export default function LoanPage() {
         { value: 'less than 10 lac', label: 'less than 10 lac'}
     ]
 
+    
     return (
          <div className='bg-gray-100'>
 

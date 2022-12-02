@@ -51,7 +51,7 @@ const AllCategories = () => {
 	//getLinkSalonSpa
 	function getLinkSalonSpa(){
 
-		var pathname="/salon-products";
+		var pathname="/salon-products?category=menicure-pedicure&text=";
 
 		return pathname;
 	}

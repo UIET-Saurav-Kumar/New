@@ -26,7 +26,7 @@ interface Props {
 type FormValues = {
    'name': string,
    'date_of_birth': string,
-    'is_tobacco_user': string,
+    // 'is_tobacco_user': string,
     'annual_income': string,
     'education': string,
     'occupation': string,
@@ -62,7 +62,7 @@ export default function TermLifeInsurance({user}: Props) {
             pick(user, [
         'name',
         'date_of_birth',
-        'is_tobacco_user',
+        // 'is_tobacco_user',
         'annual_income',
         'education',
         'occupation',
@@ -73,12 +73,13 @@ export default function TermLifeInsurance({user}: Props) {
     })
 
     function onSubmit(data: FormValues) {
+        console.log(data)
         
         storeInsured(
             {
                 name: data.name,
                 dob: data.date_of_birth,
-                smoke: data.is_tobacco_user,
+                // smoke: data.is_tobacco_user,
                 income: data.annual_income,
                 education: data.education,
                 occupation: data.occupation,

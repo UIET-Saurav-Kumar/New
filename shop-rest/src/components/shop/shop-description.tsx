@@ -27,24 +27,24 @@ export default function ShopDescription({data} :any) {
 
                 {data?.description && (
                   
-                        <p className="text-xs sm:text-sm font-md  font-light tracking-wide text-gray-600  mb-2 leading-relaxed">
-                          <ReadMore character={70}>{data?.description}</ReadMore>
-                        </p>
+                    <p className="text-xs sm:text-sm font-md  font-light tracking-wide text-gray-600  mb-2 leading-relaxed">
+                      <ReadMore character={70}>{data?.description}</ReadMore>
+                    </p>
                 )}
             </div>  
 
            {/* <div className="p-4 flex justify-evenly  space-x-5"> */}
 
               {/* Address */}
-              <div className="  mb-7 h-auto last:mb-0 flex flex-col  w-full text-left">
+              <div className=" mb-7 h-auto last:mb-0 flex flex-col w-full text-left">
                  
                   <span className="text-sm lg:text-lg text-heading font-semibold mb-2">
                     {/* {t(" address")} */}
                     Address
                   </span>
 
-                  <span className=" justify-between text-xs sm:text-sm font-light tracking-wide  text-gray-600 ">
-                      { data?.settings?.location?.formattedAddress }
+                  <span className="justify-between text-xs sm:text-sm font-light tracking-wide text-gray-600">
+                      {data?.settings?.location?.formattedAddress}
                   </span>
 
                   <div className="sm:hidden mt-5 mb-0 last:mb-0 flex flex-col  w-full text-left">
@@ -54,28 +54,30 @@ export default function ShopDescription({data} :any) {
 
                           <span className=" flex items-end space-x-1 text-xs  md:text-lg font-light tracking-wide text-body">
                             {/* {data?.settings?.contact} */}
-                            <PhoneIcon scale={0.88} className="h-4 w-4 scale-75 text-blue-900 "/> <a className="  text-indigo-800 font-semibold cursor-pointer" href={`tel:${'77430-42380'}`}>
-                           {/* 84279-90450 */}
-                           Call us
-                              </a>  
+                            <PhoneIcon scale={0.88} className="h-4 w-4 scale-75 text-blue-900 "/> 
+                            <a className="text-indigo-800 font-semibold cursor-pointer" href={`tel:${'77430-42380'}`}>
+                             {/* 84279-90450 */}
+                             Call us
+                            </a>  
                           </span>
                   </div>
 
               </div>
               
               {/* Contact number */}
-              <div className=" hidden  mb-7 last:mb-0 sm:flex flex-col  w-full text-left">
+              <div className = "hidden mb-7 last:mb-0 sm:flex flex-col  w-full text-left">
                   <span className="text-sm md:text-sm lg:text-lg text-heading font-semibold mb-2">
                     {t("Whatsapp/Call to order")}
                   </span>
 
-                  <span className=" flex items-end space-x-1 text-xs underline md:text-lg font-light tracking-wide text-body">
+                  <span className = "flex items-end space-x-1 text-xs underline md:text-lg font-light tracking-wide text-body">
                             {/* {data?.settings?.contact} */}
-                            <PhoneIcon scale={0.88} className="h-4 w-4 scale-75 text-blue-900 "/> <a className=" text-indigo-800 font-semibold cursor-pointer" href={`tel:${' 77430-42380'}`}>
-                           {/* 84279-90450 */}
-                           Call us
-                              </a>  
-                          </span>
+                            <PhoneIcon scale={0.88} className = "h-4 w-4 scale-75 text-blue-900 "/> 
+                            <a className=" text-indigo-800 font-semibold cursor-pointer" href={`tel:${' 77430-42380'}`}>
+                              {/* 84279-90450 */}
+                               Call us
+                            </a>  
+                  </span>
               </div>
 
  {/* {data?.settings?.website && (
