@@ -103,5 +103,7 @@ export const API_ENDPOINTS = {
 
   WHATSAPP_CAMPAIGN:'webhook',
 
+  TERM_LIFE_INSURANCE: 'term-life-insurance',
+
 };
 

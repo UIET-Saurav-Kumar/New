@@ -42,6 +42,11 @@ export const siteSettings = {
         icon: "DashboardIcon",
       },
       {
+        href: ROUTES.TERM_LIFE_INSURANCE,
+        label: "Insurance",
+        icon: "DashboardIcon",
+      },
+      {
         href: ROUTES.WHATSAPP_CAMPAIGN,
         label: 'Whatsapp Campaign',
         icon: 'DashboardIcon',
@@ -200,6 +205,7 @@ export const siteSettings = {
         icon: "Logs",
       },
     ],
+    
     shop: [
       {
         href: (shop: string) => `${ROUTES.DASHBOARD}${shop}`,
@@ -301,10 +307,12 @@ export const siteSettings = {
       },
     ],
   },
+
   product: {
     placeholder: "/product-placeholder.svg",
   },
   avatar: {
     placeholder: "/avatar-placeholder.svg",
   },
+
 };

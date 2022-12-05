@@ -44,4 +44,7 @@ export const ROUTES = {
   QUESTIONS: "/questions",
   BRAND_OFFERS: "/brand-offers",
   WHATSAPP_CAMPAIGN: '/whatsapp-campaign',
+  
+  TERM_LIFE_INSURANCE: '/term-life-insurance',
+
 };

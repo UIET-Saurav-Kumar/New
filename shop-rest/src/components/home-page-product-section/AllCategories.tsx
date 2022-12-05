@@ -48,8 +48,7 @@ const AllCategories = () => {
 		
 	}
 
-	//getLinkSalonSpa
-	function getLinkSalonSpa(){
+ 	function getLinkSalonSpa(){
 
 		var pathname="/salon-products?category=menicure-pedicure&text=";
 
@@ -80,9 +79,9 @@ const AllCategories = () => {
 					
 						<div className='rounded flex flex-col w-full  cursor-pointer  border-gray-200 
 										hover:border-gray-400  items-center'
-							key={category.id} >
+							 key={category.id}>
 
-							  {/* <Image    
+							  {/*<Image    
 								quality='50' 
 								priority={true}
 								 src={category?.image?.thumbnail }
@@ -91,7 +90,8 @@ const AllCategories = () => {
 								 layout="intrinsic"
 								 
 								 className=" "
-								/>    */}
+								/>*/}
+
 							<img className=' w-full h-full object-cover'  
 							     src={category?.image.thumbnail} 
 							/>   
@@ -103,8 +103,6 @@ const AllCategories = () => {
 			
 		</div>
 		
-	
-    
 </div>
 	)
 }
