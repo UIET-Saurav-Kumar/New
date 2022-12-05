@@ -41,6 +41,7 @@ import {QRCodeCanvas} from "qrcode.react";
 import Button from "@components/ui/button";
 import { useModalAction } from "@components/ui/modal/modal.context";
 import { Maybe } from "@ts-types/generated";
+import Link from "next/link";
 
 export default function ShopPage() {
 
@@ -199,6 +200,22 @@ export default function ShopPage() {
             </a>
           </div>
         </div>
+        <Link href={`/${slug}/orders`}>
+              <div className="bg-white mt-2 border cursor-pointer flex lg:hidden items-center py-3 px-4">
+                <div className="p-3 rounded-full w-11 h-11 flex items-center justify-center bg-[#6EBBFD] text-light">
+                  <OrdersIcon width={16} />
+                </div>
+
+                <div className="ml-3">
+                  <p className="text-lg font-semibold text-sub-heading mb-0.5">
+                    {orders_count}
+                  </p>
+                  <p className="text-sm text-muted mt-0">
+                    {t("common: Total-orders")}
+                  </p>
+                </div>
+              </div>
+            </Link> 
       </div>
 
        
@@ -227,7 +244,7 @@ export default function ShopPage() {
         )}
       </div>
 
-      <div className="bg-qr flex flex-col relative order-4 border-2 z-30 w-auto my-60 -mt-0">
+      <div className="bg-qr flex flex-col relative order-4 border-2 z-30 w-auto -mt-0">
        
        {/* { isAuthorize ?  */}
 

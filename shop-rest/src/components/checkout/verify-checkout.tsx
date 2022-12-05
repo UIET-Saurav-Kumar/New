@@ -121,7 +121,7 @@ const VerifyCheckout = () => {
           }
         );
       } else {
-        setError("error-add-both-address");
+        setError("Please add both address");
       }
 
     } else {
