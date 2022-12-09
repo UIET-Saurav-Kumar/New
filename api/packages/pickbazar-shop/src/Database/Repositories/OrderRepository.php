@@ -195,6 +195,7 @@ class OrderRepository extends BaseRepository
                 if($order->shop_id){
                     $shop=Shop::find($order->shop_id);
                     $customer=$order->customer;
+                    $customer_number= $customer->customer_contact;
                     $phone_number=$this->clearStr($order->customer_contact);
                     SMS::customerPurchase($phone_number,$customer->name,$shop->name);
 
@@ -244,7 +245,7 @@ class OrderRepository extends BaseRepository
                                     'shop_name'=> $shop_name,
                                     'product_name'=> $product_name,
                                     'user_name'=>$customer->name,
-                                    'customer_contact'=>$customer->phone_number,
+                                    'customer_contact'=>$customer_number,
                                     'shop_owner_phone_number'=>$phone_number,
                                     'shop_owner_name'=>$shop_name,
                                     'delivery_time'=> $delivery_time,
@@ -400,8 +401,11 @@ class OrderRepository extends BaseRepository
                         // })),
                         'shop_name'=> $product->shop->name,
                         'product_name'=> $product->name,
+                        'user_name'=> $user->name,
+                        'customer_contact'=>$user->customer_contact,
                         'shop_owner_phone_number'=>$product->shop->settings['contact'],
                         'shop_owner_name'=>$product->shop->name,
+                        "delivery_time"=> $request->delivery_time,
                         // "price"=> $request->amount,
                         // "orderId"=> $request->tracking_number,
                         // "delivery_time"=> $request->delivery_time,
