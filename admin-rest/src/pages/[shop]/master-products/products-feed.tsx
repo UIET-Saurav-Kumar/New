@@ -99,14 +99,14 @@ export default function ProductsFeed({shopId,searchTerm,type,category,orderBy,so
     <table className="">
       <thead className=" rc-table-thead">
           <tr className="">
-              <th className="rc-table-cell w-48 " >Image</th>
-              <th title="Name" className="rc-table-cell w-48 " >Name</th>
-              <th className="rc-table-cell w-48 " >Price</th>
-              <th className="rc-table-cell w-48 " >Sale Price</th>
-              <th className="rc-table-cell w-48 " >Quantity</th>
+              <th className="rc-table-cell w-auto text-xs lg:w-48 " >Image</th>
+              <th title="Name" className="rc-table-cell w-auto text-xs lg:w-48 " >Name</th>
+              <th className="rc-table-cell w-auto text-xs lg:w-48 " >Price</th>
+              <th className="rc-table-cell w-auto text-xs lg:w-48 " >Sale Price</th>
+              <th className="rc-table-cell w-auto text-xs lg:w-48 " >Quantity</th>
               
-              {/* <th className="rc-table-cell w-48 " >Tax</th> */}
-              <th className="rc-table-cell w-48 " >Actions</th>
+              {/* <th className="rc-table-cell w-auto text-xs lg:w-48 " >Tax</th> */}
+              <th className="rc-table-cell w-auto text-xs lg:w-48 " >Actions</th>
           </tr>
       </thead>
       <tbody className="rc-table-tbody">

@@ -64,7 +64,7 @@ export default function Product({product,shopId,masterIds,taxes}:any) {
                         <img alt={product?.name} src={product?.image?.thumbnail ?product?.image?.thumbnail:''} decoding="async" className="rounded overflow-hidden"/>
                     </div>
                 </td>
-                <td title="cosmos" className="rc-table-cell rc-table-cell-ellipsis  text-center">{product?.name}</td>
+                <td title="cosmos" className="rc-table-cell rc-table-cell-ellipsis text-xs  text-center">{product?.name}</td>
                 
                 <td className="rc-table-cell  text-center" >
                     <span className="whitespace-nowrap" title={"$"+product?.price}>
@@ -157,11 +157,11 @@ export default function Product({product,shopId,masterIds,taxes}:any) {
 
                 
                 <td className="rc-table-cell text-center" >
-                    <div className="space-s-5 inline-flex items-center w-auto">
+                    <div className="space-s- w-10 inline-flex items-center ">
                         <Button
                             variant="outline"
                             onClick={addProduct}
-                            className="mr-4 mb-2"
+                            className="mr-4 mb-2 w-4"
                             type="button"
                         >
                             Add

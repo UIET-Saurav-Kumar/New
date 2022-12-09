@@ -158,6 +158,7 @@ function calculateQuantity(variationOptions: any) {
     variationOptions?.map(({ quantity }: { quantity: number }) => quantity)
   );
 }
+
 export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);

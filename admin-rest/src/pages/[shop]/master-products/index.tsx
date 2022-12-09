@@ -116,7 +116,7 @@ export default function ProductsPage() {
           </div>
         </div>
       </Card>
-      <Card className="flex flex-col mb-8">
+      <Card className="flex flex-col mb-8 overflow-x-scroll w-full">
         <div className="w-full flex flex-col md:flex-row items-center">
           <div className="mb-4 md:mb-0">
             <ProductsFeed 

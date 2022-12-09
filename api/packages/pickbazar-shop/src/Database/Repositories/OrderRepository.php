@@ -243,6 +243,8 @@ class OrderRepository extends BaseRepository
                                    
                                     'shop_name'=> $shop_name,
                                     'product_name'=> $product_name,
+                                    'user_name'=>$customer->name,
+                                    'customer_contact'=>$customer->phone_number,
                                     'shop_owner_phone_number'=>$phone_number,
                                     'shop_owner_name'=>$shop_name,
                                     'delivery_time'=> $delivery_time,
