@@ -151,7 +151,7 @@ export default function Invoice() {
 
                             <p className='text-xs sm:text-sm font-body tracking-wide'> 
                             <span className="w-7/12 sm:w-8/12 text-gray-700  text-xs">
-                            {data?.order?.children[0]?.shop?.shop_categories.replace(/[{":,0123456789}]/g,'').slice(5,-3) !== 'Salon & Spa' ? data?.order?.delivery_time : data?.order?.delivery_time}
+                            {data?.order?.children[0]?.shop?.shop_categories?.replace(/[{":,0123456789}]/g,'').slice(5,-3) !== 'Salon & Spa' ? data?.order?.delivery_time : data?.order?.delivery_time}
                             </span>
                             </p>
                             <span className='grid grid-cols-1 lg:flex items-center  w-full lg:space-x-2'>
