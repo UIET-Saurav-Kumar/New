@@ -210,7 +210,7 @@ class OrderRepository extends BaseRepository
 
                         
                         
-                            SMS::purchaseToVendor('9056147024', $user->name);
+                            SMS::purchaseToVendor('7018265262', $user->name);
                             // SMS::purchaseToVendor($phone_number, $user->name); 
                             // SMS::purchaseToVendor('7018265262', $user->name); 
 
@@ -245,7 +245,7 @@ class OrderRepository extends BaseRepository
                                     'shop_name'=> $shop_name,
                                     'product_name'=> $product_name,
                                     'user_name'=>$customer->name,
-                                    'customer_contact'=>$customer_number,
+                                    'customer_contact'=>$customer->customer_contact,
                                     'shop_owner_phone_number'=>$phone_number,
                                     'shop_owner_name'=>$shop_name,
                                     'delivery_time'=> $delivery_time,
@@ -253,7 +253,7 @@ class OrderRepository extends BaseRepository
                                     'order_id'=> $order->tracking_number,
                                     // "price"=> $request->amount,
                                     // "orderId"=> $request->tracking_number,
-                                    // "delivery_time"=> $request->delivery_time,
+                                    "delivery_time"=> $request->delivery_time,
                                     // 'description'=> $request->description,
                                     // "payment_gateway"=> $request->payment_gateway,
                                     "currency"=>"INR"
@@ -388,7 +388,8 @@ class OrderRepository extends BaseRepository
 
                 //vendor order event
                 $payload2 = array(
-                    "userId"=> $product->shop->owner_id,
+                    "userId"=> $user->id,
+                    "ownerId"=> $product->shop->owner_id,
                     "phoneNumber"=> $product->shop->settings['contact'],
                     // 'shop_owner_phone_number'=>$order->shop->settings,
                     // 'shop_owner_name'=>$product->shop->name,
@@ -402,7 +403,10 @@ class OrderRepository extends BaseRepository
                         'shop_name'=> $product->shop->name,
                         'product_name'=> $product->name,
                         'user_name'=> $user->name,
-                        'customer_contact'=>$user->customer_contact,
+                        'customer_contact'=>$user->phone_number,
+                        'user_contact'=>$user['phone_number'],
+                        'user_mob'=>$user->customer_contact,
+                        'user_phone_number'=>$user['customer_contact'],
                         'shop_owner_phone_number'=>$product->shop->settings['contact'],
                         'shop_owner_name'=>$product->shop->name,
                         "delivery_time"=> $request->delivery_time,
