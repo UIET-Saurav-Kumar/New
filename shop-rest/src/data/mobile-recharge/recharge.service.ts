@@ -17,10 +17,10 @@ class Recharge extends CoreApi {
   verifyCheckout(input: VerifyCheckoutInputType) {
     
     return this.http
-      .post(API_ENDPOINTS.VERIFY_CHECKOUT, input)
+      .post(API_ENDPOINTS.UTILITY_PAYMENT, input)
       .then((res) => res.data);
       
   }  
 }
 
-export const RechargeService = new Recharge(API_ENDPOINTS.ORDER);
+export const RechargeService = new Recharge(API_ENDPOINTS.UTILITY_PAYMENT);

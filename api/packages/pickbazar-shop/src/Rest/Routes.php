@@ -36,7 +36,7 @@ use PickBazar\Http\Controllers\FeedbackController;
 use PickBazar\Http\Controllers\BillPaymentController;
 use PickBazar\Http\Controllers\BillDetailsController;
 use PickBazar\Http\Controllers\TermLifeInsuranceController;
-
+use PickBazar\Http\Controllers\UtilityPaymentController;
 
  
 //route for findByDateRange in order controller
@@ -49,6 +49,8 @@ Route::post('/get-cable-details','PickBazar\Http\Controllers\BillDetailsControll
 Route::post('/get-fast-tag-details','PickBazar\Http\Controllers\BillDetailsController@getBillDetails');
 
 // Route::get('/biller-info','PickBazar\Http\Controllers\BillPaymentController@getBillerInfo');
+
+Route::post('/mobile-recharge','PickBazar\Http\Controllers\OrderController@utilityPayment');
 Route::any('/get-operator','PickBazar\Http\Controllers\OperatorDetailsController@getOperator');
 Route::post('/recharge-plans','PickBazar\Http\Controllers\RechargePlansController@getPlans');
 Route::get('/operators-list','PickBazar\Http\Controllers\OperatorListController@operatorList');
@@ -242,6 +244,9 @@ Route::get('get-user-wallet-details/{id}','PickBazar\Http\Controllers\InviteCont
 Route::get('referral-network','PickBazar\Http\Controllers\InviteController@refferral_network');
 
 Route::any('order/success','PickBazar\Http\Controllers\GatewayResponse@process_response');
+Route::any('utility-payment/success','PickBazar\Http\Controllers\GatewayResponse@process_response');
+
+
 
 Route::post('import-products', 'PickBazar\Http\Controllers\ProductController@importProducts');
 Route::post('import-variation-options', 'PickBazar\Http\Controllers\ProductController@importVariationOptions');
@@ -319,6 +324,9 @@ Route::get('/delivery/payment','PickBazar\Http\Controllers\DeliveryController@re
 Route::group(['middleware' => ['can:' . Permission::CUSTOMER, 'auth:sanctum']], function () {
     Route::post('/logout', 'PickBazar\Http\Controllers\UserController@logout');
     Route::apiResource('orders', OrderController::class, [
+        'only' => ['index', 'show', 'store']
+    ]);
+    Route::apiResource('utility-payment', UtilityPaymentController::class, [
         'only' => ['index', 'show', 'store']
     ]);
     Route::get('orders/tracking_number/{tracking_number}', 'PickBazar\Http\Controllers\OrderController@findByTrackingNumber');

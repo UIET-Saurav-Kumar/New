@@ -1,6 +1,8 @@
 import { useCustomerQuery } from '@data/customer/use-customer.query'
 import { useCreateRechargePaymentMutation } from '@data/mobile-recharge/use-create-recharge-payment.mutation'
 import React from 'react'
+import Loader from "@components/ui/loader/loader";
+
 import { useForm } from 'react-hook-form'
 import { string } from 'yup/lib/locale'
 
@@ -153,8 +155,11 @@ export default function RechargePlanDetails(data: { data: { amount: any; number:
         </div> */}
 
         <button onClick={handleSubmit(onSubmit)} 
+        style={{height:'45px'}}
         className='bg-blue-500 px-6 rounded p-2 mx-auto text-white'>
-                 Pay Now
+            {loading?
+            ("Loading..."):
+            'Pay Now'}
         </button>
 
     </div>

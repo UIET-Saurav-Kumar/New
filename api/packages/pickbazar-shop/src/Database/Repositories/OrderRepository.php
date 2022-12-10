@@ -99,6 +99,94 @@ class OrderRepository extends BaseRepository
         return Order::class;
     }
 
+    /**
+     * @param $request
+     * @return LengthAwarePaginator|JsonResponse|Collection|mixed
+     */
+
+    public function utilityPayment($request)
+    {
+        dump($request->user()->id);
+        dd($request->all());
+        $user = $request->user();
+        $request['tracking_number'] = Str::random(12);
+        $request['customer_id'] = $request->user()->id;
+        $request['name'] = $request->user()->name;
+        $request['email_id'] = $request->user()->email;
+        $request['shop_name'] = $request->shop_name;
+        //status
+        $request['status'] = $request->status;
+        $request['customer_contact'] = $request->user()->phone_number;
+        $discount = $this->calculateDiscount($request);
+
+        if ($discount) {
+
+            $request['paid_total'] = $request['amount'] + $request['sales_tax']  - $discount;
+            // + $request['delivery_fee']
+            $request['total'] = $request['amount'] + $request['sales_tax']  - $discount;
+            // + $request['delivery_fee']
+
+            $request['discount'] =  $discount;
+
+        } else {
+            $request['paid_total'] = $request['amount'] + $request['sales_tax'] ;
+            // + $request['delivery_fee']
+            $request['total'] = $request['amount'] + $request['sales_tax'] ;
+            // + $request['delivery_fee']
+        }
+        $payment_gateway = $request['payment_gateway'];
+
+        switch ($payment_gateway) {
+            case 'cod':
+                // Cash on Delivery no need to capture payment
+                
+                break;
+            case 'cashfree':
+                // For default gateway no need to set gateway
+                // Omnipay::setGateway('cashfree');
+                // return $this->createOrder($request);
+                break;
+        }
+        if($payment_gateway=='cod'){
+            $order=$this->createOrder($request);
+            $this->sendSMS($order); 
+            return $order;
+        }
+        
+        // $response = $this->capturePayment($request);
+        
+        $payment_method = 'cc';
+        if($payment_method == 'cashfree')
+        {
+            $payment_method = 'cc';
+        }
+        if($payment_method == 'upi')
+        {
+            $payment_method = 'upi';
+        }
+        if($payment_method == 'wallet')
+        {
+            $payment_method = 'dc';
+        }
+        
+        $orderFree = new CashFreeOrder();
+        $od["orderId"] = $request['tracking_number'];
+        $od["orderAmount"] = $request['total'];
+        $od["orderNote"] = "Subscription";
+        $od["customerPhone"] = $request->customer_contact;
+        $od["customerName"] = $user->name;
+        $od["customerEmail"] = $user->email ?? "test@cashfree.com";
+        $od["payment_methods"] = $payment_method;
+        $od["returnUrl"] =  url("order/success");
+        $od["notifyUrl"] = url("order/success");
+        $orderFree->create($od);
+        $order = $this->createOrder($request);
+
+        
+        $link = $orderFree->getLink($od['orderId']);
+        return json_encode($link);
+
+    }
 
     /**
      * @param $request

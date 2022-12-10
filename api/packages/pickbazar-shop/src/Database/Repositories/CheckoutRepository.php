@@ -11,7 +11,8 @@ use PickBazar\Database\Models\Settings;
 use Illuminate\Support\Facades\Log;
 use PickBazar\Database\Models\VariationOption;
 
-class CheckoutRepository extends BaseRepository
+class CheckoutRepository 
+// extends BaseRepository
 {
 
     public function verify($request)

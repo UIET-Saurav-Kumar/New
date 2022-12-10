@@ -17,15 +17,17 @@ use Illuminate\Database\Eloquent\Collection;
 use PickBazar\Exceptions\PickbazarException;
 use PickBazar\Http\Requests\OrderCreateRequest;
 use PickBazar\Http\Requests\OrderUpdateRequest;
-use PickBazar\Database\Repositories\OrderRepository;
+use PickBazar\Database\Repositories\UtilityPaymentRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Carbon\Carbon;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class OrderController extends CoreController
+class UtilityPaymentController extends CoreController
 {
     public $repository;
 
-    public function __construct(OrderRepository $repository)
+    public function __construct(UtilityPaymentRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -65,19 +67,29 @@ class OrderController extends CoreController
      * @param OrderCreateRequest $request
      * @return LengthAwarePaginator|\Illuminate\Support\Collection|mixed
      */
-    public function store(OrderCreateRequest $request)
+    public function store(request $request)
     {
-        return $this->repository->storeOrder($request);
-    }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param OrderCreateRequest $request
-     * @return LengthAwarePaginator|\Illuminate\Support\Collection|mixed
-     */
-    public function utilityPayment(request $request)
-    {
-        return $this->repository->utilityPayment($request);
+        // Schema::dropIfExists('utility_payments');
+
+        // Schema::create('utility_payments', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('tracking_number')->unique();
+        //     $table->unsignedBigInteger('customer_id');
+        //     $table->string('customer_contact');
+        //     $table->string('circle');
+        //     $table->string('usertx');
+        //     $table->string('operator');
+        //     $table->string('status');
+        //     $table->double('amount');
+        //     $table->double('total');
+        //     $table->unsignedBigInteger('coupon_id')->nullable();
+        //     $table->double('discount')->nullable();
+        //     $table->string('payment_id')->nullable();
+        //     $table->string('payment_gateway')->nullable();
+        //     $table->foreign('customer_id')->references('id')->on('users');
+        //     $table->timestamps();
+        // });
+        return $this->repository->storePayment($request);
     }
 
     /**
