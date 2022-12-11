@@ -13,6 +13,7 @@ export const API_ENDPOINTS = {
   PRODUCT_STATUS_UPDATE:"status-product",
   POPULAR_PRODUCTS: "popular-products",
   COUPONS: "coupons",
+  UTILITY_PAYMENT:"utility-payment",
   CUSTOMERS: "customers",
   TAXES: "taxes",
   SHIPPINGS: "shipping",
@@ -102,6 +103,8 @@ export const API_ENDPOINTS = {
   ABUSIVE_REPORTS: "abusive_reports",
 
   WHATSAPP_CAMPAIGN:'webhook',
+
+  TERM_LIFE_INSURANCE: 'term-life-insurance',
 
 };
 

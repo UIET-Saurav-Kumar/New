@@ -19,6 +19,7 @@ export const ROUTES = {
   SHOPS: "/shops",
 
 
+
   GROCERY: "/grocery",
   PHARMACY: '/pharmacy',
   FRUITS: '/fruits',
@@ -44,6 +45,7 @@ export const ROUTES = {
   WITHDRAWS:"/user/withdraws",
   UPLOAD_INVOICE: '/user/upload-invoice',
   DELIVERY: '/user/delivery',
+  UTILITY_PAYMENTS: "/user/utility-payments",
 
   WISHLIST: '/wishlists',
   QUESTIONS: '/questions',

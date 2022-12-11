@@ -11,8 +11,7 @@ use PickBazar\Database\Models\Settings;
 use Illuminate\Support\Facades\Log;
 use PickBazar\Database\Models\VariationOption;
 
-class CheckoutRepository 
-// extends BaseRepository
+class CheckoutRepository
 {
 
     public function verify($request)
@@ -120,6 +119,7 @@ class CheckoutRepository
             if ($is_not_in_stock) {
                 $unavailable_products[] =  $is_not_in_stock;
             }
+
         }
         return $unavailable_products;
     }

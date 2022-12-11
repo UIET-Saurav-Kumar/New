@@ -2,9 +2,10 @@ import { useCustomerQuery } from '@data/customer/use-customer.query'
 import { useCreateRechargePaymentMutation } from '@data/mobile-recharge/use-create-recharge-payment.mutation'
 import React from 'react'
 import Loader from "@components/ui/loader/loader";
-
+import { toast, ToastContainer } from "react-toastify";
 import { useForm } from 'react-hook-form'
 import { string } from 'yup/lib/locale'
+import { useModalAction } from "@components/ui/modal/modal.context";
 
 interface FormValues {
     payment_gateway: 'cod' | 'cashfree' | 'upi' | 'wallet'
@@ -17,13 +18,14 @@ interface FormValues {
 
     
 
-export default function RechargePlanDetails(data: { data: { amount: any; number: any; phone: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; operatorName: string | number | boolean | {} | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactNodeArray | React.ReactPortal | null | undefined; circleName: string | number | boolean | {} | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactNodeArray | React.ReactPortal | null | undefined; plan: { plan_name: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; validity: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; description: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; price: {} | null | undefined } }; me: { phone_number: any } },operatorName: any,circleName: any)  {
+export default function RechargePlanDetails(data: { data: { amount: any; number: any; phone: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; operatorName: string | number | boolean | {} | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactNodeArray | React.ReactPortal | null | undefined; circleName: string | number | boolean | {} | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactNodeArray | React.ReactPortal | null | undefined; plan: { plan_name: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; validity: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; description: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; price: {} | null | undefined } }; me: { phone_number: any } },operatorName: any,circleName: any,close:any)  {
 
     // alert(operatorName)
     console.log('payment values',data?.data?.plan?.price)
     const {data:me}=useCustomerQuery();
     console.log('payment values',me)
     const { mutate: createRechargePayment, isLoading: loading } = useCreateRechargePaymentMutation();
+    const { closeModal, openModal } = useModalAction();
 
 
     const {
@@ -61,13 +63,19 @@ export default function RechargePlanDetails(data: { data: { amount: any; number:
 
         createRechargePayment(input, {
             onSuccess: (data) => {
-               if(data?.paymentLink)
-               {
-                window.location.replace(data?.paymentLink)
-               }
+
+            //    if(data?.paymentLink)
+            //    {
+            //     window.location.replace(data?.paymentLink)
+            //    }
+            closeModal()
         },
 
         onError: (error) => {
+            toast.error("unable to process the request please try again");
+            
+            closeModal()
+
             console.log(error)
         }
         })
@@ -158,10 +166,10 @@ export default function RechargePlanDetails(data: { data: { amount: any; number:
         style={{height:'45px'}}
         className='bg-blue-500 px-6 rounded p-2 mx-auto text-white'>
             {loading?
-            ("Loading..."):
+            ("Processing please wait..."):
             'Pay Now'}
         </button>
-
+        <ToastContainer autoClose={2000} />
     </div>
   )
 }

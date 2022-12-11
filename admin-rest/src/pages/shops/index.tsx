@@ -34,6 +34,9 @@ export default function AllShopPage() {
     sortedBy,
   });
 
+  // console.log('shops',data?.data)
+  console.log('all shops',data?.shops?.data.map((m)=>{return [{'shop':m?.name,'number':m.owner?.phone_number}]}))
+
   if (loading) return <Loader text={t("common:text-loading")} />;
   if (error) return <ErrorMessage message={error.message} />;
 

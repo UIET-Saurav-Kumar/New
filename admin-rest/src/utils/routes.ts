@@ -14,6 +14,8 @@ export const ROUTES = {
   USERS: "/users",
   TAXES: "/taxes",
   SHIPPINGS: "/shippings",
+  UTILITY_PAYMENTS: "/utility-payment",
+
   SETTINGS: "/settings",
   STORE_SETTINGS: "/vendor/settings",
   STORE_KEEPER: "/vendor/store_keepers",
@@ -44,4 +46,7 @@ export const ROUTES = {
   QUESTIONS: "/questions",
   BRAND_OFFERS: "/brand-offers",
   WHATSAPP_CAMPAIGN: '/whatsapp-campaign',
+  
+  TERM_LIFE_INSURANCE: '/term-life-insurance',
+
 };

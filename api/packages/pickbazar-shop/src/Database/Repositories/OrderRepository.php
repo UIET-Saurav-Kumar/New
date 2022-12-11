@@ -283,18 +283,28 @@ class OrderRepository extends BaseRepository
                 if($order->shop_id){
                     $shop=Shop::find($order->shop_id);
                     $customer=$order->customer;
+                    $customer_number= $customer->customer_contact;
                     $phone_number=$this->clearStr($order->customer_contact);
                     SMS::customerPurchase($phone_number,$customer->name,$shop->name);
 
+                 
                     // enable msg to vendor
                     if(isset($shop)){
                         $user=$shop->owner;
+
+                        array_map(function($product) {
+                            SMS::purchaseToVendor($this->clearStr($product->shop->settings['contact']), $user->name); 
+                          }, $order->children);
+
                         
-                            // SMS::purchaseToVendor('7018265262', $user->name);
-                            SMS::purchaseToVendor('9056147024', $user->name); 
+                        
+                            SMS::purchaseToVendor('7018265262', $user->name);
+                            // SMS::purchaseToVendor($phone_number, $user->name); 
+                            // SMS::purchaseToVendor('7018265262', $user->name); 
+
                             $products = $order->products;
 
-                            foreach($order->childrens as $child){
+                            foreach($order->children as $child){
                                 $product_name = $child->name;
                                 $product_price = $child->price;
                                 $shop_name = $child->shop->name;
@@ -302,6 +312,7 @@ class OrderRepository extends BaseRepository
                                 $phone_number =$child->shop->settings['contact'];
                                 $delivery_time = $child->delivery_time;
                             }
+                            
                             // foreach($products as $product){
                             //    $product_name = $product->name;
                             //      $product_price = $product->price;
@@ -321,6 +332,8 @@ class OrderRepository extends BaseRepository
                                    
                                     'shop_name'=> $shop_name,
                                     'product_name'=> $product_name,
+                                    'user_name'=>$customer->name,
+                                    'customer_contact'=>$customer->customer_contact,
                                     'shop_owner_phone_number'=>$phone_number,
                                     'shop_owner_name'=>$shop_name,
                                     'delivery_time'=> $delivery_time,
@@ -328,7 +341,7 @@ class OrderRepository extends BaseRepository
                                     'order_id'=> $order->tracking_number,
                                     // "price"=> $request->amount,
                                     // "orderId"=> $request->tracking_number,
-                                    // "delivery_time"=> $request->delivery_time,
+                                    "delivery_time"=> $request->delivery_time,
                                     // 'description'=> $request->description,
                                     // "payment_gateway"=> $request->payment_gateway,
                                     "currency"=>"INR"
@@ -336,7 +349,7 @@ class OrderRepository extends BaseRepository
                                 "createdAt"=> date('Y-m-d H:i:s')
                             );
                     }
-                }    
+                }   
 
                 $interkt_response = $this->createWhatsappVendorOrderEvent($payload);     
             }
@@ -463,7 +476,8 @@ class OrderRepository extends BaseRepository
 
                 //vendor order event
                 $payload2 = array(
-                    "userId"=> $product->shop->owner_id,
+                    "userId"=> $user->id,
+                    "ownerId"=> $product->shop->owner_id,
                     "phoneNumber"=> $product->shop->settings['contact'],
                     // 'shop_owner_phone_number'=>$order->shop->settings,
                     // 'shop_owner_name'=>$product->shop->name,
@@ -476,8 +490,14 @@ class OrderRepository extends BaseRepository
                         // })),
                         'shop_name'=> $product->shop->name,
                         'product_name'=> $product->name,
+                        'user_name'=> $user->name,
+                        'customer_contact'=>$user->phone_number,
+                        'user_contact'=>$user['phone_number'],
+                        'user_mob'=>$user->customer_contact,
+                        'user_phone_number'=>$user['customer_contact'],
                         'shop_owner_phone_number'=>$product->shop->settings['contact'],
                         'shop_owner_name'=>$product->shop->name,
+                        "delivery_time"=> $request->delivery_time,
                         // "price"=> $request->amount,
                         // "orderId"=> $request->tracking_number,
                         // "delivery_time"=> $request->delivery_time,

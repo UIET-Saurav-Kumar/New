@@ -14,6 +14,7 @@ import { useQuery } from 'react-query'
 import AsyncSelect from 'react-select/async'
 import url from '@utils/api/server_url'
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify';
 
 export const mobileOperator = [
   {
@@ -3089,6 +3090,7 @@ export default function MobileRechargeForm({ click, variant }: any) {
 
     onError: (data) => {
       // alert(data?.msg)
+      toast.error("unable to process the request, please try later");
       setError(data?.msg)
     },
 
@@ -3121,6 +3123,9 @@ export default function MobileRechargeForm({ click, variant }: any) {
   const onSubmit = (value: any) => {
     const opr = {
       mobile_no: value,
+    }
+    if(loading){
+      return;
     }
     mutateOperator(opr)
   }

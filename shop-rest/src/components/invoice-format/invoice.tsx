@@ -110,23 +110,21 @@ export default function Invoice() {
         
       </div>
 
-      <div className='flex  flex-col w-full space-y-6 p-4 rounded border bg-gray-50'>
-                     
-
+       <div className='flex  flex-col w-full space-y-6 p-4 rounded border bg-gray-50'>
                      {/* 1st row */}
                     <div className='flex w-full  space-x-8 justify-between'>
                     {/* {
-              data?.order?.children.map(product=>{
-                return ( */}
-                  <div className='flex flex-col  w-1/2  space-y-2 '>
-                        <div className='grid grid-cols-1 lg:flex w-full  lg:space-x-6 '>
+                        data?.order?.children.map(product=>{
+                           return ( */}
+                  <div className='flex flex-col  w-1/2  space-y-2'>
+                        <div className='grid grid-cols-1 lg:flex w-full lg:space-x-6 '>
                             <h1 className='text-xs sm:text-sm lg:tex-md font-semibold'>Seller :</h1>
                             <p className='text-xs sm:text-sm lg:text-md text-gray-700 font-body'>{data?.order?.products[0]?.shop?.name}</p>
                             
                         </div>
 
-                        <div className='flex flex-col w-full space-y-3 '>
-                            <h1 className='text-xs sm:text-sm lg:tex-md   font-semibold'>Seller Address :</h1>
+                        <div className='flex flex-col w-full space-y-3'>
+                            <h1 className='text-xs sm:text-sm lg:tex-md font-semibold'>Seller Address :</h1>
                             <p className='w-full sm:w-8/12 text-gray-700 tracking-wide text-xs'>{data?.order?.products[0]?.shop?.settings?.location.formattedAddress}</p>
                             
                         </div>
@@ -135,33 +133,42 @@ export default function Invoice() {
 
                      
                         <div className='flex w-1/2 space-y-2 flex-col'>
-                        <span className='grid grid-cols-1 lg:flex items-center  w-full lg:space-x-2'>
-                                <h1 className='text-xs sm:text-sm lg:tex-md font-semibold'>Customer:</h1>
+                            <span className='grid grid-cols-1 lg:flex items-center w-full lg:space-x-2'>
+                                <h1 className='text-xs sm:text-sm lg:tex-md font-semibold'>
+                                  Customer:
+                                </h1>
                                 <p className='text-xs sm:text-sm lg:text-md font-body text-gray-700'>{data?.order?.customer?.name!}</p>
                             </span>
                             <h1 className='text-xs sm:text-sm lg:tex-md font-semibold'>Shipping Address:</h1>
                             
                             <p className='text-xs sm:text-sm font-body tracking-wide'> 
-                            <span className="w-7/12 sm:w-8/12 text-gray-700  text-xs">
-                              {formatAddress(data?.order?.billing_address!)}
-                            </span>
+                             <span className="w-7/12 sm:w-8/12 text-gray-700  text-xs">
+                               {formatAddress(data?.order?.billing_address!)}
+                             </span>
                             </p>
 
-                            <h1 className='text-xs sm:text-sm lg:tex-md font-semibold'>Delivery/Appointment</h1>
+                            <h1 className='text-xs sm:text-sm lg:tex-md font-semibold'>
+                              Delivery/Appointment
+                            </h1>
 
                             <p className='text-xs sm:text-sm font-body tracking-wide'> 
                             <span className="w-7/12 sm:w-8/12 text-gray-700  text-xs">
-                            {data?.order?.children[0]?.shop?.shop_categories.replace(/[{":,0123456789}]/g,'').slice(5,-3) !== 'Salon & Spa' ? data?.order?.delivery_time : data?.order?.delivery_time}
+                              {data?.order?.children[0]?.shop?.shop_categories?.replace(/[{":,0123456789}]/g,'').slice(5,-3) !== 'Salon & Spa' ? data?.order?.delivery_time : data?.order?.delivery_time}
                             </span>
                             </p>
                             <span className='grid grid-cols-1 lg:flex items-center  w-full lg:space-x-2'>
                                 <h1 className='text-xs sm:text-sm lg:tex-md font-semibold'>Pin Code :</h1>
-                                <p className='text-xs sm:text-sm lg:text-md font-body text-gray-700'>{data?.order?.billing_address?.zip}</p>
+                                <p className='text-xs sm:text-sm lg:text-md font-body text-gray-700'>
+                                  {data?.order?.billing_address?.zip}
+                                </p>
                             </span>
+
                             <div className=' grid grid-cols-1 lg:flex items-center  w-full lg:space-x-2 '> 
-                            <h1 className='text-xs sm:text-sm lg:tex-md  font-semibold'>Phone No :</h1>
-                            <p className='text-xs sm:text-sm lg:tex-md font-body text-gray-700'>{data?.order?.customer_contact!}</p>
-                        </div>
+                              <h1 className='text-xs sm:text-sm lg:tex-md  font-semibold'>Phone No :</h1>
+                              <p className='text-xs sm:text-sm lg:tex-md font-body text-gray-700'>
+                                {data?.order?.customer_contact!}
+                              </p>
+                            </div>
                         </div>
 
                     </div>

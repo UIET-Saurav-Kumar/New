@@ -22,7 +22,7 @@ import {
       sortedBy = "DESC",
     } = params as InvoiceUploadQueryOptionsType;
   
-    const url = `${API_ENDPOINTS.UTILITY_PAYMENT}?limit=${limit}&page=${page}&orderBy=${orderBy}&sortedBy=${sortedBy}`;
+    const url = `${API_ENDPOINTS.USER_INVOICE_UPLOAD}?limit=${limit}&page=${page}&orderBy=${orderBy}&sortedBy=${sortedBy}`;
   
     const {
       data: { data, ...rest },
@@ -41,7 +41,7 @@ import {
     options: any = {}
   ) => {
     return useQuery<{ invoice_upload: InvoiceUploadPaginator }, Error>(
-      [API_ENDPOINTS.UTILITY_PAYMENT, params],
+      [API_ENDPOINTS.INVOICE_UPLOAD, params],
       fetchInvoiceUploadList,
       { ...options, keepPreviousData: true }
     );

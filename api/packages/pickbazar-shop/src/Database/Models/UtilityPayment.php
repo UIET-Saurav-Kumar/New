@@ -10,8 +10,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class UtilityPayment extends Model
 {
-    use SoftDeletes;
-
     protected $table = 'utility_payments';
 
     public $guarded = [];
@@ -25,16 +23,8 @@ class UtilityPayment extends Model
         });
     }
 
-    protected $with = ['customer', 'status'];
+    protected $with = ['customer'];
 
-
-    /**
-     * @return belongsTo
-     */
-    public function status(): belongsTo
-    {
-        return $this->belongsTo(UtilityPaymentStatus::class, 'status');
-    }
 
     /**
      * @return belongsTo
@@ -50,29 +40,5 @@ class UtilityPayment extends Model
     public function customer(): belongsTo
     {
         return $this->belongsTo(User::class, 'customer_id');
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function shop(): BelongsTo
-    {
-        return $this->belongsTo(Shop::class, 'shop_id');
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function children()
-    {
-        return $this->hasMany('PickBazar\Database\Models\UtilityPayment', 'parent_id', 'id');
-    }
-
-    /**
-     * @return HasOne
-     */
-    public function parent_order()
-    {
-        return $this->hasOne('PickBazar\Database\Models\UtilityPayment', 'id', 'parent_id');
     }
 }

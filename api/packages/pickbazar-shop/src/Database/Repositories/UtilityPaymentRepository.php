@@ -88,27 +88,27 @@ class UtilityPaymentRepository extends BaseRepository
 
         $curl = curl_init();
 
-        // $URL='https://ezulix.in/api/recharge.aspx?memberid='.$member_id.'&pin='.$pin.'&number='.$number.'&operator'.$operator.'&circle'.$circle.'&usertx'.$usertx.'&amount'.$amount;
+        $URL='https://ezulix.in/api/recharge.aspx?memberid='.$member_id.'&pin='.$pin.'&number='.$number.'&operator'.$operator.'&circle'.$circle.'&usertx'.$usertx.'&amount'.$amount;
 
-        // curl_setopt_array($curl, array(
-        //     CURLOPT_URL => $URL,
-        //     CURLOPT_RETURNTRANSFER => true,
-        //     CURLOPT_ENCODING => '',
-        //     CURLOPT_MAXREDIRS => 10,
-        //     CURLOPT_TIMEOUT => 0,
-        //     CURLOPT_FOLLOWLOCATION => true,
-        //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        //     CURLOPT_CUSTOMREQUEST => 'POST',
-        //     // CURLOPT_POSTFIELDS =>  json_encode($data),
-        //     CURLOPT_HTTPHEADER => array(
-        //         'Content-Type: text/plain',
-        //         'Content-Length: 500'
-        //     ),
-        // ));
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $URL,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            // CURLOPT_POSTFIELDS =>  json_encode($data),
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: text/plain',
+                'Content-Length: 500'
+            ),
+        ));
 
-        // $response = curl_exec($curl);
+        $response = curl_exec($curl);
 
-        // curl_close($curl);
+        curl_close($curl);
 
         return  $usertx;
 

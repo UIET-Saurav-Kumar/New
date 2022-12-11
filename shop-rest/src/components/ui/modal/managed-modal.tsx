@@ -81,7 +81,7 @@ const ManagedModal = () => {
         <ProductDetailsModalView productSlug={data} />
       )}
 
-      {view === 'RECHARGE_PLAN_DETAILS' && <RechargePlanDetails data={data}/> }
+      {view === 'RECHARGE_PLAN_DETAILS' && <RechargePlanDetails data={data} close={closeModal}/> }
 
        { view === 'BILL_PAYMENT_DETAILS' && <PaymentDetailsModal data={data} />}
        

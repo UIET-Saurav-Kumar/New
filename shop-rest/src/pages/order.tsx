@@ -56,7 +56,7 @@ const CartCounterButton = dynamic(
     );
   }
   return (
-    <div className="py-8 px-4 lg:py-10 lg:px-8 xl:py-14 xl:px-16 2xl:px-20">
+    <div className="mt-20 py-8 px-4 lg:py-10 lg:px-8 xl:py-14 xl:px-16 2xl:px-20">
       <div className="flex flex-col lg:flex-row items-center lg:items-start m-auto lg:space-s-8 w-full max-w-5xl">
         <div className="lg:max-w-2xl w-full space-y-6 order-2 lg:order-1">
           <div className="shadow-700 bg-light p-5 md:p-8">

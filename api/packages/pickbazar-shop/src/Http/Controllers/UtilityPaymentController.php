@@ -41,23 +41,13 @@ class UtilityPaymentController extends CoreController
     public function index(Request $request)
     {
         $limit = $request->limit ?   $request->limit : 10;
-        return $this->fetchOrders($request)->paginate($limit)->withQueryString();
+        return $this->fetchRecords($request)->paginate($limit)->withQueryString();
     }
 
-    public function fetchOrders(Request $request)
+    public function fetchRecords(Request $request)
     {
-        $user = $request->user();
-        if ($user && $user->hasPermissionTo(Permission::SUPER_ADMIN) && (!isset($request->shop_id) || $request->shop_id === 'undefined')) {
-            return $this->repository->with(['children','children.shop','products.shop'])->where('id', '!=', null)->where('parent_id', '=', null); //->paginate($limit);
-        } else if ($this->repository->hasPermission($user, $request->shop_id)) {
-            if ($user && $user->hasPermissionTo(Permission::STORE_OWNER)) {
-                return $this->repository->with('children')->where('shop_id', '=', $request->shop_id)->where('parent_id', '!=', null); //->paginate($limit);
-            } elseif ($user && $user->hasPermissionTo(Permission::STAFF)) {
-                return $this->repository->with('children')->where('shop_id', '=', $request->shop_id)->where('parent_id', '!=', null); //->paginate($limit);
-            }
-        } else {
-            return $this->repository->with('children')->where('customer_id', '=', $user->id)->where('parent_id', '=', null); //->paginate($limit);
-        }
+        $user = $request->user();        
+        return $this->repository->where('customer_id', '=', $user->id); //->paginate($limit);
     }
 
     
@@ -135,94 +125,6 @@ class UtilityPaymentController extends CoreController
         }
     }
 
-    // find by date range
-    public function findByDateRange(Request $request, $start_date, $end_date)
-    {
-
-        $limit = $request->limit ?   $request->limit : 10;
-
-               $start_date =
-            //    Carbon::now()->
-               $request->start_date;
-                                    //  ->toDateTimeString();
-                                     //format
-        
-               $end_date =
-            //    Carbon::now()->
-               $request->end_date;
-                                    //  ->toDateTimeString();
-        
-            // return Order::whereBetween('created_at',['2022-06-01','2022-06-20'])->get();
-            // return Order::whereBetween('created_at',[$start_date,$end_date])->get();
-            //order repository with children.shop product.shop 
-            return $this->repository->with(['children','children.shop','products.shop'])->whereBetween('created_at',[$start_date,$end_date])->where('id', '!=', null)->where('parent_id', '=', null)->get();
-            // sort as from high to low
-            // return $orders->sortByDesc('created_at');
-
-            // return $this->repository->with(['children','children.shop','products.shop'])->whereBetween('created_at',[$start_date,$end_date])->get();
-            //   return Order::whereBetween('created_at',['Wed,Jun 01, 2022 12AM','Mon,Jun 20, 2022 12AM'])->get();
-            //return Order::whereBetween('created_at',['24-06-2022','25-06-2022'])->get();
-               
-    }
-
-    //find by date range and shop name
-    public function findByDateRangeAndShopName(Request $request, $start_date, $end_date, $shop_name)
-    {
-        $start_date =
-            //    Carbon::now()->
-               $request->start_date;
-                                    //  ->toDateTimeString();
-                                     //format
-        
-               $end_date =
-            //    Carbon::now()->
-               $request->end_date;
-                                    //  ->toDateTimeString();
-        
-            // return Order::whereBetween('created_at',['2022-06-01','2022-06-20'])->get();
-            // return Order::whereBetween('created_at',[$start_date,$end_date])->get();
-            //order list without child orders
-            // return $this->repository->with(['products','products.shop'])->whereBetween('created_at',[$start_date,$end_date])->where('shop_id', '=', $shop_name)->get();
-
-        // return order without child orders
-        return $this->repository->with(['products','products.shop'])->whereBetween('created_at',[$start_date,$end_date])->where('shop_id', 'like', '%'.$shop_name.'%')->where('id', '!=', null)->where('parent_id', '=', null)->get();
-
-            // return $this->repository->with(['children','children.shop','products.shop'])->whereBetween('created_at',[$start_date,$end_date])->where('shop_id', '=', $shop_name)->get();
-            //   return Order::whereBetween('created_at',['Wed,Jun 01, 2022 12AM','Mon,Jun 20, 2022 12AM'])->get();
-            //return Order::whereBetween('created_at',['24-06-2022','25-06-2022'])->get();
-               
-    }
-
-    //search by date range and shop name like %shop_name%
-    public function searchByDateRangeAndShopName(Request $request, $start_date, $end_date, $shop_name)
-    {
-        $start_date =
-            //    Carbon::now()->
-               $request->start_date;
-                                    //  ->toDateTimeString();
-                                     //format
-        
-               $end_date =
-            //    Carbon::now()->
-               $request->end_date;
-                                    //  ->toDateTimeString();
-        
-            // return Order::whereBetween('created_at',['2022-06-01','2022-06-20'])->get();
-            // return Order::whereBetween('created_at',[$start_date,$end_date])->get();
-            //order list without child orders
-            // return $this->repository->with(['products','products.shop'])->whereBetween('created_at',[$start_date,$end_date])->where('shop_id', '=', $shop_name)->get();
-
-        // return order without child orders
-        return $this->repository->with(['products','products.shop'])->whereBetween('created_at',[$start_date,$end_date])->where('shop_id', 'like', '%'.$shop_name.'%')->where('id', '!=', null)->where('parent_id', '=', null)->get();
-
-            // return $this->repository->with(['children','children.shop','products.shop'])->whereBetween('created_at',[$start_date,$end_date])->where('shop_id', '=', $shop_name)->get();
-            //   return Order::whereBetween('created_at',['Wed,Jun 01, 2022 12AM','Mon,Jun 20, 2022 12AM'])->get();
-            //return Order::whereBetween('created_at',['24-06-2022','25-06-2022'])->get();
-               
-    }
-    
-
-   
 
     /**
      * Update the specified resource in storage.
@@ -290,89 +192,6 @@ class UtilityPaymentController extends CoreController
     }
 
 
-    public function exportOrder(Request $request, $start_date, $end_date)
-    {
-        $filename = 'Orders'.'.csv';
-
-        $headers = [
-            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
-            'Content-type'        => 'text/csv',
-            'Content-Disposition' => 'attachment; filename=' . $filename,
-            'Expires'             => '0',
-            'Pragma'              => 'public'
-        ];
-        //get start date and end date from findByDateRange function
-
-        $start_date = $request->start_date;
-        $end_date = $request->end_date;
-          // find by date range list
-          // if start date and end date is not empty then find by date range else find by shop name
-        if ($start_date && $end_date) {
-            $list = $this->repository->with(['children','children.shop','status','products','products.shop'])->whereBetween('created_at',[$start_date,$end_date])->where('id', '!=', null)->where('parent_id', '=', null)->get()->toArray();
-        } else {
-            // $list = $this->repository->with(['products','products.shop', 'status', 'children.shop'])->get()->toArray();
-            $list = $this->repository->with(['children','children.shop','status','products','products.shop'])->whereBetween('created_at',['2021-01-01',Carbon::now()->toDateTimeString()])->where('id', '!=', null)->where('parent_id', '=', null)->get()->toArray();
-        }
-
-        
-        if (!count($list)) {
-            return response()->stream(function () {
-            }, 200, $headers);
-        }
-        foreach($list as $key=>$val)
-        {
-            $shopnames = "";
-            $list[$key]['customer_name'] = $val['customer']['name'] ?? '';
-            $list[$key]['customer_email'] = $val['customer']['email'] ?? '';
-            $list[$key]['order_status'] = $val['status']['name'] ?? '';
-            if(!empty($val['children']))
-            {
-                foreach($val['children'] as $shop)
-                {
-                    $shopnames = !empty($shop['shop']) ? $shopnames.$shop['shop']['name'].", " : '';
-                }
-            }
-            
-            $list[$key]['shop_name'] = trim($shopnames);
-            //created_at
-            // $list[$key]['created_at'] = $val['created_at']->format('d-m-Y H:i:s');
-        }
-        # add headers for each column in the CSV download
-        array_unshift($list, array_keys($list[0]));
-
-        $callback = function () use ($list) {
-            $FH = fopen('php://output', 'w');
-            foreach ($list as $key => $row) {
-                if ($key === 0) {
-                    $exclude = ['customer_id','id', 'status', 'deleted_at','updated_at', 'shipping_address', 'billing_address', 'customer', 'products','gateway_response', 'coupon_id', 'parent_id','shop_id','children'];
-                    $row = array_diff($row, $exclude);
-                }
-                
-                unset($row['id']);
-                unset($row['customer_id']);
-                unset($row['status']);
-                unset($row['deleted_at']);
-                unset($row['updated_at']);
-                // unset($row['created_at']);
-
-                unset($row['shipping_address']);
-                unset($row['billing_address']);
-                unset($row['customer']);
-                unset($row['products']);
-                unset($row['gateway_response']);
-                unset($row['coupon_id']);
-                unset($row['parent_id']);
-                unset($row['shop_id']);
-                unset($row['children']);
-                
-                fputcsv($FH, $row);
-            }
-
-            fclose($FH);
-        };
-
-        return response()->stream($callback, 200, $headers);
-    }
 
     /**
      * Remove the specified resource from storage.

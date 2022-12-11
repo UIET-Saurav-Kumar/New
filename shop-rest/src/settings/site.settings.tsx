@@ -142,6 +142,7 @@ export const siteSettings = {
     { href: ROUTES.UPLOAD_INVOICE, label: "Upload Invoice" },
     { href: ROUTES.DELIVERY, label: "Deliveries" },
     {href: ROUTES.CREATE_SHOP,  label: "Business Access"},
+    {href: ROUTES.UTILITY_PAYMENTS,  label: "Utility Payments"},
     { href: ROUTES.LOGOUT, label: "Logout" },
   ],  
 
@@ -207,7 +208,10 @@ export const siteSettings = {
       href: ROUTES.DELIVERY,
       menulabel: "Delivery",
     },
-
+    {
+      href: ROUTES.UTILITY_PAYMENTS,
+      menulabel: "Utility Payments",
+    },
     {
       href: ROUTES.REPORTS,
       label: 'My Reports',

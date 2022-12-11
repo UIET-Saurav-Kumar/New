@@ -26,7 +26,7 @@ interface Props {
 type FormValues = {
    'name': string,
    'date_of_birth': string,
-    // 'is_tobacco_user': string,
+    'is_tobacco_user': 'Yes'| 'No',
     'annual_income': string,
     'education': string,
     'occupation': string,
@@ -58,6 +58,7 @@ export default function TermLifeInsurance({user}: Props) {
     control,
   } = useForm<FormValues>({
     defaultValues: {
+        is_tobacco_user: 'No',
         ...(user &&
             pick(user, [
         'name',
@@ -78,12 +79,12 @@ export default function TermLifeInsurance({user}: Props) {
         storeInsured(
             {
                 name: data.name,
-                dob: data.date_of_birth,
-                // smoke: data.is_tobacco_user,
-                income: data.annual_income,
+                date_of_birth: data.date_of_birth,
+                is_tobacco_user: data.is_tobacco_user,
+                annual_income: data.annual_income,
                 education: data.education,
                 occupation: data.occupation,
-                pincode: data.pin_code,
+                pin_code: data.pin_code,
              },
             {
               onSuccess: (data) => {
@@ -186,11 +187,9 @@ export default function TermLifeInsurance({user}: Props) {
                 Date of Birth
             </Label>
             <Input
-            type='text'
+            type='date'
             variant='outline'
             placeholder='Enter your date of birth'
-
-            onChange = { (e) => dateCorrector(e) }
 
             {...register('date_of_birth', {
                 required: 'Date of birth is required',
@@ -218,25 +217,28 @@ export default function TermLifeInsurance({user}: Props) {
                 Do you smoke or chew tobacco?
             </Label>
 
+            <div className='flex space-x-4 '> 
+            
             <Radio
                 name='is_tobacco_user'
-                id='yes'
+                id='Yes'
                 type='radio'
                 value='yes'
-                label={'Yes'}
+                label='Yes'
             />
             <Radio
                 name='is_tobacco_user'
-                id='no'
+                id='No'
                 type='radio'
-                value='no'
-                label={'No'}
+                value='yes'
+                label='No'
             />
             { errors.is_tobacco_user && (
                 <span className='text-red-500 text-sm'>
                     {errors.is_tobacco_user.message}
                 </span>
             )}
+            </div>
 
         </div>
 
