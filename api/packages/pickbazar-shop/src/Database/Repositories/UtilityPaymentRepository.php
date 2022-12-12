@@ -46,6 +46,7 @@ class UtilityPaymentRepository extends BaseRepository
         'amount',
         'total',
         'coupon_id',
+        "isPayedByCustomer",
         'discount',
         'payment_id',
         'payment_gateway',
@@ -117,20 +118,44 @@ class UtilityPaymentRepository extends BaseRepository
     public function storePayment($request)
     {
         $user = $request->user();
-        $request['usertx']=$this->recharge($request);
+        // $request['usertx']=$this->recharge($request);
 
         $request['tracking_number'] = Str::random(12);
+        $request['usertx'] = $request['tracking_number'];
         $request['customer_id'] = $request->user()->id;
         $request['name'] = $request->user()->name;
         $request['email_id'] = $request->user()->email;
         $request['amount'] = $request->amount;
         $request['total'] = $request->amount;
         $request['status'] = "PENDING";
-        $request['payment_gateway']="ezulix";
+        $request['isPayedByCustomer'] = 0;
+        $request['payment_gateway']="cashfree";
+        
         $paymentInput = $request->only($this->dataArray);
-        $utilityPayment=$this->create($paymentInput);
+        
+        $this->create($paymentInput);
 
-        return $utilityPayment;
+        $od["orderId"] = $paymentInput['tracking_number'];
+        $od["orderId"] = $request['tracking_number'];
+        $od["orderAmount"] = $request['total'];
+        $od["orderNote"] = "Mobile Recharge";
+        $od["customerPhone"] = $request->customer_contact;
+        $od["customerName"] = $user->name;
+        $od["customerEmail"] = $user->email ?? "test@cashfree.com";
+        $od["payment_methods"] = $request['payment_gateway'];
+
+        $od["returnUrl"] =  url("utility-payment/success");
+        $od["notifyUrl"] = url("utility-payment/success");
+
+
+        // $utilityPayment=$this->create($paymentInput);
+        $orderFree = new CashFreeOrder();
+        $orderFree->create($od);
+
+        $link = $orderFree->getLink($od['orderId']);
+        return json_encode($link);
+
+        // return $utilityPayment;
 
 
         

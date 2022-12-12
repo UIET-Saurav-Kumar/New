@@ -6,6 +6,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { useForm } from 'react-hook-form'
 import { string } from 'yup/lib/locale'
 import { useModalAction } from "@components/ui/modal/modal.context";
+import { useUI } from "@contexts/ui.context";
 
 interface FormValues {
     payment_gateway: 'cod' | 'cashfree' | 'upi' | 'wallet'
@@ -21,6 +22,7 @@ interface FormValues {
 export default function RechargePlanDetails(data: { data: { amount: any; number: any; phone: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; operatorName: string | number | boolean | {} | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactNodeArray | React.ReactPortal | null | undefined; circleName: string | number | boolean | {} | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactNodeArray | React.ReactPortal | null | undefined; plan: { plan_name: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; validity: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; description: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; price: {} | null | undefined } }; me: { phone_number: any } },operatorName: any,circleName: any,close:any)  {
 
     // alert(operatorName)
+    const { isAuthorize } = useUI();
     console.log('payment values',data?.data?.plan?.price)
     const {data:me}=useCustomerQuery();
     console.log('payment values',me)
@@ -49,6 +51,10 @@ export default function RechargePlanDetails(data: { data: { amount: any; number:
       });
 
       function onSubmit(values: FormValues){
+        if (!isAuthorize) {
+            return openModal("LOGIN_VIEW");
+        }
+
         console.log('payment values',values)
         let input = {
             "amount": data?.data?.plan?.price,
@@ -59,30 +65,24 @@ export default function RechargePlanDetails(data: { data: { amount: any; number:
             "customer_contact": values.customer_contact,
             
         }
-        console.log('payment values',input)
 
         createRechargePayment(input, {
             onSuccess: (data) => {
+                if(data?.paymentLink)
+                {
+                    window.location.replace(data?.paymentLink)
+                }
+                closeModal()
+            },
+            onError: (error) => {
+                toast.error("unable to process the request please try again");
 
-            //    if(data?.paymentLink)
-            //    {
-            //     window.location.replace(data?.paymentLink)
-            //    }
-            closeModal()
-        },
+                closeModal()
 
-        onError: (error) => {
-            toast.error("unable to process the request please try again");
-            
-            closeModal()
-
-            console.log(error)
-        }
+                console.log(error)
+            }
         })
-
       }
-
-      
 
   return (
 

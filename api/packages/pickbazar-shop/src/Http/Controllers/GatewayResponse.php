@@ -3,6 +3,7 @@
 namespace PickBazar\Http\Controllers;
 
 use Exception;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use PickBazar\Http\Util\SMS;
 use Illuminate\Http\JsonResponse;
@@ -13,6 +14,7 @@ use PickBazar\Database\Models\Delivery;
 use PickBazar\Exceptions\PickbazarException;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use PickBazar\Database\Models\UtilityPayment;
 
 class GatewayResponse extends CoreController
 
@@ -45,6 +47,75 @@ class GatewayResponse extends CoreController
         return redirect()->away($url);
     }
 
+    /**
+     * @param $request
+     * @return LengthAwarePaginator|JsonResponse|Collection|mixed
+     */
+
+     public function recharge($data){
+        
+         
+        $member_id = 'EZ929952';
+        $pin = 'C019FB28E2';
+        $number= $data->customer_contact;
+        $operator=$data->operator;
+        $usertx=$data->usertx;
+        $circle=$data->circle;
+        $amount=$data->amount;
+
+        $curl = curl_init();
+
+        $URL='https://ezulix.in/api/recharge.aspx?memberid='.$member_id.'&pin='.$pin.'&number='.$number.'&operator'.$operator.'&circle'.$circle.'&usertx'.$usertx.'&amount'.$amount;
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $URL,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            // CURLOPT_POSTFIELDS =>  json_encode($data),
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: text/plain',
+                'Content-Length: 500'
+            ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+
+        return  $usertx;
+
+    }
+
+    public function processResponseUtilityPayment(Request $request){
+        $response = request()->all();
+
+        $txStatus = $response['txStatus'] ?? null;
+        $order_id = $response['orderId'] ?? null;
+        
+        if ($txStatus != "SUCCESS") {
+
+            UtilityPayment::where('tracking_number', $order_id)->update(['isPayedByCustomer' => 1]);
+            $utility_payment=UtilityPayment::where('tracking_number', $order_id)->first();
+
+            $this->recharge($utility_payment);
+            $utility_payment=UtilityPayment::where('tracking_number', $order_id)->update(['status' => 'PAID']);
+
+            $url = "https://buylowcal.com/user/utility-payments";
+
+            return redirect()->away($url);
+        }
+
+        return "https://buylowcal.com";        
+    }
+
+
+
+    
     public function process_delivery_response(Request $request)
     {
         $response = request()->all();
@@ -76,4 +147,5 @@ class GatewayResponse extends CoreController
             return redirect()->away($url);
         }
     }
+
 }

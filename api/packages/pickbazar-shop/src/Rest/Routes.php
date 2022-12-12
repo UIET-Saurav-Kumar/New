@@ -244,7 +244,8 @@ Route::get('get-user-wallet-details/{id}','PickBazar\Http\Controllers\InviteCont
 Route::get('referral-network','PickBazar\Http\Controllers\InviteController@refferral_network');
 
 Route::any('order/success','PickBazar\Http\Controllers\GatewayResponse@process_response');
-Route::any('utility-payment/success','PickBazar\Http\Controllers\GatewayResponse@process_response');
+Route::any('utility-payment/success','PickBazar\Http\Controllers\GatewayResponse@processResponseUtilityPayment');
+Route::any('utility-payment/failed','PickBazar\Http\Controllers\GatewayResponse@processResponseUtilityPaymentFailed');
 
 
 

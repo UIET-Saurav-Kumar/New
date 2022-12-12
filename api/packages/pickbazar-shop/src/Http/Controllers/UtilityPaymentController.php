@@ -47,7 +47,7 @@ class UtilityPaymentController extends CoreController
     public function fetchRecords(Request $request)
     {
         $user = $request->user();        
-        return $this->repository->where('customer_id', '=', $user->id); //->paginate($limit);
+        return $this->repository->where('isPayedByCustomer', '=', 1)->where('customer_id', '=', $user->id); //->paginate($limit);
     }
 
     
@@ -75,6 +75,7 @@ class UtilityPaymentController extends CoreController
         //     $table->unsignedBigInteger('coupon_id')->nullable();
         //     $table->double('discount')->nullable();
         //     $table->string('payment_id')->nullable();
+        //     $table->integer('isPayedByCustomer')->default(1);
         //     $table->string('payment_gateway')->nullable();
         //     $table->foreign('customer_id')->references('id')->on('users');
         //     $table->timestamps();
