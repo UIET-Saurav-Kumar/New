@@ -52,8 +52,11 @@ class GatewayResponse extends CoreController
      * @return LengthAwarePaginator|JsonResponse|Collection|mixed
      */
 
+
+
+     
+
      public function recharge($data){
-        
          
         $member_id = 'EZ929952';
         $pin = 'C019FB28E2';
@@ -91,7 +94,39 @@ class GatewayResponse extends CoreController
 
     }
 
+    public function rechargeStatus(Request $request) {
+
+        $member_id = 'EZ929952';
+        $pin = 'C019FB28E2';
+        
+        //e.g id
+        // $trans_id = 'BDHD93NIDB390SB0';
+        $trans_id = $request->trans_id;
+      
+        $curl = curl_init();
+      
+        $url = 'https://ezulix.in/api/rechargestatus.aspx?memberid='.$member_id.'&pin='.$pin.'&transid='.$trans_id;
+      
+        curl_setopt_array($curl, [
+          CURLOPT_URL => $url,
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => '',
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 0,
+          CURLOPT_FOLLOWLOCATION => true,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => 'GET',
+        ]);
+      
+        $response = curl_exec($curl);
+      
+        curl_close($curl);
+      
+        return $response;
+      }
+
     public function processResponseUtilityPayment(Request $request){
+
         $response = request()->all();
 
         $txStatus = $response['txStatus'] ?? null;
@@ -108,16 +143,17 @@ class GatewayResponse extends CoreController
             $url = "https://buylowcal.com/user/utility-payments";
 
             return redirect()->away($url);
+
         }
 
         return "https://buylowcal.com";        
+
     }
-
-
-
+    
     
     public function process_delivery_response(Request $request)
     {
+
         $response = request()->all();
 
         $order_id = $response['orderId'] ?? null;
@@ -131,15 +167,17 @@ class GatewayResponse extends CoreController
         
 
         $id = Delivery::where('tracking_number', $order_id)->first()->id;
+
         if ($txStatus != "SUCCESS") {
             $delivery = Delivery::where('id', $id)->update(['is_approved' => 1]);
             $user = User::find($delivery->user_id);
             $delivery->is_approved = 1;
             $delivery->save();
             // $url = \Config::get('app.shop_url')."/orders/".$order_id;
-            try{
+            try {
                 SMS::customerPurchase($delivery->sender_phone_number, $user->name);
-            }catch(Exception $e){
+            } catch(Exception $e) {
+
             }
 
             $url = "https://buylowcal.com/user/delivery";

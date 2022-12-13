@@ -14,18 +14,16 @@ interface FormValues {
     amount: string,
     operator: string,
     circle: string,
-   
 }
-
     
 
 export default function RechargePlanDetails(data: { data: { amount: any; number: any; phone: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; operatorName: string | number | boolean | {} | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactNodeArray | React.ReactPortal | null | undefined; circleName: string | number | boolean | {} | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactNodeArray | React.ReactPortal | null | undefined; plan: { plan_name: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; validity: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; description: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; price: {} | null | undefined } }; me: { phone_number: any } },operatorName: any,circleName: any,close:any)  {
 
     // alert(operatorName)
     const { isAuthorize } = useUI();
-    console.log('payment values',data?.data?.plan?.price)
+    console.log('payment values',data?.data?.plan?.price);
     const {data:me}=useCustomerQuery();
-    console.log('payment values',me)
+    console.log('payment values',me);
     const { mutate: createRechargePayment, isLoading: loading } = useCreateRechargePaymentMutation();
     const { closeModal, openModal } = useModalAction();
 
@@ -45,17 +43,17 @@ export default function RechargePlanDetails(data: { data: { amount: any; number:
           amount:'',
           operator:'',
           circle:'',
-           
-          
         },
       });
 
       function onSubmit(values: FormValues){
+        
         if (!isAuthorize) {
             return openModal("LOGIN_VIEW");
         }
 
         console.log('payment values',values)
+
         let input = {
             "amount": data?.data?.plan?.price,
             "operator": data?.data?.operatorName,
