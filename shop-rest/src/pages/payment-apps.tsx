@@ -3,15 +3,22 @@ import React from 'react'
 export default function PaymentApps() {
 
     function handleClick() {
-        if (navigator.userAgent.match(/android/i) && navigator.userAgent.match(/google pay/i)) {
-            // If the Google Pay app is installed, redirect to the app using a deep link URL
-            window.location = "com.google.android.apps.nbu.paisa.user";
-          } else {
-            // If the app is not installed, redirect to the Google Play Store to download it
-            window.location = "https://play.google.com/store/apps/details?id=com.google.android.apps.walletnfcrel";
-          }
+        var androidDeepLink = "com.google.android.apps.nbu.paisa.user://";
 
+        // Create a deep link to the Google Pay app on iOS
+        var iosDeepLink = "googlepay://";
+        
+        // Check if the user is on an Android device
+        if (navigator.userAgent.match(/Android/i)) {
+          // If the user is on an Android device, redirect them to the Android deep link
+          window.location = androidDeepLink;
+        } else {
+          // If the user is not on an Android device, redirect them to the iOS deep link
+          window.location = iosDeepLink;
+        }
     }
+        
+    
 
   return (
 
