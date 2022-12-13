@@ -3,10 +3,10 @@ import React from 'react'
 export default function PaymentApps() {
 
     function handleClick() {
-        var androidDeepLink = "com.google.android.apps.nbu.paisa.user://";
+        var androidDeepLink = "https://play.google.com/store/apps/details?id=com.google.android.apps.nbu.paisa.user&hl=en_IN";
 
         // Create a deep link to the Google Pay app on iOS
-        var iosDeepLink = "googlepay://";
+        var iosDeepLink = "https://apps.apple.com/in/app/google-pay/id1156295409";
         
         // Check if the user is on an Android device
         if (navigator.userAgent.match(/Android/i)) {
