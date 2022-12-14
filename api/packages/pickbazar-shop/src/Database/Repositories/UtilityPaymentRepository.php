@@ -89,7 +89,7 @@ class UtilityPaymentRepository extends BaseRepository
 
         $curl = curl_init();
 
-        $URL='https://ezulix.in/api/recharge.aspx?memberid='.$member_id.'&pin='.$pin.'&number='.$number.'&operator'.$operator.'&circle'.$circle.'&usertx'.$usertx.'&amount'.$amount;
+        $URL='https://ezulix.in/api/recharge.aspx?memberid='.$member_id.'&pin='.$pin.'&number='.$number.'&operator='.$operator.'&circle='.$circle.'&usertx='.$usertx.'&amount='.$amount;
 
         curl_setopt_array($curl, array(
             CURLOPT_URL => $URL,
@@ -120,7 +120,7 @@ class UtilityPaymentRepository extends BaseRepository
         $user = $request->user();
         // $request['usertx']=$this->recharge($request);
 
-        $request['tracking_number'] = Str::random(12);
+        $request['tracking_number'] = Str::random(35);
         $request['usertx'] = $request['tracking_number'];
         $request['customer_id'] = $request->user()->id;
         $request['name'] = $request->user()->name;
