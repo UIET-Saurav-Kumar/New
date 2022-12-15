@@ -244,35 +244,60 @@ export default function SalonPage() {
               setBtn2(true);
           }
 
-          const { data: shopData } = useShopsQuery({
-            category:'Salon+-+Spa',
-            limit:3000000,
-            location:((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any,
-            is_active:1,
-            // page:1,
-            search:getSearch()
-          });
+       
 
           function getCategory():string {
               return 'Salon & Spa' as string; 
           }
 
-          function getSearch():string{
+          function getSearch():string
+          {
     
             const { query } = useRouter();
             
-            if(query.text){
-              return query.text as string
+            if(salonName){
+              return salonName as string
             }
             return "";
+
           }
+
+          const [salonName, setSalonName] = useState(null)
 
           // console.log('shop-data', shopData);
 
           // // console.log('salon category products',salonProducts?.products.data.filter(product => product?.categories.map( cat => cat.name === 'Services')   )  )
             
           // // console.log('salonProduct',salonProducts?.products.data.filter(product => product?.status === 'publish' && product?.categories?.name === 'Hair Spa'  )  )
+     function showSalons(data:any){
+      console.log('salon',data)
+      setSalonName(data.name)
+     }
 
+
+
+     
+
+
+     const { data:shops,
+      isLoading,
+      isError,
+      isFetched,
+      isFetchingNextPage,
+      fetchNextPage,
+      hasNextPage,
+  
+     } = useShopsQuery({
+      // category:getCategory(),
+      limit:3000000,
+      location:((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any,
+      is_active:1,
+      // page:1,
+      search:getSearch() 
+    });
+
+
+    console.log('shops',salonName,shops)
 
   return (
 
@@ -321,13 +346,42 @@ export default function SalonPage() {
                       ) : ( */}
                 
                     {
-                      data?.offers.data.filter(product => product.status === 'publish' && product.is_featured === 1 && product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','') ==='Salon  Spa' ).map(offer => (
-                      
-                        <motion.div key={offer.id}>
-                          <Helium product={offer}/>
-                        </motion.div>
+                      data?.offers.data.filter(product => product.status === 'publish' && product.is_featured === 1 && product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','') ==='Salon  Spa' ).map((offer,product) => (
+                          
+                        // <motion.div key={offer.id}>
+
+                        //   <Helium product={offer}/>
+                        // </motion.div>
+                        // <div onClick={ ()=>showSalons(offer)} className='h-10  p-3 text-black'>
+                        //   {offer?.name}
+                        //   </div>
+
+                      <div className="w-full max-w-sm mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+                        <img src={offer.image.thumbnail} className='w-full '/>
+                        <div className="px-6 py-4">
+                          <div className="font-bold text-xl mb-2">
+                            {offer.name}
+                          </div>
+                          {/* <p className="text-gray-700 text-base">
+                            Product Description
+                          </p> */}
+                        </div>
+                        <div className="px-6 py-4">
+                          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+                          {offer.price}
+                          </span>
+                          <button
+                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+                            onClick={ ()=>showSalons(offer)}
+                          >
+                            Select
+                          </button>
+                        </div>
+                      </div>
+
                         ))
                     }
+
                
                       {/* )} */}
             </div>
@@ -338,7 +392,8 @@ export default function SalonPage() {
             <h4 className='text-xl flex items-center justify-between lg:text-3xl font-serif text-gray-900 font-medium ml-2 lg:ml-4 py-4 tracking-normal'>
               Top Salons Near You <Link href='/shops?category=Salon+-+Spa'><span className='text-blue-800 cursor-pointer hover-underline text-sm '>view all</span></Link>
             </h4>
-            <PromotionSlider/>
+
+            <PromotionSlider offer={salonName}/>
             
         </div>
 
@@ -356,6 +411,7 @@ export default function SalonPage() {
 
             </div>  
 
+
         <h3 className='font-medium text-2xl lg:text-3xl font-serif text-gray-900 ml-2 lg:ml-8 py-4 lg:mt-10 tracking-normal'>Men</h3>
 
             <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7  placeitems-center items-center scrollbar-hide w-full px-2 lg:px-8 overflow-x-scroll gap-3'>
@@ -367,7 +423,6 @@ export default function SalonPage() {
                 ))}
             </div> 
 
-          
 
 
         {/* <h3 className='font-medium text-2xl lg:text-3xl text-gray-900 font-serif  ml-4 lg:ml-8  mt-3 tracking-normal'>Offer of the day</h3>

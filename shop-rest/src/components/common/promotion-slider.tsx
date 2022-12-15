@@ -7,7 +7,7 @@ import "swiper/swiper-bundle.css";
 import { fetchShops, useShopsQuery } from "@data/shop/use-search-shop-query";
 import { useLocation } from "@contexts/location/location.context";
 import { useRouter } from "next/router";
-import { Fragment, useRef } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { ROUTES } from "@utils/routes";
 import Link from 'next/link';
 
@@ -109,11 +109,20 @@ const offerSliderBreakpoints = {
 
 SwiperCore.use([Navigation]);
 
-export default function PromotionSlider() {
+export default function PromotionSlider(data:any) {
+
+  console.log('shops',data)
+
+  const [loading,setLoading] = useState(false);
+
+  useEffect(() => {
+         setLoading(true)
+  }, [data.offer])
+  
 
   const router = useRouter();
   const { t } = useTranslation();
-  const {getLocation} = useLocation()
+  const {getLocation} = useLocation();
 
 
   const { data: shopData } = useShopsQuery({
@@ -129,8 +138,8 @@ export default function PromotionSlider() {
     
     const { query } = useRouter();
     
-    if(query.text){
-      return query.text as string
+    if(data.offer){
+      return data.offer as string
     }
     return "";
   }
@@ -159,7 +168,7 @@ export default function PromotionSlider() {
               <Link href={`${ROUTES.SHOPS}/${shop.slug}`}>
                 <div className="flex flex-col items-center ">
               <img
-              className="w-20 object-contain rounded h-20 lg:h-36 border-3 border-gold lg:w-36 "
+              className="w-10 object-contain rounded h-10 lg:h-36 border-3 border-gold lg:w-36 "
               src={shop?.logo?.thumbnail}
               // alt={t(d.title)}
               
