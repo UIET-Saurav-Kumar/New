@@ -2,6 +2,7 @@
 
 namespace PickBazar\Http\Util;
 
+use Exception;
 use GuzzleHttp\Client;
 use PickBazar\Database\Models\Order;
 use PickBazar\Database\Models\SMSLog;
@@ -150,24 +151,27 @@ class SMS
         //     $table->foreign('customer_id')->references('id')->on('users');
         //     $table->timestamps();
         // });
-        $order=Order::where('tracking_number',$order_tracking_number)->first();
-        $categories=[];
-        foreach($order->products as $product){
-            foreach($product->categories as $category){
-                $categories[]=$category->name;
+        try{
+            $order=Order::where('tracking_number',$order_tracking_number)->first();
+            $categories=[];
+            foreach($order->products as $product){
+                foreach($product->categories as $category){
+                    $categories[]=$category->name;
+                }
             }
+    
+            SMSLog::create([
+                'phone_number'=>$phone_number,
+                'order_tracking_number'=>$order_tracking_number,
+                'order_id'=>$order->id,
+                'status'=>$status,
+                'username'=>$username,
+                'categories'=>json_encode($categories),
+                'customer_id'=>$order->customer_id,
+            ]);
+        }catch(Exception $e){
+            
         }
-
-        SMSLog::create([
-            'phone_number'=>$phone_number,
-            'order_tracking_number'=>$order_tracking_number,
-            'order_id'=>$order->id,
-            'status'=>$status,
-            'username'=>$username,
-            'categories'=>json_encode($categories),
-            'customer_id'=>$order->customer_id,
-        ]);
-        return;
         if(!$phone_number){
             return;
         }
