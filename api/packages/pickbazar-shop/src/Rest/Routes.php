@@ -1,42 +1,43 @@
 <?php
 
-use PickBazar\Enums\Permission;
 use Illuminate\Http\Response;
+use PickBazar\Enums\Permission;
 use Illuminate\Support\Facades\Route;
 use PickBazar\Http\Controllers\TagController;
 use PickBazar\Http\Controllers\TaxController;
 use PickBazar\Http\Controllers\BillController;
-use PickBazar\Http\Controllers\ContactController;
 use PickBazar\Http\Controllers\ShopController;
 use PickBazar\Http\Controllers\TypeController;
 use PickBazar\Http\Controllers\UserController;
 use PickBazar\Http\Controllers\OfferController;
 use PickBazar\Http\Controllers\OrderController;
 use PickBazar\Http\Controllers\CouponController;
+use PickBazar\Http\Controllers\ReviewController;
+use PickBazar\Http\Controllers\SMSLogController;
 use PickBazar\Http\Controllers\AddressController;
+use PickBazar\Http\Controllers\ContactController;
 use PickBazar\Http\Controllers\ProductController;
 use PickBazar\Http\Controllers\CategoryController;
 use PickBazar\Http\Controllers\DeliveryController;
+use PickBazar\Http\Controllers\FeedbackController;
+use PickBazar\Http\Controllers\QuestionController;
 use PickBazar\Http\Controllers\SettingsController;
 use PickBazar\Http\Controllers\ShippingController;
+use PickBazar\Http\Controllers\WishlistController;
 use PickBazar\Http\Controllers\WithdrawController;
 use PickBazar\Http\Controllers\AttributeController;
+
 use PickBazar\Http\Controllers\AttachmentController;
+// use PickBazar\Http\Controllers\RefundController;
+use PickBazar\Http\Controllers\BillDetailsController;
+use PickBazar\Http\Controllers\BillPaymentController;
 use PickBazar\Http\Controllers\OrderStatusController;
 use PickBazar\Http\Controllers\ShopCategoryController;
+use PickBazar\Http\Controllers\AbusiveReportController;
 use PickBazar\Http\Controllers\MasterProductController;
 use PickBazar\Http\Controllers\AttributeValueController;
-
-use PickBazar\Http\Controllers\QuestionController;
-// use PickBazar\Http\Controllers\RefundController;
-use PickBazar\Http\Controllers\ReviewController;
-use PickBazar\Http\Controllers\WishlistController;
-use PickBazar\Http\Controllers\AbusiveReportController;
-use PickBazar\Http\Controllers\FeedbackController;
-use PickBazar\Http\Controllers\BillPaymentController;
-use PickBazar\Http\Controllers\BillDetailsController;
-use PickBazar\Http\Controllers\TermLifeInsuranceController;
 use PickBazar\Http\Controllers\UtilityPaymentController;
+use PickBazar\Http\Controllers\TermLifeInsuranceController;
 
  
 //route for findByDateRange in order controller
@@ -325,6 +326,9 @@ Route::get('/delivery/payment','PickBazar\Http\Controllers\DeliveryController@re
 Route::group(['middleware' => ['can:' . Permission::CUSTOMER, 'auth:sanctum']], function () {
     Route::post('/logout', 'PickBazar\Http\Controllers\UserController@logout');
     Route::apiResource('orders', OrderController::class, [
+        'only' => ['index', 'show', 'store']
+    ]);
+    Route::apiResource('sms-log', SMSLogController::class, [
         'only' => ['index', 'show', 'store']
     ]);
     Route::apiResource('utility-payment', UtilityPaymentController::class, [

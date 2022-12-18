@@ -205,6 +205,11 @@ export const siteSettings = {
         icon: "SettingsIcon",
       },
       {
+        href: ROUTES.SMS_LOG,
+        label: "SMS Logs",
+        icon: "Logs",
+      },
+      {
         href: ROUTES.LOGS,
         label: "Business Intelligence",
         icon: "Logs",

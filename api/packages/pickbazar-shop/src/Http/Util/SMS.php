@@ -3,6 +3,10 @@
 namespace PickBazar\Http\Util;
 
 use GuzzleHttp\Client;
+use PickBazar\Database\Models\Order;
+use PickBazar\Database\Models\SMSLog;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
 
 class SMS
 {
@@ -132,21 +136,56 @@ class SMS
 
     public static function orderStatusChanged($phone_number,$username,$order_tracking_number,$status)
     {
+        // Schema::dropIfExists('s_m_s_logs');
+
+        // Schema::create('s_m_s_logs', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('phone_number');
+        //     $table->string('order_tracking_number');
+        //     $table->unsignedBigInteger('customer_id');
+        //     $table->unsignedBigInteger('order_id')->nullable();
+        //     $table->string('status')->nullable();
+        //     $table->string('username');
+        //     $table->text('categories');
+        //     $table->foreign('customer_id')->references('id')->on('users');
+        //     $table->timestamps();
+        // });
+        $order=Order::where('tracking_number',$order_tracking_number)->first();
+        $categories=[];
+        foreach($order->products as $product){
+            foreach($product->categories as $category){
+                $categories[]=$category->name;
+            }
+        }
+
+        SMSLog::create([
+            'phone_number'=>$phone_number,
+            'order_tracking_number'=>$order_tracking_number,
+            'order_id'=>$order->id,
+            'status'=>$status,
+            'username'=>$username,
+            'categories'=>json_encode($categories),
+            'customer_id'=>$order->customer_id,
+        ]);
+        return;
         if(!$phone_number){
             return;
         }
-
+        
+        
         $phone_number=SMS::formate_number($phone_number);
         $key=SMS::$key;
         $client = new Client();
-
+        
         $template="OrderstatusLowcal";
         $url = "https://2factor.in/API/R1/?module=TRANS_SMS&apikey=$key&to=$phone_number&from=LOWCAL&templatename=$template&var1=$username&var2=$order_tracking_number&var3=$status";
-
+        
         $response = $client->request('GET', "$url");
-
+        
         if ($response->getStatusCode() == 200) {
+            
             return "Success";
+
         }else{
             //dd('not sent');
         }
