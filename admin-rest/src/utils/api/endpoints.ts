@@ -14,6 +14,7 @@ export const API_ENDPOINTS = {
   POPULAR_PRODUCTS: "popular-products",
   COUPONS: "coupons",
   UTILITY_PAYMENT:"utility-payment",
+  SMS_LOG:"sms-log",
   CUSTOMERS: "customers",
   TAXES: "taxes",
   SHIPPINGS: "shipping",

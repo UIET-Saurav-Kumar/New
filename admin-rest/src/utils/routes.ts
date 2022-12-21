@@ -15,6 +15,8 @@ export const ROUTES = {
   TAXES: "/taxes",
   SHIPPINGS: "/shippings",
   UTILITY_PAYMENTS: "/utility-payment",
+  SMS_LOG: "/sms-log",
+
 
   SETTINGS: "/settings",
   STORE_SETTINGS: "/vendor/settings",
