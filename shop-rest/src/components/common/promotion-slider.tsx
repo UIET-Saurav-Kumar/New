@@ -10,8 +10,7 @@ import { useRouter } from "next/router";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { ROUTES } from "@utils/routes";
 import Link from 'next/link';
-
-
+ 
 const data = [
 
   {
@@ -109,15 +108,24 @@ const offerSliderBreakpoints = {
 
 SwiperCore.use([Navigation]);
 
-export default function PromotionSlider(data:any) {
+export default function PromotionSlider(props:any) {
 
-  console.log('shops',data)
+  console.log('shops',props)
+  
 
   const [loading,setLoading] = useState(false);
 
+  const [shopName, setShopName] = useState(null);
+
+  function handleSelect(data:any) {
+    console.log('prop',data)
+    setShopName(data.name)
+    props.selectedShop(data)
+  }
+
   useEffect(() => {
          setLoading(true)
-  }, [data.offer])
+  }, [props.offer])
   
 
   const router = useRouter();
@@ -133,13 +141,34 @@ export default function PromotionSlider(data:any) {
     // page:1,
     search:getSearch()
   });
+
+  // const downloadAllImages = (images) => {
+    const downloadLogos = async () => {
+      const shop = shopData?.pages[0]?.data
+      for (const { name, logo } of shop) {
+      const response = await fetch(logo.original);
+      const blob = await response.blob();
+      const objectURL = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = objectURL;
+      a.download = `${name}-logo.png`;
+      document.body.appendChild(a);
+      const event = new MouseEvent('click');
+      a.dispatchEvent(event);
+      document.body.removeChild(a);
+      URL.revokeObjectURL(objectURL);
+    }
+    }
+  // };
   
+
+ 
   function getSearch():string{
     
     const { query } = useRouter();
     
-    if(data.offer){
-      return data.offer as string
+    if(props?.offer?.name){
+      return props?.offer?.name as string
     }
     return "";
   }
@@ -149,7 +178,13 @@ export default function PromotionSlider(data:any) {
   return (
 
     <div className=" px-2 md:px-5 xl:px-4">
+
+    <button onClick={downloadLogos}>
+      Download All
+    </button>
+
       <div className="relative">
+
         <Swiper
           id="offer"
           // loop={true}
@@ -162,25 +197,23 @@ export default function PromotionSlider(data:any) {
           {shopData?.pages?.map((page, idx) => {
                       return (
                         <Fragment key={idx}>
-                          {page.data.filter((shop) => shop.is_active === 1).map((shop: any) => (
+                          {page.data.filter((shop) => shop.is_active === 1 && shop.name != 'Villa Hair Sense Panchkula' && shop.name != 'Villa Hair Sense').map((shop: any) => (
             <SwiperSlide key={idx}>
-                
-              <Link href={`${ROUTES.SHOPS}/${shop.slug}`}>
-                <div className="flex flex-col items-center ">
-              <img
-              className="w-10 object-contain rounded h-10 lg:h-36 border-3 border-gold lg:w-36 "
-              src={shop?.logo?.thumbnail}
-              // alt={t(d.title)}
-              
-              />
-              <p className = "text-xs  mt-2 text-center font-semibold">
-                {shop?.settings?.location?.sector}
-              </p>
-              <p className = "text-xs text-center font-light">
-                {shop?.settings?.location?.city}
-              </p>
-              </div>
-              </Link>
+              {/* <Link href={`${ROUTES.SHOPS}/${shop.slug}`}> */}
+                <div onClick={()=>handleSelect(shop)} className="flex shadow-sm  flex-col items-center ">
+                  <img
+                   className="w-10 object-contain rounded h-10 lg:h-36    lg:w-36 "
+                   src={shop?.logo?.thumbnail}
+                   alt={t(shop.name)}
+                  />
+                  <p className = "text-xs  mt-2 text-center font-semibold">
+                    {shop?.settings?.location?.sector}
+                  </p>
+                  <p className = "text-xs text-center font-light">
+                    {shop?.settings?.location?.city}
+                  </p>
+                </div>
+              {/* </Link> */}
             </SwiperSlide>
              ))}
              </Fragment>

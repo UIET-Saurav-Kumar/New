@@ -18,10 +18,7 @@ interface Props {
     | "oganesson"
     | "single"
     | "details";
-
-      
-
-          
+    
 
   counterClass?: string;
   variation?: any;

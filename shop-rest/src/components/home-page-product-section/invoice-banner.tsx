@@ -48,7 +48,7 @@ export default function InvoiceBanner() {
          
                                        /> */}
                                        <img src='/invoice.jpg' className=' md:h-auto object-contain cursor-pointer pt-0 
-        //                                lg:w-full -sm-pt-60 lg:object-contain lg:mt-8 xl:object-cover' />
+                                       lg:w-full -sm-pt-60 lg:object-contain lg:mt-8 xl:object-cover' />
    </div> 
        
     )

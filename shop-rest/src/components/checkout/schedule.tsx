@@ -9,7 +9,7 @@ interface Props {
   count: number;
 }
 
-const Schedule = ({ count }: Props) => {
+const Schedule = ({ count, heading }: Props) => {
   const { updateDeliveryTime } = useCheckout();
   const { items } = useCart();
 
@@ -47,7 +47,7 @@ const Schedule = ({ count }: Props) => {
   return (
     <SectionWithCardGroup
       count={count}
-      heading="Delivery or Appointment Schedule"
+      heading={heading ? heading : "Delivery or Appointment Schedule"}
       items={siteSettings.deliverySchedule}
       onSelect={handleSelect}
       delivery_status={isDeliveryAvailable()}

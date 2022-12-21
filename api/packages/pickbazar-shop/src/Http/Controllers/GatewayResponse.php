@@ -18,6 +18,7 @@ use PickBazar\Database\Models\UtilityPayment;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 
+
 class GatewayResponse extends CoreController
 
 {
@@ -55,10 +56,7 @@ class GatewayResponse extends CoreController
      */
 
 
-
-     
-
-     public function recharge($data){
+    public function recharge($data) {
          
         $member_id = 'EZ929952';
         $pin = 'C019FB28E2';
@@ -69,14 +67,15 @@ class GatewayResponse extends CoreController
         $amount=$data->amount;
 
 
-        $URL='https://ezulix.in/api/recharge.aspx?memberid='.$member_id.'&pin='.$pin.'&number='.$number.'&operator='.$operator.'&circle='.$circle.'&usertx='.$usertx.'&amount='.$amount;
+        $URL = 'https://ezulix.in/api/recharge.aspx?memberid='.$member_id.'&pin='.$pin.'&number='.$number.'&operator='.$operator.'&circle='.$circle.'&usertx='.$usertx.'&amount='.$amount;
         $http = new \GuzzleHttp\Client;
         $response = $http->post($URL, []);
-        $code=$response->getStatusCode();
-        $result=$response->getBody();
+        $code = $response->getStatusCode();
+        $result = $response->getBody();
         return  $code;
 
     }
+
 
     public function rechargeStatus(Request $request) {
 
@@ -84,7 +83,8 @@ class GatewayResponse extends CoreController
         $pin = 'C019FB28E2';
         
         //e.g id
-        // $trans_id = 'BDHD93NIDB390SB0';
+        //$trans_id = 'BDHD93NIDB390SB0';
+
         $trans_id = $request->trans_id;
       
         $curl = curl_init();
@@ -121,6 +121,7 @@ class GatewayResponse extends CoreController
             UtilityPayment::where('tracking_number', $order_id)->update(['isPayedByCustomer' => 1]);
             $utility_payment=UtilityPayment::where('tracking_number', $order_id)->first();
             $code=$this->recharge($utility_payment);
+
             if($code==200){
                 $utility_payment=UtilityPayment::where('tracking_number', $order_id)->update(['status' => 'APPROVED']);
             }
@@ -130,6 +131,7 @@ class GatewayResponse extends CoreController
             return redirect()->away($url);
 
         }
+
         return redirect()->away("https://buylowcal.com");        
 
     }

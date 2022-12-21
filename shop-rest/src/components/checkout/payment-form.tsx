@@ -60,7 +60,7 @@ const PaymentForm = () => {
   const { mutate: createOrder, isLoading: loading } = useCreateOrderMutation();
   const { data: orderStatusData } = useOrderStatusesQuery();
   const { data } = useCustomerQuery();
-  const {getLocation} =useLocation()
+  const {getLocation} =useLocation();
 
   const {
     register,
@@ -74,7 +74,6 @@ const PaymentForm = () => {
     defaultValues: {
       payment_gateway: "cashfree",
       contact: data?.me?.phone_number,
-      
     },
   });
   
@@ -134,6 +133,7 @@ const PaymentForm = () => {
 
   
   function onSubmit(values: FormValues) {
+    
     let input = {
       //@ts-ignore
       location:getLocation?.formattedAddress,
@@ -157,6 +157,8 @@ const PaymentForm = () => {
         ...(shipping_address?.address && shipping_address.address),
       },
     };
+
+    console.log('values',input,available_items?.map((item) => formatOrderedProduct(item)))
     
     // if (values.payment_gateway !== "cod") {
     //   // @ts-ignore

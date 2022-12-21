@@ -171,7 +171,6 @@ useIntersectionObserver({
     //   id: 1,
     //   name: "Name",
     //   status: 'name',
-
     // },
     // {
     //   id: 2,
