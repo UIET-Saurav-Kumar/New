@@ -11,7 +11,7 @@ import { Fragment, useRef } from "react";
 import { useTranslation } from "next-i18next";
 import useIntersectionObserver from "./useIntersectionObserver";
 import RelatedProducts from "./product-details/related-products";
-
+import { useCallback } from "react";
 import Link from 'next/link';
 import ProductNotFoundInfo from "./product-not-found-info";
 import OfferCard from "./product-card/offer-card";
@@ -86,9 +86,9 @@ const Feed = ({ shopId, shopData }: { shopId: string }) => {
           <ProductFeedLoader limit={3} />
         ) : (
           <>
-            {data?.pages.map((products, _idx) => (
+            {data?.pages?.map((products, _idx) => (
               <Fragment key={_idx}>
-                {products.data.filter(product => product?.status === 'publish').map(product => (
+                {products?.data?.filter(product => product?.status === 'publish').map(product => (
                  product?.is_brand_offer !== 1 ? 
                  <motion.div key={product.id}>
                     {renderProductCard(product)}
