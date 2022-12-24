@@ -22,6 +22,7 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Carbon\Carbon;
 
 
+
 class OrderController extends CoreController
 {
     public $repository;
@@ -37,6 +38,7 @@ class OrderController extends CoreController
      * @param Request $request
      * @return Collection|Order[]
      */
+    
     public function index(Request $request)
     {
         $limit = $request->limit ?   $request->limit : 10;

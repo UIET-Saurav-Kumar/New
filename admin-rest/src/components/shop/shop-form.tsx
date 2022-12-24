@@ -507,7 +507,7 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
                       /> */}
                       <Input
                         className="sm:col-span-2"
-                        label={t("form:input-label-url")}
+                        label={t("Url")}
                         variant="outline"
                         {...register(`settings.socials.${index}.url` as const)}
                         defaultValue={item.url!} // make sure to set up defaultValue
@@ -1152,7 +1152,7 @@ export default ShopForm;
 //                       /> */}
 //                       <Input
 //                         className="sm:col-span-2"
-//                         label={t("form:input-label-url")}
+//                         label={t("Url")}
 //                         variant="outline"
 //                         {...register(`settings.socials.${index}.url` as const)}
 //                         defaultValue={item.url!} // make sure to set up defaultValue

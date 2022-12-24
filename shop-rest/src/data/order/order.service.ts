@@ -20,6 +20,5 @@ class Order extends CoreApi {
       .then((res) => res.data);
       
   }
-  
 }
 export const OrderService = new Order(API_ENDPOINTS.ORDER);

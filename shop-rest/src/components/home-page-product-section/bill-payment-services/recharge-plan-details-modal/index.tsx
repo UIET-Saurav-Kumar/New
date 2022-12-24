@@ -65,6 +65,7 @@ export default function RechargePlanDetails(data: { data: { amount: any; number:
         }
 
         createRechargePayment(input, {
+            
             onSuccess: (data) => {
                 if(data?.paymentLink)
                 {
@@ -72,6 +73,7 @@ export default function RechargePlanDetails(data: { data: { amount: any; number:
                 }
                 closeModal()
             },
+
             onError: (error) => {
                 toast.error("unable to process the request please try again");
 

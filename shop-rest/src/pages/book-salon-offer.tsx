@@ -42,6 +42,10 @@ import { useCustomerQuery } from '@data/customer/use-customer.query';
 import { useModalAction } from '@components/ui/modal/modal.context';
 import { useUI } from '@contexts/ui.context';
 import { formatOrderedProduct } from "@utils/format-ordered-product";
+import { CheckedIcon } from '@components/icons/checked';
+import { CheckMarkCircle } from '@components/icons/checkmark-circle';
+import { CheckMark } from '@components/icons/checkmark';
+import { CheckMarkFill } from '@components/icons/checkmark-circle-fill';
 
 
 
@@ -163,6 +167,9 @@ export default function SalonBookingPage() {
     const {getLocation} = useLocation();
 
     const [value, onChange] = useState(new Date());
+    const [offerName, setOfferName] = useState(null);
+    const [selectedSalon, setSelectedSalon] = useState(null);
+    const [selectedTimeSlot, setSelectedTimeSlot] = useState('');
 
     const router = useRouter();
 
@@ -175,6 +182,33 @@ export default function SalonBookingPage() {
       window.scrollTo(0, 0);
     }, []);
 
+    const {
+      // isFetching: loading,
+      // isFetchingNextPage,
+      // fetchNextPage,
+      // hasNextPage,
+      isError: is_error,
+      data: products,
+      error: err,
+    } = useProductsQuery({
+      shop_id: Number(selectedSalon?.id),
+      // type: query.type as string,
+      text: offerName?.name as string,
+      // category: query?.category as string,
+    },
+    {
+      enabled: Boolean(selectedSalon?.id),
+    });
+
+    // useEffect(()=>{
+    //   setOfferName(products?.pages[0]?.data?.filter(product => product.price === offerName?.price)[0])
+    // },[  ])
+
+
+
+    console.log('products',products?.pages[0]?.data?.filter(product => product.price === offerName?.price)[0])
+    console.log('products',products,offerName)
+
     const origin = { lat: 37.7749, lng: -32.4194 };
     const destination = { lat: 40.7128, lng: -34.0060 };
 
@@ -182,7 +216,7 @@ export default function SalonBookingPage() {
     
     //   axios.get(url)
     //     .then((response) => {
-    //        const distance = response.data.rows[0].elements[0].distance.text;
+    //       const distance = response.data.rows[0].elements[0].distance.text;
     //       const duration = response.data.rows[0].elements[0].duration.text;
     //       console.log(`The distance between the two locations is ${distance} and the estimated travel time is ${duration}.`);
     //     })
@@ -190,26 +224,27 @@ export default function SalonBookingPage() {
     //       console.log(error);
     //   });
 
-       const tim = 'Tue Dec 20 2022 10:55:16 GMT+0530 (India Standard Time)'
+        const tim = 'Tue Dec 20 2022 10:55:16 GMT+0530 (India Standard Time)'
 
         const pattern = /(?<day>\w+)\s(?<month>\w+)\s(?<date>\d+)\s(?<year>\d+)\s(?<time>\d+:\d+:\d+)\s(?<tz>.*)/;
 
-         const match = tim?.match(pattern);
+        const match = tim?.match(pattern);
 
-         const day = match?.groups.day;
+        const day = match?.groups.day;
         const month = match?.groups.month;
         const date = match?.groups.date;
         const year = match?.groups.year;
 
         // Concatenate the extracted information to get the desired output
         const newDate = `${day} ${month} ${date} ${year}`;
-        alert(newDate)
+        alert(newDate);
    
     // console.log('offer data', data)
 
     // // console.log( 'category',data?.offers.data.map(product => {
     //     return product?.shop?.shop_categories.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','')}
     // ));
+
 
         const { query } = useRouter();
         const [searchTerm, setSearchTerm] = useState("");
@@ -218,13 +253,13 @@ export default function SalonBookingPage() {
         const [orderBy, setOrder] = useState("created_at");
         const [type, setType] = useState("");
         const { data: orderStatusData } = useOrderStatusesQuery();
-        const { mutate: createOrder } = useCreateOrderMutation();
+        const { mutate: createOrder, isLoading: salonBooking } = useCreateOrderMutation();
 
         const [selectedOffer, setSelectedOffer] = useState(null);
 
         const {data:customer} = useCustomerQuery();
 
-        console.log('loc',getLocation)
+        console.log('loc',getLocation);
 
         // const [sortedBy, setColumn] = useState<SortOrder>(SortOrder.Desc);
 
@@ -240,6 +275,7 @@ export default function SalonBookingPage() {
         //       text: query?.text as string,
         //   });
 
+
         const {
           billing_address,
           shipping_address,
@@ -249,11 +285,12 @@ export default function SalonBookingPage() {
           discount,
         } = useCheckout();
 
-        const [offerName, setOfferName] = useState(null);
-        const [selectedSalon, setSelectedSalon] = useState(null)
-        const [selectedTimeSlot, setSelectedTimeSlot] = useState('');
+
+       
         
+
         const { items, delivery_charges} = useCart();
+
 
         console.log(billing_address)
         const available_items = items?.filter(
@@ -263,12 +300,11 @@ export default function SalonBookingPage() {
         );
 
         let avail_items =  [{...offerName,
-          shop : selectedSalon
+          shop : selectedSalon,
+          shop_id: selectedSalon?.id,
         }]
 
-
         console.log('values 2 ', avail_items)
- 
 
         function onSubmit(values: FormValues) {
 
@@ -281,19 +317,19 @@ export default function SalonBookingPage() {
             location:getLocation?.formattedAddress,
             products: 
             avail_items?.map((item) => formatOrderedProduct(item)),
-          //    [{...offerName,
-          //   shop : {selectedSalon}
-          // }],
+            //    [{...offerName,
+            //   shop : {selectedSalon}
+            // }],
             customer_contact: customer?.me?.phone_number,
             status:   1,
-            amount: 100,
+            amount: offerName?.price,
             // coupon_id: coupon?.id,
             discount:  0,
             paid_total: offerName?.price,
-            total : 100,
+            total : offerName?.price,
             sales_tax:  2,
             delivery_fee: 0,
-            delivery_time: 'jj',
+            delivery_time: selectedTimeSlot,
             payment_gateway: 'cod',
             billing_address: {
               ...(billing_address?.address && billing_address.address),
@@ -305,8 +341,6 @@ export default function SalonBookingPage() {
 
           console.log('values',input,offerName)
             
-           
-        
             createOrder(input, {
               onSuccess: (order: any) => {
                 if (order?.tracking_number) {
@@ -358,16 +392,15 @@ export default function SalonBookingPage() {
             return "";
           }
 
-          function handleSelectedShop(data) {
+          function handleSelectedShop(data:any) {
             setSelectedSalon(data);
+            // setOfferName(products?.pages[0]?.data?.filter(product => product.price === offerName?.price)[0])
+            // setSelectedSalon(data);
               console.log(selectedSalon);
           }
 
           console.log([{'offer': offerName, 'selectedSalon' : selectedSalon }])
-
-          
-          
-
+ 
           // console.log('shop-data', shopData);
 
           // // console.log('salon category products',salonProducts?.products.data.filter(product => product?.categories.map( cat => cat.name === 'Services')   )  )
@@ -380,6 +413,8 @@ export default function SalonBookingPage() {
         //  const item = generateCartItem(data);
         //  addItemToCart(item, 1)
         }
+
+        
 
         const {
             addItemToCart,
@@ -444,37 +479,43 @@ export default function SalonBookingPage() {
             Featured Products
           </h3>
 
-            <div className = {`${data?.offers.data?.length  ? 'block' : 'hidden'} text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500
+            <div className = {`${data?.offers.data?.length  ? 'block' : 'hidden'} w-full overflow-x-scroll text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500
                grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-5 bg-gray-50 mt-3 p-2 lg:p-6 gap-2`}>
+              
                {/* {fetching && !data?.pages?.length ? (
                         <ProductFeedLoader limit={5} />
                       ) : ( */}
                 
                     {
-                      data?.offers.data.filter(product => product.status === 'publish' && product.is_featured === 1 && product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','') ==='Salon  Spa' ).map((offer,product) => (
+                      data?.offers?.data?.filter(product => product?.status === 'publish' && product?.is_featured === 1 && product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','') ==='Salon  Spa' ).map((offer,product) => (
                           
-                      <div className="w-full max-w-sm mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
-                        <img src={offer.image.thumbnail} 
+                      <div className={` ${offer?.name === offerName?.name ? 'border-3 border-green-500 ' : 'border-3'}
+                                         relative w-60 lg:w-auto max-w-sm mx-auto bg-white rounded-lg shadow-lg overflow-hidden`}>
+                        <img src={offer?.image?.thumbnail} 
                              className='w-full '/>
+                             <CheckMarkFill  width={20} className={` ${offer?.name === offerName?.name ? 'block transition-all duration-900 ease-in-out' : 'hidden'} absolute right-0 top-0 me-2 bg-white rounded-full  text-green-600`} />
                         <div className="px-6 py-4">
-                          <div className="font-bold text-xl mb-2">
-                            {offer.name}
+                          <div className="font-bold text-lg lg:text-xl mb-2">
+                            {offer?.name}
                           </div>
                         </div>
                         <div className="px-6 py-4">
-                          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-                           {offer.price}
+                          <span className="inline-block bg-gray-200 p-3 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+                          ₹
+                          {+' '+offer?.price}.00
                           </span>
                           <button
                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
                             onClick={ ()=> showSalons(offer)}
                           >
-                            Select
+                            {offer?.name === offerName?.name ? 'Selected' : 'Select'}
                           </button>
                         </div>
                       </div>
+                      
                         ))
                     }
+                    
             </div>
         
 
@@ -489,33 +530,44 @@ export default function SalonBookingPage() {
                 </Link>
             </h4>
 
-            <PromotionSlider selectedShop={handleSelectedShop} offer={offerName} />
+            <PromotionSlider selectedShop = {handleSelectedShop} 
+                             offer = {offerName} />
             
         </div>
 
-      <div className='flex items-center justify-evenly'> 
-
+      <div className='grid grid-cols-1 lg:grid-cols-2  items-center justify-evenly'> 
+             
           <div className="  bg-light p-5 mt-10 md:p-8 w-auto lg:w-1/2">
-                {/* <Schedule count={2} heading='Book Appointment' />   */}
+                {/* <Schedule count={2} heading='Book Appointment' />
+                   */}
+                <h4 className=' whitespace-nowrap text-xl flex items-center justify-between lg:text-3xl font-serif text-gray-900 font-medium     py-4 tracking-normal'>
+                  Select Appointment Data & Time
+                </h4>
                 <div>
                   <Calendar onChange={onChange} value={value} />
                 </div>
           </div>
 
-          <div className='p-3 grid grid-cols-2 gap-4 place-content-center'>
-            <button className={`${selectedTimeSlot === '10:00am - 12:00PM' ? 'bg-blue-600 text-white': 'hover:bg-blue-200 hover:text-white p-3 bg-gray-100 text-black'} rounded cursor-pointer `} 
+          <div className='p-3 text-sm lg:text-lg grid grid-cols-2 gap-4 place-content-center'>
+            <button className={`${selectedTimeSlot === '10:00am - 12:00PM' ? 'bg-blue-600 text-white': 'hover:bg-gray-100 border  p-3 bg-gray-50 text-black'} rounded cursor-pointer `} 
                     onClick={() => setSelectedTimeSlot('10:00am - 12:00PM')}> 10:00 am - 12:00 PM </button>
-            <button className={`${selectedTimeSlot === '12:00pm - 02:00pm' ? 'bg-blue-600 text-white': 'hover:bg-blue-200 hover:text-white p-3 bg-gray-100 text-black'} rounded cursor-pointer `} 
+            <button className={`${selectedTimeSlot === '12:00pm - 02:00pm' ? 'bg-blue-600 text-white': 'hover:bg-gray-100 border  p-3 bg-gray-50 text-black'} rounded cursor-pointer `} 
                     onClick={() => setSelectedTimeSlot('12:00pm - 02:00pm')}> 12:00pm - 02:00pm </button>
-            <button className={`${selectedTimeSlot === '02:00pm - 04:00pm ' ? 'bg-blue-600 text-white': 'hover:bg-blue-200 hover:text-white p-3 bg-gray-100 text-black'} rounded cursor-pointer `}
+            <button className={`${selectedTimeSlot === '02:00pm - 04:00pm ' ? 'bg-blue-600 text-white': 'hover:bg-gray-100 border  p-3 bg-gray-50 text-black'} rounded cursor-pointer `}
                     onClick={() => setSelectedTimeSlot('02:00pm - 04:00pm ')}> 02:00pm - 04:00pm </button>
-            <button className={`${selectedTimeSlot === '04:00pm - 06:00pm' ? 'bg-blue-600 text-white': 'hover:bg-blue-200 hover:text-white p-3 bg-gray-100 text-black'} rounded cursor-pointer `}
+            <button className={`${selectedTimeSlot === '04:00pm - 06:00pm' ? 'bg-blue-600 text-white': 'hover:bg-gray-100 border  p-3 bg-gray-50 text-black'} rounded cursor-pointer `}
                     onClick={() => setSelectedTimeSlot('04:00pm - 06:00pm')}> 04:00pm - 06:00pm </button>
           </div>
-
       </div>
 
-      <button className='mr-20 border  mb-20 p-4' onClick={()=>onSubmit()}>submit</button>
+      <div className='mx-auto w-full text-center'>
+        <button className='mx-auto border bg-accent mb-20 p-4' 
+                onClick={()=>onSubmit()}>
+                {salonBooking ?
+                ("booking..."):
+                'Book now'}
+        </button>
+      </div>
 
 
     </div>

@@ -34,21 +34,8 @@ const VerifyCheckout = () => {
   const { billing_address, setCheckoutData, checkoutData } = useCheckout();
   const { items, total, isEmpty } = useCart();
   const { openModal } = useModalAction();
-
-  // reload the page once when user logs in 
-  // useEffect(() => {
-  //   if (loggedIn()) {
-  //     router.reload();
-  //   }
-  // }
-  // , [loggedIn]);
+ 
   
-
-  
-  
-  
-
-
   const {
     data:ordersData,
    

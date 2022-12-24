@@ -135,6 +135,47 @@ class GatewayResponse extends CoreController
         return redirect()->away("https://buylowcal.com");        
 
     }
+
+    public function processResponseUtilityPayment(Request $request){
+
+        $response = request()->all();
+      
+        $txStatus = $response['txStatus'] ?? null;
+        $order_id = $response['orderId'] ?? null;
+      
+        if($txStatus == "SUCCESS") {
+      
+          UtilityPayment::where('tracking_number', $order_id)->update(['isPayedByCustomer' => 1]);
+          $utility_payment=UtilityPayment::where('tracking_number', $order_id)->first();
+          $code=$this->recharge($utility_payment);
+      
+          // Use the statusApi function to get the status of the recharge
+          $recharge_status = $this->statusApi($utility_payment->trans_id);
+      
+          // Extract the relevant information from the response array
+          $status = $recharge_status[1];
+          $error_code = $recharge_status[2];
+          $operator_ref = $recharge_status[3];
+          $time = $recharge_status[4];
+      
+          // Update the status of the recharge based on the response
+          if ($status == 'SUCCESS') {
+            UtilityPayment::where('tracking_number', $order_id)->update(['status' => 'APPROVED']);
+          } else {
+            UtilityPayment::where('tracking_number', $order_id)->update(['status' => 'FAILED']);
+          }
+      
+          // Use the callback URL provided by the API provider as the redirect URL
+          $callback_url = "https://buylowcal.com/callback?status=Success&txid=TransID&mytxid=aPITransID&optxid=OPeratorID&mobileno=Mobile";
+      
+          return redirect()->away($callback_url);
+      
+        }
+      
+        return redirect()->away("https://buylowcal.com");
+      
+      }
+      
     
     
     public function process_delivery_response(Request $request)

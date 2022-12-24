@@ -334,10 +334,12 @@ Route::group(['middleware' => ['can:' . Permission::CUSTOMER, 'auth:sanctum']], 
     Route::apiResource('utility-payment', UtilityPaymentController::class, [
         'only' => ['index', 'show', 'store']
     ]);
+    
     Route::get('orders/tracking_number/{tracking_number}', 'PickBazar\Http\Controllers\OrderController@findByTrackingNumber');
     Route::apiResource('attachments', AttachmentController::class, [
         'only' => ['store', 'update', 'destroy']
     ]);
+
     Route::post('store-license-attachment', 'PickBazar\Http\Controllers\AttachmentController@storeLicenseAttachment');
     Route::post('bill-attachment', 'PickBazar\Http\Controllers\AttachmentController@storeBillAttachment');
     

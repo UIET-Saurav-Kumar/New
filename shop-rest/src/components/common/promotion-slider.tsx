@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { ROUTES } from "@utils/routes";
 import Link from 'next/link';
+import { CheckMarkFill } from "@components/icons/checkmark-circle-fill";
  
 const data = [
 
@@ -200,18 +201,24 @@ export default function PromotionSlider(props:any) {
                           {page.data.filter((shop) => shop.is_active === 1 && shop.name != 'Villa Hair Sense Panchkula' && shop.name != 'Villa Hair Sense').map((shop: any) => (
             <SwiperSlide key={idx}>
               {/* <Link href={`${ROUTES.SHOPS}/${shop.slug}`}> */}
-                <div onClick={()=>handleSelect(shop)} className="flex shadow-sm  flex-col items-center ">
+                <div onClick={()=>handleSelect(shop)} className={` ${shop?.name === shopName ? '' : '' }  border-3 rounded border-white flex hover:shadow-lg flex-col items-center `}>
+                <CheckMarkFill width={30} className={` ${shop?.name === shopName? 'block' : 'hidden'} absolute right-0 top-0 me-2 bg-white rounded-full text-green-600`} />
                   <img
-                   className="w-10 object-contain rounded h-10 lg:h-36    lg:w-36 "
+                   className="w-24 object-contain rounded h-24 lg:h-36    lg:w-36 "
                    src={shop?.logo?.thumbnail}
-                   alt={t(shop.name)}
+                   alt={t(shop?.name)}
                   />
-                  <p className = "text-xs  mt-2 text-center font-semibold">
-                    {shop?.settings?.location?.sector}
-                  </p>
-                  <p className = "text-xs text-center font-light">
-                    {shop?.settings?.location?.city}
-                  </p>
+                  <span className = "flex flex-col text-xs  mt-2 text-center font-semibold">
+                    <p>{shop?.name}</p>
+                    <p> 
+                       {shop?.name?.includes(shop?.settings?.location?.sector) ? '' : shop?.settings?.location?.sector}
+                    </p>
+                    <p className ="text-xs text-center font-light">
+                     {shop?.name?.includes(shop?.settings?.location?.city) ? '' : shop?.settings?.location?.city}
+                      
+                    </p>
+                  </span>
+                   
                 </div>
               {/* </Link> */}
             </SwiperSlide>

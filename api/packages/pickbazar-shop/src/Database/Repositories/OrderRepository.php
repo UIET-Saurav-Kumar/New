@@ -425,6 +425,7 @@ class OrderRepository extends BaseRepository
                 $product_id=$request->products[0]["product_id"];
                 $product=Product::find($product_id);
                 $user=$request->user();     
+                
                 //map over products and get product name 
 
                 // find the user name if he has shop 

@@ -154,9 +154,9 @@ export default function OrderDetailsPage() {
 
         <form
           onSubmit={handleSubmit(ChangeStatus)}
-          className="flex items-start ms-auto w-full lg:w-2/4"
+          className="flex flex-col lg:flex items-start ms-auto w-full lg:w-2/4"
         >
-          <div className="w-full me-5 z-20">
+          <div className="  w-full me-5 z-20">
             <SelectInput
               name="order_status"
               control={control}
@@ -176,7 +176,7 @@ export default function OrderDetailsPage() {
               {t("form:button-label-change-status")}
             </span>
             <span className="block sm:hidden">
-              {t("form:form:button-label-change")}
+              {t("Change Status")}
             </span>
           </Button>
         </form>

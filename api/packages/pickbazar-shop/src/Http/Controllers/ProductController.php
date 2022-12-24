@@ -40,37 +40,71 @@ class ProductController extends CoreController
      * @param Request $request
      * @return Collection|Product[]
      */
-    public function index(Request $request)
-    {
+    // public function index(Request $request)
+    // {
         
-        $shop_id="";
-        if($request->search != null)
-        {
+    //     $shop_id="";
+    //     if($request->search != null)
+    //     {
 
-            $pluckcat = explode(';',$request->search);
-            $pluckall = explode(':', $pluckcat[0]);
-            if(isset($pluckcat[1])){
-                $shop_id=explode(':',$pluckcat[1])[1];
-            }
-            if($pluckall[1] == 'all')
-            {
-                $request->replace([
-                    'search' => $pluckcat[1],
-                    'searchJoin' => $request->searchJoin,
-                    'limit' => $request->limit
-                    ]);
-            }
-        }
-        $limit = $request->limit ?   $request->limit : 15;    
-        // $repdata = $this->repository->withCount('orders')->with(['type', 'shop'])->orderBy('updated_at','desc')->paginate($limit);
-        $repdata = $this->repository->with(['type', 'shop', 'categories', 'tags', 'variations.attribute'])->orderBy('is_offer', 'desc')->paginate($limit);
-        foreach($repdata as $key=>$val)
-         {
-            $repdata[$key]->image_original = $val->image['original'] ?? '';
-         }
-        return $repdata;
+    //         $pluckcat = explode(';',$request->search);
+    //         $pluckall = explode(':', $pluckcat[0]);
+    //         if(isset($pluckcat[1])){
+    //             $shop_id=explode(':',$pluckcat[1])[1];
+    //         }
+    //         if($pluckall[1] == 'all')
+    //         {
+    //             $request->replace([
+    //                 'search' => $pluckcat[1],
+    //                 'searchJoin' => $request->searchJoin,
+    //                 'limit' => $request->limit
+    //                 ]);
+    //         }
+    //     }
+    //     $limit = $request->limit ?   $request->limit : 15;    
+    //     $repdata = $this->repository->withCount('orders')->with(['type', 'shop'])->orderBy('updated_at','desc')->paginate($limit);
+    //     $repdata = $this->repository->with(['type', 'shop', 'categories', 'tags', 'variations.attribute'])->orderBy('is_offer', 'desc')->paginate($limit);
+    //     foreach($repdata as $key=>$val)
+    //      {
+    //         $repdata[$key]->image_original = $val->image['original'] ?? '';
+    //      }
+    //     return $repdata;
 
-        // $category = $request->category != null ? true : false;
+        
+        
+    // }
+
+    public function index(Request $request)
+{
+    $shop_id = "";
+    $pluckcat = explode(';', $request->search) ?: [];
+    $pluckall = explode(':', $pluckcat[0]) ?: [];
+    if (isset($pluckcat[1])) {
+        $shop_id = explode(':', $pluckcat[1])[1];
+    }
+    if ($pluckall[1] == 'all') {
+        $request->replace([
+            'search' => $pluckcat[1],
+            'searchJoin' => $request->searchJoin,
+            'limit' => $request->limit
+        ]);
+    }
+
+    $limit = $request->limit ?: 15;
+
+    $repdata = $this->repository->withCount('orders')
+        ->with(['type', 'shop', 'categories', 'tags', 'variations.attribute'])
+        ->orderBy('is_offer', 'desc')
+        ->paginate($limit);
+
+    $repdata->transform(function ($item) {
+        $item->image_original = $item->image['original'] ?? '';
+        return $item;
+    });
+
+    return $repdata;
+
+     // $category = $request->category != null ? true : false;
         // dd($category);
         // if($category)
         // {
@@ -86,12 +120,12 @@ class ProductController extends CoreController
         // }
         // else
         // {
-//             $limit = $request->limit ?   $request->limit : 15;
-//             $repdata = $this->repository->with(['type', 'shop', 'categories', 'tags', 'variations.attribute'])->orderBy('is_offer', 'desc')->paginate($limit);
-//             return $repdata;
+        //             $limit = $request->limit ?   $request->limit : 15;
+        //             $repdata = $this->repository->with(['type', 'shop', 'categories', 'tags', 'variations.attribute'])->orderBy('is_offer', 'desc')->paginate($limit);
+        //             return $repdata;
         // }
-        
-    }
+}
+
 
     public function product_offers(Request $request)
     {
