@@ -136,7 +136,6 @@ export default class CustomDocument extends Document {
        
                        `}}
        
-                       
                />
                
               
@@ -150,7 +149,7 @@ export default class CustomDocument extends Document {
               'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
               })(window,document,'script','dataLayer','GTM-58NV2K4'`
             }}
-            />
+          />
 
             <noscript dangerouslySetInnerHTML={{
                __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-58NV2K4" height="0" width="0" style="display:none;visibility:hidden"></iframe>` }} />
@@ -180,7 +179,7 @@ export default class CustomDocument extends Document {
         
 
         {/* hotjar */}
-         <script
+         {/* <script
           dangerouslySetInnerHTML={{
               __html:`(function(h,o,t,j,a,r){
                   h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
@@ -191,7 +190,7 @@ export default class CustomDocument extends Document {
                   a.appendChild(r);
               })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=')
             `,}}
-            />
+            /> */}
 
         </Head>
        
