@@ -247,6 +247,8 @@ Route::get('referral-network','PickBazar\Http\Controllers\InviteController@reffe
 Route::any('order/success','PickBazar\Http\Controllers\GatewayResponse@process_response');
 Route::any('utility-payment/success','PickBazar\Http\Controllers\GatewayResponse@processResponseUtilityPayment');
 Route::any('utility-payment/failed','PickBazar\Http\Controllers\GatewayResponse@processResponseUtilityPaymentFailed');
+Route::any('utility-payment/payment-status','PickBazar\Http\Controllers\GatewayResponse@rechargeStatus');
+
 
 
 
