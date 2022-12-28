@@ -46,7 +46,6 @@ import { CheckedIcon } from '@components/icons/checked';
 import { CheckMarkCircle } from '@components/icons/checkmark-circle';
 import { CheckMark } from '@components/icons/checkmark';
 import { CheckMarkFill } from '@components/icons/checkmark-circle-fill';
-import RegisterForm from '@components/auth/register';
 
 
 
@@ -164,12 +163,9 @@ import RegisterForm from '@components/auth/register';
     const {width} = useWindowDimensions();
 
     const {getLocation} = useLocation();
-    
-    const { query } = useRouter();
 
     const [value, onChange] = useState(new Date());
     const [offerName, setOfferName] = useState(null);
-    const [newOfferName, setNewOfferName] = useState(null);
     const [selectedSalon, setSelectedSalon] = useState(null);
     const [selectedTimeSlot, setSelectedTimeSlot] = useState('');
 
@@ -179,26 +175,14 @@ import RegisterForm from '@components/auth/register';
 
     const { isAuthorize } = useUI();
 
-    // const {
-    //   data: allProducts,
-    //   isLoading: is_loading,
-    //   error: isError,
-    // } = useAllProductsQuery({
-    //   // limit: 90000,
-    //   // category: 'Salon+-+Spa',
-    //   text: query?.text as string,
-    // },
-    // {
-    //   enabled : Boolean(offerName)
-    // });
-    // console.log('all',allProducts)
- 
+    const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY;
+
     useEffect(() => {
       window.scrollTo(0, 0);
     }, []);
 
     const {
-      isFetching: shop_loading,
+      // isFetching: loading,
       // isFetchingNextPage,
       // fetchNextPage,
       // hasNextPage,
@@ -208,19 +192,22 @@ import RegisterForm from '@components/auth/register';
     } = useProductsQuery({
       shop_id: Number(selectedSalon?.id),
       // type: query.type as string,
-      sale_price: Number(newOfferName?.sale_price),
-      text: newOfferName?.name as string,
+      sale_price: Number(offerName?.sale_price),
+      text: offerName?.name as string,
       // category: query?.category as string,
     },
     {
-      enabled: Boolean(selectedSalon?.id) ,
-    }
-    );
+      enabled: Boolean(selectedSalon?.id),
+    });
 
-  
+    // useEffect(()=>{
+    //   setOfferName(products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0])
+    // },[ ])
 
     console.log('products',products?.pages[0]?.data?.filter(product => product?.sale_price === offerName?.sale_price)[0])
-    
+    // console.log('products',products,offerName)
+
+
         const origin = { lat: 37.7749, lng: -32.4194 };
         const destination = { lat: 40.7128, lng: -34.0060 };
 
@@ -236,39 +223,73 @@ import RegisterForm from '@components/auth/register';
         const year = match?.groups.year;
 
         const newDate = `${day} ${month} ${date} ${year}`;
-     
+    
+
+    // // console.log( 'category',data?.offers.data.map(product => {
+    //     return product?.shop?.shop_categories.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','')}
+    // ));
+
+
+        const { query } = useRouter();
+        const [searchTerm, setSearchTerm] = useState("");
+        const [category, setCategory] = useState("");
+        const [page, setPage] = useState(1);
+        const [orderBy, setOrder] = useState("created_at");
+        const [type, setType] = useState("");
+        const { data: orderStatusData } = useOrderStatusesQuery();
         const { mutate: createOrder, isLoading: salonBooking } = useCreateOrderMutation();
- 
+
+        const [selectedOffer, setSelectedOffer] = useState(null);
+
         const {data:customer} = useCustomerQuery();
+        const[newOfferName, setNewOfferName] = useState(null);
 
         console.log('loc',getLocation);
+
+        // const [sortedBy, setColumn] = useState<SortOrder>(SortOrder.Desc);
+
         // const {
-        //   billing_address,
-        //   shipping_address,
-        //   delivery_time,
-        //   checkoutData,
-        //   coupon,
-        //   discount,
-        // } = useCheckout();
+        //     data: salonProducts,
+        //     isLoading: fetching,
+        //     errors,
+        //   } = useAllProductsQuery({
+        //       limit: 90000,
+        //       page,
+        //       type,
+        //       category,
+        //       text: query?.text as string,
+        //   });
 
 
-        // const { items, delivery_charges} = useCart();
+        const {
+          billing_address,
+          shipping_address,
+          delivery_time,
+          checkoutData,
+          coupon,
+          discount,
+        } = useCheckout();
 
-        // console.log(billing_address)
-        // const available_items = items?.filter(
-        //   (item: any) => 
-        //     !checkoutData?.unavailable_products.map((item: any) => item.name).includes(item.name) 
-        // );
+        console.log('log salon',selectedSalon)
+
+
+        const { items, delivery_charges} = useCart();
+
+        console.log(billing_address)
+        const available_items = items?.filter(
+          (item: any) => 
+            !checkoutData?.unavailable_products.map((item: any) => item.name).includes(item.name) 
+        );
         
 
-
         function handleSelectedShop(data:any) {
-          setNewOfferName(products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0]);
           setSelectedSalon(data);
-          // alert(JSON.stringify(data))
-          console.log('log selectedsalon data',data);
-          console.log('log selectedsalon',selectedSalon);
+          setNewOfferName(products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0])
+          // setSelectedSalon(data);
+            console.log('log selectedSalon',selectedSalon);
+            console.log('log selectedSalon data',data);
         }
+
         
 
         let avail_items =  [{...newOfferName,
@@ -276,14 +297,12 @@ import RegisterForm from '@components/auth/register';
           shop_id: selectedSalon?.id,
         }]
 
-
         console.log('log avail_items', avail_items)
         console.log('log offer', offerName)
-        console.log('log newoffer', newOfferName)
-
 
         function onSubmit(values: FormValues) {
           console.log('newoffer',offerName);
+           
 
           if (!isAuthorize) {
             return openModal("LOGIN_VIEW");
@@ -291,7 +310,7 @@ import RegisterForm from '@components/auth/register';
 
           let input = {
             //@ts-ignore
-            location: getLocation?.formattedAddress,
+            location:getLocation?.formattedAddress,
             products: 
             avail_items?.map((item) => formatOrderedProduct(item)),
             //    [{...offerName,
@@ -299,11 +318,11 @@ import RegisterForm from '@components/auth/register';
             // }],
             customer_contact: customer?.me?.phone_number,
             status:   1,
-            amount: newOfferName?.sale_price,
+            amount: newOfferName?.price,
             // coupon_id: coupon?.id,
             discount:  0,
-            paid_total: newOfferName?.sale_price,
-            total : newOfferName?.sale_price,
+            paid_total: newOfferName?.price,
+            total : newOfferName?.price,
             sales_tax:  0,
             delivery_fee: 0,
             delivery_time: selectedTimeSlot,
@@ -315,6 +334,7 @@ import RegisterForm from '@components/auth/register';
             //   ...(shipping_address?.address && shipping_address.address),
             // },
           };
+
 
           console.log('values',input,offerName)
             
@@ -343,19 +363,34 @@ import RegisterForm from '@components/auth/register';
               search:"",
               location : ((getLocation?.formattedAddress) ? JSON.stringify(getLocation):null ) as any
           }); 
- 
+
+          
+          function handleSearch({ searchText }: { searchText: string }) {
+            setSearchTerm(searchText);
+            setPage(1);
+          }
+
+          const Product = [] ; 
+      
+
+          function getCategory():string {
+              return 'Salon & Spa' as string; 
+          }
+
           function getSearch():string
           {
-  
-             if(newOfferName?.name){
+            const { query } = useRouter();
+            
+            if(newOfferName?.name){
               console.log(newOfferName?.name)
               return newOfferName?.name as string
             }
             return "";
           }
- 
 
-        console.log([{'offer': offerName, 'selectedSalon' : selectedSalon }])
+         
+
+          console.log([{'offer': offerName, 'selectedSalon' : selectedSalon }])
  
          
         function showSalons(data:any) {
@@ -365,37 +400,39 @@ import RegisterForm from '@components/auth/register';
         // addItemToCart(item, 1)
         }
 
-
-        // const {
-        //     addItemToCart,
-        //     removeItemFromCart,
-        //     isInStock,
-        //     isProductAvailable,
-        //     getItemFromCart,
-        //     isInCart,
-        //   } = useCart();
         
 
-        //  const {
-        //   data:shops,
-        //   isLoading,
-        //   isError,
-        //   isFetched,
-        //   isFetchingNextPage,
-        //   fetchNextPage,
-        //   hasNextPage,
-      
-        //  } = useShopsQuery({
-        //   // category:getCategory(),
-        //   limit:3000000,
-        //   location:((getLocation?.formattedAddress) ? JSON.stringify(getLocation) : null ) as any,
-        //   is_active:1,
-        //   // page:1,
-        //   search:getSearch() 
-        // });
+        const {
+            addItemToCart,
+            removeItemFromCart,
+            isInStock,
+            isProductAvailable,
+            getItemFromCart,
+            isInCart,
+          } = useCart();
+        
+       
+
+     const {
+      data:shops,
+      isLoading,
+      isError,
+      isFetched,
+      isFetchingNextPage,
+      fetchNextPage,
+      hasNextPage,
+  
+     } = useShopsQuery({
+      // category:getCategory(),
+      limit:3000000,
+      location:((getLocation?.formattedAddress) ? JSON.stringify(getLocation) : null ) as any,
+      is_active:1,
+      // page:1,
+      search:getSearch() 
+    });
 
 
-    console.log('shops',offerName,selectedSalon)
+    console.log('shops',offerName,shops)
 
     const handleClick = (e) => {
       const value = e.target.innerHTML;
@@ -405,7 +442,6 @@ import RegisterForm from '@components/auth/register';
     }
 
     console.log('time',selectedTimeSlot)
-
 
   return (
 
@@ -436,7 +472,7 @@ import RegisterForm from '@components/auth/register';
                         <ProductFeedLoader limit={5} />
                       ) : ( */}
                 
-                    { 
+                    {
                       data?.offers?.data?.filter(product => product?.status === 'publish' && product?.is_featured === 1 && product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','') ==='Salon  Spa' ).map((offer,product) => (
                           
                       <div className={` ${offer?.name === offerName?.name ? 'border-3 border-green-500 ' : 'border-3'}
@@ -452,7 +488,7 @@ import RegisterForm from '@components/auth/register';
                         <div className="px-6 py-4">
                           <span className="inline-block bg-gray-200 p-3 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
                           ₹
-                          {+' '+ offer?.sale_price}.00
+                          {+' '+offer?.sale_price}.00
                           </span>
                           <button
                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
@@ -479,10 +515,8 @@ import RegisterForm from '@components/auth/register';
                 </Link>
             </h4>
 
-            <PromotionSlider selectedShop ={handleSelectedShop} 
-                             newoffer = {newOfferName}
-                             is_loading ={shop_loading}  
-                             offer ={offerName} />
+            <PromotionSlider  selectedShop = {handleSelectedShop} 
+                             offer = {offerName} />
             
         </div>
 
@@ -492,11 +526,10 @@ import RegisterForm from '@components/auth/register';
                 {/* <Schedule count={2} heading='Book Appointment' />
                    */}
                 <h4 className=' whitespace-nowrap text-xl flex items-center justify-between lg:text-3xl font-serif text-gray-900 font-medium     py-4 tracking-normal'>
-                  Select Appointment Date & Time
+                  Select Appointment Data & Time
                 </h4>
                 <div>
-                  <Calendar  minDate={new Date()}
-                           maxDate={new Date(2022, 11, 31)} onChange={onChange} value={value} />
+                  <Calendar onChange={onChange} value={value} />
                 </div>
           </div>
 
@@ -510,19 +543,18 @@ import RegisterForm from '@components/auth/register';
             <button className={`${selectedTimeSlot === '04:00pm - 06:00pm' ? 'bg-blue-600 text-white': 'hover:bg-gray-100 border  p-3 bg-gray-50 text-black'} rounded cursor-pointer `}
                     onClick={() => setSelectedTimeSlot('04:00pm - 06:00pm')}> 04:00pm - 06:00pm </button>
           </div>
-
-         {!isAuthorize ? <RegisterForm/> : null}
-
       </div>
 
       <div className='mx-auto w-full text-center'>
-        <button className='mx-auto border bg-accent font-semibold rounded-md hover:shadow-400 text-white mb-20 p-4' 
+        <button className='mx-auto border bg-accent mb-20 p-4' 
                 onClick={()=>onSubmit()}>
                 {salonBooking ?
-                ("Booking..."):
+                ("booking..."):
                 'Book now'}
         </button>
       </div>
+
+
     </div>
 
     { width > 768 ? (

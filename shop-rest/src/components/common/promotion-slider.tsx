@@ -122,11 +122,14 @@ export default function PromotionSlider(props:any) {
     console.log('prop',data)
     setShopName(data.name)
     props.selectedShop(data)
+    // console.log('shop',data?.offer?.name)
   }
 
   // useEffect(() => {
   //        setLoading(true)
   // }, [props.offer])
+
+   
   
 
   const router = useRouter();
@@ -141,7 +144,21 @@ export default function PromotionSlider(props:any) {
     is_active:1,
     // page:1,
     search:getSearch()
-  });
+  },  
+  {
+    // enabled : Boolean(props.offer)
+  }
+  );
+
+  function getSearch():string{
+    
+    const { query } = useRouter();
+    
+    if(props?.offer?.name){
+      return props?.offer?.name as string
+    }
+    return "";
+  }
 
   // const downloadAllImages = (images) => {
     const downloadLogos = async () => {
@@ -163,16 +180,7 @@ export default function PromotionSlider(props:any) {
   // };
   
 
- 
-  function getSearch():string{
-    
-    const { query } = useRouter();
-    
-    if(props?.offer?.name){
-      return props?.offer?.name as string
-    }
-    return "";
-  }
+  
 
   // console.log('slider shops',shopData)
 
