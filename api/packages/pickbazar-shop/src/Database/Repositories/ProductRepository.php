@@ -26,6 +26,7 @@ class ProductRepository extends BaseRepository
         'name'        => 'like',
         'shop_id',
         'status',
+        'sale_price',
         'type.slug',
         'categories.slug',
     ];
@@ -238,6 +239,7 @@ class ProductRepository extends BaseRepository
         if(!is_array($shop_categories)){
             return "";
         }
+
         foreach($shop_categories as $category)
         {
             if(isset($category->name)){
@@ -246,6 +248,5 @@ class ProductRepository extends BaseRepository
         }
         return $ids;
     }
-
     
 }

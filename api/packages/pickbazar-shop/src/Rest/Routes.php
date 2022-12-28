@@ -276,6 +276,7 @@ Route::get('export-shops', 'PickBazar\Http\Controllers\ShopController@exportShop
 Route::post('import-shops', 'PickBazar\Http\Controllers\ShopController@importShop');
 
 Route::get('export-orders/{start_date}/{end_date}', 'PickBazar\Http\Controllers\OrderController@exportOrder');
+Route::get('export-shop-orders/{start_date}/{end_date}', 'PickBazar\Http\Controllers\OrderController@exportShopOrder');
 
 Route::post('logs', 'PickBazar\Http\Controllers\LogController@store');
 Route::get('logs', 'PickBazar\Http\Controllers\LogController@fetchLogs');

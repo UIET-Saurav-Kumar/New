@@ -124,9 +124,9 @@ export default function PromotionSlider(props:any) {
     props.selectedShop(data)
   }
 
-  useEffect(() => {
-         setLoading(true)
-  }, [props.offer])
+  // useEffect(() => {
+  //        setLoading(true)
+  // }, [props.offer])
   
 
   const router = useRouter();
@@ -180,9 +180,9 @@ export default function PromotionSlider(props:any) {
 
     <div className=" px-2 md:px-5 xl:px-4">
 
-    <button onClick={downloadLogos}>
+    {/* <button onClick={downloadLogos}>
       Download All
-    </button>
+    </button> */}
 
       <div className="relative">
 
@@ -202,7 +202,8 @@ export default function PromotionSlider(props:any) {
             <SwiperSlide key={idx}>
               {/* <Link href={`${ROUTES.SHOPS}/${shop.slug}`}> */}
                 <div onClick={()=>handleSelect(shop)} className={` ${shop?.name === shopName ? '' : '' }  border-3 rounded border-white flex hover:shadow-lg flex-col items-center `}>
-                <CheckMarkFill width={30} className={` ${shop?.name === shopName? 'block' : 'hidden'} absolute right-0 top-0 me-2 bg-white rounded-full text-green-600`} />
+                  
+                  <CheckMarkFill width={30} className={` ${shop?.name === shopName? 'block' : 'hidden'} absolute right-0 top-0 me-2 bg-white rounded-full text-green-600`} />
                   <img
                    className="w-24 object-contain rounded h-24 lg:h-36    lg:w-36 "
                    src={shop?.logo?.thumbnail}
@@ -215,7 +216,6 @@ export default function PromotionSlider(props:any) {
                     </p>
                     <p className ="text-xs text-center font-light">
                      {shop?.name?.includes(shop?.settings?.location?.city) ? '' : shop?.settings?.location?.city}
-                      
                     </p>
                   </span>
                    

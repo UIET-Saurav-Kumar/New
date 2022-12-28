@@ -20,6 +20,8 @@ use PickBazar\Http\Requests\OrderUpdateRequest;
 use PickBazar\Database\Repositories\OrderRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response;
 
 
 
@@ -292,13 +294,12 @@ class OrderController extends CoreController
             'Expires'             => '0',
             'Pragma'              => 'public'
         ];
-        //get start date and end date from findByDateRange function
 
+        $shopId = 4718;
+ 
         $start_date = $request->start_date;
         $end_date = $request->end_date;
-          // find by date range list
-          // if start date and end date is not empty then find by date range else find by shop name
-        if ($start_date && $end_date) {
+          if ($start_date && $end_date) {
             $list = $this->repository->with(['children','children.shop','status','products','products.shop'])->whereBetween('created_at',[$start_date,$end_date])->where('id', '!=', null)->where('parent_id', '=', null)->get()->toArray();
         } else {
             // $list = $this->repository->with(['products','products.shop', 'status', 'children.shop'])->get()->toArray();
@@ -364,6 +365,103 @@ class OrderController extends CoreController
 
         return response()->stream($callback, 200, $headers);
     }
+
+    public function exportShopOrder(Request $request, $start_date, $end_date)
+  {
+
+    $filename = 'Orders'.'.csv';
+
+    $headers = [
+        'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
+        'Content-type'        => 'text/csv',
+        'Content-Disposition' => 'attachment; filename=' . $filename,
+        'Expires'             => '0',
+        'Pragma'              => 'public'
+    ];
+
+    $shopId = 4718;
+
+    if ($start_date && $end_date) {
+        $list = $this->repository->with(['children','children.shop','status','products','products.shop'])
+            ->where('shop_id', $shopId)
+            ->whereBetween('created_at',[$start_date,$end_date])
+            ->where('id', '!=', null)
+            ->where('parent_id', '=', null)
+            ->get()
+            ->toArray();
+    } else {
+        $list = $this->repository->with(['children','children.shop','status','products','products.shop'])
+            ->where('shop_id', $shopId)
+            ->whereBetween('created_at',['2021-01-01',Carbon::now()->toDateTimeString()])
+            ->where('id', '!=', null)
+            ->where('parent_id', '=', null)
+            ->get()
+            ->toArray();
+    }
+
+    
+    if (!count($list)) {
+        return response()->stream(function () {
+        }, 200, $headers);
+    }
+
+    foreach($list as $key=>$val)
+    {
+        $shopnames = "";
+        $list[$key]['customer_name'] = $val['customer']['name'] ?? '';
+        $list[$key]['customer_email'] = $val['customer']['email'] ?? '';
+        $list[$key]['order_status'] = $val['status']['name'] ?? '';
+        if(!empty($val['children']))
+        {
+            foreach($val['children'] as $shop)
+            {
+                $shopnames = !empty($shop['shop']) ? $shopnames.$shop['shop']['name'].", " : '';
+            }
+        }
+        
+        $list[$key]['shop_name'] = trim($shopnames);
+        //created_at
+        // $list[$key]['created_at'] = $val['created_at']->format('d-m-Y H:i:s');
+    }
+    
+    # add headers for each column in the CSV download
+    array_unshift($list, array_keys($list[0]));
+
+    $callback = function () use ($list) {
+        $FH = fopen('php://output', 'w');
+        foreach ($list as $key => $row) {
+            if ($key === 0) {
+                $exclude = ['customer_id','id', 'status', 'deleted_at','updated_at', 'shipping_address', 'billing_address', 'customer', 'products','gateway_response', 'coupon_id', 'parent_id','shop_id','children'];
+                $row = array_diff($row, $exclude);
+            }
+            
+            unset($row['id']);
+            unset($row['customer_id']);
+            unset($row['status']);
+            unset($row['deleted_at']);
+            unset($row['updated_at']);
+            // unset($row['created_at']);
+
+            unset($row['shipping_address']);
+            unset($row['billing_address']);
+            unset($row['customer']);
+            unset($row['products']);
+            unset($row['gateway_response']);
+            unset($row['coupon_id']);
+            unset($row['parent_id']);
+            unset($row['shop_id']);
+            unset($row['children']);
+            
+            fputcsv($FH, $row);
+        }
+
+        fclose($FH);
+    };
+
+    return response()->stream($callback, 200, $headers);
+}
+
+
 
     /**
      * Remove the specified resource from storage.

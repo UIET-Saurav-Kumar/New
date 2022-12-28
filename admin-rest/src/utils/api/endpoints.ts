@@ -23,6 +23,7 @@ export const API_ENDPOINTS = {
   SHOP_CATEGORIES: "shop-categories",
 
   FIND_BY_DATE_RANGE: "find-by-date-range",
+  
 
   SELECT_SHOP_CATEGORIES:"select-shop-categories",
   TAGS: "tags",

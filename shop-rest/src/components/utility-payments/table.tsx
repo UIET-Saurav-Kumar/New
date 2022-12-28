@@ -19,6 +19,7 @@ type IProps = {
 };
 
 const UtilityTable = ({ invoice_upload, onPagination }: IProps) => {
+  
   const { t } = useTranslation();
   const { alignLeft } = useIsRTL();
 
@@ -38,10 +39,12 @@ const UtilityTable = ({ invoice_upload, onPagination }: IProps) => {
         return <Badge text={("Processing")} color="bg-yellow-500" />;
     }
   };
+
   function formateDate(date){
     var d=date.split('T')[0].split('-');
     return d[2]+"/"+d[1]+"/"+d[0]
   }
+
   let columns = [
     {
       title: ("Contact Number"),

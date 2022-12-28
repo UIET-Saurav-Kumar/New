@@ -6,6 +6,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { API_ENDPOINTS } from "@utils/api/endpoints";
 import { adminOnly, getAuthCredentials, hasAccess } from "@utils/auth-utils";
 
+
 export interface IShopCreateVariables {
   variables: {
     input: ShopInput;

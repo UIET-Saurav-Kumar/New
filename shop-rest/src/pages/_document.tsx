@@ -41,6 +41,7 @@ export default class CustomDocument extends Document {
             
 
             {/* google analytics */}
+            
             <Script
               id="google-analytics"
               strategy="afterInteractive"

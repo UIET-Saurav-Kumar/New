@@ -70,6 +70,10 @@ const OrdersExportImport = dynamic(
   () => import("@components/product/import-export-modal-orders")
 );
 
+const ShopsOrdersExportImport = dynamic(
+  () => import("@components/shop/import-export-modal-orders")
+);
+
 const LogDeleteView = dynamic(
   () => import("@components/logs/log-delete-view")
 );
@@ -139,8 +143,6 @@ const ManagedModal = () => {
 
       { view === 'PaymentDetailsModal' && <PaymentDetails/>}
 
-
-      
       {view === "DELIVERY_STATUS_VIEW" && <DeliveryStatusView />}
 
       {view === "DELETE_STAFF" && <RemoveStaffView />}
@@ -149,6 +151,7 @@ const ManagedModal = () => {
       {view === "EXPORT_IMPORT_ADMIN_PRODUCT" && <AllProductsExportImport />}
       {view === "EXPORT_IMPORT_SHOPS" && <ShopsExportImport />}
       {view === "EXPORT_IMPORT_ORDERS" && <OrdersExportImport />}
+      {view === "EXPORT_IMPORT_SHOP_ORDERS" && <ShopsOrdersExportImport />}
       {view === "EXPORT_IMPORT_MASTER_PRODUCT" && <MasterProductsExportImport />}
 
     </Modal>

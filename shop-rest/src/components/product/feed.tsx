@@ -24,6 +24,7 @@ const ProductFeedLoader = dynamic(
 const Feed = ({ shopId, shopData }: { shopId: string }) => {
 
   const { t } = useTranslation("common");
+  
   const { query } = useRouter();
 
   const { openModal } = useModalAction();
@@ -70,12 +71,12 @@ const Feed = ({ shopId, shopData }: { shopId: string }) => {
   if (!loading && !data?.pages?.[0]?.data?.length) {
 
     return (
-
       <div className="w-full mx-2 mt-5">
         <ProductNotFoundInfo shopData={shopData} />
       </div>
     );
   }
+  
   
   return (
 

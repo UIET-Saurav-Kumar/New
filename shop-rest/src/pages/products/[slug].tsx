@@ -113,6 +113,7 @@ export default function ProductSinglePage({ product }: any) {
           "ratingValue": "5",
           "reviewCount": "89"
         },
+        
         // "offers": {
         //   "@type": "Offer",
         //   "url": `{http://www.buylowcal.com/products/${product?.slug}}`,

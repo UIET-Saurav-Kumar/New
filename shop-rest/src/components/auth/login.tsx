@@ -90,7 +90,7 @@ const LoginForm = () => {
             query?.utm_source == 'shop_qr' ? 
             router.push('/shops/'+query.utm_campaign+'?utm_source=shop_qr&utm_campaign='+query.utm_campaign+'&shop_id='+query.shop_id) : null;
             closeModal();
-            query?.utm_source !== 'shop_qr' ? router.reload() : null;
+            // query?.utm_source !== 'shop_qr' ? router.reload() : null;
             return;
           }
           if (!data.token) {

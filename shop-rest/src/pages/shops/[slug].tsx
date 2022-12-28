@@ -247,6 +247,8 @@ const ShopPage = ({ data }: any) => {
 
     <>
 
+    
+
         <Head>
           <title>{(data.name?data.name:'')+' '+(data.address.city?data.address.city+" "+data.address.street_address:'')+', Best Discounts and Offers Only Through BuyLowcal.com'}</title>
           <meta name="description" content={(data.name?data.name:'')+' '+(data.address.city?data.address.city+" "+data.address.street_address:'')+' Best '+shopCategory+' deals, offers, discounts and cash backs only through buylowcal.com'} />
@@ -258,18 +260,19 @@ const ShopPage = ({ data }: any) => {
             <div className="relative bg-white lg:bg-gray-100 hidden lg:flex flex-col
                             md:flex-row md:justify-between md:items-start">
 
-                                  {/* // button to scroll to the top of the page when user has scrolled way down */}
-                                  <div className="fixed z-50 bottom-10 right-10 flex justify-center items-center">
-                                    <img src='/up-arrow.png' className="w-12 h-12" onClick={() => window.scrollTo(0, 0)} /> 
-                                  </div>
+                        {/* // button to scroll to the top of the page when user has scrolled way down */}
 
-                                  {/* <div className="fixed z-50 bottom-10 right-10 flex justify-center items-center">
-                                    <button onClick={() => scrollToProduct()} className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-full">
-                                      <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.914 9.914L10 7.828V16H8V7.828l-2.086 2.086L4.586 9.914l8.486-8.486z"/></svg>
-                                    </button>
-                                  </div> */}
+                        <div className="fixed z-50 bottom-10 right-10 flex justify-center items-center">
+                          <img src='/up-arrow.png' className="w-12 h-12" onClick={() => window.scrollTo(0, 0)} /> 
+                        </div>
 
-                    <div className='flex w-full  lg:flex flex-col'>
+                        {/* <div className="fixed z-50 bottom-10 right-10 flex justify-center items-center">
+                          <button onClick={() => scrollToProduct()} className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-full">
+                            <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.914 9.914L10 7.828V16H8V7.828l-2.086 2.086L4.586 9.914l8.486-8.486z"/></svg>
+                          </button>
+                        </div> */}
+
+                    <div className='flex w-full lg:flex flex-col'>
 
                       {/* <div className="hidden lg:space-x-5 xl:space-x-10  lg:flex justify-between "> */}
 

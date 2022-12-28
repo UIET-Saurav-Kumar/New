@@ -7,6 +7,7 @@ import { useState } from "react";
 import ImportShops from "./import-master-shops";
 // import ImportShops from "./import-master-shops";
 
+
 const ExportImportView = () => {
 
   const [startDate, setStartDate] = useState(null);
@@ -76,7 +77,7 @@ const ExportImportView = () => {
         {/* <ImportShops /> */}
 
         <a
-          href={`${process?.env?.NEXT_PUBLIC_REST_API_ENDPOINT}/export-orders/${convertStartDate()}/${convertEndDate()}/${shopid}`}
+          href={`${process?.env?.NEXT_PUBLIC_REST_API_ENDPOINT}/export-shop-orders/${convertStartDate()}/${convertEndDate()}`}
           target="_blank"
           className="border-dashed border-2 border-border-base h-36 rounded flex flex-col justify-center items-center cursor-pointer focus:border-accent-400 focus:outline-none p-5"
         >

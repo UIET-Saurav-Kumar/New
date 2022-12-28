@@ -205,8 +205,11 @@ useIntersectionObserver({
       
       <Head>
       <meta name="msvalidate.01" content="1A1026D1B7AF52339B69AA95E6DFE95C" />
+      <title>Shop Save Earn From Nearest Local Brands and Shops with Buylowcal.com</title>
+      <meta name="description" content= 'Buy and Earn from Nearest Local Shops | Groceries | Fruits | Vegetables | Salon | Takeaways | Restaurants | Mobile Recharge'/>
       <link rel="canonical" href='https://buylowcal.com'/>
-      <script
+      
+        <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(
       {
