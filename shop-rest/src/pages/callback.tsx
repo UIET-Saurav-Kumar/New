@@ -1,12 +1,14 @@
 import DefaultLayout from '@components/layout/default-layout';
 import ShopLayout from '@components/layout/shop-layout';
+import { useRouter } from 'next/router';
 import React from 'react';
 
 export default function CallbackPage( )  {
+    const {query} = useRouter();
 
     const response = {
-        user_transactionId: 'BSI23XS282BSIBBC0964',
-        transaction_id: 'KA0IFJ3FOOD',
+        user_transactionId: query.trans_id,
+        transaction_id: query.tx_id,
         amount: 100,
         currency: 'INR',
         status: 'success',
@@ -15,6 +17,8 @@ export default function CallbackPage( )  {
         paymentMethod: 'UPI',
         createdAt: '2022-01-01T12:00:00Z',
       };
+
+      
       
   return (
 

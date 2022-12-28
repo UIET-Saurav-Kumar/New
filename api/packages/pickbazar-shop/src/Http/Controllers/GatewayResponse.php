@@ -146,9 +146,12 @@ class GatewayResponse extends CoreController
         if($txStatus == "SUCCESS") {
       
           UtilityPayment::where('tracking_number', $order_id)->update(['isPayedByCustomer' => 1]);
+
           $utility_payment=UtilityPayment::where('tracking_number', $order_id)->first();
-          $code=$this->recharge($utility_payment);
-           $user_txId = $utility_payment->order_id;
+
+          $user_txId = $this->recharge($utility_payment);
+          
+          // $user_txId = $utility_payment->order_id;
 
           $recharge_status = $this->rechargeStatus($user_txId);
           $txid = $recharge_status[0];
@@ -163,8 +166,9 @@ class GatewayResponse extends CoreController
             UtilityPayment::where('tracking_number', $order_id)->update(['status' => 'FAILED']);
           }
       
-           $callback_url = "https://buylowcal.com/callback?status=Success&txid=.$order_id.&mytxid=.$txid.&optxid=OPeratorID&mobileno=Mobile";
-      
+          // $callback_url = "https://buylowcal.com/callback?status=Success&txid=.$order_id.&mytxid=.$txid.&optxid=OPeratorID&mobileno=Mobile";
+             $callback_url = "https://buylowcal.com/user/utility-payments";
+
           return redirect()->away($callback_url);
       
         }
