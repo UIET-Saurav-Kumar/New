@@ -149,9 +149,9 @@ class GatewayResponse extends CoreController
           $utility_payment=UtilityPayment::where('tracking_number', $order_id)->first();
           $code=$this->recharge($utility_payment);
       
-           $recharge_status = $this->statusApi($utility_payment->trans_id);
-      
-           $status = $recharge_status[1];
+          $recharge_status = $this->rechargeStatus($utility_payment->trans_id);
+          $txid = $recharge_status[0];
+          $status = $recharge_status[1];
           $error_code = $recharge_status[2];
           $operator_ref = $recharge_status[3];
           $time = $recharge_status[4];
