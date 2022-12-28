@@ -85,7 +85,7 @@ class GatewayResponse extends CoreController
         //e.g id
         //$trans_id = 'BDHD93NIDB390SB0';
 
-        $trans_id = $request->trans_id;
+        $trans_id = $request->user_txId;
       
         $curl = curl_init();
       
@@ -148,8 +148,9 @@ class GatewayResponse extends CoreController
           UtilityPayment::where('tracking_number', $order_id)->update(['isPayedByCustomer' => 1]);
           $utility_payment=UtilityPayment::where('tracking_number', $order_id)->first();
           $code=$this->recharge($utility_payment);
-      
-          $recharge_status = $this->rechargeStatus($utility_payment->order_id);
+           $user_txId = $utility_payment->order_id;
+
+          $recharge_status = $this->rechargeStatus($user_txId);
           $txid = $recharge_status[0];
           $status = $recharge_status[1];
           $error_code = $recharge_status[2];
