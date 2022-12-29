@@ -145,9 +145,7 @@ export default function PromotionSlider(props:any) {
     // page:1,
     search:getSearch()
   },  
-  {
-    // enabled : Boolean(props.offer)
-  }
+   
   );
 
   function getSearch():string{

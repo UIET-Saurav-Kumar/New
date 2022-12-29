@@ -230,13 +230,7 @@ import { CheckMarkFill } from '@components/icons/checkmark-circle-fill';
     // ));
 
 
-        const { query } = useRouter();
-        const [searchTerm, setSearchTerm] = useState("");
-        const [category, setCategory] = useState("");
-        const [page, setPage] = useState(1);
-        const [orderBy, setOrder] = useState("created_at");
-        const [type, setType] = useState("");
-        const { data: orderStatusData } = useOrderStatusesQuery();
+      
         const { mutate: createOrder, isLoading: salonBooking } = useCreateOrderMutation();
 
         const [selectedOffer, setSelectedOffer] = useState(null);
@@ -284,10 +278,10 @@ import { CheckMarkFill } from '@components/icons/checkmark-circle-fill';
 
         function handleSelectedShop(data:any) {
           setSelectedSalon(data);
-          setNewOfferName(products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0])
-          // setSelectedSalon(data);
-            console.log('log selectedSalon',selectedSalon);
-            console.log('log selectedSalon data',data);
+          setNewOfferName(products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0], () => {
+            console.log('New offer name:', newOfferName);
+          });
+          console.log()
         }
 
         
@@ -401,18 +395,6 @@ import { CheckMarkFill } from '@components/icons/checkmark-circle-fill';
         }
 
         
-
-        const {
-            addItemToCart,
-            removeItemFromCart,
-            isInStock,
-            isProductAvailable,
-            getItemFromCart,
-            isInCart,
-          } = useCart();
-        
-       
-
      const {
       data:shops,
       isLoading,
