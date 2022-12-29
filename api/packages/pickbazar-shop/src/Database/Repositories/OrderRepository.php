@@ -616,6 +616,7 @@ class OrderRepository extends BaseRepository
         $balance->total_earnings= $balance->total_earnings + $commission_value;
         $balance->current_balance=$balance->current_balance + $commission_value;
         $balance->save();
+        
     }
 
     private function get_uplink($user)
@@ -659,6 +660,7 @@ class OrderRepository extends BaseRepository
             return false;
         }
     }
+
 
     public function createChildOrder($id, $request)
     {

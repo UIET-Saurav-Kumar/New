@@ -73,6 +73,8 @@ export default function OrderPage() {
     tracking_number: query.tracking_number as string,
   });
 
+  console.log('order data', data)
+
   // console.log('order data',data);
 
   const { price: total } = usePrice(data && { amount: data.order.paid_total });

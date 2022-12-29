@@ -46,6 +46,8 @@ import { CheckedIcon } from '@components/icons/checked';
 import { CheckMarkCircle } from '@components/icons/checkmark-circle';
 import { CheckMark } from '@components/icons/checkmark';
 import { CheckMarkFill } from '@components/icons/checkmark-circle-fill';
+import { calculateTotal } from '@utils/calculate-total';
+import { useVerifyCheckoutMutation } from '@data/delivery/use-checkout-verify.mutation';
 
 
 
@@ -253,13 +255,19 @@ import { CheckMarkFill } from '@components/icons/checkmark-circle-fill';
         console.log('new products',products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0])   
 
         let avail_items =  [{...offerName,
-          id: products?.pages[0]?.length && products?.pages[0]?.data?.filter(product => product?.sale_price === offerName?.sale_price  )[0].id,
+          // id: products?.pages[0]?.length && products?.pages[0]?.data?.filter(product => product?.sale_price === offerName?.sale_price  )[0].id,
           shop : selectedSalon,
           shop_id: selectedSalon?.id,
+          // product_id: products?.pages[0]?.length && products?.pages[0]?.length && products?.pages[0]?.data?.filter(product => product?.sale_price === offerName?.sale_price  )[0].id,
         }]
+
+        const subtotal = calculateTotal(avail_items).total;
 
         console.log('log avail_items', avail_items)
         console.log('log offer', offerName)
+
+        const { mutate: verifyCheckout, isLoading: c_loading } =
+        useVerifyCheckoutMutation();
 
         function onSubmit(values: FormValues) {
           console.log('newoffer',offerName);
@@ -268,6 +276,7 @@ import { CheckMarkFill } from '@components/icons/checkmark-circle-fill';
           if (!isAuthorize) {
             return openModal("LOGIN_VIEW");
           }
+           
 
           let input = {
             //@ts-ignore
@@ -279,17 +288,32 @@ import { CheckMarkFill } from '@components/icons/checkmark-circle-fill';
             // }],
             customer_contact: customer?.me?.phone_number,
             status:   1,
-            amount: offerName?.price,
+            amount: offerName && offerName?.sale_price,
+            // product_id: products?.pages[0]?.length && products?.pages[0]?.data?.filter(product => product?.sale_sale_price === offerName?.sale_price  )[0].id,
             // coupon_id: coupon?.id,
+            quantity: 1,
             discount:  0,
-            paid_total: offerName?.price,
-            total : offerName?.price,
+            paid_total: offerName && offerName?.sale_price,
+            total : offerName && offerName?.sale_price,
             sales_tax:  0,
             delivery_fee: 0,
             delivery_time: selectedTimeSlot,
             payment_gateway: 'cod',
         
           };
+
+
+          verifyCheckout(
+            {
+              amount: subtotal,
+              unit_price: subtotal,
+              total: offerName && offerName?.sale_price,
+              products: avail_items?.map((item) => formatOrderedProduct(item)),
+  
+            
+            },
+           
+          )
 
 
           console.log('values',input,offerName)
@@ -308,7 +332,9 @@ import { CheckMarkFill } from '@components/icons/checkmark-circle-fill';
                 // console.log(error?.response?.data?.message);
               },
             });
+          
           }
+          
 
           const {  
               data,
@@ -331,16 +357,32 @@ import { CheckMarkFill } from '@components/icons/checkmark-circle-fill';
             }
             return "";
           }
+          const myDiv = useRef(null)
 
          
 
           console.log([{'offer': offerName, 'selectedSalon' : selectedSalon }])
+
+          const {
+            addItemToCart,
+            removeItemFromCart,
+            isInStock,
+            isProductAvailable,
+            getItemFromCart,
+            isInCart,
+          } = useCart();
  
          
         function showSalons(data:any) {
+
+          myDiv.current.scrollIntoView({
+            behavior: 'smooth',
+          })
+        
          console.log('salon',data)
          setOfferName(data)
          setSelectedSalon(null);
+        offerName && addItemToCart(offerName, 1) 
         // const item = generateCartItem(data);
         // addItemToCart(item, 1)
         }
@@ -398,8 +440,8 @@ import { CheckMarkFill } from '@components/icons/checkmark-circle-fill';
             Featured Products
           </h3>
 
-            <div className = {`${data?.offers.data?.length  ? 'block' : 'hidden'} w-full overflow-x-scroll text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500
-                             grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-5 bg-gray-50 mt-3 p-2 lg:p-6 gap-2`}>
+            <div className = {`${data?.offers.data?.length  ? 'block w-full' : 'hidden'} w-full overflow-x-scroll text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500
+                            grid grid-rows-2 row-span-full  md:grid md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-5 bg-gray-50 mt-3 p-2 lg:p-6 gap-8`}>
               
                {/* {fetching && !data?.pages?.length ? (
                         <ProductFeedLoader limit={5} />
@@ -409,7 +451,7 @@ import { CheckMarkFill } from '@components/icons/checkmark-circle-fill';
                       data?.offers?.data?.filter(product => product?.status === 'publish' && product?.is_featured === 1 && product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','') ==='Salon  Spa' ).map((offer,product) => (
                           
                       <div className={` ${offer?.name === offerName?.name ? 'border-3 border-green-500 ' : 'border-3'}
-                                         relative w-60 lg:w-auto max-w-sm mx-auto bg-white rounded-lg shadow-lg overflow-hidden`}>
+                                         relative w-full lg:w-auto mx-auto bg-white rounded-lg shadow-lg overflow-hidden`}>
                         <img src={offer?.image?.thumbnail} 
                              className='w-full '/>
                              <CheckMarkFill  width={20} className={` ${offer?.name === offerName?.name ? 'block transition-all duration-900 ease-in-out' : 'hidden'} absolute right-0 top-0 me-2 bg-white rounded-full  text-green-600`} />
@@ -418,7 +460,7 @@ import { CheckMarkFill } from '@components/icons/checkmark-circle-fill';
                               {offer?.name}
                             </div>
                           </div>
-                        <div className="px-6 py-4">
+                        <div className="px-6 py-2">
                           <span className="inline-block bg-gray-200 p-3 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
                           ₹
                           {+' '+offer?.sale_price}.00
@@ -435,9 +477,9 @@ import { CheckMarkFill } from '@components/icons/checkmark-circle-fill';
                     }
                     
             </div>
-        
 
-        <div className='flex flex-col lg:px-4 mt-0 lg:mt-10 py-4'>
+
+        <div ref={myDiv}  className='flex flex-col lg:px-4 mt-6 lg:mt-10 py-4'>
 
             <h4 className='text-xl flex items-center justify-between lg:text-3xl font-serif text-gray-900 font-medium ml-2 lg:ml-4 py-4 tracking-normal'>
                 Select Salon 

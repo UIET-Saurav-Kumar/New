@@ -50,8 +50,6 @@ const VerifyCheckout = () => {
   }
 
 
- 
-
 
   const available_items = items?.filter(
     (item: any) => 
