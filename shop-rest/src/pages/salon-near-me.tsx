@@ -197,7 +197,7 @@ import { CheckMarkFill } from '@components/icons/checkmark-circle-fill';
       // category: query?.category as string,
     },
     {
-      enabled: Boolean(selectedSalon?.id),
+      enabled: Boolean(selectedSalon),
     });
 
     // useEffect(()=>{
@@ -217,76 +217,43 @@ import { CheckMarkFill } from '@components/icons/checkmark-circle-fill';
 
         const match = tim?.match(pattern);
 
-        const day = match?.groups.day;
-        const month = match?.groups.month;
-        const date = match?.groups.date;
-        const year = match?.groups.year;
+        const day   =  match?.groups.day;
+        const month =  match?.groups.month;
+        const date  =  match?.groups.date;
+        const year  =  match?.groups.year;
 
         const newDate = `${day} ${month} ${date} ${year}`;
-    
-
-    // // console.log( 'category',data?.offers.data.map(product => {
-    //     return product?.shop?.shop_categories.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','')}
-    // ));
-
-
+   
       
         const { mutate: createOrder, isLoading: salonBooking } = useCreateOrderMutation();
 
-        const [selectedOffer, setSelectedOffer] = useState(null);
 
         const {data:customer} = useCustomerQuery();
         const[newOfferName, setNewOfferName] = useState(null);
 
-        console.log('loc',getLocation);
-
-        // const [sortedBy, setColumn] = useState<SortOrder>(SortOrder.Desc);
-
-        // const {
-        //     data: salonProducts,
-        //     isLoading: fetching,
-        //     errors,
-        //   } = useAllProductsQuery({
-        //       limit: 90000,
-        //       page,
-        //       type,
-        //       category,
-        //       text: query?.text as string,
-        //   });
-
-
-        const {
-          billing_address,
-          shipping_address,
-          delivery_time,
-          checkoutData,
-          coupon,
-          discount,
-        } = useCheckout();
 
         console.log('log salon',selectedSalon)
 
 
-        const { items, delivery_charges} = useCart();
+        useEffect(()=>{
+          setNewOfferName(products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0])
+        },[selectedSalon])
 
-        console.log(billing_address)
-        const available_items = items?.filter(
-          (item: any) => 
-            !checkoutData?.unavailable_products.map((item: any) => item.name).includes(item.name) 
-        );
-        
 
         function handleSelectedShop(data:any) {
-          setSelectedSalon(data);
-          setNewOfferName(products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0], () => {
-            console.log('New offer name:', newOfferName);
-          });
-          console.log()
-        }
-
+         offerName && setSelectedSalon(data);
+          // setNewOfferName(tr)
+          
+          console.log('new offername data',data)
+        }                           
         
+        console.log('new offername',newOfferName) 
+        console.log('new selectedSalon',selectedSalon)    
+        console.log('new old offername',offerName)
+        console.log('new products',products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0])   
 
-        let avail_items =  [{...newOfferName,
+        let avail_items =  [{...offerName,
+          id: products?.pages[0]?.length && products?.pages[0]?.data?.filter(product => product?.sale_price === offerName?.sale_price  )[0].id,
           shop : selectedSalon,
           shop_id: selectedSalon?.id,
         }]
@@ -312,21 +279,16 @@ import { CheckMarkFill } from '@components/icons/checkmark-circle-fill';
             // }],
             customer_contact: customer?.me?.phone_number,
             status:   1,
-            amount: newOfferName?.price,
+            amount: offerName?.price,
             // coupon_id: coupon?.id,
             discount:  0,
-            paid_total: newOfferName?.price,
-            total : newOfferName?.price,
+            paid_total: offerName?.price,
+            total : offerName?.price,
             sales_tax:  0,
             delivery_fee: 0,
             delivery_time: selectedTimeSlot,
             payment_gateway: 'cod',
-            // billing_address: {
-            //   ...(billing_address?.address && billing_address.address),
-            // },
-            // shipping_address: {
-            //   ...(shipping_address?.address && shipping_address.address),
-            // },
+        
           };
 
 
@@ -358,18 +320,6 @@ import { CheckMarkFill } from '@components/icons/checkmark-circle-fill';
               location : ((getLocation?.formattedAddress) ? JSON.stringify(getLocation):null ) as any
           }); 
 
-          
-          function handleSearch({ searchText }: { searchText: string }) {
-            setSearchTerm(searchText);
-            setPage(1);
-          }
-
-          const Product = [] ; 
-      
-
-          function getCategory():string {
-              return 'Salon & Spa' as string; 
-          }
 
           function getSearch():string
           {
@@ -390,6 +340,7 @@ import { CheckMarkFill } from '@components/icons/checkmark-circle-fill';
         function showSalons(data:any) {
          console.log('salon',data)
          setOfferName(data)
+         setSelectedSalon(null);
         // const item = generateCartItem(data);
         // addItemToCart(item, 1)
         }
@@ -525,10 +476,11 @@ import { CheckMarkFill } from '@components/icons/checkmark-circle-fill';
             <button className={`${selectedTimeSlot === '04:00pm - 06:00pm' ? 'bg-blue-600 text-white': 'hover:bg-gray-100 border  p-3 bg-gray-50 text-black'} rounded cursor-pointer `}
                     onClick={() => setSelectedTimeSlot('04:00pm - 06:00pm')}> 04:00pm - 06:00pm </button>
           </div>
+
       </div>
 
       <div className='mx-auto w-full text-center'>
-        <button className='mx-auto border bg-accent mb-20 p-4' 
+        <button className='mx-auto text-white font-semibold rounded mt-10 w-60 border bg-accent mb-20 p-4' 
                 onClick={()=>onSubmit()}>
                 {salonBooking ?
                 ("booking..."):

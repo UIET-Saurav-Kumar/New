@@ -111,6 +111,8 @@ SwiperCore.use([Navigation]);
 
 export default function PromotionSlider(props:any) {
 
+  const {selectedShop, offer} = props;
+
   console.log('shops',props)
   
 

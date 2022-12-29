@@ -44,6 +44,8 @@ const OrderDetails = ({ order }: Props) => {
     amount: order?.sales_tax,
   });
 
+  console.log('order details', order )
+
 
 
 
