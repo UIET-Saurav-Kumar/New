@@ -128,11 +128,11 @@ class GatewayResponse extends CoreController
             $recharge_status = $this->rechargeStatus($order_id);
 
             if($code==200&&$recharge_status=="Success"){
-              $utility_payment=UtilityPayment::where('tracking_number', $order_id)->update(['status' => 'APPROVED']);
+              UtilityPayment::where('tracking_number', $order_id)->update(['status' => 'APPROVED']);
             }else if($code==200&&$recharge_status=="Pending"){
-              $utility_payment=UtilityPayment::where('tracking_number', $order_id)->update(['status' => 'PENDING']);
+              UtilityPayment::where('tracking_number', $order_id)->update(['status' => 'PENDING']);
             }else {
-              $utility_payment=UtilityPayment::where('tracking_number', $order_id)->update(['status' => 'FAILED']);
+              UtilityPayment::where('tracking_number', $order_id)->update(['status' => 'FAILED']);
             }
 
             // $url = "https://buylowcal.com/user/utility-payments";
