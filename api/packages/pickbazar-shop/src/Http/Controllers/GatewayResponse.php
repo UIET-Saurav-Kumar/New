@@ -126,7 +126,7 @@ class GatewayResponse extends CoreController
             $code=$this->recharge($utility_payment);
 
             $recharge_status = $this->rechargeStatus($order_id);
-            $recharge_api_txid = $recharge_status[1];
+            // $recharge_api_txid = $recharge_status[1];
 
             if($code==200&&$recharge_status=="Success"){
               UtilityPayment::where('tracking_number', $order_id)->update(['status' => 'APPROVED']);
