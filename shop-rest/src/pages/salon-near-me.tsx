@@ -225,6 +225,8 @@ import { useVerifyCheckoutMutation } from '@data/delivery/use-checkout-verify.mu
         const year  =  match?.groups.year;
 
         const newDate = `${day} ${month} ${date} ${year}`;
+
+        const { data: orderStatusData } = useOrderStatusesQuery();
    
       
         const { mutate: createOrder, isLoading: salonBooking } = useCreateOrderMutation();
@@ -236,10 +238,9 @@ import { useVerifyCheckoutMutation } from '@data/delivery/use-checkout-verify.mu
 
         console.log('log salon',selectedSalon)
 
-
-        useEffect(()=>{
-          setNewOfferName(products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0])
-        },[selectedSalon])
+        // useEffect(()=>{
+        //   setNewOfferName(products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0])
+        // },[selectedSalon])
 
 
         function handleSelectedShop(data:any) {
@@ -249,22 +250,29 @@ import { useVerifyCheckoutMutation } from '@data/delivery/use-checkout-verify.mu
           console.log('new offername data',data)
         }                           
         
-        console.log('new offername',newOfferName) 
+        // console.log('new offername',newOfferName) 
         console.log('new selectedSalon',selectedSalon)    
-        console.log('new old offername',offerName)
+        console.log('new offername',offerName)
         console.log('new products',products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0])   
 
-        let avail_items =  [{...offerName,
-          // id: products?.pages[0]?.length && products?.pages[0]?.data?.filter(product => product?.sale_price === offerName?.sale_price  )[0].id,
-          shop : selectedSalon,
-          shop_id: selectedSalon?.id,
+        let avail_items =  [products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0] ]
           // product_id: products?.pages[0]?.length && products?.pages[0]?.length && products?.pages[0]?.data?.filter(product => product?.sale_price === offerName?.sale_price  )[0].id,
-        }]
+        // }]
+
+        console.log('new avail items', offerName);
 
         const subtotal = calculateTotal(avail_items).total;
 
         console.log('log avail_items', avail_items)
         console.log('log offer', offerName)
+
+        let price = products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0].price;
+        let sale_price = products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0].sale_price;
+
+
+      function calcDiscount(price, sale_price){
+        return (price - sale_price) / price *100
+      }
 
         const { mutate: verifyCheckout, isLoading: c_loading } =
         useVerifyCheckoutMutation();
@@ -287,12 +295,12 @@ import { useVerifyCheckoutMutation } from '@data/delivery/use-checkout-verify.mu
             //   shop : {selectedSalon}
             // }],
             customer_contact: customer?.me?.phone_number,
-            status:   1,
+            status:  orderStatusData?.order_statuses?.data[0]?.id ?? 1,
             amount: offerName && offerName?.sale_price,
             // product_id: products?.pages[0]?.length && products?.pages[0]?.data?.filter(product => product?.sale_sale_price === offerName?.sale_price  )[0].id,
             // coupon_id: coupon?.id,
-            quantity: 1,
-            discount:  0,
+            // quantity: 1,
+            discount:  Math.floor(calcDiscount(price, sale_price)),
             paid_total: offerName && offerName?.sale_price,
             total : offerName && offerName?.sale_price,
             sales_tax:  0,
@@ -305,11 +313,11 @@ import { useVerifyCheckoutMutation } from '@data/delivery/use-checkout-verify.mu
 
           verifyCheckout(
             {
+            
               amount: subtotal,
-              unit_price: subtotal,
-              total: offerName && offerName?.sale_price,
+              // unit_price: subtotal,
+              // total: offerName && offerName?.sale_price,
               products: avail_items?.map((item) => formatOrderedProduct(item)),
-  
             
             },
            
@@ -382,7 +390,7 @@ import { useVerifyCheckoutMutation } from '@data/delivery/use-checkout-verify.mu
          console.log('salon',data)
          setOfferName(data)
          setSelectedSalon(null);
-        offerName && addItemToCart(offerName, 1) 
+        // offerName && addItemToCart(offerName, 1) 
         // const item = generateCartItem(data);
         // addItemToCart(item, 1)
         }

@@ -50,8 +50,8 @@ const AllCategories = () => {
 
  	function getLinkSalonSpa(){
 
-		var pathname="/salon-products?category=menicure-pedicure&text=";
-		// var pathname="/salon-near-me";
+		// var pathname="/salon-products?category=menicure-pedicure&text=";
+		var pathname="/salon-near-me";
 
 		return pathname;
 	}

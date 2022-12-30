@@ -21,6 +21,8 @@ export const OrderItems = ({ products,orderId,orderStatus }: { products: any }) 
     tracking_number: query.tracking_number as string,
   });
 
+   
+
   const { price: total } = usePrice(data && { amount: data.order.paid_total });
   const { price: sub_total } = usePrice(data && { amount: data.order.amount });
   const { price: shipping_charge } = usePrice(
@@ -34,6 +36,15 @@ export const OrderItems = ({ products,orderId,orderStatus }: { products: any }) 
   const { price: discount } = usePrice(
     data && { amount: data?.order?.discount ?? 0 }
   );
+
+  let price = data?.order.price;
+  let sale_price = data?.order?.sale_price;
+
+
+  function calcDiscount(price, sale_price){
+    return (price - sale_price) / price *100
+  }
+  console.log('order data ',data,price,sale_price, calcDiscount(price,sale_price))
 
 
   // console.log('orderStatus',orderStatus);
@@ -147,6 +158,7 @@ export const OrderItems = ({ products,orderId,orderStatus }: { products: any }) 
       },
     },
 
+
     {
       title: t("Discount"),
       dataIndex: "pivot",
@@ -154,9 +166,20 @@ export const OrderItems = ({ products,orderId,orderStatus }: { products: any }) 
       align: "center",
       width: 100,
       render: () => {
-        return <p className="text-body">{discount}</p>;
+        return <p className={` ${Math.floor(discount.replace('₹','')) == 0 ? 'text-body':'text-white font-semibold p-0.5 bg-green-700 rounded-full'}  `}>{Math.floor(discount.replace('₹',''))+"%"}</p>;
       },
     },
+    {
+      title: t("Shipping/Delivery"),
+      dataIndex: " ",
+      key: "items",
+      align: "center",
+      width: 100,
+      render: () => {
+        return <p className='whitespace-nowrap text-body'>{shipping_charge}</p>;
+      },
+    },
+
 
     {
       title: (data?.order?.children?.length) > 1 ? t("Sub Total") : t("Total") ,
@@ -166,9 +189,9 @@ export const OrderItems = ({ products,orderId,orderStatus }: { products: any }) 
       width: 100,
       render: (pivot: any) => {
         const { price } = usePrice({
-          amount: +pivot.subtotal,
+          amount: +data?.order?.amount,
         });
-        return <p className=''>{price}</p>;
+        return <p className='whitespace-nowrap   ml-5'>{price}</p>;
       },
     },
 
@@ -225,12 +248,12 @@ export const OrderItems = ({ products,orderId,orderStatus }: { products: any }) 
           className="orderDetailsTable w-full"
           scroll={{ x: 350, y: 500 }}
         />
-              <p className=" p-2   flex  w-full text-body-dark items-center ">
+              {/* <p className=" p-2   flex  w-full text-body-dark items-center ">
                 <div className='flex ml-4 w-full '><strong className="w-5/12 sm:w-4/12 tracking-widest text-lg font-extrabold">
                   {t("Shipping Charges")}
                 </strong>
                 :<span className=" items-center justify-end  mr-4 flex w-7/12 sm:w-8/12 ps-4 font-bold text-lg ">{shipping_charge}</span></div>
-              </p> 
+              </p>  */}
              {data?.order?.children?.length > 1 ?  <p className=" p-2   flex  w-full text-body-dark items-center ">
                 <div className='flex ml-4 w-full '><strong className="w-5/12 sm:w-4/12 tracking-widest text-lg font-extrabold">
                   {t(" Total-amount")}
