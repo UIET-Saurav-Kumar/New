@@ -128,7 +128,7 @@ class GatewayResponse extends CoreController
             $recharge_status = $this->rechargeStatus($order_id);
             // $recharge_api_txid = $recharge_status[1];
 
-            if($code==200&&$recharge_status=="Success"){
+            if($code==200 && $recharge_status=="Success"){
               UtilityPayment::where('tracking_number', $order_id)->update(['status' => 'APPROVED']);
             }else if($code==200&&$recharge_status=="Pending"){
               UtilityPayment::where('tracking_number', $order_id)->update(['status' => 'PENDING']);
@@ -137,7 +137,7 @@ class GatewayResponse extends CoreController
             }
 
             // $url = "https://buylowcal.com/user/utility-payments";
-            $callback_url="https://buylowcal.com/callback?status=Success&txid=$order_id&mytxid=aPITransID&optxid=$utility_payment->operator&mobileno=$utility_payment->customer_contact";
+            $callback_url="https://buylowcal.com/callback?status=.$recharge_status.&txid=$order_id&mytxid=aPITransID&optxid=$utility_payment->operator&mobileno=$utility_payment->customer_contact";
 
             return redirect()->away($callback_url);
 
