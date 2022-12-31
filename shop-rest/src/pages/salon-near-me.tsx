@@ -208,6 +208,7 @@ import Image from 'next/image';
       isLoading: loading,
       error,
   } = useFeatureProductQuery({
+    // shop_id: Number(selectedSalon?.id),
       limit: 10 as number,
       search:"",
       location : ((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any
@@ -438,6 +439,21 @@ import Image from 'next/image';
 
     console.log('time',selectedTimeSlot)
 
+    const filteredData = data?.featureProducts?.data?.filter(product =>
+      product?.status === "publish" &&
+      product?.type_id == 7 &&
+      product?.is_featured === 1 &&
+      product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").replace("name", "").replace("id", "") === "Salon  Spa"
+    );
+
+     const uniqueProducts = [];
+
+    filteredData?.forEach(product => {
+      if (!uniqueProducts?.find(p => p.name === product.name)) {
+        uniqueProducts.push(product);
+      }
+    });
+
   return (
 
    //salon page design 
@@ -447,6 +463,8 @@ import Image from 'next/image';
   //    <img src='/'
   //    className="object-contain mx-auto" />
   // ) : (
+
+  
 
       <>
 
@@ -468,7 +486,7 @@ import Image from 'next/image';
                       ) : ( */}
                 
                     {
-                      data?.featureProducts?.data?.filter(product => product?.status === 'publish' && product?.type_id == 7 && product?.is_featured === 1 && product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','') ==='Salon  Spa' ).map((offer,product) => (
+                      uniqueProducts?.map((offer,product) => (
                           
                       <div className={` ${offer?.name === offerName?.name ? 'border-3 border-green-500 ' : 'border-3'}
                                          relative w-96 h-full flex flex-col  lg:w-full mx-auto bg-white rounded-lg shadow-lg `}>
