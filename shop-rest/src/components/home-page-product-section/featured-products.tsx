@@ -255,11 +255,9 @@ export default function FeaturedProducts({}) {
         name:electronicsArray,
         title:'Electronics',
         id:22,
-        
     },
         
     ]
-
 
 
     return (
@@ -280,7 +278,7 @@ export default function FeaturedProducts({}) {
                 <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
                     Salon & Spa
                 </h3>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 px-1 gap-1 lg:p-4 lg:gap-2">
+                <div className = "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 px-1 gap-1 lg:p-4 lg:gap-2">
                     { salonspaArray?.filter(product => product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                         <>    
                             <motion.div key={product.id}>

@@ -48,7 +48,8 @@ import { CheckMark } from '@components/icons/checkmark';
 import { CheckMarkFill } from '@components/icons/checkmark-circle-fill';
 import { calculateTotal } from '@utils/calculate-total';
 import { useVerifyCheckoutMutation } from '@data/delivery/use-checkout-verify.mutation';
-
+import { useFeatureProductQuery } from '@data/home/use-feature-product-query';
+import Image from 'next/image';
 
 
   const ProductFeedLoader = dynamic(
@@ -202,6 +203,29 @@ import { useVerifyCheckoutMutation } from '@data/delivery/use-checkout-verify.mu
       enabled: Boolean(selectedSalon),
     });
 
+    const {
+      data ,
+      isLoading: loading,
+      error,
+  } = useFeatureProductQuery({
+      limit: 10 as number,
+      search:"",
+      location : ((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any
+  });
+
+  console.log('feature',data)
+
+  //   const {  
+  //     data,
+  //     isLoading: loading,
+  //     error,
+  // } = useOfferQuery({
+    
+  //     limit: 20 as number,
+  //     search:"",
+  //     location : ((getLocation?.formattedAddress) ? JSON.stringify(getLocation):null ) as any
+  // }); 
+
     // useEffect(()=>{
     //   setOfferName(products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0])
     // },[ ])
@@ -255,7 +279,7 @@ import { useVerifyCheckoutMutation } from '@data/delivery/use-checkout-verify.mu
         console.log('new offername',offerName)
         console.log('new products',products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0])   
 
-        let avail_items =  [products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0] ]
+        let avail_items =  [products?.pages[0]?.data?.filter(product =>  product.sale_price === offerName?.sale_price)[0] ]
           // product_id: products?.pages[0]?.length && products?.pages[0]?.length && products?.pages[0]?.data?.filter(product => product?.sale_price === offerName?.sale_price  )[0].id,
         // }]
 
@@ -293,7 +317,7 @@ import { useVerifyCheckoutMutation } from '@data/delivery/use-checkout-verify.mu
             avail_items?.map((item) => formatOrderedProduct(item)),
             //    [{...offerName,
             //   shop : {selectedSalon}
-            // }],
+            //    }],
             customer_contact: customer?.me?.phone_number,
             status:  orderStatusData?.order_statuses?.data[0]?.id ?? 1,
             amount: offerName && offerName?.sale_price,
@@ -307,7 +331,6 @@ import { useVerifyCheckoutMutation } from '@data/delivery/use-checkout-verify.mu
             delivery_fee: 0,
             delivery_time: selectedTimeSlot,
             payment_gateway: 'cod',
-        
           };
 
 
@@ -342,18 +365,7 @@ import { useVerifyCheckoutMutation } from '@data/delivery/use-checkout-verify.mu
             });
           
           }
-          
-
-          const {  
-              data,
-              isLoading: loading,
-              error,
-          } = useOfferQuery({
-              limit: 20 as number,
-              search:"",
-              location : ((getLocation?.formattedAddress) ? JSON.stringify(getLocation):null ) as any
-          }); 
-
+           
 
           function getSearch():string
           {
@@ -448,38 +460,47 @@ import { useVerifyCheckoutMutation } from '@data/delivery/use-checkout-verify.mu
             Featured Products
           </h3>
 
-            <div className = {`${data?.offers.data?.length  ? 'block w-full' : 'hidden'} w-full overflow-x-scroll text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500
-                            grid grid-rows-2 row-span-full  md:grid md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-5 bg-gray-50 mt-3 p-2 lg:p-6 gap-8`}>
+            <div className = {`${data?.featureProducts?.data?.length  ? 'block w-full' : 'hidden'} w-full overflow-x-scroll text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500
+                            grid grid-rows-2   md:grid md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-5 bg-gray-50 mt-3 p-2 lg:p-6 gap-4`}>
               
                {/* {fetching && !data?.pages?.length ? (
                         <ProductFeedLoader limit={5} />
                       ) : ( */}
                 
                     {
-                      data?.offers?.data?.filter(product => product?.status === 'publish' && product?.is_featured === 1 && product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','') ==='Salon  Spa' ).map((offer,product) => (
+                      data?.featureProducts?.data?.filter(product => product?.status === 'publish' && product?.type_id == 7 && product?.is_featured === 1 && product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").replace('name', '').replace('id','') ==='Salon  Spa' ).map((offer,product) => (
                           
                       <div className={` ${offer?.name === offerName?.name ? 'border-3 border-green-500 ' : 'border-3'}
-                                         relative w-full lg:w-auto mx-auto bg-white rounded-lg shadow-lg overflow-hidden`}>
-                        <img src={offer?.image?.thumbnail} 
-                             className='w-full '/>
+                                         relative w-96 h-full flex flex-col  lg:w-full mx-auto bg-white rounded-lg shadow-lg `}>
+                        <div className='relative flex items-center justify-center w-auto h-64  '>
+                          <Image layout="fill"
+                                 objectFit="contain" 
+                                 quality='40' 
+                                src={offer?.image?.thumbnail} 
+                            //  className=' object-contain h-full w-full ' 
+                             alt={offer?.name}
+                          />
+                        </div>
                              <CheckMarkFill  width={20} className={` ${offer?.name === offerName?.name ? 'block transition-all duration-900 ease-in-out' : 'hidden'} absolute right-0 top-0 me-2 bg-white rounded-full  text-green-600`} />
-                          <div className="px-6 py-4">
-                            <div className="font-bold text-lg lg:text-xl mb-2">
-                              {offer?.name}
+                          <div className=' '>
+                            <div className="px-6 py-4">
+                              <div className="font-bold text-lg lg:text-xl mb-2">
+                                {offer?.name}
+                              </div>
+                            </div>
+                            <div className="px-6 py-2 ">
+                              <span className="inline-block bg-gray-200 p-3 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+                              ₹
+                              {+' '+offer?.sale_price}.00
+                              </span>
+                              <button
+                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+                                onClick={ ()=> showSalons(offer)}
+                              >
+                                {offer?.name === offerName?.name ? 'Selected' : 'Select'}
+                              </button>
                             </div>
                           </div>
-                        <div className="px-6 py-2">
-                          <span className="inline-block bg-gray-200 p-3 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-                          ₹
-                          {+' '+offer?.sale_price}.00
-                          </span>
-                          <button
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-                            onClick={ ()=> showSalons(offer)}
-                          >
-                            {offer?.name === offerName?.name ? 'Selected' : 'Select'}
-                          </button>
-                        </div>
                       </div>
                         ))
                     }
