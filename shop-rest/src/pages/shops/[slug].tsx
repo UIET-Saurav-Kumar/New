@@ -68,6 +68,7 @@ const ShopPage = ({ data }: any) => {
   const { pathname, query } = router;
   const { openModal } = useModalAction();
 
+
   function openReviewModal() {
     openModal('REVIEW_RATING', {
       shop_id: data.id,
@@ -76,6 +77,7 @@ const ShopPage = ({ data }: any) => {
       shop_review: data?.review,
     });
   }
+
 
   console.log('utm', query.utm_campaign);
 
@@ -113,8 +115,10 @@ const ShopPage = ({ data }: any) => {
     : null
   }
 
+
   const { getLocation } = useLocation();
 
+  
   useEffect(() => {
     query.utm_source == 'shop_qr' && 
     createLog({

@@ -252,10 +252,8 @@ import Image from 'next/image';
         const newDate = `${day} ${month} ${date} ${year}`;
 
         const { data: orderStatusData } = useOrderStatusesQuery();
-   
       
         const { mutate: createOrder, isLoading: salonBooking } = useCreateOrderMutation();
-
 
         const {data:customer} = useCustomerQuery();
         const[newOfferName, setNewOfferName] = useState(null);
@@ -281,18 +279,19 @@ import Image from 'next/image';
         console.log('new products',products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0])   
 
         let avail_items =  [products?.pages[0]?.data?.filter(product =>  product.sale_price === offerName?.sale_price)[0] ]
-          // product_id: products?.pages[0]?.length && products?.pages[0]?.length && products?.pages[0]?.data?.filter(product => product?.sale_price === offerName?.sale_price  )[0].id,
+        // product_id: products?.pages[0]?.length && products?.pages[0]?.length && products?.pages[0]?.data?.filter(product => product?.sale_price === offerName?.sale_price  )[0].id,
         // }]
 
         console.log('new avail items', offerName);
 
         const subtotal = calculateTotal(avail_items).total;
 
-        console.log('log avail_items', avail_items)
-        console.log('log offer', offerName)
+        console.log('log avail_items', avail_items);
 
-        let price = products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0].price;
-        let sale_price = products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0].sale_price;
+        console.log('log offer', offerName);
+
+        let price = products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0]?.price;
+        let sale_price = products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0]?.sale_price;
 
 
       function calcDiscount(price, sale_price){
@@ -344,7 +343,6 @@ import Image from 'next/image';
               products: avail_items?.map((item) => formatOrderedProduct(item)),
             
             },
-           
           )
 
 
@@ -443,7 +441,8 @@ import Image from 'next/image';
       product?.status === "publish" &&
       product?.type_id == 7 &&
       product?.is_featured === 1 &&
-      product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").replace("name", "").replace("id", "") === "Salon  Spa"
+      product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").
+      replace("name", "").replace("id", "") === "Salon  Spa"
     );
 
      const uniqueProducts = [];
@@ -453,6 +452,14 @@ import Image from 'next/image';
         uniqueProducts.push(product);
       }
     });
+
+    function allShopsList(data:any){
+        return data
+    }
+
+    console.log('all', allShopsList())
+
+   
 
   return (
 
@@ -537,7 +544,7 @@ import Image from 'next/image';
                 </Link>
             </h4>
 
-            <PromotionSlider  selectedShop = {handleSelectedShop} 
+            <PromotionSlider allShops={allShopsList}  selectedShop = {handleSelectedShop} 
                              offer = {offerName} />
             
         </div>

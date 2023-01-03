@@ -48,9 +48,11 @@ const ShopCard2: React.FC<ShopCardProps> = ({ shop,text,key,category, shopId }) 
   useEffect(() => {
     window.addEventListener("resize", () => setWidth(window.innerWidth));
   }
-    , [width]);
+   ,[width]);
   
+
   const isNew = false;
+  
 
   const {
     isFetching: loading,
@@ -70,13 +72,16 @@ const ShopCard2: React.FC<ShopCardProps> = ({ shop,text,key,category, shopId }) 
     enabled: Boolean(shopId),
   });
 
+
+
+  console.log('products', text);
+
+
   const shopLat = shop?.settings?.location?.lat
   const shopLng = shop?.settings?.location?.lng
 
   const userLat = myLocation?.lat
   const userLng = myLocation?.lng
-
- 
 
 
   return (
@@ -89,7 +94,7 @@ const ShopCard2: React.FC<ShopCardProps> = ({ shop,text,key,category, shopId }) 
               bg-white shadow-md p-6 py-6 mx-1 my-2  cursor-pointer' > */}
 
 
-        <div className='flex flex-col space-y-1 w-full p-4   '>
+        <div className='flex flex-col space-y-1 w-full p-4'>
 
               <div className="flex justify-between w-full items-center "> 
                 <span className="flex items-center"> {imageCheck(shop?.logo?.thumbnail, shop, '190', false,'  w-16 rounded-full object-contain')}
@@ -118,15 +123,15 @@ const ShopCard2: React.FC<ShopCardProps> = ({ shop,text,key,category, shopId }) 
 
      
       { width > 768 ?
-      <div className="flex items-center w-full scrollbar-hide  overflow-x-scroll"> {data?.pages.map((products, _idx) => (
-                  <Fragment key={_idx}>
-                        <PromotionSlider text={text} category={category} data={products} shopId={shop.id} />
-                  </Fragment>
-                ))}
-      </div> : 
+        <div className="flex items-center w-full scrollbar-hide  overflow-x-scroll"> {data?.pages.map((products, _idx) => (
+                    <Fragment key={_idx}>
+                          <PromotionSlider text={text} category={category} data={products} shopId={shop.id} />
+                    </Fragment>
+                  ))}
+        </div> : 
          <div className="flex items-center w-full space-x-2   scrollbar-hide  overflow-x-scroll"> {data?.pages.map((products, _idx) => (
             <Fragment key={_idx}>
-                {products?.data?.filter(product => product?.status === 'publish').map(product => (
+                {products?.data?.filter(product => product?.name == text && product?.status === 'publish').map(product => (
                   product?.is_brand_offer !== 1 ? 
                     <motion.div key={product?.id}>
                     <div className="w-44 md:w-60 "> 
@@ -141,8 +146,7 @@ const ShopCard2: React.FC<ShopCardProps> = ({ shop,text,key,category, shopId }) 
             </Fragment>
             ))}
          </div>
-}
-
+      }
         <div className="h-1 bg-gray-200 mt-7 w-full"></div>
       
       </div>

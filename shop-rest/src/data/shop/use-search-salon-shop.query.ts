@@ -12,17 +12,19 @@ import {
     UseInfiniteQueryOptions,
   } from "react-query";
 
-  
-  const ShopService = new CoreApi(API_ENDPOINTS.SHOPS);
+  const ShopService = new CoreApi(API_ENDPOINTS.SALON_SHOPS);
+
   type PaginatedShop = {
     data: Shop[];
     paginatorInfo: any;
   };
 
-  const fetchShops = async ({
+  
+  const fetchSalonShops = async ({
     queryKey,
     pageParam,
   }: QueryParamsType): Promise<PaginatedShop> => {
+
     const [_key, params] = queryKey;
     let fetchedData: any = {};
     
@@ -37,7 +39,8 @@ import {
     return { data, paginatorInfo: mapPaginatorData({ ...rest }) };
   };
   
-  const useShopsQuery = (
+
+  const useSalonShopsQuery = (
     params: ShopsQueryOptionsType = {},
     options?: UseInfiniteQueryOptions<
       PaginatedShop,
@@ -48,8 +51,8 @@ import {
     >
   ) => {
     return useInfiniteQuery<PaginatedShop, Error>(
-      [API_ENDPOINTS.SHOPS, params],
-      fetchShops,
+      [API_ENDPOINTS.SALON_SHOPS, params],
+      fetchSalonShops,
       {
         ...options,
         getNextPageParam: ({ paginatorInfo }) => paginatorInfo.nextPageUrl,
@@ -57,5 +60,5 @@ import {
     );
   };
   
-  export { useShopsQuery, fetchShops };
+  export { useSalonShopsQuery, fetchSalonShops };
   

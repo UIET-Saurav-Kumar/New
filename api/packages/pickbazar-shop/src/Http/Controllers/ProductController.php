@@ -297,6 +297,9 @@ class ProductController extends CoreController
         return $data;
     }
 
+   
+
+
     public function fetchOffers(Request $request)
     {
         $limit = isset($request->limit) ? $request->limit : 10;

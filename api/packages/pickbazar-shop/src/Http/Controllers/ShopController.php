@@ -103,6 +103,48 @@ class ShopController extends CoreController
         ];
     }
 
+    public function salonShops(Request $request)
+    {
+        // $category_slug=$request->category;
+        $location=($request->location)?json_decode($request->location):"";
+        $search=$request->search;
+        if($search){
+            $search=str_contains($request->search,"-")?str_replace("-","&",$request->search):$request->search;
+        }
+        $shops_ids=[];
+        
+        $limit = $request->limit ?  $request->limit : 15;
+
+        $shops=$this->fetchShops($request)->where("is_active",1);
+        if($search)
+        {
+            $shops_ids=ProductRepository::searchSalonByValue($search);
+            $shops->whereIn('id',$shops_ids);
+        }
+ 
+
+        $shops_array=[];
+        $shops_ids=$shops->pluck('id');
+
+        if($location)
+        {
+            
+            $shops_ids=ShopRepository::getSortedShops($location,$shops_ids);
+            foreach($shops_ids as $id){
+                $single_shop=Shop::find($id);
+                $single_shop->cover_original = $single_shop->cover_image['original'] ?? '';
+                $single_shop->logo_original = $single_shop->logo['original'] ?? '';
+                if($single_shop){
+                    array_push($shops_array,$single_shop);
+                }
+            }
+        }
+        
+        return [
+            "data"=>$shops_array
+        ];
+    }
+
     public function getAdminShop(Request $request)
     {
         $limit = $request->limit ?   $request->limit : 10;

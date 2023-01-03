@@ -4,13 +4,14 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { useTranslation } from "next-i18next";
 import "swiper/swiper-bundle.css";
 // dummy data
-import { fetchShops, useShopsQuery } from "@data/shop/use-search-shop-query";
+import { fetchShops, Salon } from "yuseSalonShopsQuerydata/shop/use-search-shop-query";
 import { useLocation } from "@contexts/location/location.context";
 import { useRouter } from "next/router";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { ROUTES } from "@utils/routes";
 import Link from 'next/link';
 import { CheckMarkFill } from "@components/icons/checkmark-circle-fill";
+import { useSalonShopsQuery } from "@data/shop/use-search-salon-shop.query";
  
 const data = [
 
@@ -120,12 +121,7 @@ export default function PromotionSlider(props:any) {
 
   const [shopName, setShopName] = useState(null);
 
-  function handleSelect(data:any) {
-    console.log('prop',data)
-    setShopName(data.name)
-    props.selectedShop(data)
-    // console.log('shop',data?.offer?.name)
-  }
+   
 
   // useEffect(() => {
   //        setLoading(true)
@@ -139,7 +135,7 @@ export default function PromotionSlider(props:any) {
   const {getLocation} = useLocation();
 
 
-  const { data: shopData } = useShopsQuery({
+  const { data: shopData } = useSalonShopsQuery({
     category:'Salon+-+Spa',
     limit:3000000,
     location:((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any,
@@ -147,8 +143,17 @@ export default function PromotionSlider(props:any) {
     // page:1,
     search:getSearch()
   },  
-   
   );
+
+  function handleSelect(data:any) {
+    const shopList = shopData?.pages;
+    console.log('prop',data)
+    setShopName(data.name)
+    props.selectedShop(data)
+    props.allShops(shopList)
+    // console.log('shop',data?.offer?.name)
+  }
+
 
   function getSearch():string{
     
@@ -159,6 +164,7 @@ export default function PromotionSlider(props:any) {
     }
     return "";
   }
+
 
   // const downloadAllImages = (images) => {
     const downloadLogos = async () => {
@@ -178,11 +184,8 @@ export default function PromotionSlider(props:any) {
     }
     }
   // };
-  
 
-  
-
-  // console.log('slider shops',shopData)
+  console.log('slider shops',shopData)
 
   return (
 
@@ -206,7 +209,8 @@ export default function PromotionSlider(props:any) {
           {shopData?.pages?.map((page, idx) => {
                       return (
                         <Fragment key={idx}>
-                          {page.data.filter((shop) => shop.is_active === 1 && shop.name != 'Villa Hair Sense Panchkula' && shop.name != 'Villa Hair Sense').map((shop: any) => (
+                          {page.data.filter((shop) => shop.is_active === 1 && shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").
+      replace("name", "").replace("id", "") === "Salon  Spa" ).map((shop: any) => (
             <SwiperSlide key={idx}>
               {/* <Link href={`${ROUTES.SHOPS}/${shop.slug}`}> */}
                 <div onClick={()=>handleSelect(shop)} className={` ${shop?.name === shopName ? '' : '' }  border-3 rounded border-white flex hover:shadow-lg flex-col items-center `}>

@@ -90,6 +90,8 @@ const ShopsPage = () => {
     return "";
   }
 
+  console.log('slug data', data?.pages)
+
   if (!isLoading && !data?.pages?.[0]?.data?.length) {
 
     return (
@@ -219,24 +221,24 @@ const ShopsPage = () => {
                           md:grid-cols-2 md++:grid-cols-2 lg:grid-cols-3 lg+:grid-cols-3 xl:grid-cols-4 xl+:grid-cols-4
                           xl++:grid-cols-5 2xl:grid-cols-5  3xl:grid-cols-6 border-2 overflow-y-scroll h-screen overflow-x-hidden  bg-gray-100'> */}
             <div className="lg:px-10  h-full w-full flex flex-col">
-                {isLoading && !data?.pages?.length ? (
-              <ProductFeedLoader limit={30} />
-            ) : (
-            <>
-                { data?.pages?.map((page, idx) => {
-                      return (
-                        <Fragment key={idx}>
-                          {/* {page.data.filter((shop) => shop?.is_active === 1 && shop?.products?.length == 0 ).map((shop: any) => (
-                            <ShopCard2 text={getText()} category={getCategory()} shop={shop} shopId={shop?.id} key={shop.id} />
-                          ))} */}
-                          {page.data.filter((shop) => shop?.is_active === 1 ).map((shop: any) => (
-                            <ShopCard2 text={getText()} category={getCategory()} shop={shop} shopId={shop?.id} key={shop.id} />
-                          ))}
-                        </Fragment>
-                      )
-                })}
-            </>
-          )} 
+                  {isLoading && !data?.pages?.length ? (
+                <ProductFeedLoader limit={30} />
+              ) : (
+              <>
+                  { data?.pages?.map((page, idx) => {
+                        return (
+                          <Fragment key={idx}>
+                            {/* {page.data.filter((shop) => shop?.is_active === 1 && shop?.products?.length == 0 ).map((shop: any) => (
+                              <ShopCard2 text={getText()} category={getCategory()} shop={shop} shopId={shop?.id} key={shop.id} />
+                            ))} */}
+                            {page.data.filter((shop) => shop?.is_active === 1 ).map((shop: any) => (
+                              <ShopCard2 text={getText()} category={getCategory()} shop={shop} shopId={shop?.id} key={shop.id} />
+                            ))}
+                          </Fragment>
+                        )
+                  })}
+              </>
+            )} 
             </div>
 
             <div ref = {loadMoreRef} className={`${!hasNextPage ? "hidden" : ""}`}>

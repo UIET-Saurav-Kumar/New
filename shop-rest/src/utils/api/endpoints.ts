@@ -31,6 +31,7 @@ export const API_ENDPOINTS: Record<string, string> = {
   CONTACT: "contact",
   ADDRESS: "address",
   SHOPS: "all-shop",
+  SALON_SHOPS: 'all-salon-shops',
   HOME_FEATURE_SHOPS:"fetch-feature-shops",
   HOME_FEATURE_STORES:"fetch-feature-stores",
   HOME_FEATURE_PRODUCTS:"fetch-feature-products",

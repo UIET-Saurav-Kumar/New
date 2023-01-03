@@ -210,6 +210,10 @@ Route::get('fetch-feature-products', 'PickBazar\Http\Controllers\ProductControll
 
 Route::get('search/{slug}', 'PickBazar\Http\Controllers\ProductController@search');
 
+// Route::get('search-salon/{slug}', 'PickBazar\Http\Controllers\ProductController@searchSalon');
+Route::get('search-salon-shop/${slug}','PickBazar\Http\Controllers\ShopController@salonShops');
+
+
 Route::get('/master-product/migrate', 'PickBazar\Http\Controllers\MasterProductController@migrate');
 
 Route::post('/store-master-product','PickBazar\Http\Controllers\MasterProductController@storeShopProduct');
@@ -313,6 +317,9 @@ Route::apiResource('attributes', AttributeController::class, [
 Route::apiResource('all-shop', ShopController::class, [
     'only' => ['index', 'show']
 ]);
+
+Route::get('all-salon-shops','PickBazar\Http\Controllers\ShopController@salonShops');
+
 
 Route::apiResource('attribute-values', AttributeValueController::class, [
     'only' => ['index', 'show']
