@@ -79,7 +79,7 @@ export default function OrderDetailsPage() {
  
   
  
-  // console.log('order', data?.order)
+  console.log('order', data?.order?.paid_total)
 
 
   const { price: subtotal } = usePrice(
@@ -187,8 +187,10 @@ export default function OrderDetailsPage() {
       key: "price",
       align: alignRight,
       render: (_: any, item: any) => {
+        const amt = data?.order?.products?.length == 1 ? (data?.order?.products[0]?.type_id == 7 ? data?.order?.amount : item.pivot.subtotal ): item.pivot.subtotal
         const { price } = usePrice({
-          amount: parseFloat(item.pivot.subtotal),
+           
+          amount: parseFloat(amt),
         });
         return <span>{price}</span>;
       },
