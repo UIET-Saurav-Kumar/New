@@ -58,7 +58,7 @@ const OrderDetails = ({ order }: Props) => {
         <>
           <div className="flex flex-col md:flex-row items-center md:justify-between p-5 border-b border-border-200">
             <h2 className="flex font-semibold text-sm md:text-xl text-heading mb-2">
-              {t("Order details-details")} <span className="px-2">-</span>{" "}
+              {t("Order details ")} <span className="px-2">-</span>{" "}
               {tracking_number}
             </h2>
 
@@ -140,7 +140,8 @@ const OrderDetails = ({ order }: Props) => {
             <div className="w-full flex justify-center items-center px-6">
               <OrderStatus status={status?.serial} />
             </div>
-            <OrderItems orderStatus={status?.serial}  products={products} orderId={id} />
+              <OrderItems orderStatus={status?.serial} 
+                          products={products} orderId={id} />
             <div className="flex items-center mx-auto mt-4 ">
         <PDFDownloadLink
           className="inline-flex items-center justify-center flex-shrink-0 font-semibold leading-none rounded outline-none transition duration-300 ease-in-out focus:outline-none focus:shadow focus:ring-1 focus:ring-accent-700 text-light border border-transparent px-5 py-0 h-12 ms-auto mb-5 bg-blue-500 hover:bg-blue-600"

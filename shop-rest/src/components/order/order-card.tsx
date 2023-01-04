@@ -19,6 +19,8 @@ const OrderCard: React.FC<OrderCardProps> = ({ onClick, order, isActive }) => {
     amount: order?.total,
   });
 
+  
+
   return (
     <div
       onClick={onClick}

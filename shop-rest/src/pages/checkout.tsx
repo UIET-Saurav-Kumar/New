@@ -10,7 +10,9 @@ import { useModalAction } from "@components/ui/modal/modal.context";
 import BackButton from "@components/ui/back-button";
 import { useCart } from "@contexts/quick-cart/cart.context";
 
+
 export default function CheckoutPage() {
+
   const { data, refetch } = useCustomerQuery();
   const { isAuthorize } = useUI();
   const { openModal } = useModalAction();
@@ -30,16 +32,12 @@ export default function CheckoutPage() {
   }, [isAuthorize,schedule]);
 
   const  getShopCategory = () => {
-
     var shopCategory = items[0]?.shop?.shop_categories?.replace(/[{":,0123456789}]/g,'').slice(5,-3)
     shopCategory === 'Groceries' ||  shopCategory === 'Cosmetics' ||  shopCategory === 'Takeaways'  ? setSchedule(false) : setSchedule(true);
-    //  alert(shopCategory);
+    // alert(shopCategory);
     return shopCategory;
   }
 
-   
-
-  
 
   // check if item shop category is groceries
   const isGroceries = () => {
@@ -47,7 +45,6 @@ export default function CheckoutPage() {
     items.forEach(element=>{
       let shop_category = element?.shop?.shop_categories?.replace(/[{":,0123456789}]/g,'').slice(5,-3)
       // console.log(shop_category);
-      
       if(shop_category == "Cosmetics") {
         // isGroceries = true;
         setSchedule(false)

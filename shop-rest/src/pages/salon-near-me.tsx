@@ -50,7 +50,7 @@ import { calculateTotal } from '@utils/calculate-total';
 import { useVerifyCheckoutMutation } from '@data/delivery/use-checkout-verify.mutation';
 import { useFeatureProductQuery } from '@data/home/use-feature-product-query';
 import Image from 'next/image';
-
+import moment from 'moment'
 
   const ProductFeedLoader = dynamic(
     () => import("@components/ui/loaders/product-feed-loader")
@@ -292,7 +292,8 @@ import Image from 'next/image';
 
         let price = products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0]?.price;
         let sale_price = products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0]?.sale_price;
-
+      
+         
 
       function calcDiscount(price, sale_price){
         return (price - sale_price) / price *100
@@ -303,8 +304,7 @@ import Image from 'next/image';
 
         function onSubmit(values: FormValues) {
           console.log('newoffer',offerName);
-           
-
+   
           if (!isAuthorize) {
             return openModal("LOGIN_VIEW");
           }
@@ -332,6 +332,8 @@ import Image from 'next/image';
             delivery_time: selectedTimeSlot,
             payment_gateway: 'cod',
           };
+
+          localStorage.setItem('input', JSON.stringify(input));
 
 
           verifyCheckout(
@@ -376,11 +378,10 @@ import Image from 'next/image';
             }
             return "";
           }
-          const myDiv = useRef(null)
-
-         
+          const myDiv = useRef(null);
 
           console.log([{'offer': offerName, 'selectedSalon' : selectedSalon }])
+
 
           const {
             addItemToCart,
@@ -401,9 +402,9 @@ import Image from 'next/image';
          console.log('salon',data)
          setOfferName(data)
          setSelectedSalon(null);
-        // offerName && addItemToCart(offerName, 1) 
-        // const item = generateCartItem(data);
-        // addItemToCart(item, 1)
+          // offerName && addItemToCart(offerName, 1) 
+          // const item = generateCartItem(data);
+          // addItemToCart(item, 1)
         }
 
         
@@ -424,7 +425,6 @@ import Image from 'next/image';
       // page:1,
       search:getSearch() 
     });
-
 
     console.log('shops',offerName,shops)
 
@@ -453,23 +453,22 @@ import Image from 'next/image';
       }
     });
 
-    function allShopsList(data:any){
-        return data
-    }
+    const minDate = new Date();
+    // minDate.setDate(minDate.getDate() + 30);
 
-    console.log('all', allShopsList())
+     
+    
 
-   
 
   return (
 
-   //salon page design 
+    //salon page design 
 
-  //  <>
-  //  {fetching && !data?.pages?.length ? (
-  //    <img src='/'
-  //    className="object-contain mx-auto" />
-  // ) : (
+    // <>
+    // {fetching && !data?.pages?.length ? (
+    // <img src='/'
+    // className="object-contain mx-auto" />
+    // ) : (
 
   
 
@@ -492,8 +491,7 @@ import Image from 'next/image';
                         <ProductFeedLoader limit={5} />
                       ) : ( */}
                 
-                    {
-                      uniqueProducts?.map((offer,product) => (
+                    { uniqueProducts?.map((offer,product) => (
                           
                       <div className={` ${offer?.name === offerName?.name ? 'border-3 border-green-500 ' : 'border-3'}
                                          relative w-96 h-full flex flex-col  lg:w-full mx-auto bg-white rounded-lg shadow-lg `}>
@@ -544,7 +542,7 @@ import Image from 'next/image';
                 </Link>
             </h4>
 
-            <PromotionSlider allShops={allShopsList}  selectedShop = {handleSelectedShop} 
+            <PromotionSlider  selectedShop = {handleSelectedShop} 
                              offer = {offerName} />
             
         </div>
@@ -558,7 +556,7 @@ import Image from 'next/image';
                   Select Appointment Data & Time
                 </h4>
                 <div>
-                  <Calendar onChange={onChange} value={value} />
+                  <Calendar onChange={onChange} value={value} minDate={minDate} />
                 </div>
           </div>
 

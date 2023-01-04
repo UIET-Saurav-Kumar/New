@@ -21,6 +21,8 @@ export const OrderItems = ({ products,orderId,orderStatus }: { products: any }) 
     tracking_number: query.tracking_number as string,
   });
 
+  console.log('item',products )
+
    
 
   const { price: total } = usePrice(data && { amount: data.order.paid_total });
@@ -46,8 +48,8 @@ export const OrderItems = ({ products,orderId,orderStatus }: { products: any }) 
   }
   console.log('order data ',data,price,sale_price, calcDiscount(price,sale_price))
 
-
-  // console.log('orderStatus',orderStatus);
+  
+  console.log('orderStatus',orderStatus);
 
 
   // var converter = require('number-to-words');
@@ -130,7 +132,7 @@ export const OrderItems = ({ products,orderId,orderStatus }: { products: any }) 
       align: "center",
       width: 100,
       render: (pivot: any) => {
-        return <p className="text-body">{pivot.order_quantity}</p>;
+        return <p className="text-body">{ products?.length == 1 && products[0].type_id == 7 ?  1 : pivot.order_quantity }</p>;
       },
     },
   
@@ -188,10 +190,11 @@ export const OrderItems = ({ products,orderId,orderStatus }: { products: any }) 
       align: alignRight,
       width: 100,
       render: (pivot: any) => {
+        const amt = products?.length == 1 ? (products[0].type_id == 7 ? pivot?.unit_price   : +pivot.subtotal) : +pivot.subtotal;
         const { price } = usePrice({
-          amount: +data?.order?.amount,
+          amount: +amt,
         });
-        return <p className='whitespace-nowrap   ml-5'>{price}</p>;
+        return <p className='whitespace-nowrap   ml-5'>{ price } </p>;
       },
     },
 

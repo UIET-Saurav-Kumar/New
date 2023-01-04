@@ -32,6 +32,7 @@
     "hiding-header-react": "^0.5.0",
     "js-cookie": "^2.2.1",
     "lodash": "^4.17.21",
+    "moment": "^2.29.4",
     "multiselect-react-dropdown": "^2.0.4",
     "next": "11.0.1",
     "next-auth": "^3.27.1",

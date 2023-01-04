@@ -56,6 +56,7 @@ const RegisterForm = () => {
     defaultValues,
     resolver: yupResolver(registerFormSchema),
   });
+  
   const router = useRouter();
   const { authorize } = useUI();
   const { closeModal, openModal } = useModalAction();
@@ -63,6 +64,7 @@ const RegisterForm = () => {
     router.push(`/${path}`);
     closeModal();
   }
+
   async function resendCode(){
     if(query.id){
       var data=await useCodeMutation(query.id as string);

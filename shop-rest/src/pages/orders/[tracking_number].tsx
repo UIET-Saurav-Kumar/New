@@ -75,7 +75,7 @@ export default function OrderPage() {
 
    
 
-  // console.log('order data',data);
+  console.log('order data',data?.order.products);
 
   const { price: total } = usePrice(data && { amount: data.order.paid_total });
 
@@ -105,6 +105,10 @@ export default function OrderPage() {
       dataIndex: "tracking_number",
       key: "tracking_number",
       align: alignLeft,
+      render: (tracking_number: string) =>{ 
+        return <p className="text-gray-700 font-light"> 
+        { tracking_number}</p>
+        },
     },
 
     {
@@ -112,7 +116,10 @@ export default function OrderPage() {
       dataIndex: "date",
       key: "date",
       align: alignLeft,
-      render: (created_at: string) => dayjs(created_at).format("MMMM D, YYYY"),
+      render: (created_at: string) =>{ 
+        return <p className="text-gray-700 font-light"> 
+        {dayjs(created_at).format("MMMM D, YYYY")}</p>
+        },
     },
 
     {
@@ -130,7 +137,9 @@ export default function OrderPage() {
       dataIndex: "products",
       key: "products",
       align: "center",
-      render: (products: any) => formatString(products?.length, t("Items")),
+      render: (products: any) =>{ 
+        return <p className="text-gray-700 font-light"> { formatString(products?.length, t("Items"))}</p>
+      },
     },
     {
       title: t("Delivery Fee"),
@@ -140,18 +149,19 @@ export default function OrderPage() {
       // width: 100,
       render: (delivery_fee: any) => {
         const { price } = usePrice(data && { amount: Number(delivery_fee) });
-        return <p>{price}</p>;
+        return <p className="text-gray-700 font-light">{price}</p>;
       },
     },
     {
-      title: t(" Total-price"),
+      title: t(" Item Total"),
       dataIndex: "paid_total",
       key: "paid_total",
       align: alignRight,
       // width: 100,
       render: (paid_total: any) => {
-        const { price } = usePrice(data && { amount: Number(paid_total) });
-        return <p>{total}</p>;
+        const amt = data?.order?.products?.length == 1 ? (data?.order?.products[0]?.type_id == 7 ? data?.order?.amount : Number(paid_total) ): Number(paid_total)
+        const { price } = usePrice(data && { amount: Number(amt) });
+        return <p className="text-gray-700 font-light">{price}</p>;
       },
     },
     
@@ -203,7 +213,7 @@ export default function OrderPage() {
 
         <div className='flex flex-col space-y-10'>
 
-          <h2 className='font-semibold text-sm md:text-md lg:text-lg'> Order Summary </h2>
+          <h2 className='font-semibold text-sm md:text-md lg:text-sm'> Order Summary </h2>
 
             <div className=''> 
               <h2 className="flex flex-col sm:flex-row items-center justify-between
@@ -235,52 +245,52 @@ export default function OrderPage() {
 
       <div className='flex flex-col shadow-md border-t border-gray-100 h-auto w-full p-2 lg:p-4 space-y-6'>
 
-            <div className='flex justify-between lg:mx-10 '> 
+            <div className='grid grid-cols-1 sm:grid-cols-2 justify-between lg:mx-10 '> 
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 space-x-4 w-auto  lg:w-1/3">
-                          <h3 className="mb-2 text-sm lg:text-lg text-heading  font-semibold">
-                            {t("Order details-number")}:
+                  <div className="grid grid-cols-2 sm:grid-cols-2  w-auto  lg:w-1/3">
+                          <h3 className="mb-2 text-sm whitespace-nowrap lg:text-sm text-heading  font-semibold">
+                            {t("Order Id")}:
                           </h3>
-                          <p className="text-sm lg:text-lg text-body-dark">
+                          <p className="text-sm lg:text-sm text-body-dark">
                             {data?.order?.tracking_number}
                           </p>
                   </div>
                     
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex space-x-2  w-auto lg:w-1/3">
-                          <h3 className="mb-2 text-sm lg:text-lg text-heading  font-semibold">
+                  <div className="grid grid-cols-2 sm:grid-cols-2 space-x-2  w-auto lg:w-1/3">
+                          <h3 className="mb-2 text-sm lg:text-sm text-heading  font-semibold">
                             {t("Date")}:
                           </h3>
-                          <p className="text-sm lg:text-lg text-body-dark">
+                          <p className="text-sm whitespace-nowrap lg:text-sm text-body-dark">
                             {dayjs(data?.order?.created_at).format("MMMM D, YYYY")}
                           </p>
                   </div>
 
             </div>
 
-            <div className='flex justify-between lg:mx-10'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 justify-between lg:mx-10'>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex space-x-4 gap-0 w-full lg:w-1/3">
-                  <h3 className="mb-2 text-sm lg:text-lg  text-heading font-semibold">
+                <div className="grid grid-cols-2 sm:grid-cols-2 space-x-4 gap-0 w-full lg:w-1/3">
+                  <h3 className="mb-2 text-sm lg:text-sm  text-heading font-semibold">
                     {t(" Total")}:
                   </h3>
-                  <p className="text-sm lg:text-lg text-body-dark">{total}</p>
+                  <p className="text-sm lg:text-sm text-body-dark">{total}</p>
                 </div>
 
                 {/* payment method */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex space-x-4   w-full lg:w-1/3">
-                  <h3 className="mb-2 text-sm lg:text-lg text-heading font-semibold">
-                    {t("text-payment-method")}:
+                <div className="grid grid-cols-2 sm:grid-cols-2 space-x-4   w-full lg:w-1/3">
+                  <h3 className="mb-2 text-sm lg:text-sm text-heading font-semibold">
+                    {t("Payment")}:
                   </h3>
-                  <p className="text-sm lg:text-lg text-body-dark">
+                  <p className="text-sm lg:text-sm text-body-dark">
                     {data?.order?.payment_gateway?.toUpperCase() ?? "N/A"}
                   </p>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex space-x-4   w-full lg:w-1/3">
-                  <h3 className="mb-2 text-sm lg:text-lg text-heading font-semibold">
+                <div className="grid grid-cols-2 sm:grid-cols-2 space-x-4   w-full lg:w-1/3">
+                  <h3 className="mb-2 text-sm white lg:text-sm text-heading font-semibold">
                     {t("Delivery Time/Appointment")}:
                   </h3>
-                  <p className="text-sm lg:text-lg text-body-dark">
+                  <p className="text-sm lg:text-sm text-body-dark">
                     {data?.order?.children[0]?.shop?.shop_categories.replace(/[{":,0123456789}]/g,'').slice(5,-3) != 'Salon & Spa' ? data?.order?.delivery_time.slice(0,5) : data?.order?.delivery_time }
                   </p>
                 </div>
@@ -298,7 +308,7 @@ export default function OrderPage() {
          
           <div className="w-full  lg:ps-3">
             <h2 className="text-xl font-bold text-heading mb-6">
-              {t("Order details-details")}
+              {'Order details'}
             </h2>
 
             <div className='grid grid-cols-1 sm:grid-cols-2 w-full '>

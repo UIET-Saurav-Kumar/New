@@ -150,7 +150,7 @@ export default function PromotionSlider(props:any) {
     console.log('prop',data)
     setShopName(data.name)
     props.selectedShop(data)
-    props.allShops(shopList)
+    // props.allShops(shopList)
     // console.log('shop',data?.offer?.name)
   }
 
