@@ -51,6 +51,8 @@ import { useVerifyCheckoutMutation } from '@data/delivery/use-checkout-verify.mu
 import { useFeatureProductQuery } from '@data/home/use-feature-product-query';
 import Image from 'next/image';
 import moment from 'moment'
+import { Default } from 'react-toastify/dist/utils';
+import DefaultLayout from '@components/layout/default-layout';
 
   const ProductFeedLoader = dynamic(
     () => import("@components/ui/loaders/product-feed-loader")
@@ -507,17 +509,21 @@ import moment from 'moment'
                              <CheckMarkFill  width={20} className={` ${offer?.name === offerName?.name ? 'block transition-all duration-900 ease-in-out' : 'hidden'} absolute right-0 top-0 me-2 bg-white rounded-full  text-green-600`} />
                           <div className=' '>
                             <div className="px-6 py-4">
-                              <div className="font-bold text-lg lg:text-xl mb-2">
+                              <div className="font-semibold text-sm lg:text-lg mb-2">
                                 {offer?.name}
                               </div>
                             </div>
                             <div className="px-6 py-2 ">
-                              <span className="inline-block bg-gray-200 p-3 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+                              <span className="inline-block bg-gray-200 text-accent p-3 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
                               ₹
                               {+' '+offer?.sale_price}.00
                               </span>
+                              <del className="inline-block  p-3  px-3 py-1 text-sm font-semibold text-gray-600 mr-2">
+                              ₹
+                              {+' '+offer?.price}.00
+                              </del>
                               <button
-                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+                                className={` ${offer?.name === offerName?.name ? 'bg-green-600 text-white' : 'text-gray-500 bg-gray-100' }   hover:bg-green-600 hover:text-white text-white font-bold py-2 px-4 rounded-full`}
                                 onClick={ ()=> showSalons(offer)}
                               >
                                 {offer?.name === offerName?.name ? 'Selected' : 'Select'}
@@ -535,11 +541,11 @@ import moment from 'moment'
 
             <h4 className='text-xl flex items-center justify-between lg:text-3xl font-serif text-gray-900 font-medium ml-2 lg:ml-4 py-4 tracking-normal'>
                 Select Salon 
-                <Link href='/shops?category=Salon+-+Spa'>
+                {/* <Link href='/shops?category=Salon+-+Spa'>
                     <span className='text-blue-800 cursor-pointer hover-underline text-sm '>
                         view all
                     </span>
-                </Link>
+                </Link> */}
             </h4>
 
             <PromotionSlider  selectedShop = {handleSelectedShop} 
@@ -562,13 +568,13 @@ import moment from 'moment'
 
           <div className='p-3 text-sm lg:text-lg grid grid-cols-2 gap-4 place-content-center'>
             <button className={`${selectedTimeSlot === '10:00am - 12:00PM' ? 'bg-blue-600 text-white': 'hover:bg-gray-100 border  p-3 bg-gray-50 text-black'} rounded cursor-pointer `} 
-                    onClick={() => setSelectedTimeSlot('10:00am - 12:00PM')}> 10:00 am - 12:00 PM </button>
+                    onClick={() => setSelectedTimeSlot('10:00am - 12:00PM')}> 10:00 am - 12:00 pm </button>
             <button className={`${selectedTimeSlot === '12:00pm - 02:00pm' ? 'bg-blue-600 text-white': 'hover:bg-gray-100 border  p-3 bg-gray-50 text-black'} rounded cursor-pointer `} 
-                    onClick={() => setSelectedTimeSlot('12:00pm - 02:00pm')}> 12:00pm - 02:00pm </button>
+                    onClick={() => setSelectedTimeSlot('12:00pm - 02:00pm')}> 12:00 pm - 02:00 pm </button>
             <button className={`${selectedTimeSlot === '02:00pm - 04:00pm ' ? 'bg-blue-600 text-white': 'hover:bg-gray-100 border  p-3 bg-gray-50 text-black'} rounded cursor-pointer `}
-                    onClick={() => setSelectedTimeSlot('02:00pm - 04:00pm ')}> 02:00pm - 04:00pm </button>
+                    onClick={() => setSelectedTimeSlot('02:00pm - 04:00pm ')}> 02:00 pm - 04:00 pm </button>
             <button className={`${selectedTimeSlot === '04:00pm - 06:00pm' ? 'bg-blue-600 text-white': 'hover:bg-gray-100 border  p-3 bg-gray-50 text-black'} rounded cursor-pointer `}
-                    onClick={() => setSelectedTimeSlot('04:00pm - 06:00pm')}> 04:00pm - 06:00pm </button>
+                    onClick={() => setSelectedTimeSlot('04:00pm - 06:00pm')}> 04:00 pm - 06:00 pm </button>
           </div>
 
       </div>
@@ -585,12 +591,12 @@ import moment from 'moment'
 
     </div>
 
-    { width > 768 ? (
+    {/* { width > 768 ? (
       <CartCounterButton/>)
       : null
-      }
+      } */}
     </>
   )
 }
 
-SalonBookingPage.Layout = ShopLayout;
+SalonBookingPage.Layout = DefaultLayout;
