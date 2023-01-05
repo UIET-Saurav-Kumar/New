@@ -42,7 +42,7 @@ const OrderList = ({ orders, onPagination }: IProps) => {
 
   var today = new Date();
 
-  var month = today.getMonth() ;
+  var month = today.getMonth();
 
   const monthNames = ["Jan", "Feb", "March", "April", "May", "June",
   "July", "Aug", "Sep", "Oct", "Nov", "Dec"

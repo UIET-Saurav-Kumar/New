@@ -53,6 +53,7 @@ import Image from 'next/image';
 import moment from 'moment'
 import { Default } from 'react-toastify/dist/utils';
 import DefaultLayout from '@components/layout/default-layout';
+import { formatSalonProduct } from '@utils/format-salon-products';
 
   const ProductFeedLoader = dynamic(
     () => import("@components/ui/loaders/product-feed-loader")
@@ -240,18 +241,34 @@ import DefaultLayout from '@components/layout/default-layout';
         const origin = { lat: 37.7749, lng: -32.4194 };
         const destination = { lat: 40.7128, lng: -34.0060 };
 
-        const tim = 'Tue Dec 20 2022 10:55:16 GMT+0530 (India Standard Time)'
+        const currentDate =   value;
+
+        const options = { month: 'short' };
+
+        const tim =  currentDate.toLocaleString('en-US', options);
+
+        let dd = String(currentDate.getDate()).padStart(2, '0');
+
+        let yyyy = currentDate.getFullYear();
+
+        console.log('value',tim
+
+        )
+
+        
 
         const pattern = /(?<day>\w+)\s(?<month>\w+)\s(?<date>\d+)\s(?<year>\d+)\s(?<time>\d+:\d+:\d+)\s(?<tz>.*)/;
 
         const match = tim?.match(pattern);
 
-        const day   =  match?.groups.day;
-        const month =  match?.groups.month;
+        // const dd   =  match?.groups.day;
+        const month =  tim;
         const date  =  match?.groups.date;
         const year  =  match?.groups.year;
 
-        const newDate = `${day} ${month} ${date} ${year}`;
+        const newDate = `${dd} ${month}`;
+
+        console.log('value',newDate)
 
         const { data: orderStatusData } = useOrderStatusesQuery();
       
@@ -300,6 +317,7 @@ import DefaultLayout from '@components/layout/default-layout';
       function calcDiscount(price, sale_price){
         return (price - sale_price) / price *100
       }
+       const { billing_address, setCheckoutData, checkoutData } = useCheckout();
 
         const { mutate: verifyCheckout, isLoading: c_loading } =
         useVerifyCheckoutMutation();
@@ -310,13 +328,14 @@ import DefaultLayout from '@components/layout/default-layout';
           if (!isAuthorize) {
             return openModal("LOGIN_VIEW");
           }
-           
+
+
 
           let input = {
             //@ts-ignore
             location:getLocation?.formattedAddress,
             products: 
-            avail_items?.map((item) => formatOrderedProduct(item)),
+            avail_items?.map((item) => formatSalonProduct(item)),
             //    [{...offerName,
             //   shop : {selectedSalon}
             //    }],
@@ -331,7 +350,7 @@ import DefaultLayout from '@components/layout/default-layout';
             total : offerName && offerName?.sale_price,
             sales_tax:  0,
             delivery_fee: 0,
-            delivery_time: selectedTimeSlot,
+            delivery_time: newDate + ' ' + selectedTimeSlot,
             payment_gateway: 'cod',
           };
 
@@ -340,11 +359,10 @@ import DefaultLayout from '@components/layout/default-layout';
 
           verifyCheckout(
             {
-            
               amount: subtotal,
               // unit_price: subtotal,
               // total: offerName && offerName?.sale_price,
-              products: avail_items?.map((item) => formatOrderedProduct(item)),
+              products: avail_items?.map((item) => formatSalonProduct(item)),
             
             },
           )
@@ -462,7 +480,7 @@ import DefaultLayout from '@components/layout/default-layout';
     
 
 
-  return (
+  return ( 
 
     //salon page design 
 

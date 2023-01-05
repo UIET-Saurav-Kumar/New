@@ -678,8 +678,8 @@ class OrderRepository extends BaseRepository
         //     $shop_name = $shop_name . $products[0]['shop_name'] . ",";
         // }
         //undefined array key shop_name
-        
         // $shop_name = rtrim($shop_name, ",");
+
         foreach ($productsByShop as $shop_id => $cartProduct) {
             $amount = array_sum(array_column($cartProduct, 'subtotal'));
             $delivery_fee=$this->getDeliveryCharges($request,$shop_id);

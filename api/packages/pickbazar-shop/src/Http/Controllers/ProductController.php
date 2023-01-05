@@ -46,12 +46,12 @@ class ProductController extends CoreController
         $shop_id="";
         if($request->search != null)
         {
-
+            
             $pluckcat = explode(';',$request->search);
             $pluckall = explode(':', $pluckcat[0]);
             if(isset($pluckcat[1])){
                 $shop_id=explode(':',$pluckcat[1])[1];
-            }
+            } 
             if($pluckall[1] == 'all')
             {
                 $request->replace([

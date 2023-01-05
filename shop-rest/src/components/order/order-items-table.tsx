@@ -38,9 +38,15 @@ export const OrderItems = ({ products,orderId,orderStatus }: { products: any }) 
   const { price: discount } = usePrice(
     data && { amount: data?.order?.discount ?? 0 }
   );
+         
+  const { price: sale_price } = usePrice(
+    data && { amount: data?.order?.sale_price ?? 0 }
+  );
 
   let price = data?.order.price;
-  let sale_price = data?.order?.sale_price;
+
+  
+  // let sale_price = data?.order?.sale_price;
 
 
   function calcDiscount(price, sale_price){
@@ -104,7 +110,7 @@ export const OrderItems = ({ products,orderId,orderStatus }: { products: any }) 
               />
             </div>
 
-            <div className="flex flex-col ms-4 overflow-hidden">
+            <div className="flex flex-col ms-4  overflow-hidden">
               <div className="flex mb-1">
                 <span className="text-sm text-body truncate inline-block overflow-hidden">
                   {name} x&nbsp;
@@ -114,7 +120,7 @@ export const OrderItems = ({ products,orderId,orderStatus }: { products: any }) 
                 </span>
               </div>
               <span className="text-sm text-accent font-semibold mb-1 truncate inline-block overflow-hidden">
-                {price} , {record.tax?JSON.parse(record.tax).rate+"% tax":""}
+               {products?.length == 1 ? (data?.order?.products[0]?.type_id == 7 ?  '₹' + '' +data?.order?.amount + '.00' : price ) : price}   , {record.tax?JSON.parse(record.tax).rate+"% tax":""}
               </span>
             </div>
 
@@ -190,7 +196,7 @@ export const OrderItems = ({ products,orderId,orderStatus }: { products: any }) 
       align: alignRight,
       width: 100,
       render: (pivot: any) => {
-        const amt = products?.length == 1 ? (products[0].type_id == 7 ? pivot?.unit_price   : +pivot.subtotal) : +pivot.subtotal;
+        const amt = products?.length == 1 ? (products[0].type_id == 7 ? data?.order?.amount   : +pivot.subtotal) : +pivot.subtotal;
         const { price } = usePrice({
           amount: +amt,
         });

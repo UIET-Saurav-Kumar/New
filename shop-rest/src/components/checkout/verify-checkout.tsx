@@ -49,6 +49,8 @@ const VerifyCheckout = () => {
     });
   }
 
+  console.log('items cart', items)
+
 
 
   const available_items = items?.filter(
