@@ -279,6 +279,7 @@ useIntersectionObserver({
                 <UserDashboard/>
                 <BillPayment/>
                 <PolicyServices/>  
+                <FeaturedShops />
                 <ElanteBanner/>
                 <RedBullBanner/>
                 <AllCategories/>
@@ -286,7 +287,7 @@ useIntersectionObserver({
                 <OfferOfTheDay/>
                 <BrandOffers/>
                 <HomePageBanner />
-                <FeaturedShops />
+                 
                 <FeaturedProducts/>
                 
               </div>

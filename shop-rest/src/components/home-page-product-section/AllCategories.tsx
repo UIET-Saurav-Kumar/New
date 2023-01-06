@@ -42,7 +42,7 @@ const AllCategories = () => {
 
 	function getLinkGrocery(){
 
-		var pathname="/shops/chandigarh-grocery-store";
+		var pathname="/shops?text=Groceries";
 		
 		return pathname;
 		

@@ -517,6 +517,7 @@ import { formatSalonProduct } from '@utils/format-salon-products';
                                          relative w-96 h-full flex flex-col  lg:w-full mx-auto bg-white rounded-lg shadow-lg `}>
                         <div className='relative flex items-center justify-center w-auto h-64  '>
                           <Image layout="fill"
+                                 priority={true}
                                  objectFit="contain" 
                                  quality='40' 
                                 src={offer?.image?.thumbnail} 

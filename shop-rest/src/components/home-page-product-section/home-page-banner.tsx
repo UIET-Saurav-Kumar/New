@@ -71,7 +71,7 @@ function location3(){
       dots: true,
       infinite: true,
       speed: 200,
-       slidesToShow: screenWidth > 768 ? 2 : 1,
+       slidesToShow: screenWidth > 768 ? 1 : 1,
       autoplay: true,
       slidesToScroll: 1,
       arrows: false,
@@ -89,7 +89,7 @@ function location3(){
 
         
        
-      { location() && <Link href='salon-products?text=pick+any&category='>
+      { location() && <Link href='salon-near-me'>
         <div className="card flex relative w-full px-1 ">
 
                {/* <Image 
@@ -142,12 +142,15 @@ function location3(){
             
                   src={'/delhi/ambience-mall-banner.jpg'} 
                   /> */}
-                  <img className="  w-full h-full object-cover rounded-lg" src={'/delhi/ambience-mall-banner.jpg'} alt="banner" />
+                  <img className="w-full h-full object-cover rounded-lg" 
+                       src={'/delhi/ambience-mall-banner.jpg'} 
+                       alt="banner" />
 
-            </div>
+        </div>
             </Link> }
 
-            { location2() &&  <Link href='/shops?text=Select+Citywalk'><div className="card flex relative w-full  ">
+            { location2() &&  <Link href='/shops?text=Select+Citywalk'>
+              <div className="card flex relative w-full  ">
 
                {/* <Image 
                 quality='40' 

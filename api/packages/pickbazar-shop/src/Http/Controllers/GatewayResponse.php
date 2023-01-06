@@ -82,10 +82,7 @@ class GatewayResponse extends CoreController
         $member_id = 'EZ929952';
         $pin = 'C019FB28E2';
         
-        //e.g id
-        // $trans_id = 'BDHD93NIDB390SB0';
-
-        // $trans_id = $request->trans_id;
+      
       
         $curl = curl_init();
       
@@ -137,7 +134,7 @@ class GatewayResponse extends CoreController
             }
 
             // $url = "https://buylowcal.com/user/utility-payments";
-            $callback_url="https://buylowcal.com/callback?status=.$recharge_status.&txid=$order_id&mytxid=aPITransID&optxid=$utility_payment->operator&mobileno=$utility_payment->customer_contact";
+            $callback_url="https://buylowcal.com/callback?status=$recharge_status&txid=$order_id&mytxid=aPITransID&optxid=$utility_payment->operator&mobileno=$utility_payment->customer_contact";
 
             return redirect()->away($callback_url);
 
