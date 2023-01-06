@@ -125,7 +125,7 @@ export default function FeaturedProducts({}) {
     })
 
     const fashionlifestyleArray =  data?.featureProducts.data.filter(function(product){
-        return product.status == 'publish' && product.type_id == 11 ? product : null;
+        return product.status == 'publish' && product?.is_brand_offer !== 1 && product.type_id == 11 ? product : null;
     })
 
     const hotelsresortsArray =  data?.featureProducts.data.filter(function(product){
@@ -157,7 +157,7 @@ export default function FeaturedProducts({}) {
     })
 
     const electronicsArray =  data?.featureProducts.data.filter(function(product){
-        return product.status == 'publish' && product.type_id == 22 ? product : null;
+        return product.status == 'publish'  && product.type_id == 22 ? product : null;
     })
 
  const arrays = [
