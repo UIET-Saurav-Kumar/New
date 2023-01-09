@@ -337,6 +337,9 @@ import Loader from '@components/ui/loader/loader';
         useVerifyCheckoutMutation();
 
         useEffect(()=>{
+          // const prevUrl = document.referrer;
+          // alert('start')
+
           const input = JSON.parse(localStorage.getItem('input'));
           const pathname = window.location.pathname;
 
@@ -362,9 +365,8 @@ import Loader from '@components/ui/loader/loader';
                   // alert('success')
                   if (order?.tracking_number) {
                     // alert('tracking number generated')
-                    
-                    router.push(`${ROUTES.ORDERS}/${order?.tracking_number}`);
                     setBooking(false)
+                    router.push(`${ROUTES.ORDERS}/${order?.tracking_number}`);
                     localStorage.removeItem('input');
                   }
                   if (order?.paymentLink)
@@ -374,9 +376,9 @@ import Loader from '@components/ui/loader/loader';
                   }
                 },
                 onError: (error: any) => {
-                  alert('Something went wrong. Please try again in some time')
+                  alert('error')
                   setBooking(false);
-                  localStorage.removeItem('input');
+                  // localStorage.removeItem('input');
                 },
               });
             }
