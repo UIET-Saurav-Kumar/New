@@ -54,6 +54,8 @@ import moment from 'moment'
 import { Default } from 'react-toastify/dist/utils';
 import DefaultLayout from '@components/layout/default-layout';
 import { formatSalonProduct } from '@utils/format-salon-products';
+import { useOrdersQuery } from '@data/order/use-orders.query';
+import Loader from '@components/ui/loader/loader';
 
   const ProductFeedLoader = dynamic(
     () => import("@components/ui/loaders/product-feed-loader")
@@ -239,6 +241,7 @@ import { formatSalonProduct } from '@utils/format-salon-products';
 
 
         const origin = { lat: 37.7749, lng: -32.4194 };
+
         const destination = { lat: 40.7128, lng: -34.0060 };
 
         const currentDate =   value;
@@ -251,11 +254,7 @@ import { formatSalonProduct } from '@utils/format-salon-products';
 
         let yyyy = currentDate.getFullYear();
 
-        console.log('value',tim
-
-        )
-
-        
+        console.log('value',tim)
 
         const pattern = /(?<day>\w+)\s(?<month>\w+)\s(?<date>\d+)\s(?<year>\d+)\s(?<time>\d+:\d+:\d+)\s(?<tz>.*)/;
 
@@ -271,14 +270,29 @@ import { formatSalonProduct } from '@utils/format-salon-products';
         console.log('value',newDate)
 
         const { data: orderStatusData } = useOrderStatusesQuery();
+
+        const {
+          data: orderData,
+          isFetching: order_loading,
+          // error,
+          // fetchNextPage,
+          // hasNextPage,
+          // isFetchingNextPage: loadingMore,
+        } = useOrdersQuery({});
+
+        console.log('my order',orderData?.pages[0]?.data?.length);
       
         const { mutate: createOrder, isLoading: salonBooking } = useCreateOrderMutation();
 
         const {data:customer} = useCustomerQuery();
         const[newOfferName, setNewOfferName] = useState(null);
 
+        const[booking, setBooking] = useState(false);
+
 
         console.log('log salon',selectedSalon)
+
+        console.log('customer',customer);
 
         // useEffect(()=>{
         //   setNewOfferName(products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0])
@@ -312,23 +326,93 @@ import { formatSalonProduct } from '@utils/format-salon-products';
         let price = products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0]?.price;
         let sale_price = products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0]?.sale_price;
       
-         
 
-      function calcDiscount(price, sale_price){
-        return (price - sale_price) / price *100
-      }
-       const { billing_address, setCheckoutData, checkoutData } = useCheckout();
+        function calcDiscount(price, sale_price){
+          return (price - sale_price) / price *100
+        }
+
+        const { billing_address, setCheckoutData, checkoutData } = useCheckout();
 
         const { mutate: verifyCheckout, isLoading: c_loading } =
         useVerifyCheckoutMutation();
 
-        function onSubmit(values: FormValues) {
-          console.log('newoffer',offerName);
-   
-          if (!isAuthorize) {
-            return openModal("LOGIN_VIEW");
+        useEffect(()=>{
+          const input = JSON.parse(localStorage.getItem('input'));
+          const pathname = window.location.pathname;
+
+          if(isAuthorize && input && pathname === '/salon-near-me'){
+            input.customer_contact = customer?.me?.phone_number;
+            // alert(customer?.me?.phone_number);
+            localStorage.setItem("input", JSON.stringify(input));
+            // alert('authorize')
+            if( !orderData?.pages[0]?.data?.length){
+              // alert('place order')
+              setBooking(true);
+              // verifyCheckout(
+              //   {
+              //     amount: subtotal,
+              //     // unit_price: subtotal,
+              //     // total: offerName && offerName?.sale_price,
+              //     products: avail_items?.map((item) => formatSalonProduct(item)),
+              //   },
+              // )
+              createOrder(input, {
+     
+                onSuccess: (order: any) => {
+                  // alert('success')
+                  if (order?.tracking_number) {
+                    // alert('tracking number generated')
+                    
+                    router.push(`${ROUTES.ORDERS}/${order?.tracking_number}`);
+                    setBooking(false)
+                    localStorage.removeItem('input');
+                  }
+                  if (order?.paymentLink)
+                  {
+                    window.location.replace(order?.paymentLink)
+                    localStorage.removeItem('input');
+                  }
+                },
+                onError: (error: any) => {
+                  alert('Something went wrong. Please try again in some time')
+                  setBooking(false);
+                  localStorage.removeItem('input');
+                },
+              });
+            }
+
           }
 
+        },[isAuthorize, customer?.me?.phone_number])
+
+        function onSubmit(values: FormValues) {
+
+          console.log('newoffer',offerName);
+
+          
+          //   if (!isAuthorize) {
+          //   return openModal("REGISTER",{
+          //     location:getLocation?.formattedAddress,
+          //     products: 
+          //     avail_items?.map((item) => formatSalonProduct(item)),
+          //     //    [{...offerName,
+          //     //   shop : {selectedSalon}
+          //     //    }],
+          //     customer_contact: customer?.me?.phone_number,
+          //     status:  orderStatusData?.order_statuses?.data[0]?.id ?? 1,
+          //     amount: offerName && offerName?.sale_price,
+          //     // product_id: products?.pages[0]?.length && products?.pages[0]?.data?.filter(product => product?.sale_sale_price === offerName?.sale_price  )[0].id,
+          //     // coupon_id: coupon?.id,
+          //     // quantity: 1,
+          //     discount:  Math.floor(calcDiscount(price, sale_price)),
+          //     paid_total: offerName && offerName?.sale_price,
+          //     total : offerName && offerName?.sale_price,
+          //     sales_tax:  0,
+          //     delivery_fee: 0,
+          //     delivery_time: newDate + ' ' + selectedTimeSlot,
+          //     payment_gateway: 'cod',
+          //   });
+          // }
 
 
           let input = {
@@ -356,6 +440,16 @@ import { formatSalonProduct } from '@utils/format-salon-products';
 
           localStorage.setItem('input', JSON.stringify(input));
 
+          let inputString = JSON.parse(localStorage.getItem('input'));
+
+          console.log('input', input);
+
+          console.log('input', inputString ? true : false);
+
+          if(!isAuthorize){
+            return openModal('REGISTER');
+          }
+
 
           verifyCheckout(
             {
@@ -363,7 +457,6 @@ import { formatSalonProduct } from '@utils/format-salon-products';
               // unit_price: subtotal,
               // total: offerName && offerName?.sale_price,
               products: avail_items?.map((item) => formatSalonProduct(item)),
-            
             },
           )
 
@@ -386,6 +479,10 @@ import { formatSalonProduct } from '@utils/format-salon-products';
             });
           
           }
+
+          let inputString = JSON.parse(localStorage.getItem('input'));
+
+          console.log('input outside', document.referrer)
            
 
           function getSearch():string
@@ -498,11 +595,13 @@ import { formatSalonProduct } from '@utils/format-salon-products';
       <link rel="canonical" href={`https://buylowcal.com/salon`}/>
     </Head>
 
-    <div className=' h-full border bg-white w-full'>
+    <div className='   h-full border bg-white w-full'>
 
           <h3 className='text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 font-medium text-2xl lg:text-3xl text-gray-900 font-serif ml-4 lg:ml-8 mt-10 lg:mt-10 tracking-normal'>
             Featured Products
           </h3>
+
+          <Loader text='booking...' className={` ${booking ? 'block' : 'hidden'} mx-auto z-50`}/>
 
             <div className = {`${data?.featureProducts?.data?.length  ? 'block w-full' : 'hidden'} w-full overflow-x-scroll text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500
                             grid grid-rows-2   md:grid md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-5 bg-gray-50 mt-3 p-2 lg:p-6 gap-4`}>

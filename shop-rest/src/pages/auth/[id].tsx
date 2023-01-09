@@ -15,6 +15,9 @@ import * as yup from "yup";
 import { useModalAction } from "@components/ui/modal/modal.context";
 import { GetServerSideProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useCreateOrderMutation } from "@data/order/use-create-order.mutation";
+import { useCustomerQuery } from "@data/customer/use-customer.query";
+import { ROUTES } from "@utils/routes";
 
 
 type FormValues = {
@@ -43,6 +46,10 @@ const defaultValues = {
 const RegisterForm = () => {
   const { t } = useTranslation("common");
   const { mutate, isLoading: loading } = useVerifyMutation();
+
+  const {data:customer} = useCustomerQuery();
+  const { isAuthorize } = useUI();
+  const { mutate: createOrder, isLoading: salonBooking } = useCreateOrderMutation();
   
   const [errorMsg, setErrorMsg] = useState("");
   const { query } = useRouter();
@@ -77,6 +84,7 @@ const RegisterForm = () => {
 
 
   function onSubmit({code}: FormValues) {
+    const input = JSON.parse(localStorage.getItem('input'));
     mutate(
       {
         code,
@@ -94,6 +102,31 @@ const RegisterForm = () => {
             Cookies.set("auth_token", data.token);
             Cookies.set("auth_permissions", data.permissions);
             authorize();
+            
+          //   input.customer_contact = customer?.me?.phone_number;
+          //   if(isAuthorize && input ){
+          //     createOrder(input, {
+     
+          //     onSuccess: (order: any) => {
+          //       alert('success')
+          //       if (order?.tracking_number) {
+          //         alert('tracking number generated')
+          //         router.push(`${ROUTES.ORDERS}/${order?.tracking_number}`);
+          //         localStorage.removeItem('input');
+          //       }
+          //       if (order?.paymentLink)
+          //       {
+          //         window.location.replace(order?.paymentLink)
+          //         localStorage.removeItem('input');
+          //       }
+          //     },
+          //     onError: (error: any) => {
+          //       alert('error')
+          //       // localStorage.removeItem('input');
+          //     },
+          //   });
+          // }
+
             query?.utm_source == 'shop_qr' ? 
             router.push('/shops/'+ query?.utm_campaign+'?utm_source=shop_qr&utm_campaign='+query.utm_campaign+'&shop_id='+query.shop_id) 
             : query?.utm_source == 'salon-near-me' ?   router.push('/salon-near-me') 

@@ -60,7 +60,7 @@ const defaultValues = {
 
 // // console.log('loc',getLocation.formattedAddress)
 
-const RegisterForm = () => {
+const RegisterForm = (props:any) => {
 
   const {getLocation} =useLocation();
   const { t } = useTranslation("common");
@@ -75,6 +75,8 @@ const RegisterForm = () => {
     lat: getLocation.lat,
     lng: getLocation.lng,
   }];
+
+  console.log('register', props);
 
   const [userLocation, setUserLocation] = useState(userLoc);
 

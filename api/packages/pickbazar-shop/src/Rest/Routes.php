@@ -64,7 +64,11 @@ Route::get('/get-emi-info','PickBazar\Http\Controllers\BillerInfoController@getB
 Route::get('/get-cable-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
 Route::get('/get-fast-tag-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
 
+
 Route::get('/get-insurance-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
+
+Route::get('/google-maps-text-search','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
+
 
 Route::get('/get-broadband-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
 Route::get('/get-emi-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
@@ -287,6 +291,8 @@ Route::get('export-shop-orders/{start_date}/{end_date}', 'PickBazar\Http\Control
 Route::post('logs', 'PickBazar\Http\Controllers\LogController@store');
 Route::get('logs', 'PickBazar\Http\Controllers\LogController@fetchLogs');
 Route::delete('logs/{id}', 'PickBazar\Http\Controllers\LogController@destory');
+
+
 
 
 // busineesId, mobile, ParentBusinees Id
