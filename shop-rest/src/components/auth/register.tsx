@@ -77,7 +77,7 @@ const RegisterForm = (props:any) => {
   }];
 
   console.log('register', props.data);
-  const url = props.data.pathname;
+  const url = props?.data?.pathname;
 
   const [userLocation, setUserLocation] = useState(userLoc);
 
