@@ -3002,6 +3002,7 @@ export default function MobileRechargeForm({ click, variant }: any) {
     },
   })
 
+
   useEffect(() => {
     if (operator) {
       const plan = {
@@ -3013,6 +3014,7 @@ export default function MobileRechargeForm({ click, variant }: any) {
     }
   }, [circleName])
 
+  
   function handleModal(plans: any) {
     return openModal('RECHARGE_PLANS', {
       plans: plans,

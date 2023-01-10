@@ -76,7 +76,8 @@ const RegisterForm = (props:any) => {
     lng: getLocation.lng,
   }];
 
-  console.log('register', props);
+  console.log('register', props.data);
+  const url = props.data.pathname;
 
   const [userLocation, setUserLocation] = useState(userLoc);
 
@@ -154,7 +155,7 @@ function handleClick(){
 
     console.log('path', router.pathname)
 
-  function onSubmit({ name, email, password, phone_number, current_location, date_of_birth, gender, occupation }: FormValues) {
+  function onSubmit({ name, email, password, phone_number, current_location, date_of_birth, gender, occupation }: FormValues)   {
     mutate(
       {
         name,
@@ -172,8 +173,8 @@ function handleClick(){
           query?.utm_source == 'shop_qr' ? 
           // router.push('/shops/'+ query?.campaign)
           router.push('/auth/'+data?.user.id+'?utm_source=shop_qr&utm_campaign='+query?.utm_campaign+'&shop_id='+query?.shop_id)
-          : (router.pathname === '/salon-near-me' || router.pathname === '/en/salon-near-me') && router.push('/auth/'+data?.user.id+'?utm_source=salon-near-me') 
-          router.push('/auth/'+data?.user.id);
+          : url === '/salon-near-me' ? router.push('/auth/'+data?.user.id+'?utm_source=salon-near-me') 
+          : router.push('/auth/'+data?.user.id);
           closeModal();
           return ;
           // if (data?.token && data?.permissions?.length) {

@@ -351,22 +351,16 @@ import Loader from '@components/ui/loader/loader';
             if( !orderData?.pages[0]?.data?.length){
               // alert('place order')
               setBooking(true);
-              // verifyCheckout(
-              //   {
-              //     amount: subtotal,
-              //     // unit_price: subtotal,
-              //     // total: offerName && offerName?.sale_price,
-              //     products: avail_items?.map((item) => formatSalonProduct(item)),
-              //   },
-              // )
+              
               createOrder(input, {
      
                 onSuccess: (order: any) => {
                   // alert('success')
                   if (order?.tracking_number) {
                     // alert('tracking number generated')
-                    setBooking(false)
+                     
                     router.push(`${ROUTES.ORDERS}/${order?.tracking_number}`);
+                    setBooking(false)
                     localStorage.removeItem('input');
                   }
                   if (order?.paymentLink)
@@ -376,7 +370,7 @@ import Loader from '@components/ui/loader/loader';
                   }
                 },
                 onError: (error: any) => {
-                  alert('error')
+                  // alert('error')
                   setBooking(false);
                   // localStorage.removeItem('input');
                 },
@@ -449,7 +443,9 @@ import Loader from '@components/ui/loader/loader';
           console.log('input', inputString ? true : false);
 
           if(!isAuthorize){
-            return openModal('REGISTER');
+            return openModal('REGISTER',{
+                pathname: '/salon-near-me',
+            });
           }
 
 

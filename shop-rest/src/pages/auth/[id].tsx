@@ -81,8 +81,6 @@ const RegisterForm = () => {
 
   console.log('query', query.utm_source + ' ' + query.utm_campaign);
 
-
-
   function onSubmit({code}: FormValues) {
     const input = JSON.parse(localStorage.getItem('input'));
     mutate(
@@ -95,7 +93,7 @@ const RegisterForm = () => {
           if(data.message=="incorrect"){
             setErrorMsg("Invalid OTP");
             return ;
-          }else{
+          } else{
             setErrorMsg("");
           }
           if (data?.token && data?.permissions?.length) {

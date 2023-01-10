@@ -81,6 +81,8 @@ export const API_ENDPOINTS: Record<string, string> = {
   CABLE_DETAILS:'get-cable-details',
   FAST_TAG_INFO:'get-fast-tag-info',
   FAST_TAG_DETAILS:'get-fast-tag-details',
+
+  GOOGLE_MAPS_TEXT_SEARCH: 'google-maps-text-search',
    
 
 

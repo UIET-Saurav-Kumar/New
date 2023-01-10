@@ -63,11 +63,10 @@ Route::get('/get-lpg-info','PickBazar\Http\Controllers\BillerInfoController@getB
 Route::get('/get-emi-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
 Route::get('/get-cable-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
 Route::get('/get-fast-tag-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
-
-
 Route::get('/get-insurance-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
 
-Route::get('/google-maps-text-search','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
+Route::get('google-maps-text-search','PickBazar\Http\Controllers\GoogleMapsPlacesController@textSearch');
+// Route::get('google-maps-text-search', 'PickBazar\Http\Controllers\AnalyticsController@totalUsers');
 
 
 Route::get('/get-broadband-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');

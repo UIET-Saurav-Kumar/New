@@ -30,6 +30,12 @@ import dynamic from "next/dynamic";
 import useIntersectionObserver from "@components/product/useIntersectionObserver";
 import ProductNotFoundInfo from "@components/product/product-not-found-info";
 import ShopNotFoundInfo from "@components/shop/shop-not-found-info";
+import { useMutation, useQueryClient, enabled } from 'react-query'
+import { useQuery } from 'react-query'
+import { API_ENDPOINTS } from "@utils/api/endpoints";
+import url from '@utils/api/server_url'
+import http from '@utils/api/http'
+import { toast } from 'react-toastify';
 
 
 const ProductFeedLoader = dynamic(
@@ -46,6 +52,12 @@ const ShopsPage = () => {
   
   const [filter, setFilter] = useState(false);
   const [sort , setSort] = useState(false);
+
+  const [error, setError] = useState('')
+
+  const queryClient = useQueryClient();
+
+  const [searchText , setSearchText] = useState('');
 
   const { t } = useTranslation("common");
   const router = useRouter();
@@ -80,7 +92,7 @@ const ShopsPage = () => {
     enabled: hasNextPage,
   })
 
-  function getSearch():string{
+  function getSearch():string {
     
     const { query } = useRouter();
     
@@ -88,7 +100,19 @@ const ShopsPage = () => {
       return query.text as string
     }
     return "";
+
   }
+
+  useEffect(() => {
+    if (searchText) {
+      const searchString = {
+        query: searchText,
+        // circle: circleName,
+      }
+
+      mutateSearch(searchString)
+    }
+  }, [searchText])
 
   console.log('slug data', data?.pages)
 
@@ -118,9 +142,6 @@ const ShopsPage = () => {
     }
      
   }
-
-
-   
 
   // function getSearch(){
   //   var value:any=(window.localStorage.getItem('search'))?window.localStorage.getItem('search'):"";
@@ -166,15 +187,52 @@ const ShopsPage = () => {
   // // console.log('shops',data?.pages?.filter((shop: any) => shop?.is_active === 1))
   // // console.log('shops name',data?.pages?.data?.map((shop: any) => shop))
 
+
+  const getSearchDetails = async (data: any) => {
+    // setOperator(null)
+    // setLoading(true)
+
+    // setPlans(null)
+    // console.log('data before', `${url}/${API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH}`, data)
+    const { data: response } = await http.post(
+      `${url}/${API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH}`,
+      data,
+    )
+    // console.log('data after', response)
+    // setLoading(false)
+    return response
+  }
+
+  useEffect(()=>{
+   getSearchDetails
+  },[])
+
    
 
-  // console.log('shop page data',getCategory())
+  const { mutate: mutateSearch } = useMutation(getSearchDetails, {
+    onSuccess: (data) => {
+      // setOperator(data);
+      data?.status == false ? setError(data?.msg) : null;
+      // setOperatorName(data?.operator)
+      // setCircleName(data?.circle)
+      console.log('operator plans', data)
+    },
+    onError: (data) => {
+      // alert(data?.msg)
+      toast.error("unable to process the request, please try later");
+      setError(data?.msg)
+    },
+
+    onSettled: () => {
+      queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH)
+    },
+  })
 
   return (
 
     <>
 
-<Head>
+    <Head>
           
         {shopCat == 'Cosmetics' &&  <title>Get Best Deals on Cosmetic Products | #1 Cosmetic stores in Chandigarh </title> }
         {shopCat == 'Groceries' && <title>  Best Grocery Store in Tricity | Get exclusive Offer Now</title> }
@@ -191,22 +249,22 @@ const ShopsPage = () => {
           <title>{shopCat == 'Groceries' && ' ' }</title> */}
 
 
-         {shopCat == 'Cosmetics' &&  <meta name="description" content= 'Get Amazing deals on ladies cosmetic products in Chandigarh tricity| Buy Now with Buylowcal '  /> }
+         { shopCat == 'Cosmetics' &&  <meta name="description" content= 'Get Amazing deals on ladies cosmetic products in Chandigarh tricity| Buy Now with Buylowcal '  /> }
           
          { shopCat == 'Groceries' && <meta name="description" content= 'Grab The Best deal and  Offers on Grocery items | Buy Now With Buylowcal' /> }
-         {shopCat == 'Pharmacy' &&  <meta name="description" content='Prescriptions may be refilled and transferred online, or you can find a CVS Pharmacy near you with Buylowcal  Online shopping, Extra Care offers, Clinic locations, and more.' /> }
+         { shopCat == 'Pharmacy' &&  <meta name="description" content='Prescriptions may be refilled and transferred online, or you can find a CVS Pharmacy near you with Buylowcal  Online shopping, Extra Care offers, Clinic locations, and more.' /> }
          { shopCat == ' Vegetables & Fruits' && <meta name="description" content= 'Acquire the best deal on purchasing Veggies & Fruits with Buylowcal And Get 20 % off On purchasing'  /> }
          { shopCat == 'Restaurants' &&  <meta name="description" content='Find the best restaurants near you with buylowcal & Get exclusive offer on every restaurant'  /> }
          { shopCat == 'Fashion, Lifestyle & Furnishings' &&  <meta name="description" content='Get Amazing Deals on Lifestyle & home Items & get 20 % off on every item '  /> }
          { shopCat == 'Gym & Health Products' &&  <meta name="description" content='Get 100% pure Gym &Health product & Get A chance to win exciting offers' /> }
-         {shopCat == 'Salon & Spa' &&  <meta name="description" content='Change your looks in couple of mins with choosing the right Salon with Buylowcal' /> }
-         {shopCat == 'Takeaways' &&  <meta name="description" content='Lets change the era with takeaways services in chandigarh with Buylowcal.com' /> }
-          {shopCat == 'Restraunts' &&  <meta name="description" content='Top 5 star Rating restraunt list in your smartphone | We provides you 100+ restraunt in one Click' /> }
+         { shopCat == 'Salon & Spa' &&  <meta name="description" content='Change your looks in couple of mins with choosing the right Salon with Buylowcal' /> }
+         { shopCat == 'Takeaways' &&  <meta name="description" content='Lets change the era with takeaways services in chandigarh with Buylowcal.com' /> }
+         { shopCat == 'Restraunts' &&  <meta name="description" content='Top 5 star Rating restraunt list in your smartphone | We provides you 100+ restraunt in one Click' /> }
 
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
           <link rel="canonical" href=' https://buylowcal.com/shops'/>
 
-        </Head>
+    </Head>
      
 
     <div className="w-full">
@@ -232,7 +290,8 @@ const ShopsPage = () => {
                               <ShopCard2 text={getText()} category={getCategory()} shop={shop} shopId={shop?.id} key={shop.id} />
                             ))} */}
                             {page.data.filter((shop) => shop?.is_active === 1 ).map((shop: any) => (
-                              <ShopCard2 text={getText()} category={getCategory()} shop={shop} shopId={shop?.id} key={shop.id} />
+                              <ShopCard2 text={getText()} category={getCategory()} 
+                                         shop={shop} shopId={shop?.id} key={shop.id} />
                             ))}
                           </Fragment>
                         )
