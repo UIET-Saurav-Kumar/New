@@ -122,7 +122,7 @@ const ShopsPage = () => {
 
       <div className="w-full mx-2 mt-5">
         {/* <ProductNotFoundInfo shopData={!data?.pages?.[0]?.data} /> */}
-        <ShopNotFoundInfo/>
+        <ShopNotFoundInfo searchText={getSearch()} />
       </div>
     );
   }
@@ -188,45 +188,45 @@ const ShopsPage = () => {
   // // console.log('shops name',data?.pages?.data?.map((shop: any) => shop))
 
 
-  const getSearchDetails = async (data: any) => {
-    // setOperator(null)
-    // setLoading(true)
+  // const getSearchDetails = async (data: any) => {
+  //   // setOperator(null)
+  //   // setLoading(true)
 
-    // setPlans(null)
-    // console.log('data before', `${url}/${API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH}`, data)
-    const { data: response } = await http.post(
-      `${url}/${API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH}`,
-      data,
-    )
-    // console.log('data after', response)
-    // setLoading(false)
-    return response
-  }
+  //   // setPlans(null)
+  //   // console.log('data before', `${url}/${API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH}`, data)
+  //   const { data: response } = await http.post(
+  //     `${url}/${API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH}`,
+  //     data,
+  //   )
+  //   // console.log('data after', response)
+  //   // setLoading(false)
+  //   return response
+  // }
 
-  useEffect(()=>{
-   getSearchDetails
-  },[])
+  // useEffect(()=>{
+  //  getSearchDetails
+  // },[])
 
    
 
-  const { mutate: mutateSearch } = useMutation(getSearchDetails, {
-    onSuccess: (data) => {
-      // setOperator(data);
-      data?.status == false ? setError(data?.msg) : null;
-      // setOperatorName(data?.operator)
-      // setCircleName(data?.circle)
-      console.log('operator plans', data)
-    },
-    onError: (data) => {
-      // alert(data?.msg)
-      toast.error("unable to process the request, please try later");
-      setError(data?.msg)
-    },
+  // const { mutate: mutateSearch } = useMutation(getSearchDetails, {
+  //   onSuccess: (data) => {
+  //     // setOperator(data);
+  //     data?.status == false ? setError(data?.msg) : null;
+  //     // setOperatorName(data?.operator)
+  //     // setCircleName(data?.circle)
+  //     console.log('operator plans', data)
+  //   },
+  //   onError: (data) => {
+  //     // alert(data?.msg)
+  //     toast.error("unable to process the request, please try later");
+  //     setError(data?.msg)
+  //   },
 
-    onSettled: () => {
-      queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH)
-    },
-  })
+  //   onSettled: () => {
+  //     queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH)
+  //   },
+  // })
 
   return (
 

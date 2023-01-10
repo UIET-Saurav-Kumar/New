@@ -6,9 +6,11 @@ import { useRouter } from "next/router";
 import AllCategories from '@components/home-page-product-section/AllCategories';
 
 
-export default function ShopNotFoundInfo({shopData}) {
+export default function ShopNotFoundInfo({shopData,searchText}) {
     const { openModal } = useModalAction();
     const router = useRouter();
+
+    console.log(searchText)
 
     //on page load scroll(0,0)
     React.useEffect(() => {
@@ -28,7 +30,12 @@ export default function ShopNotFoundInfo({shopData}) {
 
           <div className='flex flex-col  font-sans space-y-6 shadow-sm lg:shadow-none p-3'>
             <p className=' text-5xl lg:text-9xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-700 via-purple-600 to-blue-600 '>Oops!!</p>
-            <p className='font-light text-lg text-gray-600 font-sans lg:text-xl '> No shops found </p>
+            <div className=''>
+              <span className='text-bold text-lg lg:text-xl'>{searchText}</span>
+              <p className='font-light text-sm text-gray-700 font-sans lg:text-xl '>
+              does not exist in your current location </p>
+             </div> 
+            <p className='font-light text-sm text-gray-500 font-sans lg:text-sm '> Try with other location </p>
              
           </div>
 
