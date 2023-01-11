@@ -65,8 +65,15 @@ Route::get('/get-cable-info','PickBazar\Http\Controllers\BillerInfoController@ge
 Route::get('/get-fast-tag-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
 Route::get('/get-insurance-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
 
-Route::get('google-maps-text-search','PickBazar\Http\Controllers\GoogleMapsPlacesController@textSearch');
+
+Route::any('/google-maps-text-search',
+'PickBazar\Http\Controllers\PlacesApiController@textSearch');
 // Route::get('google-maps-text-search', 'PickBazar\Http\Controllers\AnalyticsController@totalUsers');
+Route::get('/google-maps-place-details',
+'PickBazar\Http\Controllers\PlacesApiController@placeDetails');
+
+Route::get('/google-maps-place-photos',
+'PickBazar\Http\Controllers\PlacesApiController@placePhotos');
 
 
 Route::get('/get-broadband-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');

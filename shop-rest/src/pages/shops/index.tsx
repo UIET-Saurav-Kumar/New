@@ -48,6 +48,8 @@ const ShopsPage = () => {
 
   const shopCat =getCategory();
 
+  const { query } = useRouter();
+
   const { width } = useWindowSize();
   
   const [filter, setFilter] = useState(false);
@@ -57,12 +59,22 @@ const ShopsPage = () => {
 
   const queryClient = useQueryClient();
 
+
+
   const [searchText , setSearchText] = useState('');
+
+  const [placeId, setPlaceId] = useState('');
 
   const { t } = useTranslation("common");
   const router = useRouter();
   const items = useTypesQuery();
   const {getLocation} =useLocation()
+
+  useEffect(()=>{
+    setSearchText(query.text?.split('+').join('-'))
+  },[query.text])
+
+  console.log('search',searchText);
 
   const selectedMenu = items?.data?.types?.find((type: any) =>
     router.asPath.includes(type.slug)
@@ -103,16 +115,7 @@ const ShopsPage = () => {
 
   }
 
-  useEffect(() => {
-    if (searchText) {
-      const searchString = {
-        query: searchText,
-        // circle: circleName,
-      }
-
-      mutateSearch(searchString)
-    }
-  }, [searchText])
+   
 
   console.log('slug data', data?.pages)
 
@@ -143,40 +146,9 @@ const ShopsPage = () => {
      
   }
 
-  // function getSearch(){
-  //   var value:any=(window.localStorage.getItem('search'))?window.localStorage.getItem('search'):"";
+ 
 
-  //   if(window.localStorage.getItem('search')){
-
-  //     try{
-  //       value=JSON.parse(value).value.replaceAll("&","-");
-  //     }catch(e){
-  //       // console.log(e)
-  //     }
-  //   }
-  //   return value;
-  // }
-
-  function handleClick(path: string) {
-    close();
-    router.push(path);
-  }
-
-  const handleFilter = () => {
-      setFilter(true);
-  }
-
-  const handleSort = () => {
-        setSort(true)
-  }
-
-  const closeFilter = () => {
-        setFilter(false);
-  }
-
-  const closeSort = () => {
-      setSort(false);
-  } 
+  
 
   //push shops with no products to the end of the list
   const ShopsWithProducts = data?.shops?.filter((shop: any) => shop?.products?.length > 0);
@@ -187,46 +159,68 @@ const ShopsPage = () => {
   // // console.log('shops',data?.pages?.filter((shop: any) => shop?.is_active === 1))
   // // console.log('shops name',data?.pages?.data?.map((shop: any) => shop))
 
+  useEffect(() => {
+    // setSearchText(query?.text)
+    if (searchText) {
+      const searchString = {
+        query: searchText,
+      }
 
-  // const getSearchDetails = async (data: any) => {
-  //   // setOperator(null)
-  //   // setLoading(true)
+      mutateSearch(searchString)
+    }
+  }, [searchText])
 
-  //   // setPlans(null)
-  //   // console.log('data before', `${url}/${API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH}`, data)
-  //   const { data: response } = await http.post(
-  //     `${url}/${API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH}`,
-  //     data,
-  //   )
-  //   // console.log('data after', response)
-  //   // setLoading(false)
-  //   return response
-  // }
+  const getSearchDetails = async (data: any) => {
+    console.log('search data',data)
+    const { data: response } = await http.get(
+      `${url}/${API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH}`,{params: data}
+    )
+    setPlaceId(response);
+    return response
+  }
 
-  // useEffect(()=>{
-  //  getSearchDetails
-  // },[])
+  const getplaceDetails = async (data: any) => {
+    console.log('search data',data)
+    const { data: response } = await http.get(
+      `${url}/${API_ENDPOINTS.GOOGLE_MAPS_PLACE_DETAILS}`,{params: data}
+    )
+    setPlaceId(response);
+    return response
+  }
 
-   
+  const { mutate: mutatePlace} = useMutation(getplaceDetails, {
+    onSuccess: (data) => {
+      setPlaceId(data);
+      data?.status == false ? setError(data?.msg) : null;
+      console.log('operator plans', data)
+    },
+    onError: (data) => {
+      // alert(data?.msg)
+      toast.error("unable to process the request, please try later");
+      setError(data?.msg)
+    },
 
-  // const { mutate: mutateSearch } = useMutation(getSearchDetails, {
-  //   onSuccess: (data) => {
-  //     // setOperator(data);
-  //     data?.status == false ? setError(data?.msg) : null;
-  //     // setOperatorName(data?.operator)
-  //     // setCircleName(data?.circle)
-  //     console.log('operator plans', data)
-  //   },
-  //   onError: (data) => {
-  //     // alert(data?.msg)
-  //     toast.error("unable to process the request, please try later");
-  //     setError(data?.msg)
-  //   },
+    onSettled: () => {
+      queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH)
+    },
+  })
 
-  //   onSettled: () => {
-  //     queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH)
-  //   },
-  // })
+  const { mutate: mutateSearch } = useMutation(getSearchDetails, {
+    onSuccess: (data) => {
+      setPlaceId(data);
+      data?.status == false ? setError(data?.msg) : null;
+      console.log('operator plans', data)
+    },
+    onError: (data) => {
+      // alert(data?.msg)
+      toast.error("unable to process the request, please try later");
+      setError(data?.msg)
+    },
+
+    onSettled: () => {
+      queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH)
+    },
+  })
 
   return (
 
@@ -237,7 +231,7 @@ const ShopsPage = () => {
         {shopCat == 'Cosmetics' &&  <title>Get Best Deals on Cosmetic Products | #1 Cosmetic stores in Chandigarh </title> }
         {shopCat == 'Groceries' && <title>  Best Grocery Store in Tricity | Get exclusive Offer Now</title> }
         {shopCat == 'Pharmacy' &&   <title> Get Upto 30% off on Pharmacy With Buylowcal | Shop Now  </title> }
-        {shopCat == ' Vegetables & Fruits' &&  <title>  Save Your Time & Money | Buy Veggies Fruits  with Buylowcal  </title> }
+        {shopCat == ' Vegetables & Fruits' &getSearchDetails&  <title>  Save Your Time & Money | Buy Veggies Fruits  with Buylowcal  </title> }
         {shopCat == 'Restaurants' &&  <title> Get Best Deals on Restaurants Now | Connect your local restaurant with Buylowcal </title> }
         {shopCat == 'Fashion, Lifestyle & Furnishings' &&   <title>  Buylowcal | shop Now Lifestyle & Home Items & Get 20% off </title> }
         {shopCat == 'Gym & Health Products' && <title>  Get 100% pure Gym & Health product & Get A chance to win exciting offers</title> }

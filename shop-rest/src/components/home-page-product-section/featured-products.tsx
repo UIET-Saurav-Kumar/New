@@ -105,23 +105,23 @@ export default function FeaturedProducts({}) {
     })
 
     const furnitureArray =  data?.featureProducts.data.filter(function(product){
-        return product.status == 'publish' && product.type_id == 6 ? product : null;
+        return product.status == 'publish' && product?.is_brand_offer !== 1 && product.type_id == 6 ? product : null;
     })
 
     const salonspaArray =  data?.featureProducts.data.filter(function(product){
-        return product.status == 'publish' && product.type_id == 7 ? product : null;
+        return product.status == 'publish' && product?.is_brand_offer !== 1 && product.type_id == 7 ? product : null;
     })
 
     const restrauntsArray =  data?.featureProducts.data.filter(function(product){
-        return product.status == 'publish' && product.type_id == 8 ? product : null;
+        return product.status == 'publish' && product?.is_brand_offer !== 1 && product.type_id == 8 ? product : null;
     })
 
     const buffetArray =  data?.featureProducts.data.filter(function(product){
-        return product.status == 'publish' && product.type_id == 9 ? product : null;
+        return product.status == 'publish' && product?.is_brand_offer !== 1 && product.type_id == 9 ? product : null;
     })
 
     const groceryoffersArray =  data?.featureProducts.data.filter(function(product){
-        return product.status == 'publish' && product.type_id == 10 ? product : null;
+        return product.status == 'publish' && product?.is_brand_offer !== 1 && product.type_id == 10 ? product : null;
     })
 
     const fashionlifestyleArray =  data?.featureProducts.data.filter(function(product){
@@ -129,35 +129,35 @@ export default function FeaturedProducts({}) {
     })
 
     const hotelsresortsArray =  data?.featureProducts.data.filter(function(product){
-        return product.status == 'publish' && product.type_id == 14 ? product : null;
+        return product.status == 'publish' && product?.is_brand_offer !== 1 && product.type_id == 14 ? product : null;
     })
 
     const fruitsvegetablesArray =  data?.featureProducts.data.filter(function(product){
-        return product.status == 'publish' && product.type_id == 15 ? product : null;
+        return product.status == 'publish' && product?.is_brand_offer !== 1 && product.type_id == 15 ? product : null;
     })
 
     const pharmacyArray =  data?.featureProducts.data.filter(function(product){
-        return product.status == 'publish' && product.type_id == 16 ? product : null;
+        return product.status == 'publish' && product?.is_brand_offer !== 1 && product.type_id == 16 ? product : null;
     })
 
     const beveragesArray =  data?.featureProducts.data.filter(function(product){
-        return product.status == 'publish' && product.type_id == 18 ? product : null;
+        return product.status == 'publish' && product?.is_brand_offer !== 1 && product.type_id == 18 ? product : null;
     })
 
     const healthproductsArray =  data?.featureProducts.data.filter(function(product){
-        return product.status == 'publish' && product.type_id == 19 ? product : null;
+        return product.status == 'publish' && product?.is_brand_offer !== 1 && product.type_id == 19 ? product : null;
     })
 
     const dairyfarmArray =  data?.featureProducts.data.filter(function(product){
-        return product.status == 'publish' && product.type_id == 20 ? product : null;
+        return product.status == 'publish' && product?.is_brand_offer !== 1 && product.type_id == 20 ? product : null;
     })
 
     const meatArray =  data?.featureProducts.data.filter(function(product){
-        return product.status == 'publish' && product.type_id == 21 ? product : null;
+        return product.status == 'publish' && product?.is_brand_offer !== 1 && product.type_id == 21 ? product : null;
     })
 
     const electronicsArray =  data?.featureProducts.data.filter(function(product){
-        return product.status == 'publish'  && product.type_id == 22 ? product : null;
+        return product.status == 'publish'  && product?.is_brand_offer !== 1 && product.type_id == 22 ? product : null;
     })
 
  const arrays = [
