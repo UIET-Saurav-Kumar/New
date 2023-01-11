@@ -83,7 +83,8 @@ export const API_ENDPOINTS: Record<string, string> = {
   FAST_TAG_DETAILS:'get-fast-tag-details',
 
   GOOGLE_MAPS_TEXT_SEARCH: 'google-maps-text-search',
-   
+  GOOGLE_MAPS_PLACE_DETAILS: 'google-maps-place-details',
+  GOOGLE_MAPS_PLACE_PHOTOS: 'google-maps-place-photos',
 
 
   LOGS:'logs'

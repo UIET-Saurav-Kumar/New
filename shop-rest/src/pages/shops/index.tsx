@@ -231,7 +231,7 @@ const ShopsPage = () => {
         {shopCat == 'Cosmetics' &&  <title>Get Best Deals on Cosmetic Products | #1 Cosmetic stores in Chandigarh </title> }
         {shopCat == 'Groceries' && <title>  Best Grocery Store in Tricity | Get exclusive Offer Now</title> }
         {shopCat == 'Pharmacy' &&   <title> Get Upto 30% off on Pharmacy With Buylowcal | Shop Now  </title> }
-        {shopCat == ' Vegetables & Fruits' &getSearchDetails&  <title>  Save Your Time & Money | Buy Veggies Fruits  with Buylowcal  </title> }
+        {shopCat == ' Vegetables & Fruits' &&  <title>  Save Your Time & Money | Buy Veggies Fruits  with Buylowcal  </title> }
         {shopCat == 'Restaurants' &&  <title> Get Best Deals on Restaurants Now | Connect your local restaurant with Buylowcal </title> }
         {shopCat == 'Fashion, Lifestyle & Furnishings' &&   <title>  Buylowcal | shop Now Lifestyle & Home Items & Get 20% off </title> }
         {shopCat == 'Gym & Health Products' && <title>  Get 100% pure Gym & Health product & Get A chance to win exciting offers</title> }

@@ -85,67 +85,67 @@ export default function FeaturedProducts({}) {
 
        
     const groceryArray =  data?.featureProducts.data.filter(function(product){
-        return product.status == 'publish' && product.type_id == 1 ? product : null;
+        return product.status == 'publish' && product?.is_brand_offer !== 1 && product.is_offer != 1 && product.type_id == 1 ? product : null;
     })
 
     const bakeryArray =  data?.featureProducts.data.filter(function(product){
-    return product.status == 'publish' && product.type_id == 2 ? product : null;
+    return product.status == 'publish' && product?.is_brand_offer !== 1 && product?.is_offer != 1 && product?.type_id == 2 ? product : null;
     })
 
     const makeupArray =  data?.featureProducts.data.filter(function(product){
-    return product.status == 'publish' && product.type_id == 3 ? product : null;
+    return product.status == 'publish' && product?.is_brand_offer !== 1 && product?.is_offer != 1 && product?.type_id == 3 ? product : null;
     })
 
     const bagsArray =  data?.featureProducts.data.filter(function(product){
-    return product.status == 'publish' && product.type_id == 4 ? product : null;
+    return product.status == 'publish' && product?.is_brand_offer !== 1 && product?.is_offer != 1 && product?.type_id == 4 ? product : null;
     })
 
     const clothingArray =  data?.featureProducts.data.filter(function(product){
-        return product.status == 'publish' && product.type_id == 5 ? product : null;
+        return product.status == 'publish' && product?.is_brand_offer !== 1 && product?.is_offer != 1 && product?.type_id == 5 ? product : null;
     })
 
     const furnitureArray =  data?.featureProducts.data.filter(function(product){
-        return product.status == 'publish' && product?.is_brand_offer !== 1 && product.type_id == 6 ? product : null;
+        return product.status == 'publish' && product?.is_brand_offer !== 1 && product?.is_offer != 1 && product?.type_id == 6 ? product : null;
     })
 
     const salonspaArray =  data?.featureProducts.data.filter(function(product){
-        return product.status == 'publish' && product?.is_brand_offer !== 1 && product.type_id == 7 ? product : null;
+        return product.status == 'publish' && product?.is_brand_offer !== 1 && product?.is_offer != 1 && product?.type_id == 7 ? product : null;
     })
 
     const restrauntsArray =  data?.featureProducts.data.filter(function(product){
-        return product.status == 'publish' && product?.is_brand_offer !== 1 && product.type_id == 8 ? product : null;
+        return product.status == 'publish' && product?.is_brand_offer !== 1 && product?.is_offer != 1 && product?.type_id == 8 ? product : null;
     })
 
     const buffetArray =  data?.featureProducts.data.filter(function(product){
-        return product.status == 'publish' && product?.is_brand_offer !== 1 && product.type_id == 9 ? product : null;
+        return product.status == 'publish' && product?.is_brand_offer !== 1 && product?.is_offer != 1 && product?.type_id == 9 ? product : null;
     })
 
     const groceryoffersArray =  data?.featureProducts.data.filter(function(product){
-        return product.status == 'publish' && product?.is_brand_offer !== 1 && product.type_id == 10 ? product : null;
+        return product.status == 'publish' && product?.is_brand_offer !== 1 && product?.is_offer != 1 && product?.type_id == 10 ? product : null;
     })
 
     const fashionlifestyleArray =  data?.featureProducts.data.filter(function(product){
-        return product.status == 'publish' && product?.is_brand_offer !== 1 && product.type_id == 11 ? product : null;
+        return product.status == 'publish' && product?.is_brand_offer !== 1 && product?.is_offer != 1 && product?.type_id == 11 ? product : null;
     })
 
     const hotelsresortsArray =  data?.featureProducts.data.filter(function(product){
-        return product.status == 'publish' && product?.is_brand_offer !== 1 && product.type_id == 14 ? product : null;
+        return product.status == 'publish' && product?.is_brand_offer !== 1 && product?.is_offer != 1 && product?.type_id == 14 ? product : null;
     })
 
     const fruitsvegetablesArray =  data?.featureProducts.data.filter(function(product){
-        return product.status == 'publish' && product?.is_brand_offer !== 1 && product.type_id == 15 ? product : null;
+        return product.status == 'publish' && product?.is_brand_offer !== 1 && product?.is_offer != 1 && product?.type_id == 15 ? product : null;
     })
 
     const pharmacyArray =  data?.featureProducts.data.filter(function(product){
-        return product.status == 'publish' && product?.is_brand_offer !== 1 && product.type_id == 16 ? product : null;
+        return product.status == 'publish' && product?.is_brand_offer !== 1 && product?.is_offer != 1 && product?.type_id == 16 ? product : null;
     })
 
     const beveragesArray =  data?.featureProducts.data.filter(function(product){
-        return product.status == 'publish' && product?.is_brand_offer !== 1 && product.type_id == 18 ? product : null;
+        return product.status == 'publish' && product?.is_brand_offer !== 1 && product?.is_offer != 1 && product?.type_id == 18 ? product : null;
     })
 
     const healthproductsArray =  data?.featureProducts.data.filter(function(product){
-        return product.status == 'publish' && product?.is_brand_offer !== 1 && product.type_id == 19 ? product : null;
+        return product.status == 'publish' && product?.is_brand_offer !== 1 && product?.is_offer != 1 && product?.type_id == 19 ? product : null;
     })
 
     const dairyfarmArray =  data?.featureProducts.data.filter(function(product){
