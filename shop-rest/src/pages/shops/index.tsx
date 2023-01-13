@@ -48,8 +48,6 @@ const ShopsPage = () => {
 
   const shopCat =getCategory();
 
-  const { query } = useRouter();
-
   const { width } = useWindowSize();
   
   const [filter, setFilter] = useState(false);
@@ -58,8 +56,6 @@ const ShopsPage = () => {
   const [error, setError] = useState('')
 
   const queryClient = useQueryClient();
-
-
 
   const [searchText , setSearchText] = useState('');
 
@@ -70,11 +66,14 @@ const ShopsPage = () => {
   const items = useTypesQuery();
   const {getLocation} =useLocation()
 
-  useEffect(()=>{
-    setSearchText(query.text?.split('+').join('-'))
-  },[query.text])
+  const { query } = useRouter();
 
-  console.log('search',searchText);
+  console.log('search',query.text);
+
+
+  // useEffect(()=>{
+  //   setSearchText(query.text)
+  // },[searchText])
 
   const selectedMenu = items?.data?.types?.find((type: any) =>
     router.asPath.includes(type.slug)
@@ -164,6 +163,7 @@ const ShopsPage = () => {
     if (searchText) {
       const searchString = {
         query: searchText,
+        // circle: circleName,
       }
 
       mutateSearch(searchString)
@@ -171,39 +171,13 @@ const ShopsPage = () => {
   }, [searchText])
 
   const getSearchDetails = async (data: any) => {
-    console.log('search data',data)
+    
     const { data: response } = await http.get(
-      `${url}/${API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH}`,{params: data}
+      `${url}/${API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH}`,
+      data,
     )
-    setPlaceId(response);
     return response
   }
-
-  const getplaceDetails = async (data: any) => {
-    console.log('search data',data)
-    const { data: response } = await http.get(
-      `${url}/${API_ENDPOINTS.GOOGLE_MAPS_PLACE_DETAILS}`,{params: data}
-    )
-    setPlaceId(response);
-    return response
-  }
-
-  const { mutate: mutatePlace} = useMutation(getplaceDetails, {
-    onSuccess: (data) => {
-      setPlaceId(data);
-      data?.status == false ? setError(data?.msg) : null;
-      console.log('operator plans', data)
-    },
-    onError: (data) => {
-      // alert(data?.msg)
-      toast.error("unable to process the request, please try later");
-      setError(data?.msg)
-    },
-
-    onSettled: () => {
-      queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH)
-    },
-  })
 
   const { mutate: mutateSearch } = useMutation(getSearchDetails, {
     onSuccess: (data) => {
@@ -231,7 +205,7 @@ const ShopsPage = () => {
         {shopCat == 'Cosmetics' &&  <title>Get Best Deals on Cosmetic Products | #1 Cosmetic stores in Chandigarh </title> }
         {shopCat == 'Groceries' && <title>  Best Grocery Store in Tricity | Get exclusive Offer Now</title> }
         {shopCat == 'Pharmacy' &&   <title> Get Upto 30% off on Pharmacy With Buylowcal | Shop Now  </title> }
-        {shopCat == ' Vegetables & Fruits' &&  <title>  Save Your Time & Money | Buy Veggies Fruits  with Buylowcal  </title> }
+        {shopCat == ' Vegetables & Fruits' &getSearchDetails&  <title>  Save Your Time & Money | Buy Veggies Fruits  with Buylowcal  </title> }
         {shopCat == 'Restaurants' &&  <title> Get Best Deals on Restaurants Now | Connect your local restaurant with Buylowcal </title> }
         {shopCat == 'Fashion, Lifestyle & Furnishings' &&   <title>  Buylowcal | shop Now Lifestyle & Home Items & Get 20% off </title> }
         {shopCat == 'Gym & Health Products' && <title>  Get 100% pure Gym & Health product & Get A chance to win exciting offers</title> }
@@ -274,7 +248,7 @@ const ShopsPage = () => {
                           xl++:grid-cols-5 2xl:grid-cols-5  3xl:grid-cols-6 border-2 overflow-y-scroll h-screen overflow-x-hidden  bg-gray-100'> */}
             <div className="lg:px-10  h-full w-full flex flex-col">
                   {isLoading && !data?.pages?.length ? (
-                <ProductFeedLoader limit={30} />
+                <ProductFeedLoader limit = {30} />
               ) : (
               <>
                   { data?.pages?.map((page, idx) => {
@@ -283,15 +257,15 @@ const ShopsPage = () => {
                             {/* {page.data.filter((shop) => shop?.is_active === 1 && shop?.products?.length == 0 ).map((shop: any) => (
                               <ShopCard2 text={getText()} category={getCategory()} shop={shop} shopId={shop?.id} key={shop.id} />
                             ))} */}
-                            {page.data.filter((shop) => shop?.is_active === 1 ).map((shop: any) => (
+                            {page?.data?.filter((shop) => shop?.is_active === 1 ).map((shop: any) => (
                               <ShopCard2 text={getText()} category={getCategory()} 
-                                         shop={shop} shopId={shop?.id} key={shop.id} />
+                                         shop={shop}  shopId={shop?.id} key={shop.id} />
                             ))}
                           </Fragment>
                         )
-                  })}
-              </>
-            )} 
+                    })}
+                </>
+              )} 
             </div>
 
             <div ref = {loadMoreRef} className={`${!hasNextPage ? "hidden" : ""}`}>

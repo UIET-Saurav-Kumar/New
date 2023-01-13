@@ -35,7 +35,7 @@ const imageCheck = (logo: any , record:any, imgsize:any, imgDim:any, classname: 
   return (check ? <img src={logo} alt={record?.name} style={{ objectFit: "contain" }} className={classname} />:<Avatar name={record?.name} size={imgsize} round={imgDim}  />);
 };
 
-const ShopCard2: React.FC<ShopCardProps> = ({ shop,text,key,category, shopId }) => {
+const ShopCard2: React.FC<ShopCardProps> = ({ shop,text,key,category, shopId,open,rating }) => {
 
   const { t } = useTranslation();
   const { query } = useRouter();
@@ -83,6 +83,19 @@ const ShopCard2: React.FC<ShopCardProps> = ({ shop,text,key,category, shopId }) 
   const userLat = myLocation?.lat
   const userLng = myLocation?.lng
 
+  function getStars(rating) {
+    let stars = '';
+  
+    for (let i = 0; i < rating; i++) {
+      stars += '⭐';
+    }
+    
+    return stars;
+  }
+  
+
+  console.log('open',open,rating)
+
 
   return (
 
@@ -97,10 +110,19 @@ const ShopCard2: React.FC<ShopCardProps> = ({ shop,text,key,category, shopId }) 
         <div className='flex flex-col space-y-1 w-full p-4'>
 
               <div className="flex justify-between w-full items-center "> 
-                <span className="flex items-center"> {imageCheck(shop?.logo?.thumbnail, shop, '190', false,'  w-16 rounded-full object-contain')}
+                <span className="flex flex-col items-center"> {imageCheck(shop?.logo?.thumbnail, shop, '190', false,'  w-16 rounded-full object-contain')}
                    <h4 className='font-semibold mx-3 text-gray-900 text-sm sm:text-lg w-full '> 
                      {shop?.name} 
                    </h4>
+                   <p className="flex items-center">
+                    {/* <span className="text-gray-700 font-light">
+                      {rating}
+                    </span> */}
+                    {/* {getStars(rating)} */}
+                   </p>
+                   {/* <p className={` ${open == true ? 'text-green-700 font-semibold' : 'text-red-500 text-semibold'}`}>
+                    {open == true ? 'open' : 'closed'}
+                   </p> */}
                 </span>
                 {/* <h4 className='text-green-600 text-xs font-semibold'> Open </h4> */}
                 <Link href={`/shops/${shop?.slug}?slug=${shop?.slug}`}>  

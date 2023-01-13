@@ -49,8 +49,8 @@ class PlacesApiController extends  CoreController
     curl_close($curl);
 
     $data = json_decode($response, true);
-    if(isset($data) && !empty($data) && isset($data['results']) && count($data['results']) > 0  && isset($data['results'][0]['place_id'])){
-      $place_id = $data['results'][0]['place_id'];
+    if(isset($data) && !empty($data) && isset($data['results']) && count($data['results']) > 0  && isset($data['results'][0])){
+      $place_id = $data['results'][0];
     }else{
       $place_id = null;
     }
@@ -61,16 +61,18 @@ class PlacesApiController extends  CoreController
     }
 
 
-    public static function placeDetails(Request $request, $place_id) {
+    public static function placeDetails(Request $request) {
 
       $api_key = 'AIzaSyDd58SS-eX8RDXYdhOu-HO1AhqVtjowXqQ';
 
-      $place_id = 'ChIJ1y20cR6TDzkRqMv3h3lAdQ4';
+      $place_id = $request->query('query');
+      $lat = $request->query('lat');
+      $lng = $request->query('lng');
 
       $curl = curl_init();
 
       curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://maps.googleapis.com/maps/api/place/details/json?place_id='.$place_id.'&key='.$api_key,
+        CURLOPT_URL => 'https://maps.googleapis.com/maps/api/place/details/json?location='.$lat.$lng.'place_id='.$place_id.'&key='.$api_key,
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -88,15 +90,15 @@ class PlacesApiController extends  CoreController
       curl_close($curl);
 
       $data = json_decode($response, true);
-      $photos = $data['results'][0]['photos'][0]['reference-id'];
+      // $photos = $data['results'][0]['photos'][0]['reference-id'];
 
-      return $photos;
+      return $data;
 
     }
     public static function placePhotos(Request $request){
 
       $api_key = 'AIzaSyDd58SS-eX8RDXYdhOu-HO1AhqVtjowXqQ';
-      $reference_id = 'ARywPAKrmqqWj9AYXFrjhC-jGx-VSk9g470DLgdSoeijaAhobUDBLSP11VGvsfrh3-1y90yPEW3e90zEvFH73YNg57raacPhiKqzoD3YSZc0Ze2JOm0n00CZQLw7EiSExw1NVcB0DMLxuBj9xHIPLpR0yTyRV8LOZy_sr8NvuoRGs4LWmVTe';
+      $reference_id =  $request->query('query');
   
       $curl = curl_init();
       curl_setopt_array($curl, array(

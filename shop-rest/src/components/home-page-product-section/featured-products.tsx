@@ -267,11 +267,9 @@ export default function FeaturedProducts({}) {
         <div className={`${data?.featureProducts.data?.length  ? 'block' : 'hidden'}`}>
             <div id='featured-products' className=' flex flex-col w-full mt-8 border-b rounded-t p-4 bg-gray-50 '>
                 <div className='flex justify-between items-center '>
-
                     <h3 className='text-lg sm:text-lg md:text-lg xl:text-2xl font-semibold  p-2'> 
                         Featured Products 
                     </h3>
-                    
                 </div>
             </div>
             

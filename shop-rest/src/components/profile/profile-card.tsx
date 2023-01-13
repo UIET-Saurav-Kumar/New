@@ -23,6 +23,9 @@ type ShopProfileCardProps = {
     data,
     className,
     cardClassName,
+    open,
+    rating,
+    totalRating,
   }) => {
     const { t } = useTranslation("common");
     const { openModal } = useModalAction();
@@ -39,8 +42,23 @@ type ShopProfileCardProps = {
       if (lastSplit != "") {
         check = true;
       }
-      return (check ?    < Image        quality='40' src={logo} alt={record?.name} className={classname} width={300} height={300} />:<Avatar name={record?.name} size={imgsize} round={imgDim} maxInitials={2} />);
+      return (check ? <Image quality='40' src={logo} alt={record?.name} className={classname} width={300} height={300} />:<Avatar name={record?.name} size={imgsize} round={imgDim} maxInitials={2} />);
     }
+
+    console.log('place', open)
+
+    function ratingStars(rating) {
+      let stars = "";
+      for (let i = 0; i < Math.floor(rating); i++) {
+          stars += '⭐️';
+      }
+      if(rating % 1 !== 0) {
+          stars += '⭐️';
+      }
+      return stars;
+  }
+  
+  
 
   return (
     <>
@@ -55,7 +73,8 @@ type ShopProfileCardProps = {
 
               <div className="w-full h-52  rounded-lg flex justify-center flex-col space-y-2 mt-0 sm:-mt-6 relative mx-auto 
                               overflow-hidden mb-8">
-                  {imageCheck(data?.logo?.thumbnail, data, '250', false,'object-contain sm:object-contain rounded md:object-contain lg:object-contain  ')}              
+                  {imageCheck(data?.logo?.thumbnail, data, '250', false,'object-contain sm:object-contain rounded md:object-contain lg:object-contain  ')}          
+                      
                   
                    {/* <span className="text-sm sm:hidden text-center font-light tracking-wide  text-gray-600 ">
 
@@ -65,19 +84,36 @@ type ShopProfileCardProps = {
 
               </div>
 
-              <h3 className="text-lg flex flex-col space-y-4 sm:text-lg w-full lg:text-xl lg:tracking-wide  sm:mt-6 pt-4 font-bold mt-0 
+              <h3 className="text-lg   flex flex-col space-y-4 sm:text-lg w-full lg:text-xl lg:tracking-wide  sm:mt-6 pt-4 font-bold mt-0 
                              lg:mt-6 lg:pt-4 text-center font-serif text-heading mb-2">
-                  {data?.name}
+                  
+                  <span className="flex flex-col ">
+                    
+                    <span className="grid   grid-cols-1 lg:flex lg:space-x-2 items-center mx-auto">
+                      <p>{data?.name}</p>
+                      <p className="text-green-600 text-sm">{ open === true && 'Open'}</p>
+                      <p className="text-red-600 text-sm">{ open === false && 'closed'}</p>
+                    </span>
+
+                    <p className="text-gray-500   mb-4">
+                    {rating && ratingStars(rating)+' '+(rating)}<span className="">
+                      <span className="text-xs text-gray-400"> {'('+totalRating+')'}</span>
+                    </span>
+                  </p>
+                  </span>
+                  
+                 
                    {/* <span className="text-sm hidden mt-2 sm:block lg:hidden text-center font-light tracking-wide  text-gray-600">
 
                       {data && data?.address.street_address}
 
                   </span> */}
               </h3>
+              
 
              
               
-                    <div className=" absolute flex  items-center  bottom-2 right-4  ">
+                    <div className=" absolute flex   items-center  bottom-2 right-4  ">
                         {data?.settings?.socials.map((item: any, index: number) => (
                         <a
                             key={index}

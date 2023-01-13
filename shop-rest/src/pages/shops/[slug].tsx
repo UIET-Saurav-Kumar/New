@@ -10,7 +10,7 @@ import dynamic from "next/dynamic";
 import url from "@utils/api/server_url";
 import { GetStaticPathsContext, GetStaticProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { QueryClient } from "react-query";
+import { useMutation, useQueryClient, enabled, QueryClient } from 'react-query'
 import { fetchProducts } from "@data/product/use-products.query";
 import { fetchSettings } from "@data/settings/use-settings.query";
 import { dehydrate } from "react-query/hydration";
@@ -45,7 +45,9 @@ import { useUI } from "@contexts/ui.context";
 import { parseContextCookie } from "@utils/parse-cookie";
 import { useCreateLogMutation } from "@data/log/use-create-log.mutation";
 import { useLocation } from "react-use";
-
+import { API_ENDPOINTS } from "@utils/api/endpoints";
+import http from '@utils/api/http'
+import { toast } from 'react-toastify';
 
 const CartCounterButton = dynamic(
   () => import("@components/cart/cart-counter-button"),
@@ -64,9 +66,25 @@ const imageCheck = (logo: any , record:any, imgsize:any, imgDim:any, classname: 
 }
 
 const ShopPage = ({ data }: any) => {
+
+  const queryClient = useQueryClient();
   const router = useRouter();
   const { pathname, query } = router;
   const { openModal } = useModalAction();
+
+  const [searchText , setSearchText] = useState('');
+
+  const [placeId, setPlaceId] = useState('');
+
+  const [placePhotos, setPlacePhotos] = useState([]);
+
+  const [showPhoto, setShowPhoto] = useState('')
+
+  const [totalRating, setTotalRating] = useState('');
+
+  const [open , setOpen] = useState('');
+
+  const [rating, setRating] = useState('')
 
 
   function openReviewModal() {
@@ -244,14 +262,150 @@ const ShopPage = ({ data }: any) => {
 
   // // console.log('shop data',metaData)
 
+  const shop_name = data?.name;
+
+  useEffect(() => {
+    // Iterate through each shop in the array
+    // for (let i = 0; i < shop_name?.length; i++) {
+
+      // const shop = shop_name[i];
+
+      const searchString = {
+        query: shop_name.split(' ').join('-'), 
+      };
+  
+      // Make the text search API call and update the shop object
+      mutateSearch(searchString)?.then((response:any) => {
+        setPlaceId(response.place_id);
+        setRating(response.rating);
+        setOpen(response.opening_hours?.open_now);
+        // shops.place_id = response.place_id;
+        // shops.rating = response.rating;
+        // open_time = response.opening_hours?.open_now;
+        // [...shops[i], {
+        //  place_id : response?.place_id,
+        //  rating : response?.rating,
+        //  open_time : response?.opening_hours?.open_now }
+        // ]
+  
+        // Pass the place_id to the place details API
+        mutatePlace( response.place_id).then((detailsResponse:any) => {
+          // [...shops[i], {
+            // shops.photos = detailsResponse.photos
+          // }]
+          //  shop?.photos = detailsResponse.photos;
+          // Pass reference_id to the place photo API
+          for (let j = 0; j < detailsResponse.photos.length; j++) {
+            const photo = detailsResponse.photos[j];
+            mutatePhoto( photo.reference_id).then((photoResponse:any) => {
+              photo.url = photoResponse;
+            });
+          }
+          
+        });
+      });
+    // }
+
+    // return shops
+    
+    // setShops([...shops]);
+  }, [shop_name])
+
+  // alert(rating)
+
+  console.log('place id',placeId,rating,open)
+
+  const getSearchDetails = async (data: any) => {
+    console.log('search data',data)
+    const { data: response } = await http.get(
+      `${url}/${API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH}`,{params: data}
+    )
+    // setPlaceId(response?.place_id);
+    // setRating(response?.rating);
+    // setOpen(response?.opening_hours?.open_now);
+    return response
+  }
+
+
+  const getplaceDetails = async (data: any) => {
+    console.log('search data',data)
+    const { data: response } = await http.get(
+      `${url}/${API_ENDPOINTS.GOOGLE_MAPS_PLACE_DETAILS}`,{params: data}
+    )
+    setPlacePhotos(response.photos);
+    return response
+  }
+
+
+  const getplacePhoto = async (data: any) => {
+    console.log('search data',data)
+    const { data: response } = await http.get(
+      `${url}/${API_ENDPOINTS.GOOGLE_MAPS_PLACE_PHOTOS}`,{params: data}
+    )
+    // setPhotos(response);
+    return response
+  }
+
+  const { mutate: mutatePlace} = useMutation(getplaceDetails, {
+    onSuccess: (data) => {
+      setPlaceId(data.place_id);
+      // data?.status == false ? setError(data?.msg) : null;
+      console.log('place id', data)
+    },
+    onError: (data) => {
+      // alert(data?.msg)
+      toast.error("unable to process the request, please try later");
+      // setError(data?.msg)
+    },
+
+    onSettled: () => {
+      queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH)
+    },
+  })
+
+  const { mutate: mutateSearch } = useMutation(getSearchDetails, {
+    onSuccess: (data) => {
+      setPlaceId(data.place_id);
+      setRating(data?.rating);
+      setOpen(data?.opening_hours?.open_now);
+      setTotalRating(data?.user_ratings_total);
+      // data?.status == false ? setError(data?.msg) : null;
+      console.log('operator plans', data)
+    },
+    onError: (data) => {
+      // alert(data?.msg)
+      toast.error("unable to process the request, please try later");
+      // setError(data?.msg)
+    },
+
+    onSettled: () => {
+      queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH)
+    },
+  })
+
+  const { mutate: mutatePhoto } = useMutation(getplacePhoto, {
+    onSuccess: (data) => {
+      setPlacePhotos(data);
+      // data?.status == false ? setError(data?.msg) : null;
+      // console.log('operator plans', data)
+    },
+    onError: (data) => {
+      // alert(data?.msg)
+      toast.error("unable to process the request, please try later");
+      // setError(data?.msg)
+    },
+
+    onSettled: () => {
+      queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH)
+    },
+  })
+
   console.log('data',data);
   
 
   return (
 
     <>
-
-    
 
         <Head>
           <title>{(data.name?data.name:'')+' '+(data.address.city?data.address.city+" "+data.address.street_address:'')+', Best Discounts and Offers Only Through BuyLowcal.com'}</title>
@@ -268,6 +422,7 @@ const ShopPage = ({ data }: any) => {
 
                         <div className="fixed z-50 bottom-10 right-10 flex justify-center items-center">
                           <img src='/up-arrow.png' className="w-12 h-12" onClick={() => window.scrollTo(0, 0)} /> 
+                          
                         </div>
 
                         {/* <div className="fixed z-50 bottom-10 right-10 flex justify-center items-center">
@@ -287,7 +442,8 @@ const ShopPage = ({ data }: any) => {
                             { checkElement() ? null 
                             :
                               ( <div className='h-full w-96'>  
-                                  <ShopProfileCard data={data} />
+                                  <ShopProfileCard totalRating={totalRating} rating={rating} open={open} data={data} />
+                                  
                                 </div> )  }
                               
                               { slug?.some(el => data?.slug?.includes(el)) ? (
@@ -336,11 +492,11 @@ const ShopPage = ({ data }: any) => {
                                     {/* <OfferCards/> */}
                           </div>
 
-                            <div className='lg:hidden px-2  w-full grid grid-cols-1 sm:flex'>
+                            <div className = 'lg:hidden px-2  w-full grid grid-cols-1 sm:flex'>
 
                               { slug?.some(el => data?.slug?.includes(el))  ? 
                                  null : ( <div className='hidden sm:block w-48 h-38 sm:h-72 sm:w-80 md:h-72 lg:w-96'> 
-                                          <ShopProfileCard data={data} /> 
+                                          <ShopProfileCard totalRating={totalRating} rating={rating} open={open} data={data}   /> 
                                       </div>)  }
                   
                                   {/* <div className='w-full flex-grow'>
@@ -352,7 +508,7 @@ const ShopPage = ({ data }: any) => {
 
                                   { slug?.some(el => data?.slug?.includes(el)) ? null
                                  : ( <div className='block sm:hidden'> 
-                                      <ShopProfileCard data={data}/> 
+                                      <ShopProfileCard totalRating={totalRating} rating={rating} open={open} data={data}/> 
                                   </div> )  }
 
                                           
@@ -390,7 +546,7 @@ const ShopPage = ({ data }: any) => {
                               }
                                 <div id='product-feed' className="static z-10 top-10 w-full">
                                   {data && 
-                                // <ShopProductFeed shopId={data.id} />
+                                  // <ShopProductFeed shopId={data.id} />
                                     <Feed shopData={data} shopId={data.id} />
                                 }</div>
                            </div> 
@@ -506,8 +662,6 @@ export default ShopPage;
 //   "is_active":1,
 //   "address":{"zip":"35203","city":"Michigan","state":"Alabama","country":"USA","street_address":"1740 Bedford Street"},
 //   "settings":{"contact":"01920192102","socials":[{"url":"https://www.facebook.com/","icon":"FacebookIcon"},{"url":"https://www.instagram.com/","icon":"InstagramIcon"}],"website":"https://redq.io/","location":{"lat":28.6673631,"lng":77.2973812,"zip":"110032","city":"Delhi","state":"DL","country":"India","formattedAddress":"Bazaar St, Vishwas Nagar, Shahdara, Delhi, 110032, India"}},"shop_categories":"[{\"name\":\"salon & spa\",\"id\":5},{\"name\":\"Groceries\",\"id\":3},{\"name\":\"Fruits\",\"id\":2},{\"name\":\"Pharmacy\",\"id\":4}]","is_featured":1,"commission":null,"commission_type":null,"gst_number":null,"fssai_number":null,"tan_number":null,"pan_number":null,"gst_certificate":null,"fssai_certificate":null,"cancelled_cheque":null,"delivery_status":1,"free_delivery_order_value":"50","delivery_charges":"100","created_at":"2021-06-27T03:47:23.000000Z","updated_at":"2022-01-09T10:20:40.000000Z","orders_count":43,"products_count":57,"categories":[],"owner":{"id":1,"name":"Store Owner","email":"store_owner@demo.com","phone_number":"917436874843","email_verified_at":null,"created_at":"2021-06-27T04:13:00.000000Z","updated_at":"2021-06-27T04:13:00.000000Z","is_active":1,"shop_id":null,"invited_by":null,"code":null},"shop_category":null}
-
-
 
 
 
@@ -849,7 +1003,7 @@ export default ShopPage;
 
 //                                 { slug?.some(el => data?.slug?.includes(el)) ? null :
 //                                     ( <div className='h-full w-2/7'>  
-//                                          <ShopProfileCard data={data} />
+//                                          <ShopProfileCard totalRating={totalRating} rating={rating} open={open} data={data} />
 //                                       </div> )  }
                                     
 //                                     { slug?.some(el => data?.slug?.includes(el)) ? null :
@@ -921,7 +1075,7 @@ export default ShopPage;
 
 //                               { slug?.some(el => data?.slug?.includes(el))  ? 
 //                                  null : ( <div className='hidden sm:block w-48 h-38 sm:h-72 sm:w-80 md:h-72 lg:w-96'> 
-//                                           <ShopProfileCard data={data} /> 
+//                                           <ShopProfileCard totalRating={totalRating} rating={rating} open={open} data={data} /> 
 //                                       </div>)  }
                   
 //                                   {/* <div className='w-full flex-grow'>
@@ -933,7 +1087,7 @@ export default ShopPage;
 
 //                               { slug?.some(el => data?.slug?.includes(el)) ? null
 //                               : ( <div className='block sm:hidden'> 
-//                                   <ShopProfileCard data={data}/> 
+//                                   <ShopProfileCard totalRating={totalRating} rating={rating} open={open} data={data}/> 
 //                               </div> )  }
 
                                           
