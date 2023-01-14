@@ -383,7 +383,7 @@ const ShopPage = ({ data }: any) => {
     },
     onError: (data) => {
       // alert(data?.msg)
-      toast.error("unable to process the request, please try later");
+      // toast.error("unable to process the request, please try later");
       // setError(data?.msg)
     },
 
@@ -405,7 +405,7 @@ const ShopPage = ({ data }: any) => {
     },
     onError: (data) => {
       // alert(data?.msg)
-      toast.error("unable to process the request, please try later");
+      // toast.error("unable to process the request, please try later");
       // setError(data?.msg)
     },
 
@@ -422,7 +422,7 @@ const ShopPage = ({ data }: any) => {
     },
     onError: (data) => {
       // alert(data?.msg)
-      toast.error("unable to process the request, please try later");
+      // toast.error("unable to process the request, please try later");
       // setError(data?.msg)
     },
 
