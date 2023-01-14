@@ -22,7 +22,7 @@ const Review = (  {review} ) => {
 
     
   return (
-    <div className="bg-white p-4  border-b rounded-lg shadow-lg space-y-2 w-100 h-auto">
+    <div className="bg-white p-4  border-b rounded-lg shadow-lg space-y-2 w-auto lg:w-100 h-auto">
       <div className="flex items-center mb-2">
         <img src='/boy.png' alt={review?.author_name} className="w-8 h-8 border rounded-full mr-4" />
         <div>
