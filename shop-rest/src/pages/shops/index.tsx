@@ -145,9 +145,6 @@ const ShopsPage = () => {
      
   }
 
- 
-
-  
 
   //push shops with no products to the end of the list
   const ShopsWithProducts = data?.shops?.filter((shop: any) => shop?.products?.length > 0);
@@ -157,44 +154,7 @@ const ShopsPage = () => {
   
   // // console.log('shops',data?.pages?.filter((shop: any) => shop?.is_active === 1))
   // // console.log('shops name',data?.pages?.data?.map((shop: any) => shop))
-
-  useEffect(() => {
-    // setSearchText(query?.text)
-    if (searchText) {
-      const searchString = {
-        query: searchText,
-        // circle: circleName,
-      }
-
-      mutateSearch(searchString)
-    }
-  }, [searchText])
-
-  const getSearchDetails = async (data: any) => {
-    
-    const { data: response } = await http.get(
-      `${url}/${API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH}`,
-      data,
-    )
-    return response
-  }
-
-  const { mutate: mutateSearch } = useMutation(getSearchDetails, {
-    onSuccess: (data) => {
-      setPlaceId(data);
-      data?.status == false ? setError(data?.msg) : null;
-      console.log('operator plans', data)
-    },
-    onError: (data) => {
-      // alert(data?.msg)
-      toast.error("unable to process the request, please try later");
-      setError(data?.msg)
-    },
-
-    onSettled: () => {
-      queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH)
-    },
-  })
+ 
 
   return (
 
@@ -205,7 +165,7 @@ const ShopsPage = () => {
         {shopCat == 'Cosmetics' &&  <title>Get Best Deals on Cosmetic Products | #1 Cosmetic stores in Chandigarh </title> }
         {shopCat == 'Groceries' && <title>  Best Grocery Store in Tricity | Get exclusive Offer Now</title> }
         {shopCat == 'Pharmacy' &&   <title> Get Upto 30% off on Pharmacy With Buylowcal | Shop Now  </title> }
-        {shopCat == ' Vegetables & Fruits' &getSearchDetails&  <title>  Save Your Time & Money | Buy Veggies Fruits  with Buylowcal  </title> }
+        {shopCat == ' Vegetables & Fruits' &&  <title>  Save Your Time & Money | Buy Veggies Fruits  with Buylowcal  </title> }
         {shopCat == 'Restaurants' &&  <title> Get Best Deals on Restaurants Now | Connect your local restaurant with Buylowcal </title> }
         {shopCat == 'Fashion, Lifestyle & Furnishings' &&   <title>  Buylowcal | shop Now Lifestyle & Home Items & Get 20% off </title> }
         {shopCat == 'Gym & Health Products' && <title>  Get 100% pure Gym & Health product & Get A chance to win exciting offers</title> }

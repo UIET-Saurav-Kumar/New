@@ -76,6 +76,8 @@ const ShopPage = ({ data }: any) => {
 
   const [placeId, setPlaceId] = useState('');
 
+  const [reviews, setReviews] = useState('');
+
   const [placePhotos, setPlacePhotos] = useState([]);
 
   const [showPhoto, setShowPhoto] = useState('')
@@ -273,9 +275,14 @@ const ShopPage = ({ data }: any) => {
       const searchString = {
         query: shop_name.split(' ').join('-'), 
       };
+      const params = {
+        query: searchString,
+        lat: data?.settings?.location?.lat,
+        lng: data?.settings?.location?.lng,
+      }
   
       // Make the text search API call and update the shop object
-      mutateSearch(searchString)?.then((response:any) => {
+      mutateSearch(params)?.then((response:any) => {
         setPlaceId(response.place_id);
         setRating(response.rating);
         setOpen(response.opening_hours?.open_now);
@@ -289,20 +296,7 @@ const ShopPage = ({ data }: any) => {
         // ]
   
         // Pass the place_id to the place details API
-        mutatePlace( response.place_id).then((detailsResponse:any) => {
-          // [...shops[i], {
-            // shops.photos = detailsResponse.photos
-          // }]
-          //  shop?.photos = detailsResponse.photos;
-          // Pass reference_id to the place photo API
-          for (let j = 0; j < detailsResponse.photos.length; j++) {
-            const photo = detailsResponse.photos[j];
-            mutatePhoto( photo.reference_id).then((photoResponse:any) => {
-              photo.url = photoResponse;
-            });
-          }
-          
-        });
+      
       });
     // }
 
@@ -312,6 +306,31 @@ const ShopPage = ({ data }: any) => {
   }, [shop_name])
 
   // alert(rating)
+
+  useEffect(()=>{
+    const params = {
+      place_id: placeId,
+     
+    }
+     mutatePlace(params)?.then((detailsResponse:any) => {
+      // [...shops[i], {
+        // shops.photos = detailsResponse.photos
+      // }]
+      //  shop?.photos = detailsResponse.photos;
+      // Pass reference_id to the place photo API
+      for (let j = 0; j < detailsResponse.photos.length; j++) {
+        const photo = detailsResponse.photos[j];
+        mutatePhoto( photo.reference_id)?.then((photoResponse:any) => {
+          photo.url = photoResponse;
+        });
+      }
+    });
+  },[placeId])
+
+
+  useEffect(()=>{
+
+  },[])
 
   console.log('place id',placeId,rating,open)
 
@@ -349,6 +368,13 @@ const ShopPage = ({ data }: any) => {
   const { mutate: mutatePlace} = useMutation(getplaceDetails, {
     onSuccess: (data) => {
       setPlaceId(data.place_id);
+      setReviews(data?.reviews);
+      // for (let j = 0; j < data?.photos.length; j++) {
+      //   const photo = data?.photos[j];
+      //   mutatePhoto( photo.reference_id)?.then((photoResponse:any) => {
+      //     photo.url = photoResponse;
+      //   });
+      // }
       // data?.status == false ? setError(data?.msg) : null;
       console.log('place id', data)
     },
@@ -359,7 +385,7 @@ const ShopPage = ({ data }: any) => {
     },
 
     onSettled: () => {
-      queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH)
+      queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_PLACE_DETAILS)
     },
   })
 
@@ -396,7 +422,7 @@ const ShopPage = ({ data }: any) => {
     },
 
     onSettled: () => {
-      queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH)
+      queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_PLACE_PHOTOS)
     },
   })
 
@@ -412,7 +438,6 @@ const ShopPage = ({ data }: any) => {
           <meta name="description" content={(data.name?data.name:'')+' '+(data.address.city?data.address.city+" "+data.address.street_address:'')+' Best '+shopCategory+' deals, offers, discounts and cash backs only through buylowcal.com'} />
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
           <link rel="canonical" href={`https://buylowcal.com/shops/${data?.slug}`}/>
-
         </Head>
 
             <div className="relative bg-white lg:bg-gray-100 hidden lg:flex flex-col

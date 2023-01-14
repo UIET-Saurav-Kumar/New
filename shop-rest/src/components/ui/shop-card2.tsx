@@ -139,7 +139,6 @@ const ShopCard2: React.FC<ShopCardProps> = ({ shop,text,key,category, shopId,ope
                       {shop?.address?.city}  
                     </h5>
               </div> 
-                         
         </div>
       </Link>
 

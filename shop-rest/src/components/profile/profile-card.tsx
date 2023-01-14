@@ -49,15 +49,18 @@ type ShopProfileCardProps = {
 
     function ratingStars(rating) {
       let stars = "";
-      for (let i = 0; i < Math.floor(rating); i++) {
-          stars += '⭐️';
-      }
-      if(rating % 1 !== 0) {
-          stars += '⭐️';
+      if (rating >= 4.5) {
+          stars ='⭐️⭐️⭐️⭐️⭐️';
+      } else {
+          for (let i = 0; i < Math.floor(rating); i++) {
+              stars +='⭐️';
+          }
+          if (rating % 1 !== 0) {
+              stars +='⭐';
+          }
       }
       return stars;
   }
-  
   
 
   return (
@@ -95,7 +98,7 @@ type ShopProfileCardProps = {
                       <p className="text-red-600 text-sm">{ open === false && 'closed'}</p>
                     </span>
 
-                    <p className="text-gray-500   mb-4">
+                    <p className={ ` ${rating ? 'block' : 'hidden'} text-gray-500   mb-4`}>
                     {rating && ratingStars(rating)+' '+(rating)}<span className="">
                       <span className="text-xs text-gray-400"> {'('+totalRating+')'}</span>
                     </span>

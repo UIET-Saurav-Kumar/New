@@ -63,16 +63,18 @@ class PlacesApiController extends  CoreController
 
     public static function placeDetails(Request $request) {
 
+      // return $request;
+
       $api_key = 'AIzaSyDd58SS-eX8RDXYdhOu-HO1AhqVtjowXqQ';
 
-      $place_id = $request->query('query');
-      $lat = $request->query('lat');
-      $lng = $request->query('lng');
+      $place_id = $request->query('place_id');
+      // $lat = $request->query('lat');
+      // $lng = $request->query('lng');
 
       $curl = curl_init();
 
       curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://maps.googleapis.com/maps/api/place/details/json?location='.$lat.$lng.'place_id='.$place_id.'&key='.$api_key,
+        CURLOPT_URL => 'https://maps.googleapis.com/maps/api/place/details/json?place_id='.$place_id.'&key='.$api_key,
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
