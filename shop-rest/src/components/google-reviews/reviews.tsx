@@ -31,13 +31,15 @@ const Review = (  {review} ) => {
         </div>
       </div>
       <div className="mb-2">
+      <span className='mr-2 text-gray-600'> {review?.rating}</span> 
         {Array(review?.rating)
           .fill()
           .map((_, i) => (
             <span key={i} className="text-green-500">
-              ⭐
+              ⭐ 
             </span>
           ))}
+         
       </div>
       <p>{review.text}</p>
     </div>
