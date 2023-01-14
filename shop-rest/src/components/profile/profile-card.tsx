@@ -26,6 +26,7 @@ type ShopProfileCardProps = {
     open,
     rating,
     totalRating,
+    reviews,
   }) => {
     const { t } = useTranslation("common");
     const { openModal } = useModalAction();
@@ -43,6 +44,14 @@ type ShopProfileCardProps = {
         check = true;
       }
       return (check ? <Image quality='40' src={logo} alt={record?.name} className={classname} width={300} height={300} />:<Avatar name={record?.name} size={imgsize} round={imgDim} maxInitials={2} />);
+    }
+
+    function openGoogleReview() {
+      openModal('GOOGLE_REVIEWS'
+      , {
+        review: reviews
+      }
+      );
     }
 
     console.log('place', open)
@@ -98,7 +107,7 @@ type ShopProfileCardProps = {
                       <p className="text-red-600 text-sm">{ open === false && 'closed'}</p>
                     </span>
 
-                    <p className={ ` ${rating ? 'block' : 'hidden'} text-gray-500   mb-4`}>
+                    <p onClick={openGoogleReview} className={ ` ${rating ? 'block cursor-pointer' : 'hidden'} text-gray-500   mb-4`}>
                     {rating && ratingStars(rating)+' '+(rating)}<span className="">
                       <span className="text-xs text-gray-400"> {'('+totalRating+')'}</span>
                     </span>
@@ -116,7 +125,7 @@ type ShopProfileCardProps = {
 
              
               
-                    <div className=" absolute flex   items-center  bottom-2 right-4  ">
+                    <div className=" absolute flex  mx-auto items-center  bottom-2 right-4  ">
                         {data?.settings?.socials.map((item: any, index: number) => (
                         <a
                             key={index}

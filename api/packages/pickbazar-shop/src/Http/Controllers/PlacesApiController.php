@@ -97,6 +97,7 @@ class PlacesApiController extends  CoreController
       return $data;
 
     }
+    
     public static function placePhotos(Request $request){
 
       $api_key = 'AIzaSyDd58SS-eX8RDXYdhOu-HO1AhqVtjowXqQ';

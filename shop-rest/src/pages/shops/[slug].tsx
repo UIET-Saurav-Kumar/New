@@ -74,7 +74,7 @@ const ShopPage = ({ data }: any) => {
 
   const [searchText , setSearchText] = useState('');
 
-  const [placeId, setPlaceId] = useState('');
+  const [placeId, setPlaceId] = useState([]);
 
   const [reviews, setReviews] = useState('');
 
@@ -97,6 +97,8 @@ const ShopPage = ({ data }: any) => {
       shop_review: data?.review,
     });
   }
+
+   
 
 
   console.log('utm', query.utm_campaign);
@@ -308,10 +310,11 @@ const ShopPage = ({ data }: any) => {
   // alert(rating)
 
   useEffect(()=>{
+
     const params = {
       place_id: placeId,
-     
     }
+
      mutatePlace(params)?.then((detailsResponse:any) => {
       // [...shops[i], {
         // shops.photos = detailsResponse.photos
@@ -367,8 +370,8 @@ const ShopPage = ({ data }: any) => {
 
   const { mutate: mutatePlace} = useMutation(getplaceDetails, {
     onSuccess: (data) => {
-      setPlaceId(data.place_id);
-      setReviews(data?.reviews);
+      // setPlaceId(data.place_id);
+      setReviews(data?.result?.reviews);
       // for (let j = 0; j < data?.photos.length; j++) {
       //   const photo = data?.photos[j];
       //   mutatePhoto( photo.reference_id)?.then((photoResponse:any) => {
@@ -376,7 +379,7 @@ const ShopPage = ({ data }: any) => {
       //   });
       // }
       // data?.status == false ? setError(data?.msg) : null;
-      console.log('place id', data)
+      console.log('reviews place id', data,reviews)
     },
     onError: (data) => {
       // alert(data?.msg)
@@ -388,6 +391,8 @@ const ShopPage = ({ data }: any) => {
       queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_PLACE_DETAILS)
     },
   })
+
+  console.log('reviews',reviews)
 
   const { mutate: mutateSearch } = useMutation(getSearchDetails, {
     onSuccess: (data) => {
@@ -467,7 +472,7 @@ const ShopPage = ({ data }: any) => {
                             { checkElement() ? null 
                             :
                               ( <div className='h-full w-96'>  
-                                  <ShopProfileCard totalRating={totalRating} rating={rating} open={open} data={data} />
+                                  <ShopProfileCard reviews={reviews} totalRating={totalRating} rating={rating} open={open} data={data} />
                                   
                                 </div> )  }
                               
@@ -521,7 +526,7 @@ const ShopPage = ({ data }: any) => {
 
                               { slug?.some(el => data?.slug?.includes(el))  ? 
                                  null : ( <div className='hidden sm:block w-48 h-38 sm:h-72 sm:w-80 md:h-72 lg:w-96'> 
-                                          <ShopProfileCard totalRating={totalRating} rating={rating} open={open} data={data}   /> 
+                                         <ShopProfileCard reviews={reviews} totalRating={totalRating} rating={rating} open={open} data={data}   /> 
                                       </div>)  }
                   
                                   {/* <div className='w-full flex-grow'>
@@ -533,7 +538,7 @@ const ShopPage = ({ data }: any) => {
 
                                   { slug?.some(el => data?.slug?.includes(el)) ? null
                                  : ( <div className='block sm:hidden'> 
-                                      <ShopProfileCard totalRating={totalRating} rating={rating} open={open} data={data}/> 
+                                      <ShopProfileCard reviews={reviews} totalRating={totalRating} rating={rating} open={open} data={data}/> 
                                   </div> )  }
 
                                           
@@ -602,7 +607,8 @@ const ShopPage = ({ data }: any) => {
     </div>
       <div className='block lg:hidden w-full'>
 
-          <ShopMobileView pageURL={pageURL} shopData={data} data={data}/>
+          <ShopMobileView reviews={reviews} totalRating={totalRating} rating={rating} open={open}
+           pageURL={pageURL} shopData={data} data={data}/>
 
       </div>
       {/* </DocumentMeta> */}
@@ -1028,7 +1034,7 @@ export default ShopPage;
 
 //                                 { slug?.some(el => data?.slug?.includes(el)) ? null :
 //                                     ( <div className='h-full w-2/7'>  
-//                                          <ShopProfileCard totalRating={totalRating} rating={rating} open={open} data={data} />
+                                        //  <ShopProfileCard reviews={reviews} totalRating={totalRating} rating={rating} open={open} data={data} />
 //                                       </div> )  }
                                     
 //                                     { slug?.some(el => data?.slug?.includes(el)) ? null :
@@ -1100,7 +1106,7 @@ export default ShopPage;
 
 //                               { slug?.some(el => data?.slug?.includes(el))  ? 
 //                                  null : ( <div className='hidden sm:block w-48 h-38 sm:h-72 sm:w-80 md:h-72 lg:w-96'> 
-//                                           <ShopProfileCard totalRating={totalRating} rating={rating} open={open} data={data} /> 
+                                          // <ShopProfileCard reviews={reviews} totalRating={totalRating} rating={rating} open={open} data={data} /> 
 //                                       </div>)  }
                   
 //                                   {/* <div className='w-full flex-grow'>
@@ -1112,7 +1118,7 @@ export default ShopPage;
 
 //                               { slug?.some(el => data?.slug?.includes(el)) ? null
 //                               : ( <div className='block sm:hidden'> 
-//                                   <ShopProfileCard totalRating={totalRating} rating={rating} open={open} data={data}/> 
+                                  // <ShopProfileCard reviews={reviews} totalRating={totalRating} rating={rating} open={open} data={data}/> 
 //                               </div> )  }
 
                                           

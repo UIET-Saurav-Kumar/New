@@ -6,7 +6,7 @@ import CategoryDropdownSidebar from "@components/category/category-dropdown-side
 import ShopPaymentForm from "@components/shop/shop-payment-form";
 import RechargePlans from "@components/home-page-product-section/bill-payment-services/recharge-plans-modal/recharge-plans";
 import RechargePlanDetails from "@components/home-page-product-section/bill-payment-services/recharge-plan-details-modal";
-
+ 
 
 const Login = dynamic(() => import("@components/auth/login"));
 const Register = dynamic(() => import("@components/auth/register"));
@@ -18,6 +18,10 @@ const OtpLoginView = dynamic(() => import('@components/auth/otp-login'));
 
 const ProductDetailsModalView = dynamic(
   () => import("@components/product/product-details-modal-view")
+);
+
+const GoogleReviews = dynamic(
+  () => import("@components/google-reviews/reviews")
 );
 
 const CreateOrUpdateAddressForm = dynamic(
@@ -79,6 +83,10 @@ const ManagedModal = () => {
       {view === 'RECHARGE_PLANS' && <RechargePlans data={data} />}
       {view === "PRODUCT_DETAILS" && (
         <ProductDetailsModalView productSlug={data} />
+      )}
+
+      {view === "GOOGLE_REVIEWS" && (
+        <GoogleReviews data={data}  />
       )}
 
       {view === 'RECHARGE_PLAN_DETAILS' && <RechargePlanDetails data={data} close={closeModal}/> }

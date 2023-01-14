@@ -25,7 +25,10 @@ import { useUI } from "@contexts/ui.context";
 
 
 
-export default function ShopMobileView({data, shopData, pageURL}: any) {
+export default function ShopMobileView({data, shopData, pageURL, open,
+  rating,
+  totalRating,
+  reviews,}: any) {
 
     const { query } = useRouter();
     const { type } = query;
@@ -91,7 +94,7 @@ export default function ShopMobileView({data, shopData, pageURL}: any) {
 
               { slug?.some(el => data.slug.includes(el)) ? null :
                 (   <div className='hidden sm:block w-48 h-38 sm:h-72 sm:w-80 md:h-72 lg:w-96'> 
-                    <ShopProfileCard data={data} /> 
+                    <ShopProfileCard reviews={reviews} totalRating={totalRating} rating={rating} open={open} data={data} /> 
                    </div>)  }
                 
                 <div className='w-full flex-grow'>
@@ -103,7 +106,7 @@ export default function ShopMobileView({data, shopData, pageURL}: any) {
 
                 {  slug.some(el => data.slug.includes(el)) ? null : 
                 ( <div className='block sm:hidden'> 
-                    <ShopProfileCard data={data}/> 
+                    <ShopProfileCard reviews={reviews} totalRating={totalRating} rating={rating} open={open} data={data}/> 
                 </div>)  }
                 
             </div>
@@ -306,7 +309,7 @@ ShopMobileView.Layout = Layout;
 
 //               { slug?.some(el => data.slug.includes(el)) ? null :
 //                 (   <div className='hidden sm:block w-2/5 h-38 sm:h-72 sm:w-80 md:h-72'> 
-//                       <ShopProfileCard data={data} /> 
+//                       <ShopProfileCard reviews={reviews} totalRating={totalRating} rating={rating} open={open} data={data} /> 
 //                     </div>)  }
                 
 //                 <div className = 'block lg:hidden w-full   border'>
@@ -361,7 +364,7 @@ ShopMobileView.Layout = Layout;
 
 //                 {  slug.some(el => data.slug.includes(el)) ? null : 
 //                 ( <div className='block sm:hidden h-48'> 
-//                     <ShopProfileCard data={data}/> 
+//                     <ShopProfileCard reviews={reviews} totalRating={totalRating} rating={rating} open={open} data={data}/> 
 //                 </div>)  }
                 
 //             </div>
