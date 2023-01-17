@@ -23,6 +23,8 @@ class PlacesApiController extends  CoreController
       // return  $request;
 
       $api_key = 'AIzaSyDd58SS-eX8RDXYdhOu-HO1AhqVtjowXqQ';
+       $lat = $request->query('lat');
+      $lng = $request->query('lng');
       
       $string = $request->query('query');
 // 
@@ -31,7 +33,7 @@ class PlacesApiController extends  CoreController
       $curl = curl_init();
 
       curl_setopt_array($curl, array(
-      CURLOPT_URL => 'https://maps.googleapis.com/maps/api/place/textsearch/json?location=30.7333,%2076.7794&region=in&query='.$string.'&key='.$api_key,
+      CURLOPT_URL => 'https://maps.googleapis.com/maps/api/place/textsearch/json?location='.$lat.','.$lng.'&region=in&query='.$string.'&key='.$api_key,
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_ENCODING => '',
       CURLOPT_MAXREDIRS => 10,
@@ -100,26 +102,40 @@ class PlacesApiController extends  CoreController
     
     public static function placePhotos(Request $request){
 
-      $api_key = 'AIzaSyDd58SS-eX8RDXYdhOu-HO1AhqVtjowXqQ';
-      $reference_id =  $request->query('query');
+      // $api_key = 'AIzaSyDd58SS-eX8RDXYdhOu-HO1AhqVtjowXqQ';
+      // $reference_id =  $request->query('photo_reference');
+      // $curl = curl_init();
+
   
-      $curl = curl_init();
-      curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference='.$reference_id.'&key='.$api_key,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_FOLLOWLOCATION => true,
-      ));
-      $response = curl_exec($curl);
-      $status_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-      curl_close($curl);
+      // curl_setopt_array($curl, array(
+      //     CURLOPT_URL => 'https://maps.googleapis.com/maps/api/place/photo?maxheight=400&maxwidth=400&photoreference='.$reference_id.'&key='.$api_key,
+      //     CURLOPT_RETURNTRANSFER => true,
+      //     CURLOPT_ENCODING => '',
+      //     CURLOPT_MAXREDIRS => 10,
+      //     CURLOPT_TIMEOUT => 0,
+      //     CURLOPT_FOLLOWLOCATION => true,
+      //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      //     CURLOPT_CUSTOMREQUEST => 'GET',
+      //     CURLOPT_HTTPHEADER => array(
+      //       'Accept: image/*'
+      //     ),
+      //   ));
+
+       
+      // $response = curl_exec($curl);
+      // curl_close($curl);
   
-      if($status_code === 200) {
-          header('Content-Type: image/png');
-          echo $response;
-      }else{
-          // handle errors, maybe return a default image
-          return "Error in loading image";
-      }
+      //  return response($response)->header('Content-Type', 'image/jpeg');
+
+ 
+        $api_key = 'AIzaSyDd58SS-eX8RDXYdhOu-HO1AhqVtjowXqQ';
+        $reference_id =  $request->query('photo_reference');
+        $curl = curl_init();
+        $url = 'https://maps.googleapis.com/maps/api/place/photo?maxheight=500&maxwidth=500&photoreference='.$reference_id.'&key=';
+      
+        return response()->json(['url' => $url]);
+      
+       
+ 
   }
-  
 }

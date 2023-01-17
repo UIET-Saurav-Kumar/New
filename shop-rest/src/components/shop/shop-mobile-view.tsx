@@ -28,7 +28,7 @@ import { useUI } from "@contexts/ui.context";
 export default function ShopMobileView({data, shopData, pageURL, open,
   rating,
   totalRating,
-  reviews,}: any) {
+  reviews,placePhotos}: any) {
 
     const { query } = useRouter();
     const { type } = query;
@@ -166,10 +166,23 @@ export default function ShopMobileView({data, shopData, pageURL, open,
                                   { query?.category?.replace(/\b\w/g, (l :any) => l.toUpperCase())   } Products
                                 </h1> 
                             </div> </> : ' '  }
-                                <div id='product-feed' className="static  z-10 top-10 w-full">{data && 
-                                // <ShopProductFeed shopId={data.id} />
+                            
+                                {data.products_count != 0 ?
+                                  <div id='product-feed' className="static  z-10 top-10 w-full">
+ 
+                                   {/* <ShopProductFeed shopId={data.id} /> */}
                                     <Feed shopId={data.id}/>
-                                }</div>
+                                    
+                                </div> :
+                                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 w-full">
+                                 {placePhotos?.map((binaryImage, index) => {
+                                     return <img key={index} 
+                                     src={binaryImage?.url+''+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
+                                     // src={`data:image/jpeg;base64,${Buffer.from(binaryImage).toString('base64')}`} 
+                                     className="h-full w-full"/>
+                                   })}
+                                 </div>
+                               }
                       </div>
               </div>
 
@@ -185,8 +198,34 @@ export default function ShopMobileView({data, shopData, pageURL, open,
                           className=" sticky border-t bg-white  py-3 px-2 z-50 font-semibold text-gray-600 font-mono  text-sm sm:text-lg transition-transform duration-75">  
                           { query?.category?.replace(/\b\w/g, (l :any) => l.toUpperCase())   } Products
                       </h1>  
-                      {data && <Feed shopData={data} shopId={data.id} />}
-                  </div> : <Feed shopData={data} shopId={data.id} /> }
+                      {data &&  data?.products_count != 0 ? <Feed shopData={data} shopId={data.id} /> :  
+                      <div className="flex flex-col">
+                      <Feed shopData={data} shopId={data.id} />
+                      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 w-full">
+                       
+                    {placePhotos?.map((binaryImage, index) => {
+                        return <img key={index} 
+                        src={binaryImage?.url+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
+                        // src={`data:image/jpeg;base64,${Buffer.from(binaryImage).toString('base64')}`} 
+                        className="h-full w-full"/>
+                      })}
+                    </div>
+                    </div>
+                                 }
+                  </div> : (data?.products_count != 0 ? <Feed shopData={data} shopId={data.id} /> : 
+                   <div className="flex flex-col">
+                   <Feed shopData={data} shopId={data.id} />
+                   <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 w-full">
+                    
+                 {placePhotos?.map((binaryImage, index) => {
+                     return <img key={index} 
+                     src={binaryImage?.url+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
+                     // src={`data:image/jpeg;base64,${Buffer.from(binaryImage).toString('base64')}`} 
+                     className="h-full w-full"/>
+                   })}
+                 </div>
+                 </div>
+                                 ) }
                </div> 
 
           }

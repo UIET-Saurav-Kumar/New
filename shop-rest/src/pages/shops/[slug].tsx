@@ -49,6 +49,7 @@ import { API_ENDPOINTS } from "@utils/api/endpoints";
 import http from '@utils/api/http'
 import { toast } from 'react-toastify';
 
+
 const CartCounterButton = dynamic(
   () => import("@components/cart/cart-counter-button"),
   { ssr: false }
@@ -97,6 +98,8 @@ const ShopPage = ({ data }: any) => {
       shop_review: data?.review,
     });
   }
+
+  console.log('shop data',data)
 
    
 
@@ -245,7 +248,6 @@ const ShopPage = ({ data }: any) => {
   // // console.log('shop slug is', data?.slug?.includes('chandigarhgrocerystore' ,'kosmetics-india'))
   seoFunction(data);
 
-   
 
   const  getShopCategory = () => {
 
@@ -266,74 +268,38 @@ const ShopPage = ({ data }: any) => {
 
   // // console.log('shop data',metaData)
 
+  console.log('lat', data?.settings?.location?.lng)
+
   const shop_name = data?.name;
 
   useEffect(() => {
-    // Iterate through each shop in the array
-    // for (let i = 0; i < shop_name?.length; i++) {
-
-      // const shop = shop_name[i];
-
+    
       const searchString = {
         query: shop_name.split(' ').join('-'), 
+        city: data?.settings?.location?.formattedAddress.replace(',','').split(' ').join('-'),
       };
+      
       const params = {
-        query: searchString,
+        query: searchString?.query,
+        city: searchString?.city,
         lat: data?.settings?.location?.lat,
         lng: data?.settings?.location?.lng,
       }
   
-      // Make the text search API call and update the shop object
-      mutateSearch(params)?.then((response:any) => {
-        setPlaceId(response.place_id);
-        setRating(response.rating);
-        setOpen(response.opening_hours?.open_now);
-        // shops.place_id = response.place_id;
-        // shops.rating = response.rating;
-        // open_time = response.opening_hours?.open_now;
-        // [...shops[i], {
-        //  place_id : response?.place_id,
-        //  rating : response?.rating,
-        //  open_time : response?.opening_hours?.open_now }
-        // ]
-  
-        // Pass the place_id to the place details API
-      
-      });
-    // }
+       mutateSearch(params)
 
-    // return shops
-    
-    // setShops([...shops]);
   }, [shop_name])
 
-  // alert(rating)
-
-  useEffect(()=>{
+ 
+  useEffect(() => {
 
     const params = {
       place_id: placeId,
     }
 
-     mutatePlace(params)?.then((detailsResponse:any) => {
-      // [...shops[i], {
-        // shops.photos = detailsResponse.photos
-      // }]
-      //  shop?.photos = detailsResponse.photos;
-      // Pass reference_id to the place photo API
-      for (let j = 0; j < detailsResponse.photos.length; j++) {
-        const photo = detailsResponse.photos[j];
-        mutatePhoto( photo.reference_id)?.then((photoResponse:any) => {
-          photo.url = photoResponse;
-        });
-      }
-    });
+     mutatePlace(params)
   },[placeId])
 
-
-  useEffect(()=>{
-
-  },[])
 
   console.log('place id',placeId,rating,open)
 
@@ -342,9 +308,7 @@ const ShopPage = ({ data }: any) => {
     const { data: response } = await http.get(
       `${url}/${API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH}`,{params: data}
     )
-    // setPlaceId(response?.place_id);
-    // setRating(response?.rating);
-    // setOpen(response?.opening_hours?.open_now);
+  
     return response
   }
 
@@ -354,8 +318,7 @@ const ShopPage = ({ data }: any) => {
     const { data: response } = await http.get(
       `${url}/${API_ENDPOINTS.GOOGLE_MAPS_PLACE_DETAILS}`,{params: data}
     )
-    setPlacePhotos(response.photos);
-    return response
+     return response
   }
 
 
@@ -364,27 +327,27 @@ const ShopPage = ({ data }: any) => {
     const { data: response } = await http.get(
       `${url}/${API_ENDPOINTS.GOOGLE_MAPS_PLACE_PHOTOS}`,{params: data}
     )
-    // setPhotos(response);
+   
     return response
   }
 
   const { mutate: mutatePlace} = useMutation(getplaceDetails, {
     onSuccess: (data) => {
-      // setPlaceId(data.place_id);
-      setReviews(data?.result?.reviews);
-      // for (let j = 0; j < data?.photos.length; j++) {
-      //   const photo = data?.photos[j];
-      //   mutatePhoto( photo.reference_id)?.then((photoResponse:any) => {
-      //     photo.url = photoResponse;
-      //   });
-      // }
-      // data?.status == false ? setError(data?.msg) : null;
-      console.log('reviews place id', data,reviews)
+       setReviews(data?.result?.reviews);
+      for (let j = 0; j < data?.result?.photos.length; j++) {
+        const photo = data?.result?.photos[j]?.photo_reference;
+        console.log('reference',photo)
+        const param = {
+          photo_reference : photo
+        }
+        mutatePhoto(param)
+        
+      }
+       console.log('reviews place id', data,reviews)
     },
     onError: (data) => {
-      // alert(data?.msg)
-      // toast.error("unable to process the request, please try later");
-      // setError(data?.msg)
+      console.log(data?.message)
+      
     },
 
     onSettled: () => {
@@ -396,42 +359,42 @@ const ShopPage = ({ data }: any) => {
 
   const { mutate: mutateSearch } = useMutation(getSearchDetails, {
     onSuccess: (data) => {
-      setPlaceId(data.place_id);
+      setPlaceId(data?.place_id);
       setRating(data?.rating);
       setOpen(data?.opening_hours?.open_now);
       setTotalRating(data?.user_ratings_total);
-      // data?.status == false ? setError(data?.msg) : null;
       console.log('operator plans', data)
-    },
+    },     
     onError: (data) => {
-      // alert(data?.msg)
-      // toast.error("unable to process the request, please try later");
-      // setError(data?.msg)
+      console.log(data?.message)
     },
-
     onSettled: () => {
       queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH)
     },
   })
 
   const { mutate: mutatePhoto } = useMutation(getplacePhoto, {
-    onSuccess: (data) => {
-      setPlacePhotos(data);
-      // data?.status == false ? setError(data?.msg) : null;
-      // console.log('operator plans', data)
+    onSuccess: (response) => {
+      setPlacePhotos(prevState => [...prevState, response])
+      
     },
     onError: (data) => {
-      // alert(data?.msg)
-      // toast.error("unable to process the request, please try later");
-      // setError(data?.msg)
+      console.log(data?.message)
     },
 
     onSettled: () => {
       queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_PLACE_PHOTOS)
     },
-  })
+});
 
-  console.log('data',data);
+
+function showImage(binaryImage: any) {
+  const dataUrl = 'data:image/jpeg;base64,' + Buffer.from(binaryImage).toString('base64');
+  return dataUrl;
+}
+
+
+  console.log('placePhotos',placePhotos);
   
 
   return (
@@ -561,7 +524,6 @@ const ShopPage = ({ data }: any) => {
                           {/* </HidingHeader>  */}
 
                           <div className='relative top-0 flex flex-col'> 
-
                               { categoryData?.categories?.data?.length ? 
                                 <> 
                                   <div id='category-dropdown-sidebar'  
@@ -574,12 +536,28 @@ const ShopPage = ({ data }: any) => {
                                   </div> 
                                 </> : ' '  
                               }
+                              {data?.products_count != 0  ?
                                 <div id='product-feed' className="static z-10 top-10 w-full">
                                   {data && 
                                   // <ShopProductFeed shopId={data.id} />
                                     <Feed shopData={data} shopId={data.id} />
-                                }</div>
-                           </div> 
+                                  }
+                                </div> : 
+                                <div className="flex flex-col">
+                                  <Feed shopData={data} shopId={data.id} />
+                                  <div className="grid grid-cols-4 gap-3 w-full">
+                                   
+                                {placePhotos?.map((binaryImage, index) => {
+                                    return <img key={index} 
+                                    src={binaryImage?.url+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
+                                    // src={`data:image/jpeg;base64,${Buffer.from(binaryImage).toString('base64')}`} 
+                                    className="h-full w-full"/>
+                                  })}
+                                </div>
+                                </div>
+                                }
+                                 
+                          </div> 
 
 
                        {/* </div> */}
@@ -608,7 +586,7 @@ const ShopPage = ({ data }: any) => {
       <div className='block lg:hidden w-full'>
 
           <ShopMobileView reviews={reviews} totalRating={totalRating} rating={rating} open={open}
-           pageURL={pageURL} shopData={data} data={data}/>
+           pageURL={pageURL} shopData={data} data={data} placePhotos={placePhotos}/>
 
       </div>
       {/* </DocumentMeta> */}

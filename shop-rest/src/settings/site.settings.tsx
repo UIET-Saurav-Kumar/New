@@ -232,21 +232,21 @@ export const siteSettings = {
 
     {
       id: "0",
-      title: "  Today  " + '('  + date + ' ' +  monthNames[month ] + ')',
+      title: "    " + '('  + date + ' ' +  monthNames[month ] + ')',
       is_delivery:false,
       description: "Visit around 10:00 AM to 2:00 PM",
     },
 
     {
       id: "0",
-      title: "  Today  " + '('  + date + ' ' +  monthNames[month ] + ')',
+      title: "    " + '('  + date + ' ' +  monthNames[month ] + ')',
       is_delivery:false,
       description: "Visit around 2:00 PM to 7:00 PM",
     },
 
     {
       id: "2",
-      title:  'Tomorrow' + ' ' +  '('  + 
+      title:  '' + ' ' +  '('  + 
       tomorrow.toDateString().split(' ')[2]  + ' ' + tomorrow.toDateString().split(' ')[1] + ' ' + tomorrow.toDateString().split(' ')[0] + ')'
              ,
       is_delivery:false,
