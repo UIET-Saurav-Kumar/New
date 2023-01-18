@@ -32,6 +32,7 @@ module.exports = withPWA({
   },
   images: {
     domains: [
+      "maps.googleapis.com",
       "ezulix.in",
       "stats.nba.com",
       "googleusercontent.com",

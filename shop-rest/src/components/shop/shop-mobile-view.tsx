@@ -76,6 +76,12 @@ export default function ShopMobileView({data, shopData, pageURL, open,
     return openModal("SHOP_PAYMENT_FORM");
    }
 
+   function handleImage(){
+    openModal('SHOP_IMAGE_POPOVER',{
+      data:placePhotos
+    })
+  }
+
    const slug = ['chandigarh-grocery-store', 'kosmetics-india'];
   
     return (
@@ -121,7 +127,7 @@ export default function ShopMobileView({data, shopData, pageURL, open,
                   <div className={`flex  gap-3 w-full overflow-x-scroll`}>
                         
                         {placePhotos?.map((binaryImage, index) => {
-                            return <img key={index} 
+                            return <img key={index} onClick={handleImage}
                             src={binaryImage?.url+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
                             // src={`data:image/jpeg;base64,${Buffer.from(binaryImage).toString('base64')}`} 
                             className="h-44 w-44 object-cover"/>
@@ -194,7 +200,7 @@ export default function ShopMobileView({data, shopData, pageURL, open,
                                 //  :
                                 //  <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 w-full">
                                 //  {placePhotos?.map((binaryImage, index) => {
-                                //      return <img key={index} 
+                                //      return <img key={index} onClick={handleImage}
                                 //      src={binaryImage?.url+''+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
                                 //      // src={`data:image/jpeg;base64,${Buffer.from(binaryImage).toString('base64')}`} 
                                 //      className="h-full w-full"/>

@@ -393,6 +393,12 @@ function showImage(binaryImage: any) {
   return dataUrl;
 }
 
+function handleImage(){
+  openModal('SHOP_IMAGE_POPOVER',{
+    data:placePhotos
+  })
+}
+
 
   console.log('placePhotos',placePhotos);
   
@@ -526,7 +532,7 @@ function showImage(binaryImage: any) {
                               <div className={`flex  gap-3 w-full overflow-x-scroll`}>
                                     
                                     {placePhotos?.map((binaryImage, index) => {
-                                        return <img key={index} 
+                                        return <img onClick={handleImage} key={index} 
                                         src={binaryImage?.url+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
                                         // src={`data:image/jpeg;base64,${Buffer.from(binaryImage).toString('base64')}`} 
                                         className="h-60 w-60 object-cover"/>
