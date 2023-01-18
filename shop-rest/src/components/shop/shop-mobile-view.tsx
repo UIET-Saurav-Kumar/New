@@ -112,8 +112,25 @@ export default function ShopMobileView({data, shopData, pageURL, open,
             </div>
 
             {  slug.some(el => data.slug.includes(el)) ? null : 
-             (<div className="px-2"><ShopDescription data={data}/>
-             </div>)
+             (
+              <div className='flex flex-col space-y-2'> 
+             <div className="px-2">
+              <ShopDescription data={data}/>
+             </div>
+             <div className="">
+                  <div className={`flex  gap-3 w-full overflow-x-scroll`}>
+                        
+                        {placePhotos?.map((binaryImage, index) => {
+                            return <img key={index} 
+                            src={binaryImage?.url+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
+                            // src={`data:image/jpeg;base64,${Buffer.from(binaryImage).toString('base64')}`} 
+                            className="h-44 w-44 object-cover"/>
+                          })}
+                  </div>
+
+                </div>
+              </div>
+             )
                 
             }
 
@@ -167,21 +184,22 @@ export default function ShopMobileView({data, shopData, pageURL, open,
                                 </h1> 
                             </div> </> : ' '  }
                             
-                                {data.products_count != 0 ?
+                                {data &&
                                   <div id='product-feed' className="static  z-10 top-10 w-full">
  
                                    {/* <ShopProductFeed shopId={data.id} /> */}
                                     <Feed shopId={data.id}/>
                                     
-                                </div> :
-                                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 w-full">
-                                 {placePhotos?.map((binaryImage, index) => {
-                                     return <img key={index} 
-                                     src={binaryImage?.url+''+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
-                                     // src={`data:image/jpeg;base64,${Buffer.from(binaryImage).toString('base64')}`} 
-                                     className="h-full w-full"/>
-                                   })}
-                                 </div>
+                                </div>
+                                //  :
+                                //  <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 w-full">
+                                //  {placePhotos?.map((binaryImage, index) => {
+                                //      return <img key={index} 
+                                //      src={binaryImage?.url+''+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
+                                //      // src={`data:image/jpeg;base64,${Buffer.from(binaryImage).toString('base64')}`} 
+                                //      className="h-full w-full"/>
+                                //    })}
+                                //  </div>
                                }
                       </div>
               </div>
@@ -192,39 +210,21 @@ export default function ShopMobileView({data, shopData, pageURL, open,
                     <div className='flex  border bg-white h-screen top-14 sticky  flex-col w-auto'>   
                                 <CategoryDropdownSidebar />
                               
-                    </div>  :'' } 
+                    </div>  
+                    :'' } 
                     {categoryData?.categories?.data?.length  ?  <div className="flex flex-col w-5/6">
                        <h1 id='category-heading' style={{top:'56px'}} id='product-heading' 
                           className=" sticky border-t bg-white  py-3 px-2 z-50 font-semibold text-gray-600 font-mono  text-sm sm:text-lg transition-transform duration-75">  
                           { query?.category?.replace(/\b\w/g, (l :any) => l.toUpperCase())   } Products
                       </h1>  
-                      {data &&  data?.products_count != 0 ? <Feed shopData={data} shopId={data.id} /> :  
-                      <div className="flex flex-col">
-                      <Feed shopData={data} shopId={data.id} />
-                      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 w-full">
-                       
-                    {placePhotos?.map((binaryImage, index) => {
-                        return <img key={index} 
-                        src={binaryImage?.url+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
-                        // src={`data:image/jpeg;base64,${Buffer.from(binaryImage).toString('base64')}`} 
-                        className="h-full w-full"/>
-                      })}
-                    </div>
-                    </div>
+                      {data &&  
+                      
+                      <Feed shopData={data} shopId={data.id} /> 
+                      
                                  }
-                  </div> : (data?.products_count != 0 ? <Feed shopData={data} shopId={data.id} /> : 
-                   <div className="flex flex-col">
-                   <Feed shopData={data} shopId={data.id} />
-                   <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 w-full">
+                  </div> : (data &&
+                  <Feed shopData={data} shopId={data.id} />  
                     
-                 {placePhotos?.map((binaryImage, index) => {
-                     return <img key={index} 
-                     src={binaryImage?.url+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
-                     // src={`data:image/jpeg;base64,${Buffer.from(binaryImage).toString('base64')}`} 
-                     className="h-full w-full"/>
-                   })}
-                 </div>
-                 </div>
                                  ) }
                </div> 
 

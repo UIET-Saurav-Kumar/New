@@ -518,13 +518,28 @@ function showImage(binaryImage: any) {
                              </div> ) : null } */}
 
                           {/* <HidingHeader> */}
-                          <div className={` sticky ${ scrollDirection === "down" ? "-top-32" : "top-0"}   transition-all duration-300 sticky z-30 bg-white top-0`}>                                              
-                              <CategoryDropdownSidebar data={data} />
+                          <div className='flex flex-col space-y-2'> 
+                            <div className={` sticky ${ scrollDirection === "down" ? "-top-32" : "top-0"}   transition-all duration-300 sticky z-30 bg-white top-0`}>                                              
+                                <CategoryDropdownSidebar data={data} />
+                            </div>
+                            <div className="">
+                              <div className={`flex  gap-3 w-full overflow-x-scroll`}>
+                                    
+                                    {placePhotos?.map((binaryImage, index) => {
+                                        return <img key={index} 
+                                        src={binaryImage?.url+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
+                                        // src={`data:image/jpeg;base64,${Buffer.from(binaryImage).toString('base64')}`} 
+                                        className="h-60 w-60 object-cover"/>
+                                      })}
+                              </div>
+
+                            </div>
                           </div>
                           {/* </HidingHeader>  */}
 
                           <div className='relative top-0 flex flex-col'> 
-                              { categoryData?.categories?.data?.length ? 
+
+                              {categoryData?.categories?.data?.length ? 
                                 <> 
                                   <div id='category-dropdown-sidebar'  
                                       className='flex border bg-white flex-col w-full'>
@@ -536,14 +551,15 @@ function showImage(binaryImage: any) {
                                   </div> 
                                 </> : ' '  
                               }
-                              {data?.products_count != 0  ?
+                              {/* {data?.products_count != 0  ? */}
                                 <div id='product-feed' className="static z-10 top-10 w-full">
                                   {data && 
                                   // <ShopProductFeed shopId={data.id} />
                                     <Feed shopData={data} shopId={data.id} />
                                   }
-                                </div> : 
-                                <div className="flex flex-col">
+                                </div> 
+                                {/* :  */}
+                                {/* <div className="flex flex-col">
                                   <Feed shopData={data} shopId={data.id} />
                                   <div className="grid grid-cols-4 gap-3 w-full">
                                    
@@ -554,8 +570,8 @@ function showImage(binaryImage: any) {
                                     className="h-full w-full"/>
                                   })}
                                 </div>
-                                </div>
-                                }
+                                </div> */}
+                                {/* } */}
                                  
                           </div> 
 
