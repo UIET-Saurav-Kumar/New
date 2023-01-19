@@ -124,13 +124,13 @@ export default function ShopMobileView({data, shopData, pageURL, open,
               <ShopDescription data={data}/>
              </div>
              <div className="">
-                  <div className={`flex  gap-3 w-full overflow-x-scroll`}>
+                  <div className={`flex px-1 gap-3 w-full overflow-x-scroll`}>
                         
                         {placePhotos?.map((binaryImage, index) => {
                             return <img key={index} onClick={handleImage}
                             src={binaryImage?.url+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
                             // src={`data:image/jpeg;base64,${Buffer.from(binaryImage).toString('base64')}`} 
-                            className="h-44 w-44 object-cover"/>
+                            className="h-44 rounded w-44 object-cover"/>
                           })}
                   </div>
 

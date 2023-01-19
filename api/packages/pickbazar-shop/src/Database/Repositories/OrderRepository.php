@@ -147,6 +147,7 @@ class OrderRepository extends BaseRepository
                 // return $this->createOrder($request);
                 break;
         }
+        
         if($payment_gateway=='cod'){
             $order=$this->createOrder($request);
             $this->sendSMS($order); 

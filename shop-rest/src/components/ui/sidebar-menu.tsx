@@ -141,7 +141,7 @@ export function SidebarMenuItem({ className, item, depth = 0 }: any) {
               )}
             >
             <div className='relative py-2 flex flex-col mx-auto h-auto  w-auto   px-2  place-items-center lg:grid-cols-2    items-center'>
-                  { item?.image.id ? (
+                  {/* { item?.image.id ? (
                     <span className="flex text-center w-auto h-auto items-center justify-center">
                         { pageURL.includes('kosmetics-india')  ? 
                         <Image 
@@ -177,10 +177,10 @@ export function SidebarMenuItem({ className, item, depth = 0 }: any) {
                         className: " w-6 h-6 lg:h-8 lg:w-8",
                       })}
                     </span>
-                  }
+                  } */}
                   
                   <div className="flex px-auto items-center">
-                    <span className='hidden lg:block lg:text-10px lg:text-sm w-auto whitespace-wrap lg:whitespace-nowrap text-center'>
+                    <span className='hidden lg:block lg:text-10px lg:text-sm border-2 px-8 p-4 rounded w-auto whitespace-wrap lg:whitespace-nowrap text-center'>
                       { pageURL.includes('kosmetics-india')   ?  null : name }
                       {/* {name} */}
                     </span>
@@ -190,6 +190,7 @@ export function SidebarMenuItem({ className, item, depth = 0 }: any) {
                     </span>
                     {/* <span className="block lg:hidden text-center ">{expandIcon}</span> */}
                   </div>
+                  
             </div>
 
           </button>

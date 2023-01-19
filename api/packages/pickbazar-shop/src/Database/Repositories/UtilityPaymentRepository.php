@@ -27,6 +27,7 @@ use Prettus\Repository\Exceptions\RepositoryException;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Ignited\LaravelOmnipay\Facades\OmnipayFacade as Omnipay;
 use LoveyCom\CashFree\PaymentGateway\Order as CashFreeOrder;
+use Illuminate\Support\Arr;
 
 
 class UtilityPaymentRepository extends BaseRepository
@@ -42,6 +43,7 @@ class UtilityPaymentRepository extends BaseRepository
         'circle',
         'usertx',
         'operator',
+        'operator_code',
         'status',
         'amount',
         'total',
@@ -78,6 +80,38 @@ class UtilityPaymentRepository extends BaseRepository
 
     public function recharge($data){
         
+        $mobileOperator = [
+            [
+                'id' => 1,
+                'name' => 'Airtel',
+                'OperatorCode' => 'AT',
+                'label' => 'Airtel',
+            ],
+            [
+                'id' => 2,
+                'name' => 'BSNL',
+                'OperatorCode' => 'BS',
+                'label' => 'BSNL',
+            ],
+            [
+                'id' => 3,
+                'name' => 'Jio',
+                'OperatorCode' => 'JIO',
+                'label' => 'Jio',
+            ],
+            [
+                'id' => 4,
+                'name' => 'Vodafone Idea',
+                'OperatorCode' => 'VI',
+                'label' => 'Vi',
+            ],
+            [
+                'id' => 5,
+                'name' => 'MTNL',
+                'OperatorCode' => 'MT',
+                'label' => 'MTNL',
+            ],
+        ];
          
         $member_id = 'EZ929952';
         $pin = 'C019FB28E2';
@@ -86,10 +120,13 @@ class UtilityPaymentRepository extends BaseRepository
         $usertx=Str::random(35);
         $circle=$data->circle;
         $amount=$data->amount;
+        $operator_code = Arr::first(array_filter($mobileOperator, function ($op) use ($operator) {
+            return $op['name'] === $operator;
+        }))['OperatorCode'];
 
         $curl = curl_init();
 
-        $URL='https://ezulix.in/api/recharge.aspx?memberid='.$member_id.'&pin='.$pin.'&number='.$number.'&operator='.$operator.'&circle='.$circle.'&usertx='.$usertx.'&amount='.$amount;
+        $URL='https://ezulix.in/api/recharge.aspx?memberid='.$member_id.'&pin='.$pin.'&number='.$number.'&operator='.$operator_code.'&circle='.$circle.'&usertx='.$usertx.'&amount='.$amount;
 
         curl_setopt_array($curl, array(
             CURLOPT_URL => $URL,

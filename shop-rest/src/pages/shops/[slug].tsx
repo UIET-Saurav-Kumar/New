@@ -394,7 +394,7 @@ function showImage(binaryImage: any) {
 }
 
 function handleImage(){
-  openModal('SHOP_IMAGE_POPOVER',{
+  openModal('SHOP_IMAGE_MODAL',{
     data:placePhotos
   })
 }
@@ -529,13 +529,13 @@ function handleImage(){
                                 <CategoryDropdownSidebar data={data} />
                             </div>
                             <div className="">
-                              <div className={`flex  gap-3 w-full overflow-x-scroll`}>
+                              <div className={`flex  gap-3 w-full px-2 overflow-x-scroll`}>
                                     
                                     {placePhotos?.map((binaryImage, index) => {
                                         return <img onClick={handleImage} key={index} 
                                         src={binaryImage?.url+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
                                         // src={`data:image/jpeg;base64,${Buffer.from(binaryImage).toString('base64')}`} 
-                                        className="h-60 w-60 object-cover"/>
+                                        className="h-60 rounded w-60 object-cover"/>
                                       })}
                               </div>
 

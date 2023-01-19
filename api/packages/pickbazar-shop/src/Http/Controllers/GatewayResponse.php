@@ -17,7 +17,7 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use PickBazar\Database\Models\UtilityPayment;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
-
+use Illuminate\Support\Arr;
 
 class GatewayResponse extends CoreController
 
@@ -56,25 +56,59 @@ class GatewayResponse extends CoreController
      */
 
 
-    public function recharge($data) {
-         
-        $member_id = 'EZ929952';
-        $pin = 'C019FB28E2';
-        $number= $data->customer_contact;
-        $operator=$data->operator;
-        $usertx=$data->usertx;
-        $circle=$data->circle;
-        $amount=$data->amount;
+     public function recharge($data) {
+      $mobileOperator = [
+          [
+              'id' => 1,
+              'name' => 'Airtel',
+              'OperatorCode' => 'AT',
+              'label' => 'Airtel',
+          ],
+          [
+              'id' => 2,
+              'name' => 'BSNL',
+              'OperatorCode' => 'BS',
+              'label' => 'BSNL',
+          ],
+          [
+              'id' => 3,
+              'name' => 'Jio',
+              'OperatorCode' => 'JIO',
+              'label' => 'Jio',
+          ],
+          [
+              'id' => 4,
+              'name' => 'Vodafone Idea',
+              'OperatorCode' => 'VI',
+              'label' => 'Vi',
+          ],
+          [
+              'id' => 5,
+              'name' => 'MTNL',
+              'OperatorCode' => 'MT',
+              'label' => 'MTNL',
+          ],
+      ];
 
-
-        $URL = 'https://ezulix.in/api/recharge.aspx?memberid='.$member_id.'&pin='.$pin.'&number='.$number.'&operator='.$operator.'&circle='.$circle.'&usertx='.$usertx.'&amount='.$amount;
-        $http = new \GuzzleHttp\Client;
-        $response = $http->post($URL, []);
-        $code = $response->getStatusCode();
-        $result = $response->getBody();
-        return  $code;
-
-    }
+      $member_id = 'EZ929952';
+      $pin = 'C019FB28E2';
+      $number= $data->customer_contact;
+      $operator=$data->operator;
+      $usertx=$data->usertx;
+      $circle=$data->circle;
+      $amount=$data->amount;
+      $operator_code = Arr::first(array_filter($mobileOperator, function ($op) use ($operator) {
+        return $op['name'] === $operator;
+    }))['OperatorCode'];
+    
+      $URL = 'https://ezulix.in/api/recharge.aspx?memberid='.$member_id.'&pin='.$pin.'&number='.$number.'&operator='.$operator_code.'&circle='.$circle.'&usertx='.$usertx.'&amount='.$amount;
+      $http = new \GuzzleHttp\Client;
+      $response = $http->post($URL, []);
+      $code = $response->getStatusCode();
+      $result = $response->getBody();
+      return  $code;
+  }
+  
 
 
     public function rechargeStatus($trans_id) {
@@ -82,7 +116,6 @@ class GatewayResponse extends CoreController
         $member_id = 'EZ929952';
         $pin = 'C019FB28E2';
         
-      
       
         $curl = curl_init();
       
@@ -134,7 +167,7 @@ class GatewayResponse extends CoreController
             }
 
             // $url = "https://buylowcal.com/user/utility-payments";
-            $callback_url="https://buylowcal.com/callback?status=$recharge_status&txid=$order_id&mytxid=aPITransID&optxid=$utility_payment->operator&mobileno=$utility_payment->customer_contact";
+            $callback_url="https://buylowcal.com/callback?status=$recharge_status&txid=$order_id&mytxid=aPITransID&optxid=$utility_payment->operator_code&mobileno=$utility_payment->customer_contact";
 
             return redirect()->away($callback_url);
 
