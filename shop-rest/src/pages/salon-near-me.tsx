@@ -56,6 +56,7 @@ import DefaultLayout from '@components/layout/default-layout';
 import { formatSalonProduct } from '@utils/format-salon-products';
 import { useOrdersQuery } from '@data/order/use-orders.query';
 import Loader from '@components/ui/loader/loader';
+import PlacesApi from '@components/shop/google-maps-places-api';
 
   const ProductFeedLoader = dynamic(
     () => import("@components/ui/loaders/product-feed-loader")
@@ -176,7 +177,8 @@ import Loader from '@components/ui/loader/loader';
     const [offerName, setOfferName] = useState(null);
     const [selectedSalon, setSelectedSalon] = useState(null);
     const [selectedTimeSlot, setSelectedTimeSlot] = useState('');
-
+    
+    const [photos, setPhotos] = useState([])
     const router = useRouter();
 
     const { closeModal, openModal } = useModalAction();
@@ -571,32 +573,36 @@ import Loader from '@components/ui/loader/loader';
     const minDate = new Date();
     // minDate.setDate(minDate.getDate() + 30);
 
-     
-    
+    function handleApiPhotos(data) {
+      setPhotos(data)
+    }
+
+    function handleImage(data){
+      openModal('SHOP_IMAGE_MODAL',{
+        data:data
+      })
+    }
 
 
   return ( 
 
     //salon page design 
-
     // <>
     // {fetching && !data?.pages?.length ? (
     // <img src='/'
     // className="object-contain mx-auto" />
     // ) : (
 
-  
-
-      <>
+    <>
 
     <Head>
       <link rel="canonical" href={`https://buylowcal.com/salon`}/>
     </Head>
 
-    <div className='   h-full border bg-white w-full'>
+    <div className='h-full border bg-white w-full'>
 
           <h3 className='text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 font-medium text-2xl lg:text-3xl text-gray-900 font-serif ml-4 lg:ml-8 mt-10 lg:mt-10 tracking-normal'>
-            Featured Products
+            Select Deals to Explore Salons
           </h3>
 
           <Loader text='booking...' className={` ${booking ? 'block' : 'hidden'} mx-auto z-50`}/>
@@ -610,16 +616,16 @@ import Loader from '@components/ui/loader/loader';
                 
                     { uniqueProducts?.map((offer,product) => (
                           
-                      <div className={` ${offer?.name === offerName?.name ? 'border-3 border-green-500 ' : 'border-3'}
-                                         relative w-96 h-full flex flex-col  lg:w-full mx-auto bg-white rounded-lg shadow-lg `}>
+                      <div onClick={ ()=> showSalons(offer)} className={` ${offer?.name === offerName?.name ? 'border-3 border-green-500 ' : 'border-3'}
+                                          relative w-96 h-full flex flex-col  lg:w-full mx-auto bg-white rounded-lg shadow-lg `}>
                         <div className='relative flex items-center justify-center w-auto h-64  '>
                           <Image layout="fill"
                                  priority={true}
                                  objectFit="contain" 
                                  quality='40' 
-                                src={offer?.image?.thumbnail} 
-                            //  className=' object-contain h-full w-full ' 
-                             alt={offer?.name}
+                                 src={offer?.image?.thumbnail} 
+                                 //  className=' object-contain h-full w-full ' 
+                                 alt={offer?.name}
                           />
                         </div>
                              <CheckMarkFill  width={20} className={` ${offer?.name === offerName?.name ? 'block transition-all duration-900 ease-in-out' : 'hidden'} absolute right-0 top-0 me-2 bg-white rounded-full  text-green-600`} />
@@ -640,7 +646,7 @@ import Loader from '@components/ui/loader/loader';
                               </del>
                               <button
                                 className={` ${offer?.name === offerName?.name ? 'bg-green-600 text-white' : 'text-gray-500 bg-gray-100' }   hover:bg-green-600 hover:text-white text-white font-bold py-2 px-4 rounded-full`}
-                                onClick={ ()=> showSalons(offer)}
+                                 
                               >
                                 {offer?.name === offerName?.name ? 'Selected' : 'Select'}
                               </button>
@@ -666,6 +672,15 @@ import Loader from '@components/ui/loader/loader';
 
             <PromotionSlider  selectedShop = {handleSelectedShop} 
                              offer = {offerName} />
+
+                             <div className='flex  gap-3 w-full px-2 overflow-x-scroll'>
+                             {selectedSalon && <PlacesApi 
+                             handleImage={handleImage}
+                              shopName={selectedSalon?.name} 
+                            //  handlePhotos={handleApiPhotos}
+                              /> }
+
+                             </div>
             
         </div>
 

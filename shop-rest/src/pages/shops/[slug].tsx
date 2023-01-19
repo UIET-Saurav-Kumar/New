@@ -48,6 +48,7 @@ import { useLocation } from "react-use";
 import { API_ENDPOINTS } from "@utils/api/endpoints";
 import http from '@utils/api/http'
 import { toast } from 'react-toastify';
+import PlacesApi from "@components/shop/google-maps-places-api";
 
 
 const CartCounterButton = dynamic(
@@ -68,26 +69,24 @@ const imageCheck = (logo: any , record:any, imgsize:any, imgDim:any, classname: 
 
 const ShopPage = ({ data }: any) => {
 
-  const queryClient = useQueryClient();
-  const router = useRouter();
+   const router = useRouter();
   const { pathname, query } = router;
   const { openModal } = useModalAction();
 
-  const [searchText , setSearchText] = useState('');
-
+ 
   const [placeId, setPlaceId] = useState([]);
 
   const [reviews, setReviews] = useState('');
 
   const [placePhotos, setPlacePhotos] = useState([]);
 
-  const [showPhoto, setShowPhoto] = useState('')
-
   const [totalRating, setTotalRating] = useState('');
 
   const [open , setOpen] = useState('');
 
-  const [rating, setRating] = useState('')
+  const [rating, setRating] = useState('');
+
+  
 
 
   function openReviewModal() {
@@ -271,136 +270,37 @@ const ShopPage = ({ data }: any) => {
   console.log('lat', data?.settings?.location?.lng)
 
   const shop_name = data?.name;
-
-  useEffect(() => {
-    
-      const searchString = {
-        query: shop_name.split(' ').join('-'), 
-        city: data?.settings?.location?.formattedAddress.replace(',','').split(' ').join('-'),
-      };
-      
-      const params = {
-        query: searchString?.query,
-        city: searchString?.city,
-        lat: data?.settings?.location?.lat,
-        lng: data?.settings?.location?.lng,
-      }
-  
-       mutateSearch(params)
-
-  }, [shop_name])
-
  
-  useEffect(() => {
 
-    const params = {
-      place_id: placeId,
-    }
-
-     mutatePlace(params)
-  },[placeId])
-
-
-  console.log('place id',placeId,rating,open)
-
-  const getSearchDetails = async (data: any) => {
-    console.log('search data',data)
-    const { data: response } = await http.get(
-      `${url}/${API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH}`,{params: data}
-    )
-  
-    return response
-  }
-
-
-  const getplaceDetails = async (data: any) => {
-    console.log('search data',data)
-    const { data: response } = await http.get(
-      `${url}/${API_ENDPOINTS.GOOGLE_MAPS_PLACE_DETAILS}`,{params: data}
-    )
-     return response
-  }
-
-
-  const getplacePhoto = async (data: any) => {
-    console.log('search data',data)
-    const { data: response } = await http.get(
-      `${url}/${API_ENDPOINTS.GOOGLE_MAPS_PLACE_PHOTOS}`,{params: data}
-    )
-   
-    return response
-  }
-
-  const { mutate: mutatePlace} = useMutation(getplaceDetails, {
-    onSuccess: (data) => {
-       setReviews(data?.result?.reviews);
-      for (let j = 0; j < data?.result?.photos.length; j++) {
-        const photo = data?.result?.photos[j]?.photo_reference;
-        console.log('reference',photo)
-        const param = {
-          photo_reference : photo
-        }
-        mutatePhoto(param)
-        
-      }
-       console.log('reviews place id', data,reviews)
-    },
-    onError: (data) => {
-      console.log(data?.message)
-      
-    },
-
-    onSettled: () => {
-      queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_PLACE_DETAILS)
-    },
-  })
-
-  console.log('reviews',reviews)
-
-  const { mutate: mutateSearch } = useMutation(getSearchDetails, {
-    onSuccess: (data) => {
-      setPlaceId(data?.place_id);
-      setRating(data?.rating);
-      setOpen(data?.opening_hours?.open_now);
-      setTotalRating(data?.user_ratings_total);
-      console.log('operator plans', data)
-    },     
-    onError: (data) => {
-      console.log(data?.message)
-    },
-    onSettled: () => {
-      queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH)
-    },
-  })
-
-  const { mutate: mutatePhoto } = useMutation(getplacePhoto, {
-    onSuccess: (response) => {
-      setPlacePhotos(prevState => [...prevState, response])
-      
-    },
-    onError: (data) => {
-      console.log(data?.message)
-    },
-
-    onSettled: () => {
-      queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_PLACE_PHOTOS)
-    },
-});
-
-
-function showImage(binaryImage: any) {
-  const dataUrl = 'data:image/jpeg;base64,' + Buffer.from(binaryImage).toString('base64');
-  return dataUrl;
+function handleApiPhotos(data) {
+  setPlacePhotos(data)
 }
 
-function handleImage(){
-  openModal('SHOP_IMAGE_MODAL',{
-    data:placePhotos
-  })
+function handleRating(data) {
+  setRating(data);
 }
 
+function handleOpen(data) {
+  setOpen(data);
+}
 
-  console.log('placePhotos',placePhotos);
+function handleReviews(data) {
+  setReviews(data);
+}
+
+function handleTotalRating(data) {
+  setTotalRating(data);
+}
+ 
+
+
+  console.log('placePhotos',placePhotos,reviews);
+
+  function handleImage(data){
+    openModal('SHOP_IMAGE_MODAL',{
+      data:data
+    })
+  }
   
 
   return (
@@ -436,39 +336,39 @@ function handleImage(){
 
                           <div className = 'hidden lg:flex flex-col overflow-y-scroll space-y-4  w-full'>  
 
-                          <div className={`${checkElement() ? 'h-0' : 'h-80'} flex w-full mt-10 border`}> 
+                            <div className={`${checkElement() ? 'h-0' : 'h-80'} flex w-full mt-10 border`}> 
 
-                            { checkElement() ? null 
-                            :
-                              ( <div className='h-full w-96'>  
-                                  <ShopProfileCard reviews={reviews} totalRating={totalRating} rating={rating} open={open} data={data} />
-                                  
+                              { checkElement() ? null 
+                                :
+                                ( <div className='h-full w-96'>  
+                                    <ShopProfileCard reviews={reviews} totalRating={totalRating} rating={rating} open={open} data={data} />
+                                    
+                                  </div> )  }
+                                
+                                { slug?.some(el => data?.slug?.includes(el)) ? (
+                                  data?.slug == 'chandigarh-grocery-store' ?
+                                <Image src='/grocery.jpg' objectFit='cover' layout='intrinsic' 
+                                width={1851} height={320} />
+                                : data?.slug == 'kosmetics-india' ?
+                                <Image src='/kosmetics.jpg' objectFit='cover' layout='intrinsic' 
+                                width={1851} height={320} /> : null
+                                )
+                                :
+                                ( <div className='flex w-full  '>
+                                  {imageCheck(data?.cover_image?.original, data, '317', false,'h-full w-full object-fill')}
                                 </div> )  }
-                              
-                              { slug?.some(el => data?.slug?.includes(el)) ? (
+
+                            </div> 
+
+                            <div className={`${!checkElement() ? 'hidden' : 'w-full h-full border'}`}>
+                                {
                                 data?.slug == 'chandigarh-grocery-store' ?
-                              <Image src='/grocery.jpg' objectFit='cover' layout='intrinsic' 
-                              width={1851} height={320} />
-                              : data?.slug == 'kosmetics-india' ?
-                              <Image src='/kosmetics.jpg' objectFit='cover' layout='intrinsic' 
-                              width={1851} height={320} /> : null
-                              )
-                              :
-                              ( <div className='flex w-full  '>
-                                {imageCheck(data?.cover_image?.original, data, '317', false,'h-full w-full object-fill')}
-                              </div> )  }
-
-                          </div> 
-
-                          <div className={`${!checkElement() ? 'hidden' : 'w-full h-full border'}`}>
-                          {
-                          data?.slug == 'chandigarh-grocery-store' ?
-                            <Image src='/grocery-web.jpg' className="" priority={true} layout="intrinsic" height={570} width={1826} objectFit="fill"  />
-                          : data?.slug == 'kosmetics-india' ?
-                          <Image src='/kosmetics.jpg' objectFit='fill' layout='intrinsic' 
-                                width={1826} height={570} /> : null
-                          }
-                          </div>
+                                  <Image src='/grocery-web.jpg' className="" priority={true} layout="intrinsic" height={570} width={1826} objectFit="fill"  />
+                                : data?.slug == 'kosmetics-india' ?
+                                <Image src='/kosmetics.jpg' objectFit='fill' layout='intrinsic' 
+                                      width={1826} height={570} /> : null
+                                }
+                            </div>
 
            
                             
@@ -530,15 +430,18 @@ function handleImage(){
                             </div>
                             <div className="">
                               <div className={`flex  gap-3 w-full px-2 overflow-x-scroll`}>
-                                    
-                                    {placePhotos?.map((binaryImage, index) => {
+                                    <PlacesApi   handleImage={handleImage}  data={data} shopName={data?.name} 
+                                               handlePhotos={handleApiPhotos}
+                                               handleRating={handleRating}
+                                               handleTotalRating={handleTotalRating}
+                                               handleOpen={handleOpen}
+                                               handleReviews={handleReviews} />
+                                    {/* {placePhotos?.map((binaryImage, index) => {
                                         return <img onClick={handleImage} key={index} 
                                         src={binaryImage?.url+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
-                                        // src={`data:image/jpeg;base64,${Buffer.from(binaryImage).toString('base64')}`} 
-                                        className="h-60 rounded w-60 object-cover"/>
-                                      })}
+                                         className="h-60 rounded w-60 object-cover"/>
+                                      })} */}
                               </div>
-
                             </div>
                           </div>
                           {/* </HidingHeader>  */}
