@@ -232,9 +232,7 @@ const ShopPage = ({ data }: any) => {
   });
 
   const seoFunction = async(data:any) => {
-
     const seoData = await fetchShopSeo(data?.slug)
-
   };
 
   const scrollToProduct = () => {

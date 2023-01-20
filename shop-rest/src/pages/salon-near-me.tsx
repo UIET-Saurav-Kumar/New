@@ -613,6 +613,11 @@ import PlacesApi from '@components/shop/google-maps-places-api';
 
     <div className='h-full border bg-white w-full'>
 
+      <p className='flex flex-col font-semibold text-blue-500 text-center mt-4 w-full'>
+      <div className="text-center text-lg font-medium tracking-wide text-red-600">Limited Slots!!</div>
+     <div className="text-center text-lg font-medium tracking-wide text-green-600">Book Now, Pay Later</div>
+      </p>
+
           <h3 className='text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 font-medium text-2xl lg:text-3xl text-gray-900 font-serif ml-4 lg:ml-8 mt-10 lg:mt-10 tracking-normal'>
             Select Deals to Explore Salons
           </h3>

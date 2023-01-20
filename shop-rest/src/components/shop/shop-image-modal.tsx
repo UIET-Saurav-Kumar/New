@@ -29,7 +29,7 @@ const ShopImageModal = ({data}:any) => {
 
   return (
 
-    <div className="m-auto block w-full max-w-[680px] rounded bg-light p-3">
+    <div className="m-auto block w-full max-w-[680px] rounded bg-light  p-3">
       
       <div className="relative">
         <Swiper
@@ -56,8 +56,8 @@ const ShopImageModal = ({data}:any) => {
               <Image quality='40'
                 src={item?.url+''+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY ?? '/product-placeholder-borderless.svg'}
                 alt={`Review gallery ${item.id}`}
-                width={600}
-                height={600}
+                width={1000}
+                height={1000}
                 objectFit="contain"
               />
             </SwiperSlide>

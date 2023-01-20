@@ -164,17 +164,36 @@ function openModal(){
 
   console.log('placePhotos',review)
 
+
+  function ratingStars(rating) {
+    let stars = "";
+    if (rating >= 4.5) {
+        stars ='⭐️⭐️⭐️⭐️⭐️';
+    } else {
+        for (let i = 0; i < Math.floor(rating); i++) {
+            stars +='⭐️';
+        }
+        if (rating % 1 !== 0) {
+            stars +='⭐';
+        }
+    }
+    return stars;
+}
+
   return (
 
-    <div className='flex  gap-3 w-full px-2 overflow-x-scroll'>
-        {place_Photos?.map((binaryImage, index) => {
-            return <img 
-                    onClick={openModal} 
-                    key={index} 
-                    src={binaryImage?.url+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
-                    className="h-60 rounded w-60 object-cover"/>
-                })}
-    </div>
+        <div className='flex flex-col mt-2'> 
+        <p>{rating && (rating + ' '+ratingStars(rating))}</p>
+            <div className='flex  gap-3 w-full px-2 overflow-x-scroll'>
+                {place_Photos?.map((binaryImage, index) => {
+                    return <img 
+                            onClick={openModal} 
+                            key={index} 
+                            src={binaryImage?.url+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
+                            className="h-60 rounded w-60 object-cover"/>
+                        })}
+            </div>
+        </div>
 
   )
 }
