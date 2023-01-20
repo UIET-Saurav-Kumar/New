@@ -177,7 +177,7 @@ import PlacesApi from '@components/shop/google-maps-places-api';
     const [offerName, setOfferName] = useState(null);
     const [selectedSalon, setSelectedSalon] = useState(null);
     const [selectedTimeSlot, setSelectedTimeSlot] = useState('');
-    
+    const [shopImages, setShopImages] = useState(false);
     const [photos, setPhotos] = useState([])
     const router = useRouter();
 
@@ -287,6 +287,7 @@ import PlacesApi from '@components/shop/google-maps-places-api';
         const { mutate: createOrder, isLoading: salonBooking } = useCreateOrderMutation();
 
         const {data:customer} = useCustomerQuery();
+
         const[newOfferName, setNewOfferName] = useState(null);
 
         const[booking, setBooking] = useState(false);
@@ -337,6 +338,10 @@ import PlacesApi from '@components/shop/google-maps-places-api';
 
         const { mutate: verifyCheckout, isLoading: c_loading } =
         useVerifyCheckoutMutation();
+
+        // useEffect(()=>{
+        //      setShopImages(true)
+        // },[selectedSalon])
 
         useEffect(()=>{
           // const prevUrl = document.referrer;
@@ -565,7 +570,7 @@ import PlacesApi from '@components/shop/google-maps-places-api';
      const uniqueProducts = [];
 
     filteredData?.forEach(product => {
-      if (!uniqueProducts?.find(p => p.name === product.name)) {
+      if (!uniqueProducts?.find(p => p.name === product.name && p?.sale_price === product?.sale_price)) {
         uniqueProducts.push(product);
       }
     });
@@ -578,10 +583,17 @@ import PlacesApi from '@components/shop/google-maps-places-api';
     }
 
     function handleImage(data){
-      openModal('SHOP_IMAGE_MODAL',{
+      console.log('modal data',data)
+      openModal('SHOP_IMAGE_POPOVER',{
         data:data
       })
     }
+
+    function handleShopImages(data:any) {
+      setShopImages(data)
+    }
+
+    console.log('shopImages',shopImages)
 
 
   return ( 
@@ -607,48 +619,50 @@ import PlacesApi from '@components/shop/google-maps-places-api';
 
           <Loader text='booking...' className={` ${booking ? 'block' : 'hidden'} mx-auto z-50`}/>
 
-            <div className = {`${data?.featureProducts?.data?.length  ? 'block w-full' : 'hidden'} w-full overflow-x-scroll text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500
-                            grid grid-rows-2   md:grid md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-5 bg-gray-50 mt-3 p-2 lg:p-6 gap-4`}>
+            <div className = {`${data?.featureProducts?.data?.length  ? 'block w-full' : 'hidden'} relative w-full overflow-x-scroll text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500
+                            grid grid-cols-2  h-full md:grid md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-5 bg-gray-50 mt-3 p-2 lg:p-6 gap-1 lg:gap-4`}>
               
                {/* {fetching && !data?.pages?.length ? (
                         <ProductFeedLoader limit={5} />
                       ) : ( */}
                 
-                    { uniqueProducts?.map((offer,product) => (
+                        { uniqueProducts?.map((offer,product) => (
                           
-                      <div onClick={ ()=> showSalons(offer)} className={` ${offer?.name === offerName?.name ? 'border-3 border-green-500 ' : 'border-3'}
-                                          relative w-96 h-full flex flex-col  lg:w-full mx-auto bg-white rounded-lg shadow-lg `}>
-                        <div className='relative flex items-center justify-center w-auto h-64  '>
-                          <Image layout="fill"
-                                 priority={true}
-                                 objectFit="contain" 
-                                 quality='40' 
-                                 src={offer?.image?.thumbnail} 
-                                 //  className=' object-contain h-full w-full ' 
-                                 alt={offer?.name}
-                          />
-                        </div>
-                             <CheckMarkFill  width={20} className={` ${offer?.name === offerName?.name ? 'block transition-all duration-900 ease-in-out' : 'hidden'} absolute right-0 top-0 me-2 bg-white rounded-full  text-green-600`} />
-                          <div className=' '>
-                            <div className="px-6 py-4">
-                              <div className="font-semibold text-sm lg:text-lg mb-2">
+                          <div onClick={ ()=> showSalons(offer)} className={` ${offer?.name === offerName?.name ? 'border-3 border-green-500 ' : 'border-3'}
+                                              relative w-full h-full flex flex-col  lg:w-full mx-auto bg-white rounded-lg shadow-lg `}>
+                            <div className='relative flex items-center justify-center w-auto h-64  '>
+                                <Image layout="fill"
+                                      priority={true}
+                                      objectFit="contain" 
+                                      quality='40' 
+                                      src={offer?.image?.thumbnail} 
+                                      //  className=' object-contain h-full w-full ' 
+                                      alt={offer?.name}
+                                />
+                            </div>
+                             <CheckMarkFill  width={20} className={` ${(offer?.name === offerName?.name && offer?.sale_price === offerName?.sale_price ) ? 'block transition-all duration-900 ease-in-out' : 'hidden'} absolute right-0 top-0 me-2 bg-white rounded-full  text-green-600`} />
+                          <div className=' space-y-2'>
+                            <div className="px-2 lg:px-6   ">
+                              <div className="font-semibold text-sm lg:text-lg h-10 ">
                                 {offer?.name}
                               </div>
                             </div>
-                            <div className="px-6 py-2 ">
-                              <span className="inline-block bg-gray-200 text-accent p-3 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-                              ₹
-                              {+' '+offer?.sale_price}.00
-                              </span>
-                              <del className="inline-block  p-3  px-3 py-1 text-sm font-semibold text-gray-600 mr-2">
-                              ₹
-                              {+' '+offer?.price}.00
-                              </del>
+                            <div className="flex flex-col px-2 lg:px-6 space-y-2 py-1 ">
+                             <div className='flex items-center'> 
+                               <span className="inline-block bg-gray-200 text-accent p-3 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+                                ₹
+                                {+' '+offer?.sale_price}.00
+                                </span>
+                                <del className="inline-block  p-3  px-2 py-1 text-sm font-semibold text-gray-600 mr-2">
+                                ₹
+                                {+' '+offer?.price}.00
+                                </del>
+                              </div>
                               <button
-                                className={` ${offer?.name === offerName?.name ? 'bg-green-600 text-white' : 'text-gray-500 bg-gray-100' }   hover:bg-green-600 hover:text-white text-white font-bold py-2 px-4 rounded-full`}
+                                className={` ${offer?.name === offerName?.name && offer?.sale_price === offerName?.sale_price ? 'bg-green-600 text-white' : 'text-gray-500 bg-gray-100' }   hover:bg-green-600 hover:text-white text-white font-bold py-2 px-4 rounded-full`}
                                  
                               >
-                                {offer?.name === offerName?.name ? 'Selected' : 'Select'}
+                                {offer?.name === offerName?.name &&  offer?.sale_price === offerName?.sale_price ? 'Selected' : 'Select'}
                               </button>
                             </div>
                           </div>
@@ -670,16 +684,16 @@ import PlacesApi from '@components/shop/google-maps-places-api';
                 </Link> */}
             </h4>
 
-            <PromotionSlider  selectedShop = {handleSelectedShop} 
-                             offer = {offerName} />
+            <PromotionSlider handleShopImages={handleShopImages}  selectedShop = {handleSelectedShop} 
+                              offer = {offerName} />
 
-                             <div className='flex  gap-3 w-full px-2 overflow-x-scroll'>
-                             {selectedSalon && <PlacesApi 
-                             handleImage={handleImage}
-                              shopName={selectedSalon?.name} 
-                            //  handlePhotos={handleApiPhotos}
-                              /> }
-
+                             <div className={`${shopImages ? 'flex' : 'hidden'}  gap-3 w-full px-2 overflow-x-scroll`}>
+                              { shopImages  && <PlacesApi 
+                              onClick={handleImage}
+                                handleImage={handleImage}
+                                shopName={selectedSalon?.name} 
+                              // handlePhotos={handleApiPhotos}
+                                /> }
                              </div>
             
         </div>
@@ -690,7 +704,7 @@ import PlacesApi from '@components/shop/google-maps-places-api';
                 {/* <Schedule count={2} heading='Book Appointment' />
                    */}
                 <h4 className=' whitespace-nowrap text-xl flex items-center justify-between lg:text-3xl font-serif text-gray-900 font-medium     py-4 tracking-normal'>
-                  Select Appointment Data & Time
+                  Select Appointment Date & Time
                 </h4>
                 <div>
                   <Calendar onChange={onChange} value={value} minDate={minDate} />

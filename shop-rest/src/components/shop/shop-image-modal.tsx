@@ -16,7 +16,7 @@ const swiperParams: SwiperOptions = {
   spaceBetween: 0,
 };
 
-const ShopImageModal = ({data}) => {
+const ShopImageModal = ({data}:any) => {
 
   // const { data } = useModalState();
   const { isRTL } = useIsRTL();
@@ -24,10 +24,13 @@ const ShopImageModal = ({data}) => {
   const [nextEl, nextRef] = useSwiperRef<HTMLDivElement>();
   const [prevEl, prevRef] = useSwiperRef<HTMLDivElement>();
 
-  console.log('modal',data?.data)
+  console.log('d modal',data?.data);
+
 
   return (
+
     <div className="m-auto block w-full max-w-[680px] rounded bg-light p-3">
+      
       <div className="relative">
         <Swiper
           id="review-gallery"
@@ -50,7 +53,7 @@ const ShopImageModal = ({data}) => {
               key={`review-gallery-${item.id}`}
               className="flex items-center justify-center selection:bg-transparent"
             >
-                 < Image        quality='40'
+              <Image quality='40'
                 src={item?.url+''+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY ?? '/product-placeholder-borderless.svg'}
                 alt={`Review gallery ${item.id}`}
                 width={600}

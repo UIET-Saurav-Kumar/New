@@ -8,7 +8,6 @@ import { useModalAction } from '@components/ui/modal/modal.context';
 
 export default function PlacesApi(props:any) {
 
-
   const queryClient = useQueryClient();
 
   const {shopName, handleApiPhotos, handlePhotos, handleImage, handleTotalRating, data, handleReviews, handleOpen, handleRating} = props;
@@ -26,9 +25,6 @@ export default function PlacesApi(props:any) {
   const [rating, setRating] = useState('');
 
 
- 
-
- 
 //   const { openModal } = useModalAction();
 
   useEffect(() => {
@@ -45,7 +41,7 @@ export default function PlacesApi(props:any) {
   useEffect(() => {
     
     const searchString = {
-      query: shop_name.split(' ').join('-'), 
+      query: shop_name?.split(' ').join('-'), 
       city: data?.settings?.location?.formattedAddress.replace(',','').split(' ').join('-'),
     };
     

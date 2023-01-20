@@ -112,7 +112,7 @@ SwiperCore.use([Navigation]);
 
 export default function PromotionSlider(props:any) {
 
-  const {selectedShop, offer} = props;
+  const {selectedShop, offer, handleShopImages} = props;
 
   console.log('shops',props)
   
@@ -120,16 +120,11 @@ export default function PromotionSlider(props:any) {
   const [loading,setLoading] = useState(false);
 
   const [shopName, setShopName] = useState(null);
-
-   
-
+ 
   // useEffect(() => {
   //        setLoading(true)
   // }, [props.offer])
-
-   
-  
-
+ 
   const router = useRouter();
   const { t } = useTranslation();
   const {getLocation} = useLocation();
@@ -148,11 +143,16 @@ export default function PromotionSlider(props:any) {
   function handleSelect(data:any) {
     const shopList = shopData?.pages;
     console.log('prop',data)
-    setShopName(data.name)
+    setShopName(data?.name)
+    // handleShopImages(false)
     props.selectedShop(data)
     // props.allShops(shopList)
     // console.log('shop',data?.offer?.name)
   }
+
+  useEffect(()=>{
+      handleShopImages(false);
+  },[shopName])
 
 
   function getSearch():string{
@@ -187,6 +187,10 @@ export default function PromotionSlider(props:any) {
 
   console.log('slider shops',shopData)
 
+  function setShopImages(){
+    handleShopImages(true)
+  }
+
   return (
 
     <div className=" px-2 md:px-5 xl:px-4">
@@ -207,28 +211,39 @@ export default function PromotionSlider(props:any) {
           }}
         >
           {shopData?.pages?.map((page, idx) => {
-                      return (
-                        <Fragment key={idx}>
-                          {page.data.filter((shop) => shop.is_active === 1 && shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").
-      replace("name", "").replace("id", "") === "Salon  Spa" ).map((shop: any) => (
+              return (
+                <Fragment key={idx}>
+                  {page?.data?.filter((shop) => shop?.is_active === 1 && shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").
+               replace("name", "").replace("id", "") === "Salon  Spa" ).map((shop: any) => (
             <SwiperSlide key={idx}>
               {/* <Link href={`${ROUTES.SHOPS}/${shop.slug}`}> */}
-                <div onClick={()=>handleSelect(shop)} className={` ${shop?.name === shopName ? '' : '' }  border-3 rounded border-white flex hover:shadow-lg flex-col items-center `}>
+                <div   className={` ${shop?.name === shopName ? '' : '' }  border py-1 rounded border-gray-100 flex hover:shadow-lg flex-col items-center `}>
                   
                   <CheckMarkFill width={30} className={` ${shop?.name === shopName? 'block' : 'hidden'} absolute right-0 top-0 me-2 bg-white rounded-full text-green-600`} />
-                  <img
-                   className="w-24 object-contain rounded h-24 lg:h-36    lg:w-36 "
+                  <img onClick={()=>handleSelect(shop)}
+                   className="w-24 cursor-pointer object-contain rounded h-24 lg:h-36    lg:w-36 "
                    src={shop?.logo?.thumbnail}
                    alt={t(shop?.name)}
                   />
-                  <span className = "flex flex-col text-xs  mt-2 text-center font-semibold">
-                    <p>{shop?.name}</p>
-                    <p> 
+                  <span className = "flex flex-col text-xs lg:text-sm  mt-2 h-28 text-center font-semibold">
+                    <p className="h-10  ">{shop?.name}</p>
+                    <p className="h-5 mt-2 text-gray-700 font-light"> 
                        {shop?.name?.includes(shop?.settings?.location?.sector) ? '' : shop?.settings?.location?.sector}
                     </p>
-                    <p className ="text-xs text-center font-light">
+                    <p className ="text-xs h-10 text-center font-light">
                      {shop?.name?.includes(shop?.settings?.location?.city) ? '' : shop?.settings?.location?.city}
                     </p>
+                    <span className={` ${shopName == shop?.name ? 'flex' : 'hidden'}   flex-col space-y-2`}>
+                      <p onClick={()=>handleShopImages(true)} 
+                       className="cursor-pointer text-blue-600 active:text-blue-800 ">
+                        View Images
+                        </p>
+                        <p className="cursor-pointer text-red-700 active:text-red-900">
+                        <Link href={`/shops/${shop.slug}`} as={`/shops/${shop.slug}`}>
+                            <a target="_blank" rel="noopener noreferrer">Visit Salon</a>
+                        </Link>
+                      </p>
+                    </span>
                   </span>
                    
                 </div>

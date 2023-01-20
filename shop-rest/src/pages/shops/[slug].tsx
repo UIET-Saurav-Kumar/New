@@ -297,8 +297,9 @@ function handleTotalRating(data) {
   console.log('placePhotos',placePhotos,reviews);
 
   function handleImage(data){
-    openModal('SHOP_IMAGE_MODAL',{
-      data:data
+    console.log('modal data',data)
+    openModal('SHOP_IMAGE_POPOVER',{
+      data:placePhotos
     })
   }
   
@@ -430,7 +431,8 @@ function handleTotalRating(data) {
                             </div>
                             <div className="">
                               <div className={`flex  gap-3 w-full px-2 overflow-x-scroll`}>
-                                    <PlacesApi   handleImage={handleImage}  data={data} shopName={data?.name} 
+                                    <PlacesApi handleImage={handleImage}  
+                                               data={data} shopName={data?.name} 
                                                handlePhotos={handleApiPhotos}
                                                handleRating={handleRating}
                                                handleTotalRating={handleTotalRating}
