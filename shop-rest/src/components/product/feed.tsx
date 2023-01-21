@@ -71,7 +71,7 @@ const Feed = ({ shopId, shopData }: { shopId: string }) => {
   if (!loading && !data?.pages?.[0]?.data?.length) {
 
     return (
-      <div className="w-full mx-2 mt-5">
+      <div className="w-full px-2 mt-60 lg:mt-96 h-full">
         <ProductNotFoundInfo shopData={shopData} />
       </div>
     );

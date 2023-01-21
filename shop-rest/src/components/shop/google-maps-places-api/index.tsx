@@ -10,7 +10,7 @@ export default function PlacesApi(props:any) {
 
   const queryClient = useQueryClient();
 
-  const {shopName, handleApiPhotos, handlePhotos, handleImage, handleTotalRating, data, handleReviews, handleOpen, handleRating} = props;
+  const {shopName, handleApiPhotos, show, handlePhotos, handleImage, handleTotalRating, data, handleReviews, handleOpen, handleRating} = props;
 
   const [place_Id, setPlace_Id] = useState([]);
 
@@ -183,7 +183,7 @@ function openModal(){
   return (
 
         <div className='flex flex-col mt-2'> 
-        <p>{rating && (rating + ' '+ratingStars(rating))}</p>
+        <p className={` ${show ? 'block' : 'hidden'}`}>{rating && (rating + ' '+ratingStars(rating))}</p>
             <div className='flex  gap-3 w-full px-2 overflow-x-scroll'>
                 {place_Photos?.map((binaryImage, index) => {
                     return <img 

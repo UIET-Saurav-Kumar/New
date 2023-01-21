@@ -68,7 +68,7 @@ const ShopImageModal = ({data}:any) => {
             <div
               ref={prevRef}
               className="review-gallery-prev absolute top-2/4 z-10 -mt-4 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-border-200 border-opacity-70 bg-light text-heading shadow-xl transition-all duration-200 hover:bg-gray-100 ltr:left-2 rtl:right-2 md:-mt-5 md:h-9 md:w-9 ltr:md:left-3 rtl:md:right-3"
-            >
+             >
               {isRTL ? (
                 <ChevronRight className="h-4 w-4" />
               ) : (

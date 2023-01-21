@@ -694,6 +694,7 @@ import PlacesApi from '@components/shop/google-maps-places-api';
 
                              <div className={`${shopImages ? 'flex' : 'hidden'}  gap-3 w-full px-2 overflow-x-scroll`}>
                               { shopImages  && <PlacesApi 
+                              show={true}
                               onClick={handleImage}
                                 handleImage={handleImage}
                                 shopName={selectedSalon?.name} 
