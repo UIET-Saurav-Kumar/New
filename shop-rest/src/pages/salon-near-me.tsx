@@ -212,6 +212,15 @@ import PlacesApi from '@components/shop/google-maps-places-api';
       enabled: Boolean(selectedSalon),
     });
 
+    useEffect(() => {
+      if (error_msg) {
+        // setError_Msg('');
+        setTimeout(() => {
+          setError_Msg('');
+        }, 3000);
+      }
+    }, [error_msg]);
+
     const {
       data ,
       isLoading: loading,
@@ -393,31 +402,22 @@ import PlacesApi from '@components/shop/google-maps-places-api';
         function onSubmit(values: FormValues) {
 
           console.log('newoffer',offerName);
+           
+          if (selectedSalon == null && selectedTimeSlot == null) {
+            setError_Msg('Please select salon and date/time slot also');
+            return;
+         }         
+       
 
+          if (selectedSalon == null) {
+            setError_Msg('Please select salon also');
+            return;
+          }
           
-          //   if (!isAuthorize) {
-          //   return openModal("REGISTER",{
-          //     location:getLocation?.formattedAddress,
-          //     products: 
-          //     avail_items?.map((item) => formatSalonProduct(item)),
-          //     //    [{...offerName,
-          //     //   shop : {selectedSalon}
-          //     //    }],
-          //     customer_contact: customer?.me?.phone_number,
-          //     status:  orderStatusData?.order_statuses?.data[0]?.id ?? 1,
-          //     amount: offerName && offerName?.sale_price,
-          //     // product_id: products?.pages[0]?.length && products?.pages[0]?.data?.filter(product => product?.sale_sale_price === offerName?.sale_price  )[0].id,
-          //     // coupon_id: coupon?.id,
-          //     // quantity: 1,
-          //     discount:  Math.floor(calcDiscount(price, sale_price)),
-          //     paid_total: offerName && offerName?.sale_price,
-          //     total : offerName && offerName?.sale_price,
-          //     sales_tax:  0,
-          //     delivery_fee: 0,
-          //     delivery_time: newDate + ' ' + selectedTimeSlot,
-          //     payment_gateway: 'cod',
-          //   });
-          // }
+          if (selectedTimeSlot == null) {
+            setError_Msg('Please select time slot also');
+            return;
+          }
 
 
           let input = {
@@ -451,8 +451,9 @@ import PlacesApi from '@components/shop/google-maps-places-api';
 
           console.log('input', inputString ? true : false);
 
-          selectedSalon == null ? setError_Msg('Please select salon also') : null
+          
 
+ 
           if(!isAuthorize){
             return openModal('REGISTER',{
                 pathname: '/salon-near-me',
@@ -735,14 +736,15 @@ import PlacesApi from '@components/shop/google-maps-places-api';
 
       </div>
 
-      <div className='mx-auto w-full text-center'>
+      <div className='flex flex-col mx-auto w-full text-center'>
+      <p className='text-red-600 animate-bounce transition-opacity duration-300 ease-in-out h-5'>{error_msg ? error_msg : ''}</p>
         <button className='mx-auto text-white font-semibold rounded mt-10 w-60 border bg-accent mb-20 p-4' 
                 onClick={()=>onSubmit()}>
                 {salonBooking ?
                 ("booking..."):
                 'Book now'}
         </button>
-        <p className='text-red-600'>{error_msg}</p>
+         
       </div>
 
 
