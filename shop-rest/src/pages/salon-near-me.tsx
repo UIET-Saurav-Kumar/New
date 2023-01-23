@@ -688,6 +688,7 @@ import PlacesApi from '@components/shop/google-maps-places-api';
                     </span>
                 </Link> */}
             </h4>
+            
 
             <PromotionSlider handleShopImages={handleShopImages}  selectedShop = {handleSelectedShop} 
                               offer = {offerName} />

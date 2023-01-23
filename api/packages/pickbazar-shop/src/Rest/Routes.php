@@ -298,6 +298,7 @@ Route::post('logs', 'PickBazar\Http\Controllers\LogController@store');
 Route::get('logs', 'PickBazar\Http\Controllers\LogController@fetchLogs');
 Route::delete('logs/{id}', 'PickBazar\Http\Controllers\LogController@destory');
 
+Route::any('cashfree', 'PickBazar\Http\Controllers\CashFreeController@cashFree');
 
 
 
@@ -340,6 +341,8 @@ Route::apiResource('attribute-values', AttributeValueController::class, [
 Route::apiResource('settings', SettingsController::class, [
     'only' => ['index']
 ]);
+
+
 
 Route::any('delivery/success','PickBazar\Http\Controllers\GatewayResponse@process_delivery_response');
 
