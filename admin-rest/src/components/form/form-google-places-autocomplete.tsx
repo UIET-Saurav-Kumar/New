@@ -43,7 +43,20 @@ export default function GooglePlacesAutocomplete({address,
     }
 
     setLocation(place.formatted_address);
+    let locality = '';
+    let area = '';
+    place.address_components.forEach((component: any) => {
+        if (component.types[0] === 'locality') {
+            locality = component.long_name;
+        }
+        if (component.types[0] === 'administrative_area_level_2') {
+            area = component.long_name;
+        }
+    });
+
     const location: any = {
+      locality: locality,
+      area:  area,
       lat: place.geometry.location.lat(),
       lng: place.geometry.location.lng(),
       formattedAddress: place.formatted_address,

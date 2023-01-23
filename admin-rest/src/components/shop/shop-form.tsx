@@ -179,6 +179,7 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
     };
     
     if (initialValues) {
+      console.log(initialValues)
       const { ...restAddress } = values.address;
       updateShop({
         variables: {

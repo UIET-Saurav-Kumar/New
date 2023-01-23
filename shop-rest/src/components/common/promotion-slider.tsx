@@ -228,10 +228,12 @@ export default function PromotionSlider(props:any) {
                   <span className = "flex flex-col text-xs lg:text-sm  mt-2 h-28 text-center font-semibold">
                     <p className="h-10  ">{shop?.name}</p>
                     <p className="h-5 mt-2 text-gray-700 font-light"> 
-                       {shop?.name?.includes(shop?.settings?.location?.sector) ? '' : shop?.settings?.location?.sector}
+                    {/* {shop?.name?.includes(shop?.settings?.location?.sector) ? '' : shop?.settings?.location?.sector} */}
+                       {shop?.address?.sector}
                     </p>
                     <p className ="text-xs h-10 text-center font-light">
-                     {shop?.name?.includes(shop?.settings?.location?.city) ? '' : shop?.settings?.location?.city}
+                    {/* {shop?.name?.includes(shop?.settings?.location?.city) ? '' : shop?.settings?.location?.city} */}
+                     {(shop?.address?.city)}
                     </p>
                     <span className={` ${shopName == shop?.name ? 'flex' : 'hidden'}   flex-col space-y-2`}>
                       <p onClick={()=>handleShopImages(true)} 

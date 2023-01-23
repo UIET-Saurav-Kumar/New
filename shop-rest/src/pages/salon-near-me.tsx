@@ -181,6 +181,8 @@ import PlacesApi from '@components/shop/google-maps-places-api';
     const [photos, setPhotos] = useState([])
     const router = useRouter();
 
+    const [error_msg ,  setError_Msg] = useState('');
+
     const { closeModal, openModal } = useModalAction();
 
     const { isAuthorize } = useUI();
@@ -448,6 +450,8 @@ import PlacesApi from '@components/shop/google-maps-places-api';
           console.log('input', input);
 
           console.log('input', inputString ? true : false);
+
+          selectedSalon == null ? setError_Msg('Please select salon also') : null
 
           if(!isAuthorize){
             return openModal('REGISTER',{
@@ -738,6 +742,7 @@ import PlacesApi from '@components/shop/google-maps-places-api';
                 ("booking..."):
                 'Book now'}
         </button>
+        <p className='text-red-600'>{error_msg}</p>
       </div>
 
 

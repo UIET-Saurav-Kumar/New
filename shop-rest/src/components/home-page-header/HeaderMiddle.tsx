@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import JoinButton from "@components/layout/navbar/join-button";
 import { useUI } from "@contexts/ui.context";
@@ -239,7 +238,7 @@ export default function HeaderMiddle() {
             setLocation(true);
             setHasLoction(false);
         //  
-        }else{
+        }else {
             setAddress(getLocation?.formattedAddress);
             setHasLoction(true);
         }
@@ -290,15 +289,15 @@ export default function HeaderMiddle() {
                {/* searchbar  */}
                <div className='  hidden lg:flex lg:items-start justify-around lg:justify-between p-0 lg:py-4 w-full px-4'>
 
-                    <div className = ' hidden lg:block ' >
+                    <div className = 'hidden lg:block'>
 
-                       <div style={{zIndex: 0}} className=''><Logo className="  " /> </div>       
+                       <div style={{zIndex: 0}} className=''><Logo className="  " /></div>       
                                           
                     </div>
                   
                   {/* Search Bar */}
                 <div className='flex flex-col  w-full space-y-2'>
-                   <div className=' flex focus-ring-2 justify-center
+                    <div className=' flex focus-ring-2 justify-center
                                     lg:w-3/4 2xl:mx-auto lg:mx-auto 
                                     2xl:flex-1'>
 
@@ -320,7 +319,6 @@ export default function HeaderMiddle() {
                         <span className='  text-red-600'>Buylowcal</span>
                         <span className='text-yellow-600'>ਬਾਏਲੋਕਲ </span>
                         <span className='text-green-600'> বাইলোকাল </span>
-                    
                     </div>
                 </div>
 

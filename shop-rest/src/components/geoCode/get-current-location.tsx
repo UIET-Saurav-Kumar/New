@@ -4,120 +4,76 @@ import { useLocation } from "@contexts/location/location.context";
 import { getLocation } from "@contexts/location/location.utils";
 import { useEffect, useState } from "react";
 
+
 export default function GetCurrentLocation({
-    onChange
-  }:{
-    onChange: any;
-    
-  }){
-    const {addLocation} =useLocation()
+  onChange
+}:{
+  onChange: any;
+}){
+  const {addLocation} =useLocation()
 
-    const [spin, setSpin] = useState(false);
+  var options = {
+      enableHighAccuracy: false,
+      timeout: 1000,
+      maximumAge: 0
+  };
 
-    var options = {
-        enableHighAccuracy: false,
-        timeout: 2000,
-        maximumAge: 0
-        //session time
-      };
+  const [btn, setBtn] = useState('Detect');
 
-       const [btn, setBtn] = useState('Detect');
+  function error(err) {
+      console.warn(`ERROR(${err.code}): ${err.message}`);
+  }
 
-      function error(err) {
-        console.warn(`ERROR(${err.code}): ${err.message}`);
+  function getLoc() {
+    alert('detecting')
+      setBtn('Detecting...')
+      if (navigator.geolocation) {
+        alert('inside navigator')
+          navigator.geolocation.getCurrentPosition(showPosition, error, options);
+          alert('after navigator')
+      } else { 
+          setBtn('Detect')
+          alert('error');
       }
+  }
 
-      const {getLocation} =useLocation();
-      // console.log('getLocation is',getLocation.length)
+  async function showPosition(position:any) {
 
-      const[address,setAddress] = useState('');
+    alert('show position started');
 
-      // call getLoc if location is null
-      useEffect(() => {
-       
-        if(getLocation?.length === 0){
-          getLoc();
+      var address = await getAddress({
+          lat:position?.coords?.latitude,
+          lng:position?.coords?.longitude
+      })
+
+      alert('show position address')
+      
+      const location: any = {
+          lat: position.coords?.latitude,
+          lng: position?.coords?.longitude,
+          formattedAddress: address,
+        };
+
+        alert('show position location')
+
+       addLocation(location)
+       setBtn('Detect')
+       onChange(getLoc);
+  }
+
+  const url = typeof window !== 'undefined' && window?.location?.href
+
+  return (
+      <> 
+        { url && url?.includes('/register' || '/invite') ?
+            <button onClick = {getLoc} className=' flex float-left sm:mx-0 items-center text-sm sm:text-sm md:text-md text-white relative bg-blue-600 transition duration-500 ease-in-out rounded p-2 mb-3 whitespace-nowrap shadow-md font-md '> 
+                Get current location     
+            </button>
+            :
+            <button onClick = {getLoc} className='rounded font-semibold bg-blue-700 p-2 px-3 text-white mb-3 flex float-left mx-4 sm:mx-0 items-center text-sm sm:text-sm md:text-md'>
+              {btn} 
+            </button>
         }
-      
-      }, [ addLocation])
-      
-
-    function getLoc() {
-        // setSpin((setSpin) => !setSpin);
-        setBtn('Detecting...')
-      
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition, error, options);
-            //reload page
-             
-        } else { 
-            setBtn('Detect')
-            alert(error);
-        }
-    }
-
-    
-
-//    call get loc when page loads
-  //  useEffect(() => {
-       // !!localStorage.getItem('location')  && getLoc()
-   // }, []);
-
-
-    async function showPosition(position:any) {
-
-        var address = await getAddress({
-            lat:position?.coords?.latitude,
-            lng:position?.coords?.longitude
-        })
-        // alert(address);
-
-        // console.log('address',address)
-        
-        const location: any = {
-            lat: position.coords?.latitude,
-            lng: position?.coords?.longitude,
-            formattedAddress: address,
-          };
-
-          window.location.reload();
-
-        // console.log('lat lng',location)
-
-        // alert(location);
-        addLocation(location)
-        setBtn('Detect')
-        onChange(getLoc);
-    }
-
-    const url = typeof window !== 'undefined' && window?.location?.href
-
-    return (
-
-        <> 
-          { url && url?.includes('/register' || '/invite') ?
-              <button onClick = {getLoc} className=' flex float-left  sm:mx-0 items-center  text-sm sm:text-sm md:text-md 
-                                text-white relative bg-blue-600 transition duration-500 ease-in-out  transform active:-translate-y-1 active:scale-95 
-                                rounded   p-2 mb-3 whitespace-nowrap   shadow-md font-md '> 
-                      <span className='mr-1 md:mr-1.5 md:w-4'>
-                          <img src='/gps-white.png' 
-                              className={`${spin ? 'animate-pulse' : 'animate-none'}
-                                    mx-1 md:-mx-1  object-cover w-3 h-3 sm:w-4 sm:h-4`}/>
-                      </span>
-                  Get current location     
-              </button>
-              :
-              <button onClick = {getLoc} 
-                      className='rounded font-semibold bg-blue-700 p-2 px-3 text-white mb-3 
-                                 flex float-left mx-4  sm:mx-0 items-center text-sm sm:text-sm md:text-md'>
-                {btn} 
-              </button>
-
-          }
-        </>
-    )
-    // <button onClick={handleCurrentLocation} className = {` ${ active ? 'block' : 'hidden'}  absolute flex items-center shadow-2xl font-semibold placeholder:text-gray-50 rounded w-60 top-22 ml-1 bg-gray-50 text-accent  py-4`}>
-    // <img src='/gps.png' className=' mr-5 ml-2  text-green-400  w-6 h-6'/> Get Current Location </button>
-
+      </>
+  )
 }
-
