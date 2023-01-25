@@ -8,7 +8,7 @@ const upiApps = [
     '/upi/bhim.png','/upi/upi.jpeg','/upi/gpay.png','/upi/paytm.png','/upi/phone-pe.jpg','/upi/qr.jpg'
 ]
 
-const upi_id = 'cf.vinendersingh91@okicici';
+const upi_id = 'vinendersingh91@okicici';
 
 const reciever_name = 'vinender';
 const merchant_code = '1234';
