@@ -16,7 +16,7 @@ const merchant_code = '1234';
 const modifiedLinks = Object.values(data)[0].map((link, index) => {
   let modifiedLink = link.replace("pa=cf.lowcalventurespvtltd@icici", `pa=${upi_id}`);
   modifiedLink = modifiedLink.replace("pn=Lowcal%20Ventures%20Pvt%20Ltd", `pn=${reciever_name}`);
-  modifiedLink = modifiedLink.replace("mc=5399", `mc=${merchant_code}`);
+  // modifiedLink = modifiedLink.replace("mc=5399", `mc=${merchant_code}`);
   return modifiedLink;
 });
 
