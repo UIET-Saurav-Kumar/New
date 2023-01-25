@@ -138,6 +138,9 @@ export default function PromotionSlider(props:any) {
     // page:1,
     search:getSearch()
   },  
+  {
+    enabled: !!props?.offer 
+  }
   );
 
   function handleSelect(data:any) {

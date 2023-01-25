@@ -696,7 +696,7 @@ import { addLocation } from '@contexts/location/location.utils';
             </div>
 
 
-        <div ref={myDiv}  className='flex flex-col lg:px-4 mt-6 lg:mt-10 py-4'>
+        <div ref={myDiv}  className={`${offerName ? 'flex' : 'hidden'} flex-col lg:px-4 mt-6 lg:mt-10 py-4`}>
 
             <h4 className='text-xl flex items-center justify-between lg:text-3xl font-serif text-gray-900 font-medium ml-2 lg:ml-4 py-4 tracking-normal'>
                 Select Salon 

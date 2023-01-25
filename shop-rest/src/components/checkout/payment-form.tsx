@@ -181,6 +181,7 @@ const PaymentForm = () => {
           router.push(`${ROUTES.ORDERS}/${order?.tracking_number}`);
         }
         if (order )
+        console.log(order?.data?.payload)
         {
           openModal('UPI_APPS', {
             data : Object.values(order?.data?.payload)

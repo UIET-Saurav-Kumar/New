@@ -324,7 +324,7 @@ class OrderRepository extends BaseRepository
         $customerName = $user->name;
         $customerId = $request['customer_id'];
         $customerEmail = $user->email ?? "test@cashfree.com";
-        $payment_methods = 'cc';
+        // $payment_methods = 'cc';
         $returnUrl =  url("order/success");
         $notifyUrl = url("order/success");
         
@@ -340,11 +340,11 @@ class OrderRepository extends BaseRepository
             "customer_email" => $customerEmail,
             "customer_phone" => $customerPhone,
           ),
-          "order_meta" => array(
-            'return_url'=> 'https://buylowcal.com/orders/{order_id}',
-            'notify_url' => 'https://buylowcal.com/orders/{order_id}',
-            "payment_methods" => 'cc'
-          )
+        //   "order_meta" => array(
+        //     'return_url'=> 'https://buylowcal.com/orders?order_id={order_id}',
+        //     'notify_url' => 'https://buylowcal.com/orders?order_id={order_id}',
+        //     "payment_methods" => 'cc'
+        //   )
 
         );
         
@@ -372,18 +372,17 @@ class OrderRepository extends BaseRepository
         
           curl_close($curl);
        
-        $postFields = json_encode($postFields);
-        $type = gettype($response);
+        //  $type = gettype($response);
         $response = json_decode($response, true);
-        // $payment_session_id = $response['payment_session_id'];
-        $payment_session_id = 'session_RtamjSUdQlmidc1cZ2gTYdvv7UriO0lKmPldFJHlDLfePM5efTFdbD10tEGHlyud4Is9nxv3FcnjVPc0MBt_3zB2cGlkzbWgQKDMourBNGvk';
+        $payment_session_id = $response['payment_session_id'];
+        // $payment_session_id = 'session_RtamjSUdQlmidc1cZ2gTYdvv7UriO0lKmPldFJHlDLfePM5efTFdbD10tEGHlyud4Is9nxv3FcnjVPc0MBt_3zB2cGlkzbWgQKDMourBNGvk';
 
         // return $response;
 
         $upi_curl = curl_init();
 
         $post_Fields = array(
-            'payment_session_id' => 'session_RtamjSUdQlmidc1cZ2gTYdvv7UriO0lKmPldFJHlDLfePM5efTFdbD10tEGHlyud4Is9nxv3FcnjVPc0MBt_3zB2cGlkzbWgQKDMourBNGvk',
+            'payment_session_id' => $payment_session_id,
             'payment_method' => array(
               'upi' => array(
                 'channel' => 'link',
@@ -401,7 +400,7 @@ class OrderRepository extends BaseRepository
           CURLOPT_MAXREDIRS => 10,
           CURLOPT_TIMEOUT => 30,
           CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_POSTFIELDS => "{\"payment_method\":{\"upi\":{\"channel\":\"link\"}},\"payment_session_id\":\"session_RtamjSUdQlmidc1cZ2gTYdvv7UriO0lKmPldFJHlDLfePM5efTFdbD10tEGHlyud4Is9nxv3FcnjVPc0MBt_3zB2cGlkzbWgQKDMourBNGvk\"}",
+          CURLOPT_POSTFIELDS => $post_Fields,
           CURLOPT_HTTPHEADER => [
             "accept: application/json",
             "content-type: application/json",
