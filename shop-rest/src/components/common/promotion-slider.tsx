@@ -114,7 +114,7 @@ export default function PromotionSlider(props:any) {
 
   const {selectedShop, offer, handleShopImages} = props;
 
-  console.log('shops',props)
+  // console.log('shops',props)
   
 
   const [loading,setLoading] = useState(false);
@@ -169,26 +169,8 @@ export default function PromotionSlider(props:any) {
   }
 
 
-  // const downloadAllImages = (images) => {
-    const downloadLogos = async () => {
-      const shop = shopData?.pages[0]?.data
-      for (const { name, logo } of shop) {
-      const response = await fetch(logo.original);
-      const blob = await response.blob();
-      const objectURL = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = objectURL;
-      a.download = `${name}-logo.png`;
-      document.body.appendChild(a);
-      const event = new MouseEvent('click');
-      a.dispatchEvent(event);
-      document.body.removeChild(a);
-      URL.revokeObjectURL(objectURL);
-    }
-    }
-  // };
-
-  console.log('slider shops',shopData)
+  
+  // console.log('slider shops',shopData)
 
   function setShopImages(){
     handleShopImages(true)

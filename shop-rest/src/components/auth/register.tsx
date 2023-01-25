@@ -76,7 +76,7 @@ const RegisterForm = (props:any) => {
     lng: getLocation.lng,
   }];
 
-  console.log('register', props.data);
+  // console.log('register', props.data);
   const url = props?.data?.pathname;
 
   const [userLocation, setUserLocation] = useState(userLoc);
@@ -153,7 +153,7 @@ function handleClick(){
     openModal("OTP_LOGIN")
 }
 
-    console.log('path', router.pathname)
+    // console.log('path', router.pathname)
 
   function onSubmit({ name, email, password, phone_number, current_location, date_of_birth, gender, occupation }: FormValues)   {
     mutate(
@@ -288,31 +288,23 @@ function handleClick(){
                   <span className="">
                   🎉 Date of Birth  </span>  🥳
                   </div>
-              <Controller
-                      control={control}
-                      name="date_of_birth"
-                      render={({ field: { onChange, onBlur, value } }) => (
-                        //@ts-ignore
-                        <DatePicker
-                        selected={birthDate}
-                        onChange={(date) => {
-                          setBirthDate((date));
-                          setValue("date_of_birth", date);
-                        }}
-                        dateFormat="dd-MM-yyyy"
-                        className="text-sm lg:text-md h-12 w-full px-4  bg-gray-100   border-border-base rounded-full focus:border-gray-400 no-underline "
-                        showYearDropdown
-                        showMonthDropdown
-                        dropdownMode="select"
-                        peekNextMonth
-                        showWeekNumbers
-                        minDate={new Date(1900, 1, 1)}
-                        maxDate={new Date()}
-                        placeholderText={t("eg..23/12/1996")}
-                        // className="w-full"
-                  />          
-                      )}
-                />
+                  <Input
+                    type='date'
+                    variant='outline'
+                    placeholder='Enter your date of birth'
+
+                    {...register('date_of_birth', {
+                        required: 'Date of birth is required',
+                        minLength: {
+                            value: 10,
+                            message: 'Date of birth should be at least 10 characters',
+                        },
+                        maxLength: {
+                            value: 10,
+                            message: 'Date of birth should not exceed 10 characters',
+                        },
+                    })}
+                    />
         </div>
 
 

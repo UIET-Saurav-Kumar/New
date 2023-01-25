@@ -196,15 +196,15 @@ import { addLocation } from '@contexts/location/location.utils';
       window.scrollTo(0, 0);
     }, []);
 
-    useEffect(()=>{
-      const location: any = {
-        lat:  30.7320 ,
-        lng:  76.7726 ,
-        formattedAddress:  'Chandigarh'  ,
-      };
+    // useEffect(()=>{
+    //   const location: any = {
+    //     lat:  30.7320 ,
+    //     lng:  76.7726 ,
+    //     formattedAddress:  'Chandigarh'  ,
+    //   };
 
-         addLocation(location);
-    },[])
+    //      addLocation(location);
+    // },[pathname])
 
     const {
       // isFetching: loading,
@@ -245,7 +245,7 @@ import { addLocation } from '@contexts/location/location.utils';
       location : ((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any
   });
 
-  console.log('feature',data)
+  // console.log('feature',data)
 
   //   const {  
   //     data,
@@ -262,7 +262,7 @@ import { addLocation } from '@contexts/location/location.utils';
     //   setOfferName(products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0])
     // },[ ])
 
-    console.log('products',products?.pages[0]?.data?.filter(product => product?.sale_price === offerName?.sale_price)[0])
+    // console.log('products',products?.pages[0]?.data?.filter(product => product?.sale_price === offerName?.sale_price)[0])
     // console.log('products',products,offerName)
 
 
@@ -280,7 +280,7 @@ import { addLocation } from '@contexts/location/location.utils';
 
         let yyyy = currentDate.getFullYear();
 
-        console.log('value',tim)
+        // console.log('value',tim)
 
         const pattern = /(?<day>\w+)\s(?<month>\w+)\s(?<date>\d+)\s(?<year>\d+)\s(?<time>\d+:\d+:\d+)\s(?<tz>.*)/;
 
@@ -293,7 +293,7 @@ import { addLocation } from '@contexts/location/location.utils';
 
         const newDate = `${dd} ${month}`;
 
-        console.log('value',newDate)
+        // console.log('value',newDate)
 
         const { data: orderStatusData } = useOrderStatusesQuery();
 
@@ -306,7 +306,7 @@ import { addLocation } from '@contexts/location/location.utils';
           // isFetchingNextPage: loadingMore,
         } = useOrdersQuery({});
 
-        console.log('my order',orderData?.pages[0]?.data?.length);
+        // console.log('my order',orderData?.pages[0]?.data?.length);
       
         const { mutate: createOrder, isLoading: salonBooking } = useCreateOrderMutation();
 
@@ -317,9 +317,9 @@ import { addLocation } from '@contexts/location/location.utils';
         const[booking, setBooking] = useState(false);
 
 
-        console.log('log salon',selectedSalon)
+        // console.log('log salon',selectedSalon)
 
-        console.log('customer',customer);
+        // console.log('customer',customer);
 
         // useEffect(()=>{
         //   setNewOfferName(products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0])
@@ -330,25 +330,25 @@ import { addLocation } from '@contexts/location/location.utils';
          offerName && setSelectedSalon(data);
           // setNewOfferName(tr)
           
-          console.log('new offername data',data)
+          // console.log('new offername data',data)
         }                           
         
         // console.log('new offername',newOfferName) 
-        console.log('new selectedSalon',selectedSalon)    
-        console.log('new offername',offerName)
-        console.log('new products',products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0])   
+        // console.log('new selectedSalon',selectedSalon)    
+        // console.log('new offername',offerName)
+        // console.log('new products',products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0])   
 
         let avail_items =  [products?.pages[0]?.data?.filter(product =>  product.sale_price === offerName?.sale_price)[0] ]
         // product_id: products?.pages[0]?.length && products?.pages[0]?.length && products?.pages[0]?.data?.filter(product => product?.sale_price === offerName?.sale_price  )[0].id,
         // }]
 
-        console.log('new avail items', offerName);
+        // console.log('new avail items', offerName);
 
         const subtotal = calculateTotal(avail_items).total;
 
-        console.log('log avail_items', avail_items);
+        // console.log('log avail_items', avail_items);
 
-        console.log('log offer', offerName);
+        // console.log('log offer', offerName);
 
         let price = products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0]?.price;
         let sale_price = products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0]?.sale_price;
@@ -414,7 +414,7 @@ import { addLocation } from '@contexts/location/location.utils';
 
         function onSubmit(values: FormValues) {
 
-          console.log('newoffer',offerName);
+          // console.log('newoffer',offerName);
            
           if (selectedSalon == null && selectedTimeSlot == null) {
             setError_Msg('Please select salon and date/time slot also');
@@ -460,9 +460,9 @@ import { addLocation } from '@contexts/location/location.utils';
 
           let inputString = JSON.parse(localStorage.getItem('input'));
 
-          console.log('input', input);
+          // console.log('input', input);
 
-          console.log('input', inputString ? true : false);
+          // console.log('input', inputString ? true : false);
 
           
 
@@ -484,7 +484,7 @@ import { addLocation } from '@contexts/location/location.utils';
           )
 
 
-          console.log('values',input,offerName)
+          // console.log('values',input,offerName)
             
             createOrder(input, {
               onSuccess: (order: any) => {
@@ -505,7 +505,7 @@ import { addLocation } from '@contexts/location/location.utils';
 
           let inputString = JSON.parse(localStorage.getItem('input'));
 
-          console.log('input outside', document.referrer)
+          // console.log('input outside', document.referrer)
            
 
           function getSearch():string
@@ -513,14 +513,14 @@ import { addLocation } from '@contexts/location/location.utils';
             const { query } = useRouter();
             
             if(newOfferName?.name){
-              console.log(newOfferName?.name)
+              // console.log(newOfferName?.name)
               return newOfferName?.name as string
             }
             return "";
           }
           const myDiv = useRef(null);
 
-          console.log([{'offer': offerName, 'selectedSalon' : selectedSalon }])
+          // console.log([{'offer': offerName, 'selectedSalon' : selectedSalon }])
 
 
           const {
@@ -539,7 +539,7 @@ import { addLocation } from '@contexts/location/location.utils';
             behavior: 'smooth',
           })
         
-         console.log('salon',data)
+        //  console.log('salon',data)
          setOfferName(data)
          setSelectedSalon(null);
           // offerName && addItemToCart(offerName, 1) 
@@ -566,16 +566,16 @@ import { addLocation } from '@contexts/location/location.utils';
       search:getSearch() 
     });
 
-    console.log('shops',offerName,shops)
+    // console.log('shops',offerName,shops)
 
     const handleClick = (e) => {
       const value = e.target.innerHTML;
-      console.log(value);
+      // console.log(value);
       // You can use the value here, for example, to set the value of an input element
       document.getElementById('input-element').value = value;
     }
 
-    console.log('time',selectedTimeSlot)
+    // console.log('time',selectedTimeSlot)
 
     const filteredData = data?.featureProducts?.data?.filter(product =>
       product?.status === "publish" &&
@@ -601,7 +601,7 @@ import { addLocation } from '@contexts/location/location.utils';
     }
 
     function handleImage(data){
-      console.log('modal data',data)
+      // console.log('modal data',data)
       openModal('SHOP_IMAGE_POPOVER',{
         data:data
       })
@@ -611,7 +611,7 @@ import { addLocation } from '@contexts/location/location.utils';
       setShopImages(data)
     }
 
-    console.log('shopImages',shopImages)
+    // console.log('shopImages',shopImages)
 
 
   return ( 

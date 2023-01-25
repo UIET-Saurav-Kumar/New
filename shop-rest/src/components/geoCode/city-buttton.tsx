@@ -20,20 +20,20 @@ export default function CityButton({lat, lng, city,
     
     const {addLocation, getLocation} =useLocation()
 
-    useEffect(() => {
-      const location: any = {
-        lat:  30.7320 ,
-        lng:  76.7726 ,
-        formattedAddress:  'Chandigarh'  ,
-      };
+    // useEffect(() => {
+    //   const location: any = {
+    //     lat:  30.7320 ,
+    //     lng:  76.7726 ,
+    //     formattedAddress:  'Chandigarh'  ,
+    //   };
       
-       pathname == '/salon-near-me'  && addLocation(location);
+    //    pathname == '/salon-near-me'  && addLocation(location);
 
-         if(getLocation?.formattedAddress === null){
-           getLoc();
-         }
+    //      if(getLocation?.formattedAddress === null){
+    //        getLoc();
+    //      }
        
-       }, [addLocation,pathname])
+    //    }, [addLocation,pathname])
 
     const [spin, setSpin] = useState(false);
 
