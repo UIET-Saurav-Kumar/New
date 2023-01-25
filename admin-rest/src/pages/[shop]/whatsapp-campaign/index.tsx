@@ -28,8 +28,6 @@ import { Head } from "next/document";
 
 import FacebookLogin from 'react-facebook-login'; 
  
- 
-
 
 export default function WhatsappCampaign() {
 
@@ -68,8 +66,7 @@ export default function WhatsappCampaign() {
       setLogin(false);
     }
   }
-
-
+ 
 
 
   function callBackRedirect() {
@@ -183,7 +180,7 @@ export default function WhatsappCampaign() {
                           <ul className="text-gray-900 space-y-4 flex flex-col items-start text-lg">
                             <li className=""> ~ Access to your Facebook Business Manager</li>
                             <li> ~ Your company or brand legal name and business</li>
-                            <li> ~ A Phone number where you can revieve OTP on</li>
+                            <li> ~ A Phone number where you can receive OTP on</li>
                             <li> ~ A valid Business website</li>
                           </ul>
                         </div>

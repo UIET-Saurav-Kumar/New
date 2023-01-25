@@ -1,6 +1,7 @@
 import getAddress from "@components/geoCode/geo-code"
 import { MapPin } from '@components/icons/map-pin';
 import { useLocation } from "@contexts/location/location.context";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 export default function GetCurrentLocation({
@@ -9,12 +10,26 @@ export default function GetCurrentLocation({
     onChange: any;
   }){
     const {addLocation} =useLocation()
+    const router = useRouter();
+
+    const pathname = router.pathname;
 
     useEffect(() => {
+
       if(addLocation?.formattedAddress === null){
         getLoc();
       }
-    }, [addLocation])
+
+    }, [addLocation, location])
+
+    useEffect(()=>{
+      const location: any = {
+        lat:  30.7320 ,
+        lng:  76.7726 ,
+        formattedAddress:  'Chandigarh'  ,
+      };
+       pathname == '/salon-near-me'  && addLocation(location);
+    },[])
 
     function getLoc() {
         if (navigator.geolocation) {

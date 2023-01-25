@@ -1,6 +1,7 @@
 <?php
 
 return [
+    
     //These are for the Marketplace
     'appID' => '',
     'secretKey' => '',

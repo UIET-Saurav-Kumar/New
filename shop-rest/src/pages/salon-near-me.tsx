@@ -57,6 +57,7 @@ import { formatSalonProduct } from '@utils/format-salon-products';
 import { useOrdersQuery } from '@data/order/use-orders.query';
 import Loader from '@components/ui/loader/loader';
 import PlacesApi from '@components/shop/google-maps-places-api';
+import { addLocation } from '@contexts/location/location.utils';
 
   const ProductFeedLoader = dynamic(
     () => import("@components/ui/loaders/product-feed-loader")
@@ -171,7 +172,7 @@ import PlacesApi from '@components/shop/google-maps-places-api';
 
     const {width} = useWindowDimensions();
 
-    const {getLocation} = useLocation();
+    const {getLocation,addLocation} = useLocation();
 
     const [value, onChange] = useState(new Date());
     const [offerName, setOfferName] = useState(null);
@@ -180,7 +181,9 @@ import PlacesApi from '@components/shop/google-maps-places-api';
     const [shopImages, setShopImages] = useState(false);
     const [photos, setPhotos] = useState([])
     const router = useRouter();
+    const pathname = router.pathname;
 
+ 
     const [error_msg ,  setError_Msg] = useState('');
 
     const { closeModal, openModal } = useModalAction();
@@ -192,6 +195,16 @@ import PlacesApi from '@components/shop/google-maps-places-api';
     useEffect(() => {
       window.scrollTo(0, 0);
     }, []);
+
+    useEffect(()=>{
+      const location: any = {
+        lat:  30.7320 ,
+        lng:  76.7726 ,
+        formattedAddress:  'Chandigarh'  ,
+      };
+
+         addLocation(location);
+    },[])
 
     const {
       // isFetching: loading,

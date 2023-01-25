@@ -25,6 +25,7 @@ import { useCustomerQuery } from "@data/customer/use-customer.query";
 import { Data } from "@react-google-maps/api";
 
 import BackButton from "@components/ui/back-button";
+import { useModalAction } from "@components/ui/modal/modal.context";
 
 interface FormValues {
   payment_gateway: "cod" | "cashfree" | "upi" | "wallet";
@@ -61,6 +62,8 @@ const PaymentForm = () => {
   const { data: orderStatusData } = useOrderStatusesQuery();
   const { data } = useCustomerQuery();
   const {getLocation} =useLocation();
+
+  const {openModal} = useModalAction();
 
   const {
     register,
@@ -173,12 +176,15 @@ const PaymentForm = () => {
 
     createOrder(input, {
       onSuccess: (order: any) => {
+        console.log('order link',order);
         if (order?.tracking_number) {
           router.push(`${ROUTES.ORDERS}/${order?.tracking_number}`);
         }
-        if (order?.paymentLink)
+        if (order )
         {
-          window.location.replace(order?.paymentLink)
+          openModal('UPI_APPS', {
+            data : Object.values(order?.data?.payload)
+          });
         }
       },
       onError: (error: any) => {
