@@ -245,18 +245,18 @@ import { addLocation } from '@contexts/location/location.utils';
       location : ((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any
   });
 
-  // console.log('feature',data)
+    // console.log('feature',data)
 
-  //   const {  
-  //     data,
-  //     isLoading: loading,
-  //     error,
-  // } = useOfferQuery({
-    
-  //     limit: 20 as number,
-  //     search:"",
-  //     location : ((getLocation?.formattedAddress) ? JSON.stringify(getLocation):null ) as any
-  // }); 
+    //   const {  
+    //     data,
+    //     isLoading: loading,
+    //     error,
+    // } = useOfferQuery({
+      
+    //     limit: 20 as number,
+    //     search:"",
+    //     location : ((getLocation?.formattedAddress) ? JSON.stringify(getLocation):null ) as any
+    // }); 
 
     // useEffect(()=>{
     //   setOfferName(products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0])

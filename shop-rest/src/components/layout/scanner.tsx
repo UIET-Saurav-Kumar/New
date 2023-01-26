@@ -6,11 +6,11 @@ import QrReader from 'react-qr-scanner';
     const [delay, setDelay] = useState(100);
     const [error, setError] = useState('')
 
-    const handleScan = (data: React.SetStateAction<string>) => {
-    setResult(data);
+    const handleScan = (data) => {
+    setResult(data?.text);
     }
 
-    const handleError = (err: React.SetStateAction<string>) => {
+    const handleError = (err) => {
         setError(err)
     console.error(err);
     }
@@ -29,7 +29,7 @@ import QrReader from 'react-qr-scanner';
             style={previewStyle}
             onError={handleError}
             onScan={handleScan}
-            facingMode={'environment'}
+            // facingMode={'environment'}
         />
         </div>
         <p>{result}</p>
