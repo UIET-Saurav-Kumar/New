@@ -23,8 +23,10 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
   const router = useRouter();
 
   const { t } = useTranslation("common");
+
   const { openSidebar, setSidebarView, toggleMobileSearch, isAuthorize } =
     useUI();
+
   const { openModal } = useModalAction();
 
   const { totalUniqueItems } = useCart();
@@ -33,6 +35,7 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
     setSidebarView(view);
     return openSidebar();
   }
+
   function handleAuthModal() {
     return openModal("LOGIN_VIEW");
   }
@@ -47,7 +50,7 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
           className="flex p-2 h-full items-center justify-center focus:outline-none focus:text-accent"
         >
           <span className="sr-only">{t("text-burger-menu")}</span>
-             {/* < Image        quality='1' 
+            {/* < Image quality='1' 
              
           layout="intrinsic"
           width={30}
@@ -97,6 +100,18 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
             src='/home.png' 
            /> */}
             <img src="/home.png" className='h-7 w-7'/>
+        </motion.button>
+        
+
+        {/* scanner */}
+        <motion.button
+          whileTap={{ scale: 0 }}
+          onClick={() => openModal("SCANNER")}
+          className="flex p-2 h-full items-center justify-center focus:outline-none focus:text-accent"
+        >
+          <span className="sr-only">{t("text-burger-menu")}</span>
+            
+            <img src="/qr.png" className='h-7 w-7'/>
         </motion.button>
 
         <motion.button

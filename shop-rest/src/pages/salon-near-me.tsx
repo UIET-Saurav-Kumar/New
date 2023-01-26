@@ -351,8 +351,8 @@ import { addLocation } from '@contexts/location/location.utils';
         // console.log('log offer', offerName);
 
         let price = products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0]?.price;
+
         let sale_price = products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0]?.sale_price;
-      
 
         function calcDiscount(price, sale_price){
           return (price - sale_price) / price *100

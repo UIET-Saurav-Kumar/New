@@ -26,7 +26,7 @@ export default function GooglePlacesAutocomplete({address,closeLocation,
 
   useEffect(()=>{
     setLocation(getLocation?.formattedAddress)
-  },[loc]);
+  });
 
   const { isLoaded, loadError } = useJsApiLoader({
     id: "google_map_autocomplete",
