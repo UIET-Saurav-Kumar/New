@@ -104,7 +104,7 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
         
 
         {/* scanner */}
-        <motion.button
+        {/* <motion.button
           whileTap={{ scale: 0 }}
           onClick={() => openModal("SCANNER")}
           className="flex p-2 h-full items-center justify-center focus:outline-none focus:text-accent"
@@ -112,7 +112,7 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
           <span className="sr-only">{t("text-burger-menu")}</span>
             
             <img src="/qr.png" className='h-7 w-7'/>
-        </motion.button>
+        </motion.button> */}
 
         <motion.button
           whileTap={{ scale: 0.88 }}
