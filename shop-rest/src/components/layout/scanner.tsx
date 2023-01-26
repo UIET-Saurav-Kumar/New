@@ -29,7 +29,7 @@ import QrReader from 'react-qr-scanner';
             style={previewStyle}
             onError={handleError}
             onScan={handleScan}
-            // facingMode={'environment'}
+            facingMode='rear'
         />
         </div>
         <p>{result}</p>
