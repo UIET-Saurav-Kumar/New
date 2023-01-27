@@ -60,7 +60,7 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
             <img src="/list.png" className='h-7 w-7'/>
         </motion.button>
 
-        {isAuthorize && (
+        {/* {isAuthorize && (
           <motion.button
             whileTap={{ scale: 0.88 }}
             onClick= //navigate to wishlist page
@@ -71,19 +71,10 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
             className="flex p-2 h-full items-center justify-center focus:outline-none focus:text-accent"
           >
             <span className="sr-only">{t("text-search")}</span>
-               {/* < Image    quality='1' 
                
-              layout="intrinsic"
-              
-              width={30}
-              height={30}
-              objectFit="contain"
-             src='/wishlist.png' 
-           
-             /> */}
               <img src="/wishlist.png" className='h-7 w-7'/>
           </motion.button>
-        )}
+        )} */}
 
         <motion.button
           whileTap={{ scale: 0.88 }}

@@ -7,9 +7,9 @@ const Scanner = (props) => {
   return (
     <> 
     {/* <div className='w-full h-screen bg-gray-50 flex px-60 flex-col justify-center'> */}
-      {/* <div className='border-2 px-10 w-full'>  */}
+      <div className='border-2 px-20 w-full h-screen bg-white'> 
         <QrReader
-         facingMode='environment'
+        constraints={{ facingMode: 'environment' }}
             onResult={(result, error) => {
             if (!!result) {
                 setData(result?.text);
@@ -23,7 +23,7 @@ const Scanner = (props) => {
         />
       {/* </div> */}
       <p>{data}</p>
-    {/* </div> */}
+    </div>
     </>
   );
 };
