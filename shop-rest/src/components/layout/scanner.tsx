@@ -1,42 +1,31 @@
-import React, { useState } from 'react';
-import QrReader from 'react-qr-scanner';
+import React, { useState ,useEffect } from "react";
+import { QrReader } from 'react-qr-reader';
 
-    function Scanner() {
-    const [result, setResult] = useState("No result");
-    const [delay, setDelay] = useState(100);
-    const [error, setError] = useState('')
+const Scanner = (props) => {
+  const [data, setData] = useState('No result');
 
-    const handleScan = (data) => {
-    setResult(data?.text);
-    }
-
-    const handleError = (err) => {
-        setError(err)
-    console.error(err);
-    }
-
-    const previewStyle = {
-    height: 800,
-    width: 880,
-    };
-
-    return (
-
-    <div className='flex flex-col justify-center w-full h-screen bg-gray-50 px-10'>
-       <div className=' mx-auto my-auto '> 
+  return (
+    <> 
+    {/* <div className='w-full h-screen bg-gray-50 flex px-60 flex-col justify-center'> */}
+      {/* <div className='border-2 px-10 w-full'>  */}
         <QrReader
-            delay={delay}
-            style={previewStyle}
-            onError={handleError}
-            onScan={handleScan}
-            facingMode='rear'
-        />
-        </div>
-        <p>{result}</p>
-        <p>{error}</p>
-    </div>
-    
-    );
-    }
+         facingMode='environment'
+            onResult={(result, error) => {
+            if (!!result) {
+                setData(result?.text);
+            }
 
-    export default Scanner;
+            if (!!error) {
+                console.info(error);
+            }
+            }}
+            style={{ width: '100%' }}
+        />
+      {/* </div> */}
+      <p>{data}</p>
+    {/* </div> */}
+    </>
+  );
+};
+
+export default Scanner;
