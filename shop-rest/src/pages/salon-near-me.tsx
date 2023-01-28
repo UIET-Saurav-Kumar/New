@@ -547,6 +547,12 @@ import { addLocation } from '@contexts/location/location.utils';
           // addItemToCart(item, 1)
         }
 
+        useEffect(()=>{
+          myDiv.current.scrollIntoView({
+            behavior: 'smooth',
+          })
+        },[offerName])
+
         
      const {
       data:shops,
@@ -671,8 +677,9 @@ import { addLocation } from '@contexts/location/location.utils';
                               </div>
                             </div>
                             <div className="flex flex-col px-2 lg:px-6 space-y-2 py-1 ">
-                             <div className='flex items-center'> 
-                               <span className="inline-block bg-gray-200 text-accent p-3 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+                             <div className='flex items-center justify-between'> 
+                               <div className='flex items-center'>
+                                <span className="inline-block bg-gray-200 text-accent p-3 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
                                 ₹
                                 {+' '+offer?.sale_price}.00
                                 </span>
@@ -680,6 +687,11 @@ import { addLocation } from '@contexts/location/location.utils';
                                 ₹
                                 {+' '+offer?.price}.00
                                 </del>
+                                </div>
+                                <span onClick={()=>openModal('OFFER_IMAGE_VIEW',{offer:offer})} 
+                                className='text-blue-700 text-sm cursor-pointer active:text-blue-800 '>
+                                  view
+                                </span>
                               </div>
                               <button
                                 className={` ${offer?.name === offerName?.name && offer?.sale_price === offerName?.sale_price ? 'bg-green-600 text-white' : 'text-gray-500 bg-gray-100' }   hover:bg-green-600 hover:text-white text-white font-bold py-2 px-4 rounded-full`}

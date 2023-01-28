@@ -260,7 +260,6 @@ class OrderRepository extends BaseRepository
         $request['name'] = $request->user()->name;
         $request['email_id'] = $request->user()->email;
         $request['shop_name'] = $request->shop_name;
-        //status
         $request['status'] = $request->status;
         $request['customer_contact'] = $request->user()->phone_number;
         $discount = $this->calculateDiscount($request);
@@ -280,6 +279,7 @@ class OrderRepository extends BaseRepository
             $request['total'] = $request['amount'] + $request['sales_tax'] ;
             // + $request['delivery_fee']
         }
+
         $payment_gateway = $request['payment_gateway'];
 
         switch ($payment_gateway) {
@@ -293,6 +293,7 @@ class OrderRepository extends BaseRepository
                 // return $this->createOrder($request);
                 break;
         }
+
         if($payment_gateway=='cod'){
             $order=$this->createOrder($request);
             $this->sendSMS($order); 
@@ -314,7 +315,6 @@ class OrderRepository extends BaseRepository
         {
             $payment_method = 'dc';
         }
-        
         
         
         $orderId = $request['tracking_number'];
@@ -392,6 +392,7 @@ class OrderRepository extends BaseRepository
 
 
         $post_Fields = json_encode($post_Fields);
+
         
         curl_setopt_array($upi_curl, [
           CURLOPT_URL => "https://api.cashfree.com/pg/orders/sessions",
@@ -404,7 +405,6 @@ class OrderRepository extends BaseRepository
           CURLOPT_HTTPHEADER => [
             "accept: application/json",
             "content-type: application/json",
-           
           ],
         ]);
         

@@ -39,7 +39,7 @@ const ShopImageModal = dynamic(
   ()=> import('@components/shop/shop-image-modal')
 );
 
-
+const OfferImageView = dynamic(()=> import("@components/common/offer-image-view"))
 
 const ReviewRating = dynamic(() => import('@components/reviews/review-form'));
 
@@ -97,6 +97,8 @@ const ManagedModal = () => {
       {view === "GOOGLE_REVIEWS" && (
         <GoogleReviews data={data}  />
       )}
+
+      {view == 'OFFER_IMAGE_VIEW' && <OfferImageView data={data}/>}
 
       {view === 'UPI_APPS' && <UpiPayment data={data}/>}
 

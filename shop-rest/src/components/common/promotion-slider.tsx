@@ -195,7 +195,7 @@ export default function PromotionSlider(props:any) {
             prevEl: ".prev",
           }}
         >
-          {shopData?.pages?.map((page, idx) => {
+          {shopData?.pages?.slice(0,5).map((page, idx) => {
               return (
                 <Fragment key={idx}>
                   {page?.data?.filter((shop) => shop?.is_active === 1 && shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").
