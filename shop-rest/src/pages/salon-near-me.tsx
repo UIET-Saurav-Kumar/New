@@ -678,7 +678,7 @@ import { addLocation } from '@contexts/location/location.utils';
                             </div>
                             <div className="flex flex-col px-2 lg:px-6 space-y-2 py-1 ">
                              <div className='flex items-center justify-between'> 
-                               <div className='flex items-center'>
+                               <div className='grid grid-cols-1 sm:grid-cols-2 items-center'>
                                 <span className="inline-block bg-gray-200 text-accent p-3 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
                                 ₹
                                 {+' '+offer?.sale_price}.00
