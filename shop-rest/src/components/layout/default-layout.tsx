@@ -4,6 +4,7 @@ import HeaderMiddle from '@components/home-page-header/HeaderMiddle';
 // import Footer from '@components/footer/Footer';
 import { useEffect,useState } from 'react';
 import dynamic from 'next/dynamic';
+import MobileNavigation from './mobile-navigation';
  
 
 const Footer = dynamic(() => import('@components/footer/Footer'),
@@ -45,6 +46,7 @@ const DefaultLayout: React.FC = ({ children }) => {
        <HeaderMiddle/> 
       </div>
       <div>{children}</div>
+      <MobileNavigation />
        <Footer/>
     </div>
 

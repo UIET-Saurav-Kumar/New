@@ -1,19 +1,17 @@
 import React from 'react';
 import Image from 'next/image';
 
+
 export default function OfferImageView(offer:any) {
 
-        
+    const url =  offer?.data?.offer?.name?.image;
 
-       const url =  offer?.data?.offer?.name?.image;
-
-       console.log('view', url)
+    console.log('view', url)
 
   return (
 
 
-
-    <div className='h-screen  w-full   bg-white'>
+    <div className='h-screen w-full bg-white'>
 
         <img 
         src={offer?.data?.offer?.image?.thumbnail} 
