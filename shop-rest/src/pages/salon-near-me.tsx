@@ -657,8 +657,8 @@ import { addLocation } from '@contexts/location/location.utils';
                 
                         { uniqueProducts?.map((offer,product) => (
                           
-                          <div onClick={ ()=> showSalons(offer)} className={` ${offer?.name === offerName?.name ? 'border-3 border-green-500 ' : 'border-3'}
-                                              relative w-full h-full flex flex-col  lg:w-full mx-auto bg-white rounded-lg shadow-lg `}>
+                          <div onClick={ ()=> showSalons(offer)} className={` ${offer?.name === offerName?.name ? 'border-3 border-green-500 ' : 'border-2'}
+                                            hover:border-gray-400 lg:p-2 relative w-full h-full flex flex-col  lg:w-full mx-auto bg-white rounded-lg shadow-lg `}>
                             <div className='relative flex items-center justify-center w-auto h-64  '>
                                 <Image layout="fill"
                                       priority={true}

@@ -204,7 +204,7 @@ export default function PromotionSlider(props:any) {
                replace("name", "").replace("id", "") === "Salon  Spa" ).map((shop: any) => (
             <SwiperSlide key={idx}>
               {/* <Link href={`${ROUTES.SHOPS}/${shop.slug}`}> */}
-                <div   className={` ${shop?.name === shopName ? '' : '' }  border py-1 rounded border-gray-100 flex hover:shadow-lg flex-col items-center `}>
+                <div   className={` ${shop?.name === shopName ? '' : '' }  border py-1 rounded hover:border-gray-400 cursor-pointer border-gray-100 flex hover:shadow-lg flex-col items-center `}>
                   
                   <CheckMarkFill width={30} className={` ${shop?.name === shopName? 'block' : 'hidden'} absolute right-0 top-0 me-2 bg-white rounded-full text-green-600`} />
                   <img onClick={()=>handleSelect(shop)}
