@@ -6,7 +6,7 @@ import CategoryDropdownSidebar from "@components/category/category-dropdown-side
 import ShopPaymentForm from "@components/shop/shop-payment-form";
 import RechargePlans from "@components/home-page-product-section/bill-payment-services/recharge-plans-modal/recharge-plans";
 import RechargePlanDetails from "@components/home-page-product-section/bill-payment-services/recharge-plan-details-modal";
-    
+     
 
 const Login = dynamic(() => import("@components/auth/login"));
 const Register = dynamic(() => import("@components/auth/register"));
@@ -20,6 +20,9 @@ const UpiPayment = dynamic(() => import("@components/checkout/upi-payment"))
 const ProductDetailsModalView = dynamic(
   () => import("@components/product/product-details-modal-view")
 );
+
+
+const UpiPaymentForm  = dynamic(() => import("@components/upi-scanner/upi-payment-form"));
 
 const Scanner = dynamic(() => import("@components/layout/scanner"));
 
@@ -99,6 +102,8 @@ const ManagedModal = () => {
       )}
 
       {view == 'OFFER_IMAGE_VIEW' && <OfferImageView data={data}/>}
+
+      {view == 'UPI_FORM' && <UpiPaymentForm data={data}/> }
 
       {view === 'UPI_APPS' && <UpiPayment data={data}/>}
 

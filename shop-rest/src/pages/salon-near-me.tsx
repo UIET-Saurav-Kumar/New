@@ -690,7 +690,7 @@ import { addLocation } from '@contexts/location/location.utils';
                                 </div>
                                 <span onClick={()=>openModal('OFFER_IMAGE_VIEW',{offer:offer})} 
                                 className='text-blue-700 text-sm cursor-pointer active:text-blue-800 '>
-                                  view
+                                  Details
                                 </span>
                               </div>
                               <button

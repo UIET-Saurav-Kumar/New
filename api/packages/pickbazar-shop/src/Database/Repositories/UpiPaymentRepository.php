@@ -14,14 +14,14 @@ class UpiPaymentRepository extends BaseRepository
         $request['transaction_id'] = Str::random(12);
         $request['id'] = $request->user()->id;
         $request['sender_name'] = $request->user()->name;
-        $request['receiver_name'] = $request->user()->name;
-        $request['receiver_upi_id'] = $request->user()->name;
-        $request['email_id'] = $request->user()->email;
-        $request['status'] = $request->status;
-        $request['customer_contact'] = $request->user()->phone_number;
+        $request['receiver_name'] = $request->reciever_name;
+        $request['receiver_upi_id'] = $request->reciever_upi;
+        // $request['email_id'] = $request->user()->email;
+        // $request['status'] = $request->status;
+        // $request['customer_contact'] = $request->user()->phone_number;
 
-        $orderId = $request['tracking_number'];
-        $orderAmount = $request['total'];
+        $orderId = $request['transaction_id'];
+        $orderAmount = $request['amount'];
         $orderNote = "Subscription";
         $customerPhone = $request->customer_contact;
         $customerName = $user->name;

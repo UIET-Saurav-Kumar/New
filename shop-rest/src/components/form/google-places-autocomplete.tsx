@@ -53,7 +53,7 @@ export default function GooglePlacesAutocomplete({address,closeLocation,
       
       // console.log("Returned place contains no geometry");
       return;
-    }
+    }  
 
     setLocation(place.formatted_address);
     const location: any = {

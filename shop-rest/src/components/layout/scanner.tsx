@@ -6,7 +6,7 @@ const Scanner = (props:any) => {
 
   const [data, setData] = useState('');
 
-  const {openModal,closeModal} = useModalAction()
+  const {openModal,closeModal} = useModalAction();
 
 // var data = "upi://pay?pa=vinendersingh91@okicici&pn=vinender%20singh&aid=uGICAgIC4oYCNBQ";
 
@@ -22,16 +22,20 @@ const Scanner = (props:any) => {
   console.log("Payee Name: ", payeeName);
 
   function openUpiApps() {
-    upiId.length && openModal('UPI_APPS',{
-        props: Object.values(upiId),
+
+     upiId?.length && openModal('UPI_FORM',{
+        props:  upiId,
+        payee_name: payeeName
     })
-    // closeModal();
-  }
+   }
+
+   
 
   useEffect(()=>{
      openUpiApps()
   },[upiId.length])
   
+
 
   return (
 

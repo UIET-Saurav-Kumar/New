@@ -153,6 +153,8 @@ export default function PromotionSlider(props:any) {
     // console.log('shop',data?.offer?.name)
   }
 
+  console.log(shopName)
+
   useEffect(()=>{
       handleShopImages(false);
   },[shopName])
@@ -195,7 +197,7 @@ export default function PromotionSlider(props:any) {
             prevEl: ".prev",
           }}
         >
-          {shopData?.pages?.slice(0,5).map((page, idx) => {
+          {shopData?.pages?.map((page, idx) => {
               return (
                 <Fragment key={idx}>
                   {page?.data?.filter((shop) => shop?.is_active === 1 && shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").

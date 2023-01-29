@@ -61,7 +61,7 @@ class OrderController extends CoreController
         } else {
             return $this->repository->with('children')->where('customer_id', '=', $user->id)->where('parent_id', '=', null); //->paginate($limit);
         }
-    }
+    }  
 
     
     /**

@@ -4,14 +4,14 @@ import Image from 'next/image';
 
 export default function OfferImageView(offer:any) {
 
-    const url =  offer?.data?.offer?.name?.image;
+    const url =  offer?.data?.offer;
 
     console.log('view', url)
 
   return (
 
 
-    <div className='h-screen w-full bg-white'>
+    <div className='flex flex-col h-screen w-full bg-white'>
 
         <img 
         src={offer?.data?.offer?.image?.thumbnail} 
@@ -20,6 +20,7 @@ export default function OfferImageView(offer:any) {
         // objectFit='contain'
         className='object-contain h-full w-full'
         alt={offer?.data?.offer?.name} />
+         
         
     </div>
   )

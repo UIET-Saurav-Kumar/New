@@ -14,6 +14,7 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const variantClasses = {
+  border_less: 'border w-32 rounded mx-auto bg-gray-100 text-xl',
   normal:
     "bg-gray-100 border border-border-base rounded focus:shadow focus:bg-light focus:border-accent",
   solid:

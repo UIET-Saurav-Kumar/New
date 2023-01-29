@@ -87,5 +87,8 @@ export const API_ENDPOINTS: Record<string, string> = {
   GOOGLE_MAPS_PLACE_PHOTOS: 'google-maps-place-photos',
 
 
+  UPI_PAYMENT: 'upi-payment',
+
+
   LOGS:'logs'
 };

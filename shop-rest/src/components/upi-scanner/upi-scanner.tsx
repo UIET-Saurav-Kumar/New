@@ -28,7 +28,7 @@ console.log('order link modified',modifiedLinks.join(' '));
 
 return (
   <div className='grid grid-cols-3 place-items-center h-96  gap-x-6 px-10 w-full bg-white'>
-    {modifiedLinks.map((link, index) => {
+    {modifiedLinks?.map((link, index) => {
       const app = upiApps[index];
       return (
         <img src={app} className=' items-center rounded-full object-contain h-20 border w-20' 
