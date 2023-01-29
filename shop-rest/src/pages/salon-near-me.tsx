@@ -735,7 +735,7 @@ import { addLocation } from '@contexts/location/location.utils';
             
         </div>
 
-      <div className='grid grid-cols-1 lg:grid-cols-2  items-center justify-evenly'> 
+      <div className={`${selectedSalon ? 'flex' : 'hidden'} grid grid-cols-1 lg:grid-cols-2  items-center justify-evenly`}> 
              
           <div className="  bg-light p-5 mt-10 md:p-8 w-auto lg:w-1/2">
                 {/* <Schedule count={2} heading='Book Appointment' />
@@ -761,13 +761,14 @@ import { addLocation } from '@contexts/location/location.utils';
 
       </div>
 
-      <div className='flex flex-col mx-auto w-full text-center'>
+      <div className={`${selectedTimeSlot ? 'flex' : 'hidden'} flex flex-col mx-auto w-full text-center`}>
       <p className='text-red-600 animate-bounce transition-opacity duration-300 ease-in-out h-5'>{error_msg ? error_msg : ''}</p>
         <button className='mx-auto text-white font-semibold rounded mt-10 w-60 border bg-accent mb-20 p-4' 
-                onClick={()=>onSubmit()}>
+                 onClick={()=>onSubmit()}>
                 {salonBooking ?
                 ("booking..."):
                 'Book now'}
+                 
         </button>
          
       </div>
