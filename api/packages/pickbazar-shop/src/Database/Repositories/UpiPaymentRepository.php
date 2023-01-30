@@ -100,7 +100,7 @@ class UpiPaymentRepository extends BaseRepository
 
       // return $response;
       
-        $payment_session_id = 'session_RtamjSUdQlmidc1cZ2gTYdvv7UriO0lKmPldFJHlDLfePM5efTFdbD10tEGHlyud4Is9nxv3FcnjVPc0MBt_3zB2cGlkzbWgQKDMourBNGvk';
+        // $payment_session_id = 'session_RtamjSUdQlmidc1cZ2gTYdvv7UriO0lKmPldFJHlDLfePM5efTFdbD10tEGHlyud4Is9nxv3FcnjVPc0MBt_3zB2cGlkzbWgQKDMourBNGvk';
 
         // return $response;
 

@@ -28,6 +28,7 @@ const gpayLink = 'upi://pay?pa=vinendersingh91@okicici&pn=vinender%20singh&aid=u
 const gpay =   'upi://pay?pa=vinendersingh91@okicici&pn=vinender%20singh&pa=Chandigarh&pn=vinender&am=100&tid=aWd13cf234sc35&tr=2JqwDseqprl34G4y&mam=100&mc=5192&mode=lazy&purpose=00&aid=uGICAgIC4oYCNBQ'
 const gpay_2 =   'upi://pay?pa=vinendersingh91@okicici&pn=vinender%20singh&pa=Chandigarh&pn=vinender&am=100&tid=aWd13cf234sc35&tr=2JqwDseqprl34G4y&mam=100&mc=5192&mode=lazy&purpose=00&aid=uGICAgIC4oYCNBQ'
 const Link_3 = 'upi://pay?pa=vinendersingh91@okicici&pn=vinender%20singh'
+const Link_4 =   'upi://pay?pa=vinendersingh91@okicici&pn=vinender%20singh&pa=Chandigarh&pn=vinender&am=100&tid=aWd13cf234sc35&tr=2JqwDseqprl34G4y&mam=100&mc=5192&mode=lazy&purpose=00'
 
 
 console.log('order link modified',modifiedLinks.join(' '));

@@ -77,6 +77,7 @@ const ManagedModal = () => {
   return (
     
     <Modal open={isOpen} onClose={closeModal}>
+
       {view === "LOGIN_VIEW" && <Login />}
       {view === "REGISTER" && <Register data={data}  />}
       {view === "FORGOT_VIEW" && <ForgotPassword />}
@@ -104,7 +105,7 @@ const ManagedModal = () => {
 
       {view == 'OFFER_IMAGE_VIEW' && <OfferImageView data={data}/>}
 
-      {view == 'UPI_FORM' && <UpiPaymentForm data={data}/> }
+      {view === 'UPI_FORM' && <UpiPaymentForm data={data}/> }
 
       {view === 'UPI_APPS' && <UpiPayment data={data}/>}
 
