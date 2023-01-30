@@ -35,10 +35,10 @@ const gpay     =   `upi://pay?pa=${upi_id}&pn=${reciever_name}&am=${amount}&tid=
 const gpay_2   =   'upi://pay?pa=vinendersingh91@okicici&pn=vinender%20singh&am=100&tid=aWd13cf234sc35&tr=2JqwDseqprl34G4y&mam=100&mc=5192&mode=lazy&purpose=00'
 const Link_3   =   'upi://pay?pa=vinendersingh91@okicici&pn=vinender%20singh'
 const Link_4   =   'upi://pay?pa=vinendersingh91@okicici&pn=vinender&am=100&tid=aWd13cf234sc35&tr=2JqwDseqprl34G4y&mam=100&mc=5192&mode=lazy&purpose=00'
+const cashfree =   'upi/pay?pa=vinendersingh91@okicici&pn=vinender%20singh&tr=ATC1081756706&am=1.00&cu=INR&mode=00&purpose=00&mc=5399&tn=1081756706 '
 
 
 console.log('order link modified',modifiedLinks.join(' '));
-
 
 return (
 
