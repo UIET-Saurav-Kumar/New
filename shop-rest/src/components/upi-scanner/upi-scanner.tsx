@@ -19,13 +19,13 @@ const upiApps = [
 
 // const reciever_name = 'vinender';
 
-const merchant_code = '1234';
+const merchant_code = '0000';
 
 
 const modifiedLinks = Object.values(data)[0]?.map((link, index) => {
-  let modifiedLink = link.replace("pa=cf.lowcalventurespvtltd@icici", `pa=${upi_id}`);
+  let modifiedLink = link.replace("pa=cf.lowcalventurespvtltd@icici", `pa=${upi_id}`) || link.replace("pa=cf.cashfreelowcal@yesbank", `pa=${upi_id}`);
   modifiedLink = modifiedLink.replace("pn=Lowcal%20Ventures%20Pvt%20Ltd", `pn=${reciever_name}`);
-  // modifiedLink = modifiedLink.replace("mc=5399", `mc=${merchant_code}`);
+  modifiedLink = modifiedLink.replace("mc=5399", `mc=${merchant_code}`);
   return modifiedLink;
 });
 
@@ -35,7 +35,7 @@ const gpay     =   `upi://pay?pa=${upi_id}&pn=${reciever_name}&am=${amount}&tid=
 const gpay_2   =   `upi://pay?pa=${upi_id}&pn=${reciever_name}&am=${amount}&tid=aWd13cf234sc35&tr=2JqwDseqprl34G4y&mc=5192&mode=lazy&purpose=00`
 const Link_3   =   `upi://pay?pa=${upi_id}&pn=${reciever_name}`
 const Link_4   =   `upi://pay?pa=${upi_id}&pn=vinender&am=${amount}&tid=aWd13cf234sc35&tr=2JqwDseqprl34G4y&mc=5192&mode=lazy&purpose=00`
-const cashfree =   `upi://pay?pa=${upi_id}&pn=${reciever_name}&tr=ATC1081756706&am=${amount}&cu=INR&mode=00&purpose=00&mc=5399&tn=1081756706`
+const cashfree =   `upi://pay?pa=${upi_id}&pn=${reciever_name}&tr=ATC1081756706&am=${amount}&cu=INR&mode=00&purpose=00&mc=0000&tn=1081756706`
 
 
 console.log('order link modified',modifiedLinks.join(' '));
