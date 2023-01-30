@@ -42,7 +42,7 @@ const Scanner = (props:any) => {
     <> 
 
     {/* <div className='w-full h-screen bg-gray-50 flex px-60 flex-col justify-center'> */}
-        <div className='border-2  w-screen h-screen px-10 flex flex-col pt-20 bg-white'> 
+        <div className=' w-screen h-screen px-2 flex flex-col pt-20 bg-white'> 
              <QrReader
                 constraints={{ facingMode: 'environment' }}
                 onResult={(result, error) => {
@@ -54,14 +54,14 @@ const Scanner = (props:any) => {
                     console.info(error);
                 }
                 }}
-                style={{ width: '100%' }}
+                style={{ height: '100vh' }}
             />
              {/* </div> */}
             <p className="text-center text-gray-900 font-semibold">
-                <span className="text-gray-900">Paying</span>{payeeName}
+                <span className="text-gray-900">Scan any QR code to pay</span>
             </p>
-            <p className="text-center text-gray-900 font-semibold">
-                {upiId}
+            <p className="text-center text-gray-500 mt-2 font-semibold">
+                Google Pay . PhonePe . PayTM . UPI
             </p>
         </div>
         </>
