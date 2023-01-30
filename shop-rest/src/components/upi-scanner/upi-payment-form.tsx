@@ -59,9 +59,9 @@ export default function UpiPaymentForm(props:any ) {
           {
             openModal('UPI_SCANNER_APPS', {
               data : Object.values(order?.data?.payload),
-              // amount: values?.amount,
-              // reciever_upi,
-              // reciever_name
+              amount: values?.amount,
+              reciever_upi,
+              reciever_name
             });
           }
         },
