@@ -29,18 +29,21 @@ const modifiedLinks = Object.values(data)[0]?.map((link, index) => {
   return modifiedLink;
 });
 
- const gpayLink = 'upi://pay?pa=vinendersingh91@okicici&pn=vinender%20singh&aid=uGICAgIC4oYCNBQ'
-const gpay =   `upi://pay?pa=${upi_id}&pn=${reciever_name}&am=${amount}&tid=aWd13cf2wer35&tr=2JqwDsdf4G4y&mam=100&mc=5192&mode=lazy&purpose=00&aid=uGICAgIC4oYCNBQ`
-const gpay_2 =   'upi://pay?pa=vinendersingh91@okicici&pn=vinender&am=100&tid=aWd13cf234sc35&tr=2JqwDseqprl34G4y&mam=100&mc=5192&mode=lazy&purpose=00'
-const Link_3 = 'upi://pay?pa=vinendersingh91@okicici&pn=vinender%20singh'
-const Link_4 =   'upi://pay?pa=vinendersingh91@okicici&pn=vinender&am=100&tid=aWd13cf234sc35&tr=2JqwDseqprl34G4y&mam=100&mc=5192&mode=lazy&purpose=00'
+
+const gpayLink =   'upi://pay?pa=vinendersingh91@okicici&pn=vinender%20singh&aid=uGICAgIC4oYCNBQ'
+const gpay     =   `upi://pay?pa=${upi_id}&pn=${reciever_name}&am=${amount}&tid=aWd13cf2wer35&tr=2JqwDsdf4G4y&mam=100&mc=5192&mode=lazy&purpose=00&aid=uGICAgIC4oYCNBQ`
+const gpay_2   =   'upi://pay?pa=vinendersingh91@okicici&pn=vinender%20singh&am=100&tid=aWd13cf234sc35&tr=2JqwDseqprl34G4y&mam=100&mc=5192&mode=lazy&purpose=00'
+const Link_3   =   'upi://pay?pa=vinendersingh91@okicici&pn=vinender%20singh'
+const Link_4   =   'upi://pay?pa=vinendersingh91@okicici&pn=vinender&am=100&tid=aWd13cf234sc35&tr=2JqwDseqprl34G4y&mam=100&mc=5192&mode=lazy&purpose=00'
 
 
 console.log('order link modified',modifiedLinks.join(' '));
 
+
 return (
-  <div className='grid grid-cols-3 place-items-center h-screen w-screen  gap-x-6 px-10 w-full bg-white'>
-                 <span onClick={()=> window.open(gpayLink)} className='h-20 cursor-pointer w-20 rounded-full border'>gpay-link</span>
+
+  <div className='grid grid-cols-3 place-items-center h-screen w-screen  gap-x-6 px-10  bg-white'>
+                <span onClick={()=> window.open(gpayLink)} className='h-20 cursor-pointer w-20 rounded-full border'>gpay-link</span>
                 <span onClick={()=> window.open(gpay)} className='h-20 cursor-pointer w-20 rounded-full border'>gpay-more</span>
                 <span onClick={()=> window.open(gpay_2)} className='h-20 cursor-pointer w-20 rounded-full border'>gpay-2</span>
                 <span onClick={()=> window.open(Link_3)} className='h-20 cursor-pointer w-20 rounded-full border'>link-3</span>
@@ -48,13 +51,13 @@ return (
     {modifiedLinks?.map((link, index) => {
       const app = upiApps[index];
       return (
-        <div key={index} className='flex flex-col'> <img src={app} className=' items-center rounded-full object-contain h-20 border w-20' 
-             key={app} alt={'upi-app'} onClick={() => window.open(link)}/>
-              </div>
+        <div key={index} className='flex flex-col'> 
+            <img src={app} className=' items-center rounded-full object-contain h-20 border w-20' 
+             key={app} alt={'upi-app'} onClick={() => window.open(link)}
+            />
+        </div>
       );
     })}
   </div>
-)
-
-    
+)   
 }
