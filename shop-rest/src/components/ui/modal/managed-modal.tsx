@@ -6,6 +6,7 @@ import CategoryDropdownSidebar from "@components/category/category-dropdown-side
 import ShopPaymentForm from "@components/shop/shop-payment-form";
 import RechargePlans from "@components/home-page-product-section/bill-payment-services/recharge-plans-modal/recharge-plans";
 import RechargePlanDetails from "@components/home-page-product-section/bill-payment-services/recharge-plan-details-modal";
+import UpiScanner from "@components/upi-scanner/upi-scanner";
      
 
 const Login = dynamic(() => import("@components/auth/login"));
@@ -107,11 +108,13 @@ const ManagedModal = () => {
 
       {view === 'UPI_APPS' && <UpiPayment data={data}/>}
 
+      {view === 'UPI_SCANNER_APPS' && <UpiScanner data={data}/>}
+
       {view === 'SCANNER' && <Scanner data={data}/>}
 
       {view === 'RECHARGE_PLAN_DETAILS' && <RechargePlanDetails data={data} close={closeModal}/> }
 
-       { view === 'BILL_PAYMENT_DETAILS' && <PaymentDetailsModal data={data} />}
+      {view === 'BILL_PAYMENT_DETAILS' && <PaymentDetailsModal data={data} />}
        
       {view === "SHOP_INFO" && (
         <ShopProfileCard

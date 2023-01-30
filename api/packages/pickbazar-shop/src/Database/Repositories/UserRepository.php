@@ -18,6 +18,7 @@ use PickBazar\Database\Models\Profile;
 use PickBazar\Database\Models\Shop;
 use PickBazar\Exceptions\PickbazarException;
 
+
 class UserRepository extends BaseRepository
 {
     /**

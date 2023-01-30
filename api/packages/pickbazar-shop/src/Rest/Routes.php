@@ -342,9 +342,7 @@ Route::apiResource('settings', SettingsController::class, [
     'only' => ['index']
 ]);
 
-
-Route::any('upi-payment', 'Pickbazar\Http\Controllers\UpiPaymentController@createPayment');
-
+Route::post('/upi-payment', 'PickBazar\Http\Controllers\UpiPaymentController@createPayment');
 
 Route::any('delivery/success','PickBazar\Http\Controllers\GatewayResponse@process_delivery_response');
 

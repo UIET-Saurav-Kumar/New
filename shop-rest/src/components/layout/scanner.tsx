@@ -42,9 +42,9 @@ const Scanner = (props:any) => {
     <> 
 
     {/* <div className='w-full h-screen bg-gray-50 flex px-60 flex-col justify-center'> */}
-        <div className='border-2  w-screen h-screen px-20  bg-white'> 
-            <QrReader
-             constraints={{ facingMode: 'environment' }}
+        <div className='border-2  w-screen h-screen px-10 flex flex-col pt-20 bg-white'> 
+             <QrReader
+                constraints={{ facingMode: 'environment' }}
                 onResult={(result, error) => {
                 if (!!result) {
                     setData(result?.text);
@@ -56,7 +56,7 @@ const Scanner = (props:any) => {
                 }}
                 style={{ width: '100%' }}
             />
-            {/* </div> */}
+             {/* </div> */}
             <p className="text-center text-gray-900 font-semibold">
                 <span className="text-gray-900">Paying</span>{payeeName}
             </p>

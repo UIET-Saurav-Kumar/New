@@ -2,23 +2,40 @@
 
 namespace PickBazar\Database\Repositories;
 
-use  PickBazar\Database\Models\UpiPayment;
+use PickBazar\Database\Models\UpiPayment;
+use Illuminate\Support\Str;
 
 class UpiPaymentRepository extends BaseRepository
 
 {
 
+   // ...
+
+    /**
+     * Specify Model class name
+     *
+     * @return string
+     */
+
+     public function model()
+    {
+        return UpiPayment::class;
+    }
+
+
     public function storePayment($request)
     {
+
+      // return $request;
         $user = $request->user();
-        $request['transaction_id'] = Str::random(12);
+        $request['transaction_id'] = Str::random(14);
         $request['id'] = $request->user()->id;
         $request['sender_name'] = $request->user()->name;
         $request['receiver_name'] = $request->reciever_name;
         $request['receiver_upi_id'] = $request->reciever_upi;
-        // $request['email_id'] = $request->user()->email;
+        $request['email_id'] = $request->user()->email;
         // $request['status'] = $request->status;
-        // $request['customer_contact'] = $request->user()->phone_number;
+        $request['customer_contact'] = $request->user()->phone_number;
 
         $orderId = $request['transaction_id'];
         $orderAmount = $request['amount'];
@@ -75,8 +92,15 @@ class UpiPaymentRepository extends BaseRepository
        
         //  $type = gettype($response);
         $response = json_decode($response, true);
-        $payment_session_id = $response['payment_session_id'];
-        // $payment_session_id = 'session_RtamjSUdQlmidc1cZ2gTYdvv7UriO0lKmPldFJHlDLfePM5efTFdbD10tEGHlyud4Is9nxv3FcnjVPc0MBt_3zB2cGlkzbWgQKDMourBNGvk';
+        if(isset($response['payment_session_id'])) {
+          $payment_session_id = $response['payment_session_id'];
+      } else {
+          'payment_session_id not found';
+      }
+
+      // return $response;
+      
+        $payment_session_id = 'session_RtamjSUdQlmidc1cZ2gTYdvv7UriO0lKmPldFJHlDLfePM5efTFdbD10tEGHlyud4Is9nxv3FcnjVPc0MBt_3zB2cGlkzbWgQKDMourBNGvk';
 
         // return $response;
 
@@ -118,16 +142,16 @@ class UpiPaymentRepository extends BaseRepository
 
     }
 
-    public function getPaymentById($id)
-    {
+    // public function getPaymentById($id)
+    // {
 
-      $user = $request->user();
-      $request[''] = Str::random(24);
+    //   $user = $request->user();
+    //   $request[''] = Str::random(24);
 
-    }
+    // }
 
-    public function getAllPayments()
-    {
-        return UpiPayment::all();
-    }
+    // public function getAllPayments()
+    // {
+    //     return UpiPayment::all();
+    // }
 }

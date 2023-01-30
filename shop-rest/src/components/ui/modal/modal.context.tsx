@@ -25,6 +25,7 @@ type MODAL_VIEWS =
   | 'UPI_FORM'
   | 'SCANNER'
   | 'OTP_LOGIN'
+  | 'UPI_SCANNER_APPS'
   | 'RECHARGE_PLAN_DETAILS';
   
     // | 'SEARCH_BAR_MODAL';

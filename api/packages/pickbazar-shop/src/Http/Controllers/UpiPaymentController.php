@@ -3,12 +3,14 @@
 namespace PickBazar\Http\Controllers;
 
 use PickBazar\Database\Models\UpiPayment;
+use Illuminate\Http\JsonResponse;
 use PickBazar\Database\Repositories\UpiPaymentRepository;
 use Illuminate\Http\Request;
 
-class UpiPaymentController extends Controller
+
+class UpiPaymentController extends CoreController
 {
-    protected $upiPaymentRepo;
+    public $upiPaymentRepo;
 
     public function __construct(UpiPaymentRepository $upiPaymentRepo)
     {
@@ -37,17 +39,17 @@ class UpiPaymentController extends Controller
         // ], 201);
     }
 
-    public function getPaymentStatus($paymentId)
-    {
-        $upiPayment = $this->upiPaymentRepo->find($paymentId);
-        if (!$upiPayment) {
-            return response()->json([
-                'error' => 'UPI Payment not found'
-            ], 404);
-        }
+    // public function getPaymentStatus($paymentId)
+    // {
+    //     $upiPayment = $this->upiPaymentRepo->find($paymentId);
+    //     if (!$upiPayment) {
+    //         return response()->json([
+    //             'error' => 'UPI Payment not found'
+    //         ], 404);
+    //     }
 
-        return response()->json([
-            'status' => $upiPayment->status
-        ], 200);
-    }
+    //     return response()->json([
+    //         'status' => $upiPayment->status
+    //     ], 200);
+    // }
 }
