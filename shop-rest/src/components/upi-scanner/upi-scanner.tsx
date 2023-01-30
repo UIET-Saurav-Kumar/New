@@ -2,8 +2,8 @@ import React from 'react'
 
 export default function UpiScanner({data}) {
 
-console.log('order link', Object.values(data)[0])
-console.log('order link props', (data))
+console.log('order link scanner', Object.values(data)[0]);
+console.log('order link props scanner', (data));
  
 const upiApps = [
     '/upi/bhim.png','/upi/upi.jpeg','/upi/gpay.png','/upi/paytm.png','/upi/phone-pe.jpg','/upi/qr.jpg'
@@ -23,7 +23,7 @@ const modifiedLinks = Object.values(data)[0]?.map((link, index) => {
   return modifiedLink;
 });
 
- const demoLink= 'https://upi.google.com/vinendersingh91@okicici?pa=Chandigarh&pn=vinender&am=100&tid=12345&tr=qwerty&mam=100&mc=5192&mode=lazy&purpose=00'
+const demoLink= 'https://upi.google.com/vinendersingh91@okicici?pa=Chandigarh&pn=vinender&am=100&tid=12345&tr=qwerty&mam=100&mc=5192&mode=lazy&purpose=00'
 const gpayLink = 'upi://pay?pa=vinendersingh91@okicici&pn=vinender%20singh&aid=uGICAgIC4oYCNBQ'
 const gpay =   'upi://pay?pa=vinendersingh91@okicici&pn=vinender%20singh&pa=Chandigarh&pn=vinender&am=100&tid=aWd13cf234sc35&tr=2JqwDseqprl34G4y&mam=100&mc=5192&mode=lazy&purpose=00&aid=uGICAgIC4oYCNBQ'
 const gpay_2 =   'upi://pay?pa=vinendersingh91@okicici&pn=vinender%20singh&pa=Chandigarh&pn=vinender&am=100&tid=aWd13cf234sc35&tr=2JqwDseqprl34G4y&mam=100&mc=5192&mode=lazy&purpose=00&aid=uGICAgIC4oYCNBQ'
