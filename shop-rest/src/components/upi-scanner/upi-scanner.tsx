@@ -35,7 +35,7 @@ const gpay     =   `upi://pay?pa=${upi_id}&pn=${reciever_name}&am=${amount}&tid=
 const gpay_2   =   'upi://pay?pa=vinendersingh91@okicici&pn=vinender%20singh&am=100&tid=aWd13cf234sc35&tr=2JqwDseqprl34G4y&mam=100&mc=5192&mode=lazy&purpose=00'
 const Link_3   =   'upi://pay?pa=vinendersingh91@okicici&pn=vinender%20singh'
 const Link_4   =   'upi://pay?pa=vinendersingh91@okicici&pn=vinender&am=100&tid=aWd13cf234sc35&tr=2JqwDseqprl34G4y&mam=100&mc=5192&mode=lazy&purpose=00'
-const cashfree =   'upi/pay?pa=vinendersingh91@okicici&pn=vinender%20singh&tr=ATC1081756706&am=1.00&cu=INR&mode=00&purpose=00&mc=5399&tn=1081756706 '
+const cashfree =   'upi://pay?pa=vinendersingh91@okicici&pn=vinender%20singh&tr=ATC1081756706&am=1.00&cu=INR&mode=00&purpose=00&mc=5399&tn=1081756706'
 
 
 console.log('order link modified',modifiedLinks.join(' '));
@@ -47,6 +47,8 @@ return (
                 <span onClick={()=> window.open(gpay)} className='h-20 cursor-pointer w-20 rounded-full border'>gpay-more</span>
                 <span onClick={()=> window.open(gpay_2)} className='h-20 cursor-pointer w-20 rounded-full border'>gpay-2</span>
                 <span onClick={()=> window.open(Link_3)} className='h-20 cursor-pointer w-20 rounded-full border'>link-3</span>
+                <span onClick={()=> window.open(Link_4)} className='h-20 cursor-pointer w-20 rounded-full border'>link-4</span>
+                <span onClick={()=> window.open(cashfree)} className='h-20 cursor-pointer w-20 rounded-full border'>cashfree</span>
                 <a href={`upi://pay?pa=${upi_id}&pn=${reciever_name}&am=${amount}`} className="text-green-700 border w-20 h-20 rounded-full">Pay Now !</a>
     {modifiedLinks?.map((link, index) => {
       const app = upiApps[index];
