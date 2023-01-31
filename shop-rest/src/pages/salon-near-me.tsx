@@ -651,7 +651,7 @@ import Spinner from '@components/ui/loaders/spinner/spinner';
      <div className="text-center text-lg font-medium tracking-wide text-green-600">Book Now, Pay Later</div>
       </p>
 
-          <h3 className='text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 font-medium text-2xl lg:text-3xl text-gray-900 font-serif ml-4 lg:ml-8 mt-10 lg:mt-10 tracking-normal'>
+          <h3 className='text-center text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 font-medium text-2xl lg:text-3xl text-gray-900 font-serif ml-4 lg:ml-8 mt-10 lg:mt-10 tracking-normal'>
             Select Deals to Explore Salons
           </h3>
 
@@ -680,12 +680,12 @@ import Spinner from '@components/ui/loaders/spinner/spinner';
                             </div>
                              <CheckMarkFill  width={20} className={` ${(offer?.name === offerName?.name && offer?.sale_price === offerName?.sale_price ) ? 'block transition-all duration-900 ease-in-out' : 'hidden'} absolute right-0 top-0 me-2 bg-white rounded-full  text-green-600`} />
                           <div className=' space-y-2'>
-                            <div className="px-2 lg:px-6   ">
-                              <div className="font-semibold text-sm lg:text-lg h-10 ">
+                            <div className="px-2 lg:px-2 xl:px-6   ">
+                              <div className="font-semibold text-sm lg:text-sm xl:text-lg lg:py-3 h-10 lg:h-16 ">
                                 {offer?.name}
                               </div>
                             </div>
-                            <div className="flex flex-col px-2 lg:px-6 space-y-2 py-1 ">
+                            <div className="flex flex-col px-2 lg:px-2 xl:px-6 space-y-2 py-1 ">
                              <div className='flex items-center justify-between'> 
                                <div className='grid grid-cols-1 sm:grid-cols-2 items-center'>
                                 <span className="inline-block bg-gray-200 text-accent p-3 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
@@ -719,8 +719,8 @@ import Spinner from '@components/ui/loaders/spinner/spinner';
 
         <div ref={myDiv}  className={`${offerName ? 'flex' : 'hidden'} flex-col lg:px-4 mt-6 lg:mt-10 py-4`}>
 
-            <h4 className='text-xl flex items-center justify-between lg:text-3xl font-serif text-gray-900 font-medium ml-2 lg:ml-4 py-4 tracking-normal'>
-                Select Salon 
+            <h4 className='text-2xl flex text-center items-center justify-center  lg:text-3xl font-serif text-gray-900 font-medium  py-4 tracking-normal'>
+                Select Salon Name
                 {/* <Link href='/shops?category=Salon+-+Spa'>
                     <span className='text-blue-800 cursor-pointer hover-underline text-sm '>
                         view all

@@ -90,16 +90,16 @@ const offerSliderBreakpoints = {
     spaceBetween: 16,
   },
   320: {
-    slidesPerView: 4,
+    slidesPerView: 3,
     spaceBetween: 5,
   },
   580: {
-    slidesPerView: 6,
-    spaceBetween: 2,
+    slidesPerView: 4,
+    spaceBetween: 4,
   },
   1024: {
-    slidesPerView: 10,
-    spaceBetween: 4,
+    slidesPerView: 6,
+    spaceBetween: 2,
   },
   1920: {
     slidesPerView: 6,
@@ -204,16 +204,16 @@ export default function PromotionSlider(props:any) {
                replace("name", "").replace("id", "") === "Salon  Spa" ).map((shop: any) => (
             <SwiperSlide key={idx}>
               {/* <Link href={`${ROUTES.SHOPS}/${shop.slug}`}> */}
-                <div   className={` ${shop?.name === shopName ? '' : '' }  border py-1 rounded hover:border-gray-400 cursor-pointer border-gray-100 flex hover:shadow-lg flex-col items-center `}>
+                <div   className={` ${shop?.name === shopName ? '' : '' }  border py-1 w-34 sm:w-54 md:w-54 lg:w-38 xl:w-60 rounded hover:border-gray-400 cursor-pointer border-gray-100 flex hover:shadow-lg flex-col items-center `}>
                   
-                  <CheckMarkFill width={30} className={` ${shop?.name === shopName? 'block' : 'hidden'} absolute right-0 top-0 me-2 bg-white rounded-full text-green-600`} />
+                  <CheckMarkFill width={30} className={` ${shop?.name === shopName? 'block' : 'hidden'} absolute z-50 right-0 md:right-10 top-0 me-2 bg-white rounded-full text-green-600`} />
                   <img onClick={()=>handleSelect(shop)}
-                   className="w-24 cursor-pointer object-contain rounded h-24 lg:h-36    lg:w-36 "
+                   className="relative w-24 cursor-pointer object-contain rounded h-24 lg:h-36    lg:w-36 "
                    src={shop?.logo?.thumbnail}
                    alt={t(shop?.name)}
                   />
                   <span className = "flex flex-col text-xs lg:text-sm  mt-2 h-28 text-center font-semibold">
-                    <p className="h-10  ">{shop?.name}</p>
+                    <p className="h-10 text-md ">{shop?.name}</p>
                     <p className="h-5 mt-2 text-gray-700 font-light"> 
                     {/* {shop?.name?.includes(shop?.settings?.location?.sector) ? '' : shop?.settings?.location?.sector} */}
                        {shop?.address?.sector}
