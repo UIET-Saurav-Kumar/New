@@ -211,8 +211,7 @@ import Spinner from '@components/ui/loaders/spinner/spinner';
     // },[pathname])
 
     const {
-      // isFetching: loading,
-      // isFetchingNextPage,
+       // isFetchingNextPage,
       // fetchNextPage,
       // hasNextPage,
       isError: is_error,
@@ -657,6 +656,10 @@ import Spinner from '@components/ui/loaders/spinner/spinner';
 
           <Loader text='booking...' className={` ${booking ? 'block' : 'hidden'} mx-auto z-50`}/>
 
+          { loading ? <div className='w-full mx-auto h-10'>
+                        <Spinner showText={false}/>
+                      </div> 
+                     : 
             <div className = {`${data?.featureProducts?.data?.length  ? 'block w-full' : 'hidden'} relative w-full overflow-x-scroll text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500
                             grid grid-cols-2  h-full md:grid md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-5 bg-gray-50 mt-3 p-2 lg:p-6 gap-1 lg:gap-4`}>
               
@@ -715,6 +718,7 @@ import Spinner from '@components/ui/loaders/spinner/spinner';
                     }
                     
             </div>
+            }
 
 
         <div ref={myDiv}  className={`${offerName ? 'flex' : 'hidden'} flex-col lg:px-4 mt-6 lg:mt-10 py-4`}>
@@ -745,17 +749,19 @@ import Spinner from '@components/ui/loaders/spinner/spinner';
         </div>
 
       <div className={`${selectedSalon ? 'flex' : 'hidden'} grid grid-cols-1 lg:grid-cols-2  items-center justify-evenly`}> 
-             
-          <div className="  bg-light p-5 mt-10 md:p-8 w-auto lg:w-1/2">
-                {/* <Schedule count={2} heading='Book Appointment' />
-                   */}
-                <h4 className=' whitespace-nowrap text-xl flex items-center justify-between lg:text-3xl font-serif text-gray-900 font-medium     py-4 tracking-normal'>
+          <div className='flex flex-col justify-center '> 
+                <h4 className=' whitespace-nowrap text-2xl text-center mx-auto flex items-center  lg:text-3xl font-serif text-gray-900 font-medium     py-4 tracking-normal'>
                   Select Appointment Date & Time
                 </h4>
-                <div>
-                  <Calendar onChange={onChange} value={value} minDate={minDate} />
-                </div>
-          </div>
+              <div className="  bg-light p-5 mt-10 md:p-8 w-auto lg:w-1/2">
+                    {/* <Schedule count={2} heading='Book Appointment' />
+                      */}
+                    
+                    <div>
+                      <Calendar onChange={onChange} value={value} minDate={minDate} />
+                    </div>
+              </div>
+            </div>
 
           <div className='p-3 text-sm lg:text-lg grid grid-cols-2 gap-4 place-content-center'>
             <button className={`${selectedTimeSlot === '10:00am - 12:00PM' ? 'bg-blue-600 text-white': 'hover:bg-gray-100 border  p-3 bg-gray-50 text-black'} rounded cursor-pointer `} 

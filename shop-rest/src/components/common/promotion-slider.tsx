@@ -12,6 +12,7 @@ import { ROUTES } from "@utils/routes";
 import Link from 'next/link';
 import { CheckMarkFill } from "@components/icons/checkmark-circle-fill";
 import { useSalonShopsQuery } from "@data/shop/use-search-salon-shop.query";
+import Spinner from "@components/ui/loaders/spinner/spinner";
  
 const data = [
 
@@ -130,7 +131,7 @@ export default function PromotionSlider(props:any) {
   const {getLocation} = useLocation();
 
 
-  const { data: shopData } = useSalonShopsQuery({
+  const { data: shopData, isLoading } = useSalonShopsQuery({
     category:'Salon+-+Spa',
     limit:3000000,
     location:((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any,
@@ -170,6 +171,8 @@ export default function PromotionSlider(props:any) {
     return "";
   }
 
+  console.log('pages',shopData?.pages)
+
 
   
   // console.log('slider shops',shopData)
@@ -180,11 +183,12 @@ export default function PromotionSlider(props:any) {
 
   return (
 
+    <> { isLoading ? <div className="w-full h-4"> <Spinner/></div> :
     <div className=" px-2 md:px-5 xl:px-4">
 
     {/* <button onClick={downloadLogos}>
-      Download All
-    </button> */}
+         Download All
+        </button> */}
 
       <div className="relative">
 
@@ -260,5 +264,7 @@ export default function PromotionSlider(props:any) {
         </div>
       </div>
     </div>
+}
+    </>
   );
 }
