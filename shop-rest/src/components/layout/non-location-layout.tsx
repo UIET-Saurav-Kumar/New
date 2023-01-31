@@ -1,24 +1,24 @@
 // import MobileNavigation from "./mobile-navigation";
 import dynamic from "next/dynamic";
-import router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import NavbarWithTypes from "./navbar/navbar-with-types";
 import ShopNavbar from "./navbar/shop-navbar";
 import ShopVisitorNavbar from "./navbar/shop-visitor-navbar";
 
 const MobileNavigation = dynamic(() => import('./mobile-navigation'), { ssr: false });
 
-const ShopLayout: React.FC = ({ children }) => {
+const NonLocationLayout: React.FC = ({ children }) => {
 
-  const {query,pathname} = useRouter();
+  const {query} = useRouter();
 
   return (
 
     <div className="flex flex-col transition-colors duration-150">
         {query.utm_source == 'shop_qr' ? <ShopVisitorNavbar/> :  <ShopNavbar />}
         <div>{children}</div>
-       {router.pathname == '/salon-near-me' ? null : <MobileNavigation /> }
+        <MobileNavigation />
     </div>
   );
 };
 
-export default ShopLayout;
+export default NonLocationLayout;

@@ -177,7 +177,7 @@ import { addLocation } from '@contexts/location/location.utils';
     const [value, onChange] = useState(new Date());
     const [offerName, setOfferName] = useState(null);
     const [selectedSalon, setSelectedSalon] = useState(null);
-    const [selectedTimeSlot, setSelectedTimeSlot] = useState('');
+    const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
     const [shopImages, setShopImages] = useState(false);
     const [photos, setPhotos] = useState([])
     const router = useRouter();
@@ -191,6 +191,9 @@ import { addLocation } from '@contexts/location/location.utils';
     const { isAuthorize } = useUI();
 
     const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY;
+
+
+    console.log('time slot', selectedTimeSlot)
 
     useEffect(() => {
       window.scrollTo(0, 0);
@@ -415,17 +418,22 @@ import { addLocation } from '@contexts/location/location.utils';
         function onSubmit(values: FormValues) {
 
           // console.log('newoffer',offerName);
+
+          if (offerName == null ) {
+            setError_Msg('Please select offer first ');
+            return;
+         }   
            
-          if (selectedSalon == null && selectedTimeSlot == null) {
-            setError_Msg('Please select salon and date/time slot also');
+          if (selectedSalon == null ) {
+            setError_Msg('Please select salon name');
             return;
          }         
        
 
-          if (selectedSalon == null) {
-            setError_Msg('Please select salon also');
-            return;
-          }
+          // if (selectedTimeSlot == null) {
+          //   setError_Msg('Please select salon also');
+          //   return;
+          // }
           
           if (selectedTimeSlot == null) {
             setError_Msg('Please select time slot also');
@@ -761,8 +769,8 @@ import { addLocation } from '@contexts/location/location.utils';
 
       </div>
 
-      <div className={`${selectedTimeSlot ? 'flex' : 'hidden'} flex flex-col mx-auto w-full text-center`}>
-      <p className='text-red-600 animate-bounce transition-opacity duration-300 ease-in-out h-5'>{error_msg ? error_msg : ''}</p>
+      <div className={`${selectedTimeSlot ? 'flex' : 'flex'} flex flex-col mx-auto w-full text-center`}>
+        <p className='text-red-600 animate-bounce transition-opacity duration-300 ease-in-out mt-4 h-5'>{error_msg ? error_msg : ''}</p>
         <button className='mx-auto text-white font-semibold rounded mt-10 w-60 border bg-accent mb-20 p-4' 
                  onClick={()=>onSubmit()}>
                 {salonBooking ?
@@ -784,4 +792,4 @@ import { addLocation } from '@contexts/location/location.utils';
   )
 }
 
-SalonBookingPage.Layout = DefaultLayout;
+SalonBookingPage.Layout = ShopLayout;

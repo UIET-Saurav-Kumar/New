@@ -3,6 +3,8 @@ import { MapPin } from '@components/icons/map-pin';
 import { useLocation } from "@contexts/location/location.context";
 import { getLocation } from "@contexts/location/location.utils";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+
 
 export default function GetCurrentLocation({
     onChange
@@ -10,9 +12,12 @@ export default function GetCurrentLocation({
     onChange: any;
     
   }){
-    const {addLocation} =useLocation()
+    const {addLocation} = useLocation()
 
     const [spin, setSpin] = useState(false);
+    const router = useRouter();
+
+    const pathname = router.pathname;
 
     var options = {
         enableHighAccuracy: false,
@@ -34,12 +39,20 @@ export default function GetCurrentLocation({
 
       // call getLoc if location is null
       useEffect(() => {
-       
+
+        const location: any = {
+          lat: '30.7320',
+          lng: '76.7726',
+          formattedAddress: 'Chandigarh',
+        };
+        
         if(getLocation?.length === 0){
-          getLoc();
+         router.pathname == '/salon-near-me' ? addLocation(location) : getLoc();
         }
       
-      }, [ addLocation])
+      }, [addLocation])
+
+      console.log('getloc',getLocation)
       
 
     function getLoc() {
