@@ -776,7 +776,7 @@ import Spinner from '@components/ui/loaders/spinner/spinner';
 
       </div>
 
-      <div className={`${offerName ? 'flex' : 'hidden'} flex flex-col mx-auto w-full text-center`}>
+      <div className={`${selectedSalon ? 'flex' : 'hidden'} flex flex-col mx-auto w-full text-center`}>
         <p className='text-red-600 animate-bounce transition-opacity duration-300 ease-in-out mt-4 h-5'>{error_msg ? error_msg : ''}</p>
         <button className='mx-auto text-white font-semibold rounded mt-10 w-60 border bg-accent mb-20 p-4' 
                  onClick={()=>onSubmit()}>
