@@ -16,7 +16,7 @@ const ShopLayout: React.FC = ({ children }) => {
     <div className="flex flex-col transition-colors duration-150">
         {query.utm_source == 'shop_qr' ? <ShopVisitorNavbar/> :  <ShopNavbar />}
         <div>{children}</div>
-       {router.pathname == '/salon-near-me' ? null : <MobileNavigation /> }
+       {pathname == '/salon-near-me' ? null : <MobileNavigation /> }
     </div>
   );
 };

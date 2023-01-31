@@ -58,6 +58,7 @@ import { useOrdersQuery } from '@data/order/use-orders.query';
 import Loader from '@components/ui/loader/loader';
 import PlacesApi from '@components/shop/google-maps-places-api';
 import { addLocation } from '@contexts/location/location.utils';
+import Spinner from '@components/ui/loaders/spinner/spinner';
 
   const ProductFeedLoader = dynamic(
     () => import("@components/ui/loaders/product-feed-loader")
@@ -643,7 +644,7 @@ import { addLocation } from '@contexts/location/location.utils';
       <link rel="canonical" href={`https://buylowcal.com/salon`}/>
     </Head>
 
-    <div className='h-full border bg-white w-full'>
+    <div className=' h-full border bg-white w-full'>
 
       <p className='flex flex-col font-semibold text-blue-500 text-center mt-4 w-full'>
       <div className="text-center text-lg font-medium tracking-wide text-red-600">Limited Slots!!</div>
@@ -663,7 +664,7 @@ import { addLocation } from '@contexts/location/location.utils';
                         <ProductFeedLoader limit={5} />
                       ) : ( */}
                 
-                        { uniqueProducts?.map((offer,product) => (
+                        {!uniqueProducts?.length ? <span className=' '>Loading...</span> : uniqueProducts?.map((offer,product) => (
                           
                           <div onClick={ ()=> showSalons(offer)} className={` ${offer?.name === offerName?.name ? 'border-3 border-green-500 ' : 'border-2'}
                                             hover:border-gray-400 lg:p-2 relative w-full h-full flex flex-col  lg:w-full mx-auto bg-white rounded-lg shadow-lg `}>
@@ -769,7 +770,7 @@ import { addLocation } from '@contexts/location/location.utils';
 
       </div>
 
-      <div className={`${selectedTimeSlot ? 'flex' : 'flex'} flex flex-col mx-auto w-full text-center`}>
+      <div className={`${offerName ? 'flex' : 'hidden'} flex flex-col mx-auto w-full text-center`}>
         <p className='text-red-600 animate-bounce transition-opacity duration-300 ease-in-out mt-4 h-5'>{error_msg ? error_msg : ''}</p>
         <button className='mx-auto text-white font-semibold rounded mt-10 w-60 border bg-accent mb-20 p-4' 
                  onClick={()=>onSubmit()}>

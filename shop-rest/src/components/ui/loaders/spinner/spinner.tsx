@@ -10,7 +10,9 @@ interface Props {
 
 const Spinner = (props: Props) => {
   const { className, showText = true, text = "loading", simple, } = props;
+
   return (
+    
     <>
       {simple ? (
         <div className={cn(className, styles.simple_loading)} />
