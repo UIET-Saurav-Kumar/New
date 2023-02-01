@@ -170,80 +170,25 @@ class OrderRepository extends BaseRepository
         {
             $payment_method = 'dc';
         }
-        
         $orderFree = new CashFreeOrder();
         $od["orderId"] = $request['tracking_number'];
         $od["orderAmount"] = $request['total'];
         $od["orderNote"] = "Subscription";
         $od["customerPhone"] = $request->customer_contact;
         $od["customerName"] = $user->name;
-        $od["customerId"] = $request['customer_id'];
         $od["customerEmail"] = $user->email ?? "test@cashfree.com";
         $od["payment_methods"] = $payment_method;
         $od["returnUrl"] =  url("order/success");
         $od["notifyUrl"] = url("order/success");
-        // $orderFree->create($od);
+        $orderFree->create($od);
+
         $order = $this->createOrder($request);
 
-        // $cashFree = new CashFreeController();
-        // $response = $cashFree->cashFree($od);
-        // $link = json_decode($response, true);
-        // return json_encode($link);
+        
+        $link = $orderFree->getLink($od['orderId']);
+        return json_encode($link);
 
         
-        list($orderId, $orderAmount, $orderNote, $customerPhone, $customerName, $customerEmail, $payment_methods, $returnUrl, $notifyUrl) = $od;
-
-        $curl = curl_init();
-        $postFields = array(
-          "order_id" =>  $orderId,
-          "order_amount" => $orderAmount,
-          "order_currency" =>  $orderNote,
-          "customer_details" => array(
-            "customer_id" =>  $customerId,
-            "customer_email" => $customerEmail,
-            "customer_phone" => $customerPhone,
-          ),
-          "order_meta" => array(
-              "return_url" => url("order/success"),
-              'notifyUrl' => url('order/success'),
-          ),
-          // "order_splits" => array(
-          //   array(
-          //     "vendor_id" => $request->input('vendor_id'),
-          //     "amount" => $request->input('amount')
-          //   )
-          // )
-        );
-        
-          $postFields = json_encode($postFields);
-          
-          curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api.cashfree.com/pg/orders',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => $postFields,
-            CURLOPT_HTTPHEADER => array(
-              'Content-Type: application/json',
-              'x-api-version: 2021-05-21',
-              'x-client-id: 13353224f34e6b8d5dec4c7c13235331',
-              'x-client-secret: 5cc5c4adb74168906d10b82bf7820a69dc23634a'
-            ),
-          ));
-        
-          $response = curl_exec($curl);
-        
-          curl_close($curl);
-          return $response;
-      
-
-        
-        // $link = $orderFree->getLink($od['orderId']);
-        // return json_encode($link);
 
     }
 
@@ -317,103 +262,25 @@ class OrderRepository extends BaseRepository
         }
         
         
-        $orderId = $request['tracking_number'];
-        $orderAmount = $request['total'];
-        $orderNote = "Subscription";
-        $customerPhone = $request->customer_contact;
-        $customerName = $user->name;
-        $customerId = $request['customer_id'];
-        $customerEmail = $user->email ?? "test@cashfree.com";
-        // $payment_methods = 'cc';
-        $returnUrl =  url("order/success");
-        $notifyUrl = url("order/success");
-        
-    
-    
-        $curl = curl_init();
-        $postFields = array(
-          "order_id" =>  $orderId,
-          "order_amount" => $orderAmount,
-          "order_currency" =>  'INR',
-          "customer_details" => array(
-            "customer_id" =>  '123',
-            "customer_email" => $customerEmail,
-            "customer_phone" => $customerPhone,
-          ),
-        //   "order_meta" => array(
-        //     'return_url'=> 'https://buylowcal.com/orders?order_id={order_id}',
-        //     'notify_url' => 'https://buylowcal.com/orders?order_id={order_id}',
-        //     "payment_methods" => 'cc'
-        //   )
+        $orderFree = new CashFreeOrder();
+        $od["orderId"] = $request['tracking_number'];
+        $od["orderAmount"] = $request['total'];
+        $od["orderNote"] = "Subscription";
+        $od["customerPhone"] = $request->customer_contact;
+        $od["customerName"] = $user->name;
+        $od["customerEmail"] = $user->email ?? "test@cashfree.com";
+        $od["payment_methods"] = $payment_method;
+        $od["returnUrl"] =  url("order/success");
+        $od["notifyUrl"] = url("order/success");
 
-        );
-        
-          $postFields = json_encode($postFields);
-          
-          curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api.cashfree.com/pg/orders',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => $postFields,
-            CURLOPT_HTTPHEADER => array(
-              'Content-Type: application/json',
-              'x-api-version: 2022-09-01',
-              'x-client-id: 13353224f34e6b8d5dec4c7c13235331',
-              'x-client-secret: 5cc5c4adb74168906d10b82bf7820a69dc23634a'
-            ),
-          ));
-        
-          $response = curl_exec($curl);
-        
-          curl_close($curl);
-       
-        //  $type = gettype($response);
-        $response = json_decode($response, true);
-        $payment_session_id = $response['payment_session_id'];
-        // $payment_session_id = 'session_RtamjSUdQlmidc1cZ2gTYdvv7UriO0lKmPldFJHlDLfePM5efTFdbD10tEGHlyud4Is9nxv3FcnjVPc0MBt_3zB2cGlkzbWgQKDMourBNGvk';
-
-        // return $response;
-
-        $upi_curl = curl_init();
-
-        $post_Fields = array(
-            'payment_session_id' => $payment_session_id,
-            'payment_method' => array(
-              'upi' => array(
-                'channel' => 'link',
-               )
-            )
-            );
+        $orderFree->create($od);
 
 
-        $post_Fields = json_encode($post_Fields);
+        $order = $this->createOrder($request);
 
         
-        curl_setopt_array($upi_curl, [
-          CURLOPT_URL => "https://api.cashfree.com/pg/orders/sessions",
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_ENCODING => "",
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 30,
-          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_POSTFIELDS => $post_Fields,
-          CURLOPT_HTTPHEADER => [
-            "accept: application/json",
-            "content-type: application/json",
-          ],
-        ]);
-        
-        $upi_response = curl_exec($upi_curl);
-        $err = curl_error($upi_curl);
-        
-        curl_close($upi_curl);
-        
-      return $upi_response;
+        $link = $orderFree->getLink($od['orderId']);
+        return json_encode($link);
 
     }
 

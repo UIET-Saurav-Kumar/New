@@ -138,8 +138,6 @@ export default function DropDown({getLoc}:{getLoc:any}) {
     { value: 'Beauzo+Salon', label: 'Beauzo Salon', image: { avatar: true, src: 'https://placeimg.com/64/64/3' } },
     { value: 'Salman+s+Makeover', label: 'Salman Makeover ', image: { avatar: true, src: 'https://placeimg.com/64/64/3' } },
     { value: 'Shri+Balaji+Fruits+And+Vegetables', label: 'Balaji Fruits & Vegetables', image: { avatar: true, src: 'https://placeimg.com/64/64/1' } },
-    
-
   ];
 
    
@@ -160,7 +158,7 @@ export default function DropDown({getLoc}:{getLoc:any}) {
                   // onInputChange={handleInputChange}
                   placeholder={ <div className='text-xs sm:text-sm md:text:md  lg:text-sm'> Restaurants | Salons | Groceries </div>}
                   onChange={optionSelected}
-                />
+              />
                   <SearchIcon className=" absolute right-3 top-3 lg:top-4  text-gray-400 w-4 h-4 me-2.5" />
           {/* </div> */}
           

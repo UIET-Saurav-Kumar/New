@@ -1,4 +1,3 @@
-
 import 
     { OfferOptionsType, Offer, QueryParamsType}
     from "@ts-types/custom.types";
@@ -9,7 +8,9 @@ import { useQuery } from "react-query";
 const OfferService = new CoreApi(API_ENDPOINTS.HOME_OFFERS);
 
 export const fetchOfferQuery = async ({ queryKey }: QueryParamsType) => {
+  
   const [_key, params] = queryKey;
+
   const {
     data
   } = await OfferService.search(params as OfferOptionsType);

@@ -181,13 +181,17 @@ const PaymentForm = () => {
         if (order?.tracking_number) {
           router.push(`${ROUTES.ORDERS}/${order?.tracking_number}`);
         }
-        if (order )
-        console.log(order?.data?.payload)
+        if (order?.paymentLink)
         {
-          openModal('UPI_APPS', {
-            data : Object.values(order?.data?.payload)
-          });
+          window.location.replace(order?.paymentLink)
         }
+        // if (order )
+        // console.log(order?.paymentLink)
+        // {
+        //   openModal('UPI_APPS', {
+        //     data : Object.values(order?.data?.payload)
+        //   });
+        // }
       },
       onError: (error: any) => {
         // console.log(error?.response?.data?.message);

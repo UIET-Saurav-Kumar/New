@@ -748,9 +748,9 @@ import Spinner from '@components/ui/loaders/spinner/spinner';
             
         </div>
 
-      <div className={`${selectedSalon ? 'flex' : 'hidden'} grid grid-cols-1 lg:grid-cols-2  items-center justify-evenly`}> 
-          <div className='flex flex-col justify-center '> 
-                <h4 className=' whitespace-nowrap text-2xl text-center mx-auto flex items-center  lg:text-3xl font-serif text-gray-900 font-medium     py-4 tracking-normal'>
+      <div className={`${selectedSalon ? 'flex' : 'hidden'} grid grid-cols-1 lg:grid-cols-2  items-center justify-evenly w-full`}> 
+          <div className='flex flex-col justify-center text-center w-full '> 
+                <h4 className=' w-full  whitespace-nowrap text-2xl text-center mx-auto flex items-center  lg:text-3xl font-serif text-gray-900 font-medium     py-4 tracking-normal'>
                   Select Appointment Date & Time
                 </h4>
               <div className="  bg-light p-5 mt-10 md:p-8 w-auto lg:w-1/2">
