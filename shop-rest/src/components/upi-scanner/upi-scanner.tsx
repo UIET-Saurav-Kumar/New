@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function UpiScanner({data}) {
 
-console.log('order link scanner', Object.values(data)[0]);
+console.log('order link scanner', Object.values(data)[0][0]);
 console.log('order link props scanner', (data));
 
 const reciever_name = data?.reciever_name;
@@ -14,6 +14,15 @@ const amount = data?.amount;
 const upiApps = [
     '/upi/bhim.png','/upi/upi.jpeg','/upi/gpay.png','/upi/paytm.png','/upi/phone-pe.jpg','/upi/qr.jpg'
 ]
+
+const upi_link = Object.values(data)[0][0];
+
+const urlParams = new URLSearchParams(new URL(upi_link).search);
+const trValue = urlParams.get("tr");
+const tnValue = urlParams.get("tn");
+
+console.log('new link', trValue, tnValue)
+
 
 const upi_id2 = 'cf.lowcalventurespvtltd@icici';
 
@@ -32,12 +41,10 @@ const modifiedLinks = Object.values(data)[0]?.map((link, index) => {
 
 
 const gpayLink =   `upi://pay?pa=${upi_id2}&pn=${reciever}&aid=uGICAgIC4oYCNBQ`
-const gpay     =   `upi://pay?pa=${upi_id}&pn=${reciever_name}&am=${amount}&url=null&tid=aWd13cf2wer35&tr=2JqwDsdf4G4y&mc=5192&mode=lazy&purpose=00&aid=uGICAgIC4oYCNBQ`
-const gpay_2   =   `upi://pay?pa=${upi_id}&pn=${reciever_name}&am=${amount}&tid=aWd13cf234sc35&tr=2JqwDseqprl34G4y&mc=5192&mode=lazy&purpose=00`
-const Link_3   =   `upi://pay?pa=${upi_id}&pn=${reciever_name}`
-const Link_4   =   `upi://pay?pa=${upi_id}&pn=vinender&am=${amount}&tid=aWd13cf234sc35&tr=2JqwDseqprl34G4y&mc=5192&mode=lazy&purpose=00`
-const cashfree =   `upi://pay?pa=${upi_id}&pn=${reciever_name}&tr=ATC1081756706&am=${amount}&cu=INR&mode=00&purpose=00&mc=0000&tn=1081756706`
-
+const gpay     =   `upi://pay?pa=${upi_id}&pn=${reciever_name}&am=${amount}&url=null&tid=aWd13cf2wer35&tr=${trValue}&mc=0000&mode=lazy&purpose=00&aid=uGICAgIC4oYCNBQ`
+const gpay_2   =   `upi://pay?pa=${upi_id}&pn=${reciever_name}&am=${amount}&tid=aWd13cf234sc35&tr=${trValue}&mc=0000&mode=lazy&purpose=00`
+const cashfree =   `upi://pay?pa=${upi_id}&pn=${reciever_name}&tr=${trValue}&am=${amount}&cu=INR&mode=00&purpose=00&mc=0000&tn=${tnValue}`
+const cashfree_mc =   `upi://pay?pa=${upi_id}&pn=${reciever_name}&tr=${trValue}&am=${amount}&cu=INR&mode=00&purpose=00&mc=5399&tn=${tnValue}`
 
 console.log('order link modified',modifiedLinks.join(' '));
 
@@ -47,8 +54,7 @@ return (
                 <span onClick={()=> window.open(gpayLink)} className='h-20 cursor-pointer w-20 rounded-full border'>gpay-link</span>
                 <span onClick={()=> window.open(gpay)} className='h-20 cursor-pointer w-20 rounded-full border'>gpay-more</span>
                 <span onClick={()=> window.open(gpay_2)} className='h-20 cursor-pointer w-20 rounded-full border'>gpay-2</span>
-                <span onClick={()=> window.open(Link_3)} className='h-20 cursor-pointer w-20 rounded-full border'>link-3</span>
-                <span onClick={()=> window.open(Link_4)} className='h-20 cursor-pointer w-20 rounded-full border'>link-4</span>
+                 <span onClick={()=> window.open(cashfree_mc)} className='h-20 cursor-pointer w-20 rounded-full border'>cashfree_mc</span>
                 <span onClick={()=> window.open(cashfree)} className='h-20 cursor-pointer w-20 rounded-full border'>cashfree</span>
                 <a href={`upi://pay?pa=${upi_id}&pn=${reciever_name}&am=${amount}`} className="text-green-700 border w-20 h-20 rounded-full">Pay Now !</a>
     {modifiedLinks?.map((link, index) => {
