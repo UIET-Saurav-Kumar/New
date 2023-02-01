@@ -15,9 +15,9 @@ const upiApps = [
     '/upi/bhim.png','/upi/upi.jpeg','/upi/gpay.png','/upi/paytm.png','/upi/phone-pe.jpg','/upi/qr.jpg'
 ]
 
-// const upi_id = 'vinendersingh91@okicici';
+const upi_id2 = 'cf.lowcalventurespvtltd@icici';
 
-// const reciever_name = 'vinender';
+const reciever = 'Lowcal%20Ventures%20Pvt%20Ltd';
 
 const merchant_code = '0000';
 
@@ -31,7 +31,7 @@ const modifiedLinks = Object.values(data)[0]?.map((link, index) => {
 });
 
 
-const gpayLink =   `upi://pay?pa=${upi_id}&pn=${reciever_name}&aid=uGICAgIC4oYCNBQ`
+const gpayLink =   `upi://pay?pa=${upi_id2}&pn=${reciever}&aid=uGICAgIC4oYCNBQ`
 const gpay     =   `upi://pay?pa=${upi_id}&pn=${reciever_name}&am=${amount}&url=null&tid=aWd13cf2wer35&tr=2JqwDsdf4G4y&mc=5192&mode=lazy&purpose=00&aid=uGICAgIC4oYCNBQ`
 const gpay_2   =   `upi://pay?pa=${upi_id}&pn=${reciever_name}&am=${amount}&tid=aWd13cf234sc35&tr=2JqwDseqprl34G4y&mc=5192&mode=lazy&purpose=00`
 const Link_3   =   `upi://pay?pa=${upi_id}&pn=${reciever_name}`

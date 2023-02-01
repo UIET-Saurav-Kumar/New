@@ -209,18 +209,19 @@ export default function OrderPage() {
                       bg-light rounded border shadow-sm">
       
       <div className=''>
-     <PDFExport ref={pdfExportComponent}  paperSize='A4'>
-    <div className="p-4 font-serif" ref={contentArea}>
+      <PDFExport ref={pdfExportComponent}  paperSize='A4'>
+      <div className="p-4 font-serif" ref={contentArea}>
+
      {data?.order?.children?.length ? ( 
 
         <div className='flex flex-col space-y-10'>
-                        <QRCodeCanvas
-                          id="qr-gen"
-                          value={data?.order?.tracking_number}
-                          size={237}
-                          level={"H"}
-                          includeMargin={true}
-                        />
+                        {/* <QRCodeCanvas
+                              id="qr-gen"
+                              value={data?.order?.tracking_number}
+                              size={237}
+                              level={"H"}
+                              includeMargin={true}
+                        /> */}
 
           <h2 className='font-semibold text-sm md:text-md lg:text-sm'> Order Summary </h2>
 
@@ -230,11 +231,11 @@ export default function OrderPage() {
 
           <span className="mb-5 sm:mb-0 me-auto">
             <span className="me-4">{t("Status")} :</span>
-            <Badge
-              text={data?.order?.status?.name!}
-              className="font-normal text-sm whitespace-nowrap"
-            />
-          </span>
+              <Badge
+                text={data?.order?.status?.name!}
+                className="font-normal text-sm whitespace-nowrap"
+              />
+            </span>
 
           <Link
             href={ROUTES.HOME}
