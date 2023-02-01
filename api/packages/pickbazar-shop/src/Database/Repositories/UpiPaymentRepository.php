@@ -58,11 +58,11 @@ class UpiPaymentRepository extends BaseRepository
             "customer_email" => $customerEmail,
             "customer_phone" => $customerPhone,
           ),
-        //   "order_meta" => array(
-        //     'return_url'=> 'https://buylowcal.com/orders?order_id={order_id}',
-        //     'notify_url' => 'https://buylowcal.com/orders?order_id={order_id}',
-        //     "payment_methods" => 'cc'
-        //   )
+          // "order_meta" => array(
+          //   'return_url'=> 'https://buylowcal.com/orders?{order_id}',
+          //   'notify_url' => 'https://buylowcal.com/orders?{order_id}',
+          //   "payment_methods" => 'cc'
+          // )
 
         );
         

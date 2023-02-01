@@ -58,6 +58,8 @@ export default function Orders() {
     }
   );
 
+  console.log('admin order',data?.orders)
+
   if (loading || fetchingShop)
     return <Loader text={t("common:text-loading")} />;
   if (error) return <ErrorMessage message={error.message} />;

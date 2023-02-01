@@ -51,7 +51,7 @@ class OrderController extends CoreController
     {
         $user = $request->user();
         if ($user && $user->hasPermissionTo(Permission::SUPER_ADMIN) && (!isset($request->shop_id) || $request->shop_id === 'undefined')) {
-            return $this->repository->with(['children','children.shop','products.shop'])->where('id', '!=', null)->where('parent_id', '=', null); //->paginate($limit);
+            return $this->repository->with(['products.shop'])->where('id', '!=', null)->where('parent_id', '=', null); //->paginate($limit);
         } else if ($this->repository->hasPermission($user, $request->shop_id)) {
             if ($user && $user->hasPermissionTo(Permission::STORE_OWNER)) {
                 return $this->repository->with('children')->where('shop_id', '=', $request->shop_id)->where('parent_id', '!=', null); //->paginate($limit);

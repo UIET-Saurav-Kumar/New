@@ -32,7 +32,7 @@ const modifiedLinks = Object.values(data)[0]?.map((link, index) => {
 
 
 const gpayLink =   `upi://pay?pa=${upi_id}&pn=${reciever_name}&aid=uGICAgIC4oYCNBQ`
-const gpay     =   `upi://pay?pa=${upi_id}&pn=${reciever_name}&am=${amount}&tid=aWd13cf2wer35&tr=2JqwDsdf4G4y&mc=5192&mode=lazy&purpose=00&aid=uGICAgIC4oYCNBQ`
+const gpay     =   `upi://pay?pa=${upi_id}&pn=${reciever_name}&am=${amount}&url=null&tid=aWd13cf2wer35&tr=2JqwDsdf4G4y&mc=5192&mode=lazy&purpose=00&aid=uGICAgIC4oYCNBQ`
 const gpay_2   =   `upi://pay?pa=${upi_id}&pn=${reciever_name}&am=${amount}&tid=aWd13cf234sc35&tr=2JqwDseqprl34G4y&mc=5192&mode=lazy&purpose=00`
 const Link_3   =   `upi://pay?pa=${upi_id}&pn=${reciever_name}`
 const Link_4   =   `upi://pay?pa=${upi_id}&pn=vinender&am=${amount}&tid=aWd13cf234sc35&tr=2JqwDseqprl34G4y&mc=5192&mode=lazy&purpose=00`

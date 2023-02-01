@@ -177,7 +177,7 @@ const PaymentForm = () => {
     
     createOrder(input, {
       onSuccess: (order: any) => {
-        console.log('order link',order);
+        console.log('order link',order?.paymentLink);
         if (order?.tracking_number) {
           router.push(`${ROUTES.ORDERS}/${order?.tracking_number}`);
         }

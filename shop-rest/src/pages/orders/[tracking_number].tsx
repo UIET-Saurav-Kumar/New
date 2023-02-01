@@ -25,6 +25,8 @@ import Invoice from "@components/invoice-format/invoice";
 import PrintPage from "@components/print-button/print-page";
 import {Children, useRef} from 'react';
 import {  PDFExport, savePDF} from '@progress/kendo-react-pdf'
+import QRCode from "react-qr-code";
+import { QRCodeCanvas } from "qrcode.react";
 
 
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
@@ -75,7 +77,7 @@ export default function OrderPage() {
 
    
 
-  console.log('order data',data?.order.products);
+  console.log('order no',data?.children[0]);
 
   const { price: total } = usePrice(data && { amount: data.order.paid_total });
 
@@ -212,6 +214,13 @@ export default function OrderPage() {
      {data?.order?.children?.length ? ( 
 
         <div className='flex flex-col space-y-10'>
+                        <QRCodeCanvas
+                          id="qr-gen"
+                          value={data?.order?.tracking_number}
+                          size={237}
+                          level={"H"}
+                          includeMargin={true}
+                        />
 
           <h2 className='font-semibold text-sm md:text-md lg:text-sm'> Order Summary </h2>
 
