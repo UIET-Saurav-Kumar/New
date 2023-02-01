@@ -40,7 +40,8 @@ const modifiedLinks = Object.values(data)[0]?.map((link, index) => {
 });
 
 
-const gpayLink =   `upi://pay?pa=${upi_id2}&pn=${reciever}&aid=uGICAgIC4oYCNBQ`
+// const gpayLink =   `upi://pay?pa=${upi_id2}&pn=${reciever}&aid=uGICAgIC4oYCNBQ`
+const gpayLink = 'upi://pay?pa=vinendersingh91@okicici&pn=vinender%20singh&aid=uGICAgIC4oYCNBQ'
 const gpay     =   `upi://pay?pa=${upi_id}&pn=${reciever_name}&am=${amount}&url=null&tid=aWd13cf2wer35&tr=${trValue}&mc=0000&mode=lazy&purpose=00&aid=uGICAgIC4oYCNBQ`
 const gpay_2   =   `upi://pay?pa=${upi_id}&pn=${reciever_name}&am=${amount}&tid=aWd13cf234sc35&tr=${trValue}&mc=0000&mode=lazy&purpose=00`
 const cashfree =   `upi://pay?pa=${upi_id}&pn=${reciever_name}&tr=${trValue}&am=${amount}&cu=INR&mode=00&purpose=00&mc=0000&tn=${tnValue}`
