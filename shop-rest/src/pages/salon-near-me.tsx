@@ -658,7 +658,7 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
                       </div> 
                      : 
             <div className = {`${data?.featureProducts?.data?.length  ? 'block w-full' : 'hidden'} relative w-full overflow-x-scroll text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500
-            ${open ? 'flex flex-col' : 'hidden' }   grid grid-cols-2  h-full md:grid md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-5 bg-gray-50 mt-3 p-2 lg:p-6 gap-1 lg:gap-4`}>
+                  ${open ? 'flex flex-col' : 'hidden' }   grid grid-cols-2  h-full md:grid md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-5 bg-gray-50 mt-3 p-2 lg:p-6 gap-1 lg:gap-4`}>
               
                {/* {fetching && !data?.pages?.length ? (
                         <ProductFeedLoader limit={5} />
@@ -709,7 +709,6 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
                               </div>
                               <button
                                 className={` ${offer?.name === offerName?.name && offer?.sale_price === offerName?.sale_price ? 'bg-green-600 text-white' : 'text-gray-500 bg-gray-100' }   hover:bg-green-600 hover:text-white text-white font-bold py-2 px-4 rounded-full`}
-                                 
                               >
                                 {offer?.name === offerName?.name &&  offer?.sale_price === offerName?.sale_price ? 'Selected' : 'Select'}
                               </button>
