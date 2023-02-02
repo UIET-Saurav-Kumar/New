@@ -16,11 +16,7 @@ export default function DropDown({getLoc}:{getLoc:any}) {
   const {getLocation} =useLocation()
   const { mutate: createLog, isLoading: loading } = useCreateLogMutation();
   
-  // useEffect(()=>{
-  //   setInputValue(getSearch())
-  // },[])
-
-  // console.log('inputvalue',inputValue)
+ 
 
   const filterColors = (inputValue: string) => {
     return colourOptions.filter(i =>
@@ -33,9 +29,9 @@ export default function DropDown({getLoc}:{getLoc:any}) {
 
       var data = await fetchSearch(inputValue);      
 
-      // console.log('search data',data)
+    
       
-      callback(data);
+      // callback(data);
      
       return data;
 
@@ -114,11 +110,10 @@ export default function DropDown({getLoc}:{getLoc:any}) {
     }
   }
 
-  
   function optionSelected(e:any){
-    // clear()
+    // clear();
     setInputValue(e);
-    changeRoute(e)
+    changeRoute(e);
   }
 
   //save the search keywords with corresponding image if its a shop to local storage

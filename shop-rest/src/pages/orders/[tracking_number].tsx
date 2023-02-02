@@ -77,7 +77,7 @@ export default function OrderPage() {
 
    
 
-  console.log('order no',data?.children[0]);
+  // console.log('order no',data?.children[0]);
 
   const { price: total } = usePrice(data && { amount: data.order.paid_total });
 

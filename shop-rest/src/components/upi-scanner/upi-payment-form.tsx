@@ -54,7 +54,7 @@ export default function UpiPaymentForm(props:any ) {
           if (order?.tracking_number) {
             router.push(`${ROUTES.ORDERS}/${order?.tracking_number}`);
           }
-          if (order )
+          if (order)
           console.log(order?.data?.payload)
           {
             openModal('UPI_SCANNER_APPS', {

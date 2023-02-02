@@ -59,6 +59,7 @@ import Loader from '@components/ui/loader/loader';
 import PlacesApi from '@components/shop/google-maps-places-api';
 import { addLocation } from '@contexts/location/location.utils';
 import Spinner from '@components/ui/loaders/spinner/spinner';
+import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
 
   const ProductFeedLoader = dynamic(
     () => import("@components/ui/loaders/product-feed-loader")
@@ -183,7 +184,8 @@ import Spinner from '@components/ui/loaders/spinner/spinner';
     const [photos, setPhotos] = useState([])
     const router = useRouter();
     const pathname = router.pathname;
-
+    
+    const [open, setOpen] = useState(true);
  
     const [error_msg ,  setError_Msg] = useState('');
 
@@ -531,21 +533,15 @@ import Spinner from '@components/ui/loaders/spinner/spinner';
           // console.log([{'offer': offerName, 'selectedSalon' : selectedSalon }])
 
 
-          const {
-            addItemToCart,
-            removeItemFromCart,
-            isInStock,
-            isProductAvailable,
-            getItemFromCart,
-            isInCart,
-          } = useCart();
  
          
         function showSalons(data:any) {
 
-          myDiv.current.scrollIntoView({
-            behavior: 'smooth',
-          })
+          // myDiv.current.scrollIntoView({
+          //   behavior: 'smooth',
+          // })
+
+          setOpen(false);
         
         //  console.log('salon',data)
          setOfferName(data)
@@ -645,14 +641,15 @@ import Spinner from '@components/ui/loaders/spinner/spinner';
 
     <div className=' h-full border bg-white w-full'>
 
-      <p className='flex flex-col font-semibold text-blue-500 text-center mt-4 w-full'>
-      <div className="text-center text-lg font-medium tracking-wide text-red-600">Limited Slots!!</div>
-     <div className="text-center text-lg font-medium tracking-wide text-green-600">Book Now, Pay Later</div>
+      <p className='flex flex-col mt-10 font-semibold text-blue-500 text-center w-full'>
+       <div className="text-center text-lg font-medium tracking-wide text-red-600">Limited Slots!!</div>
+       <div className="text-center text-lg font-medium tracking-wide whitespace-nowrap text-green-600">Book Now, Pay Later</div>
       </p>
 
-          <h3 className='text-center text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 font-medium text-2xl lg:text-3xl text-gray-900 font-serif ml-4 lg:ml-8 mt-10 lg:mt-10 tracking-normal'>
-            Select Deals to Explore Salons
-          </h3>
+          <span onClick={()=> setOpen(!open)} className=' cursor-pointer  rounded-md p-1 flex items-center justify-between text-center text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 font-medium text-xl lg:text-3xl text-gray-900 font-serif ml-4 lg:ml-8 mt-10 lg:mt-10 tracking-normal'>
+            <h3 className='text-gray-800'>Select Deals to Explore Salons</h3> 
+            <span > {open ? <ArrowUpIcon className='h-5 w-5' /> : <  ArrowDownIcon className='h-5 w-5 text-blue-500' />}</span>
+          </span>
 
           <Loader text='booking...' className={` ${booking ? 'block' : 'hidden'} mx-auto z-50`}/>
 
@@ -661,7 +658,7 @@ import Spinner from '@components/ui/loaders/spinner/spinner';
                       </div> 
                      : 
             <div className = {`${data?.featureProducts?.data?.length  ? 'block w-full' : 'hidden'} relative w-full overflow-x-scroll text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500
-                            grid grid-cols-2  h-full md:grid md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-5 bg-gray-50 mt-3 p-2 lg:p-6 gap-1 lg:gap-4`}>
+            ${open ? 'flex flex-col' : 'hidden' }   grid grid-cols-2  h-full md:grid md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-5 bg-gray-50 mt-3 p-2 lg:p-6 gap-1 lg:gap-4`}>
               
                {/* {fetching && !data?.pages?.length ? (
                         <ProductFeedLoader limit={5} />
@@ -669,18 +666,23 @@ import Spinner from '@components/ui/loaders/spinner/spinner';
                 
                         {!uniqueProducts?.length ? <span className=' '>Loading...</span> : uniqueProducts?.map((offer,product) => (
                           
-                          <div onClick={ ()=> showSalons(offer)} className={` ${offer?.name === offerName?.name ? 'border-3 border-green-500 ' : 'border-2'}
-                                            hover:border-gray-400 lg:p-2 relative w-full h-full flex flex-col  lg:w-full mx-auto bg-white rounded-lg shadow-lg `}>
-                            <div className='relative flex items-center justify-center w-auto h-64  '>
-                                <Image layout="fill"
-                                      priority={true}
-                                      objectFit="contain" 
-                                      quality='40' 
-                                      src={offer?.image?.thumbnail} 
-                                      //  className=' object-contain h-full w-full ' 
-                                      alt={offer?.name}
-                                />
-                            </div>
+                        // <div className=''>
+                          
+                        <div className=''>
+
+                           <div key={offer} onClick={ ()=> showSalons(offer)}
+                             className={` ${offer?.name === offerName?.name ? 'border-3 border-green-500 ' : 'border-2'}
+                             ${open ? 'flex flex-col' : 'hidden' } hover:border-gray-400 lg:p-2 relative w-full h-full   lg:w-full mx-auto bg-white rounded-lg shadow-lg `}>
+                               <div className='relative flex items-center justify-center w-auto h-64  '>
+                                  <Image layout="fill"
+                                        priority={true}
+                                        objectFit="contain" 
+                                        quality='40' 
+                                        src={offer?.image?.thumbnail} 
+                                        // className=' object-contain h-full w-full ' 
+                                        alt={offer?.name}
+                                  />
+                               </div>
                              <CheckMarkFill  width={20} className={` ${(offer?.name === offerName?.name && offer?.sale_price === offerName?.sale_price ) ? 'block transition-all duration-900 ease-in-out' : 'hidden'} absolute right-0 top-0 me-2 bg-white rounded-full  text-green-600`} />
                           <div className=' space-y-2'>
                             <div className="px-2 lg:px-2 xl:px-6   ">
@@ -714,17 +716,27 @@ import Spinner from '@components/ui/loaders/spinner/spinner';
                             </div>
                           </div>
                       </div>
+                      </div>
+                      // </div>
                         ))
                     }
-                    
             </div>
             }
 
 
         <div ref={myDiv}  className={`${offerName ? 'flex' : 'hidden'} flex-col lg:px-4 mt-6 lg:mt-10 py-4`}>
 
-            <h4 className='text-2xl flex text-center items-center justify-center  lg:text-3xl font-serif text-gray-900 font-medium  py-4 tracking-normal'>
-                Select Salon Name
+          <div className='flex flex-col space-y-3 m-2 '>
+            <span className='font-semibold text-gray-700'>You have selected</span>
+            <div className='flex flex-col border p-4 rounded-2xl items-center justify-around'>
+              <img onClick={()=>openModal('OFFER_IMAGE_VIEW',{offer:offerName})} src={offerName?.image?.thumbnail} className='w-20 h-20'/>
+              <span className='text-gray-800 font-semibold'>{offerName?.name}</span>
+              <span onClick={()=>setOpen(!open)} className='cursor-pointer text-sm text-blue-700'>Change offer</span>
+            </div>
+          </div>
+
+            <h4 className='text-xl flex text-center items-center justify-center  lg:text-3xl font-serif text-gray-900 font-medium  py-4 tracking-normal'>
+                Please Select Salon Name
                 {/* <Link href='/shops?category=Salon+-+Spa'>
                     <span className='text-blue-800 cursor-pointer hover-underline text-sm '>
                         view all
@@ -750,7 +762,7 @@ import Spinner from '@components/ui/loaders/spinner/spinner';
 
       <div className={`${selectedSalon ? 'flex' : 'hidden'} grid grid-cols-1 lg:grid-cols-2  items-center justify-evenly w-full`}> 
           <div className='flex flex-col justify-center text-center w-full '> 
-                <h4 className=' w-full  whitespace-nowrap text-2xl text-center mx-auto flex items-center  lg:text-3xl font-serif text-gray-900 font-medium     py-4 tracking-normal'>
+                <h4 className=' w-full px-2 whitespace-nowrap text-xl text-center mx-auto flex items-center  lg:text-3xl font-serif text-gray-900 font-medium     py-4 tracking-normal'>
                   Select Appointment Date & Time
                 </h4>
               <div className="  bg-light p-5 mt-10 md:p-8 w-auto lg:w-1/2">

@@ -90,7 +90,7 @@ class UpiPaymentRepository extends BaseRepository
         
           curl_close($curl);
        
-        //  $type = gettype($response);
+        // $type = gettype($response);
         $response = json_decode($response, true);
         if(isset($response['payment_session_id'])) {
           $payment_session_id = $response['payment_session_id'];
@@ -98,7 +98,7 @@ class UpiPaymentRepository extends BaseRepository
           'payment_session_id not found';
       }
 
-      // return $response;
+        // return $response;
       
         // $payment_session_id = 'session_RtamjSUdQlmidc1cZ2gTYdvv7UriO0lKmPldFJHlDLfePM5efTFdbD10tEGHlyud4Is9nxv3FcnjVPc0MBt_3zB2cGlkzbWgQKDMourBNGvk';
 
@@ -129,7 +129,6 @@ class UpiPaymentRepository extends BaseRepository
           CURLOPT_HTTPHEADER => [
             "accept: application/json",
             "content-type: application/json",
-           
           ],
         ]);
         

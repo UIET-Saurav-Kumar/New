@@ -206,7 +206,7 @@ export default function PromotionSlider(props:any) {
                 <Fragment key={idx}>
                   {page?.data?.filter((shop) => shop?.is_active === 1 && shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").
                replace("name", "").replace("id", "") === "Salon  Spa" ).map((shop: any) => (
-            <SwiperSlide key={idx}>
+            <SwiperSlide key={shop}>
               {/* <Link href={`${ROUTES.SHOPS}/${shop.slug}`}> */}
                 <div   className={` ${shop?.name === shopName ? '' : '' }  border py-1 w-34 sm:w-54 md:w-54 lg:w-38 xl:w-60 rounded hover:border-gray-400 cursor-pointer border-gray-100 flex hover:shadow-lg flex-col items-center `}>
                   

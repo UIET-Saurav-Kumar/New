@@ -385,6 +385,26 @@ width: 100%;
     
   }
 
+
+
+  .accordion {
+    &-header {
+      &.active {
+        background-color: #f5f5f5;
+      }
+    }
+  
+    &-body {
+      display: none;
+    }
+  }
+  
+  .accordion-header.active + .accordion-body {
+    display: block;
+  }
+
+  
+
 @media (min-width: 244px) {
 
   .css-yk16xz-control{

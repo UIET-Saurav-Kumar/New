@@ -170,6 +170,7 @@ class OrderRepository extends BaseRepository
         {
             $payment_method = 'dc';
         }
+
         $orderFree = new CashFreeOrder();
         $od["orderId"] = $request['tracking_number'];
         $od["orderAmount"] = $request['total'];
@@ -183,12 +184,10 @@ class OrderRepository extends BaseRepository
         $orderFree->create($od);
 
         $order = $this->createOrder($request);
-
         
         $link = $orderFree->getLink($od['orderId']);
         return json_encode($link);
 
-        
 
     }
 
