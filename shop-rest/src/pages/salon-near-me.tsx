@@ -529,7 +529,7 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
             return "";
           }
           const myDiv = useRef(null);
-          const offer = useRef(null);
+          const offers = useRef(null);
 
           // console.log([{'offer': offerName, 'selectedSalon' : selectedSalon }])
 
@@ -676,7 +676,7 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
                           
                         <div className=''>
 
-                           <div ref={offer} key={offer} onClick={ ()=> showSalons(offer)}
+                           <div ref={offers} key={offer} onClick={ ()=> showSalons(offer)}
                              className={` ${offer?.name === offerName?.name ? 'border-3 border-green-500 ' : 'border-2'}
                              ${open ? 'flex flex-col' : 'hidden' } hover:border-gray-400 lg:p-2 relative w-full h-full   lg:w-full mx-auto bg-white rounded-lg shadow-lg `}>
                                <div className='relative flex items-center justify-center w-auto h-64  '>
@@ -736,7 +736,7 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
             <div className='flex flex-col border p-4 rounded-2xl items-center justify-around'>
               <img onClick={()=>openModal('OFFER_IMAGE_VIEW',{offer:offerName})} src={offerName?.image?.thumbnail} className='w-20 h-20'/>
               <span className='text-gray-800 font-semibold'>{offerName?.name}</span>
-              <span onClick={()=>setOpen(!open)} className='cursor-pointer text-sm text-blue-700'>Change offer</span>
+              <span onClick={scrollUp} className='cursor-pointer text-sm text-blue-700'>Change offer</span>
             </div>
           </div>
 
