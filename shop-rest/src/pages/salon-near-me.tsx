@@ -529,11 +529,17 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
             return "";
           }
           const myDiv = useRef(null);
+          const offer = useRef(null);
 
           // console.log([{'offer': offerName, 'selectedSalon' : selectedSalon }])
 
 
- 
+        function scrollUp(){
+          setOpen(!open)
+           offers.current.scrollIntoView({
+            behavior: 'smooth',
+          })
+        }
          
         function showSalons(data:any) {
 
@@ -670,7 +676,7 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
                           
                         <div className=''>
 
-                           <div key={offer} onClick={ ()=> showSalons(offer)}
+                           <div ref={offer} key={offer} onClick={ ()=> showSalons(offer)}
                              className={` ${offer?.name === offerName?.name ? 'border-3 border-green-500 ' : 'border-2'}
                              ${open ? 'flex flex-col' : 'hidden' } hover:border-gray-400 lg:p-2 relative w-full h-full   lg:w-full mx-auto bg-white rounded-lg shadow-lg `}>
                                <div className='relative flex items-center justify-center w-auto h-64  '>
