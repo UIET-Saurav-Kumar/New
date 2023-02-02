@@ -535,6 +535,7 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
 
 
         function scrollUp(){
+          // alert('hi')
           setOpen(!open)
            offers.current.scrollIntoView({
             behavior: 'smooth',
@@ -550,7 +551,7 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
           setOpen(false);
         
         //  console.log('salon',data)
-         setOfferName(data)
+         setOfferName(data);
          setSelectedSalon(null);
           // offerName && addItemToCart(offerName, 1) 
           // const item = generateCartItem(data);
