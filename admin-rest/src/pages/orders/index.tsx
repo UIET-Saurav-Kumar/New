@@ -45,6 +45,7 @@ export default function Orders() {
   const [shopCategory, setShopCategory] = useState(""); 
   const [searchType, setSearchType] = useState<"name" | "email" | "phone" | "address">("name");
 
+
   const convertStartDate = () => {
     const d = new Date(startDate);
     const month = `0${d.getMonth() + 1}`.slice(-2);
@@ -67,18 +68,13 @@ export default function Orders() {
     error: err,
   } = useDateRangeQuery(
       // {page,limit:15},
+      //@ts-ignore
     convertStartDate(),
     convertEndDate(),
     // shopName,
   
   );
 
-  // console.log('startDAte',endDate)
-
-  // console.log('date Range',data);
-  
-  // console.log('converted date', convertStartDate(), convertEndDate());
-  
 
   const {
     data: allOrders,
@@ -94,26 +90,10 @@ export default function Orders() {
     // shopName,
     // shopCategory,
   });
-  // console.log('data',allOrders);
-
-
-// const[setDate, datevalue] = useState(new Date());
-
-  // fetch api 127.0.0.1:3000/api/v1/orders?limit=15&page=1&text=&order_by=created_at&sorted_by=desc
-  // useEffect
-  // useEffect(() => {
-  //   fetch(`http://127.0.0.1:8000/orders`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       // console.log('range orders',data);
-  //     }
-  //     )
-  //     .catch((err) => alert(err));
-  // }, []);
+ 
 
 
   if (loading) return <Loader text={t("common:text-loading")} />;
-  // if (loadingProducts) return <Loader text={t("common:text-loading")} />;
 
   if (error) return <ErrorMessage message={error.message} />;
 
@@ -133,23 +113,6 @@ export default function Orders() {
   const toggleVisible = () => {
     setVisible((v) => !v);
   };
-
-//  alert(startDate) 
- // console.log('startDate',startDate)
-
- // convert this Thu Jun 23 2022 00:00:00 GMT+0530 (India Standard Time) to yyyy-mm-dd
-  
-  // function handleStartDate(date: Date) {
-  //   setStartDate(date);
-  // }
-  // function handleEndDate(date: Date) {
-  //   setEndDate(date);
-  // }
-
-  //  alert(convertStartDate(startDate))
-
-  // // console.log('date range orders', data.orders.data);
-  // // console.log('allOrders', allOrders);
 
   return (
     <>
@@ -179,6 +142,7 @@ export default function Orders() {
                   
               </select> <Search onSearch={handleSearch} />
           </div>
+
           <Button
               onClick={handleImportModal}
               className="mt-5 w-full md:hidden"
@@ -214,7 +178,8 @@ export default function Orders() {
         >
          <div className="flex flex-col md:flex-row md:space-x-4 md:items-center mt-5 md:mt-8 border-t border-gray-200 pt-5 md:pt-8 w-full">
           <div className="flex items-center "> <span className="text-gray-700 font-light mx-4">From</span> 
-            <div className="relative flex items-center"> <DatePicker clearButtonTitle="clear"
+            <div className="relative flex items-center"> 
+            <DatePicker clearButtonTitle="clear"
              selected={startDate} onChange={(date:Date ) => setStartDate(date)} 
              dateFormat= "dd/MM/yyyy"
              className=""
@@ -276,6 +241,7 @@ export default function Orders() {
 }
 
 Orders.Layout = Layout;
+
 
 export const getStaticProps = async ({ locale }: any) => ({
   props: {

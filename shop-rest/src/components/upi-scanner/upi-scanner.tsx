@@ -40,8 +40,10 @@ const modifiedLinks = Object.values(data)[0]?.map((link, index) => {
 });
 
 
-// const gpayLink = `upi://pay?pa=${upi_id2}&pn=${reciever}&aid=uGICAgIC4oYCNBQ`
-const gpayLink = 'upi://pay?pa=vinendersingh91@okicici&pn=vinender%20singh&aid=uGICAgIC4oYCNBQ'
+const gpayLink = `upi://pay?pa=${upi_id}&pn=${reciever_name}&tr=${trValue}&am=${amount}&cu=INR&mode=00&purpose=00&mc=0000&tn=${tnValue}&aid=uGICAgIC4oYCNBQ`
+const gpayLink_MC= `upi://pay?pa=${upi_id}&pn=${reciever_name}&tr=${trValue}&am=${amount}&cu=INR&mode=00&purpose=00&mc=0000&tn=${tnValue}&aid=uGICAgIC4oYCNBQ`
+const gpayLink_MC_CF= `upi://pay?pa=${upi_id2}&pn=${reciever}&tr=${trValue}&am=${amount}&cu=INR&mode=00&purpose=00&mc=0000&tn=${tnValue}&aid=uGICAgIC4oYCNBQ`
+// const gpayLink = 'upi://pay?pa=vinendersingh91@okicici&pn=vinender%20singh&aid=uGICAgIC4oYCNBQ'
 const gpay     =   `upi://pay?pa=${upi_id}&pn=${reciever_name}&am=${amount}&url=null&tid=aWd13cf2wer35&tr=${trValue}&mc=0000&mode=lazy&purpose=00&aid=uGICAgIC4oYCNBQ`
 const gpay_2   =   `upi://pay?pa=${upi_id}&pn=${reciever_name}&am=${amount}&tid=aWd13cf234sc35&tr=${trValue}&mc=0000&mode=lazy&purpose=00`
 const cashfree =   `upi://pay?pa=${upi_id}&pn=${reciever_name}&tr=${trValue}&am=${amount}&cu=INR&mode=00&purpose=00&mc=0000&tn=${tnValue}`
@@ -52,6 +54,8 @@ console.log('order link modified',modifiedLinks.join(' '));
 return (
 
   <div className='grid grid-cols-3 place-items-center h-screen w-screen  gap-x-6 px-10  bg-white'>
+     <span onClick={()=> window.open(gpayLink_MC_CF)} className='h-20 cursor-pointer w-20 rounded-full border'>gpayLink_MC_CF</span>
+                <span onClick={()=> window.open(gpayLink_MC)} className='h-20 cursor-pointer w-20 rounded-full border'>gpayLink_MC</span>
                 <span onClick={()=> window.open(gpayLink)} className='h-20 cursor-pointer w-20 rounded-full border'>gpay-link</span>
                 <span onClick={()=> window.open(gpay)} className='h-20 cursor-pointer w-20 rounded-full border'>gpay-more</span>
                 <span onClick={()=> window.open(gpay_2)} className='h-20 cursor-pointer w-20 rounded-full border'>gpay-2</span>

@@ -59,7 +59,7 @@ import Loader from '@components/ui/loader/loader';
 import PlacesApi from '@components/shop/google-maps-places-api';
 import { addLocation } from '@contexts/location/location.utils';
 import Spinner from '@components/ui/loaders/spinner/spinner';
-import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
+import { ArrowDownIcon, ArrowUpIcon, MinusIcon, PlusIcon } from '@heroicons/react/outline';
 
 
 
@@ -560,9 +560,9 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
        <div className="text-center text-lg font-medium tracking-wide whitespace-nowrap text-green-600">Book Now, Pay Later</div>
       </p>
 
-          <span ref={offers} onClick={()=> setOpen(!open)} className=' cursor-pointer  rounded-md p-1 flex items-center justify-between text-center text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 font-medium text-xl lg:text-3xl text-gray-900 font-serif ml-4 lg:ml-8 mt-10 lg:mt-10 tracking-normal'>
+          <span ref={offers} onClick={()=> setOpen(!open)} className=' cursor-pointer  rounded-md p-1 flex items-center space-x-3 text-center text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 font-medium text-xl lg:text-2xl text-gray-900 font-serif ml-4 lg:ml-8 mt-10 lg:mt-10 tracking-normal'>
             <h3 className='text-gray-800'>Select Deals to Explore Salons</h3> 
-            <span > {open ? <ArrowUpIcon className='h-5 w-5' /> : <  ArrowDownIcon className='h-5 w-5 text-blue-500' />}</span>
+            <span > {open ? <MinusIcon className='h-6 w-6  border-gray-400 text-green-600 border-2 rounded-full' /> : <  PlusIcon className='rounded-full border-2 h-6 w-6  border-gray-400 text-green-600' />}</span>
           </span>
 
           <Loader text='booking...' className={` ${booking ? 'block' : 'hidden'} mx-auto z-50`}/>
@@ -571,8 +571,8 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
                         <Spinner showText={false}/>
                       </div> 
                      : 
-            <div className = {`${data?.featureProducts?.data?.length  ? 'block w-full' : 'hidden'} relative w-full overflow-x-scroll text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500
-                  ${open ? 'flex flex-col  grid grid-cols-2  h-full md:grid md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-5 bg-gray-50 mt-3 p-2 lg:p-6 gap-1 lg:gap-4' : 'hidden' }   `}>
+            <div className = {`${data?.featureProducts?.data?.length  ? 'block w-full' : 'hidden'} transition-all duration-5000 ease-in-out relative w-full overflow-x-scroll text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500
+                  ${open ? 'transition-all duration-5000 ease-in-out flex flex-col  grid grid-cols-2  h-full md:grid md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-5 bg-gray-50 mt-3 p-2 lg:p-6 gap-1 lg:gap-4' : 'hidden' }   `}>
               
                {/* {fetching && !data?.pages?.length ? (
                         <ProductFeedLoader limit={5} />
@@ -642,7 +642,7 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
         <div ref={myDiv}  className={`${offerName ? 'flex' : 'hidden'} flex-col lg:px-4 mt-6 lg:mt-10 py-4`}>
 
           <div className='flex flex-col space-y-3 m-2 '>
-            <span className='font-semibold text-gray-700 text-2xl'>You have selected</span>
+            <span className='font-semibold text-gray-700 lg:text-2xl text-xl'>You have selected</span>
             <div className='flex flex-col border lg:border-none p-4 rounded-2xl items-center lg:items-start justify-around'>
               <img onClick={()=>openModal('OFFER_IMAGE_VIEW',{offer:offerName})} 
               //@ts-ignore
