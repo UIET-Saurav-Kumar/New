@@ -44,7 +44,7 @@ const gpayLink = `upi://pay?pa=${upi_id2}&pn=${reciever}&tr=${trValue}&am=${amou
 const gpayLink_MC= `upi://pay?pa=${upi_id}&pn=${reciever_name}&tr=${trValue}&am=${amount}&cu=INR&mode=00&purpose=00&mc=0000&tn=${tnValue}&aid=uGICAgIC4oYCNBQ`
 const gpayLink_MC_CF= `upi://pay?pa=${upi_id2}&pn=${reciever}&tr=${trValue}&am=${amount}&cu=INR&mode=00&purpose=02&mc=5399&tn=${tnValue}&aid=uGICAgIC4oYCNBQ`
 // const gpayLink = 'upi://pay?pa=vinendersingh91@okicici&pn=vinender%20singh&aid=uGICAgIC4oYCNBQ'
-const gpay     =   `upi://pay?pa=${upi_id}&pn=${reciever_name}&am=${amount}&url=null&tid=aWd13cf2wer35&tr=${trValue}&mc=0000&mode=lazy&purpose=00&aid=uGICAgIC4oYCNBQ`
+const gpay     =   `upi://pay?pa=${upi_id}&pn=${reciever_name}&cu=INR`
 const gpay_2   =   `upi://pay?pa=${upi_id}&pn=${reciever_name}&am=${amount}&tid=aWd13cf234sc35&tr=${trValue}&mc=0000&mode=lazy&purpose=00`
 const cashfree =   `upi://pay?pa=${upi_id}&pn=${reciever_name}&tr=${trValue}&am=${amount}&cu=INR&mode=00&purpose=00&mc=0000&tn=${tnValue}`
 const cashfree_mc =   `upi://pay?pa=${upi_id}&pn=${reciever_name}&tr=${trValue}&am=${amount}&cu=INR&mode=00&purpose=00&mc=5399&tn=${tnValue}`
