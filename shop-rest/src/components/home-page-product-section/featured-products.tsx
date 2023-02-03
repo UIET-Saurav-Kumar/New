@@ -158,6 +158,13 @@ export default function FeaturedProducts({}) {
 
     const electronicsArray =  data?.featureProducts.data.filter(function(product){
         return product.status == 'publish'  && product?.is_brand_offer !== 1 && product.type_id == 22 ? product : null;
+    }) 
+    const nightClubsArray =  data?.featureProducts.data.filter(function(product){
+        return product.status == 'publish'  && product?.is_brand_offer !== 1 && product.type_id == 29 ? product : null;
+    })
+
+    const gymArray =  data?.featureProducts.data.filter(function(product){
+        return product.status == 'publish'  && product?.is_brand_offer !== 1 && product.type_id == 28 ? product : null;
     })
 
  const arrays = [
@@ -374,6 +381,42 @@ export default function FeaturedProducts({}) {
                   <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 gap-1 p-1 lg:p-4 lg:gap-2">
                     
                         {electronicsArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
+                            <>    
+                                <motion.div key={product.id}>
+                                     <Neon2 product={product} />
+                                </motion.div>
+                            </> 
+                        ))}
+
+                   </div>
+            </div> 
+
+            <div className={`${gymArray?.length  ? 'block' : 'hidden'} flex flex-col`}>
+
+                  <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
+                       Gym
+                  </h3>
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 gap-1 p-1 lg:p-4 lg:gap-2">
+                    
+                        {gymArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
+                            <>    
+                                <motion.div key={product.id}>
+                                     <Neon2 product={product} />
+                                </motion.div>
+                            </> 
+                        ))}
+
+                   </div>
+            </div> 
+
+            <div className={`${nightClubsArray?.length  ? 'block' : 'hidden'} flex flex-col`}>
+
+                  <h3 className='text-lg sm:text-lg md:text-lg xl:text-xl  font-semibold  p-2'> 
+                       Night Clubs
+                  </h3>
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 gap-1 p-1 lg:p-4 lg:gap-2">
+                    
+                        {nightClubsArray?.filter(product=> product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                             <>    
                                 <motion.div key={product.id}>
                                      <Neon2 product={product} />

@@ -61,6 +61,30 @@ import { addLocation } from '@contexts/location/location.utils';
 import Spinner from '@components/ui/loaders/spinner/spinner';
 import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
 
+
+
+
+// export async function getStaticPaths() {
+//   return {
+//     paths: [],
+//     fallback: true,
+//   };
+// }
+
+// export async function getStaticProps(context) {
+//   const location = JSON.stringify({formattedAddress: "Chandigarh",
+//   lat: "30.7320",
+//   lng: "76.7726"});
+//   const {data} =  useFeatureProductQuery({
+//     limit: 10,
+//      location: location });
+//   return {
+//     props: {
+//       data,
+//     },
+//   };
+// }
+
   const ProductFeedLoader = dynamic(
     () => import("@components/ui/loaders/product-feed-loader")
   );
@@ -150,13 +174,13 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
     ]
     
 
-    export const getStaticProps = async ({ locale }: any) => {
-        return {
-          props: {
-            ...(await serverSideTranslations(locale, ["common"])),
-          },
-        };
-      };
+    // export const getStaticProps = async ({ locale }: any) => {
+    //     return {
+    //       props: {
+    //         ...(await serverSideTranslations(locale, ["common"])),
+    //       },
+    //     };
+    //   };
 
       interface FormValues {
         payment_gateway: "cod" | "cashfree" | "upi" | "wallet";
@@ -170,7 +194,7 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
       }
 
 
-  export default function SalonBookingPage() {
+  export default function SalonBookingPage({server_data}:any) {
 
     const {width} = useWindowDimensions();
 
@@ -193,36 +217,27 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
 
     const { isAuthorize } = useUI();
 
+    console.log('getLoc',getLocation)
+
     const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY;
 
 
     console.log('time slot', selectedTimeSlot)
 
     useEffect(() => {
-      window.scrollTo(0, 0);
+      window.scrollTo(0,0);
     }, []);
 
-    // useEffect(()=>{
-    //   const location: any = {
-    //     lat:  30.7320 ,
-    //     lng:  76.7726 ,
-    //     formattedAddress:  'Chandigarh'  ,
-    //   };
-
-    //      addLocation(location);
-    // },[pathname])
-
     const {
-       // isFetchingNextPage,
-      // fetchNextPage,
-      // hasNextPage,
-      isError: is_error,
+    
       data: products,
-      error: err,
     } = useProductsQuery({
+      //@ts-ignore
       shop_id: Number(selectedSalon?.id),
       // type: query.type as string,
+      //@ts-ignore
       sale_price: Number(offerName?.sale_price),
+      //@ts-ignore
       text: offerName?.name as string,
       // category: query?.category as string,
     },
@@ -242,76 +257,39 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
     const {
       data ,
       isLoading: loading,
-      error,
   } = useFeatureProductQuery({
     // shop_id: Number(selectedSalon?.id),
       limit: 10 as number,
       search:"",
-      location : ((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any
+      //@ts-ignore
+      location : ((getLocation?.formattedAddress) ? JSON.stringify(getLocation) : null ) as any
   });
 
-    // console.log('feature',data)
-
-    //   const {  
-    //     data,
-    //     isLoading: loading,
-    //     error,
-    // } = useOfferQuery({
-      
-    //     limit: 20 as number,
-    //     search:"",
-    //     location : ((getLocation?.formattedAddress) ? JSON.stringify(getLocation):null ) as any
-    // }); 
-
-    // useEffect(()=>{
-    //   setOfferName(products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0])
-    // },[ ])
-
-    // console.log('products',products?.pages[0]?.data?.filter(product => product?.sale_price === offerName?.sale_price)[0])
-    // console.log('products',products,offerName)
-
-
-        const origin = { lat: 37.7749, lng: -32.4194 };
-
-        const destination = { lat: 40.7128, lng: -34.0060 };
+    
 
         const currentDate =   value;
 
         const options = { month: 'short' };
 
+         //@ts-ignore
         const tim =  currentDate.toLocaleString('en-US', options);
 
         let dd = String(currentDate.getDate()).padStart(2, '0');
 
-        let yyyy = currentDate.getFullYear();
-
-        // console.log('value',tim)
-
-        const pattern = /(?<day>\w+)\s(?<month>\w+)\s(?<date>\d+)\s(?<year>\d+)\s(?<time>\d+:\d+:\d+)\s(?<tz>.*)/;
-
-        const match = tim?.match(pattern);
-
-        // const dd   =  match?.groups.day;
+       
         const month =  tim;
-        const date  =  match?.groups.date;
-        const year  =  match?.groups.year;
+      
 
         const newDate = `${dd} ${month}`;
-
-        // console.log('value',newDate)
 
         const { data: orderStatusData } = useOrderStatusesQuery();
 
         const {
           data: orderData,
           isFetching: order_loading,
-          // error,
-          // fetchNextPage,
-          // hasNextPage,
-          // isFetchingNextPage: loadingMore,
+         
         } = useOrdersQuery({});
 
-        // console.log('my order',orderData?.pages[0]?.data?.length);
       
         const { mutate: createOrder, isLoading: salonBooking } = useCreateOrderMutation();
 
@@ -322,48 +300,26 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
         const[booking, setBooking] = useState(false);
 
 
-        // console.log('log salon',selectedSalon)
-
-        // console.log('customer',customer);
-
-        // useEffect(()=>{
-        //   setNewOfferName(products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0])
-        // },[selectedSalon])
-
 
         function handleSelectedShop(data:any) {
          offerName && setSelectedSalon(data);
-          // setNewOfferName(tr)
-          
-          // console.log('new offername data',data)
-        }                           
         
-        // console.log('new offername',newOfferName) 
-        // console.log('new selectedSalon',selectedSalon)    
-        // console.log('new offername',offerName)
-        // console.log('new products',products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0])   
-
+        }                           
+      //@ts-ignore
         let avail_items =  [products?.pages[0]?.data?.filter(product =>  product.sale_price === offerName?.sale_price)[0] ]
-        // product_id: products?.pages[0]?.length && products?.pages[0]?.length && products?.pages[0]?.data?.filter(product => product?.sale_price === offerName?.sale_price  )[0].id,
-        // }]
-
-        // console.log('new avail items', offerName);
-
+       
+         //@ts-ignore
         const subtotal = calculateTotal(avail_items).total;
-
-        // console.log('log avail_items', avail_items);
-
-        // console.log('log offer', offerName);
-
+        //@ts-ignore
         let price = products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0]?.price;
-
+        //@ts-ignore
         let sale_price = products?.pages[0]?.data?.filter(product => product.sale_price === offerName?.sale_price)[0]?.sale_price;
-
+        
+        //@ts-ignore
         function calcDiscount(price, sale_price){
           return (price - sale_price) / price *100
         }
 
-        const { billing_address, setCheckoutData, checkoutData } = useCheckout();
 
         const { mutate: verifyCheckout, isLoading: c_loading } =
         useVerifyCheckoutMutation();
@@ -373,9 +329,7 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
         // },[selectedSalon])
 
         useEffect(()=>{
-          // const prevUrl = document.referrer;
-          // alert('start')
-
+          //@ts-ignore
           const input = JSON.parse(localStorage.getItem('input'));
           const pathname = window.location.pathname;
 
@@ -419,8 +373,7 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
 
         function onSubmit(values: FormValues) {
 
-          // console.log('newoffer',offerName);
-
+ 
           if (offerName == null ) {
             setError_Msg('Please select offer first ');
             return;
@@ -430,12 +383,6 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
             setError_Msg('Please select salon name');
             return;
          }         
-       
-
-          // if (selectedTimeSlot == null) {
-          //   setError_Msg('Please select salon also');
-          //   return;
-          // }
           
           if (selectedTimeSlot == null) {
             setError_Msg('Please select time slot also');
@@ -448,17 +395,14 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
             location:getLocation?.formattedAddress,
             products: 
             avail_items?.map((item) => formatSalonProduct(item)),
-            //    [{...offerName,
-            //   shop : {selectedSalon}
-            //    }],
             customer_contact: customer?.me?.phone_number,
             status:  orderStatusData?.order_statuses?.data[0]?.id ?? 1,
+            //@ts-ignore
             amount: offerName && offerName?.sale_price,
-            // product_id: products?.pages[0]?.length && products?.pages[0]?.data?.filter(product => product?.sale_sale_price === offerName?.sale_price  )[0].id,
-            // coupon_id: coupon?.id,
-            // quantity: 1,
             discount:  Math.floor(calcDiscount(price, sale_price)),
+            //@ts-ignore
             paid_total: offerName && offerName?.sale_price,
+            //@ts-ignore
             total : offerName && offerName?.sale_price,
             sales_tax:  0,
             delivery_fee: 0,
@@ -467,16 +411,8 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
           };
 
           localStorage.setItem('input', JSON.stringify(input));
+       
 
-          let inputString = JSON.parse(localStorage.getItem('input'));
-
-          // console.log('input', input);
-
-          // console.log('input', inputString ? true : false);
-
-          
-
- 
           if(!isAuthorize){
             return openModal('REGISTER',{
                 pathname: '/salon-near-me',
@@ -485,6 +421,7 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
 
 
           verifyCheckout(
+            //@ts-ignore
             {
               amount: subtotal,
               // unit_price: subtotal,
@@ -507,23 +444,19 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
                 }
               },
               onError: (error: any) => {
-                // console.log(error?.response?.data?.message);
+                console.log(error?.response?.data?.message);
               },
             });
           
           }
 
-          let inputString = JSON.parse(localStorage.getItem('input'));
-
-          // console.log('input outside', document.referrer)
-           
 
           function getSearch():string
+          
           {
-            const { query } = useRouter();
-            
+            //@ts-ignore
             if(newOfferName?.name){
-              // console.log(newOfferName?.name)
+              //@ts-ignore
               return newOfferName?.name as string
             }
             return "";
@@ -534,37 +467,32 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
           // console.log([{'offer': offerName, 'selectedSalon' : selectedSalon }])
 
 
-        function scrollUp(){
-          // alert('hi')
-          setOpen(!open)
-           offers.current.scrollIntoView({
-            behavior: 'smooth',
-          })
-        }
+          function scrollUp(){
+            window.scrollTo(0,0);
+            //@ts-ignore
+            offers?.current.scrollIntoView({
+              behavior: 'auto',
+            })
+            // alert('hi');
+            setOpen(!open)
+          }
          
         function showSalons(data:any) {
 
-          // myDiv.current.scrollIntoView({
-          //   behavior: 'smooth',
-          // })
-
-          setOpen(false);
+        setOpen(false);
+        setOfferName(data);
+        setSelectedSalon(null);
         
-        //  console.log('salon',data)
-         setOfferName(data);
-         setSelectedSalon(null);
-          // offerName && addItemToCart(offerName, 1) 
-          // const item = generateCartItem(data);
-          // addItemToCart(item, 1)
         }
 
-        useEffect(()=>{
+        useEffect(()=> {
+          //@ts-ignore
           myDiv.current.scrollIntoView({
             behavior: 'smooth',
           })
         },[offerName])
 
-        
+        //@ts-ignore
      const {
       data:shops,
       isLoading,
@@ -577,22 +505,14 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
      } = useShopsQuery({
       // category:getCategory(),
       limit:3000000,
+      //@ts-ignore
       location:((getLocation?.formattedAddress) ? JSON.stringify(getLocation) : null ) as any,
       is_active:1,
       // page:1,
       search:getSearch() 
     });
 
-    // console.log('shops',offerName,shops)
-
-    const handleClick = (e) => {
-      const value = e.target.innerHTML;
-      // console.log(value);
-      // You can use the value here, for example, to set the value of an input element
-      document.getElementById('input-element').value = value;
-    }
-
-    // console.log('time',selectedTimeSlot)
+  
 
     const filteredData = data?.featureProducts?.data?.filter(product =>
       product?.status === "publish" &&
@@ -601,24 +521,20 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
       product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").
       replace("name", "").replace("id", "") === "Salon  Spa"
     );
-
+      
+     //@ts-ignore
      const uniqueProducts = [];
 
     filteredData?.forEach(product => {
+      //@ts-ignore
       if (!uniqueProducts?.find(p => p.name === product.name && p?.sale_price === product?.sale_price)) {
         uniqueProducts.push(product);
       }
     });
 
     const minDate = new Date();
-    // minDate.setDate(minDate.getDate() + 30);
 
-    function handleApiPhotos(data) {
-      setPhotos(data)
-    }
-
-    function handleImage(data){
-      // console.log('modal data',data)
+    function handleImage(data:any){
       openModal('SHOP_IMAGE_POPOVER',{
         data:data
       })
@@ -628,17 +544,8 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
       setShopImages(data)
     }
 
-    // console.log('shopImages',shopImages)
-
 
   return ( 
-
-    //salon page design 
-    // <>
-    // {fetching && !data?.pages?.length ? (
-    // <img src='/'
-    // className="object-contain mx-auto" />
-    // ) : (
 
     <>
 
@@ -653,7 +560,7 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
        <div className="text-center text-lg font-medium tracking-wide whitespace-nowrap text-green-600">Book Now, Pay Later</div>
       </p>
 
-          <span onClick={()=> setOpen(!open)} className=' cursor-pointer  rounded-md p-1 flex items-center justify-between text-center text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 font-medium text-xl lg:text-3xl text-gray-900 font-serif ml-4 lg:ml-8 mt-10 lg:mt-10 tracking-normal'>
+          <span ref={offers} onClick={()=> setOpen(!open)} className=' cursor-pointer  rounded-md p-1 flex items-center justify-between text-center text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 font-medium text-xl lg:text-3xl text-gray-900 font-serif ml-4 lg:ml-8 mt-10 lg:mt-10 tracking-normal'>
             <h3 className='text-gray-800'>Select Deals to Explore Salons</h3> 
             <span > {open ? <ArrowUpIcon className='h-5 w-5' /> : <  ArrowDownIcon className='h-5 w-5 text-blue-500' />}</span>
           </span>
@@ -665,31 +572,31 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
                       </div> 
                      : 
             <div className = {`${data?.featureProducts?.data?.length  ? 'block w-full' : 'hidden'} relative w-full overflow-x-scroll text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500
-                  ${open ? 'flex flex-col' : 'hidden' }   grid grid-cols-2  h-full md:grid md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-5 bg-gray-50 mt-3 p-2 lg:p-6 gap-1 lg:gap-4`}>
+                  ${open ? 'flex flex-col  grid grid-cols-2  h-full md:grid md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-5 bg-gray-50 mt-3 p-2 lg:p-6 gap-1 lg:gap-4' : 'hidden' }   `}>
               
                {/* {fetching && !data?.pages?.length ? (
                         <ProductFeedLoader limit={5} />
                       ) : ( */}
-                
+                        
                         {!uniqueProducts?.length ? <span className=' '>Loading...</span> : uniqueProducts?.map((offer,product) => (
                           
-                        // <div className=''>
                           
                         <div className=''>
 
-                           <div ref={offers} key={offer} onClick={ ()=> showSalons(offer)}
+                           <div  key={offer} onClick={ ()=> showSalons(offer)}
                              className={` ${offer?.name === offerName?.name ? 'border-3 border-green-500 ' : 'border-2'}
                              ${open ? 'flex flex-col' : 'hidden' } hover:border-gray-400 lg:p-2 relative w-full h-full   lg:w-full mx-auto bg-white rounded-lg shadow-lg `}>
                                <div className='relative flex items-center justify-center w-auto h-64  '>
                                   <Image layout="fill"
                                         priority={true}
                                         objectFit="contain" 
-                                        quality='40' 
+                                        quality='10' 
                                         src={offer?.image?.thumbnail} 
                                         // className=' object-contain h-full w-full ' 
                                         alt={offer?.name}
                                   />
                                </div>
+                              
                              <CheckMarkFill  width={20} className={` ${(offer?.name === offerName?.name && offer?.sale_price === offerName?.sale_price ) ? 'block transition-all duration-900 ease-in-out' : 'hidden'} absolute right-0 top-0 me-2 bg-white rounded-full  text-green-600`} />
                           <div className=' space-y-2'>
                             <div className="px-2 lg:px-2 xl:px-6   ">
@@ -700,7 +607,7 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
                             <div className="flex flex-col px-2 lg:px-2 xl:px-6 space-y-2 py-1 ">
                              <div className='flex items-center justify-between'> 
                                <div className='grid grid-cols-1 sm:grid-cols-2 items-center'>
-                                <span className="inline-block bg-gray-200 text-accent p-3 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+                                <span className="inline-block bg-gray-200   p-3 rounded-full px-3 py-1 text-sm font-semibold text-accent mr-2">
                                 ₹
                                 {+' '+offer?.sale_price}.00
                                 </span>
@@ -715,8 +622,10 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
                                 </span>
                               </div>
                               <button
+                              //@ts-ignore
                                 className={` ${offer?.name === offerName?.name && offer?.sale_price === offerName?.sale_price ? 'bg-green-600 text-white' : 'text-gray-500 bg-gray-100' }   hover:bg-green-600 hover:text-white text-white font-bold py-2 px-4 rounded-full`}
                               >
+                                
                                 {offer?.name === offerName?.name &&  offer?.sale_price === offerName?.sale_price ? 'Selected' : 'Select'}
                               </button>
                             </div>
@@ -733,9 +642,11 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
         <div ref={myDiv}  className={`${offerName ? 'flex' : 'hidden'} flex-col lg:px-4 mt-6 lg:mt-10 py-4`}>
 
           <div className='flex flex-col space-y-3 m-2 '>
-            <span className='font-semibold text-gray-700'>You have selected</span>
-            <div className='flex flex-col border p-4 rounded-2xl items-center justify-around'>
-              <img onClick={()=>openModal('OFFER_IMAGE_VIEW',{offer:offerName})} src={offerName?.image?.thumbnail} className='w-20 h-20'/>
+            <span className='font-semibold text-gray-700 text-2xl'>You have selected</span>
+            <div className='flex flex-col border lg:border-none p-4 rounded-2xl items-center lg:items-start justify-around'>
+              <img onClick={()=>openModal('OFFER_IMAGE_VIEW',{offer:offerName})} 
+              //@ts-ignore
+                   src={offerName?.image?.thumbnail} className='w-20 lg:w-60 lg:h-60 h-20'/>
               <span className='text-gray-800 font-semibold'>{offerName?.name}</span>
               <span onClick={scrollUp} className='cursor-pointer text-sm text-blue-700'>Change offer</span>
             </div>
@@ -759,6 +670,7 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
                               show={true}
                               onClick={handleImage}
                                 handleImage={handleImage}
+                                //@ts-ignore
                                 shopName={selectedSalon?.name} 
                               // handlePhotos={handleApiPhotos}
                                 /> }
@@ -783,12 +695,16 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
 
           <div className='p-3 text-sm lg:text-lg grid grid-cols-2 gap-4 place-content-center'>
             <button className={`${selectedTimeSlot === '10:00am - 12:00PM' ? 'bg-blue-600 text-white': 'hover:bg-gray-100 border  p-3 bg-gray-50 text-black'} rounded cursor-pointer `} 
+            //@ts-ignore
                     onClick={() => setSelectedTimeSlot('10:00am - 12:00PM')}> 10:00 am - 12:00 pm </button>
             <button className={`${selectedTimeSlot === '12:00pm - 02:00pm' ? 'bg-blue-600 text-white': 'hover:bg-gray-100 border  p-3 bg-gray-50 text-black'} rounded cursor-pointer `} 
+            //@ts-ignore
                     onClick={() => setSelectedTimeSlot('12:00pm - 02:00pm')}> 12:00 pm - 02:00 pm </button>
             <button className={`${selectedTimeSlot === '02:00pm - 04:00pm ' ? 'bg-blue-600 text-white': 'hover:bg-gray-100 border  p-3 bg-gray-50 text-black'} rounded cursor-pointer `}
+            //@ts-ignore
                     onClick={() => setSelectedTimeSlot('02:00pm - 04:00pm ')}> 02:00 pm - 04:00 pm </button>
             <button className={`${selectedTimeSlot === '04:00pm - 06:00pm' ? 'bg-blue-600 text-white': 'hover:bg-gray-100 border  p-3 bg-gray-50 text-black'} rounded cursor-pointer `}
+            //@ts-ignore
                     onClick={() => setSelectedTimeSlot('04:00pm - 06:00pm')}> 04:00 pm - 06:00 pm </button>
           </div>
 
@@ -797,6 +713,7 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline';
       <div className={`${selectedSalon ? 'flex' : 'hidden'} flex flex-col mx-auto w-full text-center`}>
         <p className='text-red-600 animate-bounce transition-opacity duration-300 ease-in-out mt-4 h-5'>{error_msg ? error_msg : ''}</p>
         <button className='mx-auto text-white font-semibold rounded mt-10 w-60 border bg-accent mb-20 p-4' 
+        //@ts-ignore
                  onClick={()=>onSubmit()}>
                 {salonBooking ?
                 ("booking..."):
