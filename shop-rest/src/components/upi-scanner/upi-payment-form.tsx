@@ -14,15 +14,18 @@ import { useModalAction } from '@components/ui/modal/modal.context';
 export default function UpiPaymentForm(props:any ) {
 
     const { mutate: createOrder, isLoading: loading } = useUpiPaymentMutation();
+
     const { data } = useCustomerQuery();
+
     const router = useRouter();
+
     const {openModal} = useModalAction();
 
-    console.log('prop', props?.data?.props)
+    // console.log('prop', props?.data?.props);
 
     const reciever_upi = props?.data?.props;
-    const reciever_name = props?.data?.payee_name;
 
+    const reciever_name = props?.data?.payee_name;
 
     const {
         register,
@@ -76,27 +79,30 @@ export default function UpiPaymentForm(props:any ) {
   return (
 
 
-    <div className='w-screen h-screen bg-white p-4 flex   justify-evenly '>
+    <div className='w-screen h-screen bg-white p-4 flex justify-evenly '>
 
       <form 
         onSubmit={handleSubmit(onSubmit)}
         noValidate
-        className="flex flex-col justify-center   "
-        >
+        className="flex flex-col justify-center"
+      >
 
           <div className='flex flex-col text-center mt-10'>
+
             <span className='flex items-center space-x-2 text-lg justify-center text-gray-800 font-semibold'>
                 <span className='text-gray-700 '>Paying</span>
                 <span className='text-gray-700 '>{reciever_name}</span>
-              </span>
-              <span className='font-light text-gray-700'>
+            </span>
+            <span className='font-light text-gray-700'>
                 {reciever_upi}
             </span>
               
           </div>
 
           <div className='flex flex-col space-y-4 text-center mb-20 mt-20'>
-            <Label className='text-xl  text-gray-800 font-semibold '>Enter Amount</Label>
+            <Label className='text-xl  text-gray-800 font-semibold '>
+              Enter Amount
+            </Label>
             <Input
             {...register("contact", { required: "error-contact-required" })}
             // label={("Enter amount")}
@@ -108,10 +114,9 @@ export default function UpiPaymentForm(props:any ) {
             // value={data?.me?.phone_number}
             onChange={(e) => setValue("amount", e.target.value)}
             error={(errors?.contact?.message!)}
-          />
+            />
           </div>
 
-           
 
         <Button
             loading={loading}
@@ -119,7 +124,7 @@ export default function UpiPaymentForm(props:any ) {
             className="w-full mt-20 lg:w-auto lg:ms-auto "
           >
             {("Proceed")}
-        </Button>
+        </Button> 
  
       </form>
         

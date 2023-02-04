@@ -468,6 +468,7 @@ class OrderRepository extends BaseRepository
                         //         return $item->unit_price;
                         //     })),
                         'shop_name'=> $product->shop->name,
+                        'shop_address'=> $product->shop->settings['location']['formattedAddress'],
                         // get all the product names in array
                         'product_name'=> $product->name,
                         // 'product_name'=> $product->name,

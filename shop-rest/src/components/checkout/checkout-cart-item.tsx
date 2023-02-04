@@ -43,7 +43,8 @@ const CheckoutCartItem = ({ item, notAvailable }: Props) => {
     })
     setShopOrderPrice(p)
     setShopItems(shop_items)    
-  }, [])
+  }, [items])
+  
 
   function isWithDelivery():Boolean{
     if(item?.shop?.delivery_status){
