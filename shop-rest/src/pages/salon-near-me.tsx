@@ -527,7 +527,7 @@ import { ArrowDownIcon, ArrowUpIcon, MinusIcon, PlusIcon } from '@heroicons/reac
 
     filteredData?.forEach(product => {
       //@ts-ignore
-      if (!uniqueProducts?.find(p => p.name === product.name && p?.sale_price === product?.sale_price && product?.is_featured == 1)) {
+      if (!uniqueProducts?.find(p => p.name === product.name  && p?.sale_price == product?.sale_price )) {
         uniqueProducts.push(product);
       }
     });
@@ -543,6 +543,8 @@ import { ArrowDownIcon, ArrowUpIcon, MinusIcon, PlusIcon } from '@heroicons/reac
     function handleShopImages(data:any) {
       setShopImages(data)
     }
+
+    console.log('filtered',filteredData)
 
 
   return ( 
@@ -584,7 +586,7 @@ import { ArrowDownIcon, ArrowUpIcon, MinusIcon, PlusIcon } from '@heroicons/reac
                         <div className=''>
 
                            <div  key={offer} onClick={ ()=> showSalons(offer)}
-                             className={` ${offer?.name === offerName?.name ? 'border-3 border-green-500 ' : 'border-2'}
+                             className={` ${offer?.name === offerName?.name && offer?.sale_price === offerName?.sale_price ? 'border-3 border-green-500 ' : 'border-2'}
                              ${open ? 'flex flex-col' : 'hidden' } hover:border-gray-400 lg:p-2 relative w-full h-full   lg:w-full mx-auto bg-white rounded-lg shadow-lg `}>
                                <div className='relative flex items-center justify-center w-auto h-64  '>
                                   <Image layout="fill"

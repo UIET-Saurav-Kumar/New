@@ -204,7 +204,7 @@ export default function PromotionSlider(props:any) {
           {shopData?.pages?.map((page, idx) => {
               return (
                 <Fragment key={idx}>
-                  {page?.data?.filter((shop) => shop?.name === props?.offer?.shop?.name && shop?.is_active === 1 && shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").
+                  {page?.data?.filter((shop) =>  shop?.is_active === 1 && shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").
                replace("name", "").replace("id", "") === "Salon  Spa" ).map((shop: any) => (
             <SwiperSlide key={shop}>
               {/* <Link href={`${ROUTES.SHOPS}/${shop.slug}`}> */}

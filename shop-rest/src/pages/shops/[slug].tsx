@@ -336,7 +336,21 @@ function handleTotalRating(data) {
                 "longitude": data?.settings?.location?.lng
               },
               "url": basePath+data?.slug,
-              "telephone": data?.settings?.contact
+              "telephone": data?.settings?.contact,
+              "review": [
+                {
+                  "@type": "Review",
+                  "author": "Amit",
+                  "datePublished": "2022-01-01",
+                  "description": "Best services",
+                  "reviewRating": {
+                    "@type": "Rating",
+                    "bestRating": "5",
+                    "ratingValue": "4",
+                    "worstRating": "1"
+                  }
+                }
+              ]
             }
             )}}
           />
