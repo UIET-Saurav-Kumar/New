@@ -70,16 +70,16 @@ const RegisterForm = (props:any) => {
 
   const [birthDate, setBirthDate] = useState(null);
   
-  const userLoc = [{
-    formattedAddress: getLocation.formattedAddress,
-    lat: getLocation.lat,
-    lng: getLocation.lng,
-  }];
+  // const userLoc = [{
+  //   formattedAddress: getLocation.formattedAddress,
+  //   lat: getLocation?.lat,
+  //   lng: getLocation?.lng,
+  // }];
 
   // console.log('register', props.data);
   const url = props?.data?.pathname;
 
-  const [userLocation, setUserLocation] = useState(userLoc);
+  // const [userLocation, setUserLocation] = useState(userLoc);
 
   const {
     register,

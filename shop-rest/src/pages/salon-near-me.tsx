@@ -527,7 +527,7 @@ import { ArrowDownIcon, ArrowUpIcon, MinusIcon, PlusIcon } from '@heroicons/reac
 
     filteredData?.forEach(product => {
       //@ts-ignore
-      if (!uniqueProducts?.find(p => p.name === product.name && p?.sale_price === product?.sale_price)) {
+      if (!uniqueProducts?.find(p => p.name === product.name && p?.sale_price === product?.sale_price && product?.is_featured == 1)) {
         uniqueProducts.push(product);
       }
     });

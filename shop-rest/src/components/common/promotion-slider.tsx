@@ -171,7 +171,7 @@ export default function PromotionSlider(props:any) {
     return "";
   }
 
-  console.log('pages',shopData?.pages)
+  console.log('pages',props?.offer)
 
 
   
@@ -204,7 +204,7 @@ export default function PromotionSlider(props:any) {
           {shopData?.pages?.map((page, idx) => {
               return (
                 <Fragment key={idx}>
-                  {page?.data?.filter((shop) => shop?.is_active === 1 && shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").
+                  {page?.data?.filter((shop) => shop?.name === props?.offer?.shop?.name && shop?.is_active === 1 && shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").
                replace("name", "").replace("id", "") === "Salon  Spa" ).map((shop: any) => (
             <SwiperSlide key={shop}>
               {/* <Link href={`${ROUTES.SHOPS}/${shop.slug}`}> */}
@@ -216,6 +216,7 @@ export default function PromotionSlider(props:any) {
                    src={shop?.logo?.thumbnail}
                    alt={t(shop?.name)}
                   />
+
                   <span className = "flex flex-col text-xs lg:text-sm  mt-2 h-28 text-center font-semibold">
                     <p className="h-10 text-md ">{shop?.name}</p>
                     <p className="h-5 mt-2 text-gray-700 font-light"> 
