@@ -75,17 +75,17 @@ type ShopProfileCardProps = {
   return (
     <>
       
-        <div className="mt-2 xs+++:mt-0 sm:mt-0 bg-white relative h-full w-full border
+        <div className="mt-2 xs+++:mt-0 sm:mt-0  bg-white relative h-full w-full border
                         rounded-lg xs+++:rounded-r-none flex items-center overflow-hidden">
 
           {/* <Scrollbar className={cn("w-full", styles.scrollbar_height)}> */}
 
-            <div className="w-full -space-y-8 p-3 grid grid-cols-2  gap-x-8 gap-y-0  
+            <div className="w-full  -space-y-8 p-3 grid grid-cols-2  gap-x-8 gap-y-0  
                              sm:grid-cols-1 lg:grid-cols-1 items-center">
 
-              <div className="w-full h-52  rounded-lg flex justify-center flex-col space-y-2 mt-0 sm:-mt-6 relative mx-auto 
+              <div className="w-full h-44 sm:h-32 md:h-36  rounded-lg flex justify-center flex-col space-y-2 mt-0 sm:-mt-6 relative mx-auto 
                               overflow-hidden mb-8">
-                  {imageCheck(data?.logo?.thumbnail, data, '250', false,'object-contain sm:object-contain rounded md:object-contain lg:object-contain  ')}          
+                  {imageCheck(data?.logo?.thumbnail, data, '250', false,'object-contain rounded ')}          
                       
                   
                    {/* <span className="text-sm sm:hidden text-center font-light tracking-wide  text-gray-600 ">

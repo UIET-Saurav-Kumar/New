@@ -22,7 +22,7 @@ export default function ShopDescription({data} :any) {
              {/* Description */}
             <div className=' flex flex-col  w-full text-left'>
                 <span className="text-sm lg:text-lg text-heading font-semibold mb-2">
-                      Description
+                      Our Story
                 </span>
 
                 {data?.description && (
@@ -54,8 +54,9 @@ export default function ShopDescription({data} :any) {
 
                           <span className=" flex items-end space-x-1 text-xs  md:text-lg font-light tracking-wide text-body">
                             {/* {data?.settings?.contact} */}
-                            <PhoneIcon scale={0.88} className="h-4 w-4 scale-75 text-blue-900 "/> 
-                            <a className="text-indigo-800 font-semibold cursor-pointer" href={`tel:${'77430-42380'}`}>
+                             
+                            <a className="flex items-center text-indigo-800 p-1 border-indigo-700 rounded border font-semibold no-underline cursor-pointer" href={`tel:${'77430-42380'}`}>
+                            <PhoneIcon scale={0.88} className="h-6 w-6 scale-75 text-blue-900 "/> 
                              {/* 84279-90450 */}
                              Call us
                             </a>  
@@ -70,12 +71,12 @@ export default function ShopDescription({data} :any) {
                     {t("Whatsapp/Call to order")}
                   </span>
 
-                  <span className = "flex items-end space-x-1 text-xs underline md:text-lg font-light tracking-wide text-body">
+                  <span className = "flex items-end space-x-1 text-xs   md:text-lg font-light tracking-wide text-body">
                             {/* {data?.settings?.contact} */}
-                            <PhoneIcon scale={0.9} className = "h-6 w-6 scale-75 text-blue-900 "/> 
-                            <a className=" text-indigo-800 decoration-none font-semibold cursor-pointer" href={`tel:${' 77430-42380'}`}>
-                              {/* 84279-90450 */}
-                               Call us
+                            <a className="flex items-center text-sm text-indigo-800 p-2 border-indigo-700 rounded border font-semibold no-underline cursor-pointer" href={`tel:${'77430-42380'}`}>
+                            <PhoneIcon scale={0.88} className="h-5 w-6 scale-75 text-blue-900 "/> 
+                             {/* 84279-90450 */}
+                             Call us
                             </a>  
                   </span>
               </div>
