@@ -290,8 +290,6 @@ function handleTotalRating(data) {
   setTotalRating(data);
 }
  
-
-
   console.log('placePhotos',placePhotos,reviews);
 
   function handleImage(data){
@@ -300,7 +298,9 @@ function handleTotalRating(data) {
       data:placePhotos
     })
   }
-  
+
+  console.log('schema',data);
+  const basePath = 'https://buylowcal.com/shops/' 
 
   return (
 
@@ -311,16 +311,45 @@ function handleTotalRating(data) {
           <meta name="description" content={(data.name?data.name:'')+' '+(data.address.city?data.address.city+" "+data.address.street_address:'')+' Best '+shopCategory+' deals, offers, discounts and cash backs only through buylowcal.com'} />
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
           <link rel="canonical" href={`https://buylowcal.com/shops/${data?.slug}`}/>
+          
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(
+            {
+              "@context": "http://schema.org",
+              "@type": "Store",
+              "name": data?.name,
+              "description": data?.description,
+              "image": data?.logo?.original,
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": data?.settings?.location?.formattedAddress,
+                "addressLocality": data?.settings?.location?.sector,
+                "addressRegion": data?.settings?.location?.state,
+                "postalCode": data?.settings?.location?.zip,
+                "addressCountry": data?.settings?.location?.country
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": data?.settings?.location?.lat,
+                "longitude": data?.settings?.location?.lng
+              },
+              "url": basePath+data?.slug,
+              "telephone": data?.settings?.contact
+            }
+            )}}
+          />
+
+          
         </Head>
 
-            <div className="relative bg-white lg:bg-gray-100 hidden lg:flex flex-col
-                            md:flex-row md:justify-between md:items-start">
+                <div className="relative bg-white lg:bg-gray-100 hidden lg:flex flex-col
+                                md:flex-row md:justify-between md:items-start">
 
                         {/* // button to scroll to the top of the page when user has scrolled way down */}
 
                         <div className="fixed z-50 bottom-10 right-10 flex justify-center items-center">
                           <img src='/up-arrow.png' className="w-12 h-12" onClick={() => window.scrollTo(0, 0)} /> 
-                          
                         </div>
 
                         {/* <div className="fixed z-50 bottom-10 right-10 flex justify-center items-center">
@@ -341,7 +370,6 @@ function handleTotalRating(data) {
                                 :
                                 ( <div className='h-full w-96'>  
                                     <ShopProfileCard reviews={reviews} totalRating={totalRating} rating={rating} open={open} data={data} />
-                                    
                                   </div> )  }
                                 
                                 { slug?.some(el => data?.slug?.includes(el)) ? (
@@ -410,7 +438,7 @@ function handleTotalRating(data) {
                                   </div> )  }
 
                                           
-                            </div>
+                              </div>
 
                             {/* { data?.slug == 'chandigarhgrocerystore' ? ( 
                              <div className="w-full -mt-80 object-contain">

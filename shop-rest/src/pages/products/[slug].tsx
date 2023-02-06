@@ -82,9 +82,9 @@ export default function ProductSinglePage({ product }: any) {
       <link rel="canonical" href={`https://buylowcal.com/products/${product?.slug}`}/>
 
       <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(
-      {
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(
+        {
         "@context": "http://schema.org",
         "@type": "Product",
         "name": product?.name,
@@ -135,7 +135,7 @@ export default function ProductSinglePage({ product }: any) {
        
 
     </Head>
-    
+
       <div className="bg-light min-h-screen">
         
         {/* <Seo productData={product} /> */}

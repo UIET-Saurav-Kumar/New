@@ -101,7 +101,9 @@ const offerSliderBreakpoints = {
 
 };
 
+
 SwiperCore.use([Navigation]);
+
 
 export default function CategorySlider({items}:any) {
 
@@ -147,6 +149,7 @@ export default function CategorySlider({items}:any) {
           <span className="sr-only">{t("common:text-next")}</span>
           <ArrowNext width={24} height={24} />
         </div>
+
       </div>
     </div>
   );
