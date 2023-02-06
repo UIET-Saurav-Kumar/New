@@ -299,7 +299,7 @@ function handleTotalRating(data) {
     })
   }
 
-  console.log('schema',data);
+  console.log('schema',shopCategory);
   const basePath = 'https://buylowcal.com/shops/' 
 
   return (
@@ -307,8 +307,9 @@ function handleTotalRating(data) {
     <>
 
         <Head>
-          <title>{(data.name?data.name:'')+' '+(data.address.city?data.address.city+" "+data.address.street_address:'')+', Best Discounts and Offers Only Through BuyLowcal.com'}</title>
-          <meta name="description" content={(data.name?data.name:'')+' '+(data.address.city?data.address.city+" "+data.address.street_address:'')+' Best '+shopCategory+' deals, offers, discounts and cash backs only through buylowcal.com'} />
+
+          <title>{(data.name?data.name:'')+' '+', Best Discounts and Offers Only Through BuyLowcal.com'}</title>
+          <meta name="description" content={(data?.description?data?.description:'')+' '+' Best '+shopCategory+' deals, offers, discounts and cash backs only through buylowcal.com'} />
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
           <link rel="canonical" href={`https://buylowcal.com/shops/${data?.slug}`}/>
           
@@ -320,7 +321,7 @@ function handleTotalRating(data) {
               "@type": "Store",
               "name": data?.name,
               "description": data?.description,
-              "image": data?.logo?.original,
+              "image": data?.cover_image?.original,
               "address": {
                 "@type": "PostalAddress",
                 "streetAddress": data?.settings?.location?.formattedAddress,
