@@ -61,7 +61,6 @@ export default function GetCurrentLocation({
       
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition, error, options);
-            //reload page
              
         } else { 
             setBtn('Detect')

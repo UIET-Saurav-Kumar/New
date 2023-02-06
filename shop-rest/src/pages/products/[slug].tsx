@@ -1,3 +1,4 @@
+
 import { GetStaticPathsContext, GetStaticProps } from "next";
 import ProductDetails from "@components/product/product-details";
 import Layout from "@components/layout/layout";
@@ -134,6 +135,7 @@ export default function ProductSinglePage({ product }: any) {
        
 
     </Head>
+    
       <div className="bg-light min-h-screen">
         
         {/* <Seo productData={product} /> */}
