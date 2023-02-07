@@ -14,6 +14,7 @@ import {
   UseInfiniteQueryOptions,
 } from "react-query";
 
+
 const ShopService = new CoreApi(API_ENDPOINTS.SHOPS);
 type PaginatedShop = {
   data: Shop[];

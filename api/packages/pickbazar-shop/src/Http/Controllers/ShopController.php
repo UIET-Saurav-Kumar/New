@@ -105,9 +105,11 @@ class ShopController extends CoreController
 
     public function salonShops(Request $request)
     {
+        // echo $request;
         // $category_slug=$request->category;
         $location=($request->location)?json_decode($request->location):"";
         $search=$request->search;
+        $price = $request->price;
         if($search){
             $search=str_contains($request->search,"-")?str_replace("-","&",$request->search):$request->search;
         }
@@ -118,7 +120,7 @@ class ShopController extends CoreController
         $shops=$this->fetchShops($request)->where("is_active",1);
         if($search)
         {
-            $shops_ids=ProductRepository::searchSalonByValue($search);
+            $shops_ids=ProductRepository::searchSalonByValue($search, $price);
             $shops->whereIn('id',$shops_ids);
         }
  

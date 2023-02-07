@@ -368,8 +368,8 @@ width: 100%;
   border-bottom-right-radius: 8px!important;
   border-width: 2px!important;
   /* border-style:dotted ; */
-  background-color: gray;
-  border-color: #41645ea2!important;
+  background-color: rgb(38, 33, 33);
+  border-color: #1d2423a2!important;
 }
 
 .css-yk16xz-control::placeholder {
@@ -387,21 +387,7 @@ width: 100%;
 
 
 
-  .accordion {
-    &-header {
-      &.active {
-        background-color: #f5f5f5;
-      }
-    }
-  
-    &-body {
-      display: none;
-    }
-  }
-  
-  .accordion-header.active + .accordion-body {
-    display: block;
-  }
+ 
 
   
 

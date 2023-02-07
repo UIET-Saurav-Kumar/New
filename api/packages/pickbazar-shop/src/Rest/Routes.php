@@ -304,7 +304,6 @@ Route::delete('logs/{id}', 'PickBazar\Http\Controllers\LogController@destory');
 Route::any('cashfree', 'PickBazar\Http\Controllers\CashFreeController@cashFree');
 
 
-
 // busineesId, mobile, ParentBusinees Id
 Route::apiResource('coupons', CouponController::class, [
     'only' => ['index', 'show']

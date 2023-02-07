@@ -52,7 +52,7 @@ const SearchBox: React.FC<Props> = ({
           value={value}
           autoComplete="off"
           className={cn(
-            "w-full h-full flex  items-center appearance-none transition duration-300 ease-in-out text-heading text-sm bg-gray-50 placeholder-gray-500 overflow-hidden rounded-lg lg:rounded-l-none border-gray-400 lg:border-2 focus:outline-none focus:ring-0",
+            "w-full h-full flex  items-center appearance-none transition duration-300 ease-in-out text-heading text-sm bg-gray-50 placeholder-gray-500 overflow-hidden rounded-lg lg:rounded-l-none border-gray-500 lg:border-2 focus:outline-none focus:ring-0",
             classes[variant]
           )}
           {...rest}

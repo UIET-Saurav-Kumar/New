@@ -12,7 +12,10 @@ import {
     UseInfiniteQueryOptions,
   } from "react-query";
 
+  
+
   const ShopService = new CoreApi(API_ENDPOINTS.SALON_SHOPS);
+
 
   type PaginatedShop = {
     data: Shop[];
@@ -59,6 +62,8 @@ import {
       }
     );
   };
+
+
   
   export { useSalonShopsQuery, fetchSalonShops };
   

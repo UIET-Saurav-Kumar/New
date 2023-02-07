@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { useTranslation } from "next-i18next";
 import "swiper/swiper-bundle.css";
 // dummy data
-import { fetchShops, Salon } from "yuseSalonShopsQuerydata/shop/use-search-shop-query";
+import { fetchShops, Salon } from "useSalonShopsQuerydata/shop/use-search-shop-query";
 import { useLocation } from "@contexts/location/location.context";
 import { useRouter } from "next/router";
 import { Fragment, useEffect, useRef, useState } from "react";
@@ -136,6 +136,7 @@ export default function PromotionSlider(props:any) {
     limit:3000000,
     location:((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any,
     is_active:1,
+    price: props?.offer?.sale_price,
     // page:1,
     search:getSearch()
   },  
@@ -161,12 +162,12 @@ export default function PromotionSlider(props:any) {
   },[shopName])
 
 
-  function getSearch():string{
+  function getSearch():string {
     
     const { query } = useRouter();
     
     if(props?.offer?.name){
-      return props?.offer?.name as string
+      return props?.offer?.name  as string
     }
     return "";
   }

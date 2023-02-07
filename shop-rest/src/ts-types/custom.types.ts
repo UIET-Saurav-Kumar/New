@@ -1,6 +1,7 @@
 import { Children } from "react";
 import { QueryKey } from "react-query";
 
+
 export type CategoriesQueryOptionsType = {
   type: string;
   text?: string;
@@ -8,6 +9,7 @@ export type CategoriesQueryOptionsType = {
   status?: string;
   limit?: number;
 };
+
 export type FetureShopOptionsType = {
   location?:any;
   category?:string;
@@ -15,6 +17,7 @@ export type FetureShopOptionsType = {
   search?:string;
   limit?: number;
 };
+
 export type FetureProductOptionsType = {
   location?:any;
   category?:string;
@@ -22,6 +25,7 @@ export type FetureProductOptionsType = {
   search?:string;
   limit?: number;
 };
+
 export type OfferOptionsType = {
   location?:any;
   category?:string;
@@ -29,6 +33,7 @@ export type OfferOptionsType = {
   search?:string;
   limit?: number;
 };
+
 export type ProductsQueryOptionsType = {
   type?: string;
   text?: string;
@@ -44,6 +49,7 @@ export type ShopsQueryOptionsType = {
   is_active?:number;
   search?:string;
   limit?: number;
+  price:number;
 };
 
 export type OrdersQueryOptionsType = {

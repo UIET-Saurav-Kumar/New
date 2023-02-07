@@ -478,11 +478,9 @@ import { ArrowDownIcon, ArrowUpIcon, MinusIcon, PlusIcon } from '@heroicons/reac
           }
          
         function showSalons(data:any) {
-
-        setOpen(false);
-        setOfferName(data);
-        setSelectedSalon(null);
-        
+          setOpen(false);
+          setOfferName(data);
+          setSelectedSalon(null);
         }
 
         useEffect(()=> {
@@ -492,7 +490,8 @@ import { ArrowDownIcon, ArrowUpIcon, MinusIcon, PlusIcon } from '@heroicons/reac
           })
         },[offerName])
 
-        //@ts-ignore
+
+     //@ts-ignore
      const {
       data:shops,
       isLoading,
@@ -541,7 +540,7 @@ import { ArrowDownIcon, ArrowUpIcon, MinusIcon, PlusIcon } from '@heroicons/reac
     }
 
     function handleShopImages(data:any) {
-      setShopImages(data)
+      setShopImages(data);
     }
 
     console.log('filtered',filteredData)
@@ -648,8 +647,14 @@ import { ArrowDownIcon, ArrowUpIcon, MinusIcon, PlusIcon } from '@heroicons/reac
             <div className='flex flex-col border lg:border-none p-4 rounded-2xl items-center lg:items-start justify-around'>
               <img onClick={()=>openModal('OFFER_IMAGE_VIEW',{offer:offerName})} 
               //@ts-ignore
-                   src={offerName?.image?.thumbnail} className='w-20 lg:w-60 lg:h-60 h-20'/>
-              <span className='text-gray-800 font-semibold'>{offerName?.name}</span>
+                   src={offerName?.image?.thumbnail} className='w-20 sm:w-60 sm:h-60 h-20'/>
+             <div className='flex flex-col lg:grid lg:grid-col-2 items-center'> 
+             <span className='text-gray-800 font-semibold'>{offerName?.name}</span>
+             <span className="inline-block  rounded-full  py-1 text-sm font-semibold text-accent ">
+                                ₹
+                                {+' '+offerName?.sale_price}.00
+                                </span>
+             </div>
               <span onClick={scrollUp} className='cursor-pointer text-sm text-blue-700'>Change offer</span>
             </div>
           </div>

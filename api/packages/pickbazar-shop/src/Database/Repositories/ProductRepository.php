@@ -229,13 +229,13 @@ class ProductRepository extends BaseRepository
         return $shop_ids;
     }
 
-    public static function searchSalonByValue($value)
+    public static function searchSalonByValue($search,$price)
 
     {
-        $shop_ids=Product::where("status",1)->where("name",$value)->distinct()->pluck("shop_id")->toArray();
-        // $categories=Category::where("name","like","%".$value."%")->with("products")->distinct()->get();
-        // $shop_categories_ids=ShopCategory::where("name","like","%".$value."%")->pluck("id")->toArray();
-        $select_shops=Shop::where("is_active",1)->where("name","like","%".$value."%")->pluck("id")->toArray();
+         $shop_ids=Product::where("status",1)->where("name",$search)->where('is_featured',1)->where('sale_price',$price)->distinct()->pluck("shop_id")->toArray();
+        // $categories=Category::where("name","like","%".$search."%")->with("products")->distinct()->get();
+        // $shop_categories_ids=ShopCategory::where("name","like","%".$search."%")->pluck("id")->toArray();
+        $select_shops=Shop::where("is_active",1)->where("name","like","%".$search."%")->pluck("id")->toArray();
 
         $shop_ids=array_merge($shop_ids,$select_shops);
         
