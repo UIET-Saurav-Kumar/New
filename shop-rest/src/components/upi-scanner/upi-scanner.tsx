@@ -102,12 +102,14 @@ return (
             <img className='w-60 h-60 object-contain' src={src}/>
 
             <span onClick={()=> window.open(any)} className='h-20 cursor-pointer w-20 rounded-full border'>any</span>
+            <span onClick={()=> window.open(cashfree_mc)} className='h-20 cursor-pointer w-20 rounded-full border'>cashfree_mc</span>
+          <span onClick={()=> window.open(cashfree)} className='h-20 cursor-pointer w-20 rounded-full border'>cashfree</span> */}
 
       {/* <span onClick={()=> window.open(gpayLink_MC_CF)} className='h-20 cursor-pointer w-20 rounded-full border'>gpayLink_MC_CF</span>
                   <span onClick={()=> window.open(gpayLink)} className='h-20 cursor-pointer w-20 rounded-full border'>gpay-link</span>
                   <span onClick={()=> window.open(gpay)} className='h-20 cursor-pointer w-20 rounded-full border'>gpay-more</span>
                   <span onClick={()=> window.open(gpay_2)} className='h-20 cursor-pointer w-20 rounded-full border'>gpay-2</span>
-                  <span onClick={()=> window.open(cashfree_mc)} className='h-20 cursor-pointer w-20 rounded-full border'>cashfree_mc</span>
+                  
                   <span onClick={()=> window.open(cashfree)} className='h-20 cursor-pointer w-20 rounded-full border'>cashfree</span> */}
                   <a href={`upi://pay?pa=${upi_id}&pn=${reciever_name}&am=${amount}`} className="text-green-700 border w-20 h-20 rounded-full">Pay Now !</a>
       {modifiedLinks?.map((link, index) => {
