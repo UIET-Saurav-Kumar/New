@@ -10,11 +10,11 @@ use Illuminate\Http\Request;
 
 class UpiPaymentController extends CoreController
 {
-    public $upiPaymentRepo;
+    public $repository;
 
-    public function __construct(UpiPaymentRepository $upiPaymentRepo)
+    public function __construct(UpiPaymentRepository $repository)
     {
-        $this->upiPaymentRepo = $upiPaymentRepo;
+        $this->repository = $repository;
     }
 
     public function createPayment(Request $request)
@@ -31,7 +31,7 @@ class UpiPaymentController extends CoreController
         // $upiPayment->transaction_id = $request->transaction_id;
         // $upiPayment->status = 'pending';
 
-        return $this->upiPaymentRepo->storePayment($request);
+        return $this->repository->storePayment($request);
 
         // return response()->json([
         //     'message' => 'UPI Payment created successfully',

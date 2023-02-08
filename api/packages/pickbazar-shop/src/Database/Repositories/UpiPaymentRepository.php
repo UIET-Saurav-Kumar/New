@@ -45,8 +45,8 @@ class UpiPaymentRepository extends BaseRepository
         $customerId = '1234';
         $customerEmail = $user->email ?? "test@cashfree.com";
         $payment_methods = 'cc';
-        $returnUrl =  url("upi-payment/success");
-        $notifyUrl = url("upi-payment/success");
+        // $returnUrl =  url("upi-payment/success");
+        // $notifyUrl = url("upi-payment/success");
 
         $curl = curl_init();
 
