@@ -83,10 +83,13 @@ const cashfree =   `upi://pay?pa=${upi_id}&pn=${reciever_name}&tr=${trValue}&am=
 const cashfree_mc =   `upi://pay?pa=${upi_id}&pn=${reciever_name}&tr=${trValue}&am=${amount}&cu=INR&mode=00&purpose=00&mc=5399&tn=${tnValue}`
 
 
-console.log('order link modified',modifiedLinks.join(' '));
+// console.log('order link modified',modifiedLinks.join(' '));
+
+// console.log('object',Object.values?.data[0])/
 
 
 return (
+  <div className='flex flex-col bg-white'>
 
     <div className='grid grid-cols-2 place-items-center h-screen w-screen  gap-x-6 px-10  bg-white'>
 
@@ -103,7 +106,7 @@ return (
 
             <span onClick={()=> window.open(any)} className='h-20 cursor-pointer w-20 rounded-full border'>any</span>
             <span onClick={()=> window.open(cashfree_mc)} className='h-20 cursor-pointer w-20 rounded-full border'>cashfree_mc</span>
-          <span onClick={()=> window.open(cashfree)} className='h-20 cursor-pointer w-20 rounded-full border'>cashfree</span> */}
+            <span onClick={()=> window.open(cashfree)} className='h-20 cursor-pointer w-20 rounded-full border'>cashfree</span> */}
 
       {/* <span onClick={()=> window.open(gpayLink_MC_CF)} className='h-20 cursor-pointer w-20 rounded-full border'>gpayLink_MC_CF</span>
                   <span onClick={()=> window.open(gpayLink)} className='h-20 cursor-pointer w-20 rounded-full border'>gpay-link</span>
@@ -112,7 +115,7 @@ return (
                   
                   <span onClick={()=> window.open(cashfree)} className='h-20 cursor-pointer w-20 rounded-full border'>cashfree</span> */}
                   <a href={`upi://pay?pa=${upi_id}&pn=${reciever_name}&am=${amount}`} className="text-green-700 border w-20 h-20 rounded-full">Pay Now !</a>
-      {modifiedLinks?.map((link, index) => {
+      {Object.values(data)[0]?.map((link, index) => {
         const app = upiApps[index];
         return (
           <div key={index} className='flex flex-col'> 
@@ -122,6 +125,22 @@ return (
           </div>
         );
       })}
+
+      
     </div>
-)   
-}
+     <span className='text-lf font-semibold text-center border-t'>Cashfree merchant links </span>
+     <div className='grid grid-cols-2 place-items-center'>
+      {modifiedLinks?.map((link, index) => {
+      const app = upiApps[index];
+      return (
+        <div key={index} className='flex flex-col'> 
+            <img src={app} className=' items-center rounded-full object-contain h-20 border w-20' 
+            key={app} alt={'upi-app'} onClick={() => window.open(link)}
+            />
+        </div>
+      );
+    })}
+    </div>
+    </div>
+  )   
+  }
