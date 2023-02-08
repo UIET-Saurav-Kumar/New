@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 
 class UpiPaymentController extends CoreController
 {
+    
     public $repository;
 
     public function __construct(UpiPaymentRepository $repository)
@@ -19,6 +20,8 @@ class UpiPaymentController extends CoreController
 
     public function createPayment(Request $request)
     {
+
+        // return $request;
         // $validatedData = $request->validate([
         //     'upi_id' => 'required',
         //     'amount' => 'required|numeric',

@@ -57,7 +57,7 @@ class GatewayResponse extends CoreController
         
         $response = request()->all();
 
-        return $response ;
+        // return $response ;
 
         $order_id = $response['orderId'] ?? null;
         $orderAmount = $response['orderAmount'] ?? null;
@@ -75,7 +75,7 @@ class GatewayResponse extends CoreController
         //     UpiPayment::where('parent_id', $parent_orderid)->update(['status' => 8]);
         // }
 
-        Order::where('id', $parent_orderid)->update(['gateway_response' => json_encode(request()->all())]);
+        // Order::where('id', $parent_orderid)->update(['gateway_response' => json_encode(request()->all())]);
 
         // $url = \Config::get('app.shop_url')."/orders/".$order_id;
         $url = "https://buylowcal.com/upi-payment/?" . $response;

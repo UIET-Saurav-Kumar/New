@@ -106,7 +106,7 @@ return (
 
             <span onClick={()=> window.open(any)} className='h-20 cursor-pointer w-20 rounded-full border'>any</span>
             <span onClick={()=> window.open(cashfree_mc)} className='h-20 cursor-pointer w-20 rounded-full border'>cashfree_mc</span>
-            <span onClick={()=> window.open(cashfree)} className='h-20 cursor-pointer w-20 rounded-full border'>cashfree</span> */}
+            <span onClick={()=> window.open(cashfree)} className='h-20 cursor-pointer w-20 rounded-full border'>cashfree</span>
 
       {/* <span onClick={()=> window.open(gpayLink_MC_CF)} className='h-20 cursor-pointer w-20 rounded-full border'>gpayLink_MC_CF</span>
                   <span onClick={()=> window.open(gpayLink)} className='h-20 cursor-pointer w-20 rounded-full border'>gpay-link</span>
