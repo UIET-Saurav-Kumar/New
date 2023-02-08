@@ -66,6 +66,7 @@ const Search: React.FC<Props> = ({ label, variant, ...props }) => {
   }
 
   return (
+
     <SearchBox
       label={label}
       onSubmit={onSearch}
@@ -77,6 +78,7 @@ const Search: React.FC<Props> = ({ label, variant, ...props }) => {
       variant={variant}
       {...props}
     />
+    
   );
 };
 

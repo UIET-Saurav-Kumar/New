@@ -96,7 +96,7 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
 
         {/* scanner */}
         <motion.button
-          whileTap={{ scale: 0 }}
+          whileTap={{ scale: 0.88 }}
           onClick={() => openModal("SCANNER")}
           className="flex p-2 h-full items-center justify-center focus:outline-none focus:text-accent"
         >

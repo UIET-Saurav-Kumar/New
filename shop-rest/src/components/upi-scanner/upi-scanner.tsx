@@ -1,6 +1,7 @@
-import React from 'react';
+import { QRCodeCanvas } from 'qrcode.react';
+import React, { useState } from 'react';
 
-
+import {upiqr} from 'upiqr';
 
 
 export default function UpiScanner({data}:any) {
@@ -8,6 +9,8 @@ export default function UpiScanner({data}:any) {
 console.log('order link scanner', Object.values(data)[0][0]);
 
 console.log('order link props scanner', (data));
+
+const [src,setSrc] = useState('');
 
 const reciever_name = data?.reciever_name;
 
@@ -43,6 +46,30 @@ const modifiedLinks = Object.values(data)[0]?.map((link, index) => {
   return modifiedLink;
 });
 
+// const upiQRCode = upiqr.generate({
+//   pa: upi_id,
+//   pn: reciever_name,
+//   am: amount,
+//   cu: 'INR',
+//   tn: tnValue
+// });
+
+    upiqr({
+      payeeVPA: upi_id,
+      payeeName: reciever_name,
+      am: amount,
+      cu: 'INR',
+      tn: tnValue
+    })
+    .then((upi:any) => {
+      console.log(upi.qr);   
+      setSrc(upi.qr)   // data:image/png;base64,eR0lGODP...
+      console.log(upi.intent);  // upi://pay?pa=bhar4t@upi&pn=Bharat..
+    })
+    .catch((err:any) => {
+      alert(err);
+    });
+
 
 const gpayLink = `upi://pay?pa=${upi_id2}&pn=${reciever}&tr=${trValue}&am=${amount}&cu=INR&mode=00&purpose=00&mc=0000&tn=${tnValue}&aid=uGICAgIC4oYCNBQ`
 const gpayLink_MC= `upi://pay?pa=${upi_id}&pn=${reciever_name}&tr=${trValue}&am=${amount}&cu=INR&mode=00&purpose=00&mc=0000&tn=${tnValue}&aid=uGICAgIC4oYCNBQ`
@@ -61,14 +88,26 @@ console.log('order link modified',modifiedLinks.join(' '));
 
 return (
 
-    <div className='grid grid-cols-3 place-items-center h-screen w-screen  gap-x-6 px-10  bg-white'>
-      <span onClick={()=> window.open(gpayLink_MC_CF)} className='h-20 cursor-pointer w-20 rounded-full border'>gpayLink_MC_CF</span>
+    <div className='grid grid-cols-2 place-items-center h-screen w-screen  gap-x-6 px-10  bg-white'>
+
+         {/* <QRCodeCanvas
+              id="qr-gen"
+              value={upiQRCode}
+              size={290}
+              level={"H"}
+              includeMargin={true}
+           
+            /> */}
+
+            <img className='w-60 h-60 object-contain' src={src}/>
+
+      {/* <span onClick={()=> window.open(gpayLink_MC_CF)} className='h-20 cursor-pointer w-20 rounded-full border'>gpayLink_MC_CF</span>
                   <span onClick={()=> window.open(gpayLink_MC)} className='h-20 cursor-pointer w-20 rounded-full border'>gpayLink_MC</span>
                   <span onClick={()=> window.open(gpayLink)} className='h-20 cursor-pointer w-20 rounded-full border'>gpay-link</span>
                   <span onClick={()=> window.open(gpay)} className='h-20 cursor-pointer w-20 rounded-full border'>gpay-more</span>
                   <span onClick={()=> window.open(gpay_2)} className='h-20 cursor-pointer w-20 rounded-full border'>gpay-2</span>
                   <span onClick={()=> window.open(cashfree_mc)} className='h-20 cursor-pointer w-20 rounded-full border'>cashfree_mc</span>
-                  <span onClick={()=> window.open(cashfree)} className='h-20 cursor-pointer w-20 rounded-full border'>cashfree</span>
+                  <span onClick={()=> window.open(cashfree)} className='h-20 cursor-pointer w-20 rounded-full border'>cashfree</span> */}
                   <a href={`upi://pay?pa=${upi_id}&pn=${reciever_name}&am=${amount}`} className="text-green-700 border w-20 h-20 rounded-full">Pay Now !</a>
       {modifiedLinks?.map((link, index) => {
         const app = upiApps[index];

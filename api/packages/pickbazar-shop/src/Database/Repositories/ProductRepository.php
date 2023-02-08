@@ -233,7 +233,7 @@ class ProductRepository extends BaseRepository
 
     {
          $shop_ids=Product::where("status",1)->where("name",$search)->where('is_featured',1)->where('sale_price',$price)->distinct()->pluck("shop_id")->toArray();
-        // $categories=Category::where("name","like","%".$search."%")->with("products")->distinct()->get();
+        // $categories=Category::where("name","like","%".$search."%")->with("products")->distinct()->get();//
         // $shop_categories_ids=ShopCategory::where("name","like","%".$search."%")->pluck("id")->toArray();
         $select_shops=Shop::where("is_active",1)->where("name","like","%".$search."%")->pluck("id")->toArray();
 

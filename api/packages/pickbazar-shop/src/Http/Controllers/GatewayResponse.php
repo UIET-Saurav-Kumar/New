@@ -10,6 +10,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use PickBazar\Database\Models\User;
 use PickBazar\Database\Models\Order;
+use PickBazar\Database\Models\UpiPayment;
 use PickBazar\Database\Models\Delivery;
 use PickBazar\Exceptions\PickbazarException;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -46,6 +47,37 @@ class GatewayResponse extends CoreController
 
         // $url = \Config::get('app.shop_url')."/orders/".$order_id;
         $url = "https://buylowcal.com/orders/" . $order_id;
+
+        return redirect()->away($url);
+    }
+
+    public function upi_payment_response(Request $request)
+
+    {
+        
+        $response = request()->all();
+
+        return $response ;
+
+        $order_id = $response['orderId'] ?? null;
+        $orderAmount = $response['orderAmount'] ?? null;
+        $referenceId = $response['referenceId'] ?? null;
+        $txStatus = $response['txStatus'] ?? null;
+        $paymentMode = $response['paymentMode'] ?? null;
+        $txMsg = $response['txMsg'] ?? null;
+        $txTime = $response['txTime'] ?? null;
+        $signature = $response['signature'] ?? null;
+
+        $parent_orderid = UpiPayment::where('transaction_id', $order_id)->first()->id;
+        if ($txStatus != "SUCCESS") {
+            UpiPayment::where('transaction_id', $order_id)->update(['status' => 8]);
+            UpiPayment::where('parent_id', $parent_orderid)->update(['status' => 8]);
+        }
+
+        Order::where('id', $parent_orderid)->update(['gateway_response' => json_encode(request()->all())]);
+
+        // $url = \Config::get('app.shop_url')."/orders/".$order_id;
+        $url = "https://buylowcal.com/upi-payment/?" . $response;
 
         return redirect()->away($url);
     }
@@ -158,11 +190,11 @@ class GatewayResponse extends CoreController
             $recharge_status = $this->rechargeStatus($order_id);
             // $recharge_api_txid = $recharge_status[1];
 
-            if($code==200 && $recharge_status=="Success"){
+            if ($code==200 && $recharge_status=="Success"){
               UtilityPayment::where('tracking_number', $order_id)->update(['status' => 'APPROVED']);
-            }else if($code==200&&$recharge_status=="Pending"){
+            } else if ($code==200 && $recharge_status=="Pending"){
               UtilityPayment::where('tracking_number', $order_id)->update(['status' => 'PENDING']);
-            }else {
+            } else {
               UtilityPayment::where('tracking_number', $order_id)->update(['status' => 'FAILED']);
             }
 

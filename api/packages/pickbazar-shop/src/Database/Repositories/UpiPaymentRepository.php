@@ -42,27 +42,29 @@ class UpiPaymentRepository extends BaseRepository
         $orderNote = "Subscription";
         $customerPhone = $request->customer_contact;
         $customerName = $user->name;
-        $customerId = $request['customer_id'];
+        $customerId = '1234';
         $customerEmail = $user->email ?? "test@cashfree.com";
-        // $payment_methods = 'cc';
-        $returnUrl =  url("order/success");
-        $notifyUrl = url("order/success");
+        $payment_methods = 'cc';
+        $returnUrl =  url("upi-payment/success");
+        $notifyUrl = url("upi-payment/success");
 
         $curl = curl_init();
+
         $postFields = array(
           "order_id" =>  $orderId,
           "order_amount" => $orderAmount,
           "order_currency" =>  'INR',
           "customer_details" => array(
-            "customer_id" =>  '123',
+            "customer_id" => $customerId,
             "customer_email" => $customerEmail,
             "customer_phone" => $customerPhone,
           ),
-          // "order_meta" => array(
-          //   'return_url'=> 'https://buylowcal.com/orders?{order_id}',
-          //   'notify_url' => 'https://buylowcal.com/orders?{order_id}',
-          //   "payment_methods" => 'cc'
-          // )
+          "order_meta" => array(
+            // 'return_url'=> $returnUrl,
+            'return_url'=> `https://buylowcal.com/upi-payment/ .${orderId}`,
+            'notify_url' => `https://buylowcal.com/upi-payment/ .${orderId}`,
+            // "payment_methods" => 'cc'
+          )
 
         );
         
@@ -95,12 +97,13 @@ class UpiPaymentRepository extends BaseRepository
         if(isset($response['payment_session_id'])) {
           $payment_session_id = $response['payment_session_id'];
       } else {
-          'payment_session_id not found';
+        return $response;
+           
       }
 
         // return $response;
       
-        // $payment_session_id = 'session_RtamjSUdQlmidc1cZ2gTYdvv7UriO0lKmPldFJHlDLfePM5efTFdbD10tEGHlyud4Is9nxv3FcnjVPc0MBt_3zB2cGlkzbWgQKDMourBNGvk';
+        // $payment_session_id = 'werdfdrge3ewrfd';
 
         // return $response;
 

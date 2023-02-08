@@ -394,13 +394,6 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
         </div>
 
 
-
-
-
-
-
-
-
         <div className="flex flex-wrap pb-8 border-b border-dashed border-gray-300 my-5 sm:my-8">
           <Description
             title={t("form:shop-payment-info")}
@@ -447,6 +440,7 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
         </div>
          
         <div className="flex flex-wrap pb-8 border-b border-dashed border-gray-300 my-5 sm:my-8">
+          
           <Description
             title={t("form:shop-settings")}
             details={t("form:shop-settings-helper-text")}

@@ -79,6 +79,7 @@
     "sharp": "^0.30.7",
     "swiper": "6.8.4",
     "tailwind-scrollbar-hide": "^1.1.7",
+    "upiqr": "^1.0.32",
     "yup": "^0.32.9"
   },
   "devDependencies": {
