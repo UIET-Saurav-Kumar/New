@@ -69,10 +69,11 @@ class GatewayResponse extends CoreController
         $signature = $response['signature'] ?? null;
 
         $parent_orderid = UpiPayment::where('transaction_id', $order_id)->first()->id;
-        if ($txStatus != "SUCCESS") {
-            UpiPayment::where('transaction_id', $order_id)->update(['status' => 8]);
-            UpiPayment::where('parent_id', $parent_orderid)->update(['status' => 8]);
-        }
+
+        // if ($txStatus != "SUCCESS") {
+        //     UpiPayment::where('transaction_id', $order_id)->update(['status' => 8]);
+        //     UpiPayment::where('parent_id', $parent_orderid)->update(['status' => 8]);
+        // }
 
         Order::where('id', $parent_orderid)->update(['gateway_response' => json_encode(request()->all())]);
 

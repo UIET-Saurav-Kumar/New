@@ -61,8 +61,8 @@ class UpiPaymentRepository extends BaseRepository
           ),
           "order_meta" => array(
             // 'return_url'=> $returnUrl,
-            'return_url'=> `https://buylowcal.com/upi-payment/ .${orderId}`,
-            'notify_url' => `https://buylowcal.com/upi-payment/ .${orderId}`,
+            'return_url'=> `https://buylowcal.com/upi-payment?orderId=.${orderId}`,
+            'notify_url' => `https://buylowcal.com/upi-payment?orderId=.${orderId}`,
             // "payment_methods" => 'cc'
           )
 
