@@ -63,7 +63,7 @@ class UpiPaymentRepository extends BaseRepository
             // 'return_url'=> $returnUrl,
             // 'notify_url'=> $notifyUrl,
             'return_url' => `https://api.buylowcal.com/upi-payment/success/order_id=${orderId}`,
-            'notify_url' => $notifyUrl,
+            'notify_url' => `127.0.0.1:8000/upi-payment/success/${orderId}`,
             // 'return_url' => `https://api.buylowcal.com/upi-payment/success/${orderId}`,
             // 'notify_url' => `https://api.buylowcal.com/upi-payment/success/${orderId}`,
             // "payment_methods" => 'cc'
