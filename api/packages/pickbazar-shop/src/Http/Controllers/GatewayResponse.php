@@ -57,7 +57,7 @@ class GatewayResponse extends CoreController
         
         $response = request()->all();
 
-        // return $response ;
+        return $response ;
 
         $order_id = $response['orderId'] ?? null;
         $orderAmount = $response['orderAmount'] ?? null;

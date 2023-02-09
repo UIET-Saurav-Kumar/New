@@ -45,8 +45,11 @@ class UpiPaymentRepository extends BaseRepository
         $customerId = '1234';
         $customerEmail = $user->email ?? "test@cashfree.com";
         $payment_methods = 'cc';
-        $returnUrl =  url(`upi-payment/success/${orderId}`);
-        $notifyUrl = url(`upi-payment/success`);
+        $new = 'https://buylowcal.com/upi-payment?order_id='.$orderId;
+        $new2 = "https://127.0.0.1:8000/upi-payment/success?order_id=".$orderId;
+        
+        $returnUrl =  $new2;
+        $notifyUrl =  $new2;
 
         $curl = curl_init();
 
@@ -60,18 +63,34 @@ class UpiPaymentRepository extends BaseRepository
             "customer_phone" => $customerPhone,
           ),
           "order_meta" => array(
-            // 'return_url'=> $returnUrl,
-            // 'notify_url'=> $notifyUrl,
-            'return_url' => `https://api.buylowcal.com/upi-payment/success?order_id={orderId}`,
-            'notify_url' => `https://api.buylowcal.com/upi-payment/success?order_id={orderId}`,
-            // 'return_url' => `https://api.buylowcal.com/upi-payment/success/${orderId}`,
-            // 'notify_url' => `https://api.buylowcal.com/upi-payment/success/${orderId}`,
-            // "payment_methods" => 'cc'
+            "return_url" => $returnUrl,
+            "notify_url" => $notifyUrl,
           )
 
         );
-        
-          $postFields = json_encode($postFields);
+
+        $data = [
+          'customer_details' => [
+              'customer_id' => $customerId,
+              'customer_email' => $customerEmail,
+              'customer_phone' => $customerPhone,
+          ],
+          'order_meta' => [
+            // 'return_url' => url('upi-payment/success').'/'.$orderId,
+              // 'return_url' => 'https://127.0.0.1:8000/upi-payment/success?order_id='.$orderId,
+              // 'notify_url' => 'https://127.0.0.1:8000/upi-payment/success?order_id='.$orderId,
+              'return_url'=> `http://127.0.0.1:8000:upi-payment/success?order_id=$orderId`,
+              // 'return_url' => 'https://buylowcal.com/order_id={order_id}',
+              'notify_url' => 'https://b8af79f41056.eu.ngrok.io/webhook.php'
+          ],
+          
+          'order_id' => $orderId,
+          'order_amount' => $orderAmount,
+          'order_currency' => 'INR'
+      ];
+
+        // return $postFields;
+          $postFields = json_encode($data);
           
           curl_setopt_array($curl, array(
             CURLOPT_URL => 'https://api.cashfree.com/pg/orders',
@@ -83,6 +102,8 @@ class UpiPaymentRepository extends BaseRepository
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => $postFields,
+            // CURLOPT_POSTFIELDS =>  "{\"customer_details\":{\"customer_id\":\"7112AAA812234\",\"customer_email\":\"john@cashfree.com\",\"customer_phone\":\"9908734801\"},\"order_meta\":{\"return_url\":\"https://b8af79f41056.eu.ngrok.io?order_id={order_id}\",\"notify_url\":\"https://b8af79f41056.eu.ngrok.io/webhook.php\"},\"order_id\":\"awsdfvbngfbdsc\",\"order_amount\":10.15,\"order_currency\":\"INR\"}",
+
             CURLOPT_HTTPHEADER => array(
               'Content-Type: application/json',
               'x-api-version: 2022-09-01',
@@ -90,6 +111,8 @@ class UpiPaymentRepository extends BaseRepository
               'x-client-secret: 5cc5c4adb74168906d10b82bf7820a69dc23634a'
             ),
           ));
+
+          
         
           $response = curl_exec($curl);
         

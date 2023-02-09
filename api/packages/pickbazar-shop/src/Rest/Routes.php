@@ -265,7 +265,7 @@ Route::any('utility-payment/failed','PickBazar\Http\Controllers\GatewayResponse@
 Route::any('utility-payment/payment-status','PickBazar\Http\Controllers\GatewayResponse@rechargeStatus');
 
 
-Route::any('upi-payment/success/order_id={orderId}','PickBazar\Http\Controllers\GatewayResponse@upi_payment_response');
+Route::any('upi-payment/success/{order_id}','PickBazar\Http\Controllers\GatewayResponse@upi_payment_response');
 
 
 Route::post('import-products', 'PickBazar\Http\Controllers\ProductController@importProducts');
