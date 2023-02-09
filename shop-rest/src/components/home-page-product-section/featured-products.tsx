@@ -108,7 +108,7 @@ export default function FeaturedProducts({}) {
         return product.status == 'publish' && product?.is_brand_offer !== 1 && product?.is_offer != 1 && product?.type_id == 6 ? product : null;
     })
 
-    const salonspaArray =  data?.featureProducts.data.filter(function(product){
+    const salonspaArray =  data?.featureProducts.data.slice(0,9).filter(function(product){
         return product.status == 'publish' && product?.is_brand_offer !== 1 && product?.is_offer != 1 && product?.type_id == 7 ? product : null;
     })
 
@@ -166,6 +166,7 @@ export default function FeaturedProducts({}) {
     const gymArray =  data?.featureProducts.data.filter(function(product){
         return product.status == 'publish'  && product?.is_brand_offer !== 1 && product.type_id == 28 ? product : null;
     })
+    
 
  const arrays = [
     {

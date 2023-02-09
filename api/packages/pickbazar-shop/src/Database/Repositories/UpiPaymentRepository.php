@@ -45,8 +45,8 @@ class UpiPaymentRepository extends BaseRepository
         $customerId = '1234';
         $customerEmail = $user->email ?? "test@cashfree.com";
         $payment_methods = 'cc';
-        $returnUrl =  url("upi-payment/success");
-        $notifyUrl = url("upi-payment/success");
+        $returnUrl =  url(`upi-payment/success/${orderId}`);
+        $notifyUrl = url(`upi-payment/success/${orderId}`);
 
         $curl = curl_init();
 
@@ -60,10 +60,10 @@ class UpiPaymentRepository extends BaseRepository
             "customer_phone" => $customerPhone,
           ),
           "order_meta" => array(
-            'return_url'=> $returnUrl,
-            'notify_url'=> $notifyUrl,
-            // 'return_url'=> `https://buylowcal.com/upi-payment?orderId=.${orderId}`,
-            // 'notify_url' => `https://buylowcal.com/upi-payment?orderId=.${orderId}`,
+            // 'return_url'=> $returnUrl,
+            // 'notify_url'=> $notifyUrl,
+            'return_url' => `https://api.buylowcal.com/upi-payment/success/${orderId}`,
+            'notify_url' => `https://api.buylowcal.com/upi-payment/success/${orderId}`,
             // "payment_methods" => 'cc'
           )
 
