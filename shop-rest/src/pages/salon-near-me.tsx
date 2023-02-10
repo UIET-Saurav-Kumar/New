@@ -677,8 +677,8 @@ import Appointment from './appointment';
             </h4>
             
 
-            <PromotionSlider handleShopImages={handleShopImages}  selectedShop = {handleSelectedShop} 
-                              offer = {offerName} />
+               <PromotionSlider handleShopImages = {handleShopImages}  selectedShop = {handleSelectedShop} 
+                                offer = {offerName} />
 
                              <div className={`${shopImages ? 'flex' : 'hidden'}  gap-3 w-full px-2 overflow-x-scroll`}>
                                 { shopImages  && <PlacesApi 

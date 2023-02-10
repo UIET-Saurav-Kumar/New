@@ -299,8 +299,13 @@ function handleTotalRating(data) {
     })
   }
 
-  console.log('schema',shopCategory);
+  console.log('schema',reviews);
   const basePath = 'https://buylowcal.com/shops/' 
+
+
+   console.log('schema',reviews.length )
+   
+  
 
   return (
 
@@ -337,20 +342,16 @@ function handleTotalRating(data) {
               },
               "url": basePath+data?.slug,
               "telephone": data?.settings?.contact,
-              "review": [
-                {
-                  "@type": "Review",
-                  "author": "Amit",
-                  "datePublished": "2022-01-01",
-                  "description": "Best services",
-                  "reviewRating": {
-                    "@type": "Rating",
-                    "bestRating": "5",
-                    "ratingValue": "4",
-                    "worstRating": "1"
-                  }
+              "review": reviews.length && reviews?.map((review:any) => ({
+                "@type": "Review",
+                "author": review?.author_name,
+                "datePublished": review?.relative_time_description,
+                "description": review?.text,
+                "reviewRating": {
+                  "@type": "Rating",
+                  "ratingValue": review?.rating,
                 }
-              ]
+              }))
             }
             )}}
           />
