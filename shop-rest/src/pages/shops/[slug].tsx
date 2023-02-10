@@ -341,7 +341,7 @@ function handleTotalRating(data) {
               },
               "url": basePath+data?.slug,
               "telephone": data?.settings?.contact,
-              "review": reviews.length && reviews?.map((review:any) => ({
+              "review": reviews?.length && reviews?.map((review:any) => ({
                 "@type": "Review",
                 "author": review?.author_name,
                 "datePublished": review?.relative_time_description,
