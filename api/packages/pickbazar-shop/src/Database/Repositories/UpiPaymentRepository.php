@@ -81,7 +81,7 @@ class UpiPaymentRepository extends BaseRepository
               // 'notify_url' => 'https://127.0.0.1:8000/upi-payment/success?order_id='.$orderId,
               'return_url'=> `https://api.buylowcal.com/upi-payment/success?order_id=$orderId`,
               // 'return_url' => 'https://buylowcal.com/order_id={order_id}',
-              'notify_url' => 'https://b8af79f41056.eu.ngrok.io/webhook.php'
+              'notify_url' => 'https://api.buylowcal.com/upi-payment/success?order_id=$orderId'
           ],
 
           'order_id' => $orderId,
