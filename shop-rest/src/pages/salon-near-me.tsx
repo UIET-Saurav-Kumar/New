@@ -581,8 +581,8 @@ import Appointment from './appointment';
        <div className="text-center text-lg font-medium tracking-wide whitespace-nowrap text-green-600">Book Now, Pay Later</div>
       </p>
 
-          <span ref={offers} onClick={()=> setOpen(!open)} className=' cursor-pointer  rounded-md p-1 flex items-center space-x-3 text-center text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 font-medium text-xl lg:text-2xl text-gray-900 font-serif ml-4 lg:ml-8 mt-10 lg:mt-10 tracking-normal'>
-            <h3 className='text-gray-800'>Select Deals to Explore Salons</h3> 
+          <span ref={offers} onClick={()=> setOpen(!open)} className=' cursor-pointer mx-auto rounded-md p-1 flex items-center space-x-2 text-center text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 font-medium text-xl lg:text-2xl text-gray-900 font-serif ml-2 lg:ml- mt-10 lg:mt-10 tracking-normal'>
+            <h3 className='text-gray-900 text-xl lg:text-2xl font-semibold font-serif  text-center lg:text-left'>Select Deals to Explore Salons</h3> 
             <span > {open ? <MinusIcon className='h-6 w-6  border-gray-400 text-green-600 border-2 rounded-full' /> : <  PlusIcon className='rounded-full border-2 h-6 w-6  border-gray-400 text-green-600' />}</span>
           </span>
 
@@ -663,7 +663,7 @@ import Appointment from './appointment';
         <div ref={myDiv}  className={`${offerName ? 'flex' : 'hidden'} flex-col lg:px-4 mt-6 lg:mt-10 py-4`}>
 
           <div className='flex flex-col space-y-3 m-2 '>
-            <span className='font-semibold text-gray-700 lg:text-2xl text-xl'>You have selected</span>
+            <span className='font-semibold text-center lg:text-left text-gray-900 lg:text-2xl font-serif text-xl'>You have selected</span>
             <div className='flex flex-col border lg:border-none p-4 rounded-2xl items-center lg:items-start justify-around'>
               <img onClick={()=>openModal('OFFER_IMAGE_VIEW',{offer:offerName})} 
               //@ts-ignore
@@ -679,7 +679,7 @@ import Appointment from './appointment';
             </div>
           </div>
 
-            <h4 className='text-xl flex text-center items-center justify-center  lg:text-3xl font-serif text-gray-900 font-medium  py-4 tracking-normal'>
+            <h4 className='text-xl flex text-center mx-auto lg:mx-0 lg:text-left pl-none lg:pl-6  lg:text-2xl font-serif text-gray-900 font-medium  py-4 tracking-normal'>
                 Please Select Salon Name
                 {/* <Link href='/shops?category=Salon+-+Spa'>
                     <span className='text-blue-800 cursor-pointer hover-underline text-sm '>
@@ -705,32 +705,34 @@ import Appointment from './appointment';
             
         </div>
 
-      <div ref={appointment} className={`${selectedSalon ? 'flex' : 'hidden'} grid grid-cols-1 lg:grid-cols-2  items-center justify-evenly w-full`}> 
-          <div className='flex flex-col justify-center text-center w-full '> 
-                <h4 className=' w-full px-2 whitespace-nowrap text-xl text-center mx-auto flex items-center  lg:text-3xl font-serif text-gray-900 font-medium     py-4 tracking-normal'>
+        <h4 ref={appointment} className={`${selectedSalon ? 'block' : 'hidden'} text-xl mx-auto text-center lg:text-left lg:text-2xl py-4 font-serif text-gray-900 font-medium pl-0 lg:pl-8 mt-10 lg:mt-0 tracking-normal`}>
                   Select Appointment Date & Time
                 </h4>
-              <div className="  bg-light p-5 mt-10 md:p-8 w-auto lg:w-1/2">
+
+      <div   className={`${selectedSalon ? 'flex' : 'hidden'} grid grid-cols-1 place-items-center place-content-center lg:grid-cols-2 place-contents-center items-center px-2 lg:px-10 justify-evenly w-full`}> 
+          {/* <div className='flex flex-col justify-center text-center mx-auto   w-full '>  */}
+               
+              {/* <div className="  bg-light  mt-5 md:p-8 w-full mx-auto text-center lg:w-1/2"> */}
                     {/* <Schedule count={2} heading='Book Appointment' />
                       */}
                     
-                    <div>
+                    <div className='mx-auto text-center w-full px-5 sm:px-0'>
                       <Calendar onChange={onChange} value={value} minDate={minDate} />
                     </div>
-              </div>
-          </div>
+              {/* </div> */}
+          {/* </div> */}
 
           <div className='p-3 text-sm lg:text-lg grid grid-cols-2 gap-4 place-content-center'>
-            <button className={`${selectedTimeSlot === '10:00am - 12:00PM' ? 'bg-blue-600 text-white': 'hover:bg-gray-100 border  p-3 bg-gray-50 text-black'} rounded cursor-pointer `} 
+            <button className={`${selectedTimeSlot === '10:00am - 12:00PM' ? 'bg-blue-600 text-white': 'hover:bg-gray-100 border  p-3 bg-gray-50 text-black'} rounded cursor-pointer w-auto lg:w-96 `} 
             //@ts-ignore
                     onClick={() => setSelectedTimeSlot('10:00am - 12:00PM')}> 10:00 am - 12:00 pm </button>
-            <button className={`${selectedTimeSlot === '12:00pm - 02:00pm' ? 'bg-blue-600 text-white': 'hover:bg-gray-100 border  p-3 bg-gray-50 text-black'} rounded cursor-pointer `} 
+            <button className={`${selectedTimeSlot === '12:00pm - 02:00pm' ? 'bg-blue-600 text-white': 'hover:bg-gray-100 border  p-3 bg-gray-50 text-black'} rounded cursor-pointer w-auto lg:w-96 `} 
             //@ts-ignore
                     onClick={() => setSelectedTimeSlot('12:00pm - 02:00pm')}> 12:00 pm - 02:00 pm </button>
-            <button className={`${selectedTimeSlot === '02:00pm - 04:00pm ' ? 'bg-blue-600 text-white': 'hover:bg-gray-100 border  p-3 bg-gray-50 text-black'} rounded cursor-pointer `}
+            <button className={`${selectedTimeSlot === '02:00pm - 04:00pm ' ? 'bg-blue-600 text-white': 'hover:bg-gray-100 border  p-3 bg-gray-50 text-black'} rounded cursor-pointer w-auto lg:w-96 `}
             //@ts-ignore
                     onClick={() => setSelectedTimeSlot('02:00pm - 04:00pm ')}> 02:00 pm - 04:00 pm </button>
-            <button className={`${selectedTimeSlot === '04:00pm - 06:00pm' ? 'bg-blue-600 text-white': 'hover:bg-gray-100 border  p-3 bg-gray-50 text-black'} rounded cursor-pointer `}
+            <button className={`${selectedTimeSlot === '04:00pm - 06:00pm' ? 'bg-blue-600 text-white': 'hover:bg-gray-100 border  p-3 bg-gray-50 text-black'} rounded cursor-pointer w-auto lg:w-96 `}
             //@ts-ignore
                     onClick={() => setSelectedTimeSlot('04:00pm - 06:00pm')}> 04:00 pm - 06:00 pm </button>
           </div>
