@@ -52,9 +52,11 @@ const RegistrationForm = () => {
   });
   const router = useRouter();
   const { t } = useTranslation();
+
   function getPhoneNumber(value:any){
     return value;
   }
+  
   async function onSubmit({ name, email, password, permission,phone_number }: FormValues) {
     registerUser(
       {

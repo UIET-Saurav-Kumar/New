@@ -559,7 +559,19 @@ import Appointment from './appointment';
     <>
 
     <Head>
-      <link rel="canonical" href={`https://buylowcal.com/salon`}/>
+      <link rel="canonical" href={`https://buylowcal.com/salon-near-me`}/>
+      <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(
+        {
+          "@context": "http://schema.org",
+          "@type": "WebPage",
+          "url": 'https://buylowcal.com/salon-near-me',
+          "name": ' Best Salon/Spa Deals and offers in Chandigarh, Mohali & Panchkkula ',
+          "description": "Find the best near by salons deals and offers on buylowcal. Free Booking and Free Cancelation Policy",
+        }
+      )}}
+    />
     </Head>
 
     <div className=' h-full border bg-white w-full'>
