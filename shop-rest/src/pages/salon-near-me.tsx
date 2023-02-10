@@ -218,6 +218,11 @@ import Appointment from './appointment';
 
     const { isAuthorize } = useUI();
 
+    const myDiv = useRef(null);
+    const offers = useRef(null);
+    const appointment  = useRef(null);
+    const images  = useRef(null);
+
     console.log('getLoc',getLocation)
 
     const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY;
@@ -468,9 +473,7 @@ import Appointment from './appointment';
             }
             return "";
           }
-          const myDiv = useRef(null);
-          const offers = useRef(null);
-          const appointment  = useRef(null);
+         
 
           // console.log([{'offer': offerName, 'selectedSalon' : selectedSalon }])
 
@@ -484,6 +487,14 @@ import Appointment from './appointment';
             // alert('hi');
             setOpen(!open)
           }
+
+          useEffect(()=>{
+            shopImages &&  images?.current.scrollIntoView({
+              behaviour: 'auto'
+            })
+          },[shopImages])
+
+         
          
         function showSalons(data:any) {
           setOpen(false);
@@ -692,7 +703,7 @@ import Appointment from './appointment';
                <PromotionSlider handleShopImages = {handleShopImages}  selectedShop = {handleSelectedShop} 
                                 offer = {offerName} />
 
-                             <div className={`${shopImages ? 'flex' : 'hidden'}  gap-3 w-full px-2 overflow-x-scroll`}>
+                             <div ref={images} className={`${shopImages ? 'flex' : 'hidden'}  gap-3 w-full px-2 overflow-x-scroll`}>
                                 { shopImages  && <PlacesApi 
                                 show={true}
                                 onClick={handleImage}
