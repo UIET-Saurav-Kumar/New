@@ -121,6 +121,7 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
     handleSubmit,
     formState: { errors },
     getValues,
+    setValue,
     control,
   } = useForm<FormValues>({
     shouldUnregister: true,
@@ -541,10 +542,11 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
 
           <Card className="w-full sm:w-8/12 md:w-2/3">
             <Input
-              // defaultValue={getValues("settings.location.country")}
-              value={getValues("settings.location.country")}
+              
+               value={getValues("settings.location.country")}
               label={t("form:input-label-country")}
               {...register("address.country")}
+              onChange={(e) => setValue("address.country", e.target.value)}
               variant="outline"
               className="mb-5"
               error={t(errors.address?.country?.message!)}
@@ -554,7 +556,7 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
               value={getValues("settings.location.state")}
               label={t("form:input-label-state")}
               {...register("address.state")}
-              
+              onChange={(e) => setValue("address.state", e.target.value)}
               variant="outline"
               className="mb-5"
               error={t(errors.address?.state?.message!)}
@@ -564,15 +566,18 @@ const ShopForm = ({ initialValues }: { initialValues?: any }) => {
                value={getValues("settings.location.city")}
               label={t("form:input-label-city")}
               {...register("address.city")}
+              onChange={(e) => setValue("address.city", e.target.value)}
               variant="outline"
               className="mb-5"
               error={t(errors.address?.city?.message!)}
             />
              <Input
               // defaultValue={getValues("settings.location.sector")}
-              value={   getValues("settings.location.sector")  }
+              value={getValues("settings.location.sector")  }
+              
               label={t("Area / Sector / Locality")}
               {...register("address.sector")}
+              onChange={(e) => setValue("address.sector", e.target.value)}
               variant="outline"
               className="mb-5"
               error={t(errors.address?.sector?.message!)}

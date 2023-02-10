@@ -191,9 +191,9 @@ export default function PromotionSlider(props:any) {
          Download All
         </button> */}
 
-      <div className="relative">
+      <div className="">
 
-        <Swiper
+        {/* <Swiper
           id="offer"
           // loop={true}
           breakpoints={offerSliderBreakpoints}
@@ -201,14 +201,14 @@ export default function PromotionSlider(props:any) {
             nextEl: ".next",
             prevEl: ".prev",
           }}
-        >
+        > */}
           {shopData?.pages?.map((page, idx) => {
               return (
-                <Fragment className='w-full grid-cols-2' key={idx}>
+                <div className='w-full grid grid-cols-3 lg:grid-cols-6' key={idx}>
                   {page?.data?.filter((shop) =>  shop?.is_active === 1 && shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").
                replace("name", "").replace("id", "") === "Salon  Spa" ).map((shop: any) => (
             // <SwiperSlide key={shop}>
-            <div className=" flex" >
+            <div className="relative " >
               {/* <Link href={`${ROUTES.SHOPS}/${shop.slug}`}> */}
                 <div   className={` ${shop?.name === shopName ? '' : '' }  border py-1 w-34 sm:w-54 md:w-54 lg:w-38 xl:w-60 rounded hover:border-gray-400 cursor-pointer border-gray-100 flex hover:shadow-lg flex-col items-center `}>
                   
@@ -247,12 +247,12 @@ export default function PromotionSlider(props:any) {
               </div>
             // </SwiperSlide>
              ))}
-             </Fragment>
+             </div>
            );
            })}
          
-        </Swiper>
-        <div
+        {/* </Swiper> */}
+        {/* <div
           className="prev cursor-pointer bg-gold absolute text-white top-2/4 -start-2 md:-start-5 z-10 -mt-4 md:-mt-5 w-8 h-8 md:w-9 md:h-9 rounded-full bg-light shadow-xl border border-border-200  flex items-center justify-center text-heading transition-all duration-200 hover:bg-accent hover:text-light hover:border-accent"
           role="button"
         >
@@ -265,7 +265,7 @@ export default function PromotionSlider(props:any) {
         >
           <span className="sr-only">{t("common:text-next")}</span>
           <ArrowNext width={24} height={24} />
-        </div>
+        </div> */}
       </div>
     </div>
 }
