@@ -86,6 +86,7 @@ class UpiPaymentRepository extends BaseRepository
 
           'order_id' => $orderId,
           'order_amount' => $orderAmount,
+          
           'order_currency' => 'INR'
       ];
 

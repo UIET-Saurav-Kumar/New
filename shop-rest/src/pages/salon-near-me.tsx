@@ -60,6 +60,7 @@ import PlacesApi from '@components/shop/google-maps-places-api';
 import { addLocation } from '@contexts/location/location.utils';
 import Spinner from '@components/ui/loaders/spinner/spinner';
 import { ArrowDownIcon, ArrowUpIcon, MinusIcon, PlusIcon } from '@heroicons/react/outline';
+import Appointment from './appointment';
 
 
 
@@ -220,6 +221,12 @@ import { ArrowDownIcon, ArrowUpIcon, MinusIcon, PlusIcon } from '@heroicons/reac
     console.log('getLoc',getLocation)
 
     const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY;
+
+    useEffect(()=>{
+    selectedSalon &&  appointment?.current.scrollIntoView({
+        behavior: 'auto',
+      })
+    },[selectedSalon])
 
 
     console.log('time slot', selectedTimeSlot)
@@ -463,6 +470,7 @@ import { ArrowDownIcon, ArrowUpIcon, MinusIcon, PlusIcon } from '@heroicons/reac
           }
           const myDiv = useRef(null);
           const offers = useRef(null);
+          const appointment  = useRef(null);
 
           // console.log([{'offer': offerName, 'selectedSalon' : selectedSalon }])
 
@@ -673,19 +681,19 @@ import { ArrowDownIcon, ArrowUpIcon, MinusIcon, PlusIcon } from '@heroicons/reac
                               offer = {offerName} />
 
                              <div className={`${shopImages ? 'flex' : 'hidden'}  gap-3 w-full px-2 overflow-x-scroll`}>
-                              { shopImages  && <PlacesApi 
-                              show={true}
-                              onClick={handleImage}
-                                handleImage={handleImage}
-                                //@ts-ignore
-                                shopName={selectedSalon?.name} 
-                              // handlePhotos={handleApiPhotos}
-                                /> }
+                                { shopImages  && <PlacesApi 
+                                show={true}
+                                onClick={handleImage}
+                                  handleImage={handleImage}
+                                  //@ts-ignore
+                                  shopName={selectedSalon?.name} 
+                                // handlePhotos={handleApiPhotos}
+                                  /> }
                              </div>
             
         </div>
 
-      <div className={`${selectedSalon ? 'flex' : 'hidden'} grid grid-cols-1 lg:grid-cols-2  items-center justify-evenly w-full`}> 
+      <div ref={appointment} className={`${selectedSalon ? 'flex' : 'hidden'} grid grid-cols-1 lg:grid-cols-2  items-center justify-evenly w-full`}> 
           <div className='flex flex-col justify-center text-center w-full '> 
                 <h4 className=' w-full px-2 whitespace-nowrap text-xl text-center mx-auto flex items-center  lg:text-3xl font-serif text-gray-900 font-medium     py-4 tracking-normal'>
                   Select Appointment Date & Time
@@ -698,7 +706,7 @@ import { ArrowDownIcon, ArrowUpIcon, MinusIcon, PlusIcon } from '@heroicons/reac
                       <Calendar onChange={onChange} value={value} minDate={minDate} />
                     </div>
               </div>
-            </div>
+          </div>
 
           <div className='p-3 text-sm lg:text-lg grid grid-cols-2 gap-4 place-content-center'>
             <button className={`${selectedTimeSlot === '10:00am - 12:00PM' ? 'bg-blue-600 text-white': 'hover:bg-gray-100 border  p-3 bg-gray-50 text-black'} rounded cursor-pointer `} 
@@ -720,7 +728,7 @@ import { ArrowDownIcon, ArrowUpIcon, MinusIcon, PlusIcon } from '@heroicons/reac
       <div className={`${selectedSalon ? 'flex' : 'hidden'} flex flex-col mx-auto w-full text-center`}>
         <p className='text-red-600 animate-bounce transition-opacity duration-300 ease-in-out mt-4 h-5'>{error_msg ? error_msg : ''}</p>
         <button className='mx-auto text-white font-semibold rounded mt-10 w-60 border bg-accent mb-20 p-4' 
-        //@ts-ignore
+                 //@ts-ignore
                  onClick={()=>onSubmit()}>
                 {salonBooking ?
                 ("booking..."):
