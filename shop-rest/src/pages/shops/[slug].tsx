@@ -303,7 +303,6 @@ function handleTotalRating(data) {
   const basePath = 'https://buylowcal.com/shops/' 
 
 
-   console.log('schema',reviews.length )
    
   
 
