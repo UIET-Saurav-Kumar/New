@@ -65,11 +65,13 @@ const RegisterForm = () => {
   });
   
   const router = useRouter();
+  const {pathname} = router;
   const { authorize } = useUI();
   const { closeModal, openModal } = useModalAction();
   function handleNavigate(path: string) {
     router.push(`/${path}`);
     closeModal();
+
   }
 
   async function resendCode(){
@@ -79,6 +81,7 @@ const RegisterForm = () => {
     }
   }
 
+  console.log('query_',query?.name)
   console.log('query', query.utm_source + ' ' + query.utm_campaign);
 
   function onSubmit({code}: FormValues) {
@@ -124,7 +127,7 @@ const RegisterForm = () => {
           //     },
           //   });
           // }
-
+          query?.name == 'quiz-form' && router.push('/quiz-form')
             query?.utm_source == 'shop_qr' ? 
             router.push('/shops/'+ query?.utm_campaign+'?utm_source=shop_qr&utm_campaign='+query.utm_campaign+'&shop_id='+query.shop_id) 
             : query?.utm_source == 'salon-near-me' ?   router.push('/salon-near-me') 

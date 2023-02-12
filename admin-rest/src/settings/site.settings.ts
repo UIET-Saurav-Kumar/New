@@ -77,6 +77,12 @@ export const siteSettings = {
         label: " Contact Queries",
         icon: "CategoriesIcon",
       },
+
+      {
+        href: ROUTES.QUIZ,
+        label: "Quiz",
+        icon: "CategoriesIcon",
+      },
        
       {
         href: ROUTES.MASTER_PRODUCT,

@@ -538,6 +538,10 @@ export declare type ContactInput = {
   description?:Maybe<Scalars["String"]>;
  
 };
+
+
+
+
 export declare type ContactUpdateInput = {
   name: Scalars["String"];
   email?:Maybe<Scalars["String"]>; 

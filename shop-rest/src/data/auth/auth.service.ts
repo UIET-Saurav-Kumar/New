@@ -73,6 +73,11 @@ class Auth extends CoreApi {
 			.post(API_ENDPOINTS.REGISTER, input)
 			.then((res) => res.data);
 	}
+	otpRegister(input: OtpLoginInputType) {
+		return this.http
+			.post(API_ENDPOINTS.OTP_REGISTER, input)
+			.then((res) => res.data);
+	}
 	verfiy(input: VerifyUserInputType) {
 		return this.http
 			.post(API_ENDPOINTS.USER_VERIFY, input)

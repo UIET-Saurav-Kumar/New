@@ -25,12 +25,14 @@ use PickBazar\Exceptions\PickbazarException;
 use Illuminate\Validation\ValidationException;
 use PickBazar\Database\Models\License;
 use PickBazar\Http\Requests\UserCreateRequest;
+use PickBazar\Http\Requests\OtpUserCreateRequest;
 use PickBazar\Http\Requests\UserUpdateRequest;
 use PickBazar\Http\Requests\ChangePasswordRequest;
 use PickBazar\Database\Repositories\UserRepository;
 use PickBazar\Database\Models\Permission as ModelsPermission;
 use PickBazar\Database\Models\SignupOffer;
 use PickBazar\Helpers\InteraktHelper;
+
 
 
 class UserController extends CoreController
@@ -153,9 +155,7 @@ class UserController extends CoreController
 
     public function register(UserCreateRequest $request)
     {
-        // $request->validate([
-        //     "phone_number"=>"required|unique:users"
-        // ]);
+       
 
         $notAllowedPermissions = [Permission::SUPER_ADMIN];
         if ((isset($request->permission->value) && in_array($request->permission->value, $notAllowedPermissions)) || (isset($request->permission) && in_array($request->permission, $notAllowedPermissions))) {
@@ -244,6 +244,114 @@ class UserController extends CoreController
             "traits"=> [
                 "name"=> $user->name,
                 "email"=> $user->email,
+                "user_role" => $user->permissions[0]->name,
+            ],
+            "createdAt"=> date('Y-m-d H:i:s')
+        );
+        
+        $endpoint_event = 'track/events/';
+
+        $response_event   = InteraktHelper::interaktApi(json_encode($payload),$endpoint_event);
+        #---------------------creating Register Event-----------------#
+
+        return ["user"=>$user, 'interakt_response' => $response, 'interakt_event_response' => $response_event];
+
+        return ["token" => $user->createToken('auth_token')->plainTextToken,"permissions" => $user->getPermissionNames(), 'interakt_response' => $response];
+    }
+
+
+    public function otpRegister(OtpUserCreateRequest $request)
+    {
+       
+
+        $notAllowedPermissions = [Permission::SUPER_ADMIN];
+        if ((isset($request->permission->value) && in_array($request->permission->value, $notAllowedPermissions)) || (isset($request->permission) && in_array($request->permission, $notAllowedPermissions))) {
+            throw new PickbazarException('NOT_AUTHORIZED');
+        }
+        $permissions = [Permission::CUSTOMER];
+        if (isset($request->permission)) {
+            $permissions[] = isset($request->permission->value) ? $request->permission->value : $request->permission;
+        }
+
+        $country_code = '+91';
+        $phone_number = $country_code.$request->phone_number;
+        $code=SMS::sendOTP($phone_number);
+
+        //user permissions
+    
+
+        $user = $this->repository->create([
+            'name'     => 'guest' .  Str::random(4) ,
+            'email'    => 'guest' . Str::random(4) . '@gmail.com',
+            // 'password' => Hash::make($request->password),
+            // 'invited_by'=>$request->invited_by,
+            'phone_number'=>$request->phone_number,
+            // 'gender'=> $request->gender,
+            // 'date_of_birth'=> $request->date_of_birth,
+            // 'occupation'=> $request->occupation,
+             'role'=> 'user',
+            // 'current_location'=>$request->current_location,
+            // 'is_active'=>0,
+            'code'=>$code
+        ]);
+    
+        
+        if($request->invited_by){
+            Invite::create([
+                "user_id"=>$request->invited_by,
+                "invitee_id"=>$user->id,
+                "invitee_name"=>'none'
+            ]);
+
+            $invited_by=User::find($request->invited_by);
+            SMS::userInvite($invited_by->phone_number,$invited_by->name,$user->name);
+            
+
+            $signup_offer=SignupOffer::find(1);
+            $Inviter_balance = Balance::firstOrNew(['user_id' => $request->invited_by]);
+            $Inviter_balance->total_earnings= $Inviter_balance->total_earnings + $signup_offer->inviter_reward;
+            $Inviter_balance->current_balance=$Inviter_balance->current_balance + $signup_offer->inviter_reward;
+            $Inviter_balance->save();
+
+            $Invitee_balance = Balance::firstOrNew(['user_id' => $user->id]);
+            $Invitee_balance->total_earnings= $Invitee_balance->total_earnings + $signup_offer->invitee_reward;
+            $Invitee_balance->current_balance=$Invitee_balance->current_balance + $signup_offer->invitee_reward;
+            $Invitee_balance->save();
+
+        }
+
+        $user->givePermissionTo($permissions);
+
+        #--------------creating whatapp user-----------------#
+        $CURLOPT_POSTFIELDS   = array(
+                                        "userId"=> $user->id,
+                                        "phoneNumber"=> $user->phone_number,
+                                        "countryCode"=> $country_code,
+                                        "traits"=> [
+                                            "name"=> 'guest' . $user->id ,
+                                            "email"=> 'guest' . $user->id . '@gmail.com',
+                                            "user_role"=> $user->permissions[0]->name,
+                                        ],
+                                        "createdAt"=> date('Y-m-d H:i:s')
+                                    );
+    
+        $endpoint = 'track/users/';
+
+        $response = InteraktHelper::interaktApi(json_encode($CURLOPT_POSTFIELDS),$endpoint);
+        #--------------creating whatapp user-----------------#
+        
+        #---------------------creating Register Event-----------------#
+        $payload = array(
+            "userId"=> $user->id,
+            "phoneNumber"=> $user->phone_number,
+            'gender'=> $user->gender,
+            'date_of_birth'=> $user->date_of_birth,
+            'occupation' => $user->occupation,
+            "countryCode"=> "+91",
+            "event"=> "User Registered",
+            "traits"=> [
+                "name"=> $user->name . '@gmail.com',
+                "email"=> 'guest' . $user->id . '@gmail.com',
                 "user_role" => $user->permissions[0]->name,
             ],
             "createdAt"=> date('Y-m-d H:i:s')

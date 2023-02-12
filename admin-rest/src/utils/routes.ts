@@ -50,5 +50,6 @@ export const ROUTES = {
   WHATSAPP_CAMPAIGN: '/whatsapp-campaign',
   
   TERM_LIFE_INSURANCE: '/term-life-insurance',
+  QUIZ: 'quiz',
 
 };

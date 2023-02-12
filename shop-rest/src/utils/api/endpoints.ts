@@ -22,6 +22,7 @@ export const API_ENDPOINTS: Record<string, string> = {
 
   
   REGISTER: "register",
+  OTP_REGISTER: 'otp-register',
   FORGET_PASSWORD: "forget-password",
   LOGOUT: "logout",
   CHANGE_PASSWORD: "Change Password",
@@ -88,6 +89,7 @@ export const API_ENDPOINTS: Record<string, string> = {
 
 
   UPI_PAYMENT: 'upi-payment',
+  QUIZ: 'quiz',
 
 
   LOGS:'logs'

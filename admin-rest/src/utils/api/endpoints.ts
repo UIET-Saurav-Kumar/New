@@ -108,5 +108,7 @@ export const API_ENDPOINTS = {
 
   TERM_LIFE_INSURANCE: 'term-life-insurance',
 
+  QUIZ: 'quiz',
+
 };
 

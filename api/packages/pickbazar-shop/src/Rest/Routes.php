@@ -38,6 +38,7 @@ use PickBazar\Http\Controllers\MasterProductController;
 use PickBazar\Http\Controllers\AttributeValueController;
 use PickBazar\Http\Controllers\UtilityPaymentController;
 use PickBazar\Http\Controllers\TermLifeInsuranceController;
+use PickBazar\Http\Controllers\QuizController;
 
  
 //route for findByDateRange in order controller
@@ -86,6 +87,8 @@ Route::get('/get-landline-info','PickBazar\Http\Controllers\BillerInfoController
 
 
 Route::post('/register', 'PickBazar\Http\Controllers\UserController@register');
+Route::post('/otp-register', 'PickBazar\Http\Controllers\UserController@otpRegister');
+
 Route::post('/token', 'PickBazar\Http\Controllers\UserController@token');
 Route::post('/forget-password', 'PickBazar\Http\Controllers\UserController@forgetPassword');
 Route::post('/stored-licenses', 'PickBazar\Http\Controllers\UserController@licenseStore');
@@ -312,6 +315,10 @@ Route::apiResource('contact', ContactController::class, [
     'only' => ['index', 'store']
 ]);
 
+Route::apiResource('quiz', QuizController::class, [
+    'only' => ['index', 'store']
+]);
+
 Route::apiResource('/term-life-insurance', TermLifeInsuranceController::class, [
     'only' => ['index', 'store']
 ]);
@@ -385,6 +392,7 @@ Route::group(['middleware' => ['can:' . Permission::CUSTOMER, 'auth:sanctum']], 
 
     Route::resource('bill',BillController::class);
     Route::resource('contact',ContactController::class);
+    Route::resource('quiz',QuizController::class);
     Route::resource('/term-life-insurance',TermLifeInsuranceController::class);
     Route::post('approve-bill','PickBazar\Http\Controllers\BillController@approveBill');
     Route::post('bill-reward','PickBazar\Http\Controllers\BillController@billReward');

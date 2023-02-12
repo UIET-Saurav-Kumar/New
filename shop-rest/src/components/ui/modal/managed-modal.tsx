@@ -35,6 +35,8 @@ const CreateOrUpdateAddressForm = dynamic(
   () => import("@components/address/address-form")
 );
 
+const QuizResultModal= dynamic(()=> import("@components/quiz/quiz-result-modal"))
+
 const InStoreOfferMessage = dynamic(
   () => import("@components/ui/in-store-offer-msg")
 );
@@ -42,6 +44,8 @@ const InStoreOfferMessage = dynamic(
 const ShopImageModal = dynamic(
   ()=> import('@components/shop/shop-image-modal')
 );
+
+const OtpRegister = dynamic(()=> import('@components/auth/otp-register'));
 
 const OfferImageView = dynamic(()=> import("@components/common/offer-image-view"))
 
@@ -112,6 +116,10 @@ const ManagedModal = () => {
       {view === 'UPI_SCANNER_APPS' && <UpiScanner data={data}/>}
 
       {view === 'SCANNER' && <Scanner data={data}/>}
+
+      {view === 'OTP_REGISTER' && <OtpRegister/>}
+
+      {view === 'QUIZ_RESULT_MODAL' && <QuizResultModal data={data}/>}
 
       {view === 'RECHARGE_PLAN_DETAILS' && <RechargePlanDetails data={data} close={closeModal}/> }
 
