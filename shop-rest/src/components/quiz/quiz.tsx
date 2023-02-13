@@ -86,12 +86,14 @@ export default function Quiz() {
 
   const onSubmit = (data:any) => {
 
-    
-
     let numCorrect = 0;
-     
 
     localStorage.setItem('valentine-input', JSON.stringify(input));
+
+    if (!data?.q1 || !data?.q2 || !data?.q3 || !data?.q4 || !data?.q5) {
+      // setLoading(false);
+      return setError('Please answer all the questions before submitting!');
+    }
 
 
     if(!isAuthorize){
@@ -141,15 +143,18 @@ export default function Quiz() {
         
       };
 
-      if (!data?.q1 || !data?.q2 || !data?.q3 || !data?.q4 || !data?.q5) {
-        // setLoading(false);
-        return setError('Please answer all the questions before submitting!');
-      }
 
       console.log(input)
 
 
       createquiz(input)
+
+       
+
+      if (data?.q1 || data?.q2 || data?.q3 || data?.q4 || data?.q5) {
+        // setLoading(false);
+        showResult(data)
+      }
 
        
   }
@@ -166,7 +171,7 @@ export default function Quiz() {
 
             <div className="border-b border-gray-50 shadow-sm py-2 w-full flex flex-col mx-auto px-4 space-y-2 sm:px-6 lg:px-8">
 
-                <Label>  When did Valentine's Day start being celebrated as a holiday?</Label>
+                <Label className="leading-5">  When did Valentine's Day start being celebrated as a holiday?</Label>
 
                 <div className="flex flex-col space-y-2">
                 <Radio
@@ -202,7 +207,7 @@ export default function Quiz() {
 
             <div className="border-b border-gray-50 shadow-sm py-2 w-full flex flex-col mx-auto px-4 space-y-2 sm:px-6 lg:px-8">
 
-                <Label>  Who is considered the patron saint of love and romance?</Label>
+                <Label className="leading-5">  Who is considered the patron saint of love and romance?</Label>
 
                 <div className="flex flex-col space-y-2">
                     <Radio
@@ -237,7 +242,7 @@ export default function Quiz() {
 
             <div className="border-b border-gray-50 shadow-sm py-2 w-full flex flex-col mx-auto px-4 space-y-2 sm:px-6 lg:px-8">
 
-                <Label>  What is the most popular flower given on Valentine's Day?</Label>
+                <Label className="leading-5">  What is the most popular flower given on Valentine's Day?</Label>
 
                 <div className="flex flex-col space-y-2">
                     <Radio
@@ -272,7 +277,7 @@ export default function Quiz() {
 
             <div className="border-b border-gray-50 shadow-sm py-2 w-full flex flex-col mx-auto px-4 space-y-2 sm:px-6 lg:px-8">
 
-                <Label>  Which of the following movies is not a romantic comedy released around Valentine's Day?</Label>
+                <Label className="leading-5">  Which of the following movies is not a romantic comedy released around Valentine's Day?</Label>
 
                 <div className="flex flex-col space-y-2">
                     <Radio
@@ -307,7 +312,7 @@ export default function Quiz() {
 
             <div className="border-b border-gray-50 shadow-sm py-2 w-full flex flex-col mx-auto px-4 space-y-2 sm:px-6 lg:px-8">
 
-                <Label>  In which country is it a tradition to give women chocolate on Valentine's Day?</Label>
+                <Label className="leading-5">  In which country is it a tradition to give women chocolate on Valentine's Day?</Label>
 
                 <div className="flex flex-col space-y-2">
                     <Radio
@@ -346,7 +351,7 @@ export default function Quiz() {
       <Button
       onClick={()=>onSubmit()}
         loading={loading}
-        className="w-full mt-5 lg:w-auto lg:ms-auto"
+        className="w-full w-60 mt-5 lg:w-auto lg:ms-auto"
       >
         Submit
       </Button>

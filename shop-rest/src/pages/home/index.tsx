@@ -42,6 +42,8 @@ import Head from "next/head";
 import useIntersectionObserver from "@components/product/useIntersectionObserver";
 import BillPayment from "@components/home-page-product-section/bill-payment-services/components";
 import PolicyServices from "@components/home-page-product-section/PolicyServices/components";
+import ProfileCompletenessBadge from "@components/profile/profile-completed-badge";
+import CompleteProfile from "@components/profile/complete-profile";
 
 
 const ProductFeedLoader = dynamic(
@@ -273,6 +275,8 @@ useIntersectionObserver({
             (<StayTuned/>) :
             (
               <div className="relative w-full">
+
+                <CompleteProfile/>
               
                 <Tagline/>
                 

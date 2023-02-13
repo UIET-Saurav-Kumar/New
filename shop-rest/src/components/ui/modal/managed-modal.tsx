@@ -45,7 +45,7 @@ const ShopImageModal = dynamic(
   ()=> import('@components/shop/shop-image-modal')
 );
 
-const OtpRegister = dynamic(()=> import('@components/auth/otp-register'));
+const OtpRegisterForm = dynamic(()=> import('@components/auth/otp-register'));
 
 const OfferImageView = dynamic(()=> import("@components/common/offer-image-view"))
 
@@ -117,7 +117,7 @@ const ManagedModal = () => {
 
       {view === 'SCANNER' && <Scanner data={data}/>}
 
-      {view === 'OTP_REGISTER' && <OtpRegister/>}
+      {view === 'OTP_REGISTER' && <OtpRegisterForm data={data}/>}
 
       {view === 'QUIZ_RESULT_MODAL' && <QuizResultModal data={data}/>}
 

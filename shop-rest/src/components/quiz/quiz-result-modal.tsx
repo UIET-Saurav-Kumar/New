@@ -8,12 +8,12 @@ export default function QuizResultModal({data}:any) {
   return (
 
 
-    <div className='h-screen w-screen my-auto bg-white'>
+    <div className='h-screen w-screen lg:w-96 lg:h-96 my-auto bg-white'>
 
     <div className="bg-white p-8 rounded-lg">
             <div className="flex items-center justify-center">
             {right == 5 ? (
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 border-2 p-2 border-green-500 rounded-full mt-60 text-green-500" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M18.707 5.293a1 1 0 00-1.414-1.414L8 13.586 4.707 10.293a1 1 0 00-1.414 1.414l4 4a1 1 0 001.414 0l10-10z" clipRule="evenodd" />
                 </svg>
             ) : (
@@ -22,9 +22,11 @@ export default function QuizResultModal({data}:any) {
                 </svg>
             )}
             </div>
+            <p className="text-gray-700 mt-4 text-center">{right == 5 ? <span >{'You got'+ right + '/5 answers correct'}</span>   : 'Thank you for participating.'}</p>
             <h2 className="text-xl font-bold mt-4 text-center">{right == 5 ? 'Congratulations!' : 'Better Luck Next Time!'}</h2>
             <p className="text-gray-700 mt-4 text-center">{right == 5 ? 'You are eligible for lucky draw.' : 'Thank you for participating.'}</p>
-        </div>
+            <p className="text-gray-500 mt-4 text-sm text-center">{right == 5 ? 'We will update you when the winner is announced' : 'Stay tuned for more contests.'}</p>
+    </div>
         </div>
   )
 }

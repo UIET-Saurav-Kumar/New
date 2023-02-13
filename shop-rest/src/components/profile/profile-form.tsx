@@ -41,9 +41,11 @@ const ProfileForm = ({ user }: Props) => {
         ...(user &&
           pick(user, [
             "name",
+            'email',
             'date_of_birth',
             'occupation',
             'gender',
+            'current_location',
             'profile.date_of_birth',
             'profile.gender',
             'profile.occupation',
@@ -54,6 +56,7 @@ const ProfileForm = ({ user }: Props) => {
       },
     }
   );
+
   const { mutate: updateProfile, isLoading: loading } =
     useUpdateCustomerMutation();
 
@@ -63,12 +66,15 @@ const ProfileForm = ({ user }: Props) => {
   function onSubmit(values: any) {
     updateProfile(
       {
+        
         id: user?.id,
         name: values?.name,
         date_of_birth: values?.date_of_birth,
         gender: values?.gender,
         occupation: values?.occupation,
-        profile: {
+        current_location: values?.current_location,
+        email: values?.email,
+         profile: {
           id: user?.profile?.id,
           ...values.profile,
           avatar: values?.profile.avatar?.[0],
@@ -87,6 +93,13 @@ const ProfileForm = ({ user }: Props) => {
         date_of_birth: values?.date_of_birth,
         gender: values?.gender,
         occupation: values?.occupation,
+        current_location: values?.current_location,
+        email: values?.email,
+        profile: {
+          id: user?.profile?.id,
+          ...values.profile,
+          avatar: values?.profile.avatar?.[0],
+        },
       },
       {
         onSuccess: () => {
@@ -108,24 +121,28 @@ const ProfileForm = ({ user }: Props) => {
           <div className="mb-8"> 
             <FileInput control={control} name="profile.avatar" />
           </div>
-          <div className="flex flex-col sm:flex-row sm:items-center sm:space-s-4 mb-6">
+          <div className="flex flex-col space-y-4 lg:space-y-0 sm:flex-row sm:items-center sm:space-s-4 mb-6">
             <Input
               className="flex-1"
               label={t("Name")}
               {...register("name")}
               variant="outline"
             />
+
             <Input
+              className="flex-1"
+              label={t("Email")}
+            
+              {...register("email")}
+              variant="outline"
+            />
+            {/* <Input
               {...register("profile.contact")}
               label={t("Contact Number")}
               className="flex-1 mt-3 lg:mt-0"
-              onChange={(e) => {
-                const value = maskPhoneNumber(e.target.value);
-                //@ts-ignore
-                setValue("profile.contact", value);
-              }}
+              
               variant="outline"
-            />
+            /> */}
           </div>
 
           <div className="space-y-4  col-span-1 sm:col-span-2">
@@ -133,35 +150,29 @@ const ProfileForm = ({ user }: Props) => {
             <div className="flex flex-col space-y-2"> 
 
 
-                <span className="text-xs text-gray-600   font-semibold">Date of birth</span>
-                    {/* <div className="flex  text-body-dark h-3  font-semibold text-xs leading-none mb-3">
-                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-yellow-600 to-blue-600">
-                          🎉Your Birthday present is awaiting  </span> 🥳
-                    </div> */}
-                  {/*        
-                      <Controller
-                          control={control}
-                          name="date_of_birth"
-                          render={({ field: { onChange, onBlur, value } }) => ( */}
-                          
-                  <DatePicker
-                        selected={birthDate}
-                        onChange={(date) => {
-                          setBirthDate((date));
-                          setValue("date_of_birth", date);
-                        }}
-                        dateFormat="dd-MM-yyyy"
-                        className="text-sm h-12 w-full px-4 border border-border-base rounded focus:border-accent"
-                        showYearDropdown
-                        showMonthDropdown
-                        dropdownMode="select"
-                        peekNextMonth
-                        showWeekNumbers
-                        minDate={new Date(1900, 1, 1)}
-                        maxDate={new Date()}
-                        placeholderText={t("dd-mm-yyyy")}
-                        // className="w-full"
-                  />                         
+                {/* <span className="text-xs text-gray-600   font-semibold">Date of birth</span> */}
+                <Input
+              className="flex-1"
+              label={t("Date of Birth")}
+              type='Date'
+              {...register("date_of_birth")}
+              variant="outline"
+            />
+                                
+
+              </div>
+
+              <div className="flex flex-col space-y-2"> 
+
+
+                {/* <span className="text-xs text-gray-600   font-semibold">Date of birth</span> */}
+                <Input
+                className="flex-1"
+                label={t("Current Location")}
+                {...register("current_location")}
+                variant="outline"
+                />
+                                
 
               </div>
         
@@ -174,7 +185,7 @@ const ProfileForm = ({ user }: Props) => {
                 <Radio
                   id="male"
                   type="radio"
-                  {...register("profile.gender")}
+                  {...register("gender")}
                   value="male"
                   label={t("Male")}
                   className=""
@@ -183,7 +194,7 @@ const ProfileForm = ({ user }: Props) => {
                 <Radio
                   id="female"
                   type="radio"
-                  {...register("profile.gender")}
+                  {...register("gender")}
                   value="female"
                   label={t("Female")}
                   className=""
@@ -201,7 +212,7 @@ const ProfileForm = ({ user }: Props) => {
                     // value={occupation}
                     defaultValue="Search by"
                     // setValue={setValue}
-                    {...register("profile.occupation")}
+                    {...register("occupation")}
                   >
                     <option value='' disabled selected >Select your option</option>
                     <option value="Student">{t("Student")}</option>
@@ -222,7 +233,7 @@ const ProfileForm = ({ user }: Props) => {
 
           <div className="flex">
             <Button className="ms-auto" loading={loading} disabled={loading}>
-              {t("text-save")}
+              {("Save")}
             </Button>
           </div>
         </Card>

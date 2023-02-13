@@ -50,6 +50,8 @@ const OtpRegisterForm = (props:any) => {
   const [birthDate, setBirthDate] = useState(null);
 
   const url = props?.data?.pathname;
+
+  console.log('url', url )
   
   // const userLoc = [{
   //   formattedAddress: getLocation.formattedAddress,
@@ -154,7 +156,7 @@ function handleClick(){
           query?.utm_source == 'shop_qr' ? 
           // router.push('/shops/'+ query?.campaign)
           router.push('/auth/'+data?.user.id+'?utm_source=shop_qr&utm_campaign='+query?.utm_campaign+'&shop_id='+query?.shop_id)
-          : router.pathname == '/quiz-form' ?  router.push('/auth/'+data?.user.id+'?name=quiz-form') 
+          : url == '/quiz-form' ?  router.push('/auth/'+data?.user.id+'?name=quiz-form') 
           : url === '/salon-near-me' ? router.push('/auth/'+data?.user.id+'?utm_source=salon-near-me') 
           : router.push('/auth/'+data?.user.id);
           closeModal();

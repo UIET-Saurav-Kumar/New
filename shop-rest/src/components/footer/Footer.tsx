@@ -80,6 +80,18 @@ const Footer = () => {
 						</div>		  		
 			  	  </div>
 
+					<div className='footer-section-links  space-y-4 text-left'>
+						<h5 className='footer-links-title font-bold text-lg tracking-widest '>Games</h5>
+
+						<div className=' space-y-4 tracking-widest '>
+							<Link href='https://buylowcal.com/valentine-quiz'>
+								<h5 className='light-text cursor-pointer text-sm md:text-md lg:text-md xl:text-xl hover:underline font-light'>
+									Valentine Quiz </h5>
+							</Link>
+							
+						</div>		  		
+			  	  </div>
+
 
 
 					<div className='flex flex-col  space-y-4'>
