@@ -282,7 +282,7 @@ class UserController extends CoreController
 
         $user = $this->repository->create([
             'name'     => 'guest' .  Str::random(4) ,
-            'email'    => 'guest' . Str::random(4) . '@gmail.com',
+            // 'email'    => 'guest' . Str::random(4) . '@gmail.com',
             // 'password' => Hash::make($request->password),
             // 'invited_by'=>$request->invited_by,
             'phone_number'=>$request->phone_number,

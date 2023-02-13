@@ -17,6 +17,7 @@ import ShopLayout from "@components/layout/shop-layout";
 import { useCustomerQuery } from "@data/customer/use-customer.query";
 import { useQuizSubmitMutation } from "@data/quiz/use-quiz-submit.query";
 import router from "next/router";
+import { useAllQuizQuery } from "@data/quiz/use-all-quiz.query";
 
 
 export default function Quiz() {
@@ -26,10 +27,39 @@ export default function Quiz() {
   const queryClient = useQueryClient();
   const { closeModal, openModal } = useModalAction();
   const { isAuthorize } = useUI();
+  const [page, setPage] = useState(1);
+  const [orderBy, setOrder] = useState("created_at");
+  // const [sortedBy, setColumn] = useState<SortContacts>(SortContacts.Desc);
+  
+  const {data:user} = useCustomerQuery();
+  const [participation, setParticipation] = useState(false);
+  const {
+    data:quizData,
+    // isLoading: loading,
+    // error,
+  } = useAllQuizQuery({
+    limit: 1000,
+    page,
+    // sortedBy,
+    // orderBy,
+  });
+
+  console.log('quizData',quizData?.quiz?.data);
+
+
+  function quizValidate() {
+    quizData?.quiz?.data.map((quiz)=> {
+      quiz?.phone_number == user?.me?.phone_number ? setParticipation(true) : ''
+     return participation && openModal('QUIZ_VALIDATOR')
+    }
+    ) 
+  }
+
+
 //   const { mutate: createquiz, isLoading: loading } = useQuizSubmitMutation();
 
   const postQuiz = async (data:any)=> {
-    setLoading(true)
+    setLoading(true);
     const {data: response} = await http.post(
       `${url}/${API_ENDPOINTS.QUIZ}`,
       data,
@@ -45,7 +75,7 @@ export default function Quiz() {
   }
 
 
-    const {data:user} = useCustomerQuery();
+    
 
     console.log('me',user)
 
@@ -86,14 +116,20 @@ export default function Quiz() {
 
   const onSubmit = (data:any) => {
 
-    let numCorrect = 0;
-
-    localStorage.setItem('valentine-input', JSON.stringify(input));
-
     if (!data?.q1 || !data?.q2 || !data?.q3 || !data?.q4 || !data?.q5) {
       // setLoading(false);
       return setError('Please answer all the questions before submitting!');
     }
+    
+    quizValidate();
+    
+
+
+    let numCorrect = 0;
+
+    localStorage.setItem('valentine-input', JSON.stringify(input));
+
+    
 
 
     if(!isAuthorize){
@@ -110,6 +146,8 @@ export default function Quiz() {
         q4: 'Jurassic Park',
         q5: 'Japan'
       };
+
+      
       
        
       
@@ -146,15 +184,14 @@ export default function Quiz() {
 
       console.log(input)
 
-
-      createquiz(input)
-
-       
+     !participation &&  createquiz(input)
 
       if (data?.q1 || data?.q2 || data?.q3 || data?.q4 || data?.q5) {
         // setLoading(false);
-        showResult(data)
+        !participation && showResult(data)
       }
+
+      
 
        
   }

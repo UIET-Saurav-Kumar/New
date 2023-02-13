@@ -14,8 +14,9 @@ import ContactsList from "@components/contacts/contacts-list";
 import QuizList from "@components/quiz.tsx/quiz-list";
 import { useAllQuizQuery } from "@data/quiz/use-all-quiz.query";
 
-export default function QuizPage() {
 
+export default function QuizPage() {
+  
   const { t } = useTranslation();
   const [page, setPage] = useState(1);
   const [orderBy, setOrder] = useState("created_at");

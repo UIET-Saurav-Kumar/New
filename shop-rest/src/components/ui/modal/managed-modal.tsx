@@ -7,6 +7,7 @@ import ShopPaymentForm from "@components/shop/shop-payment-form";
 import RechargePlans from "@components/home-page-product-section/bill-payment-services/recharge-plans-modal/recharge-plans";
 import RechargePlanDetails from "@components/home-page-product-section/bill-payment-services/recharge-plan-details-modal";
 import UpiScanner from "@components/upi-scanner/upi-scanner";
+import QuizValidatorModal from "@components/quiz/quiz-validator-modal";
      
 
 const Login = dynamic(() => import("@components/auth/login"));
@@ -116,6 +117,8 @@ const ManagedModal = () => {
       {view === 'UPI_SCANNER_APPS' && <UpiScanner data={data}/>}
 
       {view === 'SCANNER' && <Scanner data={data}/>}
+
+      {view  === 'QUIZ_VALIDATOR' && <QuizValidatorModal/>}
 
       {view === 'OTP_REGISTER' && <OtpRegisterForm data={data}/>}
 
