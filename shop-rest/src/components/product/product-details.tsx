@@ -18,6 +18,7 @@ import { ROUTES } from "@utils/routes";
 import { useUI } from "@contexts/ui.context";
 import WishlistButton from "./product-details/wishlist-button";
 import { StarIcon } from "@heroicons/react/outline";
+import { random } from "lodash";
 
 type Props = {
   product: any;
@@ -83,6 +84,26 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
     });
   };
 
+ const min = 3.5;
+ const max = 5;
+ const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+ 
+
+ function ratingStars(rating:any) {
+  let stars = "";
+  if (rating >= 4.5) {
+      stars ='⭐️⭐️⭐️⭐️⭐️';
+  } else {
+      for (let i = 0; i < Math.floor(rating); i++) {
+          stars +='⭐️';
+      }
+      if (rating % 1 !== 0) {
+          stars +='⭐';
+      }
+  }
+  return stars;
+ }
+
   // console.log('rating',ratings)
 
   /**
@@ -131,9 +152,9 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
             <div className="">
               <WishlistButton product={product} productId={product?.id}/>
             
-                <div className="inline-flex shrink-0 mt-2 text-white items-center rounded border border-accent bg-accent px-3 py-1 text-sm ">
-                  {ratings}
-                  <StarIcon className="h-5 w-5 ltr:ml-1 rtl:mr-1" />
+                <div className="inline-flex shrink-0 mt-2 text-white items-center rounded border border-accent bg-white text-black px-3 py-1 text-sm ">
+                 {randomNum} {ratingStars(randomNum)}
+                  {/* <StarIcon className="h-5 w-5 ltr:ml-1 rtl:mr-1" /> */}
                 </div>
              
             </div>
@@ -185,7 +206,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
             <div className="mt-4 md:mt-6 flex flex-col lg:flex-row items-center">
               <div  className="mb-3 lg:mb-0 w-full lg:max-w-[400px]">
                 <AddToCart
-                onClick={handleCartSidebar}
+                  onClick={handleCartSidebar}
                   data={product}
                   variant="big"
                   variation={selectedVariation}
@@ -195,11 +216,11 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
 
               {quantity > 0 ? (
                 <>
-                  {isEmpty(variations) && (
+                  {/* {isEmpty(variations) && (
                     <span className="text-base text-body whitespace-nowrap lg:ms-7">
                       {quantity} {t("Pieces available")}
                     </span>
-                  )}
+                  )} */}
                   {!isEmpty(selectedVariation) && (
                     <span className="text-base text-body whitespace-nowrap lg:ms-7">
                       {selectedVariation?.is_disable ||

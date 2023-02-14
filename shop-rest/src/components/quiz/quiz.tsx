@@ -33,6 +33,7 @@ export default function Quiz() {
   
   const {data:user} = useCustomerQuery();
   const [participation, setParticipation] = useState(false);
+
   const {
     data:quizData,
     // isLoading: loading,
@@ -47,13 +48,7 @@ export default function Quiz() {
   console.log('quizData',quizData?.quiz?.data);
 
 
-  function quizValidate() {
-    quizData?.quiz?.data.map((quiz)=> {
-      quiz?.phone_number == user?.me?.phone_number ? setParticipation(true) : ''
-     return participation && openModal('QUIZ_VALIDATOR')
-    }
-    ) 
-  }
+   
 
 
 //   const { mutate: createquiz, isLoading: loading } = useQuizSubmitMutation();
@@ -64,7 +59,9 @@ export default function Quiz() {
       `${url}/${API_ENDPOINTS.QUIZ}`,
       data,
     )  
+    setLoading(false);
     return response;
+     
   }
 
   const [loading, setLoading] = useState(false);
@@ -86,18 +83,13 @@ export default function Quiz() {
         showResult(data);
         router.push('/home');
         
-      // setOperator(data)
-      // data?.status == false ? setError(data?.msg) : null
-      // setOperatorName(data?.operator)
-      // setCircleName(data?.circle)
+      
       console.log('quiz', data)
     },
 
     onError: (data) => {
-        setLoading(!loading);
-      // alert(data?.msg)
-      //  toast.error("unable to process the request, please try later");
-      // setError(data?.msg)
+        setLoading(false);
+     
     },
 
     onSettled: () => {
@@ -113,6 +105,14 @@ export default function Quiz() {
     q5: 'Japan'
   };
 
+  function quizValidate() {
+    quizData?.quiz?.data.map((quiz)=> {
+    quiz?.phone_number == user?.me?.phone_number ? setParticipation(true) : ''
+    return participation && openModal('QUIZ_VALIDATOR')
+   }
+   ) 
+ }
+
 
   const onSubmit = (data:any) => {
 
@@ -120,16 +120,12 @@ export default function Quiz() {
       // setLoading(false);
       return setError('Please answer all the questions before submitting!');
     }
-    
+
     quizValidate();
     
-
-
     let numCorrect = 0;
 
     localStorage.setItem('valentine-input', JSON.stringify(input));
-
-    
 
 
     if(!isAuthorize){
@@ -139,16 +135,14 @@ export default function Quiz() {
       }
 
     
-    const correctAnswers = {
-        q1: '496 AD',
-        q2: 'St. Valentinus',
-        q3: 'Roses',
-        q4: 'Jurassic Park',
-        q5: 'Japan'
-      };
+    // const correctAnswers = {
+    //     q1: '496 AD',
+    //     q2: 'St. Valentinus',
+    //     q3: 'Roses',
+    //     q4: 'Jurassic Park',
+    //     q5: 'Japan'
+    //   };
 
-      
-      
        
       
       if (data?.q1 === correctAnswers.q1) {
@@ -178,20 +172,33 @@ export default function Quiz() {
         q3: data?.q3,
         q4: data?.q4,
         q5: data?.q5,
-        
       };
+
+      if (input?.q1 === correctAnswers.q1) {
+        numCorrect++;
+      }
+      if (input?.q2 === correctAnswers.q2) {
+        numCorrect++;
+      }
+      if (input?.q3 === correctAnswers.q3) {
+        numCorrect++;
+      }
+      if (input?.q4 === correctAnswers.q4) {
+        numCorrect++;
+      }
+      if (input?.q5 === correctAnswers.q5) {   
+        numCorrect++;
+      }
 
 
       console.log(input)
 
      !participation &&  createquiz(input)
 
-      if (data?.q1 || data?.q2 || data?.q3 || data?.q4 || data?.q5) {
+      if (input?.q1 || input?.q2 || input?.q3 || input?.q4 || input?.q5) {
         // setLoading(false);
         !participation && showResult(data)
       }
-
-      
 
        
   }

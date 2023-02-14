@@ -281,8 +281,8 @@ class UserController extends CoreController
     
 
         $user = $this->repository->create([
-            'name'     => 'guest' .  Str::random(4) ,
-            // 'email'    => 'guest' . Str::random(4) . '@gmail.com',
+            'name'     => $request->name ,
+            'email'    => $request->email,
             // 'password' => Hash::make($request->password),
             // 'invited_by'=>$request->invited_by,
             'phone_number'=>$request->phone_number,
@@ -328,8 +328,8 @@ class UserController extends CoreController
                                         "phoneNumber"=> $user->phone_number,
                                         "countryCode"=> $country_code,
                                         "traits"=> [
-                                            "name"=> 'guest' . $user->id ,
-                                            "email"=> 'guest' . $user->id . '@gmail.com',
+                                            "name"=>  $user->name ,
+                                            "email"=> $user->email ,
                                             "user_role"=> $user->permissions[0]->name,
                                         ],
                                         "createdAt"=> date('Y-m-d H:i:s')

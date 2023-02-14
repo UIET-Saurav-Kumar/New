@@ -56,7 +56,7 @@ type ShopProfileCardProps = {
 
     console.log('place', open)
 
-    function ratingStars(rating) {
+    function ratingStars(rating:any) {
       let stars = "";
       if (rating >= 4.5) {
           stars ='⭐️⭐️⭐️⭐️⭐️';

@@ -472,7 +472,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
           </div>
 
           <div className="flex flex-col sm:flex-row w-1/2 justify-start">
-            <div className="w-full sm:w-1/2 p-0 sm:pe-2 mb-5 sm:mb-0">
+            {/* <div className="w-full sm:w-1/2 p-0 sm:pe-2 mb-5 sm:mb-0">
               <Label>{t("form:coupon-active-from")}</Label>
 
               <Controller
@@ -494,9 +494,9 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
                   />
                 )}
               />
-            </div>
+            </div> */}
             
-            <div className="w-full sm:w-1/2 p-0 sm:ps-2">
+            {/* <div className="w-full sm:w-1/2 p-0 sm:ps-2">
               <Label>{t("form:coupon-expire-at")}</Label>
 
               <Controller
@@ -517,7 +517,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
                   />
                 )}
               />
-            </div>
+            </div> */}
           </div>
 
           <div className="flex flex-wrap pb-8 border-b border-dashed border-border-base my-5 sm:my-8">

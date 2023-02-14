@@ -16,6 +16,7 @@ import { useState } from "react";
 import Radio from "@components/ui/radio/radio";
 import { Label } from "@headlessui/react/dist/components/label/label";
 import {useUpdateUserMutation} from "@data/customer/use-update-user.mutation";
+import { useCustomerQuery } from "@data/customer/use-customer.query";
 
 
 
@@ -32,6 +33,7 @@ const ProfileForm = ({ user }: Props) => {
 
   const [birthDate, setBirthDate] = useState(null);
   const[occupation, setOccupation] = useState(null);
+  const {data} = useCustomerQuery();
   // // console.log('user',user)
   const { t } = useTranslation("common");
   const { register, handleSubmit, setValue, control } = useForm<UserFormValues>(
@@ -73,7 +75,7 @@ const ProfileForm = ({ user }: Props) => {
         gender: values?.gender,
         occupation: values?.occupation,
         current_location: values?.current_location,
-        email: values?.email,
+        // email: values?.email,
          profile: {
           id: user?.profile?.id,
           ...values.profile,
@@ -94,7 +96,7 @@ const ProfileForm = ({ user }: Props) => {
         gender: values?.gender,
         occupation: values?.occupation,
         current_location: values?.current_location,
-        email: values?.email,
+        // email: values?.email,
         profile: {
           id: user?.profile?.id,
           ...values.profile,
@@ -132,8 +134,8 @@ const ProfileForm = ({ user }: Props) => {
             <Input
               className="flex-1"
               label={t("Email")}
-            
-              {...register("email")}
+              value={data?.me?.email}
+              // {...register("email")}
               variant="outline"
             />
             {/* <Input

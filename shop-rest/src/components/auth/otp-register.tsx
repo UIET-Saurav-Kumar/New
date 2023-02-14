@@ -27,10 +27,16 @@ import { useOtpRegisterMutation } from "@data/auth/use-otp-register.mutation";
 
 type FormValues = {
   phone_number:number;
+  name:string;
+  email:string;
 };
 
 const registerFormSchema = yup.object().shape({
- 
+  name: yup.string().required(" Name required"),
+  email: yup
+    .string()
+    .email("error-email-format")
+    .required(" Email required"),
   phone_number:yup.string().max(10, "Phone number should be of 10 digits only").min(10, 'Phone number should be of 10 digits only').required("error-contact-required").matches(/^[0-9]{10}$/, "Invalid phone number"),
 });
 
@@ -137,12 +143,12 @@ function handleClick(){
 
     console.log('path', router.pathname)
 
-  function onSubmit({  phone_number  }:FormValues)   {
+  function onSubmit({  phone_number,name,email  }:FormValues)   {
     mutate(
         //@ts-ignore
       {
-        // name,
-        // email,
+        name,
+        email,
         // password,
         phone_number,
         // invited_by:'',
@@ -233,8 +239,33 @@ function handleClick(){
       </p>
       </div>
       </div>
-      <form className="grid grid-cols-1   gap-2 -mt-6 gap-x-1 place-content-center" 
+      <form className="grid grid-cols-1    gap-2 -mt-6 gap-x-1 place-content-center" 
             onSubmit={handleSubmit(onSubmit)} noValidate>
+
+
+      <Input
+          // label={t("Name")}
+          label={t("Name")}
+          {...register("name")}
+          type="text"
+          shadow={true}
+          variant="rounded"
+          className="mb-2 lg:mb-5 col-span-2 "
+          error={t(errors.name?.message!)}
+        />
+
+        {/* email */}
+        <Input
+    
+          // label={t("Email")}
+          label={t("Email")}
+          {...register("email")}
+          type="email"
+          shadow={true}
+          variant="rounded"
+          className="mb-2 lg:mb-5 col-span-2"
+          error={t(errors.email?.message!)}
+        />
 
         
 
@@ -245,7 +276,7 @@ function handleClick(){
           type="text"
           inputMode="numeric"
           variant="rounded"
-          className="mb-2 lg:mb-5 "
+          className="mb-2 lg:mb-5 col-span-2 "
           onChange={(e) => setValue("phone_number", getPhoneNumber(e.target.value))}
           error={t(errors.phone_number?.message!)}
         />
