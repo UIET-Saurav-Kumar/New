@@ -115,7 +115,7 @@ var { query ,pathname} = router;
 function handleRegisterClick(){
   query?.utm_source == 'shop_qr' ? 
   router.push('/register?utm_source=shop_qr&utm_campaign='+query?.utm_campaign+'&shop_id='+query?.shop_id) : 
-    openModal("REGISTER")
+    openModal("OTP_REGISTER")
 }
 
   

@@ -153,7 +153,7 @@ const {
 } = useShopAvailabilityQuery({
   limit: 16 as number,
   search:"",
-  location : ((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any
+  location : ((getLocation?.formattedAddress) ? JSON.stringify(getLocation):null ) as any
 });
 
 
@@ -201,6 +201,9 @@ useIntersectionObserver({
     }
   ]
 
+   
+  
+
     return (
 
       <> 
@@ -211,7 +214,7 @@ useIntersectionObserver({
       <meta name="description" content= 'Buy and Earn from Nearest Local Shops | Groceries | Fruits | Vegetables | Salon | Takeaways | Restaurants | Mobile Recharge'/>
       <link rel="canonical" href='https://buylowcal.com'/>
       
-        <script
+      <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(
       {
@@ -250,8 +253,6 @@ useIntersectionObserver({
       }
       )}} />
 
-       
-
       </Head>
 
         <div className="h-full">
@@ -277,7 +278,7 @@ useIntersectionObserver({
               <div className="relative w-full">
 
                 <CompleteProfile/>
-              
+                
                 <Tagline/>
                 
                 <UserDashboard/>

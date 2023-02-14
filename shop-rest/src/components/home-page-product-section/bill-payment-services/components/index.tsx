@@ -36,7 +36,11 @@ import ChallanForm from '../forms/challan-form'
 import FastTagForm from '../forms/fast-tag-form'
 import DataCardForm from '../forms/datacard-form'
 
+
 export default function BillPayment() {
+
+  const [open, setOpen] = useState(false);
+
   const {
     mobileRecharge,
     electricity,
@@ -70,16 +74,42 @@ export default function BillPayment() {
     housingView,
     cableView,
     googlePlayView,
-  } = usePayment()
+  } = usePayment();
+
+  const toggleAccordion = () => {
+    setOpen(!open);
+  };
 
   return (
-    <div className="mx-2">
-      <Label className="text-xl font-semibold text-gray-500 mt-4 px-4">
-        {' '}
-        Pay your bills{' '}
-      </Label>
-
-      <div className="grid grid-cols-3 md-grid-cols-7 items-center overflow-x-scroll gap-3  lg:grid-cols-7 w-full bg-gradient-to-l from-gray-0 lg:gap-2 to p-3 bg-gray-0  mt-4 place-content-center rounded shadow-xl">
+    <div className="border rounded-lg my-4">
+      <button
+        className="flex items-center justify-between w-full p-4 text-lg font-medium text-left bg-gray-50 hover:bg-gray-300 focus:outline-none"
+        onClick={toggleAccordion}
+      >
+        <span>Pay your bills </span>
+        <svg
+          className={`w-6 h-6 transition-transform transform ${
+            open ? 'rotate-180' : ''
+          }`}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 9l-7 7-7-7"
+          />
+        </svg>
+      </button>
+        <div
+          className={`overflow-hidden transition-all ${
+            open ? 'max-h-full' : 'max-h-0'
+          }`}
+        >
+        <div className="p-4">
+      <div className={` ${open ? 'block' : 'hidden'} grid grid-cols-3 md-grid-cols-7 items-center overflow-x-scroll gap-3  lg:grid-cols-7 w-full bg-gradient-to-l from-gray-0 lg:gap-2 to p-3 bg-gray-0  mt-4 place-content-center rounded shadow-xl`}>
         <MobileRecharge
           view={mobileRechargeView}
           click={mobileRecharge}
@@ -154,24 +184,28 @@ export default function BillPayment() {
           height={90}
           label={'Cable'}
         />
-        {/* <GooglePlay      view={googlePlayView}     click={googleplay}      width={90}   height={90}    label={'GooglePlay'}  /> */}
-      </div>
+       </div>
+        
+         
+            
 
-      <MobileRechargeForm variant={'border'} click={mobileRecharge} />
-      <DthForm variant={'border'} click={dth} />
-      <ElectricityForm variant={'border'} click={electricity} />
-      <InsuranceForm variant={'border'} click={insurance} />
-      <LandlineForm variant={'border'} click={landline} />
-      <PipedgasForm variant={'border'} click={pipedgas} />
-      <BroadbandForm variant={'border'} click={broadband} />
-      <WaterForm variant={'border'} click={water} />
-      <EmiForm variant={'border'} click={emi} />
-      <LpgBookingForm variant={'border'} click={lpgbooking} />
-      <GooglePlayForm variant={'border'} click={googleplay} />
-      <CableForm variant={'border'} click={cable} />
-      <ChallanForm variant={'border'} click={challan} />
-      <FastTagForm variant={'border'} click={fastTag} />
-      <DataCardForm variant={'border'} click={datacard} />
+      {open && <MobileRechargeForm variant={'border'} click={mobileRecharge} /> }
+      {open && <DthForm variant={'border'} click={dth} /> }
+      {open && <ElectricityForm variant={'border'} click={electricity} /> }
+      {open && <InsuranceForm variant={'border'} click={insurance} /> }
+      {open && <LandlineForm variant={'border'} click={landline} /> }
+      {open && <PipedgasForm variant={'border'} click={pipedgas} /> }
+      {open && <BroadbandForm variant={'border'} click={broadband} /> }
+      {open && <WaterForm variant={'border'} click={water} /> }
+      {open && <EmiForm variant={'border'} click={emi} /> }
+      {open && <LpgBookingForm variant={'border'} click={lpgbooking} /> }
+      {open && <GooglePlayForm variant={'border'} click={googleplay} /> }
+      {open && <CableForm variant={'border'} click={cable} /> }
+      {open && <ChallanForm variant={'border'} click={challan} /> }
+      {open && <FastTagForm variant={'border'} click={fastTag} /> }
+      {open && <DataCardForm variant={'border'} click={datacard} /> }
+      </div>
+    </div>
     </div>
   )
 }

@@ -49,6 +49,7 @@ import { API_ENDPOINTS } from "@utils/api/endpoints";
 import http from '@utils/api/http'
 import { toast } from 'react-toastify';
 import PlacesApi from "@components/shop/google-maps-places-api";
+import DefaultLayout from "@components/layout/default-layout";
 
 
 const CartCounterButton = dynamic(
@@ -637,7 +638,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 //   };
 // };
 
-ShopPage.Layout =  ShopLayout
+ShopPage.Layout =  DefaultLayout;
 export default ShopPage;
 
 
