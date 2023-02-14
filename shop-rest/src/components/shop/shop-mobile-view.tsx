@@ -213,14 +213,14 @@ export default function ShopMobileView({data, shopData, pageURL, open,
                </>  :
                 <div className='relative mt-2 flex'> 
                   {categoryData?.categories?.data?.length ? 
-                    <div className='flex  border bg-white h-screen top-14 sticky  flex-col w-auto'>   
+                    <div className='flex  border bg-white h-screen top-0 sticky  flex-col w-auto'>   
                                 <CategoryDropdownSidebar />
                               
                     </div>  
                     :'' } 
                     {categoryData?.categories?.data?.length  ?  <div className="flex flex-col w-5/6">
-                       <h1 id='category-heading' style={{top:'56px'}} id='product-heading' 
-                          className=" sticky border-t bg-white  py-3 px-2 z-50 font-semibold text-gray-600 font-mono  text-sm sm:text-lg transition-transform duration-75">  
+                       <h1 id='category-heading' style={{top:'0px'}} id='product-heading' 
+                          className=" sticky border-t bg-white top-0  py-3 px-2 z-40 font-semibold text-gray-600 font-mono  text-sm sm:text-lg transition-transform duration-75">  
                           { query?.category?.replace(/\b\w/g, (l :any) => l.toUpperCase())   } Products
                       </h1>  
                       {data &&  
