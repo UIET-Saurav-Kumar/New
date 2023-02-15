@@ -58,7 +58,7 @@ export default function GetCurrentLocation({
          
       
         if (navigator.geolocation) {
-          // setBtn('Detect')
+          setBtn('Detecting...')
             navigator.geolocation.getCurrentPosition(showPosition, error, options);
              
         } else { 
