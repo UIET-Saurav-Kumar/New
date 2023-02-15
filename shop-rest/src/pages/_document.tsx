@@ -176,6 +176,21 @@ export default class CustomDocument extends Document {
             src="https://www.facebook.com/tr?id=2308291592787983&ev=PageView&noscript=1"/>`,
             }}
           />
+
+
+          {/* smartlook session recording */}
+
+          <script
+          dangerouslySetInnerHTML={{
+                      __html:`(
+          window.smartlook||(function(d) {
+            var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
+            var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
+            c.charset='utf-8';c.src='https://web-sdk.smartlook.com/recorder.js';h.appendChild(c);
+            })(document);
+            smartlook('init', 'ce7ff96b3cd23e1268a03d0e3fe60165c7f9de66', { region: 'eu' });
+            `,}}
+    />
         
 
         {/* hotjar */}
