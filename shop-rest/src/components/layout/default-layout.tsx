@@ -5,6 +5,7 @@ import HeaderMiddle from '@components/home-page-header/HeaderMiddle';
 import { useEffect,useState } from 'react';
 import dynamic from 'next/dynamic';
 import MobileNavigation from './mobile-navigation';
+import { useRouter } from 'next/router';
  
 
 const Footer = dynamic(() => import('@components/footer/Footer'),
@@ -12,9 +13,11 @@ const Footer = dynamic(() => import('@components/footer/Footer'),
 
 const DefaultLayout: React.FC = ({ children }) => {
 
+  const router = useRouter();
+
   function useScrollDirection() {
     const [scrollDirection, setScrollDirection] = useState(null);
-  
+ 
     useEffect(() => {
       let lastScrollY = typeof window !== "undefined" ?  window.pageYOffset : '';
   
@@ -47,7 +50,7 @@ const DefaultLayout: React.FC = ({ children }) => {
       </div>
       <div>{children}</div>
       <MobileNavigation />
-       <Footer/>
+      { router?.pathname == '/salon-near-me' ? null : <Footer/> }
     </div>
 
   );
