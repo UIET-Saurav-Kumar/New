@@ -426,7 +426,7 @@ import Appointment from './appointment';
        
 
           if(!isAuthorize){
-            return openModal('REGISTER',{
+            return openModal('OTP_REGISTER',{
                 pathname: '/salon-near-me',
             });
           }
