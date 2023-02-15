@@ -52,7 +52,9 @@ const QuizList = ({ quiz, onPagination }: IProps) => {
     {
       title: ("Name"),
       align: alignLeft,
-      render: (data:any) => data.name,
+      render: (data:any,right_answers:string) => {
+         return <div className={` ${right_answers === 5 ? 'text-green-600 font-semibold' : ''}`}> {data.name}</div> 
+      }
     },
 
     {
@@ -84,7 +86,7 @@ const QuizList = ({ quiz, onPagination }: IProps) => {
       key: "right_answers",
       align: "right",
       render: (right_answers: string) => {
-        return <div>{right_answers}</div>;
+        return <div className={`${right_answers == 5 ? 'text-green-600 font-semibold' : ''}`}>{right_answers }</div>;
       },
     },
 

@@ -180,7 +180,7 @@ export default class CustomDocument extends Document {
 
           {/* smartlook session recording */}
 
-          <script
+        {/* <script type='text/javascript' 
           dangerouslySetInnerHTML={{
                       __html:`(
           window.smartlook||(function(d) {
@@ -189,8 +189,24 @@ export default class CustomDocument extends Document {
             c.charset='utf-8';c.src='https://web-sdk.smartlook.com/recorder.js';h.appendChild(c);
             })(document);
             smartlook('init', 'ce7ff96b3cd23e1268a03d0e3fe60165c7f9de66', { region: 'eu' });
-            `,}}
-    />
+            `}}
+        /> */}
+         
+         {/* Mouse flow */}
+        <script 
+        type="text/javascript"
+        dangerouslySetInnerHTML={{
+                              __html:`(
+          window._mfq = window._mfq || [];
+          (function() {
+            var mf = document.createElement("script");
+            mf.type = "text/javascript"; mf.defer = true;
+            mf.src = "//cdn.mouseflow.com/projects/84ede4e0-65c9-42ed-8763-e2aef53ee3c7.js";
+            document.getElementsByTagName("head")[0].appendChild(mf);
+          })();
+          `}}
+          />
+
         
 
         {/* hotjar */}
