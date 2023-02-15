@@ -1,7 +1,7 @@
 import Radio from "@components/ui/radio/radio";
 import  Label  from "@components/ui/label";
 import { values } from "lodash";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import styles from "./quiz.module.css";
 import DefaultLayout from "@components/layout/default-layout";
@@ -47,10 +47,6 @@ export default function Quiz() {
 
   console.log('quizData',quizData?.quiz?.data);
 
-
-   
-
-
 //   const { mutate: createquiz, isLoading: loading } = useQuizSubmitMutation();
 
   const postQuiz = async (data:any)=> {
@@ -71,16 +67,13 @@ export default function Quiz() {
      openModal('QUIZ_RESULT_MODAL', {data: data})
   }
 
-
-    
-
     console.log('me',user)
 
   const { mutate: createquiz } = useMutation(postQuiz, {
     onSuccess: (data) => {
         setLoading(false);
         // alert('done');
-        showResult(data);
+        // showResult(data);
         router.push('/home');
         
       
@@ -104,24 +97,37 @@ export default function Quiz() {
     q4: 'Jurassic Park',
     q5: 'Japan'
   };
+ 
 
   function quizValidate() {
-    quizData?.quiz?.data.map((quiz)=> {
-    quiz?.phone_number == user?.me?.phone_number ? setParticipation(true) : ''
-    return participation && openModal('QUIZ_VALIDATOR')
+    quizData?.quiz?.data.some((quiz)=> {
+    quiz?.phone_number === user?.me?.phone_number ? setParticipation(true) : null
    }
    ) 
  }
 
 
+ console.log('part',participation)
+
+
+ useEffect(()=>{
+  quizValidate()
+})
+
+
   const onSubmit = (data:any) => {
+
+    
+
+    if(participation){
+      return openModal('QUIZ_VALIDATOR')
+    }
+    // quizValidate();
 
     if (!data?.q1 || !data?.q2 || !data?.q3 || !data?.q4 || !data?.q5) {
       // setLoading(false);
       return setError('Please answer all the questions before submitting!');
     }
-
-    quizValidate();
     
     let numCorrect = 0;
 
@@ -134,15 +140,7 @@ export default function Quiz() {
         });
       }
 
-    
-    // const correctAnswers = {
-    //     q1: '496 AD',
-    //     q2: 'St. Valentinus',
-    //     q3: 'Roses',
-    //     q4: 'Jurassic Park',
-    //     q5: 'Japan'
-    //   };
-
+ 
        
       
       if (data?.q1 === correctAnswers.q1) {
@@ -174,30 +172,30 @@ export default function Quiz() {
         q5: data?.q5,
       };
 
-      if (input?.q1 === correctAnswers.q1) {
+      if (data?.q1 === correctAnswers.q1) {
         numCorrect++;
       }
-      if (input?.q2 === correctAnswers.q2) {
+      if (data?.q2 === correctAnswers.q2) {
         numCorrect++;
       }
-      if (input?.q3 === correctAnswers.q3) {
+      if (data?.q3 === correctAnswers.q3) {
         numCorrect++;
       }
-      if (input?.q4 === correctAnswers.q4) {
+      if (data?.q4 === correctAnswers.q4) {
         numCorrect++;
       }
-      if (input?.q5 === correctAnswers.q5) {   
+      if (data?.q5 === correctAnswers.q5) {   
         numCorrect++;
       }
 
 
       console.log(input)
 
-     !participation &&  createquiz(input)
+      createquiz(input)
 
-      if (input?.q1 || input?.q2 || input?.q3 || input?.q4 || input?.q5) {
+      if (data?.q1 || data?.q2 || data?.q3 || data?.q4 || data?.q5) {
         // setLoading(false);
-        !participation && showResult(data)
+        !participation && showResult(input)
       }
 
        

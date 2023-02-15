@@ -774,4 +774,4 @@ import Appointment from './appointment';
   )
 }
 
-SalonBookingPage.Layout = ShopLayout;
+SalonBookingPage.Layout = DefaultLayout;

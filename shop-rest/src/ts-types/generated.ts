@@ -1297,6 +1297,7 @@ export declare type ContactPaginator = {
 };
 
 export declare type Contacts = {
+  phone_number: any;
   __typename?: "Contacts";
   id?: Maybe<Scalars["ID"]>;
   name?:Maybe<Scalars["String"]>;

@@ -5,11 +5,8 @@ export default function QuizValidatorModal() {
 
   return (
 
-
-
-    <div className='flex flex-col justify-center items-center h-screen w-screen text-center lg:h-96 lg:w-96 bg-white'>
-
-        <div className='lg:mt-60 flex flex-col space-y-4 mx-auto'>
+    <div className='flex flex-col my-auto justify-center items-center h-screen w-screen text-center lg:h-100 lg:w-100 bg-white'>
+        <div className='mt-60 lg:mt-20  flex flex-col space-y-4 mx-auto'>
             <span className='font-bold text-green-500 text-2xl'>
                 Thank You
             </span>

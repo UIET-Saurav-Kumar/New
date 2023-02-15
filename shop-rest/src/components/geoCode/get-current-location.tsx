@@ -33,12 +33,10 @@ export default function GetCurrentLocation({
       }
 
       const {getLocation} =useLocation();
-      // console.log('getLocation is',getLocation.length)
-
+ 
       const[address,setAddress] = useState('');
 
-      // call getLoc if location is null
-      useEffect(() => {
+       useEffect(() => {
 
         const location: any = {
           lat: '30.7320',
@@ -57,9 +55,10 @@ export default function GetCurrentLocation({
 
     function getLoc() {
         // setSpin((setSpin) => !setSpin);
-        setBtn('Detecting...')
+         
       
         if (navigator.geolocation) {
+          // setBtn('Detect')
             navigator.geolocation.getCurrentPosition(showPosition, error, options);
              
         } else { 
@@ -67,21 +66,14 @@ export default function GetCurrentLocation({
             alert(error);
         }
     }
-
-    
-
-//    call get loc when page loads
-  //  useEffect(() => {
-       // !!localStorage.getItem('location')  && getLoc()
-   // }, []);
-
-
+ 
     async function showPosition(position:any) {
 
         var address = await getAddress({
             lat:position?.coords?.latitude,
             lng:position?.coords?.longitude
         })
+        
         // alert(address);
 
         // console.log('address',address)
