@@ -68,7 +68,7 @@ export default class CustomDocument extends Document {
               /> 
 
             {/* Microsoft clarity */}
-           {/* <script
+           <script
             dangerouslySetInnerHTML={{
               __html: `(function(c,l,a,r,i,t,y){
                     c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -76,7 +76,7 @@ export default class CustomDocument extends Document {
                     y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
                 })(window, document, "clarity", "script", "daka9pmxye");`,
               }}
-          /> */}
+          />
             
 
           <meta name="facebook-domain-verification" content="8mvkzpangtng356xvg4hqubj4mbuyq" />
@@ -179,7 +179,7 @@ export default class CustomDocument extends Document {
         
 
         {/* hotjar */}
-         <script
+         {/* <script
           dangerouslySetInnerHTML={{
               __html:`(function(h,o,t,j,a,r){
                   h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
@@ -190,7 +190,7 @@ export default class CustomDocument extends Document {
                   a.appendChild(r);
               })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=')
             `,}}
-            />
+            /> */}
 
         </Head>
        
