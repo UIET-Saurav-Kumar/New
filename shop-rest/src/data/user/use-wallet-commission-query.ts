@@ -1,6 +1,6 @@
 
 import 
-    { FetureProductOptionsType, FeatureProduct, QueryParamsType}
+    { FeatureProductOptionsType, FeatureProduct, QueryParamsType}
     from "@ts-types/custom.types";
 import { CoreApi } from "@utils/api/core.api";
 import { API_ENDPOINTS } from "@utils/api/endpoints";
@@ -18,7 +18,7 @@ export const fetchWalletCommissionProduct = async ({ queryKey }: QueryParamsType
   return data;
 };
 
-export const useWalletCommissionQuery = (options: FetureProductOptionsType) => {
+export const useWalletCommissionQuery = (options: FeatureProductOptionsType) => {
   return useQuery<{ WalletCommission: { data: FeatureProduct[] } }, Error>(
     [API_ENDPOINTS.GET_WALLET_COMMISSION, options],
     fetchWalletCommissionProduct

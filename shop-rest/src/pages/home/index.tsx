@@ -163,46 +163,6 @@ useIntersectionObserver({
   enabled: hasNextPage,
 })
 
-//make rocket.png visible when scroll y is 200
-
-// calculate the scroll position
-
-
-  const profileStatus = [
-    // {
-    //   id: 1,
-    //   name: "Name",
-    //   status: 'name',
-    // },
-    // {
-    //   id: 2,
-    //   name: "Email",
-    //   status: 'email',
-    // },
-    {
-      id: 3,
-      name: "Phone",
-      status: 'phone',
-    },
-    {
-      id: 4,
-      name: "date of birth",
-      status: 'date of birth',
-    },
-    {
-      id: 5,
-      name: "gender",
-      status: 'gender',
-    },
-    {
-      id: 6,
-      name: 'occupation',
-      status: 'occupation',
-    }
-  ]
-
-   
-  
 
     return (
 

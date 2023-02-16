@@ -18,7 +18,7 @@ export type FetureShopOptionsType = {
   search?:string;
   limit?: number;
 };
-export type FetureProductOptionsType = {
+export type FeatureProductOptionsType = {
   location?:any;
   id?:string;
   category?:string;

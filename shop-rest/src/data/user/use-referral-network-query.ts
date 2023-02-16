@@ -1,5 +1,5 @@
 import 
-    { FetureProductOptionsType, FeatureProduct, QueryParamsType}
+    { FeatureProductOptionsType, FeatureProduct, QueryParamsType}
     from "@ts-types/custom.types";
 import { CoreApi } from "@utils/api/core.api";
 import { API_ENDPOINTS } from "@utils/api/endpoints";
@@ -14,7 +14,7 @@ export const fetchReferralNetworkProduct = async ({ queryKey }: QueryParamsType)
 
   return data;
 };
-export const useReferralNetworkQuery = (options: FetureProductOptionsType) => {
+export const useReferralNetworkQuery = (options: FeatureProductOptionsType) => {
   return useQuery<{ referralNetwork: { data: FeatureProduct[] } }, Error>(
     [API_ENDPOINTS.REFERRAL_NETWORK, options],
     fetchReferralNetworkProduct

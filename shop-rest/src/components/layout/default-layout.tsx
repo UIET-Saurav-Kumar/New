@@ -16,6 +16,7 @@ const DefaultLayout: React.FC = ({ children }) => {
   const router = useRouter();
 
   function useScrollDirection() {
+    
     const [scrollDirection, setScrollDirection] = useState(null);
  
     useEffect(() => {
@@ -49,7 +50,7 @@ const DefaultLayout: React.FC = ({ children }) => {
        <HeaderMiddle/> 
       </div>
       <div>{children}</div>
-      <MobileNavigation />
+      { router?.pathname == '/salon-near-me' ? null : <MobileNavigation /> }
       { router?.pathname == '/salon-near-me' ? null : <Footer/> }
     </div>
 
