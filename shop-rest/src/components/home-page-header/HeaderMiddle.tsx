@@ -234,16 +234,18 @@ export default function HeaderMiddle() {
     }
 
     useEffect(()=>{
-        if(!getLocation?.formattedAddress){
+        if(!getLocation?.formattedAddress?.length){
             setLocation(true);
             setHasLoction(false);
         //  
         }else {
             setAddress(getLocation?.formattedAddress);
+            
             setHasLoction(true);
-            closeLocation(); 
+            setLocation(false);
+            // closeLocation(); 
         }
-    },[])
+    },[getLocation?.formattedAddress])
 
     function changeLocation(data:any){
        
@@ -274,7 +276,7 @@ export default function HeaderMiddle() {
         handleLocation()
     }
 
-    console.log('path', getLocation?.formattedAddress )
+    console.log('path', location, getLocation?.formattedAddress )
 
     // console.log('Login', isAuthorize);
     // console.log('getlocation',getLocation);
@@ -346,10 +348,10 @@ export default function HeaderMiddle() {
                </div>
 
                {/* Location screen */}
-               <div className={` ${!getLocation?.formattedAddress ? 'fixed inset-0 bg-gray-900 bg-opacity-60 scroll-y-none w-full h-full' : ' '} `}></div>
+               <div className={` ${location  ? ' hidden fixed inset-0 bg-gray-900 bg-opacity-60 scroll-y-none w-full h-full' : null} `}></div>
                
                     <div style={{zIndex: 1000}}  className={`absolute  flex flex-col  w-full z-1000 inset-0 shadow-lg transform ml-0 duration-200 ease-in 
-                                    ${!getLocation?.formattedAddress ? ' translate-y-0 ' : '-translate-y-full' }  transform border-5 bg-gray-100 h-screen lg:h-110 xl:h-200 2xl:h-200 overflow-y-hidden overflow-hidden `}>
+                                    ${location ? 'translate-y-0 ' : '-translate-y-full' }  transform border-5 bg-gray-100 h-screen lg:h-110 xl:h-200 2xl:h-200 overflow-y-hidden overflow-hidden `}>
                                       
                                        <div className='  border-red-400 flex w-full'>
                                            <div className='flex flex-col'>
