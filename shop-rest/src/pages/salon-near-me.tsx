@@ -48,7 +48,7 @@ import { CheckMark } from '@components/icons/checkmark';
 import { CheckMarkFill } from '@components/icons/checkmark-circle-fill';
 import { calculateTotal } from '@utils/calculate-total';
 import { useVerifyCheckoutMutation } from '@data/delivery/use-checkout-verify.mutation';
-import { useFeatureProductQuery } from '@data/home/use-feature-product-query';
+import { fetchFeatureProduct, useFeatureProductQuery } from '@data/home/use-feature-product-query';
 import Image from 'next/image';
 import moment from 'moment'
 import { Default } from 'react-toastify/dist/utils';
@@ -61,119 +61,45 @@ import { addLocation } from '@contexts/location/location.utils';
 import Spinner from '@components/ui/loaders/spinner/spinner';
 import { ArrowDownIcon, ArrowUpIcon, MinusIcon, PlusIcon } from '@heroicons/react/outline';
 import Appointment from './appointment';
+import { GetStaticPathsContext, GetStaticProps } from "next";
+import { dehydrate, QueryClient } from "react-query";
+import { fetchSettings } from '@data/settings/use-settings.query';
 
 
 
 
-// export async function getStaticPaths() {
-//   return {
-//     paths: [],
-//     fallback: true,
-//   };
-// }
+export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 
-// export async function getStaticProps(context) {
-//   const location = JSON.stringify({formattedAddress: "Chandigarh",
-//   lat: "30.7320",
-//   lng: "76.7726"});
-//   const {data} =  useFeatureProductQuery({
-//     limit: 10,
-//      location: location });
-//   return {
-//     props: {
-//       data,
-//     },
-//   };
-// }
+  const queryClient = new QueryClient();
+  // await queryClient.prefetchQuery("settings", fetchSettings);
+
+  // try {
+    // const featureItems =  fetchFeatureProduct({limit: 10});
+    await queryClient.prefetchInfiniteQuery(
+      ["featureProducts", fetchFeatureProduct]
+    );
+
+    return {
+      props: {
+        // product_data: featureItems,
+        ...(await serverSideTranslations(locale!, ["common"])),
+        dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
+      },
+      revalidate: 120,
+    };
+
+  // } catch (error) {
+  //   return {
+  //     notFound: false,
+  //   };
+  // }
+};
 
   const ProductFeedLoader = dynamic(
     () => import("@components/ui/loaders/product-feed-loader")
   );
 
 
-
- export  const womenImg = [
-        // {
-        //     id : "11",
-        //     src : '/salon/1.jpg',
-        //     slug: 'menicure-pedicure'
-        // },
-        {
-            id : "1",
-            src : '/salon/1.jpg',
-            slug: 'menicure-pedicure'
-        },
-        {
-            id : "2",
-            src : '/salon/2.jpg',
-            slug: 'hair-treatment'
-        },
-        {
-            id : "3",
-            src : '/salon/3.jpg',
-            slug: 'facial',
-        },
-        {
-            id : "4",
-            src : '/salon/4.jpg',
-            slug: 'waxing',
-        },
-        {
-            id : "5",
-            src : '/salon/5.jpg',
-            slug: 'women-hair-service'
-        },
-        {
-            id : "6",
-            src : '/salon/6.jpg',
-            slug: 'makeup'
-        },
-        {
-            id : "7",
-            src : '/salon/7.jpg',
-            slug: 'spa'
-        },
-       
-  ]
-
- export  const menImg = [
-        {
-            id : "8",
-            src : '/salon/8.jpg',
-            slug: 'menicure-pedicure'
-        },
-        {
-              id : "9",
-              src : '/salon/9.jpg',
-              slug: 'mens-grooming'
-        },
-        {
-            id : "10",
-            src : '/salon/10.jpg',
-            slug: 'facial'
-        },
-        {
-            id : "11",
-            src : '/salon/11.jpg',
-            slug: 'hair-spa'
-        },
-        {
-            id : "12",
-            src : '/salon/12.jpg',
-            slug: 'mens-grooming'
-        },
-        {
-            id : "13",
-            src : '/salon/13.jpg',
-            slug: 'shave'
-        },
-        {
-            id : "14",
-            src : '/salon/14.jpg',
-            slug: 'massage'
-        },
-    ]
-    
 
     // export const getStaticProps = async ({ locale }: any) => {
     //     return {
@@ -195,8 +121,7 @@ import Appointment from './appointment';
       }
 
 
-  export default function SalonBookingPage({server_data}:any) {
-
+  export default function SalonBookingPage(product_data:any) {
     const {width} = useWindowDimensions();
 
     const {getLocation,addLocation} = useLocation();

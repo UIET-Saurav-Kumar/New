@@ -32,6 +32,8 @@ export default function GetCurrentLocation({
         console.warn(`ERROR(${err.code}): ${err.message}`);
       }
 
+      console.log('path',router.pathname)
+
       const {getLocation} =useLocation();
  
       const[address,setAddress] = useState('');
@@ -45,10 +47,10 @@ export default function GetCurrentLocation({
         };
         
         if(getLocation?.length === 0){
-         router.pathname == '/salon-near-me' ? addLocation(location) : getLoc();
+         router.pathname == '/salon-near-me' &&  addLocation(location) ;
         }
       
-      }, [addLocation])
+      }, [router.pathname])
 
       console.log('getloc',getLocation)
       
@@ -58,8 +60,9 @@ export default function GetCurrentLocation({
          
       
         if (navigator.geolocation) {
-          setBtn('Detecting...')
+          
             navigator.geolocation.getCurrentPosition(showPosition, error, options);
+             setBtn('Detecting...')
              
         } else { 
             setBtn('Detect')
