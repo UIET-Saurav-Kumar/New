@@ -189,8 +189,9 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
                 onClick={()=>router.push(`${ROUTES.PRODUCT}/${slug}`)}
                 className="group w-full h-7 md:h-9 flex items-center justify-between text-xs md:text-sm text-body-dark rounded bg-gray-100 transition-colors hover:bg-accent hover:border-accent hover:text-light focus:outline-none focus:bg-accent focus:border-accent focus:text-light"
               >
-                <span className="flex-1">{t(' add')}</span>
+                <span className="flex-1">{t(' Grab')}</span>
                 <span className="w-7 h-7 md:w-9 md:h-9 bg-gray-200 grid place-items-center rounded-te rounded-be transition-colors duration-200 group-hover:bg-accent-600 group-focus:bg-accent-600">
+                  
                   <PlusIcon className="w-4 h-4 stroke-2" />
                 </span>
               </button>
@@ -200,7 +201,7 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
           <>
             {Number(quantity) > 0 && (
               <div className="flex  items-start  justify-between md:pt-3 ">
-              <AddToCart  variant="argon" data={product} />
+              <AddToCart  variant="single" data={product} />
              { product?.id ===  (14358 || 14110) ? containsProduct(ordersData?.pages?.[0].data, product?.id) ?
               // <span className='text-xs mt-2   lg:text-sm text-red-600'>
                
