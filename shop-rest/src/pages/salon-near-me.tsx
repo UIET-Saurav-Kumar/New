@@ -69,7 +69,7 @@ import url from "@utils/api/server_url";
 
 
 
-export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
+export const getStaticProps: GetStaticProps = async () => {
 
   const queryClient = new QueryClient();
   // await queryClient.prefetchQuery("settings", fetchSettings);
@@ -87,8 +87,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 
     return {
       props: {
-        // all_data: allData,
-        ...(await serverSideTranslations(locale!, ["common"])),
+        all_data: allData,
         dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
       },
       revalidate: 120,
