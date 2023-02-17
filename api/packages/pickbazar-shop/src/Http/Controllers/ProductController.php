@@ -220,10 +220,10 @@ class ProductController extends CoreController
 
         if($location){
             $shops=ShopRepository::getSortedShops($location);
-            return Product::withCount('orders')->whereIn("shop_id",$shops)->with(['shop'])->where("is_featured",1)->where('status','publish')->where('type_id',$type_id)->get();
+            return Product::withCount('orders')->whereIn("shop_id",$shops)->with(['shop'])->where("is_featured",1)->where('status','publish')->get();
 
         }
-        return Product::where("is_featured",1)->limit($limit)->where('status','publish')->where('type_id',$type_id)->get();
+        return Product::where("is_featured",1)->limit($limit)->where('status','publish')->get();
         
     }
 

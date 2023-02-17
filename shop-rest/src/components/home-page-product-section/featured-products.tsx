@@ -22,6 +22,8 @@ export default function FeaturedProducts({}) {
     } = useFeatureProductQuery({
         limit: 10 as number,
         search:"",
+        // type_id: 7,
+        // status: 'publish',
         location : ((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any
     });
 

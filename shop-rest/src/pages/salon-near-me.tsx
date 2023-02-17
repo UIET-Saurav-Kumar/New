@@ -69,36 +69,38 @@ import url from "@utils/api/server_url";
 
 
 
-export const getStaticProps: GetStaticProps = async () => {
+// export const getStaticProps: GetStaticProps = async () => {
 
-  const queryClient = new QueryClient();
-  // await queryClient.prefetchQuery("settings", fetchSettings);
+//   const queryClient = new QueryClient();
+//   // await queryClient.prefetchQuery("settings", fetchSettings);
 
-  const { data: allData } = await fetch(
-    `${url}/fetch-feature-products`
-  ).then((res) => res.json());
+//   const { data: allData } = await fetch(
+//     `${url}/fetch-feature-products?type_id=7`
+//   ).then((res) => res.json());
+
+//   console.log('allData',allData)
 
  
-  // try {
-    // const featureItems =  fetchFeatureProduct({limit: 10});
-    await queryClient.prefetchInfiniteQuery(
-      ["featureProducts", fetchFeatureProduct]
-    );
+//   // try {
+//     // const featureItems =  fetchFeatureProduct({limit: 10});
+//     await queryClient.prefetchInfiniteQuery(
+//       ["featureProducts", fetchFeatureProduct]
+//     );
 
-    return {
-      props: {
-        all_data: allData,
-        dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
-      },
-      revalidate: 120,
-    };
+//     return {
+//       props: {
+//         // all_data: allData,
+//         dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
+//       },
+//       revalidate: 120,
+//     };
 
-  // } catch (error) {
-  //   return {
-  //     notFound: false,
-  //   };
-  // }
-};
+//   // } catch (error) {
+//   //   return {
+//   //     notFound: false,
+//   //   };
+//   // }
+// };
 
   const ProductFeedLoader = dynamic(
     () => import("@components/ui/loaders/product-feed-loader")
@@ -127,7 +129,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 
   export default function SalonBookingPage({all_data}:any) {
-    console.log('allData',all_data)
+    // console.log('allData',all_data)
     const {width} = useWindowDimensions();
 
     const {getLocation,addLocation} = useLocation();
@@ -137,9 +139,17 @@ export const getStaticProps: GetStaticProps = async () => {
     const [selectedSalon, setSelectedSalon] = useState(null);
     const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
     const [shopImages, setShopImages] = useState(false);
-    const [photos, setPhotos] = useState([])
+    const [photos, setPhotos] = useState([]);
     const router = useRouter();
     const pathname = router.pathname;
+
+    function getData() {
+      fetch(
+        `${url}/fetch-feature-products?type_id=7`
+      ).then((res)=>res.json());
+    }
+
+    console.log('allData',getData());
     
     const [open, setOpen] = useState(true);
  
@@ -151,10 +161,10 @@ export const getStaticProps: GetStaticProps = async () => {
 
     const myDiv = useRef(null);
     const offers = useRef(null);
-    const appointment  = useRef(null);
+    const appointment = useRef(null);
     const images  = useRef(null);
 
-    console.log('getLoc',getLocation)
+    console.log('getLoc',getLocation);
 
     const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY;
 
@@ -163,7 +173,6 @@ export const getStaticProps: GetStaticProps = async () => {
         behavior: 'auto',
       })
     },[selectedSalon])
-
 
     console.log('time slot', selectedTimeSlot)
 
@@ -202,13 +211,10 @@ export const getStaticProps: GetStaticProps = async () => {
       data,
       isLoading: loading,
   } = useFeatureProductQuery({
-    // shop_id: Number(selectedSalon?.id),
-      limit: 10 as number,
+       limit: 10 as number,
       search:"",
-      // category:'Salon Spa',
-      type_id: 7,
-      // status: 'draft',
-      //@ts-ignore
+       type_id: 7,
+       //@ts-ignore
       location : ((getLocation?.formattedAddress) ? JSON.stringify(getLocation) : null ) as any
   });
 
