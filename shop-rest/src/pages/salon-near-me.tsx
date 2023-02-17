@@ -67,40 +67,27 @@ import { fetchSettings } from '@data/settings/use-settings.query';
 import url from "@utils/api/server_url";
 
 
-
-
-// export const getStaticProps: GetStaticProps = async () => {
-
-//   const queryClient = new QueryClient();
-//   // await queryClient.prefetchQuery("settings", fetchSettings);
-
-//   const { data: allData } = await fetch(
-//     `${url}/fetch-feature-products?type_id=7`
-//   ).then((res) => res.json());
-
-//   console.log('allData',allData)
-
  
-//   // try {
-//     // const featureItems =  fetchFeatureProduct({limit: 10});
-//     await queryClient.prefetchInfiniteQuery(
-//       ["featureProducts", fetchFeatureProduct]
-//     );
+// export async function getStaticProps() {
+//   const {
+//     data,
+//     isLoading: loading,
+//   } = useFeatureProductQuery({
+//     limit: 10,
+//     type_id: 7,
+//     location: 'Chandigarh'
+//   });
 
-//     return {
-//       props: {
-//         // all_data: allData,
-//         dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
-//       },
-//       revalidate: 120,
-//     };
+//   await data;
 
-//   // } catch (error) {
-//   //   return {
-//   //     notFound: false,
-//   //   };
-//   // }
-// };
+//   return {
+//     props: {
+//       featureProducts: data?.featureProducts?.data || [],
+//       loading,
+//     },
+//   };
+// }
+
 
   const ProductFeedLoader = dynamic(
     () => import("@components/ui/loaders/product-feed-loader")
@@ -128,8 +115,10 @@ import url from "@utils/api/server_url";
       }
 
 
-  export default function SalonBookingPage({all_data}:any) {
+  export default function SalonBookingPage({featureProducts}:any) {
+    
     // console.log('allData',all_data)
+
     const {width} = useWindowDimensions();
 
     const {getLocation,addLocation} = useLocation();
@@ -143,13 +132,6 @@ import url from "@utils/api/server_url";
     const router = useRouter();
     const pathname = router.pathname;
 
-    function getData() {
-      fetch(
-        `${url}/fetch-feature-products?type_id=7`
-      ).then((res)=>res.json());
-    }
-
-    console.log('allData',getData());
     
     const [open, setOpen] = useState(true);
  
@@ -207,18 +189,17 @@ import url from "@utils/api/server_url";
     }, [error_msg]);
 
 
-    const {
-      data,
-      isLoading: loading,
-  } = useFeatureProductQuery({
-       limit: 10 as number,
-      search:"",
-       type_id: 7,
-       //@ts-ignore
-      location : ((getLocation?.formattedAddress) ? JSON.stringify(getLocation) : null ) as any
-  });
+  //   const {
+  //     data,
+  //     isLoading: loading,
+  // } = useFeatureProductQuery({
+  //      limit: 10 as number,
+  //     search:"",
+  //      type_id: 7,
+  //      //@ts-ignore
+  //     location : ((getLocation?.formattedAddress) ? JSON.stringify(getLocation) : null ) as any
+  // });
 
-    
 
         const currentDate =   value;
 
@@ -229,10 +210,8 @@ import url from "@utils/api/server_url";
 
         let dd = String(currentDate.getDate()).padStart(2, '0');
 
-       
         const month =  tim;
       
-
         const newDate = `${dd} ${month}`;
 
         const { data: orderStatusData } = useOrderStatusesQuery();
@@ -473,7 +452,7 @@ import url from "@utils/api/server_url";
 
   
 
-    const filteredData = data?.featureProducts?.data?.filter(product =>
+    const filteredData = featureProducts?.filter((product:any) =>
       product?.status === "publish" &&
       product?.type_id == 7 &&
       product?.is_featured === 1 &&
@@ -599,7 +578,7 @@ import url from "@utils/api/server_url";
                                 className={` ${offer?.name === offerName?.name && offer?.sale_price === offerName?.sale_price ? 'bg-green-600 text-white' : 'text-gray-500 bg-gray-100' }   hover:bg-green-600 hover:text-white text-white font-bold py-2 px-4 rounded-full`}
                               >
                                 
-                                {offer?.name === offerName?.name &&  offer?.sale_price === offerName?.sale_price ? 'Selected' : 'Select'}
+                                {offer?.name === offerName?.name &&  offer?.sale_price === offerName?.sale_price ? 'Grabed' : 'Grab'}
                               </button>
                             </div>
                           </div>
