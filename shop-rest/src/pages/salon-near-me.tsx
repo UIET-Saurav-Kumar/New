@@ -64,6 +64,7 @@ import Appointment from './appointment';
 import { GetStaticPathsContext, GetStaticProps } from "next";
 import { dehydrate, QueryClient } from "react-query";
 import { fetchSettings } from '@data/settings/use-settings.query';
+import url from "@utils/api/server_url";
 
 
 
@@ -73,6 +74,11 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const queryClient = new QueryClient();
   // await queryClient.prefetchQuery("settings", fetchSettings);
 
+  const { data: allData } = await fetch(
+    `${url}/fetch-feature-products`
+  ).then((res) => res.json());
+
+ 
   // try {
     // const featureItems =  fetchFeatureProduct({limit: 10});
     await queryClient.prefetchInfiniteQuery(
@@ -81,7 +87,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 
     return {
       props: {
-        // product_data: featureItems,
+        all_data: allData,
         ...(await serverSideTranslations(locale!, ["common"])),
         dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
       },
@@ -121,7 +127,8 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       }
 
 
-  export default function SalonBookingPage(product_data:any) {
+  export default function SalonBookingPage({all_data}:any) {
+    console.log('allData',all_data)
     const {width} = useWindowDimensions();
 
     const {getLocation,addLocation} = useLocation();
@@ -191,13 +198,17 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       }
     }, [error_msg]);
 
+
     const {
-      data ,
+      data,
       isLoading: loading,
   } = useFeatureProductQuery({
     // shop_id: Number(selectedSalon?.id),
       limit: 10 as number,
       search:"",
+      // category:'Salon Spa',
+      type_id: 7,
+      // status: 'draft',
       //@ts-ignore
       location : ((getLocation?.formattedAddress) ? JSON.stringify(getLocation) : null ) as any
   });

@@ -23,6 +23,8 @@ export type SearchParams = {
   search?:string;
   limit?: number;
   price?:number;
+  type_id?:number;
+  status?:string;
 
 }
 
@@ -83,13 +85,15 @@ export class CoreApi {
     var {
       category,
       is_active,
+      status,
       limit = 10,
       location,
       search,
-      price
+      price,
+      type_id,
     } = params;
     
-    const queryString = `?search=${search?search:""}&price=${price}&category=${category?category:""}&location=${location?location:""}&is_active=${is_active?is_active:""}&limit=${limit?limit:""}`;
+    const queryString = `?search=${search?search:""}&price=${price}status=${status}&type_id=${type_id}&category=${category?category:""}&location=${location?location:""}&is_active=${is_active?is_active:""}&limit=${limit?limit:""}`;
     return this.http.get(this._base_path + queryString);
    }
 

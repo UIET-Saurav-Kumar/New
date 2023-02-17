@@ -211,16 +211,19 @@ class ProductController extends CoreController
 
     public function fetchFeatureProducts(Request $request)
     {
+        // return $request;
         
         $limit = isset($request->limit) ? $request->limit : 10;
         $location=($request->location)?json_decode($request->location):"";
+        $type_id=isset($request->type_id) ? $request->type_id : 7;
+        $status = isset($request->status) ? $request->status : 'publish';
 
         if($location){
             $shops=ShopRepository::getSortedShops($location);
-            return Product::withCount('orders')->whereIn("shop_id",$shops)->with(['shop'])->where("is_featured",1)->get();
+            return Product::withCount('orders')->whereIn("shop_id",$shops)->with(['shop'])->where("is_featured",1)->where('status','publish')->where('type_id',$type_id)->get();
 
         }
-        return Product::where("is_featured",1)->limit($limit)->get();
+        return Product::where("is_featured",1)->limit($limit)->where('status','publish')->where('type_id',$type_id)->get();
         
     }
 

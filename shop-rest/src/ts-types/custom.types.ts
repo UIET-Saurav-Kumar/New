@@ -24,6 +24,8 @@ export type FeatureProductOptionsType = {
   is_active?:string;
   search?:string;
   limit?: number;
+  type_id?: number;
+  status?: string;
 };
 
 export type OfferOptionsType = {
