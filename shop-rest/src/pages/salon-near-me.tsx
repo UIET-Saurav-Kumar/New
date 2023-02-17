@@ -67,6 +67,8 @@ import { fetchSettings } from '@data/settings/use-settings.query';
 import url from "@utils/api/server_url";
 
 
+
+
  
 // export async function getStaticProps() {
 //   const {
@@ -115,10 +117,8 @@ import url from "@utils/api/server_url";
       }
 
 
-  export default function SalonBookingPage({featureProducts}:any) {
-    
+  export default function SalonBookingPage({all_data}:any) {
     // console.log('allData',all_data)
-
     const {width} = useWindowDimensions();
 
     const {getLocation,addLocation} = useLocation();
@@ -131,7 +131,6 @@ import url from "@utils/api/server_url";
     const [photos, setPhotos] = useState([]);
     const router = useRouter();
     const pathname = router.pathname;
-
     
     const [open, setOpen] = useState(true);
  
@@ -189,16 +188,16 @@ import url from "@utils/api/server_url";
     }, [error_msg]);
 
 
-  //   const {
-  //     data,
-  //     isLoading: loading,
-  // } = useFeatureProductQuery({
-  //      limit: 10 as number,
-  //     search:"",
-  //      type_id: 7,
-  //      //@ts-ignore
-  //     location : ((getLocation?.formattedAddress) ? JSON.stringify(getLocation) : null ) as any
-  // });
+    const {
+      data,
+      isLoading: loading,
+  } = useFeatureProductQuery({
+       limit: 10 as number,
+      search:"",
+       type_id: 7,
+       //@ts-ignore
+      location : ((getLocation?.formattedAddress) ? JSON.stringify(getLocation) : null ) as any
+  });
 
 
         const currentDate =   value;
@@ -452,7 +451,7 @@ import url from "@utils/api/server_url";
 
   
 
-    const filteredData = featureProducts?.filter((product:any) =>
+    const filteredData = data?.featureProducts?.data?.filter(product =>
       product?.status === "publish" &&
       product?.type_id == 7 &&
       product?.is_featured === 1 &&
