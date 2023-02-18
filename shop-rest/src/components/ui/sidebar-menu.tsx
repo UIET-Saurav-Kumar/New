@@ -125,23 +125,25 @@ export function SidebarMenuItem({ className, item, depth = 0 }: any) {
 
     <>
 
-      <div 
+      {/* <div 
         // initial={false}
         // animate={{ backgroundColor: "black" }}/
         onClick={onClick}
         className="grid grid-cols-1 items-center w-auto relative"
-      >
+      > */}
         
         {/* <div className='flex items-center justify-between'> */}
           <button
+          onClick={onClick}
               className={cn(
-                "grid grid-cols-1  whitespace-normal items-center  py-1 text-start outline-none text-body-dark font-semibold  focus:outline-none focus:ring-0 focus:text-accent",
-                isOpen ? "text-accent  lg:bg-gray-50 transition duration-800 ease-in-out" : "text-body-dark",
+                "w-full border-b h-16",
+                isOpen ? "text-blue-700 font-semibold tracking-wide   transition duration-800 ease-in-out" : "text-body-dark",
                 className ? className : "text-sm"
               )}
             >
-            <div className='relative py-2 flex flex-col mx-auto h-auto  w-auto   px-2  place-items-center lg:grid-cols-2    items-center'>
-                  { item?.image.id ? (
+            {/* <button className=""> */}
+            {/* <div className='relative py-2 flex flex-col mx-auto h-auto  w-auto   px-2  place-items-center lg:grid-cols-2    items-center'> */}
+                  {/* { item?.image.id ? (
                     <span className="flex text-center w-auto h-auto items-center justify-center">
                         { pageURL.includes('kosmetics-india')  ? 
                         <Image 
@@ -177,26 +179,26 @@ export function SidebarMenuItem({ className, item, depth = 0 }: any) {
                         className: " w-6 h-6 lg:h-8 lg:w-8",
                       })}
                     </span>
-                  }
+                  } */}
                   
-                  <div className="flex px-auto items-center">
-                    <span className='hidden lg:block lg:text-10px lg:text-sm  px-8 p-4 rounded w-auto whitespace-wrap lg:whitespace-nowrap text-center'>
-                      { pageURL.includes('kosmetics-india')   ?  null : name }
+                  <div className="flex  text-center">
+                    <span className={` ${pageURL.includes('kosmetics-india')   ?  'hidden' :'block' } hidden lg:block text-10px lg:text-xs   mx-auto h-10 mt-5 rounded whitespace-wrap lg:whitespace-nowrap text-center`}>
+                      {name}
                       {/* {name} */}
                     </span>
-                    <span className='block lg:hidden text-10px lg:text-sm w-auto whitespace-wrap lg:whitespace-nowrap text-center'>
+                    <span className='block mt-3 lg:hidden text-10px lg:text-xl w-full whitespace-wrap lg:whitespace-wrap text-center'>
                       {/* { pageURL.includes('kosmetics-india')   ?  null : name } */}
                       {name}
                     </span>
                     {/* <span className="block lg:hidden text-center ">{expandIcon}</span> */}
                   </div>
                   
-            </div>
+            {/* </div> */}
 
           </button>
         {/* </div> */}
 
-      </div>
+      {/* </div> */}
 
     {/* <div style={{zIndex:1000000}} className="text-lg">
       <AnimatePresence initial={false}>

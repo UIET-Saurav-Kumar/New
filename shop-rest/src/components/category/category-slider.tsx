@@ -10,6 +10,7 @@ import 'swiper/swiper.min.css'
 import 'swiper/components/navigation/navigation.min.css'
 import 'swiper/components/pagination/pagination.min.css'
 import SidebarMenu, { SidebarMenuItem } from "@components/ui/sidebar-menu";
+import router from "next/router";
 // dummy data
 const data = [
 
@@ -92,7 +93,7 @@ const offerSliderBreakpoints = {
   },
   1024: {
     slidesPerView: 10,
-    spaceBetween: 4,
+    spaceBetween: 2,
   },
   1920: {
     slidesPerView: 12,
@@ -108,10 +109,32 @@ SwiperCore.use([Navigation]);
 export default function CategorySlider({items}:any) {
 
   const { t } = useTranslation();
+  const { pathname, query } = router;
+
+  function onClick(item:any) {
+
+    console.log('query cat',item)
+   
+    const { pathname, query } = router;
+    router.push(
+      {
+        pathname,
+        query: { ...query, category: item?.slug , text: null || null },
+        
+      },
+     
+      undefined,
+      {
+        scroll: false,
+      }
+    );
+  }
+
+  console.log('query',query)
 
   return (
 
-    <div className="w-full mx-auto px-5 hide-scrollbar  bg-white">
+    <div className="w-full mx-auto px-5 hide-scrollbar   bg-white">
       <div className="relative z-40 ">
 
         <Swiper
@@ -124,8 +147,11 @@ export default function CategorySlider({items}:any) {
           }}
         >
           {items?.map((item) => (
-            <SwiperSlide key={item?.name}>
-               <a>  <SidebarMenuItem key={`${item?.name}${item?.slug}`} item={item} />  </a> 
+            <SwiperSlide className={` ${item?.slug == query?.category ? '  font-bold  rounded border-indigo-700' : '' } border-b border rounded mx-2 lg:border-b-none mx-auto  w-full text-center`} key={item?.name}>
+              <button onClick={()=>onClick(item)}  className={` ${item?.slug == query?.category ? ' font-semibold text-indigo-700 text-xs tracking-wide px-6 h-10'  : ' font-semibold text-gray-500  text-xs px-6 h-10'}  `}>
+               { item?.name}
+              </button>
+                 {/* <SidebarMenuItem className='' key={`${item?.name}${item?.slug}`} item={item} />  */}
             </SwiperSlide>
           ))}
         </Swiper>

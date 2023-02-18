@@ -95,6 +95,25 @@ const CategoryDropdownSidebar = ({data,category}:any) => {
     );
   }
 
+  function onClick(item:any) {
+
+    console.log('query cat',item)
+   
+    const { pathname, query } = router;
+    router.push(
+      {
+        pathname,
+        query: { ...query, category: item?.slug , text: null || null },
+        
+      },
+     
+      undefined,
+      {
+        scroll: false,
+      }
+    );
+  }
+
   // console.log('shop slug name', data?.slug)
   // const { slug, name, children: items, icon } = item;
 
@@ -140,15 +159,16 @@ const CategoryDropdownSidebar = ({data,category}:any) => {
       
           {categoryData?.categories?.data?.length ? (
 
-            <div className="">
+            <div className="text-center  w-full">
               <button onClick = {allCategories} className={` ${query.category == ''  ? 'text-magenta' : 'text-gray-600'} text-sm focus:text-magenta font-semibold `}>
                 <img
                 src='/categories.png'
                 //  src='/grocery-all.png' 
                 className='w-5 tracking-widest h-5 object-contain' /> ALL
               </button>
+              
               <SidebarMenu items={categoryData?.categories?.data} 
-                           className="whitespace-nowrap w-full py-8" />
+                           className="" />
             </div>
           ) : (
             ''
