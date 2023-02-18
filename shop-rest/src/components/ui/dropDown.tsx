@@ -62,7 +62,7 @@ export default function DropDown({getLoc}:{getLoc:any}) {
 
   function route(e:any=""){
     var {pathname}=router;
-    pathname="/"+router.locale+"/shops";
+    pathname="/shops";
     const { type, ...rest } = router.query;
     
     var text =e?.value
@@ -80,11 +80,11 @@ export default function DropDown({getLoc}:{getLoc:any}) {
     router.push(
       {
           pathname,
-          query: { ...rest,text },
+          query: {text },
       },
       {
           pathname,
-          query: { ...rest,text},
+          query: {text},
       },
     );
   }

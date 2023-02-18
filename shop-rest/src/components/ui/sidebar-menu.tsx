@@ -136,7 +136,7 @@ export function SidebarMenuItem({ className, item, depth = 0 }: any) {
           <button
           onClick={onClick}
               className={cn(
-                "w-full border-b h-16",
+                "w-full border-b h-16 min-h-16 max-h-20",
                 isOpen ? "text-blue-700 font-semibold tracking-wide   transition duration-800 ease-in-out" : "text-body-dark",
                 className ? className : "text-sm"
               )}
