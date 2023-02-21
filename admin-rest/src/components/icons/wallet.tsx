@@ -222,7 +222,7 @@ const ReferralActivity = () => {
                                 <div className="grid grid-cols-1  sm:grid-cols-2 md:grid-cols-3 gap-2 lg:gap-5 bg-light p-4 mx-auto rounded h-full">
            
 
-                                <div className="space-y-3 shadow-lg border  w-full" style={{maxWidth:"450px",maxHeight:'200px'}}>
+                                    <div className="space-y-3 shadow-lg border  w-full" style={{maxWidth:"450px",maxHeight:'200px'}}>
                                         <div className="">
 
                                             <div className="flex items-center py-3 px-4 border-b border-gray-100">
@@ -241,7 +241,6 @@ const ReferralActivity = () => {
                                                 </div>
 
                                             </div>
-
                                         </div>
                                     </div>
 

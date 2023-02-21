@@ -112,7 +112,7 @@ export default function UserDashboard() {
                 <UserProfile data={data?.me}/>
             </div>
 
-            <div className='grid grid-cols-2  border-b lg:border-b-0  place-content-center mt-1 sm:grid-cols-2 lg:grid-cols-3 grid-rows-2   gap-1 lg:gap-3 h-full p-2  lg:w-full'>
+            <div className='grid grid-cols-2  border-b lg:border-b-0  place-content-center mt-1 sm:grid-cols-2 lg:grid-cols-3 grid-rows-2   gap-1 lg:gap-3 h-full p-  lg:w-full'>
 
                 {/* <div className='grid grid-cols-2 lg:flex gap-3 h-48 items-center'> */}
                     {/* <div className='col-span-2'> */}

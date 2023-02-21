@@ -6,7 +6,7 @@ export default function UserCurrentBalance({currentBalance,isAuthorize}:any) {
 
   return (
 
-        <div className='flex-1 flex-col lg:hover:drop-shadow-2xl  lg:py-8 bg-white h-44 lg:h-full rounded-lg lg:rounded-lg p-2 px-'>
+        <div className='flex-1 flex-col pl-6 sm:pl-0 lg:hover:drop-shadow-2xl  lg:py-8 bg-white h-44 lg:h-full rounded-lg lg:rounded-lg p-2 px-'>
             
             <div className='flex items-start space-x-0 justify-evenly'>
             
@@ -15,7 +15,7 @@ export default function UserCurrentBalance({currentBalance,isAuthorize}:any) {
                 </div>
                 
                 <div className='flex flex-col text-sm lg:text-xl w-auto md:w-36 xl:w-44 2xl:w-48 font-light text-gray-500'>
-                    <h4 className='font-semibold whitespace-nowrap text-lg sm:text-sm xl:text-lg 2xl:text-xl text-gray-800 '>
+                    <h4 className='font-semibold whitespace-nowrap text-xs  sm:text-sm xl:text-lg 2xl:text-xl text-gray-800 '>
                         Current Balance
                     </h4>
                     <p className='text-lg lg:text-xl xl:text-2xl text-gray-700 mt-4 font-light'>

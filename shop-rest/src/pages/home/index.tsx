@@ -242,9 +242,17 @@ useIntersectionObserver({
                 <Tagline/>
                 
                 <UserDashboard/>
+                {/* <div className="space-x-2 flex w-full items-center">
+                  <img src="/01.webp" className="object-contain"/>
+                  <img src="/02.webp" className="object-contain"/>
+                </div> */}
                 <BillPayment/>
                 <PolicyServices/>  
                 <FeaturedShops />
+                {/* <div className="space-x-2 flex w-full items-center">
+                  <img src="/03.webp" className="object-contain"/>
+                  <img src="/04.webp" className="object-contain"/>
+                </div> */}
                 <ElanteBanner/>
                 <RedBullBanner/>
                 <AllCategories/>
