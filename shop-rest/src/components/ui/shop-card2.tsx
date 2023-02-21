@@ -195,35 +195,17 @@ const ShopCard2: React.FC<ShopCardProps> = ({ type,shop,text,key,category, shopI
         </div>
 
 
-        : type == 'shop' || type == 'Category' || type == 'Shop_Category'?  <div className='flex shadow-300 rounded flex-col space-y-1  border w-44 h-full lg:w-72 lg:h-full text-center min-w-60 p-4 max-w-44'>
+        : type == 'shop' || type == 'Category' || type == 'Shop_Category'? 
+        <div className='flex shadow-300 rounded flex-col space-y-1  border     text-center   p-4   '>
 
               <div className="flex justify-between w-full items-center "> 
                 <span className="flex flex-col items-center"> 
-                {imageCheck(shop?.logo?.thumbnail, shop, '190', false,' w-60  lg:h-60 lg:w-full  object-contain')}
-                   <h4 className='font-semibold  lg:mx-3 mt-2 h-10 lg:h-16 text-gray-900 text-xs sm:text-sm lg:text-lg w-full '> 
+                {imageCheck(shop?.logo?.thumbnail, shop, '10', false,'  h-44 w-screen  object-fit')}
+                   <h4 className='font-semibold  lg:mx-3 mt-2 h-16 lg:h-16 text-gray-900 text-xs sm:text-sm lg:text-sm xl:text-sm w-full '> 
                      {shop?.name} 
                    </h4>
-                   <div className={`flex  gap-3 w-full px-2 overflow-x-scroll`}>
-                                    {/* <PlacesApi 
-                                               showImages={false}
-                                               data={shop} 
-                                               shopName={shop?.name} 
-                                              //  handlePhotos={handleApiPhotos}
-                                               handleRating={handleRating}
-                                               handleTotalRating={handleTotalRating}
-                                               handleOpen={handleOpen}
-                                               handleReviews={handleReviews} /> */}
-                                               {/* <span>{reviews}</span> */}
-                                    {/* {placePhotos?.map((binaryImage, index) => {
-                                        return <img onClick={handleImage} key={index} 
-                                        src={binaryImage?.url+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
-                                         className="h-60 rounded w-60 object-cover"/>
-                                      })} */}
-                              </div>
-                              <p className={` `}>{rating && (rating + ' '+ratingStars(rating))}</p>
-                              <p className="text-green-600 text-sm">{ open === true && 'Open'}</p>
-                      <p className="text-red-600 text-sm">{ open === false && 'closed'}</p>
-                   <p className="flex items-center">
+                   
+                    <p className="flex items-center">
                     {/* <span className="text-gray-700 font-light">
                       {rating}
                     </span> */}
@@ -234,14 +216,12 @@ const ShopCard2: React.FC<ShopCardProps> = ({ type,shop,text,key,category, shopI
                    </p> */}
                 </span>
                 {/* <h4 className='text-green-600 text-xs font-semibold'> Open </h4> */}
-               
-                
               </div>
  
               <div className=' flex items-start'> 
               <MapPin className="w-3.5 h-3.5 me-1 text-green-600  flex-shrink-0" />
                    <span className="flex flex-col">
-                     <h5 className='text-xs h-full lg:h-12 text-gray-700 flex'>
+                     <h5 className='text-xs h-full text-left lg:h-16 text-gray-700 flex'>
                       
                       {shop?.address?.sector?.length ? shop?.address?.sector : shop?.address?.street_address }  
                       
@@ -260,23 +240,7 @@ const ShopCard2: React.FC<ShopCardProps> = ({ type,shop,text,key,category, shopI
                    <h4 className='font-semibold mx-3 text-gray-900 text-sm sm:text-lg w-full '> 
                      {shop?.name} 
                    </h4>
-                   <div className={`flex  gap-3 w-full px-2 overflow-x-scroll`}>
-                                    <PlacesApi 
-                                               showImages={false}
-                                               data={shop} 
-                                               shopName={shop?.name} 
-                                              //  handlePhotos={handleApiPhotos}
-                                               handleRating={handleRating}
-                                               handleTotalRating={handleTotalRating}
-                                               handleOpen={handleOpen}
-                                               handleReviews={handleReviews} />
-                                               {/* <span>{reviews}</span> */}
-                                    {/* {placePhotos?.map((binaryImage, index) => {
-                                        return <img onClick={handleImage} key={index} 
-                                        src={binaryImage?.url+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
-                                         className="h-60 rounded w-60 object-cover"/>
-                                      })} */}
-                              </div>
+                  
                               <p className={` `}>{rating && (rating + ' '+ratingStars(rating))}</p>
                               <p className="text-green-600 text-sm">{ open === true && 'Open'}</p>
                       <p className="text-red-600 text-sm">{ open === false && 'closed'}</p>

@@ -244,7 +244,7 @@ class ProductController extends CoreController
        
         foreach($names as $name){
             array_push($data,[
-                "label"=>$name . '     ---->    ' .'All Products',
+                "label"=>$name . ' ' .'(All Products)',
                 'type'=>'Product',
                 "value"=>$name 
             ]);
@@ -257,7 +257,7 @@ class ProductController extends CoreController
 
         foreach($names as $name){
             array_push($data,[
-                "label"=>$name . '    ----->     ' .'All Products',
+                "label"=>$name . '      ' .'(All Products)',
                 'type'=>'Category',
                 "value"=>$name 
             ]);
@@ -268,7 +268,7 @@ class ProductController extends CoreController
                 ->limit(6)->pluck('name');
         foreach($names as $name){
             array_push($data,[
-                "label"=>$name . '    ----->     ' . 'All Oulets',
+                "label"=>$name . '        ' . '(All oulets)',
                 'type'=>'Shop_Category',
                 "value"=>$name 
             ]);
@@ -280,7 +280,7 @@ class ProductController extends CoreController
                     ->limit(50)->pluck('name');
         foreach($names as $name){
             array_push($data,[
-                "label"=>$name . '----->' .'(Outlet)',
+                "label"=>$name . '' .'(Outlet)',
                 'type'=>'Shop',
                 "value"=>$name
             ]);
