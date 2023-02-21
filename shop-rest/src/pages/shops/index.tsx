@@ -223,7 +223,7 @@ const ShopsPage = () => {
                               {/* {page.data.filter((shop) => shop?.is_active === 1 && shop?.products?.length == 0 ).map((shop: any) => (
                                 <ShopCard2 text={getText()} category={getCategory()} shop={shop} shopId={shop?.id} key={shop.id} />
                               ))} */}
-                              {page?.data?.filter((shop) => shop?.is_active === 1).map((shop: any) => (
+                              {page?.data?.slice(1,21).filter((shop) => shop?.is_active === 1).map((shop: any) => (
                                 <ShopCard2 text={getText()} type={getType()} category={getCategory()} 
                                            shop={shop}   shopId={shop?.id} key={shop.id} />
                               ))}
