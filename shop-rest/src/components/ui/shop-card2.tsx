@@ -204,7 +204,7 @@ const ShopCard2: React.FC<ShopCardProps> = ({ type,shop,text,key,category, shopI
                      {shop?.name} 
                    </h4>
                    <div className={`flex  gap-3 w-full px-2 overflow-x-scroll`}>
-                                    <PlacesApi 
+                                    {/* <PlacesApi 
                                                showImages={false}
                                                data={shop} 
                                                shopName={shop?.name} 
@@ -212,7 +212,7 @@ const ShopCard2: React.FC<ShopCardProps> = ({ type,shop,text,key,category, shopI
                                                handleRating={handleRating}
                                                handleTotalRating={handleTotalRating}
                                                handleOpen={handleOpen}
-                                               handleReviews={handleReviews} />
+                                               handleReviews={handleReviews} /> */}
                                                {/* <span>{reviews}</span> */}
                                     {/* {placePhotos?.map((binaryImage, index) => {
                                         return <img onClick={handleImage} key={index} 
