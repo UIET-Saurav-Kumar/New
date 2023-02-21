@@ -198,7 +198,8 @@ const ShopCard2: React.FC<ShopCardProps> = ({ type,shop,text,key,category, shopI
         : type == 'shop' || type == 'Category' ?  <div className='flex shadow-300 rounded flex-col space-y-1  border w-44 h-full lg:w-72 lg:h-full text-center min-w-60 p-4 max-w-44'>
 
               <div className="flex justify-between w-full items-center "> 
-                <span className="flex flex-col items-center"> {imageCheck(shop?.logo?.thumbnail, shop, '190', false,' w-60 lg:w-full  object-contain')}
+                <span className="flex flex-col items-center"> 
+                {imageCheck(shop?.logo?.thumbnail, shop, '190', false,' w-60  lg:h-60 lg:w-full  object-contain')}
                    <h4 className='font-semibold  lg:mx-3 mt-2 h-10 lg:h-16 text-gray-900 text-xs sm:text-sm lg:text-lg w-full '> 
                      {shop?.name} 
                    </h4>
@@ -242,7 +243,7 @@ const ShopCard2: React.FC<ShopCardProps> = ({ type,shop,text,key,category, shopI
                    <span className="flex flex-col">
                      <h5 className='text-xs h-full lg:h-12 text-gray-700 flex'>
                       
-                      {shop?.address?.sector?.length ? shop?.address?.sector : '' }  
+                      {shop?.address?.sector?.length ? shop?.address?.sector : shop?.address?.street_address }  
                       
                     </h5>
                     <p className="text-sm lg:text-sm text-gray-800 font-sans">
