@@ -114,7 +114,6 @@ const ShopsPage = () => {
 
   }
 
-   
 
   console.log('slug data', data?.pages)
 
@@ -142,7 +141,13 @@ const ShopsPage = () => {
     if(query.text){
       return query.text as string
     }
-     
+  }
+
+  function getType(){
+    const { query } = useRouter();
+    if(query.text_type){
+      return query.text_type as string
+    }
   }
 
 
@@ -197,7 +202,7 @@ const ShopsPage = () => {
 
     <div className="w-full">
 
-        <div className='flex justify-between mx-5 border-b p-3 bg-gray-100 mt-2'>
+        <div className='flex justify-between mx-5  p-3 bg-gray-100 mt-2'>
           <h3 className='font-semibold text-xs sm:text-sm md:text-sm lg:text-md 2xl:text-md'> Local shops near you </h3> 
         </div>
        
@@ -206,22 +211,23 @@ const ShopsPage = () => {
           {/* <div className='py-4 px-4 grid w-full grid-cols-1 xs+:grid-cols-1 xs++:grid-cols-2 gap-4 sm:grid-cols-2 
                           md:grid-cols-2 md++:grid-cols-2 lg:grid-cols-3 lg+:grid-cols-3 xl:grid-cols-4 xl+:grid-cols-4
                           xl++:grid-cols-5 2xl:grid-cols-5  3xl:grid-cols-6 border-2 overflow-y-scroll h-screen overflow-x-hidden  bg-gray-100'> */}
-            <div className="lg:px-10  h-full w-full flex flex-col">
-                  {isLoading && !data?.pages?.length ? (
+            <div className={` ${query.text_type == 'shop' ? 'flex flex-col gap-2 h-full w-full' : 'flex flex-col lg:px-10 h-full w-full'}   `}>
+              { isLoading && !data?.pages?.length ? (
                 <ProductFeedLoader limit = {30} />
               ) : (
-              <>
-                  { data?.pages?.map((page, idx) => {
-                        return (
-                          <Fragment key={idx}>
-                            {/* {page.data.filter((shop) => shop?.is_active === 1 && shop?.products?.length == 0 ).map((shop: any) => (
-                              <ShopCard2 text={getText()} category={getCategory()} shop={shop} shopId={shop?.id} key={shop.id} />
-                            ))} */}
-                            {page?.data?.filter((shop) => shop?.is_active === 1 ).map((shop: any) => (
-                              <ShopCard2 text={getText()} category={getCategory()} 
-                                         shop={shop}  shopId={shop?.id} key={shop.id} />
-                            ))}
-                          </Fragment>
+                <>
+                    {data?.pages?.map((page, idx) => {
+
+                          return (
+                            <div className={` ${query.text_type == 'shop' || query.text_type == 'Category' ? 'grid grid-cols-2 place-items-center gap-1 lg:gap-4 px-2 lg:px-5 mt-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 w-full' : 'flex flex-col'}`} key={idx}>
+                              {/* {page.data.filter((shop) => shop?.is_active === 1 && shop?.products?.length == 0 ).map((shop: any) => (
+                                <ShopCard2 text={getText()} category={getCategory()} shop={shop} shopId={shop?.id} key={shop.id} />
+                              ))} */}
+                              {page?.data?.filter((shop) => shop?.is_active === 1).map((shop: any) => (
+                                <ShopCard2 text={getText()} type={getType()} category={getCategory()} 
+                                           shop={shop}   shopId={shop?.id} key={shop.id} />
+                              ))}
+                            </div>
                         )
                     })}
                 </>

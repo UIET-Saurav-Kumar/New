@@ -194,6 +194,7 @@
     -webkit-tap-highlight-color: transparent;
 	  scroll-behavior: smooth;
   }
+  
   input::-moz-focus-inner {
     border: 0;
   }

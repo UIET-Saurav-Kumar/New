@@ -232,22 +232,21 @@ class ProductController extends CoreController
         $data=[];
         $slug=str_replace("-","&",$slug);
 
-         $location=($request->location)?json_decode($request->location):"";
+        $location=($request->location)?json_decode($request->location):"";
 
         $names=//active prpducts only
         Product::where("status",1)->limit(50)
                 ->where('name', 'like', $slug.'%')
                 ->distinct('name') 
                 ->pluck('name');
-        // corresponding shop name of the product
-        // render products and shop name present in selected location
         // $shops=ShopRepository::getSortedShops();
         // $products=Product::whereIn("shop_id",$shops)->where('name', 'like', $slug.'%')->limit(6)->pluck('name');
        
         foreach($names as $name){
             array_push($data,[
-                "label"=>$name,
-                "value"=>$name
+                "label"=>$name . '     ---->    ' .'product',
+                'type'=>'Product',
+                "value"=>$name 
             ]);
         }
 
@@ -258,8 +257,9 @@ class ProductController extends CoreController
 
         foreach($names as $name){
             array_push($data,[
-                "label"=>$name,
-                "value"=>$name
+                "label"=>$name . '    ----->     ' .'category',
+                'type'=>'Category',
+                "value"=>$name 
             ]);
         }
 
@@ -268,31 +268,20 @@ class ProductController extends CoreController
                 ->limit(6)->pluck('name');
         foreach($names as $name){
             array_push($data,[
-                "label"=>$name,
-                "value"=>$name
+                "label"=>$name . '    ----->     ' . 'shop-category',
+                'type'=>'Shop Category',
+                "value"=>$name 
             ]);
         }
 
-        // push sorted shops name that present in the current location
-        // $shops=ShopRepository::getSortedShops($location);
-        // $shops=Shop::where("id",$shops)->where('name', 'like', $slug.'%')->limit(6)->pluck('name');
-        // foreach($shops as $shop){
-        //     array_push($data,[
-        //         "label"=>$shop->name,
-        //         "value"=>$shop->name
-        //     ]);
-        // }
-
-        
-       
-        
 
         $names=Shop::where("is_active",1)->where('name', 'like', $slug.'%')
                     ->distinct('name')
                     ->limit(50)->pluck('name');
         foreach($names as $name){
             array_push($data,[
-                "label"=>$name,
+                "label"=>$name . '    ------>     ' .'shop',
+                'type'=>'Shop',
                 "value"=>$name
             ]);
         }

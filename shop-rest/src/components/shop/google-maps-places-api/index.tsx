@@ -10,7 +10,7 @@ export default function PlacesApi(props:any) {
 
   const queryClient = useQueryClient();
 
-  const {shopName, handleApiPhotos, show, handlePhotos, handleImage, handleTotalRating, data, handleReviews, handleOpen, handleRating} = props;
+  const {shopName, handleApiPhotos, show, showImages, handlePhotos, handleImage, handleTotalRating, data, handleReviews, handleOpen, handleRating} = props;
 
   const [place_Id, setPlace_Id] = useState([]);
 
@@ -35,6 +35,8 @@ export default function PlacesApi(props:any) {
     handleReviews && handleReviews(review);
     handleTotalRating && handleTotalRating(total_rating);
   }, [place_Photos,shopName]);
+
+  
 
   const shop_name =  shopName;
 
@@ -144,7 +146,7 @@ useEffect(() => {
     },
   })
 
-  const { mutate: mutatePhoto } = useMutation(getplacePhoto, {
+  const { mutate: mutatePhoto } =  useMutation(showImages &&  getplacePhoto, {
     onSuccess: (response) => {
       setPlace_Photos(prevState => [...prevState, response])
       
@@ -156,6 +158,7 @@ useEffect(() => {
     onSettled: () => {
       queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_PLACE_PHOTOS)
     },
+ 
 });
 
 function openModal(){
@@ -182,10 +185,10 @@ function openModal(){
 
   return (
 
-        <div className='flex flex-col mt-2'> 
+        <div className={` ${showImages ? 'flex flex-col mt-2' : 'hidden'}  `}> 
         <p className={` ${show ? 'block' : 'hidden'}`}>{rating && (rating + ' '+ratingStars(rating))}</p>
             <div className='flex  gap-3 w-full px-2 overflow-x-scroll'>
-                {place_Photos?.map((binaryImage, index) => {
+                {showImages && place_Photos?.map((binaryImage, index) => {
                     return <img 
                             onClick={openModal} 
                             key={index} 

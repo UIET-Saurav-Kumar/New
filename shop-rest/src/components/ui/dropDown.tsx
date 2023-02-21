@@ -7,7 +7,8 @@ import {fetchSearch} from '@data/search/use-search.query';
 import { useRouter } from "next/router";
 import { useLocation } from "@contexts/location/location.context";
 import { useCreateLogMutation } from "@data/log/use-create-log.mutation";
-
+import  Creatable  from 'react-select';
+ 
 
 export default function DropDown({getLoc}:{getLoc:any}) {
 
@@ -27,19 +28,46 @@ export default function DropDown({getLoc}:{getLoc:any}) {
       i.label.toLowerCase().includes(inputValue.toLowerCase())
     );
   };
+
+  const customStyles = {
+    control: (provided: any, state: { isFocused: any; }) => ({
+      ...provided,
+      border: '2px solid #ddd',
+      borderRadius: '10px',
+      boxShadow: state.isFocused ? '0 0 0 2px #aaa' : null,
+      '&:hover': {
+        border: '2px solid #aaa',
+      },
+    }),
+    indicatorSeparator: (provided: any) => ({
+      ...provided,
+      backgroundColor: '#ddd',
+    }),
+    indicatorsContainer: (provided: any) => ({
+      ...provided,
+      color: '#aaa',
+    }),
+    loadingIndicator: (provided: any) => ({
+      ...provided,
+      color: '#aaa',
+    }),
+  };
   
   
   const loadOptions = async (inputValue:any, callback:any) => {
 
       var data = await fetchSearch(inputValue);      
 
-      // console.log('search data',data)
+      console.log('search data',data)
+
+      var type = data?.type;
       
       callback(data);
      
-      return data;
+      return   data;
 
   };
+  
 
 
   function getSearch(){
@@ -64,8 +92,9 @@ export default function DropDown({getLoc}:{getLoc:any}) {
     var {pathname}=router;
     pathname="/shops";
     const { type, ...rest } = router.query;
-    
+    var text_type  = e?.type
     var text =e?.value
+    console.log('search data',e?.type)
     setInputValue(e?.value)
     
     createLog({
@@ -80,11 +109,11 @@ export default function DropDown({getLoc}:{getLoc:any}) {
     router.push(
       {
           pathname,
-          query: {text },
+          query: {text,text_type },
       },
       {
           pathname,
-          query: {text},
+          query: {text,text_type},
       },
     );
   }
@@ -94,7 +123,7 @@ export default function DropDown({getLoc}:{getLoc:any}) {
       return false
     }
     return true
-  }
+  } 
 
   function handleInputChange(newValue: string){
     return newValue;
@@ -132,12 +161,12 @@ export default function DropDown({getLoc}:{getLoc:any}) {
 
   // some default options object with image
   const defaultOptions = [
-    { value: 'Chandigarh+Home+Salon', label: 'Chandigarh Home Salon' },
-    { value: 'Kosmetic+India', label: 'Kosmetic India', image: { avatar: true, src: 'https://placeimg.com/64/64/1' } },
-    { value: 'Chandigarh+Grocery+Store', label: 'Chandigarh grocery store', image: { avatar: true, src: 'https://placeimg.com/64/64/2' } },
-    { value: 'Beauzo+Salon', label: 'Beauzo Salon', image: { avatar: true, src: 'https://placeimg.com/64/64/3' } },
-    { value: 'Salman+s+Makeover', label: 'Salman Makeover ', image: { avatar: true, src: 'https://placeimg.com/64/64/3' } },
-    { value: 'Shri+Balaji+Fruits+And+Vegetables', label: 'Balaji Fruits & Vegetables', image: { avatar: true, src: 'https://placeimg.com/64/64/1' } },
+    { value: 'Chandigarh+Home+Salon',  label: 'Chandigarh Home Salon' },
+    { value: 'Kosmetic+India',  label: 'Kosmetic India', image: { avatar: true, src: 'https://placeimg.com/64/64/1' } },
+    { value: 'Chandigarh+Grocery+Store',  label: 'Chandigarh grocery store', image: { avatar: true, src: 'https://placeimg.com/64/64/2' } },
+    { value: 'Beauzo+Salon',  label: 'Beauzo Salon', image: { avatar: true, src: 'https://placeimg.com/64/64/3' } },
+    { value: 'Salman+s+Makeover',  label: 'Salman Makeover ', image: { avatar: true, src: 'https://placeimg.com/64/64/3' } },
+    { value: 'Shri+Balaji+Fruits+And+Vegetables',  label: 'Balaji Fruits & Vegetables', image: { avatar: true, src: 'https://placeimg.com/64/64/1' } },
   ];
 
    
@@ -150,7 +179,7 @@ export default function DropDown({getLoc}:{getLoc:any}) {
             
               <AsyncSelect
                   cacheOptions
-                  // style={customStyles}
+                  style={customStyles}
                   defaultValue={inputValue.value}
                   loadOptions={loadOptions} 
                   value={ inputValue }
@@ -162,13 +191,7 @@ export default function DropDown({getLoc}:{getLoc:any}) {
                   <SearchIcon className=" absolute right-3 top-3 lg:top-4  text-gray-400 w-4 h-4 me-2.5" />
           {/* </div> */}
           
-        <div>
-              {/* <button onClick={clear} className="h-10 px-4 lg:h-12 xl:h-12 xl:px-8 flex items-center rounded-lg rounded-ts-none rounded-bs-none bg-accent 
-                                                text-light font-semibold transition-colors duration-200 focus:outline-none hover:bg-accent-hover focus:bg-accent-hover">
-                                                  
-                  <SearchIcon className="w-4 h-4 me-2.5" />
-              </button> */}
-          </div>
+
         </div>
     );
 }

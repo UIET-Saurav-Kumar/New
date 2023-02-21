@@ -40,8 +40,9 @@ export default function FeaturedShops({ }) {
 		var pathname="/"+router.locale+"/shops/"
 		const { type, ...rest } = query;
 		var text=(query.text)?query.text:"";
+        var text_type = '&text_type=shop'
 
-		return pathname+"?text="+text;
+		return pathname+"?text="+text+text_type;
 	}
 
     // console.log('logo',data?.featureShops?.data[0]?.logo?.thumbnail);

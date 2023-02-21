@@ -12,28 +12,29 @@ const Logo: React.FC<React.AnchorHTMLAttributes<{}>> = ({
 
   return (
 
-    <Link
-      href={siteSettings.logo.href}
-      className={cn("inline-flex", className)}
-      {...props}
-    >
-      <span
-        className="overflow-hidden relative"
-        style={{
-          width: siteSettings.logo.width,
-          height: siteSettings.logo.height,
-        }}
+      <Link
+        href={siteSettings.logo.href}
+        className={cn("inline-flex", className)}
+        {...props}
       >
-           < Image        quality='40'
+        <span
+          className="overflow-hidden relative"
+          style={{
+            width: siteSettings.logo.width,
+            height: siteSettings.logo.height,
+          }}
+        >
+        <Image quality='40'
           src={logo?.thumbnail ?? siteSettings.logo.placeholderImage}
           alt={siteTitle ?? siteSettings.logo.alt}
           layout="fill"
           objectFit="contain"
           loading="eager"
         />
-        
-      </span>
-    </Link>
+          
+        </span>
+      </Link>
+
   );
 };
 
