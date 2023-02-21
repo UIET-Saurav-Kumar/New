@@ -195,7 +195,7 @@ const ShopCard2: React.FC<ShopCardProps> = ({ type,shop,text,key,category, shopI
         </div>
 
 
-        : type == 'shop' || type == 'Category' ?  <div className='flex shadow-300 rounded flex-col space-y-1  border w-44 h-full lg:w-72 lg:h-full text-center min-w-60 p-4 max-w-44'>
+        : type == 'shop' || type == 'Category' || type == 'Shop_Category'?  <div className='flex shadow-300 rounded flex-col space-y-1  border w-44 h-full lg:w-72 lg:h-full text-center min-w-60 p-4 max-w-44'>
 
               <div className="flex justify-between w-full items-center "> 
                 <span className="flex flex-col items-center"> 
