@@ -236,7 +236,7 @@ class ProductController extends CoreController
 
         $names=//active prpducts only
         Product::where("status",1)->limit(50)
-                ->where('name', 'like', $slug.'%')
+                ->where('name', 'like',  $slug.'%')
                 ->distinct('name') 
                 ->pluck('name');
         // $shops=ShopRepository::getSortedShops();
@@ -257,7 +257,7 @@ class ProductController extends CoreController
 
         foreach($names as $name){
             array_push($data,[
-                "label"=>$name . '      ' .'(All Products)',
+                "label"=>$name . '      ' .'(All Outlets)',
                 'type'=>'Category',
                 "value"=>$name 
             ]);
@@ -268,7 +268,7 @@ class ProductController extends CoreController
                 ->limit(6)->pluck('name');
         foreach($names as $name){
             array_push($data,[
-                "label"=>$name . '        ' . '(All oulets)',
+                "label"=>$name . '        ' . '(All Oulets)',
                 'type'=>'Shop_Category',
                 "value"=>$name 
             ]);

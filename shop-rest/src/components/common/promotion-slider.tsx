@@ -116,7 +116,6 @@ export default function PromotionSlider(props:any) {
   const {selectedShop, offer, handleShopImages} = props;
 
   // console.log('shops',props)
-  
 
   const [loading,setLoading] = useState(false);
 

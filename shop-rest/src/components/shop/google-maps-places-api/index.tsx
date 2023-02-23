@@ -14,6 +14,8 @@ export default function PlacesApi(props:any) {
 
   const [place_Id, setPlace_Id] = useState([]);
 
+  const [business_name,setBusinessName] = useState('')
+
   const [review, set_Reviews] = useState([]);
 
   const [place_Photos, setPlace_Photos] = useState([]);
@@ -77,7 +79,7 @@ useEffect(() => {
   console.log('place id',place_Id,rating,is_open)
 
   const getSearchDetails = async (data: any) => {
-    console.log('search data',data)
+    console.log('search data details',data)
     const { data: response } = await http.get(
       `${url}/${API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH}`,{params: data}
     )
@@ -87,7 +89,7 @@ useEffect(() => {
 
 
   const getplaceDetails = async (data: any) => {
-    console.log('search data',data)
+    console.log('search data details',data)
     const { data: response } = await http.get(
       `${url}/${API_ENDPOINTS.GOOGLE_MAPS_PLACE_DETAILS}`,{params: data}
     )

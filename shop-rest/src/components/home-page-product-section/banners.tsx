@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { useLocation } from "@contexts/location/location.context";
 import { useEffect, useState } from "react";
 
-export default function Tandoor() {
+export default function Banners() {
 
   const router = useRouter();
   const { query } = useRouter();

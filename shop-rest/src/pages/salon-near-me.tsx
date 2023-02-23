@@ -230,8 +230,6 @@ import url from "@utils/api/server_url";
 
         const[booking, setBooking] = useState(false);
 
-
-
         function handleSelectedShop(data:any) {
          offerName && setSelectedSalon(data);
         

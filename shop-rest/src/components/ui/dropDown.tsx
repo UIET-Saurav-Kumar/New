@@ -54,17 +54,18 @@ export default function DropDown({getLoc}:{getLoc:any}) {
   };
   
   
-  const loadOptions = async (inputValue:any, callback:any) => {
+  const loadOptions = async (inputValue, callback) => {
+     const data = await fetchSearch(inputValue);
+     console.log('search data',data)
+    let options = [];
+    if (data.length > 0) {
+       options = data?.map(item => ({ value: item.value, label: item.label, text_type: item?.type }));
+    } else {
+       options = [{ value: inputValue, label: inputValue }];
+    }
+    callback(options);
 
-      var data = await fetchSearch(inputValue);      
-
-      console.log('search data',data)
-
-      var type = data?.type;
-      
-      callback(data);
-     
-      return   data;
+    console.log('search data opt',options)
 
   };
   
@@ -92,7 +93,7 @@ export default function DropDown({getLoc}:{getLoc:any}) {
     var {pathname}=router;
     pathname="/shops";
     const { type, ...rest } = router.query;
-    var text_type  = e?.type
+    var text_type  = e?.text_type ? e?.type : 'shop';
     var text =e?.value
     console.log('search data',e?.type)
     setInputValue(e?.value)

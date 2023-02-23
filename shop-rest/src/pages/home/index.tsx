@@ -27,7 +27,7 @@ import MobileNavigation from "@components/layout/mobile-navigation";
 import StayTuned from '@components/no-shop-msg/stay-tuned'
 import { useShopAvailabilityQuery } from "@data/home/use-shop-availability-query";
 import { useLocation } from "@contexts/location/location.context";
-import Tandoor from "@components/home-page-product-section/tandoor";
+import Tandoor from "@components/home-page-product-section/banners";
 import InvoiceBanner from "@components/home-page-product-section/invoice-banner";
 import HomePageBanner from "@components/home-page-product-section/tree-plantation-banner";
 import RedBullBanner from "@components/home-page-product-section/home-page-banner";
@@ -44,6 +44,9 @@ import BillPayment from "@components/home-page-product-section/bill-payment-serv
 import PolicyServices from "@components/home-page-product-section/PolicyServices/components";
 import ProfileCompletenessBadge from "@components/profile/profile-completed-badge";
 import CompleteProfile from "@components/profile/complete-profile";
+import Banners from "@components/home-page-product-section/banners";
+import Banners2 from "@components/home-page-product-section/banners2";
+import Banners3 from "@components/home-page-product-section/banners3";
 
 
 const ProductFeedLoader = dynamic(
@@ -242,22 +245,17 @@ useIntersectionObserver({
                 <Tagline/>
                 
                 <UserDashboard/>
-                {/* <div className="space-x-2 flex w-full items-center">
-                  <img src="/01.webp" className="object-contain"/>
-                  <img src="/02.webp" className="object-contain"/>
-                </div> */}
+                <Banners2/>
                 <BillPayment/>
                 <PolicyServices/>  
                 <FeaturedShops />
-                {/* <div className="space-x-2 flex w-full items-center">
-                  <img src="/03.webp" className="object-contain"/>
-                  <img src="/04.webp" className="object-contain"/>
-                </div> */}
+
                 <ElanteBanner/>
                 <RedBullBanner/>
                 <AllCategories/>
-                <Tandoor/>
+                <Banners/>
                 <OfferOfTheDay/>
+                <Banners3/>
                 <BrandOffers/>
                 <HomePageBanner />
                  

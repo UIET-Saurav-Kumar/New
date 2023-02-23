@@ -61,7 +61,7 @@ export default function ShopNotFoundInfo({shopData,searchText}) {
           <span className='font-bold   text-xl lg:text-3xl '> bank account</span>
            
             <div className='flex items-center w-full justify-between'> 
-             <button onClick={isAuthorize ? ()=>router.push('/user/upload-invoice/upload-form') : ()=>openModal('REGISTER')} 
+             <button onClick={isAuthorize ? ()=>router.push('/user/upload-invoice/upload-form') : ()=> openModal('OTP_REGISTER')} 
                  className="w-28 lg:w-60 font-semibold text-lg  lg:text-3xl bg-magenta rounded-lg px-4 p-3 text-white cursor-pointer hover:underline ">
                 Upload Bill
               </button>

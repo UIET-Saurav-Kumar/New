@@ -22,7 +22,7 @@ export default function ProductNotFoundInfo({shopData}) {
      >
           
            <Image 
-          onClick={isAuthorize ? ()=>router.push('/user/upload-invoice/upload-form') : ()=>openModal('REGISTER')} 
+          onClick={isAuthorize ? ()=>router.push('/user/upload-invoice/upload-form') : ()=> openModal('OTP_REGISTER')} 
          quality='40'
          src='/shop-invoice.jpeg'
           layout='fill'

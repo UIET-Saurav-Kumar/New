@@ -65,7 +65,6 @@ export default function UserTotalEarning({totalEarnings}:any) {
                   </div>
                 </div>
 
-                
             </div> 
                 
         </div>

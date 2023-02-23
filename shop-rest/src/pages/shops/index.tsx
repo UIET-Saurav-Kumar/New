@@ -36,6 +36,7 @@ import { API_ENDPOINTS } from "@utils/api/endpoints";
 import url from '@utils/api/server_url'
 import http from '@utils/api/http'
 import { toast } from 'react-toastify';
+import PlacesApi from "@components/shop/google-maps-places-api";
 
 
 const ProductFeedLoader = dynamic(
@@ -71,6 +72,18 @@ const ShopsPage = () => {
   console.log('search',query.text);
 
 
+  const [reviews, setReviews] = useState('');
+
+  const [placePhotos, setPlacePhotos] = useState([]);
+
+  const [totalRating, setTotalRating] = useState('');
+
+  const [open , setOpen] = useState('');
+
+  const [rating, setRating] = useState('');
+
+
+
   // useEffect(()=>{
   //   setSearchText(query.text)
   // },[searchText])
@@ -102,6 +115,8 @@ const ShopsPage = () => {
     onIntersect: fetchNextPage,
     enabled: hasNextPage,
   })
+
+  console.log();
 
   function getSearch():string {
     
@@ -159,7 +174,25 @@ const ShopsPage = () => {
   
   // // console.log('shops',data?.pages?.filter((shop: any) => shop?.is_active === 1))
   // // console.log('shops name',data?.pages?.data?.map((shop: any) => shop))
- 
+  function handleApiPhotos(data) {
+    setPlacePhotos(data)
+  }
+  
+  function handleRating(data) {
+    setRating(data);
+  }
+  
+  function handleOpen(data) {
+    setOpen(data);
+  }
+  
+  function handleReviews(data) {
+    setReviews(data);
+  }
+  
+  function handleTotalRating(data) {
+    setTotalRating(data);
+  }
 
   return (
 
@@ -216,20 +249,34 @@ const ShopsPage = () => {
                 <ProductFeedLoader limit = {30} />
               ) : (
                 <>
-                    {data?.pages?.map((page, idx) => {
+                    {
+                    data?.pages?.map((page, idx) => {
 
                           return (
+                            <div className="flex flex-col">
+                            <PlacesApi 
+                            showImages = {false}
+                            data={data}
+                            shopName={getText()} 
+                            handlePhotos={handleApiPhotos}
+                            handleRating={handleRating}
+                            handleTotalRating={handleTotalRating}
+                            handleOpen={handleOpen}
+                            handleReviews={handleReviews} />
                             <div className={` ${query.text_type == 'shop' || query.text_type == 'Category'  || query.text_type == 'Shop_Category' ? 'grid grid-cols-2 place-items-center px-2 lg:px- mt-4 sm:grid-cols-3 md:grid-cols-4 gap-2 lg:gap-8 lg:grid-cols-4 xl:grid-cols-5 w-full' : 'flex flex-col'}`} key={idx}>
                               {/* {page.data.filter((shop) => shop?.is_active === 1 && shop?.products?.length == 0 ).map((shop: any) => (
                                 <ShopCard2 text={getText()} category={getCategory()} shop={shop} shopId={shop?.id} key={shop.id} />
                               ))} */}
-                              {page?.data?.slice(1,21).filter((shop) => shop?.is_active === 1).map((shop: any) => (
+                              {page?.data?.slice(0,21).filter((shop) => shop?.is_active === 1).map((shop: any) => (
                                 <ShopCard2 text={getText()} type={getType()} category={getCategory()} 
                                            shop={shop}   shopId={shop?.id} key={shop.id} />
                               ))}
                             </div>
+                            </div>
                         )
-                    })}
+                    }) 
+                     
+                    }
                 </>
               )} 
             </div>
