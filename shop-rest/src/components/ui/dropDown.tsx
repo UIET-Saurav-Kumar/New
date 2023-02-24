@@ -93,7 +93,7 @@ export default function DropDown({getLoc}:{getLoc:any}) {
     var {pathname}=router;
     pathname="/shops";
     const { type, ...rest } = router.query;
-    var text_type  = e?.text_type ? e?.type : 'shop';
+    var text_type  = e?.text_type ? e?.text_type : 'shop';
     var text =e?.value
     var avail = e?.available;
     console.log('search data',e?.type)
