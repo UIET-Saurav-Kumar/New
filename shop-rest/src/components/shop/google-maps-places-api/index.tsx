@@ -33,7 +33,7 @@ export default function PlacesApi(props:any) {
   const [rating, setRating] = useState('');
 
 
-//   const { openModal } = useModalAction();
+  const { openModal } = useModalAction();
 
   useEffect(() => {
     // const photos = PlacesApi(shopName);
@@ -50,9 +50,8 @@ export default function PlacesApi(props:any) {
 
   console.log('search data details logo',business_logo)
 
-  
 
-  const shop_name =  shopName;
+  const shop_name = shopName;
 
   useEffect(() => {
     
@@ -72,6 +71,8 @@ export default function PlacesApi(props:any) {
 
 }, [shopName])
 
+ 
+
 
 useEffect(() => {
 
@@ -84,12 +85,16 @@ useEffect(() => {
 
   useEffect(() => {
 
-    const params = {
-      logo_id: logo_id,
+    const param = {
+      photo_reference : logo_id
     }
+    mutateLogoImage(param)
 
-    mutateLogoImage(params)
   },[logo_id])
+
+  console.log('logo id',logo_id)
+
+  
 
 
   useEffect(() => {
@@ -98,8 +103,8 @@ useEffect(() => {
 
   useEffect(() => {
     setBusinessLogo('');  
-    setBusinessName('');
-    setLogo_Id(''); 
+    // setBusinessName('');
+    // setLogo_Id(''); 
   }, [shopName])
 
 
@@ -130,7 +135,7 @@ useEffect(() => {
     const { data: response } = await http.get(
       `${url}/${API_ENDPOINTS.GOOGLE_MAPS_PLACE_PHOTOS}`,{params: data}
     )
-   
+    console.log('logo id',response)
     return response
   }
 
@@ -171,11 +176,9 @@ useEffect(() => {
       setRating(data?.rating);
       set_Is_Open(data?.opening_hours?.open_now);
       setTotal_Rating(data?.user_ratings_total);
-      console.log('operator plans', data)
-      const param = {
-        photo_reference : logo_id
-      }
-      mutateLogoImage(param)
+      console.log('operator plans', data);
+      
+       
       
     },     
     onError: (data) => {
@@ -215,7 +218,7 @@ const { mutate: mutateLogoImage } =  useMutation(showLogoImg &&  getplacePhoto, 
 
 });
 
-function openModal(){
+function openImageModal(){
     handleImage(place_Photos)
   }
 
@@ -237,6 +240,14 @@ function openModal(){
     return stars;
 }
 
+function openGoogleReview() {
+  openModal('GOOGLE_REVIEWS'
+  , {
+    review: review
+  }
+  );
+}
+
  
   return (
 
@@ -245,7 +256,7 @@ function openModal(){
             <div className='flex  gap-3 w-full px-2 overflow-x-scroll'>
                 {showImages && place_Photos?.map((binaryImage, index) => {
                     return <img 
-                            onClick={openModal} 
+                            onClick={openImageModal} 
                             key={index} 
                             src={binaryImage?.url+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
                             className="h-60 rounded w-60 object-cover"/>
@@ -273,7 +284,7 @@ function openModal(){
                                </p>
                                </div>
                                
-                                <p className="flex items-start  text-left">
+                                <p onClick={()=>openGoogleReview()} className="flex items-start  text-left">
                                 <span className="text-gray-500 mr-2 font-semibold">
                                   {rating}
                                 </span>
