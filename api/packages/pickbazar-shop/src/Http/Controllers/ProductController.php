@@ -281,7 +281,7 @@ class ProductController extends CoreController
         foreach($names as $name){
             array_push($data,[
                 "label"=>$name . '' .'(Outlet)',
-                'type'=>'Shop',
+                'type'=>'shop',
                 "value"=>$name
             ]);
         }
