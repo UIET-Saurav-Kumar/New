@@ -45,7 +45,7 @@ export default function PlacesApi(props:any) {
     handleOpen && handleOpen(is_open);
     handleReviews && handleReviews(review);
     handleTotalRating && handleTotalRating(total_rating);
-  }, [place_Photos,shopName,business_logo,rating,business_name]);
+  }, [place_Photos,shopName]);
 
 
   // console.log('search data details logo',business_logo)

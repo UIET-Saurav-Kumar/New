@@ -365,11 +365,13 @@ function handleTotalRating(data) {
               
               "aggregateRating": {
                 "@type": "AggregateRating",
-                "ratingValue": (reviews?.length && reviews?.reduce((acc, review) => acc + review.rating, 0) / reviews?.length).toFixed(1) ,
+                "ratingValue": (reviews?.length && reviews?.reduce((acc, review) => acc + review?.rating, 0) / reviews?.length).toFixed(1) ,
                 "reviewCount": reviews.length ? reviews?.length : '4.5'
               }
             }
-            )}}
+            )
+          }
+        }
           />
 
           
