@@ -77,7 +77,7 @@ const ShopPage = ({ data }: any) => {
  
   const [placeId, setPlaceId] = useState([]);
 
-  const [reviews, setReviews] = useState('');
+  const [reviews, setReviews] = useState([]);
 
   const [placePhotos, setPlacePhotos] = useState([]);
 
