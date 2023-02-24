@@ -48,7 +48,7 @@ export default function PlacesApi(props:any) {
   }, [place_Photos,shopName,business_logo,rating,business_name]);
 
 
-  console.log('search data details logo',business_logo)
+  // console.log('search data details logo',business_logo)
 
 
   const shop_name = shopName;
@@ -108,11 +108,11 @@ useEffect(() => {
   }, [shopName])
 
 
-  console.log('search data',place_Id,rating,is_open, business_logo)
+  // console.log('search data',place_Id,rating,is_open, business_logo)
 
 
   const getSearchDetails = async (data: any) => {
-    console.log('search data details',data)
+    // console.log('search data details',data)
     const { data: response } = await http.get(
       `${url}/${API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH}`,{params: data}
     )
@@ -122,7 +122,7 @@ useEffect(() => {
 
 
   const getplaceDetails = async (data: any) => {
-    console.log('search data details',data)
+    // console.log('search data details',data)
     const { data: response } = await http.get(
       `${url}/${API_ENDPOINTS.GOOGLE_MAPS_PLACE_DETAILS}`,{params: data}
     )
@@ -131,11 +131,11 @@ useEffect(() => {
 
 
   const getplacePhoto = async (data: any) => {
-    console.log('search data',data)
+    // console.log('search data',data)
     const { data: response } = await http.get(
       `${url}/${API_ENDPOINTS.GOOGLE_MAPS_PLACE_PHOTOS}`,{params: data}
     )
-    console.log('logo id',response)
+    // console.log('logo id',response)
     return response
   }
 
@@ -146,18 +146,18 @@ useEffect(() => {
        set_Reviews(data?.result?.reviews);
       for (let j = 0; j < data?.result?.photos.length; j++) {
         const photo = data?.result?.photos[j]?.photo_reference;
-        console.log('reference',photo)
+        // console.log('reference',photo)
         const param = {
           photo_reference : photo
         }
         mutatePhoto(param)
         
       }
-       console.log('review place id', data,review)
+      //  console.log('review place id', data,review)
     },
 
     onError: (data) => {
-      console.log(data?.message)
+      // console.log(data?.message)
     },
 
     onSettled: () => {
@@ -165,7 +165,7 @@ useEffect(() => {
     },
   })
 
-  console.log('review',review);
+  // console.log('review',review);
 
   const { mutate: mutateSearch } = useMutation(getSearchDetails, {
     onSuccess: (data) => {
@@ -176,13 +176,13 @@ useEffect(() => {
       setRating(data?.rating);
       set_Is_Open(data?.opening_hours?.open_now);
       setTotal_Rating(data?.user_ratings_total);
-      console.log('operator plans', data);
+      // console.log('operator plans', data);
       
        
       
     },     
     onError: (data) => {
-      console.log(data?.message);
+      // console.log(data?.message);
     },
     onSettled: () => {
       queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH)
@@ -194,7 +194,7 @@ useEffect(() => {
       setPlace_Photos(prevState => [...prevState, response])
     },
     onError: (data) => {
-      console.log(data?.message)
+      // console.log(data?.message)
     },
 
     onSettled: () => {
@@ -209,7 +209,7 @@ const { mutate: mutateLogoImage } =  useMutation(showLogoImg &&  getplacePhoto, 
     
   },
   onError: (data) => {
-    console.log(data?.message)
+    // console.log(data?.message)
   },
 
   onSettled: () => {
@@ -222,7 +222,7 @@ function openImageModal(){
     handleImage(place_Photos)
   }
 
-  console.log('placePhotos',review)
+  // console.log('placePhotos',review)
 
 
   function ratingStars(rating) {
