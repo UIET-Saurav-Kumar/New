@@ -61,7 +61,7 @@ export default function DropDown({getLoc}:{getLoc:any}) {
     if (data.length > 0) {
        options = data?.map(item => ({ value: item.value, label: item.label, text_type: item?.type }));
     } else {
-       options = [{ value: inputValue, label: inputValue }];
+       options = [{ value: inputValue, label: inputValue, available:false }];
     }
     callback(options);
 
@@ -95,6 +95,7 @@ export default function DropDown({getLoc}:{getLoc:any}) {
     const { type, ...rest } = router.query;
     var text_type  = e?.text_type ? e?.type : 'shop';
     var text =e?.value
+    var avail = e?.available;
     console.log('search data',e?.type)
     setInputValue(e?.value)
     
@@ -110,11 +111,11 @@ export default function DropDown({getLoc}:{getLoc:any}) {
     router.push(
       {
           pathname,
-          query: {text,text_type },
+          query: {text,text_type, avail },
       },
       {
           pathname,
-          query: {text,text_type},
+          query: {text,text_type, avail},
       },
     );
   }
