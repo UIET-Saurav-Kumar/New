@@ -36,7 +36,7 @@ import { API_ENDPOINTS } from "@utils/api/endpoints";
 import url from '@utils/api/server_url'
 import http from '@utils/api/http'
 import { toast } from 'react-toastify';
- import PlacesApi from "@components/shop/google-maps-places-api/place-photos";
+import PlacePhotos from "@components/shop/google-maps-places-api/place-photos";
 
 
 const ProductFeedLoader = dynamic(
@@ -266,7 +266,7 @@ const ShopsPage = () => {
 
                           return (
                              <div className="flex flex-col">
-                              { query?.avail == 'false' && <PlacesApi 
+                              { query?.avail == 'false' && <PlacePhotos
                                 showLogoImg={true}
                                 showImages = {false}
                                 data={data}

@@ -48,7 +48,7 @@ import { useLocation } from "react-use";
 import { API_ENDPOINTS } from "@utils/api/endpoints";
 import http from '@utils/api/http'
 import { toast } from 'react-toastify';
- import PlacesApi from "@components/shop/google-maps-places-api/place-photos";
+ import PlacePhotos from "@components/shop/google-maps-places-api/place-photos";
 import DefaultLayout from "@components/layout/default-layout";
 
 
@@ -490,7 +490,7 @@ function handleTotalRating(data) {
                             </div>
                             <div className="">
                               <div className={`flex  gap-3 w-full px-2 overflow-x-scroll`}>
-                                    <PlacesApi handleImage={handleImage}  
+                                    <PlacePhotos handleImage={handleImage}  
                                                showImages = {true}
                                                data={data} shopName={data?.name} 
                                                handlePhotos={handleApiPhotos}

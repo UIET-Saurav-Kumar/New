@@ -38,7 +38,7 @@ export default function PlaceSearch(props:any) {
 
   const { openModal } = useModalAction();
 
-  
+
   useEffect(() => {
     // const photos = Google(shopName);
     handleBusinessName && handleBusinessName(business_name);
@@ -240,14 +240,13 @@ function openImageModal(){
 
   // console.log('placePhotos',review)
 
-
-  function ratingStars(rating) {
+  function ratingStars(rating:any) {
     let stars = "";
     if (rating >= 4.5) {
-        stars ='★★★★ ';
+        stars ='⭐️⭐️⭐️⭐️☆';
     } else {
         for (let i = 0; i < Math.floor(rating); i++) {
-            stars +='☆';
+            stars +='⭐️';
         }
         if (rating % 1 !== 0) {
             stars +='☆';
@@ -281,7 +280,7 @@ function openGoogleReview() {
             {
                 showLogoImg && 
 
-                    searchResults?.slice(0,15).map( (result,index) => {
+                    searchResults?.slice(0,2).map( (result,index) => {
 
                     // <Link href={`${ROUTES.SHOPS}/${business_name}`}> 
                    return <div key={index} className='flex shadow-300 mx-auto lg:mx-5 rounded space-y-4 flex-col border  w-full    text-center   p-4   '>

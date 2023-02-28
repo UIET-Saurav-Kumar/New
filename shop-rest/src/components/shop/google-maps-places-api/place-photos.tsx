@@ -172,8 +172,6 @@ useEffect(() => {
       setTotal_Rating(data?.user_ratings_total);
       // console.log('operator plans', data);
       
-       
-      
     },     
     onError: (data) => {
       // console.log(data?.message);
