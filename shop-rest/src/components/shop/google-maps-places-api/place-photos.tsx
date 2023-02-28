@@ -138,7 +138,7 @@ useEffect(() => {
   const { mutate: mutatePlace} = useMutation(getplaceDetails, {
     onSuccess: (data) => {
        set_Reviews(data?.result?.reviews);
-      for (let j = 0; j < 5; j++) {
+      for (let j = 0; j < data?.result?.photos?.length; j++) {
         const photo = data?.result?.photos[j]?.photo_reference;
         // console.log('reference',photo)
         const param = {

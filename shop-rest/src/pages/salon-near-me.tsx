@@ -56,7 +56,7 @@ import DefaultLayout from '@components/layout/default-layout';
 import { formatSalonProduct } from '@utils/format-salon-products';
 import { useOrdersQuery } from '@data/order/use-orders.query';
 import Loader from '@components/ui/loader/loader';
-import PlacesApi from '@components/shop/google-maps-places-api';
+import PlacesApi from '@components/shop/google-maps-places-api/place-photos';
 import { addLocation } from '@contexts/location/location.utils';
 import Spinner from '@components/ui/loaders/spinner/spinner';
 import { ArrowDownIcon, ArrowUpIcon, MinusIcon, PlusIcon } from '@heroicons/react/outline';
