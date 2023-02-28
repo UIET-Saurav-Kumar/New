@@ -14,7 +14,7 @@ export default function UserWithdrawCard({currentBalance}:any) {
   function getLink() {
 		
     isAuthorize ? router.push('/user/withdraws/create') :
-     openModal("REGISTER")
+      openModal("OTP_REGISTER")
 
 }
   return (

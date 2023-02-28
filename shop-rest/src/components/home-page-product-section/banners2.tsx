@@ -92,7 +92,7 @@ export default function Banners2() {
       
             <Slider {...settings}>
 
-            {location() &&  <Link href='/appointment'>
+            {location() &&  <Link href='https://buylowcal.com/shops?text=Night+Life&text_type=Category&avail='>
               <div className="px-1 ">
 
                        {/* < Image    

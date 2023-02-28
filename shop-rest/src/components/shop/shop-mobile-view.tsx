@@ -42,13 +42,13 @@ export default function ShopMobileView({data, shopData, pageURL, open,
   });
 
   // function handleJoin() {
-  //   return openModal("REGISTER");
+  //   return  openModal("OTP_REGISTER");
   // }
 
    
   const { isAuthorize, displayHeaderSearch, displayMobileSearch } = useUI(); 
   useEffect(() => {
-   query.utm_source == 'shop_qr' ? (!isAuthorize ? openModal("REGISTER") : null) : null;
+   query.utm_source == 'shop_qr' ? (!isAuthorize ?  openModal("OTP_REGISTER") : null) : null;
     // data.slug !== 'chandigarh-grocery-store' ? window.scrollTo(0, 670) : window.scrollTo(0, 0)
  }, [isAuthorize]);
 

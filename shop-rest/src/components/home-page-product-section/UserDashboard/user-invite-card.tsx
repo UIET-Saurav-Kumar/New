@@ -13,7 +13,7 @@ export default function UserInviteCard() {
   function getLink() {
 		
     isAuthorize ? router.push('/user/invite') :
-     openModal("REGISTER")
+      openModal("OTP_REGISTER")
 
 }
 

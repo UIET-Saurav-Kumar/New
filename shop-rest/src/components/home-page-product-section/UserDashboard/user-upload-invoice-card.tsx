@@ -14,7 +14,7 @@ export default function UserUploadInvoiceCard() {
   function getLink() {
 		
     isAuthorize ? router.push('/user/upload-invoice/upload-form') :
-     openModal("REGISTER")
+      openModal("OTP_REGISTER")
 
 }
 

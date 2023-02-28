@@ -36,7 +36,7 @@ import { API_ENDPOINTS } from "@utils/api/endpoints";
 import url from '@utils/api/server_url'
 import http from '@utils/api/http'
 import { toast } from 'react-toastify';
-import PlacesApi from "@components/shop/google-maps-places-api";
+ import PlacesApi from "@components/shop/google-maps-places-api/place-photos";
 
 
 const ProductFeedLoader = dynamic(

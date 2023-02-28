@@ -18,7 +18,7 @@ export default function UserProfile({data}:any) {
     function getLink() {
           
       isAuthorize ? router.push('/user/referral-network') :
-       openModal("REGISTER")
+        openModal("OTP_REGISTER")
   
   }
 

@@ -23,7 +23,7 @@ export default function UserTotalEarning({totalEarnings}:any) {
 
   function getLink() {
     isAuthorize ? router.push('/user/wallet') :
-     openModal("REGISTER")
+      openModal("OTP_REGISTER")
   }
 
   return (

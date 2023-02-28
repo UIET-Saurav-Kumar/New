@@ -48,7 +48,7 @@ import { useLocation } from "react-use";
 import { API_ENDPOINTS } from "@utils/api/endpoints";
 import http from '@utils/api/http'
 import { toast } from 'react-toastify';
-import PlacesApi from "@components/shop/google-maps-places-api";
+ import PlacesApi from "@components/shop/google-maps-places-api/place-photos";
 import DefaultLayout from "@components/layout/default-layout";
 
 
@@ -123,7 +123,7 @@ const ShopPage = ({ data }: any) => {
   const { isAuthorize, displayHeaderSearch, displayMobileSearch } = useUI();
   
   // function handleJoin() {
-  //   return openModal("REGISTER");
+  //   return  openModal("OTP_REGISTER");
   // }
 
   const utmquery = query?.utm_campaign;
@@ -158,7 +158,7 @@ const ShopPage = ({ data }: any) => {
 
     checkUtm(query.utm_source, query.utm_campaign,query.shop_id)
     setPageUrl(window.location.href);
-    // query.utm_source == 'shop_qr' ? (!isAuthorize ? openModal("REGISTER") : null) : null;
+    // query.utm_source == 'shop_qr' ? (!isAuthorize ?  openModal("OTP_REGISTER") : null) : null;
   },  [query.utm_campaign ]);
   
   const { t } = useTranslation("common");

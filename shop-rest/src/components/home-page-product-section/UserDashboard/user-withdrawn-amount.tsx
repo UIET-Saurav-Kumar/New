@@ -11,7 +11,7 @@ export default function UserWithdrawnAmount({withdrawnAmount,isAuthorize}:any) {
   function getLink() {
 		
     isAuthorize ? router.push('/user/withdraws') :
-     openModal("REGISTER")
+      openModal("OTP_REGISTER")
 
 }
   return (

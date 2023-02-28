@@ -19,7 +19,7 @@ import Krypton from "@components/product/product-card/krypton";
 import Helium from "@components/product/product-card/helium";
 import Argon from "@components/product/product-card/argon";
 import OfferCard from "@components/product/product-card/offer-card";
-import PlacesApi from "@components/shop/google-maps-places-api";
+import PlacesApi from "@components/shop/google-maps-places-api/place-photos";
 
 type ShopCardProps = {
   shop: any;

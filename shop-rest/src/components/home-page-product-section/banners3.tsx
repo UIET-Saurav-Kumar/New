@@ -92,7 +92,7 @@ export default function Banners3() {
       
             <Slider {...settings}>
 
-            {location() &&  <Link href='/appointment'>
+            {location() &&  <Link href='https://buylowcal.com/shops?text=Restaurants&text_type=Shop_Category&avail='>
               <div className="px-1 ">
 
                        {/* < Image    
@@ -113,7 +113,7 @@ export default function Banners3() {
            }
 
 
-          {location() && <Link href='/shops?text=barista'>
+          {location() && <Link href='https://buylowcal.com/shops?text=Gym&text_type=Category&avail='>
             <div className=" px-1">
 
                {/* < Image        quality='40' 
