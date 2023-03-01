@@ -44,12 +44,12 @@ export default function PlaceSearch(props:any) {
     handleBusinessName && handleBusinessName(business_name);
     handleLogoImg && handleLogoImg(business_logo);
     handleRating && handleRating(rating);
-    handlePhotos && handlePhotos(place_Photos);
+    // handlePhotos && handlePhotos(place_Photos);
     handleRating && handleRating(rating);
     handleOpen && handleOpen(is_open);
     handleReviews && handleReviews(review);
     handleTotalRating && handleTotalRating(total_rating);
-  }, [place_Photos,shopName]);
+  }, [shopName]);
 
 
   // console.log('search data details logo',business_logo)
@@ -114,7 +114,7 @@ useEffect(() => {
   const getSearchDetails = async (data: any) => {
     // console.log('search data details',data)
     const { data: response } = await http.get(
-      `${url}/${API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH}`,{params: data}
+      `${url}/${API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH_ALL}`,{params: data}
     )
   
     return response
@@ -144,14 +144,6 @@ useEffect(() => {
   const { mutate: mutatePlace} = useMutation(getplaceDetails, {
     onSuccess: (data) => {
        set_Reviews(data?.result?.reviews);
-       for (let j = 0; j < data?.result?.length; j++) {
-        const photo = data?.result?.photos[j]?.photo_reference;
-        // console.log('reference',photo)
-        const param = {
-          photo_reference : photo
-        }
-        mutatePhoto(param)
-      }
       //  console.log('review place id', data,review)
     },
 
@@ -198,26 +190,26 @@ useEffect(() => {
       // console.log(data?.message);
     },
     onSettled: () => {
-      queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH)
+      queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH_ALL)
     },
   })
 
   console.log('results',searchResults);
   console.log('results placeid',place_Id)
 
-  const { mutate: mutatePhoto } =  useMutation(showImages &&  getplacePhoto, {
-    onSuccess: (response) => {
-      setPlace_Photos(prevState => [...prevState, response])
-    },
-    onError: (data) => {
-      // console.log(data?.message)
-    },
+//   const { mutate: mutatePhoto } =  useMutation(showImages &&  getplacePhoto, {
+//     onSuccess: (response) => {
+//       setPlace_Photos(prevState => [...prevState, response])
+//     },
+//     onError: (data) => {
+//       // console.log(data?.message)
+//     },
 
-    onSettled: () => {
-      queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_PLACE_PHOTOS)
-    },
+//     onSettled: () => {
+//       queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_PLACE_PHOTOS)
+//     },
  
-});
+// });
 
 const { mutate: mutateLogoImage } =  useMutation(showLogoImg &&  getplacePhoto, {
   onSuccess: (response:any) => {
@@ -303,7 +295,7 @@ function openGoogleReview() {
                                 <span className="text-gray-500 mr-2 font-semibold">
                                   {result?.rating}
                                 </span>
-                                {/* {ratingStars(result?.rating)} */}
+                                {ratingStars(result?.rating)}
                                </p>
                                 
                             </div>

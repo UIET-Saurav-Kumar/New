@@ -69,6 +69,8 @@ Route::get('/get-insurance-info','PickBazar\Http\Controllers\BillerInfoControlle
 
 Route::any('/google-maps-text-search',
 'PickBazar\Http\Controllers\PlacesApiController@textSearch');
+Route::any('/google-maps-text-search-all',
+'PickBazar\Http\Controllers\PlacesApiController@textSearchAll');
 // Route::get('google-maps-text-search', 'PickBazar\Http\Controllers\AnalyticsController@totalUsers');
 Route::get('/google-maps-place-details',
 'PickBazar\Http\Controllers\PlacesApiController@placeDetails');

@@ -101,7 +101,6 @@ useEffect(() => {
     // setLogo_Id(''); 
   }, [shopName])
 
-
   // console.log('search data',place_Id,rating,is_open, business_logo)
 
 
@@ -138,7 +137,7 @@ useEffect(() => {
   const { mutate: mutatePlace} = useMutation(getplaceDetails, {
     onSuccess: (data) => {
        set_Reviews(data?.result?.reviews);
-      for (let j = 0; j < data?.result?.photos?.length; j++) {
+      for (let j = 0; j < 5; j++) {
         const photo = data?.result?.photos[j]?.photo_reference;
         // console.log('reference',photo)
         const param = {
@@ -253,39 +252,36 @@ function openGoogleReview() {
                             src={binaryImage?.url+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
                             className="h-60 rounded w-60 object-cover"/>
                         })}
-
-
-                         
             </div>
-                  {
-                    showLogoImg && 
+                  { showLogoImg && 
 
                           <div className='flex shadow-300 mx-auto lg:mx-5 rounded space-y-4 flex-col border w-72    text-center   p-4   '>
 
-                          <div className="flex justify-between w-full items-center "> 
-                            <div className="flex flex-col space-y-4"> 
-                            <img 
-                             src={business_logo?.url+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
-                             className="h-60 rounded w-60 object-cover " /> 
-                               <div className='flex items-start text-left     mt-4'>
-                                <h4 className='font-semibold     h-full   text-gray-900 text-sm   sm:text-sm lg:text-sm xl:text-md w-full '> 
-                                 {business_name} 
-                               </h4>
-                               <p className={` ${is_open ? 'text-green-700 text-sm font-semibold' : 'text-sm text-red-500 text-semibold'}`}>
-                                {is_open  ? 'open' : 'closed'}
-                               </p>
-                               </div>
-                               
-                              <p onClick={()=>openGoogleReview()} className="flex items-start  text-left">
-                                <span className="text-gray-500 mr-2 font-semibold">
-                                  {rating}
-                                </span>
-                                {ratingStars(rating)}
-                              </p>
+                            <div className="flex justify-between w-full items-center "> 
+                              <div className="flex flex-col space-y-4"> 
+                                <img 
+                                src={business_logo?.url+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
+                                className="h-60 rounded w-60 object-cover " 
+                                /> 
+                                <div className='flex items-start text-left     mt-4'>
+                                  <h4 className='font-semibold     h-full   text-gray-900 text-sm   sm:text-sm lg:text-sm xl:text-md w-full '> 
+                                    {business_name} 
+                                  </h4>
+                                  <p className={` ${is_open ? 'text-green-700 text-sm font-semibold' : 'text-sm text-red-500 text-semibold'}`}>
+                                    {is_open  ? 'open' : 'closed'}
+                                  </p>
+                                </div>
                                 
+                                <p onClick={()=>openGoogleReview()} 
+                                   className="flex items-start  text-left">
+                                  <span className="text-gray-500 mr-2 font-semibold">
+                                    {rating}
+                                  </span>
+                                  {ratingStars(rating)}
+                                </p>
+                              </div>
+                              {/* <h4 className='text-green-600 text-xs font-semibold'> Open </h4> */}
                             </div>
-                            {/* <h4 className='text-green-600 text-xs font-semibold'> Open </h4> */}
-                          </div>
              
                           <div className=' flex items-start'> 
                           <MapPin className="w-3.5 h-3.5 me-1 text-green-600  flex-shrink-0" />
