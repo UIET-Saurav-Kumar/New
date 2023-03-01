@@ -380,22 +380,16 @@ function handleTotalRating(data) {
                 <div className="relative bg-white lg:bg-gray-100 hidden lg:flex flex-col
                                 md:flex-row md:justify-between md:items-start">
 
-                        {/* // button to scroll to the top of the page when user has scrolled way down */}
-
+ 
                         <div className="fixed z-50 bottom-10 right-10 flex justify-center items-center">
                           <img src='/up-arrow.png' className="w-12 h-12" onClick={() => window.scrollTo(0, 0)} /> 
                         </div>
 
-                        {/* <div className="fixed z-50 bottom-10 right-10 flex justify-center items-center">
-                          <button onClick={() => scrollToProduct()} className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-full">
-                            <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.914 9.914L10 7.828V16H8V7.828l-2.086 2.086L4.586 9.914l8.486-8.486z"/></svg>
-                          </button>
-                        </div> */}
+                        
 
                     <div className='flex w-full lg:flex flex-col'>
 
-                      {/* <div className="hidden lg:space-x-5 xl:space-x-10  lg:flex justify-between "> */}
-
+ 
                           <div className = 'hidden lg:flex flex-col overflow-y-scroll space-y-4  w-full'>  
 
                             <div className={`${checkElement() ? 'h-0' : 'h-80'} flex w-full mt-10 border`}> 
@@ -431,24 +425,15 @@ function handleTotalRating(data) {
                                 }
                             </div>
 
-                            
-                              {/*                                 
-                                { data.slug !== 'chandigarhgrocerystore' ? 
-                                ( <div className='flex w-full'> 
-                                      <WebShopBanner/>
-                                  </div>)
-                                  : null
-                                } */}
+                           
 
                                   { slug?.some(el => data?.slug?.includes(el)) ? null :
-                                  //  (<div className='w-full mt-7'> 
-                                      (<ShopDescription data = {data}/>
-                                    // </div>
-                                    )
+                                       (<ShopDescription data = {data}/>
+                                     )
                                  
                                   }
 
-                                    {/* <OfferCards/> */}
+                                   
                           </div>
 
                             <div className = 'lg:hidden px-2  w-full grid grid-cols-1 sm:flex'>
@@ -458,12 +443,7 @@ function handleTotalRating(data) {
                                          <ShopProfileCard reviews={reviews} totalRating={totalRating} rating={rating} open={open} data={data}   /> 
                                       </div>)  }
                   
-                                  {/* <div className='w-full flex-grow'>
-                                    <img alt={t("heading")} 
-                                          className='object-cover h-38 sm:h-72 rounded-lg xs+++:rounded-l-none md:h-72 lg:w-2/3 w-full'
-                                          src={data?.cover_image?.original! ?? "/product-placeholder.svg"}
-                                    />
-                                  </div> */}
+                                
 
                                   { slug?.some(el => data?.slug?.includes(el)) ? null
                                  : ( <div className='block sm:hidden'> 
@@ -473,38 +453,25 @@ function handleTotalRating(data) {
  
                             </div>
 
-                            {/* { data?.slug == 'chandigarhgrocerystore' ? ( 
-                             <div className="w-full -mt-80 object-contain">
-                                    <img src='/grocery-web.jpg' className="object-contain" />
-                             </div> ) : null }
-
-                             { data?.slug == 'kosmetics-india' ? ( 
-                             <div className="w-full -mt-80 object-contain">
-                                    <img src='/kosmetics.jpg' className="object-contain" />
-                             </div> ) : null } */}
-
-                          {/* <HidingHeader> */}
+                           
                           <div className='flex flex-col space-y-2'> 
                             <div className={` sticky ${ scrollDirection === "down" ? "-top-32" : "top-0"}   transition-all duration-300 sticky z-30 bg-white top-0`}>                                              
                                 <CategoryDropdownSidebar data={data} />
                             </div>
-                            <div className="">
+                            {/* <div className="">
                               <div className={`flex  gap-3 w-full px-2 overflow-x-scroll`}>
                                     <PlacePhotos handleImage={handleImage}  
                                                showImages = {true}
+                                               showLogoImg = {false}
                                                data={data} shopName={data?.name} 
                                                handlePhotos={handleApiPhotos}
                                                handleRating={handleRating}
                                                handleTotalRating={handleTotalRating}
                                                handleOpen={handleOpen}
                                                handleReviews={handleReviews} />
-                                    {/* {placePhotos?.map((binaryImage, index) => {
-                                        return <img onClick={handleImage} key={index} 
-                                        src={binaryImage?.url+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
-                                         className="h-60 rounded w-60 object-cover"/>
-                                      })} */}
+                                     
                               </div>
-                            </div>
+                            </div> */}
                           </div>
                           {/* </HidingHeader>  */}
 
@@ -522,47 +489,15 @@ function handleTotalRating(data) {
                                   </div> 
                                 </> : ' '  
                               }
-                              {/* {data?.products_count != 0  ? */}
-                                <div id='product-feed' className="static z-10 top-10 w-full">
+                                 <div id='product-feed' className="static z-10 top-10 w-full">
                                   {data && 
-                                  // <ShopProductFeed shopId={data.id} />
-                                    <Feed shopData={data} shopId={data.id} />
+                                     <Feed shopData={data} shopId={data.id} />
                                   }
                                 </div> 
-                                {/* :  */}
-                                {/* <div className="flex flex-col">
-                                  <Feed shopData={data} shopId={data.id} />
-                                  <div className="grid grid-cols-4 gap-3 w-full">
-                                   
-                                {placePhotos?.map((binaryImage, index) => {
-                                    return <img key={index} 
-                                    src={binaryImage?.url+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
-                                    // src={`data:image/jpeg;base64,${Buffer.from(binaryImage).toString('base64')}`} 
-                                    className="h-full w-full"/>
-                                  })}
-                                </div>
-                                </div> */}
-                                {/* } */}
+                                 
                                  
                           </div> 
-
-
-                       {/* </div> */}
-                         
-                         {/* bottom corner button */}
-                           
-
-                           {/* <div onClick={handleCategories} 
-                                className =' fixed  z-1000  bottom-16 -right-2 sm:right-2
-                                   px-3 p-2 rounded-lg  text-white  
-                                   items-center space-x-2 '> 
-
-                                <button className='flex flex-col items-center'>
-                                  <img src='/menu.png' 
-                                      className='h-14 w-14 opacity-80 active:opacity-100' /> 
-                                  <p className='text-gray-900 font-bold'> Categories </p>
-                                </button>
-                           </div> */}
+ 
 
           </div>
 

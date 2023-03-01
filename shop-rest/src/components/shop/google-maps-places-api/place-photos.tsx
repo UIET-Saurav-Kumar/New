@@ -38,14 +38,19 @@ export default function PlacePhotos(props:any) {
   useEffect(() => {
     // const photos = PlacesApi(shopName);
     handleBusinessName && handleBusinessName(business_name);
-    handleLogoImg && handleLogoImg(business_logo);
     handleRating && handleRating(rating);
-    handlePhotos && handlePhotos(place_Photos);
     handleRating && handleRating(rating);
     handleOpen && handleOpen(is_open);
     handleReviews && handleReviews(review);
     handleTotalRating && handleTotalRating(total_rating);
-  }, [place_Photos,shopName]);
+  }, [shopName]);
+    
+
+
+  useEffect(()=>{
+    handlePhotos && handlePhotos(place_Photos);
+
+  },[place_Photos])
 
   // console.log('search data details logo',business_logo)
 
@@ -79,27 +84,12 @@ useEffect(() => {
     mutatePlace(params)
   },[place_Id])
 
-
-  useEffect(() => {
-
-    const param = {
-      photo_reference : logo_id
-    }
-    mutateLogoImage(param)
-
-  },[logo_id])
-
-  console.log('logo id',logo_id)
-
+ 
   useEffect(() => {
     setPlace_Photos([]);  
   }, [shopName ])
 
-  useEffect(() => {
-    setBusinessLogo('');  
-    // setBusinessName('');
-    // setLogo_Id(''); 
-  }, [shopName])
+   
 
   // console.log('search data',place_Id,rating,is_open, business_logo)
 
@@ -137,10 +127,9 @@ useEffect(() => {
   const { mutate: mutatePlace} = useMutation(getplaceDetails, {
     onSuccess: (data) => {
        set_Reviews(data?.result?.reviews);
-      for (let j = 0; j < 5; j++) {
+      for (let j = 0; data?.result?.photos?.length; j++) {
         const photo = data?.result?.photos[j]?.photo_reference;
-        // console.log('reference',photo)
-        const param = {
+         const param = {
           photo_reference : photo
         }
         mutatePhoto(param)
@@ -163,24 +152,20 @@ useEffect(() => {
   const { mutate: mutateSearch } = useMutation(getSearchDetails, {
     onSuccess: (data) => {
       setPlace_Id(data?.place_id);
-      setBusinessName(data?.name);
-      setAddress(data?.formatted_address);
-      setLogo_Id(data?.photos[0]?.photo_reference);
       setRating(data?.rating);
       set_Is_Open(data?.opening_hours?.open_now);
       setTotal_Rating(data?.user_ratings_total);
-      // console.log('operator plans', data);
-      
-    },     
+     },     
     onError: (data) => {
       // console.log(data?.message);
     },
+    
     onSettled: () => {
       queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH)
     },
   })
 
-  const { mutate: mutatePhoto } =  useMutation(showImages &&  getplacePhoto, {
+  const { mutate: mutatePhoto } =  useMutation(  getplacePhoto, {
     onSuccess: (response) => {
       setPlace_Photos(prevState => [...prevState, response])
     },
@@ -194,27 +179,9 @@ useEffect(() => {
  
 });
 
-const { mutate: mutateLogoImage } =  useMutation(showLogoImg &&  getplacePhoto, {
-  onSuccess: (response) => {
-    setBusinessLogo(response)
-    
-  },
-  onError: (data) => {
-    // console.log(data?.message)
-  },
-
-  onSettled: () => {
-    queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_PLACE_PHOTOS)
-  },
-
-});
-
 function openImageModal(){
     handleImage(place_Photos)
   }
-
-  // console.log('placePhotos',review)
-
 
   function ratingStars(rating:any) {
     let stars = "";
@@ -229,23 +196,25 @@ function openImageModal(){
         }
     }
     return stars;
-}
-
-function openGoogleReview() {
-  openModal('GOOGLE_REVIEWS'
-  , {
-    review: review
   }
-  );
-}
+
+  function openGoogleReview() {
+    openModal('GOOGLE_REVIEWS'
+    , {
+      review: review
+    }
+    );
+  }
 
  
   return (
 
         <div className={` ${showImages || showLogoImg ? 'flex flex-col mt-2' : 'hidden'}  `}> 
-          <p className={` ${show ? 'block' : 'hidden'}`}>{rating && (rating + ' '+ratingStars(rating))}</p>
+            <p className={` ${show ? 'block' : 'hidden'}`}>
+              {rating && (rating + ' '+ratingStars(rating))}
+            </p>
             <div className='flex  gap-3 w-full px-2 overflow-x-scroll'>
-                {showImages && place_Photos?.map((binaryImage, index) => {
+                {place_Photos?.map((binaryImage, index) => {
                     return <img 
                             onClick={openImageModal} 
                             key={index} 
@@ -253,50 +222,6 @@ function openGoogleReview() {
                             className="h-60 rounded w-60 object-cover"/>
                         })}
             </div>
-                  { showLogoImg && 
-
-                          <div className='flex shadow-300 mx-auto lg:mx-5 rounded space-y-4 flex-col border w-72    text-center   p-4   '>
-
-                            <div className="flex justify-between w-full items-center "> 
-                              <div className="flex flex-col space-y-4"> 
-                                <img 
-                                src={business_logo?.url+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
-                                className="h-60 rounded w-60 object-cover " 
-                                /> 
-                                <div className='flex items-start text-left     mt-4'>
-                                  <h4 className='font-semibold     h-full   text-gray-900 text-sm   sm:text-sm lg:text-sm xl:text-md w-full '> 
-                                    {business_name} 
-                                  </h4>
-                                  <p className={` ${is_open ? 'text-green-700 text-sm font-semibold' : 'text-sm text-red-500 text-semibold'}`}>
-                                    {is_open  ? 'open' : 'closed'}
-                                  </p>
-                                </div>
-                                
-                                <p onClick={()=>openGoogleReview()} 
-                                   className="flex items-start  text-left">
-                                  <span className="text-gray-500 mr-2 font-semibold">
-                                    {rating}
-                                  </span>
-                                  {ratingStars(rating)}
-                                </p>
-                              </div>
-                              {/* <h4 className='text-green-600 text-xs font-semibold'> Open </h4> */}
-                            </div>
-             
-                          <div className=' flex items-start'> 
-                          <MapPin className="w-3.5 h-3.5 me-1 text-green-600  flex-shrink-0" />
-                               <span className="flex flex-col">
-                                 <h5 className='text-xs h-full text-left lg:h-16 text-gray-700 flex'>
-                                  
-                                  {address}  
-                                  
-                                </h5>
-                                 
-                                </span>
-                          </div> 
-                    </div>
-                           
-                        }
         </div>
 
   )

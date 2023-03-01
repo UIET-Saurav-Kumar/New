@@ -260,7 +260,7 @@ function openGoogleReview() {
 
         <div className={` ${showImages || showLogoImg ? 'grid grid-cols-2 lg:grid-cols-5 gap-2 mt-2' : 'hidden'}  `}> 
           <p className={` ${show ? 'block' : 'hidden'}`}>{rating && (rating + ' '+ratingStars(rating))}</p>
-            <div className='flex  gap-3 w-full px-2 overflow-x-scroll'>
+            {/* <div className='flex  gap-3 w-full px-2 overflow-x-scroll'>
                 { showImages && place_Photos?.slice(0,5).map((binaryImage, index) => {
                     return <img 
                             onClick={openImageModal} 
@@ -268,11 +268,11 @@ function openGoogleReview() {
                             src={binaryImage?.url+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
                             className="h-60 rounded w-60 object-cover"/>
                         })}
-            </div>
+            </div> */}
             {
                 showLogoImg && 
 
-                    searchResults?.slice(0,2).map( (result,index) => {
+                    searchResults?.slice(0,8).map( (result,index) => {
 
                     // <Link href={`${ROUTES.SHOPS}/${business_name}`}> 
                    return <div key={index} className='flex shadow-300 mx-auto lg:mx-5 rounded space-y-4 flex-col border  w-full    text-center   p-4   '>
@@ -280,8 +280,8 @@ function openGoogleReview() {
                           <div className="flex justify-between w-full items-center "> 
                             <div className="flex flex-col space-y-4 "> 
                             <img 
-                          src={business_logo?.url+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
-                          className="h-60 rounded w-60 object-cover " /> 
+                              src={business_logo?.url+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
+                              className="h-60 rounded w-60 object-cover " /> 
                                <div className='flex items-start text-left     mt-4'>
                                 <h4 className='font-semibold     h-full   text-gray-900 text-sm   sm:text-sm lg:text-sm xl:text-md w-full '> 
                                  {result?.name} 

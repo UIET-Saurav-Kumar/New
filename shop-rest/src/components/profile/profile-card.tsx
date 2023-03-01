@@ -59,17 +59,17 @@ type ShopProfileCardProps = {
     function ratingStars(rating:any) {
       let stars = "";
       if (rating >= 4.5) {
-          stars ='⭐️⭐️⭐️⭐️⭐️';
+          stars ='⭐️⭐️⭐️⭐️☆';
       } else {
           for (let i = 0; i < Math.floor(rating); i++) {
               stars +='⭐️';
           }
           if (rating % 1 !== 0) {
-              stars +='⭐';
+              stars +='☆';
           }
       }
       return stars;
-  }
+    }
   
 
   return (
