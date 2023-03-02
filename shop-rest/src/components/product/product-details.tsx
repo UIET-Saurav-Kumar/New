@@ -268,11 +268,11 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
         name="details"
         className="py-4 px-5 lg:px-16 lg:py-14 border-b border-border-200 border-opacity-70"
       >
-        <h2 className="text-lg text-heading tracking-tight font-semibold mb-4 md:mb-6">
+        <h2 className="text-lg text-heading tracking-tight   font-semibold mb-4 md:mb-6">
           {/* {t("text-details")} */}
           Description
         </h2>
-        <p className="text-sm text-body">{description}</p>
+        <p className="text-sm whitespace-pre text-body">{description}</p>
       </Element>
     </article>
   );
