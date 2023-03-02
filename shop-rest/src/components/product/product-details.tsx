@@ -19,6 +19,7 @@ import { useUI } from "@contexts/ui.context";
 import WishlistButton from "./product-details/wishlist-button";
 import { StarIcon } from "@heroicons/react/outline";
 import { random } from "lodash";
+import ReadMore from "@components/ui/truncate";
 
 type Props = {
   product: any;
@@ -167,9 +168,9 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
 
             {description && (
               <div className="mt-3 md:mt-4 text-body text-sm whitespace-pre leading-7">
-                <Truncate character={450} onClick={scrollDetails}>
+                <ReadMore character={450}  >
                   {description}
-                </Truncate>
+                </ReadMore>
               </div>
             )}
 

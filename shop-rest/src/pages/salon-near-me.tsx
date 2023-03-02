@@ -621,7 +621,7 @@ import PlacePhotos from '@components/shop/google-maps-places-api/place-photos';
                <PromotionSlider handleShopImages = {handleShopImages}  selectedShop = {handleSelectedShop} 
                                 offer = {offerName} />
 
-                             {/* <div ref={images} className={`${shopImages ? 'flex' : 'hidden'}  gap-3 w-full px-2 overflow-x-scroll`}>
+                             <div ref={images} className={`${shopImages ? 'flex' : 'hidden'}  gap-3 w-full px-2 overflow-x-scroll`}>
                                 { shopImages  && 
                                 <PlacePhotos
                                   showRating={true}
@@ -634,7 +634,7 @@ import PlacePhotos from '@components/shop/google-maps-places-api/place-photos';
                                   // handlePhotos={handleApiPhotos}
                                 /> 
                                 }
-                             </div> */}
+                             </div>
             
         </div>
 

@@ -289,7 +289,7 @@ export default function FeaturedProducts({}) {
                     Salon & Spa
                 </h3>
                 <div className = "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 px-1 gap-1 lg:p-4 lg:gap-2">
-                    { salonspaArray?.slice(0,9)?.filter(product => product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
+                    { salonspaArray?.slice(0,9)?.filter((product) => product?.status === 'publish' && product?.is_brand_offer !== 1).map((product :any) => (
                         <>    
                             <motion.div key={product.id}>
                                  <Neon2 product={product} />

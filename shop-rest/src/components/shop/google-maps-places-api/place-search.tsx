@@ -75,25 +75,37 @@ export default function PlaceSearch(props:any) {
 
 }, [shopName])
 
+useEffect(()=>{
+  setPlace_Id('');
+  setBusinessName('');
+  setAddress('');
+  setLogo_Id('');
+  setRating('');
+  set_Is_Open('');
+  setTotal_Rating('');
+},[business_name])
+
  
 
-useEffect(() => {
+// useEffect(() => {
 
-    const params = {
-      place_id: place_Id,
-    }
+//     const params = {
+//       place_id: place_Id,
+//     }
 
-     mutatePlace(params)
-  },[place_Id])
+//      mutatePlace(params)
+//   },[place_Id])
 
-  useEffect(() => {
+   
 
-    const param = {
-      photo_reference : logo_id
-    }
-    mutateLogoImage(param)
+  // useEffect(() => {
 
-  },[logo_id])
+  //   const param = {
+  //     photo_reference : logo_id
+  //   }
+  //   mutateLogoImage(param)
+
+  // },[logo_id])
 
   console.log('logo id',logo_id)
 
@@ -105,7 +117,7 @@ useEffect(() => {
   useEffect(() => {
     setBusinessLogo('');  
     
-  }, [shopName])
+  }, [shopName,logo_id])
 
 
   // console.log('search data',place_Id,rating,is_open, business_logo)
@@ -157,31 +169,44 @@ useEffect(() => {
 
   // console.log('review',review);
 
+  function getShopImage(){
+    const param = {
+      photo_reference: logo_id,
+    };
+    mutateLogoImage(param);
+  }
+
+
+  
+
   const { mutate: mutateSearch } = useMutation(getSearchDetails, {
     onSuccess: (data) => {
-      setSearchResults(data);
-      for (let j = 0; j < searchResults?.length; j++) {
-          setPlace_Id(searchResults[j]?.place_id);
-          setBusinessName(searchResults[j]?.name);
-          setAddress(searchResults[j]?.formatted_address);
-          setLogo_Id(searchResults[j]?.photos[0]?.photo_reference);
-          setRating(searchResults[j]?.rating);
-          set_Is_Open(searchResults[j]?.opening_hours?.open_now);
-          setTotal_Rating(searchResults[j]?.user_ratings_total);
-          // console.log('reference',photo)
-
-        const param = {
-          photo_reference : logo_id
-        }
-        mutateLogoImage(param)
-
-         const params = {
-          place_id: place_Id,
-        }
-    
-        mutatePlace(params)
- 
-      }
+      setSearchResults(data.slice(0,2));
+      searchResults.map(result => {
+        const {
+          place_id,
+          name,
+          formatted_address,
+          photos,
+          rating,
+          opening_hours,
+          user_ratings_total,
+        } = result;
+        
+        setPlace_Id(place_id);
+        setBusinessName(name);
+        setAddress(formatted_address);
+        setLogo_Id(photos?.[0]?.photo_reference);
+        setRating(rating);
+        set_Is_Open(opening_hours?.open_now);
+        setTotal_Rating(user_ratings_total);
+      
+        const logo_id = photos?.[0]?.photo_reference;
+         
+      
+         
+      });
+      
       
       // console.log('operator plans', data);
       
@@ -193,6 +218,13 @@ useEffect(() => {
       queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH_ALL)
     },
   })
+
+  function getShopReviews(){
+    const params = {
+         place_id: place_Id,
+       };
+       mutatePlace(params);
+ }
 
   console.log('results',searchResults);
   console.log('results placeid',place_Id)
@@ -272,7 +304,7 @@ function openGoogleReview() {
             {
                 showLogoImg && 
 
-                searchResults?.length &&   searchResults?.slice(0,8).map( (result,index) => {
+                searchResults?.length &&   searchResults?.map( (result,index) => {
 
                     // <Link href={`${ROUTES.SHOPS}/${business_name}`}> 
                    return <div key={index} className='flex shadow-300 mx-auto lg:mx-5 rounded space-y-4 flex-col border  w-full    text-center   p-4   '>
@@ -285,10 +317,10 @@ function openGoogleReview() {
                                <div className='flex items-start text-left     mt-4'>
                                 <h4 className='font-semibold     h-full   text-gray-900 text-sm   sm:text-sm lg:text-sm xl:text-md w-full '> 
                                  {result?.name} 
-                               </h4>
-                               <p className={` ${result?.is_open ? 'text-green-700 text-sm font-semibold' : 'text-sm text-red-500 text-semibold'}`}>
-                                {result?.is_open  ? 'open' : 'closed'}
-                               </p>
+                                </h4>
+                                <p className={` ${result?.is_open ? 'text-green-700 text-sm font-semibold' : 'text-sm text-red-500 text-semibold'}`}>
+                                  {result?.is_open  ? 'open' : 'closed'}
+                                </p>
                                </div>
                                
                                 <p onClick={()=>openGoogleReview()} className="flex items-start  text-left">

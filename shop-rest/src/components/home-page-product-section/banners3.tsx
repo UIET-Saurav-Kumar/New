@@ -52,8 +52,9 @@ export default function Banners3() {
             setScreenWidth(window.innerWidth);
         }
         );
-    }, []);
+    }, [screenWidth]);
 
+    
     var settings = {
 
       dots: true,

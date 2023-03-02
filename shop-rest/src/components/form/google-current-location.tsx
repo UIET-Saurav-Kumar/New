@@ -16,9 +16,11 @@ export default function GooglePlacesAutocomplete({
 }: {
   onChange: any;
 }) {
+
   const { t } = useTranslation();
   const [location,setLocation]=useState("");
   const router = useRouter();
+
   useEffect(()=>{
     const { query } = router;
     if(query.text){
@@ -26,6 +28,7 @@ export default function GooglePlacesAutocomplete({
       setLocation(loc.formattedAddress)
     }
   });
+  
   const { isLoaded, loadError } = useJsApiLoader({
     id: "google_map_autocomplete",
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY!,

@@ -44,7 +44,7 @@ export default function PlacePhotos(props:any) {
     handleReviews && handleReviews(review);
     handleTotalRating && handleTotalRating(total_rating);
     handlePhotos && handlePhotos(place_Photos);
-  }, [shopName]);
+  }, [shopName,place_Photos]);
     
 
 
@@ -76,19 +76,19 @@ export default function PlacePhotos(props:any) {
 }, [shopName])
 
 
-// useEffect(() => {
+useEffect(() => {
 
-//     const params = {
-//       place_id: place_Id,
-//     }
+    const params = {
+      place_id: place_Id,
+    }
 
-//     mutatePlace(params)
-//   },[place_Id])
+    mutatePlace(params)
+  },[place_Id])
 
  
   useEffect(() => {
     setPlace_Photos([]);  
-  }, [shopName ])
+  }, [shopName])
 
    
 
@@ -110,7 +110,7 @@ export default function PlacePhotos(props:any) {
     const { data: response } = await http.get(
       `${url}/${API_ENDPOINTS.GOOGLE_MAPS_PLACE_DETAILS}`,{params: data}
     )
-     return response
+     return response 
   }
 
 
@@ -128,14 +128,14 @@ export default function PlacePhotos(props:any) {
   const { mutate: mutatePlace} = useMutation(getplaceDetails, {
     onSuccess: (data) => {
        set_Reviews(data?.result?.reviews);
-      for (let j = 0; data?.result?.photos?.length; j++) {
-        const photo = data?.result?.photos[j]?.photo_reference;
-         const param = {
-          photo_reference : photo
-        }
-        mutatePhoto(param)
-        
-      }
+       data?.result?.photos?.slice(0,5).map((item:any) => {
+        const photo = item?.photo_reference;
+        const param = {
+          photo_reference: photo,
+        };
+        mutatePhoto(param);
+      });
+      
       //  console.log('review place id', data,review)
     },
 

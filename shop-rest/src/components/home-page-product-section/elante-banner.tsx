@@ -22,7 +22,7 @@ export default function ImageSlider() {
             setScreenWidth(window.innerWidth);
         }
         );
-    }, []);
+    }, [screenWidth]);
 
 
     var settings = {

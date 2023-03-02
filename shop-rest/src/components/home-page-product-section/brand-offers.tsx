@@ -53,9 +53,10 @@ export default function BrandOffers() {
             </div>
 
             <div className={`${data?.brand_offers?.data?.data?.length  ? 'block' : 'hidden'} relative grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 2xl:grid-cols-5 3xl:grid-cols-6 bg-gray-100 p-4 gap-2`}>
-                 {data?.brand_offers.data?.data?.filter((product:any) => product?.status === 'publish' 
-                 || product?.is_featured === 1 
-                 || product?.is_offer == 1
+                 {data?.brand_offers.data?.data?.filter((product:any) => product?.status === 'publish' &&
+                 ( product?.is_featured === 1 
+                   || product?.is_offer == 1 
+                 )
                  )
                     .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
                     // .slice(0, 30)

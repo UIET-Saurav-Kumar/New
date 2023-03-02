@@ -229,10 +229,10 @@ export default function PromotionSlider(props:any) {
                      {(shop?.address?.city)}
                     </p>
                     <span className={` ${shopName == shop?.name ? 'flex' : 'hidden'}   flex-col space-y-2`}>
-                      {/* <p onClick={()=>handleShopImages(true)} 
+                      <p onClick={()=>handleShopImages(true)} 
                        className="cursor-pointer text-blue-600 active:text-blue-800 ">
                         View Images
-                        </p> */}
+                        </p>
                         <p className="cursor-pointer text-red-700 active:text-red-900">
                         <Link href={`/shops/${shop.slug}`} as={`/shops/${shop.slug}`}>
                             <a target="_blank" rel="noopener noreferrer">Visit Salon</a>

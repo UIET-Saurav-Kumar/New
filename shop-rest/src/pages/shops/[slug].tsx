@@ -87,9 +87,6 @@ const ShopPage = ({ data }: any) => {
 
   const [rating, setRating] = useState('');
 
-  
-
-
   function openReviewModal() {
     openModal('REVIEW_RATING', {
       shop_id: data.id,
@@ -100,8 +97,6 @@ const ShopPage = ({ data }: any) => {
   }
 
   console.log('shop data',data)
-
-   
 
 
   console.log('utm', query.utm_campaign);
@@ -458,7 +453,7 @@ function handleTotalRating(data) {
                             <div className={` sticky ${ scrollDirection === "down" ? "-top-32" : "top-0"}   transition-all duration-300 sticky z-30 bg-white top-0`}>                                              
                                 <CategoryDropdownSidebar data={data} />
                             </div>
-                            {/* <div className="">
+                            <div className="">
                               <div className={`flex  gap-3 w-full px-2 overflow-x-scroll`}>
                                     <PlacePhotos handleImage={handleImage}  
                                                showImages = {true}
@@ -471,7 +466,7 @@ function handleTotalRating(data) {
                                                handleReviews={handleReviews} />
                                      
                               </div>
-                            </div> */}
+                            </div>
                           </div>
                           {/* </HidingHeader>  */}
 
