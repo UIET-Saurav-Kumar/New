@@ -166,7 +166,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
             )}
 
             {description && (
-              <div className="mt-3 md:mt-4 text-body text-sm leading-7">
+              <div className="mt-3 md:mt-4 text-body text-sm whitespace-pre leading-7">
                 <Truncate character={450} onClick={scrollDetails}>
                   {description}
                 </Truncate>
