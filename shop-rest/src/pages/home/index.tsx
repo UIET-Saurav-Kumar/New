@@ -257,7 +257,7 @@ useIntersectionObserver({
                 <OfferOfTheDay/>
                 <Banners3/>
                 <BrandOffers/>
-                <HomePageBanner />
+                {/* <HomePageBanner /> */}
                  
                 <FeaturedProducts/>
                 

@@ -203,13 +203,13 @@ export default function PromotionSlider(props:any) {
         > */}
           {shopData?.pages?.map((page, idx) => {
               return (
-                <div className='w-full grid grid-cols-3 lg:grid-cols-6' key={idx}>
+                <div className='w-full h-full grid grid-cols-3 lg:grid-cols-6' key={idx}>
                   {page?.data?.filter((shop) =>  shop?.is_active === 1 && shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").
                replace("name", "").replace("id", "") === "Salon  Spa" ).map((shop: any) => (
             // <SwiperSlide key={shop}>
-            <div className="relative " >
+            <div className="relative h-full " >
               {/* <Link href={`${ROUTES.SHOPS}/${shop.slug}`}> */}
-                <div   className={` ${shop?.name === shopName ? '' : '' }  border py-1 w-34 sm:w-54 md:w-54 lg:w-38 xl:w-60 rounded hover:border-gray-400 cursor-pointer border-gray-100 flex hover:shadow-lg flex-col items-center `}>
+                <div   className={` ${shop?.name === shopName ? '' : '' }  border py-1 w-34 sm:w-54 md:w-54 lg:w-38 xl:w-60 h-full rounded hover:border-gray-400 cursor-pointer border-gray-100 flex hover:shadow-lg flex-col items-center `}>
                   
                   <CheckMarkFill width={30} className={` ${shop?.name === shopName? 'block' : 'hidden'} absolute z-40 right-0 md:right-10 top-0 me-2 bg-white rounded-full text-green-600`} />
                   <img onClick={()=>handleSelect(shop)}
@@ -224,15 +224,15 @@ export default function PromotionSlider(props:any) {
                     {/* {shop?.name?.includes(shop?.settings?.location?.sector) ? '' : shop?.settings?.location?.sector} */}
                        {shop?.address?.sector}
                     </p>
-                    <p className ="text-xs h-10 text-center font-light">
+                    <p className ="text-xs h-10 text-center font-semibold text-gray-800 tracking-widest">
                     {/* {shop?.name?.includes(shop?.settings?.location?.city) ? '' : shop?.settings?.location?.city} */}
                      {(shop?.address?.city)}
                     </p>
                     <span className={` ${shopName == shop?.name ? 'flex' : 'hidden'}   flex-col space-y-2`}>
-                      <p onClick={()=>handleShopImages(true)} 
+                      {/* <p onClick={()=>handleShopImages(true)} 
                        className="cursor-pointer text-blue-600 active:text-blue-800 ">
                         View Images
-                        </p>
+                        </p> */}
                         <p className="cursor-pointer text-red-700 active:text-red-900">
                         <Link href={`/shops/${shop.slug}`} as={`/shops/${shop.slug}`}>
                             <a target="_blank" rel="noopener noreferrer">Visit Salon</a>

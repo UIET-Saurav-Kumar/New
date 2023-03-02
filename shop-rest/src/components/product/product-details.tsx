@@ -84,7 +84,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
     });
   };
 
- const min = 3.5;
+ const min = 4.3;
  const max = 5;
  const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
  
@@ -152,10 +152,9 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
             <div className="">
               <WishlistButton product={product} productId={product?.id}/>
             
-                <div className="inline-flex shrink-0 mt-2 text-white items-center rounded border border-accent bg-white text-black px-3 py-1 text-sm ">
+                {/* <div className="inline-flex shrink-0 mt-2 text-white items-center rounded border border-accent bg-white text-black px-3 py-1 text-sm ">
                  {randomNum} {ratingStars(randomNum)}
-                  {/* <StarIcon className="h-5 w-5 ltr:ml-1 rtl:mr-1" /> */}
-                </div>
+                 </div> */}
              
             </div>
           </div>

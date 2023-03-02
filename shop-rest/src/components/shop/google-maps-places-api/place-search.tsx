@@ -272,7 +272,7 @@ function openGoogleReview() {
             {
                 showLogoImg && 
 
-                    searchResults?.slice(0,8).map( (result,index) => {
+                searchResults?.length &&   searchResults?.slice(0,8).map( (result,index) => {
 
                     // <Link href={`${ROUTES.SHOPS}/${business_name}`}> 
                    return <div key={index} className='flex shadow-300 mx-auto lg:mx-5 rounded space-y-4 flex-col border  w-full    text-center   p-4   '>

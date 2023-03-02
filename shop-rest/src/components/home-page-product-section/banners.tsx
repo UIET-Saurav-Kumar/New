@@ -113,7 +113,7 @@ export default function Banners() {
            }
 
 
-          {location() && <Link href='/shops?text=barista'>
+          {location() && <Link href='/shops?text=barista&text_type=shop&avail='>
             <div className=" px-1">
 
                {/* < Image        quality='40' 

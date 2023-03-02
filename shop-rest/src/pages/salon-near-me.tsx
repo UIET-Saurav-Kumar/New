@@ -65,6 +65,7 @@ import { GetStaticPathsContext, GetStaticProps } from "next";
 import { dehydrate, QueryClient } from "react-query";
 import { fetchSettings } from '@data/settings/use-settings.query';
 import url from "@utils/api/server_url";
+import PlacePhotos from '@components/shop/google-maps-places-api/place-photos';
 
 
 
@@ -405,11 +406,11 @@ import url from "@utils/api/server_url";
             setOpen(!open)
           }
 
-          useEffect(()=>{
-            shopImages &&  images?.current.scrollIntoView({
-              behaviour: 'auto'
-            })
-          },[shopImages])
+          // useEffect(()=>{
+          //   shopImages &&  images?.current.scrollIntoView({
+          //     behaviour: 'auto'
+          //   })
+          // },[shopImages])
 
          
          
@@ -620,16 +621,20 @@ import url from "@utils/api/server_url";
                <PromotionSlider handleShopImages = {handleShopImages}  selectedShop = {handleSelectedShop} 
                                 offer = {offerName} />
 
-                             <div ref={images} className={`${shopImages ? 'flex' : 'hidden'}  gap-3 w-full px-2 overflow-x-scroll`}>
-                                { shopImages  && <PlacesApi 
-                                show={true}
-                                onClick={handleImage}
+                             {/* <div ref={images} className={`${shopImages ? 'flex' : 'hidden'}  gap-3 w-full px-2 overflow-x-scroll`}>
+                                { shopImages  && 
+                                <PlacePhotos
+                                  showRating={true}
+                                  showImages = {true}
+                                  showLogoImg = {false}
+                                  onClick={handleImage}
                                   handleImage={handleImage}
-                                  //@ts-ignore
-                                  shopName={selectedSalon?.name} 
-                                // handlePhotos={handleApiPhotos}
-                                  /> }
-                             </div>
+                                    //@ts-ignore
+                                    shopName={selectedSalon?.name} 
+                                  // handlePhotos={handleApiPhotos}
+                                /> 
+                                }
+                             </div> */}
             
         </div>
 

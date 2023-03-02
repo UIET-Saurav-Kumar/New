@@ -11,7 +11,7 @@ export default function PlacePhotos(props:any) {
 
   const queryClient = useQueryClient();
 
-  const {shopName, handleApiPhotos, show, showImages,handleBusinessName,handleLogoImg, showLogoImg, handlePhotos, handleImage, handleTotalRating, data, handleReviews, handleOpen, handleRating} = props;
+  const {shopName, handleApiPhotos, showRating , showImages,handleBusinessName,handleLogoImg, showLogoImg, handlePhotos, handleImage, handleTotalRating, data, handleReviews, handleOpen, handleRating} = props;
 
   const [place_Id, setPlace_Id] = useState([]);
 
@@ -43,14 +43,15 @@ export default function PlacePhotos(props:any) {
     handleOpen && handleOpen(is_open);
     handleReviews && handleReviews(review);
     handleTotalRating && handleTotalRating(total_rating);
+    handlePhotos && handlePhotos(place_Photos);
   }, [shopName]);
     
 
 
-  useEffect(()=>{
-    handlePhotos && handlePhotos(place_Photos);
+  // useEffect(()=>{
+  //   handlePhotos && handlePhotos(place_Photos);
 
-  },[place_Photos])
+  // },[place_Photos])
 
   // console.log('search data details logo',business_logo)
 
@@ -75,14 +76,14 @@ export default function PlacePhotos(props:any) {
 }, [shopName])
 
 
-useEffect(() => {
+// useEffect(() => {
 
-    const params = {
-      place_id: place_Id,
-    }
+//     const params = {
+//       place_id: place_Id,
+//     }
 
-    mutatePlace(params)
-  },[place_Id])
+//     mutatePlace(params)
+//   },[place_Id])
 
  
   useEffect(() => {
@@ -210,7 +211,7 @@ function openImageModal(){
   return (
 
         <div className={` ${showImages || showLogoImg ? 'flex flex-col mt-2' : 'hidden'}  `}> 
-            <p className={` ${show ? 'block' : 'hidden'}`}>
+            <p className={` ${showRating  ? 'block' : 'hidden'}`}>
               {rating && (rating + ' '+ratingStars(rating))}
             </p>
             <div className='flex  gap-3 w-full px-2 overflow-x-scroll'>
