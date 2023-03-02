@@ -196,16 +196,16 @@ const ShopCard2: React.FC<ShopCardProps> = ({ type,shop,text,key,category, shopI
 
 
         : type == 'shop' || type == 'Category' || type == 'Shop_Category'? 
-        <div className='flex shadow-300 rounded flex-col space-y-1  border     text-center   p-4   '>
+        <div className='flex shadow-300 rounded flex-col space-y-1  border  w-full   text-center   p-4   '>
 
-              <div className="flex justify-between w-full items-center "> 
+              <div className="flex justify-between w-full items-center  "> 
                 <span className="flex flex-col items-center"> 
                 {imageCheck(shop?.logo?.thumbnail, shop, '10', false,'  h-44 w-screen  object-fit')}
-                   <h4 className='font-semibold  lg:mx-3 mt-2 h-16 lg:h-16 text-gray-900 text-xs sm:text-sm lg:text-sm xl:text-sm w-full '> 
+                   <h4 className='font-semibold  lg:mx-3 mt-2 h-16 lg:h-16 text-gray-900 text-sm sm:text-sm lg:text-sm xl:text-sm w-full '> 
                      {shop?.name} 
                    </h4>
                    
-                    <p className="flex items-center">
+                    <p className="flex items-center w-full">
                     {/* <span className="text-gray-700 font-light">
                       {rating}
                     </span> */}
@@ -218,15 +218,15 @@ const ShopCard2: React.FC<ShopCardProps> = ({ type,shop,text,key,category, shopI
                 {/* <h4 className='text-green-600 text-xs font-semibold'> Open </h4> */}
               </div>
  
-              <div className=' flex items-start'> 
+              <div className=' flex items-start w-full'> 
               <MapPin className="w-3.5 h-3.5 me-1 text-green-600  flex-shrink-0" />
-                   <span className="flex flex-col">
-                     <h5 className='text-xs h-full text-left lg:h-16 text-gray-700 flex'>
+                   <span className="flex flex-col text-center w-full">
+                     <h5 className='text-xs sm:text-sm h-full text-left  lg:h-16 text-gray-700 flex'>
                       
                       {shop?.address?.sector?.length ? shop?.address?.sector : shop?.address?.street_address }  
                       
                     </h5>
-                    <p className="text-sm lg:text-sm text-gray-800 font-sans">
+                    <p className="text-xs lg:text-sm text-gray-700 mt-2 font-md lg:font-semibold tracking-wide text-center">
                       {shop?.address?.city  }
                     </p>
                     </span>
