@@ -33,15 +33,15 @@ export default function BrandOffers() {
         location : ((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any
     });
 
-    console.log('brand_offers', data?.brand_offers.data?.data?.filter((product:any) => product?.status === 'publish'));
+    console.log('brand_offers', data?.brand_offers?.data?.data?.filter((product:any) => product?.status === 'publish'));
 
-    // console.log('filter brand offers', data?.brand_offers?.data?.data?.map(item => item.shop.name))
+    console.log('filter brand offers', data?.brand_offers?.data?.data)
 
  
     return (
 
         <>
-            <div id='brand-offer' className={`${data?.brand_offers?.data?.data?.length  ? 'block' : 'hidden'} flex flex-col  border-b rounded-t shadow-lg  p-4 `}>
+            <div id='brand-offer' className={`${data?.brand_offers?.data?.data?.length  ? 'hidden flex flex-col  border-b rounded-t shadow-lg  p-4 ' : 'hidden'}  `}>
                 <div className='flex justify-between items-center'>
                     <h3 className='text-lg sm:text-lg md:text-lg xl:text-2xl  font-semibold'> 
                         In store offers
