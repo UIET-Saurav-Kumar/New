@@ -265,16 +265,15 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
         </div>
       </div>
 
-      <Element
+      {/* <Element
         name="details"
         className="py-4 px-5 lg:px-16 lg:py-14 border-b border-border-200 border-opacity-70"
       >
         <h2 className="text-lg text-heading tracking-tight   font-semibold mb-4 md:mb-6">
-          {/* {t("text-details")} */}
-          Description
+           Description
         </h2>
         <p className="text-sm lg:text-lg whitespace-pre-line text-body">{description}</p>
-      </Element>
+      </Element> */}
     </article>
   );
 };

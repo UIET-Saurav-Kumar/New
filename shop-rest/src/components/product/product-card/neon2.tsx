@@ -198,19 +198,23 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
             )}
           </>
         ) : (
-          <>
+          <div className="flex items-center justify-between">
             {Number(quantity) > 0 && (
-              <div className="flex  items-start  justify-between md:pt-3 ">
-              <AddToCart  variant="single" data={product} />
-             { product?.id ===  (14358 || 14110) ? containsProduct(ordersData?.pages?.[0].data, product?.id) ?
-              // <span className='text-xs mt-2   lg:text-sm text-red-600'>
-               
-                    <span className="text-xs mt-2 lg:text-sm font-bold shadow-2xl bg-red-600 p-1 rounded px-1 text-white">Sold out</span>
-                // </span>
-              : null : ''}
-           </div>
+            <div className="flex  items-start  justify-between md:pt-3 ">
+                <AddToCart  variant="single" data={product} />
+                
+              { product?.id ===  (14358 || 14110) ? containsProduct(ordersData?.pages?.[0].data, product?.id) ?
+                 
+                <span className="text-xs mt-2 lg:text-sm font-bold shadow-2xl bg-red-600 p-1 rounded px-1 text-white">
+                  Sold out
+                </span>
+                 : null : '' }
+            </div>
             )}
-          </>
+            <button className="text-blue-800 border rounded-2xl p-2 px-3 text-sm lg:mt-3">
+              Details
+            </button>
+          </div>
         )}
 
         {Number(quantity) <= 0 && (

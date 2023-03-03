@@ -7,6 +7,7 @@ import { useModalAction } from '@components/ui/modal/modal.context';
 import { MapPin } from '@components/icons/map-pin';
 import { ROUTES } from '@utils/routes';
 import Link from 'next/link';
+import Spinner from '@components/ui/loaders/spinner/spinner';
 
 export default function PlaceSearch(props:any) {
 
@@ -75,15 +76,7 @@ export default function PlaceSearch(props:any) {
 
 }, [shopName])
 
-useEffect(()=>{
-  setPlace_Id('');
-  setBusinessName('');
-  setAddress('');
-  setLogo_Id('');
-  setRating('');
-  set_Is_Open('');
-  setTotal_Rating('');
-},[business_name])
+ 
 
  
 
@@ -98,14 +91,15 @@ useEffect(()=>{
 
    
 
-  // useEffect(() => {
+  useEffect(() => {
 
-  //   const param = {
-  //     photo_reference : logo_id
-  //   }
-  //   mutateLogoImage(param)
+    const param = {
+      photo_reference : logo_id,
+      place_id: place_Id
+    }
+    mutateLogoImage(param)
 
-  // },[logo_id])
+  },[logo_id])
 
   console.log('logo id',logo_id)
 
@@ -120,12 +114,10 @@ useEffect(()=>{
   }, [shopName,logo_id])
 
 
-  // console.log('search data',place_Id,rating,is_open, business_logo)
-
+ 
 
   const getSearchDetails = async (data: any) => {
-    // console.log('search data details',data)
-    const { data: response } = await http.get(
+     const { data: response } = await http.get(
       `${url}/${API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH_ALL}`,{params: data}
     )
   
@@ -134,8 +126,7 @@ useEffect(()=>{
 
 
   const getplaceDetails = async (data: any) => {
-    // console.log('search data details',data)
-    const { data: response } = await http.get(
+     const { data: response } = await http.get(
       `${url}/${API_ENDPOINTS.GOOGLE_MAPS_PLACE_DETAILS}`,{params: data}
     )
      return response
@@ -143,29 +134,39 @@ useEffect(()=>{
 
 
   const getplacePhoto = async (data: any) => {
-    // console.log('search data',data)
+    const { place_id, photo_reference } = data;
     const { data: response } = await http.get(
-      `${url}/${API_ENDPOINTS.GOOGLE_MAPS_PLACE_PHOTOS}`,{params: data}
-    )
-    // console.log('logo id',response)
-    return response
-  }
+      `${url}/${API_ENDPOINTS.GOOGLE_MAPS_PLACE_PHOTOS}`,
+      { params: { photo_reference } }
+    );
+    return { place_id, url: response };
+  };
+  
 
   
 
-  const { mutate: mutatePlace} = useMutation(getplaceDetails, {
+  const { mutate: mutatePlace } = useMutation(getplaceDetails, {
     onSuccess: (data) => {
-       set_Reviews(data?.result?.reviews);
-      //  console.log('review place id', data,review)
+      const reviews = data?.result?.reviews || [];
+      setSearchResults(prevResults => {
+        return prevResults.map(result => {
+          if (result.place_id === data?.result?.place_id) {
+            return {
+              ...result,
+              reviews
+            };
+          }
+          return result;
+        });
+      });
     },
-
     onError: (data) => {
-      // console.log(data?.message)
+      console.log(data?.message);
     },
     onSettled: () => {
       queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_PLACE_DETAILS)
     },
-  })
+  });
 
   // console.log('review',review);
 
@@ -174,6 +175,8 @@ useEffect(()=>{
       photo_reference: logo_id,
     };
     mutateLogoImage(param);
+
+    return <img src='' className=''/>
   }
 
 
@@ -181,8 +184,7 @@ useEffect(()=>{
 
   const { mutate: mutateSearch } = useMutation(getSearchDetails, {
     onSuccess: (data) => {
-      setSearchResults(data.slice(0,2));
-      searchResults.map(result => {
+      setSearchResults(data?.slice(0, 8)?.map(result => {
         const {
           place_id,
           name,
@@ -192,7 +194,7 @@ useEffect(()=>{
           opening_hours,
           user_ratings_total,
         } = result;
-        
+  
         setPlace_Id(place_id);
         setBusinessName(name);
         setAddress(formatted_address);
@@ -200,24 +202,31 @@ useEffect(()=>{
         setRating(rating);
         set_Is_Open(opening_hours?.open_now);
         setTotal_Rating(user_ratings_total);
-      
+  
         const logo_id = photos?.[0]?.photo_reference;
-         
-      
-         
-      });
-      
-      
-      // console.log('operator plans', data);
-      
-    },     
+        logo_id && mutateLogoImage({ photo_reference: logo_id,place_id: place_Id });
+  
+        place_id && mutatePlace({ place_id });
+  
+        return {
+          place_id,
+          name,
+          formatted_address,
+          rating,
+          reviews: [],
+          photo_url: null,
+          opening_hours,
+          user_ratings_total
+        };
+      }));
+    },
     onError: (data) => {
-      // console.log(data?.message);
+      console.log(data?.message);
     },
     onSettled: () => {
       queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH_ALL)
     },
-  })
+  });
 
   function getShopReviews(){
     const params = {
@@ -229,41 +238,37 @@ useEffect(()=>{
   console.log('results',searchResults);
   console.log('results placeid',place_Id)
 
-//   const { mutate: mutatePhoto } =  useMutation(showImages &&  getplacePhoto, {
-//     onSuccess: (response) => {
-//       setPlace_Photos(prevState => [...prevState, response])
-//     },
-//     onError: (data) => {
-//       // console.log(data?.message)
-//     },
 
-//     onSettled: () => {
-//       queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_PLACE_PHOTOS)
-//     },
- 
-// });
 
-const { mutate: mutateLogoImage } =  useMutation(showLogoImg &&  getplacePhoto, {
-  onSuccess: (response:any) => {
-    setBusinessLogo(response)
-    
-  },
-  onError: (data:any) => {
-    console.log(data?.message)
-  },
-
-  onSettled: () => {
-    queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_PLACE_PHOTOS)
-  },
-
-});
+  const { mutate: mutateLogoImage } = useMutation(getplacePhoto, {
+    onSuccess: (response) => {
+      console?.log('searchresults response',response)
+      setSearchResults(prevResults => {
+        console.log('searchresults prevResults',prevResults)
+        return prevResults.map(result => {
+          if (result.place_id === response?.place_id) {
+            return {
+              ...result,
+              photo_url: response?.url
+            };
+          }
+          return result;
+        });
+      });
+    },
+    onError: (data) => {
+      console.log(data?.message);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_PLACE_PHOTOS)
+    },
+  });
 
 function openImageModal(){
     handleImage(place_Photos)
   }
 
-  // console.log('placePhotos',review)
-
+ 
   function ratingStars(rating:any) {
     let stars = "";
     if (rating >= 4.5) {
@@ -279,17 +284,20 @@ function openImageModal(){
     return stars;
 }
 
-function openGoogleReview() {
+function openGoogleReview(data) {
   openModal('GOOGLE_REVIEWS'
   , {
-    review: review
+    review: data
   }
   );
 }
 
+console.log('searchresults',searchResults)
+
  
   return (
-
+        <> 
+       { !searchResults?.length ? <Spinner/> :
         <div className={` ${showImages || showLogoImg ? 'grid grid-cols-2 lg:grid-cols-5 gap-2 mt-2' : 'hidden'}  `}> 
           <p className={` ${show ? 'block' : 'hidden'}`}>{rating && (rating + ' '+ratingStars(rating))}</p>
             {/* <div className='flex  gap-3 w-full px-2 overflow-x-scroll'>
@@ -304,7 +312,7 @@ function openGoogleReview() {
             {
                 showLogoImg && 
 
-                searchResults?.length &&   searchResults?.map( (result,index) => {
+                searchResults?.length && searchResults?.map( (result,index) => {
 
                     // <Link href={`${ROUTES.SHOPS}/${business_name}`}> 
                    return <div key={index} className='flex shadow-300 mx-auto lg:mx-5 rounded space-y-4 flex-col border  w-full    text-center   p-4   '>
@@ -312,21 +320,21 @@ function openGoogleReview() {
                           <div className="flex justify-between w-full items-center "> 
                             <div className="flex flex-col space-y-4 "> 
                             <img 
-                              src={business_logo?.url+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
+                              src={result?.photo_url?.url+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
                               className="h-60 rounded w-60 object-cover " /> 
                                <div className='flex items-start text-left     mt-4'>
                                 <h4 className='font-semibold     h-full   text-gray-900 text-sm   sm:text-sm lg:text-sm xl:text-md w-full '> 
                                  {result?.name} 
                                 </h4>
-                                <p className={` ${result?.is_open ? 'text-green-700 text-sm font-semibold' : 'text-sm text-red-500 text-semibold'}`}>
-                                  {result?.is_open  ? 'open' : 'closed'}
+                                <p className={` ${result?.opening_hours?.open_now ? 'text-green-700 text-sm font-semibold' : 'text-sm text-red-500 text-semibold'}`}>
+                                  {result?.opening_hours?.open_now  ? 'open' : 'closed'}
                                 </p>
                                </div>
                                
-                                <p onClick={()=>openGoogleReview()} className="flex items-start  text-left">
-                                <span className="text-gray-500 mr-2 font-semibold">
+                                <p onClick={()=>openGoogleReview(result?.reviews)} className="flex items-start cursor-pointer text-left">
+                                 <span className="text-gray-500 mr-2 font-semibold">
                                   {result?.rating}
-                                </span>
+                                 </span>
                                 {ratingStars(result?.rating)}
                                </p>
                                 
@@ -349,6 +357,8 @@ function openGoogleReview() {
                            
                         }
         </div>
+}
+</>
 
   )
 }
