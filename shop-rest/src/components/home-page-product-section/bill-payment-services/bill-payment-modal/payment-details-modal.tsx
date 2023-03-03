@@ -15,7 +15,7 @@ export default function PaymentDetailsModal({data}:any) {
             <div className='flex items-start  justify-between'>
                 <div className='text-sm space-y-2'>
                     <h2 className='font-semibold text-lg'>1 Bill found</h2>
-                    {data?.para.map((p:any)=>
+                    {data?.para?.map((p:any)=>
                         <p className='font-light text-gray-600'><span>{p?.key1} - </span>{p?.para1}</p>
                     )}
                     <p className='font-light text-xs text-gray-600'>{data?.operator}</p>

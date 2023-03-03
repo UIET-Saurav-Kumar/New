@@ -23,6 +23,8 @@ const ProductDetailsModalView = dynamic(
   () => import("@components/product/product-details-modal-view")
 );
 
+const ProductDescriptionModal = dynamic(()=> import('@components/product/product-card/product-description-modal'))
+
 
 const UpiPaymentForm  = dynamic(() => import("@components/upi-scanner/upi-payment-form"));
 
@@ -127,6 +129,8 @@ const ManagedModal = () => {
       {view === 'RECHARGE_PLAN_DETAILS' && <RechargePlanDetails data={data} close={closeModal}/> }
 
       {view === 'BILL_PAYMENT_DETAILS' && <PaymentDetailsModal data={data} />}
+
+      {view == 'PRODUCT_DESCRIPTION' && <ProductDescriptionModal data={data}/> }
        
       {view === "SHOP_INFO" && (
         <ShopProfileCard

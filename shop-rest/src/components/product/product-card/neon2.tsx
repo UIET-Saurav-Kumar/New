@@ -211,7 +211,7 @@ const Neon2: React.FC<NeonProps> = ({ product, className, productSlug }) => {
                  : null : '' }
             </div>
             )}
-            <button className="text-blue-800 border rounded-2xl p-2 px-3 text-sm lg:mt-3">
+            <button onClick={()=>openModal('PRODUCT_DESCRIPTION',product?.description)} className="text-blue-800 border rounded-2xl p-2 px-3 text-sm lg:mt-3">
               Details
             </button>
           </div>
