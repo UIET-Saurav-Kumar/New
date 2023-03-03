@@ -33,7 +33,7 @@ const AllCategories = () => {
 
 	function getLink(category:String){
 
-		var pathname="/"+router.locale+"/shops?category="+category.replace("&","-");
+		var pathname="/"+router.locale+"/shops?category="+category.replace("&","-")+'&text_type=shop';
 
 		return pathname;
 		
@@ -42,7 +42,7 @@ const AllCategories = () => {
 
 	function getLinkGrocery(){
 
-		var pathname="/shops?text=Groceries";
+		var pathname="/shops?text=Groceries&text_type=shop";
 		
 		return pathname;
 		
@@ -73,7 +73,7 @@ const AllCategories = () => {
                         2xl:grid-cols-5 mt-0  h-full gap-2 lg:gap-6 p-4  bg-gray-100'>
 
     
-			{data?.categories?.data.filter((cat)=>cat?.image?.length !=0 ).map( (category,_idx) => (
+			{data?.categories?.data?.filter((cat)=>cat?.image?.length !=0 ).map( (category,_idx) => (
 				
 					<Link className="categories-link" 
 						key={_idx} href={category?.name === 'Groceries' && location() ?  getLinkGrocery()    : category?.name === 'Salon & Spa' && location() ? getLinkSalonSpa() :  getLink(category.name)}>
