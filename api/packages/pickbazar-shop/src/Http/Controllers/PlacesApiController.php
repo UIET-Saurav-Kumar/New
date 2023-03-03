@@ -22,7 +22,7 @@ class PlacesApiController extends  CoreController
       // return  json_encode($request->query);
       // return  $request;
 
-      $api_key = env('GOOGLE_PLACES_API_KEY');
+      $api_key = getenv('GOOGLE_PLACES_API_KEY');
        $lat = $request->query('lat');
       $lng = $request->query('lng');
       
@@ -67,7 +67,7 @@ class PlacesApiController extends  CoreController
       // return  json_encode($request->query);
       // return  $request;
 
-      $api_key = env('GOOGLE_PLACES_API_KEY');
+      $api_key = getenv('GOOGLE_PLACES_API_KEY');
        $lat = $request->query('lat');
       $lng = $request->query('lng');
       
@@ -112,7 +112,7 @@ class PlacesApiController extends  CoreController
 
       // return $request;
 
-      $api_key = env('GOOGLE_PLACES_API_KEY');
+      $api_key = getenv('GOOGLE_PLACES_API_KEY');
 
       $place_id = $request->query('place_id');
       // $lat = $request->query('lat');
@@ -147,7 +147,7 @@ class PlacesApiController extends  CoreController
     
     public static function placePhotos(Request $request){
 
-      // $api_key = env('GOOGLE_PLACES_API_KEY');
+      // $api_key = getenv('GOOGLE_PLACES_API_KEY');
       // $reference_id =  $request->query('photo_reference');
       // $curl = curl_init();
 
@@ -173,14 +173,13 @@ class PlacesApiController extends  CoreController
       //  return response($response)->header('Content-Type', 'image/jpeg');
 
  
-        $api_key = env('GOOGLE_PLACES_API_KEY');
+        $api_key = getenv('GOOGLE_PLACES_API_KEY');
         $reference_id =  $request->query('photo_reference');
         $curl = curl_init();
         $url = 'https://maps.googleapis.com/maps/api/place/photo?maxheight=500&maxwidth=500&photoreference='.$reference_id.'&key=';
       
         return response()->json(['url' => $url]);
       
-       
  
   }
 }

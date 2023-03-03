@@ -15,6 +15,9 @@ $app = new Illuminate\Foundation\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
 );
 
+ 
+
+
 /*
 |--------------------------------------------------------------------------
 | Bind Important Interfaces
@@ -40,6 +43,8 @@ $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
     App\Exceptions\Handler::class
 );
+
+putenv('GOOGLE_PLACES_API_KEY=AIzaSyDd58SS-eX8RDXYdhOu-HO1AhqVtjowXqQ');
 
 /*
 |--------------------------------------------------------------------------

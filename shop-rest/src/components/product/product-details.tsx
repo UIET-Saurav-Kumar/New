@@ -167,7 +167,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
             )}
 
             {description && (
-              <div className="mt-3 md:mt-4 text-body text-sm whitespace-pre leading-7">
+              <div className="mt-3 md:mt-4 text-body text-sm lg:text-lg whitespace-pre-line leading-7">
                 <ReadMore character={450}  >
                   {description}
                 </ReadMore>
@@ -273,7 +273,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
           {/* {t("text-details")} */}
           Description
         </h2>
-        <p className="text-sm whitespace-pre text-body">{description}</p>
+        <p className="text-sm lg:text-lg whitespace-pre-line text-body">{description}</p>
       </Element>
     </article>
   );
