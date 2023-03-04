@@ -118,7 +118,7 @@ import PlacePhotos from '@components/shop/google-maps-places-api/place-photos';
       }
 
 
-  export default function SalonBookingPage({all_data}:any) {
+  export default function Deals({all_data}:any) {
     // console.log('allData',all_data)
     const {width} = useWindowDimensions();
 
@@ -195,10 +195,12 @@ import PlacePhotos from '@components/shop/google-maps-places-api/place-photos';
   } = useFeatureProductQuery({
        limit: 10 as number,
       search:"",
-       type_id: 7,
+    //    type_id: 2,
        //@ts-ignore
       location : ((getLocation?.formattedAddress) ? JSON.stringify(getLocation) : null ) as any
   });
+
+  console.log('feature',data)
 
 
         const currentDate =   value;
@@ -452,10 +454,11 @@ import PlacePhotos from '@components/shop/google-maps-places-api/place-photos';
 
     const filteredData = data?.featureProducts?.data?.filter(product =>
       product?.status === "publish" &&
-      product?.type_id == 7 &&
-      product?.is_featured === 1 &&
-      product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").
-      replace("name", "").replace("id", "") === "Salon  Spa"
+      product?.type_id == 8 || product?.type_id == 29  &&
+      product?.is_featured === 1 
+    //   &&
+    //   product?.shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").
+    //   replace("name", "").replace("id", "") === "Resturant  Takeaway"
     );
       
      //@ts-ignore
@@ -463,7 +466,7 @@ import PlacePhotos from '@components/shop/google-maps-places-api/place-photos';
 
     filteredData?.forEach(product => {
       //@ts-ignore
-      if (!uniqueProducts?.find(p => p.name === product.name  && p?.sale_price == product?.sale_price )) {
+      if (!uniqueProducts?.find(p => p.name === product.name && p?.sale_price == product?.sale_price )) {
         uniqueProducts.push(product);
       }
     });
@@ -511,7 +514,7 @@ import PlacePhotos from '@components/shop/google-maps-places-api/place-photos';
       </p>
 
           <span ref={offers} onClick={()=> setOpen(!open)} className=' cursor-pointer mx-auto rounded-md p-1 flex items-center space-x-2 text-center text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 font-medium text-xl lg:text-2xl text-gray-900 font-serif ml-2 lg:ml- mt-10 lg:mt-10 tracking-normal'>
-            <h3 className='text-gray-900 text-xl lg:text-2xl font-semibold font-serif  text-center lg:text-left'>Select Deals to Explore Salons</h3> 
+            <h3 className='text-gray-900 text-xl lg:text-2xl font-semibold font-serif  text-center lg:text-left'>Select Deals to Explore Restraunts</h3> 
             <span > {open ? <MinusIcon className='h-6 w-6  border-gray-400 text-green-600 border-2 rounded-full' /> : <  PlusIcon className='rounded-full border-2 h-6 w-6  border-gray-400 text-green-600' />}</span>
           </span>
 
@@ -609,7 +612,7 @@ import PlacePhotos from '@components/shop/google-maps-places-api/place-photos';
           </div>
 
             <h4 className='text-xl flex text-center mx-auto lg:mx-0 lg:text-left pl-none lg:pl-6  lg:text-2xl font-serif text-gray-900 font-medium  py-4 tracking-normal'>
-                Please Select Salon Name
+                Please Select Restraunt
                 {/* <Link href='/shops?category=Salon+-+Spa'>
                     <span className='text-blue-800 cursor-pointer hover-underline text-sm '>
                         view all
@@ -619,7 +622,7 @@ import PlacePhotos from '@components/shop/google-maps-places-api/place-photos';
             
 
                <PromotionSlider handleShopImages = {handleShopImages}  selectedShop = {handleSelectedShop} 
-                              shopCategory={"Salon  Spa"}   offer = {offerName} />
+                                shopCategory={"Restraunts"}  offer = {offerName} />
 
                              <div ref={images} className={`${shopImages ? 'flex' : 'hidden'}  gap-3 w-full px-2 overflow-x-scroll`}>
                                 { shopImages  && 
@@ -629,8 +632,8 @@ import PlacePhotos from '@components/shop/google-maps-places-api/place-photos';
                                   showLogoImg = {false}
                                   onClick={handleImage}
                                   handleImage={handleImage}
-                                    //@ts-ignore
-                                    shopName={selectedSalon?.name} 
+                                  //@ts-ignore
+                                  shopName={selectedSalon?.name} 
                                   // handlePhotos={handleApiPhotos}
                                 /> 
                                 }
@@ -696,4 +699,4 @@ import PlacePhotos from '@components/shop/google-maps-places-api/place-photos';
   )
 }
 
-SalonBookingPage.Layout = DefaultLayout;
+Deals.Layout = DefaultLayout;

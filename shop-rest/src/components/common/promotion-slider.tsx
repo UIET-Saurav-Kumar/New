@@ -131,7 +131,7 @@ export default function PromotionSlider(props:any) {
 
 
   const { data: shopData, isLoading } = useSalonShopsQuery({
-    category:'Salon+-+Spa',
+    // category:props?.shopCategory,
     limit:3000000,
     location:((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any,
     is_active:1,
@@ -171,11 +171,13 @@ export default function PromotionSlider(props:any) {
     return "";
   }
 
-  console.log('pages',props?.offer)
+   
+   console.log('pages',props?.shopCategory)
+
 
 
   
-  // console.log('slider shops',shopData)
+  console.log('slider shops',shopData)
 
   function setShopImages(){
     handleShopImages(true)
@@ -204,8 +206,7 @@ export default function PromotionSlider(props:any) {
           {shopData?.pages?.map((page, idx) => {
               return (
                 <div className='w-full h-full grid grid-cols-3 lg:grid-cols-6' key={idx}>
-                  {page?.data?.filter((shop) =>  shop?.is_active === 1 && shop?.shop_categories?.replace(/[^a-zA-Z ]/g, "").
-               replace("name", "").replace("id", "") === "Salon  Spa" ).map((shop: any) => (
+                  {page?.data?.filter((shop) =>  shop?.is_active === 1).map((shop: any) => (
             // <SwiperSlide key={shop}>
             <div className="relative h-full " >
               {/* <Link href={`${ROUTES.SHOPS}/${shop.slug}`}> */}
