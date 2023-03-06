@@ -171,7 +171,7 @@ export default function DropDown({getLoc}:{getLoc:any}) {
     { value: 'Best Places Near me',  label: 'Best Places Near me',available:false },
     { value: 'Best Salons',  label: 'Top Salons ',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/1' } },
     { value: 'Best Hangout Places',  label: 'Best Places to Hangout',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/2' } },
-    { value: 'Best bars restraunts+near+me',  label: 'Best Bars & Restraunts near me',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/3' } },
+    { value: 'Best Bars & Restraunts near me',  label: 'Best Bars & Restraunts near me',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/3' } },
     { value: 'Best deals on hotels',  label: 'Best Deals On Hotel',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/3' } },
     { value: 'Best travel destinations',  label: 'Best Travel Destinations',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/1' } },
   ];

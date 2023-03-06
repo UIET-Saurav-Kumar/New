@@ -118,7 +118,7 @@ import PlacePhotos from '@components/shop/google-maps-places-api/place-photos';
       }
 
 
-  export default function Deals({all_data}:any) {
+  export default function RestaurantDeals({all_data}:any) {
     // console.log('allData',all_data)
     const {width} = useWindowDimensions();
 
@@ -699,4 +699,4 @@ import PlacePhotos from '@components/shop/google-maps-places-api/place-photos';
   )
 }
 
-Deals.Layout = DefaultLayout;
+RestaurantDeals.Layout = DefaultLayout;
