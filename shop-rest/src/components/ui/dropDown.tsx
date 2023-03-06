@@ -94,17 +94,22 @@ export default function DropDown({getLoc}:{getLoc:any}) {
     pathname="/shops";
     const { type, ...rest } = router.query;
     var text_type  = e?.text_type ? e?.text_type : 'shop';
-    var text =e?.value
+    var searchText = `in ${getLocation?.formattedAddress}`
+    var text =e?.value +' '+searchText;
+
     var avail = e?.available;
     console.log('search data',e?.type)
-    setInputValue(e?.value)
+    setInputValue(e?.value);
+
+    // alert('log')
     
     createLog({
       location:getLocation?.formattedAddress,
-      search:text
+      search:text,
+      type:'search_item'
     }, {
       onSuccess: (data: any) => {
-        // console.log(data)
+        alert('data')
       },
     });
 
@@ -163,19 +168,19 @@ export default function DropDown({getLoc}:{getLoc:any}) {
 
   // some default options object with image
   const defaultOptions = [
-    { value: 'Chandigarh+Home+Salon',  label: 'Chandigarh Home Salon' },
-    { value: 'Kosmetic+India',  label: 'Kosmetic India', image: { avatar: true, src: 'https://placeimg.com/64/64/1' } },
-    { value: 'Chandigarh+Grocery+Store',  label: 'Chandigarh grocery store', image: { avatar: true, src: 'https://placeimg.com/64/64/2' } },
-    { value: 'Beauzo+Salon',  label: 'Beauzo Salon', image: { avatar: true, src: 'https://placeimg.com/64/64/3' } },
-    { value: 'Salman+s+Makeover',  label: 'Salman Makeover ', image: { avatar: true, src: 'https://placeimg.com/64/64/3' } },
-    { value: 'Shri+Balaji+Fruits+And+Vegetables',  label: 'Balaji Fruits & Vegetables', image: { avatar: true, src: 'https://placeimg.com/64/64/1' } },
+    { value: 'Best Places Near me',  label: 'Best Places Near me',available:false },
+    { value: 'Best Salons',  label: 'Top Salons ',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/1' } },
+    { value: 'Best Hangout Places',  label: 'Best Places to Hangout',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/2' } },
+    { value: 'Best bars restraunts+near+me',  label: 'Best Bars & Restraunts near me',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/3' } },
+    { value: 'Best deals on hotels',  label: 'Best Deals On Hotel',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/3' } },
+    { value: 'Best travel destinations',  label: 'Best Travel Destinations',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/1' } },
   ];
 
    
 
     return (
 
-        <div  className=' w-full z-10 relative'>
+        <div className=' w-full z-10 relative'>
 
           {/* <div className='w-full shadow-md  relative'> */}
             
@@ -187,9 +192,10 @@ export default function DropDown({getLoc}:{getLoc:any}) {
                   value={ inputValue }
                   defaultOptions={defaultOptions}
                   // onInputChange={handleInputChange}
-                  placeholder={ <div className='text-xs sm:text-sm md:text:md  lg:text-sm'> Restaurants | Salons | Groceries </div>}
+                  placeholder={ <div className='text-xs sm:text-sm md:text:md  lg:text-sm'> Ask me anything... </div>}
                   onChange={optionSelected}
-              />
+              />  
+              <p className='absolute right-25 lg:right-30 top-3 lg:top-3.5 font-light text-xs lg:text-sm  w-4 h-4 me-2.5 whitespace-nowrap bg-clip-text text-blue-500 bg-gradient-to-r from-blue-700 via-purple-600 to-blue-600 '>AI Powered</p>
                   <SearchIcon className=" absolute right-3 top-3 lg:top-4  text-gray-400 w-4 h-4 me-2.5" />
           {/* </div> */}
           

@@ -145,7 +145,7 @@ class LogController extends CoreController
             Log::create([
                 "user_id"=>($user)?$user->id:NULL,
                 "ip_address"=>$request->ip(),
-                'ip_location'=>$ip_location,
+                // 'ip_location'=>$ip_location,
                 "location"=>$location,
                 "search_item"=>$search,
                 "type"=>"search_item"

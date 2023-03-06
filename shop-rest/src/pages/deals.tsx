@@ -339,7 +339,7 @@ import PlacePhotos from '@components/shop/google-maps-places-api/place-photos';
             sales_tax:  0,
             delivery_fee: 0,
             delivery_time: newDate + ' ' + selectedTimeSlot,
-            payment_gateway: 'cod',
+            payment_gateway: 'upi',
           };
 
           localStorage.setItem('input', JSON.stringify(input));

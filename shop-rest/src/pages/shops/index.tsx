@@ -267,9 +267,11 @@ const ShopsPage = () => {
 
                           return (
                             
-                             <div className="flex flex-col">
-                              { query?.avail == 'false' && <PlaceSearch
+                            <div className="flex flex-col">
+                              { query?.avail == 'false' &&
+                               <PlaceSearch
                                 showLogoImg={true}
+                                searchText={query?.text}
                                 showImages = {false}
                                 data={data}
                                 shopName={getText()} 

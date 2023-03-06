@@ -13,7 +13,7 @@ export default function PlaceSearch(props:any) {
 
   const queryClient = useQueryClient();
 
-  const {shopName, handleApiPhotos, show, showImages,handleBusinessName,handleLogoImg, showLogoImg, handlePhotos, handleImage, handleTotalRating, data, handleReviews, handleOpen, handleRating} = props;
+  const {shopName, handleApiPhotos, show, searchText, showImages,handleBusinessName,handleLogoImg, showLogoImg, handlePhotos, handleImage, handleTotalRating, data, handleReviews, handleOpen, handleRating} = props;
 
   const [place_Id, setPlace_Id] = useState([]);
 
@@ -149,7 +149,7 @@ export default function PlaceSearch(props:any) {
     onSuccess: (data) => {
       const reviews = data?.result?.reviews || [];
       setSearchResults(prevResults => {
-        return prevResults.map(result => {
+        return prevResults?.map(result => {
           if (result.place_id === data?.result?.place_id) {
             return {
               ...result,
@@ -297,6 +297,10 @@ console.log('searchresults',searchResults)
  
   return (
         <> 
+        <p className='font-semibold w-full text-center p-2 text-gray-700 '>
+          {searchText}
+        </p>
+
        { !searchResults?.length ? <Spinner/> :
         <div className={` ${showImages || showLogoImg ? 'grid grid-cols-2 lg:grid-cols-5 gap-2 mt-2' : 'hidden'}  `}> 
           <p className={` ${show ? 'block' : 'hidden'}`}>{rating && (rating + ' '+ratingStars(rating))}</p>
