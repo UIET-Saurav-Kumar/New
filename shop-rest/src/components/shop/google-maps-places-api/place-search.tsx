@@ -8,6 +8,7 @@ import { MapPin } from '@components/icons/map-pin';
 import { ROUTES } from '@utils/routes';
 import Link from 'next/link';
 import Spinner from '@components/ui/loaders/spinner/spinner';
+import { useLocation } from "@contexts/location/location.context";
 
 export default function PlaceSearch(props:any) {
 
@@ -52,8 +53,10 @@ export default function PlaceSearch(props:any) {
     handleTotalRating && handleTotalRating(total_rating);
   }, [shopName]);
 
+  const {getLocation} =useLocation();
 
-  // console.log('search data details logo',business_logo)
+
+  console.log('search data ',getLocation)
 
 
   const shop_name = shopName;
@@ -67,14 +70,14 @@ export default function PlaceSearch(props:any) {
     
     const params = {
       query: searchString?.query,
-      city: searchString?.city,
-      lat: data?.settings?.location?.lat,
-      lng: data?.settings?.location?.lng,
+      city: getLocation?.formattedAddress,
+      lat: getLocation?.lat,
+      lng: getLocation?.lng,
     }
 
      mutateSearch(params)
 
-}, [shopName])
+}, [searchText])
 
  
 

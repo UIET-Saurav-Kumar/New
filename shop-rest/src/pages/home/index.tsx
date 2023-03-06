@@ -42,11 +42,11 @@ import Head from "next/head";
 import useIntersectionObserver from "@components/product/useIntersectionObserver";
 import BillPayment from "@components/home-page-product-section/bill-payment-services/components";
 import PolicyServices from "@components/home-page-product-section/PolicyServices/components";
-import ProfileCompletenessBadge from "@components/profile/profile-completed-badge";
-import CompleteProfile from "@components/profile/complete-profile";
+ import CompleteProfile from "@components/profile/complete-profile";
 import Banners from "@components/home-page-product-section/banners";
 import Banners2 from "@components/home-page-product-section/banners2";
 import Banners3 from "@components/home-page-product-section/banners3";
+import Spinner from "@components/ui/loaders/spinner/spinner";
 
 
 const ProductFeedLoader = dynamic(
@@ -226,10 +226,11 @@ useIntersectionObserver({
             </div>
 
         {loading ? (
-         <div className="absolute top-0 left-0  h-screen bg-black opacity-80   z-50 w-full">
+         <div className="absolute top-0 left-0  h-screen bg-black opacity-80   z-40 w-full">
            {/* <img src='/preloader/cir.gif' className='sticky top-1/2 left-1/2 right- object-contain '/> */}
            {/* <iframe className="mx-auto mt-1/2 h-full " src="https://giphy.com/embed/3ohs7TrCSp7c8ZrxBe" width="80" height="80" frameBorder="0" class="giphy-embed" allowFullScreen>
              </iframe> */}
+             <Spinner className="z-50"/>
              
          </div>
         ) : (

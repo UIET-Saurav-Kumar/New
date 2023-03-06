@@ -95,10 +95,10 @@ export default function DropDown({getLoc}:{getLoc:any}) {
     const { type, ...rest } = router.query;
     var text_type  = e?.text_type ? e?.text_type : 'shop';
     var searchText = `in ${getLocation?.formattedAddress}`
-    var text =e?.value +' '+searchText;
+    var text =e?.value 
 
     var avail = e?.available;
-    console.log('search data',e?.type)
+    console.log('search data',e)
     setInputValue(e?.value);
 
     // alert('log')

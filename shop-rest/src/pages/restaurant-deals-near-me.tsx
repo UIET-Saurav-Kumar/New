@@ -525,7 +525,7 @@ import PlacePhotos from '@components/shop/google-maps-places-api/place-photos';
                       </div> 
                      : 
             <div className = {`${data?.featureProducts?.data?.length  ? 'block w-full' : 'hidden'} transition-all duration-5000 ease-in-out relative w-full overflow-x-scroll text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500
-                  ${open ? 'transition-all duration-5000 ease-in-out flex flex-col  grid grid-cols-2  h-full md:grid md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-5 bg-gray-50 mt-3 p-2 lg:p-6 gap-1 lg:gap-4' : 'hidden' }   `}>
+                  ${open ? 'transition-all duration-5000 ease-in-out flex flex-col  grid grid-cols-2  h-screen md:grid md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-5 bg-gray-50 mt-3 p-2 lg:p-6 gap-1 lg:gap-4' : 'hidden h-screen' }   `}>
               
                {/* {fetching && !data?.pages?.length ? (
                         <ProductFeedLoader limit={5} />
@@ -537,7 +537,7 @@ import PlacePhotos from '@components/shop/google-maps-places-api/place-photos';
                         <div className=''>
 
                            <div  key={offer} onClick={ ()=> showSalons(offer)}
-                             className={` ${offer?.name === offerName?.name && offer?.sale_price === offerName?.sale_price ? 'border-3 border-green-500 ' : 'border-2'}
+                                 className={` ${offer?.name === offerName?.name && offer?.sale_price === offerName?.sale_price ? 'border-3 border-green-500 ' : 'border-2'}
                              ${open ? 'flex flex-col' : 'hidden' } hover:border-gray-400 lg:p-2 relative w-full h-full   lg:w-full mx-auto bg-white rounded-lg shadow-lg `}>
                                <div className='relative flex items-center justify-center w-auto h-64  '>
                                   <Image layout="fill"
