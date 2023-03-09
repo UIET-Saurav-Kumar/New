@@ -9,6 +9,7 @@ import { ROUTES } from '@utils/routes';
 import Link from 'next/link';
 import Spinner from '@components/ui/loaders/spinner/spinner';
 import { useLocation } from "@contexts/location/location.context";
+import router from 'next/router';
 
 export default function PlaceSearch(props:any) {
 
@@ -17,8 +18,9 @@ export default function PlaceSearch(props:any) {
   const {shopName, handleApiPhotos, show, searchText, showImages,handleBusinessName,handleLogoImg, showLogoImg, handlePhotos, handleImage, handleTotalRating, data, handleReviews, handleOpen, handleRating} = props;
 
   const [place_Id, setPlace_Id] = useState([]);
-
+  
   const [searchResults, setSearchResults] = useState([]);
+   
 
   const [logo_id, setLogo_Id] = useState('');
 
@@ -80,9 +82,6 @@ export default function PlaceSearch(props:any) {
 }, [searchText])
 
  
-
- 
-
 // useEffect(() => {
 
 //     const params = {
@@ -92,7 +91,6 @@ export default function PlaceSearch(props:any) {
 //      mutatePlace(params)
 //   },[place_Id])
 
-   
 
   useEffect(() => {
 
@@ -113,7 +111,6 @@ export default function PlaceSearch(props:any) {
 
   useEffect(() => {
     setBusinessLogo('');  
-    
   }, [shopName,logo_id])
 
 
@@ -151,12 +148,14 @@ export default function PlaceSearch(props:any) {
   const { mutate: mutatePlace } = useMutation(getplaceDetails, {
     onSuccess: (data) => {
       const reviews = data?.result?.reviews || [];
+      const phone_number = data?.result?.formatted_phone_number;
       setSearchResults(prevResults => {
         return prevResults?.map(result => {
           if (result.place_id === data?.result?.place_id) {
             return {
               ...result,
-              reviews
+              reviews,
+              phone_number
             };
           }
           return result;
@@ -183,7 +182,6 @@ export default function PlaceSearch(props:any) {
   }
 
 
-  
 
   const { mutate: mutateSearch } = useMutation(getSearchDetails, {
     onSuccess: (data) => {
@@ -297,6 +295,11 @@ function openGoogleReview(data) {
 
 console.log('searchresults',searchResults)
 
+function shopRoute(result) {
+  console.log('img 22',result.photo_url?.url?.split('?')[1])
+  router.push(`shops/global/${result?.name}?id=${result?.place_id}&open=${result?.opening_hours?.open_now}&photo=${result?.photo_url?.url?.split('?')[1]}&rating=${result?.rating}&total=${result?.user_ratings_total}&adr=${result?.formatted_address}&num=${result?.phone_number}`)
+}
+
  
   return (
         <> 
@@ -322,10 +325,12 @@ console.log('searchresults',searchResults)
                 searchResults?.length && searchResults?.map( (result,index) => {
 
                     // <Link href={`${ROUTES.SHOPS}/${business_name}`}> 
-                   return <div key={index} className='flex shadow-300 mx-auto lg:mx-5 rounded space-y-4 flex-col border  w-full    text-center   p-4   '>
-
+                   return  <div onClick={()=>shopRoute(result)} key={index} 
+                                className='flex shadow-300 mx-auto lg:mx-5 rounded space-y-4 flex-col border  w-full  text-center  p-4   '>
+                           
                           <div className="flex justify-between w-full items-center "> 
                             <div className="flex flex-col space-y-4 "> 
+                            {console.log('imggg',result)}
                             <img 
                               src={result?.photo_url?.url+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
                               className="h-60 rounded w-60 object-cover " /> 

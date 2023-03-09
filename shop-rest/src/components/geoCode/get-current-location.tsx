@@ -47,7 +47,9 @@ export default function GetCurrentLocation({
         };
         
         if(getLocation?.length === 0){
-         router.pathname == '/salon-near-me' &&  addLocation(location) ;
+         router.pathname == '/salon-near-me' || 
+         router.pathname == '/restaurant-deals-near-me' &&  
+         addLocation(location) ;
         }
       
       }, [router.pathname])

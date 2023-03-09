@@ -28,7 +28,7 @@ export default function GetCurrentLocation({
         lng:  76.7726 ,
         formattedAddress:  'Chandigarh'  ,
       };
-       pathname == '/salon-near-me'  && addLocation(location);
+       pathname == '/salon-near-me' || pathname == '/restaurant-deals-near-me'   && addLocation(location);
     },[])
 
     function getLoc() {

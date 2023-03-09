@@ -27,6 +27,8 @@ type ShopProfileCardProps = {
     rating,
     totalRating,
     reviews,
+    photo,
+    name,
   }) => {
     const { t } = useTranslation("common");
     const { openModal } = useModalAction();
@@ -85,7 +87,7 @@ type ShopProfileCardProps = {
 
               <div className="w-full h-44 sm:h-32 md:h-36  rounded-lg flex justify-center flex-col space-y-2 mt-0 sm:-mt-6 relative mx-auto 
                               overflow-hidden mb-8">
-                  {imageCheck(data?.logo?.thumbnail, data, '250', false,'object-contain rounded ')}          
+                  {data ? imageCheck(data?.logo?.thumbnail, data, '250', false,'object-contain rounded ') : <img src={photo} className='object-contain w-full h-full'/>}          
                       
                   
                    {/* <span className="text-sm sm:hidden text-center font-light tracking-wide  text-gray-600 ">
@@ -102,7 +104,7 @@ type ShopProfileCardProps = {
                   <span className="flex flex-col ">
                     
                     <span className="grid   grid-cols-1 lg:flex lg:space-x-2 items-center mx-auto">
-                      <p>{data?.name}</p>
+                      <p>{data ? data?.name : name }</p>
                       <p className="text-green-600 text-sm">{ open === true && 'Open'}</p>
                       <p className="text-red-600 text-sm">{ open === false && 'closed'}</p>
                     </span>

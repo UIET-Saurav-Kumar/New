@@ -576,7 +576,7 @@ import PlacePhotos from '@components/shop/google-maps-places-api/place-photos';
                                 className={` ${offer?.name === offerName?.name && offer?.sale_price === offerName?.sale_price ? 'bg-green-600 text-white' : 'text-gray-500 bg-gray-100' }   hover:bg-green-600 hover:text-white text-white font-bold py-2 px-4 rounded-full`}
                               >
                                 
-                                {offer?.name === offerName?.name &&  offer?.sale_price === offerName?.sale_price ? 'Grabed' : 'Grab'}
+                                {offer?.name === offerName?.name &&  offer?.sale_price === offerName?.sale_price ? 'Grabbed' : 'Grab'}
                               </button>
                             </div>
                           </div>
