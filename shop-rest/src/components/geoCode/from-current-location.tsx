@@ -41,7 +41,7 @@ export default function GetCurrentLocation({
 
     async function showPosition(position:any) {
        
-        var address=await getAddress({lat:position.coords.latitude,lng:position?.coords.longitude})
+        var address = await getAddress({lat:position.coords.latitude,lng:position?.coords.longitude})
         // console.log(address);
 
         const location: any = {
@@ -49,15 +49,15 @@ export default function GetCurrentLocation({
             lng: position?.coords.longitude,
             formattedAddress: address,
           };
-        // console.log(location);
+
         addLocation(location)
 
         onChange(location);
+
     }
 
     return (
         <>
-            
             <button onClick = {getLoc} className=' flex items-start justify-center text-xs sm:text-sm relative bg-white border mt-3 px-1 p-1 sm:px-1 2xl:px-8 2xl:p-2  rounded-lg text-accent font-semibold' > 
               <img src='/gps.png' className=' mr-2 ml-2  text-green-400   w-3 h-3 sm:w-6 sm:h-6'/>     current location   
             </button>

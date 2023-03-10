@@ -20,6 +20,8 @@ import WishlistButton from "./product-details/wishlist-button";
 import { StarIcon } from "@heroicons/react/outline";
 import { random } from "lodash";
 import ReadMore from "@components/ui/truncate";
+import { useLocation } from "@contexts/location/location.context";
+
 
 type Props = {
   product: any;
@@ -105,7 +107,8 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
   return stars;
  }
 
-  // console.log('rating',ratings)
+
+  // console.log('rating',ratings);
 
   /**
    *

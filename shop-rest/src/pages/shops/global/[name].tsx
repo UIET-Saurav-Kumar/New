@@ -9,6 +9,7 @@ import http from '@utils/api/http';
 import PlacePhotos from '@components/shop/google-maps-places-api/place-photos';
 import { useModalAction } from '@components/ui/modal/modal.context';
 import url from "@utils/api/server_url";
+import { useLocation } from '@contexts/location/location.context';
 
 
 export default function GlobalShops({data}:any) {
@@ -18,6 +19,9 @@ export default function GlobalShops({data}:any) {
   const queryClient = useQueryClient();
 
   const [review, set_Reviews] = useState([]);
+
+  const [shop_lat, setLat] = useState('');
+  const [shop_lng, setLng] = useState('');
 
   const { openModal } = useModalAction();
 
@@ -63,6 +67,8 @@ export default function GlobalShops({data}:any) {
 const { mutate: mutatePlace} = useMutation(getplaceDetails, {
   onSuccess: (data) => {
      set_Reviews(data?.result?.reviews);
+     setLat(data?.result?.geometry?.location?.lat);
+     setLng(data?.result?.geometry?.location?.lng);
      data?.result?.photos?.slice(0,5).map((item:any) => {
       const photo = item?.photo_reference;
       const param = {
@@ -111,6 +117,17 @@ const { mutate: mutatePhoto } =  useMutation(  getplacePhoto, {
     handleImage(place_Photos)
   }
 
+  const {getLocation} = useLocation();
+
+  const lat = getLocation?.lat;
+ 
+  const lng = getLocation?.lng;
+ 
+  const map_url = `https://www.google.com/maps/dir/?api=1&destination=${shop_lat},${shop_lng}&travelmode=driving&dir_action=navigate&origin=${lat},${lng}`;
+  
+ 
+  console.log('api',map_url);
+
 
   return (
    
@@ -119,7 +136,7 @@ const { mutate: mutatePhoto } =  useMutation(  getplacePhoto, {
       <div className='hidden lg:h-auto border mx-2 lg:flex lg:flex-col shadow-200 items-center my-2'>
           <div className='flex items-center w-full h-72'>
             <div className='h-full w-1/3'>
-              <ShopProfileCard name={query?.name} reviews={review} photo={photo_url+query?.photo+'&photo_reference='+query.photoreference+'&key='+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY} totalRating={query?.total} open={query?.open} rating={query?.rating} />
+              <ShopProfileCard  name={query?.name} reviews={review} photo={photo_url+query?.photo+'&photo_reference='+query.photoreference+'&key='+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY} totalRating={query?.total} open={query?.open} rating={query?.rating} />
             </div>
             {/* <img className='h-full border w-1/4 p-3 rounded object-contain' src={query?.photo+'&photo_reference='+query?.photoreference+'&key='+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY} /> */}
             <div className='w-full h-full border '>
@@ -128,7 +145,7 @@ const { mutate: mutatePhoto } =  useMutation(  getplacePhoto, {
           </div>
 
           <div className='w-full flex border p-3'>
-             <ShopDescription adr={query?.adr} num={query?.num} />
+             <ShopDescription mapUrl={map_url} adr={query?.adr} num={query?.num} />
           </div>
       </div>
 
@@ -141,12 +158,12 @@ const { mutate: mutatePhoto } =  useMutation(  getplacePhoto, {
                   <img className='object-fit w-full  h-full' src={photo_url+query?.photo+'&photo_reference='+query.photoreference+'&key='+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}/>
               </div>
               <div className='h-full w-full'>
-                <ShopProfileCard name={query?.name} reviews={review}   photo={photo_url+query?.photo+'&photo_reference='+query.photoreference+'&key='+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY} open={query?.open} rating={query?.rating} totalRating={query?.total} />
+                <ShopProfileCard  name={query?.name} reviews={review}   photo={photo_url+query?.photo+'&photo_reference='+query.photoreference+'&key='+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY} open={query?.open} rating={query?.rating} totalRating={query?.total} />
               </div>
           </div>
 
           <div className='w-full flex border p-3'>
-             <ShopDescription adr={query?.adr} num={query?.num} />
+             <ShopDescription mapUrl={map_url} adr={query?.adr} num={query?.num} />
           </div>
 
       </div>
@@ -160,7 +177,7 @@ const { mutate: mutatePhoto } =  useMutation(  getplacePhoto, {
                             src={binaryImage?.url+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
                             className="h-60 rounded w-60 object-cover"/>
                         })}
-            </div>
+      </div>
 
     </div>
   )

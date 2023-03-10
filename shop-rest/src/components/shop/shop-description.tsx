@@ -7,9 +7,9 @@ import ReadMore from "@components/ui/truncate";
 import Truncate from "@components/ui/truncate-scroll";
 import { scroller, Element } from "react-scroll";
 import { PhoneIcon } from "@heroicons/react/outline";
+import Link from 'next/link';
 
-
-export default function ShopDescription({data,adr,num} :any) {
+export default function ShopDescription({data,adr,num,mapUrl} :any) {
 
 
     const { t } = useTranslation("common") ;
@@ -43,9 +43,11 @@ export default function ShopDescription({data,adr,num} :any) {
                     Address
                   </span>
 
+                  
                   <span className="justify-between text-xs sm:text-sm font-light tracking-wide text-gray-600">
                       {data ? data?.settings?.location?.formattedAddress : adr}
                   </span>
+                  <a target='_blank' href={mapUrl}><span className="font-semibold text-xs cursor-pointer active:text-blue-900 text-blue-700">Directions ↗</span></a>
 
                   <div className="sm:hidden mt-5 mb-0 last:mb-0 flex flex-col  w-full text-left">
                           <span className="text-sm md:text-lg text-heading font-semibold mb-2">

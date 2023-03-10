@@ -20,7 +20,6 @@ export default function PlaceSearch(props:any) {
   const [place_Id, setPlace_Id] = useState([]);
   
   const [searchResults, setSearchResults] = useState([]);
-   
 
   const [logo_id, setLogo_Id] = useState('');
 

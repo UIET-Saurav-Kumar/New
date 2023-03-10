@@ -29,6 +29,7 @@ type ShopProfileCardProps = {
     reviews,
     photo,
     name,
+     
   }) => {
     const { t } = useTranslation("common");
     const { openModal } = useModalAction();

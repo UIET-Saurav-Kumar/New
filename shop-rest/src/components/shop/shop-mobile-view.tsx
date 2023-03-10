@@ -25,7 +25,7 @@ import { useUI } from "@contexts/ui.context";
 
 
 
-export default function ShopMobileView({data, shopData, pageURL, open,
+export default function ShopMobileView({data, mapUrl, shopData, pageURL, open,
   rating,
   totalRating,
   reviews,placePhotos}: any) {
@@ -100,7 +100,7 @@ export default function ShopMobileView({data, shopData, pageURL, open,
 
               { slug?.some(el => data.slug.includes(el)) ? null :
                 (   <div className='hidden sm:block w-48 h-38 sm:h-72 sm:w-80 md:h-72 lg:w-96'> 
-                    <ShopProfileCard reviews={reviews} totalRating={totalRating} rating={rating} open={open} data={data} /> 
+                    <ShopProfileCard  reviews={reviews} totalRating={totalRating} rating={rating} open={open} data={data} /> 
                    </div>)  }
                 
                 <div className='w-full flex-grow'>
@@ -121,7 +121,7 @@ export default function ShopMobileView({data, shopData, pageURL, open,
              (
               <div className='flex flex-col space-y-2'> 
              <div className="px-2">
-              <ShopDescription data={data}/>
+              <ShopDescription mapUrl={mapUrl} data={data}/>
              </div>
              <div className="">
                   <div className={`flex px-1 gap-3 w-full overflow-x-scroll`}>

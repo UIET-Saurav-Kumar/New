@@ -44,12 +44,13 @@ import ShopLayout from "@components/layout/shop-layout";
 import { useUI } from "@contexts/ui.context";
 import { parseContextCookie } from "@utils/parse-cookie";
 import { useCreateLogMutation } from "@data/log/use-create-log.mutation";
-import { useLocation } from "react-use";
+import { nuseLocation } from "react-use";
 import { API_ENDPOINTS } from "@utils/api/endpoints";
 import http from '@utils/api/http'
 import { toast } from 'react-toastify';
  import PlacePhotos from "@components/shop/google-maps-places-api/place-photos";
 import DefaultLayout from "@components/layout/default-layout";
+import { useLocation } from "@contexts/location/location.context";
 
 
 const CartCounterButton = dynamic(
@@ -298,8 +299,16 @@ function handleTotalRating(data) {
   console.log('schema',reviews);
   const basePath = 'https://buylowcal.com/shops/' 
 
+  console.log('s data',data)
 
-   
+  const user_lat = getLocation?.lat;
+  const user_lng = getLocation?.lng;
+
+  const shop_lat = data?.settings?.location?.lat;
+  const shop_lng = data?.settings?.location?.lng;
+
+  const map_url = `https://www.google.com/maps/dir/?api=1&destination=${shop_lat},${shop_lng}&travelmode=driving&dir_action=navigate&origin=${user_lat},${user_lng}`;
+   console.log('map',map_url);
   
 
   return (
@@ -423,7 +432,7 @@ function handleTotalRating(data) {
                            
 
                                   { slug?.some(el => data?.slug?.includes(el)) ? null :
-                                       (<ShopDescription data = {data}/>
+                                       (<ShopDescription mapUrl={map_url} data = {data}/>
                                      )
                                  
                                   }
@@ -502,7 +511,7 @@ function handleTotalRating(data) {
     </div>
       <div className='block lg:hidden w-full'>
 
-          <ShopMobileView reviews={reviews} totalRating={totalRating} rating={rating} open={open}
+          <ShopMobileView mapUrl={map_url} reviews={reviews} totalRating={totalRating} rating={rating} open={open}
            pageURL={pageURL} shopData={data} data={data} placePhotos={placePhotos}/>
 
       </div>
