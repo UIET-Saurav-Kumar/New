@@ -4,6 +4,7 @@ import { useLocation } from "@contexts/location/location.context";
 import { getLocation } from "@contexts/location/location.utils";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import Spinner from "@components/ui/loaders/spinner/spinner";
 
 
 export default function GetCurrentLocation({
@@ -12,7 +13,7 @@ export default function GetCurrentLocation({
     onChange: any;
     
   }){
-    const {addLocation} = useLocation()
+    const {addLocation} = useLocation();
 
     const [spin, setSpin] = useState(false);
     const router = useRouter();
@@ -38,6 +39,7 @@ export default function GetCurrentLocation({
  
       const[address,setAddress] = useState('');
 
+
        useEffect(() => {
 
         const location: any = {
@@ -60,7 +62,6 @@ export default function GetCurrentLocation({
     function getLoc() {
         // setSpin((setSpin) => !setSpin);
          
-      
         if (navigator.geolocation) {
           
             navigator.geolocation.getCurrentPosition(showPosition, error, options);
@@ -77,7 +78,7 @@ export default function GetCurrentLocation({
         var address = await getAddress({
             lat:position?.coords?.latitude,
             lng:position?.coords?.longitude
-        })
+        });
         
         // alert(address);
 
@@ -94,10 +95,12 @@ export default function GetCurrentLocation({
         // console.log('lat lng',location)
 
         // alert(location);
-        addLocation(location)
-        setBtn('Detect')
+        addLocation(location);
+        setBtn('Detect');
         onChange(getLoc);
     }
+
+  
 
     const url = typeof window !== 'undefined' && window?.location?.href
 
@@ -107,11 +110,11 @@ export default function GetCurrentLocation({
           { url && url?.includes('/register' || '/invite') ?
               <button onClick = {getLoc} className=' flex float-left  sm:mx-0 items-center  text-sm sm:text-sm md:text-md 
                                 text-white relative bg-blue-600 transition duration-500 ease-in-out  transform active:-translate-y-1 active:scale-95 
-                                rounded   p-2 mb-3 whitespace-nowrap   shadow-md font-md '> 
+                                  rounded   p-2 mb-3 whitespace-nowrap   shadow-md font-md '> 
                       <span className='mr-1 md:mr-1.5 md:w-4'>
                           <img src='/gps-white.png' 
                               className={`${spin ? 'animate-pulse' : 'animate-none'}
-                                    mx-1 md:-mx-1  object-cover w-3 h-3 sm:w-4 sm:h-4`}/>
+                                          mx-1 md:-mx-1  object-cover w-3 h-3 sm:w-4 sm:h-4`}/>
                       </span>
                   Get current location     
               </button>
@@ -121,7 +124,6 @@ export default function GetCurrentLocation({
                                  flex float-left mx-4  sm:mx-0 items-center text-sm sm:text-sm md:text-md'>
                 {btn} 
               </button>
-
           }
         </>
     )

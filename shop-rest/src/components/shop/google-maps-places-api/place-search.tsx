@@ -282,7 +282,8 @@ function openImageModal(){
         }
     }
     return stars;
-}
+  }
+
 
 function openGoogleReview(data) {
   openModal('GOOGLE_REVIEWS'

@@ -18,8 +18,8 @@ export default function MobileJoinButton() {
   }
 
   return (
-    <Button className="font-semibold" size="small" onClick={handleJoin}>
-      {t("Join")}
+    <Button className="font-semibold text-xs" size="small" onClick={handleJoin}>
+      {t("Login/Join")}
     </Button>
   );
 }

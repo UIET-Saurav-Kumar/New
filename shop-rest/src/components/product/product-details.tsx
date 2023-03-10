@@ -118,7 +118,9 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
     
     <article className="rounded-lg bg-light">
       <div className="flex flex-col md:flex-row border-b border-border-200 border-opacity-70">
+        
         <div className="md:w-1/2 p-6 pt-8 lg:p-14 xl:p-16">
+          
           <div className="flex items-center justify-between mb-8 lg:mb-10">
             <BackButton />
             <button className="text-sm text-magenta underline" onClick={() => navigate(`${ROUTES.SHOPS}/${shop?.slug}`)}>More from This Seller</button>
@@ -144,6 +146,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
               </div>
             )}
           </div>
+
         </div>
 
         <div className="flex flex-col items-start md:w-1/2 p-5 lg:p-14 xl:p-16">
@@ -152,7 +155,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
             <div className="">
               <h1 className="font-semibold text-lg md:text-xl xl:text-2xl tracking-tight text-heading">
               {name}
-            </h1>
+              </h1>
             <div className="">
               <WishlistButton product={product} productId={product?.id}/>
             

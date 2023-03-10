@@ -10,6 +10,7 @@ import PlacePhotos from '@components/shop/google-maps-places-api/place-photos';
 import { useModalAction } from '@components/ui/modal/modal.context';
 import url from "@utils/api/server_url";
 import { useLocation } from '@contexts/location/location.context';
+import ProductNotFoundInfo from '@components/product/product-not-found-info';
 
 
 export default function GlobalShops({data}:any) {
@@ -89,7 +90,7 @@ const { mutate: mutatePlace} = useMutation(getplaceDetails, {
   },
 })
 
-const { mutate: mutatePhoto } =  useMutation(  getplacePhoto, {
+const { mutate: mutatePhoto } =  useMutation(getplacePhoto, {
   onSuccess: (response) => {
     setPlace_Photos(prevState => [...prevState, response])
   },
@@ -125,7 +126,6 @@ const { mutate: mutatePhoto } =  useMutation(  getplacePhoto, {
  
   const map_url = `https://www.google.com/maps/dir/?api=1&destination=${shop_lat},${shop_lng}&travelmode=driving&dir_action=navigate&origin=${lat},${lng}`;
   
- 
   console.log('api',map_url);
 
 
@@ -169,7 +169,8 @@ const { mutate: mutatePhoto } =  useMutation(  getplacePhoto, {
       </div>
 
 
-      <div className='flex  gap-3 w-full px-2 overflow-x-scroll'>
+    <div className='flex flex-col  h-full'>   
+    <div className='flex  gap-3 w-full h-full px-2 overflow-x-scroll'>
                 {place_Photos?.map((binaryImage, index) => {
                     return <img 
                             onClick={openImageModal} 
@@ -178,6 +179,15 @@ const { mutate: mutatePhoto } =  useMutation(  getplacePhoto, {
                             className="h-60 rounded w-60 object-cover"/>
                         })}
       </div>
+
+      {/* <div className="h-scree ">
+        <ProductNotFoundInfo   />
+      </div> */}
+
+      </div>
+
+      
+     
 
     </div>
   )
