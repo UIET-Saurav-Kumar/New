@@ -65,7 +65,7 @@ const AllCategories = () => {
 
 
 	// console.log('categories',data?.categories?.data.map((item)=>item.image?.thumbnail));
-    // console.log('catist', data?.categories?.data);
+    console.log('catist', data?.categories?.data);
 	
 	return (
 
@@ -83,7 +83,7 @@ const AllCategories = () => {
 			{data?.categories?.data?.filter((cat)=>cat?.image?.length !=0 ).map( (category,_idx) => (
 				
 					<Link className="categories-link" 
-						key={_idx} href={category?.name === 'Groceries' && location() ?  getLinkGrocery()   : category?.name === 'Salon & Spa' && location() ? getLinkSalonSpa() : category?.name === 'Restaurants' && location() ? getLinkRestaurant() : getLink(category.name)}>
+						key={_idx} href={category?.name === 'Groceries' && location() ?  getLinkGrocery()   : category?.name === 'Salon & Spa' && location() ? getLinkSalonSpa() : category?.name === 'Restaurants'  ? getLinkRestaurant() : getLink(category.name)}>
 					
 						<div className='rounded flex flex-col w-full  cursor-pointer  border-gray-200 
 										hover:border-gray-400  items-center'

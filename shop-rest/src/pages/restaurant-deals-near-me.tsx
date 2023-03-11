@@ -265,7 +265,7 @@ import PlacePhotos from '@components/shop/google-maps-places-api/place-photos';
           const input = JSON.parse(localStorage.getItem('input'));
           const pathname = window.location.pathname;
 
-          if(isAuthorize && input && pathname === '/salon-near-me'){
+          if(isAuthorize && input && pathname === '/restaurant-deals-near-me'){
             input.customer_contact = customer?.me?.phone_number;
             // alert(customer?.me?.phone_number);
             localStorage.setItem("input", JSON.stringify(input));
@@ -347,7 +347,7 @@ import PlacePhotos from '@components/shop/google-maps-places-api/place-photos';
 
           if(!isAuthorize){
             return openModal('OTP_REGISTER',{
-                pathname: '/salon-near-me',
+                pathname: '/restaurant-deals-near-me',
             });
           }
 
@@ -491,16 +491,16 @@ import PlacePhotos from '@components/shop/google-maps-places-api/place-photos';
     <>
 
     <Head>
-      <link rel="canonical" href={`https://buylowcal.com/salon-near-me`}/>
+      <link rel="canonical" href={`https://buylowcal.com/restaurant-deals-near-me`}/>
       <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(
         {
           "@context": "http://schema.org",
           "@type": "WebPage",
-          "url": 'https://buylowcal.com/salon-near-me',
-          "name": ' Best Salon/Spa Deals and offers in Chandigarh, Mohali & Panchkkula ',
-          "description": "Find the best near by salons deals and offers on buylowcal. Free Booking and Free Cancelation Policy",
+          "url": 'https://buylowcal.com/restaurant-deals-near-me',
+          "name": ' Best Restaurant & Bars Deals and offers in Chandigarh, Mohali & Panchkula ',
+          "description": "Find the best near by Restaurant & Bars deals and offers on buylowcal. Free Booking and Free Cancelation Policy",
         }
       )}}
     />
@@ -509,8 +509,8 @@ import PlacePhotos from '@components/shop/google-maps-places-api/place-photos';
     <div className=' h-full border bg-white w-full'>
 
       <p className='flex flex-col mt-10 font-semibold text-blue-500 text-center w-full'>
-       <div className="text-center text-lg font-medium tracking-wide text-red-600">Limited Slots!!</div>
-       <div className="text-center text-lg font-medium tracking-wide whitespace-nowrap text-green-600">Book Now, Pay Later</div>
+       {/* <div className="text-center text-lg font-medium tracking-wide text-red-600">Limited Slots!!</div> */}
+       {/* <div className="text-center text-lg font-medium tracking-wide whitespace-nowrap text-green-600">Book Now, Pay Later</div> */}
       </p>
 
           <span ref={offers} onClick={()=> setOpen(!open)} className=' cursor-pointer mx-auto rounded-md p-1 flex items-center space-x-2 text-center text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 font-medium text-xl lg:text-2xl text-gray-900 font-serif ml-2 lg:ml- mt-10 lg:mt-10 tracking-normal'>
@@ -524,8 +524,8 @@ import PlacePhotos from '@components/shop/google-maps-places-api/place-photos';
                         <Spinner showText={false}/>
                       </div> 
                      : 
-            <div className = {`${data?.featureProducts?.data?.length  ? 'block w-full' : 'hidden'} transition-all duration-5000 ease-in-out relative w-full overflow-x-scroll text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500
-                  ${open ? 'transition-all duration-5000 ease-in-out flex flex-col  grid grid-cols-2  h-screen md:grid md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-5 bg-gray-50 mt-3 p-2 lg:p-6 gap-1 lg:gap-4' : 'hidden h-screen' }   `}>
+                     <div className = {`${data?.featureProducts?.data?.length  ? 'block w-full' : 'hidden'} transition-all duration-5000 ease-in-out relative w-full overflow-x-scroll text-gradient-to-r from-indigo-500 via-purple-500 to-pink-500
+                     ${open ? 'transition-all duration-5000 ease-in-out flex flex-col  grid grid-cols-2  h-full md:grid md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-5 bg-gray-50 mt-3 p-2 lg:p-6 gap-1 lg:gap-4' : 'hidden' }   `}>
               
                {/* {fetching && !data?.pages?.length ? (
                         <ProductFeedLoader limit={5} />

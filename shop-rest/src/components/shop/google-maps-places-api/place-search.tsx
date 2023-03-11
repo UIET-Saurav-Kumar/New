@@ -330,7 +330,7 @@ function shopRoute(result) {
                            
                           <div className="flex justify-between w-full items-center "> 
                             <div className="flex flex-col space-y-4 "> 
-                            {console.log('imggg',result)}
+                            {/* {console.log('imggg',result)} */}
                             <img 
                               src={result?.photo_url?.url+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
                               className="h-60 rounded w-60 object-cover " /> 

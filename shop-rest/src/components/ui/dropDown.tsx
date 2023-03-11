@@ -195,7 +195,7 @@ export default function DropDown({getLoc}:{getLoc:any}) {
                   placeholder={ <div className='text-xs sm:text-sm md:text:md  lg:text-sm'> Ask me anything... </div>}
                   onChange={optionSelected}
               />  
-              <p className='absolute right-25 lg:right-30 top-3 lg:top-3.5 font-light text-xs lg:text-sm  w-4 h-4 me-2.5 whitespace-nowrap shadow-cyan-500/50 bg-clip-text text-blue-500 bg-gradient-to-r from-blue-700 via-purple-600 to-blue-600 '>
+              <p  className='absolute right-25 lg:right-30 top-3 lg:top-3.5 font-light text-xs lg:text-sm  w-4 h-4 me-2.5 whitespace-nowrap shadow-cyan-500/50 bg-clip-text text-blue-500 bg-gradient-to-r from-blue-700 via-purple-600 to-blue-600 '>
                 AI Powered
               </p>
                   <SearchIcon className=" absolute right-3 top-3 lg:top-4  text-gray-400 w-4 h-4 me-2.5" />
