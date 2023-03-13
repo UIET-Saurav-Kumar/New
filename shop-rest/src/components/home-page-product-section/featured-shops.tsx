@@ -51,7 +51,8 @@ export default function FeaturedShops({ }) {
 
             <div className={`${data?.featureShops.data?.length  ? 'block' : 'hidden'}`}>
 
-                <div id='featured-shops' className=' flex flex-col mt-8 border-b rounded-t pb-4'>
+                <div id='featured-shops' 
+                     className='flex flex-col mt-8 border-b rounded-t pb-4'>
     
                     <div className='flex justify-between items-center p-2 px-4'>
     
@@ -60,7 +61,9 @@ export default function FeaturedShops({ }) {
                         </h3>
 
                         <Link href={getLink()}>
-                            <h3 className='font-blue text-sm sm:text-sm md:text-md 2xl:text-md  hover:underline cursor-pointer font-light text-blue-600 ' > view all </h3>
+                            <h3 className='font-blue text-sm sm:text-sm md:text-md 2xl:text-md  hover:underline cursor-pointer font-light text-blue-600 ' > 
+                                view all 
+                            </h3>
                         </Link>
     
                     </div>

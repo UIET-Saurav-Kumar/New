@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
 import Shop from "@repositories/shop";
 import { API_ENDPOINTS } from "@utils/api/endpoints";
+
 export interface IShopUpdateVariables {
   variables: {
     id: string;

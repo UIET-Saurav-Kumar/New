@@ -64,9 +64,9 @@ class ShopController extends CoreController
 
         if($category_slug)
         {
-            $temp_shops=$shops;
-            $category_shop_array=[];
-            $category_name=str_replace("-","&",$category_slug);
+            $temp_shops = $shops;
+            $category_shop_array = [];
+            $category_name = str_replace("-","&",$category_slug);
             
             $category_id=ShopCategory::where('name',$category_name)->first()->id;
             foreach($temp_shops->get() as $s){
@@ -81,12 +81,11 @@ class ShopController extends CoreController
             $shops->whereIn("id",$category_shop_array);
         }
 
-        $shops_array=[];
-        $shops_ids=$shops->pluck('id');
+        $shops_array = [];
+        $shops_ids = $shops->pluck('id');
 
         if($location)
         {
-            
             $shops_ids=ShopRepository::getSortedShops($location,$shops_ids);
             foreach($shops_ids as $id){
                 $single_shop=Shop::find($id);

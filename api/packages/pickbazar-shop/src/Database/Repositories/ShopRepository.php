@@ -83,7 +83,9 @@ class ShopRepository extends BaseRepository
             }
             if(count($request->shop_categories)){
                 $shop->shop_categories=$request['shop_categories'];
+                $shop->save();
             }
+            
             if (isset($request['balance']['payment_info'])) {
                 $shop->balance()->create($request['balance']);
             }

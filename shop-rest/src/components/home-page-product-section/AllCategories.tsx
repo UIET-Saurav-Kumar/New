@@ -75,15 +75,20 @@ const AllCategories = () => {
 	    	<h3 className='text-lg sm:text-lg md:text-lg xl:text-2xl font-semibold  p-2' > Shop by Category  </h3>
 		  </div>
 
-	    <div className='all-categories grid grid-cols-3 sm+:grid-cols-3 
-	                	md:grid-cols-4 lg:grid-cols-6 lg+:grid-cols-6    
-                        2xl:grid-cols-5 mt-0  h-full gap-2 lg:gap-6 p-4  bg-gray-100'>
+	        <div className='all-categories grid grid-cols-3 sm+:grid-cols-3 
+	                	    md:grid-cols-4 lg:grid-cols-6 lg+:grid-cols-6    
+                            2xl:grid-cols-5 mt-0  h-full gap-2 lg:gap-6 p-4 bg-gray-100'>
 
     
-			{data?.categories?.data?.filter((cat)=>cat?.image?.length !=0 ).map( (category,_idx) => (
+			    {data?.categories?.data?.filter((cat)=>cat?.image?.length !=0 ).map( (category,_idx) => (
 				
 					<Link className="categories-link" 
-						key={_idx} href={category?.name === 'Groceries' && location() ?  getLinkGrocery()   : category?.name === 'Salon & Spa' && location() ? getLinkSalonSpa() : category?.name === 'Restaurants' && location() ? getLinkRestaurant()   : getLink(category.name)}>
+						key={_idx} href={
+							             category?.name === 'Groceries'   && location() ? getLinkGrocery()    : 
+						                 category?.name === 'Salon & Spa' && location() ? getLinkSalonSpa()   : 
+										 category?.name === 'Restaurants' && location() ? getLinkRestaurant() :
+										 getLink(category.name)
+										}>
 					
 						<div className='rounded flex flex-col w-full  cursor-pointer  border-gray-200 
 										hover:border-gray-400  items-center'
@@ -96,7 +101,6 @@ const AllCategories = () => {
 								 width={351}
 								 height={420}
 								 layout="intrinsic"
-								 
 								 className=" "
 								/>*/}
 
@@ -106,12 +110,12 @@ const AllCategories = () => {
 						</div>
 					
 					</Link>
-			))}
+			    ))}
 		  
 			
-		</div>
+		    </div>
 		
-</div>
+        </div>
 	)
 }
 
