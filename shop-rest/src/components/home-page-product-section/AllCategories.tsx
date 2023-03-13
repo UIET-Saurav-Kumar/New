@@ -83,7 +83,7 @@ const AllCategories = () => {
 			{data?.categories?.data?.filter((cat)=>cat?.image?.length !=0 ).map( (category,_idx) => (
 				
 					<Link className="categories-link" 
-						key={_idx} href={category?.name === 'Groceries' && location() ?  getLinkGrocery()   : category?.name === 'Salon & Spa' && location() ? getLinkSalonSpa() : category?.name === 'Restaurants'  ? getLinkRestaurant() && location() : getLink(category.name)}>
+						key={_idx} href={category?.name === 'Groceries' && location() ?  getLinkGrocery()   : category?.name === 'Salon & Spa' && location() ? getLinkSalonSpa() : category?.name === 'Restaurants' && location() ? getLinkRestaurant()   : getLink(category.name)}>
 					
 						<div className='rounded flex flex-col w-full  cursor-pointer  border-gray-200 
 										hover:border-gray-400  items-center'
