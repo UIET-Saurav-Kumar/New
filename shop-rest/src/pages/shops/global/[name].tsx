@@ -104,8 +104,6 @@ const { mutate: mutatePhoto } =  useMutation(getplacePhoto, {
 
 });
 
-  
-
   function handleImage(data){
     console.log('modal data',data)
     openModal('SHOP_IMAGE_POPOVER',{
@@ -170,19 +168,19 @@ const { mutate: mutatePhoto } =  useMutation(getplacePhoto, {
 
 
     <div className='flex flex-col  h-full'>   
-    <div className='flex  gap-3 w-full h-full px-2 overflow-x-scroll'>
-                {place_Photos?.map((binaryImage, index) => {
-                    return <img 
-                            onClick={openImageModal} 
-                            key={index} 
-                            src={binaryImage?.url+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
-                            className="h-60 rounded w-60 object-cover"/>
-                        })}
+      <div className='flex  gap-3 w-full h-full px-2 overflow-x-scroll'>
+                  {place_Photos?.map((binaryImage, index) => {
+                      return <img 
+                              onClick={openImageModal} 
+                              key={index} 
+                              src={binaryImage?.url+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
+                              className="h-60 rounded w-60 object-cover"/>
+                          })}
       </div>
 
-      {/* <div className="h-scree ">
-        <ProductNotFoundInfo   />
-      </div> */}
+        {/* <div className="h-scree ">
+          <ProductNotFoundInfo   />
+        </div> */}
 
       </div>
 

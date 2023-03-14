@@ -10,6 +10,7 @@ import Link from 'next/link';
 import Spinner from '@components/ui/loaders/spinner/spinner';
 import { useLocation } from "@contexts/location/location.context";
 import router from 'next/router';
+import { fetchShops, useShopsQuery } from "@data/shop/use-search-shop-query";
 
 export default function PlaceSearch(props:any) {
 
@@ -40,6 +41,8 @@ export default function PlaceSearch(props:any) {
   const [rating, setRating] = useState('');
 
   const { openModal } = useModalAction();
+
+  const [shop_Name, setShopName] = useState('')
 
 
   useEffect(() => {
@@ -293,10 +296,32 @@ function openGoogleReview(data) {
   );
 }
 
+  useEffect(()=>{
+  setShopName('')
+  },[shop_Name])
+
+  const { data: shopData } = useShopsQuery({
+    // category:'Salon+-+Spa',
+    limit:3000000,
+    location:((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any,
+    is_active:1,
+    // page:1,
+    search:shop_Name
+  });
+
+console.log('data',shopData);
+
 console.log('searchresults',searchResults)
 
 function shopRoute(result) {
-  console.log('img 22',result.photo_url?.url?.split('?')[1])
+  // setShopName(result?.name);
+
+  // console.log('resulta',shopData?.pages[0]?.data[0].settings?.location?.formattedAddress)
+
+  // shop_Name && shopData?.pages[0]?.data[0].length == 1 && shopData?.pages[0]?.data[0].settings?.location?.formattedAddress.includes(result?.formatted_address) 
+  // ? alert(true) : alert(false)
+  
+  // console.log('img 22',result.photo_url?.url?.split('?')[1])
   router.push(`shops/global/${result?.name}?id=${result?.place_id}&open=${result?.opening_hours?.open_now}&photo=${result?.photo_url?.url?.split('?')[1]}&rating=${result?.rating}&total=${result?.user_ratings_total}&adr=${result?.formatted_address}&num=${result?.phone_number}`)
 }
 
@@ -330,7 +355,7 @@ function shopRoute(result) {
                            
                           <div className="flex justify-between w-full items-center "> 
                             <div className="flex flex-col space-y-4 "> 
-                            {/* {console.log('imggg',result)} */}
+                            {console.log('imggg',result)}
                             <img 
                               src={result?.photo_url?.url+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
                               className="h-60 rounded w-60 object-cover " /> 

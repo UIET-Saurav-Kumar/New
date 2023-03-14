@@ -247,8 +247,8 @@ useIntersectionObserver({
                 
                 <UserDashboard/>
                 <Banners2/>
-                <BillPayment/>
-                <PolicyServices/>  
+                {/* <BillPayment/> */}
+                {/* <PolicyServices/>   */}
                 <FeaturedShops />
 
                 <ElanteBanner/>
