@@ -277,7 +277,7 @@ export default function HeaderMiddle({searchbar}:any) {
         handleLocation()
     }
 
-    console.log('path', location, getLocation )
+    console.log('path', location, getLocation, router )
 
 
     const {
@@ -311,41 +311,60 @@ export default function HeaderMiddle({searchbar}:any) {
                {/* searchbar  */}
                <div className='  hidden lg:flex lg:items-start justify-around lg:justify-between p-0 lg:py-4 w-full px-4'>
 
-                    <div className = 'hidden lg:block'>
+                    <div className = {` ${shop_check !== 0 ? 'block' : 'hidden' }  `}>
 
                        <div style={{zIndex: 0}} className=''><Logo className="  " /></div>       
                                           
                     </div>
                   
                   {/* Search Bar */}
-                 <div className={ `${searchbar ?  'flex flex-col  w-full space-y-2' : '' }  `}>
+                 <div className={ `${searchbar && router.pathname !== '/shops' ?  'flex flex-col  w-full space-y-2' : router?.pathname == '/shops' ? 'flex flex-col  w-full space-y-2' : '' }  `}>
                     <div className=' flex focus-ring-2 justify-center
-                                    lg:w-3/4 2xl:mx-auto lg:mx-auto 
-                                    2xl:flex-1'>
+                                     lg:w-3/4 2xl:mx-auto lg:mx-auto 
+                                     2xl:flex-1'>
 
-                        {  shop_check !== 0 ? 
-                             <input onClick = {handleLocation} 
+                        {  
+                            shop_check == 0 && router?.pathname == '/shops'   ? 
+                          <>   <input onClick = {handleLocation} 
                               defaultValue = {address === 'undefined' ? getLocation.formattedAddress : address}  
                               className ='hidden  lg:inline-flex shadow-md text-gray-500 lg:w-32 lg+:w-38 2xl:w-52 md:w-32 placeholder:text-gray-500  
                                           lg:w-42 rounded-lg text-sm rounded-l-lg rounded-r-none h-12 outline-none active:border-gray-400
                                           border-2 border-e-0  focus:border-accent pr-4  border-gray-500 pl-2 ' 
                               placeholder = 'Enter location' id='location_id' /> 
-                              :
-                              <input onClick = {handleLocation} 
-                              defaultValue = {address === 'undefined' ? getLocation.formattedAddress : address}  
-                              className ='hidden  lg:inline-flex  text-gray-500 lg:w-32 lg+:w-38 2xl:w-100 md:w-32 placeholder:text-gray-500  
-                                          lg:w-42 rounded-lg text-sm  shadow-350 ml-60 h-12 outline-none active:border-gray-400
-                                          border  focus:border-accent pr-4  border-gray-500 pl-2 ' 
-                              placeholder = 'Enter location' id='location_id' /> 
-    }
-                       
-                        <div className={`${searchbar ? 'lg:flex lg:w-3/5' : 'hidden'}   `}>
-                            <DropDown  getLoc = {handleLocation} />
+
+                              <div className={`${(searchbar && shop_check !== 0 && router.pathname !== '/shops') ? 'hidden' : 'flex lg:w-3/5'}
+                                 `}>
+                             <DropDown  getLoc = {handleLocation} />
                         </div>
+                        </>
+                              : shop_check == 0 ?
+                            //   <div className='w-full'>
+                            <input onClick = {handleLocation} 
+                            defaultValue = {address === 'undefined' ? getLocation.formattedAddress : address}  
+                            className ='border border-gray-700 rounded-lg p-3 px-4 text-gray-700 w-100' 
+                            placeholder = 'Enter location' id='location_id' /> : 
+                            <input onClick = {handleLocation} 
+                              defaultValue = {address === 'undefined' ? getLocation.formattedAddress : address}  
+                              className ='hidden  lg:inline-flex shadow-md text-gray-500 lg:w-32 lg+:w-38 2xl:w-52 md:w-32 placeholder:text-gray-500  
+                                          lg:w-42 rounded-lg text-sm rounded-l-lg rounded-r-none h-12 outline-none active:border-gray-400
+                                          border-2 border-e-0  focus:border-accent pr-4  border-gray-500 pl-2 ' 
+                              placeholder = 'Enter location' id='location_id' />
+                            //   </div>
+                        }
+                       
+                       { shop_check == 0 ?
+                       <div className={`${searchbar && router.pathname == '/home'   ? 'hidden' : 'hidden'}   `}>
+                             <DropDown  getLoc = {handleLocation} />
+                        </div> : 
+                        <div className={` flex lg:w-3/5 `}>
+                        <DropDown  getLoc = {handleLocation} />
+                   </div>
+                       }
 
                     </div>
 
-                  { shop_check !== 0 && <div className=' z-10 flex items-center mx-auto space-x-10  text-gray-500 ' style={{zIndex:0}}>
+                  { shop_check !== 0 && 
+                    <div className=' z-10 flex items-center mx-auto space-x-10  text-gray-500 ' style={{zIndex:0}}>
                         <span className='text-blue-600'>बायलोकल</span>
                         <span className='text-red-600'>Buylowcal</span>
                         <span className='text-yellow-600'>ਬਾਏਲੋਕਲ </span>
@@ -471,7 +490,7 @@ export default function HeaderMiddle({searchbar}:any) {
 
                           {/* <div className = ' hidden lg:block px-0 mx-0 p-0 m-0' > */}
 
-                        <Logo className=" mx-0 px-0 " />       
+                        <Logo className={` ${ shop_check == 0 ? 'hidden' : ' block mx-0 px-0' }`} />       
                                           
                           {/* </div> */}
 
@@ -504,9 +523,9 @@ export default function HeaderMiddle({searchbar}:any) {
                             JoinBtn && (
                            <div className='flex justify-between  w-full  items-center  lg:hidden xl:hidden 2xl:hidden'>
 
-                                {/* <div className='block px-0 ml-10 sm:-ml-6  '>  */}
-                                    <Logo className='mx-0  px-0'/>
-                                 {/* </div> */}
+                                <div className={` ${shop_check == 0 ? 'hidden' : 'block' } `}> 
+                                    <Logo className=''/>
+                                 </div>
 
                                 <div className='flex items-center '>
 
@@ -533,20 +552,21 @@ export default function HeaderMiddle({searchbar}:any) {
              
                )}
        </div>
-       <div className={` ${ searchbar ? 'w-full flex flex-col lg:hidden -mb-3' : 'hidden'}  `}>
-        <div className='flex md:flex w-full lg:hidden px-4 mb-2 mt-0' >
-            <DropDown getLoc={handleLocation}/>
-            {/* <SearchIcon onClick={handleSearchModal} className='text-gray-500 h-10 w-10 cursor-pointer'/> */}
-        </div>
-        {
-            router.pathname.includes('/home') ?
-        <div className='z-0 bg-white flex items-center mx-auto space-x-4 text-12px w-full justify-evenly text-gray-500 '>
-                            <span className=' text-blue-600'>बायलोकल</span>
-                            <span className='  text-red-600'>Buylowcal</span>
-                            <span className='text-yellow-600'>ਬਾਏਲੋਕਲ </span>
-                            <span className='text-green-600'> বাইলোকাল </span>
-                        
-            </div>  : null}
+       <div className={` ${  'w-full flex flex-col lg:hidden -mb-3' }  `}>
+            <div className={` ${ shop_check == 0 && router.pathname == '/shops' ? 
+                    'flex md:flex w-full lg:hidden px-4 mb-2 mt-0' : shop_check !== 0 ? 'flex md:flex w-full lg:hidden px-4 mb-2 mt-0' : shop_check == 0 && router?.pathname == '/home' ? 'hidden' : ''}   `} >
+                <DropDown getLoc={handleLocation}/>
+            </div>
+            {
+                searchbar && router.pathname.includes('/home') ?
+            <div className='z-0 bg-white flex items-center mx-auto space-x-4 text-12px w-full justify-evenly text-gray-500 '>
+                                <span className=' text-blue-600'>बायलोकल</span>
+                                <span className='  text-red-600'>Buylowcal</span>
+                                <span className='text-yellow-600'>ਬਾਏਲੋਕਲ </span>
+                                <span className='text-green-600'> বাইলোকাল </span>
+                            
+                </div>  : null
+            }
        </div>
    </div>
 

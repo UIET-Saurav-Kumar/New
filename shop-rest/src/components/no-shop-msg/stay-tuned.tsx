@@ -1,6 +1,7 @@
 import { SearchIcon } from '@components/icons/search-icon';
 import DropDown from '@components/ui/dropDown';
 import React from 'react';
+import Logo from "@components/ui/logo";
 
 // import './index.css';
 // import logo from './logo.png';
@@ -11,38 +12,25 @@ function StayTuned() {
 
     <div className="bg-aei bg-cover bg-no-repeat w-full flex flex-col items-center justify-center h-screen lg:h-110">
 
-        <main className="flex flex-col items-center mt-40 lg:justify-center space-y-0 lg:space-y-7 flex-grow w-full">
+        <main className="flex flex-col items-center mt-40 lg:justify-center space-y-0  flex-grow w-full">
             {/* <img src={'logo'} alt="Google Logo" className="w-64 h-64 mb-8" /> */}
 
-            <div className='text-4xl lg:text-6xl font-semibold space-x-2 lg:space-x-6'>
-                <span className=' text-green-50  font-bold  tracking-normal '>
-                    <span className='text-green-400'> B </span>
-                    <span className='text-green-400'> U </span>
-                    <span className='text-green-400'> Y </span>
-                </span>
-                <span className='text-yellow-400 font-bold tracking-normal' >
-                    <span className='text-accent'> L </span>
-                    <span className='text-accent'> O </span>
-                    <span className='text-accent'> W </span>
-                    <span className='text-accent'> C </span>
-                    <span className='text-accent'> A </span>
-                    <span className='text-accent'> L </span>
-                </span>
-            </div>
+           <img src='/new-logo.png' className='h-44 w-44 lg:h-60 lg:w-60' />
 
             <form className="flex flex-col items-center w-full lg:w-1/2 px-2 space-y-8 rounded-sm">
 
                 {/* <input type="text" placeholder="Search Anything...." 
                         className="z-40 relative w-11/12 lg:w-1/3 mx-auto hover:bg-gray-50 transition-all duration-300 border p-3 lg:p-4 hover:shadow-300 active:shadow-300 text-gray-800 shadow-xl rounded-full focus:outline-none" />
                 */}
-                <DropDown />
+                
+                <DropDown searchbar={true} />
 
-                <div className=' z-10 flex items-center mx-auto space-x-6 lg:space-x-16  text-gray-500 ' style={{zIndex:0}}>
+                <div className=' z-10  flex items-center mx-auto space-x-6 lg:space-x-16  text-gray-500 ' style={{zIndex:0}}>
                         <span className='text-blue-600'>बायलोकल</span>
                         <span className='text-red-600'>Buylowcal</span>
                         <span className='text-yellow-600'>ਬਾਏਲੋਕਲ </span>
                         <span className='text-green-600'> বাইলোকাল </span>
-                    </div>
+                </div>
             
             </form>
             

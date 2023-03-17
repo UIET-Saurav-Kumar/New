@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { useLocation } from "@contexts/location/location.context";
 import { useCreateLogMutation } from "@data/log/use-create-log.mutation";
 import  Creatable  from 'react-select';
+import { useShopAvailabilityQuery } from '@data/home/use-shop-availability-query';
  
 
 export default function DropDown({ getLoc }: { getLoc: any }) {
@@ -26,6 +27,20 @@ export default function DropDown({ getLoc }: { getLoc: any }) {
   //   'Best Hangout Places',
   //   'Best Restaurants near me',
   // ]
+
+  const {
+    data,
+    // isLoading: loading,
+    isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage,
+    error,
+  } = useShopAvailabilityQuery({
+    limit: 16 as number,
+    search:"",
+    location : ((getLocation?.formattedAddress) ? JSON.stringify(getLocation):null ) as any
+  });
+
 
   const customStyles = {
     container: (provided) => ({
@@ -47,30 +62,39 @@ export default function DropDown({ getLoc }: { getLoc: any }) {
   };
 
   const defaultOptions = [
-    { value: 'Best Places Near me',  label: 'Best Places Near me',available:false },
-    { value: 'Best Salons',  label: 'Top Salons ',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/1' } },
-    { value: 'Best Hangout Places',  label: 'Best Places to Hangout',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/2' } },
-    { value: 'Best Bars & Restraunts near me',  label: 'Best Bars & Restraunts near me',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/3' } },
-    { value: 'Best deals on hotels',  label: 'Best Deals On Hotel',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/3' } },
-    { value: 'Best travel destinations',  label: 'Best Travel Destinations',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/1' } },
+    { value: 'Best shopping malls',  label: 'Best shopping malls',available:false },
+    { value: 'Top-rated supermarkets near me',  label: 'Top-rated supermarkets near me ',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/1' } },
+    { value: 'Good restaurants nearby',  label: 'Good restaurants nearbyt',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/2' } },
+    { value: 'Nearest hospitals',  label: 'Nearest hospitals',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/3' } },
+    { value: 'Closest pharmacies',  label: 'Best Deals On Hotel',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/3' } },
+    { value: '"Recommended electronics stores ',  label: '"Recommended electronics stores ',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/1' } },
+    { value: 'Top-rated pet stores ',  label: 'Top-rated pet stores ',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/1' } },
+    { value: 'Nearest petrol pumps ',  label: 'Nearest petrol pumps ',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/1' } },
+
   ];
 
   const [searchHistory, setSearchHistory] = useState(defaultOptions);
+
 
   useEffect(() => {
     const defaultOptions = [
       { value: 'Best Places Near me',  label: 'Best Places Near me',available:false },
       { value: 'Best Salons',  label: 'Top Salons ',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/1' } },
-      { value: 'Best Hangout Places',  label: 'Best Places to Hangout',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/2' } },
-      { value: 'Best Bars & Restraunts near me',  label: 'Best Bars & Restraunts near me',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/3' } },
-      { value: 'Best deals on hotels',  label: 'Best Deals On Hotel',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/3' } },
-      { value: 'Best travel destinations',  label: 'Best Travel Destinations',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/1' } },
+      { value: 'Good restaurants nearby',  label: 'Good restaurants nearbyt',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/2' } },
+      { value: 'Nearest hospitals',  label: 'Nearest hospitals',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/3' } },
+      { value: 'Closest pharmacies',  label: 'Best Deals On Hotel',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/3' } },
+      { value: 'Recommended electronics stores',  label: 'Recommended electronics stores',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/1' } },
+      { value: 'Top-rated pet stores ',  label: 'Top-rated pet stores ',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/1' } },
+      { value: 'Nearest petrol pumps ',  label: 'Nearest petrol pumps ',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/1' } },
     ];
+    
     const history = JSON.parse(window.localStorage.getItem("searchHistory")) || defaultOptions; // get saved history or default options
     setSearchHistory(history);
   }, []);
+
+  const shop_check = data?.ShopAvailability?.data?.check;
   
-  console.log('history',searchHistory)
+  console.log('history',shop_check)
 
   const filterColors = (inputValue: string) => {
     return colourOptions.filter((i) =>
@@ -82,7 +106,7 @@ export default function DropDown({ getLoc }: { getLoc: any }) {
     const data = await fetchSearch(inputValue);
     console.log("search data", data);
     let options = [];
-    if (data.length > 0) {
+    if (data.length  > 0 && shop_check !=0) {
       options = data?.map((item) => ({
         value: item.value,
         label: item.label,
@@ -91,7 +115,7 @@ export default function DropDown({ getLoc }: { getLoc: any }) {
     } else {
       options = [{ value: inputValue, label: inputValue, available: false }];
     }
-    callback(options);
+     callback(options);
 
     console.log("search data opt", options);
   };
@@ -223,7 +247,7 @@ export default function DropDown({ getLoc }: { getLoc: any }) {
                 AI Powered
               </p>
 
-              <SearchIcon className=" absolute right-3 top-3 lg:top-4  text-gray-400 w-4 h-4 me-2.5" />
+              <SearchIcon className="absolute right-3 top-3 lg:top-4 text-gray-400 w-4 h-4 me-2.5" />
               {/* </div> */}
 
         </div>

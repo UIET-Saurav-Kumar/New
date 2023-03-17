@@ -38,6 +38,7 @@ import http from '@utils/api/http'
 import { toast } from 'react-toastify';
 import PlacePhotos from "@components/shop/google-maps-places-api/place-photos";
 import PlaceSearch from "@components/shop/google-maps-places-api/place-search";
+import { useShopAvailabilityQuery } from "@data/home/use-shop-availability-query";
 
 
 const ProductFeedLoader = dynamic(
@@ -203,6 +204,20 @@ const ShopsPage = () => {
   function handleTotalRating(data) {
     setTotalRating(data);
   }
+  const {
+    data: shop_avail,
+    isLoading: loading,
+    // isFetchingNextPage,
+    // fetchNextPage,
+    // hasNextPage,
+    // error,
+  } = useShopAvailabilityQuery({
+    limit: 16 as number,
+    search:"",
+    location : ((getLocation?.formattedAddress) ? JSON.stringify(getLocation):null ) as any
+  });
+
+  const shop_check = shop_avail?.ShopAvailability?.data?.check;
 
   return (
 
@@ -246,9 +261,9 @@ const ShopsPage = () => {
     <div className="w-full">
 
         <div className='flex justify-between mx-5  p-3 bg-gray-100 mt-2'>
-          <h3 className='font-semibold text-xs sm:text-sm md:text-sm lg:text-md 2xl:text-md'>
+        { shop_check !==0 && <h3 className='font-semibold text-xs sm:text-sm md:text-sm lg:text-md 2xl:text-md'>
              Local shops near you 
-          </h3> 
+          </h3> } 
         </div>
        
         {/* <div className='xl+:mx-0 mt-0 sm:flex lg:flex md:flex xl:flex 2xl:flex'> */}
