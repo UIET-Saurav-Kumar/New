@@ -6,6 +6,8 @@ import { useEffect,useState } from 'react';
 import dynamic from 'next/dynamic';
 import MobileNavigation from './mobile-navigation';
 import { useRouter } from 'next/router';
+import { useLocation } from '@contexts/location/location.context';
+import { useShopAvailabilityQuery } from '@data/home/use-shop-availability-query';
  
 
 const Footer = dynamic(() => import('@components/footer/Footer'),
@@ -14,6 +16,22 @@ const Footer = dynamic(() => import('@components/footer/Footer'),
 const DefaultLayout: React.FC = ({ children }) => {
 
   const router = useRouter();
+  const {getLocation} =useLocation()
+
+  const {
+    data,
+    isLoading: loading,
+    isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage,
+    error,
+  } = useShopAvailabilityQuery({
+    limit: 16 as number,
+    search:"",
+    location : ((getLocation?.formattedAddress) ? JSON.stringify(getLocation):null ) as any
+  });
+
+  const shop_check = data?.ShopAvailability?.data?.check;
 
   function useScrollDirection() {
     
@@ -47,7 +65,7 @@ const DefaultLayout: React.FC = ({ children }) => {
     <div className="relative flex flex-col  transition-colors duration-150">
         {/* <HeaderTop/>  */}
       <div className={` sticky ${ scrollDirection === "down" ? "-top-44" : "top-0"}   transition-all duration-500 sticky z-50 bg-white top-0`}> 
-       <HeaderMiddle/> 
+      { shop_check == 0 ? <HeaderMiddle searchbar={false}  />  : <HeaderMiddle searchbar={true} />  }
       </div>
       <div>{children}</div>
       { router?.pathname == '/salon-near-me' ? null : <MobileNavigation /> }

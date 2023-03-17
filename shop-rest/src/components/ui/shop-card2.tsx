@@ -260,16 +260,16 @@ const ShopCard2: React.FC<ShopCardProps> = ({ type,shop,text,key,category, shopI
               </div>
  
               <div className=' flex items-start'> 
-              <MapPin className="w-3.5 h-3.5 me-1 text-green-600  flex-shrink-0" />
-                   <span className="flex flex-col">
-                     <h5 className='text-xs  text-gray-700 flex'>
+                <MapPin className="w-3.5 h-3.5 me-1 text-green-600  flex-shrink-0" />
+                    <span className="flex flex-col">
+                      <h5 className='text-xs  text-gray-700 flex'>
                       
                       {shop?.address?.sector}  
                       
-                    </h5>
-                    <p className="">
-                      {shop?.address?.city}
-                    </p>
+                      </h5>
+                      <p className="">
+                        {shop?.address?.city}
+                      </p>
                     </span>
               </div> 
         </div>

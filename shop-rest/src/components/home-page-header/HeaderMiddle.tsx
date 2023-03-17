@@ -15,6 +15,7 @@ import { SearchIcon } from '@components/icons/search-icon';
 import { useModalAction } from "@components/ui/modal/modal.context";
 import Link from 'next/link';
 import Image from 'next/image';
+import { useShopAvailabilityQuery } from '@data/home/use-shop-availability-query';
 
 
 const cities = //create object of major  indian cities with lat, lng and city name
@@ -167,14 +168,14 @@ const cities = //create object of major  indian cities with lat, lng and city na
     ]
 
 
-export default function HeaderMiddle() {
+export default function HeaderMiddle({searchbar}:any) {
 
 
     const { isAuthorize, displayHeaderSearch, displayMobileSearch } = useUI();
 
     const [JoinBtn, setJoinButton] = useState(true);
 
-
+    console.log('searchbar',searchbar)
     useEffect(() => {
         isAuthorize && setJoinButton(false)
     }, [isAuthorize])
@@ -276,7 +277,23 @@ export default function HeaderMiddle() {
         handleLocation()
     }
 
-    console.log('path', location, getLocation?.formattedAddress )
+    console.log('path', location, getLocation )
+
+
+    const {
+        data,
+        isLoading: loading,
+        isFetchingNextPage,
+        fetchNextPage,
+        hasNextPage,
+        error,
+      } = useShopAvailabilityQuery({
+        limit: 16 as number,
+        search:"",
+        location : ((getLocation?.formattedAddress) ? JSON.stringify(getLocation):null ) as any
+      });
+
+      const shop_check = data?.ShopAvailability?.data?.check;
 
     // console.log('Login', isAuthorize);
     // console.log('getlocation',getLocation);
@@ -301,40 +318,54 @@ export default function HeaderMiddle() {
                     </div>
                   
                   {/* Search Bar */}
-                <div className='flex flex-col  w-full space-y-2'>
+                 <div className={ `${searchbar ?  'flex flex-col  w-full space-y-2' : '' }  `}>
                     <div className=' flex focus-ring-2 justify-center
                                     lg:w-3/4 2xl:mx-auto lg:mx-auto 
                                     2xl:flex-1'>
 
-                       <input onClick = {handleLocation} 
+                        {  shop_check !== 0 ? 
+                             <input onClick = {handleLocation} 
                               defaultValue = {address === 'undefined' ? getLocation.formattedAddress : address}  
                               className ='hidden  lg:inline-flex shadow-md text-gray-500 lg:w-32 lg+:w-38 2xl:w-52 md:w-32 placeholder:text-gray-500  
                                           lg:w-42 rounded-lg text-sm rounded-l-lg rounded-r-none h-12 outline-none active:border-gray-400
                                           border-2 border-e-0  focus:border-accent pr-4  border-gray-500 pl-2 ' 
-                              placeholder = 'Enter location' id='location_id' />
+                              placeholder = 'Enter location' id='location_id' /> 
+                              :
+                              <input onClick = {handleLocation} 
+                              defaultValue = {address === 'undefined' ? getLocation.formattedAddress : address}  
+                              className ='hidden  lg:inline-flex  text-gray-500 lg:w-32 lg+:w-38 2xl:w-100 md:w-32 placeholder:text-gray-500  
+                                          lg:w-42 rounded-lg text-sm  shadow-350 ml-60 h-12 outline-none active:border-gray-400
+                                          border  focus:border-accent pr-4  border-gray-500 pl-2 ' 
+                              placeholder = 'Enter location' id='location_id' /> 
+    }
                        
-                        <div className='hidden  lg:flex lg:w-3/5'>
+                        <div className={`${searchbar ? 'lg:flex lg:w-3/5' : 'hidden'}   `}>
                             <DropDown  getLoc = {handleLocation} />
                         </div>
 
                     </div>
 
-                    <div className=' z-10 flex items-center mx-auto space-x-10  text-gray-500 ' style={{zIndex:0}}>
-                        <span className=' text-blue-600'>बायलोकल</span>
-                        <span className='  text-red-600'>Buylowcal</span>
+                  { shop_check !== 0 && <div className=' z-10 flex items-center mx-auto space-x-10  text-gray-500 ' style={{zIndex:0}}>
+                        <span className='text-blue-600'>बायलोकल</span>
+                        <span className='text-red-600'>Buylowcal</span>
                         <span className='text-yellow-600'>ਬਾਏਲੋਕਲ </span>
                         <span className='text-green-600'> বাইলোকাল </span>
                     </div>
+                  }
                 </div>
 
-                               <div className='hidden  sm:block  items-center mr-24'>
-                                <Link href='https://admin.buylowcal.com/register'><button className='whitespace-nowrap bg-gradient-to-r from-magenta  to-magenta hover:bg-green-800 hover:shadow-xl font-bold text-white p-3 px-3 rounded-md'>
-                                        Business Access
-                                    </button></Link>
-                               </div>
-                               <div className='hidden lg:inline-flex lg:ml-8 lg+:ml-0  xl:inline-flex'>
-                                  { !JoinBtn &&  <AuthorizedMenu/>  }
-                                  { JoinBtn &&  <JoinButton/>  }
+                               <div className='flex items-center '> 
+                                    <div className='hidden  sm:block  items-center mr-24'>
+                                        <Link href='https://admin.buylowcal.com/register'>
+                                            <button className='whitespace-nowrap bg-gradient-to-r from-magenta  to-magenta hover:bg-green-800 hover:shadow-xl font-bold text-white p-3 px-3 rounded-md'>
+                                                Business Access
+                                            </button>
+                                        </Link>
+                                    </div>
+                                    <div className='hidden lg:inline-flex lg:ml-8 lg+:ml-0  xl:inline-flex'>
+                                        { !JoinBtn &&  <AuthorizedMenu/>  }
+                                        { JoinBtn &&  <JoinButton/>  }
+                                    </div>
                                </div>
                            
                           
@@ -502,7 +533,7 @@ export default function HeaderMiddle() {
              
                )}
        </div>
-       <div className='w-full flex flex-col lg:hidden -mb-3  '>
+       <div className={` ${ searchbar ? 'w-full flex flex-col lg:hidden -mb-3' : 'hidden'}  `}>
         <div className='flex md:flex w-full lg:hidden px-4 mb-2 mt-0' >
             <DropDown getLoc={handleLocation}/>
             {/* <SearchIcon onClick={handleSearchModal} className='text-gray-500 h-10 w-10 cursor-pointer'/> */}

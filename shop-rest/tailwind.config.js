@@ -138,6 +138,7 @@ module.exports = {
         'drop-down': "url('/drop-down1.jpg')",
         'dark-bg': "url('/dark-bg.jpg')",
         'collage': "url('/collage.jpeg')",
+        'ai' : "url('/ai.jpg')",
 
        },
 

@@ -27,6 +27,25 @@ export default function DropDown({ getLoc }: { getLoc: any }) {
   //   'Best Restaurants near me',
   // ]
 
+  const customStyles = {
+    container: (provided) => ({
+      ...provided,
+      width: 200,
+    }),
+    control: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isFocused ? 'lightgray' : 'white',
+      borderRadius: 10,
+      border: state.isFocused ? 'none' : '1px solid black',
+      boxShadow: state.isFocused ? '0 0 5px rgba(0, 0, 0, 0.5)' : 'none',
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isSelected ? 'gray' : 'white',
+      color: state.isSelected ? 'white' : 'black',
+    }),
+  };
+
   const defaultOptions = [
     { value: 'Best Places Near me',  label: 'Best Places Near me',available:false },
     { value: 'Best Salons',  label: 'Top Salons ',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/1' } },
@@ -147,13 +166,16 @@ export default function DropDown({ getLoc }: { getLoc: any }) {
   }
 
 
-  function saveSearch(e: any) {
+  function saveSearch(e: any) { 
+
     console.log('savesearch',e)
     var { value, label,available, text_type } = e;
+
     if (value) {
       const searchHistory = JSON.parse(
         window.localStorage.getItem("searchHistory") || "[]"
       );
+
       if (!searchHistory.includes({value,label,available,text_type})) {
         searchHistory.unshift({value,label,available,text_type}); // add the new search keyword to the beginning of the array
         // if (searchHistory.length > 5) {
@@ -163,22 +185,35 @@ export default function DropDown({ getLoc }: { getLoc: any }) {
           "searchHistory",
           JSON.stringify(searchHistory)
         );
+
       }
     }
   }
 
+  const uniqueSearchhistory =()=>{
+    
+  } 
+
 
     return (
 
-        <div className=' w-full z-10 relative'>
+        <div className='w-full z-10 relative'>
             
               <AsyncSelect
                   cacheOptions
-                  // style={'customStyles'}
+                  style={customStyles}
                   defaultValue={inputValue.value}
                   loadOptions={loadOptions} 
                   value={ inputValue }
-                  defaultOptions={searchHistory?.length ? searchHistory.map((item) => ({ label: item.label, value: item?.value, available: item?.available, text_type: item?.text_type })) : defaultHistory}
+                  defaultOptions={searchHistory?.length ? 
+                    searchHistory.reduce((acc, curr) => {
+                      if (!acc.some((item) => item.label === curr.label)) {
+                        acc.push(curr);
+                      }
+                      return acc;
+                    }, []).map((item) => ({ label: item.label, value: item?.value, available: item?.available, text_type: item?.text_type })) 
+                    : defaultHistory
+                  }
                   // onInputChange={handleInputChange}
                   placeholder={ <div className='text-xs sm:text-sm md:text:md  lg:text-sm'> Ask me anything... </div>}
                   onChange={optionSelected}
@@ -190,7 +225,6 @@ export default function DropDown({ getLoc }: { getLoc: any }) {
 
               <SearchIcon className=" absolute right-3 top-3 lg:top-4  text-gray-400 w-4 h-4 me-2.5" />
               {/* </div> */}
-          
 
         </div>
     );

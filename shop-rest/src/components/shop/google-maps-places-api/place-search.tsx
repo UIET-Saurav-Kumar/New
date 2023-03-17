@@ -333,6 +333,7 @@ function shopRoute(result) {
         </p>
 
        { !searchResults?.length ? <Spinner/> :
+       
         <div className={` ${showImages || showLogoImg ? 'grid grid-cols-2 lg:grid-cols-5 gap-2 mt-2' : 'hidden'}  `}> 
           <p className={` ${show ? 'block' : 'hidden'}`}>{rating && (rating + ' '+ratingStars(rating))}</p>
             {/* <div className='flex  gap-3 w-full px-2 overflow-x-scroll'>

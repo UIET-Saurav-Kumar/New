@@ -47,6 +47,7 @@ import Banners from "@components/home-page-product-section/banners";
 import Banners2 from "@components/home-page-product-section/banners2";
 import Banners3 from "@components/home-page-product-section/banners3";
 import Spinner from "@components/ui/loaders/spinner/spinner";
+import SearchHistory from "@components/home-page-product-section/search-history";
 
 
 const ProductFeedLoader = dynamic(
@@ -123,10 +124,13 @@ const CartCounterButton = dynamic(
 
 export default function home() {
 
-const { width } = useWindowSize();
-const loadMoreRef = useRef();
-const { query } = useRouter();
-const {getLocation} =useLocation()
+  const { width } = useWindowSize();
+
+  const loadMoreRef = useRef();
+
+  const { query } = useRouter();
+
+  const {getLocation} =useLocation();
 
 
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -158,6 +162,7 @@ const {
   search:"",
   location : ((getLocation?.formattedAddress) ? JSON.stringify(getLocation):null ) as any
 });
+
 
 
 useIntersectionObserver({
@@ -247,8 +252,9 @@ useIntersectionObserver({
                 
                 <UserDashboard/>
                 <Banners2/>
+                {/* <SearchHistory/> */}
                 {/* <BillPayment/> */}
-                {/* <PolicyServices/>   */}
+                {/* <PolicyServices/>*/}
                 <FeaturedShops />
 
                 <ElanteBanner/>
@@ -299,4 +305,4 @@ useIntersectionObserver({
 }
  
 
-home.Layout = DefaultLayout;
+home.Layout =  DefaultLayout;

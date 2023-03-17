@@ -134,13 +134,10 @@ const ShopsPage = () => {
 
   }
 
+  console.log('slug data', data?.pages);
 
-  console.log('slug data', data?.pages)
-
-  if (!isLoading && !data?.pages?.[0]?.data?.length) {
-
+  if (!isLoading && query?.avail !== 'false' &&  !data?.pages?.[0]?.data?.length) {
     return (
-
       <div className="w-full mx-2 mt-5">
         {/* <ProductNotFoundInfo shopData={!data?.pages?.[0]?.data} /> */}
         <ShopNotFoundInfo searchText={getSearch()} />
@@ -249,7 +246,9 @@ const ShopsPage = () => {
     <div className="w-full">
 
         <div className='flex justify-between mx-5  p-3 bg-gray-100 mt-2'>
-          <h3 className='font-semibold text-xs sm:text-sm md:text-sm lg:text-md 2xl:text-md'> Local shops near you </h3> 
+          <h3 className='font-semibold text-xs sm:text-sm md:text-sm lg:text-md 2xl:text-md'>
+             Local shops near you 
+          </h3> 
         </div>
        
         {/* <div className='xl+:mx-0 mt-0 sm:flex lg:flex md:flex xl:flex 2xl:flex'> */}
@@ -283,6 +282,7 @@ const ShopsPage = () => {
                                 handleOpen={handleOpen}
                                 handleReviews={handleReviews} />
                               }
+
                               { query?.avail !== 'false' && <div className={` ${query.text_type == 'shop' || query.text_type == 'Category'  || query.text_type == 'Shop_Category' ? 'grid grid-cols-2 place-items-center px-2 lg:px- mt-4 sm:grid-cols-3 md:grid-cols-4 gap-2 lg:gap-8 lg:grid-cols-4 xl:grid-cols-5 w-full' : 'flex flex-col'}`} key={idx}>
                                 
                                   {page?.data?.slice(0,21).filter((shop) => shop?.is_active === 1).map((shop: any) => (
