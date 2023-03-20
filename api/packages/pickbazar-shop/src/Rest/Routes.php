@@ -67,15 +67,15 @@ Route::get('/get-fast-tag-info','PickBazar\Http\Controllers\BillerInfoController
 Route::get('/get-insurance-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
 
 
-Route::any('/google-maps-text-search',
+Route::any('/buylowcal-text-search',
 'PickBazar\Http\Controllers\PlacesApiController@textSearch');
-Route::any('/google-maps-text-search-all',
+Route::any('/buylowcal-text-search-all ',
 'PickBazar\Http\Controllers\PlacesApiController@textSearchAll');
-// Route::get('google-maps-text-search', 'PickBazar\Http\Controllers\AnalyticsController@totalUsers');
-Route::get('/google-maps-place-details',
+// Route::get('buylowcal-text-search', 'PickBazar\Http\Controllers\AnalyticsController@totalUsers');
+Route::get('/buylowcal-place-details',
 'PickBazar\Http\Controllers\PlacesApiController@placeDetails');
 
-Route::get('/google-maps-place-photos',
+Route::get('/buylowcal-place-photos',
 'PickBazar\Http\Controllers\PlacesApiController@placePhotos');
 
 

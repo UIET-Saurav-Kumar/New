@@ -83,11 +83,11 @@ export const API_ENDPOINTS: Record<string, string> = {
   FAST_TAG_INFO:'get-fast-tag-info',
   FAST_TAG_DETAILS:'get-fast-tag-details',
 
-  GOOGLE_MAPS_TEXT_SEARCH: 'google-maps-text-search',
-  GOOGLE_MAPS_TEXT_SEARCH_ALL: 'google-maps-text-search-all',
+  BUYLOWCAL_TEXT_SEARCH: 'buylowcal-text-search',
+  BUYLOWCAL_TEXT_SEARCH_ALL: 'buylowcal-text-search-all',
 
-  GOOGLE_MAPS_PLACE_DETAILS: 'google-maps-place-details',
-  GOOGLE_MAPS_PLACE_PHOTOS: 'google-maps-place-photos',
+  BUYLOWCAL_PLACE_DETAILS: 'buylowcal-place-details',
+  BUYLOWCAL_PLACE_PHOTOS: 'buylowcal-place-photos',
 
 
   UPI_PAYMENT: 'upi-payment',

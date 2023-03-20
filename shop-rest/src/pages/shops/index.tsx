@@ -54,9 +54,10 @@ const ShopsPage = () => {
   const { width } = useWindowSize();
   
   const [filter, setFilter] = useState(false);
+
   const [sort , setSort] = useState(false);
 
-  const [error, setError] = useState('')
+  const [error, setError] = useState('');
 
   const queryClient = useQueryClient();
 
@@ -72,7 +73,6 @@ const ShopsPage = () => {
   const { query } = useRouter();
 
   console.log('search',query.text);
-
 
   const [reviews, setReviews] = useState('');
 
@@ -109,7 +109,7 @@ const ShopsPage = () => {
    } = useShopsQuery({
     category:getCategory(),
     limit:3000000,
-    location:((getLocation?.formattedAddress)?JSON.stringify(getLocation):null ) as any,
+    location:((getLocation?.formattedAddress) ? JSON.stringify(getLocation):null ) as any,
     is_active:1,
     // page:1,
     search:getSearch()
@@ -122,29 +122,20 @@ const ShopsPage = () => {
     enabled: hasNextPage,
   })
 
-  console.log();
 
+ 
   function getSearch():string {
     
     const { query } = useRouter();
     
-    if(query.text){
-      return query.text as string
+    if(query.text || query?.category){
+      return query.text ? query.text : query?.category   
     }
     return "";
 
   }
 
   console.log('slug data', data?.pages);
-
-  if (!isLoading && query?.avail !== 'false' &&  !data?.pages?.[0]?.data?.length) {
-    return (
-      <div className="w-full mx-2 mt-5">
-        {/* <ProductNotFoundInfo shopData={!data?.pages?.[0]?.data} /> */}
-        <ShopNotFoundInfo searchText={getSearch()} />
-      </div>
-    );
-  }
 
   function getCategory(){
     const { query } = useRouter();
@@ -176,34 +167,37 @@ const ShopsPage = () => {
   // push both in seperate array starting with the first shop with products and ending with the last shop with no products
   
   // // console.log('shops',data?.pages?.filter((shop: any) => shop?.is_active === 1))
-  // // console.log('shops name',data?.pages?.data?.map((shop: any) => shop))
-  function handleApiPhotos(data) {
-    setPlacePhotos(data)
-  }
 
-  function handleBusinessName(data){
+  // // console.log('shops name',data?.pages?.data?.map((shop: any) => shop))
+
+  function handleApiPhotos(data:any) {
+    setPlacePhotos(data);
+  } 
+
+  function handleBusinessName(data:any) {
     setBusinessName(data);
   }
 
-  function handleLogoImg(data){
-    setLogoImg(data)
+  function handleLogoImg(data:any) {
+    setLogoImg(data);
   }
   
-  function handleRating(data) {
+  function handleRating(data:any) {
     setRating(data);
   }
   
-  function handleOpen(data) {
+  function handleOpen(data:any) {
     setOpen(data);
   }
   
-  function handleReviews(data) {
+  function handleReviews(data:any) {
     setReviews(data);
   }
   
-  function handleTotalRating(data) {
+  function handleTotalRating(data:any) {
     setTotalRating(data);
   }
+
   const {
     data: shop_avail,
     isLoading: loading,
@@ -217,7 +211,19 @@ const ShopsPage = () => {
     location : ((getLocation?.formattedAddress) ? JSON.stringify(getLocation):null ) as any
   });
 
+
   const shop_check = shop_avail?.ShopAvailability?.data?.check;
+
+
+  if (!isLoading && query?.avail !== 'false' &&  !data?.pages?.[0]?.data?.length) {
+    return (
+      <div className="w-full mx-2 mt-5">
+        {/* <ProductNotFoundInfo shopData={!data?.pages?.[0]?.data} /> */}
+        <ShopNotFoundInfo searchText={getSearch()} />
+      </div>
+    );
+  }
+
 
   return (
 
@@ -225,7 +231,7 @@ const ShopsPage = () => {
 
     <Head>
           
-        {shopCat == 'Cosmetics' &&  <title>Get Best Deals on Cosmetic Products | #1 Cosmetic stores in Chandigarh </title> }
+        {shopCat == 'Cosmetics' &&  <title>Get Best Deals on Cosmetic Products | #1 Cosmetic store in Chandigarh </title> }
         {shopCat == 'Groceries' && <title>  Best Grocery Store in Tricity | Get exclusive Offer Now</title> }
         {shopCat == 'Pharmacy' &&   <title> Get Upto 30% off on Pharmacy With Buylowcal | Shop Now  </title> }
         {shopCat == ' Vegetables & Fruits' &&  <title>  Save Your Time & Money | Buy Veggies Fruits  with Buylowcal  </title> }
@@ -271,7 +277,8 @@ const ShopsPage = () => {
           {/* <div className='py-4 px-4 grid w-full grid-cols-1 xs+:grid-cols-1 xs++:grid-cols-2 gap-4 sm:grid-cols-2 
                           md:grid-cols-2 md++:grid-cols-2 lg:grid-cols-3 lg+:grid-cols-3 xl:grid-cols-4 xl+:grid-cols-4
                           xl++:grid-cols-5 2xl:grid-cols-5  3xl:grid-cols-6 border-2 overflow-y-scroll h-screen overflow-x-hidden  bg-gray-100'> */}
-            <div className={` ${query.text_type == 'shop' ? 'flex flex-col gap-2 h-full w-full' : 'flex flex-col lg:px-10 h-full w-full'}   `}>
+            <div className={` ${query.text_type == 'shop' ? 'flex flex-col gap-2 h-full w-full' 
+                               : 'flex flex-col lg:px-10 h-full w-full'}   `}>
               { isLoading && !data?.pages?.length ? (
                 <ProductFeedLoader limit = {30} />
               ) : (

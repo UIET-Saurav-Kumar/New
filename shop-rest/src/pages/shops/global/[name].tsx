@@ -51,7 +51,7 @@ export default function GlobalShops({data}:any) {
 
   const getplaceDetails = async (data: any) => {
     const { data: response } = await http.get(
-     `${url}/${API_ENDPOINTS.GOOGLE_MAPS_PLACE_DETAILS}`,{params: data}
+     `${url}/${API_ENDPOINTS.BUYLOWCAL_PLACE_DETAILS}`,{params: data}
    )
     return response
  }
@@ -59,7 +59,7 @@ export default function GlobalShops({data}:any) {
  const getplacePhoto = async (data: any) => {
   // console.log('search data',data)
   const { data: response } = await http.get(
-    `${url}/${API_ENDPOINTS.GOOGLE_MAPS_PLACE_PHOTOS}`,{params: data}
+    `${url}/${API_ENDPOINTS.BUYLOWCAL_PLACE_PHOTOS}`,{params: data}
   )
   // console.log('logo id',response)
   return response
@@ -86,7 +86,7 @@ const { mutate: mutatePlace} = useMutation(getplaceDetails, {
   },
 
   onSettled: () => {
-    queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_PLACE_DETAILS)
+    queryClient.invalidateQueries(API_ENDPOINTS.BUYLOWCAL_PLACE_DETAILS)
   },
 })
 
@@ -99,7 +99,7 @@ const { mutate: mutatePhoto } =  useMutation(getplacePhoto, {
   },
 
   onSettled: () => {
-    queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_PLACE_PHOTOS)
+    queryClient.invalidateQueries(API_ENDPOINTS.BUYLOWCAL_PLACE_PHOTOS)
   },
 
 });

@@ -14,7 +14,7 @@ function StayTuned() {
 
         <div className="bg-aei bg-cover bg-no-repeat w-full flex flex-col items-center justify-center h-screen lg:h-110">
 
-            <main className="flex flex-col items-center mt-30 lg:mt-24 lg:justify-center space-y-0 flex- w-full">
+            <main className="flex flex-col items-center mt-30 lg:mt-24 lg:justify-center space-y-0 flex- h-screen w-full">
                 {/* <img src={'logo'} alt="Google Logo" className="w-64 h-64 mb-8" /> */}
 
                 <img src='/new-logo.png' className='h-44 w-44 lg:h-60   lg:w-60' />

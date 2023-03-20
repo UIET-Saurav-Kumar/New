@@ -98,7 +98,7 @@ useEffect(() => {
   const getSearchDetails = async (data: any) => {
     // console.log('search data details',data)
     const { data: response } = await http.get(
-      `${url}/${API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH}`,{params: data}
+      `${url}/${API_ENDPOINTS.BUYLOWCAL_TEXT_SEARCH}`,{params: data}
     )
   
     return response
@@ -108,7 +108,7 @@ useEffect(() => {
   const getplaceDetails = async (data: any) => {
     // console.log('search data details',data)
     const { data: response } = await http.get(
-      `${url}/${API_ENDPOINTS.GOOGLE_MAPS_PLACE_DETAILS}`,{params: data}
+      `${url}/${API_ENDPOINTS.BUYLOWCAL_PLACE_DETAILS}`,{params: data}
     )
      return response 
   }
@@ -117,7 +117,7 @@ useEffect(() => {
   const getplacePhoto = async (data: any) => {
     // console.log('search data',data)
     const { data: response } = await http.get(
-      `${url}/${API_ENDPOINTS.GOOGLE_MAPS_PLACE_PHOTOS}`,{params: data}
+      `${url}/${API_ENDPOINTS.BUYLOWCAL_PLACE_PHOTOS}`,{params: data}
     )
     // console.log('logo id',response)
     return response
@@ -144,7 +144,7 @@ useEffect(() => {
     },
 
     onSettled: () => {
-      queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_PLACE_DETAILS)
+      queryClient.invalidateQueries(API_ENDPOINTS.BUYLOWCAL_PLACE_DETAILS)
     },
   })
 
@@ -162,7 +162,7 @@ useEffect(() => {
     },
     
     onSettled: () => {
-      queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_TEXT_SEARCH)
+      queryClient.invalidateQueries(API_ENDPOINTS.BUYLOWCAL_TEXT_SEARCH)
     },
   })
 
@@ -175,7 +175,7 @@ useEffect(() => {
     },
 
     onSettled: () => {
-      queryClient.invalidateQueries(API_ENDPOINTS.GOOGLE_MAPS_PLACE_PHOTOS)
+      queryClient.invalidateQueries(API_ENDPOINTS.BUYLOWCAL_PLACE_PHOTOS)
     },
  
 });
