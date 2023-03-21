@@ -89,6 +89,8 @@ export const API_ENDPOINTS: Record<string, string> = {
   BUYLOWCAL_PLACE_DETAILS: 'buylowcal-place-details',
   BUYLOWCAL_PLACE_PHOTOS: 'buylowcal-place-photos',
 
+  IP_LOCATION:'ip-location',
+
 
   UPI_PAYMENT: 'upi-payment',
   QUIZ: 'quiz',

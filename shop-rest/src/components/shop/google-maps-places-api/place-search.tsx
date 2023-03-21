@@ -100,13 +100,13 @@ export default function PlaceSearch(props:any) {
       photo_reference : logo_id,
       place_id: place_Id
     }
-    mutateLogoImage(param)
+    mutateLogoImage(param);
 
   },[logo_id])
 
   console.log('logo id',logo_id)
 
-
+  
   useEffect(() => {
     setPlace_Photos([]);  
   }, [shopName])
@@ -116,13 +116,10 @@ export default function PlaceSearch(props:any) {
   }, [shopName,logo_id])
 
 
- 
-
   const getSearchDetails = async (data: any) => {
      const { data: response } = await http.get(
       `${url}/${API_ENDPOINTS.BUYLOWCAL_TEXT_SEARCH_ALL}`,{params: data}
     )
-  
     return response
   }
 
@@ -314,14 +311,7 @@ console.log('data',shopData);
 console.log('searchresults',searchResults)
 
 function shopRoute(result) {
-  // setShopName(result?.name);
-
-  // console.log('resulta',shopData?.pages[0]?.data[0].settings?.location?.formattedAddress)
-
-  // shop_Name && shopData?.pages[0]?.data[0].length == 1 && shopData?.pages[0]?.data[0].settings?.location?.formattedAddress.includes(result?.formatted_address) 
-  // ? alert(true) : alert(false)
   
-  // console.log('img 22',result.photo_url?.url?.split('?')[1])
   router.push(`shops/global/${result?.name}?id=${result?.place_id}&open=${result?.opening_hours?.open_now}&photo=${result?.photo_url?.url?.split('?')[1]}&rating=${result?.rating}&total=${result?.user_ratings_total}&adr=${result?.formatted_address}&num=${result?.phone_number}`)
 }
 

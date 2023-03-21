@@ -305,16 +305,17 @@ const ShopsPage = () => {
                                 handleReviews={handleReviews} />
                               }
 
-                              { query?.avail !== 'false' && <div className={` ${query.text_type == 'shop' || query.text_type == 'Category'  || query.text_type == 'Shop_Category' ? 'grid grid-cols-2 place-items-center px-2 lg:px- mt-4 sm:grid-cols-3 md:grid-cols-4 gap-2 lg:gap-8 lg:grid-cols-4 xl:grid-cols-5 w-full' : 'flex flex-col'}`} key={idx}>
-                                
+                              { query?.avail !== 'false' && 
+                                <div className={` ${query.text_type == 'shop' || query.text_type == 'Category'  || query.text_type == 'Shop_Category' ? 'grid grid-cols-2 place-items-center px-2 lg:px- mt-4 sm:grid-cols-3 md:grid-cols-4 gap-2 lg:gap-8 lg:grid-cols-4 xl:grid-cols-5 w-full' : 'flex flex-col'}`} key={idx}>
                                   {page?.data?.slice(0,21).filter((shop) => shop?.is_active === 1).map((shop: any) => (
                                     <ShopCard2 text={getText()} type={getType()} category={getCategory()} 
-                                              shop={shop}   shopId={shop?.id} key={shop.id} />
+                                               shop={shop}   shopId={shop?.id} key={shop.id} />
                                   ))}
                                 </div>
-                    }
+                              }
                             </div>
-                        )
+
+                          )
                     }) 
                      
                     }

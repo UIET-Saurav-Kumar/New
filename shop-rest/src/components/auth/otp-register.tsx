@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import { Controller, useForm } from "react-hook-form";
@@ -22,6 +22,10 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Query } from "react-query";
 import { useOtpRegisterMutation } from "@data/auth/use-otp-register.mutation";
+import { useCustomerQuery } from "@data/customer/use-customer.query";
+import http from "@utils/api/http";
+import { API_ENDPOINTS } from "@utils/api/endpoints";
+import url  from '@utils/api/server_url';
 
 
 
@@ -29,6 +33,7 @@ type FormValues = {
   phone_number:number;
   name:string;
   email:string;
+  current_location: string;
 };
 
 const registerFormSchema = yup.object().shape({
@@ -55,9 +60,32 @@ const OtpRegisterForm = (props:any) => {
 
   const [birthDate, setBirthDate] = useState(null);
 
-  const url = props?.data?.pathname;
+  const {data} = useCustomerQuery();
+  const [userLocation, setUserLocation] = useState('');
+ 
+  const memoizedLocation = useMemo(async () => {
+    try {
+      const { data: response } = await http.get(`${url}/${API_ENDPOINTS.IP_LOCATION}`);
+      return response;
+    } catch (error) {
+      console.error('Error fetching IP location:', error);
+      return null;
+    }
+  }, []);
+  
+  
+  useEffect(()=>{
+    const getIpLocation = async () => {
+      const response = await memoizedLocation;
+      setUserLocation(response?.city+","+response?.region_name);
+    }
+    getIpLocation();
+  },[ userLocation]);
+  console.log('res',userLocation)
 
-  console.log('url', url )
+  const path = props?.data?.pathname;
+
+  console.log('url', path )
   
   // const userLoc = [{
   //   formattedAddress: getLocation.formattedAddress,
@@ -81,7 +109,7 @@ const OtpRegisterForm = (props:any) => {
     resolver: yupResolver(registerFormSchema),
   });
 
-
+  
 
   const router = useRouter();
 
@@ -143,7 +171,7 @@ function handleClick(){
 
     console.log('path', router.pathname)
 
-  function onSubmit({  phone_number,name,email  }:FormValues)   {
+  function onSubmit({  phone_number,name,email, current_location  }:FormValues)   {
     mutate(
         //@ts-ignore
       {
@@ -152,7 +180,7 @@ function handleClick(){
         // password,
         phone_number,
         // invited_by:'',
-        // current_location,
+        current_location: userLocation,
         // date_of_birth,
         // occupation,
         // gender,
@@ -162,8 +190,8 @@ function handleClick(){
           query?.utm_source == 'shop_qr' ? 
           // router.push('/shops/'+ query?.campaign)
           router.push('/auth/'+data?.user.id+'?utm_source=shop_qr&utm_campaign='+query?.utm_campaign+'&shop_id='+query?.shop_id)
-          : url == '/quiz-form' ?  router.push('/auth/'+data?.user.id+'?name=quiz-form') 
-          : url === '/salon-near-me' ? router.push('/auth/'+data?.user.id+'?utm_source=salon-near-me') 
+          : path == '/quiz-form' ?  router.push('/auth/'+data?.user.id+'?name=quiz-form') 
+          : path === '/salon-near-me' ? router.push('/auth/'+data?.user.id+'?utm_source=salon-near-me') 
           : router.push('/auth/'+data?.user.id);
           closeModal();
           return ;
@@ -280,6 +308,16 @@ function handleClick(){
           onChange={(e) => setValue("phone_number", getPhoneNumber(e.target.value))}
           error={t(errors.phone_number?.message!)}
         />
+
+           <Input
+            defaultValue={userLocation}
+            label={"Current Location"} 
+            {...register("current_location")} 
+            type="text" 
+            variant="rounded" 
+            placeholder="Enter your city"
+            className="col-span-2 text-xs hidden   " 
+            error={t(errors.current_location?.message!)} />
 
        
       

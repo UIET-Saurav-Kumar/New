@@ -157,7 +157,9 @@ const ShopCard2: React.FC<ShopCardProps> = ({ type,shop,text,key,category, shopI
         <div className='flex flex-col space-y-1 w-full p-4'>
 
               <div className="flex justify-between w-full items-center "> 
-                <span className="flex flex-col items-center"> {imageCheck(shop?.logo?.thumbnail, shop, '190', false,'  w-16 rounded-full object-contain')}
+                <span className="flex flex-col items-center"> 
+                  {imageCheck(shop?.logo?.thumbnail, shop, '190', false,
+                   'w-16 rounded-full object-contain')}
                    <h4 className='font-semibold mx-3 text-gray-900 text-sm sm:text-lg w-full '> 
                      {shop?.name} 
                    </h4>
@@ -179,9 +181,9 @@ const ShopCard2: React.FC<ShopCardProps> = ({ type,shop,text,key,category, shopI
                 </Link>
               </div>
  
-              <div className=' flex items-start'> 
-              <MapPin className="w-3.5 h-3.5 me-1 text-green-600  flex-shrink-0" />
-                   <span className="flex flex-col">
+              <div className='flex items-start'> 
+                <MapPin className="w-3.5 h-3.5 me-1 text-green-600  flex-shrink-0" />
+                  <span className="flex flex-col">
                      <h5 className='text-xs  text-gray-700 flex'>
                       
                       {shop?.address?.sector}  
@@ -190,17 +192,21 @@ const ShopCard2: React.FC<ShopCardProps> = ({ type,shop,text,key,category, shopI
                     <p className="">
                       {shop?.address?.city}
                     </p>
-                    </span>
+                  </span>
               </div> 
+
+
         </div>
 
 
-        : type == 'shop' || type == 'Category' || type == 'Shop_Category'? 
+        : type == 'shop' || type == 'Category' || type == 'Shop_Category' ? 
         <div className='flex shadow-300 rounded flex-col space-y-1  border  w-full   text-center   p-4   '>
 
               <div className="flex justify-between w-full items-center  "> 
                 <span className="flex flex-col items-center"> 
-                {imageCheck(shop?.logo?.thumbnail, shop, '10', false,'  h-44 w-screen  object-fit')}
+                <div className="w-full h-full">  
+                    {imageCheck(shop?.logo?.thumbnail, shop, '10', false,'  h-44 w-60  object-contain')}
+                </div>
                    <h4 className='font-semibold  lg:mx-3 mt-2 h-16 lg:h-16 text-gray-900 text-sm sm:text-sm lg:text-sm xl:text-sm w-full '> 
                      {shop?.name} 
                    </h4>
@@ -219,16 +225,16 @@ const ShopCard2: React.FC<ShopCardProps> = ({ type,shop,text,key,category, shopI
               </div>
  
               <div className=' flex items-start w-full'> 
-              <MapPin className="w-3.5 h-3.5 me-1 text-green-600  flex-shrink-0" />
+                <MapPin className="w-3.5 h-3.5 me-1 text-green-600  flex-shrink-0" />
                    <span className="flex flex-col text-center w-full">
-                     <h5 className='text-xs sm:text-sm h-full text-left  lg:h-16 text-gray-700 flex'>
-                      
-                      {shop?.address?.sector?.length ? shop?.address?.sector : shop?.address?.street_address }  
-                      
-                    </h5>
-                    <p className="text-xs lg:text-sm text-gray-700 mt-2 font-md lg:font-semibold tracking-wide text-center">
-                      {shop?.address?.city  }
-                    </p>
+                      <h5 className='text-xs sm:text-sm h-full text-left  lg:h-16 text-gray-700 flex'>
+                        
+                        {shop?.address?.sector?.length ? shop?.address?.sector : shop?.address?.street_address }  
+                        
+                      </h5>
+                      <p className="text-xs lg:text-sm text-gray-700 mt-2 font-md lg:font-semibold tracking-wide text-center">
+                        {shop?.address?.city  }
+                      </p>
                     </span>
               </div> 
         </div>
@@ -236,27 +242,27 @@ const ShopCard2: React.FC<ShopCardProps> = ({ type,shop,text,key,category, shopI
         <div className='flex flex-col space-y-1 w-full p-4 border max-w-44'>
 
               <div className="flex justify-between w-full items-center "> 
-                <span className="flex flex-col items-center"> {imageCheck(shop?.logo?.thumbnail, shop, '190', false,' w-16 lg:w-28  object-contain')}
+                <span className="flex flex-col items-center"> 
+                     {imageCheck(shop?.logo?.thumbnail, shop, '190', false,' w-16 lg:w-28  object-contain')}
+
                    <h4 className='font-semibold mx-3 text-gray-900 text-sm sm:text-lg w-full '> 
                      {shop?.name} 
                    </h4>
                   
-                              <p className={` `}>{rating && (rating + ' '+ratingStars(rating))}</p>
-                              <p className="text-green-600 text-sm">{ open === true && 'Open'}</p>
-                      <p className="text-red-600 text-sm">{ open === false && 'closed'}</p>
-                   <p className="flex items-center">
-                    {/* <span className="text-gray-700 font-light">
-                      {rating}
-                    </span> */}
-                    {/* {getStars(rating)} */}
+                      <p className={` `}>{rating && (rating + ' '+ratingStars(rating))}   </p>
+                      <p className="text-green-600 text-sm">{ open === true && 'Open'}  </p>
+                      <p className="text-red-600 text-sm">{ open === false && 'closed'} </p>
+                      <p className="flex items-center">
+                      {/* <span className="text-gray-700 font-light">
+                        {rating}
+                      </span> */}
+                      {/* {getStars(rating)} */}
                    </p>
                    {/* <p className={` ${open == true ? 'text-green-700 font-semibold' : 'text-red-500 text-semibold'}`}>
                     {open == true ? 'open' : 'closed'}
                    </p> */}
                 </span>
                 {/* <h4 className='text-green-600 text-xs font-semibold'> Open </h4> */}
-               
-                
               </div>
  
               <div className=' flex items-start'> 

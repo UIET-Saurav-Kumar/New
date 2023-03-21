@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import { Controller, useForm } from "react-hook-form";
@@ -27,6 +27,10 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Label } from "@headlessui/react/dist/components/label/label";
 import Radio from "@components/ui/radio/radio";
+import http from "@utils/api/http";
+import { API_ENDPOINTS } from "@utils/api/endpoints";
+import url from "@utils/api/server_url";
+import { useCustomerQuery } from "@data/customer/use-customer.query";
 
 
 type FormValues = {
@@ -97,6 +101,27 @@ const RegisterForm = () => {
   const { mutate, isLoading: loading } = useRegisterMutation();
   const [errorMsg, setErrorMsg] = useState("");
   const { query } = useRouter();
+
+  const {data} = useCustomerQuery();
+
+ 
+  const [userLocation, setUserLocation] = useState('');
+
+  
+  const memoizedLocation = useMemo(async () => {
+    const { data: response } = await http.get(
+      `${url}/${API_ENDPOINTS.IP_LOCATION}`
+    );
+    return response;
+  }, []);
+  
+  useEffect(()=>{
+    const getIpLocation = async () => {
+      const response = await memoizedLocation;
+      setUserLocation(response?.city+","+response?.region_name);
+    }
+    getIpLocation();
+  },[data?.me?.id, memoizedLocation]);
 
   const [birthDate, setBirthDate] = useState(null);
   const {
@@ -340,10 +365,11 @@ const RegisterForm = () => {
 
 
           <Input
-              value={!!getLocation ? getLocation?.formattedAddress : 'null'}
+              value={userLocation}
             label={"Current Location"} 
             {...register("current_location")} 
             type="text" 
+            onChange={(e)=>e?.target?.value}
             variant="outline" 
             className="col-span-1 text-xs " 
           

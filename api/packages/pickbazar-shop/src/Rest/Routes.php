@@ -66,11 +66,12 @@ Route::get('/get-cable-info','PickBazar\Http\Controllers\BillerInfoController@ge
 Route::get('/get-fast-tag-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
 Route::get('/get-insurance-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
 
-
 Route::any('/buylowcal-text-search',
 'PickBazar\Http\Controllers\PlacesApiController@textSearch');
+
 Route::any('/buylowcal-text-search-all ',
 'PickBazar\Http\Controllers\PlacesApiController@textSearchAll');
+
 // Route::get('buylowcal-text-search', 'PickBazar\Http\Controllers\AnalyticsController@totalUsers');
 Route::get('/buylowcal-place-details',
 'PickBazar\Http\Controllers\PlacesApiController@placeDetails');
@@ -78,17 +79,25 @@ Route::get('/buylowcal-place-details',
 Route::get('/buylowcal-place-photos',
 'PickBazar\Http\Controllers\PlacesApiController@placePhotos');
 
+Route::get('/ip-location',
+'PickBazar\Http\Controllers\LogController@ipAddress');
 
 Route::get('/get-broadband-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
+
 Route::get('/get-emi-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
+
 Route::get('/get-lpg-booking-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
+
 Route::get('/get-datacard-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
+
 Route::get('/get-piped-gas-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
+
 Route::get('/get-challan-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
+
 Route::get('/get-landline-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
 
-
 Route::post('/register', 'PickBazar\Http\Controllers\UserController@register');
+
 Route::post('/otp-register', 'PickBazar\Http\Controllers\UserController@otpRegister');
 
 Route::post('/token', 'PickBazar\Http\Controllers\UserController@token');
@@ -122,9 +131,11 @@ Route::apiResource('products', ProductController::class, [
 Route::apiResource('reviews', ReviewController::class, [
     'only' => ['index', 'show'],
 ]);
+
 Route::apiResource('questions', QuestionController::class, [
     'only' => ['index', 'show'],
 ]);
+
 Route::apiResource('feedbacks', FeedbackController::class, [
     'only' => ['index', 'show'],
 ]);
@@ -132,12 +143,15 @@ Route::apiResource('feedbacks', FeedbackController::class, [
 Route::apiResource('reviews', ReviewController::class, [
     'only' => ['store', 'update']
 ]);
+
 Route::apiResource('questions', QuestionController::class, [
     'only' => ['store'],
 ]);
+
 Route::apiResource('feedbacks', FeedbackController::class, [
     'only' => ['store'],
 ]);
+
 Route::apiResource('abusive_reports', AbusiveReportController::class, [
     'only' => ['store'],
 ]);
@@ -153,6 +167,7 @@ Route::apiResource('wishlists', WishlistController::class, [
 Route::get('total-users', 'PickBazar\Http\Controllers\AnalyticsController@totalUsers');
 Route::get('wishlists/in_wishlist/{product_id}', [WishlistController::class, 'in_wishlist']);
 Route::get('my-wishlists', [ProductController::class, 'myWishlists']);
+
 
 Route::apiResource('questions', QuestionController::class, [
     'only' => ['update'],

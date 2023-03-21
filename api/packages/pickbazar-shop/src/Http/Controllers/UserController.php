@@ -290,7 +290,7 @@ class UserController extends CoreController
             // 'date_of_birth'=> $request->date_of_birth,
             // 'occupation'=> $request->occupation,
              'role'=> 'user',
-            // 'current_location'=>$request->current_location,
+            'current_location'=>$request->current_location,
             // 'is_active'=>0,
             'code'=>$code
         ]);

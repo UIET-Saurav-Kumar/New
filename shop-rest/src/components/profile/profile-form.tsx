@@ -12,11 +12,15 @@ import { User } from "@ts-types/generated";
 import pick from "lodash/pick";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Radio from "@components/ui/radio/radio";
 import { Label } from "@headlessui/react/dist/components/label/label";
 import {useUpdateUserMutation} from "@data/customer/use-update-user.mutation";
 import { useCustomerQuery } from "@data/customer/use-customer.query";
+import { API_ENDPOINTS } from "@utils/api/endpoints";
+import http from "@utils/api/http";
+import url from "@utils/api/server_url";
+import { useMutation } from "react-query";
 
 
 
@@ -32,10 +36,34 @@ type UserFormValues = {
 const ProfileForm = ({ user }: Props) => {
 
   const [birthDate, setBirthDate] = useState(null);
+
   const[occupation, setOccupation] = useState(null);
-  const {data} = useCustomerQuery();
-  // // console.log('user',user)
   const { t } = useTranslation("common");
+
+  const {data} = useCustomerQuery();
+ 
+  const [userLocation, setUserLocation] = useState('');
+  
+  const memoizedLocation = useMemo(async () => {
+    const { data: response } = await http.get(
+      `${url}/${API_ENDPOINTS.IP_LOCATION}`
+    );
+    return response;
+  }, []);
+  
+  useEffect(()=>{
+    const getIpLocation = async () => {
+      const response = await memoizedLocation;
+      setUserLocation(response?.city+","+response?.region_name);
+    }
+    getIpLocation();
+  },[data?.me?.id, memoizedLocation]);
+  
+
+
+ console.log('ip ip', userLocation)
+
+
   const { register, handleSubmit, setValue, control } = useForm<UserFormValues>(
     
     {
@@ -74,7 +102,7 @@ const ProfileForm = ({ user }: Props) => {
         date_of_birth: values?.date_of_birth,
         gender: values?.gender,
         occupation: values?.occupation,
-        current_location: values?.current_location,
+        current_location: values?.current_location.length ?values?.current_location : userLocation ,
         // email: values?.email,
          profile: {
           id: user?.profile?.id,
@@ -95,7 +123,7 @@ const ProfileForm = ({ user }: Props) => {
         date_of_birth: values?.date_of_birth,
         gender: values?.gender,
         occupation: values?.occupation,
-        current_location: values?.current_location,
+        current_location: values?.current_location?.length ? values?.current_location : userLocation,
         // email: values?.email,
         profile: {
           id: user?.profile?.id,
@@ -110,6 +138,8 @@ const ProfileForm = ({ user }: Props) => {
       }
     )
 }
+
+
 
    const profilePercentage = (user && user.profile)
     ? (Object.keys(user.profile).length / 7) * 100

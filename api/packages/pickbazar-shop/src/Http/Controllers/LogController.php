@@ -26,6 +26,31 @@ class LogController extends CoreController
         return $this->repository->with('user')->with('order')->with('shop')->paginate($limit);
     }
 
+    public static function ipAddress(Request $request){
+
+        // $ip = $request->ip();
+        $api_key = 'b7987ce134d5145d44aa312e201db3fc';
+        $ip ='125.17.177.162';
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => 'http://api.ipstack.com/'.$ip.'?access_key='.$api_key,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'GET',
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        return $response;
+
+    }
+
 
    public  function  ip_AddressLocation(Request $request) {
 
@@ -36,7 +61,7 @@ class LogController extends CoreController
         $data = \Location::get($ip);
     
         //  dd($data);
-         return $data->cityName;
+         return $data;
     
     }
 
@@ -53,6 +78,8 @@ class LogController extends CoreController
 
     public function store(Request $request)
     {
+
+        
         
         $location=$request->location;
         $search=$request->search;

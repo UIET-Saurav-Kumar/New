@@ -1,5 +1,5 @@
 
-import React, { useEffect,useState } from 'react';
+import React, { useEffect,useMemo,useState } from 'react';
 import { SearchIcon } from "@components/icons/search-icon";
 import AsyncSelect from 'react-select/async';
 import colourOptions from '@data/colourOptions';
@@ -9,6 +9,10 @@ import { useLocation } from "@contexts/location/location.context";
 import { useCreateLogMutation } from "@data/log/use-create-log.mutation";
 import  Creatable  from 'react-select';
 import { useShopAvailabilityQuery } from '@data/home/use-shop-availability-query';
+import { useCustomerQuery } from '@data/customer/use-customer.query';
+import url from '@utils/api/server_url';
+import { API_ENDPOINTS } from '@utils/api/endpoints';
+import http from '@utils/api/http';
  
 
 export default function DropDown({ getLoc }: { getLoc: any }) {
@@ -77,13 +81,14 @@ export default function DropDown({ getLoc }: { getLoc: any }) {
 
 
   useEffect(() => {
+
     const defaultOptions = [
       { value: 'Best Places Near me',  label: 'Best Places Near me',available:false },
       { value: 'Best Salons',  label: 'Top Salons ',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/1' } },
-      { value: 'Good restaurants nearby',  label: 'Good restaurants nearbyt',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/2' } },
+      { value: 'Good restaurants nearby',  label: 'Good restaurants nearby',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/2' } },
       { value: 'Nearest hospitals',  label: 'Nearest hospitals',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/3' } },
       { value: 'Closest pharmacies',  label: 'Best Deals On Hotel',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/3' } },
-      { value: 'Recommended electronics stores',  label: 'Recommended electronics stores',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/1' } },
+      { value: 'Recommend electronics stores',  label: 'Recommended electronics stores',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/1' } },
       { value: 'Top-rated pet stores ',  label: 'Top-rated pet stores ',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/1' } },
       { value: 'Nearest petrol pumps ',  label: 'Nearest petrol pumps ',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/1' } },
     ];
@@ -91,6 +96,25 @@ export default function DropDown({ getLoc }: { getLoc: any }) {
     const history = JSON.parse(window.localStorage.getItem("searchHistory")) || defaultOptions; // get saved history or default options
     setSearchHistory(history);
   }, []);
+
+  const [userLocation, setUserLocation] = useState('');
+
+  const {data:customer} = useCustomerQuery();
+
+  // const memoizedLocation = useMemo(async () => {
+  //   const { data: response } = await http.get(
+  //     `${url}/${API_ENDPOINTS.IP_LOCATION}`
+  //   );
+  //   return response;
+  // }, []);
+  
+  // useEffect(()=>{
+  //   const getIpLocation = async () => {
+  //     const response = await memoizedLocation;
+  //     setUserLocation(response?.city+","+response?.region_name);
+  //   }
+  //   getIpLocation();
+  // },[customer?.me?.id, memoizedLocation]);
 
   const shop_check = data?.ShopAvailability?.data?.check;
   
@@ -119,6 +143,7 @@ export default function DropDown({ getLoc }: { getLoc: any }) {
 
     console.log("search data opt", options);
   };
+  
 
   function route(e: any = "") {
     var { pathname } = router;
