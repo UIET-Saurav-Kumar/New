@@ -121,7 +121,7 @@ const RegisterForm = () => {
       setUserLocation(response?.city+","+response?.region_name);
     }
     getIpLocation();
-  },[data?.me?.id, memoizedLocation]);
+  },[ userLocation]);
 
   const [birthDate, setBirthDate] = useState(null);
   const {
@@ -153,7 +153,7 @@ const RegisterForm = () => {
         password,
         invited_by:query.id,
         phone_number,
-        current_location,
+        current_location : userLocation,
         date_of_birth,
         occupation,
         gender,
@@ -369,7 +369,7 @@ const RegisterForm = () => {
             label={"Current Location"} 
             {...register("current_location")} 
             type="text" 
-            onChange={(e)=>e?.target?.value}
+            // onChange={(e)=>e?.target?.value}
             variant="outline" 
             className="col-span-1 text-xs " 
           
@@ -396,7 +396,7 @@ const RegisterForm = () => {
         </div>
          
 
-      <div className=""> 
+      {/* <div className=""> 
          <GetCurrentLocation onChange={changeLocation} />  
          <div className="mt-15">
           <Button className="w-full h-12" 
@@ -405,7 +405,7 @@ const RegisterForm = () => {
             {t("Register")}
           </Button>
         </div>
-      </div>
+      </div> */}
       
 
        

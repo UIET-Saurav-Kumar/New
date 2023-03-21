@@ -265,7 +265,6 @@ function handleClick(){
 
         {/* email */}
         <Input
-    
           // label={t("Email")}
           label={t("Email")}
           {...register("email")}
@@ -280,14 +279,14 @@ function handleClick(){
         
 
         {/* Date of birth */}
-        <div className="col-span-1 sm:col-span-1">
+            <div className="col-span-1 sm:col-span-1">
         
-            <div className="flex  text-gray-700 h-3  font-semibold text-sm lg:text-md leading-none mb-3">
-                {/* <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-yellow-600 to-blue-600">
+                <div className="flex  text-gray-700 h-3  font-semibold text-sm lg:text-md leading-none mb-3">
+                  {/* <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-yellow-600 to-blue-600">
                   🎉 Date of Birth  </span>  🥳 */}
                   <span className="">
                   🎉 Date of Birth  </span>  🥳
-                  </div>
+                </div>
                   <Input
                     type='date'
                     variant='outline'
@@ -305,7 +304,7 @@ function handleClick(){
                         },
                     })}
                     />
-        </div>
+            </div>
 
 
 

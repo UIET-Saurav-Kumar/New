@@ -77,7 +77,7 @@ const OtpRegisterForm = (props:any) => {
   useEffect(()=>{
     const getIpLocation = async () => {
       const response = await memoizedLocation;
-      setUserLocation(response?.city+","+response?.region_name);
+      setUserLocation(response?.city+","+response?.region_name+','+response?.zip);
     }
     getIpLocation();
   },[ userLocation]);
