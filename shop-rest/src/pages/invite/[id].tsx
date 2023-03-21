@@ -334,7 +334,7 @@ const RegisterForm = () => {
           type="text"
           inputMode="numeric"
           variant="outline"
-          className="mb-2 lg:mb-5 text-xs"
+          className="mb-2 lg:mb-5 text-xs "
           onChange={(e) => setValue("phone_number", getPhoneNumber(e.target.value))}
           error={t(errors.phone_number?.message!)}
         />
@@ -371,11 +371,11 @@ const RegisterForm = () => {
             type="text" 
             // onChange={(e)=>e?.target?.value}
             variant="outline" 
-            className="col-span-1 text-xs " 
+            className="col-span-1 shadow-300 text-xs hidden " 
           
             error={t(errors.current_location?.message!)} />
 
-          <div className="flex flex-col  items-start ">
+          <div className="flex flex-col  items-start col-span-2 ">
             <span className="text-xs text-gray-600 mb-2 font-semibold">Occupation</span>
               <select
                     className="  text-gray-600 py-3.5 w-full text-sm items-center mr-4 bg-white border border-gray-200 rounded flex "
@@ -396,16 +396,16 @@ const RegisterForm = () => {
         </div>
          
 
-      {/* <div className=""> 
-         <GetCurrentLocation onChange={changeLocation} />  
+      <div className="">
+         {/* <GetCurrentLocation onChange={changeLocation} />   */}
          <div className="mt-15">
-          <Button className="w-full h-12" 
+          <Button className="w-full h-12 mx-20  sm:mx-0 mt-10" 
           variant="outline"
           loading={loading} disabled={loading}>
             {t("Register")}
           </Button>
         </div>
-      </div> */}
+      </div>
       
 
        
