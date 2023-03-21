@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import { Controller, useForm } from "react-hook-form";
@@ -21,6 +21,8 @@ import Radio from "@components/ui/radio/radio";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Query } from "react-query";
+import http from "@utils/api/http";
+import { API_ENDPOINTS } from "@utils/api/endpoints";
 
 
 
@@ -69,6 +71,27 @@ const RegisterForm = (props:any) => {
   const[occupation, setOccupation] = useState(null);
 
   const [birthDate, setBirthDate] = useState(null);
+
+  const [userLocation, setUserLocation] = useState('');
+ 
+  const memoizedLocation = useMemo(async () => {
+    try {
+      const { data: response } = await http.get(`${url}/${API_ENDPOINTS.IP_LOCATION}`);
+      return response;
+    } catch (error) {
+      console.error('Error fetching IP location:', error);
+      return null;
+    }
+  }, []);
+  
+  
+  useEffect(()=>{
+    const getIpLocation = async () => {
+      const response = await memoizedLocation;
+      setUserLocation(response?.city+","+response?.region_name+','+response?.zip);
+    }
+    getIpLocation();
+  },[ userLocation]);
   
   // const userLoc = [{
   //   formattedAddress: getLocation.formattedAddress,
@@ -370,13 +393,13 @@ function handleClick(){
         {/* current location */}
        {/* <div className="w-full flex  "> */}
           <Input
-            defaultValue={getLocation?.formattedAddress}
+            defaultValue={userLocation ? userLocation : getLocation?.formattedAddress}
             label={"Current Location"} 
             {...register("current_location")} 
             type="text" 
             variant="rounded" 
             placeholder="Enter your city"
-            className="col-span-2 text-xs " 
+            className="col-span-2 text-xs hidden" 
             error={t(errors.current_location?.message!)} />
           {/* {getLocation?.formattedAddress} */}
           {/* <div className="w-0 mt-2">  */}
