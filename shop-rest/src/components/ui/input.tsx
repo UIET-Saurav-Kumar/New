@@ -81,7 +81,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
           disabled={disabled}
           autoComplete="off"
           autoCorrect="off"
-          autoCapitalize="off"
+          autoCapitalize="on"
           spellCheck="false"
           aria-invalid={error ? "true" : "false"}
           {...rest}

@@ -66,6 +66,8 @@ const registerFormSchema = yup.object().shape({
                 .min(10, 'Phone number should be of 10 digits only')
                 .required("error-contact-required")
                 .matches(/^[0-9]{10}$/, "Invalid phone number"),
+                current_location : yup.string().required('Please Enter your city'),
+                date_of_birth: yup.string().required('Please enter your date of birth')
                 // based on date of birth calculate age and if age is less than 18 then show error
 
 
@@ -79,21 +81,25 @@ const registerFormSchema = yup.object().shape({
 
 
 
-const defaultValues = {
-  name: "",
-  email: "",
-  password: "",
-  phone_number:"",
-  current_location:'',
-  date_of_birth:'',
-  occupation:'',
-  gender:'male'
-};
+
+
+ 
 
 
 const RegisterForm = () => {
 
   const {getLocation} =useLocation()
+
+  const defaultValues = {
+    name: "",
+    email: "",
+    password: "",
+    phone_number:"",
+    current_location:getLocation?.formattedAddress,
+    date_of_birth:'',
+    occupation:'',
+    gender:'male'
+  };
 
   // console.log('getLoc', getLocation)
 
@@ -105,23 +111,23 @@ const RegisterForm = () => {
   const {data} = useCustomerQuery();
 
  
-  const [userLocation, setUserLocation] = useState('');
+  // const [userLocation, setUserLocation] = useState('');
 
   
-  const memoizedLocation = useMemo(async () => {
-    const { data: response } = await http.get(
-      `${url}/${API_ENDPOINTS.IP_LOCATION}`
-    );
-    return response;
-  }, []);
+  // const memoizedLocation = useMemo(async () => {
+  //   const { data: response } = await http.get(
+  //     `${url}/${API_ENDPOINTS.IP_LOCATION}`
+  //   );
+  //   return response;
+  // }, []);
   
-  useEffect(()=>{
-    const getIpLocation = async () => {
-      const response = await memoizedLocation;
-      setUserLocation(response?.city+","+response?.region_name);
-    }
-    getIpLocation();
-  },[ userLocation]);
+  // useEffect(()=>{
+  //   const getIpLocation = async () => {
+  //     const response = await memoizedLocation;
+  //     setUserLocation(response?.city+","+response?.region_name);
+  //   }
+  //   getIpLocation();
+  // },[ userLocation]);
 
   const [birthDate, setBirthDate] = useState(null);
   const {
@@ -153,7 +159,7 @@ const RegisterForm = () => {
         password,
         invited_by:query.id,
         phone_number,
-        current_location : userLocation,
+        current_location : getLocation?.formattedAddress,
         date_of_birth,
         occupation,
         gender,
@@ -220,6 +226,7 @@ const RegisterForm = () => {
     );
     // handleLocation()
 }
+
 
   const [click, setClick] = useState(false);
 
@@ -321,6 +328,7 @@ const RegisterForm = () => {
                         minDate={new Date(1900, 1, 1)}
                         maxDate={new Date()}
                         placeholderText={t("your date of birth")}
+                        required
                         // className="w-full"
                   />          
                   )}
@@ -365,13 +373,14 @@ const RegisterForm = () => {
 
 
           <Input
-              value={userLocation}
+              // value={getLocation?.formattedAddress}
             label={"Current Location"} 
             {...register("current_location")} 
             type="text" 
             // onChange={(e)=>e?.target?.value}
             variant="outline" 
-            className="col-span-1 shadow-300 text-xs hidden " 
+            className="col-span-1   text-xs " 
+            required
           
             error={t(errors.current_location?.message!)} />
 
