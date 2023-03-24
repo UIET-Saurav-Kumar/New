@@ -95,7 +95,7 @@ const RegisterForm = () => {
     email: "",
     password: "",
     phone_number:"",
-    current_location:getLocation?.formattedAddress,
+    current_location:'',
     date_of_birth:'',
     occupation:'',
     gender:'male'
@@ -373,13 +373,13 @@ const RegisterForm = () => {
 
 
           <Input
-              // value={getLocation?.formattedAddress}
+              value={userLocation}
             label={"Current Location"} 
             {...register("current_location")} 
             type="text" 
             // onChange={(e)=>e?.target?.value}
             variant="outline" 
-            className="col-span-1   text-xs " 
+            className="col-span-1  hidden text-xs " 
             required
           
             error={t(errors.current_location?.message!)} />
