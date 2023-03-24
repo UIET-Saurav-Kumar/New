@@ -22,6 +22,7 @@ class InviteController extends CoreController
 
         $first_layer_invitees = $this->get_invitees($root->id);
         $size=0;
+        
         foreach ($first_layer_invitees as $invitee) {
             $second_layer_invitees = $this->get_invitees($invitee->invitee_id);
 

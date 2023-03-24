@@ -62,26 +62,26 @@ const OtpRegisterForm = (props:any) => {
 
   const {data} = useCustomerQuery();
 
-  // const [userLocation, setUserLocation] = useState('');
+  const [userLocation, setUserLocation] = useState('');
  
-  // const memoizedLocation = useMemo(async () => {
-  //   try {
-  //     const { data: response } = await http.get(`${url}/${API_ENDPOINTS.IP_LOCATION}`);
-  //     return response;
-  //   } catch (error) {
-  //     console.error('Error fetching IP location:', error);
-  //     return null;
-  //   }
-  // }, []);
+  const memoizedLocation = useMemo(async () => {
+    try {
+      const { data: response } = await http.get(`${url}/${API_ENDPOINTS.IP_LOCATION}`);
+      return response;
+    } catch (error) {
+      console.error('Error fetching IP location:', error);
+      return null;
+    }
+  }, []);
   
   
-  // useEffect(()=>{
-  //   const getIpLocation = async () => {
-  //     const response = await memoizedLocation;
-  //     setUserLocation(response?.city+","+response?.region_name+','+response?.zip);
-  //   }
-  //   getIpLocation();
-  // },[ userLocation]);
+  useEffect(()=>{
+    const getIpLocation = async () => {
+      const response = await memoizedLocation;
+      setUserLocation(response?.city+","+response?.region_name+','+response?.zip);
+    }
+    getIpLocation();
+  },[ userLocation]);
 
   // console.log('res',userLocation)
 
@@ -182,7 +182,7 @@ function handleClick(){
         // password,
         phone_number,
         // invited_by:'',
-        current_location: getLocation?.formattedAddress,
+        current_location: userLocation,
         // date_of_birth,
         // occupation,
         // gender,
@@ -312,7 +312,7 @@ function handleClick(){
         />
 
            <Input
-            defaultValue={getLocation?.formattedAddress}
+            defaultValue={userLocation}
             label={"Current Location"} 
             {...register("current_location")} 
             type="text" 

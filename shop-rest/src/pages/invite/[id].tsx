@@ -111,23 +111,23 @@ const RegisterForm = () => {
   const {data} = useCustomerQuery();
 
  
-  // const [userLocation, setUserLocation] = useState('');
+  const [userLocation, setUserLocation] = useState('');
 
   
-  // const memoizedLocation = useMemo(async () => {
-  //   const { data: response } = await http.get(
-  //     `${url}/${API_ENDPOINTS.IP_LOCATION}`
-  //   );
-  //   return response;
-  // }, []);
+  const memoizedLocation = useMemo(async () => {
+    const { data: response } = await http.get(
+      `${url}/${API_ENDPOINTS.IP_LOCATION}`
+    );
+    return response;
+  }, []);
   
-  // useEffect(()=>{
-  //   const getIpLocation = async () => {
-  //     const response = await memoizedLocation;
-  //     setUserLocation(response?.city+","+response?.region_name);
-  //   }
-  //   getIpLocation();
-  // },[ userLocation]);
+  useEffect(()=>{
+    const getIpLocation = async () => {
+      const response = await memoizedLocation;
+      setUserLocation(response?.city+","+response?.region_name);
+    }
+    getIpLocation();
+  },[ userLocation]);
 
   const [birthDate, setBirthDate] = useState(null);
   const {
@@ -159,7 +159,7 @@ const RegisterForm = () => {
         password,
         invited_by:query.id,
         phone_number,
-        current_location : getLocation?.formattedAddress,
+        current_location : userLocation,
         date_of_birth,
         occupation,
         gender,
@@ -325,9 +325,9 @@ const RegisterForm = () => {
                         dropdownMode="select"
                         peekNextMonth
                         showWeekNumbers
-                        minDate={new Date(1900, 1, 1)}
-                        maxDate={new Date()}
-                        placeholderText={t("your date of birth")}
+                        minDate={new Date(1970,1,1)}
+                        maxDate={new Date(2005,12,31)}
+                        placeholderText={t(" DOB (min 18 years of age)")}
                         required
                         // className="w-full"
                   />          

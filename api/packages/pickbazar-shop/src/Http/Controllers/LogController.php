@@ -29,7 +29,7 @@ class LogController extends CoreController
     public static function ipAddress(Request $request){
 
         $ip = $request->ip();
-        $api_key = 'b7987ce134d5145d44aa312e201db3fc';
+        $api_key = 'efa82abc72a10a98a0d3377f0d3a1666';
         // $ip ='125.17.177.162';
         $curl = curl_init();
 

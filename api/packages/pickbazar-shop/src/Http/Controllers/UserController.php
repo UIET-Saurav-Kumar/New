@@ -652,6 +652,7 @@ class UserController extends CoreController
             throw new PickbazarException('PICKBAZAR_ERROR.PLEASE_LOGIN_USING_FACEBOOK_OR_GOOGLE');
         }
     }
+    
 
     public function licenseStore(Request $request){
         $data=$request->all();
@@ -668,6 +669,7 @@ class UserController extends CoreController
 
         return 1;
     }
+
 
     protected function storeAttachment($attachment){
         $attachment_name = uniqid().'.'.$attachment->getClientOriginalExtension();

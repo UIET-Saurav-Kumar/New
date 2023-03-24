@@ -48,6 +48,7 @@ import Banners2 from "@components/home-page-product-section/banners2";
 import Banners3 from "@components/home-page-product-section/banners3";
 import Spinner from "@components/ui/loaders/spinner/spinner";
 import SearchHistory from "@components/home-page-product-section/search-history";
+import { useCreateLogMutation } from "@data/log/use-create-log.mutation";
 
 
 const ProductFeedLoader = dynamic(
@@ -132,6 +133,11 @@ export default function home() {
 
   const {getLocation} =useLocation();
 
+  const {
+    mutate: createLog,
+    isLoading: is_loading,
+  } = useCreateLogMutation();
+
 
   const [scrollPosition, setScrollPosition] = useState(0);
 
@@ -141,6 +147,16 @@ export default function home() {
   };
 
   useEffect(() => {
+
+    createLog({
+      location:getLocation?.formattedAddress,
+      product:'visited',
+      type:'search_item'
+    }, {
+      onSuccess: (data: any) => {
+        // // console.log(data)
+      },
+    });
     window.scrollTo(0, 0);
     window.addEventListener("scroll", handleScroll);
 

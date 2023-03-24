@@ -74,7 +74,6 @@ export default function DropDown({ getLoc }: { getLoc: any }) {
     { value: '"Recommended electronics stores ',  label: '"Recommended electronics stores ',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/1' } },
     { value: 'Top-rated pet stores ',  label: 'Top-rated pet stores ',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/1' } },
     { value: 'Nearest petrol pumps ',  label: 'Nearest petrol pumps ',available:false , image: { avatar: true, src: 'https://placeimg.com/64/64/1' } },
-
   ];
 
   const [searchHistory, setSearchHistory] = useState(defaultOptions);
