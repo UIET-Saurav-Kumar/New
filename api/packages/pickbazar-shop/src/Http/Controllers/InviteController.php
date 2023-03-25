@@ -13,7 +13,7 @@ use PickBazar\Database\Models\Balance;
 class InviteController extends CoreController
 {
 
-    public function refferral_network(Request $request)
+    public function referral_network(Request $request)
     {
         $root = $request->user();
         // $root=User::find(3);
@@ -138,5 +138,60 @@ class InviteController extends CoreController
             "bill_transfered_amount"=>$bill_transfered_amount
         ];
 
+    }
+
+
+    public function getUserReferralNetwork(Request $request, $id)
+    {
+        $root = User::find($id);
+        // $root = $request->user();
+        // $root=User::find(3);
+
+        $data = $this->getNode($root, true);
+
+        $first_layer_invitees = $this->get_invitees($root->id);
+        $size=0;
+        
+        foreach ($first_layer_invitees as $invitee) {
+            $second_layer_invitees = $this->get_invitees($invitee->invitee_id);
+
+            $first_layer = [];
+            $second_layer = [];
+
+            $first_layer = $this->getNode($invitee);
+            $size++;
+
+            foreach ($second_layer_invitees as $key => $second_invitees) {
+                $third_layer = [];
+
+                $third_layer_invitees = $this->get_invitees($second_invitees->invitee_id);
+                array_push($second_layer, $this->getNode($second_invitees));
+                $size++;
+                foreach ($third_layer_invitees as $third_invitee) {
+                    array_push($third_layer, $this->getNode($third_invitee));
+                    $size++;
+                }
+
+                $second_layer[$key]["children"] = $third_layer;
+            }
+
+            if (isset($first_layer["children"])) {
+                $first_layer["children"] = $second_layer;
+                array_push($data["children"], $first_layer);
+                $size++;
+            }
+        }
+        if($size>100){
+            $size=2000;
+        }else if ($size>80){
+            $size=1500;
+        }else{
+            $size=1000;
+        }
+
+        return [
+            "data" => $data,
+            "size"=>$size
+        ];
     }
 }

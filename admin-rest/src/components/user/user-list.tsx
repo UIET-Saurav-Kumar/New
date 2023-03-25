@@ -12,6 +12,7 @@ import { useIsRTL } from "@utils/locals";
 import { useRouter } from "next/router";
 import {useWalletCommissionQuery} from '@data/user/use-wallet-commission-query'
 import dayjs from "dayjs";
+import {useReferralNetworkQuery} from '@data/user/use-referral-network-query'
 
 
 
@@ -31,8 +32,11 @@ const CustomerList = ({ customers, onPagination }: IProps) => {
     limit: 10 as number,
     search:"",
 });
+
+
+const {data:referralNetwork} = useReferralNetworkQuery();
   // const { data:customerData } = useCustomerQuery();
-  // console.log(' customer data',data)
+  console.log(' customer data',referralNetwork)
 
   
   const columns = [
@@ -188,6 +192,33 @@ const CustomerList = ({ customers, onPagination }: IProps) => {
                 //redirect to wallet details
                 walletData={walletData}
                 detailsUrl={`${router.asPath}/${id}`}
+
+               
+                // isUserActive={is_active}
+                // wallet={true}
+              />
+            )}
+          </>
+        );
+      },
+    },
+
+    {
+      title: t("table:Network"),
+      dataIndex: "id",
+      key: "network",
+      align: "center",
+      render: (id: string, { is_active }: any) => {
+        // const { data } = useMeQuery();
+        const { data, paginatorInfo } = customers!;
+        return (
+          <>
+            {data?.id != id && (
+              <ActionButtons
+                id={id}
+                //redirect to wallet details
+                referralNetwork={referralNetwork}
+                detailsUrl={`${router.asPath}/referral-network/${id}`}
 
                
                 // isUserActive={is_active}

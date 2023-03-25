@@ -99,6 +99,9 @@ export const API_ENDPOINTS = {
   GET_WALLET_COMMISSION:"get-wallet-commission",
   GET_USER_WALLET_DETAILS:"get-user-wallet-details",
 
+  GET_USER_REFERRAL_NETWORK : 'get-user-referral-network',
+  
+
   QUESTIONS: "questions",
   REVIEWS: "reviews",
   ABUSIVE_REPORTS_DECLINE: "abusive_reports/reject",

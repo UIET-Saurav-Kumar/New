@@ -38,6 +38,7 @@ const UserWallet = () => {
 
     //use walletcommission query
     const { data, loading, error } = useWalletCommissionQuery(query.userId as string);
+
     
     // console.log('query user id', query.userId)
     console.log('wallet data',data)

@@ -275,8 +275,9 @@ Route::post('shop-delivery-config','PickBazar\Http\Controllers\ShopController@sh
 Route::get('get-wallet-commission','PickBazar\Http\Controllers\InviteController@getWalletCommission');
 
 Route::get('get-user-wallet-details/{id}','PickBazar\Http\Controllers\InviteController@getUserWalletDetails');
+Route::get('get-user-referral-network/{id}','PickBazar\Http\Controllers\InviteController@getUserReferralNetwork');
 
-Route::get('referral-network','PickBazar\Http\Controllers\InviteController@refferral_network');
+Route::get('referral-network','PickBazar\Http\Controllers\InviteController@referral_network');
 
 
 Route::any('order/success','PickBazar\Http\Controllers\GatewayResponse@process_response');

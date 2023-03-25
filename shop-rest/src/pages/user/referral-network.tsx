@@ -10,6 +10,9 @@ import { InvitedUsers } from '@settings/site.settings';
 import Tree from 'react-tree-graph';
 import 'react-tree-graph/dist/style.css'
 import {useReferralNetworkQuery} from '@data/user/use-referral-network-query'
+import { AnimatedTree } from 'react-tree-graph';
+
+
 export default function ReferralNetwork() {
     
     const { data } = useReferralNetworkQuery({
@@ -17,7 +20,6 @@ export default function ReferralNetwork() {
         search:"",
     });
 
-    
   
     function useWindowSize() {
         const [size, setSize] = useState([0, 0]);
@@ -40,6 +42,7 @@ export default function ReferralNetwork() {
         }, []);
         return size;
     }
+
     const [width, height] = useWindowSize();
     return (  
 
