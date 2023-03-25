@@ -167,7 +167,7 @@ const RegisterForm = () => {
       {
         onSuccess: (data) => {
           if(data.user){
-            router.push('/auth/'+data.user.id);
+            router.push('/auth/'+data.user.id+'?inviter='+query?.id);
           }
           return ;
           if (data?.token && data?.permissions?.length) {

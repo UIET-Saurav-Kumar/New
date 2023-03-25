@@ -45,6 +45,7 @@ export default function PlaceSearch(props:any) {
   const [shop_Name, setShopName] = useState('')
 
 
+
   useEffect(() => {
     // const photos = Google(shopName);
     handleBusinessName && handleBusinessName(business_name);
@@ -57,16 +58,17 @@ export default function PlaceSearch(props:any) {
     handleTotalRating && handleTotalRating(total_rating);
   }, [shopName]);
 
+
+
   const {getLocation} =useLocation();
 
 
-  console.log('search data ',getLocation)
+  console.log('search data ',getLocation);
 
 
   const shop_name = shopName;
 
   useEffect(() => {
-    
     const searchString = {
       query: shop_name?.split(' ').join('-'), 
       city: data?.settings?.location?.formattedAddress.replace(',','').split(' ').join('-'),
@@ -245,7 +247,7 @@ export default function PlaceSearch(props:any) {
       console?.log('searchresults response',response)
       setSearchResults(prevResults => {
         console.log('searchresults prevResults',prevResults)
-        return prevResults.map(result => {
+        return prevResults?.map(result => {
           if (result.place_id === response?.place_id) {
             return {
               ...result,
@@ -338,7 +340,7 @@ function shopRoute(result) {
             {
                 showLogoImg && 
 
-                searchResults?.length && searchResults?.map( (result,index) => {
+                searchResults?.length && searchResults?.filter((filter)=>filter?.photo_url != null && !filter?.photo_url?.url.includes("photoreference=&")).map( (result,index) => {
 
                     // <Link href={`${ROUTES.SHOPS}/${business_name}`}> 
                    return  <div onClick={()=>shopRoute(result)} key={index} 
@@ -361,7 +363,7 @@ function shopRoute(result) {
                                
                                 <p onClick={()=>openGoogleReview(result?.reviews)} className="flex items-start cursor-pointer text-left">
                                  <span className="text-gray-500 mr-2 font-semibold">
-                                  {result?.rating}
+                                  {result?.rating != 0 ? result?.rating : null}
                                  </span>
                                 {ratingStars(result?.rating)}
                                </p>

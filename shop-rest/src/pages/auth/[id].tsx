@@ -89,7 +89,8 @@ const RegisterForm = () => {
     mutate(
       {
         code,
-        id:query.id
+        id:query.id,
+        inviter_id:query?.inviter
       },
       {
         onSuccess: (data) => {

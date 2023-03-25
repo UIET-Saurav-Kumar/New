@@ -87,7 +87,7 @@ const OtpRegisterForm = (props:any) => {
 
   const path = props?.data?.pathname;
 
-  console.log('url', path )
+  console.log('url', path)
   
   // const userLoc = [{
   //   formattedAddress: getLocation.formattedAddress,

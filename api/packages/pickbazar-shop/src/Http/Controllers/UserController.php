@@ -188,41 +188,8 @@ class UserController extends CoreController
             'code'=>$code
         ]);
 
-        if ($request->invited_by && $user->is_active == 1 ){
-            Invite::create([
-                "user_id"=>$request->invited_by,
-                "invitee_id"=>$user->id,
-                "invitee_name"=>$user->name
-            ]);
+         
         
-            $invited_by=User::find($request->invited_by);
-        
-            SMS::userInvite($invited_by->phone_number,$invited_by->name,$user->name);
-        
-            $signup_offer = SignupOffer::find(1);
-
-            // Check if the inviter and invitee are active
-            $inviter_balance = Balance::firstOrNew(['user_id' => $invited_by->id]);
-            $invitee_balance = Balance::firstOrNew(['user_id' => $user->id]);
-            
-            if ($user->is_active == 1) {
-                // If the invitee is active, update the balances of the inviter and invitee
-                $invitee_balance->total_earnings = $invitee_balance->total_earnings + $signup_offer->invitee_reward;
-                $invitee_balance->current_balance = $invitee_balance->current_balance + $signup_offer->invitee_reward;
-                
-                if ($user->is_active == 1) {
-                    // If both the inviter and invitee are active, update the inviter's balance
-                    $inviter_balance->total_earnings = $inviter_balance->total_earnings + $signup_offer->inviter_reward;
-                    $inviter_balance->current_balance = $inviter_balance->current_balance + $signup_offer->inviter_reward;
-                }
-            }
-            
-            $inviter_balance->save();
-            $invitee_balance->save();
-        }
-        
-        
-
         
 
         $user->givePermissionTo($permissions);
@@ -384,13 +351,39 @@ class UserController extends CoreController
 
     public function userVerify(Request $request)
     {
-        $user=User::findOrFail($request->id);
+
+
+         $user=User::findOrFail($request->id);
 
         if($request->code==$user->code){
             SMS::welcome($user->phone_number,$user->name);
             $user->update([
                 "is_active"=>1
             ]);
+
+            if($request->inviter_id){
+            Invite::create([
+                "user_id"=>$request->inviter_id,
+                "invitee_id"=>$user->id,
+                "invitee_name"=>$user->name
+            ]);
+
+            $inviter_id=User::find($request->inviter_id);
+            SMS::userInvite($inviter_id->phone_number,$inviter_id->name,$user->name);
+            
+
+            $signup_offer=SignupOffer::find(1);
+            $Inviter_balance = Balance::firstOrNew(['user_id' => $request->inviter_id]);
+            $Inviter_balance->total_earnings= $Inviter_balance->total_earnings + $signup_offer->inviter_reward;
+            $Inviter_balance->current_balance=$Inviter_balance->current_balance + $signup_offer->inviter_reward;
+            $Inviter_balance->save();
+
+            $Invitee_balance = Balance::firstOrNew(['user_id' => $user->id]);
+            $Invitee_balance->total_earnings= $Invitee_balance->total_earnings + $signup_offer->invitee_reward;
+            $Invitee_balance->current_balance=$Invitee_balance->current_balance + $signup_offer->invitee_reward;
+            $Invitee_balance->save();
+
+        }
 
             $user->givePermissionTo(Permission::CUSTOMER);
             
