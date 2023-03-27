@@ -352,7 +352,6 @@ class UserController extends CoreController
     public function userVerify(Request $request)
     {
 
-
          $user=User::findOrFail($request->id);
 
         if($request->code==$user->code){
@@ -365,7 +364,8 @@ class UserController extends CoreController
             Invite::create([
                 "user_id"=>$request->inviter_id,
                 "invitee_id"=>$user->id,
-                "invitee_name"=>$user->name
+                "invitee_name"=>$user->name,
+                // 'is_active'=> $user->is_active,
             ]);
 
             $inviter_id=User::find($request->inviter_id);

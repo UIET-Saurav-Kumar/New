@@ -15,6 +15,7 @@ class InviteController extends CoreController
 
     public function referral_network(Request $request)
     {
+
         $root = $request->user();
         // $root=User::find(3);
 
@@ -70,10 +71,13 @@ class InviteController extends CoreController
     {
         return Invite::where('user_id', $id)->get();
     }
+
+
     private function getNode($invitee, $is_root = false)
     {
         return [
             "id" => $invitee->id,
+            'is_active' => $invitee->is_active,
             "name" => ($is_root) ? $invitee->name : $invitee->invitee_name,
             "children" => []
         ];
