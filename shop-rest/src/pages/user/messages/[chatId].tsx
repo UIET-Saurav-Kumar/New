@@ -161,8 +161,8 @@ const ChatScreen = () => {
   const { query } = useRouter();
   const [chatId, setChatId] = useState("");
   const [lastMessage, setLastMessage] = useState("");
-
   const { data: currentUser } = useCustomerQuery();
+
 
   useEffect(() => {
     const getChatId = async (sender_id, receiver_id) => {
@@ -183,6 +183,7 @@ const ChatScreen = () => {
 
     fetchChatId();
   }, [currentUser?.me?.id, query.ri]);
+  
 
   const { data: messagesData } = useMessages(currentUser?.me?.id, query.ri);
 

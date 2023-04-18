@@ -78,22 +78,15 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
 
        
 
-        <motion.button
+        {/* <motion.button
           whileTap={{ scale: 0.88 }}
           onClick={() => router.push("/user/messages")}
           className="flex p-2 h-full items-center justify-center focus:outline-none focus:text-accent"
         >
           <span className="sr-only">{t("text-home")}</span>
-             {/* < Image        quality='1' 
              
-            layout="intrinsic"
-            width={30}
-            height={30}
-            objectFit="contain"
-            src='/home.png' 
-           /> */}
             <img src="/msg.png" className='h-6 w-6'/>
-        </motion.button>
+        </motion.button> */}
         
         <motion.button
           whileTap={{ scale: 0.88 }}
