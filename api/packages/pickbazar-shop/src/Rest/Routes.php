@@ -39,6 +39,11 @@ use PickBazar\Http\Controllers\AttributeValueController;
 use PickBazar\Http\Controllers\UtilityPaymentController;
 use PickBazar\Http\Controllers\TermLifeInsuranceController;
 use PickBazar\Http\Controllers\QuizController;
+use PickBazar\Http\Controllers\SwipeController;
+use PickBazar\Http\Controllers\LikesController;
+use PickBazar\Http\Controllers\ChatController;
+use PickBazar\Http\Controllers\MessagesController;
+
 
  
 //route for findByDateRange in order controller
@@ -66,10 +71,31 @@ Route::get('/get-cable-info','PickBazar\Http\Controllers\BillerInfoController@ge
 Route::get('/get-fast-tag-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
 Route::get('/get-insurance-info','PickBazar\Http\Controllers\BillerInfoController@getBillerInfo');
 
+
+//Chat controller 
+Route::post('/likes', 'PickBazar\Http\Controllers\LikesController@store');
+Route::get('/likes/{userId}', 'PickBazar\Http\Controllers\LikesController@getLikesByUserId');
+Route::get('/all-likes', 'PickBazar\Http\Controllers\LikesController@getAllLikes');
+Route::put('/message-status', 'PickBazar\Http\Controllers\LikesController@update');
+
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('/notifications', 'PickBazar\Http\Controllers\NotificationController@index');
+    Route::put('/likes/{id}', 'PickBazar\Http\Controllers\LikesController@update');
+});
+
+Route::any('/send-message', 'PickBazar\Http\Controllers\MessagesController@sendMessage');
+Route::any('/get-messages', 'PickBazar\Http\Controllers\MessagesController@getMessages');
+Route::any('/get-chat-id', 'PickBazar\Http\Controllers\MessagesController@getChatId');
+Route::post('/like-user/{liker_id}/{liked_id}','PickBazar\Http\Controllers\ChatController@likeUser');
+
+
+
 Route::any('/buylowcal-text-search',
 'PickBazar\Http\Controllers\PlacesApiController@textSearch');
 
-Route::any('/buylowcal-text-search-all ',
+
+Route::any('/buylowcal-text-search-all',
 'PickBazar\Http\Controllers\PlacesApiController@textSearchAll');
 
 // Route::get('buylowcal-text-search', 'PickBazar\Http\Controllers\AnalyticsController@totalUsers');
@@ -379,17 +405,21 @@ Route::group(['middleware' => ['can:' . Permission::CUSTOMER, 'auth:sanctum']], 
     Route::apiResource('orders', OrderController::class, [
         'only' => ['index', 'show', 'store']
     ]);
+
     Route::apiResource('sms-log', SMSLogController::class, [
         'only' => ['index', 'show', 'store']
     ]);
+
     Route::apiResource('utility-payment', UtilityPaymentController::class, [
         'only' => ['index', 'show', 'store']
     ]);
     
     Route::get('orders/tracking_number/{tracking_number}', 'PickBazar\Http\Controllers\OrderController@findByTrackingNumber');
+
     Route::apiResource('attachments', AttachmentController::class, [
         'only' => ['store', 'update', 'destroy']
     ]);
+
 
     Route::post('store-license-attachment', 'PickBazar\Http\Controllers\AttachmentController@storeLicenseAttachment');
     Route::post('bill-attachment', 'PickBazar\Http\Controllers\AttachmentController@storeBillAttachment');
@@ -401,6 +431,7 @@ Route::group(['middleware' => ['can:' . Permission::CUSTOMER, 'auth:sanctum']], 
     Route::post('checkout/verify', 'PickBazar\Http\Controllers\CheckoutController@verify');
     Route::get('me', 'PickBazar\Http\Controllers\UserController@me');
     Route::put('users/{id}', 'PickBazar\Http\Controllers\UserController@update');
+    Route::get('users/{id}', 'PickBazar\Http\Controllers\UserController@show');
     Route::post('/Change Password', 'PickBazar\Http\Controllers\UserController@changePassword');
    
     Route::apiResource('address', AddressController::class, [
@@ -441,6 +472,7 @@ Route::group(['middleware' => ['can:' . Permission::CUSTOMER, 'auth:sanctum']], 
     );
 
     Route::put('status-product/{id}',"PickBazar\Http\Controllers\ProductController@updateProductStatus");
+
     Route::group(
     ['middleware' => ['permission:' . Permission::STORE_OWNER, 'auth:sanctum']],
     function () {
@@ -458,9 +490,13 @@ Route::group(['middleware' => ['can:' . Permission::CUSTOMER, 'auth:sanctum']], 
     }
 );
 
+Route::group(['middleware' => ['permission:' . Permission::SUPER_ADMIN . '|' . Permission::CUSTOMER, 'auth:sanctum']], function () {
+
+    Route::apiResource('users', UserController::class);
+    });
 
 
-Route::group(['middleware' => ['permission:' . Permission::SUPER_ADMIN, 'auth:sanctum']], function () {
+Route::group(['middleware' => ['permission:' . Permission::SUPER_ADMIN]], function () {
     Route::apiResource('types', TypeController::class, [
         'only' => ['store', 'update', 'destroy']
     ]);
@@ -473,18 +509,23 @@ Route::group(['middleware' => ['permission:' . Permission::SUPER_ADMIN, 'auth:sa
     Route::apiResource('shop-categories', ShopCategoryController::class, [
         'only' => ['store', 'update', 'destroy']
     ]);
+
     Route::apiResource('offers', OfferController::class, [
         'only' => ['store', 'update', 'destroy']
     ]);
+
     Route::apiResource('brand-offers', BrandOfferController::class, [
         'only' => ['store', 'update', 'destroy']
     ]);
+
     Route::apiResource('tags', TagController::class, [
         'only' => ['store', 'update', 'destroy']
     ]);
+
     Route::apiResource('coupons', CouponController::class, [
         'only' => ['store', 'update', 'destroy']
     ]);
+
     Route::apiResource('order_status', OrderStatusController::class, [
         'only' => ['store', 'update', 'destroy']
     ]);
@@ -493,7 +534,7 @@ Route::group(['middleware' => ['permission:' . Permission::SUPER_ADMIN, 'auth:sa
         'only' => ['store']
     ]);
 
-    Route::apiResource('users', UserController::class);
+    
     Route::post('users/ban-user', 'PickBazar\Http\Controllers\UserController@banUser');
     Route::post('users/active-user', 'PickBazar\Http\Controllers\UserController@activeUser');
     Route::apiResource('taxes', TaxController::class);
@@ -501,7 +542,8 @@ Route::group(['middleware' => ['permission:' . Permission::SUPER_ADMIN, 'auth:sa
     Route::post('approve-shop', 'PickBazar\Http\Controllers\ShopController@approveShop');
     Route::post('disapprove-shop', 'PickBazar\Http\Controllers\ShopController@disApproveShop');
     Route::post('approve-withdraw', 'PickBazar\Http\Controllers\WithdrawController@approveWithdraw');
-    });
+});
+     
 
     Route::get('all-taxes', 'PickBazar\Http\Controllers\TaxController@all_taxes');
     Route::get('user-withdraws', 'PickBazar\Http\Controllers\WithdrawController@fetchUserWithdraws');

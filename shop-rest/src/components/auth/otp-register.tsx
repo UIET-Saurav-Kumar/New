@@ -1,3 +1,4 @@
+
 import React, { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
@@ -33,8 +34,10 @@ type FormValues = {
   phone_number:number;
   name:string;
   email:string;
+  password: string;
   current_location: string;
 };
+
 
 const registerFormSchema = yup.object().shape({
   name: yup.string().required(" Name required"),
@@ -42,10 +45,9 @@ const registerFormSchema = yup.object().shape({
     .string()
     .email("error-email-format")
     .required(" Email required"),
-  phone_number:yup.string().max(10, "Phone number should be of 10 digits only").min(10, 'Phone number should be of 10 digits only').required("error-contact-required").matches(/^[0-9]{10}$/, "Invalid phone number"),
+    password: yup.string().required(" Password required"),
+    phone_number:yup.string().max(10, "Phone number should be of 10 digits only").min(10, 'Phone number should be of 10 digits only').required("error-contact-required").matches(/^[0-9]{10}$/, "Invalid phone number"),
 });
-
-
 
 
 // // console.log('loc',getLocation.formattedAddress)
@@ -163,23 +165,25 @@ const OtpRegisterForm = (props:any) => {
     },
     );
     // handleLocation()
-}
+  }
 
-function handleClick(){
-  query?.utm_source == 'shop_qr' ? 
-  router.push('/login?utm_source=shop_qr&utm_campaign='+query?.utm_campaign+'&shop_id='+query?.shop_id) : 
+
+  function handleClick(){
+    query?.utm_source == 'shop_qr' ? 
+    router.push('/login?utm_source=shop_qr&utm_campaign='+query?.utm_campaign+'&shop_id='+query?.shop_id) : 
     openModal("OTP_LOGIN")
-}
+  }
 
     console.log('path', router.pathname)
 
-  function onSubmit({  phone_number,name,email, current_location  }:FormValues)   {
+
+  function onSubmit({  phone_number,name,email,current_location,password  }:FormValues)   {
     mutate(
         //@ts-ignore
       {
         name,
         email,
-        // password,
+        password,
         phone_number,
         // invited_by:'',
         current_location: userLocation,
@@ -297,8 +301,6 @@ function handleClick(){
           error={t(errors.email?.message!)}
         />
 
-        
-
         {/* phone number */}
         <Input
           label={"Phone Number"}
@@ -309,6 +311,15 @@ function handleClick(){
           className="mb-2 lg:mb-5 col-span-2 "
           onChange={(e) => setValue("phone_number", getPhoneNumber(e.target.value))}
           error={t(errors.phone_number?.message!)}
+        />
+
+        <PasswordInput
+          label={t("Password")}
+          {...register("password")}
+          error={t(errors.password?.message!)}
+          variant="rounded"
+          className="mb-5 col-span-2"
+          forgotPageRouteOnClick={() => openModal("FORGOT_VIEW")}
         />
 
            <Input

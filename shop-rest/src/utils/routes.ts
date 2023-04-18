@@ -50,5 +50,6 @@ export const ROUTES = {
   WISHLIST: '/wishlists',
   QUESTIONS: '/questions',
   REPORTS: '/reports',
+  MESSAGES: '/messages',
   
 };

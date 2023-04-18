@@ -7,7 +7,6 @@ export const aboutUs = {
         title: "The concept of Lowcal Ventures Pvt Ltd.",
         description: `
 
-
         Introducing a revolutionary new technology that redistributes the wealth accumulated by advertising giants to the consumers who drive their profits. With our decentralized platform, we are empowering individuals to take control of their data and their financial futures. By redirecting a portion of the advertising revenue currently monopolized by a select few companies, we are creating a more fair and balanced platform for both businesses and consumers. Join us in the fight against corporate monopolies and take your share of the advertising pie. </br>
 
         Advantages: </br>

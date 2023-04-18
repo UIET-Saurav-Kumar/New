@@ -112,6 +112,11 @@ module.exports = {
       fontFamily: {
         body: ["Open Sans", "system-ui", "sans-serif"],
         heading: ["Open Sans", "system-ui", "sans-serif"],
+        mono: ['IBM Plex Mono', 'Menlo', 'monospace'],
+        custom: ['"My Custom Font"', 'cursive'],
+        roboto: ['Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+        source: ['Source Sans Pro', 'Helvetica', 'Arial', 'sans-serif'],
+        playfair: ['Playfair Display', 'Georgia', 'serif'],
       },
       
       fontSize: {

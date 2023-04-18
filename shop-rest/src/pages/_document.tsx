@@ -81,8 +81,8 @@ export default class CustomDocument extends Document {
 
           <meta name="facebook-domain-verification" content="8mvkzpangtng356xvg4hqubj4mbuyq" />
 
-           {/* interakt */}
-          <script
+           {/* interakt whatsapp button*/}
+          {/* <script
             dangerouslySetInnerHTML={{
               __html: `(function(w,d,s,c,r,a,m){
                 w['KiwiObject']=r;
@@ -99,7 +99,7 @@ export default class CustomDocument extends Document {
                 kiwi.init('', 'R74PF9xANjTtlgpYCm6WFEpmXvX7ZJ42', {});
               });`
               }}
-            />
+            /> */}
 
               {/* Facebook login SDK */}
                <script

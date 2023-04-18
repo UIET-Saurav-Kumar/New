@@ -5,6 +5,7 @@ import User from "@repositories/user";
 import { API_ENDPOINTS } from "@utils/api/endpoints";
 
 const fetchUsers = async ({ queryKey }: QueryParamsType) => {
+  
   const [_key, params] = queryKey;
   const {
     page,
@@ -13,6 +14,7 @@ const fetchUsers = async ({ queryKey }: QueryParamsType) => {
     orderBy = "updated_at",
     sortedBy = "DESC",
   } = params as QueryOptionsType;
+
   const url = `${API_ENDPOINTS.USERS}?search=${text}&limit=${limit}&page=${page}&orderBy=${orderBy}&sortedBy=${sortedBy}`;
   const {
     data: { data, ...rest },

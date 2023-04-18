@@ -258,7 +258,7 @@ export default function PlaceSearch(props:any) {
         });
       });
     },
-    onError: (data) => {
+    onError: (data) => {updateLikes
       console.log(data?.message);
     },
     onSettled: () => {

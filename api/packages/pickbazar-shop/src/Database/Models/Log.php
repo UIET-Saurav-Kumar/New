@@ -11,7 +11,6 @@ class Log extends Model
 
     public $guarded = [];
 
-
     /**
      * @return BelongsTo
      */

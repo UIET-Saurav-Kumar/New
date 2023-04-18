@@ -77,8 +77,8 @@ class UserRepository extends BaseRepository
                 'date_of_birth'=> $request->date_of_birth,
                 'occupation'=> $request->occupation,
                 'role'=> $request->permissions[0]->name,
-
             ]);
+
             $user->givePermissionTo(UserPermission::CUSTOMER);
             if (isset($request['address']) && count($request['address'])) {
                 $user->address()->createMany($request['address']);

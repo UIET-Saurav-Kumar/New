@@ -28,6 +28,15 @@ export type FeatureProductOptionsType = {
   status?: string;
 };
 
+export type QueryOptionsType = {
+  page?: number;
+  text?: string;
+  shop_id?: number;
+  limit?: number;
+  orderBy?: string;
+  sortedBy?: SortOrder;
+};
+
 export type OfferOptionsType = {
   location?:any;
   category?:string;

@@ -113,8 +113,8 @@ type ShopProfileCardProps = {
                     <p onClick={openGoogleReview} className={ ` ${rating ? 'block cursor-pointer' : 'hidden'} text-gray-500   mb-4`}>
                     {rating && ratingStars(rating)+' '+(rating)}<span className="">
                       <span className="text-xs text-gray-400"> {'('+totalRating+')'}</span>
-                    </span>
-                  </p>
+                      </span>
+                    </p>
                   </span>
                   
                  

@@ -11,9 +11,11 @@
     "require": {
         "php": "^7.3|^8.0",
         "barryvdh/laravel-dompdf": "^0.9.0",
+        "beyondcode/laravel-websockets": "^1.14",
+        "cboden/ratchet": "^0.4.4",
         "doctrine/dbal": "^3.1",
         "fideloper/proxy": "^4.4",
-        "fruitcake/laravel-cors": "^2.0",
+        "fruitcake/laravel-cors": "^3.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "ignited/laravel-omnipay": "dev-master",
         "laravel/framework": "^8.12",

@@ -84,6 +84,8 @@ class UserController extends CoreController
         }
     }
 
+  
+
     /**
      * Update the specified resource in storage.
      *
@@ -263,7 +265,7 @@ class UserController extends CoreController
         $user = $this->repository->create([
             'name'     => $request->name ,
             'email'    => $request->email,
-            // 'password' => Hash::make($request->password),
+            'password' => Hash::make($request->password),
             // 'invited_by'=>$request->invited_by,
             'phone_number'=>$request->phone_number,
             // 'gender'=> $request->gender,
@@ -276,29 +278,29 @@ class UserController extends CoreController
         ]);
     
         
-        if($request->invited_by){
-            Invite::create([
-                "user_id"=>$request->invited_by,
-                "invitee_id"=>$user->id,
-                "invitee_name"=>'none'
-            ]);
+        // if($request->invited_by){
+        //     Invite::create([
+        //         "user_id"=>$request->invited_by,
+        //         "invitee_id"=>$user->id,
+        //         "invitee_name"=>'none'
+        //     ]);
 
-            $invited_by=User::find($request->invited_by);
-            SMS::userInvite($invited_by->phone_number,$invited_by->name,$user->name);
+        //     $invited_by=User::find($request->invited_by);
+        //     SMS::userInvite($invited_by->phone_number,$invited_by->name,$user->name);
             
 
-            $signup_offer=SignupOffer::find(1);
-            $Inviter_balance = Balance::firstOrNew(['user_id' => $request->invited_by]);
-            $Inviter_balance->total_earnings= $Inviter_balance->total_earnings + $signup_offer->inviter_reward;
-            $Inviter_balance->current_balance=$Inviter_balance->current_balance + $signup_offer->inviter_reward;
-            $Inviter_balance->save();
+        //     $signup_offer=SignupOffer::find(1);
+        //     $Inviter_balance = Balance::firstOrNew(['user_id' => $request->invited_by]);
+        //     $Inviter_balance->total_earnings= $Inviter_balance->total_earnings + $signup_offer->inviter_reward;
+        //     $Inviter_balance->current_balance=$Inviter_balance->current_balance + $signup_offer->inviter_reward;
+        //     $Inviter_balance->save();
 
-            $Invitee_balance = Balance::firstOrNew(['user_id' => $user->id]);
-            $Invitee_balance->total_earnings= $Invitee_balance->total_earnings + $signup_offer->invitee_reward;
-            $Invitee_balance->current_balance=$Invitee_balance->current_balance + $signup_offer->invitee_reward;
-            $Invitee_balance->save();
+        //     $Invitee_balance = Balance::firstOrNew(['user_id' => $user->id]);
+        //     $Invitee_balance->total_earnings= $Invitee_balance->total_earnings + $signup_offer->invitee_reward;
+        //     $Invitee_balance->current_balance=$Invitee_balance->current_balance + $signup_offer->invitee_reward;
+        //     $Invitee_balance->save();
 
-        }
+        // }
 
         $user->givePermissionTo($permissions);
 
@@ -351,7 +353,7 @@ class UserController extends CoreController
 
     public function userVerify(Request $request)
     {
-
+        
          $user=User::findOrFail($request->id);
 
         if($request->code==$user->code){

@@ -40,6 +40,8 @@ import * as ga from '../lib/ga'
 import { useRouter } from "next/router";
 
 import { PaymentProvider } from "@contexts/payment.context";
+import { ChatProvider } from "@contexts/chat-window.context";
+import { UserCardLikesProvider } from "@contexts/user-likes.context";
 
 const Noop: React.FC = ({ children }) => <>{children}</>;
 
@@ -145,28 +147,34 @@ function CustomApp({ Component, pageProps }: AppProps) {
       <Hydrate state={pageProps.dehydratedState}>
         <AppSettings>
           <ModalProvider>
-            <CartProvider>
-              <LocationProvider>
-                <UIProvider>
-                  <CheckoutProvider>
-                    <SearchProvider>
-                      <Layout {...pageProps}>
-                        <Seo />
-                         <PaymentProvider> 
-                          
-                            <Component {...pageProps} />
 
-                         </PaymentProvider>
-                      </Layout>
-                      <ToastContainer autoClose={2000} />
-                      <ManagedModal />
-                      <SidebarContainer />
-                    </SearchProvider>
-                  </CheckoutProvider>
-                  <SocialLoginProvider />
-                </UIProvider>
-              </LocationProvider>
-            </CartProvider>
+            <UserCardLikesProvider> 
+
+              <CartProvider>
+                <LocationProvider>
+                  <UIProvider>
+                    <CheckoutProvider>
+                      <SearchProvider>
+                        <Layout {...pageProps}>
+                          <Seo />
+                          <PaymentProvider> 
+                            
+                              <Component {...pageProps} />
+
+                          </PaymentProvider>
+                        </Layout>
+                        <ToastContainer autoClose={2000} />
+                        <ManagedModal />
+                        <SidebarContainer />
+                      </SearchProvider>
+                    </CheckoutProvider>
+                    <SocialLoginProvider />
+                  </UIProvider>
+                </LocationProvider>
+              </CartProvider>
+
+            </UserCardLikesProvider>
+            
           </ModalProvider>
         </AppSettings>
         {/* <ReactQueryDevtools /> */}

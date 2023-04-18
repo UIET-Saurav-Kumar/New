@@ -70,6 +70,7 @@ const DefaultLayout: React.FC = ({ children }) => {
       <div>{children}</div>
       { router?.pathname == '/salon-near-me' ? null : <MobileNavigation /> }
       { router?.pathname == '/salon-near-me' ? null : <Footer/> }
+      
     </div>
 
   );

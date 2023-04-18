@@ -125,14 +125,15 @@ export const siteSettings = {
     // { href: ROUTES.HELP, label: "FAQ" },
     { href: ROUTES.CONTACT, label: "Contact" },
     //wishlists
-    
+
   ],
 
   authorizedLinks: [
     { href: ROUTES.PROFILE, label: "Profile" },
+    { href: ROUTES.MESSAGES, label: "Messages" },
     { href: ROUTES.CHECKOUT, label: "Checkout" },
     { href: ROUTES.WISHLIST, label: 'My wishlist' },
-    { href:ROUTES.QUESTIONS, label: 'My Questions' },
+    { href: ROUTES.QUESTIONS, label: 'My Questions' },
     { href: ROUTES.EVENTS, label: "Magazines" },
     { href: ROUTES.ORDERS, label: "Orders" },
     { href: ROUTES.INVITE_FRIENDS, label: "Invite Friends" },
@@ -141,8 +142,8 @@ export const siteSettings = {
     { href: ROUTES.WITHDRAWS, label: "Withdraws" },
     { href: ROUTES.UPLOAD_INVOICE, label: "Upload Invoice" },
     { href: ROUTES.DELIVERY, label: "Deliveries" },
-    {href: ROUTES.CREATE_SHOP,  label: "Business Access"},
-    {href: ROUTES.UTILITY_PAYMENTS,  label: "Utility Payments"},
+    { href: ROUTES.CREATE_SHOP,  label: "Business Access"},
+    { href: ROUTES.UTILITY_PAYMENTS,  label: "Utility Payments"},
     { href: ROUTES.LOGOUT, label: "Logout" },
   ],  
 
@@ -154,15 +155,17 @@ export const siteSettings = {
       menulabel: " Profile",
     },
     {
+      href: ROUTES.MESSAGES,
+      menulabel: " Messages",
+    },
+    {
       href: ROUTES.CHANGE_PASSWORD,
       menulabel: "Change Password",
     },
-
     {
       href: ROUTES.EVENTS,
       menulabel: "Magazines",
     },
-
     {
       href: ROUTES.WISHLIST,
       menulabel: 'My wishlist',
@@ -171,17 +174,14 @@ export const siteSettings = {
       href: ROUTES.QUESTIONS,
       menulabel: 'My Questions',
     },
-    
     {
       href: ROUTES.ORDERS,
       menulabel: "My Orders",
     },
-
     {
       href: ROUTES.INVITE_FRIENDS,
       menulabel: "Invite Friends",
     },
-    
     {
       href: ROUTES.REFERRAL_NETWORK,
       menulabel: "Your Community",
@@ -198,12 +198,10 @@ export const siteSettings = {
       href: ROUTES.WITHDRAWS,
       menulabel: "Withdraws",
     },
-
     {
       href: ROUTES.UPLOAD_INVOICE,
       menulabel: "Upload Invoice",
     },
-
     {
       href: ROUTES.DELIVERY,
       menulabel: "Delivery",
@@ -224,7 +222,6 @@ export const siteSettings = {
       href: ROUTES.LOGOUT,
       menulabel: "Logout",
     },
-
   ],
 
  
@@ -305,8 +302,8 @@ export const siteSettings = {
   
   homePageSidenav: [
     {
-       href: ROUTES.ALLCATEGORIES,
-       label: 'All Categories'
+        href: ROUTES.ALLCATEGORIES,
+        label: 'All Categories'
     },
     {
       href: ROUTES.SELLER,
@@ -346,180 +343,6 @@ export const siteSettings = {
     label: 'Privacy Policy',
    },
   ],
-
-  allCategories: [
-
-    {
-      href: ROUTES.FRUITS,
-      label: 'Fruits',
-       src: '/transparent-fruit.png',
-    },
-
-    {
-      href: ROUTES.GROCERY,
-      label: 'Groceries',
-       src: '/transparent-grocery.png',
-    },
-
-    {
-      href: ROUTES.VEGETABLES,
-      label: 'Vegetables',
-      src: '/vegetables.jpg',
-    },
-
-    {
-      href: ROUTES.PHARMACY,
-      label: 'Pharmacy',
-      src: '/pharmacy-transparent.png',
-    },
-
-    {
-      href: ROUTES.SALOONSPA,
-      label: 'Salon & Spa',
-      src: '/salonspa.jpg',
-    },
-
-    {
-      href: ROUTES.TAKEAWAYS,
-      label: 'Takeaways',
-      src: '/transparent-delivery-man.png',
-    },
-
-    {
-      href: ROUTES.UTILITIES,
-      label: 'Utilities',
-      src: '/transparent-bill.png',
-    },
-
-    {
-      href: ROUTES.RESTRAUNTS,
-      label: 'Restraunts',
-      src: '/restraunts.jpg',
-    },
-  ],
-   
-   featuredShops : [
-     {
-       href: '/',
-       label: 'Pirates of Grill',
-       image: '/pirates-grill.jpg',
-       location: 'Sector 34 A',
-       type: 'restraunt '
-     },
-
-     {
-      href: '/',
-      label: 'Hot Million',
-      image: '/hot-millions.jpg',
-      location: 'Sector 22 A',
-      type: 'restraunt '
-    },
-
-    {
-      href: '/',
-      label: 'Nick Bakers',
-      image: '/nick-bakers.jpeg',
-      location: 'Sector 34 A',
-      type: 'Bakery'
-    },
-
-    {
-      href: '/',
-      label: 'Pirates of Grill',
-      image: '/pirates-grill.jpg',
-      location: 'Sector 34 A',
-      type: 'restraunt '
-    },
-
-    {
-      href: '/',
-      label: 'Barbeque Nation',
-      image: '/barbeque-nation.jpg',
-      location: 'Centra Mall',
-      type: 'restraunt '
-    },
-
-    {
-      href: '/',
-      label: 'Hot Million',
-      image: '/hot-millions.jpg',
-      location: 'Sector 22 A',
-      type: 'restraunt '
-    },
-
-    {
-      href: '/',
-      label: 'Sip n dine',
-      image: '/sip-dine.jpg',
-      location: 'Sector 18',
-      type: 'restraunt '
-    },
-
-    {
-      href: '/',
-      label: 'The cove',
-      image: '/cove.jpg',
-      location: 'Sector 17',
-      type: 'restraunt '
-    },
-    
-   ],
-
-   
-
-   
-
-   amazonShops: [
-    {
-      image: '/images/amazon-delivery.jpeg',
-      label: 'Amazon Delivery',
-      offers: 'upto 70% off + Upto 5% ',
-      href:'https://www.amazon.in/?&_encoding=UTF8&tag=buylowcal03-21&linkCode=ur2&linkId=8db7d97e00d6324c5a867b3dea611ff5&camp=3638&creative=24630'
-    },
-    {
-      image: '/images/amazon-deals.jpeg',
-      label: 'Amazon Deals',
-      offers: 'upto 70% off + Upto 5% ',
-      href:'https://www.amazon.in/gp/goldbox/ref=nav_topnav_deals?ie=UTF8&amp;ref=nav_topnav_deals&amp;pf_rd_m=A1VBAL9TL5WCBF&amp;pf_rd_s=&amp;pf_rd_r=PCB4JNXP3GMZ6JP1ZWYE&amp;pf_rd_t=36701&amp;pf_rd_p=5b42e6ae-1ba8-4d9f-b00b-b2fe636d1de6&amp;pf_rd_i=desktop&_encoding=UTF8&tag=buylowcal03-21&linkCode=ur2&linkId=c48ee088097b32c3e6067da0597df286&camp=3638&creative=24630 ',
-      
-    },
-    {
-      image: '/images/amazon-books.jpeg',
-      label: ' Amazon Books',
-      offers: 'upto 70% off + Upto 5% ',
-      href:'https://www.amazon.in/gp/browse.html?node=976389031&amp;ref_=nav_em_sbc_books_all_0_2_17_2&_encoding=UTF8&tag=buylowcal03-21&linkCode=ur2&linkId=13e406b2e42ac04e70723867864d9d25&camp=3638&creative=24630',
-    },
-    {
-     image: '/images/amazon-computer.jpeg',
-     label: ' Amazon Computer & Accessories',
-     offers: 'upto 70% off + Upto 5% ',
-     href:'https://www.amazon.in/gp/browse.html?node=976392031&amp;ref_=nav_em_sbc_mobcomp_all_comp_0_2_8_14&_encoding=UTF8&tag=buylowcal03-21&linkCode=ur2&linkId=dcf7f9a4f281df1f15870fc83b235eb4&camp=3638&creative=24630',
-   },
-   {
-     image: '/images/amazon-fashion.jpeg',
-     label: ' Amazon Fashion',
-     offers: 'upto 70% off + Upto 5% ',
-     href:'https://www.amazon.in/gp/browse.html?node=6648217031&amp;ref_=nav_em_sbc_mfashion_af_0_2_10_22&_encoding=UTF8&tag=buylowcal03-21&linkCode=ur2&linkId=29595ef5992d6b701c2cb8f7f4b9b6f8&camp=3638&creative=24630',
-   },
-   {
-     image: '/images/amazon-beauty.jpeg',
-     label: ' Amazon Beauty ',
-     offers: 'upto 70% off + Upto 5% ',
-     href:'https://www.amazon.in/gp/browse.html?node=1355016031&amp;ref_=nav_em_sbc_bhg_beauty_all_0_2_13_2&_encoding=UTF8&tag=buylowcal03-21&linkCode=ur2&linkId=c87bc1332759e7c406c06be62b15177b&camp=3638&creative=24630',
-   },
-
-   {
-     image: '/images/amazon-home.jpeg',
-     label: ' Amazon Home & Kitchen',
-     offers: 'upto 70% off + Upto 5% ',
-     href:'https://www.amazon.in/gp/browse.html?node=976442031&amp;ref_=nav_em_sbc_hk_all_0_2_12_15&_encoding=UTF8&tag=buylowcal03-21&linkCode=ur2&linkId=d8ab788f398e6338c3a19dbcd9585f21&camp=3638&creative=24630',
-   },
-   {
-     image: '/images/amazon-sports.jpeg',
-     label: ' Amazon Sports',
-     offers: 'upto 70% off + Upto 5% ',
-     href:'https://www.amazon.in/gp/browse.html?node=1984443031&amp;ref_=nav_em_sbc_sportslugg_all_sports_0_2_14_15&_encoding=UTF8&tag=buylowcal03-21&linkCode=ur2&linkId=4773c1b228872523af990b805cb92d4a&camp=3638&creative=24630',
-   },
-  ],
+ 
 };
 

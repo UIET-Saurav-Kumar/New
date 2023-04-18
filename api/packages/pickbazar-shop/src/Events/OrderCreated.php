@@ -1,6 +1,5 @@
 <?php
 
-
 namespace PickBazar\Events;
 
 use PickBazar\Database\Models\Order;

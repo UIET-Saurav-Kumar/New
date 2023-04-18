@@ -36,8 +36,8 @@ const CustomerList = ({ customers, onPagination }: IProps) => {
 
 const {data:referralNetwork} = useReferralNetworkQuery();
   // const { data:customerData } = useCustomerQuery();
-  console.log(' customer data',referralNetwork)
-
+  console.log(' customer data',referralNetwork);
+  
   
   const columns = [
     {

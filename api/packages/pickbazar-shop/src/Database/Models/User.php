@@ -69,6 +69,11 @@ class User extends Authenticatable
         return $this->hasMany(Address::class, 'customer_id');
     }
 
+    public function swipes()
+    {
+        return $this->hasMany(Swipe::class, 'user_id');
+    }
+
     /**
      * @return HasMany
      */
@@ -137,6 +142,8 @@ class User extends Authenticatable
         
         if($this->hasPermissionTo(Permission::SUPER_ADMIN)){
             $role="Super Admin";
+        // }else if($this->hasPermissionTo(Permission::CUSTOMER)){
+        //     $role="Customer";
         }else if($this->hasPermissionTo(Permission::STORE_OWNER)){
             $role="Store Owner";
         }else if($this->hasPermissionTo(Permission::STAFF))

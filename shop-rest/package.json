@@ -31,7 +31,10 @@
     "dayjs": "^1.10.5",
     "framer-motion": "4.1.17",
     "hiding-header-react": "^0.5.0",
+    "install": "^0.13.0",
     "js-cookie": "^2.2.1",
+    "laravel-echo": "^1.15.0",
+    "laravel-echo-server": "^1.6.3",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "multiselect-react-dropdown": "^2.0.4",
@@ -77,9 +80,11 @@
     "react-waypoint": "^10.1.0",
     "react-web-share": "^1.1.6",
     "sharp": "^0.30.7",
+    "socket.io-client": "^4.6.1",
     "swiper": "6.8.4",
     "tailwind-scrollbar-hide": "^1.1.7",
     "upiqr": "^1.0.32",
+    "uuid": "^9.0.0",
     "yup": "^0.32.9"
   },
   "devDependencies": {

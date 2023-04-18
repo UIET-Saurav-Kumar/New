@@ -84,9 +84,8 @@ export const AddToCart = ({
         // // console.log(data)
       },
     });
-    
-
   };
+
   const handleRemoveClick = (e: any) => {
     e.stopPropagation();
     removeItemFromCart(item.id);
@@ -100,7 +99,6 @@ export const AddToCart = ({
         // console.log(data)
       },
     });
-
   };
 
   // console.log('item id',item)
