@@ -50,18 +50,27 @@ const ProfileForm = ({ user }: Props) => {
     );
     return response;
   }, []);
+
+  
   
   useEffect(()=>{
     const getIpLocation = async () => {
       const response = await memoizedLocation;
       setUserLocation(response?.city+","+response?.region_name);
+      console.log(' ip ip', response);
     }
     getIpLocation();
   },[data?.me?.id, memoizedLocation]);
   
 
 
- console.log('ip ip', userLocation)
+//  console.log('ip ip', userLocation)
+ // check type of userlocation
+  console.log('ip ip', typeof userLocation, userLocation)
+
+
+
+
 
 
   const { register, handleSubmit, setValue, control } = useForm<UserFormValues>(
@@ -102,7 +111,7 @@ const ProfileForm = ({ user }: Props) => {
         date_of_birth: values?.date_of_birth,
         gender: values?.gender,
         occupation: values?.occupation,
-        current_location: values?.current_location.length ?values?.current_location : userLocation ,
+        current_location: values?.current_location.length ? values?.current_location : userLocation == null ? '' : userLocation ,
         // email: values?.email,
          profile: {
           id: user?.profile?.id,
@@ -123,7 +132,7 @@ const ProfileForm = ({ user }: Props) => {
         date_of_birth: values?.date_of_birth,
         gender: values?.gender,
         occupation: values?.occupation,
-        current_location: values?.current_location?.length ? values?.current_location : userLocation,
+        current_location: values?.current_location?.length ? values?.current_location  : userLocation == null ? '' : userLocation ,
         // email: values?.email,
         profile: {
           id: user?.profile?.id,
