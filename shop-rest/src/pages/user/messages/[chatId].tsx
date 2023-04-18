@@ -270,10 +270,10 @@ const ChatScreen = () => {
     
         // Get the last message and the chat ID
         const lastMessage = messages[messages.length - 1];
-        const currentChatId = lastMessage.chat_id;
+        const currentChatId = lastMessage?.chat_id;
     
         // Call the callback function from the parent component
-        onNewLastMessage(currentChatId, lastMessage);
+        // onNewLastMessage(currentChatId, lastMessage);
     
         const playSound = async () => {
           try {

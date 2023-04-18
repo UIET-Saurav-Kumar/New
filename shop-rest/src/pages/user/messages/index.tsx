@@ -124,14 +124,11 @@ const UsersList = () => {
 
   return (
 
-    <div className="relative w-full max-h-screen">
+    <div className="relative  w-full max-h-screen">
 
-        <div className="z-40 flex fixed p-5 items-center bg-gray-50 space-x-3 w-full border-gray-600 border-b ">
+        <div className="z-40 flex sticky top-0 p-5 items-center bg-gray-50 space-x-3 w-full border-gray-600 border-b ">
           <ArrowLeftIcon onClick={() => router.push('/home')} className='h-5 w-5 text-black bg-gray-100' />
-          {/* <img
-            src={`https://source.unsplash.com/featured/?girls/${query.name}`}
-            className="rounded-full h-12 w-12"
-          /> */}
+          
           <p className="text-lg font-semibold text-gray-600 ml-4">{query.rname}</p>
         </div>
 
@@ -160,7 +157,7 @@ const UsersList = () => {
           <Link key={like.id} href={`/user/messages/${like.chat_id}?name=${like.user_name}&rname=${currentUserData?.me?.id == like.user_id ? like.liked_by_name : like.user_name}&ri=${currentUserData?.me?.id == like.user_id ? like.liked_by : like.user_id}&si=${currentUserData?.me?.id}&id=${like.chat_id}`}>
            <div
             key={like.id}
-            className="flex bg-gray-50 shadow-300 p-4 active:bg-gray-200 transition-all duration-500 pt-20 items-center space-x-4"
+            className="  flex bg-gray-50 shadow-300 p-4 border  active:bg-gray-200 transition-all duration-500 pt-20 items-center space-x-4"
             onClick={() => handleLikeClick(like)}
            >
             <img
@@ -202,7 +199,7 @@ const UsersList = () => {
           :
           <div
             key={like.id}
-            className="flex bg-gray-50  shadow-300 p-5 items-center space-x-4"
+            className="flex bg-gray-50  shadow-300 p-5  items-center space-x-4"
             onClick={() => handleLikeClick(like)}
            >
             <img
