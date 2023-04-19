@@ -13,7 +13,7 @@ export const useAllLikesQuery = () => {
       [API_ENDPOINTS.ALL_LIKES],
       () => fetchAllLikes(),
       {
-        refetchInterval: 2000 // milliseconds
+        // refetchInterval: 2000 // milliseconds
       }
     );
   };

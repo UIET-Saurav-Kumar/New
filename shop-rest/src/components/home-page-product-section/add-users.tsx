@@ -17,6 +17,8 @@ import { v4 as uuidv4 } from 'uuid';
  import { LikedCard } from '@contexts/user-likes.context';
 import { useAllLikesQuery } from '@data/user-likes/use-all-likes.query';
 import { useUI } from '@contexts/ui.context';
+import { useCallback } from 'react';
+
 
 export const data = [
     {
@@ -75,38 +77,33 @@ export const data = [
     const { data: likesData } = useAllLikesQuery();
   
 
-    const handleLike = async (card: LikedCard) => {
-      if (likedCards.some((likedCard) => likedCard.user_id === card.user_id && likedCard.liked_by === card.liked_by)) {
-        // console.log('removing liked card')
-        removeLikedCard(card);
-        // remove user from filteredUsers array
-        setFilteredUsers((prev) => prev.filter((user) => user.id !== card.user_id ));
+    const handleLike = useCallback(async (card: LikedCard) => {      if (likedCards.some((likedCard) => likedCard.user_id === card.user_id && likedCard.liked_by === card.liked_by)) {
+         removeLikedCard(card);
+         setFilteredUsers((prev) => prev.filter((user) => user.id !== card.user_id ));
       } else {
-        // console.log('adding liked card')
-        addLikedCard(card);
-        // console.log('liked card added ',)
-        // remove user from filteredUsers array
+         addLikedCard(card);
+       
         setFilteredUsers((prev) => prev.filter((user) => user.id !== card.user_id));
       }
-    };
-
-    // console.log('liked cards',likesData);
-    
-    const { data } = useCustomerQuery();
+    }, [likedCards, removeLikedCard, addLikedCard]);
   
-    const idRef = useRef(data?.me?.id);
+    const idRef = useRef(currentUserData?.me?.id);
   
     const myId = idRef.current;
-  
+
+   
     useEffect(() => {
-      idRef.current = data?.me?.id;
-    }, [data?.me?.id]);
+      idRef.current = currentUserData?.me?.id;
+    }, [currentUserData?.me?.id]);
   
     const { data: users, isLoading: loading, error } = useUsersQuery({
-      limit: 200,
+      skip: !isAuthorize, // Add this line to skip the query when isAuthorize is false
+      limit: 2000,
       page,
       text: searchTerm,
     });
+
+    
   
   
     useEffect(() => {
@@ -151,10 +148,10 @@ export const data = [
 
       <div className="relative h-full w-full z-40">
        { isAuthorize && <p className='text-center font-semibold text-lg p-2 lg:text-2xl'>
-          People you may know
+          Community Members Near You
         </p> }
         <div className="transition-all duration-500 grid grid-cols-3 lg:grid-cols-6 gap-2 lg:gap-6">
-        {filteredUsers?.map((user: any) => {
+        {filteredUsers?.slice(0,20).map((user: any) => {
           const card: LikedCard = { user_id: user.id, liked_by: myId };
           if (
             !likedCards.some(

@@ -32,7 +32,7 @@ const fetchUsers = async ({ queryKey }: QueryParamsType) => {
       fetchUsers,
       {
         keepPreviousData: true,
-        refetchInterval: 200, // refetch every 10 seconds
+        // refetchInterval: 200, // refetch every 10 seconds
       }
     );
   };

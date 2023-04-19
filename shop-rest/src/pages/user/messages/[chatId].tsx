@@ -268,34 +268,25 @@ const ChatScreen = () => {
     useEffect(() => {
       if (messages.length > messageLength) {
         setMessageLength(messages.length);
-        localStorage.setItem("messageLength", messages.length);
+        localStorage.setItem("messageLength", messages?.length);
     
         // Get the last message and the chat ID
         const lastMessage = messages[messages.length - 1];
         const currentChatId = lastMessage?.chat_id;
     
-        // Call the callback function from the parent component
-        // onNewLastMessage(currentChatId, lastMessage);
+        
     
         const playSound = async () => {
           try {
-            const audio = new Audio("/sound2.mp3");
+            const audio = new Audio("/sounds/sound2.mp3");
             await audio.play();
           } catch (error) {
-            console.error("Error playing audio:", error);
+            alert("Error playing audio:", error);
           }
         };
         playSound();
       }
     }, [messages]);
-    
-    
- 
-
-    
-
-
-   
 
     // console.log('query',messages);
 
