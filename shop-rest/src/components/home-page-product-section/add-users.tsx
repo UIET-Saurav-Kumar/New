@@ -16,6 +16,7 @@ import { AppContext } from '@contexts/user-likes.context';
 import { v4 as uuidv4 } from 'uuid';
  import { LikedCard } from '@contexts/user-likes.context';
 import { useAllLikesQuery } from '@data/user-likes/use-all-likes.query';
+import { useUI } from '@contexts/ui.context';
 
 export const data = [
     {
@@ -63,6 +64,9 @@ export const data = [
     const [showGender, setShowGender] = useState("male");
     const [filteredUsers, setFilteredUsers] = useState([]);
     const [isLiked, setIsLiked] = useState(false);
+
+    const { isAuthorize } = useUI();
+
 
     const { likedCards, addLikedCard, removeLikedCard } = useContext(AppContext);
   
@@ -141,13 +145,14 @@ export const data = [
       return { mutate };
     };
 
+     
       
     return (
 
       <div className="relative h-full w-full z-40">
-        <p className='text-center font-semibold text-lg p-2 lg:text-2xl'>
+       { isAuthorize && <p className='text-center font-semibold text-lg p-2 lg:text-2xl'>
           People you may know
-        </p>
+        </p> }
         <div className="transition-all duration-500 grid grid-cols-3 lg:grid-cols-6 gap-2 lg:gap-6">
         {filteredUsers?.map((user: any) => {
           const card: LikedCard = { user_id: user.id, liked_by: myId };
@@ -235,7 +240,7 @@ export const data = [
         <div className="flex flex-col items-start justify-between mt-2">
           <h2 className="text-sm  lg:text-lg font-medium">{user?.name}</h2>
           <h2 className="text-xs text-gray-500 lg:text-sm font-light">
-            {user?.current_location}
+            {user.current_location == null ? '' : user?.current_location.includes('undefined')   ? ' ' : user?.current_location}
           </h2>
         </div>
  

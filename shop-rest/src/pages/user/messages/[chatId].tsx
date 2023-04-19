@@ -252,9 +252,9 @@ const ChatScreen = () => {
     const scrollToBottom = () => {
       messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
+    
     useEffect(scrollToBottom, [messages]);
  
-
     // add sound when message is sent or received only to new messages by checking if the length of messages array is incresed
     //store message length in local storage so that the state persists in re renders
     const getSavedMessageLength = () => {
@@ -264,6 +264,7 @@ const ChatScreen = () => {
     
     const [messageLength, setMessageLength] = useState(getSavedMessageLength());
     
+
     useEffect(() => {
       if (messages.length > messageLength) {
         setMessageLength(messages.length);
@@ -278,13 +279,12 @@ const ChatScreen = () => {
     
         const playSound = async () => {
           try {
-            const audio = new Audio("/message.mp3");
+            const audio = new Audio("/sound2.mp3");
             await audio.play();
           } catch (error) {
             console.error("Error playing audio:", error);
           }
         };
-    
         playSound();
       }
     }, [messages]);
@@ -336,7 +336,7 @@ const ChatScreen = () => {
                     <p className="sticky mx-auto bg-gray-100 p-1 rounded-xl px-5 top-0 z-40 text-gray-600 font-semibold my-2">{formattedDate}</p>
                   ) : null}
                   <div ref={messagesEndRef}
-                    className={`flex flex-col mb-4 h-screen ${
+                    className={`flex flex-col mb-4 h-screen  ${
                       message.sender_id == currentUser?.me?.id ? "ml-auto" : "mr-auto"
                     }`}
                   >

@@ -143,6 +143,7 @@ const UsersList = () => {
          socket={socket}
          messages={messages}
          setMessages={setMessages}
+         
          setShowChatScreen={setShowChatScreen}
         />
       ) : (
@@ -157,7 +158,7 @@ const UsersList = () => {
           <Link key={like.id} href={`/user/messages/${like.chat_id}?name=${like.user_name}&rname=${currentUserData?.me?.id == like.user_id ? like.liked_by_name : like.user_name}&ri=${currentUserData?.me?.id == like.user_id ? like.liked_by : like.user_id}&si=${currentUserData?.me?.id}&id=${like.chat_id}`}>
            <div
             key={like.id}
-            className="  flex bg-gray-50 shadow-300 p-4 border  active:bg-gray-200 transition-all duration-500 pt-20 items-center space-x-4"
+            className="  flex bg-gray-50 shadow-300 p-4 border  active:bg-gray-200 transition-all duration-500   items-center space-x-4"
             onClick={() => handleLikeClick(like)}
            >
             <img
@@ -195,7 +196,7 @@ const UsersList = () => {
                 </button>
               )}
             </div>
-          </Link>
+           </Link>
           :
           <div
             key={like.id}
