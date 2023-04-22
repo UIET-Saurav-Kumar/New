@@ -238,7 +238,7 @@ export default function CreateOrUpdateProductForm({ initialValues }: IProps) {
         id: values?.image?.id,
       },
       gallery: values.gallery?.map(({ thumbnail, original, id }: any) => ({
-        thumbnail,
+        thumbnail, 
         original,
         id,
       })),

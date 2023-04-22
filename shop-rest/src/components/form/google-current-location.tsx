@@ -2,33 +2,33 @@ import { Autocomplete, useJsApiLoader } from "@react-google-maps/api";
 import { Libraries } from "@react-google-maps/api/dist/utils/make-load-script-url";
 import { LocationInput } from "@ts-types/generated";
 import { useRouter } from "next/router";
-import React, { useState ,useEffect } from "react";
+import React, { useState ,useEffect, useRef } from "react";
 import { useTranslation } from "next-i18next";
 import Loader from "@components/ui/loader/loader";
 import useOnClickOutside from "@utils/use-click-outside";
 
-
 const libraries: Libraries = ["places"];
-// data,
-// data: LocationInput;
-export default function GooglePlacesAutocomplete({
-  onChange
-}: {
-  onChange: any;
-}) {
 
+export default function GooglePlacesAutocomplete({ onChange }: { onChange: any; }) {
   const { t } = useTranslation();
-  const [location,setLocation]=useState("");
+  const [location, setLocation] = useState("");
   const router = useRouter();
+  const geocoderRef = useRef<any>(null);
 
-  useEffect(()=>{
+  useEffect(() => {
     const { query } = router;
-    if(query.text){
-      var loc=JSON.parse(query.text as string);
-      setLocation(loc.formattedAddress)
+    if (query.text) {
+      var loc = JSON.parse(query.text as string);
+      setLocation(loc.formattedAddress);
     }
   });
-  
+
+  useEffect(() => {
+    if (!geocoderRef.current && window.google) {
+      geocoderRef.current = new window.google.maps.Geocoder();
+    }
+  }, []);
+
   const { isLoaded, loadError } = useJsApiLoader({
     id: "google_map_autocomplete",
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY!,
@@ -92,43 +92,68 @@ export default function GooglePlacesAutocomplete({
       onChange(location);
     }
   };
+
+  const getCurrentLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+          const latLng = new window?.google?.maps.LatLng(lat, lng);
+          geocoderRef.current.geocode({ location: latLng }, (results: any, status: any) => {
+            if (status === "OK") {
+              setLocation(results[0].formatted_address);
+              if (onChange) {
+                onChange({
+                  lat,
+                  lng,
+                  formattedAddress: results[0].formatted_address,
+                });
+              }
+            } else {
+              console.error("Geocoder failed due to: " + status);
+            }
+          });
+        },
+        (error) => {
+          console.error("Geolocation error: " + error.message);
+        },
+        {
+          enableHighAccuracy: true, // Request a more accurate location
+          timeout: 10000, // Time to wait for a location in milliseconds
+          maximumAge: 0, // Accept only fresh location data
+        }
+      );
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+    }
+  };
+  
+
   if (loadError) {
     return <div>{t("common:text-map-cant-load")}</div>;
   }
 
-  const[active , setActive] = useState(false);
-
-  const handleCurrentLocation = () => {
-    setActive(!active)
-    
-  }
-
-  useOnClickOutside
-
-  return  isLoaded ? (
-    
+  return isLoaded ? (
     <Autocomplete
       onLoad={onLoad}
       onPlaceChanged={onPlaceChanged}
       onUnmount={onUnmount}
       fields={["address_components", "geometry.location", "formatted_address"]}
       types={["address"]}
-      
     >
       <>
-      <input
-        type="text"
-        placeholder={t("common:placeholder-search-location")}
-        defaultValue={location}
-        onClick={handleCurrentLocation}
-        className="flex items-center justify-center relative bg-gray-400 mt-10 px-2 p-1 2xl:px-8 2xl:p-2 mx-auto rounded-lg text-white"
-      />
-      
-      
-
+        <input
+          type="text"
+          placeholder={t("common:placeholder-search-location")}
+          defaultValue={location}
+          onClick={getCurrentLocation}
+          className="flex items-center justify-center relative bg-gray-400 mt-10 px-2 p-1 2xl:px-8 2xl:p-2 mx-auto rounded-lg text-white"
+        />
       </>
     </Autocomplete>
   ) : (
+    
     <Loader simple={true} className="w-6 h-6" />
   );
 }

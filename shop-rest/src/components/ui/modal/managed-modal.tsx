@@ -8,6 +8,7 @@ import RechargePlans from "@components/home-page-product-section/bill-payment-se
 import RechargePlanDetails from "@components/home-page-product-section/bill-payment-services/recharge-plan-details-modal";
 import UpiScanner from "@components/upi-scanner/upi-scanner";
 import QuizValidatorModal from "@components/quiz/quiz-validator-modal";
+  
      
 
 const Login = dynamic(() => import("@components/auth/login"));
@@ -25,6 +26,7 @@ const ProductDetailsModalView = dynamic(
 
 const ProductDescriptionModal = dynamic(()=> import('@components/product/product-card/product-description-modal'))
 
+const CardDetails = dynamic(()=> import('@components/home-page-product-section/user-cards/card-details'))
 
 const UpiPaymentForm  = dynamic(() => import("@components/upi-scanner/upi-payment-form"));
 
@@ -131,6 +133,8 @@ const ManagedModal = () => {
       {view === 'BILL_PAYMENT_DETAILS' && <PaymentDetailsModal data={data} />}
 
       {view == 'PRODUCT_DESCRIPTION' && <ProductDescriptionModal data={data}/> }
+
+      {view == 'CARD_DETAILS' && <CardDetails data={data}/> }
        
       {view === "SHOP_INFO" && (
         <ShopProfileCard

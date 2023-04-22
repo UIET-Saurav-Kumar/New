@@ -18,6 +18,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useAllLikesQuery } from '@data/user-likes/use-all-likes.query';
 import { useUI } from '@contexts/ui.context';
 import { useCallback } from 'react';
+import { useModalAction } from '@components/ui/modal/modal.context';
 
 
 export const data = [
@@ -69,6 +70,10 @@ export const data = [
 
     const { isAuthorize } = useUI();
 
+   
+
+
+ 
 
     const { likedCards, addLikedCard, removeLikedCard } = useContext(AppContext);
   
@@ -185,6 +190,15 @@ export const data = [
     const { mutate: recordLikeDislike } = useRecordLikeDislike();
     const [isLiked, setIsLiked] = useState(false);
     const { data: currentUserData } = useCustomerQuery();
+
+    const { openModal } = useModalAction();
+
+    function openDetails(user:any) {
+      return  openModal('CARD_DETAILS',{
+        user: user
+      }) 
+    }
+    
   
     const handleHeartClick = () => {
       setIsLiked((prevIsLiked) => !prevIsLiked);
@@ -228,7 +242,7 @@ export const data = [
          }}
         >
       
-        <img
+        <img onClick={()=>openDetails(user)}
           src={`https://source.unsplash.com/featured/?${user.gender}/${user.name}`}
           alt={user?.name}
           className="   w-60 h-60 object-cover rounded-lg"

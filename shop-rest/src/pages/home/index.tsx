@@ -49,7 +49,7 @@ import Banners3 from "@components/home-page-product-section/banners3";
 import Spinner from "@components/ui/loaders/spinner/spinner";
 import SearchHistory from "@components/home-page-product-section/search-history";
 import { useCreateLogMutation } from "@data/log/use-create-log.mutation";
-import UsersCards from "@components/home-page-product-section/add-users";
+import UsersCards from "@components/home-page-product-section/user-cards/user-cards-list";
 
 
 const ProductFeedLoader = dynamic(

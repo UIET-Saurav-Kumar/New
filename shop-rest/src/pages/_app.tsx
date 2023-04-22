@@ -136,6 +136,19 @@ function CustomApp({ Component, pageProps }: AppProps) {
       router.events.off('routeChangeComplete', handleRouteChange);
     }
   }, [router]);
+
+  if (process.env.NODE_ENV === 'production') {
+    const originalConsoleError = console.error;
+  
+    console.log = () => {};
+    console.warn = () => {};
+    console.error = (error) => {
+      if (error && (error.stack || error.message)) {
+        originalConsoleError(error);
+      }
+    };
+  }
+  
   
 
     

@@ -21,7 +21,7 @@ export default function GetCurrentLocation({
     const pathname = router.pathname;
 
     var options = {
-        enableHighAccuracy: false,
+        enableHighAccuracy: true,
         timeout: 2000,
         maximumAge: 0
         //session time
@@ -59,19 +59,28 @@ export default function GetCurrentLocation({
       console.log('getloc',getLocation)
       
 
-    function getLoc() {
-        // setSpin((setSpin) => !setSpin);
-         
+      const getLoc = () => {
+        setSpin(true);
+        setBtn('Detecting...');
         if (navigator.geolocation) {
-          
-            navigator.geolocation.getCurrentPosition(showPosition, error, options);
-             setBtn('Detecting...')
-             
-        } else { 
-            setBtn('Detect')
-            alert(error);
+          navigator.geolocation.getCurrentPosition(
+            showPosition,
+            handleError,
+            options
+          );
+        } else {
+          alert('Geolocation is not supported by this browser.');
+          setBtn('Detect');
+          setSpin(false);
         }
-    }
+      };
+
+      const handleError = (error) => {
+        console.log(`ERROR(${error.code}): ${error.message}`);
+        setBtn('Detect');
+        setSpin(false);
+      };
+    
  
     async function showPosition(position:any) {
 
@@ -90,7 +99,7 @@ export default function GetCurrentLocation({
             formattedAddress: address,
           };
 
-          window.location.reload();
+          // window.location.reload();
 
         // console.log('lat lng',location)
 

@@ -69,10 +69,6 @@ const ProfileForm = ({ user }: Props) => {
   console.log('ip ip', typeof userLocation, userLocation)
 
 
-
-
-
-
   const { register, handleSubmit, setValue, control } = useForm<UserFormValues>(
     
     {
@@ -116,12 +112,12 @@ const ProfileForm = ({ user }: Props) => {
          profile: {
           id: user?.profile?.id,
           ...values.profile,
-          avatar: values?.profile.avatar?.[0],
+          avatar: values?.profile.avatar,
         },
       },
       {
         onSuccess: () => {
-          toast.success(t("profile-update-successful"));
+          toast.success(t("Profile Updated Successfully"));
         },
       }
     );
@@ -137,7 +133,7 @@ const ProfileForm = ({ user }: Props) => {
         profile: {
           id: user?.profile?.id,
           ...values.profile,
-          avatar: values?.profile.avatar?.[0],
+          avatar: values?.profile.avatar,
         },
       },
       {
@@ -160,7 +156,7 @@ const ProfileForm = ({ user }: Props) => {
       <div className="flex mb-8">
         <Card className="w-full">
           <div className="mb-8"> 
-            <FileInput control={control} name="profile.avatar" />
+            <FileInput control={control} name="profile.avatar" multiple={true} />
           </div>
           <div className="flex flex-col space-y-4 lg:space-y-0 sm:flex-row sm:items-center sm:space-s-4 mb-6">
             <Input

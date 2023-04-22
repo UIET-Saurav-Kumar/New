@@ -27,6 +27,9 @@ import { useCustomerQuery } from "@data/customer/use-customer.query";
 import http from "@utils/api/http";
 import { API_ENDPOINTS } from "@utils/api/endpoints";
 import url  from '@utils/api/server_url';
+import MultipleImageUpload from "./ImageUpload";
+import MultipleImagesUpload from "./ImageUpload";
+import FileInput from "@components/ui/file-input";
 
 
 
@@ -59,6 +62,9 @@ const OtpRegisterForm = (props:any) => {
   const { mutate, isLoading: loading } = useOtpRegisterMutation();
   const [errorMsg, setErrorMsg] = useState("");
   const[occupation, setOccupation] = useState(null);
+
+  const [uploadedPhotos, setUploadedPhotos] = useState([]);
+
 
   const [birthDate, setBirthDate] = useState(null);
 
@@ -138,18 +144,9 @@ const OtpRegisterForm = (props:any) => {
 
   function changeLocation(data:any){
 
-    // data.length ? setLocation(false) : setLocation(false)
-
-    // console.log('address data',data)
+   
     var location=JSON.stringify(data);
-    // console.log(data?.formattedAddress);
-    // document.getElementById("location_id").value = data?.formattedAddress;
-    // setLocation(data?.formattedAddress);
-
-    // if(location){
-    //     setHasLoction(true);
-        
-    // }
+  
 
     var { query ,pathname} = router;
     var pathname="/"+pathname
@@ -174,10 +171,12 @@ const OtpRegisterForm = (props:any) => {
     openModal("OTP_LOGIN")
   }
 
-    console.log('path', router.pathname)
+    console.log('path', router.pathname);
 
 
-  function onSubmit({  phone_number,name,email,current_location,password  }:FormValues)   {
+  function onSubmit({  phone_number,name,email,current_location,password  }: FormValues)   {
+    // sessionStorage.setItem("uploadedPhotos", JSON.stringify(uploadedPhotos));
+
     mutate(
         //@ts-ignore
       {
@@ -200,7 +199,7 @@ const OtpRegisterForm = (props:any) => {
           : path === '/salon-near-me' ? router.push('/auth/'+data?.user.id+'?utm_source=salon-near-me') 
           : router.push('/auth/'+data?.user.id);
           closeModal();
-          return ;
+          
           // if (data?.token && data?.permissions?.length) {
           //   Cookies.set("auth_token", data.token);
           //   Cookies.set("auth_permissions", data.permissions);
@@ -211,6 +210,7 @@ const OtpRegisterForm = (props:any) => {
           // if (!data.token) {
           //   setErrorMsg(t("error-credential-wrong"));
           // }
+          return ;
         },
 
         onError: (error) => {
@@ -236,6 +236,8 @@ const OtpRegisterForm = (props:any) => {
     setValue(name, value);
   }
 
+  console.log('photos',uploadedPhotos)
+
   return (
     
     <div className="flex items-center h-full  justify-center bg-white sm:bg-gray-100 " >
@@ -243,6 +245,10 @@ const OtpRegisterForm = (props:any) => {
       {/* <div className="flex justify-center">
         <Logo />
       </div> */}
+
+      {/* <MultipleImagesUpload onPhotosChange={setUploadedPhotos}/> */}
+      {/* <FileInput control={control} name="profile"   multiple={true} /> */}
+
        
    <div className="flex items-start">
    {/* <div className="flex w-1/4 justify-center ">
