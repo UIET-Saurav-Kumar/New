@@ -8,10 +8,10 @@ import { API_ENDPOINTS } from "@utils/api/endpoints";
 import http from "@utils/api/http";
 import url from "@utils/api/server_url";
 import { GetStaticProps } from "next";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { dehydrate, QueryClient, useMutation } from "react-query";
 import { io } from "socket.io-client";
-import ChatScreen from "./[chatId]";
+import ChatScreen from "./chat-screen";
 import { v4 as uuidv4 } from 'uuid';
 import Link from 'next/link';
 import { ArrowLeftIcon } from "@heroicons/react/outline";
@@ -49,6 +49,13 @@ const UsersList = () => {
   const [messages, setMessages] = useState([]);
   const [dataFromChild, setDataFromChild] = useState(null);
   const { query } = useRouter();
+  const [lastMessage, setLastMessage] = useState(null);
+
+
+  const lastKnownData = useRef({ currentUserData: null, likesData: null });
+
+
+
   const updateMessageStatus = async (data: any) => {
     const { data: response } = await http.put(`${url}/${API_ENDPOINTS.MESSAGE_STATUS}`, { params: data });
     return response;
@@ -70,47 +77,78 @@ const UsersList = () => {
     setShowChatScreen(true);
   };
 
-  useEffect(()=>{
-    const fetchMessages = async (sender_id, receiver_id) => {
-         
-      const response = await fetch(
-        `${url}/${API_ENDPOINTS.GET_MESSAGES}?sender_id=${currentUserData?.me?.id}&receiver_id=${receiver_id}`
-      );
-      
-      const responseText = await response.json();
-      console.log('response', responseText);
-    
-      //  const data = JSON.parse(responseText);
-      setMessages(responseText?.messages);
-    };
-  },[])
+  const fetchMessages = async (receiver_id) => {
+    const response = await fetch(
+      `${url}/${API_ENDPOINTS.GET_MESSAGES}?sender_id=${currentUserData?.me?.id}&receiver_id=${receiver_id}`
+    );
+    const responseText = await response.json();
+    return responseText?.messages;
+  };
 
- 
-  // useEffect(() => {
-  //   if (!socket) {
-  //     // create a socket connection to the WebSocket server
-  //     const newSocket = io('http://localhost:6001');
+  useEffect(() => {
+    if (
+      currentUserData &&
+      likesData &&
+      (lastKnownData.current.currentUserData !== currentUserData ||
+        lastKnownData.current.likesData !== likesData)
+    ) {
+      const fetchAndSetLastMessages = async () => {
+        const lastMessages = await Promise.all(
+          likesData
+            ?.sort((a: any, b: any) => new Date(a.updated_at) - new Date(b.updated_at))
+            .filter((l: any) => l.user_id == currentUserData?.me?.id || l.liked_by == currentUserData?.me?.id)
+            .map(async (like: any) => {
+              const receiver_id =
+                currentUserData?.me?.id == like.user_id ? like.liked_by : like.user_id;
+              const lastMessage = await fetchMessages(receiver_id);
+              return { chat_id: like.chat_id, lastMessage: lastMessage };
+            })
+        );
+        setLastMessage(lastMessages);
+      };
+
+      fetchAndSetLastMessages();
+      lastKnownData.current = { currentUserData, likesData };
+  }
+  }, [currentUserData, likesData]);
+
   
-  //     // save the socket instance in state
-  //     setSocket(newSocket);
+
+  // useEffect(()=>{
+  //   const fetchMessages = async (sender_id, receiver_id) => {
+         
+  //     const response = await fetch(
+  //       `${url}/${API_ENDPOINTS.GET_MESSAGES}?sender_id=${currentUserData?.me?.id}&receiver_id=${receiver_id}`
+  //     );
+      
+  //     const responseText = await response.json();
+  //     console.log('response', responseText);
+    
+  //     //  const data = JSON.parse(responseText);
+  //     setMessages(responseText?.messages);
+  //   };
+  // },[])
+
+  const handlePopState = () => {
+    setShowChatScreen(false);
+  };
+
   
-  //     // subscribe to the chatMessage event
-  //     newSocket.on('chatMessage', (message) => {
-  //       // update the messages state with the new message
-  //       setMessages((messages: any) => [...messages, message]);
-  //     });
+    useEffect(() => {
+      // Add the event listener when the component mounts
+      window.addEventListener("popstate", handlePopState);
   
-  //     // cleanup function to disconnect the socket connection
-  //     return () => {
-  //       newSocket.disconnect();
-  //     };
-  //   }
-  // }, [socket]);
+      // Remove the event listener when the component unmounts
+      return () => {
+        window.removeEventListener("popstate", handlePopState);
+      };
+    }, []);
   
+    
 
   const handleLikeClick = (like) => {
     setSelectedLike(like);
-    setShowChatScreen(false);
+    setShowChatScreen(true);
    setRecieverName(like.user_name);
   };
   
@@ -120,11 +158,11 @@ const UsersList = () => {
   };
 
   console.log('hadleDataFromChild', dataFromChild);
-  console.log('likes data', likesData)
+  console.log('likes data message', lastMessage)
 
   return (
 
-    <div className="relative  w-full max-h-screen">
+    <div className="relative  w-screen max-h-screen">
 
         <div className="z-40 flex sticky top-0 p-5 items-center bg-gray-50 space-x-3 w-full border-gray-600 border-b ">
           <ArrowLeftIcon onClick={() => router.push('/home')} className='h-5 w-5 text-black bg-gray-100' />
@@ -135,16 +173,23 @@ const UsersList = () => {
       {
        showChatScreen ? (
         <ChatScreen
-         // recieverId={}
-         chatId={newChatId}
-         reciever={recieverName}
-         currentUser={currentUserData.me}
-         selectedLike={selectedLike}
-         socket={socket}
-         messages={messages}
-         setMessages={setMessages}
-         
-         setShowChatScreen={setShowChatScreen}
+          // chatId={selectedLike?.chat_id}
+          setLastMessage={setLastMessage}
+          name={selectedLike?.user_name}
+          rname={
+            currentUserData?.me?.id == selectedLike?.user_id
+              ? selectedLike?.liked_by_name
+              : selectedLike?.user_name
+          }
+          ri={
+            currentUserData?.me?.id == selectedLike?.user_id
+              ? selectedLike?.liked_by
+              : selectedLike?.user_id
+          }
+          si={currentUserData?.me?.id}
+          id={selectedLike?.chat_id}
+          setShowChatScreen={setShowChatScreen}
+          // ... (existing props)
         />
       ) : (
 
@@ -153,12 +198,14 @@ const UsersList = () => {
              No messages
         </p> :
         
-        likesData?.filter((l:any)=>l.user_id == currentUserData?.me?.id || l.liked_by == currentUserData?.me?.id).map((like: any) => (
+        likesData
+        ?.sort((a: any, b: any) => new Date(a.updated_at) - new Date(b.updated_at))
+        .filter((l:any)=>l.user_id == currentUserData?.me?.id || l.liked_by == currentUserData?.me?.id).map((like: any) => (
           like.status !== 'pending' ?
-          <Link key={like.id} href={`/user/messages/${like.chat_id}?name=${like.user_name}&rname=${currentUserData?.me?.id == like.user_id ? like.liked_by_name : like.user_name}&ri=${currentUserData?.me?.id == like.user_id ? like.liked_by : like.user_id}&si=${currentUserData?.me?.id}&id=${like.chat_id}`}>
+          // <Link key={like.id} href={`/user/messages/${like.chat_id}?name=${like.user_name}&rname=${currentUserData?.me?.id == like.user_id ? like.liked_by_name : like.user_name}&ri=${currentUserData?.me?.id == like.user_id ? like.liked_by : like.user_id}&si=${currentUserData?.me?.id}&id=${like.chat_id}`}>
            <div
             key={like.id}
-            className="  flex bg-gray-50 shadow-300 p-4 border  active:bg-gray-200 transition-all duration-500   items-center space-x-4"
+            className="  flex bg-gray-50 shadow-300 p-4 border cursor-pointer hovver:bg-gray-200 active:bg-gray-200 transition-all duration-500   items-center space-x-4"
             onClick={() => handleLikeClick(like)}
            >
             <img
@@ -172,9 +219,12 @@ const UsersList = () => {
               {like.user_id == currentUserData?.me?.id && like.status == 'pending' && (
                 <p className="text-gray-400 text-sm">  {like.liked_by_name} likes your profile</p>
               )}
-              { like.status == 'accepted' && (
-                <p className="text-green-600 text-sm">Request {like.status}</p>
-              )}
+            <p className="text-gray-500 text-lg">
+              {Array.isArray(lastMessage) &&
+                lastMessage
+                  .find(lm => lm.chat_id === like.chat_id)
+                  ?.lastMessage.slice(-1)[0]?.content || 'Request ' + like.status}
+            </p>
               {(like.user_id !== currentUserData?.me?.id &&  like.status == 'pending') ? (
                 <p className="text-yellow-600 text-sm">Request {like.status}</p>
               ):null }
@@ -196,12 +246,12 @@ const UsersList = () => {
                 </button>
               )}
             </div>
-           </Link>
+          //  </Link>
           :
           <div
             key={like.id}
-            className="flex bg-gray-50  shadow-300 p-5  items-center space-x-4"
-            onClick={() => handleLikeClick(like)}
+            className="flex bg-gray-50  shadow-300 p-5 cursor-pointer hovver:bg-gray-200  items-center space-x-4"
+            // onClick={() => handleLikeClick(like)}
            >
             <img
               className="h-12 w-12 rounded-full"

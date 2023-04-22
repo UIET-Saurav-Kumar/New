@@ -11,10 +11,11 @@ class Like extends Model
 
     // protected $table = 'likes';
 
-    protected $fillable = ['user_id', 'liked_by_name', 'liked_by','chat_id', 'status','user_name'];
+    protected $fillable = ['user_id', 'liked_by_name', 'liked_by','chat_id', 'status','user_name',	'created_at',
+     	'updated_at'];
 
-    protected $hidden = [
-		'created_at',
-		'updated_at',
-	];
+  //   protected $hidden = [
+	// 	'created_at',
+	// 	'updated_at',
+	// ];
 }

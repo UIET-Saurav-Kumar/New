@@ -29,7 +29,7 @@ export default function CardDetails( {data} ) {
 
   return (
 
-    <div className="bg-white p-4 h-screen w-screen lg:w-96 lg:h-full rounded-lg overflow-y-scroll shadow-lg mt-4">
+    <div className="bg-white p-4 h-screen w-screen lg:w-96 lg:h-full  overflow-y-scroll shadow-lg mt-0">
       <div className="flex flex-row overflow-x-scroll">
         {/* Add multiple images here */}
         <img

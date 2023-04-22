@@ -40,8 +40,22 @@ class LikesController extends CoreController
     public function getAllLikes()
     {
         $likes = $this->likesRepository->getAllLikes();
+        $likes = $likes->map(function ($like) {
+            return [
+                'id' => $like->id,
+                'user_id' => $like->user_id,
+                'liked_by_name' => $like->liked_by_name,
+                'liked_by' => $like->liked_by,
+                'chat_id' => $like->chat_id,
+                'status' => $like->status,
+                'user_name' => $like->user_name,
+                'created_at' => $like->created_at,
+                'updated_at' => $like->updated_at
+            ];
+        });
         return response()->json($likes);
     }
+    
     
 
     public function getLikesByUserId($userId)

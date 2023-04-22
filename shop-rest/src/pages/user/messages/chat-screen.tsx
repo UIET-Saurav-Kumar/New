@@ -9,9 +9,7 @@ import http from '@utils/api/http';
 import { useMutation, useQuery } from 'react-query';
 import url from '@utils/api/server_url';
 import { useCustomerQuery } from '@data/customer/use-customer.query';
-import { isSameDay, addDays } from 'date-fns';
-import { last } from 'lodash';
-import { format } from 'path';
+import { isToday, isYesterday, isThisWeek, isSameDay, isThisYear, format } from 'date-fns';// import { format } from 'path';
  
 
 
@@ -139,7 +137,7 @@ import { format } from 'path';
 //         timestamp: '2023-04-09T12:03:00Z',
 //       },
 //   ];
-const useMessages = (sender_id, receiver_id) => {
+const useMessages = (sender_id: any, receiver_id: any) => {
   return useQuery(
     ["messages", sender_id, receiver_id],
     async () => {
@@ -157,18 +155,34 @@ const useMessages = (sender_id, receiver_id) => {
   
  
 
-const ChatScreen = () => {
+const ChatScreen = ({rname,name,ri,si,id,setLastMessage,setShowChatScreen}) => {
 
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
   const { query } = useRouter();
   const [chatId, setChatId] = useState("");
-  const [lastMessage, setLastMessage] = useState("");
-  const { data: currentUser } = useCustomerQuery();
+   const { data: currentUser } = useCustomerQuery();
+
+  useEffect(() => {
+    async function setupPushNotifications() {
+      const hasPermission = await Notification.requestPermission();
+  
+      if (hasPermission === "granted" && "serviceWorker" in navigator) {
+        try {
+          const registration = await navigator.serviceWorker.register("/service-worker.js");
+          console.log("Service Worker Registered", registration);
+        } catch (error) {
+          console.error("Service Worker Error", error);
+        }
+      }
+    }
+  
+    setupPushNotifications();
+  }, []);
 
 
   useEffect(() => {
-    const getChatId = async (sender_id, receiver_id) => {
+    const getChatId = async (sender_id: any, receiver_id: any) => {
       const response = await fetch(
         `${url}/${API_ENDPOINTS.GET_CHAT_ID}?sender_id=${sender_id}&receiver_id=${receiver_id}`
       );
@@ -177,18 +191,21 @@ const ChatScreen = () => {
       return data.chat_id;
     };
 
+     
+    
+
     const fetchChatId = async () => {
-      const chat_id = await getChatId(currentUser?.me?.id, query.ri);
+      const chat_id = await getChatId(currentUser?.me?.id, ri);
       if (chat_id) {
         setChatId(chat_id);
       }
     };
 
     fetchChatId();
-  }, [currentUser?.me?.id, query.ri]);
+  }, [currentUser?.me?.id, ri]);
   
 
-  const { data: messagesData } = useMessages(currentUser?.me?.id, query.ri);
+  const { data: messagesData } = useMessages(currentUser?.me?.id, ri);
 
   useEffect(() => {
     if (messagesData) {
@@ -210,32 +227,58 @@ const ChatScreen = () => {
 
     const { mutate: sendMessage } = useSendMessage();
 
+    const handleShowChatScreen = () => {
+      setShowChatScreen(false)
+    }
+
+    const handleSendMessage = async (text: string) => {
+      // ... (existing code for sending a message)
+    
+      // After successfully sending the message, call the setLastMessage function:
+      if (setLastMessage) {
+        setLastMessage(text);
+      }
+    };
+    
+
      
-    const handleMessageSubmit = async (e:any) => {
+    const handleMessageSubmit = async (e: any) => {
       e.preventDefault();
       if (message.trim()) {
         try {
           sendMessage({
             sender_id: currentUser?.me?.id,
-            receiver_id: query.ri,
-            chat_id: query.id, // Replace query.id with chatId
+            receiver_id: ri,
+            chat_id: id, // Replace query.id with chatId
             content: message,
           });
-          setMessage('');
+
+          handleSendMessage(message)
+    
+          if ("serviceWorker" in navigator) {
+            const registration = await navigator.serviceWorker.ready;
+            registration.showNotification("New Message", {
+              body: message,
+              icon: "/buylowcal-old.png", // Replace with the path to your notification icon
+            });
+          }
+    
+          setMessage("");
         } catch (error) {
           // console.error("Error sending message", error);
         }
       }
     };
     
+    
     // const sender = query.si
   
-    const handleMessageChange = (e) => {
+    const handleMessageChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
       setMessage(e.target.value);
     };
 
-    const groupMessagesByDate = (messages) => {
-      const groupedMessages = messages.reduce((groups, message) => {
+    const groupMessagesByDate = (messages: any[]) => {
+      const groupedMessages = messages.reduce((groups: { [x: string]: any[]; }, message: { created_at: string | number | Date; }) => {
         const date = new Date(message.created_at).toLocaleDateString();
         if (!groups[date]) {
           groups[date] = [];
@@ -260,45 +303,21 @@ const ChatScreen = () => {
  
     // add sound when message is sent or received only to new messages by checking if the length of messages array is incresed
     //store message length in local storage so that the state persists in re renders
+    
     const getSavedMessageLength = () => {
       const savedMessageLength = localStorage.getItem("messageLength");
       return savedMessageLength ? parseInt(savedMessageLength) : 0;
     };
     
     const [messageLength, setMessageLength] = useState(getSavedMessageLength());
-    
-
-    // useEffect(() => {
-    //   if (messages.length > messageLength) {
-    //     setMessageLength(messages.length);
-    //     localStorage.setItem("messageLength", messages?.length);
-    
-    //     // Get the last message and the chat ID
-    //     const lastMessage = messages[messages.length - 1];
-    //     const currentChatId = lastMessage?.chat_id;
-    
-        
-    
-    //     const playSound = async () => {
-    //       try {
-    //         const audio = new Audio("/sounds/sound2.mp3");
-    //         await audio.play();
-    //       } catch (error) {
-    //         alert("Error playing audio:", error);
-    //       }
-    //     };
-    //     playSound();
-    //   }
-    // }, [messages]);
-
-    // console.log('query',messages);
-
 
     return (
 
-      <div className="relative max-h-screen overflow-y-hidden flex flex-col">
+      <div className="absolute top-0 z-50 max-h-screen w-screen overflow-y-hidden flex flex-col">
+        
         <div className="z-40 flex fixed items-center bg-gray-50 space-x-3 w-full border-gray-600 border-b p-3">
-          <ArrowLeftIcon onClick={() => router.push('/user/messages')} className='h-5 w-5 text-black bg-gray-100' />
+          <ArrowLeftIcon onClick={handleShowChatScreen} 
+              className='h-5 w-5 text-black bg-gray-100' />
           <img
             src={`https://source.unsplash.com/featured/?girls/${query.name}`}
             className="rounded-full h-12 w-12"
@@ -307,20 +326,25 @@ const ChatScreen = () => {
         </div>
 
 
-
         <div className="flex-1 flex h-screen bg-white flex-col p-6">
           
           <div className="relative z-10 top-16 flex-1 flex h-60 flex-col scrollbar-hide overflow-y-scroll">
             {messages?.map((message, index) => {
-              const messageDate = new Date(message.created_at);
-              const isToday = isSameDay(messageDate, new Date());
-              const isYesterday = isSameDay(messageDate, addDays(new Date(), -1));
-    
-              const formattedDate = isToday
-                ? 'Today'
-                : isYesterday
-                ? 'Yesterday'
-                : format(messageDate, 'MMMM dd, yyyy');
+               const messageDate = new Date(message.created_at);
+
+               let formattedDate = '';
+           
+               if (isToday(messageDate)) {
+                formattedDate = 'Today';
+              } else if (isYesterday(messageDate)) {
+                formattedDate = 'Yesterday';
+              } else if (isThisWeek(messageDate)) {
+                formattedDate = format(messageDate, 'EEEE, d');
+              } else if (isThisYear(messageDate)) {
+                formattedDate = format(messageDate, 'MMMM d');
+              } else {
+                formattedDate = format(messageDate, 'MMMM d, yyyy');
+              }
     
               return (
                 
@@ -333,33 +357,36 @@ const ChatScreen = () => {
                     className={`flex flex-col mb-4 h-screen  ${
                       message.sender_id == currentUser?.me?.id ? "ml-auto" : "mr-auto"
                     }`}
-                  >
+                    >
                     <div className="flex items-center mb-1">
+                      
                       <img
                         className="h-8 w-8 rounded-full mr-2"
                         src={`https://source.unsplash.com/featured/?girls/${message.sender_name}`}
                         alt="User"
                       />
 
-                      <span
+                      {/* <span
                         className={`${
                           message.sender_id == currentUser?.me?.id ? "text-gray-600" : "text-gray-800"
                         } font-semibold`}
                       >
                         {message.sender_id == currentUser?.me?.id ? message.sender_name : message.receiver_name}
-                      </span>
+                      </span> */}
 
                       <span className="text-gray-600 ml-2 text-xs">
-                        {isFinite(messageDate.getTime()) ? messageDate.toLocaleTimeString() : ''}
+                        {isFinite(messageDate.getTime())
+                          ? messageDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                          : ''}
                       </span>
 
                     </div>
     
                     <div
                       className={`${ 
-                        message.sender_id == currentUser?.me?.id ? "bg-blue-500 max-w-1/2" : "bg-white max-w-1/2"
+                        message.sender_id == currentUser?.me?.id ? "bg-blue-500 max-w-full" : "bg-white max-w-full"
                       } rounded-lg p-3 shadow-md`}
-                    >
+                     >
                       <p
                         className={`${
                           message.sender_id == currentUser?.me?.id ? "text-white" : "text-gray-800"
@@ -369,6 +396,7 @@ const ChatScreen = () => {
                       </p>
 
                     </div>
+
                   </div>
                 </React.Fragment>
               );

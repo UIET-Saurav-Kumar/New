@@ -1,12 +1,43 @@
 import { CloseIcon } from "@components/icons/close-icon";
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useRef } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { useTranslation } from "next-i18next";
+import { createBrowserHistory } from 'history';
+import { useRouter } from 'next/router';
+import { usePreventRouteChange } from "./prevent-route-change-hook";
+import { useHistory } from 'react-router-dom';
+import { ArrowLeftIcon } from "@heroicons/react/outline";
+
 
 export default function Modal({ open, onClose, children }: any) {
   
   const cancelButtonRef = useRef(null);
   const { t } = useTranslation("common");
+
+  
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleBackButton = (event: { preventDefault: () => void; }) => {
+      if (open) {
+        event.preventDefault();
+        onClose();
+      }
+    };
+
+    if (open && !router.asPath.endsWith('#modal')) {
+      router.push(`${router.asPath}#modal`, undefined, { shallow: true });
+    } else if (!open && router.asPath.endsWith('#modal')) {
+      router.back();
+    }
+
+    window.addEventListener("popstate", handleBackButton);
+
+    return () => {
+      window.removeEventListener("popstate", handleBackButton);
+    };
+  }, [open, onClose, router]);
+  
 
   return (
 
@@ -14,7 +45,7 @@ export default function Modal({ open, onClose, children }: any) {
 
       <Dialog
         as="div"
-        className="fixed inset-0 z-50 overflow-y-auto"
+        className="fixed inset-0 z-50  overflow-y-auto"
         initialFocus={cancelButtonRef}
         static
         open={open}
@@ -53,7 +84,26 @@ export default function Modal({ open, onClose, children }: any) {
             leaveTo="opacity-0 scale-95"
           >
 
-            <div className="inline-block min-w-content max-w-full overflow-hidden text-start align-middle transition-all  md:rounded-xl relative">
+          {/* Replace the close button with a navbar */}
+          <div className=" inline-block min-w-content border max-w-full overflow-hidden text-start align-middle transition-all  md:rounded-xl relative">
+               
+              <div className="bg-gray-50 w-full p-4 text-white flex items-center">
+                <button
+                  onClick={onClose}
+                  aria-label="Close panel"
+                  ref={cancelButtonRef}
+                  className="inline-block outline-none focus:outline-none"
+                >
+                  <ArrowLeftIcon className="w-6 h-6 text-gray-900" />
+                </button>
+                <h2 className="ml-2"> </h2>
+              </div>
+              {children}
+            </div>
+
+
+            {/* close button */}
+            {/* <div className="inline-block min-w-content max-w-full overflow-hidden text-start align-middle transition-all  md:rounded-xl relative">
               <button
                 onClick={onClose}
                 aria-label="Close panel"
@@ -64,7 +114,7 @@ export default function Modal({ open, onClose, children }: any) {
                 <CloseIcon className="w-8 h-8" />
               </button>
               {children}
-            </div>
+            </div> */}
             
           </Transition.Child>
         </div>
