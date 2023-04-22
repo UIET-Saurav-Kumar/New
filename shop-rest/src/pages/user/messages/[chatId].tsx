@@ -268,28 +268,28 @@ const ChatScreen = () => {
     const [messageLength, setMessageLength] = useState(getSavedMessageLength());
     
 
-    useEffect(() => {
-      if (messages.length > messageLength) {
-        setMessageLength(messages.length);
-        localStorage.setItem("messageLength", messages?.length);
+    // useEffect(() => {
+    //   if (messages.length > messageLength) {
+    //     setMessageLength(messages.length);
+    //     localStorage.setItem("messageLength", messages?.length);
     
-        // Get the last message and the chat ID
-        const lastMessage = messages[messages.length - 1];
-        const currentChatId = lastMessage?.chat_id;
+    //     // Get the last message and the chat ID
+    //     const lastMessage = messages[messages.length - 1];
+    //     const currentChatId = lastMessage?.chat_id;
     
         
     
-        const playSound = async () => {
-          try {
-            const audio = new Audio("/sounds/sound2.mp3");
-            await audio.play();
-          } catch (error) {
-            alert("Error playing audio:", error);
-          }
-        };
-        playSound();
-      }
-    }, [messages]);
+    //     const playSound = async () => {
+    //       try {
+    //         const audio = new Audio("/sounds/sound2.mp3");
+    //         await audio.play();
+    //       } catch (error) {
+    //         alert("Error playing audio:", error);
+    //       }
+    //     };
+    //     playSound();
+    //   }
+    // }, [messages]);
 
     // console.log('query',messages);
 
