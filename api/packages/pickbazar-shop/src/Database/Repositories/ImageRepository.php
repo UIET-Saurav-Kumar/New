@@ -1,10 +1,13 @@
 <?php
 
-namespace PickBazar\Repositories;
+namespace PickBazar\Database\Repositories;
 
 use PickBazar\Database\Models\Image;
+use Prettus\Repository\Eloquent\BaseRepository;
+use Prettus\Repository\Exceptions\RepositoryException;
 
-class ImageRepository extends BaseRespository
+
+class ImageRepository extends BaseRepository
 {
     public function all()
     {

@@ -28,13 +28,17 @@ export default function Uploader({ onChange, value, name,multiple, onBlur }: any
         {
             onSuccess: (data) => {
                 let mergedData;
+                const updatedFiles = data.map((item: any) => ({
+                    ...item,
+                    preview: item.thumbnail,
+                  }));
                 
                 if (multiple) {
-                  mergedData = files.concat(data);
-                  setFiles(files.concat(data));
+                  mergedData = files.concat(updatedFiles);
+                  setFiles(files.concat(updatedFiles));
                 } else {
-                  mergedData = data;
-                  setFiles(data);
+                  mergedData = updatedFiles;
+                  setFiles(updatedFiles);
                 }
                 if (onChange) {
                   onChange(mergedData);
@@ -42,8 +46,6 @@ export default function Uploader({ onChange, value, name,multiple, onBlur }: any
               },
           onError: (error) => {
             console.error("Error uploading the file:", error.message);
-            // Handle the error (e.g., show a notification or an alert)
-            // You can replace this with your preferred error handling method
             alert("An error occurred while uploading the file.");
           },
         }
