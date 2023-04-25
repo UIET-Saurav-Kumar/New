@@ -43,7 +43,7 @@ use PickBazar\Http\Controllers\SwipeController;
 use PickBazar\Http\Controllers\LikesController;
 use PickBazar\Http\Controllers\ChatController;
 use PickBazar\Http\Controllers\MessagesController;
-use PickBazar\Http\Controllers\ImageController;
+use PickBazar\Http\Controllers\ImagesController;
 
 
  
@@ -441,7 +441,7 @@ Route::group(['middleware' => ['can:' . Permission::CUSTOMER, 'auth:sanctum']], 
     ]);
     });
 
-    Route::resource('image-upload',ImageController::class);
+    Route::resource('image-upload',ImagesController::class);
     Route::resource('bill',BillController::class);
     Route::resource('contact',ContactController::class);
     Route::resource('quiz',QuizController::class);

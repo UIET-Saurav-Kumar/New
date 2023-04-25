@@ -4,9 +4,13 @@ namespace PickBazar\Http\Controllers;
 
 use Exception;
 use Illuminate\Http\Request;
-use PickBazar\Repositories\ImageRepository;
+use Pickbazar\Enums\Permission;
+use Illuminate\Http\JsonResponse;
+use PickBazar\Database\Repositories\ImageRepository;
 
-class ImageController extends Controller
+
+class ImagesController extends CoreController
+
 {
     protected $imageRepository;
 
