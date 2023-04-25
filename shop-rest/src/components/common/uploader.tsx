@@ -30,52 +30,60 @@ export default function Uploader({ onChange, value, multiple }: any) {
 
   const { data: currentUser } = useCustomerQuery();
 
-const handleRemovePreview = (indexToRemove: number) => {
-  setFetchedImages((prevUrls) => prevUrls.filter((_, index) => index !== indexToRemove));
-};
+  const handleRemovePreview = (indexToRemove: number) => {
+    setFetchedImages((prevUrls) => prevUrls.filter((_, index) => index !== indexToRemove));
+  };
 
 
-useEffect(() => {
-  const avatarUrls = currentUser?.me?.profile?.avatar.length && currentUser?.me?.profile?.avatar
-    ?.filter((avatar: any) => Array.isArray(avatar) === false)
-    .map((avatar: any) => avatar.thumbnail);
-  setFetchedImages(avatarUrls);
-}, [currentUser]);
+  useEffect(() => {
+    const avatarUrls = currentUser?.me?.profile?.avatar.length && currentUser?.me?.profile?.avatar
+      ?.filter((avatar: any) => Array.isArray(avatar) === false)
+      .map((avatar: any) => avatar.thumbnail);
+    setFetchedImages(avatarUrls);
+  }, [currentUser]);
 
     
-   const { getRootProps, getInputProps } = useDropzone({
+  const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
     multiple,
     onDrop: async (acceptedFiles) => {
-      if (acceptedFiles.length) {
-        upload(
-          acceptedFiles, // it will be an array of uploaded attachments
-          {
-            onSuccess: (data) => {
-              let mergedData;
-              const formattedData = data.map((item: any) => ({
-                thumbnail: item.thumbnail,
-                original: item.original,
-                id: item.id,
-              }));
-            
-              if (multiple) {
-                mergedData = files.concat(formattedData);
-                setFiles(files.concat(formattedData));
-              } else {
-                mergedData = formattedData[0];
-                setFiles(formattedData);
-              }
-              if (onChange) {
-                onChange(mergedData);
-              }
-            },
-            
-          }
-        );
+      try {
+        if (acceptedFiles.length) {
+          upload(
+            acceptedFiles, // it will be an array of uploaded attachments
+            {
+              onSuccess: (data) => {
+                let mergedData;
+  
+                if (multiple) {
+                  mergedData = files.concat(data);
+                  setFiles(files.concat(data));
+                } else {
+                  mergedData = data;
+                  setFiles(data);
+                }
+                if (onChange) {
+                  onChange(mergedData);
+                }
+              },
+              onError: (error) => {
+                console.error("Error uploading the file:", error.message);
+                // Handle the error (e.g., show a notification or an alert)
+                // You can replace this with your preferred error handling method
+                alert("An error occurred while uploading the file.");
+              },
+            }
+          );
+        }
+      } catch (error) {
+        console.error("Error occurred during file upload:", error);
+        // Handle the error (e.g., show a notification or an alert)
+        // You can replace this with your preferred error handling method
+        alert("An error occurred while uploading the file.");
       }
     },
   });
+  
 
   const handleDelete = (image: string) => {
     const images = files.filter((file) => file.thumbnail !== image);

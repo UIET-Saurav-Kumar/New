@@ -107,6 +107,10 @@ export const API_ENDPOINTS: Record<string, string> = {
 
   UPI_PAYMENT: 'upi-payment',
   QUIZ: 'quiz',
+  
+  IMAGE_UPLOAD_ATTACHMENT: 'image-upload-attachment',
+
+  IMAGE_UPLOAD: 'image-upload',
 
 
   LOGS:'logs'

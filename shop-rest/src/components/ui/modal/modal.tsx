@@ -5,8 +5,7 @@ import { useTranslation } from "next-i18next";
 import { createBrowserHistory } from 'history';
 import { useRouter } from 'next/router';
 import { usePreventRouteChange } from "./prevent-route-change-hook";
-import { useHistory } from 'react-router-dom';
-import { ArrowLeftIcon } from "@heroicons/react/outline";
+ import { ArrowLeftIcon } from "@heroicons/react/outline";
 
 
 export default function Modal({ open, onClose, children }: any) {

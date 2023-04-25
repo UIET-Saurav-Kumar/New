@@ -16,6 +16,8 @@ import { v4 as uuidv4 } from 'uuid';
 import Link from 'next/link';
 import { ArrowLeftIcon } from "@heroicons/react/outline";
 import router, { Router, useRouter } from "next/router";
+import { Tab } from '@headlessui/react';
+
 
 export const getStaticProps: GetStaticProps = async () => {
 
@@ -161,37 +163,37 @@ const UsersList = () => {
   console.log('likes data message', lastMessage)
 
   return (
-
-    <div className="relative  w-screen max-h-screen">
-
-        <div className="z-40 flex sticky top-0 p-5 items-center bg-gray-50 space-x-3 w-full border-gray-600 border-b ">
-          <ArrowLeftIcon onClick={() => router.push('/home')} className='h-5 w-5 text-black bg-gray-100' />
-          
-          <p className="text-lg font-semibold text-gray-600 ml-4">{query.rname}</p>
-        </div>
+    <div className="relative w-screen max-h-screen">
+      <div className="z-40 flex sticky top-0 p-5 items-center bg-gray-50 space-x-3 w-full border-gray-600 border-b ">
+        <ArrowLeftIcon
+          onClick={() => router.push('/home')}
+          className="h-5 w-5 text-black bg-gray-100"
+        />
+  
+        <p className="text-lg font-semibold text-gray-600 ml-4">{query.rname}</p>
+      </div>
+  
 
       {
-       showChatScreen ? (
-        <ChatScreen
-          // chatId={selectedLike?.chat_id}
-          setLastMessage={setLastMessage}
-          name={selectedLike?.user_name}
-          rname={
-            currentUserData?.me?.id == selectedLike?.user_id
-              ? selectedLike?.liked_by_name
-              : selectedLike?.user_name
-          }
-          ri={
-            currentUserData?.me?.id == selectedLike?.user_id
-              ? selectedLike?.liked_by
-              : selectedLike?.user_id
-          }
-          si={currentUserData?.me?.id}
-          id={selectedLike?.chat_id}
-          setShowChatScreen={setShowChatScreen}
-          // ... (existing props)
-        />
-      ) : (
+      showChatScreen ? (
+      <ChatScreen
+        setLastMessage={setLastMessage}
+        name={selectedLike?.user_name}
+        rname={
+          currentUserData?.me?.id == selectedLike?.user_id
+            ? selectedLike?.liked_by_name
+            : selectedLike?.user_name
+        }
+        ri={
+          currentUserData?.me?.id == selectedLike?.user_id
+            ? selectedLike?.liked_by
+            : selectedLike?.user_id
+        }
+        si={currentUserData?.me?.id}
+        id={selectedLike?.chat_id}
+        setShowChatScreen={setShowChatScreen}
+      />
+    ) : (
 
         likesData?.filter((l:any)=>l.user_id == currentUserData?.me?.id || l.liked_by == currentUserData?.me?.id)?.length == 0 ? 
         <p className=" w-full flex h-screen  justify-center items-center text-gray-400 font-bold text-2xl">
@@ -202,8 +204,7 @@ const UsersList = () => {
         ?.sort((a: any, b: any) => new Date(a.updated_at) - new Date(b.updated_at))
         .filter((l:any)=>l.user_id == currentUserData?.me?.id || l.liked_by == currentUserData?.me?.id).map((like: any) => (
           like.status !== 'pending' ?
-          // <Link key={like.id} href={`/user/messages/${like.chat_id}?name=${like.user_name}&rname=${currentUserData?.me?.id == like.user_id ? like.liked_by_name : like.user_name}&ri=${currentUserData?.me?.id == like.user_id ? like.liked_by : like.user_id}&si=${currentUserData?.me?.id}&id=${like.chat_id}`}>
-           <div
+            <div
             key={like.id}
             className="  flex bg-gray-50 shadow-300 p-4 border cursor-pointer hovver:bg-gray-200 active:bg-gray-200 transition-all duration-500   items-center space-x-4"
             onClick={() => handleLikeClick(like)}
@@ -239,20 +240,17 @@ const UsersList = () => {
                   onClick={() => {
                     setSelectedLike(like);
                     handleAccept(like.id)
-                    // setShowAcceptModal(true);
-                  }}
+                   }}
                   >
                   Accept
                 </button>
               )}
             </div>
-          //  </Link>
-          :
+           : 
           <div
             key={like.id}
             className="flex bg-gray-50  shadow-300 p-5 cursor-pointer hovver:bg-gray-200  items-center space-x-4"
-            // onClick={() => handleLikeClick(like)}
-           >
+            >
             <img
               className="h-12 w-12 rounded-full"
               src={`https://source.unsplash.com/featured/?girls/${like.user_name}`}
@@ -270,9 +268,7 @@ const UsersList = () => {
               {(like.user_id !== currentUserData?.me?.id &&  like.status == 'pending') ? (
                 <p className="text-yellow-600 text-sm">Request {like.status}</p>
               ):null }
-              {/* {like.user_id !== currentUserData?.me?.id && (like.status == 'pending') && (
-                <p className="text-yellow-600 font-bold text-sm">Requested</p>
-              )} */}
+              
             </div>
             {like.status == 'pending' &&
               like.user_id == currentUserData?.me?.id && (
@@ -281,8 +277,7 @@ const UsersList = () => {
                   onClick={() => {
                     setSelectedLike(like);
                     handleAccept(like.id)
-                    // setShowAcceptModal(true);
-                  }}
+                   }}
                   >
                   Accept
                 </button>
@@ -290,34 +285,33 @@ const UsersList = () => {
             </div>
         ))
       )}
-      {showAcceptModal && (
-        <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white rounded p-4">
-            <p className="text-gray-700 font-medium mb-2">
-              Do you accept this message?
-            </p>
-            
-            <div className="flex justify-end">
-              <button
-                className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded mr-2"
-                onClick={() => setShowAcceptModal(false)}
-              >
-                Cancel
-              </button>
-              <button
-                className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-                onClick={handleAccept}
-              >
-                Accept
-              </button>
-            </div>
+     {showAcceptModal && (
+      <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
+        <div className="bg-white rounded p-4">
+          <p className="text-gray-700 font-medium mb-2">
+            Do you accept this message?
+          </p>
+
+          <div className="flex justify-end">
+            <button
+              className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded mr-2"
+              onClick={() => setShowAcceptModal(false)}
+            >
+              Cancel
+            </button>
+            <button
+              className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
+              onClick={handleAccept}
+            >
+              Accept
+            </button>
           </div>
         </div>
-      )}
-    </div>
-  );
-};
-
+      </div>
+    )}
+  </div>
+);
+}
 
 
 

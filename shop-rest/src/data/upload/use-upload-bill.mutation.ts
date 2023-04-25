@@ -4,7 +4,9 @@ import { useMutation } from "react-query";
 
 const UploadService = new CoreApi(API_ENDPOINTS.BILL_ATTACHMENT);
 
+
 export const useUploadMutation = () => {
+
   return useMutation((input: any) => {
     let formData = new FormData();
     input.forEach((attachment: any) => {
@@ -16,4 +18,5 @@ export const useUploadMutation = () => {
       },
     });
   });
+
 };

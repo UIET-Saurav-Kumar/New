@@ -2,10 +2,9 @@ import { CoreApi } from "@utils/api/core.api";
 import { API_ENDPOINTS } from "@utils/api/endpoints";
 import { useMutation } from "react-query";
 
-const UploadService = new CoreApi(API_ENDPOINTS.UPLOAD);
+const UploadService = new CoreApi(API_ENDPOINTS.IMAGE_UPLOAD_ATTACHMENT);
 
 export const useUploadMutation = () => {
-
   return useMutation((input: any) => {
     let formData = new FormData();
     input.forEach((attachment: any) => {

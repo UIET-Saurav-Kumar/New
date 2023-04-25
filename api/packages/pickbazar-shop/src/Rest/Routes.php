@@ -43,6 +43,7 @@ use PickBazar\Http\Controllers\SwipeController;
 use PickBazar\Http\Controllers\LikesController;
 use PickBazar\Http\Controllers\ChatController;
 use PickBazar\Http\Controllers\MessagesController;
+use PickBazar\Http\Controllers\ImageController;
 
 
  
@@ -423,7 +424,8 @@ Route::group(['middleware' => ['can:' . Permission::CUSTOMER, 'auth:sanctum']], 
 
     Route::post('store-license-attachment', 'PickBazar\Http\Controllers\AttachmentController@storeLicenseAttachment');
     Route::post('bill-attachment', 'PickBazar\Http\Controllers\AttachmentController@storeBillAttachment');
-    
+    Route::post('image-upload-attachment', 'PickBazar\Http\Controllers\AttachmentController@storeUserImageAttachment');
+
     Route::post('/cart-list','PickBazar\Http\Controllers\CartController@index');
     Route::post('/cart-add','PickBazar\Http\Controllers\CartController@store');
     Route::post('/cart-remove','PickBazar\Http\Controllers\CartController@remove');
@@ -439,6 +441,7 @@ Route::group(['middleware' => ['can:' . Permission::CUSTOMER, 'auth:sanctum']], 
     ]);
     });
 
+    Route::resource('image-upload',ImageController::class);
     Route::resource('bill',BillController::class);
     Route::resource('contact',ContactController::class);
     Route::resource('quiz',QuizController::class);

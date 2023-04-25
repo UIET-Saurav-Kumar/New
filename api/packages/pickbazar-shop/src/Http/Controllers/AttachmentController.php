@@ -71,6 +71,47 @@ class AttachmentController extends CoreController
         return $path;
     }
 
+    public function storeUserImageAttachment(Request $request)
+    {
+        try {
+            $urls = [];
+            foreach ($request->attachment as $media) {
+                $attachment = new Attachment;
+                $attachment->save();
+                $path = $this->storeUserImage($media);
+    
+                $converted_url = [
+                    'thumbnail' => url('/') . $path,
+                    'original' => url('/') . $path,
+                    'id' => $attachment->id
+                ];
+                $urls[] = $converted_url;
+            }
+            return $urls;
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+    
+
+
+    protected function storeUserImage($image)
+    {
+        try {
+            $image_name = uniqid() . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path() . '/images/';
+            $image->move($destinationPath, $image_name);
+            $path = '/images/' . $image_name;
+    
+            return $path;
+        } catch (\Exception $e) {
+            throw new \Exception("An error occurred while storing the user image.");
+        }
+    }
+    
+
     public function storeBillAttachment(AttachmentRequest $request){
         $urls = [];
         foreach ($request->attachment as $media) {
@@ -87,6 +128,8 @@ class AttachmentController extends CoreController
         }
         return $urls;
     }
+
+
 
     protected function storeBill($bill){
         $bill_name = uniqid().'.'.$bill->getClientOriginalExtension();
