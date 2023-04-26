@@ -14,7 +14,8 @@ const FileInput = ({ control, name , multiple = true}: FileInputProps) => {
       control={control}
       name={name}
       defaultValue={[]}
-      render={({ field: { ref, ...rest } }) => <Uploader {...rest} multiple={multiple} />}
+      render={({ field: { ref, ...rest } }) => 
+      <Uploader {...rest} multiple={multiple} />}
     />
   );
 };

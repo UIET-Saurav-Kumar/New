@@ -1,6 +1,8 @@
 
 export const API_ENDPOINTS: Record<string, string> = {
   
+  ATTACHMENTS: "attachments",
+
   PRODUCTS: "products",
   SETTINGS: "settings",
   ANALYTICS: "total-users",

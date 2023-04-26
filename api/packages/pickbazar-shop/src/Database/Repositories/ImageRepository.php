@@ -8,10 +8,12 @@ use Prettus\Repository\Exceptions\RepositoryException;
 
 
 class ImageRepository extends BaseRepository
+
 {
-    public function all()
+
+    public function model()
     {
-        return Image::all();
+        return Image::class;
     }
 
     public function findOrFail($id)
@@ -37,4 +39,5 @@ class ImageRepository extends BaseRepository
         $image = $this->findOrFail($id);
         $image->delete();
     }
+
 }

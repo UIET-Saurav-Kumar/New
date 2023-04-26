@@ -1,19 +1,19 @@
-import { CoreApi } from "@utils/api/core.api";
+import { useMutation, useQueryClient } from "react-query";
+import Attachment from "@components/repositories/upload";
 import { API_ENDPOINTS } from "@utils/api/endpoints";
-import { useMutation } from "react-query";
-
-const UploadService = new CoreApi(API_ENDPOINTS.IMAGE_UPLOAD_ATTACHMENT);
 
 export const useUploadMutation = () => {
-  return useMutation((input: any) => {
-    let formData = new FormData();
-    input.forEach((attachment: any) => {
-      formData.append("attachment[]", attachment);
-    });
-    return UploadService.create(formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
+  const queryClient = useQueryClient();
+
+  return useMutation(
+    (input: any) => {
+      return Attachment.upload(API_ENDPOINTS.ATTACHMENTS, input);
+    },
+    {
+      // Always refetch after error or success:
+      onSettled: () => {
+        queryClient.invalidateQueries(API_ENDPOINTS.SETTINGS);
       },
-    });
-  });
+    }
+  );
 };

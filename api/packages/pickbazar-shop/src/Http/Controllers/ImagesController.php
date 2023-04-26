@@ -29,8 +29,9 @@ class ImagesController extends CoreController
         }
     }
     
+    
     public function store(Request $request)
-    {
+    {  
         try {
             $validatedData = $request->validate([
                 'image_data' => 'required',
