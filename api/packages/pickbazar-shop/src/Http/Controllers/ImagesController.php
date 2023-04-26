@@ -31,20 +31,33 @@ class ImagesController extends CoreController
     
     
     public function store(Request $request)
-    {  
-        return $request;
-        try {
-            $validatedData = $request->validate([
-                'image_data' => 'required',
-                'user_id' => 'required'
+{
+    try {
+        $validatedData = $request->validate([
+            'image_data' => 'required|array',
+            'image_data.*.id' => 'required|integer', // Add this line
+            'image_data.*.original' => 'required|url', // Add this line
+            'image_data.*.thumbnail' => 'required|url', // Add this line
+            'user_id' => 'required'
+        ]);
+
+        $storedImages = [];
+        foreach ($request->input('image_data') as $imageData) {
+            $storedImages[] = $this->imageRepository->create([
+                'id' => $imageData['id'],
+                'original' => $imageData['original'],
+                'thumbnail' => $imageData['thumbnail'],
+                'user_id' => $request->user_id
             ]);
-    
-            $image = $this->imageRepository->create($validatedData);
-            return response()->json($image, 201);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Error storing image: ' . $e->getMessage()], 500);
         }
+
+        return response()->json($storedImages, 201);
+    } catch (\Exception $e) {
+        return response()->json(['error' => 'Error storing image: ' . $e->getMessage()], 500);
     }
+}
+
+
     
     public function show($id)
     {

@@ -10,16 +10,13 @@ export const useImagesUploadMutation = () => {
   return useMutation((input: any) => {
     console.log('images', input);
 
-    let formData = new FormData();
-    input.images.forEach((image: any, index: number) => {
-      formData.append(`image_data[${index}]`, image);
-    });
+    const imageData = input.images;
 
-    return ImagesUpload.create(formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    return ImagesUpload.create({ image_data: imageData, user_id: input.user_id });
   });
 };
+
+
+
+
 
