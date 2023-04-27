@@ -10,6 +10,7 @@ import { useMutation, useQuery } from 'react-query';
 import url from '@utils/api/server_url';
 import { useCustomerQuery } from '@data/customer/use-customer.query';
 import { isToday, isYesterday, isThisWeek, isSameDay, isThisYear, format } from 'date-fns';// import { format } from 'path';
+import { getImagesByUserId } from '@data/images-upload/get-uploaded-images.query';
  
 
 
@@ -162,6 +163,8 @@ const ChatScreen = ({rname,name,ri,si,id,setLastMessage,setShowChatScreen}) => {
   const { query } = useRouter();
   const [chatId, setChatId] = useState("");
    const { data: currentUser } = useCustomerQuery();
+   const { data: images, isLoading, isError, refetch } = getImagesByUserId(ri);
+
 
   useEffect(() => {
     async function setupPushNotifications() {

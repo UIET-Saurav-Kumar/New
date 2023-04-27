@@ -244,12 +244,12 @@ export const data = [
         >
       
         {images?.length ?
-              images[0]?.image_data.map((img)=>
+               
               <img onClick={()=>openDetails(user)}
-          src={img?.original}
+          src={images[0]?.image_data[0].original}
           alt={user?.name}
           className="   w-60 h-60 object-cover rounded-lg"
-        />) : 
+        /> : 
         <img onClick={()=>openDetails(user)}
           src={`https://source.unsplash.com/featured/?${user.gender}/${user.name}`}
           alt={user?.name}
