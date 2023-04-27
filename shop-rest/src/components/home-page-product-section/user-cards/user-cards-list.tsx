@@ -71,11 +71,6 @@ export const data = [
 
     const { isAuthorize } = useUI();
 
-   
-
-
- 
-
     const { likedCards, addLikedCard, removeLikedCard } = useContext(AppContext);
   
     const { data: currentUserData } = useCustomerQuery();
@@ -192,7 +187,7 @@ export const data = [
     const [isLiked, setIsLiked] = useState(false);
     const { data: currentUserData } = useCustomerQuery();
 
-    const { data: images, isLoading, isError, refetch } = getImagesByUserId(user?.me?.id);
+    const { data: images, isLoading, isError, refetch } = getImagesByUserId(user?.id);
 
 
     const { openModal } = useModalAction();
@@ -202,6 +197,8 @@ export const data = [
         user: user
       }) 
     }
+
+    console.log('images',images)
     
   
     const handleHeartClick = () => {
@@ -246,7 +243,7 @@ export const data = [
          }}
         >
       
-        {images ?
+        {images?.length ?
               images[0]?.image_data.map((img)=>
               <img onClick={()=>openDetails(user)}
           src={img?.original}
