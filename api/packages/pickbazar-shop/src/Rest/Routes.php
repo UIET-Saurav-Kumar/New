@@ -43,7 +43,7 @@ use PickBazar\Http\Controllers\SwipeController;
 use PickBazar\Http\Controllers\LikesController;
 use PickBazar\Http\Controllers\ChatController;
 use PickBazar\Http\Controllers\MessagesController;
-use PickBazar\Http\Controllers\ImagesController;
+use PickBazar\Http\Controllers\UserImagesController;
 
 
  
@@ -440,11 +440,11 @@ Route::group(['middleware' => ['can:' . Permission::CUSTOMER, 'auth:sanctum']], 
         'only' => ['destroy']
     ]);
     });
-    Route::get('image-upload/{user_id}', 'PickBazar\Http\Controllers\ImagesController@getImagesByUserId');
-    Route::delete('delete-image/{id}', 'PickBazar\Http\Controllers\ImagesController@destroy');
+    Route::get('image-upload/{user_id}', [UserImagesController::class, 'getImagesByUserId']);
+    Route::delete('delete-image/{id}', [UserImagesController::class, 'destroy']);
 
 
-    Route::resource('image-upload',ImagesController::class);
+    Route::resource('image-upload',UserImagesController::class);
     Route::resource('bill',BillController::class);
     Route::resource('contact',ContactController::class);
     Route::resource('quiz',QuizController::class);
