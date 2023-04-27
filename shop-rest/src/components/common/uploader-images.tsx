@@ -17,10 +17,17 @@ const getPreviewImage = (value: any) => {
     return images;
   };
   
-  export default function Uploader({ onChange, value, multiple }: any) {
+  export default function Uploader({ onChange, value, multiple, reset }: any) {
     const { t } = useTranslation();
     const [files, setFiles] = useState<Attachment[]>(getPreviewImage(value));
     const { mutate: upload, isLoading: loading } = useUploadMutation();
+    
+    useEffect(() => {
+      if (reset) {
+        setFiles([]);
+      }
+    }, [reset]);
+    
     const { getRootProps, getInputProps } = useDropzone({
       accept: "image/*",
       multiple,

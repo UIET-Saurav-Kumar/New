@@ -51,5 +51,6 @@ export const ROUTES = {
   QUESTIONS: '/questions',
   REPORTS: '/reports',
   MESSAGES: '/user/messages',
+  UPLOAD_IMAGES: '/user/upload-images'
    
 };

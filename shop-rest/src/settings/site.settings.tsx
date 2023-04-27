@@ -130,6 +130,7 @@ export const siteSettings = {
 
   authorizedLinks: [
     { href: ROUTES.PROFILE, label: "Profile" },
+    { href: ROUTES.UPLOAD_IMAGES, label: "Upload Images" },
     { href: ROUTES.MESSAGES, label: "Messages" },
     { href: ROUTES.CHECKOUT, label: "Checkout" },
     { href: ROUTES.WISHLIST, label: 'My wishlist' },
@@ -153,6 +154,10 @@ export const siteSettings = {
     {
       href: ROUTES.PROFILE,
       menulabel: " Profile",
+    },
+    {
+      href: ROUTES.UPLOAD_IMAGES,
+      menulabel: "Upload Images",
     },
     {
       href: ROUTES.MESSAGES,

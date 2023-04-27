@@ -7,12 +7,15 @@ import { useMutation } from "react-query";
 const ImagesUpload = new CoreApi(API_ENDPOINTS.IMAGE_UPLOAD);
 
 export const useImagesUploadMutation = () => {
-  return useMutation((input: any) => {
+  return useMutation(async (input: any) => {
     console.log('images', input);
 
     const imageData = input.images;
 
-    return ImagesUpload.create({ image_data: imageData, user_id: input.user_id });
+    const response = await ImagesUpload.create({ image_data: imageData, user_id: input.user_id });
+
+    // Return the response
+    return response;
   });
 };
 

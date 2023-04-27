@@ -19,6 +19,7 @@ import { useAllLikesQuery } from '@data/user-likes/use-all-likes.query';
 import { useUI } from '@contexts/ui.context';
 import { useCallback } from 'react';
 import { useModalAction } from '@components/ui/modal/modal.context';
+import { getImagesByUserId } from '@data/images-upload/get-uploaded-images.query';
 
 
 export const data = [
@@ -191,6 +192,9 @@ export const data = [
     const [isLiked, setIsLiked] = useState(false);
     const { data: currentUserData } = useCustomerQuery();
 
+    const { data: images, isLoading, isError, refetch } = getImagesByUserId(user?.me?.id);
+
+
     const { openModal } = useModalAction();
 
     function openDetails(user:any) {
@@ -242,11 +246,19 @@ export const data = [
          }}
         >
       
+        {images ?
+              images[0]?.image_data.map((img)=>
+              <img onClick={()=>openDetails(user)}
+          src={img?.original}
+          alt={user?.name}
+          className="   w-60 h-60 object-cover rounded-lg"
+        />) : 
         <img onClick={()=>openDetails(user)}
           src={`https://source.unsplash.com/featured/?${user.gender}/${user.name}`}
           alt={user?.name}
           className="   w-60 h-60 object-cover rounded-lg"
         />
+        }
 
         <div className="flex flex-col items-start justify-between mt-2">
           <h2 className="text-sm  lg:text-lg font-medium">{user?.name}</h2>

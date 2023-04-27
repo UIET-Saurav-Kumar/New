@@ -114,16 +114,24 @@ class UserImagesController extends CoreController
     public function destroy($id)
     {
         try {
-            $image = $this->imageRepository->find($id);
-            if ($image) {
-                $this->imageRepository->delete($id);
-                return response()->json(null, 204);
-            } else {
-                return response()->json(['error' => 'Image not found'], 404);
-            }
+            // Find the Image record containing the image with the given ID
+            $imageRecord = Image::where('image_data', 'like', '%"id":' . $id . '%')->firstOrFail();
+    
+            // Decode the image_data JSON and remove the image with the given ID
+            $imageData = json_decode($imageRecord->image_data, true);
+            $imageData = array_filter($imageData, function ($image) use ($id) {
+                return $image['id'] != $id;
+            });
+    
+            // Update the Image record with the modified image_data
+            $imageRecord->image_data = json_encode(array_values($imageData));
+            $imageRecord->save();
+    
+            return response()->json(null, 204);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Error deleting image: ' . $e->getMessage()], 500);
         }
     }
+    
 
 }
