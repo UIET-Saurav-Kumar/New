@@ -20,6 +20,7 @@ import { useUI } from '@contexts/ui.context';
 import { useCallback } from 'react';
 import { useModalAction } from '@components/ui/modal/modal.context';
 import { getImagesByUserId } from '@data/images-upload/get-uploaded-images.query';
+import { useLocation } from '@contexts/location/location.context';
 
 
 export const data = [
@@ -76,6 +77,8 @@ export const data = [
     const { data: currentUserData } = useCustomerQuery();
 
     const { data: likesData } = useAllLikesQuery();
+
+    const {getLocation} =useLocation();
   
 
     const handleLike = useCallback(async (card: LikedCard) => {      if (likedCards.some((likedCard) => likedCard.user_id === card.user_id && likedCard.liked_by === card.liked_by)) {
@@ -116,16 +119,34 @@ export const data = [
           if (currentUserData?.me?.gender === "female" && user.gender === "female") return false;
     
           // Updated condition for checking if user is liked or likes the current user
-          if (likesData?.some((like) => 
-          (like.user_id === user.id && like.liked_by === currentUserData?.me?.id) || 
-          (like.user_id === currentUserData?.me?.id && 
-           like.liked_by === user.id))) return false;
-          
+          if (
+            likesData?.some(
+              (like) =>
+                (like.user_id === user.id && like.liked_by === currentUserData?.me?.id) ||
+                (like.user_id === currentUserData?.me?.id && like.liked_by === user.id)
+            )
+          )
+            return false;
+    
+          // Filter based on current_location
+          if (user.current_location && getLocation?.formattedAddress) {
+            const userLocationWords = user.current_location.split(" ");
+            const formattedAddressWords = getLocation?.formattedAddress.split(" ");
+    
+            const locationMatch = userLocationWords.some((word) =>
+              formattedAddressWords.includes(word)
+            );
+    
+            if (!locationMatch) return false;
+          }
+    
           return true;
         });
         setFilteredUsers(filtered);
       }
     }, [users, currentUserData, likesData]);
+    
+
     
 
     console.log('likes',users?.users?.data, likesData, filteredUsers)
