@@ -9,9 +9,12 @@ import { useForm } from 'react-hook-form';
 import { useUploadMutation } from '@data/upload/use-image-upload.mutation';
 import  Button  from "@components/ui/button";
 import { useImagesUploadMutation } from '@data/images-upload/use-image-upload.query';
+import { useCustomerQuery } from '@data/customer/use-customer.query';
+import { getImagesByUserId, useImagesByUserId } from '@data/images-upload/get-uploaded-images.query';
+import { useDeleteImageMutation } from '@data/upload/use-image-delete.mutations';
  
 
-const images = [
+const imagess = [
    { 
     id: 1,
     src: 'https://source.unsplash.com/featured/?female/2431'
@@ -55,90 +58,114 @@ type ImageUploadFormValues = {
 }
 
 function Images() {
-    const [showUpload, setShowUpload] = useState(false);
-  
-    const uploadAnimation = useSpring({
-      opacity: showUpload ? 1 : 0,
-      transform: showUpload ? 'translateY(0px)' : 'translateY(-50px)',
-    });
-  
-    const handleUpload = () => {
-      // Handle successful upload
-      setShowUpload(false);
-    };
-    const { mutate: storeImages } =useImagesUploadMutation();
+  const [showUpload, setShowUpload] = useState(false);
 
+  const { data: user } = useCustomerQuery();
 
-    const {
-        register,
-        handleSubmit,
-        setValue,
-        control,
-        formState: { errors },
-      } = useForm<ImageUploadFormValues>({
-        defaultValues: {
-          images: [],
-        },
-        mode: 'onChange',
+  const { data: images, isLoading, isError, refetch } = getImagesByUserId(user?.me?.id);
+
+  const uploadAnimation = useSpring({
+    opacity: showUpload ? 1 : 0,
+    transform: showUpload ? 'translateY(0px)' : 'translateY(-50px)',
+  });
+
+  console.log('images', images && images[0]?.image_data);
+
+  const deleteImageMutation = useDeleteImageMutation();
+
+  const handleUpload = () => {
+    // Handle successful upload
+    setShowUpload(false);
+    refetch(); // Refetch images after successful upload
+  };
+  const { mutate: storeImages } = useImagesUploadMutation({
+    onSuccess: handleUpload,
+  });
+
+  const handleDelete = async (imageId) => {
+    try {
+      await deleteImageMutation.mutateAsync(imageId);
+      refetch();
+    } catch (error) {
+      console.error("Error deleting image:", error);
+    }
+  };
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    control,
+    formState: { errors },
+  } = useForm<ImageUploadFormValues>({
+    defaultValues: {
+      images: [],
+    },
+    mode: 'onChange',
+  });
+
+  const onSubmit = async (data: { image_data: any }) => {
+    try {
+      storeImages({
+        images: data.image_data,
+        user_id: user?.me?.id,
       });
+      setShowUpload(false);
+    } catch (error) {
+      // Handle any errors during the upload process
+      console.error(error);
+    }
+  };
 
-      const onSubmit = async (data: { image_data: any; }) => {
-        try {
-            storeImages(
-                {
-                    images: data.image_data
-                }
-            )
-        } catch (error) {
-          // Handle any errors during the upload process
-          console.error(error);
-        }
-      };
-  
-    return (
-      <div className="bg-gray-100 min-h-screen">
-        <Navbar />
-        <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-          <div className="px-4 py-6 sm:px-0">
-            <div className="flex justify-between mb-4">
-              <h1 className="text-2xl font-medium">My Images</h1>
-              <button
-                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                onClick={() => setShowUpload(true)}
-              >
-                Upload
-              </button>
-            </div>
-            {showUpload && (
-                 <form onSubmit={handleSubmit(onSubmit)}> 
-                    <div className="mb-4">
-                        <FileInput name='image_data' multiple={true} control={control}  />
-                    </div>
-                    <Button>Submit</Button>
+  return (
+    <div className="bg-gray-100 min-h-screen">
+      <Navbar />
+      <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <div className="px-4 py-6 sm:px-0">
+          <div className="flex justify-between mb-4">
+            <h1 className="text-2xl font-medium">My Images</h1>
+            <button
+              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+              onClick={() => setShowUpload(true)}
+            >
+              Upload
+            </button>
+          </div>
+          {showUpload && (
+            <animated.div style={uploadAnimation}>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <div className="mb-4">
+                  <FileInput name="image_data" multiple={true} control={control} />
+                </div>
+                <Button>Submit</Button>
               </form>
-            )}
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-              {images.map((image) => (
+            </animated.div>
+          )}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            {images &&
+              images[0]?.image_data?.map((image) => (
                 <div key={image.id} className="relative group">
-                  <img src={image.src} className="w-full rounded-lg" />
+                  <img src={image.thumbnail} className="w-full rounded-lg" />
                   <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-50 transition-opacity rounded-lg">
                     <div className="absolute inset-0 flex justify-center items-center">
                       <button
                         className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-                        // onClick={() => handleDelete(image.id)}
+                        onClick={() => handleDelete(image.id)}
                       >
                         Delete
                       </button>
                     </div>
-                  </div>
+                    </div>
                 </div>
               ))}
-            </div>
           </div>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
+}
+
+
   
   export default Images;
   

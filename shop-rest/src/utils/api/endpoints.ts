@@ -113,7 +113,9 @@ export const API_ENDPOINTS: Record<string, string> = {
   IMAGE_UPLOAD_ATTACHMENT: 'image-upload-attachment',
 
   IMAGE_UPLOAD: 'image-upload',
-
+  IMAGE_UPDATE: 'image-update',
+  DELETE_IMAGE: 'delete-image',
+ 
 
   LOGS:'logs'
 };

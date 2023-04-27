@@ -440,6 +440,9 @@ Route::group(['middleware' => ['can:' . Permission::CUSTOMER, 'auth:sanctum']], 
         'only' => ['destroy']
     ]);
     });
+    Route::get('image-upload/{user_id}', 'PickBazar\Http\Controllers\ImagesController@getImagesByUserId');
+    Route::delete('delete-image/{id}', 'PickBazar\Http\Controllers\ImagesController@destroy');
+
 
     Route::resource('image-upload',ImagesController::class);
     Route::resource('bill',BillController::class);

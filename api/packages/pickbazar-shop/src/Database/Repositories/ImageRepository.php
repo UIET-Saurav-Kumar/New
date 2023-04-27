@@ -23,8 +23,15 @@ class ImageRepository extends BaseRepository
 
     public function create($data)
     {
-        return Image::create($data);
+        $image = new Image();
+        $image->image_data = json_encode($data['image_data']); // Encode image_data array as JSON string
+        $image->user_id = $data['user_id'];
+        $image->save();
+    
+        return $image;
     }
+    
+
 
     public function update($id, $data)
     {
