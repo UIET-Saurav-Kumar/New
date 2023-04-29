@@ -3,6 +3,10 @@ import { MapPin } from '@components/icons/map-pin';
 import { useLocation } from "@contexts/location/location.context";
 import { useEffect, useState } from "react";
 import  { useRouter } from 'next/router';
+import { useCustomerQuery } from "@data/customer/use-customer.query";
+import { useUI } from "@contexts/ui.context";
+import { useUpdateCustomerMutation } from "@data/customer/use-update-customer.mutation";
+import { useUpdateUserMutation } from "@data/customer/use-update-user.mutation";
 
 export default function CityButton({lat, lng, city,
     onChange
@@ -18,7 +22,16 @@ export default function CityButton({lat, lng, city,
     const pathname = router.pathname;
 
     
-    const {addLocation, getLocation} =useLocation()
+    const {addLocation, getLocation} =useLocation();
+
+    const {data} = useCustomerQuery();
+  const {isAuthorize} = useUI();
+
+  const { mutate: updateProfile, isLoading: loading } =
+    useUpdateCustomerMutation();
+
+    const { mutate: updateUser, isLoading: loadingUser } =
+    useUpdateUserMutation();
 
     // useEffect(() => {
     //   const location: any = {
@@ -59,6 +72,42 @@ export default function CityButton({lat, lng, city,
 
         // console.log(location);
         addLocation(location);
+
+        if (isAuthorize && data?.user?.id) {
+            updateProfile(
+              {
+                id: data?.user?.id,
+                current_location: location.formatted_address,
+                
+              },
+              {
+                onSuccess: () => {
+                  alert("Profile updated");
+                },
+                onError: (error) => {
+                  alert("Profile update error:", error);
+                  // You can display an error message to the user here.
+                },
+              }
+            );
+    
+          updateUser(
+            { 
+              id: data?.user?.id,
+              current_location:  location.formatted_address,
+              
+            },
+            {
+              onSuccess: () => {
+                alert("User location updated");
+              },
+              onError: (error) => {
+                alert("User location update error:", error);
+                // You can display an error message to the user here.
+              },
+            }
+          );
+          }
 
         onChange(location);
     }

@@ -1,6 +1,10 @@
 import getAddress from "@components/geoCode/geo-code"
 import { MapPin } from '@components/icons/map-pin';
 import { useLocation } from "@contexts/location/location.context";
+import { useUI } from "@contexts/ui.context";
+import { useCustomerQuery } from "@data/customer/use-customer.query";
+import { useUpdateCustomerMutation } from "@data/customer/use-update-customer.mutation";
+import { useUpdateUserMutation } from "@data/customer/use-update-user.mutation";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
@@ -11,6 +15,16 @@ export default function GetCurrentLocation({
   }){
     const {addLocation} =useLocation()
     const router = useRouter();
+
+    const {data} = useCustomerQuery();
+
+    const { mutate: updateProfile, isLoading: loading } =
+    useUpdateCustomerMutation();
+
+    const { mutate: updateUser, isLoading: loadingUser } =
+    useUpdateUserMutation();
+
+    const {isAuthorize} = useUI();
 
     const pathname = router.pathname;
 
@@ -26,7 +40,7 @@ export default function GetCurrentLocation({
       const location: any = {
         lat:  30.7320 ,
         lng:  76.7726 ,
-        formattedAddress:  'Chandigarh'  ,
+        formattedAddress:  'Chandigarh',
       };
        pathname == '/salon-near-me' || pathname == '/restaurant-deals-near-me'   && addLocation(location);
     },[])
@@ -34,6 +48,7 @@ export default function GetCurrentLocation({
     function getLoc() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition);
+             
         } else { 
             alert("Geolocation is not supported by this browser.");
         }
@@ -50,7 +65,41 @@ export default function GetCurrentLocation({
             formattedAddress: address,
           };
 
-        addLocation(location)
+        addLocation(location);
+
+        if (isAuthorize && data?.user?.id) {
+          updateProfile(
+            {
+              id: data?.user?.id,
+              current_location: location,
+            },
+            {
+              onSuccess: () => {
+                alert("Profile updated");
+              },
+              onError: (error) => {
+                alert("Profile update error:", error);
+                // You can display an error message to the user here.
+              },
+            }
+          );
+  
+        updateUser(
+          {
+            id: data?.user?.id,
+            current_location: location,
+          },
+          {
+            onSuccess: () => {
+              alert("User location updated");
+            },
+            onError: (error) => {
+              alert("User location update error:", error);
+              // You can display an error message to the user here.
+            },
+          }
+        );
+          }
 
         onChange(location);
 

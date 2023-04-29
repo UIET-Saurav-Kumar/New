@@ -142,7 +142,7 @@ const ProfileForm = ({ user }: Props) => {
         },
       }
     )
-}
+ }
 
 
 

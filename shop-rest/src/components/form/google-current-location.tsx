@@ -6,6 +6,10 @@ import React, { useState ,useEffect, useRef } from "react";
 import { useTranslation } from "next-i18next";
 import Loader from "@components/ui/loader/loader";
 import useOnClickOutside from "@utils/use-click-outside";
+import { useUpdateCustomerMutation } from "@data/customer/use-update-customer.mutation";
+import { useUpdateUserMutation } from "@data/customer/use-update-user.mutation";
+import { useCustomerQuery } from "@data/customer/use-customer.query";
+import { useUI } from "@contexts/ui.context";
 
 const libraries: Libraries = ["places"];
 
@@ -45,6 +49,15 @@ export default function GooglePlacesAutocomplete({ onChange }: { onChange: any; 
     setAutocomplete(null);
   }, []);
 
+  const {data} = useCustomerQuery();
+  const {isAuthorize} = useUI();
+
+  const { mutate: updateProfile, isLoading: loading } =
+    useUpdateCustomerMutation();
+
+    const { mutate: updateUser, isLoading: loadingUser } =
+    useUpdateUserMutation();
+
   const onPlaceChanged = () => {
     const place = autocomplete.getPlace();
     if (!place.geometry || !place.geometry.location) {
@@ -53,6 +66,43 @@ export default function GooglePlacesAutocomplete({ onChange }: { onChange: any; 
     }
 
     setLocation(place.formatted_address);
+
+    if (isAuthorize && data?.user?.id) {
+      updateProfile(
+        {
+          id: data?.user?.id,
+          current_location: place?.formatted_address,
+          
+        },
+        {
+          onSuccess: () => {
+            alert("Profile updated");
+          },
+          onError: (error) => {
+            alert("Profile update error:", error);
+            // You can display an error message to the user here.
+          },
+        }
+      );
+
+    updateUser(
+      {
+        id: data?.user?.id,
+        current_location:  place?.formatted_address,
+        
+      },
+      {
+        onSuccess: () => {
+          alert("User location updated");
+        },
+        onError: (error) => {
+          alert("User location update error:", error);
+          // You can display an error message to the user here.
+        },
+      }
+    );
+    }
+
     const location: any = {
       lat: place.geometry.location.lat(),
       lng: place.geometry.location.lng(),
@@ -109,6 +159,7 @@ export default function GooglePlacesAutocomplete({ onChange }: { onChange: any; 
                   lng,
                   formattedAddress: results[0].formatted_address,
                 });
+                
               }
             } else {
               console.error("Geocoder failed due to: " + status);

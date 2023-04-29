@@ -206,7 +206,9 @@ export default function PlaceSearch(props:any) {
         setTotal_Rating(user_ratings_total);
   
         const logo_id = photos?.[0]?.photo_reference;
-        logo_id && mutateLogoImage({ photo_reference: logo_id,place_id: place_Id });
+        if (logo_id) {
+          mutateLogoImage({ photo_reference: logo_id, place_id });
+        }
   
         place_id && mutatePlace({ place_id });
   
@@ -258,7 +260,7 @@ export default function PlaceSearch(props:any) {
         });
       });
     },
-    onError: (data) => {updateLikes
+    onError: (data) => {
       console.log(data?.message);
     },
     onSettled: () => {

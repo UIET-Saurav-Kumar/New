@@ -5,6 +5,10 @@ import { getLocation } from "@contexts/location/location.utils";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Spinner from "@components/ui/loaders/spinner/spinner";
+import { useUpdateCustomerMutation } from "@data/customer/use-update-customer.mutation";
+import { useUpdateUserMutation } from "@data/customer/use-update-user.mutation";
+import { useCustomerQuery } from "@data/customer/use-customer.query";
+import { useUI } from "@contexts/ui.context";
 
 
 export default function GetCurrentLocation({
@@ -38,6 +42,16 @@ export default function GetCurrentLocation({
       const {getLocation} =useLocation();
  
       const[address,setAddress] = useState('');
+
+      const {data} = useCustomerQuery();
+
+      const { mutate: updateProfile, isLoading: loading } =
+      useUpdateCustomerMutation();
+  
+      const { mutate: updateUser, isLoading: loadingUser } =
+      useUpdateUserMutation();
+
+      const {isAuthorize} = useUI();
 
 
        useEffect(() => {
@@ -105,6 +119,39 @@ export default function GetCurrentLocation({
 
         // alert(location);
         addLocation(location);
+        if (isAuthorize && data?.user?.id) {
+        updateProfile(
+          {
+            id: data?.user?.id,
+            current_location: location,
+          },
+          {
+            onSuccess: () => {
+             alert("Profile updated");
+            },
+            onError: (error) => {
+              alert("Profile update error:", error);
+              // You can display an error message to the user here.
+            },
+          }
+        );
+
+      updateUser(
+        {
+          id: data?.user?.id,
+          current_location: location,
+        },
+        {
+          onSuccess: () => {
+           alert("User location updated");
+          },
+          onError: (error) => {
+            alert("User location update error:", error);
+            // You can display an error message to the user here.
+          },
+        }
+      );
+        }
         setBtn('Detect');
         onChange(getLoc);
     }
