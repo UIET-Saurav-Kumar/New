@@ -19,6 +19,7 @@ class ProfileRepository extends BaseRepository
         'gender' => 'like',
         'occupation'=> 'like',
         'date_of_birth' => 'like',
+        'home_location'=> 'like',
         'occupation'=> 'like',
     ];
 

@@ -21,6 +21,9 @@ import { useCallback } from 'react';
 import { useModalAction } from '@components/ui/modal/modal.context';
 import { getImagesByUserId } from '@data/images-upload/get-uploaded-images.query';
 import { useLocation } from '@contexts/location/location.context';
+import { getDistance } from 'geolib';
+import CompassLoader from '@components/ui/loader/compass-loader';
+import Spinner from '@components/ui/loaders/spinner/spinner';
 
 
 export const data = [
@@ -79,6 +82,8 @@ export const data = [
     const { data: likesData } = useAllLikesQuery();
 
     const {getLocation} =useLocation();
+
+    const [loader, setLoader] = useState(false);
   
 
     const handleLike = useCallback(async (card: LikedCard) => {      if (likedCards.some((likedCard) => likedCard.user_id === card.user_id && likedCard.liked_by === card.liked_by)) {
@@ -94,6 +99,10 @@ export const data = [
     const idRef = useRef(currentUserData?.me?.id);
   
     const myId = idRef.current;
+
+    useEffect(()=>{
+       !filteredUsers?.length && setLoader(true)
+    },[])
 
    
     useEffect(() => {
@@ -129,24 +138,40 @@ export const data = [
             return false;
     
           // Filter based on current_location
-          if (user.current_location && getLocation?.formattedAddress) {
-            const userLocationWords = user.current_location.split(" ");
-            const formattedAddressWords = getLocation?.formattedAddress.split(" ");
+          if (user?.current_location && getLocation?.formattedAddress) {
+            if (user.current_location.lat && user.current_location.lng && getLocation.lat && getLocation.lng) {
+              const distance = getDistance(
+                { latitude: user.current_location.lat, longitude: user.current_location.lng },
+                { latitude: getLocation.lat, longitude: getLocation.lng }
+              );
     
-            const locationMatch = userLocationWords.some((word) =>
-              formattedAddressWords.includes(word)
-            );
+              const maxDistance = 5000; // You can change this value to set the maximum distance for filtering users (in meters)
     
-            if (!locationMatch) return false;
+              if (distance > maxDistance) return false;
+            } else {
+              const userLocationWords = typeof user.current_location === 'string'
+                ? user.current_location.split(" ")
+                : (user.current_location.formattedAddress
+                ? user.current_location.formattedAddress.split(" ")
+                : []);
+              const formattedAddressWords = getLocation?.formattedAddress?.split(" ");
+    
+              const locationMatch = userLocationWords.some((word) =>
+                formattedAddressWords.includes(word)
+              );
+    
+              if (!locationMatch) return false;
+            }
           }
     
           return true;
         });
         setFilteredUsers(filtered);
       }
-    }, [users, currentUserData, likesData]);
+    }, [users, currentUserData, likesData, getLocation]);
     
-
+    
+    
     
 
     console.log('likes',users?.users?.data, likesData, filteredUsers)
@@ -167,40 +192,45 @@ export const data = [
      
       
     return (
-
       <div className="relative h-full w-full z-40">
-       { isAuthorize && <p className='text-center font-semibold text-lg p-2 lg:text-2xl'>
-          Community Members Near You
-        </p> }
+        {isAuthorize && (
+          <p className="text-center font-semibold text-lg p-2 lg:text-2xl">
+            Community Members Near You
+          </p>
+        )}
         <div className="transition-all duration-500 grid grid-cols-3 lg:grid-cols-6 gap-2 lg:gap-6">
-        {filteredUsers?.slice(0,20).map((user: any) => {
-          const card: LikedCard = { user_id: user.id, liked_by: myId };
-          if (
-            !likedCards.some(
-              (likedCard) =>
-                likedCard.user_id === card.user_id && likedCard.liked_by === card.liked_by
-            )
-          ) {
-            return (
-              <Card
-                key={user.id}
-                myId={myId}
-                user={user}
-                setIsChatOpen={setIsChatOpen}
-                setSelectedUser={setSelectedUser}
-                useRecordLikeDislike={useRecordLikeDislike}
-                handleLike={handleLike}
-                card={card}
-              />
-            );
-          }
-          return null;
-        })}
-
-                </div>
-              </div>
-                
-      )
+          {filteredUsers && filteredUsers?.length > 0 ? (
+            filteredUsers.slice(0, 20).map((user: any) => {
+              const card: LikedCard = { user_id: user.id, liked_by: myId };
+              if (
+                !likedCards.some(
+                  (likedCard) =>
+                    likedCard.user_id === card.user_id && likedCard.liked_by === card.liked_by
+                )
+              ) {
+                return (
+                  <Card
+                    key={user.id}
+                    myId={myId}
+                    user={user}
+                    setIsChatOpen={setIsChatOpen}
+                    setSelectedUser={setSelectedUser}
+                    useRecordLikeDislike={useRecordLikeDislike}
+                    handleLike={handleLike}
+                    card={card}
+                  />
+                );
+              }
+              return null;
+            })
+          ) : (
+            <div className="flex justify-center items-center mx-auto text-center h-full w-full">
+              <Spinner />
+            </div>
+          )}
+        </div>
+      </div>
+    );
     }
 
   const Card = ({ user, myId, handleLike, useRecordLikeDislike, setIsChatOpen, setSelectedUser }: any) => {

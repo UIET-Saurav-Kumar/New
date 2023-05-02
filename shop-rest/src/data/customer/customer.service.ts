@@ -24,6 +24,7 @@ class Customer extends CoreApi {
   }
 
   updateCustomer(input: CustomerType) {
+    console.log('profile',input)
     return this.http
       .put(this._base_path + "/" + input.id, input)
       .then((res) => res.data);

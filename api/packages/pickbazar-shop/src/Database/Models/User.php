@@ -130,7 +130,11 @@ class User extends Authenticatable
         return $this->hasMany(Question::class, 'user_id');
     }
 
-    
+    public function getCurrentLocationAttribute($value)
+    {
+        return json_decode($value, true);
+    }
+
 
 
     public function balance(): HasOne

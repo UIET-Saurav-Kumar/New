@@ -65,6 +65,7 @@ class UserRepository extends BaseRepository
 
     public function storeUser($request)
     {
+        
         try {
             $user = $this->create([
                 'name'     => $request->name,
@@ -72,7 +73,8 @@ class UserRepository extends BaseRepository
                 'password' => Hash::make($request->password),
                 'phone_number' => $request->phone_number,
                 //user current_location
-                'current_location' => $request->current_location,
+                'current_location' => is_string($request->current_location) ? $request->current_location : json_encode($request->current_location),
+
                 'gender'=> $request->gender,
                 'date_of_birth'=> $request->date_of_birth,
                 'occupation'=> $request->occupation,
@@ -89,6 +91,7 @@ class UserRepository extends BaseRepository
             $user->profile = $user->profile;
             $user->address = $user->address;
             $user->shop = $user->shop;
+            $user->current_location = json_decode($user->current_location, true);
             $user->managed_shop = $user->managed_shop;
             return $user;
         } catch (ValidatorException $e) {
@@ -118,7 +121,10 @@ class UserRepository extends BaseRepository
                     Profile::create($profile);
                 }
             }
-            $user->update($request->only($this->dataArray));
+            $updateData = array_diff_key($request->only($this->dataArray), array_flip(['profile', 'address', 'shop']));
+            $updateData['current_location'] = is_string($request->current_location) ? $request->current_location : json_encode($request->current_location);
+    
+            $user->update($updateData);
             $user->profile = $user->profile;
             $user->address = $user->address;
             $user->shop = $user->shop;
@@ -128,6 +134,7 @@ class UserRepository extends BaseRepository
             throw new PickbazarException('PICKBAZAR_ERROR.SOMETHING_WENT_WRONG');
         }
     }
+    
 
     public function sendResetEmail($email, $token)
     {

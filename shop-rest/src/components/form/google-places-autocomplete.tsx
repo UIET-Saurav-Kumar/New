@@ -26,7 +26,7 @@ export default function GooglePlacesAutocomplete({address,closeLocation,
 
   useEffect(()=>{
     setLocation(getLocation?.formattedAddress)
-  });
+  },[getLocation]);
 
   const { isLoaded, loadError } = useJsApiLoader({
     id: "google_map_autocomplete",
@@ -140,14 +140,10 @@ export default function GooglePlacesAutocomplete({address,closeLocation,
           type = "text"
           // placeholder={t("common:placeholder-search-location")}
           placeholder='Enter your location'
-          defaultValue={loc}
+          value={loc}
+          onChange={(e) => setLocation(e.target.value)}
           style={{zIndex:100}}
-          
-          // className=" mt-16 p-3 pl-8  mx-8 w-full  sm:px-8 sm:w-full sm:mx-auto  xmd:mx-4 md:w-full md:mx-auto 
-          //             2xl:p-3 md:p-3 md:mx-auto  md:w-full 2xl:w-full 2xl:mx-auto font-light
-          //             focus:border-accent focus:bg-light  rounded-full  bg-gray-80
-          //             outline-none text-xs sm:text-sm md:text-base md:text-lg 
-          //           border-gray-300 shadow-2xl border "
+         
           className='border-l-0 z-50 outline-none w-full   sm:w-2/3 md:w-2/3 lg:w-1/3 h-14 
                      rounded-l-none sm:p-3 md:p-2 rounded-lg  px-7 sm:px-6 md:px-9 border-2'
         /></div>

@@ -16,6 +16,8 @@ import { useModalAction } from "@components/ui/modal/modal.context";
 import Link from 'next/link';
 import Image from 'next/image';
 import { useShopAvailabilityQuery } from '@data/home/use-shop-availability-query';
+import { useUpdateCustomerMutation } from '@data/customer/use-update-customer.mutation';
+import { useCustomerQuery } from '@data/customer/use-customer.query';
 
 
 const cities = //create object of major  indian cities with lat, lng and city name
@@ -192,11 +194,40 @@ export default function HeaderMiddle({searchbar}:any) {
     
     const router = useRouter();
 
+    const {data:userData} = useCustomerQuery();
+
     const [click, setClick ] = useState(false);
+
     const [hasLocation, setHasLoction] = useState(false);
 
-    const handleLocation = () => {
+    const { mutate: updateProfile } =
+    useUpdateCustomerMutation();
+
+    console.log('profile id', userData)
+
+
+    const handleLocation = async  (newLocation:string) => {
+ 
         setLocation(!location);
+        await updateProfile(
+            { 
+              id: userData?.me?.id,
+              current_location: {
+                lat: newLocation?.lat,
+                lng: newLocation?.lng,
+                formattedAddress: newLocation?.formattedAddress,
+              },
+            },
+            {
+              onSuccess: (data) => {
+                console.log("Location updated in ", newLocation?.formattedAddress);
+              },
+              onError: (error) => {
+                console.log("Location updated error:");
+                // You can display an error message to the user here.
+              },
+            }
+          );
     }
 
     const { openModal } = useModalAction();
@@ -213,19 +244,7 @@ export default function HeaderMiddle({searchbar}:any) {
 
     const [address, setAddress] = useState('');
 
-    //outside click close location
-    // useEffect(() => {
-    //     const handleClick = (e:any) => {
-    //         if (click && e.target.className !== "location-button") {
-    //             setLocation(false);
-    //         }
-    //     }
-    //     document.addEventListener("click", handleClick);
-    //     return () => {
-    //         document.removeEventListener("click", handleClick);
-    //     };
-    // }, [click]);
-
+   
     const closeLocation = () => {
         setLocation(!location)
     }
@@ -239,7 +258,7 @@ export default function HeaderMiddle({searchbar}:any) {
             setLocation(true);
             setHasLoction(false);
         //  
-        }else {
+        } else {
             setAddress(getLocation?.formattedAddress);
             
             setHasLoction(true);
@@ -248,6 +267,7 @@ export default function HeaderMiddle({searchbar}:any) {
         }
     },[getLocation?.formattedAddress])
 
+    
     function changeLocation(data:any){
        
         var location=JSON.stringify(data);
@@ -256,28 +276,47 @@ export default function HeaderMiddle({searchbar}:any) {
         setLocation(data?.formattedAddress);
         setAddress(data?.formattedAddress);
 
+           
+
         if(location){
             setHasLoction(true);
             closeLocation(); 
+            
         }
 
         var { query ,pathname} = router;
         var pathname="/"+router.locale+pathname
         
         router.push(
-        {
-            pathname,
-            query: query,
-        },
-        {
-            pathname,
-            query: query,
-        },
+            {
+                pathname,
+                query: query,
+            },
+            {
+                pathname,
+                query: query,
+            },
         );
-        handleLocation()
+
+        handleLocation(data);
+        //  updateProfile(
+        //     {
+        //       id: userData?.me?.id,
+        //       current_location: {getLocation},
+        //     },
+        //     {
+        //       onSuccess: (data) => {
+        //         console.log('Location updated in ', getLocation?.formattedAddress);
+        //       },
+        //       onError: (error) => {
+        //         console.log("Location updated error:");
+        //         // You can display an error message to the user here.
+        //       },
+        //     }
+        //    );
     }
 
-    console.log('path', location, getLocation, router )
+    console.log('Location updated out', getLocation?.formattedAddress )
 
 
     const {
@@ -334,8 +373,8 @@ export default function HeaderMiddle({searchbar}:any) {
 
                               <div className={`${(searchbar && shop_check !== 0 && router.pathname !== '/shops') ? 'hidden' : 'flex lg:w-3/5'}
                                  `}>
-                             <DropDown  getLoc = {handleLocation} />
-                        </div>
+                               <DropDown  getLoc = {handleLocation} />
+                              </div>
                         </>
                               : shop_check == 0 ?
                             //   <div className='w-full'>
@@ -445,12 +484,13 @@ export default function HeaderMiddle({searchbar}:any) {
                                           
                                 <div  style = {{zIndex: 1000}}  
                                       className='w-full'> 
-                                    <GooglePlacesAutocomplete onChange = {changeLocation} 
-                                                              address  = {address} /> 
+                                      <GooglePlacesAutocomplete onChange = {changeLocation} 
+                                                                address  = {address}
+                                                                 /> 
                                 </div>
         
-                                <div style={{zIndex: 1000}}  className='w-full '> 
-                                     <GetCurrentLocation onChange = {changeLocation} />  
+                                <div style={{zIndex: 1000}}  className = 'w-full '> 
+                                     <GetCurrentLocation     onChange  = {changeLocation} />  
                                      {/* <span className='text-gray-600 font-semibold ml-10'>
                                         <span className=' mr-10 text-xl font-semibold text-magenta'>
                                             Or

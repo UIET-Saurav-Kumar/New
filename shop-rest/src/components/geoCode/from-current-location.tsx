@@ -67,39 +67,7 @@ export default function GetCurrentLocation({
 
         addLocation(location);
 
-        if (isAuthorize && data?.user?.id) {
-          updateProfile(
-            {
-              id: data?.user?.id,
-              current_location: location,
-            },
-            {
-              onSuccess: () => {
-                alert("Profile updated");
-              },
-              onError: (error) => {
-                alert("Profile update error:", error);
-                // You can display an error message to the user here.
-              },
-            }
-          );
-  
-        updateUser(
-          {
-            id: data?.user?.id,
-            current_location: location,
-          },
-          {
-            onSuccess: () => {
-              alert("User location updated");
-            },
-            onError: (error) => {
-              alert("User location update error:", error);
-              // You can display an error message to the user here.
-            },
-          }
-        );
-          }
+
 
         onChange(location);
 

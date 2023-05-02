@@ -52,9 +52,7 @@ class UserController extends CoreController
     public function index(Request $request)
     {
       $limit = $request->limit ?   $request->limit : 15;   
-
         return $this->repository->paginate($limit);
-        
     }
 
     /**
@@ -84,7 +82,6 @@ class UserController extends CoreController
         }
     }
 
-  
 
     /**
      * Update the specified resource in storage.
@@ -93,6 +90,7 @@ class UserController extends CoreController
      * @param int $id
      * @return array
      */
+
     public function update(UserUpdateRequest $request, $id)
     {
         if ($request->user()->hasPermissionTo(Permission::SUPER_ADMIN)) {
@@ -158,7 +156,6 @@ class UserController extends CoreController
     public function register(UserCreateRequest $request)
     {
        
-
         $notAllowedPermissions = [Permission::SUPER_ADMIN];
         if ((isset($request->permission->value) && in_array($request->permission->value, $notAllowedPermissions)) || (isset($request->permission) && in_array($request->permission, $notAllowedPermissions))) {
             throw new PickbazarException('NOT_AUTHORIZED');
@@ -171,9 +168,17 @@ class UserController extends CoreController
         $country_code = '+91';
         $phone_number = $country_code.$request->phone_number;
         $code=SMS::sendOTP($phone_number);
+         
+        $current_location = json_decode($request->current_location, true);
+        if ($current_location === null && json_last_error() !== JSON_ERROR_NONE) {
+            // 'current_location' is not a JSON object, use the original value
+            $current_location = $request->current_location;
+        } else {
+            // 'current_location' is a JSON object, encode it back to a string
+            $current_location = json_encode($current_location);
+        }
 
         //user permissions
-    
 
         $user = $this->repository->create([
             'name'     => $request->name,
@@ -185,7 +190,7 @@ class UserController extends CoreController
             'date_of_birth'=> $request->date_of_birth,
             'occupation'=> $request->occupation,
             // 'role'=> $request->permissions[0],
-            'current_location'=>$request->current_location,
+            'current_location'=>$current_location,
             'is_active'=>0,
             'code'=>$code
         ]);

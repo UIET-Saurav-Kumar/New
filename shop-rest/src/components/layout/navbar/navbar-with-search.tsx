@@ -22,6 +22,8 @@ import GetCurrentLocation from "@components/geoCode/get-current-location";
 import { CaretDown } from "@components/icons/caret-down";
 import MobileJoinButton from "./mobile-join-button";
 import CityButton from "@components/geoCode/city-buttton";
+import { useUpdateCustomerMutation } from "@data/customer/use-update-customer.mutation";
+import { useCustomerQuery } from "@data/customer/use-customer.query";
 
 
 const cities = //create object of major  indian cities with lat, lng and city name
@@ -188,9 +190,31 @@ const NavbarWithSearch = () => {
   const { data } = useTypesQuery();
   const {getLocation} =useLocation();
   const [location, setLocation] = useState(false);
+  const {data:userData} = useCustomerQuery();
+  const { mutate: updateProfile } =
+    useUpdateCustomerMutation();
 
-  const handleLocation = () => {
+  const handleLocation = async  (newLocation:string) => {
     setLocation(!location);
+    await updateProfile(
+      { 
+        id: userData?.me?.id,
+        current_location: {
+          lat: newLocation?.lat,
+          lng: newLocation?.lng,
+          formattedAddress: newLocation?.formattedAddress,
+        },
+      },
+      {
+        onSuccess: (data) => {
+          console.log("Location updated in ", newLocation?.formattedAddress);
+        },
+        onError: (error) => {
+          console.log("Location updated error:");
+          // You can display an error message to the user here.
+        },
+      }
+    );
   }
 
   const router = useRouter();
@@ -270,7 +294,7 @@ const NavbarWithSearch = () => {
             query: query,
         },
         );
-        handleLocation()
+        handleLocation(data)
     }
 
 
@@ -308,8 +332,8 @@ const NavbarWithSearch = () => {
                  </div>
 
                       <div 
-                      // onClick = {handleLocation}  
-                      className='flex items-center w-full lg:hidden'>
+                        // onClick = {handleLocation}  
+                        className='flex items-center w-full lg:hidden'>
                                       <input onClick = {handleLocation} 
                                defaultValue = {getLocation?.formattedAddress}  
                                className ='hidden lg:inline-flex shadow-md text-gray-500 bg-gray-50   placeholder:text-gray-500  
@@ -393,7 +417,7 @@ const NavbarWithSearch = () => {
                            
 
                 </div> 
-            <ul className="hidden lg:flex items-center flex-shrink-0 space-s-10">
+            {/* <ul className="hidden lg:flex items-center flex-shrink-0 space-s-10">
               {isAuthorize ? (
                 <li key="track-orders">
                   <Link
@@ -418,7 +442,7 @@ const NavbarWithSearch = () => {
                 </li>
               ))}
               
-            </ul>
+            </ul> */}
 
         
             <div className=' flex justify-end  ml-10 space-x-4'>  

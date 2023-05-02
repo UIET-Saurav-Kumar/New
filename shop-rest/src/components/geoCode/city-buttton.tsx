@@ -24,15 +24,9 @@ export default function CityButton({lat, lng, city,
     
     const {addLocation, getLocation} =useLocation();
 
-    const {data} = useCustomerQuery();
   const {isAuthorize} = useUI();
 
-  const { mutate: updateProfile, isLoading: loading } =
-    useUpdateCustomerMutation();
-
-    const { mutate: updateUser, isLoading: loadingUser } =
-    useUpdateUserMutation();
-
+ 
     // useEffect(() => {
     //   const location: any = {
     //     lat:  30.7320 ,
@@ -72,42 +66,6 @@ export default function CityButton({lat, lng, city,
 
         // console.log(location);
         addLocation(location);
-
-        if (isAuthorize && data?.user?.id) {
-            updateProfile(
-              {
-                id: data?.user?.id,
-                current_location: location.formatted_address,
-                
-              },
-              {
-                onSuccess: () => {
-                  alert("Profile updated");
-                },
-                onError: (error) => {
-                  alert("Profile update error:", error);
-                  // You can display an error message to the user here.
-                },
-              }
-            );
-    
-          updateUser(
-            { 
-              id: data?.user?.id,
-              current_location:  location.formatted_address,
-              
-            },
-            {
-              onSuccess: () => {
-                alert("User location updated");
-              },
-              onError: (error) => {
-                alert("User location update error:", error);
-                // You can display an error message to the user here.
-              },
-            }
-          );
-          }
 
         onChange(location);
     }

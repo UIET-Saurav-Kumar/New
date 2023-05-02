@@ -3,17 +3,22 @@ import { LocationReducer, State, initialState } from "./location.reducer";
 import { Location } from "./location.utils";
 import { useLocalStorage } from "@utils/use-local-storage";
 import { LOCATION } from "@utils/constants";
+
+
 interface LocationProviderState extends State {
   addLocation: (Location: Location) => void;
   removeLocation: () => void;
   clearLocation: () => void;
   getLocation: State;
 }
+
 export const LocationContext = React.createContext<LocationProviderState | undefined>(
   undefined
 );
 
+
 LocationContext.displayName = "LocationContext";
+
 
 export const useLocation = () => {
   const context = React.useContext(LocationContext);
@@ -23,11 +28,14 @@ export const useLocation = () => {
   return context;
 };
 
+
 export const LocationProvider: React.FC = (props) => {
+
   const [savedLocation, saveLocation] = useLocalStorage(
     LOCATION,
     JSON.stringify(initialState)
   );
+  
   const [state, dispatch] = React.useReducer(
     LocationReducer,
     JSON.parse(savedLocation!)
@@ -44,6 +52,7 @@ export const LocationProvider: React.FC = (props) => {
   const clearLocation = () =>
     dispatch({ type: "RESET_LOCATION"});
   const getLocation = state.Locations;
+
   const value = React.useMemo(
     () => ({
       ...state,
@@ -54,5 +63,6 @@ export const LocationProvider: React.FC = (props) => {
     }),
     [state]
   );
+
   return <LocationContext.Provider value={value} {...props} />;
 };

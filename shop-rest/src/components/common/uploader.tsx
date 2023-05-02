@@ -137,7 +137,7 @@ export default function Uploader({ onChange, value, multiple }: any) {
         <UploadIcon className="text-muted-light" />
         <p className="text-body text-sm mt-4 text-center">
           <span className="text-accent font-semibold">
-            {t(" Please Upload your 3 profile pictures ")}
+            {t("   Upload png , jpg images ")}
           </span><br />
           {" "}
           {t(" or drag & drop")} <br />

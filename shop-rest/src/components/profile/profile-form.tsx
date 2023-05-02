@@ -21,6 +21,7 @@ import { API_ENDPOINTS } from "@utils/api/endpoints";
 import http from "@utils/api/http";
 import url from "@utils/api/server_url";
 import { useMutation } from "react-query";
+import GooglePlacesAutocomplete from "@components/form/google-places-autocomplete";
 
 
 
@@ -76,16 +77,17 @@ const ProfileForm = ({ user }: Props) => {
         ...(user &&
           pick(user, [
             "name",
-            'email',
-            'date_of_birth',
-            'occupation',
-            'gender',
-            'current_location',
+            // 'email',
+            // 'date_of_birth',
+            // 'occupation',
+            // 'gender',
+            // 'current_location',
             'profile.date_of_birth',
             'profile.gender',
             'profile.occupation',
             "profile.bio",
             "profile.contact",
+            'profile.home_location',
             "profile.avatar",
           ])),
       },
@@ -104,14 +106,16 @@ const ProfileForm = ({ user }: Props) => {
         
         id: user?.id,
         name: values?.name,
-        date_of_birth: values?.date_of_birth,
-        gender: values?.gender,
-        occupation: values?.occupation,
-        current_location: values?.current_location.length ? values?.current_location : userLocation == null ? '' : userLocation ,
+        // date_of_birth: values?.date_of_birth,
+        // gender: values?.gender,
+        // occupation: values?.occupation,
+        // current_location: values?.current_location.length ? values?.current_location : userLocation == null ? '' : userLocation ,
         // email: values?.email,
          profile: {
           id: user?.profile?.id,
-          ...values.profile,
+          ...values?.profile,
+          home_location: values?.profile.home_location,
+          // occupation: values?.profile?.occupation,
           avatar: values?.profile.avatar,
         },
       },
@@ -122,26 +126,26 @@ const ProfileForm = ({ user }: Props) => {
       }
     );
 
-    updateUser(
-      {
-        id: user?.id,
-        date_of_birth: values?.date_of_birth,
-        gender: values?.gender,
-        occupation: values?.occupation,
-        current_location: values?.current_location?.length ? values?.current_location  : userLocation == null ? '' : userLocation ,
-        // email: values?.email,
-        profile: {
-          id: user?.profile?.id,
-          ...values.profile,
-          avatar: values?.profile.avatar,
-        },
-      },
-      {
-        onSuccess: () => {
-          toast.success(t("User Updated"));
-        },
-      }
-    )
+    // updateUser(
+    //   {
+    //     id: user?.id,
+    //     date_of_birth: values?.date_of_birth,
+    //     gender: values?.gender,
+    //     occupation: values?.occupation,
+    //     current_location: values?.current_location?.length ? values?.current_location  : userLocation == null ? '' : userLocation ,
+    //     // email: values?.email,
+    //     profile: {
+    //       id: user?.profile?.id,
+    //       ...values.profile,
+    //       avatar: values?.profile.avatar,
+    //     },
+    //   },
+    //   {
+    //     onSuccess: () => {
+    //       toast.success(t("User Updated"));
+    //     },
+    //   }
+    // )
  }
 
 
@@ -169,7 +173,7 @@ const ProfileForm = ({ user }: Props) => {
             <Input
               className="flex-1"
               label={t("Email")}
-              value={data?.me?.email}
+              // value={data?.me?.email}
               // {...register("email")}
               variant="outline"
             />
@@ -186,16 +190,15 @@ const ProfileForm = ({ user }: Props) => {
 
             <div className="flex flex-col space-y-2"> 
 
-
                 {/* <span className="text-xs text-gray-600   font-semibold">Date of birth</span> */}
                 <Input
-              className="flex-1"
-              label={t("Date of Birth")}
-              type='Date'
-              {...register("date_of_birth")}
-              variant="outline"
-            />
-                                
+                className="flex-1"
+                label={t("Date of Birth")}
+                type='Date'
+                disabled
+                {...register("profile.date_of_birth")}
+                variant="outline"
+              />
 
               </div>
 
@@ -204,11 +207,14 @@ const ProfileForm = ({ user }: Props) => {
 
                 {/* <span className="text-xs text-gray-600   font-semibold">Date of birth</span> */}
                 <Input
-                className="flex-1"
-                label={t("Current Location")}
-                {...register("current_location")}
-                variant="outline"
+                  className="flex-1"
+                  label={t("Home Town")}
+                  {...register("profile.home_location")}
+                  variant="outline"
                 />
+
+                {/* <label>Home Town</label>
+                <GooglePlacesAutocomplete/> */}
                                 
 
               </div>
@@ -222,7 +228,7 @@ const ProfileForm = ({ user }: Props) => {
                 <Radio
                   id="male"
                   type="radio"
-                  {...register("gender")}
+                  {...register("profile.gender")}
                   value="male"
                   label={t("Male")}
                   className=""
@@ -231,7 +237,7 @@ const ProfileForm = ({ user }: Props) => {
                 <Radio
                   id="female"
                   type="radio"
-                  {...register("gender")}
+                  {...register("profile.gender")}
                   value="female"
                   label={t("Female")}
                   className=""
