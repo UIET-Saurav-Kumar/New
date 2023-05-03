@@ -145,7 +145,7 @@ export const data = [
                 { latitude: getLocation.lat, longitude: getLocation.lng }
               );
     
-              const maxDistance = 5000; // You can change this value to set the maximum distance for filtering users (in meters)
+              const maxDistance = 500; // You can change this value to set the maximum distance for filtering users (in meters)
     
               if (distance > maxDistance) return false;
             } else {
@@ -163,18 +163,14 @@ export const data = [
               if (!locationMatch) return false;
             }
           }
-    
           return true;
         });
         setFilteredUsers(filtered);
       }
     }, [users, currentUserData, likesData, getLocation]);
     
-    
-    
-    
 
-    console.log('likes',users?.users?.data, likesData, filteredUsers)
+    console.log('likes', filteredUsers)
     
     
     const useRecordLikeDislike = () => { 
@@ -224,9 +220,10 @@ export const data = [
               return null;
             })
           ) : (
-            <div className="flex justify-center items-center mx-auto text-center h-full w-full">
-              <Spinner />
-            </div>
+            isAuthorize && 
+              <div className="flex justify-center items-center mx-auto text-center h-full w-full">
+                <Spinner />
+              </div>
           )}
         </div>
       </div>
