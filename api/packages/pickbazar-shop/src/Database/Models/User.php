@@ -29,9 +29,16 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email',"phone_number",'current_location','gender','date_of_birth','occupation', 'password', 'is_active', 'shop_id','invited_by','code','balance'
-    ];
+   // User model
+        protected $fillable = [
+            'name', 'email', "phone_number", 'current_location', 'gender', 'date_of_birth', 'occupation', 'password', 'is_active', 'shop_id', 'invited_by', 'code', 'balance', 'is_online'
+        ];
+
+        protected $casts = [
+            'email_verified_at' => 'datetime',
+            'is_online' => 'boolean',
+        ];
+
 
     /**
      * The attributes that should be hidden for arrays.
@@ -56,9 +63,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+   
 
 
     /**

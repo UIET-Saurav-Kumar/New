@@ -51,9 +51,12 @@ class UserController extends CoreController
      */
     public function index(Request $request)
     {
-      $limit = $request->limit ?   $request->limit : 15;   
-        return $this->repository->paginate($limit);
+        $limit = $request->limit ? $request->limit : 15;
+    
+        // Load the desired relationships with the users
+        return $this->repository->with(['profile', 'address', 'balance', 'managed_shop'])->paginate($limit);
     }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -101,6 +104,28 @@ class UserController extends CoreController
             return $this->repository->updateUser($request, $user);
         }
     }
+
+    public function updateOnlineStatus(Request $request, $user)
+    {
+        $isOnline = $request->input('is_online');
+
+        // Validate the input data, e.g., check if is_online is a boolean
+        $validatedData = $request->validate([
+            'is_online' => 'required|boolean',
+        ]);
+
+        // Update the user's online status
+        $updatedUser = User::where('id', $user)->update(['is_online' => $isOnline]);
+
+        // Return a response indicating success or failure
+        if ($updatedUser) {
+            return response()->json(['message' => 'User online status updated successfully.'], 200);
+        } else {
+            return response()->json(['message' => 'Failed to update user online status.'], 400);
+        }
+    }
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -194,10 +219,6 @@ class UserController extends CoreController
             'is_active'=>0,
             'code'=>$code
         ]);
-
-         
-        
-        
 
         $user->givePermissionTo($permissions);
 
@@ -488,7 +509,7 @@ class UserController extends CoreController
         $user = User::where('email', $request->email)->first();
         
         if (!$user) {
-            return ['message' => 'PICKBAZAR_MESSAGE.NOT_FOUND', 'success' => false];
+            return ['message' => 'Invalid email id', 'success' => false];
         }
         
         // $tokenData = DB::table('password_resets')

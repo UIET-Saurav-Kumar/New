@@ -57,6 +57,9 @@ Route::post('/get-cable-details','PickBazar\Http\Controllers\BillDetailsControll
 Route::post('/get-fast-tag-details','PickBazar\Http\Controllers\BillDetailsController@getBillDetails');
 
 // Route::get('/biller-info','PickBazar\Http\Controllers\BillPaymentController@getBillerInfo');
+// routes/api.php
+
+Route::put('/user-status/{user}', 'PickBazar\Http\Controllers\UserController@updateOnlineStatus');
 
 Route::post('/mobile-recharge','PickBazar\Http\Controllers\OrderController@utilityPayment');
 Route::any('/get-operator','PickBazar\Http\Controllers\OperatorDetailsController@getOperator');

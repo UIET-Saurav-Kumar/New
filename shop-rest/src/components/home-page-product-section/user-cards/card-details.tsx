@@ -8,21 +8,31 @@ export default function CardDetails( {data} ) {
     
   const { data: images, isLoading, isError, refetch } = getImagesByUserId(data?.user?.id);
 
-    console.log('props',data?.user?.date_of_birth);
+    console.log('props',data);
+
     //get age from date
     //date format - Mon Mar 07 2005 00:00:00 GMT+0530 (India Standard Time)
-     
-    const getAge = (dateString:string) => {
-        var today = new Date();
-        var birthDate = new Date(dateString);
-        var age = today.getFullYear() - birthDate.getFullYear();
-        var m = today.getMonth() - birthDate.getMonth();
-        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-            age--;
-        }
-      
-        return age;
-    }
+  
+    const getAge = (dateString: string) => {
+      if (!dateString) {
+        return '';
+      }
+    
+      const [day, month, year] = dateString.split("-");
+      const birthDate = new Date(`${year}-${month}-${day}`);
+    
+      var today = new Date();
+      var age = today.getFullYear() - birthDate.getFullYear();
+      var m = today.getMonth() - birthDate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+    
+      return age;
+    };
+    
+    
+    
 
     const sliderSettings = {
       dots: true,
@@ -41,7 +51,7 @@ export default function CardDetails( {data} ) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
-    console.log('images',images[0])
+    // console.log('images',images[0])
 
 
 
@@ -76,6 +86,7 @@ export default function CardDetails( {data} ) {
           />
         }
       {/* </div> */}
+
       <div className='p-4'> 
           <div className="mt-4">
             {/* <h3 className="text-lg font-semibold">Name</h3> */}
@@ -99,6 +110,7 @@ export default function CardDetails( {data} ) {
             <p className='text-gray-600'>{data?.user?.bio || "N/A"}</p>
           </div>
       </div>
+
     </div>
   );
 }

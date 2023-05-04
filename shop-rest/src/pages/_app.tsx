@@ -42,6 +42,7 @@ import { useRouter } from "next/router";
 import { PaymentProvider } from "@contexts/payment.context";
 import { ChatProvider } from "@contexts/chat-window.context";
 import { UserCardLikesProvider } from "@contexts/user-likes.context";
+import OnlineStatusHandler from "./user/user-status/user-online-status";
 
 const Noop: React.FC = ({ children }) => <>{children}</>;
 
@@ -171,6 +172,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
                         <Layout {...pageProps}>
                           <Seo />
                           <PaymentProvider> 
+                          <OnlineStatusHandler />
                             
                               <Component {...pageProps} />
 

@@ -106,6 +106,7 @@ export const API_ENDPOINTS: Record<string, string> = {
   LIKE_USER:'like-user',
   MESSAGE_STATUS: 'message-status',
 
+  USER_STATUS: 'user-status',
 
   UPI_PAYMENT: 'upi-payment',
   QUIZ: 'quiz',

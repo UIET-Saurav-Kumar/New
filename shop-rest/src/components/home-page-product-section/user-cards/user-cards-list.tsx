@@ -137,37 +137,52 @@ export const data = [
           )
             return false;
     
-          // Filter based on current_location
+          // Filter based on current_location and home_location
           if (user?.current_location && getLocation?.formattedAddress) {
-            if (user.current_location.lat && user.current_location.lng && getLocation.lat && getLocation.lng) {
-              const distance = getDistance(
-                { latitude: user.current_location.lat, longitude: user.current_location.lng },
-                { latitude: getLocation.lat, longitude: getLocation.lng }
-              );
+            const locationFilter = (location) => {
+              if (typeof location === 'string') {
+                const locationWords = location.split(" ");
+                const formattedAddressWords = getLocation?.formattedAddress?.split(" ");
+            
+                const locationMatch = locationWords.some((word) =>
+                  formattedAddressWords.includes(word)
+                );
+                if (!locationMatch) return false;
+              } else if (location.lat && location.lng && getLocation.lat && getLocation.lng) {
+                const distance = getDistance(
+                  { latitude: location.lat, longitude: location.lng },
+                  { latitude: getLocation.lat, longitude: getLocation.lng }
+                );
+            
+                const maxDistance = 5000; // You can change this value to set the maximum distance for filtering users (in meters)
+            
+                if (distance > maxDistance) return false;
+              }
+              return true;
+            };
     
-              const maxDistance = 500; // You can change this value to set the maximum distance for filtering users (in meters)
+            const currentLocationMatch = locationFilter(user.current_location.formattedAddress || user.current_location);
+            const homeLocationMatch = user.profile?.home_location ? locationFilter(user.profile.home_location) : false;
     
-              if (distance > maxDistance) return false;
-            } else {
-              const userLocationWords = typeof user.current_location === 'string'
-                ? user.current_location.split(" ")
-                : (user.current_location.formattedAddress
-                ? user.current_location.formattedAddress.split(" ")
-                : []);
-              const formattedAddressWords = getLocation?.formattedAddress?.split(" ");
-    
-              const locationMatch = userLocationWords.some((word) =>
-                formattedAddressWords.includes(word)
-              );
-    
-              if (!locationMatch) return false;
-            }
+            if (!currentLocationMatch && !homeLocationMatch) return false;
           }
           return true;
         });
-        setFilteredUsers(filtered);
+    
+        // Sort the filtered users by giving priority to online users and users with current_location or home_location
+        const sortedFilteredUsers = filtered.sort((a, b) => {
+          if (a.is_online && !b.is_online) return -1;
+          if (!a.is_online && b.is_online) return 1;
+          if ((a.current_location || a.profile?.home_location) && !(b.current_location || b.profile?.home_location)) return -1;
+          if (!(a.current_location || a.profile?.home_location) && (b.current_location || b.profile?.home_location)) return 1;
+          return 0;
+        });
+    
+        setFilteredUsers(sortedFilteredUsers);
       }
     }, [users, currentUserData, likesData, getLocation]);
+    
+
     
 
     console.log('likes', filteredUsers)
@@ -196,7 +211,7 @@ export const data = [
         )}
         <div className="transition-all duration-500 grid grid-cols-3 lg:grid-cols-6 gap-2 lg:gap-6">
           {filteredUsers && filteredUsers?.length > 0 ? (
-            filteredUsers.slice(0, 20).map((user: any) => {
+            filteredUsers?.slice(0, 20).map((user: any) => {
               const card: LikedCard = { user_id: user.id, liked_by: myId };
               if (
                 !likedCards.some(
@@ -231,14 +246,16 @@ export const data = [
     }
 
   const Card = ({ user, myId, handleLike, useRecordLikeDislike, setIsChatOpen, setSelectedUser }: any) => {
+    
     const { mutate: recordLikeDislike } = useRecordLikeDislike();
     const [isLiked, setIsLiked] = useState(false);
     const { data: currentUserData } = useCustomerQuery();
 
     const { data: images, isLoading, isError, refetch } = getImagesByUserId(user?.id);
 
-
     const { openModal } = useModalAction();
+
+    console.log('userprofile',user)
 
     function openDetails(user:any) {
       return  openModal('CARD_DETAILS',{
@@ -246,14 +263,16 @@ export const data = [
       }) 
     }
 
-    console.log('images',images)
-    
+    console.log('images',images);
   
     const handleHeartClick = () => {
+
       setIsLiked((prevIsLiked) => !prevIsLiked);
   
       if (!isLiked) {
+
         const newChatId = uuidv4();
+
         const params = {
           chat_id: newChatId,
           user_id: user.id,
@@ -275,6 +294,7 @@ export const data = [
         setTimeout(() => {
           handleLike(card);
         }, 300);
+
       }
     };
     
@@ -291,25 +311,39 @@ export const data = [
          }}
         >
       
-        {images?.length ?
+        { 
+          images?.length ?
                
-              <img onClick={()=>openDetails(user)}
-          src={images[0]?.image_data[0].original}
-          alt={user?.name}
-          className="   w-60 h-60 object-cover rounded-lg"
-        /> : 
-        <img onClick={()=>openDetails(user)}
-          src={`https://source.unsplash.com/featured/?${user.gender}/${user.name}`}
-          alt={user?.name}
-          className="   w-60 h-60 object-cover rounded-lg"
-        />
+          <img onClick={()=>openDetails(user)}
+            src={images[0]?.image_data[0].original}
+            alt={user?.name}
+            className="w-60 h-60 object-cover rounded-lg"
+          /> : 
+          <img onClick={()=>openDetails(user)}
+            src={`https://source.unsplash.com/featured/?${user.gender}/${user.name}`}
+            alt={user?.name}
+            className="w-60 h-60 object-cover rounded-lg"
+          />
         }
 
         <div className="flex flex-col items-start justify-between mt-2">
-          <h2 className="text-sm  lg:text-lg font-medium">{user?.name}</h2>
+          <h2 className="text-sm lg:text-lg font-medium">{user?.name}</h2>
           <h2 className="text-xs text-gray-500 lg:text-sm font-light">
-            {user.current_location == null ? '' : user?.current_location.includes('undefined')   ? ' ' : user?.current_location}
+          {
+            user?.current_location == null
+              ? ''
+              : typeof user.current_location === 'string' && user.current_location.includes('undefined')
+              ? ' '
+              : (user?.current_location.formattedAddress || user?.current_location)
+          }
+
           </h2>
+          {user?.isOnline && 
+            <div className='flex items-center space-x-1'>
+              <span className='h-2 w-2  bg-green-500 rounded-full'></span>
+              <span className='text-green-600'>Online</span>
+            </div>
+          }
         </div>
  
         <div className="flex items-center justify-between mt-2">

@@ -68,7 +68,7 @@ export default class CustomDocument extends Document {
               /> 
 
             {/* Microsoft clarity */}
-           <script
+           {/* <script
             dangerouslySetInnerHTML={{
               __html: `(function(c,l,a,r,i,t,y){
                     c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -76,7 +76,7 @@ export default class CustomDocument extends Document {
                     y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
                 })(window, document, "clarity", "script", "daka9pmxye");`,
               }}
-          />
+          /> */}
             
 
           <meta name="facebook-domain-verification" content="8mvkzpangtng356xvg4hqubj4mbuyq" />

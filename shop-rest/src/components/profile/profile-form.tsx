@@ -80,7 +80,7 @@ const ProfileForm = ({ user }: Props) => {
             // 'email',
             // 'date_of_birth',
             // 'occupation',
-            // 'gender',
+            'gender',
             // 'current_location',
             'profile.date_of_birth',
             'profile.gender',

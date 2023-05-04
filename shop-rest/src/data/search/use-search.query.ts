@@ -1,5 +1,3 @@
-
-
 import { Search } from "@ts-types/custom.types";
 import { API_ENDPOINTS } from "@utils/api/endpoints";
 import http from "@utils/api/http";

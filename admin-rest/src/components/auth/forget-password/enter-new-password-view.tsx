@@ -31,7 +31,7 @@ const EnterNewPasswordView = ({ onSubmit, loading }: Props) => {
       />
 
       <Button className="w-full h-11" loading={loading} disabled={loading}>
-        {t("form:text-reset-password")}
+        {t("Reset Password")}
       </Button>
     </form>
   );
