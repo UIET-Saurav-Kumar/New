@@ -48,14 +48,18 @@ class UserController extends CoreController
      * Display a listing of the resource.
      *
      * @return Response
-     */
+     */ 
     public function index(Request $request)
     {
         $limit = $request->limit ? $request->limit : 15;
-    
-        // Load the desired relationships with the users
-        return $this->repository->with(['profile', 'address', 'balance', 'managed_shop'])->paginate($limit);
+        $users = $this->repository->paginate($limit);
+
+        // Debugging: Log the fetched users data
+        \Log::info('Fetched users:', $users->toArray());
+
+        return $users;
     }
+
     
 
     /**
@@ -78,12 +82,15 @@ class UserController extends CoreController
     public function show($id)
     {
         try {
-            $user = $this->repository->with(['profile', 'address', 'shop','balance', 'managed_shop'])->findOrFail($id);
+            $user = $this->repository->with(['profile', 'address', 'shop', 'balance', 'managed_shop'])->findOrFail($id);
+            // Add this line to log the fetched user
+            Log::info('Fetched user: ' . json_encode($user));
             return $user;
         } catch (Exception $e) {
             throw new PickbazarException('PICKBAZAR_ERROR.NOT_FOUND');
         }
     }
+
 
 
     /**
@@ -215,7 +222,7 @@ class UserController extends CoreController
             'date_of_birth'=> $request->date_of_birth,
             'occupation'=> $request->occupation,
             // 'role'=> $request->permissions[0],
-            'current_location'=>$current_location,
+            'current_location' => $request->current_location ? json_encode($request->current_location) : null,
             'is_active'=>0,
             'code'=>$code
         ]);
@@ -298,8 +305,8 @@ class UserController extends CoreController
             // 'date_of_birth'=> $request->date_of_birth,
             // 'occupation'=> $request->occupation,
              'role'=> 'user',
-            'current_location'=>$request->current_location,
-            // 'is_active'=>0,
+             'current_location' => $request->current_location ? json_encode($request->current_location) : null,
+            'is_active'=>0,
             'code'=>$code
         ]);
     

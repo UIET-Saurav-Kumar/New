@@ -95,7 +95,13 @@ export default function CardDetails( {data} ) {
           </div>
           <div className="mt-4">
             <h3 className="text-lg text-gray-900 font-semibold">Lives In</h3>
-            <p className='text-gray-600'>{data?.user?.current_location == null ? 'N/A' : data?.user?.current_location.includes('undefined')   ? 'N/A' : data?.user?.current_location || "N/A"}</p>
+            <p className='text-gray-600'>
+              {
+                data?.user?.current_location == null ? 'N/A' : 
+                typeof data?.user?.current_location === 'object' ? data?.user?.current_location?.formattedAddress || 'N/A' : 
+                typeof data?.user?.current_location === 'string' && data?.user?.current_location.includes('undefined') ? 'N/A' : data?.user?.current_location || 'N/A'
+              }
+            </p>
           </div>
           <div className="mt-4">
             <h3 className="text-lg text-gray-900 font-semibold">Interests</h3>

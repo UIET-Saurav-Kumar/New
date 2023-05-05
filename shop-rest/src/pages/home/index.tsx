@@ -50,7 +50,9 @@ import Spinner from "@components/ui/loaders/spinner/spinner";
 import SearchHistory from "@components/home-page-product-section/search-history";
 import { useCreateLogMutation } from "@data/log/use-create-log.mutation";
 import UsersCards from "@components/home-page-product-section/user-cards/user-cards-list";
-
+import { useCustomerQuery } from "@data/customer/use-customer.query";
+import { useUpdateCustomerMutation } from "@data/customer/use-update-customer.mutation";
+ 
 
 const ProductFeedLoader = dynamic(
   () => import("@components/ui/loaders/product-feed-loader"),
@@ -139,8 +141,16 @@ export default function home() {
     isLoading: is_loading,
   } = useCreateLogMutation();
 
+  const { mutate: updateProfile } =
+  useUpdateCustomerMutation();
+
 
   const [scrollPosition, setScrollPosition] = useState(0);
+  const {data:userData} = useCustomerQuery();
+  
+  const userId =  userData?.me?.id;
+
+  console.log('index ', userId);
 
   const handleScroll = () => {
     const position = window.pageYOffset;
@@ -148,23 +158,51 @@ export default function home() {
   };
 
   useEffect(() => {
-
-    createLog({
-      location:getLocation?.formattedAddress,
-      product:'visited',
-      type:'search_item'
-    }, {
-      onSuccess: (data: any) => {
-        // // console.log(data)
-      },
-    });
+    const updateProfileAndLog = async () => {
+      try {
+        await updateProfile(
+          {
+            id: userData?.me?.id,
+            current_location: getLocation,
+          },
+          {
+            onSuccess: (data) => {
+              console.log("Location updated Successfully!! ");
+            },
+            onError: (error) => {
+              console.log("Location updateerror:");
+              // You can display an error message to the user here.
+            },
+          }
+        );
+  
+        createLog(
+          {
+            location: getLocation?.formattedAddress,
+            product: "visited",
+            type: "search_item",
+          },
+          {
+            onSuccess: (data: any) => {
+              // // console.log(data)
+            },
+          }
+        );
+      } catch (error) {
+        console.log("Error:", error);
+      }
+    };
+  
+    updateProfileAndLog();
+  
     window.scrollTo(0, 0);
     window.addEventListener("scroll", handleScroll);
-
+  
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [userData]);
+  
 
 
 const {

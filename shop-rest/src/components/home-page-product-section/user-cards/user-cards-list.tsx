@@ -24,6 +24,8 @@ import { useLocation } from '@contexts/location/location.context';
 import { getDistance } from 'geolib';
 import CompassLoader from '@components/ui/loader/compass-loader';
 import Spinner from '@components/ui/loaders/spinner/spinner';
+import ProductCardLoader from '@components/ui/loaders/product-card-loader';
+import ProductFeedLoader from '@components/ui/loaders/product-feed-loader';
 
 
 export const data = [
@@ -86,7 +88,8 @@ export const data = [
     const [loader, setLoader] = useState(false);
   
 
-    const handleLike = useCallback(async (card: LikedCard) => {      if (likedCards.some((likedCard) => likedCard.user_id === card.user_id && likedCard.liked_by === card.liked_by)) {
+    const handleLike = useCallback(async (card: LikedCard) => {     
+       if (likedCards.some((likedCard) => likedCard.user_id === card.user_id && likedCard.liked_by === card.liked_by)) {
          removeLikedCard(card);
          setFilteredUsers((prev) => prev.filter((user) => user.id !== card.user_id ));
       } else {
@@ -140,7 +143,7 @@ export const data = [
           // Filter based on current_location and home_location
           if (user?.current_location && getLocation?.formattedAddress) {
             const locationFilter = (location) => {
-              if (typeof location === 'string') {
+              if (typeof location === "string") {
                 const locationWords = location.split(" ");
                 const formattedAddressWords = getLocation?.formattedAddress?.split(" ");
             
@@ -148,7 +151,12 @@ export const data = [
                   formattedAddressWords.includes(word)
                 );
                 if (!locationMatch) return false;
-              } else if (location.lat && location.lng && getLocation.lat && getLocation.lng) {
+              } else if (
+                location?.lat &&
+                location?.lng &&
+                getLocation?.lat &&
+                getLocation?.lng
+              ) {
                 const distance = getDistance(
                   { latitude: location.lat, longitude: location.lng },
                   { latitude: getLocation.lat, longitude: getLocation.lng }
@@ -157,9 +165,19 @@ export const data = [
                 const maxDistance = 5000; // You can change this value to set the maximum distance for filtering users (in meters)
             
                 if (distance > maxDistance) return false;
+              } else if (location?.formattedAddress) {
+                const locationWords = location.formattedAddress.split(" ");
+                const formattedAddressWords = getLocation?.formattedAddress?.split(" ");
+            
+                const locationMatch = locationWords.some((word) =>
+                  formattedAddressWords.includes(word)
+                );
+                if (!locationMatch) return false;
               }
               return true;
             };
+            
+            
     
             const currentLocationMatch = locationFilter(user.current_location.formattedAddress || user.current_location);
             const homeLocationMatch = user.profile?.home_location ? locationFilter(user.profile.home_location) : false;
@@ -168,6 +186,7 @@ export const data = [
           }
           return true;
         });
+
     
         // Sort the filtered users by giving priority to online users and users with current_location or home_location
         const sortedFilteredUsers = filtered.sort((a, b) => {
@@ -178,14 +197,12 @@ export const data = [
           return 0;
         });
     
-        setFilteredUsers(sortedFilteredUsers);
+        setFilteredUsers([...sortedFilteredUsers]);
       }
     }, [users, currentUserData, likesData, getLocation]);
     
 
-    
-
-    console.log('likes', filteredUsers)
+    console.log('likes', users?.users?.data.slice(0,20));
     
     
     const useRecordLikeDislike = () => { 
@@ -237,7 +254,7 @@ export const data = [
           ) : (
             isAuthorize && 
               <div className="flex justify-center items-center mx-auto text-center h-full w-full">
-                <Spinner />
+                <ProductFeedLoader limit={10} uniqueKey={user?.id}  />
               </div>
           )}
         </div>
@@ -318,12 +335,13 @@ export const data = [
             src={images[0]?.image_data[0].original}
             alt={user?.name}
             className="w-60 h-60 object-cover rounded-lg"
-          /> : 
-          <img onClick={()=>openDetails(user)}
-            src={`https://source.unsplash.com/featured/?${user.gender}/${user.name}`}
-            alt={user?.name}
-            className="w-60 h-60 object-cover rounded-lg"
-          />
+          /> 
+          : 
+           <img onClick={()=>openDetails(user)}
+             src={`https://source.unsplash.com/featured/?${user.gender}/${user.name}`}
+             alt={user?.name}
+             className="w-60 h-60 object-cover rounded-lg"
+           />
         }
 
         <div className="flex flex-col items-start justify-between mt-2">
@@ -332,9 +350,8 @@ export const data = [
           {
             user?.current_location == null
               ? ''
-              : typeof user.current_location === 'string' && user.current_location.includes('undefined')
-              ? ' '
-              : (user?.current_location.formattedAddress || user?.current_location)
+              : typeof user.current_location === 'string' ? user.current_location : user?.current_location?.formattedAddress
+              
           }
 
           </h2>
@@ -344,7 +361,7 @@ export const data = [
               <span className='text-green-600'>Online</span>
             </div>
           }
-        </div>
+        </div>    
  
         <div className="flex items-center justify-between mt-2">
           <button className="flex items-center justify-center w-12 h-12 p-2 rounded-full text-white">

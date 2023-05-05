@@ -19,7 +19,7 @@ class User extends Base<CreateUser, UpdateUser> {
 
   login = async (url: string, variables: LoginInput) => {
     return this.http<LoginInput>(url, "post", variables);
-  };
+  };  
 
   logout = async (url: string) => {
     return this.http(url, "post");

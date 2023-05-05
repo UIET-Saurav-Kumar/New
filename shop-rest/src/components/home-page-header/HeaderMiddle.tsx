@@ -168,10 +168,10 @@ const cities = //create object of major  indian cities with lat, lng and city na
             lng: 83.22
         }
     ]
+  
 
 
 export default function HeaderMiddle({searchbar}:any) {
-
 
     const { isAuthorize, displayHeaderSearch, displayMobileSearch } = useUI();
 
@@ -203,31 +203,28 @@ export default function HeaderMiddle({searchbar}:any) {
     const { mutate: updateProfile } =
     useUpdateCustomerMutation();
 
-    console.log('profile id', userData)
-
+    console.log('profile id', userData);
 
     const handleLocation = async  (newLocation:string) => {
  
         setLocation(!location);
-        await updateProfile(
+
+        await updateProfile(    
             { 
               id: userData?.me?.id,
-              current_location: {
-                lat: newLocation?.lat,
-                lng: newLocation?.lng,
-                formattedAddress: newLocation?.formattedAddress,
-              },
+              current_location: newLocation,
             },
             {
               onSuccess: (data) => {
-                console.log("Location updated in ", newLocation?.formattedAddress);
+                console.log("Location updated  ");
               },
               onError: (error) => {
-                console.log("Location updated error:");
+                console.log("Location update error:");
                 // You can display an error message to the user here.
               },
             }
-          );
+        );
+        
     }
 
     const { openModal } = useModalAction();

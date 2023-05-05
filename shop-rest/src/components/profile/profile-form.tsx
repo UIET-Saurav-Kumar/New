@@ -22,6 +22,8 @@ import http from "@utils/api/http";
 import url from "@utils/api/server_url";
 import { useMutation } from "react-query";
 import GooglePlacesAutocomplete from "@components/form/google-places-autocomplete";
+import { getLocation } from "@contexts/location/location.utils";
+import { useLocation } from "react-use";
 
 
 
@@ -78,11 +80,11 @@ const ProfileForm = ({ user }: Props) => {
           pick(user, [
             "name",
             // 'email',
-            // 'date_of_birth',
-            // 'occupation',
+            'date_of_birth',
+            'occupation',
             'gender',
-            // 'current_location',
-            'profile.date_of_birth',
+            'current_location',
+            'date_of_birth',
             'profile.gender',
             'profile.occupation',
             "profile.bio",
@@ -94,6 +96,8 @@ const ProfileForm = ({ user }: Props) => {
     }
   );
 
+  const {getLocation} =useLocation();
+
   const { mutate: updateProfile, isLoading: loading } =
     useUpdateCustomerMutation();
 
@@ -101,21 +105,25 @@ const ProfileForm = ({ user }: Props) => {
     useUpdateUserMutation();
 
   function onSubmit(values: any) {
+
+    console.log('profile form',values);
+
     updateProfile(
       {
-        
         id: user?.id,
         name: values?.name,
-        // date_of_birth: values?.date_of_birth,
-        // gender: values?.gender,
-        // occupation: values?.occupation,
-        // current_location: values?.current_location.length ? values?.current_location : userLocation == null ? '' : userLocation ,
+        date_of_birth: values?.date_of_birth,
+        gender: values?.gender,
+        occupation: values?.occupation,
+        current_location: getLocation ,
         // email: values?.email,
          profile: {
           id: user?.profile?.id,
           ...values?.profile,
           home_location: values?.profile.home_location,
-          // occupation: values?.profile?.occupation,
+          date_of_birth: values?.profile?.data_of_birth,
+          gender: values?.profile?.gender,
+          occupation: values?.profile?.occupation,
           avatar: values?.profile.avatar,
         },
       },
@@ -124,7 +132,7 @@ const ProfileForm = ({ user }: Props) => {
           toast.success(t("Profile Updated Successfully"));
         },
       }
-    );
+    );  
 
     // updateUser(
     //   {
@@ -132,7 +140,7 @@ const ProfileForm = ({ user }: Props) => {
     //     date_of_birth: values?.date_of_birth,
     //     gender: values?.gender,
     //     occupation: values?.occupation,
-    //     current_location: values?.current_location?.length ? values?.current_location  : userLocation == null ? '' : userLocation ,
+    //     current_location: getLocation,
     //     // email: values?.email,
     //     profile: {
     //       id: user?.profile?.id,
@@ -173,7 +181,7 @@ const ProfileForm = ({ user }: Props) => {
             <Input
               className="flex-1"
               label={t("Email")}
-              // value={data?.me?.email}
+              value={data?.me?.email}
               // {...register("email")}
               variant="outline"
             />
@@ -195,12 +203,12 @@ const ProfileForm = ({ user }: Props) => {
                 className="flex-1"
                 label={t("Date of Birth")}
                 type='Date'
-                disabled
+                // disabled
                 {...register("profile.date_of_birth")}
                 variant="outline"
-              />
+               />
 
-              </div>
+            </div>
 
               <div className="flex flex-col space-y-2"> 
 

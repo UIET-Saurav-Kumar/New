@@ -73,7 +73,8 @@ class UserRepository extends BaseRepository
                 'password' => Hash::make($request->password),
                 'phone_number' => $request->phone_number,
                 //user current_location
-                'current_location' => is_string($request->current_location) ? $request->current_location : json_encode($request->current_location),
+                'current_location' => $request->current_location ? json_encode($request->current_location) : null,
+
 
                 'gender'=> $request->gender,
                 'date_of_birth'=> $request->date_of_birth,
@@ -101,6 +102,7 @@ class UserRepository extends BaseRepository
 
     public function updateUser($request, $user)
     {
+        // return $request;
         try {
             if (isset($request['address']) && count($request['address'])) {
                 foreach ($request['address'] as $address) {
@@ -122,7 +124,8 @@ class UserRepository extends BaseRepository
                 }
             }
             $updateData = array_diff_key($request->only($this->dataArray), array_flip(['profile', 'address', 'shop']));
-            $updateData['current_location'] = is_string($request->current_location) ? $request->current_location : json_encode($request->current_location);
+            $updateData['current_location'] = $request->current_location ? json_encode($request->current_location) : null;
+
     
             $user->update($updateData);
             $user->profile = $user->profile;

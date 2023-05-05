@@ -81,7 +81,8 @@ const OtpRegisterForm = (props:any) => {
       return null;
     }
   }, []);
-  
+
+   
   
   useEffect(()=>{
     const getIpLocation = async () => {
@@ -185,13 +186,14 @@ const OtpRegisterForm = (props:any) => {
         password,
         phone_number,
         // invited_by:'',
-        current_location: userLocation,
+        current_location: getLocation,
         // date_of_birth,
         // occupation,
-        // gender,
+        gender :'male',
       },
       {
         onSuccess: (data) => {
+          // alert('user registered')
           query?.utm_source == 'shop_qr' ? 
           // router.push('/shops/'+ query?.campaign)
           router.push('/auth/'+data?.user.id+'?utm_source=shop_qr&utm_campaign='+query?.utm_campaign+'&shop_id='+query?.shop_id)
