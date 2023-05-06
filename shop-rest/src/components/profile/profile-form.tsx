@@ -23,11 +23,11 @@ import url from "@utils/api/server_url";
 import { useMutation } from "react-query";
 import GooglePlacesAutocomplete from "@components/form/google-places-autocomplete";
 import { getLocation } from "@contexts/location/location.utils";
-import { useLocation } from "react-use";
+import { useLocation } from "@contexts/location/location.context";
 
 
 
-interface Props {
+interface Props { 
   user: User;
 }
 
@@ -41,6 +41,7 @@ const ProfileForm = ({ user }: Props) => {
   const [birthDate, setBirthDate] = useState(null);
 
   const[occupation, setOccupation] = useState(null);
+
   const { t } = useTranslation("common");
 
   const {data} = useCustomerQuery();
@@ -106,15 +107,15 @@ const ProfileForm = ({ user }: Props) => {
 
   function onSubmit(values: any) {
 
-    console.log('profile form',values);
+    console.log('profile form',getLocation);
 
     updateProfile(
       {
         id: user?.id,
         name: values?.name,
-        date_of_birth: values?.date_of_birth,
-        gender: values?.gender,
-        occupation: values?.occupation,
+        date_of_birth: values?.profile?.date_of_birth,
+        gender: values?.profile?.gender,
+        occupation: values?.profile?.occupation,
         current_location: getLocation ,
         // email: values?.email,
          profile: {
@@ -128,8 +129,8 @@ const ProfileForm = ({ user }: Props) => {
         },
       },
       {
-        onSuccess: () => {
-          toast.success(t("Profile Updated Successfully"));
+        onSuccess: () => { 
+         toast.success(t("Profile Updated Successfully"));
         },
       }
     );  
@@ -154,8 +155,7 @@ const ProfileForm = ({ user }: Props) => {
     //     },
     //   }
     // )
- }
-
+  }
 
 
    const profilePercentage = (user && user.profile)
@@ -196,19 +196,38 @@ const ProfileForm = ({ user }: Props) => {
 
           <div className="space-y-4  col-span-1 sm:col-span-2">
 
-            <div className="flex flex-col space-y-2"> 
-
-                {/* <span className="text-xs text-gray-600   font-semibold">Date of birth</span> */}
-                <Input
-                className="flex-1"
-                label={t("Date of Birth")}
-                type='Date'
-                // disabled
-                {...register("profile.date_of_birth")}
-                variant="outline"
-               />
-
-            </div>
+            {/* <div className="col-span-1 sm:col-span-1">
+        
+        <div className="flex  text-body-dark h-3  font-semibold text-xs leading-none mb-3">
+            <span className="text-gray-700 text-sm font-semibold ">Date of Birth</span>
+              </div>
+          <Controller
+                  control={control}
+                  name="date_of_birth"
+                  render={({ field: { onChange, onBlur, value } }) => (
+                    //@ts-ignore
+             <DatePicker
+                        selected={birthDate}
+                        onChange={(date) => {
+                          setBirthDate((date));
+                          setValue("date_of_birth", date);
+                        }}
+                        dateFormat="dd-MM-yyyy"
+                        className="text-sm h-12 w-full px-4 border border-border-base rounded focus:border-accent"
+                        showYearDropdown
+                        showMonthDropdown
+                        dropdownMode="select"
+                        peekNextMonth
+                        showWeekNumbers
+                        minDate={new Date(1970,1,1)}
+                        maxDate={new Date(2005,12,31)}
+                        placeholderText={t(" DOB (min 18 years of age)")}
+                        required
+                        // className="w-full"
+                  />          
+                  )}
+            />
+        </div> */}
 
               <div className="flex flex-col space-y-2"> 
 
@@ -263,7 +282,7 @@ const ProfileForm = ({ user }: Props) => {
                     // value={occupation}
                     defaultValue="Search by"
                     // setValue={setValue}
-                    {...register("occupation")}
+                    {...register("profile.occupation")}
                   >
                     <option value='' disabled selected >Select your option</option>
                     <option value="Student">{t("Student")}</option>

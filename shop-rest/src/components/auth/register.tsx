@@ -302,32 +302,38 @@ function handleClick(){
         
 
         {/* Date of birth */}
-            <div className="col-span-1 sm:col-span-1">
+        <div className="col-span-1 sm:col-span-1">
         
-                <div className="flex  text-gray-700 h-3  font-semibold text-sm lg:text-md leading-none mb-3">
-                  {/* <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-yellow-600 to-blue-600">
-                  🎉 Date of Birth  </span>  🥳 */}
-                  <span className="">
-                  🎉 Date of Birth  </span>  🥳
-                </div>
-                  <Input
-                    type='date'
-                    variant='outline'
-                    placeholder='Enter your date of birth'
-
-                    {...register('date_of_birth', {
-                        required: 'Date of birth is required',
-                        minLength: {
-                            value: 10,
-                            message: 'Date of birth should be at least 10 characters',
-                        },
-                        maxLength: {
-                            value: 10,
-                            message: 'Date of birth should not exceed 10 characters',
-                        },
-                    })}
-                    />
-            </div>
+        <div className="flex  text-body-dark h-3  font-semibold text-xs leading-none mb-3">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-yellow-600 to-blue-600">
+              🎉Your Birthday present is awaiting  </span> 🥳</div>
+          <Controller
+                  control={control}
+                  name="date_of_birth"
+                  render={({ field: { onChange, onBlur, value } }) => (
+                    //@ts-ignore
+             <DatePicker
+                        selected={birthDate}
+                        onChange={(date) => {
+                          setBirthDate((date));
+                          setValue("date_of_birth", date);
+                        }}
+                        dateFormat="dd-MM-yyyy"
+                        className="text-sm h-12 w-full px-4 border border-border-base rounded focus:border-accent"
+                        showYearDropdown
+                        showMonthDropdown
+                        dropdownMode="select"
+                        peekNextMonth
+                        showWeekNumbers
+                        minDate={new Date(1970,1,1)}
+                        maxDate={new Date(2005,12,31)}
+                        placeholderText={t(" DOB (min 18 years of age)")}
+                        required
+                        // className="w-full"
+                  />          
+                  )}
+            />
+        </div>
 
 
 
@@ -392,7 +398,7 @@ function handleClick(){
         
         {/* current location */}
        {/* <div className="w-full flex  "> */}
-          <Input
+          {/* <Input
             defaultValue={ userLocation}
             label={"Current Location"} 
             {...register("current_location")} 
@@ -400,7 +406,7 @@ function handleClick(){
             variant="rounded" 
             placeholder="Enter your city"
             className="col-span-2 text-xs hidden " 
-            error={t(errors.current_location?.message!)} />
+            error={t(errors.current_location?.message!)} /> */}
           {/* {getLocation?.formattedAddress} */}
           {/* <div className="w-0 mt-2">  */}
          {/* <GetCurrentLocation onChange = {changeLocation} />   */}

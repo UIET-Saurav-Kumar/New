@@ -26,6 +26,7 @@ import CompassLoader from '@components/ui/loader/compass-loader';
 import Spinner from '@components/ui/loaders/spinner/spinner';
 import ProductCardLoader from '@components/ui/loaders/product-card-loader';
 import ProductFeedLoader from '@components/ui/loaders/product-feed-loader';
+import { filter } from 'lodash';
 
 
 export const data = [
@@ -126,32 +127,33 @@ export const data = [
       if (users && currentUserData && likesData) {
         const filtered = users?.users?.data?.filter((user) => {
           if (user.id === currentUserData?.me?.id) return false;
-          if (!user.gender) return false;
-          if (currentUserData?.me?.gender === "male" && user.gender === "male") return false;
-          if (currentUserData?.me?.gender === "female" && user.gender === "female") return false;
+          // if (!user.gender) return false;
+          // if (currentUserData?.me?.gender === "male" && user.gender === "male") return false;
+          // if (currentUserData?.me?.gender === "female" && user.gender === "female") return false;
     
           // Updated condition for checking if user is liked or likes the current user
-          if (
-            likesData?.some(
-              (like) =>
-                (like.user_id === user.id && like.liked_by === currentUserData?.me?.id) ||
-                (like.user_id === currentUserData?.me?.id && like.liked_by === user.id)
-            )
-          )
-            return false;
+          // if (
+          //   likesData?.some(
+          //     (like) =>
+          //       (like.user_id === user.id && like.liked_by === currentUserData?.me?.id) ||
+          //       (like.user_id === currentUserData?.me?.id && like.liked_by === user.id)
+          //   )
+          // )
+          //   return false;
     
           // Filter based on current_location and home_location
           if (user?.current_location && getLocation?.formattedAddress) {
             const locationFilter = (location) => {
-              if (typeof location === "string") {
-                const locationWords = location.split(" ");
-                const formattedAddressWords = getLocation?.formattedAddress?.split(" ");
-            
-                const locationMatch = locationWords.some((word) =>
-                  formattedAddressWords.includes(word)
-                );
-                if (!locationMatch) return false;
-              } else if (
+              // if (typeof location === "string") {
+              //   const locationWords = location.split(" ");
+              //   const formattedAddressWords = getLocation?.formattedAddress?.split(" ");
+              //
+              //   const locationMatch = locationWords.some((word) =>
+              //     formattedAddressWords.includes(word)
+              //   );
+              //   if (!locationMatch) return false;
+              // } else
+              if (
                 location?.lat &&
                 location?.lng &&
                 getLocation?.lat &&
@@ -161,48 +163,82 @@ export const data = [
                   { latitude: location.lat, longitude: location.lng },
                   { latitude: getLocation.lat, longitude: getLocation.lng }
                 );
-            
+    
                 const maxDistance = 5000; // You can change this value to set the maximum distance for filtering users (in meters)
-            
+    
                 if (distance > maxDistance) return false;
-              } else if (location?.formattedAddress) {
-                const locationWords = location.formattedAddress.split(" ");
-                const formattedAddressWords = getLocation?.formattedAddress?.split(" ");
-            
-                const locationMatch = locationWords.some((word) =>
-                  formattedAddressWords.includes(word)
-                );
-                if (!locationMatch) return false;
               }
+              // else if (location?.formattedAddress) {
+              //   const locationWords = location.formattedAddress.split(" ");
+              //   const formattedAddressWords = getLocation?.formattedAddress?.split(" ");
+              //
+              //   const locationMatch = locationWords.some((word) =>
+              //     formattedAddressWords.includes(word)
+              //   );
+              //   if (!locationMatch) return false;
+              // }
               return true;
             };
-            
-            
     
-            const currentLocationMatch = locationFilter(user.current_location.formattedAddress || user.current_location);
-            const homeLocationMatch = user.profile?.home_location ? locationFilter(user.profile.home_location) : false;
+            const currentLocationMatch = locationFilter(user.current_location);
+            const homeLocationMatch = user.profile?.home_location
+              ? locationFilter(user.profile.home_location)
+              : false;
     
             if (!currentLocationMatch && !homeLocationMatch) return false;
           }
           return true;
         });
 
+     
+        const distanceInMeters = (a, b) => {
+          return getDistance(
+            { latitude: a.lat, longitude: a.lng },
+            { latitude: b.lat, longitude: b.lng }
+          );
+        };
     
-        // Sort the filtered users by giving priority to online users and users with current_location or home_location
         const sortedFilteredUsers = filtered.sort((a, b) => {
           if (a.is_online && !b.is_online) return -1;
           if (!a.is_online && b.is_online) return 1;
-          if ((a.current_location || a.profile?.home_location) && !(b.current_location || b.profile?.home_location)) return -1;
-          if (!(a.current_location || a.profile?.home_location) && (b.current_location || b.profile?.home_location)) return 1;
+          
+          if (!getLocation?.lat || !getLocation?.lng) return 0;
+    
+          const aLocation = a.current_location || a.profile?.home_location;
+          const bLocation = b.current_location || b.profile?.home_location;
+    
+          if (!aLocation && !bLocation) return 0;
+          if (!aLocation && bLocation) return 1;
+          if (aLocation && !bLocation) return -1;
+    
+          if (aLocation?.lat && aLocation?.lng && bLocation?.lat && bLocation?.lng) {
+            const aDistance = distanceInMeters(aLocation, getLocation);
+            const bDistance = distanceInMeters(bLocation, getLocation);
+    
+            return aDistance - bDistance;
+          }
           return 0;
         });
+
+        const filteredUsersWithDistance = sortedFilteredUsers.map((user) => {
+          const userLocation = user.current_location || user.profile?.home_location;
+          let distance = null;
     
-        setFilteredUsers([...sortedFilteredUsers]);
+          if (getLocation?.lat && getLocation?.lng && userLocation?.lat && userLocation?.lng) {
+            distance = distanceInMeters(userLocation, getLocation);
+          }
+    
+          return { ...user, distance };
+        });
+    
+    
+        setFilteredUsers([...filteredUsersWithDistance]);
       }
     }, [users, currentUserData, likesData, getLocation]);
     
+    
 
-    console.log('likes', users?.users?.data.slice(0,20));
+    console.log('likes', getLocation,  filteredUsers);
     
     
     const useRecordLikeDislike = () => { 

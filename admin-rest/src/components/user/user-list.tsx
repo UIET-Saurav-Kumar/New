@@ -33,10 +33,32 @@ const CustomerList = ({ customers, onPagination }: IProps) => {
     search:"",
 });
 
+function calculateAge(dateString) {
+  if (!dateString) {
+    return null;
+  }
+
+  const dateParts = dateString.split("-");
+  const birthDate = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
+
+  const currentDate = new Date();
+  let age = currentDate.getFullYear() - birthDate.getFullYear();
+  const monthDifference = currentDate.getMonth() - birthDate.getMonth();
+
+  if (monthDifference < 0 || (monthDifference === 0 && currentDate.getDate() < birthDate.getDate())) {
+    age--;
+  }
+
+  return age + 'yrs';
+}
+
+console.log('age', calculateAge('04-05-1995')); //
+
+
 
 const {data:referralNetwork} = useReferralNetworkQuery();
   // const { data:customerData } = useCustomerQuery();
-  console.log(' customer data',referralNetwork);
+  console.log('age',calculateAge('04-05-1995'));
   
   
   const columns = [
@@ -98,7 +120,7 @@ const {data:referralNetwork} = useReferralNetworkQuery();
       key: "date_of_birth",
       align: alignLeft,
       render: (date_of_birth: any) => {
-        return date_of_birth && dayjs(date_of_birth).format("DD/MM/YYYY");
+        return date_of_birth ;
       }
     },
 
@@ -109,7 +131,7 @@ const {data:referralNetwork} = useReferralNetworkQuery();
       key: "date_of_birth",
       align: alignLeft,
       render: (date_of_birth: any) => {
-        return date_of_birth && dayjs().diff(date_of_birth, "year");
+        return calculateAge(date_of_birth)  
       }
     
     },
