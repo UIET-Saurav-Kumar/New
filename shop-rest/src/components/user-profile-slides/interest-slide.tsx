@@ -5,8 +5,30 @@ import React from 'react';
 import { toast } from "react-toastify";
 
 
-
-'user_id',
+const interests = [
+  'Anime',
+  'Pop Culture',
+  'Movies',
+  'Shows',
+  'K pop',
+  'K Drama',
+  'Cricket',
+  'Bollywood',
+  'Technology',
+  'Food',
+  'Travel',
+  'Politics',
+  'Health',
+  'Spirituality',
+  'Gaming',
+  'Art',
+  'Music',
+  'Fashion',
+  'Education',
+  'Startups',
+  'Environment',
+  'Fitness',
+];
 
 const gradientColors = [
   'bg-gradient-to-r from-purple-700 via-accent to-red-700',
