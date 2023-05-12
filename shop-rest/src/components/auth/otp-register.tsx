@@ -189,7 +189,7 @@ const OtpRegisterForm = (props:any) => {
       },
       {
         onSuccess: (data) => {
-         data && router.push('/auth/'+data?.user.id);
+         router.push('/auth/'+data?.user.id);
           // alert('user registered')
           // query?.utm_source == 'shop_qr' ? 
           // router.push('/auth/'+data?.user.id+'?utm_source=shop_qr&utm_campaign='+query?.utm_campaign+'&shop_id='+query?.shop_id)
