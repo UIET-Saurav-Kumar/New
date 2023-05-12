@@ -193,11 +193,12 @@ function handleClick(){
       },
       {
         onSuccess: (data) => {
-          query?.utm_source == 'shop_qr' ? 
+           router.push('/auth/'+data?.user.id);
+          // query?.utm_source == 'shop_qr' ? 
           // router.push('/shops/'+ query?.campaign)
-          router.push('/auth/'+data?.user.id+'?utm_source=shop_qr&utm_campaign='+query?.utm_campaign+'&shop_id='+query?.shop_id)
-          : url === '/salon-near-me' ? router.push('/auth/'+data?.user.id+'?utm_source=salon-near-me') 
-          : router.push('/auth/'+data?.user.id);
+          // router.push('/auth/'+data?.user.id+'?utm_source=shop_qr&utm_campaign='+query?.utm_campaign+'&shop_id='+query?.shop_id)
+          // : url === '/salon-near-me' ? router.push('/auth/'+data?.user.id+'?utm_source=salon-near-me') 
+          // : router.push('/auth/'+data?.user.id);
           closeModal();
           return ;
           // if (data?.token && data?.permissions?.length) {

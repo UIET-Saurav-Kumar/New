@@ -44,6 +44,7 @@ use PickBazar\Http\Controllers\LikesController;
 use PickBazar\Http\Controllers\ChatController;
 use PickBazar\Http\Controllers\MessagesController;
 use PickBazar\Http\Controllers\UserImagesController;
+use PickBazar\Http\Controllers\UserProfileController;
 
 
  
@@ -83,7 +84,7 @@ Route::get('/all-likes', 'PickBazar\Http\Controllers\LikesController@getAllLikes
 Route::put('/message-status', 'PickBazar\Http\Controllers\LikesController@update');
 
 
-Route::middleware(['auth:sanctum'])->group(function () {
+Route::group(['middleware' => ['auth:sanctum']], function ()  {
     Route::get('/notifications', 'PickBazar\Http\Controllers\NotificationController@index');
     Route::put('/likes/{id}', 'PickBazar\Http\Controllers\LikesController@update');
 });
@@ -403,6 +404,13 @@ Route::post('/upi-payment', 'PickBazar\Http\Controllers\UpiPaymentController@cre
 Route::any('delivery/success','PickBazar\Http\Controllers\GatewayResponse@process_delivery_response');
 
 Route::get('/delivery/payment','PickBazar\Http\Controllers\DeliveryController@returnToPayment');
+
+Route::group(['middleware' => ['auth:sanctum']], function ()  {
+    Route::post('profile', 'PickBazar\Http\Controllers\UserProfileController@store');
+    Route::get('profile', 'PickBazar\Http\Controllers\UserProfileController@index');
+    Route::get('profile/{id}', 'PickBazar\Http\Controllers\UserProfileController@show');
+    Route::put('update-profile/{id}', 'PickBazar\Http\Controllers\UserProfileController@update');
+});
 
 Route::group(['middleware' => ['can:' . Permission::CUSTOMER, 'auth:sanctum']], function () {
     Route::post('/logout', 'PickBazar\Http\Controllers\UserController@logout');

@@ -132,7 +132,7 @@ const RegisterForm = () => {
             query?.utm_source == 'shop_qr' ? 
             router.push('/shops/'+ query?.utm_campaign+'?utm_source=shop_qr&utm_campaign='+query.utm_campaign+'&shop_id='+query.shop_id) 
             : query?.utm_source == 'salon-near-me' ?   router.push('/salon-near-me') 
-            : router.push('/user/upload-images') ;
+            : router.push('/user-profile-form') ;
           
             return;
           }

@@ -52,6 +52,7 @@ import { useCreateLogMutation } from "@data/log/use-create-log.mutation";
 import UsersCards from "@components/home-page-product-section/user-cards/user-cards-list";
 import { useCustomerQuery } from "@data/customer/use-customer.query";
 import { useUpdateCustomerMutation } from "@data/customer/use-update-customer.mutation";
+import TopBanners from "@components/home-page-product-section/top-banners";
  
 
 const ProductFeedLoader = dynamic(
@@ -303,7 +304,8 @@ useIntersectionObserver({
 
                 <CompleteProfile/>
                 
-                <Tagline/>
+                {/* <Tagline/> */}
+                <TopBanners/>
                 
                 <UserDashboard/>
 

@@ -24,6 +24,36 @@ import { useMutation } from "react-query";
 import GooglePlacesAutocomplete from "@components/form/google-places-autocomplete";
 import { getLocation } from "@contexts/location/location.utils";
 import { useLocation } from "@contexts/location/location.context";
+import { useUserProfileUpdateMutation } from "@data/user/user-profile-update.mutation";
+import { useAllUsersProfileDetailQuery } from "@data/user/use-all-users-profile-detail-query";
+import { useUserProfileDetailsQuery } from "@data/user/use-user-profile-details.query";
+import { profile } from "console";
+
+
+const interests = [
+  'Anime',
+  'Pop Culture',
+  'Movies',
+  'Shows',
+  'K pop',
+  'K Drama',
+  'Cricket',
+  'Bollywood',
+  'Technology',
+  'Food',
+  'Travel',
+  'Politics',
+  'Health',
+  'Spirituality',
+  'Gaming',
+  'Art',
+  'Music',
+  'Fashion',
+  'Education',
+  'Startups',
+  'Environment',
+  'Fitness',
+];
 
 
 
@@ -41,10 +71,37 @@ const ProfileForm = ({ user }: Props) => {
   const [birthDate, setBirthDate] = useState(null);
 
   const[occupation, setOccupation] = useState(null);
+  const {data} = useCustomerQuery();
+
+  
 
   const { t } = useTranslation("common");
 
-  const {data} = useCustomerQuery();
+
+  const {data:profileData} = useUserProfileDetailsQuery(data?.me?.id)
+
+  const [selectedInterests, setSelectedInterests] = useState(profileData?.interests || []);
+
+
+  const toggleInterest = (interest) => {
+    if (selectedInterests.includes(interest)) {
+      setSelectedInterests(selectedInterests.filter((item) => item !== interest));
+    } else {
+      setSelectedInterests([...selectedInterests, interest]);
+    }
+  };
+  
+  
+
+  useEffect(() => {
+    if(profileData?.interests) {
+      setSelectedInterests(profileData?.interests);
+    }
+  }, [profileData?.interests]);
+  
+
+  
+  
  
   const [userLocation, setUserLocation] = useState('');
   
@@ -56,7 +113,10 @@ const ProfileForm = ({ user }: Props) => {
   }, []);
 
   
+
+  console.log('formdata profil',profileData?.interests, selectedInterests );
   
+
   useEffect(()=>{
     const getIpLocation = async () => {
       const response = await memoizedLocation;
@@ -66,7 +126,6 @@ const ProfileForm = ({ user }: Props) => {
     getIpLocation();
   },[data?.me?.id, memoizedLocation]);
   
-
 
 //  console.log('ip ip', userLocation)
  // check type of userlocation
@@ -99,11 +158,17 @@ const ProfileForm = ({ user }: Props) => {
 
   const {getLocation} =useLocation();
 
-  const { mutate: updateProfile, isLoading: loading } =
+   const { mutate: updateProfile, isLoading: loading } =
     useUpdateCustomerMutation();
+
+    const { mutate: updateUserProfile, isLoading: updating } =
+    useUserProfileUpdateMutation();
 
     const { mutate: updateUser, isLoading: loadingUser } =
     useUpdateUserMutation();
+
+    useEffect(() => {}, [selectedInterests]);
+
 
   function onSubmit(values: any) {
 
@@ -135,26 +200,24 @@ const ProfileForm = ({ user }: Props) => {
       }
     );  
 
-    // updateUser(
-    //   {
-    //     id: user?.id,
-    //     date_of_birth: values?.date_of_birth,
-    //     gender: values?.gender,
-    //     occupation: values?.occupation,
-    //     current_location: getLocation,
-    //     // email: values?.email,
-    //     profile: {
-    //       id: user?.profile?.id,
-    //       ...values.profile,
-    //       avatar: values?.profile.avatar,
-    //     },
-    //   },
-    //   {
-    //     onSuccess: () => {
-    //       toast.success(t("User Updated"));
-    //     },
-    //   }
-    // )
+    updateUserProfile(
+      {
+        id: user?.id,
+        // date_of_birth: values?.date_of_birth,
+        gender: values?.profile.gender,
+        bio: values?.profile.bio,
+        interests: selectedInterests,
+        
+
+        // email: values?.email,
+       
+      },
+      {
+        onSuccess: () => {
+          toast.success(t("User Updated"));
+        },
+      }
+    )
   }
 
 
@@ -231,19 +294,16 @@ const ProfileForm = ({ user }: Props) => {
 
               <div className="flex flex-col space-y-2"> 
 
-
-                {/* <span className="text-xs text-gray-600   font-semibold">Date of birth</span> */}
+                {/* <span className="text-xs text-gray-600 font-semibold">Date of birth</span> */}
                 <Input
                   className="flex-1"
                   label={t("Home Town")}
                   {...register("profile.home_location")}
                   variant="outline"
                 />
-
                 {/* <label>Home Town</label>
                 <GooglePlacesAutocomplete/> */}
                                 
-
               </div>
         
 
@@ -300,6 +360,29 @@ const ProfileForm = ({ user }: Props) => {
             variant="outline"
             className="mb-6 mt-4"
           />
+
+          <div className="text-gray-600  font-semibold my-2">
+            Interests
+          </div>
+
+      <div className="grid grid-cols-3 lg:grid-cols-5 gap-4">
+            {interests.map((interest) => (
+              <span
+                key={interest}
+                onClick={() => toggleInterest(interest)}
+                className={`px- py-2 rounded-lg shadow-md focus:outline-none ${
+                  selectedInterests.includes(interest)
+                    ? 'bg-yellow-500 text-white font-bold text-xs lg:text-sm text-center'
+                    : 'bg-white text-gray-700 border border-gray-300 text-xs lg:text-sm text-center'
+                }`}
+              >
+                {interest}
+              </span>
+            ))}
+
+      </div>
+
+
 
           <div className="flex">
             <Button className="ms-auto" loading={loading} disabled={loading}>

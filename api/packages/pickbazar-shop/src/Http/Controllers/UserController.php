@@ -210,6 +210,10 @@ class UserController extends CoreController
             $current_location = json_encode($current_location);
         }
 
+        $originalDateString = $request->date_of_birth;
+        $cleanedDateString = preg_replace('/\(.*\)/', '', $originalDateString); // remove the '(India Standard Time)'
+        $cleanedDateString = trim($cleanedDateString); // remove any extra spaces
+
         //user permissions
 
         $user = $this->repository->create([
@@ -219,7 +223,7 @@ class UserController extends CoreController
             'invited_by'=>$request->invited_by,
             'phone_number'=>$request->phone_number,
             'gender'=> $request->gender,
-            'date_of_birth'=> $request->date_of_birth,
+            'date_of_birth' => Carbon::parse($cleanedDateString)->format('d-m-Y'),
             'occupation'=> $request->occupation,
             // 'role'=> $request->permissions[0],
             'current_location' => $request->current_location ? json_encode($request->current_location) : null,

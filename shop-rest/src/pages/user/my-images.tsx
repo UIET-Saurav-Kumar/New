@@ -59,7 +59,7 @@ type ImageUploadFormValues = {
     images: [];
 }
 
-function Images() {
+function ImagesUploader() {
   const [showUpload, setShowUpload] = useState(false);
 
   const { data: user } = useCustomerQuery();
@@ -219,10 +219,8 @@ function Images() {
   );
 }
 
-Images.layout = DefaultLayout;
+ImagesUploader.layout = DefaultLayout;
 
-
-  
-  export default Images;
+  export default ImagesUploader;
   
             

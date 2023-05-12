@@ -26,8 +26,8 @@ export default function GetCurrentLocation({
 
     var options = {
         enableHighAccuracy: true,
-        timeout: 2000,
-        maximumAge: 0
+        timeout: 10000,
+        maximumAge: 5000
         //session time
       };
 
@@ -90,7 +90,7 @@ export default function GetCurrentLocation({
       };
 
       const handleError = (error) => {
-        console.log(`ERROR(${error.code}): ${error.message}`);
+        alert(`ERROR(${error.code}): ${error.message}`);
         setBtn('Detect');
         setSpin(false);
       };
@@ -124,8 +124,6 @@ export default function GetCurrentLocation({
         onChange(getLoc);
     }
 
-  
-
     const url = typeof window !== 'undefined' && window?.location?.href
 
     return (
@@ -142,9 +140,9 @@ export default function GetCurrentLocation({
                       </span>
                   Get current location     
               </button>
-              :
+              : 
               <button onClick = {getLoc} 
-                      className='rounded font-semibold bg-blue-700 p-2 px-3 text-white mb-3 
+                      className='relative rounded font-semibold bg-blue-700 p-2 px-3 text-white mb-3 
                                  flex float-left mx-4  sm:mx-0 items-center text-sm sm:text-sm md:text-md'>
                 {btn} 
               </button>

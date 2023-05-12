@@ -65,7 +65,6 @@ const OtpRegisterForm = (props:any) => {
 
   const [uploadedPhotos, setUploadedPhotos] = useState([]);
 
-
   const [birthDate, setBirthDate] = useState(null);
 
   const {data} = useCustomerQuery();
@@ -82,7 +81,6 @@ const OtpRegisterForm = (props:any) => {
     }
   }, []);
 
-   
   
   useEffect(()=>{
     const getIpLocation = async () => {
@@ -145,9 +143,7 @@ const OtpRegisterForm = (props:any) => {
 
   function changeLocation(data:any){
 
-   
     var location=JSON.stringify(data);
-  
 
     var { query ,pathname} = router;
     var pathname="/"+pathname
@@ -193,13 +189,13 @@ const OtpRegisterForm = (props:any) => {
       },
       {
         onSuccess: (data) => {
+         data && router.push('/auth/'+data?.user.id);
           // alert('user registered')
-          query?.utm_source == 'shop_qr' ? 
-          // router.push('/shops/'+ query?.campaign)
-          router.push('/auth/'+data?.user.id+'?utm_source=shop_qr&utm_campaign='+query?.utm_campaign+'&shop_id='+query?.shop_id)
-          : path == '/quiz-form' ?  router.push('/auth/'+data?.user.id+'?name=quiz-form') 
-          : path === '/salon-near-me' ? router.push('/auth/'+data?.user.id+'?utm_source=salon-near-me') 
-          : router.push('/auth/'+data?.user.id);
+          // query?.utm_source == 'shop_qr' ? 
+          // router.push('/auth/'+data?.user.id+'?utm_source=shop_qr&utm_campaign='+query?.utm_campaign+'&shop_id='+query?.shop_id)
+          // : path == '/quiz-form' ?  router.push('/auth/'+data?.user.id+'?name=quiz-form') 
+          // : path === '/salon-near-me' ? router.push('/auth/'+data?.user.id+'?utm_source=salon-near-me') 
+          // : router.push('/auth/'+data?.user.id);
           closeModal();
           
           // if (data?.token && data?.permissions?.length) {
@@ -242,7 +238,7 @@ const OtpRegisterForm = (props:any) => {
 
   return (
     
-    <div className="flex items-center h-full  justify-center bg-white sm:bg-gray-100 " >
+    <div className="flex items-center h-screen w-screen lg:w-full lg:h-full  justify-center bg-white sm:bg-gray-100 " >
     <div className="py-6 px-5 bg-light flex flex-col justify-center">
       {/* <div className="flex justify-center">
         <Logo />
@@ -253,39 +249,39 @@ const OtpRegisterForm = (props:any) => {
 
        
    <div className="flex items-start">
-   {/* <div className="flex w-1/4 justify-center ">
+    {/* <div className="flex w-1/4 justify-center ">
         <Logo />
       </div>  */}
-     <div className="">   
-      {errorMsg && (
-        <Alert
-          variant="error"
-          message={t(errorMsg)}
-          className="mb-6"
-          closeable={true}
-          onClose={() => setErrorMsg("")}
-        />
+      <div className="">   
+        {errorMsg && (
+          <Alert
+            variant="error"
+            message={t(errorMsg)}
+            className="mb-6"
+            closeable={true}
+            onClose={() => setErrorMsg("")}
+          />
 
-      )}
-       <div className="text-sm sm:text-sm text-body  mt-4 text-center">
-        {t(" If already registered, please")}{" "}
-        <button
-          onClick={handleClick}
-          className="ms-1 underline text-accent font-semibold transition-colors duration-200 focus:outline-none hover:text-accent-hover focus:text-accent-hover hover:no-underline focus:no-underline"
-        >
-          {t(" Login")}
-        </button>
+        )}
+        <div className="text-sm sm:text-sm text-body  mt-4 text-center">
+          {t(" If already registered, please")}{" "}
+          <button
+            onClick={handleClick}
+            className="ms-1 underline text-accent font-semibold transition-colors duration-200 focus:outline-none hover:text-accent-hover focus:text-accent-hover hover:no-underline focus:no-underline"
+          >
+            {t(" Login")}
+          </button>
+        </div>
+        <p className="text-gray-700 font-semibold text-xl text-left mt-2 w-full">
+          Register Form
+        </p>
       </div>
-      <p className="text-gray-700 font-semibold text-xl text-left mt-2 w-full">
-        Register Form
-      </p>
-      </div>
-      </div>
-      <form className="grid grid-cols-1    gap-2 -mt-6 gap-x-1 place-content-center" 
+    </div>
+
+      <form className="grid grid-cols-1 gap-2 -mt-6 gap-x-1 place-content-center" 
             onSubmit={handleSubmit(onSubmit)} noValidate>
 
-
-      <Input
+        <Input
           // label={t("Name")}
           label={t("Name")}
           {...register("name")}
@@ -298,7 +294,6 @@ const OtpRegisterForm = (props:any) => {
 
         {/* email */}
         <Input
-    
           // label={t("Email")}
           label={t("Email")}
           {...register("email")}
@@ -330,25 +325,23 @@ const OtpRegisterForm = (props:any) => {
           forgotPageRouteOnClick={() => openModal("FORGOT_VIEW")}
         />
 
-           <Input
-            defaultValue={userLocation}
-            label={"Current Location"} 
-            {...register("current_location")} 
-            type="text" 
-            variant="rounded" 
-            placeholder="Enter your city"
-            className="col-span-2 text-xs hidden   " 
-            error={t(errors.current_location?.message!)} />
+        <Input
+          defaultValue={userLocation}
+          label={"Current Location"} 
+          {...register("current_location")} 
+          type="text" 
+          variant="rounded" 
+          placeholder="Enter your city"
+          className="col-span-2 text-xs hidden   " 
+          error={t(errors.current_location?.message!)} 
+        />
 
-       
-      
 
         <div className="w-full    flex mt-15">
             <Button className=" flex justify-center w-full rounded-full " 
             // variant="rounded"
             size="big"
             loading={loading} disabled={loading}>
-              
               {t("Register")}
             </Button>
         </div>
@@ -364,33 +357,34 @@ const OtpRegisterForm = (props:any) => {
           {t("or")}
         </span> */}
         <div className="text-sm sm:text-base text-body  mt-0 text-center">
-        {t(" If already registered, please")}{" "}
-        <button
-          onClick={handleClick}
-          className="ms-1 underline text-accent font-semibold transition-colors duration-200 focus:outline-none hover:text-accent-hover focus:text-accent-hover hover:no-underline focus:no-underline"
-        >
-          {t(" Login")}
-        </button>
-      </div>
-      <p className="text-center text-sm md:text-base leading-relaxed px-2 sm:px-0 text-body mt-4 sm:mt-5 mb-7 sm:mb-10">
-         
-        By signing up, you agree to our
-        <span
-          onClick={() => handleNavigate("terms")}
-          className="mx-1 underline cursor-pointer text-accent hover:no-underline"
-        >
-      
-          Terms
-        </span>
-        &
-        <span
-          onClick={() => handleNavigate("privacy")}
-          className="ms-1 underline cursor-pointer text-accent hover:no-underline"
-        >
+          {t(" If already registered, please")}{" "}
+          <button
+            onClick={handleClick}
+            className="ms-1 underline text-accent font-semibold transition-colors duration-200 focus:outline-none hover:text-accent-hover focus:text-accent-hover hover:no-underline focus:no-underline"
+          >
+            {t(" Login")}
+          </button>
+        </div>
+
+        <p className="text-center text-sm md:text-base leading-relaxed px-2 sm:px-0 text-body mt-4 sm:mt-5 mb-7 sm:mb-10">
           
-          Policy
-        </span>
-      </p>
+          By signing up, you agree to our
+          <span
+            onClick={() => handleNavigate("terms")}
+            className="mx-1 underline cursor-pointer text-accent hover:no-underline"
+          >
+        
+            Terms
+          </span>
+          &
+          <span
+            onClick={() => handleNavigate("privacy")}
+            className="ms-1 underline cursor-pointer text-accent hover:no-underline"
+          >
+            
+            Policy
+          </span>
+        </p>
       </div>
       
     </div>

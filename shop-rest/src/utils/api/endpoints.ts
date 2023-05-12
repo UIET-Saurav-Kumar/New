@@ -94,6 +94,7 @@ export const API_ENDPOINTS: Record<string, string> = {
   IP_LOCATION:'ip-location',
 
   USERS:'users',
+  PROFILE: 'profile',
   RECORD_LIKE_DISLIKE: 'record-like-dislike',
   MESSAGES: 'messages',
   LIKES: 'likes',
@@ -105,7 +106,8 @@ export const API_ENDPOINTS: Record<string, string> = {
   GET_CHAT_ID: 'get-chat-id',
   LIKE_USER:'like-user',
   MESSAGE_STATUS: 'message-status',
-
+  UPDATE_PROFILE: 'update-profile',
+ 
   USER_STATUS: 'user-status',
 
   UPI_PAYMENT: 'upi-payment',

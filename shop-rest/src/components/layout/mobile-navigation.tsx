@@ -78,15 +78,16 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
 
        
 
-        <motion.button
+      { isAuthorize && <motion.button
           whileTap={{ scale: 0.88 }}
           onClick={() => router.push("/user/messages")}
           className="flex p-2 h-full items-center justify-center focus:outline-none focus:text-accent"
         >
-          <span className="sr-only">{t("text-home")}</span>
+          <span className="sr-only">{t("msg")}</span>
              
             <img src="/msg.png" className='h-6 w-6'/>
         </motion.button>
+     }
         
         <motion.button
           whileTap={{ scale: 0.88 }}

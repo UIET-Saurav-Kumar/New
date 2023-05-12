@@ -157,7 +157,7 @@ export const siteSettings = {
     },
     {
       href: ROUTES.UPLOAD_IMAGES,
-      menulabel: "Upload Images",
+      menulabel: "My Images",
     },
     {
       href: ROUTES.MESSAGES,

@@ -165,6 +165,7 @@ export default function GooglePlacesAutocomplete({ onChange }: { onChange: any; 
           onClick={getCurrentLocation}
           className="flex items-center justify-center relative bg-gray-400 mt-10 px-2 p-1 2xl:px-8 2xl:p-2 mx-auto rounded-lg text-white"
         />
+        <span className="">loc</span>
       </>
     </Autocomplete>
   ) : (
