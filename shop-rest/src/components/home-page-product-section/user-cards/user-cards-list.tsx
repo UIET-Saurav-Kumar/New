@@ -132,14 +132,14 @@ export const data = [
           // if (currentUserData?.me?.gender === "female" && user.gender === "female") return false;
     
           // Updated condition for checking if user is liked or likes the current user
-          // if (
-          //   likesData?.some(
-          //     (like) =>
-          //       (like.user_id === user.id && like.liked_by === currentUserData?.me?.id) ||
-          //       (like.user_id === currentUserData?.me?.id && like.liked_by === user.id)
-          //   )
-          // )
-          //   return false;
+          if (
+            likesData?.some(
+              (like) =>
+                (like.user_id === user.id && like.liked_by === currentUserData?.me?.id) ||
+                (like.user_id === currentUserData?.me?.id && like.liked_by === user.id)
+            )
+          )
+            return false;
     
           // Filter based on current_location and home_location
           if (user?.current_location && getLocation?.formattedAddress) {
