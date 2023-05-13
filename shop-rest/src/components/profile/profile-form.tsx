@@ -28,6 +28,8 @@ import { useUserProfileUpdateMutation } from "@data/user/user-profile-update.mut
 import { useAllUsersProfileDetailQuery } from "@data/user/use-all-users-profile-detail-query";
 import { useUserProfileDetailsQuery } from "@data/user/use-user-profile-details.query";
 import { profile } from "console";
+import { useUserProfileMutation } from "@data/user/user-profile-create.mutation";
+import router from "next/router";
 
 
 const interests = [
@@ -127,8 +129,7 @@ const ProfileForm = ({ user }: Props) => {
   },[data?.me?.id, memoizedLocation]);
   
 
-//  console.log('ip ip', userLocation)
- // check type of userlocation
+
   console.log('ip ip', typeof userLocation, userLocation)
 
 
@@ -158,14 +159,20 @@ const ProfileForm = ({ user }: Props) => {
 
   const {getLocation} =useLocation();
 
+  const {data:userProfile} = useUserProfileDetailsQuery(user?.id)
+
+  console.log('details', userProfile)
+
    const { mutate: updateProfile, isLoading: loading } =
     useUpdateCustomerMutation();
 
     const { mutate: updateUserProfile, isLoading: updating } =
     useUserProfileUpdateMutation();
 
-    const { mutate: updateUser, isLoading: loadingUser } =
-    useUpdateUserMutation();
+    // const { mutate: updateUser, isLoading: loadingUser } =
+    // useUpdateUserMutation();
+
+    const {mutate: createUserProfile } = useUserProfileMutation();
 
     useEffect(() => {}, [selectedInterests]);
 
@@ -200,7 +207,7 @@ const ProfileForm = ({ user }: Props) => {
       }
     );  
 
-    updateUserProfile(
+  { userProfile ? updateUserProfile(
       {
         id: user?.id,
         // date_of_birth: values?.date_of_birth,
@@ -218,6 +225,28 @@ const ProfileForm = ({ user }: Props) => {
         },
       }
     )
+
+   : createUserProfile(
+      { 
+        id: user?.id,
+        // date_of_birth: values?.date_of_birth,
+        gender: values?.profile.gender,
+        bio: values?.profile.bio,
+        interests: selectedInterests,
+       },
+      {
+        onSuccess: () => {
+          toast.success(("Profile Updated Successfully"));
+          router.push('/home')
+          // onNext();
+        },
+        onError: (error) => {
+          console.log("Error submitting user profile:", error);
+          alert("There was an error submitting your user profile. Please try again.");
+        },
+      }
+    );
+  }
   }
 
 

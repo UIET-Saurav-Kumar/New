@@ -57,10 +57,10 @@ export default function TopBanners() {
 
       dots:  screenWidth < 768 ? false : false,
       infinite: true,
-      speed: 500,
-      slidesToShow: screenWidth > 768 ? 3 : 2,
+      speed: 700,
+      slidesToShow: screenWidth > 768 ? 4 : 2,
       autoplay:  screenWidth < 768 ? true : true,
-      slidesToScroll: 1,
+      slidesToScroll: 4,
       arrows: false,
      
      
@@ -94,11 +94,11 @@ export default function TopBanners() {
             {
             // location() &&
               // <Link href='/appointment'>
-              <div className="px-1  ">
+              // <div className="px-1  ">
 
                      
-                        <img src='/top-banners/2.jpeg' className="object-contain h-72 w-72 lg:h-full lg:w-full px-1  rounded-lg cursor-pointer" />
-                </div>
+                        <img src='/top-banners/2.jpeg' className="object-contain   h-72 w-72 lg:h-full lg:w-full px-1  rounded-lg " />
+                // </div>
             // </Link>
            }
 
@@ -107,89 +107,89 @@ export default function TopBanners() {
           // location() && 
 
           // <Link href='/shops?text=barista&text_type=shop&avail='>
-            <div className=" px-1 ">
+            // <div className=" px-1 ">
 
                
-                  <img src='/top-banners/1.jpeg' className='object-contain h-72 w-72 lg:h-full lg:w-full px-1  rounded-lg cursor-pointer ' />
+                  <img src='/top-banners/1.jpeg' className='object-contain   h-72 w-72 lg:h-full lg:w-full  px-1  rounded-lg  ' />
 
-          </div>
+          // </div>
           // </Link>
           }
 
            {
             // location() &&
               // <Link href='/appointment'>
-              <div className="px-1  ">
+              // <div className="px-1  ">
 
                      
-                        <img src='/top-banners/2.jpeg' className="object-contain h-72 w-72 lg:h-full lg:w-full px-1  rounded-lg cursor-pointer" />
-                </div>
+                        <img src='/top-banners/2.jpeg' className="object-contain   h-72 w-72 lg:h-full lg:w-full  px-1  rounded-lg " />
+                // </div>
             // </Link>
            }
 
             {
             // location() &&
               // <Link href='/appointment'>
-              <div className="px-1  ">
+              // <div className="px-1  ">
 
                      
-                        <img src='/top-banners/3.jpeg' className="object-contain h-72 w-72 lg:h-full lg:w-full px-1  rounded-lg cursor-pointer" />
-                </div>
+                        <img src='/top-banners/3.jpeg' className="object-contain   h-72 w-72 lg:h-full lg:w-full  px-1  rounded-lg " />
+                // </div>
             // </Link>
            }
 
             {
             // location() &&
               // <Link href='/appointment'>
-              <div className="px-1  ">
+              // <div className="px-1  ">
 
                      
-                        <img src='/top-banners/4.jpeg' className="object-contain h-72 w-72 lg:h-full lg:w-full px-1  rounded-lg cursor-pointer" />
-                </div>
+                        <img src='/top-banners/4.jpeg' className="object-contain   h-72 w-72 lg:h-full lg:w-full  px-1  rounded-lg " />
+                // </div>
             // </Link>
            }
 
             {
             // location() &&
               // <Link href='/appointment'>
-              <div className="px-1  ">
+              // <div className="px-1  ">
 
                      
-                        <img src='/top-banners/5.jpeg' className="object-contain h-72 w-72 lg:h-full lg:w-full px-1  rounded-lg cursor-pointer" />
-                </div>
+                        <img src='/top-banners/5.jpeg' className="object-contain   h-72 w-72 lg:h-full lg:w-full  px-1  rounded-lg " />
+                // </div>
             // </Link>
            }
 
             {
             // location() &&
               // <Link href='/appointment'>
-              <div className="px-1  ">
+              // <div className="px-1  ">
 
                      
-                        <img src='/top-banners/6.jpeg' className="object-contain h-72 w-72 lg:h-full lg:w-full px-1  rounded-lg cursor-pointer" />
-                </div>
+                        <img src='/top-banners/6.jpeg' className="object-contain   h-72 w-72 lg:h-full lg:w-full  px-1  rounded-lg " />
+                // </div>
             // </Link>
            }
 
             {
             // location() &&
               // <Link href='/appointment'>
-              <div className="px-1  ">
+              // <div className="px-1  ">
 
                      
-                        <img src='/top-banners/7.jpeg' className="object-contain h-72 w-72 lg:h-full lg:w-full px-1  rounded-lg cursor-pointer" />
-                </div>
+                        <img src='/top-banners/7.jpeg' className="object-contain   h-72 w-72 lg:h-full lg:w-full  px-1  rounded-lg " />
+                // </div>
             // </Link>
            }
 
             {
             // location() &&
               // <Link href='/appointment'>
-              <div className="px-1  ">
+              // <div className="px-1  ">
 
                      
-                        <img src='/top-banners/8.jpeg' className="object-contain h-72 w-72 lg:h-full lg:w-full px-1  rounded-lg cursor-pointer" />
-                </div>
+                        <img src='/top-banners/8.jpeg' className="object-contain   h-72 w-72 lg:h-full lg:w-full  px-1  rounded-lg " />
+                // </div>
             // </Link>
            }
 
