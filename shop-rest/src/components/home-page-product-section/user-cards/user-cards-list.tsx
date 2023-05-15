@@ -73,7 +73,7 @@ export const data = [
     const [isChatOpen, setIsChatOpen] = useState(false);
     const [selectedUser, setSelectedUser] = useState(null);
     const [showGender, setShowGender] = useState("male");
-    const [filteredUsers, setFilteredUsers] = useState([]);
+    const [filteredUsers, setFilteredUsers] = useState([]); 
     const [isLiked, setIsLiked] = useState(false);
 
     const { isAuthorize } = useUI();
@@ -99,6 +99,7 @@ export const data = [
         setFilteredUsers((prev) => prev.filter((user) => user.id !== card.user_id));
       }
     }, [likedCards, removeLikedCard, addLikedCard]);
+
   
     const idRef = useRef(currentUserData?.me?.id);
   
@@ -120,39 +121,26 @@ export const data = [
       text: searchTerm,
     });
 
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+          let j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+      }
+      return array;
+  }
+  
+  let myArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+   
+
     
   
   
     useEffect(() => {
-      if (users && currentUserData && likesData) {
-        const filtered = users?.users?.data?.filter((user) => {
-          if (user.id === currentUserData?.me?.id) return false;
-          // if (!user.gender) return false;
-          // if (currentUserData?.me?.gender === "male" && user.gender === "male") return false;
-          // if (currentUserData?.me?.gender === "female" && user.gender === "female") return false;
-    
-          // Updated condition for checking if user is liked or likes the current user
-          if (
-            likesData?.some(
-              (like) =>
-                (like.user_id === user.id && like.liked_by === currentUserData?.me?.id) ||
-                (like.user_id === currentUserData?.me?.id && like.liked_by === user.id)
-            )
-          )
-            return false;
-    
-          // Filter based on current_location and home_location
-          if (user?.current_location && getLocation?.formattedAddress) {
+      if (users && getLocation) {
+        let filteredUsers = users?.users?.data?.filter((user) => {
+          // Filter based on current_location
+          if (user?.current_location) {
             const locationFilter = (location) => {
-              // if (typeof location === "string") {
-              //   const locationWords = location.split(" ");
-              //   const formattedAddressWords = getLocation?.formattedAddress?.split(" ");
-              //
-              //   const locationMatch = locationWords.some((word) =>
-              //     formattedAddressWords.includes(word)
-              //   );
-              //   if (!locationMatch) return false;
-              // } else
               if (
                 location?.lat &&
                 location?.lng &&
@@ -168,29 +156,17 @@ export const data = [
     
                 if (distance > maxDistance) return false;
               }
-              // else if (location?.formattedAddress) {
-              //   const locationWords = location.formattedAddress.split(" ");
-              //   const formattedAddressWords = getLocation?.formattedAddress?.split(" ");
-              //
-              //   const locationMatch = locationWords.some((word) =>
-              //     formattedAddressWords.includes(word)
-              //   );
-              //   if (!locationMatch) return false;
-              // }
               return true;
             };
     
             const currentLocationMatch = locationFilter(user.current_location);
-            const homeLocationMatch = user.profile?.home_location
-              ? locationFilter(user.profile.home_location)
-              : false;
     
-            if (!currentLocationMatch && !homeLocationMatch) return false;
+            if (!currentLocationMatch) return false;
           }
           return true;
         });
-
-     
+    
+        // Sort and add distance data
         const distanceInMeters = (a, b) => {
           return getDistance(
             { latitude: a.lat, longitude: a.lng },
@@ -198,12 +174,7 @@ export const data = [
           );
         };
     
-        const sortedFilteredUsers = filtered.sort((a, b) => {
-          if (a.is_online && !b.is_online) return -1;
-          if (!a.is_online && b.is_online) return 1;
-          
-          if (!getLocation?.lat || !getLocation?.lng) return 0;
-    
+        const sortedFilteredUsers = filteredUsers.sort((a, b) => {
           const aLocation = a.current_location || a.profile?.home_location;
           const bLocation = b.current_location || b.profile?.home_location;
     
@@ -219,7 +190,7 @@ export const data = [
           }
           return 0;
         });
-
+    
         const filteredUsersWithDistance = sortedFilteredUsers.map((user) => {
           const userLocation = user.current_location || user.profile?.home_location;
           let distance = null;
@@ -231,9 +202,16 @@ export const data = [
           return { ...user, distance };
         });
     
-    
         setFilteredUsers([...filteredUsersWithDistance]);
       }
+
+    //   let maleUsers = users?.users?.data?.filter(user => user.gender === 'male');
+    //   let femaleUsers = users?.users?.data?.filter(user => user.gender === 'female');
+
+    //  // let mixedUsers = [...maleUsers, ...femaleUsers].slice(0, 12);
+
+
+    //   !isAuthorize && setFilteredUsers(maleUsers?.concat(femaleUsers)) 
     }, [users, currentUserData, likesData, getLocation]);
     
     
@@ -257,11 +235,11 @@ export const data = [
       
     return (
       <div className="relative h-full w-full z-40">
-        {isAuthorize && (
+        {/* {isAuthorize && ( */}
           <p className="text-center font-semibold text-lg p-2 lg:text-2xl">
             Community Members Near You
           </p>
-        )}
+        {/* )} */}
         <div className="transition-all duration-500 grid grid-cols-3 lg:grid-cols-6 gap-2 lg:gap-6">
           {filteredUsers && filteredUsers?.length > 0 ? (
             filteredUsers?.slice(0, 20).map((user: any) => {
@@ -308,21 +286,25 @@ export const data = [
 
     const { openModal } = useModalAction();
 
+    const {isAuthorize} = useUI();
+
     console.log('userprofile',user)
 
     function openDetails(user:any) {
-      return  openModal('CARD_DETAILS',{
+      isAuthorize ?  openModal('CARD_DETAILS',{
         user: user
-      }) 
+      }) : openModal('OTP_REGISTER');
     }
 
     console.log('images',images);
   
     const handleHeartClick = () => {
 
-      setIsLiked((prevIsLiked) => !prevIsLiked);
+      !isAuthorize && openModal('OTP_REGISTER');
+        
+      isAuthorize && setIsLiked((prevIsLiked) => !prevIsLiked);
   
-      if (!isLiked) {
+      if ( isAuthorize && !isLiked) {
 
         const newChatId = uuidv4();
 
@@ -349,6 +331,7 @@ export const data = [
         }, 300);
 
       }
+
     };
     
 
@@ -404,7 +387,7 @@ export const data = [
             {isLiked ? (
               <HeartFillIcon className="w-6 h-6 text-red-600" />
             ) : (
-              <HeartOutlineIcon onClick={handleHeartClick} 
+              <HeartOutlineIcon onClick={ handleHeartClick} 
                                 className="w-6 h-6 text-red-600" />
             )}
           </button>

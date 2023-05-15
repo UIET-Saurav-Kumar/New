@@ -507,11 +507,11 @@ Route::group(['middleware' => ['can:' . Permission::CUSTOMER, 'auth:sanctum']], 
     }
 );
 
-Route::group(['middleware' => ['permission:' . Permission::SUPER_ADMIN . '|' . Permission::CUSTOMER, 'auth:sanctum']], function () {
+// Route::group(['middleware' => ['permission:' . Permission::SUPER_ADMIN . '|' . Permission::CUSTOMER, 'auth:sanctum']], function () {
 
+//     Route::apiResource('users', UserController::class);
+//     });
     Route::apiResource('users', UserController::class);
-    });
-
 
 Route::group(['middleware' => ['permission:' . Permission::SUPER_ADMIN]], function () {
     Route::apiResource('types', TypeController::class, [
