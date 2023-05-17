@@ -13,8 +13,9 @@ export default function MobileAuthorizedMenu() {
     return closeSidebar();
   }
   return (
+
     <SidebarWrapper>
-      <ul className="flex-grow">
+      <ul className="flex-grow overflow-y-scroll pb-10 lg:py-0">
         {siteSettings.authorizedLinks.map(({ href, label }) => (
           <li key={`${href}${label}`}>
             <span
@@ -27,5 +28,6 @@ export default function MobileAuthorizedMenu() {
         ))}
       </ul>
     </SidebarWrapper>
+    
   );
 }

@@ -21,9 +21,7 @@ export const OrderItems = ({ products,orderId,orderStatus }: { products: any }) 
     tracking_number: query.tracking_number as string,
   });
 
-  console.log('item',products )
-
-   
+  console.log('item',products);
 
   const { price: total } = usePrice(data && { amount: data.order.paid_total });
   const { price: sub_total } = usePrice(data && { amount: data.order.amount });
@@ -48,10 +46,13 @@ export const OrderItems = ({ products,orderId,orderStatus }: { products: any }) 
   
   // let sale_price = data?.order?.sale_price;
 
+  console.log('orders value', price);
+
 
   function calcDiscount(price, sale_price){
     return (price - sale_price) / price *100
   }
+
   console.log('order data ',data,price,sale_price, calcDiscount(price,sale_price))
 
   
@@ -95,6 +96,8 @@ export const OrderItems = ({ products,orderId,orderStatus }: { products: any }) 
           name = `${name} - ${variationTitle}`;
         }
 
+        
+
         return (
           <>
           <div className="flex items-center">
@@ -120,10 +123,10 @@ export const OrderItems = ({ products,orderId,orderStatus }: { products: any }) 
                 </span>
               </div>
               <span className="text-sm text-accent font-semibold mb-1 truncate inline-block overflow-hidden">
-               {products?.length == 1 ? (data?.order?.products[0]?.type_id == 7 ?  '₹' + '' +data?.order?.amount + '.00' : price ) : price}   , {record.tax?JSON.parse(record.tax).rate+"% tax":""}
+                {products?.length == 1 ? products[0]?.price : 60}
+               {/* {products?.length == 1 ? (data?.order?.products[0].type_id == 7 ?  '₹' + '' +data?.order?.amount + '.00' : price ) : price}   , {record.tax?JSON.parse(record.tax).rate+"% tax":""} */}
               </span>
             </div>
-
           </div>
         </>
         );
@@ -196,7 +199,7 @@ export const OrderItems = ({ products,orderId,orderStatus }: { products: any }) 
       align: alignRight,
       width: 100,
       render: (pivot: any) => {
-        const amt = products?.length == 1 ? (products[0].type_id == 7 ? data?.order?.amount   : +pivot.subtotal) : +pivot.subtotal;
+        const amt = products?.length == 1 ? (products[0].type_id == 7 ? products[0]?.price   : +pivot.subtotal) : +pivot.subtotal;
         const { price } = usePrice({
           amount: +amt,
         });

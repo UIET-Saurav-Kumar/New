@@ -106,12 +106,17 @@ class OrderController extends CoreController
             if ($user->id === $order->customer_id || $user->can('super_admin')) {
                 return $order;
             } else {
-                throw new PickbazarException('PICKBAZAR_ERROR.NOT_AUTHORIZED');
+                throw new PickbazarException('NOT_AUTHORIZED');
             }
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            throw new PickbazarException('ORDER_NOT_FOUND');
+        } catch (\Symfony\Component\Security\Core\Exception\AccessDeniedException $e) {
+            throw new PickbazarException('NOT_AUTHORIZED');
         } catch (\Exception $e) {
-            throw new PickbazarException('PICKBAZAR_ERROR.NOT_FOUND');
+            throw new PickbazarException('UNKNOWN_ERROR: ' . $e->getMessage());
         }
     }
+    
 
     // find by date range
     public function findByDateRange(Request $request, $start_date, $end_date)

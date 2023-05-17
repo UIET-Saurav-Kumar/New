@@ -120,27 +120,39 @@ export const data = [
       page,
       text: searchTerm,
     });
-
-    function shuffleArray(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-          let j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]]; // Swap elements
-      }
-      return array;
-  }
-  
-  let myArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-   
-
     
-  
-  
+    
     useEffect(() => {
-      if (users && getLocation) {
-        let filteredUsers = users?.users?.data?.filter((user) => {
-          // Filter based on current_location
-          if (user?.current_location) {
+      if ( isAuthorize && users && currentUserData && likesData) {
+        const filtered = users?.users?.data?.filter((user) => {
+          if (user.id === currentUserData?.me?.id) return false;
+
+          if (!user.gender) return false;
+          if (currentUserData?.me?.gender === "male" && user.gender === "male") return false;
+          if (currentUserData?.me?.gender === "female" && user.gender === "female") return false;
+    
+          // Updated condition for checking if user is liked or likes the current user
+          if (
+            likesData?.some(
+              (like) =>
+                (like.user_id === user.id && like.liked_by === currentUserData?.me?.id) ||
+                (like.user_id === currentUserData?.me?.id && like.liked_by === user.id)
+            )
+          )
+            return false;
+    
+          // Filter based on current_location and home_location
+          if (user?.current_location && getLocation?.formattedAddress) {
             const locationFilter = (location) => {
+              // if (typeof location === "string") {
+              //   const locationWords = location.split(" ");
+              //   const formattedAddressWords = getLocation?.formattedAddress?.split(" ");
+              //
+              //   const locationMatch = locationWords.some((word) =>
+              //     formattedAddressWords.includes(word)
+              //   );
+              //   if (!locationMatch) return false;
+              // } else
               if (
                 location?.lat &&
                 location?.lng &&
@@ -156,17 +168,29 @@ export const data = [
     
                 if (distance > maxDistance) return false;
               }
+              // else if (location?.formattedAddress) {
+              //   const locationWords = location.formattedAddress.split(" ");
+              //   const formattedAddressWords = getLocation?.formattedAddress?.split(" ");
+              //
+              //   const locationMatch = locationWords.some((word) =>
+              //     formattedAddressWords.includes(word)
+              //   );
+              //   if (!locationMatch) return false;
+              // }
               return true;
             };
     
             const currentLocationMatch = locationFilter(user.current_location);
+            const homeLocationMatch = user.profile?.home_location
+              ? locationFilter(user.profile.home_location)
+              : false;
     
-            if (!currentLocationMatch) return false;
+            if (!currentLocationMatch && !homeLocationMatch) return false;
           }
           return true;
         });
-    
-        // Sort and add distance data
+
+     
         const distanceInMeters = (a, b) => {
           return getDistance(
             { latitude: a.lat, longitude: a.lng },
@@ -174,7 +198,12 @@ export const data = [
           );
         };
     
-        const sortedFilteredUsers = filteredUsers.sort((a, b) => {
+        const sortedFilteredUsers = filtered.sort((a, b) => {
+          if (a.is_online && !b.is_online) return -1;
+          if (!a.is_online && b.is_online) return 1;
+          
+          if (!getLocation?.lat || !getLocation?.lng) return 0;
+    
           const aLocation = a.current_location || a.profile?.home_location;
           const bLocation = b.current_location || b.profile?.home_location;
     
@@ -190,7 +219,7 @@ export const data = [
           }
           return 0;
         });
-    
+
         const filteredUsersWithDistance = sortedFilteredUsers.map((user) => {
           const userLocation = user.current_location || user.profile?.home_location;
           let distance = null;
@@ -202,18 +231,17 @@ export const data = [
           return { ...user, distance };
         });
     
+    
         setFilteredUsers([...filteredUsersWithDistance]);
       }
 
-    //   let maleUsers = users?.users?.data?.filter(user => user.gender === 'male');
-    //   let femaleUsers = users?.users?.data?.filter(user => user.gender === 'female');
+      let maleUsers = users?.users?.data?.filter(user => user.gender === 'male');
+      let femaleUsers = users?.users?.data?.filter(user => user.gender === 'female');
 
-    //  // let mixedUsers = [...maleUsers, ...femaleUsers].slice(0, 12);
+     // let mixedUsers = [...maleUsers, ...femaleUsers].slice(0, 12);
 
-
-    //   !isAuthorize && setFilteredUsers(maleUsers?.concat(femaleUsers)) 
+      !isAuthorize && setFilteredUsers(maleUsers?.concat(femaleUsers)) 
     }, [users, currentUserData, likesData, getLocation]);
-    
     
 
     console.log('likes', getLocation,  filteredUsers);
