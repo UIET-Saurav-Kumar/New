@@ -145,6 +145,10 @@ const UsersList = () => {
         window.removeEventListener("popstate", handlePopState);
       };
     }, []);
+
+    const isMobileView = () => {
+      return window.innerWidth <= 768;
+    };
   
     
 
@@ -163,128 +167,145 @@ const UsersList = () => {
   console.log('likes data message', lastMessage)
 
   return (
-    <div className="relative w-screen max-h-screen">
+
+    <div className="  relative  w-full max-h-screen">
+      
       <div className="z-40 flex sticky top-0 p-5 items-center bg-gray-50 space-x-3 w-full border-gray-600 border-b ">
         <ArrowLeftIcon
           onClick={() => router.push('/home')}
           className="h-5 w-5 text-black bg-gray-100"
         />
-  
         <p className="text-lg font-semibold text-gray-600 ml-4">{query.rname}</p>
       </div>
   
 
-      {
-      showChatScreen ? (
-      <ChatScreen
-        setLastMessage={setLastMessage}
-        name={selectedLike?.user_name}
-        rname={
-          currentUserData?.me?.id == selectedLike?.user_id
-            ? selectedLike?.liked_by_name
-            : selectedLike?.user_name
-        }
-        ri={
-          currentUserData?.me?.id == selectedLike?.user_id
-            ? selectedLike?.liked_by
-            : selectedLike?.user_id
-        }
-        si={currentUserData?.me?.id}
-        id={selectedLike?.chat_id}
-        setShowChatScreen={setShowChatScreen}
-      />
-    ) : (
-
-        likesData?.filter((l:any)=>l.user_id == currentUserData?.me?.id || l.liked_by == currentUserData?.me?.id)?.length == 0 ? 
-        <p className=" w-full flex h-screen  justify-center items-center text-gray-400 font-bold text-2xl">
+      {  
+       likesData?.filter((l:any)=>l.user_id == currentUserData?.me?.id || l.liked_by == currentUserData?.me?.id)?.length == 0 ? 
+         <p className=" w-full flex h-screen  justify-center items-center text-gray-400 font-bold text-2xl">
              No messages
-        </p> :
-        
-        likesData
-        ?.sort((a: any, b: any) => new Date(a.updated_at) - new Date(b.updated_at))
-        .filter((l:any)=>l.user_id == currentUserData?.me?.id || l.liked_by == currentUserData?.me?.id).map((like: any) => (
-          like.status !== 'pending' ?
-            <div
-            key={like.id}
-            className="  flex bg-gray-50 shadow-300 p-4 border cursor-pointer hovver:bg-gray-200 active:bg-gray-200 transition-all duration-500   items-center space-x-4"
-            onClick={() => handleLikeClick(like)}
-           >
-            <img
-              className="h-12 w-12 rounded-full"
-              src={`https://source.unsplash.com/featured/?girls/${like.user_name}`}
-            /> 
-            <div className="flex-grow">
-              <p className="text-gray-800 text-lg font-medium">
-                {currentUserData?.me?.id == like.user_id ?  like.liked_by_name : like.user_name}
-              </p>
-              {like.user_id == currentUserData?.me?.id && like.status == 'pending' && (
-                <p className="text-gray-400 text-sm">  {like.liked_by_name} likes your profile</p>
-              )}
-            <p className="text-gray-500 text-lg">
-              {Array.isArray(lastMessage) &&
-                lastMessage
-                  .find(lm => lm.chat_id === like.chat_id)
-                  ?.lastMessage.slice(-1)[0]?.content || 'Request ' + like.status}
-            </p>
-              {(like.user_id !== currentUserData?.me?.id &&  like.status == 'pending') ? (
-                <p className="text-yellow-600 text-sm">Request {like.status}</p>
-              ):null }
-              {like.user_id !== currentUserData?.me?.id && (like.status == 'pending') && (
-                <p className="text-yellow-600 font-bold text-sm">Requested</p>
-              )}
-            </div>
-            {like.status == 'pending' &&
-              like.user_id == currentUserData?.me?.id && (
-                <button
-                  className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-                  onClick={() => {
-                    setSelectedLike(like);
-                    handleAccept(like.id)
-                   }}
-                  >
-                  Accept
-                </button>
-              )}
-            </div>
-           : 
-          <div
-            key={like.id}
-            className="flex bg-gray-50  shadow-300 p-5 cursor-pointer hovver:bg-gray-200  items-center space-x-4"
-            >
-            <img
-              className="h-12 w-12 rounded-full"
-              src={`https://source.unsplash.com/featured/?girls/${like.user_name}`}
-            /> 
-            <div className="flex-grow">
-              <p className="text-gray-800 text-lg font-medium">
-                {currentUserData?.me?.id == like.user_id ?  like.liked_by_name : like.user_name}
-              </p>
-              {like.user_id == currentUserData?.me?.id && like.status == 'pending' && (
-                <p className="text-gray-400 text-sm">  {like.liked_by_name} likes your profile</p>
-              )}
-              { like.status == 'accepted' && (
-                <p className="text-green-600 text-sm">Request {like.status}</p>
-              )}
-              {(like.user_id !== currentUserData?.me?.id &&  like.status == 'pending') ? (
-                <p className="text-yellow-600 text-sm">Request {like.status}</p>
-              ):null }
-              
-            </div>
-            {like.status == 'pending' &&
-              like.user_id == currentUserData?.me?.id && (
-                <button
-                  className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-                  onClick={() => {
-                    setSelectedLike(like);
-                    handleAccept(like.id)
-                   }}
-                  >
-                  Accept
-                </button>
-              )}
-            </div>
-        ))
-      )}
+         </p> 
+        :
+        <div className=" flex flex-col lg:flex-row lg:items-center lg:w-full">
+          <div className="lg:relative z-40 lg:w-1/4">
+            {
+              !showChatScreen && 
+              (
+                likesData
+                ?.sort((a: any, b: any) => new Date(a.updated_at) - new Date(b.updated_at))
+                .filter((l:any)=>l.user_id == currentUserData?.me?.id || l.liked_by == currentUserData?.me?.id).map((like: any) => (
+                like.status !== 'pending' 
+                ?
+                  <div
+                    key={like.id}
+                    className=" flex bg-gray-50 shadow-00 p-4 border-r cursor-pointer hovver:bg-gray-200 active:bg-gray-200 transition-all duration-500   items-center space-x-4"
+                    onClick={() => handleLikeClick(like)}>
+                    
+                    <img
+                      className="h-12 w-12 rounded-full"
+                      src={`https://source.unsplash.com/featured/?girls/${like.user_name}`}
+                    /> 
+                    <div className="flex-grow">
+                      <p className="text-gray-800 text-sm font-medium">
+                        {currentUserData?.me?.id == like.user_id ?  like.liked_by_name : like.user_name}
+                      </p>
+                      {like.user_id == currentUserData?.me?.id && like.status == 'pending' && (
+                        <p className="text-gray-400 text-sm">  {like.liked_by_name} likes your profile</p>
+                      )}
+                      <p className="text-gray-500 text-lg">
+                      {
+                        Array.isArray(lastMessage) &&
+                        lastMessage
+                          .find(lm => lm.chat_id === like.chat_id)
+                          ?.lastMessage?.slice(-1)[0]?.content || 'Request ' + like.status
+                        }
+                      </p>
+                      {(like.user_id !== currentUserData?.me?.id &&  like.status == 'pending') ? (
+                        <p className="text-yellow-600 text-sm">Request {like.status}</p>
+                      ):null }
+                      {like.user_id !== currentUserData?.me?.id && (like.status == 'pending') && (
+                        <p className="text-yellow-600 font-bold text-sm">Requested</p>
+                      )}
+                    </div>
+                    {
+                     like.status == 'pending' &&
+                      like.user_id == currentUserData?.me?.id && (
+                        <button
+                          className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
+                          onClick={() => {
+                            setSelectedLike(like);
+                            handleAccept(like.id)
+                          }}
+                          >
+                          Accept
+                        </button>
+                      )
+                    }
+                  </div>
+                : 
+                  <div
+                    key={like.id}
+                    className="flex bg-gray-50  shadow-00 p-5  border-r cursor-pointer hovver:bg-gray-200  items-center space-x-4"
+                    >
+                    <img
+                      className="h-12 w-12 rounded-full"
+                      src={`https://source.unsplash.com/featured/?girls/${like.user_name}`}
+                    /> 
+                    <div className="flex-grow">
+                      <p className="text-gray-800 text-sm font-medium">
+                        {currentUserData?.me?.id == like.user_id ?  like.liked_by_name : like.user_name}
+                      </p>
+                      {like.user_id == currentUserData?.me?.id && like.status == 'pending' && (
+                        <p className="text-gray-400 text-sm">  {like.liked_by_name} likes your profile</p>
+                      )}
+                      { like.status == 'accepted' && (
+                        <p className="text-green-600 text-sm">Request {like.status}</p>
+                      )}
+                      {(like.user_id !== currentUserData?.me?.id &&  like.status == 'pending') ? (
+                        <p className="text-yellow-600 text-sm">Request {like.status}</p>
+                      ):null }
+                    </div>
+
+                    {like.status == 'pending' &&
+                      like.user_id == currentUserData?.me?.id && (
+                        <button
+                          className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
+                          onClick={() => {
+                            setSelectedLike(like);
+                            handleAccept(like.id)
+                          }}
+                          >
+                          Accept
+                        </button>
+                      )}
+                  </div>
+               ))
+              )
+            }
+          </div>
+          <div className="lg:relative lg:flex lg:items-end  lg:z-50 lg:w-full">
+            {showChatScreen && (
+              <ChatScreen
+                setLastMessage={setLastMessage}
+                name={selectedLike?.user_name}
+                rname={
+                  currentUserData?.me?.id == selectedLike?.user_id
+                    ? selectedLike?.liked_by_name
+                    : selectedLike?.user_name
+                }
+                ri={
+                  currentUserData?.me?.id == selectedLike?.user_id
+                    ? selectedLike?.liked_by
+                    : selectedLike?.user_id
+                }
+                si={currentUserData?.me?.id}
+                id={selectedLike?.chat_id}
+                setShowChatScreen={setShowChatScreen}
+              />
+            )}
+          </div>
+        </div>
+      }  
+      
      {showAcceptModal && (
       <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
         <div className="bg-white rounded p-4">

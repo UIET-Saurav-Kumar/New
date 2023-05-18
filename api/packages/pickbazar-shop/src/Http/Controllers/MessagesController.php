@@ -64,28 +64,26 @@ public function sendMessage(Request $request)
 
     public function getMessages(Request $request)
     {
-        // Get sender_id and receiver_id from the request
         $sender_id = $request->input('sender_id');
         $receiver_id = $request->input('receiver_id');
-    
-        // Fetch chat_id based on sender_id and receiver_id
-        // Replace with your actual logic to get the chat_id
+        
         $chat_id = $this->getChatIdBySenderReceiver($sender_id, $receiver_id);
-    
-        // Fetch messages for the specific chat_id
+        
         $messages = Message::where('chat_id', $chat_id)->get();
-    
-        // Fetch sender and receiver user data
+        
         $sender = User::find($sender_id);
         $receiver = User::find($receiver_id);
-    
-        // Add sender and receiver names to the messages
-        $messages = $messages->map(function ($message) use ($sender, $receiver) {
-            $message->sender_name = $sender->name;
-            $message->receiver_name = $receiver->name;
-            return $message;
-        });
-    
+        
+        if ($sender && $receiver) {
+            $messages = $messages->map(function ($message) use ($sender, $receiver) {
+                $message->sender_name = $sender->name;
+                $message->receiver_name = $receiver->name;
+                return $message;
+            });
+        } else {
+            return response()->json(['error' => 'User not found'], 404);
+        }
+        
         return response()->json([
             'messages' => $messages,
         ]);

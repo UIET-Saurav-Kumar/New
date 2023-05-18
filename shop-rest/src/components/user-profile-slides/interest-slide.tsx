@@ -5,30 +5,44 @@ import React from 'react';
 import { toast } from "react-toastify";
 
 
-const interests = [
-  'Anime',
-  'Pop Culture',
-  'Movies',
-  'Shows',
-  'K pop',
-  'K Drama',
-  'Cricket',
-  'Bollywood',
-  'Technology',
-  'Food',
-  'Travel',
-  'Politics',
-  'Health',
-  'Spirituality',
-  'Gaming',
-  'Art',
-  'Music',
-  'Fashion',
-  'Education',
-  'Startups',
-  'Environment',
-  'Fitness',
-];
+// const interests = [
+//   'Anime',
+//   'Pop Culture',
+//   'Movies',
+//   'Shows',
+//   'K pop',
+//   'K Drama',
+//   'Cricket',
+//   'Bollywood',
+//   'Technology',
+//   'Food',
+//   'Travel',
+//   'Politics',
+//   'Health',
+//   'Spirituality',
+//   'Gaming',
+//   'Art',
+//   'Music',
+//   'Fashion',
+//   'Education',
+//   'Startups',
+//   'Environment',
+//   'Fitness',
+// ];
+
+
+  const interests = [
+    'Beers & booze',
+    'Coffee',
+    'Beauty',
+    'Home',
+    'Eat Out',
+    'Shopping',
+    'Hangout',
+    'Movies',
+    'Pizza Dates',
+    'Gym Lovers',
+  ]
 
 const gradientColors = [
   'bg-gradient-to-r from-purple-700 via-accent to-red-700',
@@ -59,7 +73,7 @@ const gradientColors = [
 
 const InterestsSlide = ({ onNext, onBack, formData, setFormData }) => {
   
-  const {data:userData} = useCustomerQuery()
+  const {data:userData} = useCustomerQuery();
   const [selectedInterests, setSelectedInterests] = React.useState(formData.interests || []);
 
   const toggleInterest = (interest) => {
@@ -105,26 +119,30 @@ const InterestsSlide = ({ onNext, onBack, formData, setFormData }) => {
   return (
 
     <div className="flex flex-col items-center justify-center h-full">
-      <h1 className="flex flex-col space-y-4  mb-4">
-      <span className='text-xl font-semibold text-center '> What are the colors on your palette of interests?</span>
-      <p className='text-gray-600 text-sm text-center'>Pick at least 5</p>
-      </h1>
-      <div className="grid grid-cols-3 gap-4 p-3">
-            {interests.map((interest, index) => (
-        <button
-          key={interest}
-          onClick={() => toggleInterest(interest)}
-          className={`p-2 rounded-lg shadow-xl focus:outline-none font-bold text-sm ${
-            selectedInterests.includes(interest)
-              ? gradientColors[index % gradientColors.length] + ' text-white'
-              : 'bg-white text-gray-500 border border-gray-300'
-          }`}
-        >
-          {interest}
-        </button>
-      ))}
 
+      <h1 className="flex flex-col space-y-4  mb-4">
+          <span className='text-xl font-semibold text-center '> 
+                What are the colors on your palette of interests?
+          </span>
+          <p className='text-gray-600 text-sm text-center'>Pick at least 5</p>
+      </h1>
+
+      <div className="grid grid-cols-3 gap-4 p-3">
+          {interests.map((interest, index) => (
+            <button
+              key={interest}
+              onClick={() => toggleInterest(interest)}
+              className={`p-2 rounded-lg shadow-xl focus:outline-none font-bold text-sm ${
+                selectedInterests.includes(interest)
+                  ? gradientColors[index % gradientColors.length] + ' text-white'
+                  : 'bg-white text-gray-500 border border-gray-300'
+              }`}
+            >
+              {interest}
+            </button>
+         ))}
       </div>
+
       <div className="mt-6">
           <button
               type="button"
@@ -134,13 +152,14 @@ const InterestsSlide = ({ onNext, onBack, formData, setFormData }) => {
               Back
           </button>
           <button
-          onClick={handleSubmit}
+            onClick={handleSubmit}
               type="submit"
               className="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:bg-blue-700"
               >
             Save
           </button>
       </div>
+
     </div>
 
   );

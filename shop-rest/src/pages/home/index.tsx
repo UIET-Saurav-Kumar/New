@@ -53,6 +53,7 @@ import UsersCards from "@components/home-page-product-section/user-cards/user-ca
 import { useCustomerQuery } from "@data/customer/use-customer.query";
 import { useUpdateCustomerMutation } from "@data/customer/use-update-customer.mutation";
 import TopBanners from "@components/home-page-product-section/top-banners";
+import Passion from "@components/home-page-product-section/passions";
  
 
 const ProductFeedLoader = dynamic(
@@ -310,6 +311,7 @@ useIntersectionObserver({
                 <UserDashboard/>
 
                 <UsersCards/>
+                <Passion/>
                 <Banners2/>
                 {/* <SearchHistory/> */}
                 {/* <BillPayment/> */}

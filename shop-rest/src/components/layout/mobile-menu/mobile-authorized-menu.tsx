@@ -12,6 +12,7 @@ export default function MobileAuthorizedMenu() {
     router.push(path);
     return closeSidebar();
   }
+  
   return (
 
     <SidebarWrapper>
@@ -28,6 +29,6 @@ export default function MobileAuthorizedMenu() {
         ))}
       </ul>
     </SidebarWrapper>
-    
+
   );
 }

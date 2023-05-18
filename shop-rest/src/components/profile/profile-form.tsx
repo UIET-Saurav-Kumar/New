@@ -32,30 +32,43 @@ import { useUserProfileMutation } from "@data/user/user-profile-create.mutation"
 import router from "next/router";
 
 
+// const interests = [
+//   'Anime',
+//   'Pop Culture',
+//   'Movies',
+//   'Shows',
+//   'K pop',
+//   'K Drama',
+//   'Cricket',
+//   'Bollywood',
+//   'Technology',
+//   'Food',
+//   'Travel',
+//   'Politics',
+//   'Health',
+//   'Spirituality',
+//   'Gaming',
+//   'Art',
+//   'Music',
+//   'Fashion',
+//   'Education',
+//   'Startups',
+//   'Environment',
+//   'Fitness',
+// ];
+
 const interests = [
-  'Anime',
-  'Pop Culture',
+  'Beers & booze',
+  'Coffee',
+  'Beauty',
+  'Home',
+  'Eat Out',
+  'Shopping',
+  'Hangout',
   'Movies',
-  'Shows',
-  'K pop',
-  'K Drama',
-  'Cricket',
-  'Bollywood',
-  'Technology',
-  'Food',
-  'Travel',
-  'Politics',
-  'Health',
-  'Spirituality',
-  'Gaming',
-  'Art',
-  'Music',
-  'Fashion',
-  'Education',
-  'Startups',
-  'Environment',
-  'Fitness',
-];
+  'Pizza Dates',
+  'Gym Lovers',
+]
 
 
 

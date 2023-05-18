@@ -167,6 +167,7 @@ const ChatScreen = ({rname,name,ri,si,id,setLastMessage,setShowChatScreen}) => {
 
 
   useEffect(() => {
+
     async function setupPushNotifications() {
       const hasPermission = await Notification.requestPermission();
   
@@ -181,6 +182,7 @@ const ChatScreen = ({rname,name,ri,si,id,setLastMessage,setShowChatScreen}) => {
     }
   
     setupPushNotifications();
+
   }, []);
 
 
@@ -316,11 +318,11 @@ const ChatScreen = ({rname,name,ri,si,id,setLastMessage,setShowChatScreen}) => {
 
     return (
 
-      <div className="absolute top-0 z-50 max-h-screen w-screen overflow-y-hidden flex flex-col">
+      <div className="relative z-10 w-full border h-screen ">
         
-        <div className="z-40 flex fixed items-center bg-gray-50 space-x-3 w-full border-gray-600 border-b p-3">
+        <div className="z-40 flex lg:hidden fixed items-center bg-gray-50 space-x-3 w-full border-gray-600 border-b p-3">
           <ArrowLeftIcon onClick={handleShowChatScreen} 
-              className='h-5 w-5 text-black bg-gray-100' />
+              className='h-8 w-8 text-red-700 bg-gray-100' />
           <img
             src={`https://source.unsplash.com/featured/?girls/${query.name}`}
             className="rounded-full h-12 w-12"
@@ -329,9 +331,9 @@ const ChatScreen = ({rname,name,ri,si,id,setLastMessage,setShowChatScreen}) => {
         </div>
 
 
-        <div className="flex-1 flex h-screen bg-white flex-col p-6">
+        <div className="flex-1 flex h-full bg-white flex-col p-6">
           
-          <div className="relative z-10 top-16 flex-1 flex h-60 flex-col scrollbar-hide overflow-y-scroll">
+          <div className=" top-16 flex-1 flex h-60 flex-col scrollbar-hide overflow-y-scroll">
             {messages?.map((message, index) => {
                const messageDate = new Date(message.created_at);
 
@@ -357,7 +359,7 @@ const ChatScreen = ({rname,name,ri,si,id,setLastMessage,setShowChatScreen}) => {
                     <p className="sticky mx-auto bg-gray-100 p-1 rounded-xl px-5 top-0 z-40 text-gray-600 font-semibold my-2">{formattedDate}</p>
                   ) : null}
                   <div ref={messagesEndRef}
-                    className={`flex flex-col mb-4 h-screen  ${
+                    className={`flex flex-col mb-4 h-full  ${
                       message.sender_id == currentUser?.me?.id ? "ml-auto" : "mr-auto"
                     }`}
                     >

@@ -138,7 +138,7 @@ const ManagedModal = () => {
       {view == 'CARD_DETAILS' && <CardDetails data={data}/> }
 
        
-      {view == 'CHAT_SCREEN' && <ChatScreen last_message={data}/> }
+      {/* {view == 'CHAT_SCREEN' && <ChatScreen last_message={data}/> } */}
 
        
       {view === "SHOP_INFO" && (
