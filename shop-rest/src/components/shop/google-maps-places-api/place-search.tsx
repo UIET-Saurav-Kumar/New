@@ -16,7 +16,7 @@ export default function PlaceSearch(props:any) {
 
   const queryClient = useQueryClient();
 
-  const {shopName, handleApiPhotos, show, searchText, showImages,handleBusinessName,handleLogoImg, showLogoImg, handlePhotos, handleImage, handleTotalRating, data, handleReviews, handleOpen, handleRating} = props;
+  const {shopName, handleApiPhotos, show,passion_page_query, searchText, showImages,handleBusinessName,handleLogoImg, showLogoImg, handlePhotos, handleImage, handleTotalRating, data, handleReviews, handleOpen, handleRating} = props;
 
   const [place_Id, setPlace_Id] = useState([]);
   
@@ -43,6 +43,7 @@ export default function PlaceSearch(props:any) {
   const { openModal } = useModalAction();
 
   const [shop_Name, setShopName] = useState('')
+  
 
 
 
@@ -84,6 +85,8 @@ export default function PlaceSearch(props:any) {
      mutateSearch(params)
 
 }, [searchText])
+
+console.log('query avail', searchText, searchResults)
 
  
 // useEffect(() => {
@@ -322,7 +325,7 @@ function shopRoute(result) {
  
   return (
         <> 
-        <p className='font-semibold w-full text-center p-2 text-gray-700 '>
+        <p className={` ${passion_page_query ? 'hidden' : 'block'} font-semibold w-full text-center p-2 text-gray-700 `}>
           {searchText}
         </p>
 

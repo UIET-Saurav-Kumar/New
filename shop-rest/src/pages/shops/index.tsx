@@ -41,11 +41,44 @@ import PlaceSearch from "@components/shop/google-maps-places-api/place-search";
 import { useShopAvailabilityQuery } from "@data/home/use-shop-availability-query";
 
 
+
+const tabs = [
+  {
+   name:'Glam Gang',  tag:'Shine bright with your squad', slug:'Top Salons'},
+
+   {
+   src:'/passions/2.jpeg', tag:' Raise a glass together', slug:'Top Bars'},
+
+   {
+   src:'/passions/3.jpeg', tag:' Sip the world one cup at a time', slug:'Coffee Shops'},
+
+   {
+   src:'/passions/4.jpeg', tag:'Devour flavors with friends', slug:'Top Restraunts'},
+
+   {
+   src:'/passions/5.jpeg', tag:'Lift, hustle, and grow together', slug:'Gyms'},
+
+   {
+   src:'/passions/6.jpeg', tag:' Radiate good vibes only', slug:'Hangout Places'},
+
+   {
+   src:'/passions/7.jpeg', tag:' Beautify spaces, together', slug:'Home Decorater'},
+
+   {
+   src:'/passions/8.jpeg', tag:'Experience stories, together', slug:'Movie Theaters'},
+
+   {
+   src:'/passions/9.jpeg', tag:' Savor every slice with the crew', slug:'Pizza Shops'},
+
+   {
+   src:'/passions/10.jpeg', tag:'Shop till you drop, in style', slug:'malls and shopping centers'},
+];
+
 const ProductFeedLoader = dynamic(
   () => import("@components/ui/loaders/product-feed-loader")
 );
 
-const ShopsPage = () => {
+const ShopsPage = ({passion_page_query}) => {
 
   const loadMoreRef = useRef();
 
@@ -87,6 +120,8 @@ const ShopsPage = () => {
   const [open , setOpen] = useState('');
 
   const [rating, setRating] = useState('');
+
+  const [tabQuery, setTabQuery] = useState('')
 
 
 
@@ -224,6 +259,15 @@ const ShopsPage = () => {
     );
   }
 
+  console.log('query avail tab', tabQuery)
+
+  function handleTabQuery(tab: string) {
+
+    console.log('query avail tab fun',tab)
+    setTabQuery(tab)
+  }
+  
+
 
   return (
 
@@ -266,11 +310,27 @@ const ShopsPage = () => {
 
     <div className="w-full">
 
-        <div className='flex justify-between mx-5  p-3 bg-gray-100 mt-2'>
-        { shop_check !==0 && <h3 className='font-semibold text-xs sm:text-sm md:text-sm lg:text-md 2xl:text-md'>
+        <div className={`${query?.slug ? 'hidden' : 'block'} flex justify-between mx-5  p-3 bg-gray-100 mt-2`}>
+        { shop_check !==0  && <h3 className='font-semibold text-xs sm:text-sm md:text-sm lg:text-md 2xl:text-md'>
              Local shops near you 
           </h3> } 
         </div>
+
+        {/* <div className={`${query?.slug ? 'block' : 'hidden'} flex items-center space-x-5 overflow-x-scroll w-full`}>
+            {tabs
+                ?.sort((a, b) => (passion_page_query === b.slug ? 1 : -1))
+                ?.map((t) => (
+                    <button onClick={()=>handleTabQuery(t.slug)}
+                        className={`${
+                            passion_page_query === t.slug ? 'text-blue-700 font-bold' : ''
+                        } whitespace-nowrap border border-gray-300 scrollbar-hide font-semibold text-gray-700  rounded-xl px-4 p-1 `}
+                    >
+                        {t.slug}
+                    </button>
+                ))}
+        </div> */}
+
+
        
         {/* <div className='xl+:mx-0 mt-0 sm:flex lg:flex md:flex xl:flex 2xl:flex'> */}
 
@@ -289,13 +349,14 @@ const ShopsPage = () => {
                           return (
                             
                             <div className="flex flex-col">
-                              { query?.avail == 'false' &&
+                              {query?.avail  == 'false' &&
                                <PlaceSearch
                                 showLogoImg={true}
-                                searchText={query?.text}
+                                passion_page_query={passion_page_query}
+                                searchText={ query?.text || query?.slug || tabQuery }
                                 showImages = {false}
                                 data={data}
-                                shopName={getText()} 
+                                shopName={getText() || query?.slug || tabQuery} 
                                 handlePhotos={handleApiPhotos}
                                 handleLogoImg={handleLogoImg}
                                 handleBusinessName={handleBusinessName}
@@ -305,7 +366,7 @@ const ShopsPage = () => {
                                 handleReviews={handleReviews} />
                               }
 
-                              { query?.avail !== 'false' && 
+                              { query?.avail !== 'false'  && 
                                 <div className={` ${query.text_type == 'shop' || query.text_type == 'Category'  || query.text_type == 'Shop_Category' ? 'grid grid-cols-2 place-items-center px-2 lg:px- mt-4 sm:grid-cols-3 md:grid-cols-4 gap-2 lg:gap-8 lg:grid-cols-4 xl:grid-cols-5 w-full' : 'flex flex-col'}`} key={idx}>
                                   {page?.data?.slice(0,21).filter((shop) => shop?.is_active === 1).map((shop: any) => (
                                     <ShopCard2 text={getText()} type={getType()} category={getCategory()} 

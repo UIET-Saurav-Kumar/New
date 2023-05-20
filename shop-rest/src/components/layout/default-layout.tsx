@@ -68,7 +68,7 @@ const DefaultLayout: React.FC = ({ children }) => {
       { shop_check == 0 ? <HeaderMiddle searchbar={false}  />  : <HeaderMiddle searchbar={true} />  }
       </div>
       <div>{children}</div>
-      { router?.pathname == '/salon-near-me' ? null : <MobileNavigation /> }
+      { router?.pathname == '/salon-near-me' || router?.pathname == '/find-people' ? null : <MobileNavigation /> }
       { router?.pathname == '/salon-near-me' ? null : <Footer/> }
       
     </div>

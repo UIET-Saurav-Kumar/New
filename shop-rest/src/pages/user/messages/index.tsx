@@ -17,6 +17,7 @@ import Link from 'next/link';
 import { ArrowLeftIcon } from "@heroicons/react/outline";
 import router, { Router, useRouter } from "next/router";
 import { Tab } from '@headlessui/react';
+import { getImagesByUserId } from "@data/images-upload/get-uploaded-images.query";
 
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -63,8 +64,10 @@ const UsersList = () => {
     return response;
   };
 
+ 
   const { mutate: updateMessageStatusMutate } = useMutation(updateMessageStatus);
 
+  const { data: images, isLoading, isError, refetch } = getImagesByUserId(currentUserData?.me?.id);
 
   const handleAccept = (id:any) => {
      const newChatId = uuidv4();
@@ -168,9 +171,9 @@ const UsersList = () => {
 
   return (
 
-    <div className="  relative  w-full max-h-screen">
+    <div className="   relative  w-full h-screen ">
       
-      <div className="z-40 flex sticky top-0 p-5 items-center bg-gray-50 space-x-3 w-full border-gray-600 border-b ">
+      <div className={` ${showChatScreen ? 'hidden lg:block' : ''} z-40 flex sticky top-0 p-5 items-center bg-gray-50 space-x-3 w-full border-gray-600 border-b `}>
         <ArrowLeftIcon
           onClick={() => router.push('/home')}
           className="h-5 w-5 text-black bg-gray-100"
@@ -181,15 +184,15 @@ const UsersList = () => {
 
       {  
        likesData?.filter((l:any)=>l.user_id == currentUserData?.me?.id || l.liked_by == currentUserData?.me?.id)?.length == 0 ? 
-         <p className=" w-full flex h-screen  justify-center items-center text-gray-400 font-bold text-2xl">
+         <p className=" w-full flex h-screen   justify-center items-center text-gray-400 font-bold text-2xl">
              No messages
          </p> 
         :
-        <div className=" flex flex-col lg:flex-row lg:items-center lg:w-full">
-          <div className="lg:relative z-40 lg:w-1/4">
-            {
-              !showChatScreen && 
-              (
+        <div className=" flex flex-col lg:flex-row lg:items-start lg:w-full h-full ">
+        <div className='  lg:w-1/3   h-full overflow-auto '>
+          {
+              // !showChatScreen && 
+              // (
                 likesData
                 ?.sort((a: any, b: any) => new Date(a.updated_at) - new Date(b.updated_at))
                 .filter((l:any)=>l.user_id == currentUserData?.me?.id || l.liked_by == currentUserData?.me?.id).map((like: any) => (
@@ -209,9 +212,9 @@ const UsersList = () => {
                         {currentUserData?.me?.id == like.user_id ?  like.liked_by_name : like.user_name}
                       </p>
                       {like.user_id == currentUserData?.me?.id && like.status == 'pending' && (
-                        <p className="text-gray-400 text-sm">  {like.liked_by_name} likes your profile</p>
+                        <p className="text-gray-400 text-xs">  {like.liked_by_name} likes your profile</p>
                       )}
-                      <p className="text-gray-500 text-lg">
+                      <p className="text-gray-500 text-sm">
                       {
                         Array.isArray(lastMessage) &&
                         lastMessage
@@ -220,10 +223,10 @@ const UsersList = () => {
                         }
                       </p>
                       {(like.user_id !== currentUserData?.me?.id &&  like.status == 'pending') ? (
-                        <p className="text-yellow-600 text-sm">Request {like.status}</p>
+                        <p className="text-yellow-600 text-xs">Request {like.status}</p>
                       ):null }
                       {like.user_id !== currentUserData?.me?.id && (like.status == 'pending') && (
-                        <p className="text-yellow-600 font-bold text-sm">Requested</p>
+                        <p className="text-yellow-600 font-bold text-xs">Requested</p>
                       )}
                     </div>
                     {
@@ -244,7 +247,7 @@ const UsersList = () => {
                 : 
                   <div
                     key={like.id}
-                    className="flex bg-gray-50  shadow-00 p-5  border-r cursor-pointer hovver:bg-gray-200  items-center space-x-4"
+                    className="flex bg-gray-50  shadow-00 p-5  border-r border-b cursor-pointer hovver:bg-gray-200  items-center space-x-4"
                     >
                     <img
                       className="h-12 w-12 rounded-full"
@@ -255,13 +258,13 @@ const UsersList = () => {
                         {currentUserData?.me?.id == like.user_id ?  like.liked_by_name : like.user_name}
                       </p>
                       {like.user_id == currentUserData?.me?.id && like.status == 'pending' && (
-                        <p className="text-gray-400 text-sm">  {like.liked_by_name} likes your profile</p>
+                        <p className="text-gray-400 text-xs">  {like.liked_by_name} likes your profile</p>
                       )}
                       { like.status == 'accepted' && (
-                        <p className="text-green-600 text-sm">Request {like.status}</p>
+                        <p className="text-green-600 text-xs">Request {like.status}</p>
                       )}
                       {(like.user_id !== currentUserData?.me?.id &&  like.status == 'pending') ? (
-                        <p className="text-yellow-600 text-sm">Request {like.status}</p>
+                        <p className="text-yellow-600 text-xs">Request {like.status}</p>
                       ):null }
                     </div>
 
@@ -279,10 +282,11 @@ const UsersList = () => {
                       )}
                   </div>
                ))
-              )
+              // )
             }
           </div>
-          <div className="lg:relative lg:flex lg:items-end  lg:z-50 lg:w-full">
+
+          <div className=" relative flex items-end  lg:z-50 lg:w-full">
             {showChatScreen && (
               <ChatScreen
                 setLastMessage={setLastMessage}

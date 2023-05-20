@@ -61,6 +61,8 @@ export const data = [
       description: 'Phasellus auctor, tellus eu bibendum ornare, nibh nulla malesuada dolor, ut luctus enim justo vel lorem.',
     },
   ];
+
+  
   //
 
 
@@ -332,7 +334,7 @@ export const data = [
         
       isAuthorize && setIsLiked((prevIsLiked) => !prevIsLiked);
   
-      if ( isAuthorize && !isLiked) {
+      if (isAuthorize && !isLiked) {
 
         const newChatId = uuidv4();
 
