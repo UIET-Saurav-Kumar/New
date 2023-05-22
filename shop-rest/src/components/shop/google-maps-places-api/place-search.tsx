@@ -76,7 +76,7 @@ export default function PlaceSearch(props:any) {
     };
     
     const params = {
-      query: searchString?.query,
+      query: searchString?.query || searchText,
       city: getLocation?.formattedAddress,
       lat: getLocation?.lat,
       lng: getLocation?.lng,

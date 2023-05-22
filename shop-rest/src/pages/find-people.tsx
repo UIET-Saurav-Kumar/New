@@ -83,7 +83,7 @@ const businessesButtonSpring = useSpring({
 
   return (
     <div className='relative z-10 container w-full mx-auto  py-3'>
-      <div className="sticky top-0  w-full bg-white mx-auto flex items-center p-4 justify-center z-40 tabs">
+      <div className="sticky top-0 w-full bg-white mx-auto flex items-center p-4 justify-center z-40 tabs">
               <animated.button
                 style={{
                   ...communityButtonSpring,

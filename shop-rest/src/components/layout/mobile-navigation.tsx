@@ -80,7 +80,8 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
 
       { isAuthorize && <motion.button
           whileTap={{ scale: 0.88 }}
-          onClick={() => router.push("/user/messages")}
+          onClick={()=>openModal('USER_MESSAGE_LIST')}
+          // onClick={() => router.push("/user/messages")}
           className="flex p-2 h-full items-center justify-center focus:outline-none focus:text-accent"
         >
           <span className="sr-only">{t("msg")}</span>

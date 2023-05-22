@@ -284,18 +284,21 @@ const ChatScreen = ({rname,name,ri,si,id,setLastMessage,setShowChatScreen}) => {
             chat_id: id, // Replace query.id with chatId
             content: message,
           });
+          
 
-          handleSendMessage(message)
+          handleSendMessage(message);
+          newMessageScrollToBottom();
     
-          if ("serviceWorker" in navigator) {
-            const registration = await navigator.serviceWorker.ready;
-            registration.showNotification("New Message", {
-              body: message,
-              icon: "/buylowcal-old.png", // Replace with the path to your notification icon
-            });
-          }
+          // if ("serviceWorker" in navigator) {
+          //   const registration = await navigator.serviceWorker.ready;
+          //   registration.showNotification("New Message", {
+          //     body: message,
+          //     icon: "/buylowcal-old.png", // Replace with the path to your notification icon
+          //   });
+          // }
     
           setMessage("");
+           
         } catch (error) {
           // console.error("Error sending message", error);
         }
@@ -307,6 +310,7 @@ const ChatScreen = ({rname,name,ri,si,id,setLastMessage,setShowChatScreen}) => {
   
     const handleMessageChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
       setMessage(e.target.value);
+       
     };
 
     const groupMessagesByDate = (messages: any[]) => {
@@ -375,7 +379,7 @@ const ChatScreen = ({rname,name,ri,si,id,setLastMessage,setShowChatScreen}) => {
 
         <div className="flex-1 flex h-full bg-white flex-col overflow-auto p-6">
           
-          <div className=" top-0 flex-1 flex h-60  flex-col scrollbar-hide overflow-y-scroll">
+          <div className=" top-0 flex-1 flex transition-all transform-gpu duration-500 h-60  flex-col scrollbar-hide overflow-y-scroll">
 
             {
              messages?.map((message, index) => {
@@ -439,7 +443,7 @@ const ChatScreen = ({rname,name,ri,si,id,setLastMessage,setShowChatScreen}) => {
                      >
                       <p
                         className={`${
-                          message.sender_id == currentUser?.me?.id ? "text-white" : "text-gray-800"
+                          message.sender_id == currentUser?.me?.id ? "text-white w-32" : "text-gray-800"
                         }`}
                       >
                         {message.content}

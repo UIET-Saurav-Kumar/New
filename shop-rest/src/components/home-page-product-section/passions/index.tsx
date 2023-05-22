@@ -91,7 +91,7 @@ export default function Passion() {
 
   return (
     <div className='flex flex-col space-y-2 py-5 text-left w-full  border-t-2 mt-5'> 
-        <h1 className='text-lg lg:text-2xl font-semibold py-4 px-3'>Find your people</h1>
+        <h1 className='text-lg lg:text-2xl font-semibold py-4 px-3'> Find Your Tribe: Connect, Share and Discover Places</h1>
         <div className="h-full w-full grid grid-cols-2 lg:grid-cols-5 place- -center gap-2 px-2">
           
           {gradients?.map((i, index) => (

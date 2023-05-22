@@ -9,6 +9,7 @@ import RechargePlanDetails from "@components/home-page-product-section/bill-paym
 import UpiScanner from "@components/upi-scanner/upi-scanner";
 import QuizValidatorModal from "@components/quiz/quiz-validator-modal";
 import ChatScreen from "src/pages/user/messages/chat-screen";
+import UserMessageList from "src/pages/user/messages";
   
      
 
@@ -136,6 +137,8 @@ const ManagedModal = () => {
       {view == 'PRODUCT_DESCRIPTION' && <ProductDescriptionModal data={data}/> }
 
       {view == 'CARD_DETAILS' && <CardDetails data={data}/> }
+
+      {view == 'USER_MESSAGE_LIST' && <UserMessageList/>}
 
        
       {/* {view == 'CHAT_SCREEN' && <ChatScreen last_message={data}/> } */}

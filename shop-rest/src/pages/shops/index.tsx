@@ -259,12 +259,10 @@ const ShopsPage = ({passion_page_query}) => {
     );
   }
 
-  console.log('query avail tab', tabQuery)
-
+ 
   function handleTabQuery(tab: string) {
 
-    console.log('query avail tab fun',tab)
-    setTabQuery(tab)
+     setTabQuery(tab)
   }
   
 

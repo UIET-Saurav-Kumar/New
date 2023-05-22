@@ -40,7 +40,7 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 
-const UsersList = () => {
+const UserMessageList = () => {
   const { data: currentUserData } = useCustomerQuery();
   const { data: likesData } = useAllLikesQuery();
   const [showAcceptModal, setShowAcceptModal] = useState(false);
@@ -342,4 +342,4 @@ const UsersList = () => {
 
 // MessageList.Layout = DefaultLayout;
 
-export default UsersList;
+export default UserMessageList;
