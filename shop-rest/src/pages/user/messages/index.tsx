@@ -171,7 +171,7 @@ const UserMessageList = () => {
 
   return (
 
-    <div className="   relative  w-full h-screen ">
+    <div className="   relative w-screen lg:w-full h-screen ">
       
       <div className={` ${showChatScreen ? 'hidden lg:block' : ''} z-40 flex sticky top-0 p-5 items-center bg-gray-50 space-x-3 w-full border-gray-600 border-b `}>
         <ArrowLeftIcon
