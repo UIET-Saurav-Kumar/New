@@ -166,6 +166,7 @@ const ChatScreen = ({rname,name,ri,si,id,setLastMessage,setShowChatScreen}) => {
    const { data: currentUser } = useCustomerQuery();
    const { data: images, isLoading, isError, refetch } = getImagesByUserId(ri);
 
+  const [typing,setTyping] = useState(false);
 
   useEffect(() => {
 
@@ -310,6 +311,7 @@ const ChatScreen = ({rname,name,ri,si,id,setLastMessage,setShowChatScreen}) => {
     // const sender = query.si
   
     const handleMessageChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+      e.target.value.length ? setTyping(true) : setTyping(false);
       setMessage(e.target.value);
        
     };
@@ -367,15 +369,18 @@ const ChatScreen = ({rname,name,ri,si,id,setLastMessage,setShowChatScreen}) => {
 
       <div className="relative z-50 w-full border h-screen overflow-auto ">
 
-      <div className=" fixed top-0 z-40 flex  items-center bg-gray-50 space-x-3 w-screen border-b p-3">
-                    <ArrowPrev onClick={handleShowChatScreen} 
-                        className='h-8 w-8 lg:hidden cursor-pointer text-black text-bold ' />
-                    <img
-                      src={`https://source.unsplash.com/featured/?girls/${query.name}`}
-                      className="rounded-full h-12 w-12"
-                    />
-                    <p className="text-lg font-semibold text-gray-900 tracking-wide ml-4">{rname}</p>
-                  </div>
+        <div className=" fixed top-0 z-40 flex  items-center bg-gray-50 space-x-3 w-screen border-b p-3">
+                      <ArrowPrev onClick={handleShowChatScreen} 
+                          className='h-8 w-8 lg:hidden cursor-pointer text-black text-bold ' />
+                      <img
+                        src={`https://source.unsplash.com/featured/?girls/${query.name}`}
+                        className="rounded-full h-12 w-12"
+                      />
+                      <p className="flex flex-col text-lg font-semibold text-gray-900 tracking-wide ml-4">
+                        {rname}
+                        { ri == currentUser?.me?.id  && typing && <span className='transition-all duration-300 text-gray-500 text-xs'> typing...</span>}
+                      </p>
+          </div>
          
         <div className="flex-1 flex h-full bg-white flex-col p-6">
           
@@ -411,7 +416,7 @@ const ChatScreen = ({rname,name,ri,si,id,setLastMessage,setShowChatScreen}) => {
 
                  
 
-                  <div ref={messagesEndRef}
+                  <div  
                     className={`flex flex-col mb-4 h-full  ${
                       message.sender_id == currentUser?.me?.id ? "ml-auto" : "mr-auto"
                     }`}
@@ -440,12 +445,12 @@ const ChatScreen = ({rname,name,ri,si,id,setLastMessage,setShowChatScreen}) => {
 
                     </div>
     
-                    <div
+                    <div  
                       className={`${ 
-                        message.sender_id == currentUser?.me?.id ? "bg-blue-500 w-32 mb-10" : "bg-white max-w-full"
+                        message.sender_id == currentUser?.me?.id ? "bg-blue-500 w-32 mb-10" : "bg-white max-w-full mb-10 w-32"
                       } rounded-lg p-3 shadow-md`}
                      >
-                      <p
+                      <p ref={messagesEndRef}
                         className={`${
                           message.sender_id == currentUser?.me?.id ? "text-white w-32" : "text-gray-800"
                         }`}
@@ -462,7 +467,7 @@ const ChatScreen = ({rname,name,ri,si,id,setLastMessage,setShowChatScreen}) => {
           </div>
 
           
-          <form className="fixed z-40 bottom-0 w-full bg-white  p-4 " onSubmit={handleMessageSubmit}>
+          <form className="  fixed z-40 bottom-0 w-full bg-white  p-4 " onSubmit={handleMessageSubmit}>
             {/* <div className="  flex items-center w-full  bg-transparent  "> */}
               {/* <animated.button
                 className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 ease-in-out mr-2"
