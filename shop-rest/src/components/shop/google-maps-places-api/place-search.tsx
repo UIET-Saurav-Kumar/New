@@ -356,9 +356,9 @@ function shopRoute(result) {
                             {console.log('imggg',result)}
                             <img 
                               src={result?.photo_url?.url+process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
-                              className="h-60 rounded w-60 object-cover " /> 
-                               <div className='flex items-start text-left     mt-4'>
-                                <h4 className='font-semibold     h-full   text-gray-900 text-sm   sm:text-sm lg:text-sm xl:text-md w-full '> 
+                              className="h-60 rounded w-full object-cover mx-auto flex items-center " /> 
+                               <div className='flex items-start text-left mt-4'>
+                                <h4 className='font-semibold h-full   text-gray-900 text-sm   sm:text-sm lg:text-sm xl:text-md w-full '> 
                                  {result?.name} 
                                 </h4>
                                 <p className={` ${result?.opening_hours?.open_now ? 'text-green-700 text-sm font-semibold' : 'text-sm text-red-500 text-semibold'}`}>

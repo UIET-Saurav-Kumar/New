@@ -12,6 +12,7 @@ import { useCustomerQuery } from '@data/customer/use-customer.query';
 import { isToday, isYesterday, isThisWeek, isSameDay, isThisYear, format } from 'date-fns';// import { format } from 'path';
 import { getImagesByUserId } from '@data/images-upload/get-uploaded-images.query';
 import { animated, useSpring } from 'react-spring';
+import { ArrowPrev } from '@components/icons';
 
 
 // create a sample messages array
@@ -364,22 +365,21 @@ const ChatScreen = ({rname,name,ri,si,id,setLastMessage,setShowChatScreen}) => {
 
     return (
 
-      <div className="relative z-50 w-full border h-screen  overflow-auto">
-        
-        <div className=" fixed top-0 z-40 flex    items-center bg-gray-50 space-x-3 w-full border-b p-3">
-          <ArrowLeftIcon onClick={handleShowChatScreen} 
-              className='h-5 w-5 lg:hidden  text-black text-bold ' />
-          <img
-            src={`https://source.unsplash.com/featured/?girls/${query.name}`}
-            className="rounded-full h-12 w-12"
-          />
-          <p className="text-lg font-semibold text-gray-900 tracking-wide ml-4">{rname}</p>
-        </div>
+      <div className="relative z-50 w-full border h-screen overflow-auto ">
 
-
-        <div className="flex-1 flex h-full bg-white flex-col overflow-auto p-6">
+      <div className=" fixed top-0 z-40 flex  items-center bg-gray-50 space-x-3 w-screen border-b p-3">
+                    <ArrowPrev onClick={handleShowChatScreen} 
+                        className='h-8 w-8 lg:hidden cursor-pointer text-black text-bold ' />
+                    <img
+                      src={`https://source.unsplash.com/featured/?girls/${query.name}`}
+                      className="rounded-full h-12 w-12"
+                    />
+                    <p className="text-lg font-semibold text-gray-900 tracking-wide ml-4">{rname}</p>
+                  </div>
+         
+        <div className="flex-1 flex h-full bg-white flex-col p-6">
           
-          <div className=" top-0 flex-1 flex transition-all transform-gpu duration-500 h-60  flex-col scrollbar-hide overflow-y-scroll">
+          <div className="relative top-0 flex-1 flex transition-all transform-gpu duration-500 h-60  flex-col scrollbar-hide overflow-auto">
 
             {
              messages?.map((message, index) => {
@@ -402,10 +402,14 @@ const ChatScreen = ({rname,name,ri,si,id,setLastMessage,setShowChatScreen}) => {
               return (
                 
                 <React.Fragment  key={index}> 
+
+                   
                   
                   {index === 0 || !isSameDay(new Date(messages[index - 1].created_at), messageDate) ? (
-                    <p className="sticky  mx-auto bg-gray-50 p-1 rounded-xl px-9 top-0 z-30 text-gray-600 font-semibold my-2">{formattedDate}</p>
+                    <p className="sticky  mx-auto bg-gray-50 p-1 rounded-xl px-9 top-16 z-50 text-gray-600 font-semibold my-2">{formattedDate}</p>
                   ) : null}
+
+                 
 
                   <div ref={messagesEndRef}
                     className={`flex flex-col mb-4 h-full  ${

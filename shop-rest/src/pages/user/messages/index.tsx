@@ -18,6 +18,7 @@ import { ArrowLeftIcon } from "@heroicons/react/outline";
 import router, { Router, useRouter } from "next/router";
 import { Tab } from '@headlessui/react';
 import { getImagesByUserId } from "@data/images-upload/get-uploaded-images.query";
+import { ArrowPrev } from "@components/icons/arrow-prev copy";
 
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -53,6 +54,9 @@ const UserMessageList = () => {
   const [dataFromChild, setDataFromChild] = useState(null);
   const { query } = useRouter();
   const [lastMessage, setLastMessage] = useState(null);
+
+  const [activeUsers, setActiveUsers] = useState(true);
+  const [pendingUsers, setPendingUsers ] = useState(false);
 
 
   const lastKnownData = useRef({ currentUserData: null, likesData: null });
@@ -169,18 +173,31 @@ const UserMessageList = () => {
   console.log('hadleDataFromChild', dataFromChild);
   console.log('likes data message', lastMessage)
 
+  function handleActiveUsers(){
+    setActiveUsers(true);
+    setPendingUsers(false);
+  }
+
+  function handlePendingUsers(){
+    setActiveUsers(false);
+    setPendingUsers(true);
+  }
+
   return (
 
-    <div className="   relative w-screen lg:w-full h-screen ">
+    <div className=" flex flex-col relative w-screen lg:w-full h-screen ">
       
-      <div className={` ${showChatScreen ? 'hidden lg:block' : ''} z-40 lg:flex hidden lg:sticky  top-0 p-5 items-center bg-gray-50 space-x-3 w-full border-gray-600 border-b `}>
+      {/* <div className={` ${showChatScreen ? 'hidden lg:block' : ''} z-40 lg:flex hidden lg:sticky  top-0 p-5 items-center bg-gray-50 space-x-3 w-full border-gray-600 border-b `}>
         <ArrowLeftIcon
           onClick={() => router.push('/home')}
           className="h-5 w-5 text-black bg-gray-100"
         />
         <p className="text-lg font-semibold text-gray-600 ml-4">{query.rname}</p>
-      </div>
-  
+      </div> */}
+
+         <div className=" absolute z-50  h-20   border bg-gray-100">
+          </div>
+
 
       {  
        likesData?.filter((l:any)=>l.user_id == currentUserData?.me?.id || l.liked_by == currentUserData?.me?.id)?.length == 0 ? 
@@ -188,9 +205,15 @@ const UserMessageList = () => {
              No messages
          </p> 
         :
-        <div className=" flex flex-col lg:flex-row lg:items-start lg:w-full h-full ">
-        <div className='lg:w-1/3 h-full overflow-auto'>
-          {
+        <div className=" flex flex-col lg:flex-row lg:items-start lg:w-full h-full overflow-hidden ">
+           <div className="flex flex-col lg:w-1/3  h-full overflow-auto">
+            <div className="flex items-center space-x-2 h-20 border w-full px-3">
+              <ArrowPrev onClick={()=>router.push('/home')} className="h-12 w-20 cursor-pointer  text-gray-800 font-bold"/>
+               <button onClick={handleActiveUsers} className={` ${activeUsers ? 'text-white bg-green-600 font-bold  transition-all duration-300' : 'text-gray-700 font-semibold bg-white'} w-full border rounded  p-2`}>Active</button>
+               <button onClick={handlePendingUsers} className={` ${pendingUsers ? 'text-white bg-green-600 font-bold  transition-all duration-300' : 'text-gray-700 font-semibold bg-white'} w-full border rounded  p-2`}>Pending</button>
+            </div>
+          <div className=' lg:w-full  h-full overflow-auto'>
+            {
               // !showChatScreen && 
               // (
                 likesData
@@ -200,14 +223,13 @@ const UserMessageList = () => {
                 ?
                   <div
                     key={like.id}
-                    className=" flex bg-gray-50 shadow-00 p-4 border-r cursor-pointer hovver:bg-gray-200 active:bg-gray-200 transition-all duration-500   items-center space-x-4"
+                    className={` ${activeUsers ? 'flex' : 'hidden'}   bg-gray-50 shadow-00 p-4 border-r cursor-pointer hovver:bg-gray-200 active:bg-gray-200 transition-all duration-500   items-center space-x-4`}
                     onClick={() => handleLikeClick(like)}>
                     
                     <img
                       className="h-12 w-12 rounded-full"
                       src={`https://source.unsplash.com/featured/?girls/${like.user_name}`}
                     /> 
-
                     <div className="flex-grow">
                       <p className="text-gray-800 text-sm font-medium">
                         {currentUserData?.me?.id == like.user_id ?  like.liked_by_name : like.user_name}
@@ -216,11 +238,11 @@ const UserMessageList = () => {
                         <p className="text-gray-400 text-xs">  {like.liked_by_name} likes your profile</p>
                       )}
                       <p className="text-gray-500 text-sm">
-                      {
-                        Array.isArray(lastMessage) &&
-                        lastMessage
-                          .find(lm => lm.chat_id === like.chat_id)
-                          ?.lastMessage?.slice(-1)[0]?.content || 'Request ' + like.status
+                        {
+                          Array.isArray(lastMessage) &&
+                          lastMessage
+                            .find(lm => lm.chat_id === like.chat_id)
+                            ?.lastMessage?.slice(-1)[0]?.content || 'Request ' + like.status
                         }
                       </p>
                       {(like.user_id !== currentUserData?.me?.id &&  like.status == 'pending') ? (
@@ -235,9 +257,9 @@ const UserMessageList = () => {
                       like.user_id == currentUserData?.me?.id && (
                         <button
                           className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-                           onClick={() => {
-                           setSelectedLike(like);
-                           handleAccept(like.id)
+                          onClick={() => {
+                            setSelectedLike(like);
+                            handleAccept(like.id)
                           }}
                           >
                           Accept
@@ -248,7 +270,7 @@ const UserMessageList = () => {
                 : 
                   <div
                     key={like.id}
-                    className="flex bg-gray-50  shadow-00 p-5  border-r border-b cursor-pointer hovver:bg-gray-200  items-center space-x-4"
+                    className={` ${pendingUsers ? 'flex transition-all duration-200' : 'hidden'} flex bg-gray-50  shadow-00 p-5  border-r border-b cursor-pointer hovver:bg-gray-200  items-center space-x-4`}
                     >
                     <img
                       className="h-12 w-12 rounded-full"
@@ -286,8 +308,9 @@ const UserMessageList = () => {
               // )
             }
           </div>
+          </div>
 
-          <div className=" relative flex items-end  lg:z-50 lg:w-full">
+          <div className="  w-full  z-50 ">
             {showChatScreen && (
               <ChatScreen
                 setLastMessage={setLastMessage}

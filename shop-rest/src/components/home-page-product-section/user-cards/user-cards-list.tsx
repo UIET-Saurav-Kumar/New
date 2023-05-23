@@ -35,28 +35,28 @@ import { filter } from 'lodash';
   let sampleUsers = [
     {     
         id: 1,
-        name: 'Sunita',
+        name: 'Shikha Rana',
         gender: 'Female',
-        location: 'Mumbai',
+        location: 'Chandigarh',
         imageUrl: 'https://source.unsplash.com/featured/?indian-young-girl',
     },
     {
       id: 2,
-        name: 'Ravi',
+        name: 'Ravinder Gupta',
         gender: 'Male',
         location: 'Delhi',
         imageUrl: 'https://source.unsplash.com/featured/?indian-young-girl',
     },
     {
       id: 3,
-        name: 'Ayesha',
+        name: 'Ayesha Garg',
         gender: 'Female',
         location: 'Bangalore',
         imageUrl: 'https://source.unsplash.com/featured/?indian-young-girl',
     },
     {
       id: 4,
-        name: 'Vijay',
+        name: 'Vijay Rao',
         gender: 'Male',
         location: 'Kolkata',
         imageUrl: 'https://source.unsplash.com/featured/?indian-young-girl',
@@ -114,7 +114,7 @@ import { filter } from 'lodash';
       id: 12,
         name: 'Mohit Chikura',
         gender: 'male',
-        location: 'Mumbai',
+        location: 'Ludhiana',
         imageUrl: 'https://source.unsplash.com/featured/?indian-young-girl',
     },
     {
