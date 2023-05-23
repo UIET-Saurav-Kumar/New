@@ -117,6 +117,62 @@ import { filter } from 'lodash';
         location: 'Mumbai',
         imageUrl: 'https://source.unsplash.com/featured/?indian-young-girl',
     },
+    {
+      id: 13,
+        name: 'Amit Sharma',
+        gender: 'male',
+        location: 'chandigarh',
+        imageUrl: 'https://source.unsplash.com/featured/?indian-young-girl',
+    },
+    {
+      id: 14,
+        name: 'AmanDeep Singh',
+        gender: 'male',
+        location: 'Ludhiana',
+        imageUrl: 'https://source.unsplash.com/featured/?indian-young-girl',
+    },
+    {
+      id: 15,
+        name: 'Gaurav Thakur',
+        gender: 'male',
+        location: 'Mumbai',
+        imageUrl: 'https://source.unsplash.com/featured/?indian-young-girl',
+    },
+    {
+      id: 16,
+        name: 'Shreeja Chaturvedi',
+        gender: 'female',
+        location: 'Mumbai',
+        imageUrl: 'https://source.unsplash.com/featured/?indian-young-girl',
+    },
+    {
+      id: 17,
+        name: 'Monica Aggarwal',
+        gender: 'female',
+        location: 'Mumbai',
+        imageUrl: 'https://source.unsplash.com/featured/?indian-young-girl',
+    },
+    {
+      id: 18,
+        name: 'Urooj Asfaq',
+        gender: 'female',
+        location: 'Mumbai',
+        imageUrl: 'https://source.unsplash.com/featured/?indian-young-girl',
+    },
+    {
+      id: 19,
+        name: 'Manisha Chandel',
+        gender: 'female',
+        location: 'Mumbai',
+        imageUrl: 'https://source.unsplash.com/featured/?indian-young-girl',
+    },
+    {
+      id: 20,
+        name: 'Arjun Singh Chandel',
+        gender: 'male',
+        location: 'Shimla',
+        imageUrl: 'https://source.unsplash.com/featured/?indian-young-girl',
+    },
     
 ];
 
