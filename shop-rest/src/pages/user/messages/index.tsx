@@ -173,7 +173,7 @@ const UserMessageList = () => {
 
     <div className="   relative w-screen lg:w-full h-screen ">
       
-      <div className={` ${showChatScreen ? 'hidden lg:block' : ''} z-40 flex sticky top-0 p-5 items-center bg-gray-50 space-x-3 w-full border-gray-600 border-b `}>
+      <div className={` ${showChatScreen ? 'hidden lg:block' : ''} z-40 lg:flex hidden lg:sticky  top-0 p-5 items-center bg-gray-50 space-x-3 w-full border-gray-600 border-b `}>
         <ArrowLeftIcon
           onClick={() => router.push('/home')}
           className="h-5 w-5 text-black bg-gray-100"
@@ -189,7 +189,7 @@ const UserMessageList = () => {
          </p> 
         :
         <div className=" flex flex-col lg:flex-row lg:items-start lg:w-full h-full ">
-        <div className='  lg:w-1/3   h-full overflow-auto '>
+        <div className='lg:w-1/3 h-full overflow-auto'>
           {
               // !showChatScreen && 
               // (
@@ -207,6 +207,7 @@ const UserMessageList = () => {
                       className="h-12 w-12 rounded-full"
                       src={`https://source.unsplash.com/featured/?girls/${like.user_name}`}
                     /> 
+
                     <div className="flex-grow">
                       <p className="text-gray-800 text-sm font-medium">
                         {currentUserData?.me?.id == like.user_id ?  like.liked_by_name : like.user_name}
@@ -234,9 +235,9 @@ const UserMessageList = () => {
                       like.user_id == currentUserData?.me?.id && (
                         <button
                           className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-                          onClick={() => {
-                            setSelectedLike(like);
-                            handleAccept(like.id)
+                           onClick={() => {
+                           setSelectedLike(like);
+                           handleAccept(like.id)
                           }}
                           >
                           Accept

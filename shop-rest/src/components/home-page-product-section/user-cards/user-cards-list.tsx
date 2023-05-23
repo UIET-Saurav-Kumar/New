@@ -29,38 +29,97 @@ import ProductFeedLoader from '@components/ui/loaders/product-feed-loader';
 import { filter } from 'lodash';
 
 
-export const data = [
-    {
-      id: 1,
-      name: 'John Doe',
-      imageUrl: 'https://source.unsplash.com/featured/?indian-college-girl',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce interdum orci sit amet faucibus lacinia.',
+
+
+ 
+  let sampleUsers = [
+    {     
+        id: 1,
+        name: 'Sunita',
+        gender: 'Female',
+        location: 'Mumbai',
+        imageUrl: 'https://source.unsplash.com/featured/?indian-young-girl',
     },
     {
       id: 2,
-      name: 'Jane Doe',
-      imageUrl: 'https://source.unsplash.com/featured/?indian-modern-woman',
-      description: 'Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
+        name: 'Ravi',
+        gender: 'Male',
+        location: 'Delhi',
+        imageUrl: 'https://source.unsplash.com/featured/?indian-young-girl',
     },
     {
       id: 3,
-      name: 'Bob Smith',
-      imageUrl: 'https://source.unsplash.com/featured/?indian-person',
-      description: 'Nullam euismod, erat nec tristique semper, nulla tellus commodo tellus, sit amet congue urna tellus ut nisi.',
+        name: 'Ayesha',
+        gender: 'Female',
+        location: 'Bangalore',
+        imageUrl: 'https://source.unsplash.com/featured/?indian-young-girl',
     },
     {
       id: 4,
-      name: 'Alice Johnson',
-      imageUrl: 'https://source.unsplash.com/featured/?indian-young-girl',
-      description: 'Mauris ut dolor quis quam varius auctor. In non velit non metus aliquam facilisis vitae ut nisi.',
+        name: 'Vijay',
+        gender: 'Male',
+        location: 'Kolkata',
+        imageUrl: 'https://source.unsplash.com/featured/?indian-young-girl',
     },
     {
       id: 5,
-      name: 'Tom Davis',
-      imageUrl: 'https://source.unsplash.com/featured/?indian-man',
-      description: 'Phasellus auctor, tellus eu bibendum ornare, nibh nulla malesuada dolor, ut luctus enim justo vel lorem.',
+        name: 'Aman Singh Virk',
+        gender: 'Male',
+        location: 'Chandigarh',
+        imageUrl: 'https://source.unsplash.com/featured/?indian-young-girl',
     },
-  ];
+    {
+      id: 6,
+        name: 'Rashi Kukreja',
+        gender: 'female',
+        location: 'Mohali',
+        imageUrl: 'https://source.unsplash.com/featured/?indian-young-girl',
+    },
+    {
+      id: 7,
+        name: 'Akshita Sharma',
+        gender: 'Female',
+        location: 'Chandigarh',
+        imageUrl: 'https://source.unsplash.com/featured/?indian-young-girl',
+    },
+    {
+      id: 8,
+        name: 'Visheshtha Bhardawaj',
+        gender: 'feale',
+        location: 'Kolkata',
+        imageUrl: 'https://source.unsplash.com/featured/?indian-young-girl',
+    },
+    {
+      id: 9,
+        name: 'Karan Thapar',
+        gender: 'Male',
+        location: 'Panchkula',
+        imageUrl: 'https://source.unsplash.com/featured/?indian-young-girl',
+    },
+    {
+      id: 10,
+        name: 'Abhay Raichand',
+        gender: 'male',
+        location: 'Delhi',
+        imageUrl: 'https://source.unsplash.com/featured/?indian-young-girl',
+    },
+    {
+      id: 11,
+        name: 'Aruna sharma',
+        gender: 'female',
+        location: 'Delhi',
+        imageUrl: 'https://source.unsplash.com/featured/?indian-young-girl',
+    },
+    {
+      id: 12,
+        name: 'Mohit Chikura',
+        gender: 'male',
+        location: 'Mumbai',
+        imageUrl: 'https://source.unsplash.com/featured/?indian-young-girl',
+    },
+    
+];
+
 
   
   //
@@ -246,7 +305,7 @@ export const data = [
     }, [users, currentUserData, likesData, getLocation]);
     
 
-    console.log('likes', getLocation,  filteredUsers);
+    console.log('likes', filteredUsers?.slice(0,10));
     
     
     const useRecordLikeDislike = () => { 
@@ -272,7 +331,7 @@ export const data = [
         {/* )} */}
         <div className="transition-all duration-500 grid grid-cols-3 lg:grid-cols-6 gap-2 lg:gap-6">
           {filteredUsers && filteredUsers?.length > 0 ? (
-            filteredUsers?.slice(0, 20).map((user: any) => {
+            filteredUsers?.slice(0,20).map((user: any) => {
               const card: LikedCard = { user_id: user.id, liked_by: myId };
               if (
                 !likedCards.some(
@@ -296,10 +355,24 @@ export const data = [
               return null;
             })
           ) : (
-            isAuthorize && 
-              <div className="flex justify-center items-center mx-auto text-center h-full w-full">
-                <ProductFeedLoader limit={10} uniqueKey={user?.id}  />
-              </div>
+            sampleUsers?.map((usr)=>{
+              return(
+                <Card
+                    key={usr.id}
+                    myId={myId}
+                    user={usr}
+                    setIsChatOpen={setIsChatOpen}
+                    setSelectedUser={setSelectedUser}
+                    useRecordLikeDislike={useRecordLikeDislike}
+                    handleLike={handleLike}
+                    // card={card}
+                  />
+              )
+            })
+            // isAuthorize && 
+            //   <div className="flex justify-center items-center mx-auto text-center h-full w-full">
+            //     <ProductFeedLoader limit={10} uniqueKey={user?.id}  />
+            //   </div>
           )}
         </div>
       </div>
@@ -397,9 +470,9 @@ export const data = [
           <h2 className="text-sm lg:text-lg font-medium">{user?.name}</h2>
           <h2 className="text-xs text-gray-500 lg:text-sm font-light">
           {
-            user?.current_location == null
+          user?.location ? user?.location :  user?.current_location == null
               ? ''
-              : typeof user.current_location === 'string' ? user.current_location : user?.current_location?.formattedAddress
+              : typeof user.current_location === 'string' ? user.current_location  : user?.current_location?.formattedAddress 
               
           }
 
