@@ -8,7 +8,7 @@ import { usePreventRouteChange } from "./prevent-route-change-hook";
  import { ArrowLeftIcon } from "@heroicons/react/outline";
 
 
-export default function Modal({ open, onClose, children }: any) {
+export default function Modal({ open, onClose, children, view }: any) {
   
   const cancelButtonRef = useRef(null);
   const { t } = useTranslation("common");
@@ -24,9 +24,9 @@ export default function Modal({ open, onClose, children }: any) {
       }
     };
 
-    if (open && !router.asPath.endsWith('#modal')) {
-      router.push(`${router.asPath}#modal`, undefined, { shallow: true });
-    } else if (!open && router.asPath.endsWith('#modal')) {
+    if (!open && router.asPath.endsWith('#modal')  && view !== 'OTP_REGISTER') {
+      router.back();
+    } else if (!open && router.asPath.endsWith('#modal') && view !== 'OTP_REGISTER') {
       router.back();
     }
 
@@ -35,7 +35,7 @@ export default function Modal({ open, onClose, children }: any) {
     return () => {
       window.removeEventListener("popstate", handleBackButton);
     };
-  }, [open, onClose, router]);
+  }, [open, onClose, view,router]);
   
 
   return (

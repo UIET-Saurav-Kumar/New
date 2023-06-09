@@ -82,8 +82,12 @@ export default function ShopMobileView({data, mapUrl, shopData, pageURL, open,
     })
   }
 
-   const slug = ['chandigarh-grocery-store', 'kosmetics-india'];
-  
+   const slug = ['chandigarh-grocery-store', 'kosmetics-india', 'retail-store'];
+   
+   function checkElement(){
+    return slug?.some(el => data?.slug?.includes(el))
+   }
+
     return (
 
       <>
@@ -103,12 +107,13 @@ export default function ShopMobileView({data, mapUrl, shopData, pageURL, open,
                     <ShopProfileCard  reviews={reviews} totalRating={totalRating} rating={rating} open={open} data={data} /> 
                    </div>)  }
                 
-                <div className='w-full flex-grow'>
+              { !checkElement() && <div className='w-full flex-grow'>
                    <img alt={t("heading")} 
                         className='object-cover h-38 sm:h-72 rounded-lg xs+++:rounded-l-none md:h-72 lg:w-2/3 w-full'
                         src={query.slug !== 'kosmetics-india' ? data?.cover_image?.original! : '/kosmetics-shop-mob.jpg' ?? "/product-placeholder.svg"}
                    />
                 </div>
+              }
 
                 {  slug.some(el => data.slug.includes(el)) ? null : 
                 ( <div className='block sm:hidden'> 
@@ -123,8 +128,7 @@ export default function ShopMobileView({data, mapUrl, shopData, pageURL, open,
              <div className="px-2">
               <ShopDescription mapUrl={mapUrl} data={data}/>
              </div>
-             <div className="">
-                  <div className={`flex px-1 gap-3 w-full overflow-x-scroll`}>
+                   <div className={`flex px-1 gap-3 w-full overflow-x-scroll`}>
                         
                         {placePhotos?.map((binaryImage, index) => {
                             return <img key={index} onClick={handleImage}
@@ -134,7 +138,7 @@ export default function ShopMobileView({data, mapUrl, shopData, pageURL, open,
                           })}
                   </div>
 
-                </div>
+             
               </div>
              )
                 

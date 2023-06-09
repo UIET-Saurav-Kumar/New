@@ -61,7 +61,7 @@ export default function PlacePhotos(props:any) {
     
     const searchString = {
       query: shop_name?.split(' ').join('-'), 
-      city: data?.settings?.location?.formattedAddress.replace(',','').split(' ').join('-'),
+      city: data?.settings?.location?.formattedAddress?.replace(',','').split(' ').join('-'),
     };
     
     const params = {

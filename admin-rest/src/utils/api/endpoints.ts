@@ -113,5 +113,9 @@ export const API_ENDPOINTS = {
 
   QUIZ: 'quiz',
 
+  ADD_AUTH_BRANDS: 'add-auth-brands',
+  GET_AUTH_BRANDS: 'auth-brands',
+  UPDATE_AUTH_BRANDS: 'update-auth-brands'
+
 };
 

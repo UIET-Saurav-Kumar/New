@@ -73,6 +73,8 @@ const ShopCard2: React.FC<ShopCardProps> = ({ type,shop,text,key,category, shopI
     enabled: Boolean(shopId),
   });
 
+  
+
   const [reviews, setReviews] = useState('');
 
   const [placePhotos, setPlacePhotos] = useState([]);

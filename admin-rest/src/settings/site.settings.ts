@@ -71,7 +71,6 @@ export const siteSettings = {
         label: "Products",
         icon: "ProductsIcon",
       },
-
       {
         href: ROUTES.CONTACT,
         label: " Contact Queries",
@@ -236,14 +235,26 @@ export const siteSettings = {
         permissions: adminOwnerAndStaffOnly,
       },
       {
+        href: (shop: string) => `/${shop}${ROUTES.ADD_AUTH_BRANDS}`,
+        label: "Add Authorise Brands",
+        icon: "AttributeIcon",
+        permissions: adminOwnerAndStaffOnly,
+      },
+      {
+        href: (shop: string) => `/${shop}${ROUTES.GET_AUTH_BRANDS}`,
+        label: "Authorise Brands",
+        icon: "AttributeIcon",
+        permissions: adminOwnerAndStaffOnly,
+      },
+      {
         href: (shop: string) => `/${shop}${ROUTES.ATTRIBUTES}`,
-        label: "attributes",
+        label: "Attributes",
         icon: "AttributeIcon",
         permissions: adminOwnerAndStaffOnly,
       },
       {
         href: (shop: string) => `/${shop}${ROUTES.PRODUCTS}`,
-        label: "products",
+        label: "Products",
         icon: "ProductsIcon",
         permissions: adminOwnerAndStaffOnly,
       },
@@ -280,7 +291,7 @@ export const siteSettings = {
       },
       {
         href: (shop: string) => `/${shop}${ROUTES.ORDERS}`,
-        label: "orders",
+        label: "Orders",
         icon: "OrdersIcon",
         permissions: adminOwnerAndStaffOnly,
       },
@@ -309,18 +320,18 @@ export const siteSettings = {
         permissions: adminAndOwnerOnly,
       },
 
-      {
-        href: (shop: string) => `/${shop}${ROUTES.WITHDRAWS}`,
-        label: "withdraws",
-        icon: "AttributeIcon",
-        permissions: adminAndOwnerOnly,
-      },
-      {
-        href: (shop: string) => `/${shop}${ROUTES.WHATSAPP_CAMPAIGN}`,
-        label: "Whatsapp Campaign",
-        icon: "AttributeIcon",
-        permissions: adminAndOwnerOnly,
-      },
+      // {
+      //   href: (shop: string) => `/${shop}${ROUTES.WITHDRAWS}`,
+      //   label: "withdraws",
+      //   icon: "AttributeIcon",
+      //   permissions: adminAndOwnerOnly,
+      // },
+      // {
+      //   href: (shop: string) => `/${shop}${ROUTES.WHATSAPP_CAMPAIGN}`,
+      //   label: "Whatsapp Campaign",
+      //   icon: "AttributeIcon",
+      //   permissions: adminAndOwnerOnly,
+      // },
     ],
   },
 

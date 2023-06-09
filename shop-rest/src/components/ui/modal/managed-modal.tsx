@@ -87,7 +87,7 @@ const ManagedModal = () => {
 
   return (
     
-    <Modal open={isOpen} onClose={closeModal}>
+    <Modal open={isOpen} onClose={closeModal} view={view}>
 
       {view === "LOGIN_VIEW" && <Login />}
       {view === "REGISTER" && <Register data={data}  />}
@@ -130,7 +130,7 @@ const ManagedModal = () => {
 
       {view === 'QUIZ_RESULT_MODAL' && <QuizResultModal data={data}/>}
 
-      {view === 'RECHARGE_PLAN_DETAILS' && <RechargePlanDetails data={data} close={closeModal}/> }
+      {view === 'RECHARGE_PLAN_DETAILS' && <RechargePlanDetails  data={data} close={closeModal}/> }
 
       {view === 'BILL_PAYMENT_DETAILS' && <PaymentDetailsModal data={data} />}
 

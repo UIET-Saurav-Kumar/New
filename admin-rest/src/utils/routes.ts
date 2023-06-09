@@ -52,4 +52,7 @@ export const ROUTES = {
   TERM_LIFE_INSURANCE: '/term-life-insurance',
   QUIZ: 'quiz',
 
+  ADD_AUTH_BRANDS: '/auth-brands/create',
+  GET_AUTH_BRANDS: '/auth-brands'
+
 };

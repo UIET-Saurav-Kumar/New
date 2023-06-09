@@ -169,7 +169,7 @@ const ShopPage = ({ data }: any) => {
     return openModal("SHOP_PAYMENT_FORM");
   }
 
-  const slug = ['chandigarh-grocery-store', 'kosmetics-india'];
+  const slug = ['chandigarh-grocery-store', 'kosmetics-india', 'retail-store'];
 
   function checkElement(){
     return slug?.some(el => data?.slug?.includes(el))
@@ -190,7 +190,6 @@ const ShopPage = ({ data }: any) => {
   function useScrollDirection() {
     const [scrollDirection, setScrollDirection] = useState(null);
      
-  
     useEffect(() => {
        
       getShopCategory();
@@ -299,7 +298,7 @@ function handleTotalRating(data) {
   console.log('schema',reviews);
   const basePath = 'https://buylowcal.com/shops/' 
 
-  console.log('s data',data)
+  console.log('s data',data);
 
   const user_lat = getLocation?.lat;
   const user_lng = getLocation?.lng;
@@ -308,7 +307,8 @@ function handleTotalRating(data) {
   const shop_lng = data?.settings?.location?.lng;
 
   const map_url = `https://www.google.com/maps/dir/?api=1&destination=${shop_lat},${shop_lng}&travelmode=driving&dir_action=navigate&origin=${user_lat},${user_lng}`;
-   console.log('map',map_url);
+   
+  console.log('map',map_url);
   
 
   return (
@@ -389,20 +389,15 @@ function handleTotalRating(data) {
                           <img src='/up-arrow.png' className="w-12 h-12" onClick={() => window.scrollTo(0, 0)} /> 
                         </div>
 
-                        
-
                     <div className='flex w-full lg:flex flex-col'>
-
  
                           <div className = 'hidden lg:flex flex-col overflow-y-scroll space-y-4  w-full'>  
 
-                            <div className={`${checkElement() ? 'h-0' : 'h-80'} flex w-full mt-10 border`}> 
+                            <div className={`${checkElement() ? 'hidden' : 'h-80 flex w-full mt-10 border'}  `}> 
 
-                              { checkElement() ? null 
-                                :
-                                ( <div className='h-full w-96'>  
+                             <div className='h-full w-96'>  
                                     <ShopProfileCard reviews={reviews} totalRating={totalRating} rating={rating} open={open} data={data} />
-                                  </div> )  }
+                                  </div> 
                                 
                                 { slug?.some(el => data?.slug?.includes(el)) ? (
                                   data?.slug == 'chandigarh-grocery-store' ?
@@ -429,42 +424,37 @@ function handleTotalRating(data) {
                                 }
                             </div>
 
-                           
-
                                   { slug?.some(el => data?.slug?.includes(el)) ? null :
                                        (<ShopDescription mapUrl={map_url} data = {data}/>
                                      )
                                  
                                   }
-
-                                   
+  
                           </div>
 
-                            <div className = 'lg:hidden px-2  w-full grid grid-cols-1 sm:flex'>
+                            {/* <div className = 'lg:hidden px-2  w-full grid grid-cols-1 sm:flex'>
 
                               { slug?.some(el => data?.slug?.includes(el))  ? 
                                  null : ( <div className='hidden sm:block w-48 h-38 sm:h-72 sm:w-80 md:h-72 lg:w-96'> 
                                          <ShopProfileCard reviews={reviews} totalRating={totalRating} rating={rating} open={open} data={data}   /> 
                                       </div>)  }
                   
-                                
-
                                   { slug?.some(el => data?.slug?.includes(el)) ? null
                                  : ( <div className='block sm:hidden'> 
                                       <ShopProfileCard reviews={reviews} totalRating={totalRating} rating={rating} open={open} data={data}/> 
                                   </div> )
                               }
  
-                            </div>
+                            </div> */}
 
                            
                           <div className='flex flex-col space-y-2'> 
-                            <div className={` sticky ${ scrollDirection === "down" ? "-top-32" : "top-0"}   transition-all duration-300 sticky z-30 bg-white top-0`}>                                              
+                            <div className={` sticky ${ scrollDirection === "down" ? "-top-32 p-6" : "top-0 p-6"}   transition-all duration-300 sticky z-30 bg-white top-0`}>                                              
                                 <CategoryDropdownSidebar data={data} />
                             </div>
                             <div className="">
-                              <div className={`flex  gap-3 w-full px-2 overflow-x-scroll`}>
-                                    <PlacePhotos handleImage={handleImage}  
+                            { !checkElement() && <div className={`flex  gap-3 w-full px-2 overflow-x-scroll`}>
+                                  <PlacePhotos handleImage={handleImage}  
                                                showImages = {true}
                                                showLogoImg = {false}
                                                data={data} shopName={data?.name} 
@@ -475,6 +465,7 @@ function handleTotalRating(data) {
                                                handleReviews={handleReviews} />
                                      
                               </div>
+}
                             </div>
                           </div>
                           {/* </HidingHeader>  */}
@@ -499,14 +490,12 @@ function handleTotalRating(data) {
                                   }
                                 </div> 
                                  
-                                 
                           </div> 
  
-
-          </div>
+                    </div>
 
       
-      {width > 1023 && <CartCounterButton />}
+        {width > 1023 && <CartCounterButton />}
 
     </div>
       <div className='block lg:hidden w-full'>

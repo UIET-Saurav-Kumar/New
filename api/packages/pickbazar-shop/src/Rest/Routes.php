@@ -45,7 +45,7 @@ use PickBazar\Http\Controllers\ChatController;
 use PickBazar\Http\Controllers\MessagesController;
 use PickBazar\Http\Controllers\UserImagesController;
 use PickBazar\Http\Controllers\UserProfileController;
-
+use PickBazar\Http\Controllers\AuthBrandController;
 
  
 //route for findByDateRange in order controller
@@ -354,6 +354,12 @@ Route::delete('logs/{id}', 'PickBazar\Http\Controllers\LogController@destory');
 
 Route::any('cashfree', 'PickBazar\Http\Controllers\CashFreeController@cashFree');
 
+
+
+//Auth Brands
+Route::get('/auth-brands', 'PickBazar\Http\Controllers\AuthBrandController@index');
+Route::post('/add-auth-brands', 'PickBazar\Http\Controllers\AuthBrandController@store');
+Route::put('/update-auth-brands', 'PickBazar\Http\Controllers\AuthBrandController@update');
 
 // busineesId, mobile, ParentBusinees Id
 Route::apiResource('coupons', CouponController::class, [

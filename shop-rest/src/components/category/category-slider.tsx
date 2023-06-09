@@ -134,7 +134,7 @@ export default function CategorySlider({items}:any) {
 
   return (
 
-    <div className="w-full mx-auto px-5 hide-scrollbar   bg-white">
+    <div className="w-full mx-auto px-5 hide-scrollbar bg-white">
       <div className="relative z-40 ">
 
         <Swiper
@@ -147,7 +147,7 @@ export default function CategorySlider({items}:any) {
           }}
         >
           {items?.map((item) => (
-            <SwiperSlide className={` ${item?.slug == query?.category ? '  font-bold  rounded border-indigo-700' : '' } border-b border rounded mx-2 lg:border-b-none mx-auto  w-full text-center`} key={item?.name}>
+            <SwiperSlide className={` ${item?.slug == query?.category ? '  font-bold  rounded border-indigo-700' : '' } border-b border rounded mx-2 lg:border-b-none   w-full text-center`} key={item?.name}>
               <button onClick={()=>onClick(item)}  className={` ${item?.slug == query?.category ? ' font-semibold text-indigo-700 text-xs tracking-wide px-6 h-10'  : ' font-semibold text-gray-500  text-xs px-6 h-10'}  `}>
                { item?.name}
               </button>
@@ -174,6 +174,7 @@ export default function CategorySlider({items}:any) {
         >
           <span className="sr-only">{t("common:text-next")}</span>
           <ArrowNext width={24} height={24} />
+          
         </div>
 
       </div>

@@ -193,7 +193,7 @@ function handleClick(){
       },
       {
         onSuccess: (data) => {
-           router.push('/auth/'+data?.user.id);
+            router.push('/auth/'+data?.user.id);
           // query?.utm_source == 'shop_qr' ? 
           // router.push('/shops/'+ query?.campaign)
           // router.push('/auth/'+data?.user.id+'?utm_source=shop_qr&utm_campaign='+query?.utm_campaign+'&shop_id='+query?.shop_id)

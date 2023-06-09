@@ -21,11 +21,11 @@ export default function RedbullBanner() {
 }
 
 function location2(){
-  return address?.includes('Delhi')   ;
+  return address?.includes('Delhi');
 }
 
 function location3(){
-  return address?.includes('Gurgaon')   ;
+  return address?.includes('Gurgaon');
 }
 
 

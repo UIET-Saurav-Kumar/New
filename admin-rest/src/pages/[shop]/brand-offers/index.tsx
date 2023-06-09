@@ -78,6 +78,7 @@ export default function ProductsPage() {
     <>
       <Card className="flex flex-col mb-8">
         <div className="w-full flex flex-col md:flex-row items-center">
+          
           <div className="md:w-1/4 mb-4 md:mb-0">
             <h1 className="text-lg font-semibold text-heading">
               Brand Offers
