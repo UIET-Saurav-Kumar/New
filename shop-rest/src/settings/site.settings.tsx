@@ -171,14 +171,14 @@ export const siteSettings = {
       href: ROUTES.EVENTS,
       menulabel: "Magazines",
     },
-    {
-      href: ROUTES.WISHLIST,
-      menulabel: 'My wishlist',
-    },
-    {
-      href: ROUTES.QUESTIONS,
-      menulabel: 'My Questions',
-    },
+    // {
+    //   href: ROUTES.WISHLIST,
+    //   menulabel: 'My wishlist',
+    // },
+    // {
+    //   href: ROUTES.QUESTIONS,
+    //   menulabel: 'My Questions',
+    // },
     {
       href: ROUTES.ORDERS,
       menulabel: "My Orders",

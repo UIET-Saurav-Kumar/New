@@ -30,10 +30,10 @@ function CompleteProfile() {
 
   return (
 
-    <div className={` ${isAuthorize ? 'block' : 'hidden'} relative flex  mt-4 justify-evenly px-4 lg:px-16 space-x-1 mb-2 lg:space-x-16`}>
+    <div className={` ${isAuthorize ? 'block' : 'hidden'} relative flex  mt-5 justify-evenly px-4 lg:px-16 space-x-1 mb-2 lg:space-x-16`}>
 
          {/* <button onClick={handleButtonClick}></button> */}
-             {message && <Link href='/user/profile'><div className='cursor-pointer text-blue-700 '>{message}</div></Link>}
+             {message && <Link href='/user/profile'><div className='cursor-pointer text-blue-700 bg-green-300 rounded-full  animate-bounce '>{message}</div></Link>}
 
         {/* <div className={`${!data?.me?.name ? 'bg-white border rounded-full border-gray-500 border-dotted relative ' : 'relative bg-green-600  ' }    `}>
               { !data?.me?.name ? <span className='absolute rounded-full h-10 border border-dotted w-10'></span> : 

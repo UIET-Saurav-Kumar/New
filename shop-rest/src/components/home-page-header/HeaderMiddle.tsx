@@ -338,7 +338,7 @@ export default function HeaderMiddle({searchbar}:any) {
     return (
 
         <div id='amazon-shops' 
-             className='flex flex-col  lg:shadow-md md:bg-white lg:bg-white'> 
+             className='flex flex-col  lg:shadow-md md:bg-white  rounded-lg'> 
 
 
        <div className='relative z-30 px-4 flex justify-evenly max-w-full pt-4 pb-4 lg:pt-0 lg:pb-0  '>
@@ -354,7 +354,7 @@ export default function HeaderMiddle({searchbar}:any) {
                     </div>
                   
                   {/* Search Bar */}
-                 <div className={ `${searchbar && router.pathname !== '/shops' ?  'flex flex-col  w-full space-y-2' : router?.pathname == '/shops' ? 'flex flex-col  w-full space-y-2' : '' }  `}>
+                 {/* <div className={ `${searchbar && router.pathname !== '/shops' ?  'flex flex-col  w-full space-y-2' : router?.pathname == '/shops' ? 'flex flex-col  w-full space-y-2' : '' }  `}>
                     <div className=' flex focus-ring-2 justify-center
                                      lg:w-3/4 2xl:mx-auto lg:mx-auto 
                                      2xl:flex-1'>
@@ -407,16 +407,16 @@ export default function HeaderMiddle({searchbar}:any) {
                         <span className='text-green-600'> বাইলোকাল </span>
                     </div>
                   }
-                </div>
+                </div> */}
 
                                <div className='flex items-center '> 
-                                    <div className='hidden  sm:block  items-center mr-24'>
+                                    {/* <div className='hidden  sm:block  items-center mr-24'>
                                         <Link href='https://admin.buylowcal.com/register'>
                                             <button className='whitespace-nowrap bg-gradient-to-r from-magenta  to-magenta hover:bg-green-800 hover:shadow-xl font-bold text-white p-3 px-3 rounded-md'>
                                                 Business Access
                                             </button>
                                         </Link>
-                                    </div>
+                                    </div> */}
                                     <div className='hidden lg:inline-flex lg:ml-8 lg+:ml-0  xl:inline-flex'>
                                         { !JoinBtn &&  <AuthorizedMenu/>  }
                                         { JoinBtn &&  <JoinButton/>  }
@@ -479,22 +479,22 @@ export default function HeaderMiddle({searchbar}:any) {
                             <div id='location-input' style={{zIndex: 0}} className='absolute flex flex-col justify-center 
                                      w-full lg:w-full    items-center  pt-40 sm:pt-20 md:pt-20 lg:pt-0 space-y-6 ml-0 mx-3 sm:mx-16 md:ml-16 lg:ml-6 xl:ml-8 2xl:ml-10 lg:mt-80'> 
                                           
-                                <div  style = {{zIndex: 1000}}  
+                                {/* <div  style = {{zIndex: 1000}}  
                                       className='w-full'> 
                                       <GooglePlacesAutocomplete onChange = {changeLocation} 
                                                                 address  = {address}
                                                                  /> 
-                                </div>
+                                </div> */}
         
-                                <div style={{zIndex: 1000}}  className = 'w-full '> 
+                                {/* <div style={{zIndex: 1000}}  className = 'w-full '> 
                                      <GetCurrentLocation     onChange  = {changeLocation} />  
-                                     {/* <span className='text-gray-600 font-semibold ml-10'>
+                                     <span className='text-gray-600 font-semibold ml-10'>
                                         <span className=' mr-10 text-xl font-semibold text-magenta'>
                                             Or
                                         </span>
                                           Select Your City 
-                                     </span> */}
-                                </div>
+                                     </span>
+                                </div> */}
                                 
 
                             </div>
@@ -589,7 +589,7 @@ export default function HeaderMiddle({searchbar}:any) {
              
                )}
        </div>
-       <div className={` ${  'w-full flex flex-col lg:hidden -mb-3' }  `}>
+       {/* <div className={` ${  'w-full flex flex-col lg:hidden -mb-3' }  `}>
             <div className={` ${ shop_check == 0 && router.pathname == '/shops' ? 
                     'flex md:flex w-full lg:hidden px-4 mb-2 mt-0' : shop_check !== 0 ? 'flex md:flex w-full lg:hidden px-4 mb-2 mt-0' : shop_check == 0 && router?.pathname == '/home' ? 'hidden' : ''}   `} >
                 <DropDown getLoc={handleLocation}/>
@@ -597,14 +597,14 @@ export default function HeaderMiddle({searchbar}:any) {
             {
                 searchbar && router.pathname.includes('/home') ?
             <div className='z-0 bg-white flex items-center mx-auto space-x-4 text-12px w-full justify-evenly text-gray-500 '>
-                                <span className=' text-blue-600'>बायलोकल</span>
-                                <span className='  text-red-600'>Buylowcal</span>
+                                <span className='text-blue-600'>बायलोकल</span>
+                                <span className='text-red-600'>Buylowcal</span>
                                 <span className='text-yellow-600'>ਬਾਏਲੋਕਲ </span>
                                 <span className='text-green-600'> বাইলোকাল </span>
                             
                 </div>  : null
             }
-       </div>
+       </div> */}
    </div>
 
     )
